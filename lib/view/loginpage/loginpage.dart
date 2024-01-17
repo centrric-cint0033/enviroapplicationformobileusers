@@ -1,3 +1,6 @@
+import 'package:auto_route/auto_route.dart';
+import 'package:enviro_mobile_application/Routepage/routespage.dart';
+
 import 'package:enviro_mobile_application/view/loginpage/common/appbar/Appthemes/Appthemes.dart';
 import 'package:enviro_mobile_application/view/loginpage/common/appbar/cmbutton.dart';
 import 'package:flutter/material.dart';
@@ -6,21 +9,20 @@ import 'common/appbar/cmcustomformfield.dart';
 import 'common/appbar/cmimage.dart';
 import 'common/appbar/imagepath/imagepath.dart';
 
+@RoutePage()
 class LoginPage extends StatelessWidget {
   const LoginPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(
-        flexibleSpace: Column(),
-      ),
+      appBar: const CustomAppBar(),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(15.0),
           child: Column(
             children: [
-              SizedBox(height: 66),
+              const SizedBox(height: 66),
               CommonImage(
                 width: 150,
                 height: 150,
@@ -53,7 +55,11 @@ class LoginPage extends StatelessWidget {
                 height: 48,
               ),
               const SizedBox(height: 64),
-              const CmButton(
+              CmButton(
+                buttonTextStyle: TextStyle(color: Appthemes.textColor),
+                onPressed: () {
+                  ontaplogin(context);
+                },
                 text: "Login",
               ),
               const SizedBox(height: 43),
@@ -70,4 +76,8 @@ class LoginPage extends StatelessWidget {
       ),
     );
   }
+}
+
+void ontaplogin(BuildContext context) {
+  context.router.pushNamed(RouteNames.homePage);
 }

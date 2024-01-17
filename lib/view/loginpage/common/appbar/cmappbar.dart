@@ -7,6 +7,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final bool? centerTitle;
   final Widget? flexible;
   final Color? color;
+  final bool? automaticallyImplyLeading;
+  final Widget? suffixIcon;
 
   const CustomAppBar({
     Key? key,
@@ -15,7 +17,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.centerTitle,
     this.flexible,
     this.color,
-    required Column flexibleSpace,
+    this.automaticallyImplyLeading,
+    this.suffixIcon,
   }) : super(key: key);
 
   @override
@@ -24,7 +27,9 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       title: title,
       centerTitle: centerTitle ?? true,
       backgroundColor: color ?? Colors.white,
+      automaticallyImplyLeading: automaticallyImplyLeading ?? true,
       flexibleSpace: flexible ?? Container(),
+      leading: suffixIcon,
     );
   }
 
