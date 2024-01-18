@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:enviro_mobile_application/view/loginpage/common/appbar/Appthemes/Appthemes.dart';
+import 'package:flutter/rendering.dart';
 
 class CmButton extends StatelessWidget {
   const CmButton({
@@ -29,19 +30,23 @@ class CmButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      onPressed: onPressed,
-      style: ButtonStyle(
-        backgroundColor: MaterialStateProperty.all<Color>(color ?? Colors.blue),
-        fixedSize: MaterialStateProperty.all<Size>(
-            Size(width ?? 341.0, height ?? 50.0)),
-        shape: MaterialStateProperty.all<OutlinedBorder>(
-          RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(borderRadius ?? 10.0),
+    return SizedBox(
+      width: width,
+      height: height,
+      child: ElevatedButton(
+        onPressed: onPressed,
+        style: ButtonStyle(
+          backgroundColor:
+              MaterialStateProperty.all<Color>(color ?? Colors.blue),
+          fixedSize: MaterialStateProperty.all<Size>(
+            Size(width ?? 341.0, height ?? 50.0),
+          ),
+          shape: MaterialStateProperty.all<OutlinedBorder>(
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(borderRadius ?? 10.0),
+            ),
           ),
         ),
-      ),
-      child: Center(
         child: widget ??
             Text(
               text ?? "",
