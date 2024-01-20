@@ -79,5 +79,5 @@ class LoginPage extends StatelessWidget {
 }
 
 void ontaplogin(BuildContext context) {
-  context.router.pushNamed(RouteNames.homePage);
+  context.router.pushNamed(RouteNames.mainscreen);
 }
