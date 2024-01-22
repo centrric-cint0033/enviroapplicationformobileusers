@@ -1,3 +1,4 @@
+import 'package:enviro_mobile_application/view/loginpage/common/appbar/Appthemes/Appthemes.dart';
 import 'package:enviro_mobile_application/view/loginpage/common/appbar/cmbutton.dart';
 import 'package:flutter/material.dart';
 
@@ -8,14 +9,13 @@ class CardMainContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(left: 24, right: 24),
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
       child: Card(
+        color: Appthemes.textfieldbcColor,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20),
-          side: const BorderSide(width: 1, color: Colors.blue),
         ),
-        elevation: 5,
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
