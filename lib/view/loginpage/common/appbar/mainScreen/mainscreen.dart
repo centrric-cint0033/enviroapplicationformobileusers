@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:enviro_mobile_application/view/loginpage/calenderpage/calender_page.dart';
 import 'package:enviro_mobile_application/view/loginpage/common/appbar/bottombar.dart';
 import 'package:enviro_mobile_application/view/loginpage/Common_widgets/homepage.dart';
+import 'package:enviro_mobile_application/view/loginpage/oh&s_page/oh&s_page.dart';
 import 'package:enviro_mobile_application/view/loginpage/vehiclepage/vehicle-page.dart';
 import 'package:enviro_mobile_application/view/loginpage/week_page/week_page.dart';
 import 'package:enviro_mobile_application/viewmodel/home_page_viewmodel.dart';
@@ -16,7 +17,7 @@ class MainScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     List<Widget> widgetOptions = <Widget>[
       const HomePage(),
-      const CalendarPage(),
+      const OhsPage(),
       const WeekPage(),
       const VehiclePage()
     ];

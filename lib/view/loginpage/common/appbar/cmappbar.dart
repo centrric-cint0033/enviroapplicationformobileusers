@@ -11,7 +11,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Widget? suffixIcon;
   final List<Widget>? actions;
   final Widget? leadingImage;
-  final bool showNotification;
+  final bool showNotificationButton;
 
   const CustomAppBar({
     Key? key,
@@ -24,11 +24,22 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.suffixIcon,
     this.actions,
     this.leadingImage,
-    this.showNotification = true,
+    this.showNotificationButton = false, // Initialize with false
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    List<Widget> updatedActions = actions ?? [];
+
+    if (showNotificationButton) {
+      updatedActions.add(
+        IconButton(
+          icon: Icon(Icons.notifications),
+          onPressed: onNotificationPressed,
+        ),
+      );
+    }
+
     return AppBar(
       title: title,
       centerTitle: centerTitle ?? true,
@@ -36,44 +47,13 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       automaticallyImplyLeading: automaticallyImplyLeading ?? true,
       flexibleSpace: flexible ?? Container(),
       leading: leadingImage,
-      actions: [
-        if (showNotification) _buildNotificationButton(),
-        if (suffixIcon != null) suffixIcon!,
-        if (actions != null) ...actions!,
-      ],
+      actions: updatedActions,
     );
   }
 
-  Widget _buildNotificationButton() {
-    return Padding(
-      padding: const EdgeInsets.only(right: 16.0),
-      child: Stack(
-        children: [
-          IconButton(
-            iconSize: 32,
-            icon: const Icon(Icons.notifications),
-            onPressed: () {},
-          ),
-          Positioned(
-            right: 0,
-            child: Container(
-              padding: const EdgeInsets.all(4),
-              decoration: const BoxDecoration(
-                color: Colors.red,
-                shape: BoxShape.circle,
-              ),
-              child: const Text(
-                '1', // You can use your notification count
-                style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
+  // Add your notification button press logic here
+  void onNotificationPressed() {
+    // Handle notification button press
   }
 
   @override
