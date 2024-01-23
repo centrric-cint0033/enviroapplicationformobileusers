@@ -1,6 +1,7 @@
 import 'package:enviro_mobile_application/view/loginpage/common/appbar/cmappbar.dart';
 import 'package:enviro_mobile_application/view/loginpage/common/appbar/imagepath/imagepath.dart';
-import 'package:enviro_mobile_application/view/loginpage/homepage/widgets/card_main_container.dart';
+import 'package:enviro_mobile_application/view/loginpage/Common_widgets/widgets/card_main_container.dart';
+import 'package:enviro_mobile_application/view/loginpage/Common_widgets/widgets/week_page.dart';
 import 'package:flutter/material.dart';
 
 class WeekPage extends StatelessWidget {
@@ -20,21 +21,7 @@ class WeekPage extends StatelessWidget {
           ),
         ],
       ),
-      body: const SingleChildScrollView(
-        child: Column(
-          children: [
-            SizedBox(
-              height: 14.0,
-            ),
-            Text('Todays week shedule',
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                )),
-            CardMainContainer(),
-          ],
-        ),
-      ),
+      body: weekpage(),
     );
   }
 }

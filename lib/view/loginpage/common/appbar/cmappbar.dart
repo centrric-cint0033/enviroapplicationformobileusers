@@ -10,8 +10,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final bool? automaticallyImplyLeading;
   final Widget? suffixIcon;
   final List<Widget>? actions;
-
   final Widget? leadingImage;
+  final bool showNotification;
 
   const CustomAppBar({
     Key? key,
@@ -24,6 +24,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.suffixIcon,
     this.actions,
     this.leadingImage,
+    this.showNotification = true,
   }) : super(key: key);
 
   @override
@@ -35,7 +36,43 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       automaticallyImplyLeading: automaticallyImplyLeading ?? true,
       flexibleSpace: flexible ?? Container(),
       leading: leadingImage,
-      actions: actions,
+      actions: [
+        if (showNotification) _buildNotificationButton(),
+        if (suffixIcon != null) suffixIcon!,
+        if (actions != null) ...actions!,
+      ],
+    );
+  }
+
+  Widget _buildNotificationButton() {
+    return Padding(
+      padding: const EdgeInsets.only(right: 16.0),
+      child: Stack(
+        children: [
+          IconButton(
+            iconSize: 32,
+            icon: const Icon(Icons.notifications),
+            onPressed: () {},
+          ),
+          Positioned(
+            right: 0,
+            child: Container(
+              padding: const EdgeInsets.all(4),
+              decoration: const BoxDecoration(
+                color: Colors.red,
+                shape: BoxShape.circle,
+              ),
+              child: const Text(
+                '1', // You can use your notification count
+                style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 

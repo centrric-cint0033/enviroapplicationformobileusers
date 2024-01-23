@@ -11,7 +11,7 @@
 import 'package:auto_route/auto_route.dart' as _i4;
 import 'package:enviro_mobile_application/view/loginpage/common/appbar/mainScreen/mainscreen.dart'
     as _i3;
-import 'package:enviro_mobile_application/view/loginpage/homepage/homepage.dart'
+import 'package:enviro_mobile_application/view/loginpage/Common_widgets/homepage.dart'
     as _i1;
 import 'package:enviro_mobile_application/view/loginpage/loginpage.dart' as _i2;
 

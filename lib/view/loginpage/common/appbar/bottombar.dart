@@ -13,29 +13,29 @@ class CommonBottombar extends StatelessWidget {
           const BottomNavigationBarItem(
             backgroundColor: Colors.black12,
             icon: Icon(
-              Icons.home,
-              color: Colors.red,
+              Icons.schedule,
+              color: Colors.blue,
             ),
-            label: 'Home',
+            label: 'schedule',
           ),
           const BottomNavigationBarItem(
             icon: Icon(
-              Icons.calendar_today,
-              color: Colors.green,
+              Icons.accessibility_new,
+              color: Colors.blue,
             ),
-            label: 'Calendar',
+            label: 'OH&S',
           ),
           const BottomNavigationBarItem(
             icon: Icon(
-              Icons.today,
-              color: Colors.orange,
+              Icons.public,
+              color: Colors.blue,
             ),
-            label: 'Week',
+            label: 'Intranet',
           ),
           const BottomNavigationBarItem(
             icon: Icon(
               Icons.directions_car,
-              color: Colors.purple,
+              color: Colors.blue,
             ),
             label: 'Vehicle',
           ),
