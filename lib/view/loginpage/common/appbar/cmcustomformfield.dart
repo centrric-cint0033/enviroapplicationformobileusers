@@ -28,7 +28,7 @@ class Cmformfield extends StatelessWidget {
   final double? width;
   final double? height;
   final Alignment? alignment;
-  final Border? border;
+  final InputBorder? border;
 
   final TextEditingController? controller;
   final String? hinttext;
@@ -53,10 +53,13 @@ class Cmformfield extends StatelessWidget {
       child: TextFormField(
         controller: controller,
         decoration: InputDecoration(
-            border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
-            hintText: hinttext,
-            suffixIcon: suffixIcon,
-            prefixIcon: prefixIcon),
+          hintStyle: TextStyle(),
+          border: border ??
+              OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+          hintText: hinttext,
+          suffixIcon: suffixIcon,
+          prefixIcon: prefixIcon,
+        ),
         style: textStyle,
         cursorHeight: cursorHeight ?? height,
         cursorWidth: 2.0,
