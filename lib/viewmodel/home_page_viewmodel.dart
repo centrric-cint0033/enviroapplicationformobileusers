@@ -14,6 +14,7 @@ class HomeViewModel extends HomeViewModelBase with _$HomeViewModel {
 
 abstract class HomeViewModelBase with Store {
   final IHomeService homeService;
+  HomeViewModelBase(this.homeService);
 
   @observable
   bool passwordVisibility = false;
@@ -24,6 +25,4 @@ abstract class HomeViewModelBase with Store {
   void setCurrentIndex(int index) {
     currentIndex = index;
   }
-
-  HomeViewModelBase(this.homeService);
 }

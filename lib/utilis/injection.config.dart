@@ -8,14 +8,21 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:enviro_mobile_application/view/loginpage/service/i_calenderservice.dart'
-    as _i3;
-import 'package:enviro_mobile_application/view/loginpage/service/i_homeservice.dart'
-    as _i4;
-import 'package:enviro_mobile_application/viewmodel/calenderpage/calender_page_viewmodel.dart'
+import 'package:enviro_mobile_application/utilis/httpswervice.dart' as _i3;
+import 'package:enviro_mobile_application/view/loginpage/service/Authservice.dart'
     as _i5;
-import 'package:enviro_mobile_application/viewmodel/home_page_viewmodel.dart'
+import 'package:enviro_mobile_application/view/loginpage/service/i_authservice.dart'
+    as _i4;
+import 'package:enviro_mobile_application/view/loginpage/service/i_calenderservice.dart'
     as _i6;
+import 'package:enviro_mobile_application/view/loginpage/service/i_homeservice.dart'
+    as _i7;
+import 'package:enviro_mobile_application/viewmodel/calenderpage/calender_page_viewmodel.dart'
+    as _i9;
+import 'package:enviro_mobile_application/viewmodel/home_page_viewmodel.dart'
+    as _i10;
+import 'package:enviro_mobile_application/viewmodel/login_page_viewmodel.dart'
+    as _i8;
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
 
@@ -30,12 +37,16 @@ extension GetItInjectableX on _i1.GetIt {
       environment,
       environmentFilter,
     );
-    gh.lazySingleton<_i3.ICalenderService>(() => _i3.calendarService());
-    gh.lazySingleton<_i4.IHomeService>(() => _i4.AuthService());
-    gh.factory<_i5.CalendarPageViewModel>(
-        () => _i5.CalendarPageViewModel(gh<_i3.ICalenderService>()));
-    gh.factory<_i6.HomeViewModel>(
-        () => _i6.HomeViewModel(gh<_i4.IHomeService>()));
+    gh.lazySingleton<_i3.HttpService>(() => _i3.HttpService());
+    gh.lazySingleton<_i4.IAuthService>(() => _i5.AuthRepository());
+    gh.lazySingleton<_i6.ICalenderService>(() => _i6.calendarService());
+    gh.lazySingleton<_i7.IHomeService>(() => _i7.AuthService());
+    gh.factory<_i8.LoginViewModel>(
+        () => _i8.LoginViewModel(gh<_i4.IAuthService>()));
+    gh.factory<_i9.CalendarPageViewModel>(
+        () => _i9.CalendarPageViewModel(gh<_i6.ICalenderService>()));
+    gh.factory<_i10.HomeViewModel>(
+        () => _i10.HomeViewModel(gh<_i7.IHomeService>()));
     return this;
   }
 }
