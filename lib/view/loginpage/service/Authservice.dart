@@ -30,7 +30,7 @@ class AuthRepository implements IAuthService {
       (res) async {
         var data = jsonDecode(res.body);
         await getIt<SecureStorage>()
-            .writeData(key: 'token', value: data["refresh"]["access"]);
+            .writeData(key: 'token', value: data["access"]);
 
         return const Right("Success");
       },

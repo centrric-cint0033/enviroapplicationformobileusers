@@ -1,4 +1,3 @@
-import 'package:dartz/dartz.dart';
 import 'package:enviro_mobile_application/api_response/api_response.dart';
 import 'package:enviro_mobile_application/model/auth/loginreqmodel.dart';
 import 'package:enviro_mobile_application/utilis/injection.dart';
@@ -7,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 import 'package:mobx/mobx.dart';
 
-import '../utilis/main_failure.dart';
 part 'login_page_viewmodel.g.dart';
 
 final vmLogin = getIt<LoginViewModel>();

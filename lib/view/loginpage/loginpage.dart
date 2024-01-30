@@ -44,38 +44,41 @@ class LoginPage extends StatelessWidget {
                 //       color: Appthemes.bluecolor),
                 // ),
                 const SizedBox(height: 39),
-                Cmformfield(
-                  controller: vmLogin.userNameController,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter your Username';
-                    }
-                    return null;
-                  },
-                  keyboard: TextInputType.text,
-                  hinttext: 'Username or Email',
-                  width: 335,
-                  height: 48,
-                  cursorHeight: 25,
-                  prefixIcon: const Icon(Icons.email),
+                Container(
+                  height: 79,
+                  child: Cmformfield(
+                    controller: vmLogin.userNameController,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter your Username';
+                      }
+                      return null;
+                    },
+                    keyboard: TextInputType.text,
+                    hinttext: 'Username or Email',
+                    width: 335,
+                    height: 48,
+                    cursorHeight: 25,
+                    prefixIcon: const Icon(Icons.email),
+                  ),
                 ),
                 const SizedBox(height: 24),
-                Cmformfield(
-                  controller: vmLogin.passwordController,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter your Password';
-                    }
-                    return null;
-                  },
-                  prefixIcon: const Icon(
-                    Icons.lock,
+                Container(
+                  height: 79,
+                  child: Cmformfield(
+                    controller: vmLogin.passwordController,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter your Password';
+                      }
+                      return null;
+                    },
+                    prefixIcon: const Icon(
+                      Icons.lock,
+                    ),
+                    keyboardType: TextInputType.visiblePassword,
+                    hinttext: "Password or phonenumber",
                   ),
-                  keyboardType: TextInputType.visiblePassword,
-                  cursorHeight: 25,
-                  hinttext: "Password or phonenumber",
-                  width: 335,
-                  height: 48,
                 ),
                 const SizedBox(height: 64),
                 Observer(builder: (_) {

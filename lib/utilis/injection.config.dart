@@ -8,6 +8,7 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
+import 'package:enviro_mobile_application/Routepage/securestorage.dart' as _i9;
 import 'package:enviro_mobile_application/utilis/httpservice.dart' as _i3;
 import 'package:enviro_mobile_application/view/loginpage/service/Authservice.dart'
     as _i5;
@@ -18,9 +19,9 @@ import 'package:enviro_mobile_application/view/loginpage/service/i_calenderservi
 import 'package:enviro_mobile_application/view/loginpage/service/i_homeservice.dart'
     as _i7;
 import 'package:enviro_mobile_application/viewmodel/calenderpage/calender_page_viewmodel.dart'
-    as _i9;
-import 'package:enviro_mobile_application/viewmodel/home_page_viewmodel.dart'
     as _i10;
+import 'package:enviro_mobile_application/viewmodel/home_page_viewmodel.dart'
+    as _i11;
 import 'package:enviro_mobile_application/viewmodel/login_page_viewmodel.dart'
     as _i8;
 import 'package:get_it/get_it.dart' as _i1;
@@ -43,10 +44,11 @@ extension GetItInjectableX on _i1.GetIt {
     gh.lazySingleton<_i7.IHomeService>(() => _i7.AuthService());
     gh.factory<_i8.LoginViewModel>(
         () => _i8.LoginViewModel(gh<_i4.IAuthService>()));
-    gh.factory<_i9.CalendarPageViewModel>(
-        () => _i9.CalendarPageViewModel(gh<_i6.ICalenderService>()));
-    gh.factory<_i10.HomeViewModel>(
-        () => _i10.HomeViewModel(gh<_i7.IHomeService>()));
+    gh.lazySingleton<_i9.SecureStorage>(() => _i9.SecureStorage());
+    gh.factory<_i10.CalendarPageViewModel>(
+        () => _i10.CalendarPageViewModel(gh<_i6.ICalenderService>()));
+    gh.factory<_i11.HomeViewModel>(
+        () => _i11.HomeViewModel(gh<_i7.IHomeService>()));
     return this;
   }
 }

@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Widget? title;
+  final Widget? leading;
   final double? height;
   final bool? centerTitle;
   final Widget? flexible;
@@ -15,6 +16,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   const CustomAppBar({
     Key? key,
+    this.leading,
     this.title,
     this.height,
     this.centerTitle,

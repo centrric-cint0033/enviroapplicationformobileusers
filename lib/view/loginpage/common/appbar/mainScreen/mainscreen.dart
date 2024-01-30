@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:enviro_mobile_application/view/loginpage/calenderpage/calender_page.dart';
 import 'package:enviro_mobile_application/view/loginpage/common/appbar/bottombar.dart';
 import 'package:enviro_mobile_application/view/loginpage/Common_widgets/homepage.dart';
+import 'package:enviro_mobile_application/view/loginpage/home_page/home_page.dart';
 import 'package:enviro_mobile_application/view/loginpage/intranet_page/intranet_page.dart';
 import 'package:enviro_mobile_application/view/loginpage/oh&s_page/oh&s_page.dart';
 import 'package:enviro_mobile_application/view/loginpage/vehiclepage/vehicle-page.dart';
@@ -17,7 +18,7 @@ class MainScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<Widget> widgetOptions = <Widget>[
-      const HomePage(),
+      const Homepage1(),
       const OhsPage(),
       const IntranetPage(),
       const VehiclePage()

@@ -8,6 +8,7 @@ import 'view/loginpage/common/appbar/Appthemes/Appthemes.dart';
 
 void main() {
   configureLocalDependancies();
+
   runApp(const MyApp());
 }
 
