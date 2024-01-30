@@ -1,4 +1,4 @@
-const baseUrl = "https://staging-deep.envirowasteadmin.com.au/";
+const baseUrl = "https://staging-deep.envirowasteadmin.com.au";
 
 const passwordErrorMessage =
     'Password Must Include 8 characters \n At least one capital letter \n At least one special characters [ !@#\$&*~ ] \n At least one number \n No spaces';

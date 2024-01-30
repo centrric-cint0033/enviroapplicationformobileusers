@@ -8,7 +8,7 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:enviro_mobile_application/utilis/httpswervice.dart' as _i3;
+import 'package:enviro_mobile_application/utilis/httpservice.dart' as _i3;
 import 'package:enviro_mobile_application/view/loginpage/service/Authservice.dart'
     as _i5;
 import 'package:enviro_mobile_application/view/loginpage/service/i_authservice.dart'

@@ -25,6 +25,15 @@ mixin _$LoginViewModel on LoginViewModelBase, Store {
     });
   }
 
+  late final _$loginAsyncAction =
+      AsyncAction('LoginViewModelBase.login', context: context);
+
+  @override
+  Future<int?> login({required String username, required String password}) {
+    return _$loginAsyncAction
+        .run(() => super.login(username: username, password: password));
+  }
+
   @override
   String toString() {
     return '''

@@ -74,7 +74,7 @@ class HttpService {
           );
           break;
         default:
-          response = response = await retryMethod(
+          response = await retryMethod(
             client.get(Uri.parse(url)),
           );
           break;
@@ -82,8 +82,10 @@ class HttpService {
 
       customPrint(content: data, name: "Payload");
       customPrint(content: response.body, name: "Response");
+
       if (response.statusCode == HttpStatus.ok ||
           response.statusCode == HttpStatus.created) {
+        customPrint(content: response.body, name: "Response");
         return Right(response);
       } else {
         return Left({const MainFailure.clientFailure(): response});
@@ -103,7 +105,6 @@ class HttpService {
       client.close();
     }
   }
-  // Retry
 
   Future<Response> retryMethod(Future<Response> apiCall) {
     return retry(
@@ -137,7 +138,6 @@ class HttpService {
   }
 }
 
-// Interceptor
 class LoggingInterceptor implements InterceptorContract {
   @override
   Future<RequestData> interceptRequest({required RequestData data}) async {

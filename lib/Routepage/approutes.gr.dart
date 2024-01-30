@@ -14,6 +14,7 @@ import 'package:enviro_mobile_application/view/loginpage/common/appbar/mainScree
 import 'package:enviro_mobile_application/view/loginpage/Common_widgets/homepage.dart'
     as _i1;
 import 'package:enviro_mobile_application/view/loginpage/loginpage.dart' as _i2;
+import 'package:flutter/material.dart' as _i5;
 
 abstract class $AppRouter extends _i4.RootStackRouter {
   $AppRouter({super.navigatorKey});
@@ -27,9 +28,11 @@ abstract class $AppRouter extends _i4.RootStackRouter {
       );
     },
     LoginRoute.name: (routeData) {
+      final args = routeData.argsAs<LoginRouteArgs>(
+          orElse: () => const LoginRouteArgs());
       return _i4.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i2.LoginPage(),
+        child: _i2.LoginPage(key: args.key),
       );
     },
     MainRoute.name: (routeData) {
@@ -57,16 +60,31 @@ class HomeRoute extends _i4.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i2.LoginPage]
-class LoginRoute extends _i4.PageRouteInfo<void> {
-  const LoginRoute({List<_i4.PageRouteInfo>? children})
-      : super(
+class LoginRoute extends _i4.PageRouteInfo<LoginRouteArgs> {
+  LoginRoute({
+    _i5.Key? key,
+    List<_i4.PageRouteInfo>? children,
+  }) : super(
           LoginRoute.name,
+          args: LoginRouteArgs(key: key),
           initialChildren: children,
         );
 
   static const String name = 'LoginRoute';
 
-  static const _i4.PageInfo<void> page = _i4.PageInfo<void>(name);
+  static const _i4.PageInfo<LoginRouteArgs> page =
+      _i4.PageInfo<LoginRouteArgs>(name);
+}
+
+class LoginRouteArgs {
+  const LoginRouteArgs({this.key});
+
+  final _i5.Key? key;
+
+  @override
+  String toString() {
+    return 'LoginRouteArgs{key: $key}';
+  }
 }
 
 /// generated route for
