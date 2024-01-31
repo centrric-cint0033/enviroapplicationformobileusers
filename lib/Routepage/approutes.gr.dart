@@ -8,21 +8,23 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:auto_route/auto_route.dart' as _i4;
+import 'package:auto_route/auto_route.dart' as _i5;
 import 'package:enviro_mobile_application/view/loginpage/common/appbar/mainScreen/mainscreen.dart'
     as _i3;
 import 'package:enviro_mobile_application/view/loginpage/Common_widgets/homepage.dart'
     as _i1;
 import 'package:enviro_mobile_application/view/loginpage/loginpage.dart' as _i2;
-import 'package:flutter/material.dart' as _i5;
+import 'package:enviro_mobile_application/view/sales_page/sales_main_page.dart'
+    as _i4;
+import 'package:flutter/material.dart' as _i6;
 
-abstract class $AppRouter extends _i4.RootStackRouter {
+abstract class $AppRouter extends _i5.RootStackRouter {
   $AppRouter({super.navigatorKey});
 
   @override
-  final Map<String, _i4.PageFactory> pagesMap = {
+  final Map<String, _i5.PageFactory> pagesMap = {
     HomeRoute.name: (routeData) {
-      return _i4.AutoRoutePage<dynamic>(
+      return _i5.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const _i1.HomePage(),
       );
@@ -30,15 +32,21 @@ abstract class $AppRouter extends _i4.RootStackRouter {
     LoginRoute.name: (routeData) {
       final args = routeData.argsAs<LoginRouteArgs>(
           orElse: () => const LoginRouteArgs());
-      return _i4.AutoRoutePage<dynamic>(
+      return _i5.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: _i2.LoginPage(key: args.key),
       );
     },
     MainRoute.name: (routeData) {
-      return _i4.AutoRoutePage<dynamic>(
+      return _i5.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const _i3.MainScreen(),
+      );
+    },
+    SalesMainRoute.name: (routeData) {
+      return _i5.AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const _i4.SalesMainPage(),
       );
     },
   };
@@ -46,8 +54,8 @@ abstract class $AppRouter extends _i4.RootStackRouter {
 
 /// generated route for
 /// [_i1.HomePage]
-class HomeRoute extends _i4.PageRouteInfo<void> {
-  const HomeRoute({List<_i4.PageRouteInfo>? children})
+class HomeRoute extends _i5.PageRouteInfo<void> {
+  const HomeRoute({List<_i5.PageRouteInfo>? children})
       : super(
           HomeRoute.name,
           initialChildren: children,
@@ -55,15 +63,15 @@ class HomeRoute extends _i4.PageRouteInfo<void> {
 
   static const String name = 'HomeRoute';
 
-  static const _i4.PageInfo<void> page = _i4.PageInfo<void>(name);
+  static const _i5.PageInfo<void> page = _i5.PageInfo<void>(name);
 }
 
 /// generated route for
 /// [_i2.LoginPage]
-class LoginRoute extends _i4.PageRouteInfo<LoginRouteArgs> {
+class LoginRoute extends _i5.PageRouteInfo<LoginRouteArgs> {
   LoginRoute({
-    _i5.Key? key,
-    List<_i4.PageRouteInfo>? children,
+    _i6.Key? key,
+    List<_i5.PageRouteInfo>? children,
   }) : super(
           LoginRoute.name,
           args: LoginRouteArgs(key: key),
@@ -72,14 +80,14 @@ class LoginRoute extends _i4.PageRouteInfo<LoginRouteArgs> {
 
   static const String name = 'LoginRoute';
 
-  static const _i4.PageInfo<LoginRouteArgs> page =
-      _i4.PageInfo<LoginRouteArgs>(name);
+  static const _i5.PageInfo<LoginRouteArgs> page =
+      _i5.PageInfo<LoginRouteArgs>(name);
 }
 
 class LoginRouteArgs {
   const LoginRouteArgs({this.key});
 
-  final _i5.Key? key;
+  final _i6.Key? key;
 
   @override
   String toString() {
@@ -89,8 +97,8 @@ class LoginRouteArgs {
 
 /// generated route for
 /// [_i3.MainScreen]
-class MainRoute extends _i4.PageRouteInfo<void> {
-  const MainRoute({List<_i4.PageRouteInfo>? children})
+class MainRoute extends _i5.PageRouteInfo<void> {
+  const MainRoute({List<_i5.PageRouteInfo>? children})
       : super(
           MainRoute.name,
           initialChildren: children,
@@ -98,5 +106,19 @@ class MainRoute extends _i4.PageRouteInfo<void> {
 
   static const String name = 'MainRoute';
 
-  static const _i4.PageInfo<void> page = _i4.PageInfo<void>(name);
+  static const _i5.PageInfo<void> page = _i5.PageInfo<void>(name);
+}
+
+/// generated route for
+/// [_i4.SalesMainPage]
+class SalesMainRoute extends _i5.PageRouteInfo<void> {
+  const SalesMainRoute({List<_i5.PageRouteInfo>? children})
+      : super(
+          SalesMainRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'SalesMainRoute';
+
+  static const _i5.PageInfo<void> page = _i5.PageInfo<void>(name);
 }

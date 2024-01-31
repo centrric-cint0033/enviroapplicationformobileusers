@@ -1,6 +1,8 @@
 import 'package:enviro_mobile_application/view/loginpage/Common_widgets/notification_news_tabbar.dart';
 import 'package:enviro_mobile_application/view/loginpage/Common_widgets/widgets/cm_home_page.dart';
-import 'package:enviro_mobile_application/view/loginpage/Common_widgets/widgets/common_tababr.dart';
+import 'package:enviro_mobile_application/view/loginpage/Common_widgets/widgets/cmn_action_icon.dart';
+import 'package:enviro_mobile_application/view/loginpage/Common_widgets/widgets/cmn_title_textwidget.dart';
+
 import 'package:enviro_mobile_application/view/loginpage/Common_widgets/widgets/news_page.dart';
 import 'package:enviro_mobile_application/view/loginpage/Common_widgets/widgets/notification_page.dart';
 import 'package:enviro_mobile_application/view/loginpage/common/appbar/cmappbar.dart';
@@ -8,6 +10,8 @@ import 'package:enviro_mobile_application/view/loginpage/common/appbar/imagepath
 import 'package:enviro_mobile_application/view/loginpage/notification_page/notificationpage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../Common_widgets/widgets/cmn_leading_icon.dart';
 
 class OhsPage extends StatelessWidget {
   const OhsPage({Key? key}) : super(key: key);
@@ -22,20 +26,9 @@ class OhsPage extends StatelessWidget {
       length: 2,
       child: Scaffold(
         appBar: CustomAppBar(
-          leadingImage: Image.asset(ImageConstant.imagePath),
-          automaticallyImplyLeading: false,
-          actions: [
-            IconButton(
-              iconSize: 32,
-              icon: const Icon(Icons.notifications),
-              onPressed: _handleOhsButtonTap,
-            ),
-            IconButton(
-              iconSize: 32,
-              icon: const Icon(Icons.account_circle),
-              onPressed: () {},
-            ),
-          ],
+          leading: cmn_leading_icon(),
+          title: cmnTitleWidget('OH&S'),
+          actions: cmn_action_icon,
         ),
         body: Column(
           children: [

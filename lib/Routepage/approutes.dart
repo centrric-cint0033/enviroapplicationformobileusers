@@ -14,6 +14,7 @@ class AppRouter extends $AppRouter {
         AutoRoute(
           page: MainRoute.page,
           path: RouteNames.mainscreen,
-        )
+        ),
+        AutoRoute(page: SalesMainRoute.page, path: RouteNames.salesmainpage)
       ];
 }

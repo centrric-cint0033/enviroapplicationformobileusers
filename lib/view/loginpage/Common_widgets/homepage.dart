@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:enviro_mobile_application/view/loginpage/Common_widgets/widgets/common_tababr.dart';
 import 'package:enviro_mobile_application/view/loginpage/Common_widgets/widgets/week_page.dart';
 
 import 'package:enviro_mobile_application/view/loginpage/common/appbar/cmappbar.dart';
@@ -6,8 +7,6 @@ import 'package:enviro_mobile_application/view/loginpage/common/appbar/imagepath
 import 'package:enviro_mobile_application/view/loginpage/Common_widgets/widgets/calender_page.dart';
 
 import 'package:enviro_mobile_application/view/loginpage/Common_widgets/widgets/cm_home_page.dart';
-
-import 'package:enviro_mobile_application/view/loginpage/Common_widgets/widgets/common_tababr.dart';
 
 import 'package:flutter/material.dart';
 

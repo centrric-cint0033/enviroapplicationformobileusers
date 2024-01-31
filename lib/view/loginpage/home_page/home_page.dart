@@ -1,8 +1,11 @@
+import 'package:auto_route/auto_route.dart';
+import 'package:enviro_mobile_application/Routepage/routespage.dart';
+import 'package:enviro_mobile_application/view/sales_page/sales_main_page.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:enviro_mobile_application/view/loginpage/Common_widgets/widgets/cmn_action_icon.dart';
 import 'package:enviro_mobile_application/view/loginpage/Common_widgets/widgets/cmn_leading_icon.dart';
 import 'package:enviro_mobile_application/view/loginpage/Common_widgets/widgets/cmn_title_textwidget.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:enviro_mobile_application/view/loginpage/common/appbar/cmappbar.dart';
 
 class Homepage1 extends StatelessWidget {
@@ -23,12 +26,15 @@ class Homepage1 extends StatelessWidget {
           crossAxisSpacing: 16.0,
           mainAxisSpacing: 16.0,
           children: [
-            _buildBox(
-              'assets/images/star.svg',
-              'Sales',
-              Colors.blue,
-              width: 30.0,
-              height: 30.0,
+            GestureDetector(
+              onTap: () => salesfunction(context),
+              child: _buildBox(
+                'assets/images/star.svg',
+                'Sales',
+                Colors.blue,
+                width: 30.0,
+                height: 30.0,
+              ),
             ),
             _buildBox(
               'assets/images/truck.svg',
@@ -101,4 +107,9 @@ class Homepage1 extends StatelessWidget {
       ),
     );
   }
+}
+
+void salesfunction(BuildContext context) {
+  context.router.pushNamed(RouteNames.salesmainpage);
+  print('Notification button tapped!');
 }
