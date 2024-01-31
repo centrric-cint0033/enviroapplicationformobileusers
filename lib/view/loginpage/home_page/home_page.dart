@@ -1,3 +1,6 @@
+import 'package:enviro_mobile_application/view/loginpage/Common_widgets/widgets/cmn_action_icon.dart';
+import 'package:enviro_mobile_application/view/loginpage/Common_widgets/widgets/cmn_leading_icon.dart';
+import 'package:enviro_mobile_application/view/loginpage/Common_widgets/widgets/cmn_title_textwidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:enviro_mobile_application/view/loginpage/common/appbar/cmappbar.dart';
@@ -5,21 +8,13 @@ import 'package:enviro_mobile_application/view/loginpage/common/appbar/cmappbar.
 class Homepage1 extends StatelessWidget {
   const Homepage1({Key? key}) : super(key: key);
 
-  void _handleNotificationButtonTap() {
-    print('Notification button tapped!');
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
-        actions: [
-          IconButton(
-            iconSize: 32,
-            icon: Icon(Icons.notifications),
-            onPressed: _handleNotificationButtonTap, // Remove the parentheses
-          ),
-        ],
+        leading: cmn_leading_icon(),
+        title: cmnTitleWidget('HOME'),
+        actions: cmn_action_icon,
       ),
       body: Padding(
         padding: const EdgeInsets.all(36.0),
@@ -84,7 +79,7 @@ class Homepage1 extends StatelessWidget {
   }
 
   Widget _buildBox(String svgPath, String text, Color iconColor,
-      {double width = 30.0, double height = 30.0}) {
+      {double width = 15.0, double height = 15.0}) {
     return Container(
       padding: const EdgeInsets.all(8.0),
       decoration: BoxDecoration(
