@@ -1,9 +1,14 @@
+import 'package:auto_route/auto_route.dart';
+import 'package:enviro_mobile_application/view/loginpage/Common_widgets/widgets/cmn_action_icon.dart';
+import 'package:enviro_mobile_application/view/loginpage/Common_widgets/widgets/cmn_leading_icon.dart';
+import 'package:enviro_mobile_application/view/loginpage/Common_widgets/widgets/cmn_title_textwidget.dart';
 import 'package:flutter/material.dart';
 
 import 'package:enviro_mobile_application/view/loginpage/common/appbar/cmcustomformfield.dart';
 import 'package:enviro_mobile_application/view/loginpage/common/appbar/cmappbar.dart';
 import 'package:enviro_mobile_application/view/loginpage/common/appbar/imagepath/imagepath.dart';
 
+@RoutePage()
 class IntranetPage extends StatelessWidget {
   const IntranetPage({Key? key});
 
@@ -15,20 +20,9 @@ class IntranetPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
-        leadingImage: Image.asset(ImageConstant.imagePath),
-        automaticallyImplyLeading: false,
-        actions: [
-          IconButton(
-            iconSize: 32,
-            icon: const Icon(Icons.notifications),
-            onPressed: _handleIntranetButtonTap,
-          ),
-          IconButton(
-            iconSize: 32,
-            icon: const Icon(Icons.account_circle),
-            onPressed: () {},
-          ),
-        ],
+        leading: const cmn_leading_icon(),
+        title: cmnTitleWidget('Intranet'),
+        actions: cmn_action_icon,
       ),
       body: Padding(
         padding: const EdgeInsets.only(top: 35, right: 18),
@@ -36,38 +30,44 @@ class IntranetPage extends StatelessWidget {
           children: [
             Container(
               alignment: Alignment.topRight,
-              child: TextButton(
-                onPressed: _handleIntranetButtonTap,
-                style: ButtonStyle(
-                  side: MaterialStateProperty.all<BorderSide>(
-                    const BorderSide(color: Colors.blue),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Padding(
+                    padding: EdgeInsets.only(left: 18),
+                    child: Text('Folders'),
                   ),
-                  backgroundColor:
-                      MaterialStateProperty.all<Color>(Colors.white),
-                ),
-                child: const Text(
-                  'Add Folder +',
-                  style: TextStyle(color: Colors.blue),
-                ),
+                  TextButton(
+                    onPressed: _handleIntranetButtonTap,
+                    style: ButtonStyle(
+                      side: MaterialStateProperty.all<BorderSide>(
+                        const BorderSide(color: Colors.blue),
+                      ),
+                      backgroundColor:
+                          MaterialStateProperty.all<Color>(Colors.white),
+                    ),
+                    child: const Text(
+                      'Add Folder +',
+                      style: TextStyle(color: Colors.blue),
+                    ),
+                  ),
+                ],
               ),
             ),
             const SizedBox(
               height: 25,
             ),
-            Padding(
-              padding: const EdgeInsets.only(left: 8.0),
-              child: Cmformfield(
-                borderColor: Colors.black12,
-                cursorHeight: 25,
-                hinttext: 'Search by folder name',
-                height: 52,
-                width: double.infinity,
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(32),
-                ),
+            Cmformfield(
+              borderColor: Colors.black12,
+              cursorHeight: 25,
+              hinttext: 'Search by folder name',
+              height: 28,
+              width: double.infinity,
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(32),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 14,
             ),
             Expanded(

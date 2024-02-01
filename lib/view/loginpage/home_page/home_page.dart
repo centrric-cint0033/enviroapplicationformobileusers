@@ -36,12 +36,15 @@ class Homepage1 extends StatelessWidget {
                 height: 30.0,
               ),
             ),
-            _buildBox(
-              'assets/images/truck.svg',
-              'Vehicle',
-              Colors.blue,
-              width: 30.0,
-              height: 30.0,
+            GestureDetector(
+              onTap: () => vehiclefunction(context),
+              child: _buildBox(
+                'assets/images/truck.svg',
+                'Vehicle',
+                Colors.blue,
+                width: 30.0,
+                height: 30.0,
+              ),
             ),
             GestureDetector(
               onTap: () => ohsfunction(context),
@@ -60,19 +63,25 @@ class Homepage1 extends StatelessWidget {
               width: 30.0,
               height: 30.0,
             ),
-            _buildBox(
-              'assets/images/calendar.svg',
-              'Scheduling',
-              Colors.blue,
-              width: 30.0,
-              height: 30.0,
+            GestureDetector(
+              onTap: () => calenderfunction(context),
+              child: _buildBox(
+                'assets/images/calendar.svg',
+                'Scheduling',
+                Colors.blue,
+                width: 30.0,
+                height: 30.0,
+              ),
             ),
-            _buildBox(
-              'assets/images/globe.svg',
-              'Intranet',
-              Colors.blue,
-              width: 30.0,
-              height: 30.0,
+            GestureDetector(
+              onTap: () => intranetfuntion(context),
+              child: _buildBox(
+                'assets/images/globe.svg',
+                'Intranet',
+                Colors.blue,
+                width: 30.0,
+                height: 30.0,
+              ),
             ),
             _buildBox(
               'assets/images/users.svg',
@@ -119,5 +128,20 @@ void salesfunction(BuildContext context) {
 
 void ohsfunction(BuildContext context) {
   context.router.pushNamed(RouteNames.OhsPage);
+  print('Notification button tapped!');
+}
+
+void intranetfuntion(BuildContext context) {
+  context.router.pushNamed(RouteNames.intranet_page);
+  print('Notification button tapped!');
+}
+
+void calenderfunction(BuildContext context) {
+  context.router.pushNamed(RouteNames.calender_page);
+  print('Notification button tapped!');
+}
+
+void vehiclefunction(BuildContext context) {
+  context.router.pushNamed(RouteNames.vehicle_main_page);
   print('Notification button tapped!');
 }

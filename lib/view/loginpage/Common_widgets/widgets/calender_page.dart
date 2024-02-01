@@ -7,7 +7,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:table_calendar/table_calendar.dart';
 
-Padding calender_page() {
+Padding calander_page() {
   return Padding(
     padding: const EdgeInsets.all(14.0),
     child: SingleChildScrollView(

@@ -1,3 +1,7 @@
+import 'package:auto_route/auto_route.dart';
+import 'package:enviro_mobile_application/view/loginpage/Common_widgets/widgets/cmn_action_icon.dart';
+import 'package:enviro_mobile_application/view/loginpage/Common_widgets/widgets/cmn_leading_icon.dart';
+import 'package:enviro_mobile_application/view/loginpage/Common_widgets/widgets/cmn_title_textwidget.dart';
 import 'package:enviro_mobile_application/view/loginpage/common/appbar/Appthemes/Appthemes.dart';
 import 'package:enviro_mobile_application/view/loginpage/common/appbar/cmappbar.dart';
 import 'package:enviro_mobile_application/view/loginpage/common/appbar/imagepath/imagepath.dart';
@@ -5,6 +9,7 @@ import 'package:enviro_mobile_application/view/loginpage/Common_widgets/widgets/
 
 import 'package:flutter/material.dart';
 
+@RoutePage()
 class CalendarPage extends StatelessWidget {
   const CalendarPage({Key? key}) : super(key: key);
 
@@ -14,17 +19,11 @@ class CalendarPage extends StatelessWidget {
       length: 3,
       child: Scaffold(
         appBar: CustomAppBar(
-          leadingImage: Image.asset(ImageConstant.imagePath),
-          automaticallyImplyLeading: false,
-          actions: [
-            IconButton(
-              iconSize: 32,
-              icon: const Icon(Icons.account_circle),
-              onPressed: () {},
-            ),
-          ],
+          leading: cmn_leading_icon(),
+          title: cmnTitleWidget('Shedule'),
+          actions: cmn_action_icon,
         ),
-        body: calender_page(),
+        body: calander_page(),
       ),
     );
   }

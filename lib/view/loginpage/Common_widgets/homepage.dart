@@ -39,7 +39,7 @@ class HomePage extends StatelessWidget {
             CommonTabbar(),
             Expanded(
               child: TabBarView(
-                children: <Widget>[cmhomepage(), weekpage(), calender_page()],
+                children: <Widget>[cmhomepage(), weekpage()],
               ),
             ),
           ],
