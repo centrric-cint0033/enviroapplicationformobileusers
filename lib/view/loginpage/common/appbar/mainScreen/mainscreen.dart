@@ -32,7 +32,7 @@ class MainScreen extends StatelessWidget {
           },
         ),
       ),
-      bottomNavigationBar: const CommonBottombar(),
+      // bottomNavigationBar: const CommonBottombar(),
     );
   }
 }

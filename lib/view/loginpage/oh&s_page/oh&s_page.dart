@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:enviro_mobile_application/view/loginpage/Common_widgets/notification_news_tabbar.dart';
 import 'package:enviro_mobile_application/view/loginpage/Common_widgets/widgets/cm_home_page.dart';
 import 'package:enviro_mobile_application/view/loginpage/Common_widgets/widgets/cmn_action_icon.dart';
@@ -13,6 +14,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../Common_widgets/widgets/cmn_leading_icon.dart';
 
+@RoutePage()
 class OhsPage extends StatelessWidget {
   const OhsPage({Key? key}) : super(key: key);
 
@@ -33,14 +35,14 @@ class OhsPage extends StatelessWidget {
         body: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.all(25.0),
+              padding: const EdgeInsets.only(left: 25, right: 25),
               child: Container(
                 width: 390,
-                height: 52,
+                height: 62,
                 decoration: BoxDecoration(
                   color: Colors.blue,
                   border: Border.all(color: Colors.blue),
-                  borderRadius: BorderRadius.circular(22.0),
+                  borderRadius: BorderRadius.circular(8.0),
                 ),
                 child: notification_news_tabbar(),
               ),

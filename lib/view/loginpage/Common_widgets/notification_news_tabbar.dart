@@ -4,7 +4,7 @@ TabBar notification_news_tabbar() {
   return TabBar(
     indicatorSize: TabBarIndicatorSize.tab,
     indicator: BoxDecoration(
-      borderRadius: BorderRadius.circular(23),
+      borderRadius: BorderRadius.circular(8),
       color: Colors.white,
     ),
     labelColor: Colors.black,

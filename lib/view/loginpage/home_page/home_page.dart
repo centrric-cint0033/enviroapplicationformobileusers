@@ -43,12 +43,15 @@ class Homepage1 extends StatelessWidget {
               width: 30.0,
               height: 30.0,
             ),
-            _buildBox(
-              'assets/images/move(1).svg',
-              'OH&S',
-              Colors.blue,
-              width: 30.0,
-              height: 30.0,
+            GestureDetector(
+              onTap: () => ohsfunction(context),
+              child: _buildBox(
+                'assets/images/move(1).svg',
+                'OH&S',
+                Colors.blue,
+                width: 30.0,
+                height: 30.0,
+              ),
             ),
             _buildBox(
               'assets/images/user.svg',
@@ -111,5 +114,10 @@ class Homepage1 extends StatelessWidget {
 
 void salesfunction(BuildContext context) {
   context.router.pushNamed(RouteNames.salesmainpage);
+  print('Notification button tapped!');
+}
+
+void ohsfunction(BuildContext context) {
+  context.router.pushNamed(RouteNames.OhsPage);
   print('Notification button tapped!');
 }
