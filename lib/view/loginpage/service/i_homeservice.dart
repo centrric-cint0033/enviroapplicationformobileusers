@@ -1,6 +1,7 @@
-import 'package:injectable/injectable.dart';
+import 'package:dartz/dartz.dart';
 
-abstract class IHomeService {}
+import '../../../utilis/main_failure.dart';
 
-@LazySingleton(as: IHomeService)
-class AuthService implements IHomeService {}
+abstract class IHomeService {
+  Future<Either<MainFailure, String>> permissions({required data});
+}
