@@ -1,6 +1,8 @@
 import 'package:enviro_mobile_application/api_response/api_response.dart';
+import 'package:enviro_mobile_application/model/home/res_model/homerespmodel.dart';
 import 'package:enviro_mobile_application/utilis/injection.dart';
-import 'package:enviro_mobile_application/view/loginpage/service/i_homeservice.dart';
+
+import 'package:enviro_mobile_application/view/service/home/i_homeservice.dart';
 
 import 'package:injectable/injectable.dart';
 import 'package:mobx/mobx.dart';
@@ -28,10 +30,10 @@ abstract class HomeViewModelBase with Store {
   }
 
   @observable
-  ApiResponse permissionsResponse = ApiResponse<String>();
+  ApiResponse permissionsResponse = ApiResponse<HomeRespModel>();
 
   @action
-  Future<int?> permissions() async {
+  Future<void> permissions() async {
     permissionsResponse =
         permissionsResponse.copyWith(error: null, loading: true);
 
@@ -42,7 +44,6 @@ abstract class HomeViewModelBase with Store {
           error: l,
           loading: false,
         );
-        return null;
       },
       (r) {
         permissionsResponse = permissionsResponse.copyWith(
@@ -50,7 +51,6 @@ abstract class HomeViewModelBase with Store {
           error: null,
           loading: false,
         );
-        return 200;
       },
     );
   }

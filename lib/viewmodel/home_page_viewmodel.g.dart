@@ -61,7 +61,7 @@ mixin _$HomeViewModel on HomeViewModelBase, Store {
       AsyncAction('HomeViewModelBase.permissions', context: context);
 
   @override
-  Future<int?> permissions() {
+  Future<void> permissions() {
     return _$permissionsAsyncAction.run(() => super.permissions());
   }
 

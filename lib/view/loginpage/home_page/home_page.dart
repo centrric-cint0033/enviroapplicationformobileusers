@@ -17,7 +17,7 @@ class Homepage1 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
-        leading: cmn_leading_icon(),
+        leading: const cmn_leading_icon(),
         title: cmnTitleWidget('HOME'),
         actions: cmn_action_icon,
       ),
@@ -125,21 +125,24 @@ class Homepage1 extends StatelessWidget {
   }
 }
 
-onsalesfunction(BuildContext context) async {
-  int? statusCode = await vmselection.permissions();
+void onsalesfunction(context) async {
+  await vmselection.permissions();
+
   final router = context.router;
-  if (statusCode != null) {
-    router.replaceNamed(RouteNames.salesmainpage);
-  } else {
+  final permissionsResponse = vmselection.permissionsResponse;
+
+  if (permissionsResponse.error != null) {
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
         backgroundColor: Color(0XFF061933),
         content: Text(
-          'You have no permission for entering this .',
+          'You have no permission for entering this.',
         ),
         duration: Duration(seconds: 3),
       ),
     );
+  } else {
+    router.replaceNamed(RouteNames.salesmainpage);
   }
 }
 

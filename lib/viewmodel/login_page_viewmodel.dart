@@ -1,7 +1,8 @@
 import 'package:enviro_mobile_application/api_response/api_response.dart';
 import 'package:enviro_mobile_application/model/auth/loginreqmodel.dart';
 import 'package:enviro_mobile_application/utilis/injection.dart';
-import 'package:enviro_mobile_application/view/loginpage/service/i_authservice.dart';
+
+import 'package:enviro_mobile_application/view/service/auth/i_authservice.dart';
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 import 'package:mobx/mobx.dart';
