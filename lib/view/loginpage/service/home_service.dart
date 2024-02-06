@@ -14,12 +14,11 @@ import 'package:injectable/injectable.dart';
 @LazySingleton(as: IHomeService)
 class HomeRepository implements IHomeService {
   @override
-  Future<Either<MainFailure, String>> permissions({required data}) async {
+  Future<Either<MainFailure, String>> permissions() async {
     var response = await getIt<HttpService>().request(
-      authenticated: false,
+      authenticated: true,
       method: HttpMethod.get,
       apiUrl: ApiEndPoints.endPointpermissions,
-      data: jsonEncode(data.toJson()),
     );
     return response.fold(
       (l) {

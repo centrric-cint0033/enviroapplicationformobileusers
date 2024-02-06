@@ -41,6 +41,30 @@ mixin _$HomeViewModel on HomeViewModelBase, Store {
     });
   }
 
+  late final _$permissionsResponseAtom =
+      Atom(name: 'HomeViewModelBase.permissionsResponse', context: context);
+
+  @override
+  ApiResponse<dynamic> get permissionsResponse {
+    _$permissionsResponseAtom.reportRead();
+    return super.permissionsResponse;
+  }
+
+  @override
+  set permissionsResponse(ApiResponse<dynamic> value) {
+    _$permissionsResponseAtom.reportWrite(value, super.permissionsResponse, () {
+      super.permissionsResponse = value;
+    });
+  }
+
+  late final _$permissionsAsyncAction =
+      AsyncAction('HomeViewModelBase.permissions', context: context);
+
+  @override
+  Future<int?> permissions() {
+    return _$permissionsAsyncAction.run(() => super.permissions());
+  }
+
   late final _$HomeViewModelBaseActionController =
       ActionController(name: 'HomeViewModelBase', context: context);
 
@@ -59,7 +83,8 @@ mixin _$HomeViewModel on HomeViewModelBase, Store {
   String toString() {
     return '''
 passwordVisibility: ${passwordVisibility},
-currentIndex: ${currentIndex}
+currentIndex: ${currentIndex},
+permissionsResponse: ${permissionsResponse}
     ''';
   }
 }

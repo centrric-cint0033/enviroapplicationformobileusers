@@ -31,11 +31,11 @@ abstract class HomeViewModelBase with Store {
   ApiResponse permissionsResponse = ApiResponse<String>();
 
   @action
-  Future<int?> permissions({required data}) async {
+  Future<int?> permissions() async {
     permissionsResponse =
         permissionsResponse.copyWith(error: null, loading: true);
 
-    final res = await homeService.permissions(data: null);
+    final res = await homeService.permissions();
     return res.fold(
       (l) {
         permissionsResponse = permissionsResponse.copyWith(

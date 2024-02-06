@@ -1,7 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:enviro_mobile_application/Routepage/routespage.dart';
 import 'package:enviro_mobile_application/view/sales_page/sales_main_page.dart';
+import 'package:enviro_mobile_application/viewmodel/home_page_viewmodel.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:enviro_mobile_application/view/loginpage/Common_widgets/widgets/cmn_action_icon.dart';
 import 'package:enviro_mobile_application/view/loginpage/Common_widgets/widgets/cmn_leading_icon.dart';
@@ -26,16 +28,18 @@ class Homepage1 extends StatelessWidget {
           crossAxisSpacing: 16.0,
           mainAxisSpacing: 16.0,
           children: [
-            GestureDetector(
-              onTap: () => salesfunction(context),
-              child: _buildBox(
-                'assets/images/star.svg',
-                'Sales',
-                Colors.blue,
-                width: 30.0,
-                height: 30.0,
-              ),
-            ),
+            Observer(builder: (_) {
+              return GestureDetector(
+                onTap: () => onsalesfunction(context),
+                child: _buildBox(
+                  'assets/images/star.svg',
+                  'Sales',
+                  Colors.blue,
+                  width: 30.0,
+                  height: 30.0,
+                ),
+              );
+            }),
             GestureDetector(
               onTap: () => vehiclefunction(context),
               child: _buildBox(
@@ -121,13 +125,26 @@ class Homepage1 extends StatelessWidget {
   }
 }
 
-void salesfunction(BuildContext context) {
-  context.router.pushNamed(RouteNames.salesmainpage);
-  print('Notification button tapped!');
+onsalesfunction(BuildContext context) async {
+  int? statusCode = await vmselection.permissions();
+  final router = context.router;
+  if (statusCode != null) {
+    router.replaceNamed(RouteNames.salesmainpage);
+  } else {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        backgroundColor: Color(0XFF061933),
+        content: Text(
+          'You have no permission for entering this .',
+        ),
+        duration: Duration(seconds: 3),
+      ),
+    );
+  }
 }
 
 void ohsfunction(BuildContext context) {
-  context.router.pushNamed(RouteNames.OhsPage);
+  context.router.pushNamed(RouteNames.ohsPage);
   print('Notification button tapped!');
 }
 
