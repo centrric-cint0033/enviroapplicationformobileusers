@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:enviro_mobile_application/view/loginpage/Common_widgets/widgets/common_search_widget.dart';
 
 class MasterTruckPage extends StatelessWidget {
   const MasterTruckPage({Key? key}) : super(key: key);
@@ -14,9 +13,7 @@ class MasterTruckPage extends StatelessWidget {
           child: Column(
             children: [
               Container(width: 68, child: const Card()),
-              common_search_widget(),
-              const SizedBox(height: 16.0),
-              _buildAdditionalCard(), // Additional card added here
+              _buildAdditionalCard(),
               const SizedBox(height: 16.0),
               _buildJobCard(
                 date: "2024-02-01",
@@ -34,6 +31,9 @@ class MasterTruckPage extends StatelessWidget {
   }
 
   Widget _buildAdditionalCard() {
+    List<String> vehicles = ['Vehicle 1', 'Vehicle 2', 'Vehicle 3'];
+    String? selectedVehicle;
+
     return Container(
       width: double.infinity,
       child: Card(
@@ -47,11 +47,31 @@ class MasterTruckPage extends StatelessWidget {
         color: Colors.white,
         child: Padding(
           padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+          child: Row(
             children: [
-              Text("Additional Card Content"),
-              // Add more content as needed
+              const Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(height: 8.0),
+                  ],
+                ),
+              ),
+              const SizedBox(width: 16.0),
+              DropdownButton<String>(
+                value: selectedVehicle,
+                onChanged: (String? newValue) {
+                  if (newValue != null) {
+                    selectedVehicle = newValue;
+                  }
+                },
+                items: vehicles.map<DropdownMenuItem<String>>((String value) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(value),
+                  );
+                }).toList(),
+              ),
             ],
           ),
         ),

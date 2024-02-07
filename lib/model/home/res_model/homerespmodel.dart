@@ -20,9 +20,8 @@ class HomeRespModel with _$HomeRespModel {
     String? currentUserPermission,
   }) = _HomeRespModel;
 
-  factory HomeRespModel.fromJson(Map<String, dynamic>? json) =>
-      _$HomeRespModelFromJson(
-          json ?? {}); // Provide a default empty map if json is null
+  factory HomeRespModel.fromJson(Map<String, dynamic> json) =>
+      _$HomeRespModelFromJson(json);
 }
 
 @freezed

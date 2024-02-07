@@ -30,7 +30,7 @@ class HomeRepository implements IHomeService {
         return Left(l.keys.first);
       },
       (res) async {
-        var data = jsonDecode(res.body)["data"];
+        var data = jsonDecode(res.body);
         await getIt<SecureStorage>().readData(key: 'token');
         return Right(HomeRespModel.fromJson(data));
       },
