@@ -142,7 +142,12 @@ class HttpService {
 class LoggingInterceptor implements InterceptorContract {
   @override
   Future<RequestData> interceptRequest({required RequestData data}) async {
-    print(data.toString());
+    final token = await SecureStorage().readData(key: "token");
+    data.headers.addAll({
+      'Accept': 'application/json',
+      'Authorization': 'Bearer $token',
+      'Content-Type': 'application/json',
+    });
     return data;
   }
 

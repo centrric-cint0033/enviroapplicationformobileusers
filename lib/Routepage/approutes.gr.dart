@@ -9,19 +9,18 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:auto_route/auto_route.dart' as _i9;
+import 'package:enviro_mobile_application/view/intranet_page/intranet_page.dart'
+    as _i3;
 import 'package:enviro_mobile_application/view/loginpage/calenderpage/calender_page.dart'
     as _i1;
-import 'package:enviro_mobile_application/view/loginpage/common/appbar/mainScreen/mainscreen.dart'
-    as _i5;
 import 'package:enviro_mobile_application/view/loginpage/Common_widgets/homepage.dart'
     as _i2;
-import 'package:enviro_mobile_application/view/loginpage/intranet_page/intranet_page.dart'
-    as _i3;
 import 'package:enviro_mobile_application/view/loginpage/loginpage.dart' as _i4;
-import 'package:enviro_mobile_application/view/loginpage/oh&s_page/oh&s_page.dart'
-    as _i6;
+import 'package:enviro_mobile_application/view/main_screen/main_screen.dart'
+    as _i5;
 import 'package:enviro_mobile_application/view/main_vehicle_page.dart/main_vehicle_page.dart'
     as _i8;
+import 'package:enviro_mobile_application/view/ohs_page/ohs_page.dart' as _i6;
 import 'package:enviro_mobile_application/view/sales_page/sales_main_page.dart'
     as _i7;
 import 'package:flutter/material.dart' as _i10;

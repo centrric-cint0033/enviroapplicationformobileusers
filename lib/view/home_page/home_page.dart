@@ -125,10 +125,10 @@ class Homepage1 extends StatelessWidget {
   }
 }
 
-void onsalesfunction(context) async {
+void onsalesfunction(BuildContext context) async {
+  final router = context.router;
   await vmselection.permissions();
 
-  final router = context.router;
   final permissionsResponse = vmselection.permissionsResponse;
 
   if (permissionsResponse.error != null) {
@@ -142,7 +142,7 @@ void onsalesfunction(context) async {
       ),
     );
   } else {
-    router.replaceNamed(RouteNames.salesmainpage);
+    router.pushNamed(RouteNames.salesmainpage);
   }
 }
 
@@ -152,16 +152,16 @@ void ohsfunction(BuildContext context) {
 }
 
 void intranetfuntion(BuildContext context) {
-  context.router.pushNamed(RouteNames.intranet_page);
+  context.router.pushNamed(RouteNames.intranetpage);
   print('Notification button tapped!');
 }
 
 void calenderfunction(BuildContext context) {
-  context.router.pushNamed(RouteNames.calender_page);
+  context.router.pushNamed(RouteNames.calenderpage);
   print('Notification button tapped!');
 }
 
 void vehiclefunction(BuildContext context) {
-  context.router.pushNamed(RouteNames.vehicle_main_page);
+  context.router.pushNamed(RouteNames.vehiclemainpage);
   print('Notification button tapped!');
 }

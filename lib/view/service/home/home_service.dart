@@ -1,7 +1,9 @@
 import 'dart:convert';
 
+import 'package:auto_route/auto_route.dart';
 import 'package:dartz/dartz.dart';
 import 'package:enviro_mobile_application/Routepage/securestorage.dart';
+
 import 'package:enviro_mobile_application/model/home/res_model/homerespmodel.dart';
 
 import 'package:enviro_mobile_application/utilis/api_endpoints/api_endpoints.dart';
@@ -29,6 +31,7 @@ class HomeRepository implements IHomeService {
       },
       (res) async {
         var data = jsonDecode(res.body)["data"];
+        await getIt<SecureStorage>().readData(key: 'token');
         return Right(HomeRespModel.fromJson(data));
       },
     );

@@ -1,12 +1,12 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:enviro_mobile_application/view/loginpage/calenderpage/calender_page.dart';
+import 'package:enviro_mobile_application/view/home_page/home_page.dart';
+import 'package:enviro_mobile_application/view/intranet_page/intranet_page.dart';
+
 import 'package:enviro_mobile_application/view/loginpage/common/appbar/bottombar.dart';
 import 'package:enviro_mobile_application/view/loginpage/Common_widgets/homepage.dart';
-import 'package:enviro_mobile_application/view/loginpage/home_page/home_page.dart';
-import 'package:enviro_mobile_application/view/loginpage/intranet_page/intranet_page.dart';
-import 'package:enviro_mobile_application/view/loginpage/oh&s_page/oh&s_page.dart';
-import 'package:enviro_mobile_application/view/loginpage/vehiclepage/vehicle-page.dart';
-import 'package:enviro_mobile_application/view/loginpage/week_page/week_page.dart';
+import 'package:enviro_mobile_application/view/ohs_page/ohs_page.dart';
+import 'package:enviro_mobile_application/view/vehicle_page/vehicle_page.dart';
+
 import 'package:enviro_mobile_application/viewmodel/home_page_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
