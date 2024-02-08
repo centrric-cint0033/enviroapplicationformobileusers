@@ -36,44 +36,45 @@ class MasterTruckPage extends StatelessWidget {
 
     return Container(
       width: double.infinity,
-      child: Card(
-        margin: const EdgeInsets.only(left: 16.0, right: 16),
-        shape: RoundedRectangleBorder(
-          side: const BorderSide(
-            color: Color(0XFF949494),
-          ),
-          borderRadius: BorderRadius.circular(8.0),
-        ),
-        color: Colors.white,
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Row(
-            children: [
-              const Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(height: 8.0),
-                  ],
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+        child: Row(
+          children: [
+            Expanded(
+              child: Container(
+                decoration: BoxDecoration(
+                  border: Border.all(color: const Color(0XFF949494)),
+                  borderRadius: BorderRadius.circular(8.0),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                  child: DropdownButtonHideUnderline(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text('Selected Vehicles'),
+                        DropdownButton<String>(
+                          value: selectedVehicle,
+                          onChanged: (String? newValue) {
+                            if (newValue != null) {
+                              selectedVehicle = newValue;
+                            }
+                          },
+                          items: vehicles
+                              .map<DropdownMenuItem<String>>((String value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(value),
+                            );
+                          }).toList(),
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
               ),
-              const SizedBox(width: 16.0),
-              DropdownButton<String>(
-                value: selectedVehicle,
-                onChanged: (String? newValue) {
-                  if (newValue != null) {
-                    selectedVehicle = newValue;
-                  }
-                },
-                items: vehicles.map<DropdownMenuItem<String>>((String value) {
-                  return DropdownMenuItem<String>(
-                    value: value,
-                    child: Text(value),
-                  );
-                }).toList(),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

@@ -3,24 +3,24 @@ import 'dart:convert';
 import 'package:dartz/dartz.dart';
 import 'package:enviro_mobile_application/Routepage/securestorage.dart';
 
-import 'package:enviro_mobile_application/model/home/res_model/homerespmodel.dart';
+import 'package:enviro_mobile_application/model/vehicle/res_model/all_vehicle_list/allvehiclelist_model.dart';
 
 import 'package:enviro_mobile_application/utilis/api_endpoints/api_endpoints.dart';
 import 'package:enviro_mobile_application/utilis/httpservice.dart';
 import 'package:enviro_mobile_application/utilis/injection.dart';
 import 'package:enviro_mobile_application/utilis/main_failure.dart';
 
-import 'package:enviro_mobile_application/view/service/home/i_homeservice.dart';
+import 'package:enviro_mobile_application/view/service/vehicle/i_all_vehicle_service.dart';
 import 'package:injectable/injectable.dart';
 
-@LazySingleton(as: IHomeService)
-class HomeRepository implements IHomeService {
+@LazySingleton(as: IAllVehicleListService)
+class AllVehicleListRepository implements IAllVehicleListService {
   @override
-  Future<Either<MainFailure, HomeRespModel>> permissions() async {
+  Future<Either<MainFailure, AllVehicleListModel>> allvehiclelisting() async {
     var response = await getIt<HttpService>().request(
       authenticated: true,
       method: HttpMethod.get,
-      apiUrl: ApiEndPoints.endPointpermissions,
+      apiUrl: ApiEndPoints.endPointallvehiclelisting,
     );
     return response.fold(
       (l) {
@@ -31,7 +31,7 @@ class HomeRepository implements IHomeService {
       (res) async {
         var data = jsonDecode(res.body);
         await getIt<SecureStorage>().readData(key: 'token');
-        return Right(HomeRespModel.fromJson(data));
+        return Right(AllVehicleListModel.fromJson(data));
       },
     );
   }
