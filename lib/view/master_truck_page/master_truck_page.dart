@@ -1,3 +1,4 @@
+import 'package:enviro_mobile_application/viewmodel/vehiclepage/vehicle_page_viewmodel.dart';
 import 'package:flutter/material.dart';
 
 class MasterTruckPage extends StatelessWidget {
@@ -56,9 +57,7 @@ class MasterTruckPage extends StatelessWidget {
                         DropdownButton<String>(
                           value: selectedVehicle,
                           onChanged: (String? newValue) {
-                            if (newValue != null) {
-                              selectedVehicle = newValue;
-                            }
+                            vmvehicle.allvehiclelisting();
                           },
                           items: vehicles
                               .map<DropdownMenuItem<String>>((String value) {

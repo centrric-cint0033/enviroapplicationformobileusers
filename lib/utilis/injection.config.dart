@@ -27,9 +27,11 @@ import 'package:enviro_mobile_application/view/service/vehicle/i_all_vehicle_ser
 import 'package:enviro_mobile_application/viewmodel/calenderpage/calender_page_viewmodel.dart'
     as _i3;
 import 'package:enviro_mobile_application/viewmodel/home_page_viewmodel.dart'
-    as _i14;
+    as _i15;
 import 'package:enviro_mobile_application/viewmodel/login_page_viewmodel.dart'
     as _i12;
+import 'package:enviro_mobile_application/viewmodel/vehiclepage/vehicle_page_viewmodel.dart'
+    as _i14;
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
 
@@ -54,8 +56,10 @@ extension GetItInjectableX on _i1.GetIt {
     gh.factory<_i12.LoginViewModel>(
         () => _i12.LoginViewModel(gh<_i8.IAuthService>()));
     gh.lazySingleton<_i13.SecureStorage>(() => _i13.SecureStorage());
-    gh.factory<_i14.HomeViewModel>(
-        () => _i14.HomeViewModel(gh<_i10.IHomeService>()));
+    gh.factory<_i14.AllVehiclelistviewModel>(
+        () => _i14.AllVehiclelistviewModel(gh<_i6.IAllVehicleListService>()));
+    gh.factory<_i15.HomeViewModel>(
+        () => _i15.HomeViewModel(gh<_i10.IHomeService>()));
     return this;
   }
 }

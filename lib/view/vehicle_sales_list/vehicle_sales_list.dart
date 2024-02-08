@@ -13,7 +13,7 @@ class VehicleSalesPage extends StatelessWidget {
           padding: const EdgeInsets.only(left: 8.0, right: 8),
           child: Column(
             children: [
-              _buildDateDropdown(), // Added date dropdown
+              _buildDateDropdown(),
               const SizedBox(height: 16.0),
               common_search_widget(),
               const SizedBox(height: 16.0),
@@ -70,9 +70,7 @@ class VehicleSalesPage extends StatelessWidget {
                   child: Text(value),
                 );
               }).toList(),
-              onChanged: (String? newValue) {
-                // Add your logic for date selection here
-              },
+              onChanged: (String? newValue) {},
               hint: Text('Jan'),
             ),
           ),

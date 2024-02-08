@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:dartz/dartz.dart';
-import 'package:enviro_mobile_application/Routepage/securestorage.dart';
 
 import 'package:enviro_mobile_application/model/vehicle/res_model/all_vehicle_list/allvehiclelist_model.dart';
 
@@ -24,13 +23,12 @@ class AllVehicleListRepository implements IAllVehicleListService {
     );
     return response.fold(
       (l) {
-        // Show Error
         (l.values.first);
         return Left(l.keys.first);
       },
       (res) async {
         var data = jsonDecode(res.body);
-        await getIt<SecureStorage>().readData(key: 'token');
+
         return Right(AllVehicleListModel.fromJson(data));
       },
     );
