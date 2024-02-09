@@ -9,13 +9,13 @@ part of 'allvehiclelist_model.dart';
 _$AllVehicleListModelImpl _$$AllVehicleListModelImplFromJson(
         Map<String, dynamic> json) =>
     _$AllVehicleListModelImpl(
-      allVehiclePermission: (json['allVehiclePermission'] as List<dynamic>)
-          .map((e) => Allvehiclepermission.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      id: json['id'] as int,
+      registration: json['registration'] as String,
     );
 
 Map<String, dynamic> _$$AllVehicleListModelImplToJson(
         _$AllVehicleListModelImpl instance) =>
     <String, dynamic>{
-      'allVehiclePermission': instance.allVehiclePermission,
+      'id': instance.id,
+      'registration': instance.registration,
     };

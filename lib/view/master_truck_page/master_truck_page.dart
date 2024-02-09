@@ -32,7 +32,7 @@ class MasterTruckPage extends StatelessWidget {
   }
 
   Widget _buildAdditionalCard() {
-    List<String> vehicles = ['Vehicle 1', 'Vehicle 2', 'Vehicle 3'];
+    List<String> vehicles = [];
     String? selectedVehicle;
 
     return Container(
@@ -57,7 +57,7 @@ class MasterTruckPage extends StatelessWidget {
                         DropdownButton<String>(
                           value: selectedVehicle,
                           onChanged: (String? newValue) {
-                            vmvehicle.allvehiclelisting();
+                            vmvehicle.allvehiclelisting;
                           },
                           items: vehicles
                               .map<DropdownMenuItem<String>>((String value) {

@@ -5,5 +5,5 @@ import 'package:enviro_mobile_application/model/vehicle/res_model/all_vehicle_li
 import '../../../utilis/main_failure.dart';
 
 abstract class IAllVehicleListService {
-  Future<Either<MainFailure, AllVehicleListModel>> allvehiclelisting();
+  Future<Either<MainFailure, List<AllVehicleListModel>>> allvehiclelisting();
 }

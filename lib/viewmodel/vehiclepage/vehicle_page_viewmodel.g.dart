@@ -14,13 +14,13 @@ mixin _$AllVehiclelistviewModel on AllVehiclelistviewModelBase, Store {
       context: context);
 
   @override
-  ApiResponse<dynamic> get allvehiclelistResponse {
+  ApiResponse<List<AllVehicleListModel>> get allvehiclelistResponse {
     _$allvehiclelistResponseAtom.reportRead();
     return super.allvehiclelistResponse;
   }
 
   @override
-  set allvehiclelistResponse(ApiResponse<dynamic> value) {
+  set allvehiclelistResponse(ApiResponse<List<AllVehicleListModel>> value) {
     _$allvehiclelistResponseAtom
         .reportWrite(value, super.allvehiclelistResponse, () {
       super.allvehiclelistResponse = value;

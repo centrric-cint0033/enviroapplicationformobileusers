@@ -25,7 +25,8 @@ abstract class AllVehiclelistviewModelBase with Store {
   AllVehiclelistviewModelBase(this.allVehicleListService);
 
   @observable
-  ApiResponse allvehiclelistResponse = ApiResponse<AllVehicleListModel>();
+  ApiResponse<List<AllVehicleListModel>> allvehiclelistResponse =
+      ApiResponse<List<AllVehicleListModel>>();
 
   @action
   Future<void> allvehiclelisting() async {

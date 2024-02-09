@@ -20,8 +20,8 @@ AllVehicleListModel _$AllVehicleListModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$AllVehicleListModel {
-  List<Allvehiclepermission> get allVehiclePermission =>
-      throw _privateConstructorUsedError;
+  int get id => throw _privateConstructorUsedError;
+  String get registration => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -35,7 +35,7 @@ abstract class $AllVehicleListModelCopyWith<$Res> {
           AllVehicleListModel value, $Res Function(AllVehicleListModel) then) =
       _$AllVehicleListModelCopyWithImpl<$Res, AllVehicleListModel>;
   @useResult
-  $Res call({List<Allvehiclepermission> allVehiclePermission});
+  $Res call({int id, String registration});
 }
 
 /// @nodoc
@@ -51,13 +51,18 @@ class _$AllVehicleListModelCopyWithImpl<$Res, $Val extends AllVehicleListModel>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? allVehiclePermission = null,
+    Object? id = null,
+    Object? registration = null,
   }) {
     return _then(_value.copyWith(
-      allVehiclePermission: null == allVehiclePermission
-          ? _value.allVehiclePermission
-          : allVehiclePermission // ignore: cast_nullable_to_non_nullable
-              as List<Allvehiclepermission>,
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
+      registration: null == registration
+          ? _value.registration
+          : registration // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -70,7 +75,7 @@ abstract class _$$AllVehicleListModelImplCopyWith<$Res>
       __$$AllVehicleListModelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<Allvehiclepermission> allVehiclePermission});
+  $Res call({int id, String registration});
 }
 
 /// @nodoc
@@ -84,13 +89,18 @@ class __$$AllVehicleListModelImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? allVehiclePermission = null,
+    Object? id = null,
+    Object? registration = null,
   }) {
     return _then(_$AllVehicleListModelImpl(
-      allVehiclePermission: null == allVehiclePermission
-          ? _value._allVehiclePermission
-          : allVehiclePermission // ignore: cast_nullable_to_non_nullable
-              as List<Allvehiclepermission>,
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
+      registration: null == registration
+          ? _value.registration
+          : registration // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -98,25 +108,20 @@ class __$$AllVehicleListModelImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$AllVehicleListModelImpl implements _AllVehicleListModel {
-  _$AllVehicleListModelImpl(
-      {required final List<Allvehiclepermission> allVehiclePermission})
-      : _allVehiclePermission = allVehiclePermission;
+  const _$AllVehicleListModelImpl(
+      {required this.id, required this.registration});
 
   factory _$AllVehicleListModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$AllVehicleListModelImplFromJson(json);
 
-  final List<Allvehiclepermission> _allVehiclePermission;
   @override
-  List<Allvehiclepermission> get allVehiclePermission {
-    if (_allVehiclePermission is EqualUnmodifiableListView)
-      return _allVehiclePermission;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_allVehiclePermission);
-  }
+  final int id;
+  @override
+  final String registration;
 
   @override
   String toString() {
-    return 'AllVehicleListModel(allVehiclePermission: $allVehiclePermission)';
+    return 'AllVehicleListModel(id: $id, registration: $registration)';
   }
 
   @override
@@ -124,14 +129,14 @@ class _$AllVehicleListModelImpl implements _AllVehicleListModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$AllVehicleListModelImpl &&
-            const DeepCollectionEquality()
-                .equals(other._allVehiclePermission, _allVehiclePermission));
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.registration, registration) ||
+                other.registration == registration));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(_allVehiclePermission));
+  int get hashCode => Object.hash(runtimeType, id, registration);
 
   @JsonKey(ignore: true)
   @override
@@ -149,15 +154,17 @@ class _$AllVehicleListModelImpl implements _AllVehicleListModel {
 }
 
 abstract class _AllVehicleListModel implements AllVehicleListModel {
-  factory _AllVehicleListModel(
-          {required final List<Allvehiclepermission> allVehiclePermission}) =
-      _$AllVehicleListModelImpl;
+  const factory _AllVehicleListModel(
+      {required final int id,
+      required final String registration}) = _$AllVehicleListModelImpl;
 
   factory _AllVehicleListModel.fromJson(Map<String, dynamic> json) =
       _$AllVehicleListModelImpl.fromJson;
 
   @override
-  List<Allvehiclepermission> get allVehiclePermission;
+  int get id;
+  @override
+  String get registration;
   @override
   @JsonKey(ignore: true)
   _$$AllVehicleListModelImplCopyWith<_$AllVehicleListModelImpl> get copyWith =>

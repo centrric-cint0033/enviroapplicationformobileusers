@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:enviro_mobile_application/Routepage/routespage.dart';
 import 'package:enviro_mobile_application/view/sales_page/sales_main_page.dart';
 import 'package:enviro_mobile_application/viewmodel/home_page_viewmodel.dart';
+import 'package:enviro_mobile_application/viewmodel/vehiclepage/vehicle_page_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -161,7 +162,7 @@ void calenderfunction(BuildContext context) {
   print('Notification button tapped!');
 }
 
-void vehiclefunction(BuildContext context) {
+void vehiclefunction(BuildContext context) async {
   context.router.pushNamed(RouteNames.vehiclemainpage);
-  print('Notification button tapped!');
+  await vmvehicle.allvehiclelisting();
 }

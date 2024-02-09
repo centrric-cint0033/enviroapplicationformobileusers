@@ -15,7 +15,8 @@ import 'package:injectable/injectable.dart';
 @LazySingleton(as: IAllVehicleListService)
 class AllVehicleListRepository implements IAllVehicleListService {
   @override
-  Future<Either<MainFailure, AllVehicleListModel>> allvehiclelisting() async {
+  Future<Either<MainFailure, List<AllVehicleListModel>>>
+      allvehiclelisting() async {
     var response = await getIt<HttpService>().request(
       authenticated: true,
       method: HttpMethod.get,
@@ -27,9 +28,11 @@ class AllVehicleListRepository implements IAllVehicleListService {
         return Left(l.keys.first);
       },
       (res) async {
-        var data = jsonDecode(res.body);
+        var data = jsonDecode(res.body) as List;
 
-        return Right(AllVehicleListModel.fromJson(data));
+        List<AllVehicleListModel> vehicles =
+            data.map((e) => AllVehicleListModel.fromJson(e)).toList();
+        return Right(vehicles);
       },
     );
   }
