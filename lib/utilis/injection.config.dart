@@ -26,9 +26,9 @@ import 'package:enviro_mobile_application/view/service/vehicle/i_all_vehicle_ser
     as _i6;
 import 'package:enviro_mobile_application/viewmodel/calenderpage/calender_page_viewmodel.dart'
     as _i3;
-import 'package:enviro_mobile_application/viewmodel/home_page_viewmodel.dart'
+import 'package:enviro_mobile_application/viewmodel/home_page/home_page_viewmodel.dart'
     as _i15;
-import 'package:enviro_mobile_application/viewmodel/login_page_viewmodel.dart'
+import 'package:enviro_mobile_application/viewmodel/login_page/login_page_viewmodel.dart'
     as _i12;
 import 'package:enviro_mobile_application/viewmodel/vehiclepage/vehicle_page_viewmodel.dart'
     as _i14;

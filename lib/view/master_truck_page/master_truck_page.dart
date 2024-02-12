@@ -51,6 +51,7 @@ class MasterTruckPage extends StatelessWidget {
           children: [
             Expanded(
               child: Container(
+                width: double.infinity,
                 height: 54,
                 decoration: BoxDecoration(
                   border: Border.all(color: const Color(0XFF949494)),
@@ -63,18 +64,21 @@ class MasterTruckPage extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         const Text('Selected Vehicles'),
-                        DropdownButton<String>(
-                          value: selectedVehicle,
-                          onChanged: (String? newValue) {
-                            selectedVehicle = newValue;
-                          },
-                          items: vehicles
-                              .map<DropdownMenuItem<String>>((String value) {
-                            return DropdownMenuItem<String>(
-                              value: value,
-                              child: Text(value),
-                            );
-                          }).toList(),
+                        Expanded(
+                          child: DropdownButton<String>(
+                            value: selectedVehicle,
+                            onChanged: (String? newValue) {
+                              selectedVehicle = newValue;
+                            },
+                            items: vehicles.map<DropdownMenuItem<String>>(
+                              (String value) {
+                                return DropdownMenuItem<String>(
+                                  value: value,
+                                  child: Text(value),
+                                );
+                              },
+                            ).toList(),
+                          ),
                         ),
                       ],
                     ),
