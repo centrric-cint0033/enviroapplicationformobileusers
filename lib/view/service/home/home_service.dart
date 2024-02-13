@@ -24,7 +24,6 @@ class HomeRepository implements IHomeService {
     );
     return response.fold(
       (l) {
-        // Show Error
         (l.values.first);
         return Left(l.keys.first);
       },

@@ -7,7 +7,7 @@ import 'package:enviro_mobile_application/view/loginpage/Common_widgets/widgets/
 import 'package:enviro_mobile_application/view/loginpage/Common_widgets/widgets/vehicle_tab_bar.dart';
 
 import 'package:enviro_mobile_application/view/loginpage/common/appbar/cmappbar.dart';
-import 'package:enviro_mobile_application/view/master_car_page/master_car.dart';
+import 'package:enviro_mobile_application/view/master_car_page/master_car_page.dart';
 import 'package:enviro_mobile_application/view/master_truck_page/master_truck_page.dart';
 import 'package:enviro_mobile_application/view/vehicle_sales_list/vehicle_sales_list.dart';
 import 'package:flutter/material.dart';

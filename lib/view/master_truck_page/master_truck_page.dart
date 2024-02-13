@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:enviro_mobile_application/viewmodel/vehiclepage/vehicle_page_viewmodel.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:enviro_mobile_application/view/loginpage/Common_widgets/widgets/common_search_widget.dart';
 
 class MasterTruckPage extends StatelessWidget {
   const MasterTruckPage({Key? key}) : super(key: key);
@@ -19,6 +19,8 @@ class MasterTruckPage extends StatelessWidget {
               }),
               _buildAdditionalCard(),
               const SizedBox(height: 16.0),
+              common_search_widget(),
+              const SizedBox(height: 16.0),
               _buildJobCard(
                 date: "2024-02-01",
                 clientId: "123",
@@ -35,13 +37,30 @@ class MasterTruckPage extends StatelessWidget {
   }
 
   Widget _buildAdditionalCard() {
-    List<String> vehicles = [];
-    if (vmvehicle.allvehiclelistResponse.data != null) {
-      vehicles = vmvehicle.allvehiclelistResponse.data!
-          .map((vehicle) => vehicle.registration)
-          .toList();
-    }
     String? selectedVehicle;
+    List<String> vehicleOptions = [
+      'Vehicle list',
+      'Pre inspection check',
+      'Maintenance check'
+    ];
+    // List<String> vehicles = [];
+    // if (vmvehicle.allvehiclelistResponse.data != null) {
+    //   vehicles = vmvehicle.allvehiclelistResponse.data!
+    //       .map((vehicle) => vehicle.registration)
+    //       .toList();
+    // }
+
+    void onTapVehicleList() {
+      print('Tapped on Vehicle list');
+    }
+
+    void onTapPreInspectionCheck() {
+      print('Tapped on Pre inspectioncheck');
+    }
+
+    void onTapMaintenanceCheck() {
+      print('Tapped on Maintenance check');
+    }
 
     return Container(
       width: double.infinity,
@@ -51,33 +70,53 @@ class MasterTruckPage extends StatelessWidget {
           children: [
             Expanded(
               child: Container(
-                width: double.infinity,
                 height: 54,
                 decoration: BoxDecoration(
                   border: Border.all(color: const Color(0XFF949494)),
                   borderRadius: BorderRadius.circular(8.0),
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 6.0),
                   child: DropdownButtonHideUnderline(
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text('Selected Vehicles'),
+                        const Text('Vehicles List'),
                         Expanded(
                           child: DropdownButton<String>(
                             value: selectedVehicle,
                             onChanged: (String? newValue) {
                               selectedVehicle = newValue;
                             },
-                            items: vehicles.map<DropdownMenuItem<String>>(
-                              (String value) {
-                                return DropdownMenuItem<String>(
-                                  value: value,
+                            items: vehicleOptions.map((String value) {
+                              return DropdownMenuItem<String>(
+                                value: value,
+                                child: GestureDetector(
+                                  onTap: () {
+                                    switch (value) {
+                                      case 'Vehicle list':
+                                        onTapVehicleList();
+                                        break;
+                                      case 'Pre inspectioncheck':
+                                        onTapPreInspectionCheck();
+                                        break;
+                                      case 'Maintenance check':
+                                        onTapMaintenanceCheck();
+                                        break;
+                                    }
+                                  },
                                   child: Text(value),
-                                );
-                              },
-                            ).toList(),
+                                ),
+                              );
+                            }).toList(),
+                            // / items: vehicles.map<DropdownMenuItem<String>>(
+                            //   (String value) {
+                            //     return DropdownMenuItem<String>(
+                            //       value: value,
+                            //       child: Text(value),
+                            //     );
+                            //   },
+                            // ).toList(),
                           ),
                         ),
                       ],
