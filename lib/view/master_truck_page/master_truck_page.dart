@@ -1,6 +1,9 @@
+import 'package:enviro_mobile_application/viewmodel/login_page/login_page_viewmodel.dart';
+import 'package:enviro_mobile_application/viewmodel/truck_page/truck_page_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:enviro_mobile_application/view/loginpage/Common_widgets/widgets/common_search_widget.dart';
+import 'package:mobx/mobx.dart';
 
 class MasterTruckPage extends StatelessWidget {
   const MasterTruckPage({Key? key}) : super(key: key);
@@ -21,14 +24,29 @@ class MasterTruckPage extends StatelessWidget {
               const SizedBox(height: 16.0),
               common_search_widget(),
               const SizedBox(height: 16.0),
-              _buildJobCard(
-                date: "2024-02-01",
-                clientId: "123",
-                clientName: "John Doe",
-                quotedId: "456",
-                amount: "56",
-                status: "Accepted",
+              Observer(
+                builder: (BuildContext context) {
+                  return Expanded(
+                    child: ListView.separated(
+                      itemCount: vmtruck.truckPageResponse.data?.length ?? 0,
+                      separatorBuilder: (BuildContext context, int index) =>
+                          SizedBox(height: 12.0),
+                      itemBuilder: (context, index) {
+                        var data = vmtruck.truckPageResponse.data?[index];
+                        return _buildJobCard(
+                          registrationno: data?.registration ?? "",
+                          RegoDue: data?.editedDateTime ?? "",
+                          Type: data?.types ?? "",
+                          year: data?.year ?? "",
+                        );
+                      },
+                    ),
+                  );
+                },
               ),
+              SizedBox(
+                height: 45,
+              )
             ],
           ),
         ),
@@ -132,12 +150,10 @@ class MasterTruckPage extends StatelessWidget {
   }
 
   Widget _buildJobCard({
-    required String date,
-    required String clientId,
-    required String clientName,
-    required String quotedId,
-    required String amount,
-    required String status,
+    required String registrationno,
+    required dynamic RegoDue,
+    required String Type,
+    required dynamic year,
   }) {
     return Container(
       width: double.infinity,
@@ -155,17 +171,52 @@ class MasterTruckPage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text("Date         : $date"),
+              Row(
+                children: [
+                  Text(
+                    "Registration no : $registrationno",
+                    style: TextStyle(color: Colors.blue),
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 8.0,
+              ),
+              Row(
+                children: [
+                  Text(
+                    "RegoDue            : $RegoDue",
+                    style: TextStyle(color: Colors.blue),
+                  ),
+                ],
+              ),
               const SizedBox(height: 8.0),
-              Text("Client ID    : $clientId"),
+              Row(
+                children: [
+                  Text(
+                    "Type                   : $Type",
+                    style: TextStyle(color: Colors.blue),
+                  ),
+                ],
+              ),
               const SizedBox(height: 8.0),
-              Text("Client Name  : $clientName"),
+              Row(
+                children: [
+                  Text(
+                    "Year                   : $year",
+                    style: const TextStyle(color: Colors.blue),
+                  ),
+                ],
+              ),
               const SizedBox(height: 8.0),
-              Text("Quoted ID    : $quotedId"),
-              const SizedBox(height: 8.0),
-              Text("Amount       : $amount"),
-              const SizedBox(height: 8.0),
-              Text("Status       : $status"),
+              Positioned(
+                top: 0,
+                right: 0,
+                child: IconButton(
+                  icon: const Icon(Icons.person_add),
+                  onPressed: () {},
+                ),
+              ),
             ],
           ),
         ),
