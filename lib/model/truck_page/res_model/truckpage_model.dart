@@ -4,8 +4,8 @@ part 'truckpage_model.freezed.dart';
 part 'truckpage_model.g.dart';
 
 @freezed
-class TruckpageModel with _$TruckpageModel {
-  factory TruckpageModel({
+class CmnvehiclepageModel with _$CmnvehiclepageModel {
+  factory CmnvehiclepageModel({
     int? id,
     String? imageThumbnail,
     String? image1,
@@ -37,8 +37,8 @@ class TruckpageModel with _$TruckpageModel {
     bool? preinspectionRequired,
     String? createdDateTime,
     String? editedDateTime,
-  }) = _TruckpageModel;
+  }) = _CmnvehiclepageModel;
 
-  factory TruckpageModel.fromJson(Map<String, dynamic> json) =>
-      _$TruckpageModelFromJson(json);
+  factory CmnvehiclepageModel.fromJson(Map<String, dynamic> json) =>
+      _$CmnvehiclepageModelFromJson(json);
 }

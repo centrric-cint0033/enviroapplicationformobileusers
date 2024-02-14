@@ -6,8 +6,9 @@ part of 'truckpage_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$TruckpageModelImpl _$$TruckpageModelImplFromJson(Map<String, dynamic> json) =>
-    _$TruckpageModelImpl(
+_$CmnvehiclepageModelImpl _$$CmnvehiclepageModelImplFromJson(
+        Map<String, dynamic> json) =>
+    _$CmnvehiclepageModelImpl(
       id: json['id'] as int?,
       imageThumbnail: json['imageThumbnail'] as String?,
       image1: json['image1'] as String?,
@@ -41,8 +42,8 @@ _$TruckpageModelImpl _$$TruckpageModelImplFromJson(Map<String, dynamic> json) =>
       editedDateTime: json['editedDateTime'] as String?,
     );
 
-Map<String, dynamic> _$$TruckpageModelImplToJson(
-        _$TruckpageModelImpl instance) =>
+Map<String, dynamic> _$$CmnvehiclepageModelImplToJson(
+        _$CmnvehiclepageModelImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'imageThumbnail': instance.imageThumbnail,

@@ -13,13 +13,13 @@ mixin _$TruckPageViewModel on AllTruckPageViewModelBase, Store {
       name: 'AllTruckPageViewModelBase.truckPageResponse', context: context);
 
   @override
-  ApiResponse<List<TruckpageModel>> get truckPageResponse {
+  ApiResponse<List<CmnvehiclepageModel>> get truckPageResponse {
     _$truckPageResponseAtom.reportRead();
     return super.truckPageResponse;
   }
 
   @override
-  set truckPageResponse(ApiResponse<List<TruckpageModel>> value) {
+  set truckPageResponse(ApiResponse<List<CmnvehiclepageModel>> value) {
     _$truckPageResponseAtom.reportWrite(value, super.truckPageResponse, () {
       super.truckPageResponse = value;
     });

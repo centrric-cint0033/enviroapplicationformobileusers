@@ -14,12 +14,12 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-TruckpageModel _$TruckpageModelFromJson(Map<String, dynamic> json) {
-  return _TruckpageModel.fromJson(json);
+CmnvehiclepageModel _$CmnvehiclepageModelFromJson(Map<String, dynamic> json) {
+  return _CmnvehiclepageModel.fromJson(json);
 }
 
 /// @nodoc
-mixin _$TruckpageModel {
+mixin _$CmnvehiclepageModel {
   int? get id => throw _privateConstructorUsedError;
   String? get imageThumbnail => throw _privateConstructorUsedError;
   String? get image1 => throw _privateConstructorUsedError;
@@ -54,15 +54,15 @@ mixin _$TruckpageModel {
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $TruckpageModelCopyWith<TruckpageModel> get copyWith =>
+  $CmnvehiclepageModelCopyWith<CmnvehiclepageModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $TruckpageModelCopyWith<$Res> {
-  factory $TruckpageModelCopyWith(
-          TruckpageModel value, $Res Function(TruckpageModel) then) =
-      _$TruckpageModelCopyWithImpl<$Res, TruckpageModel>;
+abstract class $CmnvehiclepageModelCopyWith<$Res> {
+  factory $CmnvehiclepageModelCopyWith(
+          CmnvehiclepageModel value, $Res Function(CmnvehiclepageModel) then) =
+      _$CmnvehiclepageModelCopyWithImpl<$Res, CmnvehiclepageModel>;
   @useResult
   $Res call(
       {int? id,
@@ -99,9 +99,9 @@ abstract class $TruckpageModelCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$TruckpageModelCopyWithImpl<$Res, $Val extends TruckpageModel>
-    implements $TruckpageModelCopyWith<$Res> {
-  _$TruckpageModelCopyWithImpl(this._value, this._then);
+class _$CmnvehiclepageModelCopyWithImpl<$Res, $Val extends CmnvehiclepageModel>
+    implements $CmnvehiclepageModelCopyWith<$Res> {
+  _$CmnvehiclepageModelCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -273,11 +273,11 @@ class _$TruckpageModelCopyWithImpl<$Res, $Val extends TruckpageModel>
 }
 
 /// @nodoc
-abstract class _$$TruckpageModelImplCopyWith<$Res>
-    implements $TruckpageModelCopyWith<$Res> {
-  factory _$$TruckpageModelImplCopyWith(_$TruckpageModelImpl value,
-          $Res Function(_$TruckpageModelImpl) then) =
-      __$$TruckpageModelImplCopyWithImpl<$Res>;
+abstract class _$$CmnvehiclepageModelImplCopyWith<$Res>
+    implements $CmnvehiclepageModelCopyWith<$Res> {
+  factory _$$CmnvehiclepageModelImplCopyWith(_$CmnvehiclepageModelImpl value,
+          $Res Function(_$CmnvehiclepageModelImpl) then) =
+      __$$CmnvehiclepageModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -315,11 +315,11 @@ abstract class _$$TruckpageModelImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$TruckpageModelImplCopyWithImpl<$Res>
-    extends _$TruckpageModelCopyWithImpl<$Res, _$TruckpageModelImpl>
-    implements _$$TruckpageModelImplCopyWith<$Res> {
-  __$$TruckpageModelImplCopyWithImpl(
-      _$TruckpageModelImpl _value, $Res Function(_$TruckpageModelImpl) _then)
+class __$$CmnvehiclepageModelImplCopyWithImpl<$Res>
+    extends _$CmnvehiclepageModelCopyWithImpl<$Res, _$CmnvehiclepageModelImpl>
+    implements _$$CmnvehiclepageModelImplCopyWith<$Res> {
+  __$$CmnvehiclepageModelImplCopyWithImpl(_$CmnvehiclepageModelImpl _value,
+      $Res Function(_$CmnvehiclepageModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -357,7 +357,7 @@ class __$$TruckpageModelImplCopyWithImpl<$Res>
     Object? createdDateTime = freezed,
     Object? editedDateTime = freezed,
   }) {
-    return _then(_$TruckpageModelImpl(
+    return _then(_$CmnvehiclepageModelImpl(
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -488,8 +488,8 @@ class __$$TruckpageModelImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$TruckpageModelImpl implements _TruckpageModel {
-  _$TruckpageModelImpl(
+class _$CmnvehiclepageModelImpl implements _CmnvehiclepageModel {
+  _$CmnvehiclepageModelImpl(
       {this.id,
       this.imageThumbnail,
       this.image1,
@@ -523,8 +523,8 @@ class _$TruckpageModelImpl implements _TruckpageModel {
       this.editedDateTime})
       : _multipleImages = multipleImages;
 
-  factory _$TruckpageModelImpl.fromJson(Map<String, dynamic> json) =>
-      _$$TruckpageModelImplFromJson(json);
+  factory _$CmnvehiclepageModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$CmnvehiclepageModelImplFromJson(json);
 
   @override
   final int? id;
@@ -599,14 +599,14 @@ class _$TruckpageModelImpl implements _TruckpageModel {
 
   @override
   String toString() {
-    return 'TruckpageModel(id: $id, imageThumbnail: $imageThumbnail, image1: $image1, multipleImages: $multipleImages, tabType: $tabType, vehicleType: $vehicleType, activeStatus: $activeStatus, previousRego: $previousRego, registration: $registration, types: $types, year: $year, transmission: $transmission, fuel: $fuel, height: $height, width: $width, length: $length, litres: $litres, vinNumber: $vinNumber, axies: $axies, dueRego: $dueRego, engineNumbers: $engineNumbers, eTag: $eTag, insurance: $insurance, fuelCard: $fuelCard, fbt: $fbt, action: $action, image2: $image2, image3: $image3, preinspectionRequired: $preinspectionRequired, createdDateTime: $createdDateTime, editedDateTime: $editedDateTime)';
+    return 'CmnvehiclepageModel(id: $id, imageThumbnail: $imageThumbnail, image1: $image1, multipleImages: $multipleImages, tabType: $tabType, vehicleType: $vehicleType, activeStatus: $activeStatus, previousRego: $previousRego, registration: $registration, types: $types, year: $year, transmission: $transmission, fuel: $fuel, height: $height, width: $width, length: $length, litres: $litres, vinNumber: $vinNumber, axies: $axies, dueRego: $dueRego, engineNumbers: $engineNumbers, eTag: $eTag, insurance: $insurance, fuelCard: $fuelCard, fbt: $fbt, action: $action, image2: $image2, image3: $image3, preinspectionRequired: $preinspectionRequired, createdDateTime: $createdDateTime, editedDateTime: $editedDateTime)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$TruckpageModelImpl &&
+            other is _$CmnvehiclepageModelImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.imageThumbnail, imageThumbnail) ||
                 other.imageThumbnail == imageThumbnail) &&
@@ -694,20 +694,20 @@ class _$TruckpageModelImpl implements _TruckpageModel {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$TruckpageModelImplCopyWith<_$TruckpageModelImpl> get copyWith =>
-      __$$TruckpageModelImplCopyWithImpl<_$TruckpageModelImpl>(
+  _$$CmnvehiclepageModelImplCopyWith<_$CmnvehiclepageModelImpl> get copyWith =>
+      __$$CmnvehiclepageModelImplCopyWithImpl<_$CmnvehiclepageModelImpl>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$TruckpageModelImplToJson(
+    return _$$CmnvehiclepageModelImplToJson(
       this,
     );
   }
 }
 
-abstract class _TruckpageModel implements TruckpageModel {
-  factory _TruckpageModel(
+abstract class _CmnvehiclepageModel implements CmnvehiclepageModel {
+  factory _CmnvehiclepageModel(
       {final int? id,
       final String? imageThumbnail,
       final String? image1,
@@ -738,10 +738,10 @@ abstract class _TruckpageModel implements TruckpageModel {
       final String? image3,
       final bool? preinspectionRequired,
       final String? createdDateTime,
-      final String? editedDateTime}) = _$TruckpageModelImpl;
+      final String? editedDateTime}) = _$CmnvehiclepageModelImpl;
 
-  factory _TruckpageModel.fromJson(Map<String, dynamic> json) =
-      _$TruckpageModelImpl.fromJson;
+  factory _CmnvehiclepageModel.fromJson(Map<String, dynamic> json) =
+      _$CmnvehiclepageModelImpl.fromJson;
 
   @override
   int? get id;
@@ -807,6 +807,6 @@ abstract class _TruckpageModel implements TruckpageModel {
   String? get editedDateTime;
   @override
   @JsonKey(ignore: true)
-  _$$TruckpageModelImplCopyWith<_$TruckpageModelImpl> get copyWith =>
+  _$$CmnvehiclepageModelImplCopyWith<_$CmnvehiclepageModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

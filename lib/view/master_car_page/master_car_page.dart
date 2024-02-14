@@ -1,6 +1,8 @@
 import 'package:enviro_mobile_application/view/loginpage/Common_widgets/widgets/cmn_additional_card.dart';
+import 'package:enviro_mobile_application/viewmodel/car_page/car_page_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:enviro_mobile_application/view/loginpage/Common_widgets/widgets/common_search_widget.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 
 class MasterCarpage extends StatelessWidget {
   const MasterCarpage({Key? key}) : super(key: key);
@@ -18,13 +20,25 @@ class MasterCarpage extends StatelessWidget {
               const SizedBox(height: 16.0),
               common_search_widget(),
               const SizedBox(height: 16.0),
-              _buildJobCard(
-                date: "2024-02-01",
-                clientId: "123",
-                clientName: "John Doe",
-                quotedId: "456",
-                amount: "56",
-                status: "Accepted",
+              Observer(
+                builder: (BuildContext context) {
+                  return Expanded(
+                    child: ListView.separated(
+                      itemCount: vmcar.CarPageResponse.data?.length ?? 0,
+                      separatorBuilder: (BuildContext context, int index) =>
+                          const SizedBox(height: 12.0),
+                      itemBuilder: (context, index) {
+                        var data = vmcar.CarPageResponse.data?[index];
+                        return _buildJobCard(
+                          registrationno: data?.registration ?? "",
+                          RegoDue: data?.editedDateTime ?? "",
+                          Type: data?.types ?? "",
+                          year: data?.year ?? "",
+                        );
+                      },
+                    ),
+                  );
+                },
               ),
             ],
           ),
@@ -34,12 +48,10 @@ class MasterCarpage extends StatelessWidget {
   }
 
   Widget _buildJobCard({
-    required String date,
-    required String clientId,
-    required String clientName,
-    required String quotedId,
-    required String amount,
-    required String status,
+    required dynamic registrationno,
+    required dynamic RegoDue,
+    required String Type,
+    required dynamic year,
   }) {
     return Container(
       width: double.infinity,
@@ -57,17 +69,72 @@ class MasterCarpage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text("Date         : $date"),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "Registration no : $registrationno",
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(color: Colors.blue),
+                  ),
+                  SizedBox(
+                    height: 26,
+                    width: 87,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        side: const BorderSide(
+                          color: Color(0XFF949494),
+                        ),
+                      ),
+                      onPressed: () {
+                        print('vgjhsdvbsjhdb');
+                      },
+                      child: const Padding(
+                        padding: EdgeInsets.only(top: 3.0, bottom: 3.0),
+                        child: Text(
+                          'Folders',
+                          style: TextStyle(color: Colors.black54),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 8.0,
+              ),
+              Row(
+                children: [
+                  Text(
+                    "RegoDue            : $RegoDue",
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(color: Colors.blue),
+                  ),
+                ],
+              ),
               const SizedBox(height: 8.0),
-              Text("Client ID    : $clientId"),
+              Row(
+                children: [
+                  Flexible(
+                    child: Text(
+                      "Type                   : $Type",
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(color: Colors.blue),
+                    ),
+                  ),
+                ],
+              ),
               const SizedBox(height: 8.0),
-              Text("Client Name  : $clientName"),
+              Row(
+                children: [
+                  Text(
+                    "Year                   : $year",
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(color: Colors.blue),
+                  ),
+                ],
+              ),
               const SizedBox(height: 8.0),
-              Text("Quoted ID    : $quotedId"),
-              const SizedBox(height: 8.0),
-              Text("Client Name  :  $clientName"),
-              const SizedBox(height: 8.0),
-              Text("Quoted ID    : $quotedId"),
             ],
           ),
         ),

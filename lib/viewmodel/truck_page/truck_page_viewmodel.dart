@@ -24,8 +24,8 @@ abstract class AllTruckPageViewModelBase with Store {
   AllTruckPageViewModelBase(this.masterTruckPageService);
 
   @observable
-  ApiResponse<List<TruckpageModel>> truckPageResponse =
-      ApiResponse<List<TruckpageModel>>();
+  ApiResponse<List<CmnvehiclepageModel>> truckPageResponse =
+      ApiResponse<List<CmnvehiclepageModel>>();
 
   @action
   Future<void> truckPageFunction() async {
