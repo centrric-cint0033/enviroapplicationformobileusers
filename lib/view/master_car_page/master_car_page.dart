@@ -1,3 +1,4 @@
+import 'package:enviro_mobile_application/view/loginpage/Common_widgets/widgets/cmn_additional_card.dart';
 import 'package:flutter/material.dart';
 import 'package:enviro_mobile_application/view/loginpage/Common_widgets/widgets/common_search_widget.dart';
 
@@ -13,6 +14,8 @@ class MasterCarpage extends StatelessWidget {
           padding: const EdgeInsets.only(left: 8.0, right: 8),
           child: Column(
             children: [
+              cmn_additional_card(),
+              const SizedBox(height: 16.0),
               common_search_widget(),
               const SizedBox(height: 16.0),
               _buildJobCard(
