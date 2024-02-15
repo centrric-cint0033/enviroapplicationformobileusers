@@ -13,15 +13,16 @@ class Cmn_Additional_Card extends StatelessWidget {
       'Pre inspection check',
       'Maintenance check'
     ];
-    // List<String> vehicles = [];
-    // if (vmvehicle.allvehiclelistResponse.data != null) {
-    //   vehicles = vmvehicle.allvehiclelistResponse.data!
-    //       .map((vehicle) => vehicle.registration)
-    //       .toList();
-    // }
 
     void onTapVehicleList() {
-      print('Tapped on Vehicle list');
+      // List<String> vehicles = [];
+      // if (vmvehicle.allvehiclelistResponse.data != null) {
+      //   vehicles = vmvehicle.allvehiclelistResponse.data!
+      //       .map((vehicle) => vehicle.registration)
+      //       .toList();
+      // }
+
+      Text('cbh dc');
     }
 
     void onTapPreInspectionCheck() {
@@ -29,7 +30,7 @@ class Cmn_Additional_Card extends StatelessWidget {
     }
 
     void onTapMaintenanceCheck() {
-      print('Tapped on Maintenance check');
+      print('');
     }
 
     return Container(
