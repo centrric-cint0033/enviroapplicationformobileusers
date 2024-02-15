@@ -3,6 +3,7 @@ import 'package:enviro_mobile_application/Routepage/routespage.dart';
 import 'package:enviro_mobile_application/view/sales_page/sales_main_page.dart';
 import 'package:enviro_mobile_application/viewmodel/car_page/car_page_viewmodel.dart';
 import 'package:enviro_mobile_application/viewmodel/home_page/home_page_viewmodel.dart';
+import 'package:enviro_mobile_application/viewmodel/semi_trailor_page/semi_trailor_page_viewmodel.dart';
 import 'package:enviro_mobile_application/viewmodel/truck_page/truck_page_viewmodel.dart';
 
 import 'package:enviro_mobile_application/viewmodel/vehiclepage/vehicle_page_viewmodel.dart';
@@ -152,7 +153,6 @@ void onsalesfunction(BuildContext context) async {
 
 void ohsfunction(BuildContext context) {
   context.router.pushNamed(RouteNames.ohsPage);
-  print('Notification button tapped!');
 }
 
 void intranetfuntion(BuildContext context) {
@@ -169,4 +169,5 @@ void vehiclefunction(BuildContext context) async {
   context.router.pushNamed(RouteNames.vehiclemainpage);
   await vmtruck.truckPageFunction();
   await vmcar.mastercarfunction();
+  vmtrailor.trailorfunction();
 }

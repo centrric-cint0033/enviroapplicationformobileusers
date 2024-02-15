@@ -7,19 +7,19 @@ import 'package:enviro_mobile_application/utilis/api_endpoints/api_endpoints.dar
 import 'package:enviro_mobile_application/utilis/httpservice.dart';
 import 'package:enviro_mobile_application/utilis/injection.dart';
 import 'package:enviro_mobile_application/utilis/main_failure.dart';
-import 'package:enviro_mobile_application/view/service/master_car_page/i_all_master_carservice.dart';
+import 'package:enviro_mobile_application/view/service/semi_trailor_service.dart/i_all_semi_trailor_pageservice.dart';
 
 import 'package:injectable/injectable.dart';
 
-@LazySingleton(as: IAllMastercarService)
-class MastercarService implements IAllMastercarService {
+@LazySingleton(as: IAllSemiTrailorPageService)
+class SemiTrailorPageService implements IAllSemiTrailorPageService {
   @override
   Future<Either<MainFailure, List<CmnvehiclepageModel>>>
-      mastercarfunction() async {
+      trailorfunction() async {
     var response = await getIt<HttpService>().request(
       authenticated: true,
       method: HttpMethod.get,
-      apiUrl: ApiEndPoints.endpointcarpage,
+      apiUrl: ApiEndPoints.endpointsemitrailorpage,
     );
     return response.fold(
       (l) {

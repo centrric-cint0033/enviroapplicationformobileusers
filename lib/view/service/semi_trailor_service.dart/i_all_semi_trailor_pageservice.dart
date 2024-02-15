@@ -3,6 +3,6 @@ import 'package:enviro_mobile_application/model/truck_page/res_model/truckpage_m
 
 import '../../../utilis/main_failure.dart';
 
-abstract class IAllMasterTruckPageService {
-  Future<Either<MainFailure, List<CmnvehiclepageModel>>> mastertruckfunction();
+abstract class IAllSemiTrailorPageService {
+  Future<Either<MainFailure, List<CmnvehiclepageModel>>> trailorfunction();
 }
