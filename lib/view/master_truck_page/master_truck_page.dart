@@ -21,7 +21,7 @@ class MasterTruckPage extends StatelessWidget {
               Observer(builder: (_) {
                 return Container(width: 68, child: const Card());
               }),
-              cmn_additional_card(),
+              Cmn_Additional_Card(),
               const SizedBox(height: 16.0),
               common_search_widget(),
               const SizedBox(height: 16.0),

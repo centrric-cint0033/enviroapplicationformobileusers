@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class cmn_additional_card extends StatelessWidget {
-  const cmn_additional_card({
+class Cmn_Additional_Card extends StatelessWidget {
+  const Cmn_Additional_Card({
     super.key,
   });
 
