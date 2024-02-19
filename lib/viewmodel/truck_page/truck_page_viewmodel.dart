@@ -1,4 +1,7 @@
+import 'dart:developer';
+
 import 'package:enviro_mobile_application/model/truck_page/res_model/truckpage_model.dart';
+
 import 'package:enviro_mobile_application/utilis/injection.dart';
 import 'package:enviro_mobile_application/view/service/master_truckservice/i_all_master_trucksevice.dart';
 
@@ -32,6 +35,7 @@ abstract class AllTruckPageViewModelBase with Store {
     truckPageResponse = truckPageResponse.copyWith(error: null, loading: true);
 
     final result = await masterTruckPageService.mastertruckfunction();
+    print(result.toString() + "azee");
     return result.fold(
       (l) {
         truckPageResponse = truckPageResponse.copyWith(

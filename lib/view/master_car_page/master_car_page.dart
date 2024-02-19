@@ -24,11 +24,11 @@ class MasterCarpage extends StatelessWidget {
                 builder: (BuildContext context) {
                   return Expanded(
                     child: ListView.separated(
-                      itemCount: vmcar.CarPageResponse.data?.length ?? 0,
+                      itemCount: vmcar.carPageResponse.data?.length ?? 0,
                       separatorBuilder: (BuildContext context, int index) =>
                           const SizedBox(height: 12.0),
                       itemBuilder: (context, index) {
-                        var data = vmcar.CarPageResponse.data?[index];
+                        var data = vmcar.carPageResponse.data?[index];
                         return _buildJobCard(
                           registrationno: data?.registration ?? "",
                           RegoDue: data?.editedDateTime ?? "",

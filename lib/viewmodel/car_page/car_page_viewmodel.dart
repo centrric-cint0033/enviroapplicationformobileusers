@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:enviro_mobile_application/model/truck_page/res_model/truckpage_model.dart';
 import 'package:enviro_mobile_application/utilis/injection.dart';
 import 'package:enviro_mobile_application/view/service/master_car_page/i_all_master_carservice.dart';
@@ -23,23 +25,46 @@ abstract class AllCarPageViewModelBase with Store {
   AllCarPageViewModelBase(this.MastercarService);
 
   @observable
-  ApiResponse<List<CmnvehiclepageModel>> CarPageResponse =
+  ApiResponse<List<CmnvehiclepageModel>> carPageResponse =
       ApiResponse<List<CmnvehiclepageModel>>();
 
   @action
   Future<void> mastercarfunction() async {
-    CarPageResponse = CarPageResponse.copyWith(error: null, loading: true);
+    carPageResponse = carPageResponse.copyWith(error: null, loading: true);
 
     final result = await MastercarService.mastercarfunction();
     return result.fold(
       (l) {
-        CarPageResponse = CarPageResponse.copyWith(
+        carPageResponse = carPageResponse.copyWith(
           error: l,
           loading: false,
         );
       },
       (r) {
-        CarPageResponse = CarPageResponse.copyWith(
+        carPageResponse = carPageResponse.copyWith(
+          data: r,
+          error: null,
+          loading: false,
+        );
+      },
+    );
+  }
+
+  @action
+  Future<void> preinspectionfunction() async {
+    carPageResponse = carPageResponse.copyWith(error: null, loading: true);
+
+    final result = await MastercarService.preinspectionfunction();
+    print("gxcvqsh");
+    return result.fold(
+      (l) {
+        carPageResponse = carPageResponse.copyWith(
+          error: l,
+          loading: false,
+        );
+      },
+      (r) {
+        carPageResponse = carPageResponse.copyWith(
           data: r,
           error: null,
           loading: false,

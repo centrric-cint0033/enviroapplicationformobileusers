@@ -7,4 +7,6 @@ class ApiEndPoints {
   static const endpointcarpage = '/api/v1/vehicles/waste/car/all/1/';
   static const endpointsemitrailorpage =
       '/api/v1/vehicles/waste/forklift/all/1/';
+  static const endpointpreinspectioncheckpage =
+      '/api/v1/vehicles/waste/truck/list/';
 }

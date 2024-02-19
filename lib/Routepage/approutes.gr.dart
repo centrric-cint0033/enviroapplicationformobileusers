@@ -18,11 +18,11 @@ import 'package:enviro_mobile_application/view/loginpage/Common_widgets/homepage
 import 'package:enviro_mobile_application/view/loginpage/loginpage.dart' as _i4;
 import 'package:enviro_mobile_application/view/main_screen/main_screen.dart'
     as _i5;
-import 'package:enviro_mobile_application/view/vehicle_main_page.dart/vehicle_main_page.dart'
-    as _i8;
 import 'package:enviro_mobile_application/view/ohs_page/ohs_page.dart' as _i6;
 import 'package:enviro_mobile_application/view/sales_page/sales_main_page.dart'
     as _i7;
+import 'package:enviro_mobile_application/view/vehicle_main_page.dart/vehicle_main_page.dart'
+    as _i8;
 import 'package:flutter/material.dart' as _i10;
 
 abstract class $AppRouter extends _i9.RootStackRouter {

@@ -9,19 +9,19 @@ part of 'car_page_viewmodel.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$CarPageViewModel on AllCarPageViewModelBase, Store {
-  late final _$CarPageResponseAtom =
-      Atom(name: 'AllCarPageViewModelBase.CarPageResponse', context: context);
+  late final _$carPageResponseAtom =
+      Atom(name: 'AllCarPageViewModelBase.carPageResponse', context: context);
 
   @override
-  ApiResponse<List<CmnvehiclepageModel>> get CarPageResponse {
-    _$CarPageResponseAtom.reportRead();
-    return super.CarPageResponse;
+  ApiResponse<List<CmnvehiclepageModel>> get carPageResponse {
+    _$carPageResponseAtom.reportRead();
+    return super.carPageResponse;
   }
 
   @override
-  set CarPageResponse(ApiResponse<List<CmnvehiclepageModel>> value) {
-    _$CarPageResponseAtom.reportWrite(value, super.CarPageResponse, () {
-      super.CarPageResponse = value;
+  set carPageResponse(ApiResponse<List<CmnvehiclepageModel>> value) {
+    _$carPageResponseAtom.reportWrite(value, super.carPageResponse, () {
+      super.carPageResponse = value;
     });
   }
 
@@ -34,10 +34,20 @@ mixin _$CarPageViewModel on AllCarPageViewModelBase, Store {
     return _$mastercarfunctionAsyncAction.run(() => super.mastercarfunction());
   }
 
+  late final _$preinspectionfunctionAsyncAction = AsyncAction(
+      'AllCarPageViewModelBase.preinspectionfunction',
+      context: context);
+
+  @override
+  Future<void> preinspectionfunction() {
+    return _$preinspectionfunctionAsyncAction
+        .run(() => super.preinspectionfunction());
+  }
+
   @override
   String toString() {
     return '''
-CarPageResponse: ${CarPageResponse}
+carPageResponse: ${carPageResponse}
     ''';
   }
 }

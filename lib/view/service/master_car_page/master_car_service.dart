@@ -35,4 +35,26 @@ class MastercarService implements IAllMastercarService {
       },
     );
   }
+
+  Future<Either<MainFailure, List<CmnvehiclepageModel>>>
+      preinspectionfunction() async {
+    var response = await getIt<HttpService>().request(
+      authenticated: true,
+      method: HttpMethod.get,
+      apiUrl: ApiEndPoints.endpointpreinspectioncheckpage,
+    );
+    return response.fold(
+      (l) {
+        (l.values.first);
+        return Left(l.keys.first);
+      },
+      (res) async {
+        var data = jsonDecode(res.body) as List;
+
+        List<CmnvehiclepageModel> vehicles =
+            data.map((e) => CmnvehiclepageModel.fromJson(e)).toList();
+        return Right(vehicles);
+      },
+    );
+  }
 }

@@ -1,3 +1,8 @@
+import 'dart:developer';
+
+import 'package:enviro_mobile_application/utilis/api_endpoints/api_endpoints.dart';
+import 'package:enviro_mobile_application/viewmodel/car_page/car_page_viewmodel.dart';
+import 'package:enviro_mobile_application/viewmodel/truck_page/truck_page_viewmodel.dart';
 import 'package:flutter/material.dart';
 
 class Cmn_Additional_Card extends StatelessWidget {
@@ -11,26 +16,19 @@ class Cmn_Additional_Card extends StatelessWidget {
     List<String> vehicleOptions = [
       'Vehicle list',
       'Pre inspection check',
-      'Maintenance check'
+      'Maintenance check',
+      'Fuel Expense',
     ];
 
-    void onTapVehicleList() {
-      // List<String> vehicles = [];
-      // if (vmvehicle.allvehiclelistResponse.data != null) {
-      //   vehicles = vmvehicle.allvehiclelistResponse.data!
-      //       .map((vehicle) => vehicle.registration)
-      //       .toList();
-      // }
-
-      Text('cbh dc');
-    }
-
-    void onTapPreInspectionCheck() {
-      print('Tapped on Pre inspectioncheck');
-    }
+    void onTapVehicleList() {}
 
     void onTapMaintenanceCheck() {
-      print('');
+      print('Tapped on Maintenance check');
+    }
+
+    void onTapFuelExpense() {
+      print('Tapped on Fuel Expense');
+      // Implement your logic for Fuel Expense here
     }
 
     return Container(
@@ -66,13 +64,19 @@ class Cmn_Additional_Card extends StatelessWidget {
                                   onTap: () {
                                     switch (value) {
                                       case 'Vehicle list':
-                                        onTapVehicleList();
+                                        print('fgxchf');
+                                        vmcar.preinspectionfunction();
+                                        log(vmcar.carPageResponse.toString() +
+                                            "uiglgugR");
                                         break;
-                                      case 'Pre inspectioncheck':
-                                        onTapPreInspectionCheck();
+                                      case 'Pre inspection check':
+                                        vmcar.carPageResponse;
                                         break;
                                       case 'Maintenance check':
-                                        onTapMaintenanceCheck();
+                                        vmcar.mastercarfunction();
+                                        break;
+                                      case 'Fuel Expense':
+                                        vmcar.mastercarfunction();
                                         break;
                                     }
                                   },
@@ -80,14 +84,6 @@ class Cmn_Additional_Card extends StatelessWidget {
                                 ),
                               );
                             }).toList(),
-                            // / items: vehicles.map<DropdownMenuItem<String>>(
-                            //   (String value) {
-                            //     return DropdownMenuItem<String>(
-                            //       value: value,
-                            //       child: Text(value),
-                            //     );
-                            //   },
-                            // ).toList(),
                           ),
                         ),
                       ],
