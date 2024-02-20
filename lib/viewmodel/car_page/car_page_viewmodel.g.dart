@@ -30,18 +30,9 @@ mixin _$CarPageViewModel on AllCarPageViewModelBase, Store {
       context: context);
 
   @override
-  Future<void> mastercarfunction() {
-    return _$mastercarfunctionAsyncAction.run(() => super.mastercarfunction());
-  }
-
-  late final _$preinspectionfunctionAsyncAction = AsyncAction(
-      'AllCarPageViewModelBase.preinspectionfunction',
-      context: context);
-
-  @override
-  Future<void> preinspectionfunction() {
-    return _$preinspectionfunctionAsyncAction
-        .run(() => super.preinspectionfunction());
+  Future<void> mastercarfunction({ActionType? drop}) {
+    return _$mastercarfunctionAsyncAction
+        .run(() => super.mastercarfunction(drop: drop));
   }
 
   @override

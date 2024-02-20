@@ -4,8 +4,8 @@ import 'package:enviro_mobile_application/model/truck_page/res_model/truckpage_m
 import '../../../utilis/main_failure.dart';
 
 abstract class IAllMastercarService {
-  Future<Either<MainFailure, List<CmnvehiclepageModel>>> mastercarfunction();
+  // Future<Either<MainFailure, List<CmnvehiclepageModel>>> mastercarfunction();
 
-  Future<Either<MainFailure, List<CmnvehiclepageModel>>>
-      preinspectionfunction();
+  Future<Either<MainFailure, List<CmnvehiclepageModel>>> preinspectionfunction(
+      drop);
 }

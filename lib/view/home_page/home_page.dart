@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:enviro_mobile_application/Routepage/routespage.dart';
+import 'package:enviro_mobile_application/view/service/master_car_page/master_car_service.dart';
 import 'package:enviro_mobile_application/viewmodel/car_page/car_page_viewmodel.dart';
 import 'package:enviro_mobile_application/viewmodel/home_page/home_page_viewmodel.dart';
 import 'package:enviro_mobile_application/viewmodel/semi_trailor_page/semi_trailor_page_viewmodel.dart';
@@ -12,6 +13,7 @@ import 'package:enviro_mobile_application/view/loginpage/Common_widgets/widgets/
 import 'package:enviro_mobile_application/view/loginpage/Common_widgets/widgets/cmn_leading_icon.dart';
 import 'package:enviro_mobile_application/view/loginpage/Common_widgets/widgets/cmn_title_textwidget.dart';
 import 'package:enviro_mobile_application/view/loginpage/common/appbar/cmappbar.dart';
+import 'package:mobx/mobx.dart';
 
 class Homepage1 extends StatelessWidget {
   const Homepage1({Key? key}) : super(key: key);
@@ -165,8 +167,8 @@ void calenderfunction(BuildContext context) {
 
 void vehiclefunction(BuildContext context) async {
   context.router.pushNamed(RouteNames.vehiclemainpage);
-  await vmcar.preinspectionfunction();
+  vmtruck.truckPageFunction();
+
   await vmcar.mastercarfunction();
   vmtrailor.trailorfunction();
-  vmcar.preinspectionfunction();
 }

@@ -9,6 +9,8 @@ class MasterCarpage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print("azeem: ${vmcar.carPageResponse}");
+
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Scaffold(
@@ -16,7 +18,9 @@ class MasterCarpage extends StatelessWidget {
           padding: const EdgeInsets.only(left: 8.0, right: 8),
           child: Column(
             children: [
-              const Cmn_Additional_Card(),
+              Observer(builder: (_) {
+                return Cmn_Additional_Card();
+              }),
               const SizedBox(height: 16.0),
               common_search_widget(),
               const SizedBox(height: 16.0),
