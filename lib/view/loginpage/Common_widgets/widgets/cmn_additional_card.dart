@@ -1,10 +1,18 @@
 import 'package:enviro_mobile_application/view/service/master_car_page/master_car_service.dart';
+import 'package:enviro_mobile_application/viewmodel/semi_trailor_page/semi_trailor_page_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:enviro_mobile_application/viewmodel/car_page/car_page_viewmodel.dart';
 
 class Cmn_Additional_Card extends StatelessWidget {
-  const Cmn_Additional_Card({Key? key}) : super(key: key);
+  final VoidCallback? onMasterCardClicked;
+  final VoidCallback? onMastertruck;
+
+  const Cmn_Additional_Card({
+    Key? key,
+    this.onMasterCardClicked,
+    this.onMastertruck,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +48,7 @@ class Cmn_Additional_Card extends StatelessWidget {
                             ActionType? actionType;
                             switch (newValue) {
                               case 'Vehicle list':
-                                actionType = ActionType.fuelexpence;
+                                actionType = ActionType.vehiclelist;
                                 break;
                               case 'Preinspectioncheck':
                                 actionType = ActionType.Preinspectioncheck;
@@ -54,6 +62,11 @@ class Cmn_Additional_Card extends StatelessWidget {
                             }
                             if (actionType != null) {
                               vmcar.mastercarfunction(drop: actionType);
+                              onMasterCardClicked?.call();
+                            }
+                            if (actionType != null) {
+                              vmtrailor.trailorfunction();
+                              onMastertruck?.call();
                             }
                           },
                           items: vehicleOptions.map((String drop) {

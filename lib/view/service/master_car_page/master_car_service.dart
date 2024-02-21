@@ -63,7 +63,7 @@ class MastercarService implements IAllMastercarService {
         apiUrl = ApiEndPoints.endpointsemitrailorpage;
         break;
       default:
-        apiUrl = ApiEndPoints.endpointtruckpage;
+        apiUrl = ApiEndPoints.endpointcarpage;
     }
 
     var response = await getIt<HttpService>().request(

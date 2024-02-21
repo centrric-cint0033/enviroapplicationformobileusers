@@ -19,7 +19,9 @@ class MasterCarpage extends StatelessWidget {
           child: Column(
             children: [
               Observer(builder: (_) {
-                return Cmn_Additional_Card();
+                return Cmn_Additional_Card(
+                  onMasterCardClicked: () {},
+                );
               }),
               const SizedBox(height: 16.0),
               common_search_widget(),
