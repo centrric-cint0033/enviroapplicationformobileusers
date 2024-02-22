@@ -30,8 +30,9 @@ mixin _$TruckPageViewModel on AllTruckPageViewModelBase, Store {
       context: context);
 
   @override
-  Future<void> truckPageFunction() {
-    return _$truckPageFunctionAsyncAction.run(() => super.truckPageFunction());
+  Future<void> truckPageFunction({ActionType? truckdrop}) {
+    return _$truckPageFunctionAsyncAction
+        .run(() => super.truckPageFunction(truckdrop: truckdrop));
   }
 
   @override

@@ -8,12 +8,14 @@ import 'package:enviro_mobile_application/utilis/httpservice.dart';
 import 'package:enviro_mobile_application/utilis/injection.dart';
 import 'package:enviro_mobile_application/utilis/main_failure.dart';
 import 'package:enviro_mobile_application/view/master_car_page/master_car_page.dart';
+import 'package:enviro_mobile_application/view/master_truck_page/master_truck_page.dart';
 import 'package:enviro_mobile_application/view/service/master_car_page/i_all_master_carservice.dart';
+import 'package:flutter/material.dart';
 
 import 'package:injectable/injectable.dart';
 import 'package:mobx/mobx.dart';
 
-enum ActionType {
+enum CarActionType {
   Preinspectioncheck,
   MaintenanceCheck,
   vehiclelist,
@@ -50,16 +52,18 @@ class MastercarService implements IAllMastercarService {
       drop) async {
     String apiUrl;
     switch (drop) {
-      case ActionType.Preinspectioncheck:
+      case MasterCarpage:
+      case CarActionType.Preinspectioncheck:
         apiUrl = ApiEndPoints.endpointpreinspectioncheckpage;
         break;
-      case ActionType.MaintenanceCheck:
+      case MasterTruckPage:
+      case CarActionType.MaintenanceCheck:
         apiUrl = ApiEndPoints.endpointsemitrailorpage;
         break;
-      case ActionType.fuelexpence:
+      case CarActionType.fuelexpence:
         apiUrl = ApiEndPoints.endpointtruckpage;
         break;
-      case ActionType.vehiclelist:
+      case CarActionType.vehiclelist:
         apiUrl = ApiEndPoints.endpointsemitrailorpage;
         break;
       default:

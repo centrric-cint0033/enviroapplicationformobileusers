@@ -30,7 +30,7 @@ abstract class AllCarPageViewModelBase with Store {
       ApiResponse<List<CmnvehiclepageModel>>();
 
   @action
-  Future<void> mastercarfunction({ActionType? drop}) async {
+  Future<void> mastercarfunction({CarActionType? drop}) async {
     carPageResponse = carPageResponse.copyWith(error: null, loading: true);
 
     final result = await MastercarService.preinspectionfunction(drop);

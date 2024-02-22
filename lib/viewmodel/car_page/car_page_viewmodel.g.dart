@@ -30,7 +30,7 @@ mixin _$CarPageViewModel on AllCarPageViewModelBase, Store {
       context: context);
 
   @override
-  Future<void> mastercarfunction({ActionType? drop}) {
+  Future<void> mastercarfunction({CarActionType? drop}) {
     return _$mastercarfunctionAsyncAction
         .run(() => super.mastercarfunction(drop: drop));
   }

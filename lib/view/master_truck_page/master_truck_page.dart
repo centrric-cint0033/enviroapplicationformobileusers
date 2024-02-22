@@ -1,10 +1,10 @@
-import 'package:enviro_mobile_application/view/loginpage/Common_widgets/widgets/cmn_additional_card.dart';
-import 'package:enviro_mobile_application/viewmodel/login_page/login_page_viewmodel.dart';
+import 'package:enviro_mobile_application/view/service/master_car_page/master_car_service.dart';
+import 'package:enviro_mobile_application/view/service/master_truckservice/master_truckservice.dart';
+
 import 'package:enviro_mobile_application/viewmodel/truck_page/truck_page_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:enviro_mobile_application/view/loginpage/Common_widgets/widgets/common_search_widget.dart';
-import 'package:mobx/mobx.dart';
 
 class MasterTruckPage extends StatelessWidget {
   const MasterTruckPage({Key? key}) : super(key: key);
@@ -19,11 +19,78 @@ class MasterTruckPage extends StatelessWidget {
           child: Column(
             children: [
               Observer(builder: (_) {
-                return Container(width: 68, child: const Card());
+                String? selectedVehicle;
+                List<String> vehicleOptions = [
+                  'Vehicle list',
+                  'Preinspectioncheck',
+                  'Maintenance check',
+                  'Fuel Expense',
+                ];
+
+                return Container(
+                  width: double.infinity,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: Container(
+                            height: 54,
+                            decoration: BoxDecoration(
+                              border:
+                                  Border.all(color: const Color(0XFF949494)),
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
+                            child: Observer(builder: (_) {
+                              return Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 6.0),
+                                child: DropdownButtonHideUnderline(
+                                  child: Observer(builder: (_) {
+                                    return DropdownButton<String>(
+                                      value: selectedVehicle,
+                                      onChanged: (String? newValue) {
+                                        ActionType? actionType;
+                                        switch (newValue) {
+                                          case 'Vehicle list':
+                                            actionType = ActionType.vehiclelist;
+                                            break;
+                                          case 'Preinspectioncheck':
+                                            actionType =
+                                                ActionType.Preinspectioncheck;
+                                            break;
+                                          case 'Maintenance check':
+                                            actionType =
+                                                ActionType.MaintenanceCheck;
+                                            break;
+                                          case 'Fuel Expense':
+                                            actionType = ActionType.fuelexpence;
+                                            break;
+                                        }
+                                        if (actionType != null) {
+                                          vmtruck.truckPageFunction(
+                                              truckdrop: actionType);
+                                        }
+                                      },
+                                      items: vehicleOptions
+                                          .map((String truckdrop) {
+                                        return DropdownMenuItem<String>(
+                                          value: truckdrop,
+                                          child: Text(truckdrop),
+                                        );
+                                      }).toList(),
+                                    );
+                                  }),
+                                ),
+                              );
+                            }),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                );
               }),
-              Cmn_Additional_Card(
-                onMastertruck: () {},
-              ),
               const SizedBox(height: 16.0),
               common_search_widget(),
               const SizedBox(height: 16.0),

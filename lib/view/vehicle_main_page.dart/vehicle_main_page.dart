@@ -26,10 +26,10 @@ class VehicleMainPage extends StatelessWidget {
           title: cmnTitleWidget('VEHICLE'),
           actions: cmn_action_icon,
         ),
-        body: Column(
+        body: const Column(
           children: [
             VehicleTabbar(),
-            const Expanded(
+            Expanded(
               child: TabBarView(
                 children: <Widget>[
                   MasterTruckPage(),

@@ -4,6 +4,7 @@ import 'package:enviro_mobile_application/model/truck_page/res_model/truckpage_m
 
 import 'package:enviro_mobile_application/utilis/injection.dart';
 import 'package:enviro_mobile_application/view/service/master_truckservice/i_all_master_trucksevice.dart';
+import 'package:enviro_mobile_application/view/service/master_truckservice/master_truckservice.dart';
 
 import 'package:injectable/injectable.dart';
 import 'package:mobx/mobx.dart';
@@ -31,10 +32,10 @@ abstract class AllTruckPageViewModelBase with Store {
       ApiResponse<List<CmnvehiclepageModel>>();
 
   @action
-  Future<void> truckPageFunction() async {
+  Future<void> truckPageFunction({ActionType? truckdrop}) async {
     truckPageResponse = truckPageResponse.copyWith(error: null, loading: true);
 
-    final result = await masterTruckPageService.mastertruckfunction();
+    final result = await masterTruckPageService.mastertruckfunction(truckdrop);
     print(result.toString() + "azee");
     return result.fold(
       (l) {

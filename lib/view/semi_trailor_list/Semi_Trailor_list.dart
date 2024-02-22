@@ -16,8 +16,7 @@ class SemiTrailorPage extends StatelessWidget {
           padding: const EdgeInsets.only(left: 8.0, right: 8),
           child: Column(
             children: [
-              Cmn_Additional_Card(),
-              // _buildDateDropdown(),
+              // Cmn_Additional_Card(), // _buildDateDropdown(),
               const SizedBox(height: 16.0),
               common_search_widget(),
               const SizedBox(height: 16.0),

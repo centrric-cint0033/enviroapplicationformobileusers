@@ -1,4 +1,5 @@
 import 'package:enviro_mobile_application/view/loginpage/Common_widgets/widgets/cmn_additional_card.dart';
+import 'package:enviro_mobile_application/view/service/master_car_page/master_car_service.dart';
 import 'package:enviro_mobile_application/viewmodel/car_page/car_page_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:enviro_mobile_application/view/loginpage/Common_widgets/widgets/common_search_widget.dart';
@@ -19,8 +20,78 @@ class MasterCarpage extends StatelessWidget {
           child: Column(
             children: [
               Observer(builder: (_) {
-                return Cmn_Additional_Card(
-                  onMasterCardClicked: () {},
+                String? selectedVehicle;
+                List<String> vehicleOptions = [
+                  'Vehicle list',
+                  'Preinspectioncheck',
+                  'Maintenance check',
+                  'Fuel Expense',
+                ];
+
+                return Container(
+                  width: double.infinity,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: Container(
+                            height: 54,
+                            decoration: BoxDecoration(
+                              border:
+                                  Border.all(color: const Color(0XFF949494)),
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
+                            child: Observer(builder: (_) {
+                              return Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 6.0),
+                                child: DropdownButtonHideUnderline(
+                                  child: Observer(builder: (_) {
+                                    return DropdownButton<String>(
+                                      value: selectedVehicle,
+                                      onChanged: (String? newValue) {
+                                        CarActionType? actionType;
+                                        switch (newValue) {
+                                          case 'Vehicle list':
+                                            actionType =
+                                                CarActionType.vehiclelist;
+                                            break;
+                                          case 'Preinspectioncheck':
+                                            actionType = CarActionType
+                                                .Preinspectioncheck;
+                                            break;
+                                          case 'Maintenance check':
+                                            actionType =
+                                                CarActionType.MaintenanceCheck;
+                                            break;
+                                          case 'Fuel Expense':
+                                            actionType =
+                                                CarActionType.fuelexpence;
+                                            break;
+                                        }
+                                        if (actionType != null) {
+                                          vmcar.mastercarfunction(
+                                              drop: actionType);
+                                          // onMasterCardClicked!();
+                                        }
+                                      },
+                                      items: vehicleOptions.map((String drop) {
+                                        return DropdownMenuItem<String>(
+                                          value: drop,
+                                          child: Text(drop),
+                                        );
+                                      }).toList(),
+                                    );
+                                  }),
+                                ),
+                              );
+                            }),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 );
               }),
               const SizedBox(height: 16.0),

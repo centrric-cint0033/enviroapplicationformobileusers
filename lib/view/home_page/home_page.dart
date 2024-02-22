@@ -13,7 +13,6 @@ import 'package:enviro_mobile_application/view/loginpage/Common_widgets/widgets/
 import 'package:enviro_mobile_application/view/loginpage/Common_widgets/widgets/cmn_leading_icon.dart';
 import 'package:enviro_mobile_application/view/loginpage/Common_widgets/widgets/cmn_title_textwidget.dart';
 import 'package:enviro_mobile_application/view/loginpage/common/appbar/cmappbar.dart';
-import 'package:mobx/mobx.dart';
 
 class Homepage1 extends StatelessWidget {
   const Homepage1({Key? key}) : super(key: key);
