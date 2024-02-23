@@ -9,6 +9,7 @@ part of 'truckpage_model.dart';
 _$CmnvehiclepageModelImpl _$$CmnvehiclepageModelImplFromJson(
         Map<String, dynamic> json) =>
     _$CmnvehiclepageModelImpl(
+      odometer: json['odometer'] as int?,
       id: json['id'] as int?,
       imageThumbnail: json['imageThumbnail'] as String?,
       image1: json['image1'] as String?,
@@ -45,6 +46,7 @@ _$CmnvehiclepageModelImpl _$$CmnvehiclepageModelImplFromJson(
 Map<String, dynamic> _$$CmnvehiclepageModelImplToJson(
         _$CmnvehiclepageModelImpl instance) =>
     <String, dynamic>{
+      'odometer': instance.odometer,
       'id': instance.id,
       'imageThumbnail': instance.imageThumbnail,
       'image1': instance.image1,

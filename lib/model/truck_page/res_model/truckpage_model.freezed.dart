@@ -20,6 +20,7 @@ CmnvehiclepageModel _$CmnvehiclepageModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$CmnvehiclepageModel {
+  int? get odometer => throw _privateConstructorUsedError;
   int? get id => throw _privateConstructorUsedError;
   String? get imageThumbnail => throw _privateConstructorUsedError;
   String? get image1 => throw _privateConstructorUsedError;
@@ -65,7 +66,8 @@ abstract class $CmnvehiclepageModelCopyWith<$Res> {
       _$CmnvehiclepageModelCopyWithImpl<$Res, CmnvehiclepageModel>;
   @useResult
   $Res call(
-      {int? id,
+      {int? odometer,
+      int? id,
       String? imageThumbnail,
       String? image1,
       List<dynamic>? multipleImages,
@@ -111,6 +113,7 @@ class _$CmnvehiclepageModelCopyWithImpl<$Res, $Val extends CmnvehiclepageModel>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? odometer = freezed,
     Object? id = freezed,
     Object? imageThumbnail = freezed,
     Object? image1 = freezed,
@@ -144,6 +147,10 @@ class _$CmnvehiclepageModelCopyWithImpl<$Res, $Val extends CmnvehiclepageModel>
     Object? editedDateTime = freezed,
   }) {
     return _then(_value.copyWith(
+      odometer: freezed == odometer
+          ? _value.odometer
+          : odometer // ignore: cast_nullable_to_non_nullable
+              as int?,
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -281,7 +288,8 @@ abstract class _$$CmnvehiclepageModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {int? id,
+      {int? odometer,
+      int? id,
       String? imageThumbnail,
       String? image1,
       List<dynamic>? multipleImages,
@@ -325,6 +333,7 @@ class __$$CmnvehiclepageModelImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? odometer = freezed,
     Object? id = freezed,
     Object? imageThumbnail = freezed,
     Object? image1 = freezed,
@@ -358,6 +367,10 @@ class __$$CmnvehiclepageModelImplCopyWithImpl<$Res>
     Object? editedDateTime = freezed,
   }) {
     return _then(_$CmnvehiclepageModelImpl(
+      odometer: freezed == odometer
+          ? _value.odometer
+          : odometer // ignore: cast_nullable_to_non_nullable
+              as int?,
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -490,7 +503,8 @@ class __$$CmnvehiclepageModelImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$CmnvehiclepageModelImpl implements _CmnvehiclepageModel {
   _$CmnvehiclepageModelImpl(
-      {this.id,
+      {this.odometer,
+      this.id,
       this.imageThumbnail,
       this.image1,
       final List<dynamic>? multipleImages,
@@ -526,6 +540,8 @@ class _$CmnvehiclepageModelImpl implements _CmnvehiclepageModel {
   factory _$CmnvehiclepageModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$CmnvehiclepageModelImplFromJson(json);
 
+  @override
+  final int? odometer;
   @override
   final int? id;
   @override
@@ -599,7 +615,7 @@ class _$CmnvehiclepageModelImpl implements _CmnvehiclepageModel {
 
   @override
   String toString() {
-    return 'CmnvehiclepageModel(id: $id, imageThumbnail: $imageThumbnail, image1: $image1, multipleImages: $multipleImages, tabType: $tabType, vehicleType: $vehicleType, activeStatus: $activeStatus, previousRego: $previousRego, registration: $registration, types: $types, year: $year, transmission: $transmission, fuel: $fuel, height: $height, width: $width, length: $length, litres: $litres, vinNumber: $vinNumber, axies: $axies, dueRego: $dueRego, engineNumbers: $engineNumbers, eTag: $eTag, insurance: $insurance, fuelCard: $fuelCard, fbt: $fbt, action: $action, image2: $image2, image3: $image3, preinspectionRequired: $preinspectionRequired, createdDateTime: $createdDateTime, editedDateTime: $editedDateTime)';
+    return 'CmnvehiclepageModel(odometer: $odometer, id: $id, imageThumbnail: $imageThumbnail, image1: $image1, multipleImages: $multipleImages, tabType: $tabType, vehicleType: $vehicleType, activeStatus: $activeStatus, previousRego: $previousRego, registration: $registration, types: $types, year: $year, transmission: $transmission, fuel: $fuel, height: $height, width: $width, length: $length, litres: $litres, vinNumber: $vinNumber, axies: $axies, dueRego: $dueRego, engineNumbers: $engineNumbers, eTag: $eTag, insurance: $insurance, fuelCard: $fuelCard, fbt: $fbt, action: $action, image2: $image2, image3: $image3, preinspectionRequired: $preinspectionRequired, createdDateTime: $createdDateTime, editedDateTime: $editedDateTime)';
   }
 
   @override
@@ -607,6 +623,8 @@ class _$CmnvehiclepageModelImpl implements _CmnvehiclepageModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$CmnvehiclepageModelImpl &&
+            (identical(other.odometer, odometer) ||
+                other.odometer == odometer) &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.imageThumbnail, imageThumbnail) ||
                 other.imageThumbnail == imageThumbnail) &&
@@ -658,6 +676,7 @@ class _$CmnvehiclepageModelImpl implements _CmnvehiclepageModel {
   @override
   int get hashCode => Object.hashAll([
         runtimeType,
+        odometer,
         id,
         imageThumbnail,
         image1,
@@ -708,7 +727,8 @@ class _$CmnvehiclepageModelImpl implements _CmnvehiclepageModel {
 
 abstract class _CmnvehiclepageModel implements CmnvehiclepageModel {
   factory _CmnvehiclepageModel(
-      {final int? id,
+      {final int? odometer,
+      final int? id,
       final String? imageThumbnail,
       final String? image1,
       final List<dynamic>? multipleImages,
@@ -743,6 +763,8 @@ abstract class _CmnvehiclepageModel implements CmnvehiclepageModel {
   factory _CmnvehiclepageModel.fromJson(Map<String, dynamic> json) =
       _$CmnvehiclepageModelImpl.fromJson;
 
+  @override
+  int? get odometer;
   @override
   int? get id;
   @override

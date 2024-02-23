@@ -1,8 +1,9 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:enviro_mobile_application/view/loginpage/Common_widgets/widgets/cmn_additional_card.dart';
+import 'package:enviro_mobile_application/view/service/semi_trailor_service.dart/semi_trailor_service.dart';
 import 'package:enviro_mobile_application/viewmodel/semi_trailor_page/semi_trailor_page_viewmodel.dart';
+import 'package:flutter/material.dart';
 import 'package:enviro_mobile_application/view/loginpage/Common_widgets/widgets/common_search_widget.dart';
-import 'package:enviro_mobile_application/model/truck_page/res_model/truckpage_model.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 
 class SemiTrailorPage extends StatelessWidget {
   const SemiTrailorPage({Key? key}) : super(key: key);
@@ -17,7 +18,7 @@ class SemiTrailorPage extends StatelessWidget {
           child: Column(
             children: [
               Observer(builder: (_) {
-                String? selectedVehicle = vmtrailor.selectedVehicle;
+                // String? selectedVehicle = vmtrailor.selectedVehicle.toString();
                 List<String> vehicleOptions = [
                   'Vehicle list',
                   'Preinspectioncheck',
@@ -46,9 +47,31 @@ class SemiTrailorPage extends StatelessWidget {
                                 child: DropdownButtonHideUnderline(
                                   child: Observer(builder: (_) {
                                     return DropdownButton<String>(
-                                      value: selectedVehicle,
+                                      // value: selectedVehicle,
                                       onChanged: (String? newValue) {
-                                        vmtrailor.setSelectedVehicle(newValue);
+                                        MasterTruckActionType? actionType;
+                                        switch (newValue) {
+                                          case 'Vehicle list':
+                                            actionType = MasterTruckActionType
+                                                .vehiclelist;
+                                            break;
+                                          case 'Preinspectioncheck':
+                                            actionType = MasterTruckActionType
+                                                .Preinspectioncheck;
+                                            break;
+                                          case 'Maintenance check':
+                                            actionType = MasterTruckActionType
+                                                .MaintenanceCheck;
+                                            break;
+                                          case 'Fuel Expense':
+                                            actionType = MasterTruckActionType
+                                                .fuelexpence;
+                                            break;
+                                        }
+                                        if (actionType != null) {
+                                          vmtrailor.trailorfunction(
+                                              semitruckdrop: actionType);
+                                        }
                                       },
                                       items:
                                           vehicleOptions.map((String newValue) {
@@ -69,6 +92,7 @@ class SemiTrailorPage extends StatelessWidget {
                   ),
                 );
               }),
+              // Cmn_Additional_Card(), // _buildDateDropdown(),
               const SizedBox(height: 16.0),
               common_search_widget(),
               const SizedBox(height: 16.0),
@@ -97,6 +121,53 @@ class SemiTrailorPage extends StatelessWidget {
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  Widget _buildDateDropdown() {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 12.0),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(8.0),
+              border: Border.all(color: Colors.grey),
+            ),
+            child: DropdownButton<String>(
+              items:
+                  <String>['2025', '2026', '2027', '2028'].map((String value) {
+                return DropdownMenuItem<String>(
+                  value: value,
+                  child: Text(value),
+                );
+              }).toList(),
+              onChanged: (String? newValue) {},
+              hint: Text('2024'),
+            ),
+          ),
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 12.0),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(8.0),
+              border: Border.all(color: Colors.grey),
+            ),
+            child: DropdownButton<String>(
+              items:
+                  <String>['Feb', 'March', 'April', 'May'].map((String value) {
+                return DropdownMenuItem<String>(
+                  value: value,
+                  child: Text(value),
+                );
+              }).toList(),
+              onChanged: (String? newValue) {},
+              hint: Text('Jan'),
+            ),
+          ),
+        ],
       ),
     );
   }

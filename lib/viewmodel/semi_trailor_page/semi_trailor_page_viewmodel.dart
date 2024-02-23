@@ -24,13 +24,13 @@ abstract class AllSemiTrailorPageViewModelBase with Store {
 
   AllSemiTrailorPageViewModelBase(this.SemiTrailorPageService);
 
-  @observable
-  String? selectedVehicle;
+  // @observable
+  // String? selectedVehicle;
 
-  @action
-  void setSelectedVehicle(String? newValue) {
-    selectedVehicle = newValue;
-  }
+  // @action
+  // void setSelectedVehicle(String? newValue) {
+  //   selectedVehicle = newValue;
+  // }
 
   @observable
   ApiResponse<List<CmnvehiclepageModel>> semitrailorPageResponse =

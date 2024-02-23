@@ -6,6 +6,7 @@ part 'truckpage_model.g.dart';
 @freezed
 class CmnvehiclepageModel with _$CmnvehiclepageModel {
   factory CmnvehiclepageModel({
+    int? odometer,
     int? id,
     String? imageThumbnail,
     String? image1,
