@@ -23,19 +23,20 @@ class MasterTruckPageService implements IAllMasterTruckPageService {
       truckdrop) async {
     String apiUrl;
     switch (truckdrop) {
+      case ActionType.vehiclelist:
+        apiUrl = ApiEndPoints.endpointtruckpage;
+        break;
       case ActionType.Preinspectioncheck:
-        apiUrl = ApiEndPoints.endpointpreinspectioncheckpage;
+        apiUrl = ApiEndPoints.endpointpreinspectiontruckcheckpage;
         break;
 
       case ActionType.MaintenanceCheck:
-        apiUrl = ApiEndPoints.endpointsemitrailorpage;
+        apiUrl = ApiEndPoints.endpointmaintancetruckcheckpage;
         break;
       case ActionType.fuelexpence:
-        apiUrl = ApiEndPoints.endpointtruckpage;
+        apiUrl = ApiEndPoints.endpointfueltruckcheckpage;
         break;
-      case ActionType.vehiclelist:
-        apiUrl = ApiEndPoints.endpointsemitrailorpage;
-        break;
+
       default:
         apiUrl = ApiEndPoints.endpointcarpage;
     }

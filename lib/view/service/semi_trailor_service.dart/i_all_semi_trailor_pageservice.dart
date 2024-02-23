@@ -4,5 +4,6 @@ import 'package:enviro_mobile_application/model/truck_page/res_model/truckpage_m
 import '../../../utilis/main_failure.dart';
 
 abstract class IAllSemiTrailorPageService {
-  Future<Either<MainFailure, List<CmnvehiclepageModel>>> trailorfunction();
+  Future<Either<MainFailure, List<CmnvehiclepageModel>>> pretrailorfunction(
+      semitruckdrop);
 }

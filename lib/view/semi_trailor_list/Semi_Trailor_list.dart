@@ -1,8 +1,8 @@
-import 'package:enviro_mobile_application/view/loginpage/Common_widgets/widgets/cmn_additional_card.dart';
-import 'package:enviro_mobile_application/viewmodel/semi_trailor_page/semi_trailor_page_viewmodel.dart';
 import 'package:flutter/material.dart';
-import 'package:enviro_mobile_application/view/loginpage/Common_widgets/widgets/common_search_widget.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:enviro_mobile_application/viewmodel/semi_trailor_page/semi_trailor_page_viewmodel.dart';
+import 'package:enviro_mobile_application/view/loginpage/Common_widgets/widgets/common_search_widget.dart';
+import 'package:enviro_mobile_application/model/truck_page/res_model/truckpage_model.dart';
 
 class SemiTrailorPage extends StatelessWidget {
   const SemiTrailorPage({Key? key}) : super(key: key);
@@ -16,7 +16,59 @@ class SemiTrailorPage extends StatelessWidget {
           padding: const EdgeInsets.only(left: 8.0, right: 8),
           child: Column(
             children: [
-              // Cmn_Additional_Card(), // _buildDateDropdown(),
+              Observer(builder: (_) {
+                String? selectedVehicle = vmtrailor.selectedVehicle;
+                List<String> vehicleOptions = [
+                  'Vehicle list',
+                  'Preinspectioncheck',
+                  'Maintenance check',
+                  'Fuel Expense',
+                ];
+
+                return Container(
+                  width: double.infinity,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: Container(
+                            height: 54,
+                            decoration: BoxDecoration(
+                              border:
+                                  Border.all(color: const Color(0XFF949494)),
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
+                            child: Observer(builder: (_) {
+                              return Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 6.0),
+                                child: DropdownButtonHideUnderline(
+                                  child: Observer(builder: (_) {
+                                    return DropdownButton<String>(
+                                      value: selectedVehicle,
+                                      onChanged: (String? newValue) {
+                                        vmtrailor.setSelectedVehicle(newValue);
+                                      },
+                                      items:
+                                          vehicleOptions.map((String newValue) {
+                                        return DropdownMenuItem<String>(
+                                          value: newValue,
+                                          child: Text(newValue),
+                                        );
+                                      }).toList(),
+                                    );
+                                  }),
+                                ),
+                              );
+                            }),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              }),
               const SizedBox(height: 16.0),
               common_search_widget(),
               const SizedBox(height: 16.0),
@@ -45,53 +97,6 @@ class SemiTrailorPage extends StatelessWidget {
             ],
           ),
         ),
-      ),
-    );
-  }
-
-  Widget _buildDateDropdown() {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Container(
-            padding: EdgeInsets.symmetric(horizontal: 12.0),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(8.0),
-              border: Border.all(color: Colors.grey),
-            ),
-            child: DropdownButton<String>(
-              items:
-                  <String>['2025', '2026', '2027', '2028'].map((String value) {
-                return DropdownMenuItem<String>(
-                  value: value,
-                  child: Text(value),
-                );
-              }).toList(),
-              onChanged: (String? newValue) {},
-              hint: Text('2024'),
-            ),
-          ),
-          Container(
-            padding: EdgeInsets.symmetric(horizontal: 12.0),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(8.0),
-              border: Border.all(color: Colors.grey),
-            ),
-            child: DropdownButton<String>(
-              items:
-                  <String>['Feb', 'March', 'April', 'May'].map((String value) {
-                return DropdownMenuItem<String>(
-                  value: value,
-                  child: Text(value),
-                );
-              }).toList(),
-              onChanged: (String? newValue) {},
-              hint: Text('Jan'),
-            ),
-          ),
-        ],
       ),
     );
   }

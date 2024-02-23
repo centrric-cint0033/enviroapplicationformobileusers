@@ -11,16 +11,44 @@ import 'package:enviro_mobile_application/view/service/semi_trailor_service.dart
 
 import 'package:injectable/injectable.dart';
 
+enum MasterTruckActionType {
+  Preinspectioncheck,
+  MaintenanceCheck,
+  vehiclelist,
+  fuelexpence
+}
+
 @LazySingleton(as: IAllSemiTrailorPageService)
 class SemiTrailorPageService implements IAllSemiTrailorPageService {
   @override
-  Future<Either<MainFailure, List<CmnvehiclepageModel>>>
-      trailorfunction() async {
+  Future<Either<MainFailure, List<CmnvehiclepageModel>>> pretrailorfunction(
+      semitruckdrop) async {
+    String apiUrl;
+    switch (semitruckdrop) {
+      case MasterTruckActionType.vehiclelist:
+        apiUrl = ApiEndPoints.endpointsemitrailorpage;
+        break;
+      case MasterTruckActionType.Preinspectioncheck:
+        apiUrl = ApiEndPoints.endpointpreinspectionsemitruckcheckpage;
+        break;
+
+      case MasterTruckActionType.MaintenanceCheck:
+        apiUrl = ApiEndPoints.endpointmaintancesemitruckcheckpage;
+        break;
+      case MasterTruckActionType.fuelexpence:
+        apiUrl = ApiEndPoints.endpointfuelsemitruckcheckpage;
+        break;
+
+      default:
+        apiUrl = ApiEndPoints.endpointsemitrailorpage;
+    }
+
     var response = await getIt<HttpService>().request(
       authenticated: true,
       method: HttpMethod.get,
-      apiUrl: ApiEndPoints.endpointsemitrailorpage,
+      apiUrl: apiUrl,
     );
+
     return response.fold(
       (l) {
         (l.values.first);

@@ -53,19 +53,20 @@ class MastercarService implements IAllMastercarService {
     String apiUrl;
     switch (drop) {
       case MasterCarpage:
+      case CarActionType.vehiclelist:
+        apiUrl = ApiEndPoints.endpointcarpage;
+        break;
       case CarActionType.Preinspectioncheck:
-        apiUrl = ApiEndPoints.endpointpreinspectioncheckpage;
+        apiUrl = ApiEndPoints.endpointpreinspectioncarcheckpage;
         break;
       case MasterTruckPage:
       case CarActionType.MaintenanceCheck:
-        apiUrl = ApiEndPoints.endpointsemitrailorpage;
+        apiUrl = ApiEndPoints.endpointmaintancecarcheckpage;
         break;
       case CarActionType.fuelexpence:
-        apiUrl = ApiEndPoints.endpointtruckpage;
+        apiUrl = ApiEndPoints.endpointfuelcarcheckpage;
         break;
-      case CarActionType.vehiclelist:
-        apiUrl = ApiEndPoints.endpointsemitrailorpage;
-        break;
+
       default:
         apiUrl = ApiEndPoints.endpointcarpage;
     }

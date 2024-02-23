@@ -49,9 +49,9 @@ class MasterTruckPage extends StatelessWidget {
                                   child: Observer(builder: (_) {
                                     return DropdownButton<String>(
                                       value: selectedVehicle,
-                                      onChanged: (String? newValue) {
+                                      onChanged: (String? Value) {
                                         ActionType? actionType;
-                                        switch (newValue) {
+                                        switch (Value) {
                                           case 'Vehicle list':
                                             actionType = ActionType.vehiclelist;
                                             break;
@@ -71,6 +71,7 @@ class MasterTruckPage extends StatelessWidget {
                                           vmtruck.truckPageFunction(
                                               truckdrop: actionType);
                                         }
+                                        selectedVehicle = Value;
                                       },
                                       items: vehicleOptions
                                           .map((String truckdrop) {
