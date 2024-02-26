@@ -28,6 +28,14 @@ abstract class AllTruckPageViewModelBase with Store {
   AllTruckPageViewModelBase(this.masterTruckPageService);
 
   @observable
+  String? selectedTruckresponse;
+
+  @action
+  void setSelectedTruck(String? newValue) {
+    selectedTruckresponse = newValue;
+  }
+
+  @observable
   ApiResponse<List<CmnvehiclepageModel>> truckPageResponse =
       ApiResponse<List<CmnvehiclepageModel>>();
 

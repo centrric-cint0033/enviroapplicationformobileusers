@@ -20,7 +20,9 @@ class MasterCarpage extends StatelessWidget {
           child: Column(
             children: [
               Observer(builder: (_) {
-                String? selectedVehicle;
+                String? selectedcar = vmcar.selectedcarstatus ?? 'Vehicle list';
+
+                print('azsssxx$selectedcar');
                 List<String> vehicleOptions = [
                   'Vehicle list',
                   'Preinspectioncheck',
@@ -49,10 +51,11 @@ class MasterCarpage extends StatelessWidget {
                                 child: DropdownButtonHideUnderline(
                                   child: Observer(builder: (_) {
                                     return DropdownButton<String>(
-                                      value: selectedVehicle,
-                                      onChanged: (String? newValue) {
+                                      value: selectedcar,
+                                      onChanged: (String? selectedcar) {
+                                        vmcar.setSelectedCar(selectedcar);
                                         CarActionType? actionType;
-                                        switch (newValue) {
+                                        switch (selectedcar) {
                                           case 'Vehicle list':
                                             actionType =
                                                 CarActionType.vehiclelist;

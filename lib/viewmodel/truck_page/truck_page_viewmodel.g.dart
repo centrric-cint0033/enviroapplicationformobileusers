@@ -9,6 +9,24 @@ part of 'truck_page_viewmodel.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$TruckPageViewModel on AllTruckPageViewModelBase, Store {
+  late final _$selectedTruckresponseAtom = Atom(
+      name: 'AllTruckPageViewModelBase.selectedTruckresponse',
+      context: context);
+
+  @override
+  String? get selectedTruckresponse {
+    _$selectedTruckresponseAtom.reportRead();
+    return super.selectedTruckresponse;
+  }
+
+  @override
+  set selectedTruckresponse(String? value) {
+    _$selectedTruckresponseAtom.reportWrite(value, super.selectedTruckresponse,
+        () {
+      super.selectedTruckresponse = value;
+    });
+  }
+
   late final _$truckPageResponseAtom = Atom(
       name: 'AllTruckPageViewModelBase.truckPageResponse', context: context);
 
@@ -35,9 +53,24 @@ mixin _$TruckPageViewModel on AllTruckPageViewModelBase, Store {
         .run(() => super.truckPageFunction(truckdrop: truckdrop));
   }
 
+  late final _$AllTruckPageViewModelBaseActionController =
+      ActionController(name: 'AllTruckPageViewModelBase', context: context);
+
+  @override
+  void setSelectedTruck(String? newValue) {
+    final _$actionInfo = _$AllTruckPageViewModelBaseActionController
+        .startAction(name: 'AllTruckPageViewModelBase.setSelectedTruck');
+    try {
+      return super.setSelectedTruck(newValue);
+    } finally {
+      _$AllTruckPageViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
   @override
   String toString() {
     return '''
+selectedTruckresponse: ${selectedTruckresponse},
 truckPageResponse: ${truckPageResponse}
     ''';
   }

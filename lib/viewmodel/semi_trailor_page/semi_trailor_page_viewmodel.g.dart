@@ -59,12 +59,12 @@ mixin _$SemiTrailorPageViewModel on AllSemiTrailorPageViewModelBase, Store {
           name: 'AllSemiTrailorPageViewModelBase', context: context);
 
   @override
-  void setSelectedVehicle(String? selectedValue) {
+  void setSelectedVehicle(String? newValue) {
     final _$actionInfo =
         _$AllSemiTrailorPageViewModelBaseActionController.startAction(
             name: 'AllSemiTrailorPageViewModelBase.setSelectedVehicle');
     try {
-      return super.setSelectedVehicle(selectedValue);
+      return super.setSelectedVehicle(newValue);
     } finally {
       _$AllSemiTrailorPageViewModelBaseActionController.endAction(_$actionInfo);
     }

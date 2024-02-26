@@ -18,7 +18,7 @@ class SemiTrailorPage extends StatelessWidget {
           child: Column(
             children: [
               Observer(builder: (_) {
-                String? newValue = vmtrailor.selectedVehicle;
+                String? newValue = vmtrailor.selectedVehicle ?? 'Vehicle list';
                 print('azeemsele$newValue');
                 List<String> vehicleOptions = [
                   'Vehicle list',

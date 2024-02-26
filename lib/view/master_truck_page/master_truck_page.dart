@@ -19,7 +19,9 @@ class MasterTruckPage extends StatelessWidget {
           child: Column(
             children: [
               Observer(builder: (_) {
-                String? selectedVehicle;
+                String? selectedtruck =
+                    vmtruck.selectedTruckresponse ?? 'Vehicle list';
+                print('selection$selectedtruck');
                 List<String> vehicleOptions = [
                   'Vehicle list',
                   'Preinspectioncheck',
@@ -48,11 +50,12 @@ class MasterTruckPage extends StatelessWidget {
                                 child: DropdownButtonHideUnderline(
                                   child: Observer(builder: (_) {
                                     return DropdownButton<String>(
-                                      style: TextStyle(color: Colors.blueGrey),
-                                      value: selectedVehicle,
-                                      onChanged: (String? Value) {
+                                      value: selectedtruck,
+                                      onChanged: (String? selectedtruck) {
+                                        print('azeemsss: $selectedtruck');
+                                        vmtruck.setSelectedTruck(selectedtruck);
                                         ActionType? actionType;
-                                        switch (Value) {
+                                        switch (selectedtruck) {
                                           case 'Vehicle list':
                                             actionType = ActionType.vehiclelist;
                                             break;
@@ -72,7 +75,6 @@ class MasterTruckPage extends StatelessWidget {
                                           vmtruck.truckPageFunction(
                                               truckdrop: actionType);
                                         }
-                                        selectedVehicle = Value;
                                       },
                                       items: vehicleOptions
                                           .map((String truckdrop) {

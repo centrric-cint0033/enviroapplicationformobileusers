@@ -26,6 +26,14 @@ abstract class AllCarPageViewModelBase with Store {
   AllCarPageViewModelBase(this.MastercarService);
 
   @observable
+  String? selectedcarstatus;
+
+  @action
+  void setSelectedCar(String? newValue) {
+    selectedcarstatus = newValue;
+  }
+
+  @observable
   ApiResponse<List<CmnvehiclepageModel>> carPageResponse =
       ApiResponse<List<CmnvehiclepageModel>>();
 
