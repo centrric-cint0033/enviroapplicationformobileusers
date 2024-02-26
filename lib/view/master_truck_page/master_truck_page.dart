@@ -48,6 +48,7 @@ class MasterTruckPage extends StatelessWidget {
                                 child: DropdownButtonHideUnderline(
                                   child: Observer(builder: (_) {
                                     return DropdownButton<String>(
+                                      style: TextStyle(color: Colors.blueGrey),
                                       value: selectedVehicle,
                                       onChanged: (String? Value) {
                                         ActionType? actionType;

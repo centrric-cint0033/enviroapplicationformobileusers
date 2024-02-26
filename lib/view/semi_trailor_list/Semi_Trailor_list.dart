@@ -18,7 +18,8 @@ class SemiTrailorPage extends StatelessWidget {
           child: Column(
             children: [
               Observer(builder: (_) {
-                // String? selectedVehicle = vmtrailor.selectedVehicle.toString();
+                String? newValue = vmtrailor.selectedVehicle;
+                print('azeemsele$newValue');
                 List<String> vehicleOptions = [
                   'Vehicle list',
                   'Preinspectioncheck',
@@ -47,37 +48,42 @@ class SemiTrailorPage extends StatelessWidget {
                                 child: DropdownButtonHideUnderline(
                                   child: Observer(builder: (_) {
                                     return DropdownButton<String>(
-                                      // value: selectedVehicle,
+                                      value: newValue,
                                       onChanged: (String? newValue) {
-                                        MasterTruckActionType? actionType;
-                                        switch (newValue) {
-                                          case 'Vehicle list':
-                                            actionType = MasterTruckActionType
-                                                .vehiclelist;
-                                            break;
-                                          case 'Preinspectioncheck':
-                                            actionType = MasterTruckActionType
-                                                .Preinspectioncheck;
-                                            break;
-                                          case 'Maintenance check':
-                                            actionType = MasterTruckActionType
-                                                .MaintenanceCheck;
-                                            break;
-                                          case 'Fuel Expense':
-                                            actionType = MasterTruckActionType
-                                                .fuelexpence;
-                                            break;
-                                        }
-                                        if (actionType != null) {
-                                          vmtrailor.trailorfunction(
-                                              semitruckdrop: actionType);
+                                        if (newValue != null) {
+                                          vmtrailor
+                                              .setSelectedVehicle(newValue);
+                                          print('azeemsss: $newValue');
+                                          MasterTruckActionType? actionType;
+                                          switch (newValue) {
+                                            case 'Vehicle list':
+                                              actionType = MasterTruckActionType
+                                                  .vehiclelist;
+                                              break;
+                                            case 'Preinspectioncheck':
+                                              actionType = MasterTruckActionType
+                                                  .Preinspectioncheck;
+                                              break;
+                                            case 'Maintenance check':
+                                              actionType = MasterTruckActionType
+                                                  .MaintenanceCheck;
+                                              break;
+                                            case 'Fuel Expense':
+                                              actionType = MasterTruckActionType
+                                                  .fuelexpence;
+                                              break;
+                                          }
+                                          if (actionType != null) {
+                                            vmtrailor.trailorfunction(
+                                                semitruckdrop: actionType);
+                                          }
                                         }
                                       },
-                                      items:
-                                          vehicleOptions.map((String newValue) {
+                                      items: vehicleOptions
+                                          .map((String selectedVehicle) {
                                         return DropdownMenuItem<String>(
-                                          value: newValue,
-                                          child: Text(newValue),
+                                          value: selectedVehicle,
+                                          child: Text(selectedVehicle),
                                         );
                                       }).toList(),
                                     );
