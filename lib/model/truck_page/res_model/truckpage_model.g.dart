@@ -41,6 +41,13 @@ _$CmnvehiclepageModelImpl _$$CmnvehiclepageModelImplFromJson(
       preinspectionRequired: json['preinspectionRequired'] as bool?,
       createdDateTime: json['createdDateTime'] as String?,
       editedDateTime: json['editedDateTime'] as String?,
+      description: json['description'] as String?,
+      date_time: json['date_time'] as String?,
+      driver_name: json['driver_name'] as int?,
+      service_provided: json['service_provided'] as String?,
+      l_cost: json['l_cost'] as String?,
+      s_part: json['s_part'] as String?,
+      total_cost: json['total_cost'] as String?,
     );
 
 Map<String, dynamic> _$$CmnvehiclepageModelImplToJson(
@@ -78,4 +85,11 @@ Map<String, dynamic> _$$CmnvehiclepageModelImplToJson(
       'preinspectionRequired': instance.preinspectionRequired,
       'createdDateTime': instance.createdDateTime,
       'editedDateTime': instance.editedDateTime,
+      'description': instance.description,
+      'date_time': instance.date_time,
+      'driver_name': instance.driver_name,
+      'service_provided': instance.service_provided,
+      'l_cost': instance.l_cost,
+      's_part': instance.s_part,
+      'total_cost': instance.total_cost,
     };

@@ -52,6 +52,13 @@ mixin _$CmnvehiclepageModel {
   bool? get preinspectionRequired => throw _privateConstructorUsedError;
   String? get createdDateTime => throw _privateConstructorUsedError;
   String? get editedDateTime => throw _privateConstructorUsedError;
+  String? get description => throw _privateConstructorUsedError;
+  String? get date_time => throw _privateConstructorUsedError;
+  int? get driver_name => throw _privateConstructorUsedError;
+  String? get service_provided => throw _privateConstructorUsedError;
+  String? get l_cost => throw _privateConstructorUsedError;
+  String? get s_part => throw _privateConstructorUsedError;
+  String? get total_cost => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -97,7 +104,14 @@ abstract class $CmnvehiclepageModelCopyWith<$Res> {
       String? image3,
       bool? preinspectionRequired,
       String? createdDateTime,
-      String? editedDateTime});
+      String? editedDateTime,
+      String? description,
+      String? date_time,
+      int? driver_name,
+      String? service_provided,
+      String? l_cost,
+      String? s_part,
+      String? total_cost});
 }
 
 /// @nodoc
@@ -145,6 +159,13 @@ class _$CmnvehiclepageModelCopyWithImpl<$Res, $Val extends CmnvehiclepageModel>
     Object? preinspectionRequired = freezed,
     Object? createdDateTime = freezed,
     Object? editedDateTime = freezed,
+    Object? description = freezed,
+    Object? date_time = freezed,
+    Object? driver_name = freezed,
+    Object? service_provided = freezed,
+    Object? l_cost = freezed,
+    Object? s_part = freezed,
+    Object? total_cost = freezed,
   }) {
     return _then(_value.copyWith(
       odometer: freezed == odometer
@@ -275,6 +296,34 @@ class _$CmnvehiclepageModelCopyWithImpl<$Res, $Val extends CmnvehiclepageModel>
           ? _value.editedDateTime
           : editedDateTime // ignore: cast_nullable_to_non_nullable
               as String?,
+      description: freezed == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String?,
+      date_time: freezed == date_time
+          ? _value.date_time
+          : date_time // ignore: cast_nullable_to_non_nullable
+              as String?,
+      driver_name: freezed == driver_name
+          ? _value.driver_name
+          : driver_name // ignore: cast_nullable_to_non_nullable
+              as int?,
+      service_provided: freezed == service_provided
+          ? _value.service_provided
+          : service_provided // ignore: cast_nullable_to_non_nullable
+              as String?,
+      l_cost: freezed == l_cost
+          ? _value.l_cost
+          : l_cost // ignore: cast_nullable_to_non_nullable
+              as String?,
+      s_part: freezed == s_part
+          ? _value.s_part
+          : s_part // ignore: cast_nullable_to_non_nullable
+              as String?,
+      total_cost: freezed == total_cost
+          ? _value.total_cost
+          : total_cost // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -319,7 +368,14 @@ abstract class _$$CmnvehiclepageModelImplCopyWith<$Res>
       String? image3,
       bool? preinspectionRequired,
       String? createdDateTime,
-      String? editedDateTime});
+      String? editedDateTime,
+      String? description,
+      String? date_time,
+      int? driver_name,
+      String? service_provided,
+      String? l_cost,
+      String? s_part,
+      String? total_cost});
 }
 
 /// @nodoc
@@ -365,6 +421,13 @@ class __$$CmnvehiclepageModelImplCopyWithImpl<$Res>
     Object? preinspectionRequired = freezed,
     Object? createdDateTime = freezed,
     Object? editedDateTime = freezed,
+    Object? description = freezed,
+    Object? date_time = freezed,
+    Object? driver_name = freezed,
+    Object? service_provided = freezed,
+    Object? l_cost = freezed,
+    Object? s_part = freezed,
+    Object? total_cost = freezed,
   }) {
     return _then(_$CmnvehiclepageModelImpl(
       odometer: freezed == odometer
@@ -495,6 +558,34 @@ class __$$CmnvehiclepageModelImplCopyWithImpl<$Res>
           ? _value.editedDateTime
           : editedDateTime // ignore: cast_nullable_to_non_nullable
               as String?,
+      description: freezed == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String?,
+      date_time: freezed == date_time
+          ? _value.date_time
+          : date_time // ignore: cast_nullable_to_non_nullable
+              as String?,
+      driver_name: freezed == driver_name
+          ? _value.driver_name
+          : driver_name // ignore: cast_nullable_to_non_nullable
+              as int?,
+      service_provided: freezed == service_provided
+          ? _value.service_provided
+          : service_provided // ignore: cast_nullable_to_non_nullable
+              as String?,
+      l_cost: freezed == l_cost
+          ? _value.l_cost
+          : l_cost // ignore: cast_nullable_to_non_nullable
+              as String?,
+      s_part: freezed == s_part
+          ? _value.s_part
+          : s_part // ignore: cast_nullable_to_non_nullable
+              as String?,
+      total_cost: freezed == total_cost
+          ? _value.total_cost
+          : total_cost // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -534,7 +625,14 @@ class _$CmnvehiclepageModelImpl implements _CmnvehiclepageModel {
       this.image3,
       this.preinspectionRequired,
       this.createdDateTime,
-      this.editedDateTime})
+      this.editedDateTime,
+      this.description,
+      this.date_time,
+      this.driver_name,
+      this.service_provided,
+      this.l_cost,
+      this.s_part,
+      this.total_cost})
       : _multipleImages = multipleImages;
 
   factory _$CmnvehiclepageModelImpl.fromJson(Map<String, dynamic> json) =>
@@ -612,10 +710,24 @@ class _$CmnvehiclepageModelImpl implements _CmnvehiclepageModel {
   final String? createdDateTime;
   @override
   final String? editedDateTime;
+  @override
+  final String? description;
+  @override
+  final String? date_time;
+  @override
+  final int? driver_name;
+  @override
+  final String? service_provided;
+  @override
+  final String? l_cost;
+  @override
+  final String? s_part;
+  @override
+  final String? total_cost;
 
   @override
   String toString() {
-    return 'CmnvehiclepageModel(odometer: $odometer, id: $id, imageThumbnail: $imageThumbnail, image1: $image1, multipleImages: $multipleImages, tabType: $tabType, vehicleType: $vehicleType, activeStatus: $activeStatus, previousRego: $previousRego, registration: $registration, types: $types, year: $year, transmission: $transmission, fuel: $fuel, height: $height, width: $width, length: $length, litres: $litres, vinNumber: $vinNumber, axies: $axies, dueRego: $dueRego, engineNumbers: $engineNumbers, eTag: $eTag, insurance: $insurance, fuelCard: $fuelCard, fbt: $fbt, action: $action, image2: $image2, image3: $image3, preinspectionRequired: $preinspectionRequired, createdDateTime: $createdDateTime, editedDateTime: $editedDateTime)';
+    return 'CmnvehiclepageModel(odometer: $odometer, id: $id, imageThumbnail: $imageThumbnail, image1: $image1, multipleImages: $multipleImages, tabType: $tabType, vehicleType: $vehicleType, activeStatus: $activeStatus, previousRego: $previousRego, registration: $registration, types: $types, year: $year, transmission: $transmission, fuel: $fuel, height: $height, width: $width, length: $length, litres: $litres, vinNumber: $vinNumber, axies: $axies, dueRego: $dueRego, engineNumbers: $engineNumbers, eTag: $eTag, insurance: $insurance, fuelCard: $fuelCard, fbt: $fbt, action: $action, image2: $image2, image3: $image3, preinspectionRequired: $preinspectionRequired, createdDateTime: $createdDateTime, editedDateTime: $editedDateTime, description: $description, date_time: $date_time, driver_name: $driver_name, service_provided: $service_provided, l_cost: $l_cost, s_part: $s_part, total_cost: $total_cost)';
   }
 
   @override
@@ -669,7 +781,19 @@ class _$CmnvehiclepageModelImpl implements _CmnvehiclepageModel {
             (identical(other.createdDateTime, createdDateTime) ||
                 other.createdDateTime == createdDateTime) &&
             (identical(other.editedDateTime, editedDateTime) ||
-                other.editedDateTime == editedDateTime));
+                other.editedDateTime == editedDateTime) &&
+            (identical(other.description, description) ||
+                other.description == description) &&
+            (identical(other.date_time, date_time) ||
+                other.date_time == date_time) &&
+            (identical(other.driver_name, driver_name) ||
+                other.driver_name == driver_name) &&
+            (identical(other.service_provided, service_provided) ||
+                other.service_provided == service_provided) &&
+            (identical(other.l_cost, l_cost) || other.l_cost == l_cost) &&
+            (identical(other.s_part, s_part) || other.s_part == s_part) &&
+            (identical(other.total_cost, total_cost) ||
+                other.total_cost == total_cost));
   }
 
   @JsonKey(ignore: true)
@@ -707,7 +831,14 @@ class _$CmnvehiclepageModelImpl implements _CmnvehiclepageModel {
         image3,
         preinspectionRequired,
         createdDateTime,
-        editedDateTime
+        editedDateTime,
+        description,
+        date_time,
+        driver_name,
+        service_provided,
+        l_cost,
+        s_part,
+        total_cost
       ]);
 
   @JsonKey(ignore: true)
@@ -758,7 +889,14 @@ abstract class _CmnvehiclepageModel implements CmnvehiclepageModel {
       final String? image3,
       final bool? preinspectionRequired,
       final String? createdDateTime,
-      final String? editedDateTime}) = _$CmnvehiclepageModelImpl;
+      final String? editedDateTime,
+      final String? description,
+      final String? date_time,
+      final int? driver_name,
+      final String? service_provided,
+      final String? l_cost,
+      final String? s_part,
+      final String? total_cost}) = _$CmnvehiclepageModelImpl;
 
   factory _CmnvehiclepageModel.fromJson(Map<String, dynamic> json) =
       _$CmnvehiclepageModelImpl.fromJson;
@@ -827,6 +965,20 @@ abstract class _CmnvehiclepageModel implements CmnvehiclepageModel {
   String? get createdDateTime;
   @override
   String? get editedDateTime;
+  @override
+  String? get description;
+  @override
+  String? get date_time;
+  @override
+  int? get driver_name;
+  @override
+  String? get service_provided;
+  @override
+  String? get l_cost;
+  @override
+  String? get s_part;
+  @override
+  String? get total_cost;
   @override
   @JsonKey(ignore: true)
   _$$CmnvehiclepageModelImplCopyWith<_$CmnvehiclepageModelImpl> get copyWith =>

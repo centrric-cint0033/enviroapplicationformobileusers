@@ -1,10 +1,8 @@
-import 'package:enviro_mobile_application/view/service/master_car_page/master_car_service.dart';
-import 'package:enviro_mobile_application/view/service/master_truckservice/master_truckservice.dart';
-
-import 'package:enviro_mobile_application/viewmodel/truck_page/truck_page_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:enviro_mobile_application/view/loginpage/Common_widgets/widgets/common_search_widget.dart';
+import 'package:enviro_mobile_application/view/service/master_truckservice/master_truckservice.dart';
+import 'package:enviro_mobile_application/viewmodel/truck_page/truck_page_viewmodel.dart';
 
 class MasterTruckPage extends StatelessWidget {
   const MasterTruckPage({Key? key}) : super(key: key);
@@ -112,6 +110,13 @@ class MasterTruckPage extends StatelessWidget {
                           RegoDue: data?.editedDateTime ?? "",
                           Type: data?.types ?? "",
                           year: data?.year ?? "",
+                          odometer: data?.odometer,
+                          drivername: data?.driver_name,
+                          Date: data?.date_time ?? "",
+                          servicedate: data?.service_provided ?? "",
+                          labourcost: data?.l_cost ?? "",
+                          spareparts: data?.s_part ?? "",
+                          totalcost: data?.total_cost ?? "",
                         );
                       },
                     ),
@@ -133,6 +138,13 @@ class MasterTruckPage extends StatelessWidget {
     required dynamic RegoDue,
     required String Type,
     required dynamic year,
+    required int? odometer,
+    required int? drivername,
+    required String? Date,
+    required String? servicedate,
+    required String? labourcost,
+    required String? spareparts,
+    required String? totalcost,
   }) {
     return Container(
       width: double.infinity,
@@ -169,6 +181,7 @@ class MasterTruckPage extends StatelessWidget {
                       ),
                       onPressed: () {
                         print('vgjhsdvbsjhdb');
+                        // Navigate to folders
                       },
                       child: const Padding(
                         padding: EdgeInsets.only(top: 3.0, bottom: 3.0),
@@ -185,6 +198,7 @@ class MasterTruckPage extends StatelessWidget {
                 height: 8.0,
               ),
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
                     "RegoDue            : $RegoDue",
@@ -193,12 +207,39 @@ class MasterTruckPage extends StatelessWidget {
                   ),
                 ],
               ),
+              const SizedBox(
+                height: 8.0,
+              ),
+              Row(
+                children: [
+                  Text(
+                    "odometer           : $odometer",
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(color: Colors.blue),
+                  ),
+                ],
+              ),
+              if (drivername != null) ...[
+                const SizedBox(
+                  height: 8.0,
+                ),
+                Row(
+                  children: [
+                    Text(
+                      "DriverName            : $drivername",
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(color: Colors.blue),
+                    ),
+                  ],
+                ),
+              ],
               const SizedBox(height: 8.0),
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Flexible(
                     child: Text(
-                      "Type                   : $Type",
+                      "servicedate          : $servicedate",
                       overflow: TextOverflow.ellipsis,
                       style: const TextStyle(color: Colors.blue),
                     ),
@@ -208,8 +249,41 @@ class MasterTruckPage extends StatelessWidget {
               const SizedBox(height: 8.0),
               Row(
                 children: [
+                  Flexible(
+                    child: Text(
+                      "date                    : $Date",
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(color: Colors.blue),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 8.0),
+              const SizedBox(height: 8.0),
+              Row(
+                children: [
                   Text(
-                    "Year                   : $year",
+                    "labourcost              : $labourcost",
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(color: Colors.blue),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 8.0),
+              Row(
+                children: [
+                  Text(
+                    "spareparts              : $spareparts",
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(color: Colors.blue),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 8.0),
+              Row(
+                children: [
+                  Text(
+                    "totalcost               : $totalcost",
                     overflow: TextOverflow.ellipsis,
                     style: const TextStyle(color: Colors.blue),
                   ),

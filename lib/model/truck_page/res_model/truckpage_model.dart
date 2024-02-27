@@ -38,6 +38,13 @@ class CmnvehiclepageModel with _$CmnvehiclepageModel {
     bool? preinspectionRequired,
     String? createdDateTime,
     String? editedDateTime,
+    String? description,
+    String? date_time,
+    int? driver_name,
+    String? service_provided,
+    String? l_cost,
+    String? s_part,
+    String? total_cost,
   }) = _CmnvehiclepageModel;
 
   factory CmnvehiclepageModel.fromJson(Map<String, dynamic> json) =>
