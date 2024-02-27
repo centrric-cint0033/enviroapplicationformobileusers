@@ -114,6 +114,13 @@ class MasterCarpage extends StatelessWidget {
                           RegoDue: data?.editedDateTime ?? "",
                           Type: data?.types ?? "",
                           year: data?.year ?? "",
+                          odometer: data?.odometer,
+                          drivername: data?.driver_name,
+                          Date: data?.date_time ?? "",
+                          servicedate: data?.service_provided ?? "",
+                          labourcost: data?.l_cost ?? "",
+                          spareparts: data?.s_part ?? "",
+                          totalcost: data?.total_cost ?? "",
                         );
                       },
                     ),
@@ -132,6 +139,13 @@ class MasterCarpage extends StatelessWidget {
     required dynamic RegoDue,
     required String Type,
     required dynamic year,
+    required int? odometer,
+    required int? drivername,
+    required String? Date,
+    required String? servicedate,
+    required String? labourcost,
+    required String? spareparts,
+    required String? totalcost,
   }) {
     return Container(
       width: double.infinity,
@@ -215,6 +229,75 @@ class MasterCarpage extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 8.0),
+              Row(
+                children: [
+                  Text(
+                    "odometer           : $odometer",
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(color: Colors.blue),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 8.0),
+              Row(
+                children: [
+                  Text(
+                    "spareparts          : $spareparts",
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(color: Colors.blue),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 8.0),
+              Row(
+                children: [
+                  Text(
+                    "date         : $Date",
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(color: Colors.blue),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 8.0),
+              Row(
+                children: [
+                  Text(
+                    "servicedate          : $servicedate",
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(color: Colors.blue),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 8.0),
+              Row(
+                children: [
+                  Text(
+                    "labourcost          : $labourcost",
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(color: Colors.blue),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 8.0),
+              Row(
+                children: [
+                  Text(
+                    "odometer           : $odometer",
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(color: Colors.blue),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 8.0),
+              Row(
+                children: [
+                  Text(
+                    "totalcost           : $totalcost",
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(color: Colors.blue),
+                  ),
+                ],
+              ),
             ],
           ),
         ),
