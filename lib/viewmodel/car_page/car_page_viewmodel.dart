@@ -59,26 +59,53 @@ abstract class AllCarPageViewModelBase with Store {
     );
   }
 
-  // @action
-  // Future<void> preinspectionfunction() async {
-  //   carPageResponse = carPageResponse.copyWith(error: null, loading: true);
+  @observable
+  ApiResponse<List<CmnvehiclepageModel>> carPagefuelResponse =
+      ApiResponse<List<CmnvehiclepageModel>>();
 
-  //   final result = await MastercarService.preinspectionfunction();
-  //   print("gxcvqsh");
-  //   return result.fold(
-  //     (l) {
-  //       carPageResponse = carPageResponse.copyWith(
-  //         error: l,
-  //         loading: false,
-  //       );
-  //     },
-  //     (r) {
-  //       carPageResponse = carPageResponse.copyWith(
-  //         data: r,
-  //         error: null,
-  //         loading: false,
-  //       );
-  //     },
-  //   );
-  // }
+  @action
+  Future<void> fuelsearchfunction() async {
+    carPagefuelResponse =
+        carPagefuelResponse.copyWith(error: null, loading: true);
+
+    final result = await MastercarService.masterfuelsearchfunction();
+    return result.fold(
+      (l) {
+        carPagefuelResponse = carPagefuelResponse.copyWith(
+          error: l,
+          loading: false,
+        );
+      },
+      (r) {
+        carPagefuelResponse = carPagefuelResponse.copyWith(
+          data: r,
+          error: null,
+          loading: false,
+        );
+      },
+    );
+
+    // @action
+    // Future<void> preinspectionfunction() async {
+    //   carPageResponse = carPageResponse.copyWith(error: null, loading: true);
+
+    //   final result = await MastercarService.preinspectionfunction();
+    //   print("gxcvqsh");
+    //   return result.fold(
+    //     (l) {
+    //       carPageResponse = carPageResponse.copyWith(
+    //         error: l,
+    //         loading: false,
+    //       );
+    //     },
+    //     (r) {
+    //       carPageResponse = carPageResponse.copyWith(
+    //         data: r,
+    //         error: null,
+    //         loading: false,
+    //       );
+    //     },
+    //   );
+    // }
+  }
 }

@@ -1,4 +1,6 @@
+import 'package:enviro_mobile_application/viewmodel/car_page/car_page_viewmodel.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 
 Container common_search_widget() {
   return Container(
@@ -25,19 +27,24 @@ Container common_search_widget() {
                       hintText: 'Search By client',
                       hintStyle: const TextStyle(color: Colors.grey),
                       border: InputBorder.none,
-                      suffixIcon: GestureDetector(
-                        onTap: () {},
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: Colors.blue,
-                            borderRadius: BorderRadius.circular(5.0),
+                      suffixIcon: Observer(builder: (_) {
+                        return GestureDetector(
+                          onTap: () {
+                            vmcar.carPagefuelResponse;
+                            print(vmcar.carPagefuelResponse);
+                          },
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: Colors.blue,
+                              borderRadius: BorderRadius.circular(5.0),
+                            ),
+                            child: const Icon(
+                              Icons.search,
+                              color: Colors.white,
+                            ),
                           ),
-                          child: const Icon(
-                            Icons.search,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
+                        );
+                      }),
                     ),
                   ),
                 ),

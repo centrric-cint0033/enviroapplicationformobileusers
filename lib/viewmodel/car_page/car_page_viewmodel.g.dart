@@ -41,6 +41,22 @@ mixin _$CarPageViewModel on AllCarPageViewModelBase, Store {
     });
   }
 
+  late final _$carPagefuelResponseAtom = Atom(
+      name: 'AllCarPageViewModelBase.carPagefuelResponse', context: context);
+
+  @override
+  ApiResponse<List<CmnvehiclepageModel>> get carPagefuelResponse {
+    _$carPagefuelResponseAtom.reportRead();
+    return super.carPagefuelResponse;
+  }
+
+  @override
+  set carPagefuelResponse(ApiResponse<List<CmnvehiclepageModel>> value) {
+    _$carPagefuelResponseAtom.reportWrite(value, super.carPagefuelResponse, () {
+      super.carPagefuelResponse = value;
+    });
+  }
+
   late final _$mastercarfunctionAsyncAction = AsyncAction(
       'AllCarPageViewModelBase.mastercarfunction',
       context: context);
@@ -49,6 +65,16 @@ mixin _$CarPageViewModel on AllCarPageViewModelBase, Store {
   Future<void> mastercarfunction({CarActionType? drop}) {
     return _$mastercarfunctionAsyncAction
         .run(() => super.mastercarfunction(drop: drop));
+  }
+
+  late final _$fuelsearchfunctionAsyncAction = AsyncAction(
+      'AllCarPageViewModelBase.fuelsearchfunction',
+      context: context);
+
+  @override
+  Future<void> fuelsearchfunction() {
+    return _$fuelsearchfunctionAsyncAction
+        .run(() => super.fuelsearchfunction());
   }
 
   late final _$AllCarPageViewModelBaseActionController =
@@ -69,7 +95,8 @@ mixin _$CarPageViewModel on AllCarPageViewModelBase, Store {
   String toString() {
     return '''
 selectedcarstatus: ${selectedcarstatus},
-carPageResponse: ${carPageResponse}
+carPageResponse: ${carPageResponse},
+carPagefuelResponse: ${carPagefuelResponse}
     ''';
   }
 }
