@@ -61,4 +61,30 @@ abstract class AllTruckPageViewModelBase with Store {
       },
     );
   }
+
+  @observable
+  ApiResponse<List<CmnvehiclepageModel>> truckPagefuelResponse =
+      ApiResponse<List<CmnvehiclepageModel>>();
+
+  @action
+  Future<void> fueltrucksearchfunction() async {
+    truckPageResponse = truckPageResponse.copyWith(error: null, loading: true);
+
+    final result = await masterTruckPageService.masterfueltruckfunction();
+    return result.fold(
+      (l) {
+        truckPagefuelResponse = truckPagefuelResponse.copyWith(
+          error: l,
+          loading: false,
+        );
+      },
+      (r) {
+        truckPageResponse = truckPageResponse.copyWith(
+          data: r,
+          error: null,
+          loading: false,
+        );
+      },
+    );
+  }
 }

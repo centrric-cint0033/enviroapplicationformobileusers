@@ -6,4 +6,6 @@ import '../../../utilis/main_failure.dart';
 abstract class IAllMasterTruckPageService {
   Future<Either<MainFailure, List<CmnvehiclepageModel>>> mastertruckfunction(
       truckdrop);
+  Future<Either<MainFailure, List<CmnvehiclepageModel>>>
+      masterfueltruckfunction();
 }
