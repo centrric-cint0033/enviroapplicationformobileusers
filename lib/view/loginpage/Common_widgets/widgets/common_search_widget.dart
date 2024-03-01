@@ -1,4 +1,5 @@
 import 'package:enviro_mobile_application/viewmodel/car_page/car_page_viewmodel.dart';
+import 'package:enviro_mobile_application/viewmodel/semi_trailor_page/semi_trailor_page_viewmodel.dart';
 import 'package:enviro_mobile_application/viewmodel/truck_page/truck_page_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -26,9 +27,9 @@ Container common_search_widget() {
                   child: TextField(
                     onChanged: (value) {
                       if (value.isEmpty) {
-                        vmtruck.truckPageFunction();
+                        vmtrailor.trailorfunction();
                       } else {
-                        vmtruck.fueltrucksearchfunction();
+                        vmtrailor.semifueltrucksearchfunction();
                       }
                     },
                     controller: textController,

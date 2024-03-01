@@ -6,4 +6,6 @@ import '../../../utilis/main_failure.dart';
 abstract class IAllSemiTrailorPageService {
   Future<Either<MainFailure, List<CmnvehiclepageModel>>> pretrailorfunction(
       semitruckdrop);
+  Future<Either<MainFailure, List<CmnvehiclepageModel>>>
+      masterfuelsemitruckfunction();
 }

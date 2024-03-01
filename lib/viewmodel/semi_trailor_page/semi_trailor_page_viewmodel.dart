@@ -59,4 +59,31 @@ abstract class AllSemiTrailorPageViewModelBase with Store {
       },
     );
   }
+
+  @observable
+  ApiResponse<List<CmnvehiclepageModel>> semitruckPagefuelResponse =
+      ApiResponse<List<CmnvehiclepageModel>>();
+
+  @action
+  Future<void> semifueltrucksearchfunction() async {
+    semitrailorPageResponse =
+        semitrailorPageResponse.copyWith(error: null, loading: true);
+
+    final result = await SemiTrailorPageService.masterfuelsemitruckfunction();
+    return result.fold(
+      (l) {
+        semitruckPagefuelResponse = semitruckPagefuelResponse.copyWith(
+          error: l,
+          loading: false,
+        );
+      },
+      (r) {
+        semitrailorPageResponse = semitrailorPageResponse.copyWith(
+          data: r,
+          error: null,
+          loading: false,
+        );
+      },
+    );
+  }
 }

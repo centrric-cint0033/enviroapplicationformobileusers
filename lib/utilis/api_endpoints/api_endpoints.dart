@@ -30,4 +30,7 @@ class ApiEndPoints {
 
   static const endpointtruckfuelsearch =
       '/api/v1/vehicles/waste/truck/fuelExpense/search/vehicle/';
+
+  static const endpointsemitruckfuelsearch =
+      '/api/v1/vehicles/waste/fork-lift/fuelExpense/search/vehicle/';
 }
