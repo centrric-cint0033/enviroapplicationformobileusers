@@ -24,7 +24,11 @@ Container common_search_widget() {
                 Expanded(
                   child: TextField(
                     onChanged: (value) {
-                      vmcar.fuelsearchfunction();
+                      if (value.isEmpty) {
+                        vmcar.mastercarfunction();
+                      } else {
+                        vmcar.fuelsearchfunction();
+                      }
                     },
                     controller: textController,
                     style: const TextStyle(color: Colors.black),
