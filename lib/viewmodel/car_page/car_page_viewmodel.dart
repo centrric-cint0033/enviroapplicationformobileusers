@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:enviro_mobile_application/model/truck_page/res_model/truckpage_model.dart';
 import 'package:enviro_mobile_application/utilis/injection.dart';
 import 'package:enviro_mobile_application/view/service/master_car_page/i_all_master_carservice.dart';
@@ -65,8 +63,7 @@ abstract class AllCarPageViewModelBase with Store {
 
   @action
   Future<void> fuelsearchfunction() async {
-    carPagefuelResponse =
-        carPagefuelResponse.copyWith(error: null, loading: true);
+    carPageResponse = carPageResponse.copyWith(error: null, loading: true);
 
     final result = await MastercarService.masterfuelsearchfunction();
     return result.fold(
@@ -77,35 +74,35 @@ abstract class AllCarPageViewModelBase with Store {
         );
       },
       (r) {
-        carPagefuelResponse = carPagefuelResponse.copyWith(
+        carPageResponse = carPageResponse.copyWith(
           data: r,
           error: null,
           loading: false,
         );
       },
     );
-
-    // @action
-    // Future<void> preinspectionfunction() async {
-    //   carPageResponse = carPageResponse.copyWith(error: null, loading: true);
-
-    //   final result = await MastercarService.preinspectionfunction();
-    //   print("gxcvqsh");
-    //   return result.fold(
-    //     (l) {
-    //       carPageResponse = carPageResponse.copyWith(
-    //         error: l,
-    //         loading: false,
-    //       );
-    //     },
-    //     (r) {
-    //       carPageResponse = carPageResponse.copyWith(
-    //         data: r,
-    //         error: null,
-    //         loading: false,
-    //       );
-    //     },
-    //   );
-    // }
   }
+
+  // @action
+  // Future<void> preinspectionfunction() async {
+  //   carPageResponse = carPageResponse.copyWith(error: null, loading: true);
+
+  //   final result = await MastercarService.preinspectionfunction();
+  //   print("gxcvqsh");
+  //   return result.fold(
+  //     (l) {
+  //       carPageResponse = carPageResponse.copyWith(
+  //         error: l,
+  //         loading: false,
+  //       );
+  //     },
+  //     (r) {
+  //       carPageResponse = carPageResponse.copyWith(
+  //         data: r,
+  //         error: null,
+  //         loading: false,
+  //       );
+  //     },
+  //   );
+  // }
 }

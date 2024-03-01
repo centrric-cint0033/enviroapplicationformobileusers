@@ -5,8 +5,10 @@ import '../../../utilis/main_failure.dart';
 
 abstract class IAllMastercarService {
   // Future<Either<MainFailure, List<CmnvehiclepageModel>>> mastercarfunction();
-  Future<Either<MainFailure, List<CmnvehiclepageModel>>>
-      masterfuelsearchfunction();
+
   Future<Either<MainFailure, List<CmnvehiclepageModel>>> preinspectionfunction(
       drop);
+
+  Future<Either<MainFailure, List<CmnvehiclepageModel>>>
+      masterfuelsearchfunction();
 }

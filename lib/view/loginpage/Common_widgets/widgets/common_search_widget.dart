@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
 Container common_search_widget() {
+  TextEditingController textController = TextEditingController();
   return Container(
     padding: const EdgeInsets.only(right: 15.0, left: 15),
     child: Row(
@@ -22,6 +23,10 @@ Container common_search_widget() {
               children: [
                 Expanded(
                   child: TextField(
+                    onChanged: (value) {
+                      vmcar.fuelsearchfunction();
+                    },
+                    controller: textController,
                     style: const TextStyle(color: Colors.black),
                     decoration: InputDecoration(
                       hintText: 'Search By client',
@@ -29,10 +34,7 @@ Container common_search_widget() {
                       border: InputBorder.none,
                       suffixIcon: Observer(builder: (_) {
                         return GestureDetector(
-                          onTap: () {
-                            vmcar.carPagefuelResponse;
-                            print(vmcar.carPagefuelResponse);
-                          },
+                          onTap: () {},
                           child: Container(
                             decoration: BoxDecoration(
                               color: Colors.blue,
