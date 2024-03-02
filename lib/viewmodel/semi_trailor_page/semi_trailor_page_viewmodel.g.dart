@@ -44,6 +44,24 @@ mixin _$SemiTrailorPageViewModel on AllSemiTrailorPageViewModelBase, Store {
     });
   }
 
+  late final _$semitruckPagefuelResponseAtom = Atom(
+      name: 'AllSemiTrailorPageViewModelBase.semitruckPagefuelResponse',
+      context: context);
+
+  @override
+  ApiResponse<List<CmnvehiclepageModel>> get semitruckPagefuelResponse {
+    _$semitruckPagefuelResponseAtom.reportRead();
+    return super.semitruckPagefuelResponse;
+  }
+
+  @override
+  set semitruckPagefuelResponse(ApiResponse<List<CmnvehiclepageModel>> value) {
+    _$semitruckPagefuelResponseAtom
+        .reportWrite(value, super.semitruckPagefuelResponse, () {
+      super.semitruckPagefuelResponse = value;
+    });
+  }
+
   late final _$trailorfunctionAsyncAction = AsyncAction(
       'AllSemiTrailorPageViewModelBase.trailorfunction',
       context: context);
@@ -52,6 +70,16 @@ mixin _$SemiTrailorPageViewModel on AllSemiTrailorPageViewModelBase, Store {
   Future<void> trailorfunction({MasterTruckActionType? semitruckdrop}) {
     return _$trailorfunctionAsyncAction
         .run(() => super.trailorfunction(semitruckdrop: semitruckdrop));
+  }
+
+  late final _$semifueltrucksearchfunctionAsyncAction = AsyncAction(
+      'AllSemiTrailorPageViewModelBase.semifueltrucksearchfunction',
+      context: context);
+
+  @override
+  Future<void> semifueltrucksearchfunction() {
+    return _$semifueltrucksearchfunctionAsyncAction
+        .run(() => super.semifueltrucksearchfunction());
   }
 
   late final _$AllSemiTrailorPageViewModelBaseActionController =
@@ -74,7 +102,8 @@ mixin _$SemiTrailorPageViewModel on AllSemiTrailorPageViewModelBase, Store {
   String toString() {
     return '''
 selectedVehicle: ${selectedVehicle},
-semitrailorPageResponse: ${semitrailorPageResponse}
+semitrailorPageResponse: ${semitrailorPageResponse},
+semitruckPagefuelResponse: ${semitruckPagefuelResponse}
     ''';
   }
 }

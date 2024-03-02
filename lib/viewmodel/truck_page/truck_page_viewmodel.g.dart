@@ -43,6 +43,24 @@ mixin _$TruckPageViewModel on AllTruckPageViewModelBase, Store {
     });
   }
 
+  late final _$truckPagefuelResponseAtom = Atom(
+      name: 'AllTruckPageViewModelBase.truckPagefuelResponse',
+      context: context);
+
+  @override
+  ApiResponse<List<CmnvehiclepageModel>> get truckPagefuelResponse {
+    _$truckPagefuelResponseAtom.reportRead();
+    return super.truckPagefuelResponse;
+  }
+
+  @override
+  set truckPagefuelResponse(ApiResponse<List<CmnvehiclepageModel>> value) {
+    _$truckPagefuelResponseAtom.reportWrite(value, super.truckPagefuelResponse,
+        () {
+      super.truckPagefuelResponse = value;
+    });
+  }
+
   late final _$truckPageFunctionAsyncAction = AsyncAction(
       'AllTruckPageViewModelBase.truckPageFunction',
       context: context);
@@ -51,6 +69,16 @@ mixin _$TruckPageViewModel on AllTruckPageViewModelBase, Store {
   Future<void> truckPageFunction({ActionType? truckdrop}) {
     return _$truckPageFunctionAsyncAction
         .run(() => super.truckPageFunction(truckdrop: truckdrop));
+  }
+
+  late final _$fueltrucksearchfunctionAsyncAction = AsyncAction(
+      'AllTruckPageViewModelBase.fueltrucksearchfunction',
+      context: context);
+
+  @override
+  Future<void> fueltrucksearchfunction() {
+    return _$fueltrucksearchfunctionAsyncAction
+        .run(() => super.fueltrucksearchfunction());
   }
 
   late final _$AllTruckPageViewModelBaseActionController =
@@ -71,7 +99,8 @@ mixin _$TruckPageViewModel on AllTruckPageViewModelBase, Store {
   String toString() {
     return '''
 selectedTruckresponse: ${selectedTruckresponse},
-truckPageResponse: ${truckPageResponse}
+truckPageResponse: ${truckPageResponse},
+truckPagefuelResponse: ${truckPagefuelResponse}
     ''';
   }
 }

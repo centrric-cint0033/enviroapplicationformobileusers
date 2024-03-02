@@ -25,8 +25,10 @@ class ApiEndPoints {
       '/api/v1/vehicles/waste/car/pre-inspection/1/';
   static const endpointfuelcarcheckpage =
       '/api/v1/vehicles/waste/car/getFuelExpenses/1/';
-  static const endpointmasterfuelsearch =
-      '/api/v1/vehicles/waste/truck/fuelExpense/search/vehicle/';
+  static const endpointmaintancecarsearchcheckpage =
+      '/api/v1/vehicles/waste/car/maintenance/reports/search/';
+  static const endpointmasterfuelcarsearch =
+      '/api/v1/vehicles/waste/car/fuelExpense/search/vehicle/';
 
   static const endpointtruckfuelsearch =
       '/api/v1/vehicles/waste/truck/fuelExpense/search/vehicle/';

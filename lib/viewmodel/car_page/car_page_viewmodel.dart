@@ -2,6 +2,7 @@ import 'package:enviro_mobile_application/model/truck_page/res_model/truckpage_m
 import 'package:enviro_mobile_application/utilis/injection.dart';
 import 'package:enviro_mobile_application/view/service/master_car_page/i_all_master_carservice.dart';
 import 'package:enviro_mobile_application/view/service/master_car_page/master_car_service.dart';
+import 'package:enviro_mobile_application/view/service/master_truckservice/master_truckservice.dart';
 
 import 'package:injectable/injectable.dart';
 import 'package:mobx/mobx.dart';
@@ -62,10 +63,10 @@ abstract class AllCarPageViewModelBase with Store {
       ApiResponse<List<CmnvehiclepageModel>>();
 
   @action
-  Future<void> fuelsearchfunction() async {
+  Future<void> fuelsearchfunction({ActionType? searchdrop}) async {
     carPageResponse = carPageResponse.copyWith(error: null, loading: true);
 
-    final result = await MastercarService.masterfuelsearchfunction();
+    final result = await MastercarService.masterfuelsearchfunction(searchdrop);
     return result.fold(
       (l) {
         carPagefuelResponse = carPagefuelResponse.copyWith(

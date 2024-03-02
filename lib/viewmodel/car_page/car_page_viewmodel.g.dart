@@ -72,9 +72,9 @@ mixin _$CarPageViewModel on AllCarPageViewModelBase, Store {
       context: context);
 
   @override
-  Future<void> fuelsearchfunction() {
+  Future<void> fuelsearchfunction({ActionType? searchdrop}) {
     return _$fuelsearchfunctionAsyncAction
-        .run(() => super.fuelsearchfunction());
+        .run(() => super.fuelsearchfunction(searchdrop: searchdrop));
   }
 
   late final _$AllCarPageViewModelBaseActionController =

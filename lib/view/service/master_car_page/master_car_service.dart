@@ -95,9 +95,25 @@ class MastercarService implements IAllMastercarService {
 
   @override
   Future<Either<MainFailure, List<CmnvehiclepageModel>>>
-      masterfuelsearchfunction() async {
-    MultipartRequest request = MultipartRequest(
-        "POST", Uri.parse("$baseUrl${ApiEndPoints.endpointmasterfuelsearch}"));
+      masterfuelsearchfunction(searchdrop) async {
+    String apiUrl;
+    switch (searchdrop) {
+      case CarActionType.Preinspectioncheck:
+        apiUrl = ApiEndPoints.endpointmasterfuelcarsearch;
+        break;
+      case CarActionType.MaintenanceCheck:
+        apiUrl = ApiEndPoints.endpointmaintancecarsearchcheckpage;
+        break;
+      case CarActionType.fuelexpence:
+        apiUrl = ApiEndPoints.endpointmasterfuelcarsearch; // Update endpoint
+        break;
+      default:
+        apiUrl = ApiEndPoints.endpointmasterfuelcarsearch;
+        break;
+    }
+
+    MultipartRequest request =
+        MultipartRequest("POST", Uri.parse("$baseUrl$apiUrl"));
 
     request.fields['registration'] = 'e';
 
