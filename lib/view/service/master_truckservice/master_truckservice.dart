@@ -7,6 +7,7 @@ import 'package:enviro_mobile_application/utilis/api_endpoints/api_endpoints.dar
 import 'package:enviro_mobile_application/utilis/httpservice.dart';
 import 'package:enviro_mobile_application/utilis/injection.dart';
 import 'package:enviro_mobile_application/utilis/main_failure.dart';
+import 'package:enviro_mobile_application/view/service/master_car_page/master_car_service.dart';
 import 'package:enviro_mobile_application/view/service/master_truckservice/i_all_master_trucksevice.dart';
 import 'package:http/http.dart';
 import 'package:injectable/injectable.dart';
@@ -66,9 +67,32 @@ class MasterTruckPageService implements IAllMasterTruckPageService {
 
   @override
   Future<Either<MainFailure, List<CmnvehiclepageModel>>>
-      masterfueltruckfunction() async {
-    MultipartRequest request = MultipartRequest(
-        "POST", Uri.parse("$baseUrl${ApiEndPoints.endpointtruckfuelsearch}"));
+      masterfueltruckfunction(trucksearchdrop) async {
+    String apiUrl;
+    print('awww$trucksearchdrop');
+    switch (trucksearchdrop) {
+      case CarActionType.vehiclelist:
+        apiUrl = ApiEndPoints.endpointvehiclecarlistsearch;
+        break;
+      case CarActionType.Preinspectioncheck:
+        apiUrl = ApiEndPoints.endpointpreinspectioncarsearch;
+        break;
+      case CarActionType.MaintenanceCheck:
+        apiUrl = ApiEndPoints.endpointmaintancecarsearchcheckpage;
+        MultipartRequest request =
+            MultipartRequest("POST", Uri.parse("$baseUrl$apiUrl"));
+        request.fields['key'] = 'e';
+        break;
+      case CarActionType.fuelexpence:
+        apiUrl = ApiEndPoints.endpointmasterfuelcarsearch;
+        break;
+      default:
+        apiUrl = ApiEndPoints.endpointmasterfuelcarsearch;
+        break;
+    }
+
+    MultipartRequest request =
+        MultipartRequest("POST", Uri.parse("$baseUrl$apiUrl"));
 
     request.fields['registration'] = 'e';
 

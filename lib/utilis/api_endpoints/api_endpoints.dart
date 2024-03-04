@@ -37,4 +37,11 @@ class ApiEndPoints {
       '/api/v1/vehicles/waste/fork-lift/fuelExpense/search/vehicle/';
   static const endpointpreinspectioncarsearch =
       '/api/v1/vehicles/waste/truck/pre-inspection/filter/vehicle/';
+  static const endpointvehiclecarlistsearch =
+      '/api/v1/vehicles/waste/car/search/';
+  static const endpointvehiclesemitrucklistsearch =
+      '/api/v1/vehicles/waste/fork-lift/search/';
+
+  static const endpointpreinspectionsemitrucksearch =
+      '/api/v1/vehicles/waste/fork-lift/pre-inspection/filter/vehicle/';
 }

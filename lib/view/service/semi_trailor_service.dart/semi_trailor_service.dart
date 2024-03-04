@@ -8,6 +8,7 @@ import 'package:enviro_mobile_application/utilis/api_endpoints/api_endpoints.dar
 import 'package:enviro_mobile_application/utilis/httpservice.dart';
 import 'package:enviro_mobile_application/utilis/injection.dart';
 import 'package:enviro_mobile_application/utilis/main_failure.dart';
+import 'package:enviro_mobile_application/view/service/master_car_page/master_car_service.dart';
 import 'package:enviro_mobile_application/view/service/semi_trailor_service.dart/i_all_semi_trailor_pageservice.dart';
 import 'package:http/http.dart';
 
@@ -68,15 +69,37 @@ class SemiTrailorPageService implements IAllSemiTrailorPageService {
 
   @override
   Future<Either<MainFailure, List<CmnvehiclepageModel>>>
-      masterfuelsemitruckfunction() async {
-    MultipartRequest request = MultipartRequest("POST",
-        Uri.parse("$baseUrl${ApiEndPoints.endpointsemitruckfuelsearch}"));
+      masterfuelsemitruckfunction(searchsemidrop) async {
+    String apiUrl;
+    print('awww$searchsemidrop');
+    switch (searchsemidrop) {
+      case CarActionType.vehiclelist:
+        apiUrl = ApiEndPoints.endpointvehiclesemitrucklistsearch;
+        break;
+      case CarActionType.Preinspectioncheck:
+        apiUrl = ApiEndPoints.endpointpreinspectionsemitrucksearch;
+        break;
+      case CarActionType.MaintenanceCheck:
+        apiUrl = ApiEndPoints.endpointmaintancesemitruckcheckpage;
+        MultipartRequest request =
+            MultipartRequest("POST", Uri.parse("$baseUrl$apiUrl"));
+        request.fields['key'] = 'e';
+        break;
+      case CarActionType.fuelexpence:
+        apiUrl = ApiEndPoints.endpointmasterfuelcarsearch;
+        break;
+      default:
+        apiUrl = ApiEndPoints.endpointmasterfuelcarsearch;
+        break;
+    }
+
+    MultipartRequest request =
+        MultipartRequest("POST", Uri.parse("$baseUrl$apiUrl"));
 
     request.fields['registration'] = 'e';
 
     var response =
         await getIt<HttpService>().multipartRequest(request: request);
-
     return response.fold(
       (l) {
         // Show Error

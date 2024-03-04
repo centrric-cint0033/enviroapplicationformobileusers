@@ -1,5 +1,6 @@
 import 'package:enviro_mobile_application/model/truck_page/res_model/truckpage_model.dart';
 import 'package:enviro_mobile_application/utilis/injection.dart';
+import 'package:enviro_mobile_application/view/service/master_truckservice/master_truckservice.dart';
 import 'package:enviro_mobile_application/view/service/semi_trailor_service.dart/i_all_semi_trailor_pageservice.dart';
 import 'package:enviro_mobile_application/view/service/semi_trailor_service.dart/semi_trailor_service.dart';
 
@@ -65,11 +66,12 @@ abstract class AllSemiTrailorPageViewModelBase with Store {
       ApiResponse<List<CmnvehiclepageModel>>();
 
   @action
-  Future<void> semifueltrucksearchfunction() async {
+  Future<void> semifueltrucksearchfunction({ActionType? searchsemidrop}) async {
     semitrailorPageResponse =
         semitrailorPageResponse.copyWith(error: null, loading: true);
 
-    final result = await SemiTrailorPageService.masterfuelsemitruckfunction();
+    final result = await SemiTrailorPageService.masterfuelsemitruckfunction(
+        searchsemidrop);
     return result.fold(
       (l) {
         semitruckPagefuelResponse = semitruckPagefuelResponse.copyWith(

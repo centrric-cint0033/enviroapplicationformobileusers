@@ -77,9 +77,9 @@ mixin _$SemiTrailorPageViewModel on AllSemiTrailorPageViewModelBase, Store {
       context: context);
 
   @override
-  Future<void> semifueltrucksearchfunction() {
-    return _$semifueltrucksearchfunctionAsyncAction
-        .run(() => super.semifueltrucksearchfunction());
+  Future<void> semifueltrucksearchfunction({ActionType? searchsemidrop}) {
+    return _$semifueltrucksearchfunctionAsyncAction.run(() =>
+        super.semifueltrucksearchfunction(searchsemidrop: searchsemidrop));
   }
 
   late final _$AllSemiTrailorPageViewModelBaseActionController =

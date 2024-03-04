@@ -67,10 +67,12 @@ abstract class AllTruckPageViewModelBase with Store {
       ApiResponse<List<CmnvehiclepageModel>>();
 
   @action
-  Future<void> fueltrucksearchfunction() async {
+  Future<void> fueltrucksearchfunction(
+      {ActionType? searchtrucksemidrop}) async {
     truckPageResponse = truckPageResponse.copyWith(error: null, loading: true);
 
-    final result = await masterTruckPageService.masterfueltruckfunction();
+    final result = await masterTruckPageService
+        .masterfueltruckfunction(searchtrucksemidrop);
     return result.fold(
       (l) {
         truckPagefuelResponse = truckPagefuelResponse.copyWith(

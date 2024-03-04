@@ -97,7 +97,11 @@ class MastercarService implements IAllMastercarService {
   Future<Either<MainFailure, List<CmnvehiclepageModel>>>
       masterfuelsearchfunction(searchdrop) async {
     String apiUrl;
+    print('awww$searchdrop');
     switch (searchdrop) {
+      case CarActionType.vehiclelist:
+        apiUrl = ApiEndPoints.endpointvehiclecarlistsearch;
+        break;
       case CarActionType.Preinspectioncheck:
         apiUrl = ApiEndPoints.endpointpreinspectioncarsearch;
         break;
@@ -108,7 +112,7 @@ class MastercarService implements IAllMastercarService {
         request.fields['key'] = 'e';
         break;
       case CarActionType.fuelexpence:
-        apiUrl = ApiEndPoints.endpointmasterfuelcarsearch; // Update endpoint
+        apiUrl = ApiEndPoints.endpointmasterfuelcarsearch;
         break;
       default:
         apiUrl = ApiEndPoints.endpointmasterfuelcarsearch;

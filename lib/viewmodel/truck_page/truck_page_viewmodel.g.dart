@@ -76,9 +76,9 @@ mixin _$TruckPageViewModel on AllTruckPageViewModelBase, Store {
       context: context);
 
   @override
-  Future<void> fueltrucksearchfunction() {
-    return _$fueltrucksearchfunctionAsyncAction
-        .run(() => super.fueltrucksearchfunction());
+  Future<void> fueltrucksearchfunction({ActionType? searchtrucksemidrop}) {
+    return _$fueltrucksearchfunctionAsyncAction.run(() => super
+        .fueltrucksearchfunction(searchtrucksemidrop: searchtrucksemidrop));
   }
 
   late final _$AllTruckPageViewModelBaseActionController =
