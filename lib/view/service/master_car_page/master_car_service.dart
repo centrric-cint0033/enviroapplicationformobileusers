@@ -99,10 +99,13 @@ class MastercarService implements IAllMastercarService {
     String apiUrl;
     switch (searchdrop) {
       case CarActionType.Preinspectioncheck:
-        apiUrl = ApiEndPoints.endpointmasterfuelcarsearch;
+        apiUrl = ApiEndPoints.endpointpreinspectioncarsearch;
         break;
       case CarActionType.MaintenanceCheck:
         apiUrl = ApiEndPoints.endpointmaintancecarsearchcheckpage;
+        MultipartRequest request =
+            MultipartRequest("POST", Uri.parse("$baseUrl$apiUrl"));
+        request.fields['key'] = 'e';
         break;
       case CarActionType.fuelexpence:
         apiUrl = ApiEndPoints.endpointmasterfuelcarsearch; // Update endpoint
