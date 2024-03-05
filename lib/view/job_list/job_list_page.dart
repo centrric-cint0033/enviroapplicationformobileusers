@@ -43,8 +43,8 @@ class JobListPage extends StatelessWidget {
       child: Card(
         margin: const EdgeInsets.only(left: 16.0, right: 16),
         shape: RoundedRectangleBorder(
-          side: BorderSide(
-            color: const Color(0XFF949494),
+          side: const BorderSide(
+            color: Color(0XFF949494),
           ),
           borderRadius: BorderRadius.circular(8.0),
         ),

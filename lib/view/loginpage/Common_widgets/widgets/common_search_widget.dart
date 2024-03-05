@@ -25,13 +25,13 @@ Container common_search_widget() {
               children: [
                 Expanded(
                   child: TextField(
-                    onChanged: (value) {
-                      if (value.isEmpty) {
-                        vmtrailor.trailorfunction();
-                      } else {
-                        vmtrailor.semifueltrucksearchfunction();
-                      }
-                    },
+                    // onChanged: (value) {
+                    //   if (value.isEmpty) {
+                    //     vmtrailor.trailorfunction();
+                    //   } else {
+                    //     vmtrailor.semifueltrucksearchfunction();
+                    //   }
+                    // },
                     controller: textController,
                     style: const TextStyle(color: Colors.black),
                     decoration: InputDecoration(

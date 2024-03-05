@@ -3,6 +3,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:enviro_mobile_application/view/loginpage/Common_widgets/widgets/common_search_widget.dart';
 import 'package:enviro_mobile_application/view/service/master_truckservice/master_truckservice.dart';
 import 'package:enviro_mobile_application/viewmodel/truck_page/truck_page_viewmodel.dart';
+import 'package:mobx/mobx.dart';
 
 TextEditingController textController = TextEditingController();
 
@@ -114,39 +115,45 @@ class MasterTruckPage extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Expanded(
-                              child: TextField(
-                                onChanged: (value) {
-                                  if (value.isEmpty) {
-                                    vmtruck.truckPageFunction();
-                                  } else {
-                                    vmtruck.fueltrucksearchfunction();
-                                  }
-                                },
-                                controller: textController,
-                                style: const TextStyle(color: Colors.black),
-                                decoration: InputDecoration(
-                                  hintText: 'Search By client',
-                                  hintStyle:
-                                      const TextStyle(color: Colors.grey),
-                                  border: InputBorder.none,
-                                  suffixIcon: Observer(builder: (_) {
-                                    return GestureDetector(
-                                      onTap: () {},
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                          color: Colors.blue,
-                                          borderRadius:
-                                              BorderRadius.circular(5.0),
+                              child: Observer(builder: (_) {
+                                return TextField(
+                                  onChanged: (value) {
+                                    ActionType? actionType;
+                                    if (value.isEmpty) {
+                                      vmtruck.truckPageFunction();
+                                    } else {
+                                      vmtruck.fueltrucksearchfunction(
+                                        value: value,
+                                        searchtrucksemidrop: actionType,
+                                      );
+                                    }
+                                  },
+                                  controller: textController,
+                                  style: const TextStyle(color: Colors.black),
+                                  decoration: InputDecoration(
+                                    hintText: 'Search By client',
+                                    hintStyle:
+                                        const TextStyle(color: Colors.grey),
+                                    border: InputBorder.none,
+                                    suffixIcon: Observer(builder: (_) {
+                                      return GestureDetector(
+                                        onTap: () {},
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                            color: Colors.blue,
+                                            borderRadius:
+                                                BorderRadius.circular(5.0),
+                                          ),
+                                          child: const Icon(
+                                            Icons.search,
+                                            color: Colors.white,
+                                          ),
                                         ),
-                                        child: const Icon(
-                                          Icons.search,
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                    );
-                                  }),
-                                ),
-                              ),
+                                      );
+                                    }),
+                                  ),
+                                );
+                              }),
                             ),
                           ],
                         ),

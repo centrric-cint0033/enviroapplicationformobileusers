@@ -41,7 +41,7 @@ class MasterTruckPageService implements IAllMasterTruckPageService {
         break;
 
       default:
-        apiUrl = ApiEndPoints.endpointcarpage;
+        apiUrl = ApiEndPoints.endpointtruckpage;
     }
 
     var response = await getIt<HttpService>().request(
@@ -57,7 +57,6 @@ class MasterTruckPageService implements IAllMasterTruckPageService {
       },
       (res) async {
         var data = jsonDecode(res.body) as List;
-
         List<CmnvehiclepageModel> vehicles =
             data.map((e) => CmnvehiclepageModel.fromJson(e)).toList();
         return Right(vehicles);
@@ -67,27 +66,27 @@ class MasterTruckPageService implements IAllMasterTruckPageService {
 
   @override
   Future<Either<MainFailure, List<CmnvehiclepageModel>>>
-      masterfueltruckfunction(trucksearchdrop) async {
+      masterfueltruckfunction(trucksearchdrop, value) async {
     String apiUrl;
     print('awww$trucksearchdrop');
     switch (trucksearchdrop) {
       case CarActionType.vehiclelist:
-        apiUrl = ApiEndPoints.endpointvehiclecarlistsearch;
+        apiUrl = ApiEndPoints.endpointtruckpage;
         break;
       case CarActionType.Preinspectioncheck:
-        apiUrl = ApiEndPoints.endpointpreinspectioncarsearch;
+        apiUrl = ApiEndPoints.endpointpreinspectiontrucksearch;
         break;
       case CarActionType.MaintenanceCheck:
-        apiUrl = ApiEndPoints.endpointmaintancecarsearchcheckpage;
+        apiUrl = ApiEndPoints.endpointmaintancetrucksearchcheckpage;
         MultipartRequest request =
             MultipartRequest("POST", Uri.parse("$baseUrl$apiUrl"));
         request.fields['key'] = 'e';
         break;
       case CarActionType.fuelexpence:
-        apiUrl = ApiEndPoints.endpointmasterfuelcarsearch;
+        apiUrl = ApiEndPoints.endpointtruckfuelsearch;
         break;
       default:
-        apiUrl = ApiEndPoints.endpointmasterfuelcarsearch;
+        apiUrl = ApiEndPoints.endpointtruckfuelsearch;
         break;
     }
 
@@ -110,6 +109,7 @@ class MasterTruckPageService implements IAllMasterTruckPageService {
 
         List<CmnvehiclepageModel> fuelcarsearch =
             data.map((e) => CmnvehiclepageModel.fromJson(e)).toList();
+        print('OFF$fuelcarsearch');
         return Right(fuelcarsearch);
       },
     );

@@ -23,7 +23,7 @@ Padding notification_page() {
                   const Color.fromARGB(255, 188, 209, 228),
                 ),
               ),
-              child: Text(
+              child: const Text(
                 'Add New +',
                 style: TextStyle(color: Colors.blue),
               ),

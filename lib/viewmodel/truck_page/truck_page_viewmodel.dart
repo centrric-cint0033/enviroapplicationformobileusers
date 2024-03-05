@@ -68,11 +68,13 @@ abstract class AllTruckPageViewModelBase with Store {
 
   @action
   Future<void> fueltrucksearchfunction(
-      {ActionType? searchtrucksemidrop}) async {
-    truckPageResponse = truckPageResponse.copyWith(error: null, loading: true);
+      {value, ActionType? searchtrucksemidrop}) async {
+    print(value);
+    truckPagefuelResponse =
+        truckPagefuelResponse.copyWith(error: null, loading: true);
 
-    final result = await masterTruckPageService
-        .masterfueltruckfunction(searchtrucksemidrop);
+    final result = await masterTruckPageService.masterfueltruckfunction(
+        searchtrucksemidrop, value);
     return result.fold(
       (l) {
         truckPagefuelResponse = truckPagefuelResponse.copyWith(
@@ -81,7 +83,7 @@ abstract class AllTruckPageViewModelBase with Store {
         );
       },
       (r) {
-        truckPageResponse = truckPageResponse.copyWith(
+        truckPagefuelResponse = truckPagefuelResponse.copyWith(
           data: r,
           error: null,
           loading: false,

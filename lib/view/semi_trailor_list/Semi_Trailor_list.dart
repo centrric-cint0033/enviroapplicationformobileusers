@@ -283,6 +283,16 @@ class SemiTrailorPage extends StatelessWidget {
               Row(
                 children: [
                   Text(
+                    "drivername           : $drivername",
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(color: Colors.blue),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 8.0),
+              Row(
+                children: [
+                  Text(
                     "spareparts          : $spareparts",
                     overflow: TextOverflow.ellipsis,
                     style: const TextStyle(color: Colors.blue),
