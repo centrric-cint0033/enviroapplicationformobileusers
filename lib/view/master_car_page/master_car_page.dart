@@ -374,26 +374,52 @@ class MasterCarpage extends StatelessWidget {
                 ),
                 if (vmcar.status == CarActionType.fuelexpence)
                   Observer(builder: (_) {
-                    return SizedBox(
-                      height: 26,
-                      width: 87,
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          side: const BorderSide(
-                            color: Color(0XFF949494),
+                    return Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        SizedBox(
+                          height: 26,
+                          width: 88,
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              side: const BorderSide(
+                                color: Color(0XFF949494),
+                              ),
+                            ),
+                            onPressed: () {
+                              print('vgjhsdvbsjhdb');
+                            },
+                            child: const Padding(
+                              padding: EdgeInsets.only(top: 3.0, bottom: 3.0),
+                              child: Text(
+                                'Edit',
+                                style: TextStyle(color: Colors.black54),
+                              ),
+                            ),
                           ),
                         ),
-                        onPressed: () {
-                          print('vgjhsdvbsjhdb');
-                        },
-                        child: const Padding(
-                          padding: EdgeInsets.only(top: 3.0, bottom: 3.0),
-                          child: Text(
-                            'Folders',
-                            style: TextStyle(color: Colors.black54),
+                        SizedBox(
+                          height: 26,
+                          // width: 87,
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              side: const BorderSide(
+                                color: Color(0XFF949494),
+                              ),
+                            ),
+                            onPressed: () {
+                              print('vgjhsdvbsjhdb');
+                            },
+                            child: const Padding(
+                              padding: EdgeInsets.only(top: 3.0, bottom: 3.0),
+                              child: Text(
+                                'Delete',
+                                style: TextStyle(color: Colors.black54),
+                              ),
+                            ),
                           ),
                         ),
-                      ),
+                      ],
                     );
                   }),
               ],
