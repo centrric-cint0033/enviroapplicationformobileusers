@@ -67,6 +67,7 @@ class MastercarService implements IAllMastercarService {
         break;
       case CarActionType.fuelexpence:
         apiUrl = ApiEndPoints.endpointfuelcarcheckpage;
+
         break;
 
       default:

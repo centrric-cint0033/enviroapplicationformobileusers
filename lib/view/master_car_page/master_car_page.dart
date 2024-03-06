@@ -1,5 +1,6 @@
 import 'package:enviro_mobile_application/view/loginpage/Common_widgets/widgets/cmn_additional_card.dart';
 import 'package:enviro_mobile_application/view/service/master_car_page/master_car_service.dart';
+import 'package:enviro_mobile_application/view/service/master_truckservice/master_truckservice.dart';
 import 'package:enviro_mobile_application/viewmodel/car_page/car_page_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:enviro_mobile_application/view/loginpage/Common_widgets/widgets/common_search_widget.dart';
@@ -74,6 +75,7 @@ class MasterCarpage extends StatelessWidget {
                                           case 'Fuel Expense':
                                             actionType =
                                                 CarActionType.fuelexpence;
+
                                             break;
                                         }
                                         if (actionType != null) {
@@ -174,7 +176,7 @@ class MasterCarpage extends StatelessWidget {
                           registrationno: data?.registration ?? "",
                           RegoDue: data?.editedDateTime ?? "",
                           Type: data?.types ?? "",
-                          year: data?.year ?? "",
+                          year: data?.year,
                           odometer: data?.odometer,
                           drivername: data?.driver_name,
                           Date: data?.date_time ?? "",
@@ -196,10 +198,10 @@ class MasterCarpage extends StatelessWidget {
   }
 
   Widget _buildJobCard({
-    required dynamic registrationno,
-    required dynamic RegoDue,
+    required String registrationno,
+    required String RegoDue,
     required String Type,
-    required dynamic year,
+    required int? year,
     required int? odometer,
     required int? drivername,
     required String? Date,
@@ -221,156 +223,182 @@ class MasterCarpage extends StatelessWidget {
         color: Colors.white,
         child: Padding(
           padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "Registration no : $registrationno",
-                    overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(color: Colors.blue),
-                  ),
-                  SizedBox(
-                    height: 26,
-                    width: 87,
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        side: const BorderSide(
-                          color: Color(0XFF949494),
-                        ),
-                      ),
-                      onPressed: () {
-                        print('vgjhsdvbsjhdb');
-                      },
-                      child: const Padding(
-                        padding: EdgeInsets.only(top: 3.0, bottom: 3.0),
-                        child: Text(
-                          'Folders',
-                          style: TextStyle(color: Colors.black54),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(
-                height: 8.0,
-              ),
-              Row(
-                children: [
-                  Text(
-                    "RegoDue            : $RegoDue",
-                    overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(color: Colors.blue),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 8.0),
-              Row(
-                children: [
-                  Flexible(
-                    child: Text(
-                      "Type                   : $Type",
+          child: Observer(builder: (_) {
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Registration no : $registrationno",
                       overflow: TextOverflow.ellipsis,
                       style: const TextStyle(color: Colors.blue),
                     ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 8.0),
-              Row(
-                children: [
-                  Text(
-                    "Year                   : $year",
-                    overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(color: Colors.blue),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 8.0),
-              Row(
-                children: [
-                  Text(
-                    "odometer           : $odometer",
-                    overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(color: Colors.blue),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 8.0),
-              Row(
-                children: [
-                  Text(
-                    "drivername           : $drivername",
-                    overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(color: Colors.blue),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 8.0),
-              Row(
-                children: [
-                  Text(
-                    "spareparts          : $spareparts",
-                    overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(color: Colors.blue),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 8.0),
-              Row(
-                children: [
-                  Text(
-                    "date         : $Date",
-                    overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(color: Colors.blue),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 8.0),
-              Row(
-                children: [
-                  Text(
-                    "servicedate          : $servicedate",
-                    overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(color: Colors.blue),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 8.0),
-              Row(
-                children: [
-                  Text(
-                    "labourcost          : $labourcost",
-                    overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(color: Colors.blue),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 8.0),
-              Row(
-                children: [
-                  Text(
-                    "odometer           : $odometer",
-                    overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(color: Colors.blue),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 8.0),
-              Row(
-                children: [
-                  Text(
-                    "totalcost           : $totalcost",
-                    overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(color: Colors.blue),
-                  ),
-                ],
-              ),
-            ],
-          ),
+                    SizedBox(
+                      height: 26,
+                      width: 87,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          side: const BorderSide(
+                            color: Color(0XFF949494),
+                          ),
+                        ),
+                        onPressed: () {
+                          print('vgjhsdvbsjhdb');
+                        },
+                        child: const Padding(
+                          padding: EdgeInsets.only(top: 3.0, bottom: 3.0),
+                          child: Text(
+                            'Folders',
+                            style: TextStyle(color: Colors.black54),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: 8.0,
+                ),
+                Row(
+                  children: [
+                    Text(
+                      "RegoDue            : $RegoDue",
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(color: Colors.blue),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 8.0),
+                Row(
+                  children: [
+                    Flexible(
+                      child: Text(
+                        "Type                   : $Type",
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(color: Colors.blue),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 8.0),
+                Row(
+                  children: [
+                    Text(
+                      "Year                   : $year",
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(color: Colors.blue),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 8.0),
+                Row(
+                  children: [
+                    Text(
+                      "odometer           : $odometer",
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(color: Colors.blue),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 8.0),
+                Row(
+                  children: [
+                    Text(
+                      "drivername           : $drivername",
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(color: Colors.blue),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 8.0),
+                Row(
+                  children: [
+                    Text(
+                      "spareparts          : $spareparts",
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(color: Colors.blue),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 8.0),
+                Row(
+                  children: [
+                    Text(
+                      "date         : $Date",
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(color: Colors.blue),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 8.0),
+                Row(
+                  children: [
+                    Text(
+                      "servicedate          : $servicedate",
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(color: Colors.blue),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 8.0),
+                Row(
+                  children: [
+                    Text(
+                      "labourcost          : $labourcost",
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(color: Colors.blue),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 8.0),
+                Row(
+                  children: [
+                    Text(
+                      "odometer           : $odometer",
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(color: Colors.blue),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 8.0),
+                Row(
+                  children: [
+                    Text(
+                      "totalcost           : $totalcost",
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(color: Colors.blue),
+                    ),
+                  ],
+                ),
+                if (vmcar.status == CarActionType.fuelexpence)
+                  Observer(builder: (_) {
+                    return SizedBox(
+                      height: 26,
+                      width: 87,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          side: const BorderSide(
+                            color: Color(0XFF949494),
+                          ),
+                        ),
+                        onPressed: () {
+                          print('vgjhsdvbsjhdb');
+                        },
+                        child: const Padding(
+                          padding: EdgeInsets.only(top: 3.0, bottom: 3.0),
+                          child: Text(
+                            'Folders',
+                            style: TextStyle(color: Colors.black54),
+                          ),
+                        ),
+                      ),
+                    );
+                  }),
+              ],
+            );
+          }),
         ),
       ),
     );

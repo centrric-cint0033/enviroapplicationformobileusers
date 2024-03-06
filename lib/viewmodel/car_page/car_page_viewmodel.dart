@@ -25,6 +25,9 @@ abstract class AllCarPageViewModelBase with Store {
   AllCarPageViewModelBase(this.MastercarService);
 
   @observable
+  CarActionType? status;
+
+  @observable
   String? selectedcarstatus;
 
   @action
@@ -39,7 +42,7 @@ abstract class AllCarPageViewModelBase with Store {
   @action
   Future<void> mastercarfunction({CarActionType? drop}) async {
     carPageResponse = carPageResponse.copyWith(error: null, loading: true);
-
+    status = drop;
     final result = await MastercarService.preinspectionfunction(drop);
     return result.fold(
       (l) {
