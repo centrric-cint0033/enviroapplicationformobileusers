@@ -24,6 +24,8 @@ abstract class AllSemiTrailorPageViewModelBase with Store {
   final IAllSemiTrailorPageService SemiTrailorPageService;
 
   AllSemiTrailorPageViewModelBase(this.SemiTrailorPageService);
+  @observable
+  MasterTruckActionType? status;
 
   @observable
   String? selectedVehicle;
@@ -41,7 +43,7 @@ abstract class AllSemiTrailorPageViewModelBase with Store {
   Future<void> trailorfunction({MasterTruckActionType? semitruckdrop}) async {
     semitrailorPageResponse =
         semitrailorPageResponse.copyWith(error: null, loading: true);
-
+    status = semitruckdrop;
     final result =
         await SemiTrailorPageService.pretrailorfunction(semitruckdrop);
     return result.fold(

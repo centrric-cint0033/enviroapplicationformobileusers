@@ -26,6 +26,8 @@ abstract class AllTruckPageViewModelBase with Store {
   final IAllMasterTruckPageService masterTruckPageService;
 
   AllTruckPageViewModelBase(this.masterTruckPageService);
+  @observable
+  ActionType? status;
 
   @observable
   String? selectedTruckresponse;
@@ -42,7 +44,7 @@ abstract class AllTruckPageViewModelBase with Store {
   @action
   Future<void> truckPageFunction({ActionType? truckdrop}) async {
     truckPageResponse = truckPageResponse.copyWith(error: null, loading: true);
-
+    status = truckdrop;
     final result = await masterTruckPageService.mastertruckfunction(truckdrop);
     print(result.toString() + "azee");
     return result.fold(

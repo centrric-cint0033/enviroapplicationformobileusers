@@ -1,11 +1,7 @@
-import 'package:enviro_mobile_application/view/loginpage/Common_widgets/widgets/cmn_additional_card.dart';
 import 'package:enviro_mobile_application/view/service/master_car_page/master_car_service.dart';
-import 'package:enviro_mobile_application/view/service/master_truckservice/master_truckservice.dart';
 import 'package:enviro_mobile_application/viewmodel/car_page/car_page_viewmodel.dart';
 import 'package:flutter/material.dart';
-import 'package:enviro_mobile_application/view/loginpage/Common_widgets/widgets/common_search_widget.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:mobx/mobx.dart';
 
 TextEditingController textController = TextEditingController();
 
@@ -210,7 +206,7 @@ class MasterCarpage extends StatelessWidget {
     required String? spareparts,
     required String? totalcost,
   }) {
-    return Container(
+    return SizedBox(
       width: double.infinity,
       child: Card(
         margin: const EdgeInsets.only(left: 16.0, right: 16),

@@ -11,11 +11,10 @@ import 'package:enviro_mobile_application/utilis/main_failure.dart';
 import 'package:enviro_mobile_application/view/master_car_page/master_car_page.dart';
 import 'package:enviro_mobile_application/view/master_truck_page/master_truck_page.dart';
 import 'package:enviro_mobile_application/view/service/master_car_page/i_all_master_carservice.dart';
-import 'package:flutter/material.dart';
+
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
 import 'package:injectable/injectable.dart';
-import 'package:mobx/mobx.dart';
 
 enum CarActionType {
   Preinspectioncheck,
