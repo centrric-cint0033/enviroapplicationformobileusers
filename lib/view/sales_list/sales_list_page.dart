@@ -14,34 +14,34 @@ class SalesListPage extends StatelessWidget {
         body: Padding(
           padding: const EdgeInsets.only(left: 8.0, right: 8),
           child: Column(
-            children: [
-              // common_search_widget(),
-              const SizedBox(height: 16.0),
-              Observer(
-                builder: (_) {
-                  return Expanded(
-                    child: ListView.separated(
-                      itemCount: vmquotereg.quoteRegResponse.data?.length ?? 0,
-                      separatorBuilder: (BuildContext context, int index) {
-                        return SizedBox(height: 12.0);
-                      },
-                      itemBuilder: (context, index) {
-                        var data = vmquotereg.quoteRegResponse.data?[index];
-                        return _buildJobCard(
-                          id: data?.id ?? 0,
-                          won_lose_status: data?.won_lose_status ?? "",
-                          created_by: data?.created_by ?? "",
-                          client_type: data?.client_type ?? "",
-                          schedule_id: data?.schedule_id,
-                          client_email: data?.client_email ?? "",
-                        );
-                      },
-                    ),
-                  );
-                },
+              // children: [
+              //   // common_search_widget(),
+              //   const SizedBox(height: 16.0),
+              //   Observer(
+              //     builder: (_) {
+              //       return Expanded(
+              //         child: ListView.separated(
+              //           itemCount: vmquotereg.quoteRegResponse.data?.length ?? 0,
+              //           separatorBuilder: (BuildContext context, int index) {
+              //             return SizedBox(height: 12.0);
+              //           },
+              //           itemBuilder: (context, index) {
+              //             var data = vmquotereg.quoteRegResponse.data?[index];
+              //             return _buildJobCard(
+              //               id: data?.id ?? 0,
+              //               won_lose_status: data?.won_lose_status ?? "",
+              //               created_by: data?.created_by ?? "",
+              //               client_type: data?.client_type ?? "",
+              //               schedule_id: data?.schedule_id,
+              //               client_email: data?.client_email ?? "",
+              //             );
+              //           },
+              //         ),
+              //       );
+              //     },
+              //   ),
+              // ],
               ),
-            ],
-          ),
         ),
       ),
     );
