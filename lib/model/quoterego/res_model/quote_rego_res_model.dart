@@ -11,7 +11,7 @@ class QuoteRegResModel with _$QuoteRegResModel {
     int? client,
     String? created_by,
     String? client_type,
-    String? schedule_id,
+    int? schedule_id,
     String? client_email,
   }) = _QuoteRegResModel;
 

@@ -32,7 +32,7 @@ class SalesListPage extends StatelessWidget {
                           won_lose_status: data?.won_lose_status ?? "",
                           created_by: data?.created_by ?? "",
                           client_type: data?.client_type ?? "",
-                          schedule_id: data?.schedule_id ?? "",
+                          schedule_id: data?.schedule_id,
                           client_email: data?.client_email ?? "",
                         );
                       },
@@ -52,7 +52,7 @@ class SalesListPage extends StatelessWidget {
     required String won_lose_status,
     required String created_by,
     required String client_type,
-    required String schedule_id,
+    required int? schedule_id,
     required String client_email,
   }) {
     return Container(
@@ -92,7 +92,7 @@ class SalesListPage extends StatelessWidget {
               ),
               const SizedBox(height: 8.0),
               Text(
-                "Schedule ID: $schedule_id",
+                "Schedule ID: ${schedule_id ?? ''}",
                 style: const TextStyle(color: Colors.blue),
               ),
               const SizedBox(height: 8.0),

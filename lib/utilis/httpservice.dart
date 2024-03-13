@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 import 'dart:async';
 import 'dart:convert';
@@ -41,8 +42,6 @@ class HttpService {
       client = Client();
     }
     try {
-      customPrint(content: data, name: "data");
-
       final url = "$baseUrl$apiUrl";
       customPrint(content: url, name: "url");
       final headers = {
@@ -84,9 +83,11 @@ class HttpService {
       customPrint(content: data, name: "Payload");
       customPrint(content: response.body, name: "Response");
 
+      // customPrint(content: 'LOGS');
+      // log(response.body);
+
       if (response.statusCode == HttpStatus.ok ||
           response.statusCode == HttpStatus.created) {
-        customPrint(content: response.body, name: "Response");
         return Right(response);
       } else {
         return Left({const MainFailure.clientFailure(): response});
@@ -153,7 +154,6 @@ class LoggingInterceptor implements InterceptorContract {
 
   @override
   Future<ResponseData> interceptResponse({required ResponseData data}) async {
-    print(data.toString());
     return data;
   }
 }

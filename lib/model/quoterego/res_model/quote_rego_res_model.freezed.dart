@@ -25,7 +25,7 @@ mixin _$QuoteRegResModel {
   int? get client => throw _privateConstructorUsedError;
   String? get created_by => throw _privateConstructorUsedError;
   String? get client_type => throw _privateConstructorUsedError;
-  String? get schedule_id => throw _privateConstructorUsedError;
+  int? get schedule_id => throw _privateConstructorUsedError;
   String? get client_email => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -46,7 +46,7 @@ abstract class $QuoteRegResModelCopyWith<$Res> {
       int? client,
       String? created_by,
       String? client_type,
-      String? schedule_id,
+      int? schedule_id,
       String? client_email});
 }
 
@@ -95,7 +95,7 @@ class _$QuoteRegResModelCopyWithImpl<$Res, $Val extends QuoteRegResModel>
       schedule_id: freezed == schedule_id
           ? _value.schedule_id
           : schedule_id // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as int?,
       client_email: freezed == client_email
           ? _value.client_email
           : client_email // ignore: cast_nullable_to_non_nullable
@@ -118,7 +118,7 @@ abstract class _$$QuoteRegResModelImplCopyWith<$Res>
       int? client,
       String? created_by,
       String? client_type,
-      String? schedule_id,
+      int? schedule_id,
       String? client_email});
 }
 
@@ -165,7 +165,7 @@ class __$$QuoteRegResModelImplCopyWithImpl<$Res>
       schedule_id: freezed == schedule_id
           ? _value.schedule_id
           : schedule_id // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as int?,
       client_email: freezed == client_email
           ? _value.client_email
           : client_email // ignore: cast_nullable_to_non_nullable
@@ -200,7 +200,7 @@ class _$QuoteRegResModelImpl implements _QuoteRegResModel {
   @override
   final String? client_type;
   @override
-  final String? schedule_id;
+  final int? schedule_id;
   @override
   final String? client_email;
 
@@ -255,7 +255,7 @@ abstract class _QuoteRegResModel implements QuoteRegResModel {
       final int? client,
       final String? created_by,
       final String? client_type,
-      final String? schedule_id,
+      final int? schedule_id,
       final String? client_email}) = _$QuoteRegResModelImpl;
 
   factory _QuoteRegResModel.fromJson(Map<String, dynamic> json) =
@@ -272,7 +272,7 @@ abstract class _QuoteRegResModel implements QuoteRegResModel {
   @override
   String? get client_type;
   @override
-  String? get schedule_id;
+  int? get schedule_id;
   @override
   String? get client_email;
   @override
