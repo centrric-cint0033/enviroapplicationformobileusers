@@ -22,7 +22,7 @@ QuoteRegResModel _$QuoteRegResModelFromJson(Map<String, dynamic> json) {
 mixin _$QuoteRegResModel {
   int? get id => throw _privateConstructorUsedError;
   String? get won_lose_status => throw _privateConstructorUsedError;
-  String? get client => throw _privateConstructorUsedError;
+  int? get client => throw _privateConstructorUsedError;
   String? get created_by => throw _privateConstructorUsedError;
   String? get client_type => throw _privateConstructorUsedError;
   String? get schedule_id => throw _privateConstructorUsedError;
@@ -43,7 +43,7 @@ abstract class $QuoteRegResModelCopyWith<$Res> {
   $Res call(
       {int? id,
       String? won_lose_status,
-      String? client,
+      int? client,
       String? created_by,
       String? client_type,
       String? schedule_id,
@@ -83,7 +83,7 @@ class _$QuoteRegResModelCopyWithImpl<$Res, $Val extends QuoteRegResModel>
       client: freezed == client
           ? _value.client
           : client // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as int?,
       created_by: freezed == created_by
           ? _value.created_by
           : created_by // ignore: cast_nullable_to_non_nullable
@@ -115,7 +115,7 @@ abstract class _$$QuoteRegResModelImplCopyWith<$Res>
   $Res call(
       {int? id,
       String? won_lose_status,
-      String? client,
+      int? client,
       String? created_by,
       String? client_type,
       String? schedule_id,
@@ -153,7 +153,7 @@ class __$$QuoteRegResModelImplCopyWithImpl<$Res>
       client: freezed == client
           ? _value.client
           : client // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as int?,
       created_by: freezed == created_by
           ? _value.created_by
           : created_by // ignore: cast_nullable_to_non_nullable
@@ -194,7 +194,7 @@ class _$QuoteRegResModelImpl implements _QuoteRegResModel {
   @override
   final String? won_lose_status;
   @override
-  final String? client;
+  final int? client;
   @override
   final String? created_by;
   @override
@@ -252,7 +252,7 @@ abstract class _QuoteRegResModel implements QuoteRegResModel {
   factory _QuoteRegResModel(
       {final int? id,
       final String? won_lose_status,
-      final String? client,
+      final int? client,
       final String? created_by,
       final String? client_type,
       final String? schedule_id,
@@ -266,7 +266,7 @@ abstract class _QuoteRegResModel implements QuoteRegResModel {
   @override
   String? get won_lose_status;
   @override
-  String? get client;
+  int? get client;
   @override
   String? get created_by;
   @override

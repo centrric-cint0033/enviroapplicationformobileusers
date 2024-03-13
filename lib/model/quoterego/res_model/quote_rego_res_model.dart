@@ -8,7 +8,7 @@ class QuoteRegResModel with _$QuoteRegResModel {
   factory QuoteRegResModel({
     int? id,
     String? won_lose_status,
-    String? client,
+    int? client,
     String? created_by,
     String? client_type,
     String? schedule_id,

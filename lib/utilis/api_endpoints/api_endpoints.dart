@@ -52,4 +52,6 @@ class ApiEndPoints {
       '/api/v1/vehicles/waste/fork-lift/fuelExpense/search/vehicle/';
   static const endpointquoteregvehiclelist =
       '/api/v1/sales/quote/waste/2/?limit=20';
+  static const endpointjoblist = '/api/v1/sales/joblist/waste/2/?limit=20';
+  static const endpointsaleslist = '/api/v1/sales/saleslist/waste/2/?limit=20';
 }

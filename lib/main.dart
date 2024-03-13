@@ -9,15 +9,15 @@ import 'view/loginpage/common/appbar/Appthemes/Appthemes.dart';
 void main() {
   configureLocalDependancies();
 
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  MyApp({super.key});
+  final appRouter = AppRouter();
 
   @override
   Widget build(BuildContext context) {
-    final appRouter = AppRouter();
     return ScreenUtilInit(
       designSize: const Size(325, 640),
       minTextAdapt: true,

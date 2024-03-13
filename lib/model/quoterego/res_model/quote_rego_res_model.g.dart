@@ -11,7 +11,7 @@ _$QuoteRegResModelImpl _$$QuoteRegResModelImplFromJson(
     _$QuoteRegResModelImpl(
       id: json['id'] as int?,
       won_lose_status: json['won_lose_status'] as String?,
-      client: json['client'] as String?,
+      client: json['client'] as int?,
       created_by: json['created_by'] as String?,
       client_type: json['client_type'] as String?,
       schedule_id: json['schedule_id'] as String?,
