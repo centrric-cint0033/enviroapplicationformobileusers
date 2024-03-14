@@ -1,5 +1,6 @@
+import 'package:enviro_mobile_application/viewmodel/vehicle_job_list/vehicle_job_list_viewmodel.dart';
 import 'package:flutter/material.dart';
-import 'package:enviro_mobile_application/view/loginpage/Common_widgets/widgets/common_search_widget.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 
 class JobListPage extends StatelessWidget {
   const JobListPage({Key? key}) : super(key: key);
@@ -13,15 +14,26 @@ class JobListPage extends StatelessWidget {
           padding: const EdgeInsets.only(left: 8.0, right: 8),
           child: Column(
             children: [
-              // common_search_widget(),
               const SizedBox(height: 16.0),
-              _buildJobCard(
-                date: "2024-02-01",
-                clientId: "123",
-                clientName: "John Doe",
-                quotedId: "456",
-                amount: "56",
-                status: "Accepted",
+              Observer(
+                builder: (_) {
+                  return Expanded(
+                    child: ListView.separated(
+                      itemCount: vmjoblists.joblistResponse.data?.length ?? 0,
+                      separatorBuilder: (BuildContext context, int index) {
+                        return const SizedBox(height: 12.0);
+                      },
+                      itemBuilder: (context, index) {
+                        var data = vmjoblists.joblistResponse.data?[index];
+                        return _buildJobCard(
+                          date: data?.date ?? "",
+                          clientName: data?.client_name ?? "",
+                          quotedby: data?.quoted_by ?? "",
+                        );
+                      },
+                    ),
+                  );
+                },
               ),
             ],
           ),
@@ -32,11 +44,11 @@ class JobListPage extends StatelessWidget {
 
   Widget _buildJobCard({
     required String date,
-    required String clientId,
+    // required String clientId,
     required String clientName,
-    required String quotedId,
-    required String amount,
-    required String status,
+    required String quotedby,
+    // required String amount,
+    // required String status,
   }) {
     return Container(
       width: double.infinity,
@@ -54,17 +66,137 @@ class JobListPage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text("Date         : $date"),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const SizedBox(width: 10),
+                  const Expanded(
+                    child: Text(
+                      "date:",
+                      textAlign: TextAlign.right,
+                      style: TextStyle(color: Colors.blue),
+                    ),
+                  ),
+                  Expanded(
+                    child: Text(
+                      "$date",
+                      textAlign: TextAlign.left,
+                      style: const TextStyle(color: Colors.blue),
+                    ),
+                  ),
+                ],
+              ),
               const SizedBox(height: 8.0),
-              Text("Client ID    : $clientId"),
+              const Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  SizedBox(width: 10),
+                  Expanded(
+                    child: Text(
+                      "clientid",
+                      textAlign: TextAlign.right,
+                      style: TextStyle(color: Colors.blue),
+                    ),
+                  ),
+                  SizedBox(width: 10),
+                  // Expanded(
+                  //   child: Text(
+                  //     "$clientId",
+                  //     textAlign: TextAlign.left,
+                  //     style: const TextStyle(color: Colors.blue),
+                  //   ),
+                  // ),
+                ],
+              ),
               const SizedBox(height: 8.0),
-              Text("Client Name  : $clientName"),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const SizedBox(width: 10),
+                  const Expanded(
+                    child: Text(
+                      "Created By:",
+                      textAlign: TextAlign.right,
+                      style: TextStyle(color: Colors.blue),
+                    ),
+                  ),
+                  const SizedBox(width: 10),
+                  Expanded(
+                    child: Text(
+                      "$clientName",
+                      textAlign: TextAlign.left,
+                      style: const TextStyle(color: Colors.blue),
+                    ),
+                  ),
+                ],
+              ),
               const SizedBox(height: 8.0),
-              Text("Quoted ID    : $quotedId"),
+              Row(
+                children: [
+                  const SizedBox(width: 10),
+                  const Expanded(
+                    child: Text(
+                      "Client Type:",
+                      textAlign: TextAlign.right,
+                      style: TextStyle(color: Colors.blue),
+                    ),
+                  ),
+                  const SizedBox(width: 10),
+                  Expanded(
+                    child: Text(
+                      "$quotedby",
+                      textAlign: TextAlign.left,
+                      style: const TextStyle(color: Colors.blue),
+                    ),
+                  ),
+                ],
+              ),
               const SizedBox(height: 8.0),
-              Text("Client Name  :  $clientName"),
+              const Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  SizedBox(width: 10),
+                  Expanded(
+                    child: Text(
+                      "Schedule ID:",
+                      textAlign: TextAlign.right,
+                      style: TextStyle(color: Colors.blue),
+                    ),
+                  ),
+                  SizedBox(width: 10),
+                  // Expanded(
+                  //   child: Text(
+                  //     "$amount",
+                  //     textAlign: TextAlign.left,
+                  //     style: const TextStyle(color: Colors.blue),
+                  //   ),
+                  // ),
+                ],
+              ),
               const SizedBox(height: 8.0),
-              Text("Quoted ID    : $quotedId"),
+              const Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  SizedBox(width: 10),
+                  Expanded(
+                    child: Text(
+                      "Client Email:",
+                      textAlign: TextAlign.right,
+                      style: TextStyle(color: Colors.blue),
+                    ),
+                  ),
+                  SizedBox(width: 10),
+                  // Expanded(
+                  //   child: Text(
+                  //     "$status",
+                  //     textAlign: TextAlign.left,
+                  //     style: const TextStyle(color: Colors.blue),
+                  //   ),
+                  // ),
+                ],
+              ),
             ],
           ),
         ),

@@ -7,6 +7,7 @@ import 'package:enviro_mobile_application/viewmodel/quote_reg_page/quote_reg_pag
 import 'package:enviro_mobile_application/viewmodel/sales_performance/sales_performance_viewmodel.dart';
 import 'package:enviro_mobile_application/viewmodel/semi_trailor_page/semi_trailor_page_viewmodel.dart';
 import 'package:enviro_mobile_application/viewmodel/truck_page/truck_page_viewmodel.dart';
+import 'package:enviro_mobile_application/viewmodel/vehicle_job_list/vehicle_job_list_viewmodel.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -151,6 +152,7 @@ void onsalesfunction(BuildContext context) async {
     router.pushNamed(RouteNames.salesmainpage);
     vmquotereg.quoteregviewmodelfunction();
     vmsalesperformance.saleslistviewmodelfunction();
+    vmjoblists.vehiclelistviewmodelfunction();
   }
 }
 
