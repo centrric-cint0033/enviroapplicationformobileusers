@@ -4,6 +4,7 @@ import 'package:enviro_mobile_application/view/service/master_car_page/master_ca
 import 'package:enviro_mobile_application/viewmodel/car_page/car_page_viewmodel.dart';
 import 'package:enviro_mobile_application/viewmodel/home_page/home_page_viewmodel.dart';
 import 'package:enviro_mobile_application/viewmodel/quote_reg_page/quote_reg_page_viewmodel.dart';
+import 'package:enviro_mobile_application/viewmodel/sales_performance/sales_performance_viewmodel.dart';
 import 'package:enviro_mobile_application/viewmodel/semi_trailor_page/semi_trailor_page_viewmodel.dart';
 import 'package:enviro_mobile_application/viewmodel/truck_page/truck_page_viewmodel.dart';
 
@@ -149,6 +150,7 @@ void onsalesfunction(BuildContext context) async {
   } else {
     router.pushNamed(RouteNames.salesmainpage);
     vmquotereg.quoteregviewmodelfunction();
+    vmsalesperformance.saleslistviewmodelfunction();
   }
 }
 

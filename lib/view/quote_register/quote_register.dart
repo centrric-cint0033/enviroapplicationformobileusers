@@ -75,15 +75,15 @@ class QuoteRegisterpage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  SizedBox(width: 10),
-                  Expanded(
+                  const SizedBox(width: 10),
+                  const Expanded(
                     child: Text(
                       "ID:",
                       textAlign: TextAlign.right,
                       style: TextStyle(color: Colors.blue),
                     ),
                   ),
-                  SizedBox(width: 10),
+                  const SizedBox(width: 10),
                   Expanded(
                     child: Text(
                       " $id",
@@ -97,15 +97,15 @@ class QuoteRegisterpage extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  SizedBox(width: 10),
-                  Expanded(
+                  const SizedBox(width: 10),
+                  const Expanded(
                     child: Text(
                       "Won/Lose Status:",
                       textAlign: TextAlign.right,
                       style: TextStyle(color: Colors.blue),
                     ),
                   ),
-                  SizedBox(width: 10),
+                  const SizedBox(width: 10),
                   Expanded(
                     child: Text(
                       "$won_lose_status",
@@ -119,15 +119,15 @@ class QuoteRegisterpage extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  SizedBox(width: 10),
-                  Expanded(
+                  const SizedBox(width: 10),
+                  const Expanded(
                     child: Text(
                       "Created By:",
                       textAlign: TextAlign.right,
                       style: TextStyle(color: Colors.blue),
                     ),
                   ),
-                  SizedBox(width: 10),
+                  const SizedBox(width: 10),
                   Expanded(
                     child: Text(
                       "$created_by",
@@ -140,15 +140,15 @@ class QuoteRegisterpage extends StatelessWidget {
               const SizedBox(height: 8.0),
               Row(
                 children: [
-                  SizedBox(width: 10),
-                  Expanded(
-                    child: const Text(
+                  const SizedBox(width: 10),
+                  const Expanded(
+                    child: Text(
                       "Client Type:",
                       textAlign: TextAlign.right,
                       style: TextStyle(color: Colors.blue),
                     ),
                   ),
-                  SizedBox(width: 10),
+                  const SizedBox(width: 10),
                   Expanded(
                     child: Text(
                       "$client_type",
@@ -162,15 +162,15 @@ class QuoteRegisterpage extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  SizedBox(width: 10),
-                  Expanded(
+                  const SizedBox(width: 10),
+                  const Expanded(
                     child: Text(
                       "Schedule ID:",
                       textAlign: TextAlign.right,
                       style: TextStyle(color: Colors.blue),
                     ),
                   ),
-                  SizedBox(width: 10),
+                  const SizedBox(width: 10),
                   Expanded(
                     child: Text(
                       "S${schedule_id ?? ''}",
@@ -185,15 +185,15 @@ class QuoteRegisterpage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  SizedBox(width: 10),
-                  Expanded(
+                  const SizedBox(width: 10),
+                  const Expanded(
                     child: Text(
                       "Client Email:",
                       textAlign: TextAlign.right,
                       style: TextStyle(color: Colors.blue),
                     ),
                   ),
-                  SizedBox(width: 10),
+                  const SizedBox(width: 10),
                   Expanded(
                     child: Text(
                       "$client_email",
