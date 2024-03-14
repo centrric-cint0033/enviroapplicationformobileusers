@@ -15,7 +15,7 @@ class SalesListPage extends StatelessWidget {
           padding: const EdgeInsets.only(left: 8.0, right: 8),
           child: Column(
             children: [
-              common_search_widget(),
+              // common_search_widget(),
               const SizedBox(height: 16.0),
               Observer(
                 builder: (_) {

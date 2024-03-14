@@ -20,11 +20,13 @@ SalesListResModel _$SalesListResModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$SalesListResModel {
-  String? get name => throw _privateConstructorUsedError;
-  int? get won => throw _privateConstructorUsedError;
-  int? get lost => throw _privateConstructorUsedError;
-  int? get pending => throw _privateConstructorUsedError;
-  int? get total => throw _privateConstructorUsedError;
+  String get name => throw _privateConstructorUsedError;
+  int get won => throw _privateConstructorUsedError;
+  int get lost => throw _privateConstructorUsedError;
+  int get pending => throw _privateConstructorUsedError;
+  int get total => throw _privateConstructorUsedError;
+  String get profile => throw _privateConstructorUsedError;
+  int get id => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -38,7 +40,14 @@ abstract class $SalesListResModelCopyWith<$Res> {
           SalesListResModel value, $Res Function(SalesListResModel) then) =
       _$SalesListResModelCopyWithImpl<$Res, SalesListResModel>;
   @useResult
-  $Res call({String? name, int? won, int? lost, int? pending, int? total});
+  $Res call(
+      {String name,
+      int won,
+      int lost,
+      int pending,
+      int total,
+      String profile,
+      int id});
 }
 
 /// @nodoc
@@ -54,33 +63,43 @@ class _$SalesListResModelCopyWithImpl<$Res, $Val extends SalesListResModel>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? name = freezed,
-    Object? won = freezed,
-    Object? lost = freezed,
-    Object? pending = freezed,
-    Object? total = freezed,
+    Object? name = null,
+    Object? won = null,
+    Object? lost = null,
+    Object? pending = null,
+    Object? total = null,
+    Object? profile = null,
+    Object? id = null,
   }) {
     return _then(_value.copyWith(
-      name: freezed == name
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String?,
-      won: freezed == won
+              as String,
+      won: null == won
           ? _value.won
           : won // ignore: cast_nullable_to_non_nullable
-              as int?,
-      lost: freezed == lost
+              as int,
+      lost: null == lost
           ? _value.lost
           : lost // ignore: cast_nullable_to_non_nullable
-              as int?,
-      pending: freezed == pending
+              as int,
+      pending: null == pending
           ? _value.pending
           : pending // ignore: cast_nullable_to_non_nullable
-              as int?,
-      total: freezed == total
+              as int,
+      total: null == total
           ? _value.total
           : total // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as int,
+      profile: null == profile
+          ? _value.profile
+          : profile // ignore: cast_nullable_to_non_nullable
+              as String,
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
     ) as $Val);
   }
 }
@@ -93,7 +112,14 @@ abstract class _$$SalesListResModelImplCopyWith<$Res>
       __$$SalesListResModelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? name, int? won, int? lost, int? pending, int? total});
+  $Res call(
+      {String name,
+      int won,
+      int lost,
+      int pending,
+      int total,
+      String profile,
+      int id});
 }
 
 /// @nodoc
@@ -107,33 +133,43 @@ class __$$SalesListResModelImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? name = freezed,
-    Object? won = freezed,
-    Object? lost = freezed,
-    Object? pending = freezed,
-    Object? total = freezed,
+    Object? name = null,
+    Object? won = null,
+    Object? lost = null,
+    Object? pending = null,
+    Object? total = null,
+    Object? profile = null,
+    Object? id = null,
   }) {
     return _then(_$SalesListResModelImpl(
-      name: freezed == name
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String?,
-      won: freezed == won
+              as String,
+      won: null == won
           ? _value.won
           : won // ignore: cast_nullable_to_non_nullable
-              as int?,
-      lost: freezed == lost
+              as int,
+      lost: null == lost
           ? _value.lost
           : lost // ignore: cast_nullable_to_non_nullable
-              as int?,
-      pending: freezed == pending
+              as int,
+      pending: null == pending
           ? _value.pending
           : pending // ignore: cast_nullable_to_non_nullable
-              as int?,
-      total: freezed == total
+              as int,
+      total: null == total
           ? _value.total
           : total // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as int,
+      profile: null == profile
+          ? _value.profile
+          : profile // ignore: cast_nullable_to_non_nullable
+              as String,
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -141,26 +177,36 @@ class __$$SalesListResModelImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$SalesListResModelImpl implements _SalesListResModel {
-  _$SalesListResModelImpl(
-      {this.name, this.won, this.lost, this.pending, this.total});
+  const _$SalesListResModelImpl(
+      {required this.name,
+      required this.won,
+      required this.lost,
+      required this.pending,
+      required this.total,
+      required this.profile,
+      required this.id});
 
   factory _$SalesListResModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$SalesListResModelImplFromJson(json);
 
   @override
-  final String? name;
+  final String name;
   @override
-  final int? won;
+  final int won;
   @override
-  final int? lost;
+  final int lost;
   @override
-  final int? pending;
+  final int pending;
   @override
-  final int? total;
+  final int total;
+  @override
+  final String profile;
+  @override
+  final int id;
 
   @override
   String toString() {
-    return 'SalesListResModel(name: $name, won: $won, lost: $lost, pending: $pending, total: $total)';
+    return 'SalesListResModel(name: $name, won: $won, lost: $lost, pending: $pending, total: $total, profile: $profile, id: $id)';
   }
 
   @override
@@ -172,12 +218,15 @@ class _$SalesListResModelImpl implements _SalesListResModel {
             (identical(other.won, won) || other.won == won) &&
             (identical(other.lost, lost) || other.lost == lost) &&
             (identical(other.pending, pending) || other.pending == pending) &&
-            (identical(other.total, total) || other.total == total));
+            (identical(other.total, total) || other.total == total) &&
+            (identical(other.profile, profile) || other.profile == profile) &&
+            (identical(other.id, id) || other.id == id));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, name, won, lost, pending, total);
+  int get hashCode =>
+      Object.hash(runtimeType, name, won, lost, pending, total, profile, id);
 
   @JsonKey(ignore: true)
   @override
@@ -195,26 +244,32 @@ class _$SalesListResModelImpl implements _SalesListResModel {
 }
 
 abstract class _SalesListResModel implements SalesListResModel {
-  factory _SalesListResModel(
-      {final String? name,
-      final int? won,
-      final int? lost,
-      final int? pending,
-      final int? total}) = _$SalesListResModelImpl;
+  const factory _SalesListResModel(
+      {required final String name,
+      required final int won,
+      required final int lost,
+      required final int pending,
+      required final int total,
+      required final String profile,
+      required final int id}) = _$SalesListResModelImpl;
 
   factory _SalesListResModel.fromJson(Map<String, dynamic> json) =
       _$SalesListResModelImpl.fromJson;
 
   @override
-  String? get name;
+  String get name;
   @override
-  int? get won;
+  int get won;
   @override
-  int? get lost;
+  int get lost;
   @override
-  int? get pending;
+  int get pending;
   @override
-  int? get total;
+  int get total;
+  @override
+  String get profile;
+  @override
+  int get id;
   @override
   @JsonKey(ignore: true)
   _$$SalesListResModelImplCopyWith<_$SalesListResModelImpl> get copyWith =>

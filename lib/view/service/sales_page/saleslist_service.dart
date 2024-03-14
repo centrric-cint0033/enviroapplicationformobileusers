@@ -27,10 +27,11 @@ class SalesListPageService implements IAllSalesService {
         return Left(l.keys.first);
       },
       (res) async {
-        var data = jsonDecode(res.body) as List;
+        var data = jsonDecode(res.body);
 
-        List<SalesListResModel> saleslistvehicle =
-            data.map((e) => SalesListResModel.fromJson(e)).toList();
+        List<SalesListResModel> saleslistvehicle = List<SalesListResModel>.from(
+            data['app_data'].map((e) => SalesListResModel.fromJson(e)));
+
         return Right(saleslistvehicle);
       },
     );

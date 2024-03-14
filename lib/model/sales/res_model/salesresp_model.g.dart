@@ -9,11 +9,13 @@ part of 'salesresp_model.dart';
 _$SalesListResModelImpl _$$SalesListResModelImplFromJson(
         Map<String, dynamic> json) =>
     _$SalesListResModelImpl(
-      name: json['name'] as String?,
-      won: json['won'] as int?,
-      lost: json['lost'] as int?,
-      pending: json['pending'] as int?,
-      total: json['total'] as int?,
+      name: json['name'] as String,
+      won: json['won'] as int,
+      lost: json['lost'] as int,
+      pending: json['pending'] as int,
+      total: json['total'] as int,
+      profile: json['profile'] as String,
+      id: json['id'] as int,
     );
 
 Map<String, dynamic> _$$SalesListResModelImplToJson(
@@ -24,4 +26,6 @@ Map<String, dynamic> _$$SalesListResModelImplToJson(
       'lost': instance.lost,
       'pending': instance.pending,
       'total': instance.total,
+      'profile': instance.profile,
+      'id': instance.id,
     };
