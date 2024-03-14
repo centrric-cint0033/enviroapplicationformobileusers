@@ -11,6 +11,7 @@ class SalesJobListstRegResModel with _$SalesJobListstRegResModel {
     String? client_name,
     String? quoted_by,
     String? paid_status,
+    String? paid_amount,
   }) = _SalesJobListstRegResModel;
 
   factory SalesJobListstRegResModel.fromJson(Map<String, dynamic> json) =>

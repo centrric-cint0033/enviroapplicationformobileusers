@@ -26,6 +26,7 @@ mixin _$SalesJobListstRegResModel {
   String? get client_name => throw _privateConstructorUsedError;
   String? get quoted_by => throw _privateConstructorUsedError;
   String? get paid_status => throw _privateConstructorUsedError;
+  String? get paid_amount => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -44,7 +45,8 @@ abstract class $SalesJobListstRegResModelCopyWith<$Res> {
       String? date,
       String? client_name,
       String? quoted_by,
-      String? paid_status});
+      String? paid_status,
+      String? paid_amount});
 }
 
 /// @nodoc
@@ -66,6 +68,7 @@ class _$SalesJobListstRegResModelCopyWithImpl<$Res,
     Object? client_name = freezed,
     Object? quoted_by = freezed,
     Object? paid_status = freezed,
+    Object? paid_amount = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -88,6 +91,10 @@ class _$SalesJobListstRegResModelCopyWithImpl<$Res,
           ? _value.paid_status
           : paid_status // ignore: cast_nullable_to_non_nullable
               as String?,
+      paid_amount: freezed == paid_amount
+          ? _value.paid_amount
+          : paid_amount // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -106,7 +113,8 @@ abstract class _$$SalesJobListstRegResModelImplCopyWith<$Res>
       String? date,
       String? client_name,
       String? quoted_by,
-      String? paid_status});
+      String? paid_status,
+      String? paid_amount});
 }
 
 /// @nodoc
@@ -127,6 +135,7 @@ class __$$SalesJobListstRegResModelImplCopyWithImpl<$Res>
     Object? client_name = freezed,
     Object? quoted_by = freezed,
     Object? paid_status = freezed,
+    Object? paid_amount = freezed,
   }) {
     return _then(_$SalesJobListstRegResModelImpl(
       id: freezed == id
@@ -149,6 +158,10 @@ class __$$SalesJobListstRegResModelImplCopyWithImpl<$Res>
           ? _value.paid_status
           : paid_status // ignore: cast_nullable_to_non_nullable
               as String?,
+      paid_amount: freezed == paid_amount
+          ? _value.paid_amount
+          : paid_amount // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -157,7 +170,12 @@ class __$$SalesJobListstRegResModelImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$SalesJobListstRegResModelImpl implements _SalesJobListstRegResModel {
   _$SalesJobListstRegResModelImpl(
-      {this.id, this.date, this.client_name, this.quoted_by, this.paid_status});
+      {this.id,
+      this.date,
+      this.client_name,
+      this.quoted_by,
+      this.paid_status,
+      this.paid_amount});
 
   factory _$SalesJobListstRegResModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$SalesJobListstRegResModelImplFromJson(json);
@@ -172,10 +190,12 @@ class _$SalesJobListstRegResModelImpl implements _SalesJobListstRegResModel {
   final String? quoted_by;
   @override
   final String? paid_status;
+  @override
+  final String? paid_amount;
 
   @override
   String toString() {
-    return 'SalesJobListstRegResModel(id: $id, date: $date, client_name: $client_name, quoted_by: $quoted_by, paid_status: $paid_status)';
+    return 'SalesJobListstRegResModel(id: $id, date: $date, client_name: $client_name, quoted_by: $quoted_by, paid_status: $paid_status, paid_amount: $paid_amount)';
   }
 
   @override
@@ -190,13 +210,15 @@ class _$SalesJobListstRegResModelImpl implements _SalesJobListstRegResModel {
             (identical(other.quoted_by, quoted_by) ||
                 other.quoted_by == quoted_by) &&
             (identical(other.paid_status, paid_status) ||
-                other.paid_status == paid_status));
+                other.paid_status == paid_status) &&
+            (identical(other.paid_amount, paid_amount) ||
+                other.paid_amount == paid_amount));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, id, date, client_name, quoted_by, paid_status);
+  int get hashCode => Object.hash(
+      runtimeType, id, date, client_name, quoted_by, paid_status, paid_amount);
 
   @JsonKey(ignore: true)
   @override
@@ -219,7 +241,8 @@ abstract class _SalesJobListstRegResModel implements SalesJobListstRegResModel {
       final String? date,
       final String? client_name,
       final String? quoted_by,
-      final String? paid_status}) = _$SalesJobListstRegResModelImpl;
+      final String? paid_status,
+      final String? paid_amount}) = _$SalesJobListstRegResModelImpl;
 
   factory _SalesJobListstRegResModel.fromJson(Map<String, dynamic> json) =
       _$SalesJobListstRegResModelImpl.fromJson;
@@ -234,6 +257,8 @@ abstract class _SalesJobListstRegResModel implements SalesJobListstRegResModel {
   String? get quoted_by;
   @override
   String? get paid_status;
+  @override
+  String? get paid_amount;
   @override
   @JsonKey(ignore: true)
   _$$SalesJobListstRegResModelImplCopyWith<_$SalesJobListstRegResModelImpl>

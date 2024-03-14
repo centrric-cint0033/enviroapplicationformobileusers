@@ -14,6 +14,7 @@ _$SalesJobListstRegResModelImpl _$$SalesJobListstRegResModelImplFromJson(
       client_name: json['client_name'] as String?,
       quoted_by: json['quoted_by'] as String?,
       paid_status: json['paid_status'] as String?,
+      paid_amount: json['paid_amount'] as String?,
     );
 
 Map<String, dynamic> _$$SalesJobListstRegResModelImplToJson(
@@ -24,4 +25,5 @@ Map<String, dynamic> _$$SalesJobListstRegResModelImplToJson(
       'client_name': instance.client_name,
       'quoted_by': instance.quoted_by,
       'paid_status': instance.paid_status,
+      'paid_amount': instance.paid_amount,
     };

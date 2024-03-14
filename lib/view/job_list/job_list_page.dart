@@ -1,3 +1,4 @@
+import 'package:enviro_mobile_application/view/loginpage/Common_widgets/widgets/common_search_widget.dart';
 import 'package:enviro_mobile_application/viewmodel/vehicle_job_list/vehicle_job_list_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -14,6 +15,7 @@ class JobListPage extends StatelessWidget {
           padding: const EdgeInsets.only(left: 8.0, right: 8),
           child: Column(
             children: [
+              common_search_widget(),
               const SizedBox(height: 16.0),
               Observer(
                 builder: (_) {
@@ -29,6 +31,8 @@ class JobListPage extends StatelessWidget {
                           date: data?.date ?? "",
                           clientName: data?.client_name ?? "",
                           quotedby: data?.quoted_by ?? "",
+                          amount: data?.paid_amount ?? "",
+                          status: data?.paid_status ?? "",
                         );
                       },
                     ),
@@ -44,11 +48,11 @@ class JobListPage extends StatelessWidget {
 
   Widget _buildJobCard({
     required String date,
-    // required String clientId,
+    // required int clientId,
     required String clientName,
     required String quotedby,
-    // required String amount,
-    // required String status,
+    required String amount,
+    required String status,
   }) {
     return Container(
       width: double.infinity,
@@ -70,17 +74,18 @@ class JobListPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const SizedBox(width: 10),
+                  const SizedBox(height: 13.0),
                   const Expanded(
                     child: Text(
-                      "date:",
+                      "Date:",
                       textAlign: TextAlign.right,
                       style: TextStyle(color: Colors.blue),
                     ),
                   ),
+                  const SizedBox(height: 13.0),
                   Expanded(
                     child: Text(
-                      "$date",
+                      " $date",
                       textAlign: TextAlign.left,
                       style: const TextStyle(color: Colors.blue),
                     ),
@@ -88,40 +93,18 @@ class JobListPage extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 8.0),
-              const Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  SizedBox(width: 10),
-                  Expanded(
-                    child: Text(
-                      "clientid",
-                      textAlign: TextAlign.right,
-                      style: TextStyle(color: Colors.blue),
-                    ),
-                  ),
-                  SizedBox(width: 10),
-                  // Expanded(
-                  //   child: Text(
-                  //     "$clientId",
-                  //     textAlign: TextAlign.left,
-                  //     style: const TextStyle(color: Colors.blue),
-                  //   ),
-                  // ),
-                ],
-              ),
-              const SizedBox(height: 8.0),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const SizedBox(width: 10),
+                  const SizedBox(height: 13.0),
                   const Expanded(
                     child: Text(
-                      "Created By:",
+                      "clientName:",
                       textAlign: TextAlign.right,
                       style: TextStyle(color: Colors.blue),
                     ),
                   ),
-                  const SizedBox(width: 10),
+                  const SizedBox(height: 13.0),
                   Expanded(
                     child: Text(
                       "$clientName",
@@ -131,18 +114,19 @@ class JobListPage extends StatelessWidget {
                   ),
                 ],
               ),
-              const SizedBox(height: 8.0),
+              const SizedBox(height: 13.0),
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const SizedBox(width: 10),
+                  const SizedBox(height: 13.0),
                   const Expanded(
                     child: Text(
-                      "Client Type:",
+                      "Quoted By:",
                       textAlign: TextAlign.right,
                       style: TextStyle(color: Colors.blue),
                     ),
                   ),
-                  const SizedBox(width: 10),
+                  const SizedBox(height: 13.0),
                   Expanded(
                     child: Text(
                       "$quotedby",
@@ -153,48 +137,46 @@ class JobListPage extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 8.0),
-              const Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              Row(
                 children: [
-                  SizedBox(width: 10),
-                  Expanded(
+                  const SizedBox(height: 13.0),
+                  const Expanded(
                     child: Text(
-                      "Schedule ID:",
+                      "Amount:",
                       textAlign: TextAlign.right,
                       style: TextStyle(color: Colors.blue),
                     ),
                   ),
-                  SizedBox(width: 10),
-                  // Expanded(
-                  //   child: Text(
-                  //     "$amount",
-                  //     textAlign: TextAlign.left,
-                  //     style: const TextStyle(color: Colors.blue),
-                  //   ),
-                  // ),
+                  const SizedBox(height: 13.0),
+                  Expanded(
+                    child: Text(
+                      "$amount",
+                      textAlign: TextAlign.left,
+                      style: const TextStyle(color: Colors.blue),
+                    ),
+                  ),
                 ],
               ),
-              const SizedBox(height: 8.0),
-              const Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
+              const SizedBox(height: 13.0),
+              Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  SizedBox(width: 10),
-                  Expanded(
+                  const SizedBox(height: 13.0),
+                  const Expanded(
                     child: Text(
-                      "Client Email:",
+                      "Status:",
                       textAlign: TextAlign.right,
                       style: TextStyle(color: Colors.blue),
                     ),
                   ),
-                  SizedBox(width: 10),
-                  // Expanded(
-                  //   child: Text(
-                  //     "$status",
-                  //     textAlign: TextAlign.left,
-                  //     style: const TextStyle(color: Colors.blue),
-                  //   ),
-                  // ),
+                  const SizedBox(height: 13.0),
+                  Expanded(
+                    child: Text(
+                      "$status",
+                      textAlign: TextAlign.left,
+                      style: const TextStyle(color: Colors.blue),
+                    ),
+                  ),
                 ],
               ),
             ],
