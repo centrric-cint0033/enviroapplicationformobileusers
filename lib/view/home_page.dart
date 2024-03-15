@@ -17,8 +17,9 @@ import 'package:enviro_mobile_application/view/loginpage/Common_widgets/widgets/
 import 'package:enviro_mobile_application/view/loginpage/Common_widgets/widgets/cmn_title_textwidget.dart';
 import 'package:enviro_mobile_application/view/loginpage/common/appbar/cmappbar.dart';
 
-class Homepage1 extends StatelessWidget {
-  const Homepage1({Key? key}) : super(key: key);
+@RoutePage()
+class HomePage extends StatelessWidget {
+  const HomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

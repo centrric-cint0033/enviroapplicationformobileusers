@@ -1,6 +1,7 @@
 class RouteNames {
   static const String loginpage = '/';
   static const String mainscreen = '/mainscreen';
+  static const String rHomePage = '/homePage';
   static const String rSalesPpage = '/salesmainpage';
   static const String ohsPage = '/ohspage';
   static const String intranetpage = '/intranetpage';

@@ -118,7 +118,7 @@ class LoginPage extends StatelessWidget {
       );
 
       if (statusCode != null) {
-        router.replaceNamed(RouteNames.mainscreen);
+        router.replaceNamed(RouteNames.rHomePage);
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
