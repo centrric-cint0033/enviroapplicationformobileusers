@@ -11,14 +11,14 @@
 import 'package:auto_route/auto_route.dart' as _i8;
 import 'package:enviro_mobile_application/view/01_auth/login_page.dart' as _i3;
 import 'package:enviro_mobile_application/view/02_sales/sales_page.dart' as _i5;
+import 'package:enviro_mobile_application/view/03_vehicles/vehicle_main_page.dart'
+    as _i7;
+import 'package:enviro_mobile_application/view/04_ohs/ohs_page.dart' as _i4;
 import 'package:enviro_mobile_application/view/06_scheduling/scheduling_page.dart'
     as _i6;
 import 'package:enviro_mobile_application/view/07_intranet/intranet_page.dart'
     as _i2;
 import 'package:enviro_mobile_application/view/home_page.dart' as _i1;
-import 'package:enviro_mobile_application/view/ohs_page/ohs_page.dart' as _i4;
-import 'package:enviro_mobile_application/view/vehicle_main_page.dart/vehicle_main_page.dart'
-    as _i7;
 import 'package:flutter/material.dart' as _i9;
 
 abstract class $AppRouter extends _i8.RootStackRouter {
@@ -64,10 +64,10 @@ abstract class $AppRouter extends _i8.RootStackRouter {
         child: const _i6.SchedulingPage(),
       );
     },
-    VehicleMainRoute.name: (routeData) {
+    VehicleRoute.name: (routeData) {
       return _i8.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i7.VehicleMainPage(),
+        child: const _i7.VehiclePage(),
       );
     },
   };
@@ -173,15 +173,15 @@ class SchedulingRoute extends _i8.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i7.VehicleMainPage]
-class VehicleMainRoute extends _i8.PageRouteInfo<void> {
-  const VehicleMainRoute({List<_i8.PageRouteInfo>? children})
+/// [_i7.VehiclePage]
+class VehicleRoute extends _i8.PageRouteInfo<void> {
+  const VehicleRoute({List<_i8.PageRouteInfo>? children})
       : super(
-          VehicleMainRoute.name,
+          VehicleRoute.name,
           initialChildren: children,
         );
 
-  static const String name = 'VehicleMainRoute';
+  static const String name = 'VehicleRoute';
 
   static const _i8.PageInfo<void> page = _i8.PageInfo<void>(name);
 }

@@ -13,8 +13,8 @@ import 'package:enviro_mobile_application/view/semi_trailor_list/Semi_Trailor_li
 import 'package:flutter/material.dart';
 
 @RoutePage()
-class VehicleMainPage extends StatelessWidget {
-  const VehicleMainPage({super.key});
+class VehiclePage extends StatelessWidget {
+  const VehiclePage({super.key});
 
   @override
   Widget build(BuildContext context) {

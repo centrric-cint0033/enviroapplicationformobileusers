@@ -20,7 +20,7 @@ class SchedulingPage extends StatelessWidget {
       child: Scaffold(
         appBar: CustomAppBar(
           leading: cmn_leading_icon(),
-          title: cmnTitleWidget('Shedule'),
+          title: cmnTitleWidget('Schedule'),
           actions: cmn_action_icon,
         ),
         body: calander_page(),

@@ -13,7 +13,6 @@ class AppRouter extends $AppRouter {
         AutoRoute(page: OhsRoute.page, path: RouteNames.ohsPage),
         AutoRoute(page: IntranetRoute.page, path: RouteNames.intranetpage),
         AutoRoute(page: SchedulingRoute.page, path: RouteNames.rSchedulingPage),
-        AutoRoute(
-            page: VehicleMainRoute.page, path: RouteNames.vehiclemainpage),
+        AutoRoute(page: VehicleRoute.page, path: RouteNames.vehiclemainpage),
       ];
 }
