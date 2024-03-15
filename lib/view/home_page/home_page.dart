@@ -3,6 +3,7 @@ import 'package:enviro_mobile_application/Routepage/routespage.dart';
 import 'package:enviro_mobile_application/view/service/master_car_page/master_car_service.dart';
 import 'package:enviro_mobile_application/viewmodel/car_page/car_page_viewmodel.dart';
 import 'package:enviro_mobile_application/viewmodel/home_page/home_page_viewmodel.dart';
+import 'package:enviro_mobile_application/viewmodel/oh&s_page/oh&s_viewmodel.dart';
 import 'package:enviro_mobile_application/viewmodel/quote_reg_page/quote_reg_page_viewmodel.dart';
 import 'package:enviro_mobile_application/viewmodel/sales_performance/sales_performance_viewmodel.dart';
 import 'package:enviro_mobile_application/viewmodel/semi_trailor_page/semi_trailor_page_viewmodel.dart';
@@ -158,6 +159,7 @@ void onsalesfunction(BuildContext context) async {
 
 void ohsfunction(BuildContext context) {
   context.router.pushNamed(RouteNames.ohsPage);
+  vmohsnews.ohsnewsviewmodelfunction();
 }
 
 void intranetfuntion(BuildContext context) {
