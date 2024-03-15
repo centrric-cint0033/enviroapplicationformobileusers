@@ -9,18 +9,17 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:auto_route/auto_route.dart' as _i9;
-import 'package:enviro_mobile_application/view/intranet_page/intranet_page.dart'
-    as _i3;
-import 'package:enviro_mobile_application/view/loginpage/calenderpage/calender_page.dart'
-    as _i1;
-import 'package:enviro_mobile_application/view/loginpage/Common_widgets/homepage.dart'
-    as _i2;
-import 'package:enviro_mobile_application/view/loginpage/loginpage.dart' as _i4;
-import 'package:enviro_mobile_application/view/main_screen/main_screen.dart'
-    as _i5;
-import 'package:enviro_mobile_application/view/ohs_page/ohs_page.dart' as _i6;
-import 'package:enviro_mobile_application/view/sales_page/sales_main_page.dart'
+import 'package:enviro_mobile_application/view/01_auth/login_page.dart' as _i3;
+import 'package:enviro_mobile_application/view/02_sales/sales_page.dart' as _i6;
+import 'package:enviro_mobile_application/view/06_scheduling/scheduling_page.dart'
     as _i7;
+import 'package:enviro_mobile_application/view/07_intranet/intranet_page.dart'
+    as _i2;
+import 'package:enviro_mobile_application/view/loginpage/Common_widgets/homepage.dart'
+    as _i1;
+import 'package:enviro_mobile_application/view/main_screen/main_screen.dart'
+    as _i4;
+import 'package:enviro_mobile_application/view/ohs_page/ohs_page.dart' as _i5;
 import 'package:enviro_mobile_application/view/vehicle_main_page.dart/vehicle_main_page.dart'
     as _i8;
 import 'package:flutter/material.dart' as _i10;
@@ -30,22 +29,16 @@ abstract class $AppRouter extends _i9.RootStackRouter {
 
   @override
   final Map<String, _i9.PageFactory> pagesMap = {
-    CalendarRoute.name: (routeData) {
-      return _i9.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const _i1.CalendarPage(),
-      );
-    },
     HomeRoute.name: (routeData) {
       return _i9.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i2.HomePage(),
+        child: const _i1.HomePage(),
       );
     },
     IntranetRoute.name: (routeData) {
       return _i9.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i3.IntranetPage(),
+        child: const _i2.IntranetPage(),
       );
     },
     LoginRoute.name: (routeData) {
@@ -53,25 +46,31 @@ abstract class $AppRouter extends _i9.RootStackRouter {
           orElse: () => const LoginRouteArgs());
       return _i9.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i4.LoginPage(key: args.key),
+        child: _i3.LoginPage(key: args.key),
       );
     },
     MainRoute.name: (routeData) {
       return _i9.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i5.MainScreen(),
+        child: const _i4.MainScreen(),
       );
     },
     OhsRoute.name: (routeData) {
       return _i9.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i6.OhsPage(),
+        child: const _i5.OhsPage(),
       );
     },
-    SalesMainRoute.name: (routeData) {
+    SalesRoute.name: (routeData) {
       return _i9.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i7.SalesMainPage(),
+        child: const _i6.SalesPage(),
+      );
+    },
+    SchedulingRoute.name: (routeData) {
+      return _i9.AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const _i7.SchedulingPage(),
       );
     },
     VehicleMainRoute.name: (routeData) {
@@ -84,21 +83,7 @@ abstract class $AppRouter extends _i9.RootStackRouter {
 }
 
 /// generated route for
-/// [_i1.CalendarPage]
-class CalendarRoute extends _i9.PageRouteInfo<void> {
-  const CalendarRoute({List<_i9.PageRouteInfo>? children})
-      : super(
-          CalendarRoute.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'CalendarRoute';
-
-  static const _i9.PageInfo<void> page = _i9.PageInfo<void>(name);
-}
-
-/// generated route for
-/// [_i2.HomePage]
+/// [_i1.HomePage]
 class HomeRoute extends _i9.PageRouteInfo<void> {
   const HomeRoute({List<_i9.PageRouteInfo>? children})
       : super(
@@ -112,7 +97,7 @@ class HomeRoute extends _i9.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i3.IntranetPage]
+/// [_i2.IntranetPage]
 class IntranetRoute extends _i9.PageRouteInfo<void> {
   const IntranetRoute({List<_i9.PageRouteInfo>? children})
       : super(
@@ -126,7 +111,7 @@ class IntranetRoute extends _i9.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i4.LoginPage]
+/// [_i3.LoginPage]
 class LoginRoute extends _i9.PageRouteInfo<LoginRouteArgs> {
   LoginRoute({
     _i10.Key? key,
@@ -155,7 +140,7 @@ class LoginRouteArgs {
 }
 
 /// generated route for
-/// [_i5.MainScreen]
+/// [_i4.MainScreen]
 class MainRoute extends _i9.PageRouteInfo<void> {
   const MainRoute({List<_i9.PageRouteInfo>? children})
       : super(
@@ -169,7 +154,7 @@ class MainRoute extends _i9.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i6.OhsPage]
+/// [_i5.OhsPage]
 class OhsRoute extends _i9.PageRouteInfo<void> {
   const OhsRoute({List<_i9.PageRouteInfo>? children})
       : super(
@@ -183,15 +168,29 @@ class OhsRoute extends _i9.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i7.SalesMainPage]
-class SalesMainRoute extends _i9.PageRouteInfo<void> {
-  const SalesMainRoute({List<_i9.PageRouteInfo>? children})
+/// [_i6.SalesPage]
+class SalesRoute extends _i9.PageRouteInfo<void> {
+  const SalesRoute({List<_i9.PageRouteInfo>? children})
       : super(
-          SalesMainRoute.name,
+          SalesRoute.name,
           initialChildren: children,
         );
 
-  static const String name = 'SalesMainRoute';
+  static const String name = 'SalesRoute';
+
+  static const _i9.PageInfo<void> page = _i9.PageInfo<void>(name);
+}
+
+/// generated route for
+/// [_i7.SchedulingPage]
+class SchedulingRoute extends _i9.PageRouteInfo<void> {
+  const SchedulingRoute({List<_i9.PageRouteInfo>? children})
+      : super(
+          SchedulingRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'SchedulingRoute';
 
   static const _i9.PageInfo<void> page = _i9.PageInfo<void>(name);
 }

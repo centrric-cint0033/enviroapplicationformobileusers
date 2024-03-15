@@ -1,6 +1,6 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:enviro_mobile_application/view/home_page/home_page.dart';
-import 'package:enviro_mobile_application/view/intranet_page/intranet_page.dart';
+import 'package:enviro_mobile_application/view/home_page.dart';
+import 'package:enviro_mobile_application/view/07_intranet/intranet_page.dart';
 
 import 'package:enviro_mobile_application/view/loginpage/common/appbar/bottombar.dart';
 import 'package:enviro_mobile_application/view/loginpage/Common_widgets/homepage.dart';

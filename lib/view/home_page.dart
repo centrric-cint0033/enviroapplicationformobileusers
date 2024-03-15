@@ -149,7 +149,7 @@ void onsalesfunction(BuildContext context) async {
       ),
     );
   } else {
-    router.pushNamed(RouteNames.salesmainpage);
+    router.pushNamed(RouteNames.rSalesPpage);
     vmquotereg.quoteregviewmodelfunction();
     vmsalesperformance.saleslistviewmodelfunction();
     vmjoblists.vehiclelistviewmodelfunction();
@@ -166,7 +166,7 @@ void intranetfuntion(BuildContext context) {
 }
 
 void calenderfunction(BuildContext context) {
-  context.router.pushNamed(RouteNames.calenderpage);
+  context.router.pushNamed(RouteNames.rSchedulingPage);
   print('Notification button tapped!');
 }
 

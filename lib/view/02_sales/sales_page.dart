@@ -13,8 +13,8 @@ import 'package:enviro_mobile_application/view/sales_list/sales_list_page.dart';
 import 'package:flutter/material.dart';
 
 @RoutePage()
-class SalesMainPage extends StatelessWidget {
-  const SalesMainPage({super.key});
+class SalesPage extends StatelessWidget {
+  const SalesPage({super.key});
 
   @override
   Widget build(BuildContext context) {
