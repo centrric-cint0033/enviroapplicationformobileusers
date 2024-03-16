@@ -1,7 +1,10 @@
 import 'package:enviro_mobile_application/view/loginpage/common/appbar/cmcustomformfield.dart';
+import 'package:enviro_mobile_application/viewmodel/oh&s_news_folder/oh&s_news_fldr_view_model.dart';
 import 'package:enviro_mobile_application/viewmodel/oh&s_page/oh&s_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+
+import '../../../../model/oh&snews_folder/oh&snews_fldr_model.dart';
 
 class NewsPage extends StatelessWidget {
   @override
@@ -157,16 +160,30 @@ class NewsPage extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 15),
-              ListView(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                children: [
-                  _buildCard('EnviroHill'),
-                  _buildCard('Enviro digital mesh'),
-                  _buildCard('Enviro pumps'),
-                  _buildCard('Enviro waste'),
-                ],
-              ),
+              Observer(builder: (_) {
+                return ListView.separated(
+                  shrinkWrap: true,
+                  itemCount:
+                      vmohsnewsfolder.newspagefolderResponse.data?.length ?? 0,
+                  physics: const NeverScrollableScrollPhysics(),
+                  separatorBuilder: (BuildContext context, int index) =>
+                      const SizedBox(height: 12.0),
+                  itemBuilder: (BuildContext context, int index) {
+                    var data =
+                        vmohsnewsfolder.newspagefolderResponse.data?[index];
+                    if (data != null) {
+                      List<OhsNewsfldrRespModelFolder> folders = data.folders;
+                      String folderName =
+                          folders.isNotEmpty ? folders[0].files[0].name : '';
+                      return ListTile(
+                        title: _buildCard(folderName),
+                      );
+                    } else {
+                      return Container();
+                    }
+                  },
+                );
+              }),
             ],
           ),
         ),
@@ -174,19 +191,7 @@ class NewsPage extends StatelessWidget {
     );
   }
 
-  void _handlegeneralButtonTap(BuildContext context) {
-    print('Add New button tapped!');
-  }
-
-  void _handleViewButtonTap(BuildContext context) {
-    print('View button tapped!');
-  }
-
-  void _handleButtonTap() {
-    print('Add Folder button tapped!');
-  }
-
-  Widget _buildCard(String cardText) {
+  Widget _buildCard(String folderName) {
     return Container(
       height: 66,
       width: double.infinity,
@@ -206,7 +211,7 @@ class NewsPage extends StatelessWidget {
               Expanded(
                 child: Center(
                   child: Text(
-                    cardText,
+                    folderName,
                     style: const TextStyle(
                       color: Colors.black,
                     ),
@@ -234,5 +239,17 @@ class NewsPage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void _handlegeneralButtonTap(BuildContext context) {
+    print('Add New button tapped!');
+  }
+
+  void _handleViewButtonTap(BuildContext context) {
+    print('View button tapped!');
+  }
+
+  void _handleButtonTap() {
+    print('Add Folder button tapped!');
   }
 }

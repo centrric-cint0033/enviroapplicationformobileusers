@@ -27,11 +27,11 @@ class OhsNewsFolderService implements IAllOhsNewsFolderService {
       (res) async {
         var data = jsonDecode(res.body) as List;
 
-        List<OhsNewsfldrRespModel> ohsnewslist =
+        List<OhsNewsfldrRespModel> ohsnewsfldrlist =
             List<OhsNewsfldrRespModel>.from(
                 data.map((e) => OhsNewsfldrRespModel.fromJson(e)));
 
-        return Right(ohsnewslist);
+        return Right(ohsnewsfldrlist);
       },
     );
   }
