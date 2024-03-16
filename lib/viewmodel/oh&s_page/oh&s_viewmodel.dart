@@ -1,6 +1,6 @@
 import 'package:enviro_mobile_application/model/oh&s/resp/oh&s_resp_model.dart';
 import 'package:enviro_mobile_application/utilis/injection.dart';
-import 'package:enviro_mobile_application/view/service/oh&s_page/i_all_oh&s_service.dart';
+import 'package:enviro_mobile_application/view/service/oh&s_news_page/i_all_oh&s_service.dart';
 
 import 'package:injectable/injectable.dart';
 import 'package:mobx/mobx.dart';

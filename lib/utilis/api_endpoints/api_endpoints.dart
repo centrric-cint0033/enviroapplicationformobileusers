@@ -55,4 +55,5 @@ class ApiEndPoints {
   static const endpointjoblist = '/api/v1/sales/jobs/waste/1/?limit=20';
   static const endpointsaleslist = '/api/v1/sales/performance/waste/2024/3/';
   static const endpointohsnews = '/api/v1/oh_and_s/news/view/1/?limit=8';
+  static const endpointnewsfolder = '/api/v1/oh_and_s/folder/segment/list/1/';
 }

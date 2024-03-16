@@ -44,7 +44,7 @@ class NewsPage extends StatelessWidget {
               Observer(
                 builder: (_) {
                   return SizedBox(
-                    height: 400, // Adjust the height as needed
+                    height: 400,
                     child: ListView.separated(
                       shrinkWrap: true,
                       itemCount: vmohsnews.newspageResponse.data?.length ?? 0,
@@ -175,17 +175,14 @@ class NewsPage extends StatelessWidget {
   }
 
   void _handlegeneralButtonTap(BuildContext context) {
-    // Your logic for handling the "Add New" button tap goes here
     print('Add New button tapped!');
   }
 
   void _handleViewButtonTap(BuildContext context) {
-    // Your logic for handling the "View" button tap goes here
     print('View button tapped!');
   }
 
   void _handleButtonTap() {
-    // Your logic for handling the "Add Folder" button tap goes here
     print('Add Folder button tapped!');
   }
 
