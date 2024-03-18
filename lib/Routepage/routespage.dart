@@ -6,4 +6,5 @@ class RouteNames {
   static const String intranetpage = '/intranetpage';
   static const String calenderpage = '/calenderpage';
   static const String vehiclemainpage = '/vehicle_main_page';
+  static const String newsfolderinsidepage = '/newsfolderinsidepage';
 }

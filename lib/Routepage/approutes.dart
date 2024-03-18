@@ -25,5 +25,8 @@ class AppRouter extends $AppRouter {
         AutoRoute(page: CalendarRoute.page, path: RouteNames.calenderpage),
         AutoRoute(
             page: VehicleMainRoute.page, path: RouteNames.vehiclemainpage),
+        AutoRoute(
+            page: NewsRouteInsideRoute.page,
+            path: RouteNames.newsfolderinsidepage),
       ];
 }

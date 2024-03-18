@@ -1,16 +1,18 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:enviro_mobile_application/view/loginpage/common/appbar/cmcustomformfield.dart';
 import 'package:enviro_mobile_application/viewmodel/oh&s_news_folder/oh&s_news_fldr_view_model.dart';
 import 'package:enviro_mobile_application/viewmodel/oh&s_page/oh&s_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
+import '../../../../Routepage/routespage.dart';
 import '../../../../model/oh&snews_folder/oh&snews_fldr_model.dart';
 
 class NewsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(18.0),
+      padding: const EdgeInsets.only(left: 8.0, right: 8.0, bottom: 8.0),
       child: Scaffold(
         body: SingleChildScrollView(
           child: Column(
@@ -162,7 +164,7 @@ class NewsPage extends StatelessWidget {
                   ),
                 ),
               ),
-              const SizedBox(height: 2),
+              const SizedBox(height: 16),
               Observer(builder: (_) {
                 return ListView.separated(
                   shrinkWrap: true,
@@ -182,7 +184,7 @@ class NewsPage extends StatelessWidget {
 
                     if (data != null) {
                       String folderName = data.name;
-                      return _buildCard(folderName);
+                      return _buildCard(folderName, context);
                     } else {
                       return Container();
                     }
@@ -196,54 +198,60 @@ class NewsPage extends StatelessWidget {
     );
   }
 
-  Widget _buildCard(String folderName) {
-    return Container(
-      height: 57,
-      width: double.infinity,
-      child: Card(
-        color: Colors.white,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(18.0),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(15.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const Icon(Icons.folder, color: Colors.black26),
-              Expanded(
-                child: Center(
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 8.0),
-                    child: Text(
-                      folderName,
-                      style: const TextStyle(
-                        color: Colors.black,
+  Widget _buildCard(String folderName, BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        print('Delete button tapped!');
+        newsfolderclickfunction(context);
+      },
+      child: Container(
+        height: 57,
+        width: double.infinity,
+        child: Card(
+          color: Colors.white,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(18.0),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(15.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Icon(Icons.folder, color: Colors.black26),
+                Expanded(
+                  child: Center(
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 8.0),
+                      child: Text(
+                        folderName,
+                        style: const TextStyle(
+                          color: Colors.black,
+                        ),
                       ),
                     ),
                   ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 15.0),
-                child: Row(
-                  children: [
-                    IconButton(
-                      icon: const Icon(Icons.edit, color: Colors.black26),
-                      onPressed: () {
-                        print('Edit button tapped!');
-                      },
-                    ),
-                    IconButton(
-                      icon: const Icon(Icons.delete, color: Colors.black26),
-                      onPressed: () {
-                        print('Delete button tapped!');
-                      },
-                    ),
-                  ],
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 15.0),
+                  child: Row(
+                    children: [
+                      IconButton(
+                        icon: const Icon(Icons.edit, color: Colors.black26),
+                        onPressed: () {
+                          print('Edit button tapped!');
+                        },
+                      ),
+                      IconButton(
+                        icon: const Icon(Icons.delete, color: Colors.black26),
+                        onPressed: () {
+                          print('Delete button tapped!');
+                        },
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
@@ -260,5 +268,10 @@ class NewsPage extends StatelessWidget {
 
   void _handleButtonTap() {
     print('Add Folder button tapped!');
+  }
+
+  void newsfolderclickfunction(BuildContext context) async {
+    print('Delete button tapped!');
+    context.router.pushNamed(RouteNames.newsfolderinsidepage);
   }
 }
