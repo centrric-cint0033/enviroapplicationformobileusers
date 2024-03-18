@@ -13,13 +13,13 @@ mixin _$CarPageViewModel on AllCarPageViewModelBase, Store {
       Atom(name: 'AllCarPageViewModelBase.status', context: context);
 
   @override
-  CarActionType? get status {
+  InvalidType get status {
     _$statusAtom.reportRead();
     return super.status;
   }
 
   @override
-  set status(CarActionType? value) {
+  set status(InvalidType value) {
     _$statusAtom.reportWrite(value, super.status, () {
       super.status = value;
     });
@@ -78,7 +78,7 @@ mixin _$CarPageViewModel on AllCarPageViewModelBase, Store {
       context: context);
 
   @override
-  Future<void> mastercarfunction({CarActionType? drop}) {
+  Future<void> mastercarfunction({InvalidType drop}) {
     return _$mastercarfunctionAsyncAction
         .run(() => super.mastercarfunction(drop: drop));
   }
@@ -88,7 +88,7 @@ mixin _$CarPageViewModel on AllCarPageViewModelBase, Store {
       context: context);
 
   @override
-  Future<void> fuelsearchfunction({ActionType? searchdrop}) {
+  Future<void> fuelsearchfunction({InvalidType searchdrop}) {
     return _$fuelsearchfunctionAsyncAction
         .run(() => super.fuelsearchfunction(searchdrop: searchdrop));
   }

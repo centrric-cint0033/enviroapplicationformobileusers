@@ -13,13 +13,13 @@ mixin _$SemiTrailorPageViewModel on AllSemiTrailorPageViewModelBase, Store {
       Atom(name: 'AllSemiTrailorPageViewModelBase.status', context: context);
 
   @override
-  MasterTruckActionType? get status {
+  InvalidType get status {
     _$statusAtom.reportRead();
     return super.status;
   }
 
   @override
-  set status(MasterTruckActionType? value) {
+  set status(InvalidType value) {
     _$statusAtom.reportWrite(value, super.status, () {
       super.status = value;
     });
@@ -83,7 +83,7 @@ mixin _$SemiTrailorPageViewModel on AllSemiTrailorPageViewModelBase, Store {
       context: context);
 
   @override
-  Future<void> trailorfunction({MasterTruckActionType? semitruckdrop}) {
+  Future<void> trailorfunction({InvalidType semitruckdrop}) {
     return _$trailorfunctionAsyncAction
         .run(() => super.trailorfunction(semitruckdrop: semitruckdrop));
   }
@@ -93,7 +93,7 @@ mixin _$SemiTrailorPageViewModel on AllSemiTrailorPageViewModelBase, Store {
       context: context);
 
   @override
-  Future<void> semifueltrucksearchfunction({ActionType? searchsemidrop}) {
+  Future<void> semifueltrucksearchfunction({InvalidType searchsemidrop}) {
     return _$semifueltrucksearchfunctionAsyncAction.run(() =>
         super.semifueltrucksearchfunction(searchsemidrop: searchsemidrop));
   }

@@ -13,13 +13,13 @@ mixin _$TruckPageViewModel on AllTruckPageViewModelBase, Store {
       Atom(name: 'AllTruckPageViewModelBase.status', context: context);
 
   @override
-  ActionType? get status {
+  InvalidType get status {
     _$statusAtom.reportRead();
     return super.status;
   }
 
   @override
-  set status(ActionType? value) {
+  set status(InvalidType value) {
     _$statusAtom.reportWrite(value, super.status, () {
       super.status = value;
     });
@@ -82,7 +82,7 @@ mixin _$TruckPageViewModel on AllTruckPageViewModelBase, Store {
       context: context);
 
   @override
-  Future<void> truckPageFunction({ActionType? truckdrop}) {
+  Future<void> truckPageFunction({InvalidType truckdrop}) {
     return _$truckPageFunctionAsyncAction
         .run(() => super.truckPageFunction(truckdrop: truckdrop));
   }
@@ -93,7 +93,7 @@ mixin _$TruckPageViewModel on AllTruckPageViewModelBase, Store {
 
   @override
   Future<void> fueltrucksearchfunction(
-      {dynamic value, ActionType? searchtrucksemidrop}) {
+      {dynamic value, InvalidType searchtrucksemidrop}) {
     return _$fueltrucksearchfunctionAsyncAction.run(() => super
         .fueltrucksearchfunction(
             value: value, searchtrucksemidrop: searchtrucksemidrop));

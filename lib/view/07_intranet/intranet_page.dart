@@ -36,7 +36,7 @@ class IntranetPage extends StatelessWidget {
                   const Padding(
                     padding: EdgeInsets.only(left: 18),
                     child: Text('Folders'),
-                  ),
+                  )
                   TextButton(
                     onPressed: _handleIntranetButtonTap,
                     style: ButtonStyle(
