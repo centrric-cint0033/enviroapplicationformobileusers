@@ -67,7 +67,7 @@ class NewsPageInsidePage extends StatelessWidget {
               ],
             ),
           ),
-          const SizedBox(height: 14),
+          const SizedBox(height: 10),
           Expanded(
             child: ListView(
               scrollDirection: Axis.vertical,
@@ -86,7 +86,7 @@ class NewsPageInsidePage extends StatelessWidget {
 
   Widget _buildCard(String cardText) {
     return Container(
-      height: 66,
+      height: 57,
       width: double.infinity,
       margin: const EdgeInsets.all(8.0),
       child: Card(
