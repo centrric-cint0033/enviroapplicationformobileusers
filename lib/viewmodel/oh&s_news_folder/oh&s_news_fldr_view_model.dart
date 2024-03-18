@@ -24,8 +24,8 @@ abstract class OhsNewsFolderViewModelBase with Store {
   OhsNewsFolderViewModelBase(this.OhsnewsfoldrService);
 
   @observable
-  ApiResponse<List<OhsNewsfldrRespModel>> newspagefolderResponse =
-      ApiResponse<List<OhsNewsfldrRespModel>>();
+  ApiResponse<OhsNewsfldrRespModel> newspagefolderResponse =
+      ApiResponse<OhsNewsfldrRespModel>();
 
   @action
   Future<void> ohsnewsfolderviewmodelfunction() async {

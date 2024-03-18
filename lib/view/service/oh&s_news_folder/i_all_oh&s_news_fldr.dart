@@ -4,6 +4,6 @@ import 'package:enviro_mobile_application/model/oh&snews_folder/oh&snews_fldr_mo
 import '../../../utilis/main_failure.dart';
 
 abstract class IAllOhsNewsFolderService {
-  Future<Either<MainFailure, List<OhsNewsfldrRespModel>>>
+  Future<Either<MainFailure, OhsNewsfldrRespModel>>
       ohsnewsfolderservicefunction();
 }

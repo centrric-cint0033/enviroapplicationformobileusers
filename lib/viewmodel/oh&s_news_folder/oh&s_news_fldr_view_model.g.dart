@@ -14,13 +14,13 @@ mixin _$OhsNewsFolderViewModel on OhsNewsFolderViewModelBase, Store {
       context: context);
 
   @override
-  ApiResponse<List<OhsNewsfldrRespModel>> get newspagefolderResponse {
+  ApiResponse<OhsNewsfldrRespModel> get newspagefolderResponse {
     _$newspagefolderResponseAtom.reportRead();
     return super.newspagefolderResponse;
   }
 
   @override
-  set newspagefolderResponse(ApiResponse<List<OhsNewsfldrRespModel>> value) {
+  set newspagefolderResponse(ApiResponse<OhsNewsfldrRespModel> value) {
     _$newspagefolderResponseAtom
         .reportWrite(value, super.newspagefolderResponse, () {
       super.newspagefolderResponse = value;

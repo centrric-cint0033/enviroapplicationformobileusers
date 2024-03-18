@@ -12,7 +12,7 @@ import 'package:injectable/injectable.dart';
 @LazySingleton(as: IAllOhsNewsFolderService)
 class OhsNewsFolderService implements IAllOhsNewsFolderService {
   @override
-  Future<Either<MainFailure, List<OhsNewsfldrRespModel>>>
+  Future<Either<MainFailure, OhsNewsfldrRespModel>>
       ohsnewsfolderservicefunction() async {
     var response = await getIt<HttpService>().request(
         authenticated: true,
@@ -25,11 +25,10 @@ class OhsNewsFolderService implements IAllOhsNewsFolderService {
         return Left(l.keys.first);
       },
       (res) async {
-        var data = jsonDecode(res.body) as List;
+        // var data = jsonDecode(res.body) as List;
 
-        List<OhsNewsfldrRespModel> ohsnewsfldrlist =
-            List<OhsNewsfldrRespModel>.from(
-                data.map((e) => OhsNewsfldrRespModel.fromJson(e)));
+        OhsNewsfldrRespModel ohsnewsfldrlist =
+            OhsNewsfldrRespModel.fromJson(jsonDecode(res.body));
 
         return Right(ohsnewsfldrlist);
       },

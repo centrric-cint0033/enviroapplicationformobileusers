@@ -163,18 +163,22 @@ class NewsPage extends StatelessWidget {
               Observer(builder: (_) {
                 return ListView.separated(
                   shrinkWrap: true,
-                  itemCount:
-                      vmohsnewsfolder.newspagefolderResponse.data?.length ?? 0,
+                  itemCount: vmohsnewsfolder
+                              .newspagefolderResponse.data?.folders.isEmpty ??
+                          true
+                      ? 0
+                      : vmohsnewsfolder.newspagefolderResponse.data?.folders[0]
+                              .folders.length ??
+                          0,
                   physics: const NeverScrollableScrollPhysics(),
                   separatorBuilder: (BuildContext context, int index) =>
                       const SizedBox(height: 12.0),
                   itemBuilder: (BuildContext context, int index) {
-                    var data =
-                        vmohsnewsfolder.newspagefolderResponse.data?[index];
+                    var data = vmohsnewsfolder
+                        .newspagefolderResponse.data?.folders[0].folders[index];
+
                     if (data != null) {
-                      List<OhsNewsfldrRespModelFolder> folders = data.folders;
-                      String folderName =
-                          folders.isNotEmpty ? folders[0].files[0].name : '';
+                      String folderName = data.name;
                       return ListTile(
                         title: _buildCard(folderName),
                       );
