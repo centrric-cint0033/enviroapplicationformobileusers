@@ -148,18 +148,21 @@ class NewsPage extends StatelessWidget {
                   ),
                 ],
               ),
-              const SizedBox(height: 25),
-              Cmformfield(
-                borderColor: Colors.black12,
-                cursorHeight: 25,
-                hinttext: 'Search by folder name',
-                height: 18,
+              const SizedBox(height: 18),
+              Container(
+                height: 50,
                 width: double.infinity,
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(35),
+                child: Cmformfield(
+                  borderColor: Colors.black12,
+                  cursorHeight: 15,
+                  hinttext: 'Search by folder name',
+                  width: double.infinity,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(35),
+                  ),
                 ),
               ),
-              const SizedBox(height: 15),
+              const SizedBox(height: 2),
               Observer(builder: (_) {
                 return ListView.separated(
                   shrinkWrap: true,
@@ -172,16 +175,14 @@ class NewsPage extends StatelessWidget {
                           0,
                   physics: const NeverScrollableScrollPhysics(),
                   separatorBuilder: (BuildContext context, int index) =>
-                      const SizedBox(height: 12.0),
+                      const SizedBox(height: 6.0),
                   itemBuilder: (BuildContext context, int index) {
                     var data = vmohsnewsfolder
                         .newspagefolderResponse.data?.folders[0].folders[index];
 
                     if (data != null) {
                       String folderName = data.name;
-                      return ListTile(
-                        title: _buildCard(folderName),
-                      );
+                      return _buildCard(folderName);
                     } else {
                       return Container();
                     }
@@ -197,46 +198,50 @@ class NewsPage extends StatelessWidget {
 
   Widget _buildCard(String folderName) {
     return Container(
-      height: 66,
+      height: 57,
       width: double.infinity,
-      margin: const EdgeInsets.all(8.0),
       child: Card(
-        elevation: 4.0,
         color: Colors.white,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(18.0),
         ),
         child: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(15.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               const Icon(Icons.folder, color: Colors.black26),
               Expanded(
                 child: Center(
-                  child: Text(
-                    folderName,
-                    style: const TextStyle(
-                      color: Colors.black,
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 8.0),
+                    child: Text(
+                      folderName,
+                      style: const TextStyle(
+                        color: Colors.black,
+                      ),
                     ),
                   ),
                 ),
               ),
-              Row(
-                children: [
-                  IconButton(
-                    icon: const Icon(Icons.edit, color: Colors.black26),
-                    onPressed: () {
-                      print('Edit button tapped!');
-                    },
-                  ),
-                  IconButton(
-                    icon: const Icon(Icons.delete, color: Colors.black26),
-                    onPressed: () {
-                      print('Delete button tapped!');
-                    },
-                  ),
-                ],
+              Padding(
+                padding: const EdgeInsets.only(bottom: 15.0),
+                child: Row(
+                  children: [
+                    IconButton(
+                      icon: const Icon(Icons.edit, color: Colors.black26),
+                      onPressed: () {
+                        print('Edit button tapped!');
+                      },
+                    ),
+                    IconButton(
+                      icon: const Icon(Icons.delete, color: Colors.black26),
+                      onPressed: () {
+                        print('Delete button tapped!');
+                      },
+                    ),
+                  ],
+                ),
               ),
             ],
           ),

@@ -33,13 +33,13 @@ import 'package:enviro_mobile_application/view/service/oh&s_news_folder/i_all_oh
 import 'package:enviro_mobile_application/view/service/oh&s_news_folder/oh&s_news_fldr_service.dart'
     as _i11;
 import 'package:enviro_mobile_application/view/service/oh&s_news_page/i_all_oh&s_service.dart'
-    as _i12;
-import 'package:enviro_mobile_application/view/service/oh&s_news_page/oh&s_page_news_service.dart'
-    as _i13;
-import 'package:enviro_mobile_application/view/service/oh&s_page/i_all_oh&s_service.dart'
     as _i14;
-import 'package:enviro_mobile_application/view/service/oh&s_page/oh&s_page_service.dart'
+import 'package:enviro_mobile_application/view/service/oh&s_news_page/oh&s_page_news_service.dart'
     as _i15;
+import 'package:enviro_mobile_application/view/service/oh&s_page/i_all_oh&s_service.dart'
+    as _i12;
+import 'package:enviro_mobile_application/view/service/oh&s_page/oh&s_page_service.dart'
+    as _i13;
 import 'package:enviro_mobile_application/view/service/quote_reg_page/i_all_quote_reg_service.dart'
     as _i16;
 import 'package:enviro_mobile_application/view/service/quote_reg_page/quote_reg_service.dart'
@@ -124,7 +124,7 @@ extension GetItInjectableX on _i1.GetIt {
     gh.factory<_i31.OhsNewsFolderViewModel>(
         () => _i31.OhsNewsFolderViewModel(gh<_i10.IAllOhsNewsFolderService>()));
     gh.factory<_i32.OhsNewsViewModel>(
-        () => _i32.OhsNewsViewModel(gh<_i12.IAllOhsService>()));
+        () => _i32.OhsNewsViewModel(gh<_i14.IAllOhsService>()));
     gh.factory<_i33.QuoteRegPageViewModel>(
         () => _i33.QuoteRegPageViewModel(gh<_i16.IAllQuoteRegService>()));
     gh.factory<_i34.SalesPerformanceViewModel>(
