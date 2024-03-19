@@ -24,7 +24,9 @@ class NewsPage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     TextButton(
-                      onPressed: () => _handlegeneralButtonTap(context),
+                      onPressed: () {
+                        _showMyDialog(context);
+                      },
                       style: ButtonStyle(
                         side: MaterialStateProperty.all<BorderSide>(
                           const BorderSide(color: Colors.blue),
@@ -196,6 +198,104 @@ class NewsPage extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+
+  Future<void> _showMyDialog(BuildContext context) async {
+    TextEditingController textFieldController1 = TextEditingController();
+    TextEditingController textFieldController2 = TextEditingController();
+    TextEditingController textFieldController3 = TextEditingController();
+    TextEditingController textFieldController4 = TextEditingController();
+
+    showDialog<void>(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),
+          content: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                SizedBox(
+                  height: 30,
+                  child: TextField(
+                    controller: textFieldController1,
+                    decoration: const InputDecoration(
+                      labelText: 'Title',
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(10))),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 20),
+                Container(
+                  child: TextField(
+                    controller: textFieldController2,
+                    decoration: const InputDecoration(
+                      labelText: 'Description',
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(10))),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 20),
+                SizedBox(
+                  height: 30,
+                  child: TextField(
+                    controller: textFieldController3,
+                    decoration: const InputDecoration(
+                      labelText: 'Add Member',
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(10))),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 17),
+                SizedBox(
+                  height: 30,
+                  child: TextField(
+                    controller: textFieldController4,
+                    decoration: const InputDecoration(
+                      labelText: 'Add File+',
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(
+                              10))), // Add border to the text field
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: const Text(
+                'Cancel',
+                style: TextStyle(color: Colors.black),
+              ),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              child: const Text(
+                'OK',
+                style: TextStyle(color: Colors.black),
+              ),
+              onPressed: () {
+                // Access the text from the text controllers
+                String text1 = textFieldController1.text;
+                String text2 = textFieldController2.text;
+                String text3 = textFieldController3.text;
+                String text4 = textFieldController4.text;
+
+                // Perform actions with the text or close the dialog
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 

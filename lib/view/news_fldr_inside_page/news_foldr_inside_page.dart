@@ -46,7 +46,7 @@ class NewsPageInsidePage extends StatelessWidget {
                   }
                 }
               }
-              return const SizedBox(); // Return an empty widget if data is not available
+              return const SizedBox();
             }),
           ),
           Padding(
@@ -108,7 +108,7 @@ class NewsPageInsidePage extends StatelessWidget {
                   );
                 }
               }
-              return const SizedBox(); // Return an empty widget if data is not available
+              return const SizedBox();
             }),
           ),
         ],
