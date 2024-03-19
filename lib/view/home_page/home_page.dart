@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:dartz/dartz.dart';
 import 'package:enviro_mobile_application/Routepage/routespage.dart';
 import 'package:enviro_mobile_application/view/service/master_car_page/master_car_service.dart';
 import 'package:enviro_mobile_application/viewmodel/car_page/car_page_viewmodel.dart';
@@ -161,7 +162,7 @@ void onsalesfunction(BuildContext context) async {
 void ohsfunction(BuildContext context) {
   context.router.pushNamed(RouteNames.ohsPage);
   vmohsnews.ohsnewsviewmodelfunction();
-  vmohsnewsfolder.ohsnewsfolderviewmodelfunction();
+  vmohsnewsfolder.ohsnewsfolderviewmodelfunction(1);
 }
 
 void intranetfuntion(BuildContext context) {

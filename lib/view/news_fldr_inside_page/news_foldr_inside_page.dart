@@ -1,5 +1,7 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:enviro_mobile_application/viewmodel/oh&s_news_folder/oh&s_news_fldr_view_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 
 @RoutePage()
 class NewsPageInsidePage extends StatelessWidget {
@@ -67,24 +69,41 @@ class NewsPageInsidePage extends StatelessWidget {
               ],
             ),
           ),
-          const SizedBox(height: 10),
+          const SizedBox(height: 14),
           Expanded(
-            child: ListView(
-              scrollDirection: Axis.vertical,
-              children: [
-                _buildCard('EnviroHill'),
-                _buildCard('Enviro digital mesh'),
-                _buildCard('Enviro pumps'),
-                _buildCard('Enviro waste'),
-              ],
-            ),
+            child: Observer(builder: (_) {
+              return ListView.separated(
+                shrinkWrap: true,
+                itemCount: vmohsnewsfolder.newspagefolderinsideResponse.data
+                            ?.folders.isEmpty ??
+                        true
+                    ? 0
+                    : vmohsnewsfolder.newspagefolderinsideResponse.data
+                            ?.folders[0].folders.length ??
+                        0,
+                physics: const NeverScrollableScrollPhysics(),
+                separatorBuilder: (BuildContext context, int index) =>
+                    const SizedBox(height: 6.0),
+                itemBuilder: (BuildContext context, int index) {
+                  var data = vmohsnewsfolder.newspagefolderinsideResponse.data
+                      ?.folders[0].folders[index];
+
+                  if (data != null) {
+                    String folderName = data.name;
+                    return _buildCard(folderName, context);
+                  } else {
+                    return Container();
+                  }
+                },
+              );
+            }),
           ),
         ],
       ),
     );
   }
 
-  Widget _buildCard(String cardText) {
+  Widget _buildCard(String folderName, BuildContext context) {
     return Container(
       height: 57,
       width: double.infinity,
@@ -104,7 +123,7 @@ class NewsPageInsidePage extends StatelessWidget {
               Expanded(
                 child: Center(
                   child: Text(
-                    cardText,
+                    folderName,
                     style: const TextStyle(
                       color: Colors.black,
                     ),

@@ -5,5 +5,5 @@ import '../../../utilis/main_failure.dart';
 
 abstract class IAllOhsNewsFolderService {
   Future<Either<MainFailure, OhsNewsfldrRespModel>>
-      ohsnewsfolderservicefunction();
+      ohsnewsfolderservicefunction(int id);
 }

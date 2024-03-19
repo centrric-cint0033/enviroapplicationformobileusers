@@ -13,7 +13,7 @@ import 'package:injectable/injectable.dart';
 class OhsNewsFolderService implements IAllOhsNewsFolderService {
   @override
   Future<Either<MainFailure, OhsNewsfldrRespModel>>
-      ohsnewsfolderservicefunction() async {
+      ohsnewsfolderservicefunction(int id) async {
     var response = await getIt<HttpService>().request(
         authenticated: true,
         method: HttpMethod.get,

@@ -28,11 +28,11 @@ abstract class OhsNewsFolderViewModelBase with Store {
       ApiResponse<OhsNewsfldrRespModel>();
 
   @action
-  Future<void> ohsnewsfolderviewmodelfunction() async {
+  Future<void> ohsnewsfolderviewmodelfunction(int id) async {
     newspagefolderResponse =
         newspagefolderResponse.copyWith(error: null, loading: true);
 
-    final result = await OhsnewsfoldrService.ohsnewsfolderservicefunction();
+    final result = await OhsnewsfoldrService.ohsnewsfolderservicefunction(id);
     return result.fold(
       (l) {
         newspagefolderResponse = newspagefolderResponse.copyWith(
@@ -42,6 +42,33 @@ abstract class OhsNewsFolderViewModelBase with Store {
       },
       (r) {
         newspagefolderResponse = newspagefolderResponse.copyWith(
+          data: r,
+          error: null,
+          loading: false,
+        );
+      },
+    );
+  }
+
+  @observable
+  ApiResponse<OhsNewsfldrRespModel> newspagefolderinsideResponse =
+      ApiResponse<OhsNewsfldrRespModel>();
+
+  @action
+  Future<void> newspagefolderinsidefunction(int id) async {
+    newspagefolderinsideResponse =
+        newspagefolderinsideResponse.copyWith(error: null, loading: true);
+
+    final result = await OhsnewsfoldrService.ohsnewsfolderservicefunction(id);
+    return result.fold(
+      (l) {
+        newspagefolderinsideResponse = newspagefolderinsideResponse.copyWith(
+          error: l,
+          loading: false,
+        );
+      },
+      (r) {
+        newspagefolderinsideResponse = newspagefolderinsideResponse.copyWith(
           data: r,
           error: null,
           loading: false,

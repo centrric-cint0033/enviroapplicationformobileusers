@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:dartz/dartz.dart';
 import 'package:enviro_mobile_application/view/loginpage/common/appbar/cmcustomformfield.dart';
 import 'package:enviro_mobile_application/viewmodel/oh&s_news_folder/oh&s_news_fldr_view_model.dart';
 import 'package:enviro_mobile_application/viewmodel/oh&s_page/oh&s_viewmodel.dart';
@@ -201,8 +202,8 @@ class NewsPage extends StatelessWidget {
   Widget _buildCard(String folderName, BuildContext context) {
     return GestureDetector(
       onTap: () {
-        print('Delete button tapped!');
-        newsfolderclickfunction(context);
+        print('cdvfsdg');
+        newsfolderclickfunction(context, 1745);
       },
       child: Container(
         height: 57,
@@ -270,8 +271,8 @@ class NewsPage extends StatelessWidget {
     print('Add Folder button tapped!');
   }
 
-  void newsfolderclickfunction(BuildContext context) async {
-    print('Delete button tapped!');
+  void newsfolderclickfunction(BuildContext context, int id) async {
     context.router.pushNamed(RouteNames.newsfolderinsidepage);
+    vmohsnewsfolder.newspagefolderinsidefunction(id);
   }
 }

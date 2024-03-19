@@ -27,20 +27,49 @@ mixin _$OhsNewsFolderViewModel on OhsNewsFolderViewModelBase, Store {
     });
   }
 
+  late final _$newspagefolderinsideResponseAtom = Atom(
+      name: 'OhsNewsFolderViewModelBase.newspagefolderinsideResponse',
+      context: context);
+
+  @override
+  ApiResponse<OhsNewsfldrRespModel> get newspagefolderinsideResponse {
+    _$newspagefolderinsideResponseAtom.reportRead();
+    return super.newspagefolderinsideResponse;
+  }
+
+  @override
+  set newspagefolderinsideResponse(ApiResponse<OhsNewsfldrRespModel> value) {
+    _$newspagefolderinsideResponseAtom
+        .reportWrite(value, super.newspagefolderinsideResponse, () {
+      super.newspagefolderinsideResponse = value;
+    });
+  }
+
   late final _$ohsnewsfolderviewmodelfunctionAsyncAction = AsyncAction(
       'OhsNewsFolderViewModelBase.ohsnewsfolderviewmodelfunction',
       context: context);
 
   @override
-  Future<void> ohsnewsfolderviewmodelfunction() {
+  Future<void> ohsnewsfolderviewmodelfunction(int id) {
     return _$ohsnewsfolderviewmodelfunctionAsyncAction
-        .run(() => super.ohsnewsfolderviewmodelfunction());
+        .run(() => super.ohsnewsfolderviewmodelfunction(id));
+  }
+
+  late final _$newspagefolderinsidefunctionAsyncAction = AsyncAction(
+      'OhsNewsFolderViewModelBase.newspagefolderinsidefunction',
+      context: context);
+
+  @override
+  Future<void> newspagefolderinsidefunction(int id) {
+    return _$newspagefolderinsidefunctionAsyncAction
+        .run(() => super.newspagefolderinsidefunction(id));
   }
 
   @override
   String toString() {
     return '''
-newspagefolderResponse: ${newspagefolderResponse}
+newspagefolderResponse: ${newspagefolderResponse},
+newspagefolderinsideResponse: ${newspagefolderinsideResponse}
     ''';
   }
 }
