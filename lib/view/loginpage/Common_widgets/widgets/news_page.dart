@@ -185,7 +185,7 @@ class NewsPage extends StatelessWidget {
 
                     if (data != null) {
                       String folderName = data.name;
-                      return _buildCard(folderName, context);
+                      return _buildCard(folderName, context, data.id);
                     } else {
                       return Container();
                     }
@@ -199,11 +199,11 @@ class NewsPage extends StatelessWidget {
     );
   }
 
-  Widget _buildCard(String folderName, BuildContext context) {
+  Widget _buildCard(String folderName, BuildContext context, int id) {
     return GestureDetector(
       onTap: () {
-        print('cdvfsdg');
-        newsfolderclickfunction(context, 1745);
+        print('cdvfsdg $id');
+        newsfolderclickfunction(context, id);
       },
       child: Container(
         height: 57,
@@ -272,7 +272,7 @@ class NewsPage extends StatelessWidget {
   }
 
   void newsfolderclickfunction(BuildContext context, int id) async {
-    context.router.pushNamed(RouteNames.newsfolderinsidepage);
     vmohsnewsfolder.newspagefolderinsidefunction(id);
+    context.router.pushNamed(RouteNames.newsfolderinsidepage);
   }
 }

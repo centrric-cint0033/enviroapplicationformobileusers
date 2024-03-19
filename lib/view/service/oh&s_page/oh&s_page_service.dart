@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:dartz/dartz.dart';
 import 'package:enviro_mobile_application/model/oh&s/resp/oh&s_resp_model.dart';
 import 'package:enviro_mobile_application/utilis/api_endpoints/api_endpoints.dart';
+import 'package:enviro_mobile_application/utilis/api_endpoints/customprint.dart';
 import 'package:enviro_mobile_application/utilis/httpservice.dart';
 import 'package:enviro_mobile_application/utilis/injection.dart';
 import 'package:enviro_mobile_application/utilis/main_failure.dart';
@@ -25,10 +26,13 @@ class OhsPageService implements IAllOhsService {
       },
       (res) async {
         var data = jsonDecode(res.body) as List;
-
-        List<OhsRespModel> ohsnewslist =
-            List<OhsRespModel>.from(data.map((e) => OhsRespModel.fromJson(e)));
-
+        List<OhsRespModel> ohsnewslist = [];
+        try {
+          ohsnewslist = List<OhsRespModel>.from(
+              data.map((e) => OhsRespModel.fromJson(e)));
+        } catch (e) {
+          customPrint(content: e.toString(), name: "Exception::::");
+        }
         return Right(ohsnewslist);
       },
     );

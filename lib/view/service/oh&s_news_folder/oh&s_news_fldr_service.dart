@@ -17,7 +17,7 @@ class OhsNewsFolderService implements IAllOhsNewsFolderService {
     var response = await getIt<HttpService>().request(
         authenticated: true,
         method: HttpMethod.get,
-        apiUrl: ApiEndPoints.endpointnewsfolder);
+        apiUrl: '${ApiEndPoints.endpointnewsfolder}/$id');
 
     return response.fold(
       (l) {
@@ -26,7 +26,7 @@ class OhsNewsFolderService implements IAllOhsNewsFolderService {
       },
       (res) async {
         // var data = jsonDecode(res.body) as List;
-
+        print(res.body);
         OhsNewsfldrRespModel ohsnewsfldrlist =
             OhsNewsfldrRespModel.fromJson(jsonDecode(res.body));
 
