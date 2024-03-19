@@ -130,29 +130,34 @@ class NewsPage extends StatelessWidget {
                 },
               ),
               const SizedBox(height: 10),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: Text('Folders'),
-                  ),
-                  TextButton(
-                    onPressed: _handleButtonTap,
-                    style: ButtonStyle(
-                      side: MaterialStateProperty.all<BorderSide>(
-                        const BorderSide(color: Colors.blue),
+              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+                const Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Text('Folders'),
+                ),
+                TextButton(
+                  onPressed: () {
+                    _showMyfolderDialog(context);
+                  },
+                  style: ButtonStyle(
+                    side: MaterialStateProperty.all<BorderSide>(
+                      const BorderSide(color: Colors.blue),
+                    ),
+                    backgroundColor: MaterialStateProperty.all<Color>(
+                      const Color.fromARGB(255, 188, 209, 228),
+                    ),
+                    shape: MaterialStateProperty.all<OutlinedBorder>(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(18.0),
                       ),
-                      backgroundColor:
-                          MaterialStateProperty.all<Color>(Colors.white),
-                    ),
-                    child: const Text(
-                      'Add Folder +',
-                      style: TextStyle(color: Colors.blue),
                     ),
                   ),
-                ],
-              ),
+                  child: const Text(
+                    'Add folder+',
+                    style: TextStyle(color: Colors.blue),
+                  ),
+                ),
+              ]),
               const SizedBox(height: 18),
               Container(
                 height: 50,
@@ -283,13 +288,64 @@ class NewsPage extends StatelessWidget {
                 style: TextStyle(color: Colors.black),
               ),
               onPressed: () {
-                // Access the text from the text controllers
-                String text1 = textFieldController1.text;
-                String text2 = textFieldController2.text;
-                String text3 = textFieldController3.text;
-                String text4 = textFieldController4.text;
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
 
-                // Perform actions with the text or close the dialog
+  Future<void> _showMyfolderDialog(BuildContext context) async {
+    TextEditingController textFieldController1 = TextEditingController();
+    TextEditingController textFieldController2 = TextEditingController();
+    TextEditingController textFieldController3 = TextEditingController();
+    TextEditingController textFieldController4 = TextEditingController();
+
+    showDialog<void>(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('New Folder'),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+          content: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                const SizedBox(height: 17),
+                SizedBox(
+                  height: 30,
+                  child: TextField(
+                    controller: textFieldController4,
+                    decoration: const InputDecoration(
+                      labelText: 'Untitled folder',
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(
+                              10))), // Add border to the text field
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: const Text(
+                'Cancel',
+                style: TextStyle(color: Colors.black),
+              ),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              child: const Text(
+                'Create',
+                style: TextStyle(color: Colors.black),
+              ),
+              onPressed: () {
                 Navigator.of(context).pop();
               },
             ),
