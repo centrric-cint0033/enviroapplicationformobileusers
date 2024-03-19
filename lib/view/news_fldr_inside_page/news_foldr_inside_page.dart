@@ -1,7 +1,8 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:enviro_mobile_application/viewmodel/oh&s_news_folder/oh&s_news_fldr_view_model.dart';
+import 'package:enviro_mobile_application/model/oh&snews_folder/oh&snews_fldr_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:enviro_mobile_application/viewmodel/oh&s_news_folder/oh&s_news_fldr_view_model.dart';
 
 @RoutePage()
 class NewsPageInsidePage extends StatelessWidget {
@@ -19,19 +20,34 @@ class NewsPageInsidePage extends StatelessWidget {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Padding(
-            padding: EdgeInsets.only(
+          Padding(
+            padding: const EdgeInsets.only(
               left: 18.0,
               right: 18.0,
               top: 18.0,
               bottom: 8.0,
             ),
-            child: Text(
-              'Your Text Here',
-              style: TextStyle(
-                fontSize: 18,
-              ),
-            ),
+            child: Observer(builder: (_) {
+              final response =
+                  vmohsnewsfolder.newspagefolderinsideResponse.data;
+              if (response != null) {
+                final List<OhsNewsfldrRespModelFolder> folders =
+                    response.folders;
+                if (folders.isNotEmpty) {
+                  final List<FolderFolder> subFolders = folders[0].folders;
+                  if (subFolders.isNotEmpty) {
+                    final String folderName = subFolders[0].name;
+                    return Text(
+                      folderName,
+                      style: const TextStyle(
+                        fontSize: 18,
+                      ),
+                    );
+                  }
+                }
+              }
+              return const SizedBox(); // Return an empty widget if data is not available
+            }),
           ),
           Padding(
             padding: const EdgeInsets.all(18.0),
@@ -72,30 +88,27 @@ class NewsPageInsidePage extends StatelessWidget {
           const SizedBox(height: 14),
           Expanded(
             child: Observer(builder: (_) {
-              return ListView.separated(
-                shrinkWrap: true,
-                itemCount: vmohsnewsfolder.newspagefolderinsideResponse.data
-                            ?.folders.isEmpty ??
-                        true
-                    ? 0
-                    : vmohsnewsfolder.newspagefolderinsideResponse.data
-                            ?.folders[0].folders.length ??
-                        0,
-                physics: const NeverScrollableScrollPhysics(),
-                separatorBuilder: (BuildContext context, int index) =>
-                    const SizedBox(height: 6.0),
-                itemBuilder: (BuildContext context, int index) {
-                  var data = vmohsnewsfolder.newspagefolderinsideResponse.data
-                      ?.folders[0].folders[index];
-
-                  if (data != null) {
-                    String folderName = data.name;
-                    return _buildCard(folderName, context);
-                  } else {
-                    return Container();
-                  }
-                },
-              );
+              final response =
+                  vmohsnewsfolder.newspagefolderinsideResponse.data;
+              if (response != null) {
+                final List<OhsNewsfldrRespModelFolder> folders =
+                    response.folders;
+                if (folders.isNotEmpty) {
+                  final List<FolderFolder> subFolders = folders[0].folders;
+                  return ListView.separated(
+                    shrinkWrap: true,
+                    itemCount: subFolders.length,
+                    physics: const NeverScrollableScrollPhysics(),
+                    separatorBuilder: (BuildContext context, int index) =>
+                        const SizedBox(height: 6.0),
+                    itemBuilder: (BuildContext context, int index) {
+                      final folderName = subFolders[index].name;
+                      return _buildCard(folderName, context);
+                    },
+                  );
+                }
+              }
+              return const SizedBox(); // Return an empty widget if data is not available
             }),
           ),
         ],
