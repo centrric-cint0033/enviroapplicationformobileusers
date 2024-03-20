@@ -9,6 +9,8 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:auto_route/auto_route.dart' as _i11;
+import 'package:enviro_mobile_application/model/oh&s/resp/oh&s_resp_model.dart'
+    as _i13;
 import 'package:enviro_mobile_application/view/intranet_page/intranet_page.dart'
     as _i3;
 import 'package:enviro_mobile_application/view/loginpage/calenderpage/calender_page.dart'
@@ -72,10 +74,14 @@ abstract class $AppRouter extends _i11.RootStackRouter {
         child: const _i6.NewsPageInsidePage(),
       );
     },
-    OhsDeatailRoute.name: (routeData) {
+    OhsDetailRoute.name: (routeData) {
+      final args = routeData.argsAs<OhsDetailRouteArgs>();
       return _i11.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i7.OhsDetailPage(),
+        child: _i7.OhsDetailPage(
+          key: args.key,
+          data: args.data,
+        ),
       );
     },
     OhsRoute.name: (routeData) {
@@ -199,17 +205,41 @@ class NewsRouteInsideRoute extends _i11.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i7.OhsDeatailPage]
-class OhsDeatailRoute extends _i11.PageRouteInfo<void> {
-  const OhsDeatailRoute({List<_i11.PageRouteInfo>? children})
-      : super(
-          OhsDeatailRoute.name,
+/// [_i7.OhsDetailPage]
+class OhsDetailRoute extends _i11.PageRouteInfo<OhsDetailRouteArgs> {
+  OhsDetailRoute({
+    _i12.Key? key,
+    required _i13.OhsRespModel data,
+    List<_i11.PageRouteInfo>? children,
+  }) : super(
+          OhsDetailRoute.name,
+          args: OhsDetailRouteArgs(
+            key: key,
+            data: data,
+          ),
           initialChildren: children,
         );
 
-  static const String name = 'OhsDeatailRoute';
+  static const String name = 'OhsDetailRoute';
 
-  static const _i11.PageInfo<void> page = _i11.PageInfo<void>(name);
+  static const _i11.PageInfo<OhsDetailRouteArgs> page =
+      _i11.PageInfo<OhsDetailRouteArgs>(name);
+}
+
+class OhsDetailRouteArgs {
+  const OhsDetailRouteArgs({
+    this.key,
+    required this.data,
+  });
+
+  final _i12.Key? key;
+
+  final _i13.OhsRespModel data;
+
+  @override
+  String toString() {
+    return 'OhsDetailRouteArgs{key: $key, data: $data}';
+  }
 }
 
 /// generated route for

@@ -1,6 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:dartz/dartz.dart';
+import 'package:enviro_mobile_application/Routepage/approutes.gr.dart';
 import 'package:enviro_mobile_application/view/loginpage/common/appbar/cmcustomformfield.dart';
+import 'package:enviro_mobile_application/view/oh&s_detail_page/oh&s_detail_page.dart';
 import 'package:enviro_mobile_application/viewmodel/oh&s_news_folder/oh&s_news_fldr_view_model.dart';
 import 'package:enviro_mobile_application/viewmodel/oh&s_page/oh&s_viewmodel.dart';
 import 'package:flutter/material.dart';
@@ -66,7 +68,7 @@ class NewsPage extends StatelessWidget {
                             height: 120,
                             width: double.infinity,
                             child: GestureDetector(
-                              onTap: () => ohsdetailpagefunction(context),
+                              onTap: () => ohsdetailpagefunction(context, data),
                               child: Card(
                                 color: const Color.fromARGB(255, 188, 209, 228),
                                 child: Container(
@@ -78,6 +80,9 @@ class NewsPage extends StatelessWidget {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.center,
                                       children: [
+                                        // Text(
+                                        //   data?.description ?? '',
+                                        // ),
                                         ListTile(
                                           title: Text(
                                             data?.title ?? '',
@@ -537,7 +542,7 @@ class NewsPage extends StatelessWidget {
     context.router.pushNamed(RouteNames.newsfolderinsidepage);
   }
 
-  void ohsdetailpagefunction(BuildContext context) {
-    context.router.pushNamed(RouteNames.ohsdetailpage);
+  void ohsdetailpagefunction(BuildContext context, data) {
+    context.router.push(OhsDetailRoute(data: data));
   }
 }

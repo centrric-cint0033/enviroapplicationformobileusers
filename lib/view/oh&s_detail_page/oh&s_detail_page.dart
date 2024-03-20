@@ -1,14 +1,18 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:enviro_mobile_application/model/oh&s/resp/oh&s_resp_model.dart';
 import 'package:enviro_mobile_application/view/loginpage/Common_widgets/widgets/cmn_action_icon.dart';
 import 'package:enviro_mobile_application/view/loginpage/Common_widgets/widgets/cmn_leading_icon.dart';
 import 'package:enviro_mobile_application/view/loginpage/Common_widgets/widgets/cmn_title_textwidget.dart';
 import 'package:enviro_mobile_application/view/loginpage/common/appbar/cmappbar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 @RoutePage()
 class OhsDetailPage extends StatelessWidget {
-  const OhsDetailPage({Key? key}) : super(key: key);
+  final OhsRespModel data;
+
+  const OhsDetailPage({Key? key, required this.data}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -33,22 +37,37 @@ class OhsDetailPage extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
-                      'Text 1',
-                      style: TextStyle(fontSize: 20.sp, color: Colors.black),
+                    Observer(builder: (_) {
+                      return Text(
+                        data.title ?? '',
+                      );
+                    }),
+                    const SizedBox(
+                      height: 8,
                     ),
-                    Text(
-                      'Text 2',
-                      style: TextStyle(fontSize: 20.sp, color: Colors.black),
+                    Column(
+                      children: [
+                        Text(
+                          data.created_by ?? '',
+                        ),
+                        Text(
+                          data.description ?? '',
+                        ),
+                        Text(
+                          data.edited_date_time ?? '',
+                        )
+                      ],
                     ),
-                    Text(
-                      'Text 3',
-                      style: TextStyle(fontSize: 20.sp, color: Colors.black),
+                    const SizedBox(
+                      height: 8,
                     ),
-                    Text(
-                      'Text 4',
-                      style: TextStyle(fontSize: 20.sp, color: Colors.black),
+
+                    const SizedBox(
+                      height: 8,
                     ),
+                    // Text(
+                    //   data?.edited_date_time ?? '',
+                    // ),
                     const SizedBox(
                       height: 8,
                     ),
@@ -77,7 +96,7 @@ class OhsDetailPage extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 38,
           ),
           Center(
@@ -91,7 +110,7 @@ class OhsDetailPage extends StatelessWidget {
                       const BorderSide(color: Colors.black),
                     ),
                     backgroundColor: MaterialStateProperty.all<Color>(
-                      Color(0xFFEBE8E8),
+                      const Color(0xFFEBE8E8),
                     ),
                     shape: MaterialStateProperty.all<OutlinedBorder>(
                       RoundedRectangleBorder(
@@ -104,7 +123,7 @@ class OhsDetailPage extends StatelessWidget {
                     style: TextStyle(color: Colors.black),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 13,
                 ),
                 TextButton(
@@ -114,7 +133,7 @@ class OhsDetailPage extends StatelessWidget {
                       const BorderSide(color: Colors.black),
                     ),
                     backgroundColor: MaterialStateProperty.all<Color>(
-                      Color(0xFFEBE8E8),
+                      const Color(0xFFEBE8E8),
                     ),
                     shape: MaterialStateProperty.all<OutlinedBorder>(
                       RoundedRectangleBorder(

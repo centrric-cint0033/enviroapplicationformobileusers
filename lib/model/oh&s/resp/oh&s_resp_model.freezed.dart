@@ -27,7 +27,7 @@ mixin _$OhsRespModel {
   String? get title => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
   String? get fileAttachment => throw _privateConstructorUsedError;
-  String? get editedDateTime => throw _privateConstructorUsedError;
+  String? get edited_date_time => throw _privateConstructorUsedError;
   String? get createdDateTime => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -50,7 +50,7 @@ abstract class $OhsRespModelCopyWith<$Res> {
       String? title,
       String? description,
       String? fileAttachment,
-      String? editedDateTime,
+      String? edited_date_time,
       String? createdDateTime});
 }
 
@@ -74,7 +74,7 @@ class _$OhsRespModelCopyWithImpl<$Res, $Val extends OhsRespModel>
     Object? title = freezed,
     Object? description = freezed,
     Object? fileAttachment = freezed,
-    Object? editedDateTime = freezed,
+    Object? edited_date_time = freezed,
     Object? createdDateTime = freezed,
   }) {
     return _then(_value.copyWith(
@@ -106,9 +106,9 @@ class _$OhsRespModelCopyWithImpl<$Res, $Val extends OhsRespModel>
           ? _value.fileAttachment
           : fileAttachment // ignore: cast_nullable_to_non_nullable
               as String?,
-      editedDateTime: freezed == editedDateTime
-          ? _value.editedDateTime
-          : editedDateTime // ignore: cast_nullable_to_non_nullable
+      edited_date_time: freezed == edited_date_time
+          ? _value.edited_date_time
+          : edited_date_time // ignore: cast_nullable_to_non_nullable
               as String?,
       createdDateTime: freezed == createdDateTime
           ? _value.createdDateTime
@@ -134,7 +134,7 @@ abstract class _$$OhsRespModelImplCopyWith<$Res>
       String? title,
       String? description,
       String? fileAttachment,
-      String? editedDateTime,
+      String? edited_date_time,
       String? createdDateTime});
 }
 
@@ -156,7 +156,7 @@ class __$$OhsRespModelImplCopyWithImpl<$Res>
     Object? title = freezed,
     Object? description = freezed,
     Object? fileAttachment = freezed,
-    Object? editedDateTime = freezed,
+    Object? edited_date_time = freezed,
     Object? createdDateTime = freezed,
   }) {
     return _then(_$OhsRespModelImpl(
@@ -188,9 +188,9 @@ class __$$OhsRespModelImplCopyWithImpl<$Res>
           ? _value.fileAttachment
           : fileAttachment // ignore: cast_nullable_to_non_nullable
               as String?,
-      editedDateTime: freezed == editedDateTime
-          ? _value.editedDateTime
-          : editedDateTime // ignore: cast_nullable_to_non_nullable
+      edited_date_time: freezed == edited_date_time
+          ? _value.edited_date_time
+          : edited_date_time // ignore: cast_nullable_to_non_nullable
               as String?,
       createdDateTime: freezed == createdDateTime
           ? _value.createdDateTime
@@ -211,7 +211,7 @@ class _$OhsRespModelImpl implements _OhsRespModel {
       required this.title,
       required this.description,
       required this.fileAttachment,
-      required this.editedDateTime,
+      required this.edited_date_time,
       required this.createdDateTime});
 
   factory _$OhsRespModelImpl.fromJson(Map<String, dynamic> json) =>
@@ -232,13 +232,13 @@ class _$OhsRespModelImpl implements _OhsRespModel {
   @override
   final String? fileAttachment;
   @override
-  final String? editedDateTime;
+  final String? edited_date_time;
   @override
   final String? createdDateTime;
 
   @override
   String toString() {
-    return 'OhsRespModel(userReadStatus: $userReadStatus, editStatus: $editStatus, dp: $dp, created_by: $created_by, title: $title, description: $description, fileAttachment: $fileAttachment, editedDateTime: $editedDateTime, createdDateTime: $createdDateTime)';
+    return 'OhsRespModel(userReadStatus: $userReadStatus, editStatus: $editStatus, dp: $dp, created_by: $created_by, title: $title, description: $description, fileAttachment: $fileAttachment, edited_date_time: $edited_date_time, createdDateTime: $createdDateTime)';
   }
 
   @override
@@ -258,8 +258,8 @@ class _$OhsRespModelImpl implements _OhsRespModel {
                 other.description == description) &&
             (identical(other.fileAttachment, fileAttachment) ||
                 other.fileAttachment == fileAttachment) &&
-            (identical(other.editedDateTime, editedDateTime) ||
-                other.editedDateTime == editedDateTime) &&
+            (identical(other.edited_date_time, edited_date_time) ||
+                other.edited_date_time == edited_date_time) &&
             (identical(other.createdDateTime, createdDateTime) ||
                 other.createdDateTime == createdDateTime));
   }
@@ -275,7 +275,7 @@ class _$OhsRespModelImpl implements _OhsRespModel {
       title,
       description,
       fileAttachment,
-      editedDateTime,
+      edited_date_time,
       createdDateTime);
 
   @JsonKey(ignore: true)
@@ -301,7 +301,7 @@ abstract class _OhsRespModel implements OhsRespModel {
       required final String? title,
       required final String? description,
       required final String? fileAttachment,
-      required final String? editedDateTime,
+      required final String? edited_date_time,
       required final String? createdDateTime}) = _$OhsRespModelImpl;
 
   factory _OhsRespModel.fromJson(Map<String, dynamic> json) =
@@ -322,7 +322,7 @@ abstract class _OhsRespModel implements OhsRespModel {
   @override
   String? get fileAttachment;
   @override
-  String? get editedDateTime;
+  String? get edited_date_time;
   @override
   String? get createdDateTime;
   @override

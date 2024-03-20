@@ -15,7 +15,7 @@ _$OhsRespModelImpl _$$OhsRespModelImplFromJson(Map<String, dynamic> json) =>
       title: json['title'] as String?,
       description: json['description'] as String?,
       fileAttachment: json['fileAttachment'] as String?,
-      editedDateTime: json['editedDateTime'] as String?,
+      edited_date_time: json['edited_date_time'] as String?,
       createdDateTime: json['createdDateTime'] as String?,
     );
 
@@ -28,6 +28,6 @@ Map<String, dynamic> _$$OhsRespModelImplToJson(_$OhsRespModelImpl instance) =>
       'title': instance.title,
       'description': instance.description,
       'fileAttachment': instance.fileAttachment,
-      'editedDateTime': instance.editedDateTime,
+      'edited_date_time': instance.edited_date_time,
       'createdDateTime': instance.createdDateTime,
     };

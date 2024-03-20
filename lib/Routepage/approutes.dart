@@ -29,6 +29,6 @@ class AppRouter extends $AppRouter {
         AutoRoute(
             page: NewsRouteInsideRoute.page,
             path: RouteNames.newsfolderinsidepage),
-        AutoRoute(page: OhsDeatailRoute.page, path: RouteNames.ohsdetailpage),
+        AutoRoute(page: OhsDetailRoute.page, path: RouteNames.ohsdetailpage),
       ];
 }

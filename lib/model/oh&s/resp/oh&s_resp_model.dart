@@ -21,7 +21,7 @@ class OhsRespModel with _$OhsRespModel {
     required String? title,
     required String? description,
     required String? fileAttachment,
-    required String? editedDateTime,
+    required String? edited_date_time,
     required String? createdDateTime,
   }) = _OhsRespModel;
 
