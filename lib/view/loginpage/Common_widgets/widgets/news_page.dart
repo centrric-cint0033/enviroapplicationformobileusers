@@ -65,59 +65,65 @@ class NewsPage extends StatelessWidget {
                           child: Container(
                             height: 120,
                             width: double.infinity,
-                            child: Card(
-                              color: const Color.fromARGB(255, 188, 209, 228),
-                              child: Container(
-                                child: Padding(
-                                  padding: const EdgeInsets.only(left: 94),
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      ListTile(
-                                        title: Text(
-                                          data?.title ?? '',
-                                          style: const TextStyle(
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.bold,
+                            child: GestureDetector(
+                              onTap: () => ohsdetailpagefunction(context),
+                              child: Card(
+                                color: const Color.fromARGB(255, 188, 209, 228),
+                                child: Container(
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(left: 94),
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        ListTile(
+                                          title: Text(
+                                            data?.title ?? '',
+                                            style: const TextStyle(
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.bold,
+                                            ),
                                           ),
-                                        ),
-                                        subtitle: Text(
-                                          data?.created_by ?? '',
-                                          style: const TextStyle(fontSize: 16),
-                                        ),
-                                        trailing: TextButton(
-                                          onPressed: () =>
-                                              _handleViewButtonTap(context),
-                                          style: ButtonStyle(
-                                            side: MaterialStateProperty.all<
-                                                BorderSide>(
-                                              const BorderSide(
-                                                  color: Colors.blue),
-                                            ),
-                                            backgroundColor:
-                                                MaterialStateProperty.all<
-                                                    Color>(
-                                              const Color.fromARGB(
-                                                  255, 188, 209, 228),
-                                            ),
-                                            shape: MaterialStateProperty.all<
-                                                OutlinedBorder>(
-                                              RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(18.0),
+                                          subtitle: Text(
+                                            data?.created_by ?? '',
+                                            style:
+                                                const TextStyle(fontSize: 16),
+                                          ),
+                                          trailing: TextButton(
+                                            onPressed: () =>
+                                                _handleViewButtonTap(context),
+                                            style: ButtonStyle(
+                                              side: MaterialStateProperty.all<
+                                                  BorderSide>(
+                                                const BorderSide(
+                                                    color: Colors.blue),
+                                              ),
+                                              backgroundColor:
+                                                  MaterialStateProperty.all<
+                                                      Color>(
+                                                const Color.fromARGB(
+                                                    255, 188, 209, 228),
+                                              ),
+                                              shape: MaterialStateProperty.all<
+                                                  OutlinedBorder>(
+                                                RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          18.0),
+                                                ),
                                               ),
                                             ),
-                                          ),
-                                          child: const Text(
-                                            'View',
-                                            style:
-                                                TextStyle(color: Colors.blue),
+                                            child: const Text(
+                                              'View',
+                                              style:
+                                                  TextStyle(color: Colors.blue),
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                    ],
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ),
@@ -249,10 +255,24 @@ class NewsPage extends StatelessWidget {
                   height: 30,
                   child: TextField(
                     controller: textFieldController3,
-                    decoration: const InputDecoration(
+                    decoration: InputDecoration(
                       labelText: 'Add Member',
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(10))),
+                      border: const OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                      ),
+                      suffixIcon: DropdownButton(
+                        onChanged: (String? value) {},
+                        items: const <DropdownMenuItem<String>>[
+                          DropdownMenuItem<String>(
+                            value: 'Option 1',
+                            child: Text('Option 1'),
+                          ),
+                          DropdownMenuItem<String>(
+                            value: 'Option 2',
+                            child: Text('Option 2'),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
@@ -370,11 +390,14 @@ class NewsPage extends StatelessWidget {
             borderRadius: BorderRadius.circular(18.0),
           ),
           child: Padding(
-            padding: const EdgeInsets.all(15.0),
+            padding: const EdgeInsets.all(0.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Icon(Icons.folder, color: Colors.black26),
+                const Padding(
+                  padding: EdgeInsets.only(left: 14.0),
+                  child: Icon(Icons.folder, color: Colors.black26),
+                ),
                 Expanded(
                   child: Center(
                     child: Padding(
@@ -382,6 +405,7 @@ class NewsPage extends StatelessWidget {
                       child: Text(
                         folderName,
                         style: const TextStyle(
+                          overflow: TextOverflow.ellipsis,
                           color: Colors.black,
                         ),
                       ),
@@ -389,24 +413,105 @@ class NewsPage extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(bottom: 15.0),
-                  child: Row(
-                    children: [
-                      IconButton(
-                        icon: const Icon(Icons.edit, color: Colors.black26),
-                        onPressed: () {
-                          print('Edit button tapped!');
-                        },
-                      ),
-                      IconButton(
-                        icon: const Icon(Icons.delete, color: Colors.black26),
-                        onPressed: () {
-                          print('Delete button tapped!');
-                        },
-                      ),
-                    ],
-                  ),
-                ),
+                    padding: const EdgeInsets.only(right: 15.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  title: const Text('Rename'),
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(5)),
+                                  content: const SingleChildScrollView(
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: <Widget>[
+                                        SizedBox(height: 17),
+                                        SizedBox(
+                                          height: 30,
+                                          child: TextField(
+                                            decoration: InputDecoration(
+                                              labelText: 'Untitled folder',
+                                              border: OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.all(
+                                                          Radius.circular(10))),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  actions: <Widget>[
+                                    TextButton(
+                                      child: const Text(
+                                        'Cancel',
+                                        style: TextStyle(color: Colors.black),
+                                      ),
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                    ),
+                                    TextButton(
+                                      child: const Text(
+                                        'Rename',
+                                        style: TextStyle(color: Colors.black),
+                                      ),
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+                          },
+                          child: const Icon(Icons.edit, color: Colors.black26),
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(5)),
+                                  title: const Text("Delete"),
+                                  content: const Text("Are you sure"),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () {
+                                        // Your delete logic here
+                                        Navigator.of(context).pop();
+                                      },
+                                      child: const Text(
+                                        "Delete",
+                                        style: TextStyle(color: Colors.black),
+                                      ),
+                                    ),
+                                    TextButton(
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                      child: const Text(
+                                        "Cancel",
+                                        style: TextStyle(color: Colors.black),
+                                      ),
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+                          },
+                          child:
+                              const Icon(Icons.delete, color: Colors.black26),
+                        ),
+                      ],
+                    )),
               ],
             ),
           ),
@@ -430,5 +535,9 @@ class NewsPage extends StatelessWidget {
   void newsfolderclickfunction(BuildContext context, int id) async {
     vmohsnewsfolder.newspagefolderinsidefunction(id);
     context.router.pushNamed(RouteNames.newsfolderinsidepage);
+  }
+
+  void ohsdetailpagefunction(BuildContext context) {
+    context.router.pushNamed(RouteNames.ohsdetailpage);
   }
 }

@@ -3,6 +3,7 @@ import 'package:enviro_mobile_application/Routepage/approutes.gr.dart';
 
 import 'package:enviro_mobile_application/Routepage/routespage.dart';
 import 'package:enviro_mobile_application/view/loginpage/Common_widgets/widgets/calender_page.dart';
+import 'package:enviro_mobile_application/view/oh&s_detail_page/oh&s_detail_page.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
@@ -28,5 +29,6 @@ class AppRouter extends $AppRouter {
         AutoRoute(
             page: NewsRouteInsideRoute.page,
             path: RouteNames.newsfolderinsidepage),
+        AutoRoute(page: OhsDeatailRoute.page, path: RouteNames.ohsdetailpage),
       ];
 }
