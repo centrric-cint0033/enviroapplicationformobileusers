@@ -50,7 +50,13 @@ class OhsPage extends StatelessWidget {
             ),
             Expanded(
               child: TabBarView(
-                children: [NewsPage(), notification_page()],
+                children: [
+                  NewsPage(
+                      // name: 'name',
+                      // id: 1,
+                      ),
+                  notification_page()
+                ],
               ),
             ),
           ],
