@@ -9,26 +9,55 @@ Padding notification_page() {
     padding: const EdgeInsets.all(8.0),
     child: Column(
       children: [
-        Container(
-          alignment: Alignment.topRight,
-          child: Padding(
-            padding: const EdgeInsets.only(right: 9.0),
-            child: TextButton(
-              onPressed: _handleRightButtonTap,
-              style: ButtonStyle(
-                side: MaterialStateProperty.all<BorderSide>(
-                  const BorderSide(color: Colors.blue),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(left: 10.0, right: 10),
+              child: Container(
+                alignment: Alignment.topRight,
+                child: Padding(
+                  padding: const EdgeInsets.only(right: 9.0),
+                  child: TextButton(
+                    onPressed: _handleRightButtonTap,
+                    style: ButtonStyle(
+                      side: MaterialStateProperty.all<BorderSide>(
+                        const BorderSide(color: Colors.blue),
+                      ),
+                      backgroundColor: MaterialStateProperty.all<Color>(
+                        const Color.fromARGB(255, 188, 209, 228),
+                      ),
+                    ),
+                    child: const Text(
+                      'Add New +',
+                      style: TextStyle(color: Colors.blue),
+                    ),
+                  ),
                 ),
-                backgroundColor: MaterialStateProperty.all<Color>(
-                  const Color.fromARGB(255, 188, 209, 228),
-                ),
-              ),
-              child: const Text(
-                'Add New +',
-                style: TextStyle(color: Colors.blue),
               ),
             ),
-          ),
+            Container(
+              alignment: Alignment.topRight,
+              child: Padding(
+                padding: const EdgeInsets.only(right: 9.0),
+                child: TextButton(
+                  onPressed: _handleRightButtonTap,
+                  style: ButtonStyle(
+                    side: MaterialStateProperty.all<BorderSide>(
+                      const BorderSide(color: Colors.blue),
+                    ),
+                    backgroundColor: MaterialStateProperty.all<Color>(
+                      const Color.fromARGB(255, 188, 209, 228),
+                    ),
+                  ),
+                  child: const Text(
+                    'Archive',
+                    style: TextStyle(color: Colors.blue),
+                  ),
+                ),
+              ),
+            ),
+          ],
         ),
         SizedBox(
           height: 8,

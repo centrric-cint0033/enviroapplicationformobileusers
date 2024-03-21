@@ -57,4 +57,6 @@ class ApiEndPoints {
   static const endpointohsnews = '/api/v1/oh_and_s/news/view/1/?limit=8';
   static const endpointnewsfolder = '/api/v1/oh_and_s/folder/segment/list';
   static const endpointfoldercreation = '/api/v1/drive/folder/create/';
+  static const endpointnotificationlist =
+      '/api/v1/oh_and_s/notification/view/1/?limit=8';
 }
