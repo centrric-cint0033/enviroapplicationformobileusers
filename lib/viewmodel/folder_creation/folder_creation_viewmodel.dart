@@ -3,6 +3,7 @@ import 'package:enviro_mobile_application/model/oh&snews_folder/oh&snews_fldr_mo
 import 'package:enviro_mobile_application/utilis/injection.dart';
 import 'package:enviro_mobile_application/view/service/folder_creation/i_all_folder_creation_service.dart';
 import 'package:enviro_mobile_application/view/service/oh&s_news_page/i_all_oh&s_service.dart';
+import 'package:enviro_mobile_application/viewmodel/oh&s_news_folder/oh&s_news_fldr_view_model.dart';
 
 import 'package:injectable/injectable.dart';
 import 'package:mobx/mobx.dart';
@@ -49,6 +50,7 @@ abstract class FolderCreationViewModelBase with Store {
           error: null,
           loading: false,
         );
+        vmohsnewsfolder.ohsnewsfolderviewmodelfunction(id);
       },
     );
   }

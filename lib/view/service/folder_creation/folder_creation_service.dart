@@ -23,7 +23,7 @@ class FolderCreationService implements IAllFolderCreationService {
     MultipartRequest request =
         MultipartRequest("POST", Uri.parse("$baseUrl$apiUrl"));
 
-    request.fields['name'] = 'addfolder';
+    request.fields['name'] = folderName;
     request.fields['parent_folder'] = '1';
 
     var response =

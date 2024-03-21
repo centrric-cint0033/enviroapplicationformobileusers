@@ -8,6 +8,7 @@ import 'package:enviro_mobile_application/utilis/httpservice.dart';
 import 'package:enviro_mobile_application/utilis/injection.dart';
 import 'package:enviro_mobile_application/utilis/main_failure.dart';
 import 'package:enviro_mobile_application/view/service/oh&s_page/i_all_oh&s_service.dart';
+import 'package:enviro_mobile_application/viewmodel/oh&s_news_folder/oh&s_news_fldr_view_model.dart';
 import 'package:injectable/injectable.dart';
 
 @LazySingleton(as: IAllOhsService)

@@ -32,9 +32,9 @@ mixin _$FolderCreationViewModel on FolderCreationViewModelBase, Store {
       context: context);
 
   @override
-  Future<void> ohsfoldercreationviewmodelfunction(String name, int id) {
+  Future<void> ohsfoldercreationviewmodelfunction(String folderName, int id) {
     return _$ohsfoldercreationviewmodelfunctionAsyncAction
-        .run(() => super.ohsfoldercreationviewmodelfunction(name, id));
+        .run(() => super.ohsfoldercreationviewmodelfunction(folderName, id));
   }
 
   @override
