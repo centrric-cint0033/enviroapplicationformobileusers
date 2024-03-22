@@ -10,11 +10,11 @@ import 'package:enviro_mobile_application/view/service/notification_page_service
 import 'package:enviro_mobile_application/view/service/oh&s_news_page/i_all_oh&s_service.dart';
 import 'package:injectable/injectable.dart';
 
-@LazySingleton(as: IAllOhsService)
-class NotificationListService implements IAllNotificationListService {
+@LazySingleton(as: IAllNotificationService)
+class NotificationListService implements IAllNotificationService {
   @override
   Future<Either<MainFailure, List<OhsRespModel>>>
-      Notificationlistfunction() async {
+      ohsnotificationfunction() async {
     var response = await getIt<HttpService>().request(
         authenticated: true,
         method: HttpMethod.get,
@@ -28,10 +28,10 @@ class NotificationListService implements IAllNotificationListService {
       (res) async {
         var data = jsonDecode(res.body) as List;
 
-        List<OhsRespModel> ohsnewslist =
+        List<OhsRespModel> ohsnotificationlist =
             List<OhsRespModel>.from(data.map((e) => OhsRespModel.fromJson(e)));
 
-        return Right(ohsnewslist);
+        return Right(ohsnotificationlist);
       },
     );
   }

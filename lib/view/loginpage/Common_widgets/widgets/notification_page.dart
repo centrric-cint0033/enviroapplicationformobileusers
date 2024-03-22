@@ -1,4 +1,6 @@
+import 'package:enviro_mobile_application/viewmodel/oh&s_notification/oh&s_notification_view_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 
 void _handleRightButtonTap() {
   print('Right button tapped!');
@@ -59,65 +61,107 @@ Padding notification_page() {
             ),
           ],
         ),
-        SizedBox(
-          height: 8,
-        ),
-        SingleChildScrollView(
-          child: Container(
-            height: 150,
-            width: double.infinity,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Card(
-                color: const Color.fromARGB(255, 188, 209, 228),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Expanded(
-                      child: Container(
+        const SizedBox(height: 15),
+        Observer(builder: (_) {
+          return SizedBox(
+            height: 400,
+            child: ListView.separated(
+              shrinkWrap: true,
+              itemCount:
+                  vmohsnotification.notificationpageResponse.data?.length ?? 0,
+              separatorBuilder: (BuildContext context, int index) =>
+                  const SizedBox(height: 12.0),
+              itemBuilder: (context, index) {
+                var data =
+                    vmohsnotification.notificationpageResponse.data?[index];
+                return GestureDetector(
+                  onTap: () => ohsdetailpagefunction(context, data),
+                  child: Container(
+                    height: 120,
+                    width: double.infinity,
+                    child: Card(
+                      color: const Color.fromARGB(255, 188, 209, 228),
+                      child: Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: const Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
+                        child: Row(
                           children: [
-                            Text(
-                              'Beverly',
-                              style: TextStyle(
-                                  fontSize: 18, fontWeight: FontWeight.bold),
+                            // Display image from the view model
+                            SizedBox(
+                              width: 100,
+                              height: 100,
+                              child: data?.dp != null
+                                  ? Image.network(
+                                      data!.dp!,
+                                      fit: BoxFit.cover,
+                                    )
+                                  : Placeholder(), // Placeholder if image is not available
                             ),
-                            Text(
-                              'Harly',
-                              style: TextStyle(fontSize: 16),
+                            Expanded(
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 8.0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      data?.title ?? '',
+                                      style: const TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                      overflow: TextOverflow.ellipsis,
+                                      maxLines: 2,
+                                    ),
+                                    Text(
+                                      data?.created_by ?? '',
+                                      style: const TextStyle(fontSize: 16),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            TextButton(
+                              onPressed: () => _handleViewButtonTap(context),
+                              style: ButtonStyle(
+                                side: MaterialStateProperty.all<BorderSide>(
+                                  const BorderSide(color: Colors.blue),
+                                ),
+                                backgroundColor:
+                                    MaterialStateProperty.all<Color>(
+                                  const Color.fromARGB(255, 188, 209, 228),
+                                ),
+                                shape:
+                                    MaterialStateProperty.all<OutlinedBorder>(
+                                  RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(18.0),
+                                  ),
+                                ),
+                              ),
+                              child: const Text(
+                                'View',
+                                style: TextStyle(color: Colors.blue),
+                              ),
                             ),
                           ],
                         ),
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(right: 18),
-                      child: TextButton(
-                        onPressed: () {},
-                        style: ButtonStyle(
-                          side: MaterialStateProperty.all<BorderSide>(
-                            const BorderSide(color: Colors.blue),
-                          ),
-                          backgroundColor: MaterialStateProperty.all<Color>(
-                            const Color.fromARGB(255, 188, 209, 228),
-                          ),
-                        ),
-                        child: const Text(
-                          'View',
-                          style: TextStyle(color: Colors.blue),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+                  ),
+                );
+              },
             ),
-          ),
-        ),
+          );
+        })
       ],
     ),
   );
+}
+
+void ohsdetailpagefunction(BuildContext context, data) {
+  print('Opening details page for notification: ${data.title}');
+}
+
+void _handleViewButtonTap(BuildContext context) {
+  print('View button tapped!');
 }

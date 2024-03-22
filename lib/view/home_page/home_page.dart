@@ -6,6 +6,7 @@ import 'package:enviro_mobile_application/viewmodel/car_page/car_page_viewmodel.
 import 'package:enviro_mobile_application/viewmodel/folder_creation/folder_creation_viewmodel.dart';
 import 'package:enviro_mobile_application/viewmodel/home_page/home_page_viewmodel.dart';
 import 'package:enviro_mobile_application/viewmodel/oh&s_news_folder/oh&s_news_fldr_view_model.dart';
+import 'package:enviro_mobile_application/viewmodel/oh&s_notification/oh&s_notification_view_model.dart';
 import 'package:enviro_mobile_application/viewmodel/oh&s_page/oh&s_viewmodel.dart';
 import 'package:enviro_mobile_application/viewmodel/quote_reg_page/quote_reg_page_viewmodel.dart';
 import 'package:enviro_mobile_application/viewmodel/sales_performance/sales_performance_viewmodel.dart';
@@ -164,6 +165,7 @@ void ohsfunction(BuildContext context) {
   context.router.pushNamed(RouteNames.ohsPage);
   vmohsnews.ohsnewsviewmodelfunction();
   vmohsnewsfolder.ohsnewsfolderviewmodelfunction(1);
+  vmohsnotification.ohsnotificationviewmodelfunction();
 }
 
 void intranetfuntion(BuildContext context) {
