@@ -164,12 +164,13 @@ void onsalesfunction(BuildContext context) async {
 void ohsfunction(BuildContext context) {
   context.router.pushNamed(RouteNames.ohsPage);
   vmohsnews.ohsnewsviewmodelfunction();
-  vmohsnewsfolder.ohsnewsfolderviewmodelfunction(1);
   vmohsnotification.ohsnotificationviewmodelfunction();
+  vmohsnewsfolder.ohsnewsfolderviewmodelfunction(1);
 }
 
 void intranetfuntion(BuildContext context) {
   context.router.pushNamed(RouteNames.intranetpage);
+  vmohsnotification.ohsnotificationviewmodelfunction();
   print('Notification button tapped!');
 }
 

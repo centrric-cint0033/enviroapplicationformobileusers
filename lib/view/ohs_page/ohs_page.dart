@@ -45,9 +45,9 @@ class OhsPage extends StatelessWidget {
                 child: notification_news_tabbar(),
               ),
             ),
-            SizedBox(
-              height: 48.h,
-            ),
+            // SizedBox(
+            //   height: 48.h,
+            // ),
             Expanded(
               child: TabBarView(
                 children: [

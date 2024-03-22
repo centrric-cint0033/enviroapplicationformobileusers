@@ -63,8 +63,7 @@ Padding notification_page() {
         ),
         const SizedBox(height: 15),
         Observer(builder: (_) {
-          return SizedBox(
-            height: 400,
+          return Expanded(
             child: ListView.separated(
               shrinkWrap: true,
               itemCount:
@@ -94,7 +93,7 @@ Padding notification_page() {
                                       data!.dp!,
                                       fit: BoxFit.cover,
                                     )
-                                  : Placeholder(), // Placeholder if image is not available
+                                  : const Placeholder(), // Placeholder if image is not available
                             ),
                             Expanded(
                               child: Padding(
@@ -152,7 +151,7 @@ Padding notification_page() {
               },
             ),
           );
-        })
+        }),
       ],
     ),
   );

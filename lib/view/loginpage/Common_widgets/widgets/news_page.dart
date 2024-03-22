@@ -55,8 +55,8 @@ class NewsPage extends StatelessWidget {
               Observer(
                 builder: (_) {
                   return SizedBox(
-                    height: 400,
                     child: ListView.separated(
+                      physics: NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
                       itemCount: vmohsnews.newspageResponse.data?.length ?? 0,
                       separatorBuilder: (BuildContext context, int index) =>
