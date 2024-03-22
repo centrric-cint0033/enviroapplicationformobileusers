@@ -16,7 +16,7 @@ class NewsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 8.0, right: 8.0, bottom: 8.0),
+      padding: const EdgeInsets.all(8.0),
       child: Scaffold(
         body: SingleChildScrollView(
           child: Column(
@@ -121,10 +121,15 @@ class NewsPage extends StatelessWidget {
                                                 ),
                                               ),
                                             ),
-                                            child: const Text(
-                                              'View',
-                                              style:
-                                                  TextStyle(color: Colors.blue),
+                                            child: GestureDetector(
+                                              onTap: () =>
+                                                  ohsdetailpagefunction(
+                                                      context, data),
+                                              child: const Text(
+                                                'View',
+                                                style: TextStyle(
+                                                    color: Colors.blue),
+                                              ),
                                             ),
                                           ),
                                         ),
@@ -389,8 +394,8 @@ class NewsPage extends StatelessWidget {
   Widget _buildCard(String folderName, BuildContext context, int id) {
     return GestureDetector(
       onTap: () {
-        print('cdvfsdg $id');
-        newsfolderclickfunction(context, id);
+        // print('cdvfsdg $id');
+        // newsfolderclickfunction(context, id);
       },
       child: Container(
         height: 57,

@@ -1,3 +1,6 @@
+import 'package:auto_route/auto_route.dart';
+import 'package:enviro_mobile_application/Routepage/approutes.gr.dart';
+import 'package:enviro_mobile_application/Routepage/routespage.dart';
 import 'package:enviro_mobile_application/viewmodel/oh&s_notification/oh&s_notification_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -121,7 +124,8 @@ Padding notification_page() {
                               ),
                             ),
                             TextButton(
-                              onPressed: () => _handleViewButtonTap(context),
+                              onPressed: () =>
+                                  notificationdetailpagefunction(context, data),
                               style: ButtonStyle(
                                 side: MaterialStateProperty.all<BorderSide>(
                                   const BorderSide(color: Colors.blue),
@@ -161,6 +165,7 @@ void ohsdetailpagefunction(BuildContext context, data) {
   print('Opening details page for notification: ${data.title}');
 }
 
-void _handleViewButtonTap(BuildContext context) {
-  print('View button tapped!');
+void notificationdetailpagefunction(BuildContext context, data) {
+  context.router.pushNamed(RouteNames.notificationdetailpage);
+  context.router.push(NotificationDetailRoute(data: data));
 }
