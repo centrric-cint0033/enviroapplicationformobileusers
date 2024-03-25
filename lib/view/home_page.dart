@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:enviro_mobile_application/Routepage/routespage.dart';
 import 'package:enviro_mobile_application/view_model/02_sales/sales_view_model.dart';
 import 'package:enviro_mobile_application/view_model/03_vehicles/vehicle_view_model.dart';
+import 'package:enviro_mobile_application/view_model/04_ohs/ohs_view_model.dart';
 import 'package:enviro_mobile_application/view_model/home_page/home_page_viewmodel.dart';
 
 import 'package:flutter/material.dart';
@@ -153,6 +154,9 @@ void onsalesfunction(BuildContext context) async {
 }
 
 void ohsfunction(BuildContext context) {
+  vmOhs
+    ..ohsnotificationviewmodelfunction()
+    ..ohsnewsviewmodelfunction();
   context.router.pushNamed(RouteNames.ohsPage);
 }
 

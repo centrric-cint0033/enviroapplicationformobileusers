@@ -29,7 +29,7 @@ class NotificationPage extends StatelessWidget {
           ),
         ],
       ),
-      body: notification_page(),
+      body: notification_page(context),
     );
   }
 }

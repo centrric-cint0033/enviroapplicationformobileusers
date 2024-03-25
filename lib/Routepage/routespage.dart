@@ -7,4 +7,7 @@ class RouteNames {
   static const String intranetpage = '/intranetpage';
   static const String rSchedulingPage = '/schedulingPage';
   static const String vehiclemainpage = '/vehicle_main_page';
+  static const String rNewsfolderinsidepage = '/newsfolderinsidepage';
+  static const String rOhsdetailpage = '/ohsdetailpage';
+  static const String rNotificationdetailpage = '/notificationdetailpage';
 }
