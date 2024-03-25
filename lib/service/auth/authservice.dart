@@ -3,12 +3,12 @@ import 'dart:convert';
 import 'package:dartz/dartz.dart';
 import 'package:enviro_mobile_application/Routepage/securestorage.dart';
 import 'package:enviro_mobile_application/model/auth/loginreqmodel.dart';
+import 'package:enviro_mobile_application/service/auth/i_authservice.dart';
 import 'package:enviro_mobile_application/utilis/api_endpoints/api_endpoints.dart';
 import 'package:enviro_mobile_application/utilis/httpservice.dart';
 import 'package:enviro_mobile_application/utilis/injection.dart';
 import 'package:enviro_mobile_application/utilis/main_failure.dart';
 
-import 'package:enviro_mobile_application/view/service/auth/i_authservice.dart';
 import 'package:injectable/injectable.dart';
 
 @LazySingleton(as: IAuthService)

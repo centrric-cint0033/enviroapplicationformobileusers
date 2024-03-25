@@ -1,21 +1,16 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:enviro_mobile_application/Routepage/routespage.dart';
-import 'package:enviro_mobile_application/view/service/master_car_page/master_car_service.dart';
-import 'package:enviro_mobile_application/viewmodel/car_page/car_page_viewmodel.dart';
-import 'package:enviro_mobile_application/viewmodel/home_page/home_page_viewmodel.dart';
-import 'package:enviro_mobile_application/viewmodel/quote_reg_page/quote_reg_page_viewmodel.dart';
-import 'package:enviro_mobile_application/viewmodel/sales_performance/sales_performance_viewmodel.dart';
-import 'package:enviro_mobile_application/viewmodel/semi_trailor_page/semi_trailor_page_viewmodel.dart';
-import 'package:enviro_mobile_application/viewmodel/truck_page/truck_page_viewmodel.dart';
-import 'package:enviro_mobile_application/viewmodel/vehicle_job_list/vehicle_job_list_viewmodel.dart';
+import 'package:enviro_mobile_application/view_model/02_sales/sales_view_model.dart';
+import 'package:enviro_mobile_application/view_model/03_vehicles/vehicle_view_model.dart';
+import 'package:enviro_mobile_application/view_model/home_page/home_page_viewmodel.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:enviro_mobile_application/view/loginpage/Common_widgets/widgets/cmn_action_icon.dart';
-import 'package:enviro_mobile_application/view/loginpage/Common_widgets/widgets/cmn_leading_icon.dart';
-import 'package:enviro_mobile_application/view/loginpage/Common_widgets/widgets/cmn_title_textwidget.dart';
-import 'package:enviro_mobile_application/view/loginpage/common/appbar/cmappbar.dart';
+import 'package:enviro_mobile_application/widgets/cmn_action_icon.dart';
+import 'package:enviro_mobile_application/widgets/cmn_leading_icon.dart';
+import 'package:enviro_mobile_application/widgets/cmn_title_textwidget.dart';
+import 'package:enviro_mobile_application/widgets/cmappbar.dart';
 
 @RoutePage()
 class HomePage extends StatelessWidget {
@@ -151,9 +146,9 @@ void onsalesfunction(BuildContext context) async {
     );
   } else {
     router.pushNamed(RouteNames.rSalesPpage);
-    vmquotereg.quoteregviewmodelfunction();
-    vmsalesperformance.saleslistviewmodelfunction();
-    vmjoblists.vehiclelistviewmodelfunction();
+    vmSales.quoteregviewmodelfunction();
+    vmSales.saleslistviewmodelfunction();
+    vmSales.vehiclelistviewmodelfunction();
   }
 }
 
@@ -173,8 +168,8 @@ void calenderfunction(BuildContext context) {
 
 void vehiclefunction(BuildContext context) async {
   context.router.pushNamed(RouteNames.vehiclemainpage);
-  vmtruck.truckPageFunction();
+  vmVehicle.truckPageFunction();
 
-  await vmcar.mastercarfunction();
-  vmtrailor.trailorfunction();
+  await vmVehicle.mastercarfunction();
+  vmVehicle.trailorfunction();
 }

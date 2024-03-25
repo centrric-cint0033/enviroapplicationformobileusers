@@ -4,13 +4,13 @@ import 'package:dartz/dartz.dart';
 import 'package:enviro_mobile_application/Routepage/securestorage.dart';
 
 import 'package:enviro_mobile_application/model/home/res_model/homerespmodel.dart';
+import 'package:enviro_mobile_application/service/home/i_homeservice.dart';
 
 import 'package:enviro_mobile_application/utilis/api_endpoints/api_endpoints.dart';
 import 'package:enviro_mobile_application/utilis/httpservice.dart';
 import 'package:enviro_mobile_application/utilis/injection.dart';
 import 'package:enviro_mobile_application/utilis/main_failure.dart';
 
-import 'package:enviro_mobile_application/view/service/home/i_homeservice.dart';
 import 'package:injectable/injectable.dart';
 
 @LazySingleton(as: IHomeService)

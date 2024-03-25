@@ -1,12 +1,12 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:enviro_mobile_application/view/loginpage/Common_widgets/widgets/cmn_action_icon.dart';
-import 'package:enviro_mobile_application/view/loginpage/Common_widgets/widgets/cmn_leading_icon.dart';
-import 'package:enviro_mobile_application/view/loginpage/Common_widgets/widgets/cmn_title_textwidget.dart';
+import 'package:enviro_mobile_application/widgets/cmn_action_icon.dart';
+import 'package:enviro_mobile_application/widgets/cmn_leading_icon.dart';
+import 'package:enviro_mobile_application/widgets/cmn_title_textwidget.dart';
 import 'package:flutter/material.dart';
 
-import 'package:enviro_mobile_application/view/loginpage/common/appbar/cmcustomformfield.dart';
-import 'package:enviro_mobile_application/view/loginpage/common/appbar/cmappbar.dart';
-import 'package:enviro_mobile_application/view/loginpage/common/appbar/imagepath/imagepath.dart';
+import 'package:enviro_mobile_application/widgets/cmcustomformfield.dart';
+import 'package:enviro_mobile_application/widgets/cmappbar.dart';
+import 'package:enviro_mobile_application/utilis/imagepath.dart';
 
 @RoutePage()
 class IntranetPage extends StatelessWidget {
@@ -36,7 +36,7 @@ class IntranetPage extends StatelessWidget {
                   const Padding(
                     padding: EdgeInsets.only(left: 18),
                     child: Text('Folders'),
-                  )
+                  ),
                   TextButton(
                     onPressed: _handleIntranetButtonTap,
                     style: ButtonStyle(

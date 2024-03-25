@@ -1,16 +1,16 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:enviro_mobile_application/Routepage/routespage.dart';
 
-import 'package:enviro_mobile_application/view/loginpage/common/appbar/Appthemes/Appthemes.dart';
-import 'package:enviro_mobile_application/view/loginpage/common/appbar/cmbutton.dart';
-import 'package:enviro_mobile_application/viewmodel/login_page/login_page_viewmodel.dart';
+import 'package:enviro_mobile_application/utilis/Appthemes.dart';
+import 'package:enviro_mobile_application/view_model/01_auth/auth_view_model.dart';
+import 'package:enviro_mobile_application/widgets/cmbutton.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import '../loginpage/common/appbar/cmappbar.dart';
-import '../loginpage/common/appbar/cmcustomformfield.dart';
-import '../loginpage/common/appbar/cmimage.dart';
-import '../loginpage/common/appbar/imagepath/imagepath.dart';
+import '../../widgets/cmappbar.dart';
+import '../../widgets/cmcustomformfield.dart';
+import '../../widgets/cmimage.dart';
+import '../../utilis/imagepath.dart';
 
 @RoutePage()
 class LoginPage extends StatelessWidget {
@@ -48,7 +48,7 @@ class LoginPage extends StatelessWidget {
                 Container(
                   height: 79,
                   child: Cmformfield(
-                    controller: vmLogin.userNameController,
+                    controller: vmAuth.userNameController,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'Please enter your Username';
@@ -67,7 +67,7 @@ class LoginPage extends StatelessWidget {
                 Container(
                   height: 79,
                   child: Cmformfield(
-                    controller: vmLogin.passwordController,
+                    controller: vmAuth.passwordController,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'Please enter your Password';
@@ -112,9 +112,9 @@ class LoginPage extends StatelessWidget {
     if (_formKey.currentState?.validate() ?? false) {
       final router = context.router;
 
-      int? statusCode = await vmLogin.login(
-        username: vmLogin.userNameController.text.trim(),
-        password: vmLogin.passwordController.text.trim(),
+      int? statusCode = await vmAuth.login(
+        username: vmAuth.userNameController.text.trim(),
+        password: vmAuth.passwordController.text.trim(),
       );
 
       if (statusCode != null) {
