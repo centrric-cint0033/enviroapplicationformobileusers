@@ -392,6 +392,7 @@ class NewsPage extends StatelessWidget {
   }
 
   Widget _buildCard(String folderName, BuildContext context, int id) {
+    TextEditingController textFolderController = TextEditingController();
     return GestureDetector(
       onTap: () {
         // print('cdvfsdg $id');
@@ -478,6 +479,14 @@ class NewsPage extends StatelessWidget {
                                         style: TextStyle(color: Colors.black),
                                       ),
                                       onPressed: () {
+                                        String folderName =
+                                            textFolderController.text;
+                                        if (folderName.isNotEmpty) {
+                                          Navigator.of(context).pop();
+                                          vmfoldercreation
+                                              .ohsfoldercreationviewmodelfunction(
+                                                  folderName, 1);
+                                        } else {}
                                         Navigator.of(context).pop();
                                       },
                                     ),
