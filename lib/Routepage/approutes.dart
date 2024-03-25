@@ -2,12 +2,6 @@ import 'package:auto_route/auto_route.dart';
 import 'package:enviro_mobile_application/Routepage/approutes.gr.dart';
 
 import 'package:enviro_mobile_application/Routepage/routespage.dart';
-import 'package:enviro_mobile_application/view/loginpage/Common_widgets/widgets/calender_page.dart';
-import 'package:enviro_mobile_application/view/notification_detail_page/notifcation_detail_page.dart';
-import 'package:enviro_mobile_application/view/oh&s_detail_page/oh&s_detail_page.dart';
-
-import 'package:flutter/material.dart';
-import 'package:flutter/material.dart';
 
 @AutoRouterConfig()
 class AppRouter extends $AppRouter {

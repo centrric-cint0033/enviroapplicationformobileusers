@@ -7,7 +7,6 @@ import 'package:enviro_mobile_application/utilis/httpservice.dart';
 import 'package:enviro_mobile_application/utilis/injection.dart';
 import 'package:enviro_mobile_application/utilis/main_failure.dart';
 import 'package:enviro_mobile_application/view/service/notification_page_service/i_all_notfcn_page_service.dart';
-import 'package:enviro_mobile_application/view/service/oh&s_news_page/i_all_oh&s_service.dart';
 import 'package:injectable/injectable.dart';
 
 @LazySingleton(as: IAllNotificationService)

@@ -55,7 +55,7 @@ class OhsPage extends StatelessWidget {
                       // name: 'name',
                       // id: 1,
                       ),
-                  notification_page()
+                  notification_page(context)
                 ],
               ),
             ),

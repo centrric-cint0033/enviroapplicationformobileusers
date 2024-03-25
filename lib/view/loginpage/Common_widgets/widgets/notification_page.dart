@@ -9,7 +9,7 @@ void _handleRightButtonTap() {
   print('Right button tapped!');
 }
 
-Padding notification_page() {
+Padding notification_page(BuildContext context) {
   return Padding(
     padding: const EdgeInsets.all(8.0),
     child: Column(
@@ -23,20 +23,31 @@ Padding notification_page() {
                 alignment: Alignment.topRight,
                 child: Padding(
                   padding: const EdgeInsets.only(right: 9.0),
-                  child: TextButton(
-                    onPressed: _handleRightButtonTap,
-                    style: ButtonStyle(
-                      side: MaterialStateProperty.all<BorderSide>(
-                        const BorderSide(color: Colors.blue),
+                  child: Row(
+                    children: [
+                      TextButton(
+                        onPressed: () {
+                          _showMyDialognotification(context);
+                        },
+                        style: ButtonStyle(
+                          side: MaterialStateProperty.all<BorderSide>(
+                            const BorderSide(color: Colors.blue),
+                          ),
+                          backgroundColor: MaterialStateProperty.all<Color>(
+                            const Color.fromARGB(255, 188, 209, 228),
+                          ),
+                          shape: MaterialStateProperty.all<OutlinedBorder>(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(18.0),
+                            ),
+                          ),
+                        ),
+                        child: const Text(
+                          'Add New+',
+                          style: TextStyle(color: Colors.blue),
+                        ),
                       ),
-                      backgroundColor: MaterialStateProperty.all<Color>(
-                        const Color.fromARGB(255, 188, 209, 228),
-                      ),
-                    ),
-                    child: const Text(
-                      'Add New +',
-                      style: TextStyle(color: Colors.blue),
-                    ),
+                    ],
                   ),
                 ),
               ),
@@ -158,6 +169,111 @@ Padding notification_page() {
         }),
       ],
     ),
+  );
+}
+
+Future<void> _showMyDialognotification(BuildContext context) async {
+  TextEditingController textFieldController1 = TextEditingController();
+  TextEditingController textFieldController2 = TextEditingController();
+  TextEditingController textFieldController3 = TextEditingController();
+  TextEditingController textFieldController4 = TextEditingController();
+
+  showDialog<void>(
+    context: context,
+    barrierDismissible: false,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),
+        content: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              SizedBox(
+                height: 30,
+                child: TextField(
+                  controller: textFieldController1,
+                  decoration: const InputDecoration(
+                    labelText: 'Title',
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(10))),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 20),
+              Container(
+                child: TextField(
+                  controller: textFieldController2,
+                  decoration: const InputDecoration(
+                    labelText: 'Description',
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(10))),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 20),
+              SizedBox(
+                height: 30,
+                child: TextField(
+                  controller: textFieldController3,
+                  decoration: InputDecoration(
+                    labelText: 'Add Member',
+                    border: const OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                    ),
+                    suffixIcon: DropdownButton(
+                      onChanged: (String? value) {},
+                      items: const <DropdownMenuItem<String>>[
+                        DropdownMenuItem<String>(
+                          value: 'Option 1',
+                          child: Text('Option 1'),
+                        ),
+                        DropdownMenuItem<String>(
+                          value: 'Option 2',
+                          child: Text('Option 2'),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 17),
+              SizedBox(
+                height: 30,
+                child: TextField(
+                  controller: textFieldController4,
+                  decoration: const InputDecoration(
+                    labelText: 'Add File+',
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(
+                            10))), // Add border to the text field
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+        actions: <Widget>[
+          TextButton(
+            child: const Text(
+              'Cancel',
+              style: TextStyle(color: Colors.black),
+            ),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+          TextButton(
+            child: const Text(
+              'OK',
+              style: TextStyle(color: Colors.black),
+            ),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+        ],
+      );
+    },
   );
 }
 
