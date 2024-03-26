@@ -73,7 +73,7 @@ abstract class OHSViewModelBase with Store {
           error: null,
           loading: false,
         );
-        // ohsService.ohsnewsfolderviewmodelfunction(id);
+        ohsService.ohsnewsfolderservicefunction(id);
       },
     );
   }
@@ -156,6 +156,39 @@ abstract class OHSViewModelBase with Store {
           error: null,
           loading: false,
         );
+      },
+    );
+  }
+
+  @observable
+  ApiResponse<String> renameResponse = ApiResponse<String>();
+
+  @action
+  Future<void> folderrenameviewmodelfunction(String folderName, int id) async {
+    renameResponse = renameResponse.copyWith(error: null, loading: true);
+
+    print(id);
+    print(
+      folderName,
+    );
+    final result =
+        await ohsService.ohsnewsfldrenameservicefunction(folderName, id);
+    return result.fold(
+      (l) {
+        print('Error occurred during folder rename: $l');
+        renameResponse = renameResponse.copyWith(
+          error: l,
+          loading: false,
+        );
+      },
+      (r) {
+        print('Folder rename successful!');
+        renameResponse = renameResponse.copyWith(
+          data: r,
+          error: null,
+          loading: false,
+        );
+        vmOhs.ohsnewsfolderviewmodelfunction(1);
       },
     );
   }

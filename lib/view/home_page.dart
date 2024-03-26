@@ -158,6 +158,9 @@ void ohsfunction(BuildContext context) {
     ..ohsnotificationviewmodelfunction()
     ..ohsnewsviewmodelfunction();
   context.router.pushNamed(RouteNames.ohsPage);
+
+  vmOhs.ohsnewsfolderviewmodelfunction(1);
+  context.router.pushNamed(RouteNames.ohsPage);
 }
 
 void intranetfuntion(BuildContext context) {

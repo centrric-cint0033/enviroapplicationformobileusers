@@ -9,6 +9,7 @@ import 'package:enviro_mobile_application/utilis/api_endpoints/customprint.dart'
 import 'package:enviro_mobile_application/utilis/httpservice.dart';
 import 'package:enviro_mobile_application/utilis/injection.dart';
 import 'package:enviro_mobile_application/utilis/main_failure.dart';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:injectable/injectable.dart';
 
@@ -23,6 +24,9 @@ abstract class IohsService {
       String folderName, int id);
 
   Future<Either<MainFailure, String>> ohsnewsfldrenameservicefunction(
+      folderName, id);
+
+  Future<Either<MainFailure, String>> ohsnewsfolderrenamefunction(
       folderName, id);
 }
 
@@ -178,6 +182,36 @@ class OhsService implements IohsService {
       (res) async {
         var data = jsonDecode(res.body);
 
+        return Right('success');
+      },
+    );
+  }
+
+  @override
+  Future<Either<MainFailure, String>> ohsnewsfolderrenamefunction(
+      folderName, id) async {
+    debugPrint("Folder name is:: $folderName");
+    String apiUrl = '${ApiEndPoints.endpointnewsfldrrename}/$id/';
+    debugPrint("end point name is:: $baseUrl$apiUrl");
+
+    MultipartRequest request =
+        MultipartRequest("PUT", Uri.parse("$baseUrl$apiUrl"));
+
+    request.fields['name'] = folderName;
+    print(folderName);
+
+    var response =
+        await getIt<HttpService>().multipartRequest(request: request);
+
+    return response.fold(
+      (l) {
+        // Show Error
+        (l.values.first);
+        return Left(l.keys.first);
+      },
+      (res) async {
+        var data = jsonDecode(res.body);
+        print('Response body: $data');
         return Right('success');
       },
     );
