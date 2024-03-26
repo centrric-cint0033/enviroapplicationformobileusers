@@ -61,4 +61,5 @@ class ApiEndPoints {
   static const endpointnotificationlist =
       '/api/v1/oh_and_s/notification/view/1/?limit=8';
   static const endpointnewsfldrrename = '/api/v1/drive/folder/rename/3260/';
+  static const endpointSites = '/api/v1/clients/all/alpha_asc/waste/';
 }

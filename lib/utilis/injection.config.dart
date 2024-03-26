@@ -9,16 +9,16 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:enviro_mobile_application/Routepage/securestorage.dart' as _i17;
+import 'package:enviro_mobile_application/service/01_auth/authservice.dart'
+    as _i9;
+import 'package:enviro_mobile_application/service/01_auth/i_authservice.dart'
+    as _i8;
 import 'package:enviro_mobile_application/service/02_sales/sales_service.dart'
     as _i12;
 import 'package:enviro_mobile_application/service/03_vehicles/vehicle_service.dart'
     as _i13;
 import 'package:enviro_mobile_application/service/04_ohs/ohs_service.dart'
     as _i14;
-import 'package:enviro_mobile_application/service/01_auth/authservice.dart'
-    as _i9;
-import 'package:enviro_mobile_application/service/01_auth/i_authservice.dart'
-    as _i8;
 import 'package:enviro_mobile_application/service/calender/i_calender.dart'
     as _i4;
 import 'package:enviro_mobile_application/service/home/home_service.dart'
