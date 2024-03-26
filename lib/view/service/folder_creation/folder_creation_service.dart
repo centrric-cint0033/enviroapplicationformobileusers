@@ -16,6 +16,7 @@ class FolderCreationService implements IAllFolderCreationService {
   @override
   Future<Either<MainFailure, String>> ohsnewsfoldercreationfunction(
       folderName, id) async {
+    print(folderName);
     String apiUrl;
 
     apiUrl = ApiEndPoints.endpointfoldercreation;

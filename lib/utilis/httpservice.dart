@@ -120,6 +120,7 @@ class HttpService {
     required MultipartRequest request,
   }) async {
     final token = await SecureStorage().readData(key: "token");
+    customPrint(content: request.fields, name: 'request content');
     request.headers.addAll({
       'Accept': 'application/json',
       'Content-Type': 'multipart/form-data',

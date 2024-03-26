@@ -6,23 +6,25 @@ import 'package:enviro_mobile_application/utilis/api_endpoints/api_endpoints.dar
 import 'package:enviro_mobile_application/utilis/httpservice.dart';
 import 'package:enviro_mobile_application/utilis/injection.dart';
 import 'package:enviro_mobile_application/utilis/main_failure.dart';
-import 'package:enviro_mobile_application/view/service/ohs_folder_rename/i_all_foldr_rename_service.dart';
+import 'package:enviro_mobile_application/view/service/ohs_folder_rename/i_folde_rename_service.dart';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:injectable/injectable.dart';
 
-@LazySingleton(as: IAllFolderRenameService)
-class FolderRenameService implements IAllFolderRenameService {
+@LazySingleton(as: Ifolderrename)
+class FolderRenameService implements Ifolderrename {
   @override
-  Future<Either<MainFailure, String>> folderrenamefunction(
+  Future<Either<MainFailure, String>> ohsnewsfolderrenamefunction(
       folderName, id) async {
-    String apiUrl;
-
-    apiUrl = ApiEndPoints.endpointnewsfldrrename;
+    debugPrint("Folder name is:: $folderName");
+    String apiUrl = '${ApiEndPoints.endpointnewsfldrrename}/$id';
+    debugPrint("end point name is:: $baseUrl$apiUrl");
 
     MultipartRequest request =
         MultipartRequest("PUT", Uri.parse("$baseUrl$apiUrl"));
 
     request.fields['name'] = folderName;
+    print(folderName);
 
     var response =
         await getIt<HttpService>().multipartRequest(request: request);
@@ -35,7 +37,7 @@ class FolderRenameService implements IAllFolderRenameService {
       },
       (res) async {
         var data = jsonDecode(res.body);
-
+        print('Response body: $data');
         return Right('success');
       },
     );

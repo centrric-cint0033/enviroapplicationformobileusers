@@ -4,6 +4,7 @@ import 'package:enviro_mobile_application/Routepage/approutes.gr.dart';
 import 'package:enviro_mobile_application/view/loginpage/common/appbar/cmcustomformfield.dart';
 import 'package:enviro_mobile_application/view/oh&s_detail_page/oh&s_detail_page.dart';
 import 'package:enviro_mobile_application/viewmodel/folder_creation/folder_creation_viewmodel.dart';
+import 'package:enviro_mobile_application/viewmodel/folderrename/folder_rename_viewmodel.dart';
 import 'package:enviro_mobile_application/viewmodel/oh&s_news_folder/oh&s_news_fldr_view_model.dart';
 import 'package:enviro_mobile_application/viewmodel/oh&s_page/oh&s_viewmodel.dart';
 import 'package:flutter/material.dart';
@@ -56,7 +57,7 @@ class NewsPage extends StatelessWidget {
                 builder: (_) {
                   return SizedBox(
                     child: ListView.separated(
-                      physics: NeverScrollableScrollPhysics(),
+                      physics: const NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
                       itemCount: vmohsnews.newspageResponse.data?.length ?? 0,
                       separatorBuilder: (BuildContext context, int index) =>
@@ -396,7 +397,7 @@ class NewsPage extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         // print('cdvfsdg $id');
-        // newsfolderclickfunction(context, id);
+        newsfolderclickfunction(context, id);
       },
       child: Container(
         height: 57,
@@ -436,6 +437,8 @@ class NewsPage extends StatelessWidget {
                       children: [
                         GestureDetector(
                           onTap: () {
+                            TextEditingController textFolderController2 =
+                                TextEditingController();
                             showDialog(
                               context: context,
                               builder: (BuildContext context) {
@@ -443,15 +446,16 @@ class NewsPage extends StatelessWidget {
                                   title: const Text('Rename'),
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(5)),
-                                  content: const SingleChildScrollView(
+                                  content: SingleChildScrollView(
                                     child: Column(
                                       mainAxisSize: MainAxisSize.min,
                                       children: <Widget>[
-                                        SizedBox(height: 17),
+                                        const SizedBox(height: 17),
                                         SizedBox(
                                           height: 30,
                                           child: TextField(
-                                            decoration: InputDecoration(
+                                            controller: textFolderController2,
+                                            decoration: const InputDecoration(
                                               labelText: 'Untitled folder',
                                               border: OutlineInputBorder(
                                                   borderRadius:
@@ -473,23 +477,30 @@ class NewsPage extends StatelessWidget {
                                         Navigator.of(context).pop();
                                       },
                                     ),
-                                    TextButton(
-                                      child: const Text(
-                                        'Rename',
-                                        style: TextStyle(color: Colors.black),
-                                      ),
-                                      onPressed: () {
-                                        String folderName =
-                                            textFolderController.text;
-                                        if (folderName.isNotEmpty) {
+                                    Observer(builder: (_) {
+                                      return TextButton(
+                                        child: const Text(
+                                          'Rename',
+                                          style: TextStyle(color: Colors.black),
+                                        ),
+                                        onPressed: () {
+                                          print('sss');
+
+                                          String folderName =
+                                              textFolderController2.text;
+                                          print(folderName);
+                                          if (folderName.isNotEmpty) {
+                                            print('iiiiii');
+                                            // Navigator.of(context).pop();
+                                            vmohsrename
+                                                .folderrenameviewmodelfunction(
+                                                    folderName, id);
+                                            print('api');
+                                          } else {}
                                           Navigator.of(context).pop();
-                                          vmfoldercreation
-                                              .ohsfoldercreationviewmodelfunction(
-                                                  folderName, 1);
-                                        } else {}
-                                        Navigator.of(context).pop();
-                                      },
-                                    ),
+                                        },
+                                      );
+                                    }),
                                   ],
                                 );
                               },
