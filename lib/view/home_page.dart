@@ -64,12 +64,15 @@ class HomePage extends StatelessWidget {
                 height: 30.0,
               ),
             ),
-            _buildBox(
-              'assets/images/user.svg',
-              'Site',
-              Colors.blue,
-              width: 30.0,
-              height: 30.0,
+            GestureDetector(
+              onTap: () => navigateToSitesPage(context: context),
+              child: _buildBox(
+                'assets/images/user.svg',
+                'Site',
+                Colors.blue,
+                width: 30.0,
+                height: 30.0,
+              ),
             ),
             GestureDetector(
               onTap: () => calenderfunction(context),
@@ -176,4 +179,8 @@ void vehiclefunction(BuildContext context) async {
 
   await vmVehicle.mastercarfunction();
   vmVehicle.trailorfunction();
+}
+
+void navigateToSitesPage({required BuildContext context}) {
+  context.router.pushNamed(RouteNames.siteListPage);
 }
