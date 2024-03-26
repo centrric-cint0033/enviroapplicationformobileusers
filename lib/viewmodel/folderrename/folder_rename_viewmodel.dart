@@ -49,7 +49,7 @@ abstract class FoldersRenameViewModelBase with Store {
           error: null,
           loading: false,
         );
-        vmohsnewsfolder.ohsnewsfolderviewmodelfunction(id);
+        vmohsnewsfolder.ohsnewsfolderviewmodelfunction(1);
       },
     );
   }

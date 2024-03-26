@@ -17,7 +17,7 @@ class FolderRenameService implements Ifolderrename {
   Future<Either<MainFailure, String>> ohsnewsfolderrenamefunction(
       folderName, id) async {
     debugPrint("Folder name is:: $folderName");
-    String apiUrl = '${ApiEndPoints.endpointnewsfldrrename}/$id';
+    String apiUrl = '${ApiEndPoints.endpointnewsfldrrename}/$id/';
     debugPrint("end point name is:: $baseUrl$apiUrl");
 
     MultipartRequest request =
