@@ -14,10 +14,11 @@ import '../../utilis/api_endpoints/api_endpoints.dart';
 class SiteService implements ISiteService {
   @override
   Future<Either<MainFailure, List<SiteResModel>>> getSites({int? page}) async {
+    String url = "${ApiEndPoints.endpointSites}?page=${page ?? 1}&limit=10";
     var response = await getIt<HttpService>().request(
+      apiUrl: url,
       authenticated: true,
       method: HttpMethod.get,
-      apiUrl: ApiEndPoints.endpointSites,
     );
 
     return response.fold(

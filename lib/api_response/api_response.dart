@@ -1,4 +1,3 @@
-import 'package:enviro_mobile_application/model/vehicle/res_model/all_vehicle_list/allvehiclelist_model.dart';
 import 'package:enviro_mobile_application/utilis/main_failure.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
