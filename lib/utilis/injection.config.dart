@@ -15,8 +15,9 @@ import 'package:enviro_mobile_application/service/03_vehicles/vehicle_service.da
     as _i13;
 import 'package:enviro_mobile_application/service/04_ohs/ohs_service.dart'
     as _i14;
-import 'package:enviro_mobile_application/service/auth/authservice.dart' as _i9;
-import 'package:enviro_mobile_application/service/auth/i_authservice.dart'
+import 'package:enviro_mobile_application/service/01_auth/authservice.dart'
+    as _i9;
+import 'package:enviro_mobile_application/service/01_auth/i_authservice.dart'
     as _i8;
 import 'package:enviro_mobile_application/service/calender/i_calender.dart'
     as _i4;
