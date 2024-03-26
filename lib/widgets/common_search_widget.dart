@@ -32,7 +32,7 @@ Container common_search_widget() {
                     controller: textController,
                     style: const TextStyle(color: Colors.black),
                     decoration: InputDecoration(
-                      hintText: 'Search By client',
+                      hintText: 'h By client',
                       hintStyle: const TextStyle(color: Colors.grey),
                       border: InputBorder.none,
                       suffixIcon: Observer(builder: (_) {

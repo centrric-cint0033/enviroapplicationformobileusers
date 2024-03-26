@@ -3,6 +3,7 @@ import 'package:enviro_mobile_application/Routepage/routespage.dart';
 import 'package:enviro_mobile_application/view_model/02_sales/sales_view_model.dart';
 import 'package:enviro_mobile_application/view_model/03_vehicles/vehicle_view_model.dart';
 import 'package:enviro_mobile_application/view_model/04_ohs/ohs_view_model.dart';
+import 'package:enviro_mobile_application/view_model/10_site/site_view_model.dart';
 import 'package:enviro_mobile_application/view_model/home_page/home_page_viewmodel.dart';
 
 import 'package:flutter/material.dart';
@@ -182,5 +183,6 @@ void vehiclefunction(BuildContext context) async {
 }
 
 void navigateToSitesPage({required BuildContext context}) {
+  vmSite.getSite();
   context.router.pushNamed(RouteNames.siteListPage);
 }

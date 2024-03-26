@@ -8,7 +8,7 @@ import '../../model/10_site/site_res_model/site_res_model.dart';
 
 part 'site_view_model.g.dart';
 
-final vmOhs = getIt<SiteViewModel>();
+final vmSite = getIt<SiteViewModel>();
 
 @injectable
 class SiteViewModel extends SiteViewModelBase with _$SiteViewModel {
