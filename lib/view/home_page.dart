@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:enviro_mobile_application/Routepage/routespage.dart';
+import 'package:enviro_mobile_application/utilis/api_endpoints/customprint.dart';
 import 'package:enviro_mobile_application/view_model/02_sales/sales_view_model.dart';
 import 'package:enviro_mobile_application/view_model/03_vehicles/vehicle_view_model.dart';
 import 'package:enviro_mobile_application/view_model/04_ohs/ohs_view_model.dart';
@@ -153,14 +154,12 @@ void onsalesfunction(BuildContext context) async {
   }
 }
 
-void ohsfunction(BuildContext context) {
-  vmOhs
-    ..ohsnotificationviewmodelfunction()
-    ..ohsnewsviewmodelfunction();
+void ohsfunction(BuildContext context) async {
   context.router.pushNamed(RouteNames.ohsPage);
-
-  vmOhs.ohsnewsfolderviewmodelfunction(1);
-  context.router.pushNamed(RouteNames.ohsPage);
+  customPrint(content: 'ohs');
+  await vmOhs.ohsnotificationviewmodelfunction();
+  await vmOhs.ohsnewsviewmodelfunction();
+  await vmOhs.ohsnewsfolderviewmodelfunction(1);
 }
 
 void intranetfuntion(BuildContext context) {
