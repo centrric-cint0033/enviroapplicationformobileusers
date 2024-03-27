@@ -1,6 +1,5 @@
-import 'package:enviro_mobile_application/utilis/api_endpoints/customprint.dart';
-import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
+import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../utilis/injection.dart';
@@ -45,7 +44,6 @@ abstract class SiteViewModelBase with Store {
 
   @action
   Future<void> getPermanentSites({int? page}) async {
-    customPrint(content: page, name: "Page is ::");
     permanentSiteResponse = permanentSiteResponse.copyWith(
       error: null,
       paginationLoading: page != null,
@@ -164,7 +162,8 @@ abstract class SiteViewModelBase with Store {
       if (permanentSitesController.position.pixels ==
               permanentSitesController.position.maxScrollExtent &&
           !permanentSitesController.position.outOfRange &&
-          permanentSiteResponse.pagination) {
+          permanentSiteResponse.pagination &&
+          !permanentSiteResponse.paginationLoading) {
         int pageNo = permanentSiteResponse.pageNo + 1;
         getPermanentSites(page: pageNo);
       }
@@ -177,9 +176,9 @@ abstract class SiteViewModelBase with Store {
       if (tempSitesController.position.pixels ==
               tempSitesController.position.maxScrollExtent &&
           !tempSitesController.position.outOfRange &&
-          tempSiteResponse.pagination) {
+          tempSiteResponse.pagination &&
+          !tempSiteResponse.paginationLoading) {
         int pageNo = tempSiteResponse.pageNo + 1;
-        customPrint(content: pageNo, name: "pageNo");
         getTemporarySites(page: pageNo);
       }
     });
@@ -191,7 +190,8 @@ abstract class SiteViewModelBase with Store {
       if (delSitesController.position.pixels ==
               delSitesController.position.maxScrollExtent &&
           !delSitesController.position.outOfRange &&
-          delSiteResponse.pagination) {
+          delSiteResponse.pagination &&
+          !delSiteResponse.paginationLoading) {
         int pageNo = delSiteResponse.pageNo + 1;
         getDeletedSites(page: pageNo);
       }
