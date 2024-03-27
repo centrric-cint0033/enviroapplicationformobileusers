@@ -87,6 +87,13 @@ class HttpService {
 
       if (response.statusCode == HttpStatus.ok ||
           response.statusCode == HttpStatus.created) {
+        // for app login
+        if (jsonDecode(response.body)["access"] != null) {
+          await SecureStorage().writeData(
+            key: "token",
+            value: jsonDecode(response.body)["access"],
+          );
+        }
         return Right(response);
       } else {
         return Left({const MainFailure.clientFailure(): response});
