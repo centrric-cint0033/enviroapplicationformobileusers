@@ -67,17 +67,15 @@ class SiteDetailScreen extends StatelessWidget {
                     ],
                   ),
                   for (MapEntry<String, String> data in map.entries) ...{
-                    if (data.value.isNotEmpty) ...{
-                      sized0hx10,
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 20.w),
-                        child: KeyValueTextWidget(
-                          maxLines: 4,
-                          keyName: data.key,
-                          value: data.value,
-                        ),
+                    sized0hx10,
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 20.w),
+                      child: KeyValueTextWidget(
+                        maxLines: 4,
+                        keyName: data.key,
+                        value: data.value,
                       ),
-                    }
+                    ),
                   },
                   sized0hx10,
                   Container(
