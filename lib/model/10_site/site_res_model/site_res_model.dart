@@ -1,3 +1,5 @@
+// ignore_for_file: invalid_annotation_target
+
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'site_res_model.freezed.dart';
@@ -6,7 +8,7 @@ part 'site_res_model.g.dart';
 @freezed
 class SiteResModel with _$SiteResModel {
   factory SiteResModel({
-    num? id,
+    int? id,
     @JsonKey(name: 'dp_thumbnail') String? dpThumbnail,
     @JsonKey(name: 'sales_person_name') String? salesPersonName,
     @JsonKey(name: 'tab_type') String? tabType,

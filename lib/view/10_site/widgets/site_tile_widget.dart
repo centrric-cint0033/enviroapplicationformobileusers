@@ -6,12 +6,19 @@ import 'icon_widget.dart';
 import 'key_value_text_widget.dart';
 
 class SiteTileWidget extends StatelessWidget {
+  final Function() onTap;
   final String name, address;
-  const SiteTileWidget({super.key, required this.name, required this.address});
+  const SiteTileWidget({
+    super.key,
+    required this.name,
+    required this.onTap,
+    required this.address,
+  });
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      onTap: onTap,
       tileColor: Colors.grey.shade100,
       contentPadding: EdgeInsets.symmetric(
         vertical: 10.h,

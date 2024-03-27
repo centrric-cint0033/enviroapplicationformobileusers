@@ -12,6 +12,12 @@ part 'site_view_model.g.dart';
 
 final vmSite = getIt<SiteViewModel>();
 
+enum SiteType {
+  permananet,
+  temporary,
+  deleted,
+}
+
 @injectable
 class SiteViewModel extends SiteViewModelBase with _$SiteViewModel {
   SiteViewModel(super.siteService);
@@ -190,5 +196,70 @@ abstract class SiteViewModelBase with Store {
         getDeletedSites(page: pageNo);
       }
     });
+  }
+
+  @action
+  Future<void> getDetails({
+    required int id,
+    required BuildContext context,
+    SiteType type = SiteType.permananet,
+  }) async {
+    final response = await siteService.getSiteDetails(id: id);
+
+    response.fold(
+      (l) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            backgroundColor: Color(0XFF061933),
+            content: Text(
+              'Something went wrong',
+            ),
+            duration: Duration(seconds: 3),
+          ),
+        );
+      },
+      (res) {
+        int index;
+        switch (type) {
+          case SiteType.permananet:
+            List<SiteResModel> pSites =
+                permanentSiteResponse.data?.toList() ?? [];
+            index = pSites.indexWhere(
+              (element) => element.id == id,
+            );
+            if (index != -1) {
+              pSites[index] = res;
+              permanentSiteResponse =
+                  permanentSiteResponse.copyWith(data: pSites);
+            }
+            break;
+
+          case SiteType.temporary:
+            List<SiteResModel> tSites = tempSiteResponse.data?.toList() ?? [];
+            index = tSites.indexWhere(
+              (element) => element.id == id,
+            );
+            if (index != -1) {
+              tSites[index] = res;
+              tempSiteResponse = tempSiteResponse.copyWith(data: tSites);
+            }
+            break;
+
+          case SiteType.deleted:
+            List<SiteResModel> dSites = delSiteResponse.data?.toList() ?? [];
+            index = dSites.indexWhere(
+              (element) => element.id == id,
+            );
+            if (index != -1) {
+              dSites[index] = res;
+              delSiteResponse = delSiteResponse.copyWith(data: dSites);
+            }
+            break;
+
+          default:
+            break;
+        }
+      },
+    );
   }
 }

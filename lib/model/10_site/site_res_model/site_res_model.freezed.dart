@@ -20,7 +20,7 @@ SiteResModel _$SiteResModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$SiteResModel {
-  num? get id => throw _privateConstructorUsedError;
+  int? get id => throw _privateConstructorUsedError;
   @JsonKey(name: 'dp_thumbnail')
   String? get dpThumbnail => throw _privateConstructorUsedError;
   @JsonKey(name: 'sales_person_name')
@@ -184,7 +184,7 @@ abstract class $SiteResModelCopyWith<$Res> {
       _$SiteResModelCopyWithImpl<$Res, SiteResModel>;
   @useResult
   $Res call(
-      {num? id,
+      {int? id,
       @JsonKey(name: 'dp_thumbnail') String? dpThumbnail,
       @JsonKey(name: 'sales_person_name') String? salesPersonName,
       @JsonKey(name: 'tab_type') String? tabType,
@@ -368,7 +368,7 @@ class _$SiteResModelCopyWithImpl<$Res, $Val extends SiteResModel>
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as num?,
+              as int?,
       dpThumbnail: freezed == dpThumbnail
           ? _value.dpThumbnail
           : dpThumbnail // ignore: cast_nullable_to_non_nullable
@@ -698,7 +698,7 @@ abstract class _$$SiteResModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {num? id,
+      {int? id,
       @JsonKey(name: 'dp_thumbnail') String? dpThumbnail,
       @JsonKey(name: 'sales_person_name') String? salesPersonName,
       @JsonKey(name: 'tab_type') String? tabType,
@@ -880,7 +880,7 @@ class __$$SiteResModelImplCopyWithImpl<$Res>
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as num?,
+              as int?,
       dpThumbnail: freezed == dpThumbnail
           ? _value.dpThumbnail
           : dpThumbnail // ignore: cast_nullable_to_non_nullable
@@ -1294,7 +1294,7 @@ class _$SiteResModelImpl implements _SiteResModel {
       _$$SiteResModelImplFromJson(json);
 
   @override
-  final num? id;
+  final int? id;
   @override
   @JsonKey(name: 'dp_thumbnail')
   final String? dpThumbnail;
@@ -1759,7 +1759,7 @@ class _$SiteResModelImpl implements _SiteResModel {
 
 abstract class _SiteResModel implements SiteResModel {
   factory _SiteResModel(
-      {final num? id,
+      {final int? id,
       @JsonKey(name: 'dp_thumbnail') final String? dpThumbnail,
       @JsonKey(name: 'sales_person_name') final String? salesPersonName,
       @JsonKey(name: 'tab_type') final String? tabType,
@@ -1854,7 +1854,7 @@ abstract class _SiteResModel implements SiteResModel {
       _$SiteResModelImpl.fromJson;
 
   @override
-  num? get id;
+  int? get id;
   @override
   @JsonKey(name: 'dp_thumbnail')
   String? get dpThumbnail;

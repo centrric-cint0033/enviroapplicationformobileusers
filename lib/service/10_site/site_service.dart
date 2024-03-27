@@ -91,4 +91,27 @@ class SiteService implements ISiteService {
       },
     );
   }
+
+  @override
+  Future<Either<MainFailure, SiteResModel>> getSiteDetails({
+    required int id,
+  }) async {
+    var response = await getIt<HttpService>().request(
+      authenticated: true,
+      method: HttpMethod.get,
+      apiUrl: "${ApiEndPoints.endpointSiteDetail}$id/",
+    );
+
+    return response.fold(
+      (l) {
+        (l.values.first);
+        return Left(l.keys.first);
+      },
+      (res) async {
+        var data = jsonDecode(res.body);
+
+        return Right(SiteResModel.fromJson(data));
+      },
+    );
+  }
 }

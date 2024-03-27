@@ -13,4 +13,7 @@ abstract class ISiteService {
   Future<Either<MainFailure, List<SiteResModel>>> getDeletedSites({
     int? page,
   });
+  Future<Either<MainFailure, SiteResModel>> getSiteDetails({
+    required int id,
+  });
 }

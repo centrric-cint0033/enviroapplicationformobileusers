@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class KeyValueTextWidget extends StatelessWidget {
+  final int? maxLines;
   final String keyName, value;
   const KeyValueTextWidget({
     super.key,
+    this.maxLines,
     required this.value,
     required this.keyName,
   });
@@ -22,7 +24,7 @@ class KeyValueTextWidget extends StatelessWidget {
         Expanded(
           child: Text(
             ":$value",
-            maxLines: 1,
+            maxLines: maxLines ?? 1,
             style: TextStyle(fontSize: 12.sp),
             overflow: TextOverflow.ellipsis,
           ),

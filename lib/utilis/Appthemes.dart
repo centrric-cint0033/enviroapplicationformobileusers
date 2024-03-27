@@ -9,6 +9,7 @@ abstract class Appthemes {
   static const primaryColor = Colors.blue;
 
   static final ThemeData themeData = ThemeData(
+    dividerColor: Colors.grey.shade200,
     colorScheme: const ColorScheme.light(
       primary: primaryColor,
     ),

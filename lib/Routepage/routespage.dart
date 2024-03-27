@@ -12,4 +12,5 @@ class RouteNames {
   static const String rNotificationdetailpage = '/notification_detail_page';
 
   static const String siteListPage = '/site_list_page';
+  static const String siteDetailPage = '/site_detail_page';
 }

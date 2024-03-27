@@ -85,6 +85,18 @@ mixin _$SiteViewModel on SiteViewModelBase, Store {
         .run(() => super.getDeletedSites(page: page));
   }
 
+  late final _$getDetailsAsyncAction =
+      AsyncAction('SiteViewModelBase.getDetails', context: context);
+
+  @override
+  Future<void> getDetails(
+      {required int id,
+      required BuildContext context,
+      SiteType type = SiteType.permananet}) {
+    return _$getDetailsAsyncAction
+        .run(() => super.getDetails(id: id, context: context, type: type));
+  }
+
   @override
   String toString() {
     return '''

@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class IconWidget extends StatelessWidget {
-  const IconWidget({super.key});
+  final double? length;
+  const IconWidget({super.key, this.length});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 40.h,
-      height: 40.h,
+      width: length ?? 40.h,
+      height: length ?? 40.h,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12.r),
         color: Theme.of(context).colorScheme.primary.withOpacity(0.1),

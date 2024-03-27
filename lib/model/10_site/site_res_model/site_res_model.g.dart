@@ -8,7 +8,7 @@ part of 'site_res_model.dart';
 
 _$SiteResModelImpl _$$SiteResModelImplFromJson(Map<String, dynamic> json) =>
     _$SiteResModelImpl(
-      id: json['id'] as num?,
+      id: json['id'] as int?,
       dpThumbnail: json['dp_thumbnail'] as String?,
       salesPersonName: json['sales_person_name'] as String?,
       tabType: json['tab_type'] as String?,
