@@ -23,15 +23,20 @@ class DelSiteListWidget extends StatelessWidget {
           child: vmSite.delSiteResponse.loading
               ? const Center(child: CupertinoActivityIndicator())
               : ListView.separated(
-                  itemCount: sites.length,
+                  itemCount: sites.length + 1,
+                  controller: vmSite.delSitesController,
                   physics: const AlwaysScrollableScrollPhysics(),
                   separatorBuilder: (context, index) => sized0hx05,
-                  padding: EdgeInsets.symmetric(vertical: 10.h),
+                  padding: EdgeInsets.symmetric(vertical: 20.h),
                   itemBuilder: (context, index) {
-                    return SiteTileWidget(
-                      name: sites[index].clientName ?? "",
-                      address: sites[index].siteAddress ?? "",
-                    );
+                    return index == sites.length
+                        ? vmSite.delSiteResponse.paginationLoading
+                            ? const CupertinoActivityIndicator()
+                            : const SizedBox.shrink()
+                        : SiteTileWidget(
+                            name: sites[index].clientName ?? "",
+                            address: sites[index].siteAddress ?? "",
+                          );
                   },
                 ),
         );

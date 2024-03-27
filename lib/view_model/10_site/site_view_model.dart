@@ -1,3 +1,5 @@
+import 'package:enviro_mobile_application/utilis/api_endpoints/customprint.dart';
+import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
 import 'package:injectable/injectable.dart';
 
@@ -31,8 +33,13 @@ abstract class SiteViewModelBase with Store {
   ApiResponse<List<SiteResModel>> delSiteResponse =
       ApiResponse<List<SiteResModel>>();
 
+  ScrollController delSitesController = ScrollController();
+  ScrollController tempSitesController = ScrollController();
+  ScrollController permanentSitesController = ScrollController();
+
   @action
   Future<void> getPermanentSites({int? page}) async {
+    customPrint(content: page, name: "Page is ::");
     permanentSiteResponse = permanentSiteResponse.copyWith(
       error: null,
       paginationLoading: page != null,
@@ -58,11 +65,12 @@ abstract class SiteViewModelBase with Store {
         }
 
         permanentSiteResponse = permanentSiteResponse.copyWith(
-          data: res,
+          data: sites,
           error: null,
           loading: false,
           pageNo: page ?? 1,
           paginationLoading: false,
+          pagination: res.length == 10,
         );
       },
     );
@@ -95,11 +103,12 @@ abstract class SiteViewModelBase with Store {
         }
 
         tempSiteResponse = tempSiteResponse.copyWith(
-          data: res,
+          data: sites,
           error: null,
           loading: false,
           pageNo: page ?? 1,
           paginationLoading: false,
+          pagination: res.length == 10,
         );
       },
     );
@@ -132,13 +141,54 @@ abstract class SiteViewModelBase with Store {
         }
 
         delSiteResponse = delSiteResponse.copyWith(
-          data: res,
+          data: sites,
           error: null,
           loading: false,
           pageNo: page ?? 1,
           paginationLoading: false,
+          pagination: res.length == 10,
         );
       },
     );
+  }
+
+  /// Permanent sites pagination
+  void permanentSitesPagination() {
+    permanentSitesController.addListener(() {
+      if (permanentSitesController.position.pixels ==
+              permanentSitesController.position.maxScrollExtent &&
+          !permanentSitesController.position.outOfRange &&
+          permanentSiteResponse.pagination) {
+        int pageNo = permanentSiteResponse.pageNo + 1;
+        getPermanentSites(page: pageNo);
+      }
+    });
+  }
+
+  /// Temporary sites pagination
+  void tempSitesPagination() {
+    tempSitesController.addListener(() {
+      if (tempSitesController.position.pixels ==
+              tempSitesController.position.maxScrollExtent &&
+          !tempSitesController.position.outOfRange &&
+          tempSiteResponse.pagination) {
+        int pageNo = tempSiteResponse.pageNo + 1;
+        customPrint(content: pageNo, name: "pageNo");
+        getTemporarySites(page: pageNo);
+      }
+    });
+  }
+
+  /// Deleted sites pagination
+  void delSitesPagination() {
+    delSitesController.addListener(() {
+      if (delSitesController.position.pixels ==
+              delSitesController.position.maxScrollExtent &&
+          !delSitesController.position.outOfRange &&
+          delSiteResponse.pagination) {
+        int pageNo = delSiteResponse.pageNo + 1;
+        getDeletedSites(page: pageNo);
+      }
+    });
   }
 }

@@ -24,15 +24,20 @@ class PermanentSitesListWidget extends StatelessWidget {
           child: vmSite.permanentSiteResponse.loading
               ? const Center(child: CupertinoActivityIndicator())
               : ListView.separated(
-                  itemCount: sites.length,
+                  itemCount: sites.length + 1,
+                  controller: vmSite.permanentSitesController,
                   physics: const AlwaysScrollableScrollPhysics(),
                   separatorBuilder: (context, index) => sized0hx05,
                   padding: EdgeInsets.symmetric(vertical: 10.h),
                   itemBuilder: (context, index) {
-                    return SiteTileWidget(
-                      name: sites[index].clientName ?? "",
-                      address: sites[index].siteAddress ?? "",
-                    );
+                    return index == sites.length
+                        ? vmSite.permanentSiteResponse.paginationLoading
+                            ? const CupertinoActivityIndicator()
+                            : const SizedBox.shrink()
+                        : SiteTileWidget(
+                            name: sites[index].clientName ?? "",
+                            address: sites[index].siteAddress ?? "",
+                          );
                   },
                 ),
         );

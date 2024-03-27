@@ -1,3 +1,4 @@
+import 'package:enviro_mobile_application/view_model/10_site/site_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
 
@@ -15,6 +16,14 @@ class SiteListScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    WidgetsBinding.instance.addPostFrameCallback(
+      (timeStamp) {
+        vmSite
+          ..permanentSitesPagination()
+          ..tempSitesPagination()
+          ..delSitesPagination();
+      },
+    );
     return DefaultTabController(
       length: 3,
       child: Scaffold(
