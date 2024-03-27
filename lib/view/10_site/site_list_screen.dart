@@ -1,6 +1,7 @@
-import 'package:enviro_mobile_application/view_model/10_site/site_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:enviro_mobile_application/view_model/10_site/site_view_model.dart';
 
 import '../../widgets/cmappbar.dart';
 import 'widgets/del_site_list_widget.dart';
@@ -32,16 +33,34 @@ class SiteListScreen extends StatelessWidget {
           title: cmnTitleWidget('Site'),
           actions: cmn_action_icon,
         ),
-        body: const Column(
+        body: Column(
           children: [
-            TabBar(
-              tabs: [
-                Tab(text: "Permanent"),
-                Tab(text: "Temporary"),
-                Tab(text: "Deleted"),
-              ],
+            Container(
+              width: MediaQuery.sizeOf(context).width - 30.w,
+              decoration: BoxDecoration(
+                color: Colors.blue,
+                border: Border.all(color: Colors.blue),
+                borderRadius: BorderRadius.circular(8.0),
+              ),
+              padding: const EdgeInsets.all(2.0),
+              child: TabBar(
+                indicatorSize: TabBarIndicatorSize.tab,
+                physics: const AlwaysScrollableScrollPhysics(),
+                indicator: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                labelColor: Colors.black,
+                unselectedLabelColor: Colors.white,
+                indicatorColor: Colors.black,
+                tabs: const [
+                  Tab(text: "Permanent"),
+                  Tab(text: "Temporary"),
+                  Tab(text: "Deleted"),
+                ],
+              ),
             ),
-            Expanded(
+            const Expanded(
                 child: TabBarView(
               children: [
                 PermanentSitesListWidget(),
