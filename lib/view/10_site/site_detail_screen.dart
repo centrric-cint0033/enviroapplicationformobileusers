@@ -38,12 +38,26 @@ class SiteDetailScreen extends StatelessWidget {
           "Site Email": site.clientEmail ?? "",
           "Site Address": site.siteAddress ?? "",
           "Site Postcode": site.sitePostCode ?? "",
-          "Site Contact": site.companyContactNumber ?? "",
+          "Site Contact": site.siteContactMob ?? "",
           "Site Phone": site.sitePhoneNo ?? "",
           "Site Mobile No": site.siteContactMob ?? "",
           "Induction Required": site.inductionRequiredStr ?? "",
           "Induction Type": site.industryType?.toString() ?? "",
           "ABN Number": site.abn ?? "",
+        };
+        Map<String, String> company = {
+          "Entity Name": site.companyName ?? "",
+          "Entity Address": site.companyAddress ?? "",
+          "Entity Phone Number": site.companyLandlineNumber ?? "",
+          "Entity Email": site.companyEmail ?? "",
+          "Entity Postcode": site.companyPostcode ?? "",
+          "Term of account": site.invoiceTermsOfAccount ?? "",
+          "Account Status": site.accountStatus ?? "",
+          "Reason For Cancelling": site.reasonForCancelling ?? "",
+          "Payment Type": site.paymentTypeStr ?? "",
+          "Purchase No": site.invoicePurchaseNo ?? "",
+          "Price": site.price ?? "",
+          "Sale Person": site.salesPerson ?? "",
         };
         return Scaffold(
           body: SafeArea(
@@ -73,7 +87,7 @@ class SiteDetailScreen extends StatelessWidget {
                       child: KeyValueTextWidget(
                         maxLines: 4,
                         keyName: data.key,
-                        value: data.value,
+                        value: ":${data.value}",
                       ),
                     ),
                   },
@@ -92,6 +106,23 @@ class SiteDetailScreen extends StatelessWidget {
                           ?.copyWith(fontSize: 13.sp),
                     ),
                   ),
+                  for (MapEntry<String, String> data in company.entries) ...{
+                    sized0hx10,
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 20.w),
+                      child: KeyValueTextWidget(
+                        maxLines: 4,
+                        keyName: data.key,
+                        value: data.value,
+                        keyStyle:
+                            Theme.of(context).textTheme.titleSmall?.copyWith(
+                                  fontSize: 12.sp,
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.normal,
+                                ),
+                      ),
+                    ),
+                  },
                   sized0hx10,
                 ],
               ),

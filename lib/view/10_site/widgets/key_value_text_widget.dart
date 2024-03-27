@@ -3,10 +3,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class KeyValueTextWidget extends StatelessWidget {
   final int? maxLines;
+  final TextStyle? keyStyle;
   final String keyName, value;
   const KeyValueTextWidget({
     super.key,
     this.maxLines,
+    this.keyStyle,
     required this.value,
     required this.keyName,
   });
@@ -18,12 +20,12 @@ class KeyValueTextWidget extends StatelessWidget {
         Expanded(
           child: Text(
             keyName,
-            style: Theme.of(context).textTheme.titleSmall,
+            style: keyStyle ?? Theme.of(context).textTheme.titleSmall,
           ),
         ),
         Expanded(
           child: Text(
-            ":$value",
+            value,
             maxLines: maxLines ?? 1,
             style: TextStyle(fontSize: 12.sp),
             overflow: TextOverflow.ellipsis,
