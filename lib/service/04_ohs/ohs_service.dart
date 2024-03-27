@@ -233,7 +233,7 @@ class OhsService implements IohsService {
       },
       (res) async {
         var data = jsonDecode(res.body);
-        print('Response body: $data');
+
         return const Right('success');
       },
     );
