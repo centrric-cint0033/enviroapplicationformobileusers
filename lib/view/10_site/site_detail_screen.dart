@@ -9,6 +9,7 @@ import 'package:enviro_mobile_application/model/10_site/site_res_model/site_res_
 
 import 'widgets/icon_widget.dart';
 import 'widgets/key_value_text_widget.dart';
+import '../../widgets/cmn_title_textwidget.dart';
 
 @RoutePage()
 class SiteDetailScreen extends StatelessWidget {
@@ -20,52 +21,19 @@ class SiteDetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Observer(
       builder: (context) {
-        late SiteResModel site;
-        switch (type) {
-          case SiteType.permananet:
-            site = vmSite.permanentSiteResponse.data![index];
-            break;
-          case SiteType.temporary:
-            site = vmSite.tempSiteResponse.data![index];
-            break;
-          case SiteType.deleted:
-            site = vmSite.delSiteResponse.data![index];
-            break;
-          default:
-        }
-        Map<String, String> map = {
-          "Site Name": site.clientName ?? "",
-          "Site Email": site.clientEmail ?? "",
-          "Site Address": site.siteAddress ?? "",
-          "Site Postcode": site.sitePostCode ?? "",
-          "Site Contact": site.siteContactMob ?? "",
-          "Site Phone": site.sitePhoneNo ?? "",
-          "Site Mobile No": site.siteContactMob ?? "",
-          "Induction Required": site.inductionRequiredStr ?? "",
-          "Induction Type": site.industryType?.toString() ?? "",
-          "ABN Number": site.abn ?? "",
-        };
-        Map<String, String> company = {
-          "Entity Name": site.companyName ?? "",
-          "Entity Address": site.companyAddress ?? "",
-          "Entity Phone Number": site.companyLandlineNumber ?? "",
-          "Entity Email": site.companyEmail ?? "",
-          "Entity Postcode": site.companyPostcode ?? "",
-          "Term of account": site.invoiceTermsOfAccount ?? "",
-          "Account Status": site.accountStatus ?? "",
-          "Reason For Cancelling": site.reasonForCancelling ?? "",
-          "Payment Type": site.paymentTypeStr ?? "",
-          "Purchase No": site.invoicePurchaseNo ?? "",
-          "Price": site.price ?? "",
-          "Sale Person": site.salesPerson ?? "",
-        };
+        SiteResModel? site = _getSite(index: index, type: type);
+        Map<String, String> map = _getSiteMap(site!);
+        Map<String, String> company = _getEntityMap(site);
         return Scaffold(
+          appBar: AppBar(
+            elevation: 1,
+            title: cmnTitleWidget("Site Profile"),
+          ),
           body: SafeArea(
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  sized0hx10,
-                  Divider(color: Colors.grey.shade200),
+                  // Divider(color: Colors.grey.shade200),
                   sized0hx10,
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -107,9 +75,9 @@ class SiteDetailScreen extends StatelessWidget {
                     ),
                   ),
                   for (MapEntry<String, String> data in company.entries) ...{
-                    sized0hx10,
                     Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 20.w),
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 20.w, vertical: 10.h),
                       child: KeyValueTextWidget(
                         maxLines: 4,
                         keyName: data.key,
@@ -133,3 +101,43 @@ class SiteDetailScreen extends StatelessWidget {
     );
   }
 }
+
+SiteResModel? _getSite({required int index, required SiteType type}) {
+  switch (type) {
+    case SiteType.permananet:
+      return vmSite.permanentSiteResponse.data![index];
+    case SiteType.temporary:
+      return vmSite.tempSiteResponse.data![index];
+    case SiteType.deleted:
+      return vmSite.delSiteResponse.data![index];
+    default:
+      return null;
+  }
+}
+
+Map<String, String> _getSiteMap(SiteResModel site) => {
+      "Site Name": site.clientName ?? "",
+      "Site Email": site.clientEmail ?? "",
+      "Site Address": site.siteAddress ?? "",
+      "Site Postcode": site.sitePostCode ?? "",
+      "Site Contact": site.siteContactMob ?? "",
+      "Site Phone": site.sitePhoneNo ?? "",
+      "Site Mobile No": site.siteContactMob ?? "",
+      "Induction Required": site.inductionRequiredStr ?? "",
+      "Induction Type": site.industryType?.toString() ?? "",
+      "ABN Number": site.abn ?? "",
+    };
+Map<String, String> _getEntityMap(SiteResModel site) => {
+      "Entity Name": site.companyName ?? "",
+      "Entity Address": site.companyAddress ?? "",
+      "Entity Phone Number": site.companyLandlineNumber ?? "",
+      "Entity Email": site.companyEmail ?? "",
+      "Entity Postcode": site.companyPostcode ?? "",
+      "Term of account": site.invoiceTermsOfAccount ?? "",
+      "Account Status": site.accountStatus ?? "",
+      "Reason For Cancelling": site.reasonForCancelling ?? "",
+      "Payment Type": site.paymentTypeStr ?? "",
+      "Purchase No": site.invoicePurchaseNo ?? "",
+      "Price": site.price ?? "",
+      "Sale Person": site.salesPerson ?? "",
+    };
