@@ -93,6 +93,22 @@ mixin _$OHSViewModel on OHSViewModelBase, Store {
     });
   }
 
+  late final _$renameResponseAtom =
+      Atom(name: 'OHSViewModelBase.renameResponse', context: context);
+
+  @override
+  ApiResponse<String> get renameResponse {
+    _$renameResponseAtom.reportRead();
+    return super.renameResponse;
+  }
+
+  @override
+  set renameResponse(ApiResponse<String> value) {
+    _$renameResponseAtom.reportWrite(value, super.renameResponse, () {
+      super.renameResponse = value;
+    });
+  }
+
   late final _$ohsnewsviewmodelfunctionAsyncAction = AsyncAction(
       'OHSViewModelBase.ohsnewsviewmodelfunction',
       context: context);
@@ -143,6 +159,16 @@ mixin _$OHSViewModel on OHSViewModelBase, Store {
         .run(() => super.ohsnotificationviewmodelfunction());
   }
 
+  late final _$folderrenameviewmodelfunctionAsyncAction = AsyncAction(
+      'OHSViewModelBase.folderrenameviewmodelfunction',
+      context: context);
+
+  @override
+  Future<void> folderrenameviewmodelfunction(String folderName, int id) {
+    return _$folderrenameviewmodelfunctionAsyncAction
+        .run(() => super.folderrenameviewmodelfunction(folderName, id));
+  }
+
   @override
   String toString() {
     return '''
@@ -150,7 +176,8 @@ newspageResponse: ${newspageResponse},
 FoldercreationResponse: ${FoldercreationResponse},
 newspagefolderinsideResponse: ${newspagefolderinsideResponse},
 newspagefolderResponse: ${newspagefolderResponse},
-notificationpageResponse: ${notificationpageResponse}
+notificationpageResponse: ${notificationpageResponse},
+renameResponse: ${renameResponse}
     ''';
   }
 }
