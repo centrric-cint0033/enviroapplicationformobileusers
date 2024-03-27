@@ -73,7 +73,8 @@ abstract class OHSViewModelBase with Store {
           error: null,
           loading: false,
         );
-        ohsService.ohsnewsfolderservicefunction(id);
+        // ohsService.ohsnewsfolderservicefunction(id);
+        vmOhs.ohsnewsfolderviewmodelfunction(1);
       },
     );
   }
