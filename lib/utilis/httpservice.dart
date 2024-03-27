@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 import 'dart:async';
 import 'dart:convert';
@@ -82,13 +83,11 @@ class HttpService {
       customPrint(content: data, name: "Payload");
       customPrint(content: response.body, name: "Response");
 
-      // customPrint(content: 'LOGS');
-      // log(response.body);
-
       if (response.statusCode == HttpStatus.ok ||
           response.statusCode == HttpStatus.created) {
         // for app login
-        if (jsonDecode(response.body)["access"] != null) {
+        if (jsonDecode(response.body) is! List &&
+            jsonDecode(response.body)["access"] != null) {
           await SecureStorage().writeData(
             key: "token",
             value: jsonDecode(response.body)["access"],
