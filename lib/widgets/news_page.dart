@@ -562,9 +562,9 @@ class NewsPage extends StatelessWidget {
     print('Add Folder button tapped!');
   }
 
-  void newsfolderclickfunction(BuildContext context, int id) async {
+  void newsfolderclickfunction(BuildContext context, id) async {
     vmOhs.newspagefolderinsidefunction(id);
-    context.router.pushNamed(RouteNames.rNewsfolderinsidepage);
+    context.router.push(NewsRouteInsideRoute(id: id));
   }
 
   void ohsdetailpagefunction(BuildContext context, data) {

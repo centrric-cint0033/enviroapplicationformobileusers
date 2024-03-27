@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:enviro_mobile_application/model/04_ohs/oh&s_resp_model.dart';
 import 'package:enviro_mobile_application/model/04_ohs/oh&snews_fldr_model.dart';
 import 'package:enviro_mobile_application/view_model/04_ohs/ohs_view_model.dart';
 import 'package:flutter/material.dart';
@@ -6,7 +7,9 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 
 @RoutePage()
 class NewsPageInsidePage extends StatelessWidget {
-  const NewsPageInsidePage({Key? key}) : super(key: key);
+  final int id;
+
+  const NewsPageInsidePage({Key? key, required this.id}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -110,7 +113,8 @@ class NewsPageInsidePage extends StatelessWidget {
                         const SizedBox(height: 6.0),
                     itemBuilder: (BuildContext context, int index) {
                       final folderName = subFolders[index].name;
-                      return _buildCard(folderName, context, index);
+                      return _buildCard(
+                          folderName, context, subFolders[index].id);
                     },
                   );
                 }
@@ -230,6 +234,7 @@ class NewsPageInsidePage extends StatelessWidget {
                             actions: <Widget>[
                               TextButton(
                                 onPressed: () {
+                                  print('as$id');
                                   Navigator.of(context)
                                       .pop(); // Close the dialog
                                 },
@@ -237,8 +242,11 @@ class NewsPageInsidePage extends StatelessWidget {
                               ),
                               TextButton(
                                 onPressed: () {
+                                  print('as$id');
                                   vmOhs.folderdeleteviewmodelfunction(
-                                      'folders', id);
+                                    'folders',
+                                    id,
+                                  );
                                   Navigator.of(context)
                                       .pop(); // Close the dialog
                                 },

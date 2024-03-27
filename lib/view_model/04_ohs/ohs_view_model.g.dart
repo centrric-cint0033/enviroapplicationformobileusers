@@ -125,23 +125,6 @@ mixin _$OHSViewModel on OHSViewModelBase, Store {
     });
   }
 
-  late final _$deleteinsideResponseAtom =
-      Atom(name: 'OHSViewModelBase.deleteinsideResponse', context: context);
-
-  @override
-  ApiResponse<String> get deleteinsideResponse {
-    _$deleteinsideResponseAtom.reportRead();
-    return super.deleteinsideResponse;
-  }
-
-  @override
-  set deleteinsideResponse(ApiResponse<String> value) {
-    _$deleteinsideResponseAtom.reportWrite(value, super.deleteinsideResponse,
-        () {
-      super.deleteinsideResponse = value;
-    });
-  }
-
   late final _$ohsnewsviewmodelfunctionAsyncAction = AsyncAction(
       'OHSViewModelBase.ohsnewsviewmodelfunction',
       context: context);
@@ -212,16 +195,6 @@ mixin _$OHSViewModel on OHSViewModelBase, Store {
         .run(() => super.folderdeleteviewmodelfunction(folders, id));
   }
 
-  late final _$folderinsidedltefunctionAsyncAction = AsyncAction(
-      'OHSViewModelBase.folderinsidedltefunction',
-      context: context);
-
-  @override
-  Future<void> folderinsidedltefunction(String folders, int id) {
-    return _$folderinsidedltefunctionAsyncAction
-        .run(() => super.folderinsidedltefunction(folders, id));
-  }
-
   @override
   String toString() {
     return '''
@@ -231,8 +204,7 @@ newspagefolderinsideResponse: ${newspagefolderinsideResponse},
 newspagefolderResponse: ${newspagefolderResponse},
 notificationpageResponse: ${notificationpageResponse},
 renameResponse: ${renameResponse},
-deleteResponse: ${deleteResponse},
-deleteinsideResponse: ${deleteinsideResponse}
+deleteResponse: ${deleteResponse}
     ''';
   }
 }

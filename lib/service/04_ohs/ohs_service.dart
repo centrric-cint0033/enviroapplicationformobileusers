@@ -109,7 +109,9 @@ class OhsService implements IohsService {
 
   @override
   Future<Either<MainFailure, OhsNewsfldrRespModel>>
-      ohsnewsfolderservicefunction(int id) async {
+      ohsnewsfolderservicefunction(
+    int id,
+  ) async {
     var response = await getIt<HttpService>().request(
         authenticated: true,
         method: HttpMethod.get,

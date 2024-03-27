@@ -55,9 +55,13 @@ abstract class $AppRouter extends _i11.RootStackRouter {
       );
     },
     NewsRouteInsideRoute.name: (routeData) {
+      final args = routeData.argsAs<NewsRouteInsideRouteArgs>();
       return _i11.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i4.NewsPageInsidePage(),
+        child: _i4.NewsPageInsidePage(
+          key: args.key,
+          id: args.id,
+        ),
       );
     },
     NotificationDetailRoute.name: (routeData) {
@@ -166,16 +170,41 @@ class LoginRouteArgs {
 
 /// generated route for
 /// [_i4.NewsPageInsidePage]
-class NewsRouteInsideRoute extends _i11.PageRouteInfo<void> {
-  const NewsRouteInsideRoute({List<_i11.PageRouteInfo>? children})
-      : super(
+class NewsRouteInsideRoute
+    extends _i11.PageRouteInfo<NewsRouteInsideRouteArgs> {
+  NewsRouteInsideRoute({
+    _i12.Key? key,
+    required int id,
+    List<_i11.PageRouteInfo>? children,
+  }) : super(
           NewsRouteInsideRoute.name,
+          args: NewsRouteInsideRouteArgs(
+            key: key,
+            id: id,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'NewsRouteInsideRoute';
 
-  static const _i11.PageInfo<void> page = _i11.PageInfo<void>(name);
+  static const _i11.PageInfo<NewsRouteInsideRouteArgs> page =
+      _i11.PageInfo<NewsRouteInsideRouteArgs>(name);
+}
+
+class NewsRouteInsideRouteArgs {
+  const NewsRouteInsideRouteArgs({
+    this.key,
+    required this.id,
+  });
+
+  final _i12.Key? key;
+
+  final int id;
+
+  @override
+  String toString() {
+    return 'NewsRouteInsideRouteArgs{key: $key, id: $id}';
+  }
 }
 
 /// generated route for
