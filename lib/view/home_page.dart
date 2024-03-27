@@ -91,12 +91,15 @@ class HomePage extends StatelessWidget {
                 height: 30.0,
               ),
             ),
-            _buildBox(
-              'assets/images/users.svg',
-              'Team',
-              Colors.blue,
-              width: 30.0,
-              height: 30.0,
+            GestureDetector(
+              onTap: () => teamfuntion(context),
+              child: _buildBox(
+                'assets/images/users.svg',
+                'Team',
+                Colors.blue,
+                width: 30.0,
+                height: 30.0,
+              ),
             ),
           ],
         ),
@@ -176,4 +179,9 @@ void vehiclefunction(BuildContext context) async {
 
   await vmVehicle.mastercarfunction();
   vmVehicle.trailorfunction();
+}
+
+void teamfuntion(BuildContext context) {
+  context.router.pushNamed(RouteNames.teamPage);
+  print('TeamPage button tapped!');
 }

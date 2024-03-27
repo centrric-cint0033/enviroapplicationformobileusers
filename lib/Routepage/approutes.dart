@@ -23,5 +23,9 @@ class AppRouter extends $AppRouter {
           page: NotificationDetailRoute.page,
           path: RouteNames.rNotificationdetailpage,
         ),
+        AutoRoute(
+          page: TeamRoute.page,
+          path: RouteNames.teamPage,
+        ),
       ];
 }
