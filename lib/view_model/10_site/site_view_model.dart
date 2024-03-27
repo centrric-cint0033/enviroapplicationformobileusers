@@ -36,7 +36,7 @@ abstract class SiteViewModelBase with Store {
     permanentSiteResponse = permanentSiteResponse.copyWith(
       error: null,
       paginationLoading: page != null,
-      loading: permanentSiteResponse.data != null,
+      loading: permanentSiteResponse.data == null,
     );
 
     final response = await siteService.getPermanantSites(page: page);
@@ -61,6 +61,7 @@ abstract class SiteViewModelBase with Store {
           data: res,
           error: null,
           loading: false,
+          pageNo: page ?? 1,
           paginationLoading: false,
         );
       },
@@ -72,7 +73,7 @@ abstract class SiteViewModelBase with Store {
     tempSiteResponse = tempSiteResponse.copyWith(
       error: null,
       paginationLoading: page != null,
-      loading: tempSiteResponse.data != null,
+      loading: tempSiteResponse.data == null,
     );
 
     final response = await siteService.getPermanantSites(page: page);
@@ -97,6 +98,7 @@ abstract class SiteViewModelBase with Store {
           data: res,
           error: null,
           loading: false,
+          pageNo: page ?? 1,
           paginationLoading: false,
         );
       },
@@ -108,7 +110,7 @@ abstract class SiteViewModelBase with Store {
     delSiteResponse = delSiteResponse.copyWith(
       error: null,
       paginationLoading: page != null,
-      loading: delSiteResponse.data != null,
+      loading: delSiteResponse.data == null,
     );
 
     final response = await siteService.getDeletedSites(page: page);
@@ -133,6 +135,7 @@ abstract class SiteViewModelBase with Store {
           data: res,
           error: null,
           loading: false,
+          pageNo: page ?? 1,
           paginationLoading: false,
         );
       },
