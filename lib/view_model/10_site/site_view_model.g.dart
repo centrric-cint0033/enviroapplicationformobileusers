@@ -13,15 +13,15 @@ mixin _$SiteViewModel on SiteViewModelBase, Store {
       Atom(name: 'SiteViewModelBase.siteResponse', context: context);
 
   @override
-  ApiResponse<List<SiteResModel>> get siteResponse {
+  ApiResponse<List<SiteResModel>> get permanentSiteResponse {
     _$siteResponseAtom.reportRead();
-    return super.siteResponse;
+    return super.permanentSiteResponse;
   }
 
   @override
-  set siteResponse(ApiResponse<List<SiteResModel>> value) {
-    _$siteResponseAtom.reportWrite(value, super.siteResponse, () {
-      super.siteResponse = value;
+  set permanentSiteResponse(ApiResponse<List<SiteResModel>> value) {
+    _$siteResponseAtom.reportWrite(value, super.permanentSiteResponse, () {
+      super.permanentSiteResponse = value;
     });
   }
 
@@ -29,14 +29,14 @@ mixin _$SiteViewModel on SiteViewModelBase, Store {
       AsyncAction('SiteViewModelBase.getSite', context: context);
 
   @override
-  Future<void> getSite({int? page}) {
-    return _$getSiteAsyncAction.run(() => super.getSite(page: page));
+  Future<void> getPermanentSites({int? page}) {
+    return _$getSiteAsyncAction.run(() => super.getPermanentSites(page: page));
   }
 
   @override
   String toString() {
     return '''
-siteResponse: ${siteResponse}
+siteResponse: ${permanentSiteResponse}
     ''';
   }
 }

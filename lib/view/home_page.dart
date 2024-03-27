@@ -183,6 +183,9 @@ void vehiclefunction(BuildContext context) async {
 }
 
 void navigateToSitesPage({required BuildContext context}) {
-  vmSite.getSite();
+  vmSite
+    ..getPermanentSites()
+    ..getTemporarySites()
+    ..getDeletedSites();
   context.router.pushNamed(RouteNames.siteListPage);
 }

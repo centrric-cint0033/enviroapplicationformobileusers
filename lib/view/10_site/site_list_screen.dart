@@ -27,7 +27,7 @@ class SiteListScreen extends StatelessWidget {
           title: cmnTitleWidget('Site'),
           actions: cmn_action_icon,
         ),
-        body: Column(
+        body: const Column(
           children: [
             TabBar(
               tabs: [
@@ -39,32 +39,95 @@ class SiteListScreen extends StatelessWidget {
             Expanded(
                 child: TabBarView(
               children: [
-                Observer(
-                  builder: (context) {
-                    List<SiteResModel> sites =
-                        vmSite.siteResponse.data?.toList() ?? [];
-                    return vmSite.siteResponse.loading
-                        ? const Center(child: CupertinoActivityIndicator())
-                        : ListView.separated(
-                            itemCount: sites.length,
-                            separatorBuilder: (context, index) => sized0hx05,
-                            padding: EdgeInsets.symmetric(vertical: 10.h),
-                            itemBuilder: (context, index) {
-                              return SiteTileWidget(
-                                name: sites[index].clientName ?? "",
-                                address: sites[index].siteAddress ?? "",
-                              );
-                            },
-                          );
-                  },
-                ),
-                SizedBox(),
-                SizedBox(),
+                PermanentSitesListWidget(),
+                TempSiteListWidget(),
+                DelSiteListWidget(),
               ],
             ))
           ],
         ),
       ),
+    );
+  }
+}
+
+class DelSiteListWidget extends StatelessWidget {
+  const DelSiteListWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Observer(
+      builder: (context) {
+        List<SiteResModel> sites = vmSite.delSiteResponse.data?.toList() ?? [];
+        return vmSite.delSiteResponse.loading
+            ? const Center(child: CupertinoActivityIndicator())
+            : ListView.separated(
+                itemCount: sites.length,
+                separatorBuilder: (context, index) => sized0hx05,
+                padding: EdgeInsets.symmetric(vertical: 10.h),
+                itemBuilder: (context, index) {
+                  return SiteTileWidget(
+                    name: sites[index].clientName ?? "",
+                    address: sites[index].siteAddress ?? "",
+                  );
+                },
+              );
+      },
+    );
+  }
+}
+
+class TempSiteListWidget extends StatelessWidget {
+  const TempSiteListWidget({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Observer(
+      builder: (context) {
+        List<SiteResModel> sites = vmSite.tempSiteResponse.data?.toList() ?? [];
+        return vmSite.tempSiteResponse.loading
+            ? const Center(child: CupertinoActivityIndicator())
+            : ListView.separated(
+                itemCount: sites.length,
+                separatorBuilder: (context, index) => sized0hx05,
+                padding: EdgeInsets.symmetric(vertical: 10.h),
+                itemBuilder: (context, index) {
+                  return SiteTileWidget(
+                    name: sites[index].clientName ?? "",
+                    address: sites[index].siteAddress ?? "",
+                  );
+                },
+              );
+      },
+    );
+  }
+}
+
+class PermanentSitesListWidget extends StatelessWidget {
+  const PermanentSitesListWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Observer(
+      builder: (context) {
+        List<SiteResModel> sites =
+            vmSite.permanentSiteResponse.data?.toList() ?? [];
+        return vmSite.permanentSiteResponse.loading
+            ? const Center(child: CupertinoActivityIndicator())
+            : ListView.separated(
+                itemCount: sites.length,
+                separatorBuilder: (context, index) => sized0hx05,
+                padding: EdgeInsets.symmetric(vertical: 10.h),
+                itemBuilder: (context, index) {
+                  return SiteTileWidget(
+                    name: sites[index].clientName ?? "",
+                    address: sites[index].siteAddress ?? "",
+                  );
+                },
+              );
+      },
     );
   }
 }
