@@ -28,6 +28,7 @@ abstract class IohsService {
 
   Future<Either<MainFailure, String>> ohsnewsfolderrenamefunction(
       folderName, id);
+  Future<Either<MainFailure, String>> ohsnewsfolderdeletefunction(folders, id);
 }
 
 @LazySingleton(as: IohsService)
@@ -213,6 +214,27 @@ class OhsService implements IohsService {
         var data = jsonDecode(res.body);
         print('Response body: $data');
         return Right('success');
+      },
+    );
+  }
+
+  @override
+  Future<Either<MainFailure, String>> ohsnewsfolderdeletefunction(
+      folders, id) async {
+    var response = await getIt<HttpService>().request(
+        authenticated: true,
+        method: HttpMethod.delete,
+        apiUrl: '${ApiEndPoints.endpointnewsfldrdlte}/$id/');
+
+    return response.fold(
+      (l) {
+        (l.values.first);
+        return Left(l.keys.first);
+      },
+      (res) async {
+        var data = jsonDecode(res.body);
+        print('Response body: $data');
+        return const Right('success');
       },
     );
   }

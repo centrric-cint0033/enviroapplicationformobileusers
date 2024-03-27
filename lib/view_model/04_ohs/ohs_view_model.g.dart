@@ -109,6 +109,22 @@ mixin _$OHSViewModel on OHSViewModelBase, Store {
     });
   }
 
+  late final _$deleteResponseAtom =
+      Atom(name: 'OHSViewModelBase.deleteResponse', context: context);
+
+  @override
+  ApiResponse<String> get deleteResponse {
+    _$deleteResponseAtom.reportRead();
+    return super.deleteResponse;
+  }
+
+  @override
+  set deleteResponse(ApiResponse<String> value) {
+    _$deleteResponseAtom.reportWrite(value, super.deleteResponse, () {
+      super.deleteResponse = value;
+    });
+  }
+
   late final _$ohsnewsviewmodelfunctionAsyncAction = AsyncAction(
       'OHSViewModelBase.ohsnewsviewmodelfunction',
       context: context);
@@ -169,6 +185,16 @@ mixin _$OHSViewModel on OHSViewModelBase, Store {
         .run(() => super.folderrenameviewmodelfunction(folderName, id));
   }
 
+  late final _$folderdeleteviewmodelfunctionAsyncAction = AsyncAction(
+      'OHSViewModelBase.folderdeleteviewmodelfunction',
+      context: context);
+
+  @override
+  Future<void> folderdeleteviewmodelfunction(String folders, int id) {
+    return _$folderdeleteviewmodelfunctionAsyncAction
+        .run(() => super.folderdeleteviewmodelfunction(folders, id));
+  }
+
   @override
   String toString() {
     return '''
@@ -177,7 +203,8 @@ FoldercreationResponse: ${FoldercreationResponse},
 newspagefolderinsideResponse: ${newspagefolderinsideResponse},
 newspagefolderResponse: ${newspagefolderResponse},
 notificationpageResponse: ${notificationpageResponse},
-renameResponse: ${renameResponse}
+renameResponse: ${renameResponse},
+deleteResponse: ${deleteResponse}
     ''';
   }
 }

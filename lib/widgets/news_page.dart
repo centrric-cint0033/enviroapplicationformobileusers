@@ -514,7 +514,8 @@ class NewsPage extends StatelessWidget {
                                   actions: [
                                     TextButton(
                                       onPressed: () {
-                                        // Your delete logic here
+                                        vmOhs.folderdeleteviewmodelfunction(
+                                            'folders', id);
                                         Navigator.of(context).pop();
                                       },
                                       child: const Text(

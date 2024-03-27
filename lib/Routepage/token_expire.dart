@@ -1,5 +1,3 @@
-// Checking the expiration time
-
 import 'package:enviro_mobile_application/utilis/api_endpoints/customprint.dart';
 
 bool jwtTokenChecker(Map<String, dynamic>? token) {
