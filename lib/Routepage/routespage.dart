@@ -4,6 +4,7 @@ class RouteNames {
   static const String rHomePage = '/homePage';
   static const String rSalesPpage = '/salesmainpage';
   static const String ohsPage = '/ohspage';
+  static const String rOhsdetailpage = '/ohs_detail_page';
   static const String intranetpage = '/intranetpage';
   static const String rSchedulingPage = '/schedulingPage';
   static const String vehiclemainpage = '/vehicle_main_page';
