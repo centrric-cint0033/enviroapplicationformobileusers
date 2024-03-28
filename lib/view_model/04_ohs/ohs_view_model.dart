@@ -221,7 +221,12 @@ abstract class OHSViewModelBase with Store {
           error: null,
           loading: false,
         );
-        vmOhs.newspagefolderinsidefunction(parentId);
+
+        if (parentId == 1) {
+          ohsnewsfolderviewmodelfunction(parentId);
+        } else {
+          newspagefolderinsidefunction(parentId);
+        }
       },
     );
   }

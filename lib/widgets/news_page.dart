@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:dartz/dartz.dart';
 import 'package:enviro_mobile_application/Routepage/approutes.gr.dart';
 import 'package:enviro_mobile_application/Routepage/routespage.dart';
+import 'package:enviro_mobile_application/utilis/api_endpoints/customprint.dart';
 
 import 'package:enviro_mobile_application/view_model/04_ohs/ohs_view_model.dart';
 
@@ -503,6 +504,7 @@ class NewsPage extends StatelessWidget {
                         ),
                         GestureDetector(
                           onTap: () {
+                            // customPrint(content: id);
                             showDialog(
                               context: context,
                               builder: (BuildContext context) {
