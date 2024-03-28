@@ -171,16 +171,16 @@ class MasterCarpage extends StatelessWidget {
                         var data = vmVehicle.carPageResponse.data?[index];
                         return _buildJobCard(
                           registrationno: data?.registration ?? "",
-                          RegoDue: data?.editedDateTime ?? "",
+                          RegoDue: data?.editedDateTime,
                           Type: data?.types ?? "",
                           year: data?.year,
                           odometer: data?.odometer,
-                          drivername: data?.driver_name,
-                          Date: data?.date_time ?? "",
-                          servicedate: data?.service_provided ?? "",
-                          labourcost: data?.l_cost ?? "",
-                          spareparts: data?.s_part ?? "",
-                          totalcost: data?.total_cost ?? "",
+                          drivername: data?.driverName,
+                          Date: data?.dateTime,
+                          servicedate: data?.serviceProvided ?? "",
+                          labourcost: data?.lCost ?? "",
+                          spareparts: data?.sPart ?? "",
+                          totalcost: data?.totalCost ?? "",
                         );
                       },
                     ),
@@ -196,12 +196,12 @@ class MasterCarpage extends StatelessWidget {
 
   Widget _buildJobCard({
     required String registrationno,
-    required String RegoDue,
+    DateTime? RegoDue,
     required String Type,
     required int? year,
     required int? odometer,
     required int? drivername,
-    required String? Date,
+    DateTime? Date,
     required String? servicedate,
     required String? labourcost,
     required String? spareparts,

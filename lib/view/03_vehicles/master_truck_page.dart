@@ -172,20 +172,22 @@ class MasterTruckPage extends StatelessWidget {
                       separatorBuilder: (BuildContext context, int index) =>
                           const SizedBox(height: 12.0),
                       itemBuilder: (context, index) {
-                        var data = vmVehicle.truckPageResponse.data?[index];
-                        return _buildJobCard(
-                          registrationno: data?.registration ?? "",
-                          RegoDue: data?.editedDateTime ?? "",
-                          Type: data?.types ?? "",
-                          year: data?.year ?? "",
-                          odometer: data?.odometer,
-                          drivername: data?.driver_name,
-                          Date: data?.date_time ?? "",
-                          servicedate: data?.service_provided ?? "",
-                          labourcost: data?.l_cost ?? "",
-                          spareparts: data?.s_part ?? "",
-                          totalcost: data?.total_cost ?? "",
-                        );
+                        // var data = vmVehicle.truckPageResponse.data?[index];
+                        return const SizedBox();
+
+                        // _buildJobCard(
+                        //   registrationno: data?.registration ?? "",
+                        //   regoDue: data?.editedDateTime,
+                        //   Type: data?.types ?? "",
+                        //   year: data?.year,
+                        //   odometer: data?.odometer,
+                        //   drivername: data?.driverName,
+                        //   date: data?.dateTime,
+                        //   servicedate: data?.serviceProvided ?? "",
+                        //   labourcost: data?.lCost ?? "",
+                        //   spareparts: data?.sPart ?? "",
+                        //   totalcost: data?.totalCost ?? "",
+                        // );
                       },
                     ),
                   );
@@ -203,12 +205,12 @@ class MasterTruckPage extends StatelessWidget {
 
   Widget _buildJobCard({
     required String registrationno,
-    required dynamic RegoDue,
+    DateTime? regoDue,
     required String Type,
     required dynamic year,
     required int? odometer,
     required int? drivername,
-    required String? Date,
+    DateTime? date,
     required String? servicedate,
     required String? labourcost,
     required String? spareparts,
@@ -269,7 +271,7 @@ class MasterTruckPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "RegoDue            : $RegoDue",
+                    "RegoDue            : $regoDue",
                     overflow: TextOverflow.ellipsis,
                     style: const TextStyle(color: Colors.blue),
                   ),
@@ -319,7 +321,7 @@ class MasterTruckPage extends StatelessWidget {
                 children: [
                   Flexible(
                     child: Text(
-                      "date                    : $Date",
+                      "date                    : $date",
                       overflow: TextOverflow.ellipsis,
                       style: const TextStyle(color: Colors.blue),
                     ),

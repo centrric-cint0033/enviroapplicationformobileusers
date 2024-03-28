@@ -172,16 +172,16 @@ class SemiTrailorPage extends StatelessWidget {
                             vmVehicle.semitrailorPageResponse.data?[index];
                         return _buildJobCard(
                           registrationno: data?.registration ?? "",
-                          RegoDue: data?.editedDateTime ?? "",
+                          regoDue: data?.editedDateTime,
                           Type: data?.types ?? "",
-                          year: data?.year ?? "",
+                          year: data?.year,
                           odometer: data?.odometer,
-                          drivername: data?.driver_name,
-                          Date: data?.date_time ?? "",
-                          servicedate: data?.service_provided ?? "",
-                          labourcost: data?.l_cost ?? "",
-                          spareparts: data?.s_part ?? "",
-                          totalcost: data?.total_cost ?? "",
+                          drivername: data?.driverName,
+                          date: data?.dateTime,
+                          servicedate: data?.serviceProvided ?? "",
+                          labourcost: data?.lCost ?? "",
+                          spareparts: data?.sPart ?? "",
+                          totalcost: data?.totalCost ?? "",
                         );
                       },
                     ),
@@ -197,12 +197,12 @@ class SemiTrailorPage extends StatelessWidget {
 
   Widget _buildJobCard({
     required dynamic registrationno,
-    required dynamic RegoDue,
+    DateTime? regoDue,
     required String Type,
     required dynamic year,
     required int? odometer,
     required int? drivername,
-    required String? Date,
+    DateTime? date,
     required String? servicedate,
     required String? labourcost,
     required String? spareparts,
@@ -239,7 +239,7 @@ class SemiTrailorPage extends StatelessWidget {
                 children: [
                   Flexible(
                     child: Text(
-                      "RegoDue                   : $RegoDue",
+                      "RegoDue                   : ${regoDue.toString()}",
                       overflow: TextOverflow.ellipsis,
                       style: const TextStyle(color: Colors.blue),
                     ),
@@ -302,7 +302,7 @@ class SemiTrailorPage extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    "date         : $Date",
+                    "date         : ${date.toString()}",
                     overflow: TextOverflow.ellipsis,
                     style: const TextStyle(color: Colors.blue),
                   ),

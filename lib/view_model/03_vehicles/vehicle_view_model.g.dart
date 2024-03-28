@@ -45,13 +45,13 @@ mixin _$VehicleViewModel on VehicleViewModelBase, Store {
       Atom(name: 'VehicleViewModelBase.carPageResponse', context: context);
 
   @override
-  ApiResponse<List<CmnvehiclepageModel>> get carPageResponse {
+  ApiResponse<List<VehicleModel>> get carPageResponse {
     _$carPageResponseAtom.reportRead();
     return super.carPageResponse;
   }
 
   @override
-  set carPageResponse(ApiResponse<List<CmnvehiclepageModel>> value) {
+  set carPageResponse(ApiResponse<List<VehicleModel>> value) {
     _$carPageResponseAtom.reportWrite(value, super.carPageResponse, () {
       super.carPageResponse = value;
     });
@@ -61,13 +61,13 @@ mixin _$VehicleViewModel on VehicleViewModelBase, Store {
       Atom(name: 'VehicleViewModelBase.carPagefuelResponse', context: context);
 
   @override
-  ApiResponse<List<CmnvehiclepageModel>> get carPagefuelResponse {
+  ApiResponse<List<VehicleModel>> get carPagefuelResponse {
     _$carPagefuelResponseAtom.reportRead();
     return super.carPagefuelResponse;
   }
 
   @override
-  set carPagefuelResponse(ApiResponse<List<CmnvehiclepageModel>> value) {
+  set carPagefuelResponse(ApiResponse<List<VehicleModel>> value) {
     _$carPagefuelResponseAtom.reportWrite(value, super.carPagefuelResponse, () {
       super.carPagefuelResponse = value;
     });
@@ -109,13 +109,13 @@ mixin _$VehicleViewModel on VehicleViewModelBase, Store {
       name: 'VehicleViewModelBase.semitrailorPageResponse', context: context);
 
   @override
-  ApiResponse<List<CmnvehiclepageModel>> get semitrailorPageResponse {
+  ApiResponse<List<VehicleModel>> get semitrailorPageResponse {
     _$semitrailorPageResponseAtom.reportRead();
     return super.semitrailorPageResponse;
   }
 
   @override
-  set semitrailorPageResponse(ApiResponse<List<CmnvehiclepageModel>> value) {
+  set semitrailorPageResponse(ApiResponse<List<VehicleModel>> value) {
     _$semitrailorPageResponseAtom
         .reportWrite(value, super.semitrailorPageResponse, () {
       super.semitrailorPageResponse = value;
@@ -126,13 +126,13 @@ mixin _$VehicleViewModel on VehicleViewModelBase, Store {
       name: 'VehicleViewModelBase.semitruckPagefuelResponse', context: context);
 
   @override
-  ApiResponse<List<CmnvehiclepageModel>> get semitruckPagefuelResponse {
+  ApiResponse<List<VehicleModel>> get semitruckPagefuelResponse {
     _$semitruckPagefuelResponseAtom.reportRead();
     return super.semitruckPagefuelResponse;
   }
 
   @override
-  set semitruckPagefuelResponse(ApiResponse<List<CmnvehiclepageModel>> value) {
+  set semitruckPagefuelResponse(ApiResponse<List<VehicleModel>> value) {
     _$semitruckPagefuelResponseAtom
         .reportWrite(value, super.semitruckPagefuelResponse, () {
       super.semitruckPagefuelResponse = value;
@@ -176,13 +176,13 @@ mixin _$VehicleViewModel on VehicleViewModelBase, Store {
       Atom(name: 'VehicleViewModelBase.truckPageResponse', context: context);
 
   @override
-  ApiResponse<List<CmnvehiclepageModel>> get truckPageResponse {
+  ApiResponse<List<VehicleModel>> get truckPageResponse {
     _$truckPageResponseAtom.reportRead();
     return super.truckPageResponse;
   }
 
   @override
-  set truckPageResponse(ApiResponse<List<CmnvehiclepageModel>> value) {
+  set truckPageResponse(ApiResponse<List<VehicleModel>> value) {
     _$truckPageResponseAtom.reportWrite(value, super.truckPageResponse, () {
       super.truckPageResponse = value;
     });
@@ -192,13 +192,13 @@ mixin _$VehicleViewModel on VehicleViewModelBase, Store {
       name: 'VehicleViewModelBase.truckPagefuelResponse', context: context);
 
   @override
-  ApiResponse<List<CmnvehiclepageModel>> get truckPagefuelResponse {
+  ApiResponse<List<VehicleModel>> get truckPagefuelResponse {
     _$truckPagefuelResponseAtom.reportRead();
     return super.truckPagefuelResponse;
   }
 
   @override
-  set truckPagefuelResponse(ApiResponse<List<CmnvehiclepageModel>> value) {
+  set truckPagefuelResponse(ApiResponse<List<VehicleModel>> value) {
     _$truckPagefuelResponseAtom.reportWrite(value, super.truckPagefuelResponse,
         () {
       super.truckPagefuelResponse = value;
