@@ -10,6 +10,8 @@ import 'package:enviro_mobile_application/model/10_site/site_res_model/site_res_
 import 'widgets/icon_widget.dart';
 import 'widgets/key_value_text_widget.dart';
 import '../../widgets/cmn_title_textwidget.dart';
+import '../11_previous_sale/widgets/previous_sales_widget.dart';
+import '../../view_model/11_previous_sale/previous_sale_view_model.dart';
 
 @RoutePage()
 class SiteDetailScreen extends StatelessWidget {
@@ -19,6 +21,9 @@ class SiteDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    WidgetsBinding.instance.addPostFrameCallback(
+      (timeStamp) => vmPreviousSale.previousSalesPagination(),
+    );
     return Observer(
       builder: (context) {
         SiteResModel? site = _getSite(index: index, type: type);
@@ -31,7 +36,9 @@ class SiteDetailScreen extends StatelessWidget {
           ),
           body: SafeArea(
             child: SingleChildScrollView(
+              controller: vmPreviousSale.previousSaleController,
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   // Divider(color: Colors.grey.shade200),
                   sized0hx10,
@@ -92,6 +99,7 @@ class SiteDetailScreen extends StatelessWidget {
                     ),
                   },
                   sized0hx10,
+                  const PreviouseSalesWidget(),
                 ],
               ),
             ),

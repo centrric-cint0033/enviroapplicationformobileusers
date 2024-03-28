@@ -1,3 +1,4 @@
+import 'package:enviro_mobile_application/view_model/11_previous_sale/previous_sale_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:auto_route/auto_route.dart';
@@ -44,6 +45,7 @@ class PermanentSitesListWidget extends StatelessWidget {
                                   context: context,
                                   type: SiteType.permananet,
                                 );
+                                vmPreviousSale.getPreviousSales();
                                 context.router.push(
                                   SiteDetailRoute(
                                     index: index,
