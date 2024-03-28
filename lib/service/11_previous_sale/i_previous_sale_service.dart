@@ -6,5 +6,6 @@ import '../../model/11_previous_sale/previous_sale_res_model/previous_sale_res_m
 abstract class IPreviousSaleService {
   Future<Either<MainFailure, List<PreviousSaleResModel>>> getPreviousSale({
     int? page,
+    required int siteId,
   });
 }

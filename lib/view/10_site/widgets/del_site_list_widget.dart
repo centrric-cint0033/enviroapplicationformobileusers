@@ -44,7 +44,9 @@ class DelSiteListWidget extends StatelessWidget {
                                   context: context,
                                   type: SiteType.deleted,
                                 );
-                                vmPreviousSale.getPreviousSales();
+                                vmPreviousSale.getPreviousSales(
+                                  siteId: sites[index].id!,
+                                );
                                 context.router.push(
                                   SiteDetailRoute(
                                     index: index,

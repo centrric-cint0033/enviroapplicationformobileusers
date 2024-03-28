@@ -31,9 +31,9 @@ mixin _$PreviousSaleViewModel on PreviousSaleViewModelBase, Store {
       context: context);
 
   @override
-  Future<void> getPreviousSales({int? page}) {
+  Future<void> getPreviousSales({int? page, int? siteId}) {
     return _$getPreviousSalesAsyncAction
-        .run(() => super.getPreviousSales(page: page));
+        .run(() => super.getPreviousSales(page: page, siteId: siteId));
   }
 
   @override

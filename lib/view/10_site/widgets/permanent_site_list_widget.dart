@@ -45,7 +45,9 @@ class PermanentSitesListWidget extends StatelessWidget {
                                   context: context,
                                   type: SiteType.permananet,
                                 );
-                                vmPreviousSale.getPreviousSales();
+                                vmPreviousSale.getPreviousSales(
+                                  siteId: sites[index].id!,
+                                );
                                 context.router.push(
                                   SiteDetailRoute(
                                     index: index,

@@ -22,13 +22,18 @@ abstract class PreviousSaleViewModelBase with Store {
   PreviousSaleViewModelBase(this.previousSaleService);
 
   ScrollController previousSaleController = ScrollController();
+  late int siteID;
 
   @observable
   ApiResponse<List<PreviousSaleResModel>> previousSaleResponse =
       ApiResponse<List<PreviousSaleResModel>>();
 
   @action
-  Future<void> getPreviousSales({int? page}) async {
+  Future<void> getPreviousSales({
+    int? page,
+    int? siteId,
+  }) async {
+    siteID = siteId ?? siteID;
     previousSaleResponse = previousSaleResponse.copyWith(
       error: null,
       paginationLoading: page != null,
@@ -36,7 +41,10 @@ abstract class PreviousSaleViewModelBase with Store {
       data: page == null ? null : previousSaleResponse.data,
     );
 
-    final response = await previousSaleService.getPreviousSale(page: page);
+    final response = await previousSaleService.getPreviousSale(
+      page: page,
+      siteId: siteID,
+    );
 
     response.fold(
       (l) {

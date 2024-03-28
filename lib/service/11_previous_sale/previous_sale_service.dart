@@ -13,10 +13,12 @@ import '../../model/11_previous_sale/previous_sale_res_model/previous_sale_res_m
 @LazySingleton(as: IPreviousSaleService)
 class PreviousSaleService implements IPreviousSaleService {
   @override
-  Future<Either<MainFailure, List<PreviousSaleResModel>>> getPreviousSale(
-      {int? page}) async {
+  Future<Either<MainFailure, List<PreviousSaleResModel>>> getPreviousSale({
+    int? page,
+    required int siteId,
+  }) async {
     String url =
-        "${ApiEndPoints.endpointPreviousSale}?page=${page ?? 1}&limit=10";
+        "${ApiEndPoints.endpointPreviousSale}$siteId/all/?page=${page ?? 1}&limit=10";
     var response = await getIt<HttpService>().request(
       apiUrl: url,
       authenticated: true,
