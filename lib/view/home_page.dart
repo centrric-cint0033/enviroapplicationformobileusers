@@ -4,6 +4,7 @@ import 'package:enviro_mobile_application/utilis/api_endpoints/customprint.dart'
 import 'package:enviro_mobile_application/view_model/02_sales/sales_view_model.dart';
 import 'package:enviro_mobile_application/view_model/03_vehicles/vehicle_view_model.dart';
 import 'package:enviro_mobile_application/view_model/04_ohs/ohs_view_model.dart';
+import 'package:enviro_mobile_application/view_model/07_intranet/intranet_view_model.dart';
 import 'package:enviro_mobile_application/view_model/home_page/home_page_viewmodel.dart';
 
 import 'package:flutter/material.dart';
@@ -154,15 +155,16 @@ void onsalesfunction(BuildContext context) async {
   }
 }
 
-void ohsfunction(BuildContext context) async {
+void ohsfunction(BuildContext context) {
   context.router.pushNamed(RouteNames.ohsPage);
   customPrint(content: 'ohs');
-  await vmOhs.ohsnotificationviewmodelfunction();
-  await vmOhs.ohsnewsviewmodelfunction();
-  await vmOhs.ohsnewsfolderviewmodelfunction(1);
+  vmOhs.ohsnotificationviewmodelfunction();
+  vmOhs.ohsnewsviewmodelfunction();
+  vmOhs.ohsnewsfolderviewmodelfunction(1);
 }
 
 void intranetfuntion(BuildContext context) {
+  vmIntranet.intranetviewmodelfunction(1);
   context.router.pushNamed(RouteNames.intranetpage);
   print('Notification button tapped!');
 }
@@ -176,6 +178,6 @@ void vehiclefunction(BuildContext context) async {
   context.router.pushNamed(RouteNames.vehiclemainpage);
   vmVehicle.truckPageFunction();
 
-  await vmVehicle.mastercarfunction();
+  vmVehicle.mastercarfunction();
   vmVehicle.trailorfunction();
 }

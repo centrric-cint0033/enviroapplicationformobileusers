@@ -62,4 +62,6 @@ class ApiEndPoints {
       '/api/v1/oh_and_s/notification/view/1/?limit=8';
   static const endpointnewsfldrrename = '/api/v1/drive/folder/rename/3260/';
   static const endpointnewsfldrdlte = '/api/v1/drive/folder/delete';
+  static const endpointintranetfldrlstng =
+      '/api/v1/intranet_archive/folder/segment';
 }
