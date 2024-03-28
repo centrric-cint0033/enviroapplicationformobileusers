@@ -20,7 +20,11 @@ class KeyValueTextWidget extends StatelessWidget {
         Expanded(
           child: Text(
             keyName,
-            style: keyStyle ?? Theme.of(context).textTheme.titleSmall,
+            style: keyStyle ??
+                Theme.of(context)
+                    .textTheme
+                    .titleSmall
+                    ?.copyWith(fontSize: 12.sp),
           ),
         ),
         Expanded(
