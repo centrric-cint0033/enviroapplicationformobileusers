@@ -69,4 +69,5 @@ class ApiEndPoints {
   static const endpointSiteDetail = '/api/v1/clients/single/';
   static const endpointPreviousSale = '/api/v1/jobs/previous/sale/';
   static const endpointSiteFolders = '/api/v1/drive/site/folder/';
+  static const endpointSearchSite = '/api/v1/clients/searchClient/all/waste/';
 }

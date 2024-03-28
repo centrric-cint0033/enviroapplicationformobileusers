@@ -12,11 +12,7 @@ part 'site_view_model.g.dart';
 
 final vmSite = getIt<SiteViewModel>();
 
-enum SiteType {
-  permananet,
-  temporary,
-  deleted,
-}
+enum SiteType { permananet, temporary, deleted }
 
 @injectable
 class SiteViewModel extends SiteViewModelBase with _$SiteViewModel {
@@ -46,6 +42,8 @@ abstract class SiteViewModelBase with Store {
   ScrollController delSitesController = ScrollController();
   ScrollController tempSitesController = ScrollController();
   ScrollController permanentSitesController = ScrollController();
+
+  TextEditingController searchCtr = TextEditingController();
 
   @action
   Future<void> getPermanentSites({int? page}) async {
@@ -290,6 +288,36 @@ abstract class SiteViewModelBase with Store {
           error: null,
           loading: false,
         );
+      },
+    );
+  }
+
+  @action
+  Future<void> searchSites({
+    required String key,
+    SiteType type = SiteType.permananet,
+  }) async {
+    final response = await siteService.searchSites(key: key);
+
+    response.fold(
+      (l) {},
+      (res) {
+        switch (type) {
+          case SiteType.permananet:
+            permanentSiteResponse = permanentSiteResponse.copyWith(data: res);
+            break;
+
+          case SiteType.temporary:
+            tempSiteResponse = tempSiteResponse.copyWith(data: res);
+            break;
+
+          case SiteType.deleted:
+            delSiteResponse = delSiteResponse.copyWith(data: res);
+            break;
+
+          default:
+            break;
+        }
       },
     );
   }

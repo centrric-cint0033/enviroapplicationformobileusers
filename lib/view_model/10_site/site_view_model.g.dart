@@ -121,6 +121,16 @@ mixin _$SiteViewModel on SiteViewModelBase, Store {
     return _$getSiteFoldersAsyncAction.run(() => super.getSiteFolders(id: id));
   }
 
+  late final _$searchSitesAsyncAction =
+      AsyncAction('SiteViewModelBase.searchSites', context: context);
+
+  @override
+  Future<void> searchSites(
+      {required String key, SiteType type = SiteType.permananet}) {
+    return _$searchSitesAsyncAction
+        .run(() => super.searchSites(key: key, type: type));
+  }
+
   @override
   String toString() {
     return '''
