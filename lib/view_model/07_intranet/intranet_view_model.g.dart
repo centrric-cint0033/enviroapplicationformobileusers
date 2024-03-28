@@ -26,6 +26,24 @@ mixin _$IntranetViewModel on IntranetViewModelBase, Store {
     });
   }
 
+  late final _$intranetfolderinsideResponseAtom = Atom(
+      name: 'IntranetViewModelBase.intranetfolderinsideResponse',
+      context: context);
+
+  @override
+  ApiResponse<intranetfldrRespModel> get intranetfolderinsideResponse {
+    _$intranetfolderinsideResponseAtom.reportRead();
+    return super.intranetfolderinsideResponse;
+  }
+
+  @override
+  set intranetfolderinsideResponse(ApiResponse<intranetfldrRespModel> value) {
+    _$intranetfolderinsideResponseAtom
+        .reportWrite(value, super.intranetfolderinsideResponse, () {
+      super.intranetfolderinsideResponse = value;
+    });
+  }
+
   late final _$intranetviewmodelfunctionAsyncAction = AsyncAction(
       'IntranetViewModelBase.intranetviewmodelfunction',
       context: context);
@@ -36,10 +54,21 @@ mixin _$IntranetViewModel on IntranetViewModelBase, Store {
         .run(() => super.intranetviewmodelfunction(id));
   }
 
+  late final _$intranetfolderinsidefunctionAsyncAction = AsyncAction(
+      'IntranetViewModelBase.intranetfolderinsidefunction',
+      context: context);
+
+  @override
+  Future<void> intranetfolderinsidefunction(int id) {
+    return _$intranetfolderinsidefunctionAsyncAction
+        .run(() => super.intranetfolderinsidefunction(id));
+  }
+
   @override
   String toString() {
     return '''
-intranetpageResponse: ${intranetpageResponse}
+intranetpageResponse: ${intranetpageResponse},
+intranetfolderinsideResponse: ${intranetfolderinsideResponse}
     ''';
   }
 }

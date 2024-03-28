@@ -48,4 +48,34 @@ abstract class IntranetViewModelBase with Store {
       },
     );
   }
+
+  @observable
+  ApiResponse<intranetfldrRespModel> intranetfolderinsideResponse =
+      ApiResponse<intranetfldrRespModel>();
+  @action
+  Future<void> intranetfolderinsidefunction(
+    int id,
+  ) async {
+    intranetfolderinsideResponse =
+        intranetfolderinsideResponse.copyWith(error: null, loading: true);
+
+    final result = await intranetService.intranetfolderservicefunction(
+      id,
+    );
+    return result.fold(
+      (l) {
+        intranetfolderinsideResponse = intranetfolderinsideResponse.copyWith(
+          error: l,
+          loading: false,
+        );
+      },
+      (r) {
+        intranetfolderinsideResponse = intranetfolderinsideResponse.copyWith(
+          data: r,
+          error: null,
+          loading: false,
+        );
+      },
+    );
+  }
 }

@@ -29,5 +29,9 @@ class AppRouter extends $AppRouter {
           page: NotificationDetailRoute.page,
           path: RouteNames.rNotificationdetailpage,
         ),
+        AutoRoute(
+          page: IntranetInsideRoute.page,
+          path: RouteNames.rintranetinsidepage,
+        ),
       ];
 }

@@ -10,4 +10,5 @@ class RouteNames {
   static const String rNewsfolderinsidepage = '/newsfolderinsidepage';
   static const String rOhsdetailpage = '/ohsdetailpage';
   static const String rNotificationdetailpage = '/notificationdetailpage';
+  static const String rintranetinsidepage = '/intranetinsidepage';
 }
