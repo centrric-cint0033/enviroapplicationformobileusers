@@ -60,7 +60,7 @@ abstract class $AppRouter extends _i11.RootStackRouter {
         routeData: routeData,
         child: _i4.NewsPageInsidePage(
           key: args.key,
-          id: args.id,
+          parentId: args.parentId,
         ),
       );
     },
@@ -174,13 +174,13 @@ class NewsRouteInsideRoute
     extends _i11.PageRouteInfo<NewsRouteInsideRouteArgs> {
   NewsRouteInsideRoute({
     _i12.Key? key,
-    required int id,
+    required int parentId,
     List<_i11.PageRouteInfo>? children,
   }) : super(
           NewsRouteInsideRoute.name,
           args: NewsRouteInsideRouteArgs(
             key: key,
-            id: id,
+            parentId: parentId,
           ),
           initialChildren: children,
         );
@@ -194,16 +194,16 @@ class NewsRouteInsideRoute
 class NewsRouteInsideRouteArgs {
   const NewsRouteInsideRouteArgs({
     this.key,
-    required this.id,
+    required this.parentId,
   });
 
   final _i12.Key? key;
 
-  final int id;
+  final int parentId;
 
   @override
   String toString() {
-    return 'NewsRouteInsideRouteArgs{key: $key, id: $id}';
+    return 'NewsRouteInsideRouteArgs{key: $key, parentId: $parentId}';
   }
 }
 

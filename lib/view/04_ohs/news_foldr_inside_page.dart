@@ -7,9 +7,10 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 
 @RoutePage()
 class NewsPageInsidePage extends StatelessWidget {
-  final int id;
+  final int parentId;
 
-  const NewsPageInsidePage({Key? key, required this.id}) : super(key: key);
+  const NewsPageInsidePage({Key? key, required this.parentId})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -244,9 +245,7 @@ class NewsPageInsidePage extends StatelessWidget {
                                 onPressed: () {
                                   print('as$id');
                                   vmOhs.folderdeleteviewmodelfunction(
-                                    'folders',
-                                    id,
-                                  );
+                                      'folders', id, parentId);
                                   Navigator.of(context)
                                       .pop(); // Close the dialog
                                 },

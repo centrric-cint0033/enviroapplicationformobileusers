@@ -201,7 +201,8 @@ abstract class OHSViewModelBase with Store {
   ApiResponse<String> deleteResponse = ApiResponse<String>();
 
   @action
-  Future<void> folderdeleteviewmodelfunction(String folders, int id) async {
+  Future<void> folderdeleteviewmodelfunction(
+      String folders, int id, int parentId) async {
     deleteResponse = deleteResponse.copyWith(error: null, loading: true);
 
     print(id);
@@ -209,20 +210,18 @@ abstract class OHSViewModelBase with Store {
     final result = await ohsService.ohsnewsfolderdeletefunction(folders, id);
     return result.fold(
       (l) {
-        print('Error occurred during folder rename: $l');
         deleteResponse = deleteResponse.copyWith(
           error: l,
           loading: false,
         );
       },
       (r) {
-        print('Folder rename successful!');
         deleteResponse = deleteResponse.copyWith(
           data: r,
           error: null,
           loading: false,
         );
-        vmOhs.ohsnewsfolderviewmodelfunction(1);
+        vmOhs.newspagefolderinsidefunction(parentId);
       },
     );
   }

@@ -515,7 +515,7 @@ class NewsPage extends StatelessWidget {
                                     TextButton(
                                       onPressed: () {
                                         vmOhs.folderdeleteviewmodelfunction(
-                                            'folders', id);
+                                            'folders', id, 1);
                                         Navigator.of(context).pop();
                                       },
                                       child: const Text(
@@ -564,7 +564,7 @@ class NewsPage extends StatelessWidget {
 
   void newsfolderclickfunction(BuildContext context, id) async {
     vmOhs.newspagefolderinsidefunction(id);
-    context.router.push(NewsRouteInsideRoute(id: id));
+    context.router.push(NewsRouteInsideRoute(parentId: id));
   }
 
   void ohsdetailpagefunction(BuildContext context, data) {

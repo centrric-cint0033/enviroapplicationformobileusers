@@ -29,7 +29,8 @@ abstract class IohsService {
 
   Future<Either<MainFailure, String>> ohsnewsfolderrenamefunction(
       folderName, id);
-  Future<Either<MainFailure, String>> ohsnewsfolderdeletefunction(folders, id);
+  Future<Either<MainFailure, String>> ohsnewsfolderdeletefunction(
+      folders, int id);
 }
 
 @LazySingleton(as: IohsService)
@@ -223,7 +224,7 @@ class OhsService implements IohsService {
 
   @override
   Future<Either<MainFailure, String>> ohsnewsfolderdeletefunction(
-      folders, id) async {
+      folders, int id) async {
     var response = await getIt<HttpService>().request(
         authenticated: true,
         method: HttpMethod.delete,

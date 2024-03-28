@@ -190,9 +190,10 @@ mixin _$OHSViewModel on OHSViewModelBase, Store {
       context: context);
 
   @override
-  Future<void> folderdeleteviewmodelfunction(String folders, int id) {
+  Future<void> folderdeleteviewmodelfunction(
+      String folders, int id, int parentId) {
     return _$folderdeleteviewmodelfunctionAsyncAction
-        .run(() => super.folderdeleteviewmodelfunction(folders, id));
+        .run(() => super.folderdeleteviewmodelfunction(folders, id, parentId));
   }
 
   @override
