@@ -20,6 +20,7 @@ class SiteFolderListWidget extends StatelessWidget {
       itemBuilder: (context, index) {
         Folder folder = folders[index];
         return Card(
+          color: Colors.grey.shade200,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10.0),
           ),
@@ -27,7 +28,7 @@ class SiteFolderListWidget extends StatelessWidget {
             contentPadding: const EdgeInsets.only(left: 20),
             leading: const Icon(
               Icons.folder,
-              color: Colors.black26,
+              color: Colors.black54,
             ),
             title: Text(
               folder.name ?? "",
@@ -43,7 +44,7 @@ class SiteFolderListWidget extends StatelessWidget {
                     onTap: () {},
                   ),
                   CommonIconBtnWidget(
-                    icon: Icons.delete,
+                    icon: Icons.delete_forever,
                     onTap: () {},
                   ),
                 ],

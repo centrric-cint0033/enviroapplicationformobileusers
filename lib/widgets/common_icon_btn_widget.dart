@@ -15,7 +15,11 @@ class CommonIconBtnWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return IconButton(
       onPressed: onTap,
-      icon: Icon(icon, color: color ?? Colors.grey),
+      icon: Icon(
+        icon,
+        size: 19,
+        color: color ?? Colors.black54,
+      ),
     );
   }
 }
