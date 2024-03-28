@@ -9,6 +9,7 @@ import 'package:enviro_mobile_application/model/10_site/site_res_model/site_res_
 import '../../utilis/injection.dart';
 import '../../utilis/httpservice.dart';
 import '../../utilis/api_endpoints/api_endpoints.dart';
+import '../../model/10_site/folder_res_model/folder_res_model.dart';
 
 @LazySingleton(as: ISiteService)
 class SiteService implements ISiteService {
@@ -111,6 +112,29 @@ class SiteService implements ISiteService {
         var data = jsonDecode(res.body);
 
         return Right(SiteResModel.fromJson(data));
+      },
+    );
+  }
+
+  @override
+  Future<Either<MainFailure, FolderResModel>> getSiteFolders({
+    required int id,
+  }) async {
+    var response = await getIt<HttpService>().request(
+      authenticated: true,
+      method: HttpMethod.get,
+      apiUrl: "${ApiEndPoints.endpointSiteFolders}$id/1/",
+    );
+
+    return response.fold(
+      (l) {
+        (l.values.first);
+        return Left(l.keys.first);
+      },
+      (res) async {
+        var data = jsonDecode(res.body);
+
+        return Right(FolderResModel.fromJson(data));
       },
     );
   }

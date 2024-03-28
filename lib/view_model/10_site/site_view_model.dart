@@ -6,6 +6,7 @@ import '../../utilis/injection.dart';
 import '../../api_response/api_response.dart';
 import '../../service/10_site/i_site_service.dart';
 import '../../model/10_site/site_res_model/site_res_model.dart';
+import '../../model/10_site/folder_res_model/folder_res_model.dart';
 
 part 'site_view_model.g.dart';
 
@@ -37,6 +38,10 @@ abstract class SiteViewModelBase with Store {
   @observable
   ApiResponse<List<SiteResModel>> delSiteResponse =
       ApiResponse<List<SiteResModel>>();
+
+  @observable
+  ApiResponse<FolderResModel> siteFolderResponse =
+      ApiResponse<FolderResModel>();
 
   ScrollController delSitesController = ScrollController();
   ScrollController tempSitesController = ScrollController();
@@ -259,6 +264,32 @@ abstract class SiteViewModelBase with Store {
           default:
             break;
         }
+      },
+    );
+  }
+
+  @action
+  Future<void> getSiteFolders({required int id}) async {
+    siteFolderResponse = siteFolderResponse.copyWith(
+      error: null,
+      loading: true,
+    );
+
+    final response = await siteService.getSiteFolders(id: id);
+
+    response.fold(
+      (l) {
+        siteFolderResponse = siteFolderResponse.copyWith(
+          error: l,
+          loading: false,
+        );
+      },
+      (res) {
+        siteFolderResponse = siteFolderResponse.copyWith(
+          data: res,
+          error: null,
+          loading: false,
+        );
       },
     );
   }

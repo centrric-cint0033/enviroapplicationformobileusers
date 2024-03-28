@@ -68,4 +68,5 @@ class ApiEndPoints {
       '/api/v1/clients/deleted-client/list/alpha_asc/waste/';
   static const endpointSiteDetail = '/api/v1/clients/single/';
   static const endpointPreviousSale = '/api/v1/jobs/previous/sale/';
+  static const endpointSiteFolders = '/api/v1/drive/site/folder/';
 }

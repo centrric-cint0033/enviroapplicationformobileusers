@@ -39,11 +39,13 @@ class TempSiteListWidget extends StatelessWidget {
                         : SiteTileWidget(
                             onTap: () {
                               if (sites[index].id != null) {
-                                vmSite.getDetails(
-                                  id: sites[index].id!,
-                                  context: context,
-                                  type: SiteType.temporary,
-                                );
+                                vmSite
+                                  ..getDetails(
+                                    id: sites[index].id!,
+                                    context: context,
+                                    type: SiteType.temporary,
+                                  )
+                                  ..getSiteFolders(id: sites[index].id!);
                                 vmPreviousSale.getPreviousSales(
                                   siteId: sites[index].id!,
                                 );

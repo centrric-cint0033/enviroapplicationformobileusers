@@ -10,7 +10,9 @@ import 'package:enviro_mobile_application/model/10_site/site_res_model/site_res_
 import 'widgets/icon_widget.dart';
 import 'widgets/key_value_text_widget.dart';
 import '../../widgets/cmn_title_textwidget.dart';
+import 'widgets/site_folder_list_data_widget.dart';
 import '../11_previous_sale/widgets/previous_sales_widget.dart';
+import '../../model/10_site/folder_res_model/folder_res_model.dart';
 import '../../view_model/11_previous_sale/previous_sale_view_model.dart';
 
 @RoutePage()
@@ -29,6 +31,7 @@ class SiteDetailScreen extends StatelessWidget {
         SiteResModel? site = _getSite(index: index, type: type);
         Map<String, String> map = _getSiteMap(site!);
         Map<String, String> company = _getEntityMap(site);
+        List<Folder> folders = _getFolderData();
         return Scaffold(
           appBar: AppBar(
             elevation: 1,
@@ -99,6 +102,8 @@ class SiteDetailScreen extends StatelessWidget {
                     ),
                   },
                   sized0hx10,
+                  SiteFolderListWidget(folders: folders),
+                  sized0hx10,
                   const PreviouseSalesWidget(),
                 ],
               ),
@@ -107,6 +112,14 @@ class SiteDetailScreen extends StatelessWidget {
         );
       },
     );
+  }
+}
+
+List<Folder> _getFolderData() {
+  try {
+    return vmSite.siteFolderResponse.data?.folders?.first.folders ?? [];
+  } catch (e) {
+    return [];
   }
 }
 

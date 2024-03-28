@@ -58,6 +58,22 @@ mixin _$SiteViewModel on SiteViewModelBase, Store {
     });
   }
 
+  late final _$siteFolderResponseAtom =
+      Atom(name: 'SiteViewModelBase.siteFolderResponse', context: context);
+
+  @override
+  ApiResponse<FolderResModel> get siteFolderResponse {
+    _$siteFolderResponseAtom.reportRead();
+    return super.siteFolderResponse;
+  }
+
+  @override
+  set siteFolderResponse(ApiResponse<FolderResModel> value) {
+    _$siteFolderResponseAtom.reportWrite(value, super.siteFolderResponse, () {
+      super.siteFolderResponse = value;
+    });
+  }
+
   late final _$getPermanentSitesAsyncAction =
       AsyncAction('SiteViewModelBase.getPermanentSites', context: context);
 
@@ -97,12 +113,21 @@ mixin _$SiteViewModel on SiteViewModelBase, Store {
         .run(() => super.getDetails(id: id, context: context, type: type));
   }
 
+  late final _$getSiteFoldersAsyncAction =
+      AsyncAction('SiteViewModelBase.getSiteFolders', context: context);
+
+  @override
+  Future<void> getSiteFolders({required int id}) {
+    return _$getSiteFoldersAsyncAction.run(() => super.getSiteFolders(id: id));
+  }
+
   @override
   String toString() {
     return '''
 permanentSiteResponse: ${permanentSiteResponse},
 tempSiteResponse: ${tempSiteResponse},
-delSiteResponse: ${delSiteResponse}
+delSiteResponse: ${delSiteResponse},
+siteFolderResponse: ${siteFolderResponse}
     ''';
   }
 }
