@@ -36,9 +36,8 @@ abstract class PreviousSaleViewModelBase with Store {
     siteID = siteId ?? siteID;
     previousSaleResponse = previousSaleResponse.copyWith(
       error: null,
+      loading: page == null,
       paginationLoading: page != null,
-      loading: previousSaleResponse.data == null,
-      data: page == null ? null : previousSaleResponse.data,
     );
 
     final response = await previousSaleService.getPreviousSale(
