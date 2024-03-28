@@ -33,6 +33,7 @@ abstract class PreviousSaleViewModelBase with Store {
       error: null,
       paginationLoading: page != null,
       loading: previousSaleResponse.data == null,
+      data: page == null ? null : previousSaleResponse.data,
     );
 
     final response = await previousSaleService.getPreviousSale(page: page);

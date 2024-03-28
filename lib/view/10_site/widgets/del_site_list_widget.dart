@@ -9,6 +9,7 @@ import '../../../utilis/constant.dart';
 import '../../../Routepage/approutes.gr.dart';
 import '../../../view_model/10_site/site_view_model.dart';
 import '../../../model/10_site/site_res_model/site_res_model.dart';
+import '../../../view_model/11_previous_sale/previous_sale_view_model.dart';
 
 class DelSiteListWidget extends StatelessWidget {
   const DelSiteListWidget({super.key});
@@ -43,6 +44,7 @@ class DelSiteListWidget extends StatelessWidget {
                                   context: context,
                                   type: SiteType.deleted,
                                 );
+                                vmPreviousSale.getPreviousSales();
                                 context.router.push(
                                   SiteDetailRoute(
                                     index: index,
