@@ -52,7 +52,10 @@ class _SearchFieldState extends State<SearchField> {
         ),
         contentPadding: const EdgeInsets.only(left: 20.0, right: 10),
         suffix: GestureDetector(
-          onTap: () => widget.ctr?.clear(),
+          onTap: () {
+            widget.ctr?.clear();
+            if (widget.onChanged != null) widget.onChanged!("");
+          },
           child: const Icon(Icons.close, color: Colors.grey),
         ),
       ),
