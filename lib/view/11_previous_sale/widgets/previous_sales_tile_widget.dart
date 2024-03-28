@@ -14,7 +14,7 @@ class PreviousSalesTileWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final style = Theme.of(context).textTheme.bodyMedium?.copyWith(
           fontSize: 12.sp,
-          color: Colors.grey,
+          color: Colors.black45,
           fontWeight: FontWeight.normal,
         );
     return Container(
