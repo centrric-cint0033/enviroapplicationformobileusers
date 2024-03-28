@@ -1,5 +1,7 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:enviro_mobile_application/Routepage/approutes.gr.dart';
 import 'package:enviro_mobile_application/Routepage/routespage.dart';
+import 'package:enviro_mobile_application/Routepage/securestorage.dart';
 import 'package:enviro_mobile_application/utilis/api_endpoints/customprint.dart';
 import 'package:enviro_mobile_application/view_model/02_sales/sales_view_model.dart';
 import 'package:enviro_mobile_application/view_model/03_vehicles/vehicle_view_model.dart';
@@ -98,6 +100,19 @@ class HomePage extends StatelessWidget {
               Colors.blue,
               width: 30.0,
               height: 30.0,
+            ),
+            InkWell(
+              onTap: () async {
+                context.router.replaceAll([LoginRoute()]);
+                await SecureStorage().clearData();
+              },
+              child: _buildBox(
+                'assets/images/users.svg',
+                'Login',
+                Colors.blue,
+                width: 30.0,
+                height: 30.0,
+              ),
             ),
           ],
         ),

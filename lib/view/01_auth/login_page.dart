@@ -45,7 +45,7 @@ class LoginPage extends StatelessWidget {
                 //       color: Appthemes.bluecolor),
                 // ),
                 const SizedBox(height: 39),
-                Container(
+                SizedBox(
                   height: 79,
                   child: Cmformfield(
                     controller: vmAuth.userNameController,
@@ -64,7 +64,7 @@ class LoginPage extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 24),
-                Container(
+                SizedBox(
                   height: 79,
                   child: Cmformfield(
                     controller: vmAuth.passwordController,
@@ -84,6 +84,7 @@ class LoginPage extends StatelessWidget {
                 const SizedBox(height: 64),
                 Observer(builder: (_) {
                   return CmButton(
+                    loading: vmAuth.loginResponse.loading,
                     buttonTextStyle:
                         const TextStyle(color: Appthemes.textColor),
                     onPressed: () {
