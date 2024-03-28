@@ -51,7 +51,7 @@ mixin _$SalesModel {
   @JsonKey(name: 'job_card_code')
   String? get jobCardCode => throw _privateConstructorUsedError;
   @JsonKey(name: 'created_date_time')
-  String? get createdDateTime => throw _privateConstructorUsedError;
+  DateTime? get createdDateTime => throw _privateConstructorUsedError;
   @JsonKey(name: 'job_card_keys')
   JobCardKeys? get jobCardKeys => throw _privateConstructorUsedError;
   @JsonKey(name: 'deleted_status')
@@ -65,7 +65,7 @@ mixin _$SalesModel {
   bool? get reoccurring => throw _privateConstructorUsedError;
   String? get status => throw _privateConstructorUsedError;
   @JsonKey(name: 'schedule_status')
-  bool? get scheduleStatus => throw _privateConstructorUsedError;
+  dynamic get scheduleStatus => throw _privateConstructorUsedError;
   @JsonKey(name: 'job_type')
   String? get jobType => throw _privateConstructorUsedError;
   @JsonKey(name: 'ready_for_schedule')
@@ -82,14 +82,79 @@ mixin _$SalesModel {
   @JsonKey(name: 'job_card_type')
   String? get jobCardType => throw _privateConstructorUsedError;
   @JsonKey(name: 'recurring_date')
-  dynamic get recurringDate => throw _privateConstructorUsedError;
+  String? get recurringDate => throw _privateConstructorUsedError;
   @JsonKey(name: 'created_by')
-  int? get createdBy => throw _privateConstructorUsedError;
+  String? get createdBy => throw _privateConstructorUsedError;
   int? get quote => throw _privateConstructorUsedError;
   @JsonKey(name: 'job_card')
   int? get jobCard => throw _privateConstructorUsedError;
   @JsonKey(name: 'job_comments')
   List<dynamic>? get jobComments => throw _privateConstructorUsedError;
+  @JsonKey(name: 'won_lose_status')
+  String? get wonLoseStatus => throw _privateConstructorUsedError;
+  @JsonKey(name: 'schedule_id')
+  dynamic get scheduleId => throw _privateConstructorUsedError;
+  @JsonKey(name: 'file_list')
+  List<dynamic>? get fileList => throw _privateConstructorUsedError;
+  @JsonKey(name: 'client_email')
+  String? get clientEmail => throw _privateConstructorUsedError;
+  @JsonKey(name: 'sale_person')
+  String? get salePerson => throw _privateConstructorUsedError;
+  @JsonKey(name: 'contact_number')
+  String? get contactNumber => throw _privateConstructorUsedError;
+  String? get customer => throw _privateConstructorUsedError;
+  @JsonKey(name: 'won_reject_date')
+  String? get wonRejectDate => throw _privateConstructorUsedError;
+  @JsonKey(name: 'parent_quote_status')
+  String? get parentQuoteStatus => throw _privateConstructorUsedError;
+  @JsonKey(name: 'mail_cc')
+  List<dynamic>? get mailCc => throw _privateConstructorUsedError;
+  dynamic get company => throw _privateConstructorUsedError;
+  String? get template => throw _privateConstructorUsedError;
+  @JsonKey(name: 'template_name')
+  dynamic get templateName => throw _privateConstructorUsedError;
+  @JsonKey(name: 'auto_create')
+  int? get autoCreate => throw _privateConstructorUsedError;
+  String? get url => throw _privateConstructorUsedError;
+  @JsonKey(name: 'invoice_amt')
+  String? get invoiceAmt => throw _privateConstructorUsedError;
+  @JsonKey(name: 'company_name')
+  String? get companyName => throw _privateConstructorUsedError;
+  @JsonKey(name: 'mail_subject')
+  String? get mailSubject => throw _privateConstructorUsedError;
+  @JsonKey(name: 'mail_body')
+  String? get mailBody => throw _privateConstructorUsedError;
+  @JsonKey(name: 'safety_data')
+  dynamic get safetyData => throw _privateConstructorUsedError;
+  @JsonKey(name: 'safety_data_html_send')
+  dynamic get safetyDataHtmlSend => throw _privateConstructorUsedError;
+  @JsonKey(name: 'sales_team_review')
+  bool? get salesTeamReview => throw _privateConstructorUsedError;
+  @JsonKey(name: 'email_sending_option')
+  bool? get emailSendingOption => throw _privateConstructorUsedError;
+  @JsonKey(name: 'is_quote_through_recurring')
+  bool? get isQuoteThroughRecurring => throw _privateConstructorUsedError;
+  @JsonKey(name: 'recurring_status')
+  String? get recurringStatus => throw _privateConstructorUsedError;
+  @JsonKey(name: 'parent_quote_id')
+  dynamic get parentQuoteId => throw _privateConstructorUsedError;
+  @JsonKey(name: 'scope_of_work_type')
+  String? get scopeOfWorkType => throw _privateConstructorUsedError;
+  @JsonKey(name: 'sales_approve_date_time')
+  dynamic get salesApproveDateTime => throw _privateConstructorUsedError;
+  @JsonKey(name: 'quote_type')
+  String? get quoteType => throw _privateConstructorUsedError;
+  @JsonKey(name: 'converted_to_recurring_quote_id')
+  dynamic get convertedToRecurringQuoteId => throw _privateConstructorUsedError;
+  int? get employee => throw _privateConstructorUsedError;
+  @JsonKey(name: 'mail_bcc')
+  List<dynamic>? get mailBcc => throw _privateConstructorUsedError;
+  String? get name => throw _privateConstructorUsedError;
+  int? get won => throw _privateConstructorUsedError;
+  int? get lost => throw _privateConstructorUsedError;
+  int? get pending => throw _privateConstructorUsedError;
+  int? get total => throw _privateConstructorUsedError;
+  String? get profile => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -122,7 +187,7 @@ abstract class $SalesModelCopyWith<$Res> {
       dynamic typeOfWasteStrProfileName,
       @JsonKey(name: 'sales_approve_date') String? salesApproveDate,
       @JsonKey(name: 'job_card_code') String? jobCardCode,
-      @JsonKey(name: 'created_date_time') String? createdDateTime,
+      @JsonKey(name: 'created_date_time') DateTime? createdDateTime,
       @JsonKey(name: 'job_card_keys') JobCardKeys? jobCardKeys,
       @JsonKey(name: 'deleted_status') bool? deletedStatus,
       @JsonKey(name: 'tab_type') String? tabType,
@@ -131,7 +196,7 @@ abstract class $SalesModelCopyWith<$Res> {
       @JsonKey(name: 'paid_amount') String? paidAmount,
       bool? reoccurring,
       String? status,
-      @JsonKey(name: 'schedule_status') bool? scheduleStatus,
+      @JsonKey(name: 'schedule_status') dynamic scheduleStatus,
       @JsonKey(name: 'job_type') String? jobType,
       @JsonKey(name: 'ready_for_schedule') bool? readyForSchedule,
       @JsonKey(name: 'is_job_through_reccuuring') bool? isJobThroughReccuuring,
@@ -140,11 +205,51 @@ abstract class $SalesModelCopyWith<$Res> {
       bool? rescheduled,
       @JsonKey(name: 'active_status') bool? activeStatus,
       @JsonKey(name: 'job_card_type') String? jobCardType,
-      @JsonKey(name: 'recurring_date') dynamic recurringDate,
-      @JsonKey(name: 'created_by') int? createdBy,
+      @JsonKey(name: 'recurring_date') String? recurringDate,
+      @JsonKey(name: 'created_by') String? createdBy,
       int? quote,
       @JsonKey(name: 'job_card') int? jobCard,
-      @JsonKey(name: 'job_comments') List<dynamic>? jobComments});
+      @JsonKey(name: 'job_comments') List<dynamic>? jobComments,
+      @JsonKey(name: 'won_lose_status') String? wonLoseStatus,
+      @JsonKey(name: 'schedule_id') dynamic scheduleId,
+      @JsonKey(name: 'file_list') List<dynamic>? fileList,
+      @JsonKey(name: 'client_email') String? clientEmail,
+      @JsonKey(name: 'sale_person') String? salePerson,
+      @JsonKey(name: 'contact_number') String? contactNumber,
+      String? customer,
+      @JsonKey(name: 'won_reject_date') String? wonRejectDate,
+      @JsonKey(name: 'parent_quote_status') String? parentQuoteStatus,
+      @JsonKey(name: 'mail_cc') List<dynamic>? mailCc,
+      dynamic company,
+      String? template,
+      @JsonKey(name: 'template_name') dynamic templateName,
+      @JsonKey(name: 'auto_create') int? autoCreate,
+      String? url,
+      @JsonKey(name: 'invoice_amt') String? invoiceAmt,
+      @JsonKey(name: 'company_name') String? companyName,
+      @JsonKey(name: 'mail_subject') String? mailSubject,
+      @JsonKey(name: 'mail_body') String? mailBody,
+      @JsonKey(name: 'safety_data') dynamic safetyData,
+      @JsonKey(name: 'safety_data_html_send') dynamic safetyDataHtmlSend,
+      @JsonKey(name: 'sales_team_review') bool? salesTeamReview,
+      @JsonKey(name: 'email_sending_option') bool? emailSendingOption,
+      @JsonKey(name: 'is_quote_through_recurring')
+      bool? isQuoteThroughRecurring,
+      @JsonKey(name: 'recurring_status') String? recurringStatus,
+      @JsonKey(name: 'parent_quote_id') dynamic parentQuoteId,
+      @JsonKey(name: 'scope_of_work_type') String? scopeOfWorkType,
+      @JsonKey(name: 'sales_approve_date_time') dynamic salesApproveDateTime,
+      @JsonKey(name: 'quote_type') String? quoteType,
+      @JsonKey(name: 'converted_to_recurring_quote_id')
+      dynamic convertedToRecurringQuoteId,
+      int? employee,
+      @JsonKey(name: 'mail_bcc') List<dynamic>? mailBcc,
+      String? name,
+      int? won,
+      int? lost,
+      int? pending,
+      int? total,
+      String? profile});
 
   $JobCardKeysCopyWith<$Res>? get jobCardKeys;
 }
@@ -202,6 +307,44 @@ class _$SalesModelCopyWithImpl<$Res, $Val extends SalesModel>
     Object? quote = freezed,
     Object? jobCard = freezed,
     Object? jobComments = freezed,
+    Object? wonLoseStatus = freezed,
+    Object? scheduleId = freezed,
+    Object? fileList = freezed,
+    Object? clientEmail = freezed,
+    Object? salePerson = freezed,
+    Object? contactNumber = freezed,
+    Object? customer = freezed,
+    Object? wonRejectDate = freezed,
+    Object? parentQuoteStatus = freezed,
+    Object? mailCc = freezed,
+    Object? company = freezed,
+    Object? template = freezed,
+    Object? templateName = freezed,
+    Object? autoCreate = freezed,
+    Object? url = freezed,
+    Object? invoiceAmt = freezed,
+    Object? companyName = freezed,
+    Object? mailSubject = freezed,
+    Object? mailBody = freezed,
+    Object? safetyData = freezed,
+    Object? safetyDataHtmlSend = freezed,
+    Object? salesTeamReview = freezed,
+    Object? emailSendingOption = freezed,
+    Object? isQuoteThroughRecurring = freezed,
+    Object? recurringStatus = freezed,
+    Object? parentQuoteId = freezed,
+    Object? scopeOfWorkType = freezed,
+    Object? salesApproveDateTime = freezed,
+    Object? quoteType = freezed,
+    Object? convertedToRecurringQuoteId = freezed,
+    Object? employee = freezed,
+    Object? mailBcc = freezed,
+    Object? name = freezed,
+    Object? won = freezed,
+    Object? lost = freezed,
+    Object? pending = freezed,
+    Object? total = freezed,
+    Object? profile = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -275,7 +418,7 @@ class _$SalesModelCopyWithImpl<$Res, $Val extends SalesModel>
       createdDateTime: freezed == createdDateTime
           ? _value.createdDateTime
           : createdDateTime // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as DateTime?,
       jobCardKeys: freezed == jobCardKeys
           ? _value.jobCardKeys
           : jobCardKeys // ignore: cast_nullable_to_non_nullable
@@ -311,7 +454,7 @@ class _$SalesModelCopyWithImpl<$Res, $Val extends SalesModel>
       scheduleStatus: freezed == scheduleStatus
           ? _value.scheduleStatus
           : scheduleStatus // ignore: cast_nullable_to_non_nullable
-              as bool?,
+              as dynamic,
       jobType: freezed == jobType
           ? _value.jobType
           : jobType // ignore: cast_nullable_to_non_nullable
@@ -347,11 +490,11 @@ class _$SalesModelCopyWithImpl<$Res, $Val extends SalesModel>
       recurringDate: freezed == recurringDate
           ? _value.recurringDate
           : recurringDate // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       createdBy: freezed == createdBy
           ? _value.createdBy
           : createdBy // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as String?,
       quote: freezed == quote
           ? _value.quote
           : quote // ignore: cast_nullable_to_non_nullable
@@ -364,6 +507,158 @@ class _$SalesModelCopyWithImpl<$Res, $Val extends SalesModel>
           ? _value.jobComments
           : jobComments // ignore: cast_nullable_to_non_nullable
               as List<dynamic>?,
+      wonLoseStatus: freezed == wonLoseStatus
+          ? _value.wonLoseStatus
+          : wonLoseStatus // ignore: cast_nullable_to_non_nullable
+              as String?,
+      scheduleId: freezed == scheduleId
+          ? _value.scheduleId
+          : scheduleId // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      fileList: freezed == fileList
+          ? _value.fileList
+          : fileList // ignore: cast_nullable_to_non_nullable
+              as List<dynamic>?,
+      clientEmail: freezed == clientEmail
+          ? _value.clientEmail
+          : clientEmail // ignore: cast_nullable_to_non_nullable
+              as String?,
+      salePerson: freezed == salePerson
+          ? _value.salePerson
+          : salePerson // ignore: cast_nullable_to_non_nullable
+              as String?,
+      contactNumber: freezed == contactNumber
+          ? _value.contactNumber
+          : contactNumber // ignore: cast_nullable_to_non_nullable
+              as String?,
+      customer: freezed == customer
+          ? _value.customer
+          : customer // ignore: cast_nullable_to_non_nullable
+              as String?,
+      wonRejectDate: freezed == wonRejectDate
+          ? _value.wonRejectDate
+          : wonRejectDate // ignore: cast_nullable_to_non_nullable
+              as String?,
+      parentQuoteStatus: freezed == parentQuoteStatus
+          ? _value.parentQuoteStatus
+          : parentQuoteStatus // ignore: cast_nullable_to_non_nullable
+              as String?,
+      mailCc: freezed == mailCc
+          ? _value.mailCc
+          : mailCc // ignore: cast_nullable_to_non_nullable
+              as List<dynamic>?,
+      company: freezed == company
+          ? _value.company
+          : company // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      template: freezed == template
+          ? _value.template
+          : template // ignore: cast_nullable_to_non_nullable
+              as String?,
+      templateName: freezed == templateName
+          ? _value.templateName
+          : templateName // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      autoCreate: freezed == autoCreate
+          ? _value.autoCreate
+          : autoCreate // ignore: cast_nullable_to_non_nullable
+              as int?,
+      url: freezed == url
+          ? _value.url
+          : url // ignore: cast_nullable_to_non_nullable
+              as String?,
+      invoiceAmt: freezed == invoiceAmt
+          ? _value.invoiceAmt
+          : invoiceAmt // ignore: cast_nullable_to_non_nullable
+              as String?,
+      companyName: freezed == companyName
+          ? _value.companyName
+          : companyName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      mailSubject: freezed == mailSubject
+          ? _value.mailSubject
+          : mailSubject // ignore: cast_nullable_to_non_nullable
+              as String?,
+      mailBody: freezed == mailBody
+          ? _value.mailBody
+          : mailBody // ignore: cast_nullable_to_non_nullable
+              as String?,
+      safetyData: freezed == safetyData
+          ? _value.safetyData
+          : safetyData // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      safetyDataHtmlSend: freezed == safetyDataHtmlSend
+          ? _value.safetyDataHtmlSend
+          : safetyDataHtmlSend // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      salesTeamReview: freezed == salesTeamReview
+          ? _value.salesTeamReview
+          : salesTeamReview // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      emailSendingOption: freezed == emailSendingOption
+          ? _value.emailSendingOption
+          : emailSendingOption // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      isQuoteThroughRecurring: freezed == isQuoteThroughRecurring
+          ? _value.isQuoteThroughRecurring
+          : isQuoteThroughRecurring // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      recurringStatus: freezed == recurringStatus
+          ? _value.recurringStatus
+          : recurringStatus // ignore: cast_nullable_to_non_nullable
+              as String?,
+      parentQuoteId: freezed == parentQuoteId
+          ? _value.parentQuoteId
+          : parentQuoteId // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      scopeOfWorkType: freezed == scopeOfWorkType
+          ? _value.scopeOfWorkType
+          : scopeOfWorkType // ignore: cast_nullable_to_non_nullable
+              as String?,
+      salesApproveDateTime: freezed == salesApproveDateTime
+          ? _value.salesApproveDateTime
+          : salesApproveDateTime // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      quoteType: freezed == quoteType
+          ? _value.quoteType
+          : quoteType // ignore: cast_nullable_to_non_nullable
+              as String?,
+      convertedToRecurringQuoteId: freezed == convertedToRecurringQuoteId
+          ? _value.convertedToRecurringQuoteId
+          : convertedToRecurringQuoteId // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      employee: freezed == employee
+          ? _value.employee
+          : employee // ignore: cast_nullable_to_non_nullable
+              as int?,
+      mailBcc: freezed == mailBcc
+          ? _value.mailBcc
+          : mailBcc // ignore: cast_nullable_to_non_nullable
+              as List<dynamic>?,
+      name: freezed == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
+      won: freezed == won
+          ? _value.won
+          : won // ignore: cast_nullable_to_non_nullable
+              as int?,
+      lost: freezed == lost
+          ? _value.lost
+          : lost // ignore: cast_nullable_to_non_nullable
+              as int?,
+      pending: freezed == pending
+          ? _value.pending
+          : pending // ignore: cast_nullable_to_non_nullable
+              as int?,
+      total: freezed == total
+          ? _value.total
+          : total // ignore: cast_nullable_to_non_nullable
+              as int?,
+      profile: freezed == profile
+          ? _value.profile
+          : profile // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 
@@ -407,7 +702,7 @@ abstract class _$$SalesModelImplCopyWith<$Res>
       dynamic typeOfWasteStrProfileName,
       @JsonKey(name: 'sales_approve_date') String? salesApproveDate,
       @JsonKey(name: 'job_card_code') String? jobCardCode,
-      @JsonKey(name: 'created_date_time') String? createdDateTime,
+      @JsonKey(name: 'created_date_time') DateTime? createdDateTime,
       @JsonKey(name: 'job_card_keys') JobCardKeys? jobCardKeys,
       @JsonKey(name: 'deleted_status') bool? deletedStatus,
       @JsonKey(name: 'tab_type') String? tabType,
@@ -416,7 +711,7 @@ abstract class _$$SalesModelImplCopyWith<$Res>
       @JsonKey(name: 'paid_amount') String? paidAmount,
       bool? reoccurring,
       String? status,
-      @JsonKey(name: 'schedule_status') bool? scheduleStatus,
+      @JsonKey(name: 'schedule_status') dynamic scheduleStatus,
       @JsonKey(name: 'job_type') String? jobType,
       @JsonKey(name: 'ready_for_schedule') bool? readyForSchedule,
       @JsonKey(name: 'is_job_through_reccuuring') bool? isJobThroughReccuuring,
@@ -425,11 +720,51 @@ abstract class _$$SalesModelImplCopyWith<$Res>
       bool? rescheduled,
       @JsonKey(name: 'active_status') bool? activeStatus,
       @JsonKey(name: 'job_card_type') String? jobCardType,
-      @JsonKey(name: 'recurring_date') dynamic recurringDate,
-      @JsonKey(name: 'created_by') int? createdBy,
+      @JsonKey(name: 'recurring_date') String? recurringDate,
+      @JsonKey(name: 'created_by') String? createdBy,
       int? quote,
       @JsonKey(name: 'job_card') int? jobCard,
-      @JsonKey(name: 'job_comments') List<dynamic>? jobComments});
+      @JsonKey(name: 'job_comments') List<dynamic>? jobComments,
+      @JsonKey(name: 'won_lose_status') String? wonLoseStatus,
+      @JsonKey(name: 'schedule_id') dynamic scheduleId,
+      @JsonKey(name: 'file_list') List<dynamic>? fileList,
+      @JsonKey(name: 'client_email') String? clientEmail,
+      @JsonKey(name: 'sale_person') String? salePerson,
+      @JsonKey(name: 'contact_number') String? contactNumber,
+      String? customer,
+      @JsonKey(name: 'won_reject_date') String? wonRejectDate,
+      @JsonKey(name: 'parent_quote_status') String? parentQuoteStatus,
+      @JsonKey(name: 'mail_cc') List<dynamic>? mailCc,
+      dynamic company,
+      String? template,
+      @JsonKey(name: 'template_name') dynamic templateName,
+      @JsonKey(name: 'auto_create') int? autoCreate,
+      String? url,
+      @JsonKey(name: 'invoice_amt') String? invoiceAmt,
+      @JsonKey(name: 'company_name') String? companyName,
+      @JsonKey(name: 'mail_subject') String? mailSubject,
+      @JsonKey(name: 'mail_body') String? mailBody,
+      @JsonKey(name: 'safety_data') dynamic safetyData,
+      @JsonKey(name: 'safety_data_html_send') dynamic safetyDataHtmlSend,
+      @JsonKey(name: 'sales_team_review') bool? salesTeamReview,
+      @JsonKey(name: 'email_sending_option') bool? emailSendingOption,
+      @JsonKey(name: 'is_quote_through_recurring')
+      bool? isQuoteThroughRecurring,
+      @JsonKey(name: 'recurring_status') String? recurringStatus,
+      @JsonKey(name: 'parent_quote_id') dynamic parentQuoteId,
+      @JsonKey(name: 'scope_of_work_type') String? scopeOfWorkType,
+      @JsonKey(name: 'sales_approve_date_time') dynamic salesApproveDateTime,
+      @JsonKey(name: 'quote_type') String? quoteType,
+      @JsonKey(name: 'converted_to_recurring_quote_id')
+      dynamic convertedToRecurringQuoteId,
+      int? employee,
+      @JsonKey(name: 'mail_bcc') List<dynamic>? mailBcc,
+      String? name,
+      int? won,
+      int? lost,
+      int? pending,
+      int? total,
+      String? profile});
 
   @override
   $JobCardKeysCopyWith<$Res>? get jobCardKeys;
@@ -486,6 +821,44 @@ class __$$SalesModelImplCopyWithImpl<$Res>
     Object? quote = freezed,
     Object? jobCard = freezed,
     Object? jobComments = freezed,
+    Object? wonLoseStatus = freezed,
+    Object? scheduleId = freezed,
+    Object? fileList = freezed,
+    Object? clientEmail = freezed,
+    Object? salePerson = freezed,
+    Object? contactNumber = freezed,
+    Object? customer = freezed,
+    Object? wonRejectDate = freezed,
+    Object? parentQuoteStatus = freezed,
+    Object? mailCc = freezed,
+    Object? company = freezed,
+    Object? template = freezed,
+    Object? templateName = freezed,
+    Object? autoCreate = freezed,
+    Object? url = freezed,
+    Object? invoiceAmt = freezed,
+    Object? companyName = freezed,
+    Object? mailSubject = freezed,
+    Object? mailBody = freezed,
+    Object? safetyData = freezed,
+    Object? safetyDataHtmlSend = freezed,
+    Object? salesTeamReview = freezed,
+    Object? emailSendingOption = freezed,
+    Object? isQuoteThroughRecurring = freezed,
+    Object? recurringStatus = freezed,
+    Object? parentQuoteId = freezed,
+    Object? scopeOfWorkType = freezed,
+    Object? salesApproveDateTime = freezed,
+    Object? quoteType = freezed,
+    Object? convertedToRecurringQuoteId = freezed,
+    Object? employee = freezed,
+    Object? mailBcc = freezed,
+    Object? name = freezed,
+    Object? won = freezed,
+    Object? lost = freezed,
+    Object? pending = freezed,
+    Object? total = freezed,
+    Object? profile = freezed,
   }) {
     return _then(_$SalesModelImpl(
       id: freezed == id
@@ -559,7 +932,7 @@ class __$$SalesModelImplCopyWithImpl<$Res>
       createdDateTime: freezed == createdDateTime
           ? _value.createdDateTime
           : createdDateTime // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as DateTime?,
       jobCardKeys: freezed == jobCardKeys
           ? _value.jobCardKeys
           : jobCardKeys // ignore: cast_nullable_to_non_nullable
@@ -595,7 +968,7 @@ class __$$SalesModelImplCopyWithImpl<$Res>
       scheduleStatus: freezed == scheduleStatus
           ? _value.scheduleStatus
           : scheduleStatus // ignore: cast_nullable_to_non_nullable
-              as bool?,
+              as dynamic,
       jobType: freezed == jobType
           ? _value.jobType
           : jobType // ignore: cast_nullable_to_non_nullable
@@ -631,11 +1004,11 @@ class __$$SalesModelImplCopyWithImpl<$Res>
       recurringDate: freezed == recurringDate
           ? _value.recurringDate
           : recurringDate // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       createdBy: freezed == createdBy
           ? _value.createdBy
           : createdBy // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as String?,
       quote: freezed == quote
           ? _value.quote
           : quote // ignore: cast_nullable_to_non_nullable
@@ -648,6 +1021,158 @@ class __$$SalesModelImplCopyWithImpl<$Res>
           ? _value._jobComments
           : jobComments // ignore: cast_nullable_to_non_nullable
               as List<dynamic>?,
+      wonLoseStatus: freezed == wonLoseStatus
+          ? _value.wonLoseStatus
+          : wonLoseStatus // ignore: cast_nullable_to_non_nullable
+              as String?,
+      scheduleId: freezed == scheduleId
+          ? _value.scheduleId
+          : scheduleId // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      fileList: freezed == fileList
+          ? _value._fileList
+          : fileList // ignore: cast_nullable_to_non_nullable
+              as List<dynamic>?,
+      clientEmail: freezed == clientEmail
+          ? _value.clientEmail
+          : clientEmail // ignore: cast_nullable_to_non_nullable
+              as String?,
+      salePerson: freezed == salePerson
+          ? _value.salePerson
+          : salePerson // ignore: cast_nullable_to_non_nullable
+              as String?,
+      contactNumber: freezed == contactNumber
+          ? _value.contactNumber
+          : contactNumber // ignore: cast_nullable_to_non_nullable
+              as String?,
+      customer: freezed == customer
+          ? _value.customer
+          : customer // ignore: cast_nullable_to_non_nullable
+              as String?,
+      wonRejectDate: freezed == wonRejectDate
+          ? _value.wonRejectDate
+          : wonRejectDate // ignore: cast_nullable_to_non_nullable
+              as String?,
+      parentQuoteStatus: freezed == parentQuoteStatus
+          ? _value.parentQuoteStatus
+          : parentQuoteStatus // ignore: cast_nullable_to_non_nullable
+              as String?,
+      mailCc: freezed == mailCc
+          ? _value._mailCc
+          : mailCc // ignore: cast_nullable_to_non_nullable
+              as List<dynamic>?,
+      company: freezed == company
+          ? _value.company
+          : company // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      template: freezed == template
+          ? _value.template
+          : template // ignore: cast_nullable_to_non_nullable
+              as String?,
+      templateName: freezed == templateName
+          ? _value.templateName
+          : templateName // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      autoCreate: freezed == autoCreate
+          ? _value.autoCreate
+          : autoCreate // ignore: cast_nullable_to_non_nullable
+              as int?,
+      url: freezed == url
+          ? _value.url
+          : url // ignore: cast_nullable_to_non_nullable
+              as String?,
+      invoiceAmt: freezed == invoiceAmt
+          ? _value.invoiceAmt
+          : invoiceAmt // ignore: cast_nullable_to_non_nullable
+              as String?,
+      companyName: freezed == companyName
+          ? _value.companyName
+          : companyName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      mailSubject: freezed == mailSubject
+          ? _value.mailSubject
+          : mailSubject // ignore: cast_nullable_to_non_nullable
+              as String?,
+      mailBody: freezed == mailBody
+          ? _value.mailBody
+          : mailBody // ignore: cast_nullable_to_non_nullable
+              as String?,
+      safetyData: freezed == safetyData
+          ? _value.safetyData
+          : safetyData // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      safetyDataHtmlSend: freezed == safetyDataHtmlSend
+          ? _value.safetyDataHtmlSend
+          : safetyDataHtmlSend // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      salesTeamReview: freezed == salesTeamReview
+          ? _value.salesTeamReview
+          : salesTeamReview // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      emailSendingOption: freezed == emailSendingOption
+          ? _value.emailSendingOption
+          : emailSendingOption // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      isQuoteThroughRecurring: freezed == isQuoteThroughRecurring
+          ? _value.isQuoteThroughRecurring
+          : isQuoteThroughRecurring // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      recurringStatus: freezed == recurringStatus
+          ? _value.recurringStatus
+          : recurringStatus // ignore: cast_nullable_to_non_nullable
+              as String?,
+      parentQuoteId: freezed == parentQuoteId
+          ? _value.parentQuoteId
+          : parentQuoteId // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      scopeOfWorkType: freezed == scopeOfWorkType
+          ? _value.scopeOfWorkType
+          : scopeOfWorkType // ignore: cast_nullable_to_non_nullable
+              as String?,
+      salesApproveDateTime: freezed == salesApproveDateTime
+          ? _value.salesApproveDateTime
+          : salesApproveDateTime // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      quoteType: freezed == quoteType
+          ? _value.quoteType
+          : quoteType // ignore: cast_nullable_to_non_nullable
+              as String?,
+      convertedToRecurringQuoteId: freezed == convertedToRecurringQuoteId
+          ? _value.convertedToRecurringQuoteId
+          : convertedToRecurringQuoteId // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      employee: freezed == employee
+          ? _value.employee
+          : employee // ignore: cast_nullable_to_non_nullable
+              as int?,
+      mailBcc: freezed == mailBcc
+          ? _value._mailBcc
+          : mailBcc // ignore: cast_nullable_to_non_nullable
+              as List<dynamic>?,
+      name: freezed == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
+      won: freezed == won
+          ? _value.won
+          : won // ignore: cast_nullable_to_non_nullable
+              as int?,
+      lost: freezed == lost
+          ? _value.lost
+          : lost // ignore: cast_nullable_to_non_nullable
+              as int?,
+      pending: freezed == pending
+          ? _value.pending
+          : pending // ignore: cast_nullable_to_non_nullable
+              as int?,
+      total: freezed == total
+          ? _value.total
+          : total // ignore: cast_nullable_to_non_nullable
+              as int?,
+      profile: freezed == profile
+          ? _value.profile
+          : profile // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -696,8 +1221,50 @@ class _$SalesModelImpl implements _SalesModel {
       @JsonKey(name: 'created_by') this.createdBy,
       this.quote,
       @JsonKey(name: 'job_card') this.jobCard,
-      @JsonKey(name: 'job_comments') final List<dynamic>? jobComments})
-      : _jobComments = jobComments;
+      @JsonKey(name: 'job_comments') final List<dynamic>? jobComments,
+      @JsonKey(name: 'won_lose_status') this.wonLoseStatus,
+      @JsonKey(name: 'schedule_id') this.scheduleId,
+      @JsonKey(name: 'file_list') final List<dynamic>? fileList,
+      @JsonKey(name: 'client_email') this.clientEmail,
+      @JsonKey(name: 'sale_person') this.salePerson,
+      @JsonKey(name: 'contact_number') this.contactNumber,
+      this.customer,
+      @JsonKey(name: 'won_reject_date') this.wonRejectDate,
+      @JsonKey(name: 'parent_quote_status') this.parentQuoteStatus,
+      @JsonKey(name: 'mail_cc') final List<dynamic>? mailCc,
+      this.company,
+      this.template,
+      @JsonKey(name: 'template_name') this.templateName,
+      @JsonKey(name: 'auto_create') this.autoCreate,
+      this.url,
+      @JsonKey(name: 'invoice_amt') this.invoiceAmt,
+      @JsonKey(name: 'company_name') this.companyName,
+      @JsonKey(name: 'mail_subject') this.mailSubject,
+      @JsonKey(name: 'mail_body') this.mailBody,
+      @JsonKey(name: 'safety_data') this.safetyData,
+      @JsonKey(name: 'safety_data_html_send') this.safetyDataHtmlSend,
+      @JsonKey(name: 'sales_team_review') this.salesTeamReview,
+      @JsonKey(name: 'email_sending_option') this.emailSendingOption,
+      @JsonKey(name: 'is_quote_through_recurring') this.isQuoteThroughRecurring,
+      @JsonKey(name: 'recurring_status') this.recurringStatus,
+      @JsonKey(name: 'parent_quote_id') this.parentQuoteId,
+      @JsonKey(name: 'scope_of_work_type') this.scopeOfWorkType,
+      @JsonKey(name: 'sales_approve_date_time') this.salesApproveDateTime,
+      @JsonKey(name: 'quote_type') this.quoteType,
+      @JsonKey(name: 'converted_to_recurring_quote_id')
+      this.convertedToRecurringQuoteId,
+      this.employee,
+      @JsonKey(name: 'mail_bcc') final List<dynamic>? mailBcc,
+      this.name,
+      this.won,
+      this.lost,
+      this.pending,
+      this.total,
+      this.profile})
+      : _jobComments = jobComments,
+        _fileList = fileList,
+        _mailCc = mailCc,
+        _mailBcc = mailBcc;
 
   factory _$SalesModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$SalesModelImplFromJson(json);
@@ -751,7 +1318,7 @@ class _$SalesModelImpl implements _SalesModel {
   final String? jobCardCode;
   @override
   @JsonKey(name: 'created_date_time')
-  final String? createdDateTime;
+  final DateTime? createdDateTime;
   @override
   @JsonKey(name: 'job_card_keys')
   final JobCardKeys? jobCardKeys;
@@ -774,7 +1341,7 @@ class _$SalesModelImpl implements _SalesModel {
   final String? status;
   @override
   @JsonKey(name: 'schedule_status')
-  final bool? scheduleStatus;
+  final dynamic scheduleStatus;
   @override
   @JsonKey(name: 'job_type')
   final String? jobType;
@@ -800,10 +1367,10 @@ class _$SalesModelImpl implements _SalesModel {
   final String? jobCardType;
   @override
   @JsonKey(name: 'recurring_date')
-  final dynamic recurringDate;
+  final String? recurringDate;
   @override
   @JsonKey(name: 'created_by')
-  final int? createdBy;
+  final String? createdBy;
   @override
   final int? quote;
   @override
@@ -821,8 +1388,136 @@ class _$SalesModelImpl implements _SalesModel {
   }
 
   @override
+  @JsonKey(name: 'won_lose_status')
+  final String? wonLoseStatus;
+  @override
+  @JsonKey(name: 'schedule_id')
+  final dynamic scheduleId;
+  final List<dynamic>? _fileList;
+  @override
+  @JsonKey(name: 'file_list')
+  List<dynamic>? get fileList {
+    final value = _fileList;
+    if (value == null) return null;
+    if (_fileList is EqualUnmodifiableListView) return _fileList;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  @override
+  @JsonKey(name: 'client_email')
+  final String? clientEmail;
+  @override
+  @JsonKey(name: 'sale_person')
+  final String? salePerson;
+  @override
+  @JsonKey(name: 'contact_number')
+  final String? contactNumber;
+  @override
+  final String? customer;
+  @override
+  @JsonKey(name: 'won_reject_date')
+  final String? wonRejectDate;
+  @override
+  @JsonKey(name: 'parent_quote_status')
+  final String? parentQuoteStatus;
+  final List<dynamic>? _mailCc;
+  @override
+  @JsonKey(name: 'mail_cc')
+  List<dynamic>? get mailCc {
+    final value = _mailCc;
+    if (value == null) return null;
+    if (_mailCc is EqualUnmodifiableListView) return _mailCc;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  @override
+  final dynamic company;
+  @override
+  final String? template;
+  @override
+  @JsonKey(name: 'template_name')
+  final dynamic templateName;
+  @override
+  @JsonKey(name: 'auto_create')
+  final int? autoCreate;
+  @override
+  final String? url;
+  @override
+  @JsonKey(name: 'invoice_amt')
+  final String? invoiceAmt;
+  @override
+  @JsonKey(name: 'company_name')
+  final String? companyName;
+  @override
+  @JsonKey(name: 'mail_subject')
+  final String? mailSubject;
+  @override
+  @JsonKey(name: 'mail_body')
+  final String? mailBody;
+  @override
+  @JsonKey(name: 'safety_data')
+  final dynamic safetyData;
+  @override
+  @JsonKey(name: 'safety_data_html_send')
+  final dynamic safetyDataHtmlSend;
+  @override
+  @JsonKey(name: 'sales_team_review')
+  final bool? salesTeamReview;
+  @override
+  @JsonKey(name: 'email_sending_option')
+  final bool? emailSendingOption;
+  @override
+  @JsonKey(name: 'is_quote_through_recurring')
+  final bool? isQuoteThroughRecurring;
+  @override
+  @JsonKey(name: 'recurring_status')
+  final String? recurringStatus;
+  @override
+  @JsonKey(name: 'parent_quote_id')
+  final dynamic parentQuoteId;
+  @override
+  @JsonKey(name: 'scope_of_work_type')
+  final String? scopeOfWorkType;
+  @override
+  @JsonKey(name: 'sales_approve_date_time')
+  final dynamic salesApproveDateTime;
+  @override
+  @JsonKey(name: 'quote_type')
+  final String? quoteType;
+  @override
+  @JsonKey(name: 'converted_to_recurring_quote_id')
+  final dynamic convertedToRecurringQuoteId;
+  @override
+  final int? employee;
+  final List<dynamic>? _mailBcc;
+  @override
+  @JsonKey(name: 'mail_bcc')
+  List<dynamic>? get mailBcc {
+    final value = _mailBcc;
+    if (value == null) return null;
+    if (_mailBcc is EqualUnmodifiableListView) return _mailBcc;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  @override
+  final String? name;
+  @override
+  final int? won;
+  @override
+  final int? lost;
+  @override
+  final int? pending;
+  @override
+  final int? total;
+  @override
+  final String? profile;
+
+  @override
   String toString() {
-    return 'SalesModel(id: $id, client: $client, isMockJob: $isMockJob, jobCode: $jobCode, quotedBy: $quotedBy, clientId: $clientId, clientName: $clientName, clientType: $clientType, paidStatus: $paidStatus, date: $date, jobCardId: $jobCardId, nextService2: $nextService2, frequency: $frequency, wasteTypeStr: $wasteTypeStr, typeOfWasteStrProfileName: $typeOfWasteStrProfileName, salesApproveDate: $salesApproveDate, jobCardCode: $jobCardCode, createdDateTime: $createdDateTime, jobCardKeys: $jobCardKeys, deletedStatus: $deletedStatus, tabType: $tabType, uuid: $uuid, amount: $amount, paidAmount: $paidAmount, reoccurring: $reoccurring, status: $status, scheduleStatus: $scheduleStatus, jobType: $jobType, readyForSchedule: $readyForSchedule, isJobThroughReccuuring: $isJobThroughReccuuring, parentJobId: $parentJobId, editedDateTime: $editedDateTime, rescheduled: $rescheduled, activeStatus: $activeStatus, jobCardType: $jobCardType, recurringDate: $recurringDate, createdBy: $createdBy, quote: $quote, jobCard: $jobCard, jobComments: $jobComments)';
+    return 'SalesModel(id: $id, client: $client, isMockJob: $isMockJob, jobCode: $jobCode, quotedBy: $quotedBy, clientId: $clientId, clientName: $clientName, clientType: $clientType, paidStatus: $paidStatus, date: $date, jobCardId: $jobCardId, nextService2: $nextService2, frequency: $frequency, wasteTypeStr: $wasteTypeStr, typeOfWasteStrProfileName: $typeOfWasteStrProfileName, salesApproveDate: $salesApproveDate, jobCardCode: $jobCardCode, createdDateTime: $createdDateTime, jobCardKeys: $jobCardKeys, deletedStatus: $deletedStatus, tabType: $tabType, uuid: $uuid, amount: $amount, paidAmount: $paidAmount, reoccurring: $reoccurring, status: $status, scheduleStatus: $scheduleStatus, jobType: $jobType, readyForSchedule: $readyForSchedule, isJobThroughReccuuring: $isJobThroughReccuuring, parentJobId: $parentJobId, editedDateTime: $editedDateTime, rescheduled: $rescheduled, activeStatus: $activeStatus, jobCardType: $jobCardType, recurringDate: $recurringDate, createdBy: $createdBy, quote: $quote, jobCard: $jobCard, jobComments: $jobComments, wonLoseStatus: $wonLoseStatus, scheduleId: $scheduleId, fileList: $fileList, clientEmail: $clientEmail, salePerson: $salePerson, contactNumber: $contactNumber, customer: $customer, wonRejectDate: $wonRejectDate, parentQuoteStatus: $parentQuoteStatus, mailCc: $mailCc, company: $company, template: $template, templateName: $templateName, autoCreate: $autoCreate, url: $url, invoiceAmt: $invoiceAmt, companyName: $companyName, mailSubject: $mailSubject, mailBody: $mailBody, safetyData: $safetyData, safetyDataHtmlSend: $safetyDataHtmlSend, salesTeamReview: $salesTeamReview, emailSendingOption: $emailSendingOption, isQuoteThroughRecurring: $isQuoteThroughRecurring, recurringStatus: $recurringStatus, parentQuoteId: $parentQuoteId, scopeOfWorkType: $scopeOfWorkType, salesApproveDateTime: $salesApproveDateTime, quoteType: $quoteType, convertedToRecurringQuoteId: $convertedToRecurringQuoteId, employee: $employee, mailBcc: $mailBcc, name: $name, won: $won, lost: $lost, pending: $pending, total: $total, profile: $profile)';
   }
 
   @override
@@ -873,8 +1568,8 @@ class _$SalesModelImpl implements _SalesModel {
             (identical(other.reoccurring, reoccurring) ||
                 other.reoccurring == reoccurring) &&
             (identical(other.status, status) || other.status == status) &&
-            (identical(other.scheduleStatus, scheduleStatus) ||
-                other.scheduleStatus == scheduleStatus) &&
+            const DeepCollectionEquality()
+                .equals(other.scheduleStatus, scheduleStatus) &&
             (identical(other.jobType, jobType) || other.jobType == jobType) &&
             (identical(other.readyForSchedule, readyForSchedule) ||
                 other.readyForSchedule == readyForSchedule) &&
@@ -890,14 +1585,66 @@ class _$SalesModelImpl implements _SalesModel {
                 other.activeStatus == activeStatus) &&
             (identical(other.jobCardType, jobCardType) ||
                 other.jobCardType == jobCardType) &&
-            const DeepCollectionEquality()
-                .equals(other.recurringDate, recurringDate) &&
+            (identical(other.recurringDate, recurringDate) ||
+                other.recurringDate == recurringDate) &&
             (identical(other.createdBy, createdBy) ||
                 other.createdBy == createdBy) &&
             (identical(other.quote, quote) || other.quote == quote) &&
             (identical(other.jobCard, jobCard) || other.jobCard == jobCard) &&
             const DeepCollectionEquality()
-                .equals(other._jobComments, _jobComments));
+                .equals(other._jobComments, _jobComments) &&
+            (identical(other.wonLoseStatus, wonLoseStatus) ||
+                other.wonLoseStatus == wonLoseStatus) &&
+            const DeepCollectionEquality()
+                .equals(other.scheduleId, scheduleId) &&
+            const DeepCollectionEquality().equals(other._fileList, _fileList) &&
+            (identical(other.clientEmail, clientEmail) ||
+                other.clientEmail == clientEmail) &&
+            (identical(other.salePerson, salePerson) ||
+                other.salePerson == salePerson) &&
+            (identical(other.contactNumber, contactNumber) ||
+                other.contactNumber == contactNumber) &&
+            (identical(other.customer, customer) ||
+                other.customer == customer) &&
+            (identical(other.wonRejectDate, wonRejectDate) ||
+                other.wonRejectDate == wonRejectDate) &&
+            (identical(other.parentQuoteStatus, parentQuoteStatus) ||
+                other.parentQuoteStatus == parentQuoteStatus) &&
+            const DeepCollectionEquality().equals(other._mailCc, _mailCc) &&
+            const DeepCollectionEquality().equals(other.company, company) &&
+            (identical(other.template, template) ||
+                other.template == template) &&
+            const DeepCollectionEquality()
+                .equals(other.templateName, templateName) &&
+            (identical(other.autoCreate, autoCreate) ||
+                other.autoCreate == autoCreate) &&
+            (identical(other.url, url) || other.url == url) &&
+            (identical(other.invoiceAmt, invoiceAmt) ||
+                other.invoiceAmt == invoiceAmt) &&
+            (identical(other.companyName, companyName) ||
+                other.companyName == companyName) &&
+            (identical(other.mailSubject, mailSubject) ||
+                other.mailSubject == mailSubject) &&
+            (identical(other.mailBody, mailBody) || other.mailBody == mailBody) &&
+            const DeepCollectionEquality().equals(other.safetyData, safetyData) &&
+            const DeepCollectionEquality().equals(other.safetyDataHtmlSend, safetyDataHtmlSend) &&
+            (identical(other.salesTeamReview, salesTeamReview) || other.salesTeamReview == salesTeamReview) &&
+            (identical(other.emailSendingOption, emailSendingOption) || other.emailSendingOption == emailSendingOption) &&
+            (identical(other.isQuoteThroughRecurring, isQuoteThroughRecurring) || other.isQuoteThroughRecurring == isQuoteThroughRecurring) &&
+            (identical(other.recurringStatus, recurringStatus) || other.recurringStatus == recurringStatus) &&
+            const DeepCollectionEquality().equals(other.parentQuoteId, parentQuoteId) &&
+            (identical(other.scopeOfWorkType, scopeOfWorkType) || other.scopeOfWorkType == scopeOfWorkType) &&
+            const DeepCollectionEquality().equals(other.salesApproveDateTime, salesApproveDateTime) &&
+            (identical(other.quoteType, quoteType) || other.quoteType == quoteType) &&
+            const DeepCollectionEquality().equals(other.convertedToRecurringQuoteId, convertedToRecurringQuoteId) &&
+            (identical(other.employee, employee) || other.employee == employee) &&
+            const DeepCollectionEquality().equals(other._mailBcc, _mailBcc) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.won, won) || other.won == won) &&
+            (identical(other.lost, lost) || other.lost == lost) &&
+            (identical(other.pending, pending) || other.pending == pending) &&
+            (identical(other.total, total) || other.total == total) &&
+            (identical(other.profile, profile) || other.profile == profile));
   }
 
   @JsonKey(ignore: true)
@@ -930,7 +1677,7 @@ class _$SalesModelImpl implements _SalesModel {
         paidAmount,
         reoccurring,
         status,
-        scheduleStatus,
+        const DeepCollectionEquality().hash(scheduleStatus),
         jobType,
         readyForSchedule,
         isJobThroughReccuuring,
@@ -939,11 +1686,49 @@ class _$SalesModelImpl implements _SalesModel {
         rescheduled,
         activeStatus,
         jobCardType,
-        const DeepCollectionEquality().hash(recurringDate),
+        recurringDate,
         createdBy,
         quote,
         jobCard,
-        const DeepCollectionEquality().hash(_jobComments)
+        const DeepCollectionEquality().hash(_jobComments),
+        wonLoseStatus,
+        const DeepCollectionEquality().hash(scheduleId),
+        const DeepCollectionEquality().hash(_fileList),
+        clientEmail,
+        salePerson,
+        contactNumber,
+        customer,
+        wonRejectDate,
+        parentQuoteStatus,
+        const DeepCollectionEquality().hash(_mailCc),
+        const DeepCollectionEquality().hash(company),
+        template,
+        const DeepCollectionEquality().hash(templateName),
+        autoCreate,
+        url,
+        invoiceAmt,
+        companyName,
+        mailSubject,
+        mailBody,
+        const DeepCollectionEquality().hash(safetyData),
+        const DeepCollectionEquality().hash(safetyDataHtmlSend),
+        salesTeamReview,
+        emailSendingOption,
+        isQuoteThroughRecurring,
+        recurringStatus,
+        const DeepCollectionEquality().hash(parentQuoteId),
+        scopeOfWorkType,
+        const DeepCollectionEquality().hash(salesApproveDateTime),
+        quoteType,
+        const DeepCollectionEquality().hash(convertedToRecurringQuoteId),
+        employee,
+        const DeepCollectionEquality().hash(_mailBcc),
+        name,
+        won,
+        lost,
+        pending,
+        total,
+        profile
       ]);
 
   @JsonKey(ignore: true)
@@ -962,49 +1747,89 @@ class _$SalesModelImpl implements _SalesModel {
 
 abstract class _SalesModel implements SalesModel {
   factory _SalesModel(
-          {final int? id,
-          final int? client,
-          @JsonKey(name: 'is_mock_job') final bool? isMockJob,
-          @JsonKey(name: 'job_code') final String? jobCode,
-          @JsonKey(name: 'quoted_by') final String? quotedBy,
-          @JsonKey(name: 'client_id') final dynamic clientId,
-          @JsonKey(name: 'client_name') final String? clientName,
-          @JsonKey(name: 'client_type') final String? clientType,
-          @JsonKey(name: 'paid_status') final String? paidStatus,
-          final String? date,
-          @JsonKey(name: 'job_card_id') final int? jobCardId,
-          @JsonKey(name: 'next_service_2') final dynamic nextService2,
-          final String? frequency,
-          @JsonKey(name: 'waste_type_str') final String? wasteTypeStr,
-          @JsonKey(name: 'type_of_waste_str_profile_name')
-          final dynamic typeOfWasteStrProfileName,
-          @JsonKey(name: 'sales_approve_date') final String? salesApproveDate,
-          @JsonKey(name: 'job_card_code') final String? jobCardCode,
-          @JsonKey(name: 'created_date_time') final String? createdDateTime,
-          @JsonKey(name: 'job_card_keys') final JobCardKeys? jobCardKeys,
-          @JsonKey(name: 'deleted_status') final bool? deletedStatus,
-          @JsonKey(name: 'tab_type') final String? tabType,
-          final String? uuid,
-          final String? amount,
-          @JsonKey(name: 'paid_amount') final String? paidAmount,
-          final bool? reoccurring,
-          final String? status,
-          @JsonKey(name: 'schedule_status') final bool? scheduleStatus,
-          @JsonKey(name: 'job_type') final String? jobType,
-          @JsonKey(name: 'ready_for_schedule') final bool? readyForSchedule,
-          @JsonKey(name: 'is_job_through_reccuuring')
-          final bool? isJobThroughReccuuring,
-          @JsonKey(name: 'parent_job_id') final dynamic parentJobId,
-          @JsonKey(name: 'edited_date_time') final DateTime? editedDateTime,
-          final bool? rescheduled,
-          @JsonKey(name: 'active_status') final bool? activeStatus,
-          @JsonKey(name: 'job_card_type') final String? jobCardType,
-          @JsonKey(name: 'recurring_date') final dynamic recurringDate,
-          @JsonKey(name: 'created_by') final int? createdBy,
-          final int? quote,
-          @JsonKey(name: 'job_card') final int? jobCard,
-          @JsonKey(name: 'job_comments') final List<dynamic>? jobComments}) =
-      _$SalesModelImpl;
+      {final int? id,
+      final int? client,
+      @JsonKey(name: 'is_mock_job') final bool? isMockJob,
+      @JsonKey(name: 'job_code') final String? jobCode,
+      @JsonKey(name: 'quoted_by') final String? quotedBy,
+      @JsonKey(name: 'client_id') final dynamic clientId,
+      @JsonKey(name: 'client_name') final String? clientName,
+      @JsonKey(name: 'client_type') final String? clientType,
+      @JsonKey(name: 'paid_status') final String? paidStatus,
+      final String? date,
+      @JsonKey(name: 'job_card_id') final int? jobCardId,
+      @JsonKey(name: 'next_service_2') final dynamic nextService2,
+      final String? frequency,
+      @JsonKey(name: 'waste_type_str') final String? wasteTypeStr,
+      @JsonKey(name: 'type_of_waste_str_profile_name')
+      final dynamic typeOfWasteStrProfileName,
+      @JsonKey(name: 'sales_approve_date') final String? salesApproveDate,
+      @JsonKey(name: 'job_card_code') final String? jobCardCode,
+      @JsonKey(name: 'created_date_time') final DateTime? createdDateTime,
+      @JsonKey(name: 'job_card_keys') final JobCardKeys? jobCardKeys,
+      @JsonKey(name: 'deleted_status') final bool? deletedStatus,
+      @JsonKey(name: 'tab_type') final String? tabType,
+      final String? uuid,
+      final String? amount,
+      @JsonKey(name: 'paid_amount') final String? paidAmount,
+      final bool? reoccurring,
+      final String? status,
+      @JsonKey(name: 'schedule_status') final dynamic scheduleStatus,
+      @JsonKey(name: 'job_type') final String? jobType,
+      @JsonKey(name: 'ready_for_schedule') final bool? readyForSchedule,
+      @JsonKey(name: 'is_job_through_reccuuring')
+      final bool? isJobThroughReccuuring,
+      @JsonKey(name: 'parent_job_id') final dynamic parentJobId,
+      @JsonKey(name: 'edited_date_time') final DateTime? editedDateTime,
+      final bool? rescheduled,
+      @JsonKey(name: 'active_status') final bool? activeStatus,
+      @JsonKey(name: 'job_card_type') final String? jobCardType,
+      @JsonKey(name: 'recurring_date') final String? recurringDate,
+      @JsonKey(name: 'created_by') final String? createdBy,
+      final int? quote,
+      @JsonKey(name: 'job_card') final int? jobCard,
+      @JsonKey(name: 'job_comments') final List<dynamic>? jobComments,
+      @JsonKey(name: 'won_lose_status') final String? wonLoseStatus,
+      @JsonKey(name: 'schedule_id') final dynamic scheduleId,
+      @JsonKey(name: 'file_list') final List<dynamic>? fileList,
+      @JsonKey(name: 'client_email') final String? clientEmail,
+      @JsonKey(name: 'sale_person') final String? salePerson,
+      @JsonKey(name: 'contact_number') final String? contactNumber,
+      final String? customer,
+      @JsonKey(name: 'won_reject_date') final String? wonRejectDate,
+      @JsonKey(name: 'parent_quote_status') final String? parentQuoteStatus,
+      @JsonKey(name: 'mail_cc') final List<dynamic>? mailCc,
+      final dynamic company,
+      final String? template,
+      @JsonKey(name: 'template_name') final dynamic templateName,
+      @JsonKey(name: 'auto_create') final int? autoCreate,
+      final String? url,
+      @JsonKey(name: 'invoice_amt') final String? invoiceAmt,
+      @JsonKey(name: 'company_name') final String? companyName,
+      @JsonKey(name: 'mail_subject') final String? mailSubject,
+      @JsonKey(name: 'mail_body') final String? mailBody,
+      @JsonKey(name: 'safety_data') final dynamic safetyData,
+      @JsonKey(name: 'safety_data_html_send') final dynamic safetyDataHtmlSend,
+      @JsonKey(name: 'sales_team_review') final bool? salesTeamReview,
+      @JsonKey(name: 'email_sending_option') final bool? emailSendingOption,
+      @JsonKey(name: 'is_quote_through_recurring')
+      final bool? isQuoteThroughRecurring,
+      @JsonKey(name: 'recurring_status') final String? recurringStatus,
+      @JsonKey(name: 'parent_quote_id') final dynamic parentQuoteId,
+      @JsonKey(name: 'scope_of_work_type') final String? scopeOfWorkType,
+      @JsonKey(name: 'sales_approve_date_time')
+      final dynamic salesApproveDateTime,
+      @JsonKey(name: 'quote_type') final String? quoteType,
+      @JsonKey(name: 'converted_to_recurring_quote_id')
+      final dynamic convertedToRecurringQuoteId,
+      final int? employee,
+      @JsonKey(name: 'mail_bcc') final List<dynamic>? mailBcc,
+      final String? name,
+      final int? won,
+      final int? lost,
+      final int? pending,
+      final int? total,
+      final String? profile}) = _$SalesModelImpl;
 
   factory _SalesModel.fromJson(Map<String, dynamic> json) =
       _$SalesModelImpl.fromJson;
@@ -1058,7 +1883,7 @@ abstract class _SalesModel implements SalesModel {
   String? get jobCardCode;
   @override
   @JsonKey(name: 'created_date_time')
-  String? get createdDateTime;
+  DateTime? get createdDateTime;
   @override
   @JsonKey(name: 'job_card_keys')
   JobCardKeys? get jobCardKeys;
@@ -1081,7 +1906,7 @@ abstract class _SalesModel implements SalesModel {
   String? get status;
   @override
   @JsonKey(name: 'schedule_status')
-  bool? get scheduleStatus;
+  dynamic get scheduleStatus;
   @override
   @JsonKey(name: 'job_type')
   String? get jobType;
@@ -1107,10 +1932,10 @@ abstract class _SalesModel implements SalesModel {
   String? get jobCardType;
   @override
   @JsonKey(name: 'recurring_date')
-  dynamic get recurringDate;
+  String? get recurringDate;
   @override
   @JsonKey(name: 'created_by')
-  int? get createdBy;
+  String? get createdBy;
   @override
   int? get quote;
   @override
@@ -1119,6 +1944,109 @@ abstract class _SalesModel implements SalesModel {
   @override
   @JsonKey(name: 'job_comments')
   List<dynamic>? get jobComments;
+  @override
+  @JsonKey(name: 'won_lose_status')
+  String? get wonLoseStatus;
+  @override
+  @JsonKey(name: 'schedule_id')
+  dynamic get scheduleId;
+  @override
+  @JsonKey(name: 'file_list')
+  List<dynamic>? get fileList;
+  @override
+  @JsonKey(name: 'client_email')
+  String? get clientEmail;
+  @override
+  @JsonKey(name: 'sale_person')
+  String? get salePerson;
+  @override
+  @JsonKey(name: 'contact_number')
+  String? get contactNumber;
+  @override
+  String? get customer;
+  @override
+  @JsonKey(name: 'won_reject_date')
+  String? get wonRejectDate;
+  @override
+  @JsonKey(name: 'parent_quote_status')
+  String? get parentQuoteStatus;
+  @override
+  @JsonKey(name: 'mail_cc')
+  List<dynamic>? get mailCc;
+  @override
+  dynamic get company;
+  @override
+  String? get template;
+  @override
+  @JsonKey(name: 'template_name')
+  dynamic get templateName;
+  @override
+  @JsonKey(name: 'auto_create')
+  int? get autoCreate;
+  @override
+  String? get url;
+  @override
+  @JsonKey(name: 'invoice_amt')
+  String? get invoiceAmt;
+  @override
+  @JsonKey(name: 'company_name')
+  String? get companyName;
+  @override
+  @JsonKey(name: 'mail_subject')
+  String? get mailSubject;
+  @override
+  @JsonKey(name: 'mail_body')
+  String? get mailBody;
+  @override
+  @JsonKey(name: 'safety_data')
+  dynamic get safetyData;
+  @override
+  @JsonKey(name: 'safety_data_html_send')
+  dynamic get safetyDataHtmlSend;
+  @override
+  @JsonKey(name: 'sales_team_review')
+  bool? get salesTeamReview;
+  @override
+  @JsonKey(name: 'email_sending_option')
+  bool? get emailSendingOption;
+  @override
+  @JsonKey(name: 'is_quote_through_recurring')
+  bool? get isQuoteThroughRecurring;
+  @override
+  @JsonKey(name: 'recurring_status')
+  String? get recurringStatus;
+  @override
+  @JsonKey(name: 'parent_quote_id')
+  dynamic get parentQuoteId;
+  @override
+  @JsonKey(name: 'scope_of_work_type')
+  String? get scopeOfWorkType;
+  @override
+  @JsonKey(name: 'sales_approve_date_time')
+  dynamic get salesApproveDateTime;
+  @override
+  @JsonKey(name: 'quote_type')
+  String? get quoteType;
+  @override
+  @JsonKey(name: 'converted_to_recurring_quote_id')
+  dynamic get convertedToRecurringQuoteId;
+  @override
+  int? get employee;
+  @override
+  @JsonKey(name: 'mail_bcc')
+  List<dynamic>? get mailBcc;
+  @override
+  String? get name;
+  @override
+  int? get won;
+  @override
+  int? get lost;
+  @override
+  int? get pending;
+  @override
+  int? get total;
+  @override
+  String? get profile;
   @override
   @JsonKey(ignore: true)
   _$$SalesModelImplCopyWith<_$SalesModelImpl> get copyWith =>

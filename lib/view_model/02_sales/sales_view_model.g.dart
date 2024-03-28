@@ -13,13 +13,13 @@ mixin _$SalesViewModel on SalesViewModelBase, Store {
       Atom(name: 'SalesViewModelBase.joblistResponse', context: context);
 
   @override
-  ApiResponse<List<SalesJobListstRegResModel>> get joblistResponse {
+  ApiResponse<List<SalesModel>> get joblistResponse {
     _$joblistResponseAtom.reportRead();
     return super.joblistResponse;
   }
 
   @override
-  set joblistResponse(ApiResponse<List<SalesJobListstRegResModel>> value) {
+  set joblistResponse(ApiResponse<List<SalesModel>> value) {
     _$joblistResponseAtom.reportWrite(value, super.joblistResponse, () {
       super.joblistResponse = value;
     });
@@ -29,13 +29,13 @@ mixin _$SalesViewModel on SalesViewModelBase, Store {
       Atom(name: 'SalesViewModelBase.salespageResponse', context: context);
 
   @override
-  ApiResponse<List<SalesListResModel>> get salespageResponse {
+  ApiResponse<List<SalesModel>> get salespageResponse {
     _$salespageResponseAtom.reportRead();
     return super.salespageResponse;
   }
 
   @override
-  set salespageResponse(ApiResponse<List<SalesListResModel>> value) {
+  set salespageResponse(ApiResponse<List<SalesModel>> value) {
     _$salespageResponseAtom.reportWrite(value, super.salespageResponse, () {
       super.salespageResponse = value;
     });
@@ -45,13 +45,13 @@ mixin _$SalesViewModel on SalesViewModelBase, Store {
       Atom(name: 'SalesViewModelBase.quoteRegResponse', context: context);
 
   @override
-  ApiResponse<List<QuoteRegResModel>> get quoteRegResponse {
+  ApiResponse<List<SalesModel>> get quoteRegResponse {
     _$quoteRegResponseAtom.reportRead();
     return super.quoteRegResponse;
   }
 
   @override
-  set quoteRegResponse(ApiResponse<List<QuoteRegResModel>> value) {
+  set quoteRegResponse(ApiResponse<List<SalesModel>> value) {
     _$quoteRegResponseAtom.reportWrite(value, super.quoteRegResponse, () {
       super.quoteRegResponse = value;
     });
