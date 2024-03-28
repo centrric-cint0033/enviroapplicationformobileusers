@@ -14,10 +14,12 @@ class SearchField extends StatefulWidget {
 
 class _SearchFieldState extends State<SearchField> {
   late Timer _debounce;
+  late TextEditingController ctr;
 
   @override
   void initState() {
     _debounce = Timer(const Duration(), () {});
+    if (widget.ctr == null) ctr = TextEditingController();
     super.initState();
   }
 
@@ -30,7 +32,7 @@ class _SearchFieldState extends State<SearchField> {
   @override
   Widget build(BuildContext context) {
     return TextField(
-      controller: widget.ctr,
+      controller: widget.ctr ?? ctr,
       onChanged: (value) {
         if (_debounce.isActive) _debounce.cancel();
         _debounce = Timer(const Duration(milliseconds: 200), () {
@@ -53,8 +55,9 @@ class _SearchFieldState extends State<SearchField> {
         contentPadding: const EdgeInsets.only(left: 20.0, right: 10),
         suffix: GestureDetector(
           onTap: () {
-            if (widget.ctr?.text.isNotEmpty == true) {
+            if (widget.ctr?.text.isNotEmpty ?? ctr.text.isNotEmpty) {
               widget.ctr?.clear();
+              ctr.clear();
               if (widget.onChanged != null) widget.onChanged!("");
             }
           },

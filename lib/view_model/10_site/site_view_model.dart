@@ -321,4 +321,28 @@ abstract class SiteViewModelBase with Store {
       },
     );
   }
+
+  @action
+  Future<void> searchSiteFolders({required String key}) async {
+    final response = await siteService.searchSiteFolder(key: key);
+    response.fold(
+      (l) {
+        siteFolderResponse = siteFolderResponse.copyWith(
+          error: l,
+          loading: false,
+        );
+      },
+      (res) {
+        FolderResModel? data = siteFolderResponse.data;
+        FolderListModel? model = data?.folders?.first;
+        siteFolderResponse = siteFolderResponse.copyWith(
+          error: null,
+          loading: false,
+          data: data?.copyWith(
+            folders: [if (model != null) model.copyWith(folders: res)],
+          ),
+        );
+      },
+    );
+  }
 }

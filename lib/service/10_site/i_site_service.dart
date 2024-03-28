@@ -24,4 +24,7 @@ abstract class ISiteService {
   Future<Either<MainFailure, List<SiteResModel>>> searchSites({
     required String key,
   });
+  Future<Either<MainFailure, List<Folder>>> searchSiteFolder({
+    required String key,
+  });
 }

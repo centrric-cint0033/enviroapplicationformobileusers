@@ -11,6 +11,7 @@ import 'widgets/icon_widget.dart';
 import 'widgets/key_value_text_widget.dart';
 import '../../widgets/cmn_title_textwidget.dart';
 import 'widgets/site_folder_list_data_widget.dart';
+import 'widgets/folder_title_and_search_widget.dart';
 import '../11_previous_sale/widgets/previous_sales_widget.dart';
 import '../../model/10_site/folder_res_model/folder_res_model.dart';
 import '../../view_model/11_previous_sale/previous_sale_view_model.dart';
@@ -101,7 +102,7 @@ class SiteDetailScreen extends StatelessWidget {
                       ),
                     ),
                   },
-                  sized0hx10,
+                  const FolderTitleAndSearchWidget(),
                   SiteFolderListWidget(folders: folders),
                   sized0hx10,
                   const PreviouseSalesWidget(),

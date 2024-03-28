@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:enviro_mobile_application/view_model/10_site/site_view_model.dart';
 
 import '../../widgets/cmappbar.dart';
-import '../../widgets/search_field.dart';
 import 'widgets/del_site_list_widget.dart';
 import '../../widgets/cmn_action_icon.dart';
 import 'widgets/temp_site_list_widget.dart';
 import '../../widgets/cmn_leading_icon.dart';
+import 'widgets/site_list_search_widget.dart';
 import 'widgets/permanent_site_list_widget.dart';
 import '../../widgets/cmn_title_textwidget.dart';
+import '../../view_model/10_site/site_view_model.dart';
 
 @RoutePage()
 class SiteListScreen extends StatelessWidget {
@@ -63,19 +63,7 @@ class SiteListScreen extends StatelessWidget {
                 ],
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(10),
-              child: SearchField(
-                ctr: vmSite.searchCtr,
-                hint: "Search Site by Name",
-                onChanged: (String data) {
-                  vmSite.searchSites(
-                    key: data,
-                    type: _getSiteType(selectedTab),
-                  );
-                },
-              ),
-            ),
+            SiteListSearchWidget(selectedTab: selectedTab),
             const Expanded(
               child: TabBarView(
                 children: [
@@ -89,18 +77,5 @@ class SiteListScreen extends StatelessWidget {
         ),
       ),
     );
-  }
-}
-
-SiteType _getSiteType(int tab) {
-  switch (tab) {
-    case 0:
-      return SiteType.permananet;
-    case 1:
-      return SiteType.temporary;
-    case 2:
-      return SiteType.deleted;
-    default:
-      return SiteType.permananet;
   }
 }

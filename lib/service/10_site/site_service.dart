@@ -166,4 +166,31 @@ class SiteService implements ISiteService {
       },
     );
   }
+
+  @override
+  Future<Either<MainFailure, List<Folder>>> searchSiteFolder({
+    required String key,
+  }) async {
+    MultipartRequest request = MultipartRequest(
+        "POST", Uri.parse("$baseUrl${ApiEndPoints.endpointSearchSiteFolder}"));
+    request.fields['key'] = key;
+    request.fields['site'] = "1294";
+    request.fields['folder_id'] = "1";
+    request.fields['search_type'] = "site-individual-private";
+    var response =
+        await getIt<HttpService>().multipartRequest(request: request);
+
+    return response.fold(
+      (l) {
+        (l.values.first);
+        return Left(l.keys.first);
+      },
+      (res) async {
+        var data = jsonDecode(res.body) as List;
+
+        List<Folder> folders = data.map((e) => Folder.fromJson(e)).toList();
+        return Right(folders);
+      },
+    );
+  }
 }
