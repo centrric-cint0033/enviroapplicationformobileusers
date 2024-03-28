@@ -1,4 +1,5 @@
 import 'package:enviro_mobile_application/api_response/api_response.dart';
+import 'package:enviro_mobile_application/model/03_vehicle/vehicle_model/vehicle_model.dart';
 import 'package:enviro_mobile_application/model/truck_page/res_model/truckpage_model.dart';
 import 'package:enviro_mobile_application/service/03_vehicles/vehicle_service.dart';
 
@@ -33,8 +34,8 @@ abstract class VehicleViewModelBase with Store {
   }
 
   @observable
-  ApiResponse<List<CmnvehiclepageModel>> carPageResponse =
-      ApiResponse<List<CmnvehiclepageModel>>();
+  ApiResponse<List<VehicleModel>> carPageResponse =
+      ApiResponse<List<VehicleModel>>();
 
   @action
   Future<void> mastercarfunction({CarActionType? drop}) async {
@@ -59,8 +60,8 @@ abstract class VehicleViewModelBase with Store {
   }
 
   @observable
-  ApiResponse<List<CmnvehiclepageModel>> carPagefuelResponse =
-      ApiResponse<List<CmnvehiclepageModel>>();
+  ApiResponse<List<VehicleModel>> carPagefuelResponse =
+      ApiResponse<List<VehicleModel>>();
 
   @action
   Future<void> fuelsearchfunction({ActionType? searchdrop}) async {
@@ -119,8 +120,8 @@ abstract class VehicleViewModelBase with Store {
   }
 
   @observable
-  ApiResponse<List<CmnvehiclepageModel>> semitrailorPageResponse =
-      ApiResponse<List<CmnvehiclepageModel>>();
+  ApiResponse<List<VehicleModel>> semitrailorPageResponse =
+      ApiResponse<List<VehicleModel>>();
 
   @action
   Future<void> trailorfunction({MasterTruckActionType? semitruckdrop}) async {
@@ -146,8 +147,8 @@ abstract class VehicleViewModelBase with Store {
   }
 
   @observable
-  ApiResponse<List<CmnvehiclepageModel>> semitruckPagefuelResponse =
-      ApiResponse<List<CmnvehiclepageModel>>();
+  ApiResponse<List<VehicleModel>> semitruckPagefuelResponse =
+      ApiResponse<List<VehicleModel>>();
 
   @action
   Future<void> semifueltrucksearchfunction({ActionType? searchsemidrop}) async {
@@ -185,15 +186,14 @@ abstract class VehicleViewModelBase with Store {
   }
 
   @observable
-  ApiResponse<List<CmnvehiclepageModel>> truckPageResponse =
-      ApiResponse<List<CmnvehiclepageModel>>();
+  ApiResponse<List<VehicleModel>> truckPageResponse =
+      ApiResponse<List<VehicleModel>>();
 
   @action
   Future<void> truckPageFunction({ActionType? truckdrop}) async {
     truckPageResponse = truckPageResponse.copyWith(error: null, loading: true);
     sstatus = truckdrop;
     final result = await vehicleService.mastertruckfunction(truckdrop);
-    print(result.toString() + "azee");
     return result.fold(
       (l) {
         truckPageResponse = truckPageResponse.copyWith(
@@ -212,8 +212,8 @@ abstract class VehicleViewModelBase with Store {
   }
 
   @observable
-  ApiResponse<List<CmnvehiclepageModel>> truckPagefuelResponse =
-      ApiResponse<List<CmnvehiclepageModel>>();
+  ApiResponse<List<VehicleModel>> truckPagefuelResponse =
+      ApiResponse<List<VehicleModel>>();
 
   @action
   Future<void> fueltrucksearchfunction(

@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:dartz/dartz.dart';
 import 'package:enviro_mobile_application/constant/base_url.dart';
@@ -9,6 +10,7 @@ import 'package:enviro_mobile_application/utilis/api_endpoints/customprint.dart'
 import 'package:enviro_mobile_application/utilis/httpservice.dart';
 import 'package:enviro_mobile_application/utilis/injection.dart';
 import 'package:enviro_mobile_application/utilis/main_failure.dart';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:injectable/injectable.dart';
 
@@ -24,6 +26,10 @@ abstract class IohsService {
 
   Future<Either<MainFailure, String>> ohsnewsfldrenameservicefunction(
       folderName, id);
+
+  Future<Either<MainFailure, String>> ohsnewsfolderrenamefunction(
+      folderName, id);
+  Future<Either<MainFailure, String>> ohsnewsfolderdeletefunction(folders, id);
 }
 
 @LazySingleton(as: IohsService)
@@ -179,6 +185,57 @@ class OhsService implements IohsService {
         var data = jsonDecode(res.body);
 
         return Right('success');
+      },
+    );
+  }
+
+  @override
+  Future<Either<MainFailure, String>> ohsnewsfolderrenamefunction(
+      folderName, id) async {
+    debugPrint("Folder name is:: $folderName");
+    String apiUrl = '${ApiEndPoints.endpointnewsfldrrename}/$id/';
+    debugPrint("end point name is:: $baseUrl$apiUrl");
+
+    MultipartRequest request =
+        MultipartRequest("PUT", Uri.parse("$baseUrl$apiUrl"));
+
+    request.fields['name'] = folderName;
+    print(folderName);
+
+    var response =
+        await getIt<HttpService>().multipartRequest(request: request);
+
+    return response.fold(
+      (l) {
+        // Show Error
+        (l.values.first);
+        return Left(l.keys.first);
+      },
+      (res) async {
+        var data = jsonDecode(res.body);
+        print('Response body: $data');
+        return Right('success');
+      },
+    );
+  }
+
+  @override
+  Future<Either<MainFailure, String>> ohsnewsfolderdeletefunction(
+      folders, id) async {
+    var response = await getIt<HttpService>().request(
+        authenticated: true,
+        method: HttpMethod.delete,
+        apiUrl: '${ApiEndPoints.endpointnewsfldrdlte}/$id/');
+
+    return response.fold(
+      (l) {
+        (l.values.first);
+        return Left(l.keys.first);
+      },
+      (res) async {
+        var data = jsonDecode(res.body);
+
+        return const Right('success');
       },
     );
   }

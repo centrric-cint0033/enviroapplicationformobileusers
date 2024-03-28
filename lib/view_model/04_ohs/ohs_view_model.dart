@@ -1,7 +1,8 @@
+import 'dart:developer';
+
 import 'package:enviro_mobile_application/api_response/api_response.dart';
 import 'package:enviro_mobile_application/model/04_ohs/oh&s_resp_model.dart';
 import 'package:enviro_mobile_application/model/04_ohs/oh&snews_fldr_model.dart';
-import 'package:enviro_mobile_application/service/03_vehicles/vehicle_service.dart';
 import 'package:enviro_mobile_application/service/04_ohs/ohs_service.dart';
 import 'package:enviro_mobile_application/utilis/injection.dart';
 import 'package:injectable/injectable.dart';
@@ -73,7 +74,8 @@ abstract class OHSViewModelBase with Store {
           error: null,
           loading: false,
         );
-        // ohsService.ohsnewsfolderviewmodelfunction(id);
+        // ohsService.ohsnewsfolderservicefunction(id);
+        vmOhs.ohsnewsfolderviewmodelfunction(1);
       },
     );
   }
@@ -152,6 +154,98 @@ abstract class OHSViewModelBase with Store {
       },
       (r) {
         notificationpageResponse = notificationpageResponse.copyWith(
+          data: r,
+          error: null,
+          loading: false,
+        );
+      },
+    );
+  }
+
+  @observable
+  ApiResponse<String> renameResponse = ApiResponse<String>();
+
+  @action
+  Future<void> folderrenameviewmodelfunction(String folderName, int id) async {
+    renameResponse = renameResponse.copyWith(error: null, loading: true);
+
+    print(id);
+    print(
+      folderName,
+    );
+    final result =
+        await ohsService.ohsnewsfldrenameservicefunction(folderName, id);
+    return result.fold(
+      (l) {
+        print('Error occurred during folder rename: $l');
+        renameResponse = renameResponse.copyWith(
+          error: l,
+          loading: false,
+        );
+      },
+      (r) {
+        print('Folder rename successful!');
+        renameResponse = renameResponse.copyWith(
+          data: r,
+          error: null,
+          loading: false,
+        );
+        vmOhs.ohsnewsfolderviewmodelfunction(1);
+      },
+    );
+  }
+
+  @observable
+  ApiResponse<String> deleteResponse = ApiResponse<String>();
+
+  @action
+  Future<void> folderdeleteviewmodelfunction(String folders, int id) async {
+    deleteResponse = deleteResponse.copyWith(error: null, loading: true);
+
+    print(id);
+
+    final result = await ohsService.ohsnewsfolderdeletefunction(folders, id);
+    return result.fold(
+      (l) {
+        deleteResponse = deleteResponse.copyWith(
+          error: l,
+          loading: false,
+        );
+      },
+      (r) {
+        print('Folder rename successful!');
+        deleteResponse = deleteResponse.copyWith(
+          data: r,
+          error: null,
+          loading: false,
+        );
+        vmOhs.ohsnewsfolderviewmodelfunction(1);
+      },
+    );
+  }
+
+  @observable
+  ApiResponse<String> deleteinsideResponse = ApiResponse<String>();
+
+  @action
+  Future<void> folderinsidedltefunction(String folders, int id) async {
+    deleteinsideResponse =
+        deleteinsideResponse.copyWith(error: null, loading: true);
+
+    print(id);
+
+    final result = await ohsService.ohsnewsfolderdeletefunction(folders, id);
+    return result.fold(
+      (l) {
+        print('Error occurred during folder rename: $l');
+        deleteinsideResponse = deleteinsideResponse.copyWith(
+          error: l,
+          loading: false,
+        );
+      },
+      (r) {
+        print('Folder rename successful!');
+        deleteinsideResponse = deleteinsideResponse.copyWith(
           data: r,
           error: null,
           loading: false,

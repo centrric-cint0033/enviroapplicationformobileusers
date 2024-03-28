@@ -71,4 +71,5 @@ class ApiEndPoints {
   static const endpointSiteFolders = '/api/v1/drive/site/folder/';
   static const endpointSearchSite = '/api/v1/clients/searchClient/all/waste/';
   static const endpointSearchSiteFolder = '/api/v1/drive/site/search/folder/';
+  static const endpointnewsfldrdlte = '/api/v1/drive/folder/delete';
 }

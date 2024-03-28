@@ -110,7 +110,7 @@ class NewsPageInsidePage extends StatelessWidget {
                         const SizedBox(height: 6.0),
                     itemBuilder: (BuildContext context, int index) {
                       final folderName = subFolders[index].name;
-                      return _buildCard(folderName, context);
+                      return _buildCard(folderName, context, index);
                     },
                   );
                 }
@@ -181,7 +181,7 @@ class NewsPageInsidePage extends StatelessWidget {
     );
   }
 
-  Widget _buildCard(String folderName, BuildContext context) {
+  Widget _buildCard(String folderName, BuildContext context, int id) {
     return Container(
       height: 57,
       width: double.infinity,
@@ -219,9 +219,37 @@ class NewsPageInsidePage extends StatelessWidget {
                   IconButton(
                     icon: const Icon(Icons.delete, color: Colors.black26),
                     onPressed: () {
-                      print('Delete button tapped!');
+                      showDialog(
+                        context:
+                            context, // Assuming you have access to the BuildContext
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: Text("Confirm Deletion"),
+                            content: Text(
+                                "Are you sure you want to delete this item?"),
+                            actions: <Widget>[
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.of(context)
+                                      .pop(); // Close the dialog
+                                },
+                                child: Text("Cancel"),
+                              ),
+                              TextButton(
+                                onPressed: () {
+                                  vmOhs.folderdeleteviewmodelfunction(
+                                      'folders', id);
+                                  Navigator.of(context)
+                                      .pop(); // Close the dialog
+                                },
+                                child: Text("Delete"),
+                              ),
+                            ],
+                          );
+                        },
+                      );
                     },
-                  ),
+                  )
                 ],
               ),
             ],

@@ -29,10 +29,10 @@ class JobListPage extends StatelessWidget {
                         var data = vmSales.joblistResponse.data?[index];
                         return _buildJobCard(
                           date: data?.date ?? "",
-                          clientName: data?.client_name ?? "",
-                          quotedby: data?.quoted_by ?? "",
-                          amount: data?.paid_amount ?? "",
-                          status: data?.paid_status ?? "",
+                          clientName: data?.clientName ?? "",
+                          quotedby: data?.quotedBy ?? "",
+                          amount: data?.paidAmount ?? "",
+                          status: data?.paidStatus ?? "",
                         );
                       },
                     ),

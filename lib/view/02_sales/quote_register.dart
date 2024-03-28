@@ -28,11 +28,11 @@ class QuoteRegisterpage extends StatelessWidget {
                         var data = vmSales.quoteRegResponse.data?[index];
                         return _buildJobCard(
                           id: data?.id ?? 0,
-                          won_lose_status: data?.won_lose_status ?? "",
-                          created_by: data?.created_by ?? "",
-                          client_type: data?.client_type ?? "",
-                          schedule_id: data?.schedule_id,
-                          client_email: data?.client_email ?? "",
+                          won_lose_status: data?.wonLoseStatus ?? "",
+                          created_by: data?.createdBy ?? "",
+                          client_type: data?.clientType ?? "",
+                          schedule_id: data?.scheduleId,
+                          client_email: data?.clientEmail ?? "",
                         );
                       },
                     ),

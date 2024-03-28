@@ -5,8 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'utilis/Appthemes.dart';
+import 'package:enviro_mobile_application/Routepage/securestorage.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   configureLocalDependancies();
 
   runApp(MyApp());

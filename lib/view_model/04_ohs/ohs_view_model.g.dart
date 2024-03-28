@@ -93,6 +93,55 @@ mixin _$OHSViewModel on OHSViewModelBase, Store {
     });
   }
 
+  late final _$renameResponseAtom =
+      Atom(name: 'OHSViewModelBase.renameResponse', context: context);
+
+  @override
+  ApiResponse<String> get renameResponse {
+    _$renameResponseAtom.reportRead();
+    return super.renameResponse;
+  }
+
+  @override
+  set renameResponse(ApiResponse<String> value) {
+    _$renameResponseAtom.reportWrite(value, super.renameResponse, () {
+      super.renameResponse = value;
+    });
+  }
+
+  late final _$deleteResponseAtom =
+      Atom(name: 'OHSViewModelBase.deleteResponse', context: context);
+
+  @override
+  ApiResponse<String> get deleteResponse {
+    _$deleteResponseAtom.reportRead();
+    return super.deleteResponse;
+  }
+
+  @override
+  set deleteResponse(ApiResponse<String> value) {
+    _$deleteResponseAtom.reportWrite(value, super.deleteResponse, () {
+      super.deleteResponse = value;
+    });
+  }
+
+  late final _$deleteinsideResponseAtom =
+      Atom(name: 'OHSViewModelBase.deleteinsideResponse', context: context);
+
+  @override
+  ApiResponse<String> get deleteinsideResponse {
+    _$deleteinsideResponseAtom.reportRead();
+    return super.deleteinsideResponse;
+  }
+
+  @override
+  set deleteinsideResponse(ApiResponse<String> value) {
+    _$deleteinsideResponseAtom.reportWrite(value, super.deleteinsideResponse,
+        () {
+      super.deleteinsideResponse = value;
+    });
+  }
+
   late final _$ohsnewsviewmodelfunctionAsyncAction = AsyncAction(
       'OHSViewModelBase.ohsnewsviewmodelfunction',
       context: context);
@@ -143,6 +192,36 @@ mixin _$OHSViewModel on OHSViewModelBase, Store {
         .run(() => super.ohsnotificationviewmodelfunction());
   }
 
+  late final _$folderrenameviewmodelfunctionAsyncAction = AsyncAction(
+      'OHSViewModelBase.folderrenameviewmodelfunction',
+      context: context);
+
+  @override
+  Future<void> folderrenameviewmodelfunction(String folderName, int id) {
+    return _$folderrenameviewmodelfunctionAsyncAction
+        .run(() => super.folderrenameviewmodelfunction(folderName, id));
+  }
+
+  late final _$folderdeleteviewmodelfunctionAsyncAction = AsyncAction(
+      'OHSViewModelBase.folderdeleteviewmodelfunction',
+      context: context);
+
+  @override
+  Future<void> folderdeleteviewmodelfunction(String folders, int id) {
+    return _$folderdeleteviewmodelfunctionAsyncAction
+        .run(() => super.folderdeleteviewmodelfunction(folders, id));
+  }
+
+  late final _$folderinsidedltefunctionAsyncAction = AsyncAction(
+      'OHSViewModelBase.folderinsidedltefunction',
+      context: context);
+
+  @override
+  Future<void> folderinsidedltefunction(String folders, int id) {
+    return _$folderinsidedltefunctionAsyncAction
+        .run(() => super.folderinsidedltefunction(folders, id));
+  }
+
   @override
   String toString() {
     return '''
@@ -150,7 +229,10 @@ newspageResponse: ${newspageResponse},
 FoldercreationResponse: ${FoldercreationResponse},
 newspagefolderinsideResponse: ${newspagefolderinsideResponse},
 newspagefolderResponse: ${newspagefolderResponse},
-notificationpageResponse: ${notificationpageResponse}
+notificationpageResponse: ${notificationpageResponse},
+renameResponse: ${renameResponse},
+deleteResponse: ${deleteResponse},
+deleteinsideResponse: ${deleteinsideResponse}
     ''';
   }
 }
