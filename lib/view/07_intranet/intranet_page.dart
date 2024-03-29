@@ -8,6 +8,7 @@ import 'package:enviro_mobile_application/view_model/07_intranet/intranet_view_m
 import 'package:enviro_mobile_application/widgets/cmn_action_icon.dart';
 import 'package:enviro_mobile_application/widgets/cmn_leading_icon.dart';
 import 'package:enviro_mobile_application/widgets/cmn_title_textwidget.dart';
+import 'package:enviro_mobile_application/widgets/drawer.dart';
 import 'package:flutter/material.dart';
 
 import 'package:enviro_mobile_application/widgets/cmcustomformfield.dart';
@@ -26,8 +27,9 @@ class IntranetPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(
-        leading: const cmn_leading_icon(),
+      drawer: CmnDrawer(context),
+      appBar: AppBar(
+        // leading: const cmn_leading_icon(),
         title: cmnTitleWidget('Intranet'),
         actions: cmn_action_icon,
       ),

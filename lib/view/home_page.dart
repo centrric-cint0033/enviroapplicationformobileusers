@@ -6,6 +6,7 @@ import 'package:enviro_mobile_application/view_model/03_vehicles/vehicle_view_mo
 import 'package:enviro_mobile_application/view_model/04_ohs/ohs_view_model.dart';
 import 'package:enviro_mobile_application/view_model/07_intranet/intranet_view_model.dart';
 import 'package:enviro_mobile_application/view_model/home_page/home_page_viewmodel.dart';
+import 'package:enviro_mobile_application/widgets/drawer.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -22,9 +23,10 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(
-        leading: const cmn_leading_icon(),
-        title: cmnTitleWidget('HOME'),
+      drawer: CmnDrawer(context),
+      appBar: AppBar(
+        // leading: const cmn_leading_icon(),
+        title: cmnTitleWidget('Home'),
         actions: cmn_action_icon,
       ),
       body: Padding(

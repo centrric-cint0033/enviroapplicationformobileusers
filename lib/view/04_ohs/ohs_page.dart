@@ -4,6 +4,7 @@ import 'package:enviro_mobile_application/widgets/cmappbar.dart';
 import 'package:enviro_mobile_application/widgets/cmn_action_icon.dart';
 import 'package:enviro_mobile_application/widgets/cmn_leading_icon.dart';
 import 'package:enviro_mobile_application/widgets/cmn_title_textwidget.dart';
+import 'package:enviro_mobile_application/widgets/drawer.dart';
 import 'package:enviro_mobile_application/widgets/news_page.dart';
 import 'package:enviro_mobile_application/widgets/notification_page.dart';
 
@@ -22,8 +23,9 @@ class OhsPage extends StatelessWidget {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
-        appBar: CustomAppBar(
-          leading: const cmn_leading_icon(),
+        drawer: CmnDrawer(context),
+        appBar: AppBar(
+          // leading: const cmn_leading_icon(),
           title: cmnTitleWidget('OH&S'),
           actions: cmn_action_icon,
         ),

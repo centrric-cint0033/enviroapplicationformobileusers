@@ -2,6 +2,8 @@ import 'package:auto_route/auto_route.dart';
 import 'package:enviro_mobile_application/model/04_ohs/oh&s_resp_model.dart';
 import 'package:enviro_mobile_application/model/04_ohs/oh&snews_fldr_model.dart';
 import 'package:enviro_mobile_application/view_model/04_ohs/ohs_view_model.dart';
+import 'package:enviro_mobile_application/widgets/cmn_action_icon.dart';
+import 'package:enviro_mobile_application/widgets/cmn_title_textwidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
@@ -16,10 +18,9 @@ class NewsPageInsidePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'Folders',
-          textAlign: TextAlign.left,
-        ),
+        // leading: const cmn_leading_icon(),
+        title: cmnTitleWidget('Folders'),
+        actions: cmn_action_icon,
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

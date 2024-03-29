@@ -4,6 +4,9 @@ import 'package:enviro_mobile_application/model/05_intranet/intranet_res_model.d
 import 'package:enviro_mobile_application/view_model/04_ohs/ohs_view_model.dart';
 
 import 'package:enviro_mobile_application/view_model/07_intranet/intranet_view_model.dart';
+import 'package:enviro_mobile_application/widgets/cmn_action_icon.dart';
+import 'package:enviro_mobile_application/widgets/cmn_title_textwidget.dart';
+import 'package:enviro_mobile_application/widgets/drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
@@ -17,11 +20,11 @@ class IntranetInsidePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: CmnDrawer(context),
       appBar: AppBar(
-        title: const Text(
-          'Folders',
-          textAlign: TextAlign.left,
-        ),
+        // leading: const cmn_leading_icon(),
+        title: cmnTitleWidget('Intranet'),
+        actions: cmn_action_icon,
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

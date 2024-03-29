@@ -3,6 +3,7 @@ import 'package:enviro_mobile_application/Routepage/approutes.gr.dart';
 import 'package:enviro_mobile_application/Routepage/guards.dart';
 
 import 'package:enviro_mobile_application/Routepage/routespage.dart';
+import 'package:flutter/material.dart';
 
 @AutoRouterConfig()
 class AppRouter extends $AppRouter {

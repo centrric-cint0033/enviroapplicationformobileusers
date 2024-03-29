@@ -10,6 +10,7 @@ import 'package:enviro_mobile_application/widgets/cmappbar.dart';
 
 import 'package:enviro_mobile_application/view/02_sales/quote_register.dart';
 import 'package:enviro_mobile_application/view/02_sales/sales_list_page.dart';
+import 'package:enviro_mobile_application/widgets/drawer.dart';
 import 'package:flutter/material.dart';
 
 @RoutePage()
@@ -21,8 +22,9 @@ class SalesPage extends StatelessWidget {
     return DefaultTabController(
         length: 3,
         child: Scaffold(
-          appBar: CustomAppBar(
-            leading: const cmn_leading_icon(),
+          drawer: CmnDrawer(context),
+          appBar: AppBar(
+            // leading: const cmn_leading_icon(),
             title: cmnTitleWidget('Sales'),
             actions: cmn_action_icon,
           ),

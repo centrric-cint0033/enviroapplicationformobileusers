@@ -11,4 +11,5 @@ class RouteNames {
   static const String rOhsdetailpage = '/ohsdetailpage';
   static const String rNotificationdetailpage = '/notificationdetailpage';
   static const String rintranetinsidepage = '/intranetinsidepage';
+  static const String drawerpage = '/drawerpage';
 }
