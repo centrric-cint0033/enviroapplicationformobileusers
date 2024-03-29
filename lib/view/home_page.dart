@@ -133,9 +133,9 @@ class HomePage extends StatelessWidget {
   }
 }
 
-void onsalesfunction(BuildContext context) async {
+void onsalesfunction(BuildContext context) {
   final router = context.router;
-  await vmselection.permissions();
+  vmselection.permissions();
 
   final permissionsResponse = vmselection.permissionsResponse;
 

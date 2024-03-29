@@ -1,4 +1,5 @@
 import 'package:enviro_mobile_application/utilis/constant.dart';
+import 'package:enviro_mobile_application/view/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -33,8 +34,7 @@ Drawer CmnDrawer(BuildContext context) {
                 ),
                 title: const Text('Sales'),
                 onTap: () {
-                  // Add your functionality here
-                  Navigator.pop(context);
+                  onsalesfunction(context);
                 },
               ),
               sized0hx05,
@@ -45,6 +45,7 @@ Drawer CmnDrawer(BuildContext context) {
                 ),
                 title: const Text('Vehicle'),
                 onTap: () {
+                  vehiclefunction(context);
                   // Add your functionality here
                   Navigator.pop(context);
                 },
@@ -69,7 +70,8 @@ Drawer CmnDrawer(BuildContext context) {
                 ),
                 title: const Text('OH&S'),
                 onTap: () {
-                  // Add your functionality here
+                  ohsfunction(context);
+
                   Navigator.pop(context);
                 },
               ),
@@ -93,6 +95,7 @@ Drawer CmnDrawer(BuildContext context) {
                 ),
                 title: const Text('Intranet'),
                 onTap: () {
+                  intranetfuntion(context);
                   // Add your functionality here
                   Navigator.pop(context);
                 },
