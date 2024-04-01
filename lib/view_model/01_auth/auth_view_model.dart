@@ -24,6 +24,11 @@ abstract class AuthViewModelBase with Store {
   TextEditingController userNameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
+  void clearController() {
+    userNameController.clear();
+    passwordController.clear();
+  }
+
   @observable
   ApiResponse loginResponse = ApiResponse<String>();
 
@@ -37,18 +42,13 @@ abstract class AuthViewModelBase with Store {
     );
     return res.fold(
       (l) {
-        loginResponse = loginResponse.copyWith(
-          error: l,
-          loading: false,
-        );
+        loginResponse = loginResponse.copyWith(error: l, loading: false);
         return null;
       },
       (r) {
-        loginResponse = loginResponse.copyWith(
-          data: r,
-          error: null,
-          loading: false,
-        );
+        clearController();
+        loginResponse =
+            loginResponse.copyWith(data: r, error: null, loading: false);
         return 200;
       },
     );

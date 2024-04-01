@@ -65,7 +65,6 @@ class VehicleModel with _$VehicleModel {
     int? odometer,
     @JsonKey(name: 'odometdriver_signature') String? odometdriverSignature,
     @JsonKey(name: 'hour_meter_start') String? hourMeterStart,
-    // ignore: invalid_annotation_target
     @JsonKey(name: 'fit_for_work') bool? fitForWork,
     @JsonKey(name: 'Valid_driving_license') bool? validDrivingLicense,
     @JsonKey(name: 'appropriate_ppe') bool? appropriatePpe,

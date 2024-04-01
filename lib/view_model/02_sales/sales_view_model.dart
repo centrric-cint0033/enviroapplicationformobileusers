@@ -1,7 +1,5 @@
 import 'package:enviro_mobile_application/api_response/api_response.dart';
-import 'package:enviro_mobile_application/model/quoterego/res_model/quote_rego_res_model.dart';
-import 'package:enviro_mobile_application/model/sales/res_model/salesresp_model.dart';
-import 'package:enviro_mobile_application/model/saleslist/resmodel/saleslist_resmodel.dart';
+import 'package:enviro_mobile_application/model/02_sales/sales_model/sales_model.dart';
 import 'package:enviro_mobile_application/service/02_sales/sales_service.dart';
 import 'package:enviro_mobile_application/utilis/injection.dart';
 import 'package:injectable/injectable.dart';
@@ -23,8 +21,8 @@ abstract class SalesViewModelBase with Store {
   SalesViewModelBase(this.salesService);
 
   @observable
-  ApiResponse<List<SalesJobListstRegResModel>> joblistResponse =
-      ApiResponse<List<SalesJobListstRegResModel>>();
+  ApiResponse<List<SalesModel>> joblistResponse =
+      ApiResponse<List<SalesModel>>();
 
   @action
   Future<void> vehiclelistviewmodelfunction() async {
@@ -49,8 +47,8 @@ abstract class SalesViewModelBase with Store {
   }
 
   @observable
-  ApiResponse<List<SalesListResModel>> salespageResponse =
-      ApiResponse<List<SalesListResModel>>();
+  ApiResponse<List<SalesModel>> salespageResponse =
+      ApiResponse<List<SalesModel>>();
 
   @action
   Future<void> saleslistviewmodelfunction() async {
@@ -76,8 +74,8 @@ abstract class SalesViewModelBase with Store {
   }
 
   @observable
-  ApiResponse<List<QuoteRegResModel>> quoteRegResponse =
-      ApiResponse<List<QuoteRegResModel>>();
+  ApiResponse<List<SalesModel>> quoteRegResponse =
+      ApiResponse<List<SalesModel>>();
 
   @action
   Future<void> quoteregviewmodelfunction() async {

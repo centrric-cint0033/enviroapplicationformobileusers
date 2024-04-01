@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:dartz/dartz.dart';
 import 'package:enviro_mobile_application/constant/base_url.dart';
+import 'package:enviro_mobile_application/model/03_vehicle/vehicle_model/vehicle_model.dart';
 import 'package:enviro_mobile_application/model/truck_page/res_model/truckpage_model.dart';
 import 'package:enviro_mobile_application/utilis/api_endpoints/api_endpoints.dart';
 import 'package:enviro_mobile_application/utilis/httpservice.dart';
@@ -34,22 +35,21 @@ enum MasterTruckActionType {
 }
 
 abstract class IVehicleService {
-  Future<Either<MainFailure, List<CmnvehiclepageModel>>> preinspectionfunction(
-      drop);
+  Future<Either<MainFailure, List<VehicleModel>>> preinspectionfunction(drop);
 
-  Future<Either<MainFailure, List<CmnvehiclepageModel>>>
-      masterfuelsearchfunction(searchdrop);
+  Future<Either<MainFailure, List<VehicleModel>>> masterfuelsearchfunction(
+      searchdrop);
 
-  Future<Either<MainFailure, List<CmnvehiclepageModel>>> pretrailorfunction(
+  Future<Either<MainFailure, List<VehicleModel>>> pretrailorfunction(
       semitruckdrop);
 
-  Future<Either<MainFailure, List<CmnvehiclepageModel>>>
-      masterfuelsemitruckfunction(searchdrop);
+  Future<Either<MainFailure, List<VehicleModel>>> masterfuelsemitruckfunction(
+      searchdrop);
 
-  Future<Either<MainFailure, List<CmnvehiclepageModel>>> mastertruckfunction(
+  Future<Either<MainFailure, List<VehicleModel>>> mastertruckfunction(
       truckdrop);
-  Future<Either<MainFailure, List<CmnvehiclepageModel>>>
-      masterfueltruckfunction(searchtrucksemidrop, value);
+  Future<Either<MainFailure, List<VehicleModel>>> masterfueltruckfunction(
+      searchtrucksemidrop, value);
 }
 
 @LazySingleton(as: IVehicleService)
@@ -78,7 +78,7 @@ class VehicleService implements IVehicleService {
   // }
 
   @override
-  Future<Either<MainFailure, List<CmnvehiclepageModel>>> preinspectionfunction(
+  Future<Either<MainFailure, List<VehicleModel>>> preinspectionfunction(
       drop) async {
     String apiUrl;
     switch (drop) {
@@ -115,16 +115,16 @@ class VehicleService implements IVehicleService {
       },
       (res) async {
         var data = jsonDecode(res.body) as List;
-        List<CmnvehiclepageModel> vehicles =
-            data.map((e) => CmnvehiclepageModel.fromJson(e)).toList();
+        List<VehicleModel> vehicles =
+            data.map((e) => VehicleModel.fromJson(e)).toList();
         return Right(vehicles);
       },
     );
   }
 
   @override
-  Future<Either<MainFailure, List<CmnvehiclepageModel>>>
-      masterfuelsearchfunction(searchdrop) async {
+  Future<Either<MainFailure, List<VehicleModel>>> masterfuelsearchfunction(
+      searchdrop) async {
     String apiUrl;
     print('awww$searchdrop');
     switch (searchdrop) {
@@ -165,15 +165,15 @@ class VehicleService implements IVehicleService {
       (res) async {
         var data = jsonDecode(res.body) as List;
 
-        List<CmnvehiclepageModel> fuelcarsearch =
-            data.map((e) => CmnvehiclepageModel.fromJson(e)).toList();
+        List<VehicleModel> fuelcarsearch =
+            data.map((e) => VehicleModel.fromJson(e)).toList();
         return Right(fuelcarsearch);
       },
     );
   }
 
   @override
-  Future<Either<MainFailure, List<CmnvehiclepageModel>>> pretrailorfunction(
+  Future<Either<MainFailure, List<VehicleModel>>> pretrailorfunction(
       semitruckdrop) async {
     String apiUrl;
     switch (semitruckdrop) {
@@ -209,16 +209,16 @@ class VehicleService implements IVehicleService {
       (res) async {
         var data = jsonDecode(res.body) as List;
 
-        List<CmnvehiclepageModel> vehicles =
-            data.map((e) => CmnvehiclepageModel.fromJson(e)).toList();
+        List<VehicleModel> vehicles =
+            data.map((e) => VehicleModel.fromJson(e)).toList();
         return Right(vehicles);
       },
     );
   }
 
   @override
-  Future<Either<MainFailure, List<CmnvehiclepageModel>>>
-      masterfuelsemitruckfunction(searchsemidrop) async {
+  Future<Either<MainFailure, List<VehicleModel>>> masterfuelsemitruckfunction(
+      searchsemidrop) async {
     String apiUrl;
     print('awww$searchsemidrop');
     switch (searchsemidrop) {
@@ -258,15 +258,15 @@ class VehicleService implements IVehicleService {
       (res) async {
         var data = jsonDecode(res.body) as List;
 
-        List<CmnvehiclepageModel> fuelcarsearch =
-            data.map((e) => CmnvehiclepageModel.fromJson(e)).toList();
+        List<VehicleModel> fuelcarsearch =
+            data.map((e) => VehicleModel.fromJson(e)).toList();
         return Right(fuelcarsearch);
       },
     );
   }
 
   @override
-  Future<Either<MainFailure, List<CmnvehiclepageModel>>> mastertruckfunction(
+  Future<Either<MainFailure, List<VehicleModel>>> mastertruckfunction(
       truckdrop) async {
     String apiUrl;
     switch (truckdrop) {
@@ -301,16 +301,16 @@ class VehicleService implements IVehicleService {
       },
       (res) async {
         var data = jsonDecode(res.body) as List;
-        List<CmnvehiclepageModel> vehicles =
-            data.map((e) => CmnvehiclepageModel.fromJson(e)).toList();
+        List<VehicleModel> vehicles =
+            data.map((e) => VehicleModel.fromJson(e)).toList();
         return Right(vehicles);
       },
     );
   }
 
   @override
-  Future<Either<MainFailure, List<CmnvehiclepageModel>>>
-      masterfueltruckfunction(trucksearchdrop, value) async {
+  Future<Either<MainFailure, List<VehicleModel>>> masterfueltruckfunction(
+      trucksearchdrop, value) async {
     String apiUrl;
     print('awww$trucksearchdrop');
     switch (trucksearchdrop) {
@@ -351,8 +351,8 @@ class VehicleService implements IVehicleService {
       (res) async {
         var data = jsonDecode(res.body) as List;
 
-        List<CmnvehiclepageModel> fuelcarsearch =
-            data.map((e) => CmnvehiclepageModel.fromJson(e)).toList();
+        List<VehicleModel> fuelcarsearch =
+            data.map((e) => VehicleModel.fromJson(e)).toList();
         print('OFF$fuelcarsearch');
         return Right(fuelcarsearch);
       },
