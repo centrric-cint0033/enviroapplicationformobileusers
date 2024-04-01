@@ -20,22 +20,26 @@ class JobListPage extends StatelessWidget {
               Observer(
                 builder: (_) {
                   return Expanded(
-                    child: ListView.separated(
-                      itemCount: vmSales.joblistResponse.data?.length ?? 0,
-                      separatorBuilder: (BuildContext context, int index) {
-                        return const SizedBox(height: 12.0);
-                      },
-                      itemBuilder: (context, index) {
-                        var data = vmSales.joblistResponse.data?[index];
-                        return _buildJobCard(
-                          date: data?.date ?? "",
-                          clientName: data?.clientName ?? "",
-                          quotedby: data?.quotedBy ?? "",
-                          amount: data?.paidAmount ?? "",
-                          status: data?.status ?? "",
-                        );
-                      },
-                    ),
+                    child: vmSales.joblistResponse.loading
+                        ? const Center(child: CircularProgressIndicator())
+                        : ListView.separated(
+                            itemCount:
+                                vmSales.joblistResponse.data?.length ?? 0,
+                            separatorBuilder:
+                                (BuildContext context, int index) {
+                              return const SizedBox(height: 12.0);
+                            },
+                            itemBuilder: (context, index) {
+                              var data = vmSales.joblistResponse.data?[index];
+                              return _buildJobCard(
+                                date: data?.date ?? "",
+                                clientName: data?.clientName ?? "",
+                                quotedby: data?.quotedBy ?? "",
+                                amount: data?.paidAmount ?? "",
+                                status: data?.status ?? "",
+                              );
+                            },
+                          ),
                   );
                 },
               ),

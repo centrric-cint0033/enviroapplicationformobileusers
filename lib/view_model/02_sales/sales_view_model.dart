@@ -1,6 +1,7 @@
 import 'package:enviro_mobile_application/api_response/api_response.dart';
 import 'package:enviro_mobile_application/model/02_sales/sales_model/sales_model.dart';
 import 'package:enviro_mobile_application/service/02_sales/sales_service.dart';
+import 'package:enviro_mobile_application/utilis/api_endpoints/customprint.dart';
 import 'package:enviro_mobile_application/utilis/injection.dart';
 import 'package:injectable/injectable.dart';
 import 'package:mobx/mobx.dart';
@@ -26,17 +27,23 @@ abstract class SalesViewModelBase with Store {
 
   @action
   Future<void> saleJobListApi() async {
-    joblistResponse = joblistResponse.copyWith(error: null, loading: true);
-    final result = await salesService.saleJoblistApiService();
-    return result.fold(
-      (l) {
-        joblistResponse = joblistResponse.copyWith(error: l, loading: false);
-      },
-      (r) {
-        joblistResponse =
-            joblistResponse.copyWith(data: r, error: null, loading: false);
-      },
-    );
+    try {
+      joblistResponse = joblistResponse.copyWith(error: null, loading: true);
+      final result = await salesService.saleJoblistApiService();
+      return result.fold(
+        (l) {
+          joblistResponse = joblistResponse.copyWith(error: l, loading: false);
+        },
+        (r) {
+          joblistResponse =
+              joblistResponse.copyWith(data: r, error: null, loading: false);
+        },
+      );
+    } catch (e) {
+      customPrint(content: e, name: 'Error saleJobListApi');
+    } finally {
+      joblistResponse = joblistResponse.copyWith(loading: false);
+    }
   }
 
   @observable
@@ -45,19 +52,25 @@ abstract class SalesViewModelBase with Store {
 
   @action
   Future<void> saleslistApi() async {
-    salespageResponse = salespageResponse.copyWith(error: null, loading: true);
-
-    final result = await salesService.saleslistServiceApi();
-    return result.fold(
-      (l) {
-        salespageResponse =
-            salespageResponse.copyWith(error: l, loading: false);
-      },
-      (r) {
-        salespageResponse =
-            salespageResponse.copyWith(data: r, error: null, loading: false);
-      },
-    );
+    try {
+      salespageResponse =
+          salespageResponse.copyWith(error: null, loading: true);
+      final result = await salesService.saleslistServiceApi();
+      return result.fold(
+        (l) {
+          salespageResponse =
+              salespageResponse.copyWith(error: l, loading: false);
+        },
+        (r) {
+          salespageResponse =
+              salespageResponse.copyWith(data: r, error: null, loading: false);
+        },
+      );
+    } catch (e) {
+      customPrint(content: e, name: 'Error saleslistApi');
+    } finally {
+      salespageResponse = salespageResponse.copyWith(loading: false);
+    }
   }
 
   @observable
@@ -66,23 +79,24 @@ abstract class SalesViewModelBase with Store {
 
   @action
   Future<void> quoteRegisterApi() async {
-    quoteRegResponse = quoteRegResponse.copyWith(error: null, loading: true);
+    try {
+      quoteRegResponse = quoteRegResponse.copyWith(error: null, loading: true);
 
-    final result = await salesService.quoteRegisterServiceApi();
-    return result.fold(
-      (l) {
-        quoteRegResponse = quoteRegResponse.copyWith(
-          error: l,
-          loading: false,
-        );
-      },
-      (r) {
-        quoteRegResponse = quoteRegResponse.copyWith(
-          data: r,
-          error: null,
-          loading: false,
-        );
-      },
-    );
+      final result = await salesService.quoteRegisterServiceApi();
+      return result.fold(
+        (l) {
+          quoteRegResponse =
+              quoteRegResponse.copyWith(error: l, loading: false);
+        },
+        (r) {
+          quoteRegResponse =
+              quoteRegResponse.copyWith(data: r, error: null, loading: false);
+        },
+      );
+    } catch (e) {
+      customPrint(content: e, name: 'Error quoteRegisterApi');
+    } finally {
+      quoteRegResponse = quoteRegResponse.copyWith(loading: false);
+    }
   }
 }

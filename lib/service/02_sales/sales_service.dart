@@ -56,7 +56,6 @@ class SalesService implements ISalesService {
       },
       (res) async {
         var data = jsonDecode(res.body) as List;
-
         List<SalesModel> quoteregvehicle =
             data.map((e) => SalesModel.fromJson(e)).toList();
         return Right(quoteregvehicle);

@@ -44,23 +44,28 @@ abstract class AuthViewModelBase with Store {
       {required BuildContext context,
       required String username,
       required String password}) async {
-    loginResponse = loginResponse.copyWith(error: null, loading: true);
-
-    final res = await loginService.login(
-      data: LoginReqModel(username: username, password: password),
-    );
-    return res.fold(
-      (l) {
-        loginResponse = loginResponse.copyWith(errors: l, loading: false);
-        popupErrorData(context, mainFailure: l);
-        return null;
-      },
-      (r) {
-        clearController();
-        loginResponse =
-            loginResponse.copyWith(data: r, error: null, loading: false);
-        return 200;
-      },
-    );
+    try {
+      loginResponse = loginResponse.copyWith(error: null, loading: true);
+      final res = await loginService.login(
+        data: LoginReqModel(username: username, password: password),
+      );
+      return res.fold(
+        (l) {
+          loginResponse = loginResponse.copyWith(errors: l, loading: false);
+          popupErrorData(context, mainFailure: l);
+          return null;
+        },
+        (r) {
+          clearController();
+          loginResponse =
+              loginResponse.copyWith(data: r, error: null, loading: false);
+          return 200;
+        },
+      );
+    } catch (e) {
+      return null;
+    } finally {
+      loginResponse = loginResponse.copyWith(loading: false);
+    }
   }
 }
