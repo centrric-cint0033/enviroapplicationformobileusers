@@ -30,95 +30,101 @@ class HomePage extends StatelessWidget {
         title: cmnTitleWidget('Home'),
         actions: cmn_action_icon,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(36.0),
-        child: GridView.count(
-          crossAxisCount: 3,
-          crossAxisSpacing: 16.0,
-          mainAxisSpacing: 16.0,
-          children: [
-            Observer(builder: (_) {
-              return GestureDetector(
-                onTap: () => onsalesfunction(context),
-                child: _buildBox(
-                  'assets/images/star.svg',
-                  'Sales',
-                  Colors.blue,
-                  width: 30.0,
-                  height: 30.0,
+      body: Observer(builder: (context) {
+        return Padding(
+          padding: const EdgeInsets.all(36.0),
+          child: vmselection.permissionsResponse.loading
+              ? const Center(
+                  child: CircularProgressIndicator(),
+                )
+              : GridView.count(
+                  crossAxisCount: 3,
+                  crossAxisSpacing: 16.0,
+                  mainAxisSpacing: 16.0,
+                  children: [
+                    Observer(builder: (_) {
+                      return GestureDetector(
+                        onTap: () => onsalesfunction(context),
+                        child: _buildBox(
+                          'assets/images/star.svg',
+                          'Sales',
+                          Colors.blue,
+                          width: 30.0,
+                          height: 30.0,
+                        ),
+                      );
+                    }),
+                    GestureDetector(
+                      onTap: () => vehiclefunction(context),
+                      child: _buildBox(
+                        'assets/images/truck.svg',
+                        'Vehicle',
+                        Colors.blue,
+                        width: 30.0,
+                        height: 30.0,
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: () => ohsfunction(context),
+                      child: _buildBox(
+                        'assets/images/move(1).svg',
+                        'OH&S',
+                        Colors.blue,
+                        width: 30.0,
+                        height: 30.0,
+                      ),
+                    ),
+                    _buildBox(
+                      'assets/images/user.svg',
+                      'Site',
+                      Colors.blue,
+                      width: 30.0,
+                      height: 30.0,
+                    ),
+                    GestureDetector(
+                      onTap: () => calenderfunction(context),
+                      child: _buildBox(
+                        'assets/images/calendar.svg',
+                        'Scheduling',
+                        Colors.blue,
+                        width: 30.0,
+                        height: 30.0,
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: () => intranetfuntion(context),
+                      child: _buildBox(
+                        'assets/images/globe.svg',
+                        'Intranet',
+                        Colors.blue,
+                        width: 30.0,
+                        height: 30.0,
+                      ),
+                    ),
+                    _buildBox(
+                      'assets/images/users.svg',
+                      'Team',
+                      Colors.blue,
+                      width: 30.0,
+                      height: 30.0,
+                    ),
+                    // InkWell(
+                    //   onTap: () async {
+                    //     context.router.replaceAll([LoginRoute()]);
+                    //     await SecureStorage().clearData();
+                    //   },
+                    //   child: _buildBox(
+                    //     'assets/images/users.svg',
+                    //     'LogOut',
+                    //     Colors.blue,
+                    //     width: 30.0,
+                    //     height: 30.0,
+                    //   ),
+                    // ),
+                  ],
                 ),
-              );
-            }),
-            GestureDetector(
-              onTap: () => vehiclefunction(context),
-              child: _buildBox(
-                'assets/images/truck.svg',
-                'Vehicle',
-                Colors.blue,
-                width: 30.0,
-                height: 30.0,
-              ),
-            ),
-            GestureDetector(
-              onTap: () => ohsfunction(context),
-              child: _buildBox(
-                'assets/images/move(1).svg',
-                'OH&S',
-                Colors.blue,
-                width: 30.0,
-                height: 30.0,
-              ),
-            ),
-            _buildBox(
-              'assets/images/user.svg',
-              'Site',
-              Colors.blue,
-              width: 30.0,
-              height: 30.0,
-            ),
-            GestureDetector(
-              onTap: () => calenderfunction(context),
-              child: _buildBox(
-                'assets/images/calendar.svg',
-                'Scheduling',
-                Colors.blue,
-                width: 30.0,
-                height: 30.0,
-              ),
-            ),
-            GestureDetector(
-              onTap: () => intranetfuntion(context),
-              child: _buildBox(
-                'assets/images/globe.svg',
-                'Intranet',
-                Colors.blue,
-                width: 30.0,
-                height: 30.0,
-              ),
-            ),
-            _buildBox(
-              'assets/images/users.svg',
-              'Team',
-              Colors.blue,
-              width: 30.0,
-              height: 30.0,
-            ),
-            // InkWell(
-            //   onTap: () async {
-            //     context.router.replaceAll([LoginRoute()]);
-            //     await SecureStorage().clearData();
-            //   },
-            //   child: _buildBox(
-            //     'assets/images/users.svg',
-            //     'LogOut',
-            //     Colors.blue,
-            //     width: 30.0,
-            //     height: 30.0,
-            //   ),
-            // ),
-          ],
-        ),
-      ),
+        );
+      }),
     );
   }
 
@@ -149,7 +155,6 @@ class HomePage extends StatelessWidget {
 
 void onsalesfunction(BuildContext context) async {
   final router = context.router;
-  await vmselection.permissions();
 
   final permissionsResponse = vmselection.permissionsResponse;
 
@@ -165,9 +170,9 @@ void onsalesfunction(BuildContext context) async {
     );
   } else {
     router.pushNamed(RouteNames.rSalesPpage);
-    await vmSales.saleslistApi();
-    await vmSales.quoteRegisterApi();
-    await vmSales.saleJobListApi();
+    vmSales.saleJobListApi();
+    vmSales.saleslistApi();
+    vmSales.quoteRegisterApi();
   }
 }
 

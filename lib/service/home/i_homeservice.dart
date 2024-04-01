@@ -4,5 +4,5 @@ import 'package:enviro_mobile_application/model/home/res_model/homerespmodel.dar
 import '../../../utilis/main_failure.dart';
 
 abstract class IHomeService {
-  Future<Either<MainFailure, HomeRespModel>> permissions();
+  Future<Either<MainFailure, HomeRespModel>> permissionsApiService();
 }

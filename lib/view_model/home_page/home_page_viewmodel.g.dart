@@ -57,12 +57,12 @@ mixin _$HomeViewModel on HomeViewModelBase, Store {
     });
   }
 
-  late final _$permissionsAsyncAction =
-      AsyncAction('HomeViewModelBase.permissions', context: context);
+  late final _$permissionsApiAsyncAction =
+      AsyncAction('HomeViewModelBase.permissionsApi', context: context);
 
   @override
-  Future<void> permissions() {
-    return _$permissionsAsyncAction.run(() => super.permissions());
+  Future<void> permissionsApi() {
+    return _$permissionsApiAsyncAction.run(() => super.permissionsApi());
   }
 
   late final _$HomeViewModelBaseActionController =
