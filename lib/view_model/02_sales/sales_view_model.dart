@@ -25,23 +25,16 @@ abstract class SalesViewModelBase with Store {
       ApiResponse<List<SalesModel>>();
 
   @action
-  Future<void> vehiclelistviewmodelfunction() async {
+  Future<void> saleJobListApi() async {
     joblistResponse = joblistResponse.copyWith(error: null, loading: true);
-
-    final result = await salesService.vehiclejoblistfunction();
+    final result = await salesService.saleJoblistApiService();
     return result.fold(
       (l) {
-        joblistResponse = joblistResponse.copyWith(
-          error: l,
-          loading: false,
-        );
+        joblistResponse = joblistResponse.copyWith(error: l, loading: false);
       },
       (r) {
-        joblistResponse = joblistResponse.copyWith(
-          data: r,
-          error: null,
-          loading: false,
-        );
+        joblistResponse =
+            joblistResponse.copyWith(data: r, error: null, loading: false);
       },
     );
   }
@@ -51,24 +44,18 @@ abstract class SalesViewModelBase with Store {
       ApiResponse<List<SalesModel>>();
 
   @action
-  Future<void> saleslistviewmodelfunction() async {
-    print('aaaaa$salespageResponse');
+  Future<void> saleslistApi() async {
     salespageResponse = salespageResponse.copyWith(error: null, loading: true);
 
-    final result = await salesService.saleslistfunction();
+    final result = await salesService.saleslistServiceApi();
     return result.fold(
       (l) {
-        salespageResponse = salespageResponse.copyWith(
-          error: l,
-          loading: false,
-        );
+        salespageResponse =
+            salespageResponse.copyWith(error: l, loading: false);
       },
       (r) {
-        salespageResponse = salespageResponse.copyWith(
-          data: r,
-          error: null,
-          loading: false,
-        );
+        salespageResponse =
+            salespageResponse.copyWith(data: r, error: null, loading: false);
       },
     );
   }
@@ -78,10 +65,10 @@ abstract class SalesViewModelBase with Store {
       ApiResponse<List<SalesModel>>();
 
   @action
-  Future<void> quoteregviewmodelfunction() async {
+  Future<void> quoteRegisterApi() async {
     quoteRegResponse = quoteRegResponse.copyWith(error: null, loading: true);
 
-    final result = await salesService.quoteregfunction();
+    final result = await salesService.quoteRegisterServiceApi();
     return result.fold(
       (l) {
         quoteRegResponse = quoteRegResponse.copyWith(

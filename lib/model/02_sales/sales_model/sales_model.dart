@@ -47,7 +47,7 @@ class SalesModel with _$SalesModel {
     @JsonKey(name: 'active_status') bool? activeStatus,
     @JsonKey(name: 'job_card_type') String? jobCardType,
     @JsonKey(name: 'recurring_date') String? recurringDate,
-    @JsonKey(name: 'created_by') String? createdBy,
+    @JsonKey(name: 'created_by') dynamic createdBy,
     int? quote,
     @JsonKey(name: 'job_card') int? jobCard,
     @JsonKey(name: 'job_comments') List<dynamic>? jobComments,

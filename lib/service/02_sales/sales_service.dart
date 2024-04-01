@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:dartz/dartz.dart';
 import 'package:enviro_mobile_application/model/02_sales/sales_model/sales_model.dart';
@@ -9,17 +10,17 @@ import 'package:enviro_mobile_application/utilis/main_failure.dart';
 import 'package:injectable/injectable.dart';
 
 abstract class ISalesService {
-  Future<Either<MainFailure, List<SalesModel>>> saleslistfunction();
+  Future<Either<MainFailure, List<SalesModel>>> saleslistServiceApi();
 
-  Future<Either<MainFailure, List<SalesModel>>> vehiclejoblistfunction();
+  Future<Either<MainFailure, List<SalesModel>>> saleJoblistApiService();
 
-  Future<Either<MainFailure, List<SalesModel>>> quoteregfunction();
+  Future<Either<MainFailure, List<SalesModel>>> quoteRegisterServiceApi();
 }
 
 @LazySingleton(as: ISalesService)
 class SalesService implements ISalesService {
   @override
-  Future<Either<MainFailure, List<SalesModel>>> saleslistfunction() async {
+  Future<Either<MainFailure, List<SalesModel>>> saleslistServiceApi() async {
     var response = await getIt<HttpService>().request(
         authenticated: true,
         method: HttpMethod.get,
@@ -42,7 +43,7 @@ class SalesService implements ISalesService {
   }
 
   @override
-  Future<Either<MainFailure, List<SalesModel>>> vehiclejoblistfunction() async {
+  Future<Either<MainFailure, List<SalesModel>>> saleJoblistApiService() async {
     var response = await getIt<HttpService>().request(
         authenticated: true,
         method: HttpMethod.get,
@@ -64,7 +65,8 @@ class SalesService implements ISalesService {
   }
 
   @override
-  Future<Either<MainFailure, List<SalesModel>>> quoteregfunction() async {
+  Future<Either<MainFailure, List<SalesModel>>>
+      quoteRegisterServiceApi() async {
     var response = await getIt<HttpService>().request(
         authenticated: true,
         method: HttpMethod.get,

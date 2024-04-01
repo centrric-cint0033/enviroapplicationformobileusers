@@ -32,7 +32,7 @@ class JobListPage extends StatelessWidget {
                           clientName: data?.clientName ?? "",
                           quotedby: data?.quotedBy ?? "",
                           amount: data?.paidAmount ?? "",
-                          status: data?.paidStatus ?? "",
+                          status: data?.status ?? "",
                         );
                       },
                     ),
@@ -54,133 +54,128 @@ class JobListPage extends StatelessWidget {
     required String amount,
     required String status,
   }) {
-    return Container(
-      width: double.infinity,
-      child: Card(
-        margin: const EdgeInsets.only(left: 16.0, right: 16),
-        shape: RoundedRectangleBorder(
-          side: const BorderSide(
-            color: Color(0XFF949494),
-          ),
-          borderRadius: BorderRadius.circular(8.0),
-        ),
-        color: Colors.white,
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const SizedBox(height: 13.0),
-                  const Expanded(
-                    child: Text(
-                      "Date:",
-                      textAlign: TextAlign.right,
-                      style: TextStyle(color: Colors.blue),
-                    ),
+    return Card(
+      margin: const EdgeInsets.only(left: 16.0, right: 16),
+      shape: RoundedRectangleBorder(
+        side: BorderSide(color: Colors.grey[200]!),
+        borderRadius: BorderRadius.circular(8.0),
+      ),
+      color: Colors.white,
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const SizedBox(height: 13.0),
+                const Expanded(
+                  child: Text(
+                    "Date",
+                    textAlign: TextAlign.left,
+                    style: TextStyle(color: Colors.blue),
                   ),
-                  const SizedBox(height: 13.0),
-                  Expanded(
-                    child: Text(
-                      " $date",
-                      textAlign: TextAlign.left,
-                      style: const TextStyle(color: Colors.blue),
-                    ),
+                ),
+                const SizedBox(height: 13.0),
+                Expanded(
+                  child: Text(
+                    ": $date",
+                    textAlign: TextAlign.left,
+                    style: const TextStyle(color: Colors.blue),
                   ),
-                ],
-              ),
-              const SizedBox(height: 8.0),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const SizedBox(height: 13.0),
-                  const Expanded(
-                    child: Text(
-                      "clientName:",
-                      textAlign: TextAlign.right,
-                      style: TextStyle(color: Colors.blue),
-                    ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 8.0),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const SizedBox(height: 13.0),
+                const Expanded(
+                  child: Text(
+                    "clientName",
+                    textAlign: TextAlign.left,
+                    style: TextStyle(color: Colors.blue),
                   ),
-                  const SizedBox(height: 13.0),
-                  Expanded(
-                    child: Text(
-                      "$clientName",
-                      textAlign: TextAlign.left,
-                      style: const TextStyle(color: Colors.blue),
-                    ),
+                ),
+                const SizedBox(height: 13.0),
+                Expanded(
+                  child: Text(
+                    ": $clientName",
+                    textAlign: TextAlign.left,
+                    style: const TextStyle(color: Colors.blue),
                   ),
-                ],
-              ),
-              const SizedBox(height: 13.0),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const SizedBox(height: 13.0),
-                  const Expanded(
-                    child: Text(
-                      "Quoted By:",
-                      textAlign: TextAlign.right,
-                      style: TextStyle(color: Colors.blue),
-                    ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 13.0),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const SizedBox(height: 13.0),
+                const Expanded(
+                  child: Text(
+                    "Quoted By",
+                    textAlign: TextAlign.left,
+                    style: TextStyle(color: Colors.blue),
                   ),
-                  const SizedBox(height: 13.0),
-                  Expanded(
-                    child: Text(
-                      "$quotedby",
-                      textAlign: TextAlign.left,
-                      style: const TextStyle(color: Colors.blue),
-                    ),
+                ),
+                const SizedBox(height: 13.0),
+                Expanded(
+                  child: Text(
+                    ": $quotedby",
+                    textAlign: TextAlign.left,
+                    style: const TextStyle(color: Colors.blue),
                   ),
-                ],
-              ),
-              const SizedBox(height: 8.0),
-              Row(
-                children: [
-                  const SizedBox(height: 13.0),
-                  const Expanded(
-                    child: Text(
-                      "Amount:",
-                      textAlign: TextAlign.right,
-                      style: TextStyle(color: Colors.blue),
-                    ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 8.0),
+            Row(
+              children: [
+                const SizedBox(height: 13.0),
+                const Expanded(
+                  child: Text(
+                    "Amount",
+                    textAlign: TextAlign.left,
+                    style: TextStyle(color: Colors.blue),
                   ),
-                  const SizedBox(height: 13.0),
-                  Expanded(
-                    child: Text(
-                      "$amount",
-                      textAlign: TextAlign.left,
-                      style: const TextStyle(color: Colors.blue),
-                    ),
+                ),
+                const SizedBox(height: 13.0),
+                Expanded(
+                  child: Text(
+                    ": $amount",
+                    textAlign: TextAlign.left,
+                    style: const TextStyle(color: Colors.blue),
                   ),
-                ],
-              ),
-              const SizedBox(height: 13.0),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const SizedBox(height: 13.0),
-                  const Expanded(
-                    child: Text(
-                      "Status:",
-                      textAlign: TextAlign.right,
-                      style: TextStyle(color: Colors.blue),
-                    ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 13.0),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const SizedBox(height: 13.0),
+                const Expanded(
+                  child: Text(
+                    "Status",
+                    textAlign: TextAlign.left,
+                    style: TextStyle(color: Colors.blue),
                   ),
-                  const SizedBox(height: 13.0),
-                  Expanded(
-                    child: Text(
-                      "$status",
-                      textAlign: TextAlign.left,
-                      style: const TextStyle(color: Colors.blue),
-                    ),
+                ),
+                const SizedBox(height: 13.0),
+                Expanded(
+                  child: Text(
+                    ": $status",
+                    textAlign: TextAlign.left,
+                    style: const TextStyle(color: Colors.blue),
                   ),
-                ],
-              ),
-            ],
-          ),
+                ),
+              ],
+            ),
+          ],
         ),
       ),
     );

@@ -148,9 +148,9 @@ class HomePage extends StatelessWidget {
   }
 }
 
-void onsalesfunction(BuildContext context) {
+void onsalesfunction(BuildContext context) async {
   final router = context.router;
-  vmselection.permissions();
+  await vmselection.permissions();
 
   final permissionsResponse = vmselection.permissionsResponse;
 
@@ -166,9 +166,9 @@ void onsalesfunction(BuildContext context) {
     );
   } else {
     router.pushNamed(RouteNames.rSalesPpage);
-    vmSales.quoteregviewmodelfunction();
-    vmSales.saleslistviewmodelfunction();
-    vmSales.vehiclelistviewmodelfunction();
+    await vmSales.saleslistApi();
+    await vmSales.quoteRegisterApi();
+    await vmSales.saleJobListApi();
   }
 }
 

@@ -12,9 +12,9 @@ Container common_search_widget() {
             padding: const EdgeInsets.symmetric(horizontal: 7.0),
             decoration: BoxDecoration(
               color: Colors.white,
-              borderRadius: BorderRadius.circular(5.0),
+              borderRadius: BorderRadius.circular(8.0),
               border: Border.all(
-                color: const Color(0XFF949494),
+                color: Colors.grey[200]!,
               ),
             ),
             child: Row(
@@ -33,20 +33,14 @@ Container common_search_widget() {
                     style: const TextStyle(color: Colors.black),
                     decoration: InputDecoration(
                       hintText: 'Search By client',
-                      hintStyle: const TextStyle(color: Colors.grey),
+                      // hintStyle: const TextStyle(color: Colors.grey),
                       border: InputBorder.none,
                       suffixIcon: Observer(builder: (_) {
                         return GestureDetector(
                           onTap: () {},
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: Colors.blue,
-                              borderRadius: BorderRadius.circular(5.0),
-                            ),
-                            child: const Icon(
-                              Icons.search,
-                              color: Colors.white,
-                            ),
+                          child: const Icon(
+                            Icons.search,
+                            color: Colors.black,
                           ),
                         );
                       }),
