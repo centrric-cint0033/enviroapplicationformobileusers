@@ -3,6 +3,7 @@ import 'package:enviro_mobile_application/Routepage/routespage.dart';
 
 import 'package:enviro_mobile_application/utilis/Appthemes.dart';
 import 'package:enviro_mobile_application/view_model/01_auth/auth_view_model.dart';
+import 'package:enviro_mobile_application/view_model/10_profile/profile_view_model.dart';
 import 'package:enviro_mobile_application/widgets/cmbutton.dart';
 
 import 'package:flutter/material.dart';
@@ -119,6 +120,7 @@ class LoginPage extends StatelessWidget {
       );
 
       if (statusCode != null) {
+        vmProfile.profileviewmodelfunction();
         router.replaceNamed(RouteNames.rHomePage);
       } else {
         ScaffoldMessenger.of(context).showSnackBar(

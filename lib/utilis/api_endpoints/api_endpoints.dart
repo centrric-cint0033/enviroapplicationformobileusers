@@ -64,4 +64,5 @@ class ApiEndPoints {
   static const endpointnewsfldrdlte = '/api/v1/drive/folder/delete';
   static const endpointintranetfldrlstng =
       '/api/v1/intranet_archive/folder/segment';
+  static const endpointprofilelstng = '/api/v1/accounts/profile/view/';
 }

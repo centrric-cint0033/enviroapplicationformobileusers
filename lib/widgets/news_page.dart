@@ -5,6 +5,7 @@ import 'package:enviro_mobile_application/Routepage/routespage.dart';
 import 'package:enviro_mobile_application/utilis/api_endpoints/customprint.dart';
 
 import 'package:enviro_mobile_application/view_model/04_ohs/ohs_view_model.dart';
+import 'package:enviro_mobile_application/view_model/10_profile/profile_view_model.dart';
 
 import 'package:enviro_mobile_application/widgets/cmcustomformfield.dart';
 import 'package:flutter/material.dart';
@@ -566,6 +567,7 @@ class NewsPage extends StatelessWidget {
 
   void newsfolderclickfunction(BuildContext context, id) async {
     vmOhs.newspagefolderinsidefunction(id);
+
     context.router.push(NewsRouteInsideRoute(parentId: id));
   }
 
