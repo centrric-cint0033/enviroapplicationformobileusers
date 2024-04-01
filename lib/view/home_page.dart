@@ -7,6 +7,7 @@ import 'package:enviro_mobile_application/view_model/02_sales/sales_view_model.d
 import 'package:enviro_mobile_application/view_model/03_vehicles/vehicle_view_model.dart';
 import 'package:enviro_mobile_application/view_model/04_ohs/ohs_view_model.dart';
 import 'package:enviro_mobile_application/view_model/07_intranet/intranet_view_model.dart';
+import 'package:enviro_mobile_application/view_model/10_profile/profile_view_model.dart';
 import 'package:enviro_mobile_application/view_model/home_page/home_page_viewmodel.dart';
 import 'package:enviro_mobile_application/widgets/drawer.dart';
 
@@ -14,9 +15,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:enviro_mobile_application/widgets/cmn_action_icon.dart';
-import 'package:enviro_mobile_application/widgets/cmn_leading_icon.dart';
 import 'package:enviro_mobile_application/widgets/cmn_title_textwidget.dart';
-import 'package:enviro_mobile_application/widgets/cmappbar.dart';
 
 @RoutePage()
 class HomePage extends StatelessWidget {
@@ -104,19 +103,19 @@ class HomePage extends StatelessWidget {
               width: 30.0,
               height: 30.0,
             ),
-            InkWell(
-              onTap: () async {
-                context.router.replaceAll([LoginRoute()]);
-                await SecureStorage().clearData();
-              },
-              child: _buildBox(
-                'assets/images/users.svg',
-                'LogOut',
-                Colors.blue,
-                width: 30.0,
-                height: 30.0,
-              ),
-            ),
+            // InkWell(
+            //   onTap: () async {
+            //     context.router.replaceAll([LoginRoute()]);
+            //     await SecureStorage().clearData();
+            //   },
+            //   child: _buildBox(
+            //     'assets/images/users.svg',
+            //     'LogOut',
+            //     Colors.blue,
+            //     width: 30.0,
+            //     height: 30.0,
+            //   ),
+            // ),
           ],
         ),
       ),
@@ -173,6 +172,7 @@ void onsalesfunction(BuildContext context) async {
 }
 
 void ohsfunction(BuildContext context) {
+  vmProfile.profileviewmodelfunction();
   context.router.pushNamed(RouteNames.ohsPage);
   customPrint(content: 'ohs');
   vmOhs.ohsnotificationviewmodelfunction();

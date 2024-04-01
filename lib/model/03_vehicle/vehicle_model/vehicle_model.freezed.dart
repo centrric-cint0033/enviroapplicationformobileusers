@@ -103,8 +103,7 @@ mixin _$VehicleModel {
   @JsonKey(name: 'odometdriver_signature')
   String? get odometdriverSignature => throw _privateConstructorUsedError;
   @JsonKey(name: 'hour_meter_start')
-  String? get hourMeterStart =>
-      throw _privateConstructorUsedError; // ignore: invalid_annotation_target
+  String? get hourMeterStart => throw _privateConstructorUsedError;
   @JsonKey(name: 'fit_for_work')
   bool? get fitForWork => throw _privateConstructorUsedError;
   @JsonKey(name: 'Valid_driving_license')
@@ -1855,7 +1854,6 @@ class _$VehicleModelImpl implements _VehicleModel {
   @override
   @JsonKey(name: 'hour_meter_start')
   final String? hourMeterStart;
-// ignore: invalid_annotation_target
   @override
   @JsonKey(name: 'fit_for_work')
   final bool? fitForWork;
@@ -2573,7 +2571,7 @@ abstract class _VehicleModel implements VehicleModel {
   @override
   @JsonKey(name: 'hour_meter_start')
   String? get hourMeterStart;
-  @override // ignore: invalid_annotation_target
+  @override
   @JsonKey(name: 'fit_for_work')
   bool? get fitForWork;
   @override
