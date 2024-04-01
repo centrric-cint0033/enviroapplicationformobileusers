@@ -1,7 +1,6 @@
 import 'package:enviro_mobile_application/api_response/api_response.dart';
 import 'package:enviro_mobile_application/model/auth/loginreqmodel.dart';
 import 'package:enviro_mobile_application/service/auth/authservice.dart';
-import 'package:enviro_mobile_application/utilis/api_endpoints/customprint.dart';
 import 'package:enviro_mobile_application/utilis/injection.dart';
 import 'package:enviro_mobile_application/widgets/ww_popup_error.dart';
 import 'package:flutter/material.dart';
@@ -52,7 +51,6 @@ abstract class AuthViewModelBase with Store {
     );
     return res.fold(
       (l) {
-        customPrint(content: 'asdasd asd asd');
         loginResponse = loginResponse.copyWith(errors: l, loading: false);
         popupErrorData(context, mainFailure: l);
         return null;
