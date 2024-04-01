@@ -57,7 +57,8 @@ class CmButton extends StatelessWidget {
               : widget ??
                   Text(
                     text ?? "",
-                    style: buttonTextStyle,
+                    style:
+                        buttonTextStyle ?? const TextStyle(color: Colors.white),
                   ),
         ),
       ),

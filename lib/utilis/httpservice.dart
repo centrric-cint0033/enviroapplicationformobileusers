@@ -95,7 +95,9 @@ class HttpService {
         }
         return Right(response);
       } else {
-        return Left({const MainFailure.clientFailure(): response});
+        return Left({
+          const MainFailure.clientFailure(): jsonDecode(response.body)["detail"]
+        });
       }
     } on FormatException catch (_) {
       return Left({const MainFailure.clientFailure(): null});

@@ -10,6 +10,7 @@ class ApiResponse<T> with _$ApiResponse<T> {
     T? data,
     int? statusCode,
     String? message,
+    Map<MainFailure, dynamic>? errors,
     MainFailure? error,
     @Default(1) int pageNo,
     @Default(false) bool loading,

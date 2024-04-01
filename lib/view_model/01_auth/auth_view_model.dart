@@ -1,7 +1,9 @@
 import 'package:enviro_mobile_application/api_response/api_response.dart';
 import 'package:enviro_mobile_application/model/auth/loginreqmodel.dart';
-import 'package:enviro_mobile_application/service/auth/i_authservice.dart';
+import 'package:enviro_mobile_application/service/auth/authservice.dart';
+import 'package:enviro_mobile_application/utilis/api_endpoints/customprint.dart';
 import 'package:enviro_mobile_application/utilis/injection.dart';
+import 'package:enviro_mobile_application/widgets/ww_popup_error.dart';
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 import 'package:mobx/mobx.dart';
@@ -29,12 +31,20 @@ abstract class AuthViewModelBase with Store {
     passwordController.clear();
   }
 
+//      _      ____    ___      ____      _      _       _       ____
+//     / \    |  _ \  |_ _|    / ___|    / \    | |     | |     / ___|
+//    / _ \   | |_) |  | |    | |       / _ \   | |     | |     \___ \
+//   / ___ \  |  __/   | |    | |___   / ___ \  | |___  | |___   ___) |
+//  /_/   \_\ |_|     |___|    \____| /_/   \_\ |_____| |_____| |____/
+
   @observable
   ApiResponse loginResponse = ApiResponse<String>();
 
   @action
   Future<int?> login(
-      {required String username, required String password}) async {
+      {required BuildContext context,
+      required String username,
+      required String password}) async {
     loginResponse = loginResponse.copyWith(error: null, loading: true);
 
     final res = await loginService.login(
@@ -42,7 +52,9 @@ abstract class AuthViewModelBase with Store {
     );
     return res.fold(
       (l) {
-        loginResponse = loginResponse.copyWith(error: l, loading: false);
+        customPrint(content: 'asdasd asd asd');
+        loginResponse = loginResponse.copyWith(errors: l, loading: false);
+        popupErrorData(context, mainFailure: l);
         return null;
       },
       (r) {

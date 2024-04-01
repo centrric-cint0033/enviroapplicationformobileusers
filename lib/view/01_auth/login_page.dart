@@ -114,22 +114,13 @@ class LoginPage extends StatelessWidget {
       final router = context.router;
 
       int? statusCode = await vmAuth.login(
+        context: context,
         username: vmAuth.userNameController.text.trim(),
         password: vmAuth.passwordController.text.trim(),
       );
 
       if (statusCode != null) {
         router.replaceNamed(RouteNames.rHomePage);
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            backgroundColor: Color(0XFF061933),
-            content: Text(
-              'Invalid username or password. Please try again.',
-            ),
-            duration: Duration(seconds: 3),
-          ),
-        );
       }
     }
   }
