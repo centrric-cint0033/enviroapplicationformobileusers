@@ -108,7 +108,7 @@ class HomePage extends StatelessWidget {
               },
               child: _buildBox(
                 'assets/images/users.svg',
-                'Login',
+                'LogOut',
                 Colors.blue,
                 width: 30.0,
                 height: 30.0,
