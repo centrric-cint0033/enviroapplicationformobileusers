@@ -19,23 +19,27 @@ class QuoteRegisterpage extends StatelessWidget {
               Observer(
                 builder: (_) {
                   return Expanded(
-                    child: ListView.separated(
-                      itemCount: vmSales.quoteRegResponse.data?.length ?? 0,
-                      separatorBuilder: (BuildContext context, int index) {
-                        return const SizedBox(height: 12.0);
-                      },
-                      itemBuilder: (context, index) {
-                        var data = vmSales.quoteRegResponse.data?[index];
-                        return _buildJobCard(
-                          id: data?.id ?? 0,
-                          won_lose_status: data?.wonLoseStatus ?? "",
-                          created_by: data?.createdBy ?? "",
-                          client_type: data?.clientType ?? "",
-                          schedule_id: data?.scheduleId,
-                          client_email: data?.clientEmail ?? "",
-                        );
-                      },
-                    ),
+                    child: vmSales.quoteRegResponse.loading
+                        ? const Center(child: CircularProgressIndicator())
+                        : ListView.separated(
+                            itemCount:
+                                vmSales.quoteRegResponse.data?.length ?? 0,
+                            separatorBuilder:
+                                (BuildContext context, int index) {
+                              return const SizedBox(height: 12.0);
+                            },
+                            itemBuilder: (context, index) {
+                              var data = vmSales.quoteRegResponse.data?[index];
+                              return _buildJobCard(
+                                id: data?.id ?? 0,
+                                won_lose_status: data?.wonLoseStatus ?? "",
+                                created_by: data?.createdBy ?? "",
+                                client_type: data?.clientType ?? "",
+                                schedule_id: data?.scheduleId,
+                                client_email: data?.clientEmail ?? "",
+                              );
+                            },
+                          ),
                   );
                 },
               ),
