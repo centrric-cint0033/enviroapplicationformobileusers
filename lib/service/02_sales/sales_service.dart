@@ -10,7 +10,8 @@ import 'package:enviro_mobile_application/utilis/main_failure.dart';
 import 'package:injectable/injectable.dart';
 
 abstract class ISalesService {
-  Future<Either<MainFailure, List<SalesModel>>> saleslistServiceApi();
+  Future<Either<Map<MainFailure, dynamic>, List<SalesModel>>>
+      saleslistServiceApi();
 
   Future<Either<Map<MainFailure, dynamic>, List<SalesModel>>>
       saleJoblistApiService();
@@ -22,23 +23,19 @@ abstract class ISalesService {
 @LazySingleton(as: ISalesService)
 class SalesService implements ISalesService {
   @override
-  Future<Either<MainFailure, List<SalesModel>>> saleslistServiceApi() async {
+  Future<Either<Map<MainFailure, dynamic>, List<SalesModel>>>
+      saleslistServiceApi() async {
     var response = await getIt<HttpService>().request(
         authenticated: true,
         method: HttpMethod.get,
         apiUrl: ApiEndPoints.endpointsaleslist);
 
     return response.fold(
-      (l) {
-        (l.values.first);
-        return Left(l.keys.first);
-      },
+      (l) => Left(l),
       (res) async {
         var data = jsonDecode(res.body);
-
         List<SalesModel> saleslistvehicle = List<SalesModel>.from(
             data['app_data'].map((e) => SalesModel.fromJson(e)));
-
         return Right(saleslistvehicle);
       },
     );
