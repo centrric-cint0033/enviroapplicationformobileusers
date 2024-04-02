@@ -21,7 +21,7 @@ class SchedulingPage extends StatelessWidget {
         appBar: AppBar(
           // leading: const cmn_leading_icon(),
           title: cmnTitleWidget('Sales'),
-          actions: cmn_action_icon,
+          actions: [const NotificationButton()],
         ),
         body: calander_page(),
       ),

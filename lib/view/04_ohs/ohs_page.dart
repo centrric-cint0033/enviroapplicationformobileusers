@@ -27,7 +27,7 @@ class OhsPage extends StatelessWidget {
         appBar: AppBar(
           // leading: const cmn_leading_icon(),
           title: cmnTitleWidget('OH&S'),
-          actions: cmn_action_icon,
+          actions: [const NotificationButton()],
         ),
         body: Column(
           children: [

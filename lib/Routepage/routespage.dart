@@ -13,4 +13,5 @@ class RouteNames {
   static const String rintranetinsidepage = '/intranetinsidepage';
   static const String drawerpage = '/drawerpage';
   static const String rprofilepage = '/profilepage';
+  static const String rnotificationpage = '/notificationpage';
 }

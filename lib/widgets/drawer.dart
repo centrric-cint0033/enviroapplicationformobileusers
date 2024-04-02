@@ -7,6 +7,7 @@ import 'package:enviro_mobile_application/view/09_prfle_creation_page/prfle_crti
 import 'package:enviro_mobile_application/view/home_page.dart';
 import 'package:enviro_mobile_application/view_model/10_profile/profile_view_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../Routepage/approutes.gr.dart';
@@ -28,22 +29,26 @@ Drawer CmnDrawer(BuildContext context) {
               children: [
                 Row(
                   children: [
-                    SizedBox(
-                      width: 50,
-                      height: 70,
-                      child: vmProfile.profilepageResponse.data?.dp != null
-                          ? Image.network(
-                              vmProfile.profilepageResponse.data!.dp!,
-                              fit: BoxFit.cover,
-                            )
-                          : Container(), // You can replace Container() with any placeholder widget you desire
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 23.0),
-                      child: Text(
-                        vmProfile.profilepageResponse.data?.username ?? '',
-                      ),
-                    ),
+                    Observer(builder: (_) {
+                      return SizedBox(
+                        width: 50,
+                        height: 70,
+                        child: vmProfile.profilepageResponse.data?.dp != null
+                            ? Image.network(
+                                vmProfile.profilepageResponse.data!.dp!,
+                                fit: BoxFit.cover,
+                              )
+                            : Container(), // You can replace Container() with any placeholder widget you desire
+                      );
+                    }),
+                    Observer(builder: (_) {
+                      return Padding(
+                        padding: const EdgeInsets.only(left: 23.0),
+                        child: Text(
+                          vmProfile.profilepageResponse.data?.username ?? '',
+                        ),
+                      );
+                    }),
                   ],
                 ),
                 const SizedBox(
@@ -59,11 +64,13 @@ Drawer CmnDrawer(BuildContext context) {
                         side: MaterialStateProperty.all(
                             const BorderSide(color: Colors.blue)),
                       ),
-                      child: Text(
-                        vmProfile.profilepageResponse.data?.permissionType ??
-                            '',
-                        style: const TextStyle(color: Colors.black),
-                      )),
+                      child: Observer(builder: (_) {
+                        return Text(
+                          vmProfile.profilepageResponse.data?.permissionType ??
+                              '',
+                          style: const TextStyle(color: Colors.black),
+                        );
+                      })),
                 ),
                 const SizedBox(
                   height: 46,
