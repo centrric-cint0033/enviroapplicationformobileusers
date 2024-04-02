@@ -8,7 +8,8 @@ import 'package:flutter/material.dart';
 
 @RoutePage()
 class ProfileCreationPage extends StatelessWidget {
-  const ProfileCreationPage({Key? key}) : super(key: key);
+  ProfileCreationPage({Key? key}) : super(key: key);
+  final TextEditingController _controllerphonenumber = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -64,6 +65,8 @@ class ProfileCreationPage extends StatelessWidget {
                           borderRadius:
                               BorderRadius.all(Radius.circular(24.0))),
                       labelText: 'Name',
+                      prefixText:
+                          vmProfile.profilepageResponse.data?.name ?? '',
                       labelStyle: const TextStyle(color: Colors.blue),
                     ),
                   ),
@@ -75,6 +78,7 @@ class ProfileCreationPage extends StatelessWidget {
                 child: SizedBox(
                   height: 48,
                   child: TextField(
+                    controller: _controllerphonenumber,
                     decoration: InputDecoration(
                       filled: true,
                       fillColor: Colors.grey[200],
@@ -83,6 +87,9 @@ class ProfileCreationPage extends StatelessWidget {
                           borderRadius:
                               BorderRadius.all(Radius.circular(24.0))),
                       labelText: 'Mobile Number',
+                      prefixText:
+                          vmProfile.profilepageResponse.data?.contactNumber ??
+                              '',
                       labelStyle: const TextStyle(color: Colors.blue),
                     ),
                     keyboardType: TextInputType.phone,
@@ -103,6 +110,8 @@ class ProfileCreationPage extends StatelessWidget {
                           borderRadius:
                               BorderRadius.all(Radius.circular(24.0))),
                       labelText: 'Email',
+                      prefixText:
+                          vmProfile.profilepageResponse.data?.email ?? '',
                       labelStyle: const TextStyle(color: Colors.blue),
                     ),
                     keyboardType: TextInputType.emailAddress,
@@ -120,7 +129,7 @@ class ProfileCreationPage extends StatelessWidget {
                         onPressed: () {
                           // Add your icon onPressed logic here
                         },
-                        icon: Icon(Icons.edit),
+                        icon: const Icon(Icons.edit),
                       ),
                       filled: true,
                       fillColor: Colors.grey[200],
@@ -129,6 +138,8 @@ class ProfileCreationPage extends StatelessWidget {
                           borderRadius:
                               BorderRadius.all(Radius.circular(24.0))),
                       labelText: 'Username',
+                      prefixText:
+                          vmProfile.profilepageResponse.data?.username ?? '',
                       labelStyle: const TextStyle(color: Colors.blue),
                     ),
                   ),

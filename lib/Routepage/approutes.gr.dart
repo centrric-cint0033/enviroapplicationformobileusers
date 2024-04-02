@@ -106,9 +106,11 @@ abstract class $AppRouter extends _i13.RootStackRouter {
       );
     },
     ProfileCreationRoute.name: (routeData) {
+      final args = routeData.argsAs<ProfileCreationRouteArgs>(
+          orElse: () => const ProfileCreationRouteArgs());
       return _i13.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i9.ProfileCreationPage(),
+        child: _i9.ProfileCreationPage(key: args.key),
       );
     },
     SalesRoute.name: (routeData) {
@@ -359,16 +361,32 @@ class OhsRoute extends _i13.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i9.ProfileCreationPage]
-class ProfileCreationRoute extends _i13.PageRouteInfo<void> {
-  const ProfileCreationRoute({List<_i13.PageRouteInfo>? children})
-      : super(
+class ProfileCreationRoute
+    extends _i13.PageRouteInfo<ProfileCreationRouteArgs> {
+  ProfileCreationRoute({
+    _i14.Key? key,
+    List<_i13.PageRouteInfo>? children,
+  }) : super(
           ProfileCreationRoute.name,
+          args: ProfileCreationRouteArgs(key: key),
           initialChildren: children,
         );
 
   static const String name = 'ProfileCreationRoute';
 
-  static const _i13.PageInfo<void> page = _i13.PageInfo<void>(name);
+  static const _i13.PageInfo<ProfileCreationRouteArgs> page =
+      _i13.PageInfo<ProfileCreationRouteArgs>(name);
+}
+
+class ProfileCreationRouteArgs {
+  const ProfileCreationRouteArgs({this.key});
+
+  final _i14.Key? key;
+
+  @override
+  String toString() {
+    return 'ProfileCreationRouteArgs{key: $key}';
+  }
 }
 
 /// generated route for
