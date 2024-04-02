@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:enviro_mobile_application/utilis/constant.dart';
 import 'package:enviro_mobile_application/view_model/10_profile/profile_view_model.dart';
+import 'package:enviro_mobile_application/view_model/10_profile/profile_view_model.dart';
 import 'package:enviro_mobile_application/widgets/cmn_action_icon.dart';
 import 'package:enviro_mobile_application/widgets/cmn_title_textwidget.dart';
 import 'package:enviro_mobile_application/widgets/drawer.dart';
@@ -10,7 +11,10 @@ import 'package:flutter/material.dart';
 class ProfileCreationPage extends StatelessWidget {
   ProfileCreationPage({Key? key}) : super(key: key);
   final TextEditingController _controllerphonenumber = TextEditingController();
-
+  final TextEditingController _controlleremail = TextEditingController();
+  final TextEditingController _controllerusername = TextEditingController();
+  final TextEditingController _controllerpassword = TextEditingController();
+  final TextEditingController _controllername = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,6 +61,8 @@ class ProfileCreationPage extends StatelessWidget {
                 child: SizedBox(
                   height: 48,
                   child: TextField(
+                    controller: _controllername
+                      ..text = vmProfile.profilepageResponse.data?.name ?? '',
                     decoration: InputDecoration(
                       filled: true,
                       fillColor: Colors.grey[200],
@@ -65,8 +71,6 @@ class ProfileCreationPage extends StatelessWidget {
                           borderRadius:
                               BorderRadius.all(Radius.circular(24.0))),
                       labelText: 'Name',
-                      prefixText:
-                          vmProfile.profilepageResponse.data?.name ?? '',
                       labelStyle: const TextStyle(color: Colors.blue),
                     ),
                   ),
@@ -78,7 +82,10 @@ class ProfileCreationPage extends StatelessWidget {
                 child: SizedBox(
                   height: 48,
                   child: TextField(
-                    controller: _controllerphonenumber,
+                    controller: _controllerphonenumber
+                      ..text =
+                          vmProfile.profilepageResponse.data?.contactNumber ??
+                              '',
                     decoration: InputDecoration(
                       filled: true,
                       fillColor: Colors.grey[200],
@@ -87,9 +94,6 @@ class ProfileCreationPage extends StatelessWidget {
                           borderRadius:
                               BorderRadius.all(Radius.circular(24.0))),
                       labelText: 'Mobile Number',
-                      prefixText:
-                          vmProfile.profilepageResponse.data?.contactNumber ??
-                              '',
                       labelStyle: const TextStyle(color: Colors.blue),
                     ),
                     keyboardType: TextInputType.phone,
@@ -102,6 +106,8 @@ class ProfileCreationPage extends StatelessWidget {
                 child: SizedBox(
                   height: 48,
                   child: TextField(
+                    controller: _controlleremail
+                      ..text = vmProfile.profilepageResponse.data?.email ?? '',
                     decoration: InputDecoration(
                       filled: true,
                       fillColor: Colors.grey[200],
@@ -110,8 +116,6 @@ class ProfileCreationPage extends StatelessWidget {
                           borderRadius:
                               BorderRadius.all(Radius.circular(24.0))),
                       labelText: 'Email',
-                      prefixText:
-                          vmProfile.profilepageResponse.data?.email ?? '',
                       labelStyle: const TextStyle(color: Colors.blue),
                     ),
                     keyboardType: TextInputType.emailAddress,
@@ -124,6 +128,9 @@ class ProfileCreationPage extends StatelessWidget {
                 child: SizedBox(
                   height: 48,
                   child: TextField(
+                    controller: _controllerusername
+                      ..text =
+                          vmProfile.profilepageResponse.data?.username ?? '',
                     decoration: InputDecoration(
                       suffixIcon: IconButton(
                         onPressed: () {
@@ -138,8 +145,6 @@ class ProfileCreationPage extends StatelessWidget {
                           borderRadius:
                               BorderRadius.all(Radius.circular(24.0))),
                       labelText: 'Username',
-                      prefixText:
-                          vmProfile.profilepageResponse.data?.username ?? '',
                       labelStyle: const TextStyle(color: Colors.blue),
                     ),
                   ),
@@ -172,26 +177,29 @@ class ProfileCreationPage extends StatelessWidget {
               ),
               const SizedBox(
                 height: 64,
-              ), // Add more space before the button
+              ),
               SizedBox(
                 width: 34,
-                child: ElevatedButton(
-                  style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.resolveWith<Color>(
-                      (Set<MaterialState> states) {
-                        return Colors.blue; // Background color
-                      },
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 15.0, right: 15),
+                  child: ElevatedButton(
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.resolveWith<Color>(
+                        (Set<MaterialState> states) {
+                          return Colors.blue; // Background color
+                        },
+                      ),
+                      foregroundColor: MaterialStateProperty.resolveWith<Color>(
+                        (Set<MaterialState> states) {
+                          return Colors.white; // Text color
+                        },
+                      ),
                     ),
-                    foregroundColor: MaterialStateProperty.resolveWith<Color>(
-                      (Set<MaterialState> states) {
-                        return Colors.white; // Text color
-                      },
-                    ),
+                    onPressed: () {
+                      // Add your save logic here
+                    },
+                    child: const Text('Save'),
                   ),
-                  onPressed: () {
-                    // Add your save logic here
-                  },
-                  child: const Text('Save'),
                 ),
               ),
             ],
