@@ -6,8 +6,8 @@ import 'package:enviro_mobile_application/widgets/ww_response_handler.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
-class SalesListPage extends StatelessWidget {
-  const SalesListPage({Key? key}) : super(key: key);
+class SalesListTab extends StatelessWidget {
+  const SalesListTab({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -40,13 +40,13 @@ class SalesListWidget extends StatelessWidget {
     return buildCardDataOrder(
       image: data?.profile,
       [
-        expandedRowShowText('Total Quote Won', ": ${data?.won ?? ""}"),
+        expandedRowShowText1('Total Quote Won', ": ${data?.won ?? ""}"),
         gapField,
-        expandedRowShowText('Total Quote Lost:', ": ${data?.lost ?? ""}"),
+        expandedRowShowText1('Total Quote Lost:', ": ${data?.lost ?? ""}"),
         gapField,
-        expandedRowShowText('Total Quote Pending', ": ${data?.pending ?? ""}"),
+        expandedRowShowText1('Total Quote Pending', ": ${data?.pending ?? ""}"),
         gapField,
-        expandedRowShowText('Total Quote Made', ": ${data?.total ?? ""}"),
+        expandedRowShowText1('Total Quote Made', ": ${data?.total ?? ""}"),
       ],
     );
   }

@@ -8,8 +8,8 @@ import 'package:enviro_mobile_application/widgets/ww_response_handler.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
-class QuoteRegisterpage extends StatelessWidget {
-  const QuoteRegisterpage({Key? key}) : super(key: key);
+class QuoteRegisterTab extends StatelessWidget {
+  const QuoteRegisterTab({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

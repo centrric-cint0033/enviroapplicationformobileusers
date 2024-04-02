@@ -6,6 +6,8 @@ abstract class Appthemes {
   static const textColor = Color(0XFFAAAAAA);
   static const bluecolor = Color(0XFF061933);
   static Color cLightGrey = Colors.grey[200]!;
+  static const cPrimary = Color(0xff109AD1);
+
   static final ThemeData themeData = ThemeData(
     useMaterial3: true,
     textTheme: const TextTheme(

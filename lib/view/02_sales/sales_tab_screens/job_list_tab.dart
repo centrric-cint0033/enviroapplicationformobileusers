@@ -7,8 +7,8 @@ import 'package:enviro_mobile_application/widgets/ww_response_handler.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
-class JobListPage extends StatelessWidget {
-  const JobListPage({Key? key}) : super(key: key);
+class JobListTab extends StatelessWidget {
+  const JobListTab({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

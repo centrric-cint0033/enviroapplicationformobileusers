@@ -15,31 +15,33 @@ Card customCard({required Widget child}) => Card(
     color: Colors.white,
     child: child);
 
-Text showText(String value) => Text(
-      value,
-      // textAlign: TextAlign.left,
-      style: const TextStyle(color: Colors.blue),
-    );
+Text showText(String value) =>
+    Text(value, style: const TextStyle(color: Appthemes.cPrimary));
 
-Expanded expandedShowText(String value) => Expanded(child: showText(value));
+Expanded expandedShowText(String value) =>
+    Expanded(flex: 3, child: showText(value));
 
 Row expandedRowShowText(String firsValue, String secondValue) => Row(
       children: [expandedShowText(firsValue), expandedShowText(secondValue)],
     );
 
+Row expandedRowShowText1(String firsValue, String secondValue) => Row(
+      children: [
+        Expanded(flex: 3, child: showText(firsValue)),
+        Expanded(flex: 1, child: showText(secondValue))
+      ],
+    );
+
 Widget buildCardDataOrder(List<Widget> widget, {String? image}) => customCard(
-        child: Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: Row(
-        children: [
+    child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Row(children: [
           if (image != null) ...[
             imageAndName(image),
             sized0wx10,
           ],
           Expanded(flex: 7, child: Column(children: widget)),
-        ],
-      ),
-    ));
+        ])));
 
 Expanded imageAndName(String image) => Expanded(
     flex: 2,

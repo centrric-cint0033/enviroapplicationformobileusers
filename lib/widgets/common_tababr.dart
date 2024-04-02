@@ -1,3 +1,4 @@
+import 'package:enviro_mobile_application/utilis/Appthemes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -7,8 +8,8 @@ Padding CommonTabbar() {
     child: Container(
       height: 32.w,
       decoration: BoxDecoration(
-        color: Colors.blue,
-        border: Border.all(color: Colors.blue),
+        color: Appthemes.cPrimary,
+        border: Border.all(color: Appthemes.cPrimary),
         borderRadius: BorderRadius.circular(8.0),
       ),
       child: TabBar(
