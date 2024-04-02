@@ -1,19 +1,21 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:enviro_mobile_application/Routepage/approutes.gr.dart';
+import 'package:enviro_mobile_application/Routepage/routespage.dart';
 import 'package:enviro_mobile_application/Routepage/securestorage.dart';
 import 'package:enviro_mobile_application/utilis/constant.dart';
+import 'package:enviro_mobile_application/view/09_prfle_creation_page/prfle_crtion.dart';
+import 'package:enviro_mobile_application/view/09_prfle_creation_page/prfle_crtion.dart';
 import 'package:enviro_mobile_application/view/home_page.dart';
 import 'package:enviro_mobile_application/view_model/10_profile/profile_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 
-void profilenamechnge() => {};
+import '../Routepage/approutes.gr.dart';
+
 Drawer CmnDrawer(BuildContext context) {
   return Drawer(
     width: 210.w,
     child: ListView(
-      physics: NeverScrollableScrollPhysics(),
+      physics: const NeverScrollableScrollPhysics(),
       padding: EdgeInsets.zero,
       children: <Widget>[
         const SizedBox(
@@ -50,11 +52,13 @@ Drawer CmnDrawer(BuildContext context) {
                 Container(
                   height: 33,
                   child: ElevatedButton(
+                      onPressed: () {
+                        profileeditfunction(context);
+                      },
                       style: ButtonStyle(
                         side: MaterialStateProperty.all(
                             const BorderSide(color: Colors.blue)),
                       ),
-                      onPressed: profilenamechnge,
                       child: Text(
                         vmProfile.profilepageResponse.data?.permissionType ??
                             '',
@@ -78,7 +82,7 @@ Drawer CmnDrawer(BuildContext context) {
                 ListTile(
                   leading: const Icon(
                     Icons.monetization_on,
-                    color: Colors.blue, // Set icon color to blue
+                    color: Colors.blue,
                   ),
                   title: const Text('Sales'),
                   onTap: () {
@@ -184,4 +188,8 @@ Drawer CmnDrawer(BuildContext context) {
       ],
     ),
   );
+}
+
+void profileeditfunction(BuildContext context) {
+  context.router.pushNamed(RouteNames.rprofilepage);
 }
