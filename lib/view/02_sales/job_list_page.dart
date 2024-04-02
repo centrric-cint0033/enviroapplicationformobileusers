@@ -29,14 +29,14 @@ class JobListPage extends StatelessWidget {
                                 ? wwErrorData(
                                     onTap: () => vmSales.saleJobListApi(),
                                     mainFailure: vmSales.joblistResponse.errors)
-                                : const SalesListWidget());
+                                : const SalesJobListWidget());
                   }),
                 ]))));
   }
 }
 
-class SalesListWidget extends StatelessWidget {
-  const SalesListWidget({super.key});
+class SalesJobListWidget extends StatelessWidget {
+  const SalesJobListWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
