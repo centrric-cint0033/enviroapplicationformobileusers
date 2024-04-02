@@ -1,3 +1,4 @@
+import 'package:enviro_mobile_application/utilis/Appthemes.dart';
 import 'package:enviro_mobile_application/view_model/02_sales/sales_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -54,14 +55,12 @@ class QuoteRegisterpage extends StatelessWidget {
     required int? schedule_id,
     required String client_email,
   }) {
-    return Container(
+    return SizedBox(
       width: double.infinity,
       child: Card(
         margin: const EdgeInsets.only(left: 16.0, right: 16),
         shape: RoundedRectangleBorder(
-          side: const BorderSide(
-            color: Color(0XFF949494),
-          ),
+          side: BorderSide(color: Appthemes.cLightGrey),
           borderRadius: BorderRadius.circular(8.0),
         ),
         color: Colors.white,
@@ -77,15 +76,14 @@ class QuoteRegisterpage extends StatelessWidget {
                   const SizedBox(width: 10),
                   const Expanded(
                     child: Text(
-                      "ID:",
-                      textAlign: TextAlign.right,
+                      "ID",
+                      textAlign: TextAlign.left,
                       style: TextStyle(color: Colors.blue),
                     ),
                   ),
-                  const SizedBox(width: 10),
                   Expanded(
                     child: Text(
-                      " $id",
+                      ": $id",
                       textAlign: TextAlign.left,
                       style: const TextStyle(color: Colors.blue),
                     ),
@@ -99,15 +97,14 @@ class QuoteRegisterpage extends StatelessWidget {
                   const SizedBox(width: 10),
                   const Expanded(
                     child: Text(
-                      "Won/Lose Status:",
-                      textAlign: TextAlign.right,
+                      "Won/Lose Status",
+                      textAlign: TextAlign.left,
                       style: TextStyle(color: Colors.blue),
                     ),
                   ),
-                  const SizedBox(width: 10),
                   Expanded(
                     child: Text(
-                      "$won_lose_status",
+                      ": $won_lose_status",
                       textAlign: TextAlign.left,
                       style: const TextStyle(color: Colors.blue),
                     ),
@@ -121,16 +118,13 @@ class QuoteRegisterpage extends StatelessWidget {
                   const SizedBox(width: 10),
                   const Expanded(
                     child: Text(
-                      "Created By:",
-                      textAlign: TextAlign.right,
+                      "Created By",
                       style: TextStyle(color: Colors.blue),
                     ),
                   ),
-                  const SizedBox(width: 10),
                   Expanded(
                     child: Text(
-                      "$created_by",
-                      textAlign: TextAlign.left,
+                      ": $created_by",
                       style: const TextStyle(color: Colors.blue),
                     ),
                   ),
@@ -142,16 +136,14 @@ class QuoteRegisterpage extends StatelessWidget {
                   const SizedBox(width: 10),
                   const Expanded(
                     child: Text(
-                      "Client Type:",
-                      textAlign: TextAlign.right,
+                      "Client Type",
+                      textAlign: TextAlign.left,
                       style: TextStyle(color: Colors.blue),
                     ),
                   ),
-                  const SizedBox(width: 10),
                   Expanded(
                     child: Text(
-                      "$client_type",
-                      textAlign: TextAlign.left,
+                      ": $client_type",
                       style: const TextStyle(color: Colors.blue),
                     ),
                   ),
@@ -164,15 +156,13 @@ class QuoteRegisterpage extends StatelessWidget {
                   const SizedBox(width: 10),
                   const Expanded(
                     child: Text(
-                      "Schedule ID:",
-                      textAlign: TextAlign.right,
+                      "Schedule ID",
                       style: TextStyle(color: Colors.blue),
                     ),
                   ),
-                  const SizedBox(width: 10),
                   Expanded(
                     child: Text(
-                      "S${schedule_id ?? ''}",
+                      ": S${schedule_id ?? ''}",
                       textAlign: TextAlign.left,
                       style: const TextStyle(color: Colors.blue),
                     ),
@@ -187,15 +177,13 @@ class QuoteRegisterpage extends StatelessWidget {
                   const SizedBox(width: 10),
                   const Expanded(
                     child: Text(
-                      "Client Email:",
-                      textAlign: TextAlign.right,
+                      "Client Email",
                       style: TextStyle(color: Colors.blue),
                     ),
                   ),
-                  const SizedBox(width: 10),
                   Expanded(
                     child: Text(
-                      "$client_email",
+                      ": $client_email",
                       textAlign: TextAlign.left,
                       style: const TextStyle(color: Colors.blue),
                     ),

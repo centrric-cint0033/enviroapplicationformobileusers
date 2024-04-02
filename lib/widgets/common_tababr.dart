@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 Padding CommonTabbar() {
   return Padding(
     padding: const EdgeInsets.only(left: 25, right: 25),
     child: Container(
-      width: 390,
-      height: 62,
+      height: 32.w,
       decoration: BoxDecoration(
         color: Colors.blue,
         border: Border.all(color: Colors.blue),
