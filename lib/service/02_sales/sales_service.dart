@@ -12,9 +12,11 @@ import 'package:injectable/injectable.dart';
 abstract class ISalesService {
   Future<Either<MainFailure, List<SalesModel>>> saleslistServiceApi();
 
-  Future<Either<MainFailure, List<SalesModel>>> saleJoblistApiService();
+  Future<Either<Map<MainFailure, dynamic>, List<SalesModel>>>
+      saleJoblistApiService();
 
-  Future<Either<MainFailure, List<SalesModel>>> quoteRegisterServiceApi();
+  Future<Either<Map<MainFailure, dynamic>, List<SalesModel>>>
+      quoteRegisterServiceApi();
 }
 
 @LazySingleton(as: ISalesService)
@@ -43,17 +45,15 @@ class SalesService implements ISalesService {
   }
 
   @override
-  Future<Either<MainFailure, List<SalesModel>>> saleJoblistApiService() async {
+  Future<Either<Map<MainFailure, dynamic>, List<SalesModel>>>
+      saleJoblistApiService() async {
     var response = await getIt<HttpService>().request(
         authenticated: true,
         method: HttpMethod.get,
         apiUrl: ApiEndPoints.endpointjoblist);
 
     return response.fold(
-      (l) {
-        (l.values.first);
-        return Left(l.keys.first);
-      },
+      (l) => Left(l),
       (res) async {
         var data = jsonDecode(res.body) as List;
         List<SalesModel> quoteregvehicle =
@@ -64,7 +64,7 @@ class SalesService implements ISalesService {
   }
 
   @override
-  Future<Either<MainFailure, List<SalesModel>>>
+  Future<Either<Map<MainFailure, dynamic>, List<SalesModel>>>
       quoteRegisterServiceApi() async {
     var response = await getIt<HttpService>().request(
         authenticated: true,
@@ -72,10 +72,7 @@ class SalesService implements ISalesService {
         apiUrl: ApiEndPoints.endpointquoteregvehiclelist);
 
     return response.fold(
-      (l) {
-        (l.values.first);
-        return Left(l.keys.first);
-      },
+      (l) => Left(l),
       (res) async {
         var data = jsonDecode(res.body) as List;
 

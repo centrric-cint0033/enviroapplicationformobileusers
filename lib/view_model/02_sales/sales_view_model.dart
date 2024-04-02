@@ -28,15 +28,15 @@ abstract class SalesViewModelBase with Store {
   @action
   Future<void> saleJobListApi() async {
     try {
-      joblistResponse = joblistResponse.copyWith(error: null, loading: true);
+      joblistResponse = joblistResponse.copyWith(errors: null, loading: true);
       final result = await salesService.saleJoblistApiService();
       return result.fold(
         (l) {
-          joblistResponse = joblistResponse.copyWith(error: l, loading: false);
+          joblistResponse = joblistResponse.copyWith(errors: l, loading: false);
         },
         (r) {
           joblistResponse =
-              joblistResponse.copyWith(data: r, error: null, loading: false);
+              joblistResponse.copyWith(data: r, errors: null, loading: false);
         },
       );
     } catch (e) {
@@ -80,17 +80,17 @@ abstract class SalesViewModelBase with Store {
   @action
   Future<void> quoteRegisterApi() async {
     try {
-      quoteRegResponse = quoteRegResponse.copyWith(error: null, loading: true);
+      quoteRegResponse = quoteRegResponse.copyWith(errors: null, loading: true);
 
       final result = await salesService.quoteRegisterServiceApi();
       return result.fold(
         (l) {
           quoteRegResponse =
-              quoteRegResponse.copyWith(error: l, loading: false);
+              quoteRegResponse.copyWith(errors: l, loading: false);
         },
         (r) {
           quoteRegResponse =
-              quoteRegResponse.copyWith(data: r, error: null, loading: false);
+              quoteRegResponse.copyWith(data: r, errors: null, loading: false);
         },
       );
     } catch (e) {

@@ -24,3 +24,9 @@ Expanded expandedShowText(String value) => Expanded(child: showText(value));
 Row expandedRowShowText(String firsValue, String secondValue) => Row(
       children: [expandedShowText(firsValue), expandedShowText(secondValue)],
     );
+
+Widget buildCardDataOrder(List<Widget> widget) => customCard(
+        child: Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Column(children: widget),
+    ));

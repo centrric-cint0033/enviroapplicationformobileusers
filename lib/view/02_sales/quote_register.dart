@@ -1,5 +1,11 @@
-import 'package:enviro_mobile_application/utilis/Appthemes.dart';
+// ignore_for_file: non_constant_identifier_names
+
+import 'package:enviro_mobile_application/model/02_sales/sales_model/sales_model.dart';
+import 'package:enviro_mobile_application/utilis/constant.dart';
+import 'package:enviro_mobile_application/view/02_sales/sales_widgets.dart/sales_widget.dart';
 import 'package:enviro_mobile_application/view_model/02_sales/sales_view_model.dart';
+import 'package:enviro_mobile_application/widgets/ww_customLoading.dart';
+import 'package:enviro_mobile_application/widgets/ww_popup_error.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
@@ -9,191 +15,61 @@ class QuoteRegisterpage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Scaffold(
-        body: Padding(
-          padding: const EdgeInsets.only(left: 8.0, right: 8),
-          child: Column(
-            children: [
-              // common_search_widget(),
-              const SizedBox(height: 16.0),
-              Observer(
-                builder: (_) {
-                  return Expanded(
-                    child: ListView.separated(
-                      itemCount: vmSales.quoteRegResponse.data?.length ?? 0,
-                      separatorBuilder: (BuildContext context, int index) {
-                        return const SizedBox(height: 12.0);
-                      },
-                      itemBuilder: (context, index) {
-                        var data = vmSales.quoteRegResponse.data?[index];
-                        return _buildJobCard(
-                          id: data?.id ?? 0,
-                          won_lose_status: data?.wonLoseStatus ?? "",
-                          created_by: data?.createdBy ?? "",
-                          client_type: data?.clientType ?? "",
-                          schedule_id: data?.scheduleId,
-                          client_email: data?.clientEmail ?? "",
-                        );
-                      },
-                    ),
-                  );
-                },
-              ),
-            ],
-          ),
-        ),
-      ),
+        padding: const EdgeInsets.all(8.0),
+        child: Scaffold(
+            body: Padding(
+                padding: const EdgeInsets.only(left: 8.0, right: 8),
+                child: Column(children: [
+                  const SizedBox(height: 16.0),
+                  Observer(builder: (_) {
+                    return Expanded(
+                      child: vmSales.quoteRegResponse.loading
+                          ? wwCustomLoader()
+                          : vmSales.quoteRegResponse.errors != null
+                              ? Center(
+                                  child: wwErrorData(
+                                      onTap: () => vmSales.quoteRegisterApi(),
+                                      mainFailure:
+                                          vmSales.quoteRegResponse.errors),
+                                )
+                              : const QuoteReqisterListWidget(),
+                    );
+                  })
+                ]))));
+  }
+}
+
+class QuoteReqisterListWidget extends StatelessWidget {
+  const QuoteReqisterListWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.separated(
+      itemCount: vmSales.quoteRegResponse.data?.length ?? 0,
+      separatorBuilder: (BuildContext context, int index) => sized0hx10,
+      itemBuilder: (context, index) {
+        var data = vmSales.quoteRegResponse.data?[index];
+        return listData(data);
+      },
     );
   }
 
-  Widget _buildJobCard({
-    required int id,
-    required String won_lose_status,
-    required String created_by,
-    required String client_type,
-    required int? schedule_id,
-    required String client_email,
-  }) {
-    return SizedBox(
-      width: double.infinity,
-      child: Card(
-        margin: const EdgeInsets.only(left: 16.0, right: 16),
-        shape: RoundedRectangleBorder(
-          side: BorderSide(color: Appthemes.cLightGrey),
-          borderRadius: BorderRadius.circular(8.0),
-        ),
-        color: Colors.white,
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const SizedBox(width: 10),
-                  const Expanded(
-                    child: Text(
-                      "ID",
-                      textAlign: TextAlign.left,
-                      style: TextStyle(color: Colors.blue),
-                    ),
-                  ),
-                  Expanded(
-                    child: Text(
-                      ": $id",
-                      textAlign: TextAlign.left,
-                      style: const TextStyle(color: Colors.blue),
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 8.0),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const SizedBox(width: 10),
-                  const Expanded(
-                    child: Text(
-                      "Won/Lose Status",
-                      textAlign: TextAlign.left,
-                      style: TextStyle(color: Colors.blue),
-                    ),
-                  ),
-                  Expanded(
-                    child: Text(
-                      ": $won_lose_status",
-                      textAlign: TextAlign.left,
-                      style: const TextStyle(color: Colors.blue),
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 8.0),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const SizedBox(width: 10),
-                  const Expanded(
-                    child: Text(
-                      "Created By",
-                      style: TextStyle(color: Colors.blue),
-                    ),
-                  ),
-                  Expanded(
-                    child: Text(
-                      ": $created_by",
-                      style: const TextStyle(color: Colors.blue),
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 8.0),
-              Row(
-                children: [
-                  const SizedBox(width: 10),
-                  const Expanded(
-                    child: Text(
-                      "Client Type",
-                      textAlign: TextAlign.left,
-                      style: TextStyle(color: Colors.blue),
-                    ),
-                  ),
-                  Expanded(
-                    child: Text(
-                      ": $client_type",
-                      style: const TextStyle(color: Colors.blue),
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 8.0),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const SizedBox(width: 10),
-                  const Expanded(
-                    child: Text(
-                      "Schedule ID",
-                      style: TextStyle(color: Colors.blue),
-                    ),
-                  ),
-                  Expanded(
-                    child: Text(
-                      ": S${schedule_id ?? ''}",
-                      textAlign: TextAlign.left,
-                      style: const TextStyle(color: Colors.blue),
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 8.0),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const SizedBox(width: 10),
-                  const Expanded(
-                    child: Text(
-                      "Client Email",
-                      style: TextStyle(color: Colors.blue),
-                    ),
-                  ),
-                  Expanded(
-                    child: Text(
-                      ": $client_email",
-                      textAlign: TextAlign.left,
-                      style: const TextStyle(color: Colors.blue),
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ),
-      ),
+  Widget listData(SalesModel? data) {
+    return buildCardDataOrder(
+      [
+        expandedRowShowText('ID', ": ${data?.id ?? ""}"),
+        gapField,
+        expandedRowShowText(
+            'Won/Lose Status', ": ${data?.wonLoseStatus ?? ""}"),
+        gapField,
+        expandedRowShowText('Created By', ": ${data?.createdBy ?? ""}"),
+        gapField,
+        expandedRowShowText('Client Type', ": ${data?.clientType ?? ""}"),
+        gapField,
+        expandedRowShowText('Schedule ID', ": ${data?.scheduleId ?? ""}"),
+        gapField,
+        expandedRowShowText('Client Email', ": ${data?.clientEmail ?? ""}"),
+      ],
     );
   }
 }
