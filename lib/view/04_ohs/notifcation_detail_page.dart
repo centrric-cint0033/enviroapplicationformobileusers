@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:enviro_mobile_application/model/04_ohs/oh&s_resp_model.dart';
 import 'package:enviro_mobile_application/widgets/cmappbar.dart';
 import 'package:enviro_mobile_application/widgets/cmn_action_icon.dart';
+
 import 'package:enviro_mobile_application/widgets/cmn_leading_icon.dart';
 import 'package:enviro_mobile_application/widgets/cmn_title_textwidget.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +21,7 @@ class NotificationDetailPage extends StatelessWidget {
       appBar: CustomAppBar(
         leading: const cmn_leading_icon(),
         title: cmnTitleWidget('OH&S'),
-        actions: cmn_action_icon,
+        actions: [const NotificationButton()],
       ),
       body: SingleChildScrollView(
         child: Column(

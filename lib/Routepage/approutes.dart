@@ -35,5 +35,7 @@ class AppRouter extends $AppRouter {
         ),
         AutoRoute(
             page: ProfileCreationRoute.page, path: RouteNames.rprofilepage),
+        AutoRoute(
+            page: NotificationRoute.page, path: RouteNames.rnotificationpage),
       ];
 }

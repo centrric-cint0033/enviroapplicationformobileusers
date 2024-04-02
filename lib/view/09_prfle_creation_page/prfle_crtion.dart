@@ -21,7 +21,7 @@ class ProfileCreationPage extends StatelessWidget {
       drawer: CmnDrawer(context),
       appBar: AppBar(
         title: cmnTitleWidget('Profile'),
-        actions: cmn_action_icon,
+        actions: [const NotificationButton()],
       ),
       body: SingleChildScrollView(
         child: Padding(

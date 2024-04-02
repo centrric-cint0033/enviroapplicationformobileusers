@@ -24,7 +24,7 @@ class IntranetInsidePage extends StatelessWidget {
       appBar: AppBar(
         // leading: const cmn_leading_icon(),
         title: cmnTitleWidget('Intranet'),
-        actions: cmn_action_icon,
+        actions: [const NotificationButton()],
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

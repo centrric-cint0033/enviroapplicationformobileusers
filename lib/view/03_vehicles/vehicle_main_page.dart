@@ -26,7 +26,7 @@ class VehiclePage extends StatelessWidget {
         appBar: AppBar(
           // leading: const cmn_leading_icon(),
           title: cmnTitleWidget('Vehicles'),
-          actions: cmn_action_icon,
+          actions: [const NotificationButton()],
         ),
         body: const Column(
           children: [

@@ -26,7 +26,7 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         // leading: const cmn_leading_icon(),
         title: cmnTitleWidget('Home'),
-        actions: cmn_action_icon,
+        actions: [const NotificationButton()],
       ),
       body: Observer(builder: (context) {
         return Padding(

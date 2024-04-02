@@ -1,19 +1,16 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:dartz/dartz.dart';
 import 'package:enviro_mobile_application/Routepage/approutes.gr.dart';
-import 'package:enviro_mobile_application/Routepage/routespage.dart';
-import 'package:enviro_mobile_application/view/07_intranet/intranet_inside_page.dart';
+
 import 'package:enviro_mobile_application/view_model/04_ohs/ohs_view_model.dart';
 import 'package:enviro_mobile_application/view_model/07_intranet/intranet_view_model.dart';
 import 'package:enviro_mobile_application/widgets/cmn_action_icon.dart';
-import 'package:enviro_mobile_application/widgets/cmn_leading_icon.dart';
+
 import 'package:enviro_mobile_application/widgets/cmn_title_textwidget.dart';
 import 'package:enviro_mobile_application/widgets/drawer.dart';
 import 'package:flutter/material.dart';
 
 import 'package:enviro_mobile_application/widgets/cmcustomformfield.dart';
-import 'package:enviro_mobile_application/widgets/cmappbar.dart';
-import 'package:enviro_mobile_application/utilis/imagepath.dart';
+
 import 'package:flutter_mobx/flutter_mobx.dart';
 
 @RoutePage()
@@ -31,7 +28,7 @@ class IntranetPage extends StatelessWidget {
       appBar: AppBar(
         // leading: const cmn_leading_icon(),
         title: cmnTitleWidget('Intranet'),
-        actions: cmn_action_icon,
+        actions: [NotificationButton()],
       ),
       body: Padding(
         padding: const EdgeInsets.only(top: 35, right: 18),

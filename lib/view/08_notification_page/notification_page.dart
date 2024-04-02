@@ -1,8 +1,10 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:enviro_mobile_application/widgets/notification_page.dart';
 import 'package:flutter/material.dart';
 import 'package:enviro_mobile_application/widgets/cmappbar.dart';
 import 'package:enviro_mobile_application/utilis/imagepath.dart';
 
+@RoutePage()
 class NotificationPage extends StatelessWidget {
   const NotificationPage({Key? key});
 
