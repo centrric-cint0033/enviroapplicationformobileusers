@@ -30,7 +30,6 @@ class ProfileCreationPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Center(
-                // Wrap the Image.network with Center widget
                 child: SizedBox(
                   width: 100,
                   height: 100,
@@ -40,7 +39,6 @@ class ProfileCreationPage extends StatelessWidget {
                           fit: BoxFit.cover,
                         )
                       : Container(),
-                  // You can replace Container() with any placeholder widget you desire
                 ),
               ),
               sized0hx05,
@@ -76,7 +74,7 @@ class ProfileCreationPage extends StatelessWidget {
                   ),
                 ),
               ),
-              const SizedBox(height: 22), // Add some space between fields
+              const SizedBox(height: 22),
               Padding(
                 padding: const EdgeInsets.only(left: 12.0, right: 12.0),
                 child: SizedBox(
@@ -158,9 +156,7 @@ class ProfileCreationPage extends StatelessWidget {
                   child: TextField(
                     decoration: InputDecoration(
                         suffixIcon: IconButton(
-                          onPressed: () {
-                            // Add your icon onPressed logic here
-                          },
+                          onPressed: () {},
                           icon: Icon(Icons.edit),
                         ),
                         filled: true,
@@ -171,7 +167,7 @@ class ProfileCreationPage extends StatelessWidget {
                                 BorderRadius.all(Radius.circular(24.0))),
                         labelText: 'Password',
                         labelStyle: const TextStyle(color: Colors.blue)),
-                    obscureText: true, // Hide the entered text
+                    obscureText: true,
                   ),
                 ),
               ),
