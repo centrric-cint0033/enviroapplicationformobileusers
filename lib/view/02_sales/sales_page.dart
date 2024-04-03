@@ -21,7 +21,7 @@ class SalesPage extends StatelessWidget {
           appBar: AppBar(
             // leading: const cmn_leading_icon(),
             title: cmnTitleWidget('Sales'),
-            actions: [const NotificationButton()],
+            actions: const [NotificationButton()],
           ),
           body: Column(
             children: [

@@ -7,21 +7,24 @@ import 'package:enviro_mobile_application/view_model/02_sales/sales_view_model.d
 import 'package:enviro_mobile_application/widgets/ww_response_handler.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class QuoteRegisterTab extends StatelessWidget {
   const QuoteRegisterTab({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Scaffold(body: Observer(builder: (_) {
-          return WWResponseHandler(
-              data: vmSales.quoteRegResponse,
-              isEmpty: vmSales.quoteRegResponse.data?.isEmpty ?? true,
-              onTap: () => vmSales.quoteRegisterApi(),
-              child: const QuoteReqisterListWidget());
-        })));
+    return Scaffold(
+        body: Padding(
+      padding: EdgeInsets.symmetric(horizontal: 15.w),
+      child: Observer(builder: (_) {
+        return WWResponseHandler(
+            data: vmSales.quoteRegResponse,
+            isEmpty: vmSales.quoteRegResponse.data?.isEmpty ?? true,
+            onTap: () => vmSales.quoteRegisterApi(),
+            child: const QuoteReqisterListWidget());
+      }),
+    ));
   }
 }
 

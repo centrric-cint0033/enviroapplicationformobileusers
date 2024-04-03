@@ -3,6 +3,7 @@ import 'package:enviro_mobile_application/model/02_sales/sales_model/sales_model
 import 'package:enviro_mobile_application/service/02_sales/sales_service.dart';
 import 'package:enviro_mobile_application/utilis/api_endpoints/customprint.dart';
 import 'package:enviro_mobile_application/utilis/injection.dart';
+import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 import 'package:mobx/mobx.dart';
 
@@ -20,6 +21,13 @@ abstract class SalesViewModelBase with Store {
   final ISalesService salesService;
 
   SalesViewModelBase(this.salesService);
+  TextEditingController salesJobListSearchCtr = TextEditingController();
+
+//      _      ____    ___      ____      _      _       _       ____
+//     / \    |  _ \  |_ _|    / ___|    / \    | |     | |     / ___|
+//    / _ \   | |_) |  | |    | |       / _ \   | |     | |     \___ \
+//   / ___ \  |  __/   | |    | |___   / ___ \  | |___  | |___   ___) |
+//  /_/   \_\ |_|     |___|    \____| /_/   \_\ |_____| |_____| |____/
 
   @observable
   ApiResponse<List<SalesModel>> joblistResponse =
@@ -45,6 +53,12 @@ abstract class SalesViewModelBase with Store {
       joblistResponse = joblistResponse.copyWith(loading: false);
     }
   }
+
+//     _  _       _  _       _  _       _  _       _  _       _  _       _  _       _  _
+//   _| || |_   _| || |_   _| || |_   _| || |_   _| || |_   _| || |_   _| || |_   _| || |_
+//  |_  ..  _| |_  ..  _| |_  ..  _| |_  ..  _| |_  ..  _| |_  ..  _| |_  ..  _| |_  ..  _|
+//  |_      _| |_      _| |_      _| |_      _| |_      _| |_      _| |_      _| |_      _|
+//    |_||_|     |_||_|     |_||_|     |_||_|     |_||_|     |_||_|     |_||_|     |_||_|
 
   @observable
   ApiResponse<List<SalesModel>> salespageResponse =
@@ -72,6 +86,12 @@ abstract class SalesViewModelBase with Store {
       salespageResponse = salespageResponse.copyWith(loading: false);
     }
   }
+
+//     _  _       _  _       _  _       _  _       _  _       _  _       _  _       _  _
+//   _| || |_   _| || |_   _| || |_   _| || |_   _| || |_   _| || |_   _| || |_   _| || |_
+//  |_  ..  _| |_  ..  _| |_  ..  _| |_  ..  _| |_  ..  _| |_  ..  _| |_  ..  _| |_  ..  _|
+//  |_      _| |_      _| |_      _| |_      _| |_      _| |_      _| |_      _| |_      _|
+//    |_||_|     |_||_|     |_||_|     |_||_|     |_||_|     |_||_|     |_||_|     |_||_|
 
   @observable
   ApiResponse<List<SalesModel>> quoteRegResponse =

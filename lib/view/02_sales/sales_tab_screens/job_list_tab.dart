@@ -6,27 +6,33 @@ import 'package:enviro_mobile_application/widgets/ww_search_widget.dart';
 import 'package:enviro_mobile_application/widgets/ww_response_handler.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class JobListTab extends StatelessWidget {
   const JobListTab({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Scaffold(
-            body: Column(children: [
-          WWSearchField(controller: TextEditingController(), searchTap: () {}),
-          sized0hx10,
-          Observer(builder: (_) {
-            return Expanded(
-                child: WWResponseHandler(
-                    data: vmSales.joblistResponse,
-                    isEmpty: vmSales.joblistResponse.data?.isEmpty ?? true,
-                    onTap: () => vmSales.saleJobListApi(),
-                    child: const SalesJobListWidget()));
-          }),
-        ])));
+    return Scaffold(
+        body: Padding(
+      padding: EdgeInsets.symmetric(horizontal: 15.w),
+      child: Column(children: [
+        sized0hx10,
+        WWSearchField(
+          controller: vmSales.salesJobListSearchCtr,
+          searchTap: () {},
+        ),
+        sized0hx10,
+        Observer(builder: (_) {
+          return Expanded(
+              child: WWResponseHandler(
+                  data: vmSales.joblistResponse,
+                  isEmpty: vmSales.joblistResponse.data?.isEmpty ?? true,
+                  onTap: () => vmSales.saleJobListApi(),
+                  child: const SalesJobListWidget()));
+        }),
+      ]),
+    ));
   }
 }
 
@@ -36,13 +42,10 @@ class SalesJobListWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.separated(
-      itemCount: vmSales.joblistResponse.data?.length ?? 0,
-      separatorBuilder: (BuildContext context, int index) => sized0hx10,
-      itemBuilder: (context, index) {
-        var data = vmSales.joblistResponse.data?[index];
-        return listData(data);
-      },
-    );
+        itemCount: vmSales.joblistResponse.data?.length ?? 0,
+        separatorBuilder: (BuildContext context, int index) => sized0hx10,
+        itemBuilder: (context, index) =>
+            listData(vmSales.joblistResponse.data?[index]));
   }
 
   Widget listData(SalesModel? data) {
