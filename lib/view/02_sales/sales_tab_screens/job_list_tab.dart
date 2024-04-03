@@ -1,4 +1,8 @@
+import 'package:auto_route/auto_route.dart';
+import 'package:enviro_mobile_application/Routepage/approutes.gr.dart';
+import 'package:enviro_mobile_application/Routepage/routespage.dart';
 import 'package:enviro_mobile_application/model/02_sales/sales_model/sales_model.dart';
+import 'package:enviro_mobile_application/utilis/api_endpoints/customprint.dart';
 import 'package:enviro_mobile_application/utilis/constant.dart';
 import 'package:enviro_mobile_application/view/02_sales/sales_widgets.dart/sales_widget.dart';
 import 'package:enviro_mobile_application/view_model/02_sales/sales_view_model.dart';
@@ -17,7 +21,7 @@ class JobListTab extends StatelessWidget {
         body: Padding(
       padding: EdgeInsets.symmetric(horizontal: 15.w),
       child: Column(children: [
-        sized0hx10,
+        gapField,
         WWSearchField(
           controller: vmSales.salesJobListSearchCtr,
           onChanged: (v) => vmSales.onTextChanged(() => v.isEmpty
@@ -25,7 +29,7 @@ class JobListTab extends StatelessWidget {
               : vmSales.salesJobListSearchApi(v)),
           searchTap: () {},
         ),
-        sized0hx10,
+        gapField,
         Observer(builder: (_) {
           return Expanded(
               child: WWResponseHandler(
@@ -50,8 +54,12 @@ class SalesJobListWidget extends StatelessWidget {
     return ListView.separated(
         itemCount: vmSales.joblistResponse.data?.length ?? 0,
         separatorBuilder: (BuildContext context, int index) => sized0hx10,
-        itemBuilder: (context, index) =>
-            listData(vmSales.joblistResponse.data?[index]));
+        itemBuilder: (context, index) => InkWell(
+            onTap: () {
+              context.router.push(
+                  SalesDetailRoute(data: vmSales.joblistResponse.data?[index]));
+            },
+            child: listData(vmSales.joblistResponse.data?[index])));
   }
 
   Widget listData(SalesModel? data) {
@@ -63,7 +71,7 @@ class SalesJobListWidget extends StatelessWidget {
         gapField,
         expandedRowShowText('Quoted By', ': ${data?.quotedBy ?? ""}'),
         gapField,
-        expandedRowShowText('Amount', ': ${data?.quotedBy ?? ""}'),
+        expandedRowShowText('Amount', ': ${data?.amount ?? ""}'),
         gapField,
         expandedRowShowText('Status', ': ${data?.status ?? ""}'),
       ],

@@ -24,6 +24,7 @@ abstract class SalesViewModelBase with Store {
 
   SalesViewModelBase(this.salesService);
   TextEditingController salesJobListSearchCtr = TextEditingController();
+  TextEditingController salesQuoteListSearchCtr = TextEditingController();
 
   Timer? debouce;
 
@@ -61,6 +62,36 @@ abstract class SalesViewModelBase with Store {
       );
     } catch (e) {
       customPrint(content: e, name: 'Error saleJobListApi');
+    } finally {
+      joblistResponse = joblistResponse.copyWith(loading: false);
+    }
+  }
+
+//     _  _       _  _       _  _       _  _       _  _       _  _       _  _       _  _
+//   _| || |_   _| || |_   _| || |_   _| || |_   _| || |_   _| || |_   _| || |_   _| || |_
+//  |_  ..  _| |_  ..  _| |_  ..  _| |_  ..  _| |_  ..  _| |_  ..  _| |_  ..  _| |_  ..  _|
+//  |_      _| |_      _| |_      _| |_      _| |_      _| |_      _| |_      _| |_      _|
+//    |_||_|     |_||_|     |_||_|     |_||_|     |_||_|     |_||_|     |_||_|     |_||_|
+
+  @action
+  Future<void> salesJobListSearchApi(String searchData) async {
+    try {
+      joblistResponse = joblistResponse.copyWith(errors: null, loading: true);
+
+      final result = await salesService.salesJobListSearchServiceApi(data: [
+        {"key": searchData}
+      ]);
+      return result.fold(
+        (l) {
+          joblistResponse = joblistResponse.copyWith(errors: l, loading: false);
+        },
+        (r) {
+          joblistResponse =
+              joblistResponse.copyWith(data: r, errors: null, loading: false);
+        },
+      );
+    } catch (e) {
+      customPrint(content: e, name: 'Error salesJobListSearchApi');
     } finally {
       joblistResponse = joblistResponse.copyWith(loading: false);
     }
@@ -139,26 +170,27 @@ abstract class SalesViewModelBase with Store {
 //    |_||_|     |_||_|     |_||_|     |_||_|     |_||_|     |_||_|     |_||_|     |_||_|
 
   @action
-  Future<void> salesJobListSearchApi(String searchData) async {
+  Future<void> salesQuoteListSearchApi(String searchData) async {
     try {
-      joblistResponse = joblistResponse.copyWith(errors: null, loading: true);
+      quoteRegResponse = quoteRegResponse.copyWith(errors: null, loading: true);
 
-      final result = await salesService.salesJobListSearchServiceApi(data: [
+      final result = await salesService.salesQuoteListSearchServiceApi(data: [
         {"key": searchData}
       ]);
       return result.fold(
         (l) {
-          joblistResponse = joblistResponse.copyWith(errors: l, loading: false);
+          quoteRegResponse =
+              quoteRegResponse.copyWith(errors: l, loading: false);
         },
         (r) {
-          joblistResponse =
-              joblistResponse.copyWith(data: r, errors: null, loading: false);
+          quoteRegResponse =
+              quoteRegResponse.copyWith(data: r, errors: null, loading: false);
         },
       );
     } catch (e) {
       customPrint(content: e, name: 'Error salesJobListSearchApi');
     } finally {
-      joblistResponse = joblistResponse.copyWith(loading: false);
+      quoteRegResponse = quoteRegResponse.copyWith(loading: false);
     }
   }
 }

@@ -44,7 +44,7 @@ class CmButton extends StatelessWidget {
             backgroundColor:
                 MaterialStateProperty.all<Color>(color ?? Colors.blue),
             fixedSize: MaterialStateProperty.all<Size>(
-              Size(width ?? 341.0, height ?? 50.0),
+              Size(width ?? double.maxFinite, height ?? 50.0),
             ),
             shape: MaterialStateProperty.all<OutlinedBorder>(
               RoundedRectangleBorder(

@@ -11,15 +11,18 @@ class ApiEndPoints {
 
   //SALES APIS
 
-  static const endpointsaleslist = '/api/v1/sales/performance/waste/2024/3/';
+  static const endpointsaleslist = '/api/v1/sales/performance/waste/2024/2';
 
   static const endpointquoteregvehiclelist =
       '/api/v1/sales/quote/waste/2/?limit=20';
 
   static const endpointjoblist = '/api/v1/sales/jobs/waste/1/?limit=10';
 
-  static const endpointSalesSearch =
+  static const endpointSalesJobSearch =
       '/api/v1/jobs/search/site/waste/?limit=20&page=1';
+
+  static const endpointSaleQuoteSearch =
+      '/api/v1/sales/quote/search/site/waste/?limit=20&page=1';
 
   // VEHICLE APIS
 

@@ -22,6 +22,9 @@ abstract class ISalesService {
 
   Future<Either<Map<MainFailure, dynamic>, List<SalesModel>>>
       salesJobListSearchServiceApi({required List<Map<String, String>> data});
+
+  Future<Either<Map<MainFailure, dynamic>, List<SalesModel>>>
+      salesQuoteListSearchServiceApi({required List<Map<String, String>> data});
 }
 
 @LazySingleton(as: ISalesService)
@@ -41,6 +44,25 @@ class SalesService implements ISalesService {
         List<SalesModel> saleslistvehicle = List<SalesModel>.from(
             data['app_data'].map((e) => SalesModel.fromJson(e)));
         return Right(saleslistvehicle);
+      },
+    );
+  }
+
+  @override
+  Future<Either<Map<MainFailure, dynamic>, List<SalesModel>>>
+      salesJobListSearchServiceApi(
+          {required List<Map<String, String>> data}) async {
+    var response = await getIt<HttpService>().multipartRequest(
+        data: data,
+        method: 'POST',
+        apiUrl: ApiEndPoints.endpointSalesJobSearch);
+    return response.fold(
+      (l) => Left(l),
+      (res) async {
+        var data = jsonDecode(res.body) as List;
+        List<SalesModel> quoteregvehicle =
+            data.map((e) => SalesModel.fromJson(e)).toList();
+        return Right(quoteregvehicle);
       },
     );
   }
@@ -85,13 +107,12 @@ class SalesService implements ISalesService {
 
   @override
   Future<Either<Map<MainFailure, dynamic>, List<SalesModel>>>
-      salesJobListSearchServiceApi(
+      salesQuoteListSearchServiceApi(
           {required List<Map<String, String>> data}) async {
-    //  MultipartRequest request = MultipartRequest("PUT",
-    //     Uri.parse("${ApiEndPoints.baseUrl}/${ApiEndPoints.endPprofileEdit}"));
-
     var response = await getIt<HttpService>().multipartRequest(
-        data: data, method: 'POST', apiUrl: ApiEndPoints.endpointSalesSearch);
+        data: data,
+        method: 'POST',
+        apiUrl: ApiEndPoints.endpointSaleQuoteSearch);
     return response.fold(
       (l) => Left(l),
       (res) async {
