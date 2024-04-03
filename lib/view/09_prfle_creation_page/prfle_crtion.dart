@@ -184,7 +184,7 @@ class ProfileCreationPage extends StatelessWidget {
                     child: TextFormField(
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return 'Please enter the password';
+                          return 'Please enter the passwords';
                         }
                         return null;
                       },
