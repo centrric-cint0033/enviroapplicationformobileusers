@@ -19,10 +19,9 @@ class SalesPage extends StatelessWidget {
         child: Scaffold(
           drawer: CmnDrawer(context),
           appBar: AppBar(
-            // leading: const cmn_leading_icon(),
-            title: cmnTitleWidget('Sales'),
-            actions: [const NotificationButton()],
-          ),
+              // leading: const cmn_leading_icon(),
+              title: cmnTitleWidget('Sales'),
+              actions: [notificationButton(context)]),
           body: Column(
             children: [
               CommonTabbar(),

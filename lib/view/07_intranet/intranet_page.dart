@@ -26,10 +26,9 @@ class IntranetPage extends StatelessWidget {
     return Scaffold(
       drawer: CmnDrawer(context),
       appBar: AppBar(
-        // leading: const cmn_leading_icon(),
-        title: cmnTitleWidget('Intranet'),
-        actions: [NotificationButton()],
-      ),
+          // leading: const cmn_leading_icon(),
+          title: cmnTitleWidget('Intranet'),
+          actions: [notificationButton(context)]),
       body: Padding(
         padding: const EdgeInsets.only(top: 35, right: 18),
         child: Column(

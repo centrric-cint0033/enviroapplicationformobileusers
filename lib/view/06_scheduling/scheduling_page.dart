@@ -19,10 +19,9 @@ class SchedulingPage extends StatelessWidget {
       length: 3,
       child: Scaffold(
         appBar: AppBar(
-          // leading: const cmn_leading_icon(),
-          title: cmnTitleWidget('Sales'),
-          actions: [const NotificationButton()],
-        ),
+            // leading: const cmn_leading_icon(),
+            title: cmnTitleWidget('Sales'),
+            actions: [notificationButton(context)]),
         body: calander_page(),
       ),
     );

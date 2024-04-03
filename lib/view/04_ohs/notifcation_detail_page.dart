@@ -19,10 +19,9 @@ class NotificationDetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
-        leading: const cmn_leading_icon(),
-        title: cmnTitleWidget('OH&S'),
-        actions: [const NotificationButton()],
-      ),
+          leading: const cmn_leading_icon(),
+          title: cmnTitleWidget('OH&S'),
+          actions: [notificationButton(context)]),
       body: SingleChildScrollView(
         child: Column(
           children: [

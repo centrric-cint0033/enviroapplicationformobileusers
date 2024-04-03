@@ -24,10 +24,9 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       drawer: CmnDrawer(context),
       appBar: AppBar(
-        // leading: const cmn_leading_icon(),
-        title: cmnTitleWidget('Home'),
-        actions: [const NotificationButton()],
-      ),
+          // leading: const cmn_leading_icon(),
+          title: cmnTitleWidget('Home'),
+          actions: [notificationButton(context)]),
       body: Observer(builder: (context) {
         return Padding(
           padding: const EdgeInsets.all(36.0),

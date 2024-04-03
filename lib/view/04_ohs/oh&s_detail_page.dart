@@ -22,10 +22,9 @@ class OhsDetailPage extends StatelessWidget {
     return Scaffold(
       drawer: CmnDrawer(context),
       appBar: AppBar(
-        // leading: const cmn_leading_icon(),
-        title: cmnTitleWidget('OH&S'),
-        actions: [const NotificationButton()],
-      ),
+          // leading: const cmn_leading_icon(),
+          title: cmnTitleWidget('OH&S'),
+          actions: [notificationButton(context)]),
       body: Column(
         children: [
           Padding(

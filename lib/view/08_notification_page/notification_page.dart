@@ -1,4 +1,7 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:enviro_mobile_application/widgets/cmn_action_icon.dart';
+import 'package:enviro_mobile_application/widgets/cmn_title_textwidget.dart';
+import 'package:enviro_mobile_application/widgets/drawer.dart';
 import 'package:enviro_mobile_application/widgets/notification_page.dart';
 import 'package:flutter/material.dart';
 import 'package:enviro_mobile_application/widgets/cmappbar.dart';
@@ -15,22 +18,10 @@ class NotificationPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(
-        leadingImage: Image.asset(ImageConstant.imagePath),
-        automaticallyImplyLeading: false,
-        actions: [
-          IconButton(
-            iconSize: 32,
-            icon: const Icon(Icons.notifications),
-            onPressed: _handleNotificationButtonTap,
-          ),
-          IconButton(
-            iconSize: 32,
-            icon: const Icon(Icons.account_circle),
-            onPressed: () {},
-          ),
-        ],
-      ),
+      drawer: CmnDrawer(context),
+      appBar: AppBar(
+          title: cmnTitleWidget('Home'),
+          actions: [notificationButton(context)]),
       body: notification_page(context),
     );
   }

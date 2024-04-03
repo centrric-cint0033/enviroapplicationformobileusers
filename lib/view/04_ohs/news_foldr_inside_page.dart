@@ -18,10 +18,9 @@ class NewsPageInsidePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        // leading: const cmn_leading_icon(),
-        title: cmnTitleWidget('Folders'),
-        actions: const [NotificationButton()],
-      ),
+          // leading: const cmn_leading_icon(),
+          title: cmnTitleWidget('Folders'),
+          actions: [notificationButton(context)]),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
