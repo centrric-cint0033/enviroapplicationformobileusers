@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 abstract class Appthemes {
   static const lightTextColor = Color.fromARGB(255, 187, 30, 30);
@@ -6,14 +7,16 @@ abstract class Appthemes {
   static const textColor = Color(0XFFAAAAAA);
   static const bluecolor = Color(0XFF061933);
   static Color cLightGrey = Colors.grey[200]!;
+  static const cPrimary = Color(0xff109AD1);
+
   static final ThemeData themeData = ThemeData(
     useMaterial3: true,
-    textTheme: const TextTheme(
+    textTheme: TextTheme(
+      //textfield hint style using default
       titleMedium: TextStyle(
         color: Colors.black,
-        fontSize: 18,
+        fontSize: 12.sp,
         fontFamily: 'Inter',
-        fontWeight: FontWeight.w700,
       ),
       headlineMedium: TextStyle(
           color: Colors.black,

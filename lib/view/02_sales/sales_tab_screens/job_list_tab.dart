@@ -2,36 +2,31 @@ import 'package:enviro_mobile_application/model/02_sales/sales_model/sales_model
 import 'package:enviro_mobile_application/utilis/constant.dart';
 import 'package:enviro_mobile_application/view/02_sales/sales_widgets.dart/sales_widget.dart';
 import 'package:enviro_mobile_application/view_model/02_sales/sales_view_model.dart';
-import 'package:enviro_mobile_application/widgets/common_search_widget.dart';
-import 'package:enviro_mobile_application/widgets/ww_customLoading.dart';
-import 'package:enviro_mobile_application/widgets/ww_popup_error.dart';
+import 'package:enviro_mobile_application/widgets/ww_search_widget.dart';
+import 'package:enviro_mobile_application/widgets/ww_response_handler.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
-class JobListPage extends StatelessWidget {
-  const JobListPage({Key? key}) : super(key: key);
+class JobListTab extends StatelessWidget {
+  const JobListTab({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
         padding: const EdgeInsets.all(8.0),
         child: Scaffold(
-            body: Padding(
-                padding: const EdgeInsets.only(left: 8.0, right: 8),
-                child: Column(children: [
-                  common_search_widget(),
-                  sized0hx10,
-                  Observer(builder: (_) {
-                    return Expanded(
-                        child: vmSales.joblistResponse.loading
-                            ? wwCustomLoader()
-                            : vmSales.joblistResponse.errors != null
-                                ? wwErrorData(
-                                    onTap: () => vmSales.saleJobListApi(),
-                                    mainFailure: vmSales.joblistResponse.errors)
-                                : const SalesJobListWidget());
-                  }),
-                ]))));
+            body: Column(children: [
+          WWSearchField(controller: TextEditingController(), searchTap: () {}),
+          sized0hx10,
+          Observer(builder: (_) {
+            return Expanded(
+                child: WWResponseHandler(
+                    data: vmSales.joblistResponse,
+                    isEmpty: vmSales.joblistResponse.data?.isEmpty ?? true,
+                    onTap: () => vmSales.saleJobListApi(),
+                    child: const SalesJobListWidget()));
+          }),
+        ])));
   }
 }
 

@@ -54,16 +54,16 @@ abstract class SalesViewModelBase with Store {
   Future<void> saleslistApi() async {
     try {
       salespageResponse =
-          salespageResponse.copyWith(error: null, loading: true);
+          salespageResponse.copyWith(errors: null, loading: true);
       final result = await salesService.saleslistServiceApi();
       return result.fold(
         (l) {
           salespageResponse =
-              salespageResponse.copyWith(error: l, loading: false);
+              salespageResponse.copyWith(errors: l, loading: false);
         },
         (r) {
           salespageResponse =
-              salespageResponse.copyWith(data: r, error: null, loading: false);
+              salespageResponse.copyWith(data: r, errors: null, loading: false);
         },
       );
     } catch (e) {
