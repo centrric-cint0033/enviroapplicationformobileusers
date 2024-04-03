@@ -20,6 +20,9 @@ class JobListTab extends StatelessWidget {
         sized0hx10,
         WWSearchField(
           controller: vmSales.salesJobListSearchCtr,
+          onChanged: (v) => vmSales.onTextChanged(() => v.isEmpty
+              ? vmSales.saleJobListApi()
+              : vmSales.salesJobListSearchApi(v)),
           searchTap: () {},
         ),
         sized0hx10,
@@ -28,7 +31,10 @@ class JobListTab extends StatelessWidget {
               child: WWResponseHandler(
                   data: vmSales.joblistResponse,
                   isEmpty: vmSales.joblistResponse.data?.isEmpty ?? true,
-                  onTap: () => vmSales.saleJobListApi(),
+                  onTap: () => vmSales.salesJobListSearchCtr.text.isNotEmpty
+                      ? vmSales.salesJobListSearchApi(
+                          vmSales.salesJobListSearchCtr.text)
+                      : vmSales.saleJobListApi(),
                   child: const SalesJobListWidget()));
         }),
       ]),

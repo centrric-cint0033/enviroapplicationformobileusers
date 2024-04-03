@@ -1,7 +1,28 @@
 class ApiEndPoints {
   // Authentication APIs
+
+  // AUTH APIS
+
   static const endPointLogin = '/api/token/';
+
+  //PERMISSIONS APIS
+
   static const endPointpermissions = '/api/v1/permissions/all/';
+
+  //SALES APIS
+
+  static const endpointsaleslist = '/api/v1/sales/performance/waste/2024/3/';
+
+  static const endpointquoteregvehiclelist =
+      '/api/v1/sales/quote/waste/2/?limit=20';
+
+  static const endpointjoblist = '/api/v1/sales/jobs/waste/1/?limit=10';
+
+  static const endpointSalesSearch =
+      '/api/v1/jobs/search/site/waste/?limit=20&page=1';
+
+  // VEHICLE APIS
+
   static const endPointallvehiclelisting = '/api/v1/vehicles/waste/truck/list/';
   static const endpointtruckpage = '/api/v1/vehicles/waste/truck/all/1/';
   static const endpointcarpage = '/api/v1/vehicles/waste/car/all/1/';
@@ -50,10 +71,6 @@ class ApiEndPoints {
       '/api/v1/vehicles/waste/fork-lift/pre-inspection/filter/vehicle/';
   static const endpointfuelexpensessemitrucksearch =
       '/api/v1/vehicles/waste/fork-lift/fuelExpense/search/vehicle/';
-  static const endpointquoteregvehiclelist =
-      '/api/v1/sales/quote/waste/2/?limit=20';
-  static const endpointjoblist = '/api/v1/sales/jobs/waste/1/?limit=10';
-  static const endpointsaleslist = '/api/v1/sales/performance/waste/2024/3/';
 
   static const endpointohsnews = '/api/v1/oh_and_s/news/view/1/?limit=8';
   static const endpointnewsfolder = '/api/v1/oh_and_s/folder/segment/list';

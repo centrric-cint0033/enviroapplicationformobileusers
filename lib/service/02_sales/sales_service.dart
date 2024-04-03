@@ -7,6 +7,7 @@ import 'package:enviro_mobile_application/utilis/api_endpoints/api_endpoints.dar
 import 'package:enviro_mobile_application/utilis/httpservice.dart';
 import 'package:enviro_mobile_application/utilis/injection.dart';
 import 'package:enviro_mobile_application/utilis/main_failure.dart';
+import 'package:http/http.dart';
 import 'package:injectable/injectable.dart';
 
 abstract class ISalesService {
@@ -18,6 +19,9 @@ abstract class ISalesService {
 
   Future<Either<Map<MainFailure, dynamic>, List<SalesModel>>>
       quoteRegisterServiceApi();
+
+  Future<Either<Map<MainFailure, dynamic>, List<SalesModel>>>
+      salesJobListSearchServiceApi({required List<Map<String, String>> data});
 }
 
 @LazySingleton(as: ISalesService)
@@ -72,7 +76,26 @@ class SalesService implements ISalesService {
       (l) => Left(l),
       (res) async {
         var data = jsonDecode(res.body) as List;
+        List<SalesModel> quoteregvehicle =
+            data.map((e) => SalesModel.fromJson(e)).toList();
+        return Right(quoteregvehicle);
+      },
+    );
+  }
 
+  @override
+  Future<Either<Map<MainFailure, dynamic>, List<SalesModel>>>
+      salesJobListSearchServiceApi(
+          {required List<Map<String, String>> data}) async {
+    //  MultipartRequest request = MultipartRequest("PUT",
+    //     Uri.parse("${ApiEndPoints.baseUrl}/${ApiEndPoints.endPprofileEdit}"));
+
+    var response = await getIt<HttpService>().multipartRequest(
+        data: data, method: 'POST', apiUrl: ApiEndPoints.endpointSalesSearch);
+    return response.fold(
+      (l) => Left(l),
+      (res) async {
+        var data = jsonDecode(res.body) as List;
         List<SalesModel> quoteregvehicle =
             data.map((e) => SalesModel.fromJson(e)).toList();
         return Right(quoteregvehicle);

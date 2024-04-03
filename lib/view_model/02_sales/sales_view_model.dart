@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:enviro_mobile_application/api_response/api_response.dart';
 import 'package:enviro_mobile_application/model/02_sales/sales_model/sales_model.dart';
 import 'package:enviro_mobile_application/service/02_sales/sales_service.dart';
@@ -22,6 +24,16 @@ abstract class SalesViewModelBase with Store {
 
   SalesViewModelBase(this.salesService);
   TextEditingController salesJobListSearchCtr = TextEditingController();
+
+  Timer? debouce;
+
+  void onTextChanged(Function() function) {
+    // Clear the previous debounce timer
+    if (debouce?.isActive ?? false) debouce?.cancel();
+
+    // Set up a new debounce timer
+    debouce = Timer(const Duration(milliseconds: 500), () => function());
+  }
 
 //      _      ____    ___      ____      _      _       _       ____
 //     / \    |  _ \  |_ _|    / ___|    / \    | |     | |     / ___|
@@ -117,6 +129,36 @@ abstract class SalesViewModelBase with Store {
       customPrint(content: e, name: 'Error quoteRegisterApi');
     } finally {
       quoteRegResponse = quoteRegResponse.copyWith(loading: false);
+    }
+  }
+
+//     _  _       _  _       _  _       _  _       _  _       _  _       _  _       _  _
+//   _| || |_   _| || |_   _| || |_   _| || |_   _| || |_   _| || |_   _| || |_   _| || |_
+//  |_  ..  _| |_  ..  _| |_  ..  _| |_  ..  _| |_  ..  _| |_  ..  _| |_  ..  _| |_  ..  _|
+//  |_      _| |_      _| |_      _| |_      _| |_      _| |_      _| |_      _| |_      _|
+//    |_||_|     |_||_|     |_||_|     |_||_|     |_||_|     |_||_|     |_||_|     |_||_|
+
+  @action
+  Future<void> salesJobListSearchApi(String searchData) async {
+    try {
+      joblistResponse = joblistResponse.copyWith(errors: null, loading: true);
+
+      final result = await salesService.salesJobListSearchServiceApi(data: [
+        {"key": searchData}
+      ]);
+      return result.fold(
+        (l) {
+          joblistResponse = joblistResponse.copyWith(errors: l, loading: false);
+        },
+        (r) {
+          joblistResponse =
+              joblistResponse.copyWith(data: r, errors: null, loading: false);
+        },
+      );
+    } catch (e) {
+      customPrint(content: e, name: 'Error salesJobListSearchApi');
+    } finally {
+      joblistResponse = joblistResponse.copyWith(loading: false);
     }
   }
 }
