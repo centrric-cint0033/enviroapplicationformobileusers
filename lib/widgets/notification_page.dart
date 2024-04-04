@@ -1,7 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:enviro_mobile_application/Routepage/approutes.gr.dart';
 import 'package:enviro_mobile_application/Routepage/routespage.dart';
-import 'package:enviro_mobile_application/view_model/01_auth/auth_view_model.dart';
 import 'package:enviro_mobile_application/view_model/04_ohs/ohs_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -244,8 +243,7 @@ Future<void> _showMyDialognotification(BuildContext context) async {
                   decoration: const InputDecoration(
                     labelText: 'Add File+',
                     border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(
-                            10))), // Add border to the text field
+                        borderRadius: BorderRadius.all(Radius.circular(10))),
                   ),
                 ),
               ),

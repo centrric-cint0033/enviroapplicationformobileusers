@@ -7,4 +7,5 @@ class ImageConstant {
   static String imagesheduling = 'assets/images/calendar.svg';
   static String imageintranet = 'assets/images/users.svg';
   static String imageteam = 'assets/images/globe.svg';
+  static String svgError = 'assets/images/empty1.svg';
 }

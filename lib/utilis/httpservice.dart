@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:io';
 import 'dart:async';
 import 'dart:convert';
@@ -83,14 +82,23 @@ class HttpService {
       customPrint(content: data, name: "Payload");
       customPrint(content: response.body, name: "Response");
 
-      // customPrint(content: 'LOGS');
-      // log(response.body);
-
       if (response.statusCode == HttpStatus.ok ||
           response.statusCode == HttpStatus.created) {
+        // for app login
+        if (jsonDecode(response.body) is! List &&
+            jsonDecode(response.body)["access"] != null) {
+          await SecureStorage().writeData(
+            key: "token",
+            value: jsonDecode(response.body)["access"],
+          );
+        }
         return Right(response);
       } else {
-        return Left({const MainFailure.clientFailure(): response});
+        return Left({
+          const MainFailure.clientFailure():
+              jsonDecode(response.body)["detail"] ??
+                  jsonDecode(response.body)["app_data"]
+        });
       }
     } on FormatException catch (_) {
       return Left({const MainFailure.clientFailure(): null});
@@ -117,25 +125,61 @@ class HttpService {
   }
 
   Future<Either<Map<MainFailure, dynamic>, Response>> multipartRequest({
-    required MultipartRequest request,
+    MultipartRequest? request,
+    String? apiUrl,
+    String? method,
+    List<Map<String, String>>? data,
   }) async {
-    final token = await SecureStorage().readData(key: "token");
-    request.headers.addAll({
-      'Accept': 'application/json',
-      'Content-Type': 'multipart/form-data',
-    });
-    if (token != null) {
-      request.headers.addAll({'Authorization': 'Bearer $token'});
-    }
+    final url = "$baseUrl$apiUrl";
 
-    StreamedResponse streamedResponse = await request.send();
-    final response = await Response.fromStream(streamedResponse);
-    customPrint(content: response.body, name: "StreamedResponse");
-    if (response.statusCode == HttpStatus.ok ||
-        response.statusCode == HttpStatus.created) {
-      return Right(response);
-    } else {
-      return Left({const MainFailure.clientFailure(): response});
+    // if (method != null) {
+    MultipartRequest request = MultipartRequest(method!, Uri.parse(url));
+    // }
+
+    try {
+      final token = await SecureStorage().readData(key: "token");
+      request.headers.addAll({
+        'Accept': 'application/json',
+        'Content-Type': 'multipart/form-data',
+      });
+      if (token != null) {
+        request.headers.addAll({'Authorization': 'Bearer $token'});
+      }
+
+      if (data != null) {
+        for (var element in data) {
+          element.forEach((key, value) {
+            request.fields[key] = value.toString();
+          });
+        }
+      }
+
+      StreamedResponse streamedResponse = await request.send();
+      final response = await Response.fromStream(streamedResponse);
+      customPrint(content: response.body, name: "StreamedResponse");
+      if (response.statusCode == HttpStatus.ok ||
+          response.statusCode == HttpStatus.created) {
+        return Right(response);
+      } else {
+        return Left({
+          const MainFailure.clientFailure():
+              jsonDecode(response.body)["detail"] ??
+                  jsonDecode(response.body)["app_data"]
+        });
+      }
+    } on FormatException catch (_) {
+      return Left({const MainFailure.clientFailure(): null});
+    } on HttpException catch (_) {
+      return Left({const MainFailure.clientFailure(): null});
+    } on TimeoutException catch (_) {
+      return Left({const MainFailure.timeout(): null});
+    } on SocketException catch (_) {
+      return Left({const MainFailure.networkFailure(): null});
+    } catch (e) {
+      debugPrint(e.toString());
+      return Left({const MainFailure.clientFailure(): null});
+    } finally {
+      // client.close();
     }
   }
 }

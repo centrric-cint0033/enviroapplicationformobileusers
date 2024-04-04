@@ -18,11 +18,10 @@ class SchedulingPage extends StatelessWidget {
     return DefaultTabController(
       length: 3,
       child: Scaffold(
-        appBar: CustomAppBar(
-          leading: cmn_leading_icon(),
-          title: cmnTitleWidget('Schedule'),
-          actions: cmn_action_icon,
-        ),
+        appBar: AppBar(
+            // leading: const cmn_leading_icon(),
+            title: cmnTitleWidget('Sales'),
+            actions: [notificationButton(context)]),
         body: calander_page(),
       ),
     );

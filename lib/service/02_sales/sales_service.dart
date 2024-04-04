@@ -1,90 +1,124 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:dartz/dartz.dart';
-import 'package:enviro_mobile_application/model/quoterego/res_model/quote_rego_res_model.dart';
-import 'package:enviro_mobile_application/model/sales/res_model/salesresp_model.dart';
-import 'package:enviro_mobile_application/model/saleslist/resmodel/saleslist_resmodel.dart';
+import 'package:enviro_mobile_application/model/02_sales/sales_model/sales_model.dart';
 import 'package:enviro_mobile_application/utilis/api_endpoints/api_endpoints.dart';
 import 'package:enviro_mobile_application/utilis/httpservice.dart';
 import 'package:enviro_mobile_application/utilis/injection.dart';
 import 'package:enviro_mobile_application/utilis/main_failure.dart';
+import 'package:http/http.dart';
 import 'package:injectable/injectable.dart';
 
 abstract class ISalesService {
-  Future<Either<MainFailure, List<SalesListResModel>>> saleslistfunction();
+  Future<Either<Map<MainFailure, dynamic>, List<SalesModel>>>
+      saleslistServiceApi();
 
-  Future<Either<MainFailure, List<SalesJobListstRegResModel>>>
-      vehiclejoblistfunction();
+  Future<Either<Map<MainFailure, dynamic>, List<SalesModel>>>
+      saleJoblistApiService();
 
-  Future<Either<MainFailure, List<QuoteRegResModel>>> quoteregfunction();
+  Future<Either<Map<MainFailure, dynamic>, List<SalesModel>>>
+      quoteRegisterServiceApi();
+
+  Future<Either<Map<MainFailure, dynamic>, List<SalesModel>>>
+      salesJobListSearchServiceApi({required List<Map<String, String>> data});
+
+  Future<Either<Map<MainFailure, dynamic>, List<SalesModel>>>
+      salesQuoteListSearchServiceApi({required List<Map<String, String>> data});
 }
 
 @LazySingleton(as: ISalesService)
 class SalesService implements ISalesService {
   @override
-  Future<Either<MainFailure, List<SalesListResModel>>>
-      saleslistfunction() async {
+  Future<Either<Map<MainFailure, dynamic>, List<SalesModel>>>
+      saleslistServiceApi() async {
     var response = await getIt<HttpService>().request(
         authenticated: true,
         method: HttpMethod.get,
         apiUrl: ApiEndPoints.endpointsaleslist);
 
     return response.fold(
-      (l) {
-        (l.values.first);
-        return Left(l.keys.first);
-      },
+      (l) => Left(l),
       (res) async {
         var data = jsonDecode(res.body);
-
-        List<SalesListResModel> saleslistvehicle = List<SalesListResModel>.from(
-            data['app_data'].map((e) => SalesListResModel.fromJson(e)));
-
+        List<SalesModel> saleslistvehicle = List<SalesModel>.from(
+            data['app_data'].map((e) => SalesModel.fromJson(e)));
         return Right(saleslistvehicle);
       },
     );
   }
 
   @override
-  Future<Either<MainFailure, List<SalesJobListstRegResModel>>>
-      vehiclejoblistfunction() async {
-    var response = await getIt<HttpService>().request(
-        authenticated: true,
-        method: HttpMethod.get,
-        apiUrl: ApiEndPoints.endpointjoblist);
-
+  Future<Either<Map<MainFailure, dynamic>, List<SalesModel>>>
+      salesJobListSearchServiceApi(
+          {required List<Map<String, String>> data}) async {
+    var response = await getIt<HttpService>().multipartRequest(
+        data: data,
+        method: 'POST',
+        apiUrl: ApiEndPoints.endpointSalesJobSearch);
     return response.fold(
-      (l) {
-        (l.values.first);
-        return Left(l.keys.first);
-      },
+      (l) => Left(l),
       (res) async {
         var data = jsonDecode(res.body) as List;
-
-        List<SalesJobListstRegResModel> quoteregvehicle =
-            data.map((e) => SalesJobListstRegResModel.fromJson(e)).toList();
+        List<SalesModel> quoteregvehicle =
+            data.map((e) => SalesModel.fromJson(e)).toList();
         return Right(quoteregvehicle);
       },
     );
   }
 
   @override
-  Future<Either<MainFailure, List<QuoteRegResModel>>> quoteregfunction() async {
+  Future<Either<Map<MainFailure, dynamic>, List<SalesModel>>>
+      saleJoblistApiService() async {
+    var response = await getIt<HttpService>().request(
+        authenticated: true,
+        method: HttpMethod.get,
+        apiUrl: ApiEndPoints.endpointjoblist);
+
+    return response.fold(
+      (l) => Left(l),
+      (res) async {
+        var data = jsonDecode(res.body) as List;
+        List<SalesModel> quoteregvehicle =
+            data.map((e) => SalesModel.fromJson(e)).toList();
+        return Right(quoteregvehicle);
+      },
+    );
+  }
+
+  @override
+  Future<Either<Map<MainFailure, dynamic>, List<SalesModel>>>
+      quoteRegisterServiceApi() async {
     var response = await getIt<HttpService>().request(
         authenticated: true,
         method: HttpMethod.get,
         apiUrl: ApiEndPoints.endpointquoteregvehiclelist);
 
     return response.fold(
-      (l) {
-        (l.values.first);
-        return Left(l.keys.first);
-      },
+      (l) => Left(l),
       (res) async {
         var data = jsonDecode(res.body) as List;
+        List<SalesModel> quoteregvehicle =
+            data.map((e) => SalesModel.fromJson(e)).toList();
+        return Right(quoteregvehicle);
+      },
+    );
+  }
 
-        List<QuoteRegResModel> quoteregvehicle =
-            data.map((e) => QuoteRegResModel.fromJson(e)).toList();
+  @override
+  Future<Either<Map<MainFailure, dynamic>, List<SalesModel>>>
+      salesQuoteListSearchServiceApi(
+          {required List<Map<String, String>> data}) async {
+    var response = await getIt<HttpService>().multipartRequest(
+        data: data,
+        method: 'POST',
+        apiUrl: ApiEndPoints.endpointSaleQuoteSearch);
+    return response.fold(
+      (l) => Left(l),
+      (res) async {
+        var data = jsonDecode(res.body) as List;
+        List<SalesModel> quoteregvehicle =
+            data.map((e) => SalesModel.fromJson(e)).toList();
         return Right(quoteregvehicle);
       },
     );

@@ -1,14 +1,15 @@
+import 'package:enviro_mobile_application/utilis/Appthemes.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 Padding CommonTabbar() {
   return Padding(
-    padding: const EdgeInsets.only(left: 25, right: 25),
+    padding: EdgeInsets.only(left: 15.w, right: 15.w),
     child: Container(
-      width: 390,
-      height: 62,
+      height: 32.w,
       decoration: BoxDecoration(
-        color: Colors.blue,
-        border: Border.all(color: Colors.blue),
+        color: Appthemes.cPrimary,
+        border: Border.all(color: Appthemes.cPrimary),
         borderRadius: BorderRadius.circular(8.0),
       ),
       child: TabBar(
@@ -22,7 +23,7 @@ Padding CommonTabbar() {
         indicatorColor: Colors.black,
         tabs: const [
           Tab(text: 'Job List'),
-          Tab(text: 'Quote Register'),
+          Tab(text: 'Quote Reg'),
           Tab(text: 'Sales List'),
         ],
       ),

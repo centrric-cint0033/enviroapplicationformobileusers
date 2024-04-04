@@ -6,6 +6,7 @@ import 'package:enviro_mobile_application/view/03_vehicles/master_truck_page.dar
 import 'package:enviro_mobile_application/widgets/cmn_action_icon.dart';
 import 'package:enviro_mobile_application/widgets/cmn_leading_icon.dart';
 import 'package:enviro_mobile_application/widgets/cmn_title_textwidget.dart';
+import 'package:enviro_mobile_application/widgets/drawer.dart';
 
 import 'package:enviro_mobile_application/widgets/vehicle_tab_bar.dart';
 
@@ -21,11 +22,11 @@ class VehiclePage extends StatelessWidget {
     return DefaultTabController(
       length: 3,
       child: Scaffold(
-        appBar: CustomAppBar(
-          leading: const cmn_leading_icon(),
-          title: cmnTitleWidget('VEHICLE'),
-          actions: cmn_action_icon,
-        ),
+        drawer: CmnDrawer(context),
+        appBar: AppBar(
+            // leading: const cmn_leading_icon(),
+            title: cmnTitleWidget('Vehicles'),
+            actions: [notificationButton(context)]),
         body: const Column(
           children: [
             VehicleTabbar(),

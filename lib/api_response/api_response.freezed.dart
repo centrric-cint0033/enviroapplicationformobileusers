@@ -19,6 +19,7 @@ mixin _$ApiResponse<T> {
   T? get data => throw _privateConstructorUsedError;
   int? get statusCode => throw _privateConstructorUsedError;
   String? get message => throw _privateConstructorUsedError;
+  Map<MainFailure, dynamic>? get errors => throw _privateConstructorUsedError;
   MainFailure? get error => throw _privateConstructorUsedError;
   int get pageNo => throw _privateConstructorUsedError;
   bool get loading => throw _privateConstructorUsedError;
@@ -41,6 +42,7 @@ abstract class $ApiResponseCopyWith<T, $Res> {
       {T? data,
       int? statusCode,
       String? message,
+      Map<MainFailure, dynamic>? errors,
       MainFailure? error,
       int pageNo,
       bool loading,
@@ -67,6 +69,7 @@ class _$ApiResponseCopyWithImpl<T, $Res, $Val extends ApiResponse<T>>
     Object? data = freezed,
     Object? statusCode = freezed,
     Object? message = freezed,
+    Object? errors = freezed,
     Object? error = freezed,
     Object? pageNo = null,
     Object? loading = null,
@@ -87,6 +90,10 @@ class _$ApiResponseCopyWithImpl<T, $Res, $Val extends ApiResponse<T>>
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as String?,
+      errors: freezed == errors
+          ? _value.errors
+          : errors // ignore: cast_nullable_to_non_nullable
+              as Map<MainFailure, dynamic>?,
       error: freezed == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
@@ -139,6 +146,7 @@ abstract class _$$ApiResponseImplCopyWith<T, $Res>
       {T? data,
       int? statusCode,
       String? message,
+      Map<MainFailure, dynamic>? errors,
       MainFailure? error,
       int pageNo,
       bool loading,
@@ -164,6 +172,7 @@ class __$$ApiResponseImplCopyWithImpl<T, $Res>
     Object? data = freezed,
     Object? statusCode = freezed,
     Object? message = freezed,
+    Object? errors = freezed,
     Object? error = freezed,
     Object? pageNo = null,
     Object? loading = null,
@@ -184,6 +193,10 @@ class __$$ApiResponseImplCopyWithImpl<T, $Res>
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as String?,
+      errors: freezed == errors
+          ? _value._errors
+          : errors // ignore: cast_nullable_to_non_nullable
+              as Map<MainFailure, dynamic>?,
       error: freezed == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
@@ -219,12 +232,14 @@ class _$ApiResponseImpl<T> implements _ApiResponse<T> {
       {this.data,
       this.statusCode,
       this.message,
+      final Map<MainFailure, dynamic>? errors,
       this.error,
       this.pageNo = 1,
       this.loading = false,
       this.pagination = true,
       this.searchLoading = false,
-      this.paginationLoading = false});
+      this.paginationLoading = false})
+      : _errors = errors;
 
   @override
   final T? data;
@@ -232,6 +247,16 @@ class _$ApiResponseImpl<T> implements _ApiResponse<T> {
   final int? statusCode;
   @override
   final String? message;
+  final Map<MainFailure, dynamic>? _errors;
+  @override
+  Map<MainFailure, dynamic>? get errors {
+    final value = _errors;
+    if (value == null) return null;
+    if (_errors is EqualUnmodifiableMapView) return _errors;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(value);
+  }
+
   @override
   final MainFailure? error;
   @override
@@ -252,7 +277,7 @@ class _$ApiResponseImpl<T> implements _ApiResponse<T> {
 
   @override
   String toString() {
-    return 'ApiResponse<$T>(data: $data, statusCode: $statusCode, message: $message, error: $error, pageNo: $pageNo, loading: $loading, pagination: $pagination, searchLoading: $searchLoading, paginationLoading: $paginationLoading)';
+    return 'ApiResponse<$T>(data: $data, statusCode: $statusCode, message: $message, errors: $errors, error: $error, pageNo: $pageNo, loading: $loading, pagination: $pagination, searchLoading: $searchLoading, paginationLoading: $paginationLoading)';
   }
 
   @override
@@ -264,6 +289,7 @@ class _$ApiResponseImpl<T> implements _ApiResponse<T> {
             (identical(other.statusCode, statusCode) ||
                 other.statusCode == statusCode) &&
             (identical(other.message, message) || other.message == message) &&
+            const DeepCollectionEquality().equals(other._errors, _errors) &&
             (identical(other.error, error) || other.error == error) &&
             (identical(other.pageNo, pageNo) || other.pageNo == pageNo) &&
             (identical(other.loading, loading) || other.loading == loading) &&
@@ -281,6 +307,7 @@ class _$ApiResponseImpl<T> implements _ApiResponse<T> {
       const DeepCollectionEquality().hash(data),
       statusCode,
       message,
+      const DeepCollectionEquality().hash(_errors),
       error,
       pageNo,
       loading,
@@ -301,6 +328,7 @@ abstract class _ApiResponse<T> implements ApiResponse<T> {
       {final T? data,
       final int? statusCode,
       final String? message,
+      final Map<MainFailure, dynamic>? errors,
       final MainFailure? error,
       final int pageNo,
       final bool loading,
@@ -314,6 +342,8 @@ abstract class _ApiResponse<T> implements ApiResponse<T> {
   int? get statusCode;
   @override
   String? get message;
+  @override
+  Map<MainFailure, dynamic>? get errors;
   @override
   MainFailure? get error;
   @override
