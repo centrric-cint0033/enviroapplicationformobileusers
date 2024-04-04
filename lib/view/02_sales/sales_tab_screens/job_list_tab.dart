@@ -28,6 +28,7 @@ class JobListTab extends StatelessWidget {
               ? vmSales.saleJobListApi()
               : vmSales.salesJobListSearchApi(v)),
           searchTap: () {},
+          hintText: 'Search By Client',
         ),
         gapField,
         Observer(builder: (_) {

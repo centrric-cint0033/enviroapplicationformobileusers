@@ -5,6 +5,7 @@ import 'package:enviro_mobile_application/view_model/02_sales/sales_view_model.d
 import 'package:enviro_mobile_application/view_model/03_vehicles/vehicle_view_model.dart';
 import 'package:enviro_mobile_application/view_model/04_ohs/ohs_view_model.dart';
 import 'package:enviro_mobile_application/view_model/07_intranet/intranet_view_model.dart';
+import 'package:enviro_mobile_application/view_model/08_team/team_view_model.dart';
 import 'package:enviro_mobile_application/view_model/10_profile/profile_view_model.dart';
 import 'package:enviro_mobile_application/view_model/home_page/home_page_viewmodel.dart';
 import 'package:enviro_mobile_application/widgets/drawer.dart';
@@ -98,12 +99,15 @@ class HomePage extends StatelessWidget {
                         height: 30.0,
                       ),
                     ),
-                    _buildBox(
-                      'assets/images/users.svg',
-                      'Team',
-                      Colors.blue,
-                      width: 30.0,
-                      height: 30.0,
+                    GestureDetector(
+                      onTap: () => teamfuntion(context),
+                      child: _buildBox(
+                        'assets/images/users.svg',
+                        'Team',
+                        Colors.blue,
+                        width: 30.0,
+                        height: 30.0,
+                      ),
                     ),
                     // InkWell(
                     //   onTap: () async {
@@ -202,6 +206,8 @@ void vehiclefunction(BuildContext context) async {
 }
 
 void teamfuntion(BuildContext context) {
+  vmTeam.getCurrentEmployee();
+  vmTeam.getTerminatedEmployee();
   context.router.pushNamed(RouteNames.teamPage);
   print('TeamPage button tapped!');
 }

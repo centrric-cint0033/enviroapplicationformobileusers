@@ -29,6 +29,7 @@ class QuoteRegisterTab extends StatelessWidget {
                 ? vmSales.quoteRegisterApi()
                 : vmSales.salesQuoteListSearchApi(v)),
             searchTap: () {},
+            hintText: 'Search By Client',
           ),
           gapField,
           Observer(builder: (_) {

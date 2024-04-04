@@ -5,11 +5,13 @@ class WWSearchField extends StatelessWidget {
   final Function(String)? onChanged;
   final TextEditingController controller;
   final Function() searchTap;
+  final String hintText;
   const WWSearchField(
       {super.key,
       this.onChanged,
       required this.controller,
-      required this.searchTap});
+      required this.searchTap,
+      required this.hintText});
 
   @override
   Widget build(BuildContext context) {
@@ -25,16 +27,14 @@ class WWSearchField extends StatelessWidget {
             controller: controller,
             style: const TextStyle(color: Colors.black),
             decoration: InputDecoration(
-                hintText: 'Search By client',
+                hintText: hintText,
                 border: InputBorder.none,
                 contentPadding: const EdgeInsets.all(10),
-                suffixIcon: Observer(builder: (_) {
-                  return GestureDetector(
-                      onTap: searchTap,
-                      child: const Icon(
-                        Icons.search,
-                        color: Colors.black,
-                      ));
-                }))));
+                suffixIcon: GestureDetector(
+                    onTap: searchTap,
+                    child: const Icon(
+                      Icons.search,
+                      color: Colors.black,
+                    )))));
   }
 }

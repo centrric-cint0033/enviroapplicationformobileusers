@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'profile_res_model.dart';
+part of 'team_profile_employee_details_res_model.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,116 +14,115 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
-ProfileRespModel _$ProfileRespModelFromJson(Map<String, dynamic> json) {
-  return _ProfileRespModel.fromJson(json);
+TeamProfileEmployeeDetailsResModel _$TeamProfileEmployeeDetailsResModelFromJson(
+    Map<String, dynamic> json) {
+  return _TeamProfileEmployeeDetailsResModel.fromJson(json);
 }
 
 /// @nodoc
-mixin _$ProfileRespModel {
-  @JsonKey(name: "id")
-  int? get id => throw _privateConstructorUsedError;
-  @JsonKey(name: "termination_date")
+mixin _$TeamProfileEmployeeDetailsResModel {
+  num? get id => throw _privateConstructorUsedError;
+  @JsonKey(name: 'termination_date')
   dynamic get terminationDate => throw _privateConstructorUsedError;
-  @JsonKey(name: "username")
   String? get username => throw _privateConstructorUsedError;
-  @JsonKey(name: "expiry_date")
+  @JsonKey(name: 'expiry_date')
   String? get expiryDate => throw _privateConstructorUsedError;
-  @JsonKey(name: "alert_before")
+  @JsonKey(name: 'alert_before')
   String? get alertBefore => throw _privateConstructorUsedError;
-  @JsonKey(name: "driving_license")
+  @JsonKey(name: 'driving_license')
   dynamic get drivingLicense => throw _privateConstructorUsedError;
-  @JsonKey(name: "employee_id")
-  int? get employeeId => throw _privateConstructorUsedError;
-  @JsonKey(name: "name")
+  @JsonKey(name: 'employee_id')
+  num? get employeeId => throw _privateConstructorUsedError;
   String? get name => throw _privateConstructorUsedError;
-  @JsonKey(name: "user_type")
+  @JsonKey(name: 'user_type')
   String? get userType => throw _privateConstructorUsedError;
-  @JsonKey(name: "permission_type")
+  @JsonKey(name: 'permission_type')
   String? get permissionType => throw _privateConstructorUsedError;
-  @JsonKey(name: "contact_number")
+  @JsonKey(name: 'contact_number')
   String? get contactNumber => throw _privateConstructorUsedError;
-  @JsonKey(name: "date_of_birth")
-  DateTime? get dateOfBirth => throw _privateConstructorUsedError;
-  @JsonKey(name: "active_status")
+  @JsonKey(name: 'date_of_birth')
+  String? get dateOfBirth => throw _privateConstructorUsedError;
+  @JsonKey(name: 'active_status')
   bool? get activeStatus => throw _privateConstructorUsedError;
-  @JsonKey(name: "date_joined")
-  DateTime? get dateJoined => throw _privateConstructorUsedError;
-  @JsonKey(name: "dp")
+  @JsonKey(name: 'date_joined')
+  String? get dateJoined => throw _privateConstructorUsedError;
   String? get dp => throw _privateConstructorUsedError;
-  @JsonKey(name: "bio")
   String? get bio => throw _privateConstructorUsedError;
-  @JsonKey(name: "instagram_link")
+  @JsonKey(name: 'instagram_link')
   dynamic get instagramLink => throw _privateConstructorUsedError;
-  @JsonKey(name: "facebook_link")
+  @JsonKey(name: 'facebook_link')
   dynamic get facebookLink => throw _privateConstructorUsedError;
-  @JsonKey(name: "linkedin_link")
+  @JsonKey(name: 'linkedin_link')
   dynamic get linkedinLink => throw _privateConstructorUsedError;
-  @JsonKey(name: "email")
   String? get email => throw _privateConstructorUsedError;
-  @JsonKey(name: "personal_email")
+  @JsonKey(name: 'personal_email')
   String? get personalEmail => throw _privateConstructorUsedError;
-  @JsonKey(name: "emergency_contact_name")
+  @JsonKey(name: 'emergency_contact_name')
   String? get emergencyContactName => throw _privateConstructorUsedError;
-  @JsonKey(name: "emergency_contact")
+  @JsonKey(name: 'emergency_contact')
   String? get emergencyContact => throw _privateConstructorUsedError;
-  @JsonKey(name: "employement_status")
+  @JsonKey(name: 'employement_status')
   String? get employementStatus => throw _privateConstructorUsedError;
-  @JsonKey(name: "address")
   String? get address => throw _privateConstructorUsedError;
-  @JsonKey(name: "edited_date_time")
-  String? get editedDateTime => throw _privateConstructorUsedError;
-  @JsonKey(name: "is_occupied")
+  @JsonKey(name: 'edited_date_time')
+  DateTime? get editedDateTime => throw _privateConstructorUsedError;
+  @JsonKey(name: 'is_occupied')
   bool? get isOccupied => throw _privateConstructorUsedError;
-  @JsonKey(name: "user")
-  int? get user => throw _privateConstructorUsedError;
+  num? get user => throw _privateConstructorUsedError;
+  List<dynamic>? get folders => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $ProfileRespModelCopyWith<ProfileRespModel> get copyWith =>
-      throw _privateConstructorUsedError;
+  $TeamProfileEmployeeDetailsResModelCopyWith<
+          TeamProfileEmployeeDetailsResModel>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $ProfileRespModelCopyWith<$Res> {
-  factory $ProfileRespModelCopyWith(
-          ProfileRespModel value, $Res Function(ProfileRespModel) then) =
-      _$ProfileRespModelCopyWithImpl<$Res, ProfileRespModel>;
+abstract class $TeamProfileEmployeeDetailsResModelCopyWith<$Res> {
+  factory $TeamProfileEmployeeDetailsResModelCopyWith(
+          TeamProfileEmployeeDetailsResModel value,
+          $Res Function(TeamProfileEmployeeDetailsResModel) then) =
+      _$TeamProfileEmployeeDetailsResModelCopyWithImpl<$Res,
+          TeamProfileEmployeeDetailsResModel>;
   @useResult
   $Res call(
-      {@JsonKey(name: "id") int? id,
-      @JsonKey(name: "termination_date") dynamic terminationDate,
-      @JsonKey(name: "username") String? username,
-      @JsonKey(name: "expiry_date") String? expiryDate,
-      @JsonKey(name: "alert_before") String? alertBefore,
-      @JsonKey(name: "driving_license") dynamic drivingLicense,
-      @JsonKey(name: "employee_id") int? employeeId,
-      @JsonKey(name: "name") String? name,
-      @JsonKey(name: "user_type") String? userType,
-      @JsonKey(name: "permission_type") String? permissionType,
-      @JsonKey(name: "contact_number") String? contactNumber,
-      @JsonKey(name: "date_of_birth") DateTime? dateOfBirth,
-      @JsonKey(name: "active_status") bool? activeStatus,
-      @JsonKey(name: "date_joined") DateTime? dateJoined,
-      @JsonKey(name: "dp") String? dp,
-      @JsonKey(name: "bio") String? bio,
-      @JsonKey(name: "instagram_link") dynamic instagramLink,
-      @JsonKey(name: "facebook_link") dynamic facebookLink,
-      @JsonKey(name: "linkedin_link") dynamic linkedinLink,
-      @JsonKey(name: "email") String? email,
-      @JsonKey(name: "personal_email") String? personalEmail,
-      @JsonKey(name: "emergency_contact_name") String? emergencyContactName,
-      @JsonKey(name: "emergency_contact") String? emergencyContact,
-      @JsonKey(name: "employement_status") String? employementStatus,
-      @JsonKey(name: "address") String? address,
-      @JsonKey(name: "edited_date_time") String? editedDateTime,
-      @JsonKey(name: "is_occupied") bool? isOccupied,
-      @JsonKey(name: "user") int? user});
+      {num? id,
+      @JsonKey(name: 'termination_date') dynamic terminationDate,
+      String? username,
+      @JsonKey(name: 'expiry_date') String? expiryDate,
+      @JsonKey(name: 'alert_before') String? alertBefore,
+      @JsonKey(name: 'driving_license') dynamic drivingLicense,
+      @JsonKey(name: 'employee_id') num? employeeId,
+      String? name,
+      @JsonKey(name: 'user_type') String? userType,
+      @JsonKey(name: 'permission_type') String? permissionType,
+      @JsonKey(name: 'contact_number') String? contactNumber,
+      @JsonKey(name: 'date_of_birth') String? dateOfBirth,
+      @JsonKey(name: 'active_status') bool? activeStatus,
+      @JsonKey(name: 'date_joined') String? dateJoined,
+      String? dp,
+      String? bio,
+      @JsonKey(name: 'instagram_link') dynamic instagramLink,
+      @JsonKey(name: 'facebook_link') dynamic facebookLink,
+      @JsonKey(name: 'linkedin_link') dynamic linkedinLink,
+      String? email,
+      @JsonKey(name: 'personal_email') String? personalEmail,
+      @JsonKey(name: 'emergency_contact_name') String? emergencyContactName,
+      @JsonKey(name: 'emergency_contact') String? emergencyContact,
+      @JsonKey(name: 'employement_status') String? employementStatus,
+      String? address,
+      @JsonKey(name: 'edited_date_time') DateTime? editedDateTime,
+      @JsonKey(name: 'is_occupied') bool? isOccupied,
+      num? user,
+      List<dynamic>? folders});
 }
 
 /// @nodoc
-class _$ProfileRespModelCopyWithImpl<$Res, $Val extends ProfileRespModel>
-    implements $ProfileRespModelCopyWith<$Res> {
-  _$ProfileRespModelCopyWithImpl(this._value, this._then);
+class _$TeamProfileEmployeeDetailsResModelCopyWithImpl<$Res,
+        $Val extends TeamProfileEmployeeDetailsResModel>
+    implements $TeamProfileEmployeeDetailsResModelCopyWith<$Res> {
+  _$TeamProfileEmployeeDetailsResModelCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -161,12 +160,13 @@ class _$ProfileRespModelCopyWithImpl<$Res, $Val extends ProfileRespModel>
     Object? editedDateTime = freezed,
     Object? isOccupied = freezed,
     Object? user = freezed,
+    Object? folders = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as num?,
       terminationDate: freezed == terminationDate
           ? _value.terminationDate
           : terminationDate // ignore: cast_nullable_to_non_nullable
@@ -190,7 +190,7 @@ class _$ProfileRespModelCopyWithImpl<$Res, $Val extends ProfileRespModel>
       employeeId: freezed == employeeId
           ? _value.employeeId
           : employeeId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as num?,
       name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -210,7 +210,7 @@ class _$ProfileRespModelCopyWithImpl<$Res, $Val extends ProfileRespModel>
       dateOfBirth: freezed == dateOfBirth
           ? _value.dateOfBirth
           : dateOfBirth // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
+              as String?,
       activeStatus: freezed == activeStatus
           ? _value.activeStatus
           : activeStatus // ignore: cast_nullable_to_non_nullable
@@ -218,7 +218,7 @@ class _$ProfileRespModelCopyWithImpl<$Res, $Val extends ProfileRespModel>
       dateJoined: freezed == dateJoined
           ? _value.dateJoined
           : dateJoined // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
+              as String?,
       dp: freezed == dp
           ? _value.dp
           : dp // ignore: cast_nullable_to_non_nullable
@@ -266,7 +266,7 @@ class _$ProfileRespModelCopyWithImpl<$Res, $Val extends ProfileRespModel>
       editedDateTime: freezed == editedDateTime
           ? _value.editedDateTime
           : editedDateTime // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as DateTime?,
       isOccupied: freezed == isOccupied
           ? _value.isOccupied
           : isOccupied // ignore: cast_nullable_to_non_nullable
@@ -274,56 +274,64 @@ class _$ProfileRespModelCopyWithImpl<$Res, $Val extends ProfileRespModel>
       user: freezed == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as num?,
+      folders: freezed == folders
+          ? _value.folders
+          : folders // ignore: cast_nullable_to_non_nullable
+              as List<dynamic>?,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$ProfileRespModelImplCopyWith<$Res>
-    implements $ProfileRespModelCopyWith<$Res> {
-  factory _$$ProfileRespModelImplCopyWith(_$ProfileRespModelImpl value,
-          $Res Function(_$ProfileRespModelImpl) then) =
-      __$$ProfileRespModelImplCopyWithImpl<$Res>;
+abstract class _$$TeamProfileEmployeeDetailsResModelImplCopyWith<$Res>
+    implements $TeamProfileEmployeeDetailsResModelCopyWith<$Res> {
+  factory _$$TeamProfileEmployeeDetailsResModelImplCopyWith(
+          _$TeamProfileEmployeeDetailsResModelImpl value,
+          $Res Function(_$TeamProfileEmployeeDetailsResModelImpl) then) =
+      __$$TeamProfileEmployeeDetailsResModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: "id") int? id,
-      @JsonKey(name: "termination_date") dynamic terminationDate,
-      @JsonKey(name: "username") String? username,
-      @JsonKey(name: "expiry_date") String? expiryDate,
-      @JsonKey(name: "alert_before") String? alertBefore,
-      @JsonKey(name: "driving_license") dynamic drivingLicense,
-      @JsonKey(name: "employee_id") int? employeeId,
-      @JsonKey(name: "name") String? name,
-      @JsonKey(name: "user_type") String? userType,
-      @JsonKey(name: "permission_type") String? permissionType,
-      @JsonKey(name: "contact_number") String? contactNumber,
-      @JsonKey(name: "date_of_birth") DateTime? dateOfBirth,
-      @JsonKey(name: "active_status") bool? activeStatus,
-      @JsonKey(name: "date_joined") DateTime? dateJoined,
-      @JsonKey(name: "dp") String? dp,
-      @JsonKey(name: "bio") String? bio,
-      @JsonKey(name: "instagram_link") dynamic instagramLink,
-      @JsonKey(name: "facebook_link") dynamic facebookLink,
-      @JsonKey(name: "linkedin_link") dynamic linkedinLink,
-      @JsonKey(name: "email") String? email,
-      @JsonKey(name: "personal_email") String? personalEmail,
-      @JsonKey(name: "emergency_contact_name") String? emergencyContactName,
-      @JsonKey(name: "emergency_contact") String? emergencyContact,
-      @JsonKey(name: "employement_status") String? employementStatus,
-      @JsonKey(name: "address") String? address,
-      @JsonKey(name: "edited_date_time") String? editedDateTime,
-      @JsonKey(name: "is_occupied") bool? isOccupied,
-      @JsonKey(name: "user") int? user});
+      {num? id,
+      @JsonKey(name: 'termination_date') dynamic terminationDate,
+      String? username,
+      @JsonKey(name: 'expiry_date') String? expiryDate,
+      @JsonKey(name: 'alert_before') String? alertBefore,
+      @JsonKey(name: 'driving_license') dynamic drivingLicense,
+      @JsonKey(name: 'employee_id') num? employeeId,
+      String? name,
+      @JsonKey(name: 'user_type') String? userType,
+      @JsonKey(name: 'permission_type') String? permissionType,
+      @JsonKey(name: 'contact_number') String? contactNumber,
+      @JsonKey(name: 'date_of_birth') String? dateOfBirth,
+      @JsonKey(name: 'active_status') bool? activeStatus,
+      @JsonKey(name: 'date_joined') String? dateJoined,
+      String? dp,
+      String? bio,
+      @JsonKey(name: 'instagram_link') dynamic instagramLink,
+      @JsonKey(name: 'facebook_link') dynamic facebookLink,
+      @JsonKey(name: 'linkedin_link') dynamic linkedinLink,
+      String? email,
+      @JsonKey(name: 'personal_email') String? personalEmail,
+      @JsonKey(name: 'emergency_contact_name') String? emergencyContactName,
+      @JsonKey(name: 'emergency_contact') String? emergencyContact,
+      @JsonKey(name: 'employement_status') String? employementStatus,
+      String? address,
+      @JsonKey(name: 'edited_date_time') DateTime? editedDateTime,
+      @JsonKey(name: 'is_occupied') bool? isOccupied,
+      num? user,
+      List<dynamic>? folders});
 }
 
 /// @nodoc
-class __$$ProfileRespModelImplCopyWithImpl<$Res>
-    extends _$ProfileRespModelCopyWithImpl<$Res, _$ProfileRespModelImpl>
-    implements _$$ProfileRespModelImplCopyWith<$Res> {
-  __$$ProfileRespModelImplCopyWithImpl(_$ProfileRespModelImpl _value,
-      $Res Function(_$ProfileRespModelImpl) _then)
+class __$$TeamProfileEmployeeDetailsResModelImplCopyWithImpl<$Res>
+    extends _$TeamProfileEmployeeDetailsResModelCopyWithImpl<$Res,
+        _$TeamProfileEmployeeDetailsResModelImpl>
+    implements _$$TeamProfileEmployeeDetailsResModelImplCopyWith<$Res> {
+  __$$TeamProfileEmployeeDetailsResModelImplCopyWithImpl(
+      _$TeamProfileEmployeeDetailsResModelImpl _value,
+      $Res Function(_$TeamProfileEmployeeDetailsResModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -357,12 +365,13 @@ class __$$ProfileRespModelImplCopyWithImpl<$Res>
     Object? editedDateTime = freezed,
     Object? isOccupied = freezed,
     Object? user = freezed,
+    Object? folders = freezed,
   }) {
-    return _then(_$ProfileRespModelImpl(
+    return _then(_$TeamProfileEmployeeDetailsResModelImpl(
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as num?,
       terminationDate: freezed == terminationDate
           ? _value.terminationDate
           : terminationDate // ignore: cast_nullable_to_non_nullable
@@ -386,7 +395,7 @@ class __$$ProfileRespModelImplCopyWithImpl<$Res>
       employeeId: freezed == employeeId
           ? _value.employeeId
           : employeeId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as num?,
       name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -406,7 +415,7 @@ class __$$ProfileRespModelImplCopyWithImpl<$Res>
       dateOfBirth: freezed == dateOfBirth
           ? _value.dateOfBirth
           : dateOfBirth // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
+              as String?,
       activeStatus: freezed == activeStatus
           ? _value.activeStatus
           : activeStatus // ignore: cast_nullable_to_non_nullable
@@ -414,7 +423,7 @@ class __$$ProfileRespModelImplCopyWithImpl<$Res>
       dateJoined: freezed == dateJoined
           ? _value.dateJoined
           : dateJoined // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
+              as String?,
       dp: freezed == dp
           ? _value.dp
           : dp // ignore: cast_nullable_to_non_nullable
@@ -462,7 +471,7 @@ class __$$ProfileRespModelImplCopyWithImpl<$Res>
       editedDateTime: freezed == editedDateTime
           ? _value.editedDateTime
           : editedDateTime // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as DateTime?,
       isOccupied: freezed == isOccupied
           ? _value.isOccupied
           : isOccupied // ignore: cast_nullable_to_non_nullable
@@ -470,142 +479,151 @@ class __$$ProfileRespModelImplCopyWithImpl<$Res>
       user: freezed == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as num?,
+      folders: freezed == folders
+          ? _value._folders
+          : folders // ignore: cast_nullable_to_non_nullable
+              as List<dynamic>?,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$ProfileRespModelImpl implements _ProfileRespModel {
-  const _$ProfileRespModelImpl(
-      {@JsonKey(name: "id") this.id,
-      @JsonKey(name: "termination_date") this.terminationDate,
-      @JsonKey(name: "username") this.username,
-      @JsonKey(name: "expiry_date") this.expiryDate,
-      @JsonKey(name: "alert_before") this.alertBefore,
-      @JsonKey(name: "driving_license") this.drivingLicense,
-      @JsonKey(name: "employee_id") this.employeeId,
-      @JsonKey(name: "name") this.name,
-      @JsonKey(name: "user_type") this.userType,
-      @JsonKey(name: "permission_type") this.permissionType,
-      @JsonKey(name: "contact_number") this.contactNumber,
-      @JsonKey(name: "date_of_birth") this.dateOfBirth,
-      @JsonKey(name: "active_status") this.activeStatus,
-      @JsonKey(name: "date_joined") this.dateJoined,
-      @JsonKey(name: "dp") this.dp,
-      @JsonKey(name: "bio") this.bio,
-      @JsonKey(name: "instagram_link") this.instagramLink,
-      @JsonKey(name: "facebook_link") this.facebookLink,
-      @JsonKey(name: "linkedin_link") this.linkedinLink,
-      @JsonKey(name: "email") this.email,
-      @JsonKey(name: "personal_email") this.personalEmail,
-      @JsonKey(name: "emergency_contact_name") this.emergencyContactName,
-      @JsonKey(name: "emergency_contact") this.emergencyContact,
-      @JsonKey(name: "employement_status") this.employementStatus,
-      @JsonKey(name: "address") this.address,
-      @JsonKey(name: "edited_date_time") this.editedDateTime,
-      @JsonKey(name: "is_occupied") this.isOccupied,
-      @JsonKey(name: "user") this.user});
+class _$TeamProfileEmployeeDetailsResModelImpl
+    implements _TeamProfileEmployeeDetailsResModel {
+  _$TeamProfileEmployeeDetailsResModelImpl(
+      {this.id,
+      @JsonKey(name: 'termination_date') this.terminationDate,
+      this.username,
+      @JsonKey(name: 'expiry_date') this.expiryDate,
+      @JsonKey(name: 'alert_before') this.alertBefore,
+      @JsonKey(name: 'driving_license') this.drivingLicense,
+      @JsonKey(name: 'employee_id') this.employeeId,
+      this.name,
+      @JsonKey(name: 'user_type') this.userType,
+      @JsonKey(name: 'permission_type') this.permissionType,
+      @JsonKey(name: 'contact_number') this.contactNumber,
+      @JsonKey(name: 'date_of_birth') this.dateOfBirth,
+      @JsonKey(name: 'active_status') this.activeStatus,
+      @JsonKey(name: 'date_joined') this.dateJoined,
+      this.dp,
+      this.bio,
+      @JsonKey(name: 'instagram_link') this.instagramLink,
+      @JsonKey(name: 'facebook_link') this.facebookLink,
+      @JsonKey(name: 'linkedin_link') this.linkedinLink,
+      this.email,
+      @JsonKey(name: 'personal_email') this.personalEmail,
+      @JsonKey(name: 'emergency_contact_name') this.emergencyContactName,
+      @JsonKey(name: 'emergency_contact') this.emergencyContact,
+      @JsonKey(name: 'employement_status') this.employementStatus,
+      this.address,
+      @JsonKey(name: 'edited_date_time') this.editedDateTime,
+      @JsonKey(name: 'is_occupied') this.isOccupied,
+      this.user,
+      final List<dynamic>? folders})
+      : _folders = folders;
 
-  factory _$ProfileRespModelImpl.fromJson(Map<String, dynamic> json) =>
-      _$$ProfileRespModelImplFromJson(json);
+  factory _$TeamProfileEmployeeDetailsResModelImpl.fromJson(
+          Map<String, dynamic> json) =>
+      _$$TeamProfileEmployeeDetailsResModelImplFromJson(json);
 
   @override
-  @JsonKey(name: "id")
-  final int? id;
+  final num? id;
   @override
-  @JsonKey(name: "termination_date")
+  @JsonKey(name: 'termination_date')
   final dynamic terminationDate;
   @override
-  @JsonKey(name: "username")
   final String? username;
   @override
-  @JsonKey(name: "expiry_date")
+  @JsonKey(name: 'expiry_date')
   final String? expiryDate;
   @override
-  @JsonKey(name: "alert_before")
+  @JsonKey(name: 'alert_before')
   final String? alertBefore;
   @override
-  @JsonKey(name: "driving_license")
+  @JsonKey(name: 'driving_license')
   final dynamic drivingLicense;
   @override
-  @JsonKey(name: "employee_id")
-  final int? employeeId;
+  @JsonKey(name: 'employee_id')
+  final num? employeeId;
   @override
-  @JsonKey(name: "name")
   final String? name;
   @override
-  @JsonKey(name: "user_type")
+  @JsonKey(name: 'user_type')
   final String? userType;
   @override
-  @JsonKey(name: "permission_type")
+  @JsonKey(name: 'permission_type')
   final String? permissionType;
   @override
-  @JsonKey(name: "contact_number")
+  @JsonKey(name: 'contact_number')
   final String? contactNumber;
   @override
-  @JsonKey(name: "date_of_birth")
-  final DateTime? dateOfBirth;
+  @JsonKey(name: 'date_of_birth')
+  final String? dateOfBirth;
   @override
-  @JsonKey(name: "active_status")
+  @JsonKey(name: 'active_status')
   final bool? activeStatus;
   @override
-  @JsonKey(name: "date_joined")
-  final DateTime? dateJoined;
+  @JsonKey(name: 'date_joined')
+  final String? dateJoined;
   @override
-  @JsonKey(name: "dp")
   final String? dp;
   @override
-  @JsonKey(name: "bio")
   final String? bio;
   @override
-  @JsonKey(name: "instagram_link")
+  @JsonKey(name: 'instagram_link')
   final dynamic instagramLink;
   @override
-  @JsonKey(name: "facebook_link")
+  @JsonKey(name: 'facebook_link')
   final dynamic facebookLink;
   @override
-  @JsonKey(name: "linkedin_link")
+  @JsonKey(name: 'linkedin_link')
   final dynamic linkedinLink;
   @override
-  @JsonKey(name: "email")
   final String? email;
   @override
-  @JsonKey(name: "personal_email")
+  @JsonKey(name: 'personal_email')
   final String? personalEmail;
   @override
-  @JsonKey(name: "emergency_contact_name")
+  @JsonKey(name: 'emergency_contact_name')
   final String? emergencyContactName;
   @override
-  @JsonKey(name: "emergency_contact")
+  @JsonKey(name: 'emergency_contact')
   final String? emergencyContact;
   @override
-  @JsonKey(name: "employement_status")
+  @JsonKey(name: 'employement_status')
   final String? employementStatus;
   @override
-  @JsonKey(name: "address")
   final String? address;
   @override
-  @JsonKey(name: "edited_date_time")
-  final String? editedDateTime;
+  @JsonKey(name: 'edited_date_time')
+  final DateTime? editedDateTime;
   @override
-  @JsonKey(name: "is_occupied")
+  @JsonKey(name: 'is_occupied')
   final bool? isOccupied;
   @override
-  @JsonKey(name: "user")
-  final int? user;
+  final num? user;
+  final List<dynamic>? _folders;
+  @override
+  List<dynamic>? get folders {
+    final value = _folders;
+    if (value == null) return null;
+    if (_folders is EqualUnmodifiableListView) return _folders;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
 
   @override
   String toString() {
-    return 'ProfileRespModel(id: $id, terminationDate: $terminationDate, username: $username, expiryDate: $expiryDate, alertBefore: $alertBefore, drivingLicense: $drivingLicense, employeeId: $employeeId, name: $name, userType: $userType, permissionType: $permissionType, contactNumber: $contactNumber, dateOfBirth: $dateOfBirth, activeStatus: $activeStatus, dateJoined: $dateJoined, dp: $dp, bio: $bio, instagramLink: $instagramLink, facebookLink: $facebookLink, linkedinLink: $linkedinLink, email: $email, personalEmail: $personalEmail, emergencyContactName: $emergencyContactName, emergencyContact: $emergencyContact, employementStatus: $employementStatus, address: $address, editedDateTime: $editedDateTime, isOccupied: $isOccupied, user: $user)';
+    return 'TeamProfileEmployeeDetailsResModel(id: $id, terminationDate: $terminationDate, username: $username, expiryDate: $expiryDate, alertBefore: $alertBefore, drivingLicense: $drivingLicense, employeeId: $employeeId, name: $name, userType: $userType, permissionType: $permissionType, contactNumber: $contactNumber, dateOfBirth: $dateOfBirth, activeStatus: $activeStatus, dateJoined: $dateJoined, dp: $dp, bio: $bio, instagramLink: $instagramLink, facebookLink: $facebookLink, linkedinLink: $linkedinLink, email: $email, personalEmail: $personalEmail, emergencyContactName: $emergencyContactName, emergencyContact: $emergencyContact, employementStatus: $employementStatus, address: $address, editedDateTime: $editedDateTime, isOccupied: $isOccupied, user: $user, folders: $folders)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ProfileRespModelImpl &&
+            other is _$TeamProfileEmployeeDetailsResModelImpl &&
             (identical(other.id, id) || other.id == id) &&
             const DeepCollectionEquality()
                 .equals(other.terminationDate, terminationDate) &&
@@ -654,7 +672,8 @@ class _$ProfileRespModelImpl implements _ProfileRespModel {
                 other.editedDateTime == editedDateTime) &&
             (identical(other.isOccupied, isOccupied) ||
                 other.isOccupied == isOccupied) &&
-            (identical(other.user, user) || other.user == user));
+            (identical(other.user, user) || other.user == user) &&
+            const DeepCollectionEquality().equals(other._folders, _folders));
   }
 
   @JsonKey(ignore: true)
@@ -688,145 +707,145 @@ class _$ProfileRespModelImpl implements _ProfileRespModel {
         address,
         editedDateTime,
         isOccupied,
-        user
+        user,
+        const DeepCollectionEquality().hash(_folders)
       ]);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$ProfileRespModelImplCopyWith<_$ProfileRespModelImpl> get copyWith =>
-      __$$ProfileRespModelImplCopyWithImpl<_$ProfileRespModelImpl>(
-          this, _$identity);
+  _$$TeamProfileEmployeeDetailsResModelImplCopyWith<
+          _$TeamProfileEmployeeDetailsResModelImpl>
+      get copyWith => __$$TeamProfileEmployeeDetailsResModelImplCopyWithImpl<
+          _$TeamProfileEmployeeDetailsResModelImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$ProfileRespModelImplToJson(
+    return _$$TeamProfileEmployeeDetailsResModelImplToJson(
       this,
     );
   }
 }
 
-abstract class _ProfileRespModel implements ProfileRespModel {
-  const factory _ProfileRespModel(
-      {@JsonKey(name: "id") final int? id,
-      @JsonKey(name: "termination_date") final dynamic terminationDate,
-      @JsonKey(name: "username") final String? username,
-      @JsonKey(name: "expiry_date") final String? expiryDate,
-      @JsonKey(name: "alert_before") final String? alertBefore,
-      @JsonKey(name: "driving_license") final dynamic drivingLicense,
-      @JsonKey(name: "employee_id") final int? employeeId,
-      @JsonKey(name: "name") final String? name,
-      @JsonKey(name: "user_type") final String? userType,
-      @JsonKey(name: "permission_type") final String? permissionType,
-      @JsonKey(name: "contact_number") final String? contactNumber,
-      @JsonKey(name: "date_of_birth") final DateTime? dateOfBirth,
-      @JsonKey(name: "active_status") final bool? activeStatus,
-      @JsonKey(name: "date_joined") final DateTime? dateJoined,
-      @JsonKey(name: "dp") final String? dp,
-      @JsonKey(name: "bio") final String? bio,
-      @JsonKey(name: "instagram_link") final dynamic instagramLink,
-      @JsonKey(name: "facebook_link") final dynamic facebookLink,
-      @JsonKey(name: "linkedin_link") final dynamic linkedinLink,
-      @JsonKey(name: "email") final String? email,
-      @JsonKey(name: "personal_email") final String? personalEmail,
-      @JsonKey(name: "emergency_contact_name")
+abstract class _TeamProfileEmployeeDetailsResModel
+    implements TeamProfileEmployeeDetailsResModel {
+  factory _TeamProfileEmployeeDetailsResModel(
+      {final num? id,
+      @JsonKey(name: 'termination_date') final dynamic terminationDate,
+      final String? username,
+      @JsonKey(name: 'expiry_date') final String? expiryDate,
+      @JsonKey(name: 'alert_before') final String? alertBefore,
+      @JsonKey(name: 'driving_license') final dynamic drivingLicense,
+      @JsonKey(name: 'employee_id') final num? employeeId,
+      final String? name,
+      @JsonKey(name: 'user_type') final String? userType,
+      @JsonKey(name: 'permission_type') final String? permissionType,
+      @JsonKey(name: 'contact_number') final String? contactNumber,
+      @JsonKey(name: 'date_of_birth') final String? dateOfBirth,
+      @JsonKey(name: 'active_status') final bool? activeStatus,
+      @JsonKey(name: 'date_joined') final String? dateJoined,
+      final String? dp,
+      final String? bio,
+      @JsonKey(name: 'instagram_link') final dynamic instagramLink,
+      @JsonKey(name: 'facebook_link') final dynamic facebookLink,
+      @JsonKey(name: 'linkedin_link') final dynamic linkedinLink,
+      final String? email,
+      @JsonKey(name: 'personal_email') final String? personalEmail,
+      @JsonKey(name: 'emergency_contact_name')
       final String? emergencyContactName,
-      @JsonKey(name: "emergency_contact") final String? emergencyContact,
-      @JsonKey(name: "employement_status") final String? employementStatus,
-      @JsonKey(name: "address") final String? address,
-      @JsonKey(name: "edited_date_time") final String? editedDateTime,
-      @JsonKey(name: "is_occupied") final bool? isOccupied,
-      @JsonKey(name: "user") final int? user}) = _$ProfileRespModelImpl;
+      @JsonKey(name: 'emergency_contact') final String? emergencyContact,
+      @JsonKey(name: 'employement_status') final String? employementStatus,
+      final String? address,
+      @JsonKey(name: 'edited_date_time') final DateTime? editedDateTime,
+      @JsonKey(name: 'is_occupied') final bool? isOccupied,
+      final num? user,
+      final List<dynamic>? folders}) = _$TeamProfileEmployeeDetailsResModelImpl;
 
-  factory _ProfileRespModel.fromJson(Map<String, dynamic> json) =
-      _$ProfileRespModelImpl.fromJson;
+  factory _TeamProfileEmployeeDetailsResModel.fromJson(
+          Map<String, dynamic> json) =
+      _$TeamProfileEmployeeDetailsResModelImpl.fromJson;
 
   @override
-  @JsonKey(name: "id")
-  int? get id;
+  num? get id;
   @override
-  @JsonKey(name: "termination_date")
+  @JsonKey(name: 'termination_date')
   dynamic get terminationDate;
   @override
-  @JsonKey(name: "username")
   String? get username;
   @override
-  @JsonKey(name: "expiry_date")
+  @JsonKey(name: 'expiry_date')
   String? get expiryDate;
   @override
-  @JsonKey(name: "alert_before")
+  @JsonKey(name: 'alert_before')
   String? get alertBefore;
   @override
-  @JsonKey(name: "driving_license")
+  @JsonKey(name: 'driving_license')
   dynamic get drivingLicense;
   @override
-  @JsonKey(name: "employee_id")
-  int? get employeeId;
+  @JsonKey(name: 'employee_id')
+  num? get employeeId;
   @override
-  @JsonKey(name: "name")
   String? get name;
   @override
-  @JsonKey(name: "user_type")
+  @JsonKey(name: 'user_type')
   String? get userType;
   @override
-  @JsonKey(name: "permission_type")
+  @JsonKey(name: 'permission_type')
   String? get permissionType;
   @override
-  @JsonKey(name: "contact_number")
+  @JsonKey(name: 'contact_number')
   String? get contactNumber;
   @override
-  @JsonKey(name: "date_of_birth")
-  DateTime? get dateOfBirth;
+  @JsonKey(name: 'date_of_birth')
+  String? get dateOfBirth;
   @override
-  @JsonKey(name: "active_status")
+  @JsonKey(name: 'active_status')
   bool? get activeStatus;
   @override
-  @JsonKey(name: "date_joined")
-  DateTime? get dateJoined;
+  @JsonKey(name: 'date_joined')
+  String? get dateJoined;
   @override
-  @JsonKey(name: "dp")
   String? get dp;
   @override
-  @JsonKey(name: "bio")
   String? get bio;
   @override
-  @JsonKey(name: "instagram_link")
+  @JsonKey(name: 'instagram_link')
   dynamic get instagramLink;
   @override
-  @JsonKey(name: "facebook_link")
+  @JsonKey(name: 'facebook_link')
   dynamic get facebookLink;
   @override
-  @JsonKey(name: "linkedin_link")
+  @JsonKey(name: 'linkedin_link')
   dynamic get linkedinLink;
   @override
-  @JsonKey(name: "email")
   String? get email;
   @override
-  @JsonKey(name: "personal_email")
+  @JsonKey(name: 'personal_email')
   String? get personalEmail;
   @override
-  @JsonKey(name: "emergency_contact_name")
+  @JsonKey(name: 'emergency_contact_name')
   String? get emergencyContactName;
   @override
-  @JsonKey(name: "emergency_contact")
+  @JsonKey(name: 'emergency_contact')
   String? get emergencyContact;
   @override
-  @JsonKey(name: "employement_status")
+  @JsonKey(name: 'employement_status')
   String? get employementStatus;
   @override
-  @JsonKey(name: "address")
   String? get address;
   @override
-  @JsonKey(name: "edited_date_time")
-  String? get editedDateTime;
+  @JsonKey(name: 'edited_date_time')
+  DateTime? get editedDateTime;
   @override
-  @JsonKey(name: "is_occupied")
+  @JsonKey(name: 'is_occupied')
   bool? get isOccupied;
   @override
-  @JsonKey(name: "user")
-  int? get user;
+  num? get user;
+  @override
+  List<dynamic>? get folders;
   @override
   @JsonKey(ignore: true)
-  _$$ProfileRespModelImplCopyWith<_$ProfileRespModelImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$TeamProfileEmployeeDetailsResModelImplCopyWith<
+          _$TeamProfileEmployeeDetailsResModelImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

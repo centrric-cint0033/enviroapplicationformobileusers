@@ -86,4 +86,11 @@ class ApiEndPoints {
       '/api/v1/intranet_archive/folder/segment';
   static const endpointprofilelstng = '/api/v1/accounts/profile/view/';
   static const endpointprofileledit = '/api/v1/team/employee/edit/287/';
+
+  static const endpointcurrentemployeelist =
+      '/api/v1/team/status/current/?limit=10&page=1';
+  static const endpointterminatedemployeelist =
+      '/api/v1/team/status/terminated/?limit=10&page=1';
+  static const endpointteamprofileemployeedetailList = '/api/v1/team/employee';
+    static const endpointgetteamfolder = '/api/v1/drive/team/folder';
 }
