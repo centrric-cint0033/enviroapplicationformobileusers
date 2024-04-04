@@ -73,14 +73,42 @@ abstract class SalesViewModelBase with Store {
 //  |_      _| |_      _| |_      _| |_      _| |_      _| |_      _| |_      _| |_      _|
 //    |_||_|     |_||_|     |_||_|     |_||_|     |_||_|     |_||_|     |_||_|     |_||_|
 
+  ScrollController ctrSaleJobListScroll = ScrollController();
+
+  int incPageTopRentAll = 1;
+
+  // void topRentViewAllListener() async {
+  //   if (ctrSaleJobListScroll.offset >=
+  //           ctrSaleJobListScroll.position.maxScrollExtent &&
+  //       !ctrSaleJobListScroll.position.outOfRange) {
+  //     //
+  //     int totalRec =
+  //         topRentAllProductSuccRes.data?.pagination?.totalRecords ?? 0;
+  //     int pageLength = topRentAllProductSuccRes.data?.data.length ?? 0;
+
+  //     if (totalRec == pageLength) {
+  //       customPrint(content: 'content maximum reached');
+  //       topRentAllProductSuccRes =
+  //           topRentAllProductSuccRes.copyWith(pagination: false);
+  //     } else {
+  //       incPageTopRentAll = incPageTopRentAll + 1;
+
+  //       await topRentAllApi(page: incPageTopRentAll);
+  //       customPrint(content: 'page reached maximum');
+  //     }
+
+  //     customPrint(content: totalRec, name: 'Total Rec');
+  //     customPrint(content: pageLength, name: 'page length');
+  //   }
+  // }
+
   @action
   Future<void> salesJobListSearchApi(String searchData) async {
     try {
       joblistResponse = joblistResponse.copyWith(errors: null, loading: true);
 
-      final result = await salesService.salesJobListSearchServiceApi(data: [
-        {"key": searchData}
-      ]);
+      final result = await salesService
+          .salesJobListSearchServiceApi(data: {"key": searchData});
       return result.fold(
         (l) {
           joblistResponse = joblistResponse.copyWith(errors: l, loading: false);
@@ -174,9 +202,8 @@ abstract class SalesViewModelBase with Store {
     try {
       quoteRegResponse = quoteRegResponse.copyWith(errors: null, loading: true);
 
-      final result = await salesService.salesQuoteListSearchServiceApi(data: [
-        {"key": searchData}
-      ]);
+      final result = await salesService
+          .salesQuoteListSearchServiceApi(data: {"key": searchData});
       return result.fold(
         (l) {
           quoteRegResponse =

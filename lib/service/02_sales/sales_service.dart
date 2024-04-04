@@ -21,10 +21,10 @@ abstract class ISalesService {
       quoteRegisterServiceApi();
 
   Future<Either<Map<MainFailure, dynamic>, List<SalesModel>>>
-      salesJobListSearchServiceApi({required List<Map<String, String>> data});
+      salesJobListSearchServiceApi({required Map<String, String> data});
 
   Future<Either<Map<MainFailure, dynamic>, List<SalesModel>>>
-      salesQuoteListSearchServiceApi({required List<Map<String, String>> data});
+      salesQuoteListSearchServiceApi({required Map<String, String> data});
 }
 
 @LazySingleton(as: ISalesService)
@@ -50,8 +50,7 @@ class SalesService implements ISalesService {
 
   @override
   Future<Either<Map<MainFailure, dynamic>, List<SalesModel>>>
-      salesJobListSearchServiceApi(
-          {required List<Map<String, String>> data}) async {
+      salesJobListSearchServiceApi({required Map<String, String> data}) async {
     var response = await getIt<HttpService>().multipartRequest(
         data: data,
         method: 'POST',
@@ -108,7 +107,7 @@ class SalesService implements ISalesService {
   @override
   Future<Either<Map<MainFailure, dynamic>, List<SalesModel>>>
       salesQuoteListSearchServiceApi(
-          {required List<Map<String, String>> data}) async {
+          {required Map<String, String> data}) async {
     var response = await getIt<HttpService>().multipartRequest(
         data: data,
         method: 'POST',

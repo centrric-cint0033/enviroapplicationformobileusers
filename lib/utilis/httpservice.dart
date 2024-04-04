@@ -128,7 +128,7 @@ class HttpService {
     MultipartRequest? request,
     String? apiUrl,
     String? method,
-    List<Map<String, String>>? data,
+    Map<String, String>? data,
   }) async {
     final url = "$baseUrl$apiUrl";
 
@@ -147,11 +147,9 @@ class HttpService {
       }
 
       if (data != null) {
-        for (var element in data) {
-          element.forEach((key, value) {
-            request.fields[key] = value.toString();
-          });
-        }
+        data.forEach((key, value) {
+          request.fields[key] = value.toString();
+        });
       }
 
       StreamedResponse streamedResponse = await request.send();
