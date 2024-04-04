@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:enviro_mobile_application/utilis/constant.dart';
 import 'package:enviro_mobile_application/view_model/10_profile/profile_view_model.dart';
 import 'package:enviro_mobile_application/view_model/10_profile/profile_view_model.dart';
+import 'package:enviro_mobile_application/widgets/cmbutton.dart';
 import 'package:enviro_mobile_application/widgets/cmn_action_icon.dart';
 import 'package:enviro_mobile_application/widgets/cmn_title_textwidget.dart';
 import 'package:enviro_mobile_application/widgets/drawer.dart';
@@ -211,21 +212,9 @@ class ProfileCreationPage extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.only(left: 15.0, right: 15),
                     child: Observer(builder: (_) {
-                      return ElevatedButton(
-                        style: ButtonStyle(
-                          backgroundColor:
-                              MaterialStateProperty.resolveWith<Color>(
-                            (Set<MaterialState> states) {
-                              return Colors.blue; // Background color
-                            },
-                          ),
-                          foregroundColor:
-                              MaterialStateProperty.resolveWith<Color>(
-                            (Set<MaterialState> states) {
-                              return Colors.white; // Text color
-                            },
-                          ),
-                        ),
+                      return CmButton(
+                        loading: vmProfile.profileeditResponse.loading,
+                        text: 'Save',
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
                             String username = _controllerusername.text;
@@ -234,7 +223,6 @@ class ProfileCreationPage extends StatelessWidget {
                             vmProfile.profileeditviewmodel(username, password);
                           }
                         },
-                        child: const Text('Save'),
                       );
                     }),
                   ),
