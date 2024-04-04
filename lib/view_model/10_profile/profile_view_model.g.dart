@@ -29,13 +29,13 @@ mixin _$ProfileViewModel on ProfileViewModelBase, Store {
       Atom(name: 'ProfileViewModelBase.renameResponse', context: context);
 
   @override
-  ApiResponse<String> get renameResponse {
+  ApiResponse<List<ProfileRespModel>> get renameResponse {
     _$renameResponseAtom.reportRead();
     return super.renameResponse;
   }
 
   @override
-  set renameResponse(ApiResponse<String> value) {
+  set renameResponse(ApiResponse<List<ProfileRespModel>> value) {
     _$renameResponseAtom.reportWrite(value, super.renameResponse, () {
       super.renameResponse = value;
     });
@@ -56,9 +56,9 @@ mixin _$ProfileViewModel on ProfileViewModelBase, Store {
       context: context);
 
   @override
-  Future<void> profileeditviewmodelfunction(String Username, String Password) {
+  Future<void> profileeditviewmodelfunction(String username, String password) {
     return _$profileeditviewmodelfunctionAsyncAction
-        .run(() => super.profileeditviewmodelfunction(Username, Password));
+        .run(() => super.profileeditviewmodelfunction(username, password));
   }
 
   @override

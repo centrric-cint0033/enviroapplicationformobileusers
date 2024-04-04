@@ -49,23 +49,21 @@ abstract class ProfileViewModelBase with Store {
   }
 
   @observable
-  ApiResponse<String> renameResponse = ApiResponse<String>();
+  ApiResponse<List<ProfileRespModel>> renameResponse =
+      ApiResponse<List<ProfileRespModel>>();
 
   @action
   Future<void> profileeditviewmodelfunction(
-      String Username, String Password) async {
+      String username, String password) async {
     renameResponse = renameResponse.copyWith(error: null, loading: true);
 
-    print(Password);
-    print(
-      Username,
-    );
-    final result = await profileService.profileeditfunction(Username, Password);
+    final result = await profileService
+        .profileEditApi(data: {"username": username, "password": password});
     return result.fold(
       (l) {
         print('Error occurred during folder rename: $l');
         renameResponse = renameResponse.copyWith(
-          error: l,
+          errors: l,
           loading: false,
         );
       },

@@ -13,7 +13,7 @@ import 'package:injectable/injectable.dart';
 abstract class IprofileService {
   Future<Either<MainFailure, ProfileRespModel>> profileservicefunction();
   Future<Either<Map<MainFailure, dynamic>, List<ProfileRespModel>>>
-      profileEditApi({required List<Map<String, String>> data});
+      profileEditApi({required Map<String, String> data});
 }
 
 @LazySingleton(as: IprofileService)
@@ -41,7 +41,7 @@ class ProfileService implements IprofileService {
 
   @override
   Future<Either<Map<MainFailure, dynamic>, List<ProfileRespModel>>>
-      profileEditApi({required List<Map<String, String>> data}) async {
+      profileEditApi({required Map<String, String> data}) async {
     var response = await getIt<HttpService>().multipartRequest(
         data: data, method: 'PATCH', apiUrl: ApiEndPoints.endpointprofileedit);
     return response.fold(
