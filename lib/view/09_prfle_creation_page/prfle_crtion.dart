@@ -62,6 +62,7 @@ class ProfileCreationPage extends StatelessWidget {
                   child: SizedBox(
                     height: 48,
                     child: TextFormField(
+                      readOnly: true,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return 'Please enter your name';
@@ -89,6 +90,7 @@ class ProfileCreationPage extends StatelessWidget {
                   child: SizedBox(
                     height: 48,
                     child: TextFormField(
+                      readOnly: true,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return 'Please enter the 10 digit"s phonenumber';
@@ -119,6 +121,7 @@ class ProfileCreationPage extends StatelessWidget {
                   child: SizedBox(
                     height: 48,
                     child: TextFormField(
+                      readOnly: true,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return 'Please enter the Email';
@@ -178,33 +181,30 @@ class ProfileCreationPage extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(left: 12.0, right: 12.0),
                   child: SizedBox(
-                    child: Container(
-                      height: 48,
-                      child: TextFormField(
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please enter the passwords';
-                          }
-                          return null;
-                        },
-                        controller: _controllerpassword,
-                        decoration: InputDecoration(
-                          suffixIcon: IconButton(
-                            onPressed: () {},
-                            icon: Icon(Icons.edit),
-                          ),
-                          filled: true,
-                          fillColor: Colors.grey[200],
-                          border: const OutlineInputBorder(
-                            borderSide: BorderSide.none,
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(24.0)),
-                          ),
-                          labelText: 'Password',
-                          labelStyle: const TextStyle(color: Colors.blue),
+                    height: 48,
+                    child: TextFormField(
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter the passwords';
+                        }
+                        return null;
+                      },
+                      controller: _controllerpassword,
+                      decoration: InputDecoration(
+                        suffixIcon: IconButton(
+                          onPressed: () {},
+                          icon: Icon(Icons.edit),
                         ),
-                        obscureText: true,
+                        filled: true,
+                        fillColor: Colors.grey[200],
+                        border: const OutlineInputBorder(
+                          borderSide: BorderSide.none,
+                          borderRadius: BorderRadius.all(Radius.circular(24.0)),
+                        ),
+                        labelText: 'Password',
+                        labelStyle: const TextStyle(color: Colors.blue),
                       ),
+                      obscureText: true,
                     ),
                   ),
                 ),
