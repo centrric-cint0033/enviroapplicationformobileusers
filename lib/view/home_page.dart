@@ -183,6 +183,7 @@ void ohsfunction(BuildContext context) {
 }
 
 void intranetfuntion(BuildContext context) {
+  vmProfile.profileeditviewmodelfunction('jithin', 'jithin');
   vmIntranet.intranetviewmodelfunction(1);
   context.router.pushNamed(RouteNames.intranetpage);
   print('Notification button tapped!');

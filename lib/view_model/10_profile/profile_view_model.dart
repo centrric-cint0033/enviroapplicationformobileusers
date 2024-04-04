@@ -47,4 +47,37 @@ abstract class ProfileViewModelBase with Store {
       },
     );
   }
+
+  @observable
+  ApiResponse<String> renameResponse = ApiResponse<String>();
+
+  @action
+  Future<void> profileeditviewmodelfunction(
+      String Username, String Password) async {
+    renameResponse = renameResponse.copyWith(error: null, loading: true);
+
+    print(Password);
+    print(
+      Username,
+    );
+    final result = await profileService.profileeditfunction(Username, Password);
+    return result.fold(
+      (l) {
+        print('Error occurred during folder rename: $l');
+        renameResponse = renameResponse.copyWith(
+          error: l,
+          loading: false,
+        );
+      },
+      (r) {
+        print('Folder rename successful!');
+        renameResponse = renameResponse.copyWith(
+          data: r,
+          error: null,
+          loading: false,
+        );
+        // vmOhs.ohsnewsfolderviewmodelfunction(1);
+      },
+    );
+  }
 }
