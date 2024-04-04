@@ -65,6 +65,15 @@ mixin _$SalesViewModel on SalesViewModelBase, Store {
     return _$saleJobListApiAsyncAction.run(() => super.saleJobListApi());
   }
 
+  late final _$salesJobListSearchApiAsyncAction =
+      AsyncAction('SalesViewModelBase.salesJobListSearchApi', context: context);
+
+  @override
+  Future<void> salesJobListSearchApi(String searchData) {
+    return _$salesJobListSearchApiAsyncAction
+        .run(() => super.salesJobListSearchApi(searchData));
+  }
+
   late final _$saleslistApiAsyncAction =
       AsyncAction('SalesViewModelBase.saleslistApi', context: context);
 
@@ -79,6 +88,16 @@ mixin _$SalesViewModel on SalesViewModelBase, Store {
   @override
   Future<void> quoteRegisterApi() {
     return _$quoteRegisterApiAsyncAction.run(() => super.quoteRegisterApi());
+  }
+
+  late final _$salesQuoteListSearchApiAsyncAction = AsyncAction(
+      'SalesViewModelBase.salesQuoteListSearchApi',
+      context: context);
+
+  @override
+  Future<void> salesQuoteListSearchApi(String searchData) {
+    return _$salesQuoteListSearchApiAsyncAction
+        .run(() => super.salesQuoteListSearchApi(searchData));
   }
 
   @override

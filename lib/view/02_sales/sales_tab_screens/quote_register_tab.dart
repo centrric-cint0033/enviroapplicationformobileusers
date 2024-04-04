@@ -1,27 +1,48 @@
 // ignore_for_file: non_constant_identifier_names
 
+import 'package:auto_route/auto_route.dart';
+import 'package:enviro_mobile_application/Routepage/approutes.gr.dart';
 import 'package:enviro_mobile_application/model/02_sales/sales_model/sales_model.dart';
 import 'package:enviro_mobile_application/utilis/constant.dart';
 import 'package:enviro_mobile_application/view/02_sales/sales_widgets.dart/sales_widget.dart';
 import 'package:enviro_mobile_application/view_model/02_sales/sales_view_model.dart';
 import 'package:enviro_mobile_application/widgets/ww_response_handler.dart';
+import 'package:enviro_mobile_application/widgets/ww_search_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class QuoteRegisterTab extends StatelessWidget {
   const QuoteRegisterTab({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Scaffold(body: Observer(builder: (_) {
-          return WWResponseHandler(
-              data: vmSales.quoteRegResponse,
-              isEmpty: vmSales.quoteRegResponse.data?.isEmpty ?? true,
-              onTap: () => vmSales.quoteRegisterApi(),
-              child: const QuoteReqisterListWidget());
-        })));
+    return Scaffold(
+        body: Padding(
+      padding: EdgeInsets.symmetric(horizontal: 15.w),
+      child: Column(
+        children: [
+          gapField,
+          WWSearchField(
+            controller: vmSales.salesQuoteListSearchCtr,
+            onChanged: (v) => vmSales.onTextChanged(() => v.isEmpty
+                ? vmSales.quoteRegisterApi()
+                : vmSales.salesQuoteListSearchApi(v)),
+            searchTap: () {},
+          ),
+          gapField,
+          Observer(builder: (_) {
+            return Expanded(
+              child: WWResponseHandler(
+                  data: vmSales.quoteRegResponse,
+                  isEmpty: vmSales.quoteRegResponse.data?.isEmpty ?? true,
+                  onTap: () => vmSales.quoteRegisterApi(),
+                  child: const QuoteReqisterListWidget()),
+            );
+          }),
+        ],
+      ),
+    ));
   }
 }
 
@@ -36,7 +57,12 @@ class QuoteReqisterListWidget extends StatelessWidget {
       separatorBuilder: (BuildContext context, int index) => sized0hx10,
       itemBuilder: (context, index) {
         var data = vmSales.quoteRegResponse.data?[index];
-        return listData(data);
+        return InkWell(
+            onTap: () {
+              context.router.push(
+                  SalesDetailRoute(data: vmSales.joblistResponse.data?[index]));
+            },
+            child: listData(data));
       },
     );
   }

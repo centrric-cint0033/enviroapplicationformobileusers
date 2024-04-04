@@ -7,7 +7,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 final gapField = sized0hx10;
 
 Card customCard({required Widget child}) => Card(
-    margin: const EdgeInsets.only(left: 16.0, right: 16),
     shape: RoundedRectangleBorder(
       side: BorderSide(color: Appthemes.cLightGrey),
       borderRadius: BorderRadius.circular(8.0),

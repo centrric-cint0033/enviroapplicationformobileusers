@@ -5,21 +5,24 @@ import 'package:enviro_mobile_application/view_model/02_sales/sales_view_model.d
 import 'package:enviro_mobile_application/widgets/ww_response_handler.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SalesListTab extends StatelessWidget {
   const SalesListTab({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Scaffold(body: Observer(builder: (_) {
-          return WWResponseHandler(
-              data: vmSales.salespageResponse,
-              isEmpty: vmSales.salespageResponse.data?.isEmpty ?? true,
-              onTap: () => vmSales.saleslistApi(),
-              child: const SalesListWidget());
-        })));
+    return Scaffold(
+        body: Padding(
+      padding: EdgeInsets.symmetric(horizontal: 15.w),
+      child: Observer(builder: (_) {
+        return WWResponseHandler(
+            data: vmSales.salespageResponse,
+            isEmpty: vmSales.salespageResponse.data?.isEmpty ?? true,
+            onTap: () => vmSales.saleslistApi(),
+            child: const SalesListWidget());
+      }),
+    ));
   }
 }
 

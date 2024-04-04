@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 Padding CommonTabbar() {
   return Padding(
-    padding: const EdgeInsets.only(left: 25, right: 25),
+    padding: EdgeInsets.only(left: 15.w, right: 15.w),
     child: Container(
       height: 32.w,
       decoration: BoxDecoration(
@@ -23,7 +23,7 @@ Padding CommonTabbar() {
         indicatorColor: Colors.black,
         tabs: const [
           Tab(text: 'Job List'),
-          Tab(text: 'Quote Register'),
+          Tab(text: 'Quote Reg'),
           Tab(text: 'Sales List'),
         ],
       ),
