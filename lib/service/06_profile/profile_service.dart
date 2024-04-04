@@ -35,4 +35,25 @@ class ProfileService implements IprofileService {
       },
     );
   }
+
+  // @override
+  // Future<Either<MainFailure, ProfileRespModel>> profileservicefunction() async {
+  //   var response = await getIt<HttpService>().request(
+  //       authenticated: true,
+  //       method: HttpMethod.get,
+  //       apiUrl: ApiEndPoints.endpointprofilelstng);
+
+  //   return response.fold(
+  //     (l) {
+  //       (l.values.first);
+  //       return Left(l.keys.first);
+  //     },
+  //     (res) async {
+  //       ProfileRespModel intranetfldrlist =
+  //           ProfileRespModel.fromJson(jsonDecode(res.body));
+
+  //       return Right(intranetfldrlist);
+  //     },
+  //   );
+  // }
 }
