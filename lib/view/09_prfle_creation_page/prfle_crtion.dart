@@ -6,6 +6,7 @@ import 'package:enviro_mobile_application/widgets/cmn_action_icon.dart';
 import 'package:enviro_mobile_application/widgets/cmn_title_textwidget.dart';
 import 'package:enviro_mobile_application/widgets/drawer.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 
 @RoutePage()
 class ProfileCreationPage extends StatelessWidget {
@@ -183,12 +184,6 @@ class ProfileCreationPage extends StatelessWidget {
                   child: SizedBox(
                     height: 48,
                     child: TextFormField(
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter the passwords';
-                        }
-                        return null;
-                      },
                       controller: _controllerpassword,
                       decoration: InputDecoration(
                         suffixIcon: IconButton(
@@ -215,27 +210,33 @@ class ProfileCreationPage extends StatelessWidget {
                   width: 34,
                   child: Padding(
                     padding: const EdgeInsets.only(left: 15.0, right: 15),
-                    child: ElevatedButton(
-                      style: ButtonStyle(
-                        backgroundColor:
-                            MaterialStateProperty.resolveWith<Color>(
-                          (Set<MaterialState> states) {
-                            return Colors.blue; // Background color
-                          },
+                    child: Observer(builder: (_) {
+                      return ElevatedButton(
+                        style: ButtonStyle(
+                          backgroundColor:
+                              MaterialStateProperty.resolveWith<Color>(
+                            (Set<MaterialState> states) {
+                              return Colors.blue; // Background color
+                            },
+                          ),
+                          foregroundColor:
+                              MaterialStateProperty.resolveWith<Color>(
+                            (Set<MaterialState> states) {
+                              return Colors.white; // Text color
+                            },
+                          ),
                         ),
-                        foregroundColor:
-                            MaterialStateProperty.resolveWith<Color>(
-                          (Set<MaterialState> states) {
-                            return Colors.white; // Text color
-                          },
-                        ),
-                      ),
-                      onPressed: () {
-                        if (_formKey.currentState!.validate()) {}
-                        // Add your save logic here
-                      },
-                      child: const Text('Save'),
-                    ),
+                        onPressed: () {
+                          if (_formKey.currentState!.validate()) {
+                            String username = _controllerusername.text;
+                            String password = _controllerpassword.text;
+
+                            vmProfile.profileeditviewmodel(username, password);
+                          }
+                        },
+                        child: const Text('Save'),
+                      );
+                    }),
                   ),
                 ),
               ],
