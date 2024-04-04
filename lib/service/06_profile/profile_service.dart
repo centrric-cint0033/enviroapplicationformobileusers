@@ -33,7 +33,6 @@ class ProfileService implements IprofileService {
       (res) async {
         ProfileRespModel intranetfldrlist =
             ProfileRespModel.fromJson(jsonDecode(res.body));
-
         return Right(intranetfldrlist);
       },
     );

@@ -62,7 +62,7 @@ abstract class ProfileViewModelBase with Store {
           profileeditResponse.copyWith(errors: null, loading: true);
 
       final result = await profileService
-          .profileEditApi(data: {"Username": username, "Password": password});
+          .profileEditApi(data: {"username": username, "password": password});
       return result.fold(
         (l) {
           profileeditResponse =

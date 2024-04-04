@@ -148,13 +148,17 @@ class HttpService {
 
       if (data != null) {
         data.forEach((key, value) {
-          request.fields[key] = value.toString();
+          if (value.isNotEmpty) {
+            customPrint(content: '$key : $value');
+            request.fields[key] = value.toString();
+          }
         });
       }
 
       StreamedResponse streamedResponse = await request.send();
       final response = await Response.fromStream(streamedResponse);
       customPrint(content: response.body, name: "StreamedResponse");
+      customPrint(content: response.statusCode);
       if (response.statusCode == HttpStatus.ok ||
           response.statusCode == HttpStatus.created) {
         return Right(response);
