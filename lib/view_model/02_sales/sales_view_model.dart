@@ -77,30 +77,28 @@ abstract class SalesViewModelBase with Store {
 
   int incPageTopRentAll = 1;
 
-  // void topRentViewAllListener() async {
-  //   if (ctrSaleJobListScroll.offset >=
-  //           ctrSaleJobListScroll.position.maxScrollExtent &&
-  //       !ctrSaleJobListScroll.position.outOfRange) {
-  //     //
-  //     int totalRec =
-  //         topRentAllProductSuccRes.data?.pagination?.totalRecords ?? 0;
-  //     int pageLength = topRentAllProductSuccRes.data?.data.length ?? 0;
+  void topRentViewAllListener() async {
+    if (ctrSaleJobListScroll.offset >=
+            ctrSaleJobListScroll.position.maxScrollExtent &&
+        !ctrSaleJobListScroll.position.outOfRange) {
+      //
+      int totalRec = joblistResponse.data?.length ?? 0;
+      int pageLength = joblistResponse.data?.length ?? 0;
 
-  //     if (totalRec == pageLength) {
-  //       customPrint(content: 'content maximum reached');
-  //       topRentAllProductSuccRes =
-  //           topRentAllProductSuccRes.copyWith(pagination: false);
-  //     } else {
-  //       incPageTopRentAll = incPageTopRentAll + 1;
+      if (totalRec == pageLength) {
+        customPrint(content: 'content maximum reached');
+        joblistResponse = joblistResponse.copyWith(pagination: false);
+      } else {
+        incPageTopRentAll = incPageTopRentAll + 1;
 
-  //       await topRentAllApi(page: incPageTopRentAll);
-  //       customPrint(content: 'page reached maximum');
-  //     }
+        // await topRentAllApi(page: incPageTopRentAll);
+        customPrint(content: 'page reached maximum');
+      }
 
-  //     customPrint(content: totalRec, name: 'Total Rec');
-  //     customPrint(content: pageLength, name: 'page length');
-  //   }
-  // }
+      customPrint(content: totalRec, name: 'Total Rec');
+      customPrint(content: pageLength, name: 'page length');
+    }
+  }
 
   @action
   Future<void> salesJobListSearchApi(String searchData) async {
