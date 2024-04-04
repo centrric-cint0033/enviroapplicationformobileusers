@@ -48,34 +48,27 @@ abstract class ProfileViewModelBase with Store {
     );
   }
 
-  @observable
-  ApiResponse<List<ProfileRespModel>> renameResponse =
-      ApiResponse<List<ProfileRespModel>>();
+  // @action
+  // Future<void> salesJobListSearchApi(String searchData) async {
+  //   try {
+  //     joblistResponse = joblistResponse.copyWith(errors: null, loading: true);
 
-  @action
-  Future<void> profileeditviewmodelfunction(
-      String username, String password) async {
-    renameResponse = renameResponse.copyWith(error: null, loading: true);
-
-    final result = await profileService
-        .profileEditApi(data: {"username": username, "password": password});
-    return result.fold(
-      (l) {
-        print('Error occurred during folder rename: $l');
-        renameResponse = renameResponse.copyWith(
-          errors: l,
-          loading: false,
-        );
-      },
-      (r) {
-        print('Folder rename successful!');
-        renameResponse = renameResponse.copyWith(
-          data: r,
-          error: null,
-          loading: false,
-        );
-        // vmOhs.ohsnewsfolderviewmodelfunction(1);
-      },
-    );
-  }
+  //     final result = await salesService.salesJobListSearchServiceApi(data: [
+  //       {"key": searchData}
+  //     ]);
+  //     return result.fold(
+  //       (l) {
+  //         joblistResponse = joblistResponse.copyWith(errors: l, loading: false);
+  //       },
+  //       (r) {
+  //         joblistResponse =
+  //             joblistResponse.copyWith(data: r, errors: null, loading: false);
+  //       },
+  //     );
+  //   } catch (e) {
+  //     customPrint(content: e, name: 'Error salesJobListSearchApi');
+  //   } finally {
+  //     joblistResponse = joblistResponse.copyWith(loading: false);
+  //   }
+  // }
 }

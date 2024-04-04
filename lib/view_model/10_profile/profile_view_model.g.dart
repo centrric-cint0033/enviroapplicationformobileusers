@@ -25,22 +25,6 @@ mixin _$ProfileViewModel on ProfileViewModelBase, Store {
     });
   }
 
-  late final _$renameResponseAtom =
-      Atom(name: 'ProfileViewModelBase.renameResponse', context: context);
-
-  @override
-  ApiResponse<List<ProfileRespModel>> get renameResponse {
-    _$renameResponseAtom.reportRead();
-    return super.renameResponse;
-  }
-
-  @override
-  set renameResponse(ApiResponse<List<ProfileRespModel>> value) {
-    _$renameResponseAtom.reportWrite(value, super.renameResponse, () {
-      super.renameResponse = value;
-    });
-  }
-
   late final _$profileviewmodelfunctionAsyncAction = AsyncAction(
       'ProfileViewModelBase.profileviewmodelfunction',
       context: context);
@@ -51,21 +35,10 @@ mixin _$ProfileViewModel on ProfileViewModelBase, Store {
         .run(() => super.profileviewmodelfunction());
   }
 
-  late final _$profileeditviewmodelfunctionAsyncAction = AsyncAction(
-      'ProfileViewModelBase.profileeditviewmodelfunction',
-      context: context);
-
-  @override
-  Future<void> profileeditviewmodelfunction(String username, String password) {
-    return _$profileeditviewmodelfunctionAsyncAction
-        .run(() => super.profileeditviewmodelfunction(username, password));
-  }
-
   @override
   String toString() {
     return '''
-profilepageResponse: ${profilepageResponse},
-renameResponse: ${renameResponse}
+profilepageResponse: ${profilepageResponse}
     ''';
   }
 }
