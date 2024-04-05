@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -37,6 +38,12 @@ class SiteDetailScreen extends StatelessWidget {
           appBar: AppBar(
             elevation: 1,
             title: cmnTitleWidget("Site Profile"),
+            actions: [
+              vmSite.detailLoading
+                  ? const CupertinoActivityIndicator()
+                  : const SizedBox.shrink(),
+              SizedBox(width: 5.w),
+            ],
           ),
           body: SafeArea(
             child: SingleChildScrollView(

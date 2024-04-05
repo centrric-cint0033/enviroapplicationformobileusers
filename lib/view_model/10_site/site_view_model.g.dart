@@ -74,6 +74,22 @@ mixin _$SiteViewModel on SiteViewModelBase, Store {
     });
   }
 
+  late final _$detailLoadingAtom =
+      Atom(name: 'SiteViewModelBase.detailLoading', context: context);
+
+  @override
+  bool get detailLoading {
+    _$detailLoadingAtom.reportRead();
+    return super.detailLoading;
+  }
+
+  @override
+  set detailLoading(bool value) {
+    _$detailLoadingAtom.reportWrite(value, super.detailLoading, () {
+      super.detailLoading = value;
+    });
+  }
+
   late final _$getPermanentSitesAsyncAction =
       AsyncAction('SiteViewModelBase.getPermanentSites', context: context);
 
@@ -146,7 +162,8 @@ mixin _$SiteViewModel on SiteViewModelBase, Store {
 permanentSiteResponse: ${permanentSiteResponse},
 tempSiteResponse: ${tempSiteResponse},
 delSiteResponse: ${delSiteResponse},
-siteFolderResponse: ${siteFolderResponse}
+siteFolderResponse: ${siteFolderResponse},
+detailLoading: ${detailLoading}
     ''';
   }
 }

@@ -45,6 +45,9 @@ abstract class SiteViewModelBase with Store {
 
   TextEditingController searchCtr = TextEditingController();
 
+  @observable
+  bool detailLoading = false;
+
   @action
   Future<void> getPermanentSites({int? page}) async {
     permanentSiteResponse = permanentSiteResponse.copyWith(
@@ -207,6 +210,7 @@ abstract class SiteViewModelBase with Store {
     required BuildContext context,
     SiteType type = SiteType.permananet,
   }) async {
+    detailLoading = true;
     final response = await siteService.getSiteDetails(id: id);
 
     response.fold(
@@ -264,6 +268,7 @@ abstract class SiteViewModelBase with Store {
         }
       },
     );
+    detailLoading = false;
   }
 
   @action
