@@ -79,7 +79,7 @@ class HomePage extends StatelessWidget {
                       height: 30.0,
                     ),
                     GestureDetector(
-                      onTap: () => calenderfunction(context),
+                      onTap: () => shedulepagefunction(context),
                       child: _buildBox(
                         'assets/images/calendar.svg',
                         'Scheduling',
@@ -188,10 +188,10 @@ void intranetfuntion(BuildContext context) {
   print('Notification button tapped!');
 }
 
-void calenderfunction(BuildContext context) {
-  context.router.pushNamed(RouteNames.rSchedulingPage);
-  print('Notification button tapped!');
-}
+// void calenderfunction(BuildContext context) {
+//   context.router.pushNamed(RouteNames.rshedulepage);
+//   print('Notification button tapped!');
+// }
 
 void vehiclefunction(BuildContext context) async {
   context.router.pushNamed(RouteNames.vehiclemainpage);
@@ -199,4 +199,8 @@ void vehiclefunction(BuildContext context) async {
 
   vmVehicle.mastercarfunction();
   vmVehicle.trailorfunction();
+}
+
+void shedulepagefunction(BuildContext context) async {
+  context.router.pushNamed(RouteNames.rshedulepage);
 }

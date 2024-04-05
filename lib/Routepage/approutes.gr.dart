@@ -27,8 +27,6 @@ import 'package:enviro_mobile_application/view/04_ohs/notifcation_detail_page.da
 import 'package:enviro_mobile_application/view/04_ohs/oh&s_detail_page.dart'
     as _i8;
 import 'package:enviro_mobile_application/view/04_ohs/ohs_page.dart' as _i9;
-import 'package:enviro_mobile_application/view/06_scheduling/scheduling_page.dart'
-    as _i13;
 import 'package:enviro_mobile_application/view/07_intranet/intranet_inside_page.dart'
     as _i2;
 import 'package:enviro_mobile_application/view/07_intranet/intranet_page.dart'
@@ -37,6 +35,8 @@ import 'package:enviro_mobile_application/view/08_notification_page/notification
     as _i7;
 import 'package:enviro_mobile_application/view/09_prfle_creation_page/prfle_crtion.dart'
     as _i10;
+import 'package:enviro_mobile_application/view/10_shedule/shedule_page.dart'
+    as _i13;
 import 'package:enviro_mobile_application/view/home_page.dart' as _i1;
 import 'package:flutter/material.dart' as _i16;
 
@@ -141,10 +141,10 @@ abstract class $AppRouter extends _i15.RootStackRouter {
         child: const _i12.SalesPage(),
       );
     },
-    SchedulingRoute.name: (routeData) {
+    ScheduleRoute.name: (routeData) {
       return _i15.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i13.SchedulingPage(),
+        child: const _i13.SchedulePage(),
       );
     },
     VehicleRoute.name: (routeData) {
@@ -478,15 +478,15 @@ class SalesRoute extends _i15.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i13.SchedulingPage]
-class SchedulingRoute extends _i15.PageRouteInfo<void> {
-  const SchedulingRoute({List<_i15.PageRouteInfo>? children})
+/// [_i13.SchedulePage]
+class ScheduleRoute extends _i15.PageRouteInfo<void> {
+  const ScheduleRoute({List<_i15.PageRouteInfo>? children})
       : super(
-          SchedulingRoute.name,
+          ScheduleRoute.name,
           initialChildren: children,
         );
 
-  static const String name = 'SchedulingRoute';
+  static const String name = 'ScheduleRoute';
 
   static const _i15.PageInfo<void> page = _i15.PageInfo<void>(name);
 }

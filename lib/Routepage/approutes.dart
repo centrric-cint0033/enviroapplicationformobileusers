@@ -18,7 +18,6 @@ class AppRouter extends $AppRouter {
         AutoRoute(page: SalesRoute.page, path: RouteNames.rSalesPpage),
         AutoRoute(page: OhsRoute.page, path: RouteNames.ohsPage),
         AutoRoute(page: IntranetRoute.page, path: RouteNames.intranetpage),
-        AutoRoute(page: SchedulingRoute.page, path: RouteNames.rSchedulingPage),
         AutoRoute(page: VehicleRoute.page, path: RouteNames.vehiclemainpage),
         AutoRoute(
             page: NewsRouteInsideRoute.page,
@@ -36,5 +35,6 @@ class AppRouter extends $AppRouter {
             page: NotificationRoute.page, path: RouteNames.rnotificationpage),
         AutoRoute(
             page: SalesDetailRoute.page, path: RouteNames.rSalesDetailPage),
+        AutoRoute(page: ScheduleRoute.page, path: RouteNames.rshedulepage),
       ];
 }
