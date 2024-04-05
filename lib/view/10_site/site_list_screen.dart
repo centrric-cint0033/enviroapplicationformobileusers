@@ -33,7 +33,6 @@ class SiteListScreen extends StatelessWidget {
         appBar: CustomAppBar(
           leading: const cmn_leading_icon(),
           title: cmnTitleWidget('Site'),
-          actions: cmn_action_icon,
         ),
         body: Column(
           children: [
