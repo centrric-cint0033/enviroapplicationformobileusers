@@ -112,6 +112,22 @@ mixin _$TeamViewModel on TeamViewModelBase, Store {
     });
   }
 
+  late final _$editFolderResponseAtom =
+      Atom(name: 'TeamViewModelBase.editFolderResponse', context: context);
+
+  @override
+  ApiResponse<String> get editFolderResponse {
+    _$editFolderResponseAtom.reportRead();
+    return super.editFolderResponse;
+  }
+
+  @override
+  set editFolderResponse(ApiResponse<String> value) {
+    _$editFolderResponseAtom.reportWrite(value, super.editFolderResponse, () {
+      super.editFolderResponse = value;
+    });
+  }
+
   late final _$getCurrentEmployeeAsyncAction =
       AsyncAction('TeamViewModelBase.getCurrentEmployee', context: context);
 
@@ -176,6 +192,18 @@ mixin _$TeamViewModel on TeamViewModelBase, Store {
         folder: folder, context: context, employeeID: employeeID));
   }
 
+  late final _$editTeamFolderApiAsyncAction =
+      AsyncAction('TeamViewModelBase.editTeamFolderApi', context: context);
+
+  @override
+  Future<void> editTeamFolderApi(
+      {required Folder folder,
+      required BuildContext context,
+      required num employeeID}) {
+    return _$editTeamFolderApiAsyncAction.run(() => super.editTeamFolderApi(
+        folder: folder, context: context, employeeID: employeeID));
+  }
+
   @override
   String toString() {
     return '''
@@ -184,7 +212,8 @@ terminatedEmployeeResponse: ${terminatedEmployeeResponse},
 teamProfileEmployeeDetailListResponse: ${teamProfileEmployeeDetailListResponse},
 teamFoldersResponse: ${teamFoldersResponse},
 addFolderResponse: ${addFolderResponse},
-deleteFolderResponse: ${deleteFolderResponse}
+deleteFolderResponse: ${deleteFolderResponse},
+editFolderResponse: ${editFolderResponse}
     ''';
   }
 }

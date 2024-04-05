@@ -335,7 +335,10 @@ class TeamProfileScreen extends StatelessWidget {
                                     ),
                                     TextButton(
                                       onPressed: () {
-                                        Navigator.of(context).pop();
+                                        vmTeam.editTeamFolderApi(
+                                            folder: data,
+                                            context: context,
+                                            employeeID: id);
                                       },
                                       child: const Text(
                                         "Cancel",

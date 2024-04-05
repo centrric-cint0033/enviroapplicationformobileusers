@@ -45,6 +45,8 @@ abstract class TeamViewModelBase with Store {
   ApiResponse addFolderResponse = ApiResponse<TeamCreateFolderReqModel>();
   @observable
   ApiResponse<String> deleteFolderResponse = ApiResponse<String>();
+  @observable
+  ApiResponse<String> editFolderResponse = ApiResponse<String>();
 
   TextEditingController textFolderController = TextEditingController();
   @action
@@ -199,6 +201,35 @@ abstract class TeamViewModelBase with Store {
           loading: false,
         );
 
+        getTeamFolders(id: employeeID);
+        context.router.pop();
+      },
+    );
+  }
+
+  @action
+  Future<void> editTeamFolderApi(
+      {required Folder folder,
+      required BuildContext context,
+      required num employeeID}) async {
+    editFolderResponse =
+        editFolderResponse.copyWith(error: null, loading: true);
+
+    final result = await teamService.editTeamFolders(id: folder.id!);
+    return result.fold(
+      (l) {
+        editFolderResponse = editFolderResponse.copyWith(
+          error: l,
+          loading: false,
+        );
+      },
+      (r) {
+        editFolderResponse = editFolderResponse.copyWith(
+          data: r,
+          error: null,
+          loading: false,
+        );
+        log(editFolderResponse.toString() + "90327");
         getTeamFolders(id: employeeID);
         context.router.pop();
       },
