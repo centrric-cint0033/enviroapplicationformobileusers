@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:enviro_mobile_application/api_response/api_response.dart';
 import 'package:enviro_mobile_application/model/10_team/team_folder_req_model/team_create_folder_req_model.dart';
@@ -10,6 +12,8 @@ import 'package:enviro_mobile_application/utilis/injection.dart';
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 import 'package:mobx/mobx.dart';
+
+import '../../model/10_team/team_folder_resp_model/folder.dart';
 part 'team_view_model.g.dart';
 
 final vmTeam = getIt<TeamViewModel>();
@@ -35,9 +39,12 @@ abstract class TeamViewModelBase with Store {
       teamProfileEmployeeDetailListResponse =
       ApiResponse<TeamProfileEmployeeDetailsResModel>();
   @observable
-  ApiResponse teamFoldersResponse = ApiResponse<TeamFolderRespModel>();
+  ApiResponse<TeamFolderRespModel> teamFoldersResponse =
+      ApiResponse<TeamFolderRespModel>();
   @observable
   ApiResponse addFolderResponse = ApiResponse<TeamCreateFolderReqModel>();
+  @observable
+  ApiResponse<String> deleteFolderResponse = ApiResponse<String>();
 
   TextEditingController textFolderController = TextEditingController();
   @action
@@ -162,11 +169,37 @@ abstract class TeamViewModelBase with Store {
       (r) {
         addFolderResponse =
             addFolderResponse.copyWith(data: r, error: null, loading: false);
-        TeamFolderRespModel createFolderList = teamFoldersResponse.data;
-        teamFoldersResponse =
-            teamFoldersResponse.copyWith(data: createFolderList);
         getTeamFolders(id: employee);
         vmTeam.textFolderController.clear();
+        context.router.pop();
+      },
+    );
+  }
+
+  @action
+  Future<void> deleteTeamFolderApi(
+      {required Folder folder,
+      required BuildContext context,
+      required num employeeID}) async {
+    deleteFolderResponse =
+        deleteFolderResponse.copyWith(error: null, loading: true);
+
+    final result = await teamService.deleteTeamFolders(id: folder.id!);
+    return result.fold(
+      (l) {
+        deleteFolderResponse = deleteFolderResponse.copyWith(
+          error: l,
+          loading: false,
+        );
+      },
+      (r) {
+        deleteFolderResponse = deleteFolderResponse.copyWith(
+          data: r,
+          error: null,
+          loading: false,
+        );
+
+        getTeamFolders(id: employeeID);
         context.router.pop();
       },
     );

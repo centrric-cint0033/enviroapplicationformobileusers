@@ -1,9 +1,11 @@
 import 'package:enviro_mobile_application/utilis/Appthemes.dart';
 import 'package:flutter/material.dart';
 
-Widget customButton(Function onpressed, Color color, String text) {
+Widget customButton(Function onPressed, Color color, String text) {
   return TextButton(
-    onPressed: () => onpressed,
+    onPressed: () {
+      onPressed();
+    },
     style: ButtonStyle(
       side: MaterialStateProperty.all<BorderSide>(
         BorderSide(color: color),

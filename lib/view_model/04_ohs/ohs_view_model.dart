@@ -226,6 +226,7 @@ abstract class OHSViewModelBase with Store {
 
         if (parentId == 1) {
           ohsnewsfolderviewmodelfunction(parentId);
+          
         } else {
           newspagefolderinsidefunction(parentId);
         }

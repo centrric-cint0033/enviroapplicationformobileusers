@@ -2,12 +2,14 @@ import 'dart:developer';
 
 import 'package:auto_route/auto_route.dart';
 import 'package:enviro_mobile_application/model/10_team/team_folder_req_model/team_create_folder_req_model.dart';
+import 'package:enviro_mobile_application/model/10_team/team_folder_resp_model/folder.dart';
 import 'package:enviro_mobile_application/model/10_team/team_folder_resp_model/team_folder_resp_model.dart';
 import 'package:enviro_mobile_application/model/10_team/team_profile_employee_details_res_model/team_profile_employee_details_res_model.dart';
 import 'package:enviro_mobile_application/utilis/Appthemes.dart';
 import 'package:enviro_mobile_application/utilis/constant.dart';
 import 'package:enviro_mobile_application/view/02_sales/sales_widgets.dart/sales_widget.dart';
-import 'package:enviro_mobile_application/view/10_team/team_widgets/custom_buttom_widget.dart';
+import 'package:enviro_mobile_application/view/10_team/team_widgets/cm_button.dart';
+import 'package:enviro_mobile_application/view/10_team/team_widgets/custom_container_widget.dart';
 import 'package:enviro_mobile_application/view/10_team/team_widgets/dp_image_widget.dart';
 import 'package:enviro_mobile_application/view_model/08_team/team_view_model.dart';
 import 'package:enviro_mobile_application/widgets/cm_show_folder_dialoque.dart';
@@ -23,7 +25,6 @@ class TeamProfileScreen extends StatelessWidget {
   TeamProfileScreen({
     super.key,
   });
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -80,7 +81,7 @@ class TeamProfileScreen extends StatelessWidget {
                                             SizedBox(
                                               height: 26.h,
                                               child: customButton(() {},
-                                                  Appthemes.cPrimary, "  Edit"),
+                                                  Appthemes.cPrimary, "Edit"),
                                             )
                                           ],
                                         )
@@ -116,7 +117,6 @@ class TeamProfileScreen extends StatelessWidget {
                                       name: folderName,
                                       parentfolder: 1);
                                 });
-                               
                               },
                               style: ButtonStyle(
                                 side: MaterialStateProperty.all<BorderSide>(
@@ -150,8 +150,8 @@ class TeamProfileScreen extends StatelessWidget {
                               ?.folders?[0].folders?[index];
 
                           if (data != null) {
-                            return _buildCard(
-                                data.name ?? "", context, data.id ?? 0);
+                            return _buildCard(context,
+                                data: data, id: employeeDetails?.id ?? 0);
                           } else {
                             return Container();
                           }
@@ -195,7 +195,8 @@ class TeamProfileScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildCard(String folderName, BuildContext context, int id) {
+  Widget _buildCard(BuildContext context,
+      {required Folder data, required num id}) {
     return GestureDetector(
       onTap: () {
         // print('cdvfsdg $id');
@@ -223,7 +224,7 @@ class TeamProfileScreen extends StatelessWidget {
                     child: Padding(
                       padding: const EdgeInsets.only(left: 8.0),
                       child: Text(
-                        folderName,
+                        data.name ?? "",
                         style: const TextStyle(
                           overflow: TextOverflow.ellipsis,
                           color: Colors.black,
@@ -322,9 +323,10 @@ class TeamProfileScreen extends StatelessWidget {
                                   actions: [
                                     TextButton(
                                       onPressed: () {
-                                        // vmOhs.folderdeleteviewmodelfunction(
-                                        //     'folders', id, 1);
-                                        Navigator.of(context).pop();
+                                        vmTeam.deleteTeamFolderApi(
+                                            folder: data,
+                                            context: context,
+                                            employeeID: id);
                                       },
                                       child: const Text(
                                         "Delete",

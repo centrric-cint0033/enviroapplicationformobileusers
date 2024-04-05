@@ -3,7 +3,7 @@ import 'package:enviro_mobile_application/Routepage/approutes.gr.dart';
 import 'package:enviro_mobile_application/model/10_team/team_res_model/team_res_model.dart';
 import 'package:enviro_mobile_application/utilis/Appthemes.dart';
 import 'package:enviro_mobile_application/utilis/constant.dart';
-import 'package:enviro_mobile_application/view/10_team/team_widgets/custom_buttom_widget.dart';
+import 'package:enviro_mobile_application/view/10_team/team_widgets/custom_container_widget.dart';
 import 'package:enviro_mobile_application/view/10_team/team_widgets/dp_image_widget.dart';
 import 'package:enviro_mobile_application/view_model/08_team/team_view_model.dart';
 import 'package:flutter/material.dart';
@@ -51,7 +51,7 @@ class CurrentEmployeeListWidget extends StatelessWidget {
                         bottomRight: Radius.circular(32))),
                 leading: dpImage(data?.dpThumbnail ?? ""),
                 title: Text(data?.name ?? ""),
-                trailing: customButton(() {}, Appthemes.cPrimary, "View")),
+                trailing: customContainerWidget(Appthemes.cPrimary, "View")),
           ),
         ),
       ),

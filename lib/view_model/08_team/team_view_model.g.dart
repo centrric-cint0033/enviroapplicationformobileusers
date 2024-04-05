@@ -67,13 +67,13 @@ mixin _$TeamViewModel on TeamViewModelBase, Store {
       Atom(name: 'TeamViewModelBase.teamFoldersResponse', context: context);
 
   @override
-  ApiResponse<dynamic> get teamFoldersResponse {
+  ApiResponse<TeamFolderRespModel> get teamFoldersResponse {
     _$teamFoldersResponseAtom.reportRead();
     return super.teamFoldersResponse;
   }
 
   @override
-  set teamFoldersResponse(ApiResponse<dynamic> value) {
+  set teamFoldersResponse(ApiResponse<TeamFolderRespModel> value) {
     _$teamFoldersResponseAtom.reportWrite(value, super.teamFoldersResponse, () {
       super.teamFoldersResponse = value;
     });
@@ -92,6 +92,23 @@ mixin _$TeamViewModel on TeamViewModelBase, Store {
   set addFolderResponse(ApiResponse<dynamic> value) {
     _$addFolderResponseAtom.reportWrite(value, super.addFolderResponse, () {
       super.addFolderResponse = value;
+    });
+  }
+
+  late final _$deleteFolderResponseAtom =
+      Atom(name: 'TeamViewModelBase.deleteFolderResponse', context: context);
+
+  @override
+  ApiResponse<String> get deleteFolderResponse {
+    _$deleteFolderResponseAtom.reportRead();
+    return super.deleteFolderResponse;
+  }
+
+  @override
+  set deleteFolderResponse(ApiResponse<String> value) {
+    _$deleteFolderResponseAtom.reportWrite(value, super.deleteFolderResponse,
+        () {
+      super.deleteFolderResponse = value;
     });
   }
 
@@ -147,6 +164,18 @@ mixin _$TeamViewModel on TeamViewModelBase, Store {
         context: context));
   }
 
+  late final _$deleteTeamFolderApiAsyncAction =
+      AsyncAction('TeamViewModelBase.deleteTeamFolderApi', context: context);
+
+  @override
+  Future<void> deleteTeamFolderApi(
+      {required Folder folder,
+      required BuildContext context,
+      required num employeeID}) {
+    return _$deleteTeamFolderApiAsyncAction.run(() => super.deleteTeamFolderApi(
+        folder: folder, context: context, employeeID: employeeID));
+  }
+
   @override
   String toString() {
     return '''
@@ -154,7 +183,8 @@ currentEmployeeResponse: ${currentEmployeeResponse},
 terminatedEmployeeResponse: ${terminatedEmployeeResponse},
 teamProfileEmployeeDetailListResponse: ${teamProfileEmployeeDetailListResponse},
 teamFoldersResponse: ${teamFoldersResponse},
-addFolderResponse: ${addFolderResponse}
+addFolderResponse: ${addFolderResponse},
+deleteFolderResponse: ${deleteFolderResponse}
     ''';
   }
 }
