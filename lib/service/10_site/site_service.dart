@@ -12,6 +12,7 @@ import '../../utilis/injection.dart';
 import '../../utilis/httpservice.dart';
 import '../../utilis/api_endpoints/api_endpoints.dart';
 import '../../model/10_site/folder_res_model/folder_res_model.dart';
+import '../../model/02_sales/waste_type_model/waste_type_model.dart';
 
 @LazySingleton(as: ISiteService)
 class SiteService implements ISiteService {
@@ -190,6 +191,29 @@ class SiteService implements ISiteService {
 
         List<Folder> folders = data.map((e) => Folder.fromJson(e)).toList();
         return Right(folders);
+      },
+    );
+  }
+
+  @override
+  Future<Either<MainFailure, List<WasteTypeModel>>> getWasteTypeInSites(
+      {required int id}) async {
+    var response = await getIt<HttpService>().request(
+      authenticated: true,
+      method: HttpMethod.get,
+      apiUrl: "${ApiEndPoints.endpointWasteTypeInSite}$id/",
+    );
+
+    return response.fold(
+      (l) {
+        (l.values.first);
+        return Left(l.keys.first);
+      },
+      (res) async {
+        var data = jsonDecode(res.body) as List;
+        List<WasteTypeModel> wasteTypes =
+            data.map((e) => WasteTypeModel.fromJson(e)).toList();
+        return Right(wasteTypes);
       },
     );
   }

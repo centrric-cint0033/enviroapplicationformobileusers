@@ -42,24 +42,12 @@ class PermanentSitesListWidget extends StatelessWidget {
                                 : const SizedBox.shrink()
                             : SiteTileWidget(
                                 onTap: () {
-                                  if (sites[index].id != null) {
-                                    vmSite
-                                      ..getDetails(
-                                        id: sites[index].id!,
-                                        context: context,
-                                        type: SiteType.permananet,
-                                      )
-                                      ..getSiteFolders(id: sites[index].id!);
-                                    vmPreviousSale.getPreviousSales(
-                                      siteId: sites[index].id!,
-                                    );
-                                    context.router.push(
-                                      SiteDetailRoute(
-                                        index: index,
-                                        type: SiteType.permananet,
-                                      ),
-                                    );
-                                  }
+                                  navigateToSiteDetailScreen(
+                                    index: index,
+                                    context: context,
+                                    siteId: sites[index].id,
+                                    siteType: SiteType.permananet,
+                                  );
                                 },
                                 name: sites[index].clientName ?? "",
                                 address: sites[index].siteAddress ?? "",
@@ -68,6 +56,33 @@ class PermanentSitesListWidget extends StatelessWidget {
                     ),
         );
       },
+    );
+  }
+}
+
+void navigateToSiteDetailScreen({
+  int? siteId,
+  required int index,
+  SiteType? siteType,
+  required BuildContext context,
+}) {
+  if (siteId != null) {
+    vmSite
+      ..getDetails(
+        id: siteId,
+        context: context,
+        type: SiteType.permananet,
+      )
+      ..getWasteTypesInSite(id: siteId)
+      ..getSiteFolders(id: siteId);
+    vmPreviousSale.getPreviousSales(
+      siteId: siteId,
+    );
+    context.router.push(
+      SiteDetailRoute(
+        index: index,
+        type: siteType ?? SiteType.permananet,
+      ),
     );
   }
 }

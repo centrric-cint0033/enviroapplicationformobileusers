@@ -1,8 +1,9 @@
 import 'package:dartz/dartz.dart';
-import 'package:enviro_mobile_application/model/10_site/site_res_model/site_res_model.dart';
-import 'package:enviro_mobile_application/model/10_site/folder_res_model/folder_res_model.dart';
 
 import '../../utilis/main_failure.dart';
+import '../../model/10_site/site_res_model/site_res_model.dart';
+import '../../model/10_site/folder_res_model/folder_res_model.dart';
+import '../../model/02_sales/waste_type_model/waste_type_model.dart';
 
 abstract class ISiteService {
   Future<Either<MainFailure, List<SiteResModel>>> getPermanantSites({
@@ -26,5 +27,9 @@ abstract class ISiteService {
   });
   Future<Either<MainFailure, List<Folder>>> searchSiteFolder({
     required String key,
+  });
+
+  Future<Either<MainFailure, List<WasteTypeModel>>> getWasteTypeInSites({
+    required int id,
   });
 }

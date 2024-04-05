@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'site_tile_widget.dart';
 import '../../../utilis/constant.dart';
-import '../../../Routepage/approutes.gr.dart';
+import 'permanent_site_list_widget.dart';
 import '../../../widgets/empty_data_widget.dart';
 import '../../../view_model/10_site/site_view_model.dart';
 import '../../../model/10_site/site_res_model/site_res_model.dart';
-import '../../../view_model/11_previous_sale/previous_sale_view_model.dart';
 
 class TempSiteListWidget extends StatelessWidget {
   const TempSiteListWidget({super.key});
@@ -41,24 +39,12 @@ class TempSiteListWidget extends StatelessWidget {
                                 : const SizedBox.shrink()
                             : SiteTileWidget(
                                 onTap: () {
-                                  if (sites[index].id != null) {
-                                    vmSite
-                                      ..getDetails(
-                                        id: sites[index].id!,
-                                        context: context,
-                                        type: SiteType.temporary,
-                                      )
-                                      ..getSiteFolders(id: sites[index].id!);
-                                    vmPreviousSale.getPreviousSales(
-                                      siteId: sites[index].id!,
-                                    );
-                                    context.router.push(
-                                      SiteDetailRoute(
-                                        index: index,
-                                        type: SiteType.temporary,
-                                      ),
-                                    );
-                                  }
+                                  navigateToSiteDetailScreen(
+                                    index: index,
+                                    context: context,
+                                    siteId: sites[index].id,
+                                    siteType: SiteType.temporary,
+                                  );
                                 },
                                 name: sites[index].clientName ?? "",
                                 address: sites[index].siteAddress ?? "",

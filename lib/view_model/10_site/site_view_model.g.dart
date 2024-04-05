@@ -90,6 +90,39 @@ mixin _$SiteViewModel on SiteViewModelBase, Store {
     });
   }
 
+  late final _$selectedWasteTypeModelAtom =
+      Atom(name: 'SiteViewModelBase.selectedWasteTypeModel', context: context);
+
+  @override
+  WasteTypeModel? get selectedWasteTypeModel {
+    _$selectedWasteTypeModelAtom.reportRead();
+    return super.selectedWasteTypeModel;
+  }
+
+  @override
+  set selectedWasteTypeModel(WasteTypeModel? value) {
+    _$selectedWasteTypeModelAtom
+        .reportWrite(value, super.selectedWasteTypeModel, () {
+      super.selectedWasteTypeModel = value;
+    });
+  }
+
+  late final _$wasteTypesInSiteAtom =
+      Atom(name: 'SiteViewModelBase.wasteTypesInSite', context: context);
+
+  @override
+  ApiResponse<List<WasteTypeModel>> get wasteTypesInSite {
+    _$wasteTypesInSiteAtom.reportRead();
+    return super.wasteTypesInSite;
+  }
+
+  @override
+  set wasteTypesInSite(ApiResponse<List<WasteTypeModel>> value) {
+    _$wasteTypesInSiteAtom.reportWrite(value, super.wasteTypesInSite, () {
+      super.wasteTypesInSite = value;
+    });
+  }
+
   late final _$getPermanentSitesAsyncAction =
       AsyncAction('SiteViewModelBase.getPermanentSites', context: context);
 
@@ -156,6 +189,15 @@ mixin _$SiteViewModel on SiteViewModelBase, Store {
         .run(() => super.searchSiteFolders(key: key));
   }
 
+  late final _$getWasteTypesInSiteAsyncAction =
+      AsyncAction('SiteViewModelBase.getWasteTypesInSite', context: context);
+
+  @override
+  Future<void> getWasteTypesInSite({required int id}) {
+    return _$getWasteTypesInSiteAsyncAction
+        .run(() => super.getWasteTypesInSite(id: id));
+  }
+
   @override
   String toString() {
     return '''
@@ -163,7 +205,9 @@ permanentSiteResponse: ${permanentSiteResponse},
 tempSiteResponse: ${tempSiteResponse},
 delSiteResponse: ${delSiteResponse},
 siteFolderResponse: ${siteFolderResponse},
-detailLoading: ${detailLoading}
+detailLoading: ${detailLoading},
+selectedWasteTypeModel: ${selectedWasteTypeModel},
+wasteTypesInSite: ${wasteTypesInSite}
     ''';
   }
 }

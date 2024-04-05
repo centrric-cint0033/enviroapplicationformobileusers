@@ -7,6 +7,7 @@ import '../../api_response/api_response.dart';
 import '../../service/10_site/i_site_service.dart';
 import '../../model/10_site/site_res_model/site_res_model.dart';
 import '../../model/10_site/folder_res_model/folder_res_model.dart';
+import '../../model/02_sales/waste_type_model/waste_type_model.dart';
 
 part 'site_view_model.g.dart';
 
@@ -47,6 +48,13 @@ abstract class SiteViewModelBase with Store {
 
   @observable
   bool detailLoading = false;
+
+  @observable
+  WasteTypeModel? selectedWasteTypeModel;
+
+  @observable
+  ApiResponse<List<WasteTypeModel>> wasteTypesInSite =
+      ApiResponse<List<WasteTypeModel>>();
 
   @action
   Future<void> getPermanentSites({int? page}) async {
@@ -346,6 +354,32 @@ abstract class SiteViewModelBase with Store {
           data: data?.copyWith(
             folders: [if (model != null) model.copyWith(folders: res)],
           ),
+        );
+      },
+    );
+  }
+
+  @action
+  Future<void> getWasteTypesInSite({required int id}) async {
+    wasteTypesInSite = wasteTypesInSite.copyWith(
+      error: null,
+      loading: true,
+    );
+
+    final response = await siteService.getWasteTypeInSites(id: id);
+
+    response.fold(
+      (l) {
+        wasteTypesInSite = wasteTypesInSite.copyWith(
+          error: l,
+          loading: false,
+        );
+      },
+      (res) {
+        wasteTypesInSite = wasteTypesInSite.copyWith(
+          data: res,
+          error: null,
+          loading: false,
         );
       },
     );
