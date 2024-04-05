@@ -1,6 +1,7 @@
 import 'package:enviro_mobile_application/api_response/api_response.dart';
 import 'package:enviro_mobile_application/model/06_profile/profile_model/profile_res_model.dart';
 import 'package:enviro_mobile_application/service/06_profile/profile_service.dart';
+import 'package:enviro_mobile_application/utilis/api_endpoints/customprint.dart';
 import 'package:enviro_mobile_application/utilis/injection.dart';
 import 'package:injectable/injectable.dart';
 import 'package:mobx/mobx.dart';
@@ -27,6 +28,8 @@ abstract class ProfileViewModelBase with Store {
   @action
   Future<void> profileviewmodelfunction() async {
     print('aaaaa$profilepageResponse');
+    print('aaaaa$profilepageResponse');
+
     profilepageResponse =
         profilepageResponse.copyWith(error: null, loading: true);
 
@@ -47,4 +50,28 @@ abstract class ProfileViewModelBase with Store {
       },
     );
   }
+
+  // @action
+  // Future<void> salesJobListSearchApi(String searchData) async {
+  //   try {
+  //     joblistResponse = joblistResponse.copyWith(errors: null, loading: true);
+
+  //     final result = await salesService.salesJobListSearchServiceApi(data: [
+  //       {"key": searchData}
+  //     ]);
+  //     return result.fold(
+  //       (l) {
+  //         joblistResponse = joblistResponse.copyWith(errors: l, loading: false);
+  //       },
+  //       (r) {
+  //         joblistResponse =
+  //             joblistResponse.copyWith(data: r, errors: null, loading: false);
+  //       },
+  //     );
+  //   } catch (e) {
+  //     customPrint(content: e, name: 'Error salesJobListSearchApi');
+  //   } finally {
+  //     joblistResponse = joblistResponse.copyWith(loading: false);
+  //   }
+  // }
 }

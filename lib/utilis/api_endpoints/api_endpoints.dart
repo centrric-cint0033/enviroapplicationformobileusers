@@ -94,4 +94,5 @@ class ApiEndPoints {
   static const endpointteamprofileemployeedetailList = '/api/v1/team/employee';
   static const endpointgetteamfolder = '/api/v1/drive/team/folder';
     static const endpointaddteamfolder = '/api/v1/drive/create/team/folder/';
+  static const endpointprofileedit = '/api/v1/team/employee/edit';
 }
