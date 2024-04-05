@@ -136,9 +136,15 @@ mixin _$TeamViewModel on TeamViewModelBase, Store {
 
   @override
   Future<void> addTeamFolder(
-      {required TeamCreateFolderReqModel data, required BuildContext context}) {
-    return _$addTeamFolderAsyncAction
-        .run(() => super.addTeamFolder(data: data, context: context));
+      {required String name,
+      required num employee,
+      required num parentfolder,
+      required BuildContext context}) {
+    return _$addTeamFolderAsyncAction.run(() => super.addTeamFolder(
+        name: name,
+        employee: employee,
+        parentfolder: parentfolder,
+        context: context));
   }
 
   @override

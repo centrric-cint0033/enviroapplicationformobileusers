@@ -22,7 +22,7 @@ abstract class IteamService {
   Future<Either<MainFailure, TeamFolderRespModel>> getTeamFolders(
       {required num id});
   Future<Either<MainFailure, TeamCreateFolderReqModel>> addTeamFolders(
-      {required TeamCreateFolderReqModel data});
+      {required Map<String, String> data});
 }
 
 @LazySingleton(as: IteamService)
@@ -109,22 +109,9 @@ class TeamService implements IteamService {
 
   @override
   Future<Either<MainFailure, TeamCreateFolderReqModel>> addTeamFolders(
-      {required TeamCreateFolderReqModel data}) async {
-    // var response = await getIt<HttpService>().multipartRequest(
-    //   data: ,
-    //     method: 'POST', apiUrl: ApiEndPoints.endpointaddteamfolder);
-    String apiUrl;
-
-    apiUrl = ApiEndPoints.endpointaddteamfolder;
-
-    MultipartRequest request =
-        MultipartRequest("POST", Uri.parse("$baseUrl$apiUrl"));
-    request.fields['name'] = data.name ?? "";
-    request.fields['employee'] = data.employee.toString();
-    request.fields['parent_folder'] = '1';
-    var response =
-        await getIt<HttpService>().multipartRequest(mRequest: request);
-
+      {required Map<String, String> data}) async {
+    var response = await getIt<HttpService>().multipartRequest(
+        data: data, method: 'POST', apiUrl: ApiEndPoints.endpointaddteamfolder);
     return response.fold(
       (l) {
         // Show Error

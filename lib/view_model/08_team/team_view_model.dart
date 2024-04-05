@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:auto_route/auto_route.dart';
 import 'package:enviro_mobile_application/api_response/api_response.dart';
 import 'package:enviro_mobile_application/model/10_team/team_folder_req_model/team_create_folder_req_model.dart';
@@ -39,6 +38,8 @@ abstract class TeamViewModelBase with Store {
   ApiResponse teamFoldersResponse = ApiResponse<TeamFolderRespModel>();
   @observable
   ApiResponse addFolderResponse = ApiResponse<TeamCreateFolderReqModel>();
+
+  TextEditingController textFolderController = TextEditingController();
   @action
   Future<void> getCurrentEmployee() async {
     try {
@@ -142,11 +143,17 @@ abstract class TeamViewModelBase with Store {
 
   @action
   Future<void> addTeamFolder(
-      {required TeamCreateFolderReqModel data,
+      {required String name,
+      required num employee,
+      required num parentfolder,
       required BuildContext context}) async {
     addFolderResponse = addFolderResponse.copyWith(error: null, loading: true);
 
-    final result = await teamService.addTeamFolders(data: data);
+    final result = await teamService.addTeamFolders(data: {
+      "name": name,
+      "employee": employee.toString(),
+      "parent_folder": parentfolder.toString()
+    });
     return result.fold(
       (l) {
         addFolderResponse =
@@ -155,13 +162,11 @@ abstract class TeamViewModelBase with Store {
       (r) {
         addFolderResponse =
             addFolderResponse.copyWith(data: r, error: null, loading: false);
-        log(addFolderResponse.toString() + "weiudfn");
         TeamFolderRespModel createFolderList = teamFoldersResponse.data;
-        //  createFolderList.insert(0, r);
         teamFoldersResponse =
             teamFoldersResponse.copyWith(data: createFolderList);
-        getTeamFolders(id: data.employee ?? 0);
-        log(teamFoldersResponse.toString() + "eksdjf");
+        getTeamFolders(id: employee);
+        vmTeam.textFolderController.clear();
         context.router.pop();
       },
     );

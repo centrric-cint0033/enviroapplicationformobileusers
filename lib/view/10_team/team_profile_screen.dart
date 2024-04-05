@@ -23,7 +23,7 @@ class TeamProfileScreen extends StatelessWidget {
   TeamProfileScreen({
     super.key,
   });
-  TextEditingController textFolderController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -106,16 +106,17 @@ class TeamProfileScreen extends StatelessWidget {
                             TextButton(
                               onPressed: () {
                                 showMyfolderDialog(
-                                    context, textFolderController, () {
-                                  String folderName = textFolderController.text;
+                                    context, vmTeam.textFolderController, () {
+                                  String folderName =
+                                      vmTeam.textFolderController.text;
                                   log(folderName);
                                   vmTeam.addTeamFolder(
                                       context: context,
-                                      data: TeamCreateFolderReqModel(
-                                          employee: employeeDetails?.id ?? 0,
-                                          name: folderName,
-                                          parent_folder: 1));
+                                      employee: employeeDetails?.id ?? 0,
+                                      name: folderName,
+                                      parentfolder: 1);
                                 });
+                               
                               },
                               style: ButtonStyle(
                                 side: MaterialStateProperty.all<BorderSide>(

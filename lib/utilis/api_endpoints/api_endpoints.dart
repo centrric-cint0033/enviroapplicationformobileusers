@@ -87,12 +87,13 @@ class ApiEndPoints {
   static const endpointprofilelstng = '/api/v1/accounts/profile/view/';
   static const endpointprofileledit = '/api/v1/team/employee/edit/287/';
 
+  // TEAM APIS
   static const endpointcurrentemployeelist =
       '/api/v1/team/status/current/?limit=10&page=1';
   static const endpointterminatedemployeelist =
       '/api/v1/team/status/terminated/?limit=10&page=1';
   static const endpointteamprofileemployeedetailList = '/api/v1/team/employee';
   static const endpointgetteamfolder = '/api/v1/drive/team/folder';
-    static const endpointaddteamfolder = '/api/v1/drive/create/team/folder/';
+  static const endpointaddteamfolder = '/api/v1/drive/create/team/folder/';
   static const endpointprofileedit = '/api/v1/team/employee/edit';
 }
