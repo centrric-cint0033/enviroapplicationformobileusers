@@ -29,9 +29,12 @@ mixin _$AuthViewModel on AuthViewModelBase, Store {
       AsyncAction('AuthViewModelBase.login', context: context);
 
   @override
-  Future<int?> login({required String username, required String password}) {
-    return _$loginAsyncAction
-        .run(() => super.login(username: username, password: password));
+  Future<int?> login(
+      {required BuildContext context,
+      required String username,
+      required String password}) {
+    return _$loginAsyncAction.run(() =>
+        super.login(context: context, username: username, password: password));
   }
 
   @override

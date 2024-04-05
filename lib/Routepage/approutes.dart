@@ -1,6 +1,6 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:enviro_mobile_application/Routepage/approutes.gr.dart';
 import 'package:enviro_mobile_application/Routepage/guards.dart';
+import 'package:enviro_mobile_application/Routepage/approutes.gr.dart';
 
 import 'package:enviro_mobile_application/Routepage/routespage.dart';
 
@@ -21,9 +21,8 @@ class AppRouter extends $AppRouter {
         AutoRoute(page: SchedulingRoute.page, path: RouteNames.rSchedulingPage),
         AutoRoute(page: VehicleRoute.page, path: RouteNames.vehiclemainpage),
         AutoRoute(
-          page: NewsRouteInsideRoute.page,
-          path: RouteNames.rNewsfolderinsidepage,
-        ),
+            page: NewsRouteInsideRoute.page,
+            path: RouteNames.rNewsfolderinsidepage),
         AutoRoute(page: OhsDetailRoute.page, path: RouteNames.rOhsdetailpage),
         AutoRoute(
           page: NotificationDetailRoute.page,
@@ -37,5 +36,17 @@ class AppRouter extends $AppRouter {
           page: SiteDetailRoute.page,
           path: RouteNames.siteDetailPage,
         ),
+        AutoRoute(
+            page: NotificationDetailRoute.page,
+            path: RouteNames.rNotificationdetailpage),
+        AutoRoute(
+            page: IntranetInsideRoute.page,
+            path: RouteNames.rintranetinsidepage),
+        AutoRoute(
+            page: ProfileCreationRoute.page, path: RouteNames.rprofilepage),
+        AutoRoute(
+            page: NotificationRoute.page, path: RouteNames.rnotificationpage),
+        AutoRoute(
+            page: SalesDetailRoute.page, path: RouteNames.rSalesDetailPage),
       ];
 }

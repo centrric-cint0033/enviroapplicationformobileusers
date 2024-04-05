@@ -3,6 +3,7 @@ class RouteNames {
   static const String mainscreen = '/';
   static const String rHomePage = '/homePage';
   static const String rSalesPpage = '/salesmainpage';
+  static const String rSalesDetailPage = '/sales_detail_page';
   static const String ohsPage = '/ohspage';
   static const String rOhsdetailpage = '/ohs_detail_page';
   static const String intranetpage = '/intranetpage';
@@ -13,4 +14,8 @@ class RouteNames {
 
   static const String siteListPage = '/site_list_page';
   static const String siteDetailPage = '/site_detail_page';
+  static const String rintranetinsidepage = '/intranetinsidepage';
+  static const String drawerpage = '/drawerpage';
+  static const String rprofilepage = '/profilepage';
+  static const String rnotificationpage = '/notificationpage';
 }

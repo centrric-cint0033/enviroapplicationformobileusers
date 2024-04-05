@@ -84,7 +84,7 @@ mixin _$SalesModel {
   @JsonKey(name: 'recurring_date')
   String? get recurringDate => throw _privateConstructorUsedError;
   @JsonKey(name: 'created_by')
-  String? get createdBy => throw _privateConstructorUsedError;
+  dynamic get createdBy => throw _privateConstructorUsedError;
   int? get quote => throw _privateConstructorUsedError;
   @JsonKey(name: 'job_card')
   int? get jobCard => throw _privateConstructorUsedError;
@@ -206,7 +206,7 @@ abstract class $SalesModelCopyWith<$Res> {
       @JsonKey(name: 'active_status') bool? activeStatus,
       @JsonKey(name: 'job_card_type') String? jobCardType,
       @JsonKey(name: 'recurring_date') String? recurringDate,
-      @JsonKey(name: 'created_by') String? createdBy,
+      @JsonKey(name: 'created_by') dynamic createdBy,
       int? quote,
       @JsonKey(name: 'job_card') int? jobCard,
       @JsonKey(name: 'job_comments') List<dynamic>? jobComments,
@@ -494,7 +494,7 @@ class _$SalesModelCopyWithImpl<$Res, $Val extends SalesModel>
       createdBy: freezed == createdBy
           ? _value.createdBy
           : createdBy // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       quote: freezed == quote
           ? _value.quote
           : quote // ignore: cast_nullable_to_non_nullable
@@ -721,7 +721,7 @@ abstract class _$$SalesModelImplCopyWith<$Res>
       @JsonKey(name: 'active_status') bool? activeStatus,
       @JsonKey(name: 'job_card_type') String? jobCardType,
       @JsonKey(name: 'recurring_date') String? recurringDate,
-      @JsonKey(name: 'created_by') String? createdBy,
+      @JsonKey(name: 'created_by') dynamic createdBy,
       int? quote,
       @JsonKey(name: 'job_card') int? jobCard,
       @JsonKey(name: 'job_comments') List<dynamic>? jobComments,
@@ -1008,7 +1008,7 @@ class __$$SalesModelImplCopyWithImpl<$Res>
       createdBy: freezed == createdBy
           ? _value.createdBy
           : createdBy // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       quote: freezed == quote
           ? _value.quote
           : quote // ignore: cast_nullable_to_non_nullable
@@ -1370,7 +1370,7 @@ class _$SalesModelImpl implements _SalesModel {
   final String? recurringDate;
   @override
   @JsonKey(name: 'created_by')
-  final String? createdBy;
+  final dynamic createdBy;
   @override
   final int? quote;
   @override
@@ -1587,8 +1587,7 @@ class _$SalesModelImpl implements _SalesModel {
                 other.jobCardType == jobCardType) &&
             (identical(other.recurringDate, recurringDate) ||
                 other.recurringDate == recurringDate) &&
-            (identical(other.createdBy, createdBy) ||
-                other.createdBy == createdBy) &&
+            const DeepCollectionEquality().equals(other.createdBy, createdBy) &&
             (identical(other.quote, quote) || other.quote == quote) &&
             (identical(other.jobCard, jobCard) || other.jobCard == jobCard) &&
             const DeepCollectionEquality()
@@ -1625,7 +1624,8 @@ class _$SalesModelImpl implements _SalesModel {
                 other.companyName == companyName) &&
             (identical(other.mailSubject, mailSubject) ||
                 other.mailSubject == mailSubject) &&
-            (identical(other.mailBody, mailBody) || other.mailBody == mailBody) &&
+            (identical(other.mailBody, mailBody) ||
+                other.mailBody == mailBody) &&
             const DeepCollectionEquality().equals(other.safetyData, safetyData) &&
             const DeepCollectionEquality().equals(other.safetyDataHtmlSend, safetyDataHtmlSend) &&
             (identical(other.salesTeamReview, salesTeamReview) || other.salesTeamReview == salesTeamReview) &&
@@ -1687,7 +1687,7 @@ class _$SalesModelImpl implements _SalesModel {
         activeStatus,
         jobCardType,
         recurringDate,
-        createdBy,
+        const DeepCollectionEquality().hash(createdBy),
         quote,
         jobCard,
         const DeepCollectionEquality().hash(_jobComments),
@@ -1785,7 +1785,7 @@ abstract class _SalesModel implements SalesModel {
       @JsonKey(name: 'active_status') final bool? activeStatus,
       @JsonKey(name: 'job_card_type') final String? jobCardType,
       @JsonKey(name: 'recurring_date') final String? recurringDate,
-      @JsonKey(name: 'created_by') final String? createdBy,
+      @JsonKey(name: 'created_by') final dynamic createdBy,
       final int? quote,
       @JsonKey(name: 'job_card') final int? jobCard,
       @JsonKey(name: 'job_comments') final List<dynamic>? jobComments,
@@ -1935,7 +1935,7 @@ abstract class _SalesModel implements SalesModel {
   String? get recurringDate;
   @override
   @JsonKey(name: 'created_by')
-  String? get createdBy;
+  dynamic get createdBy;
   @override
   int? get quote;
   @override

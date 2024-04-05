@@ -3,6 +3,7 @@ import 'package:enviro_mobile_application/Routepage/routespage.dart';
 
 import 'package:enviro_mobile_application/utilis/Appthemes.dart';
 import 'package:enviro_mobile_application/view_model/01_auth/auth_view_model.dart';
+import 'package:enviro_mobile_application/view_model/10_profile/profile_view_model.dart';
 import 'package:enviro_mobile_application/widgets/cmbutton.dart';
 
 import 'package:flutter/material.dart';
@@ -45,7 +46,7 @@ class LoginPage extends StatelessWidget {
                 //       color: Appthemes.bluecolor),
                 // ),
                 const SizedBox(height: 39),
-                Container(
+                SizedBox(
                   height: 79,
                   child: Cmformfield(
                     controller: vmAuth.userNameController,
@@ -64,7 +65,7 @@ class LoginPage extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 24),
-                Container(
+                SizedBox(
                   height: 79,
                   child: Cmformfield(
                     controller: vmAuth.passwordController,
@@ -84,6 +85,7 @@ class LoginPage extends StatelessWidget {
                 const SizedBox(height: 64),
                 Observer(builder: (_) {
                   return CmButton(
+                    loading: vmAuth.loginResponse.loading,
                     buttonTextStyle:
                         const TextStyle(color: Appthemes.textColor),
                     onPressed: () {
@@ -113,22 +115,14 @@ class LoginPage extends StatelessWidget {
       final router = context.router;
 
       int? statusCode = await vmAuth.login(
+        context: context,
         username: vmAuth.userNameController.text.trim(),
         password: vmAuth.passwordController.text.trim(),
       );
 
       if (statusCode != null) {
+        vmProfile.profileviewmodelfunction();
         router.replaceNamed(RouteNames.rHomePage);
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            backgroundColor: Color(0XFF061933),
-            content: Text(
-              'Invalid username or password. Please try again.',
-            ),
-            duration: Duration(seconds: 3),
-          ),
-        );
       }
     }
   }

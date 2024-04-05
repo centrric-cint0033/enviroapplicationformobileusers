@@ -1,0 +1,77 @@
+import 'package:enviro_mobile_application/api_response/api_response.dart';
+import 'package:enviro_mobile_application/model/06_profile/profile_model/profile_res_model.dart';
+import 'package:enviro_mobile_application/service/06_profile/profile_service.dart';
+import 'package:enviro_mobile_application/utilis/api_endpoints/customprint.dart';
+import 'package:enviro_mobile_application/utilis/injection.dart';
+import 'package:injectable/injectable.dart';
+import 'package:mobx/mobx.dart';
+
+part 'profile_view_model.g.dart';
+
+final vmProfile = getIt<ProfileViewModel>();
+
+@injectable
+@lazySingleton
+class ProfileViewModel extends ProfileViewModelBase with _$ProfileViewModel {
+  ProfileViewModel(super.profileService);
+}
+
+abstract class ProfileViewModelBase with Store {
+  final IprofileService profileService;
+
+  ProfileViewModelBase(this.profileService);
+
+  @observable
+  ApiResponse<ProfileRespModel> profilepageResponse =
+      ApiResponse<ProfileRespModel>();
+
+  @action
+  Future<void> profileviewmodelfunction() async {
+    print('aaaaa$profilepageResponse');
+    print('aaaaa$profilepageResponse');
+
+    profilepageResponse =
+        profilepageResponse.copyWith(error: null, loading: true);
+
+    final result = await profileService.profileservicefunction();
+    return result.fold(
+      (l) {
+        profilepageResponse = profilepageResponse.copyWith(
+          error: l,
+          loading: false,
+        );
+      },
+      (r) {
+        profilepageResponse = profilepageResponse.copyWith(
+          data: r,
+          error: null,
+          loading: false,
+        );
+      },
+    );
+  }
+
+  // @action
+  // Future<void> salesJobListSearchApi(String searchData) async {
+  //   try {
+  //     joblistResponse = joblistResponse.copyWith(errors: null, loading: true);
+
+  //     final result = await salesService.salesJobListSearchServiceApi(data: [
+  //       {"key": searchData}
+  //     ]);
+  //     return result.fold(
+  //       (l) {
+  //         joblistResponse = joblistResponse.copyWith(errors: l, loading: false);
+  //       },
+  //       (r) {
+  //         joblistResponse =
+  //             joblistResponse.copyWith(data: r, errors: null, loading: false);
+  //       },
+  //     );
+  //   } catch (e) {
+  //     customPrint(content: e, name: 'Error salesJobListSearchApi');
+  //   } finally {
+  //     joblistResponse = joblistResponse.copyWith(loading: false);
+  //   }
+  // }
+}

@@ -3,12 +3,11 @@ import 'package:enviro_mobile_application/utilis/injection.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import 'utilis/Appthemes.dart';
-import 'package:enviro_mobile_application/Routepage/securestorage.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await ScreenUtil.ensureScreenSize();
   configureLocalDependancies();
 
   runApp(MyApp());

@@ -50,7 +50,7 @@ _$SalesModelImpl _$$SalesModelImplFromJson(Map<String, dynamic> json) =>
       activeStatus: json['active_status'] as bool?,
       jobCardType: json['job_card_type'] as String?,
       recurringDate: json['recurring_date'] as String?,
-      createdBy: json['created_by'] as String?,
+      createdBy: json['created_by'],
       quote: json['quote'] as int?,
       jobCard: json['job_card'] as int?,
       jobComments: json['job_comments'] as List<dynamic>?,

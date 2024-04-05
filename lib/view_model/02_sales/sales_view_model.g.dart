@@ -57,34 +57,47 @@ mixin _$SalesViewModel on SalesViewModelBase, Store {
     });
   }
 
-  late final _$vehiclelistviewmodelfunctionAsyncAction = AsyncAction(
-      'SalesViewModelBase.vehiclelistviewmodelfunction',
-      context: context);
+  late final _$saleJobListApiAsyncAction =
+      AsyncAction('SalesViewModelBase.saleJobListApi', context: context);
 
   @override
-  Future<void> vehiclelistviewmodelfunction() {
-    return _$vehiclelistviewmodelfunctionAsyncAction
-        .run(() => super.vehiclelistviewmodelfunction());
+  Future<void> saleJobListApi() {
+    return _$saleJobListApiAsyncAction.run(() => super.saleJobListApi());
   }
 
-  late final _$saleslistviewmodelfunctionAsyncAction = AsyncAction(
-      'SalesViewModelBase.saleslistviewmodelfunction',
-      context: context);
+  late final _$salesJobListSearchApiAsyncAction =
+      AsyncAction('SalesViewModelBase.salesJobListSearchApi', context: context);
 
   @override
-  Future<void> saleslistviewmodelfunction() {
-    return _$saleslistviewmodelfunctionAsyncAction
-        .run(() => super.saleslistviewmodelfunction());
+  Future<void> salesJobListSearchApi(String searchData) {
+    return _$salesJobListSearchApiAsyncAction
+        .run(() => super.salesJobListSearchApi(searchData));
   }
 
-  late final _$quoteregviewmodelfunctionAsyncAction = AsyncAction(
-      'SalesViewModelBase.quoteregviewmodelfunction',
+  late final _$saleslistApiAsyncAction =
+      AsyncAction('SalesViewModelBase.saleslistApi', context: context);
+
+  @override
+  Future<void> saleslistApi() {
+    return _$saleslistApiAsyncAction.run(() => super.saleslistApi());
+  }
+
+  late final _$quoteRegisterApiAsyncAction =
+      AsyncAction('SalesViewModelBase.quoteRegisterApi', context: context);
+
+  @override
+  Future<void> quoteRegisterApi() {
+    return _$quoteRegisterApiAsyncAction.run(() => super.quoteRegisterApi());
+  }
+
+  late final _$salesQuoteListSearchApiAsyncAction = AsyncAction(
+      'SalesViewModelBase.salesQuoteListSearchApi',
       context: context);
 
   @override
-  Future<void> quoteregviewmodelfunction() {
-    return _$quoteregviewmodelfunctionAsyncAction
-        .run(() => super.quoteregviewmodelfunction());
+  Future<void> salesQuoteListSearchApi(String searchData) {
+    return _$salesQuoteListSearchApiAsyncAction
+        .run(() => super.salesQuoteListSearchApi(searchData));
   }
 
   @override

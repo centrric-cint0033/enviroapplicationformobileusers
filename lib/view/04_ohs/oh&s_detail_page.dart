@@ -6,6 +6,7 @@ import 'package:enviro_mobile_application/widgets/cmappbar.dart';
 import 'package:enviro_mobile_application/widgets/cmn_action_icon.dart';
 import 'package:enviro_mobile_application/widgets/cmn_leading_icon.dart';
 import 'package:enviro_mobile_application/widgets/cmn_title_textwidget.dart';
+import 'package:enviro_mobile_application/widgets/drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -19,11 +20,11 @@ class OhsDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(
-        leading: const cmn_leading_icon(),
-        title: cmnTitleWidget('OH&S'),
-        actions: cmn_action_icon,
-      ),
+      drawer: CmnDrawer(context),
+      appBar: AppBar(
+          // leading: const cmn_leading_icon(),
+          title: cmnTitleWidget('OH&S'),
+          actions: [notificationButton(context)]),
       body: Column(
         children: [
           Padding(

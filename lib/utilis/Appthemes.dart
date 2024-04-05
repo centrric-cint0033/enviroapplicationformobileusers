@@ -8,12 +8,18 @@ abstract class Appthemes {
   static const bluecolor = Color(0XFF061933);
   static const primaryColor = Colors.blue;
 
+  static Color cLightGrey = Colors.grey[200]!;
+  static const cPrimary = Color(0xff109AD1);
+  static const cLightGreen = Color(0xff3FC0B5);
+
   static final ThemeData themeData = ThemeData(
+    useMaterial3: true,
     dividerColor: Colors.grey.shade200,
     colorScheme: const ColorScheme.light(
       primary: primaryColor,
     ),
     textTheme: TextTheme(
+      //textfield hint style using default
       titleSmall: TextStyle(
         fontSize: 13.sp,
         color: primaryColor,
@@ -21,9 +27,8 @@ abstract class Appthemes {
       ),
       titleMedium: TextStyle(
         color: Colors.black,
-        fontSize: 18.sp,
+        fontSize: 12.sp,
         fontFamily: 'Inter',
-        fontWeight: FontWeight.w700,
       ),
       headlineMedium: TextStyle(
         color: Colors.black,

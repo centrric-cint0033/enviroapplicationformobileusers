@@ -16,7 +16,7 @@ import 'package:injectable/injectable.dart';
 @LazySingleton(as: IHomeService)
 class HomeRepository implements IHomeService {
   @override
-  Future<Either<MainFailure, HomeRespModel>> permissions() async {
+  Future<Either<MainFailure, HomeRespModel>> permissionsApiService() async {
     var response = await getIt<HttpService>().request(
       authenticated: true,
       method: HttpMethod.get,

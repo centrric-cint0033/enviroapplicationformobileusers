@@ -1,6 +1,7 @@
 import 'package:enviro_mobile_application/api_response/api_response.dart';
 import 'package:enviro_mobile_application/model/home/res_model/homerespmodel.dart';
 import 'package:enviro_mobile_application/service/home/i_homeservice.dart';
+import 'package:enviro_mobile_application/utilis/api_endpoints/customprint.dart';
 import 'package:enviro_mobile_application/utilis/injection.dart';
 
 import 'package:injectable/injectable.dart';
@@ -32,25 +33,25 @@ abstract class HomeViewModelBase with Store {
   ApiResponse permissionsResponse = ApiResponse<HomeRespModel>();
 
   @action
-  Future<void> permissions() async {
-    permissionsResponse =
-        permissionsResponse.copyWith(error: null, loading: true);
-
-    final res = await homeService.permissions();
-    return res.fold(
-      (l) {
-        permissionsResponse = permissionsResponse.copyWith(
-          error: l,
-          loading: false,
-        );
-      },
-      (r) {
-        permissionsResponse = permissionsResponse.copyWith(
-          data: r,
-          error: null,
-          loading: false,
-        );
-      },
-    );
+  Future<void> permissionsApi() async {
+    try {
+      permissionsResponse =
+          permissionsResponse.copyWith(error: null, loading: true);
+      final res = await homeService.permissionsApiService();
+      return res.fold(
+        (l) {
+          permissionsResponse =
+              permissionsResponse.copyWith(error: l, loading: false);
+        },
+        (r) {
+          permissionsResponse = permissionsResponse.copyWith(
+              data: r, error: null, loading: false);
+        },
+      );
+    } catch (e) {
+      customPrint(content: e, name: 'Error ');
+    } finally {
+      permissionsResponse = permissionsResponse.copyWith(loading: false);
+    }
   }
 }

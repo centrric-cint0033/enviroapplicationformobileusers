@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:enviro_mobile_application/api_response/api_response.dart';
 import 'package:enviro_mobile_application/model/04_ohs/oh&s_resp_model.dart';
 import 'package:enviro_mobile_application/model/04_ohs/oh&snews_fldr_model.dart';
@@ -85,11 +83,15 @@ abstract class OHSViewModelBase with Store {
       ApiResponse<OhsNewsfldrRespModel>();
 
   @action
-  Future<void> newspagefolderinsidefunction(int id) async {
+  Future<void> newspagefolderinsidefunction(
+    int id,
+  ) async {
     newspagefolderinsideResponse =
         newspagefolderinsideResponse.copyWith(error: null, loading: true);
 
-    final result = await ohsService.ohsnewsfolderservicefunction(id);
+    final result = await ohsService.ohsnewsfolderservicefunction(
+      id,
+    );
     return result.fold(
       (l) {
         newspagefolderinsideResponse = newspagefolderinsideResponse.copyWith(
@@ -199,7 +201,8 @@ abstract class OHSViewModelBase with Store {
   ApiResponse<String> deleteResponse = ApiResponse<String>();
 
   @action
-  Future<void> folderdeleteviewmodelfunction(String folders, int id) async {
+  Future<void> folderdeleteviewmodelfunction(
+      String folders, int id, int parentId) async {
     deleteResponse = deleteResponse.copyWith(error: null, loading: true);
 
     print(id);
@@ -213,43 +216,17 @@ abstract class OHSViewModelBase with Store {
         );
       },
       (r) {
-        print('Folder rename successful!');
         deleteResponse = deleteResponse.copyWith(
           data: r,
           error: null,
           loading: false,
         );
-        vmOhs.ohsnewsfolderviewmodelfunction(1);
-      },
-    );
-  }
 
-  @observable
-  ApiResponse<String> deleteinsideResponse = ApiResponse<String>();
-
-  @action
-  Future<void> folderinsidedltefunction(String folders, int id) async {
-    deleteinsideResponse =
-        deleteinsideResponse.copyWith(error: null, loading: true);
-
-    print(id);
-
-    final result = await ohsService.ohsnewsfolderdeletefunction(folders, id);
-    return result.fold(
-      (l) {
-        print('Error occurred during folder rename: $l');
-        deleteinsideResponse = deleteinsideResponse.copyWith(
-          error: l,
-          loading: false,
-        );
-      },
-      (r) {
-        print('Folder rename successful!');
-        deleteinsideResponse = deleteinsideResponse.copyWith(
-          data: r,
-          error: null,
-          loading: false,
-        );
+        if (parentId == 1) {
+          ohsnewsfolderviewmodelfunction(parentId);
+        } else {
+          newspagefolderinsidefunction(parentId);
+        }
       },
     );
   }

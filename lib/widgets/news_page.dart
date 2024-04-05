@@ -2,8 +2,10 @@ import 'package:auto_route/auto_route.dart';
 import 'package:dartz/dartz.dart';
 import 'package:enviro_mobile_application/Routepage/approutes.gr.dart';
 import 'package:enviro_mobile_application/Routepage/routespage.dart';
+import 'package:enviro_mobile_application/utilis/api_endpoints/customprint.dart';
 
 import 'package:enviro_mobile_application/view_model/04_ohs/ohs_view_model.dart';
+import 'package:enviro_mobile_application/view_model/10_profile/profile_view_model.dart';
 
 import 'package:enviro_mobile_application/widgets/cmcustomformfield.dart';
 import 'package:flutter/material.dart';
@@ -503,6 +505,7 @@ class NewsPage extends StatelessWidget {
                         ),
                         GestureDetector(
                           onTap: () {
+                            // customPrint(content: id);
                             showDialog(
                               context: context,
                               builder: (BuildContext context) {
@@ -515,7 +518,7 @@ class NewsPage extends StatelessWidget {
                                     TextButton(
                                       onPressed: () {
                                         vmOhs.folderdeleteviewmodelfunction(
-                                            'folders', id);
+                                            'folders', id, 1);
                                         Navigator.of(context).pop();
                                       },
                                       child: const Text(
@@ -562,9 +565,10 @@ class NewsPage extends StatelessWidget {
     print('Add Folder button tapped!');
   }
 
-  void newsfolderclickfunction(BuildContext context, int id) async {
+  void newsfolderclickfunction(BuildContext context, id) async {
     vmOhs.newspagefolderinsidefunction(id);
-    context.router.pushNamed(RouteNames.rNewsfolderinsidepage);
+
+    context.router.push(NewsRouteInsideRoute(parentId: id));
   }
 
   void ohsdetailpagefunction(BuildContext context, data) {

@@ -1,22 +1,26 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:enviro_mobile_application/model/04_ohs/oh&s_resp_model.dart';
 import 'package:enviro_mobile_application/model/04_ohs/oh&snews_fldr_model.dart';
 import 'package:enviro_mobile_application/view_model/04_ohs/ohs_view_model.dart';
+import 'package:enviro_mobile_application/widgets/cmn_action_icon.dart';
+import 'package:enviro_mobile_application/widgets/cmn_title_textwidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
 @RoutePage()
 class NewsPageInsidePage extends StatelessWidget {
-  const NewsPageInsidePage({Key? key}) : super(key: key);
+  final int parentId;
+
+  const NewsPageInsidePage({Key? key, required this.parentId})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'Folders',
-          textAlign: TextAlign.left,
-        ),
-      ),
+          // leading: const cmn_leading_icon(),
+          title: cmnTitleWidget('Folders'),
+          actions: [notificationButton(context)]),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -110,7 +114,8 @@ class NewsPageInsidePage extends StatelessWidget {
                         const SizedBox(height: 6.0),
                     itemBuilder: (BuildContext context, int index) {
                       final folderName = subFolders[index].name;
-                      return _buildCard(folderName, context, index);
+                      return _buildCard(
+                          folderName, context, subFolders[index].id);
                     },
                   );
                 }
@@ -210,46 +215,118 @@ class NewsPageInsidePage extends StatelessWidget {
               ),
               Row(
                 children: [
-                  IconButton(
-                    icon: const Icon(Icons.edit, color: Colors.black26),
-                    onPressed: () {
-                      print('Edit button tapped!');
-                    },
-                  ),
-                  IconButton(
-                    icon: const Icon(Icons.delete, color: Colors.black26),
-                    onPressed: () {
+                  GestureDetector(
+                    onTap: () {
+                      TextEditingController textFolderController2 =
+                          TextEditingController();
                       showDialog(
-                        context:
-                            context, // Assuming you have access to the BuildContext
+                        context: context,
                         builder: (BuildContext context) {
                           return AlertDialog(
-                            title: Text("Confirm Deletion"),
-                            content: Text(
-                                "Are you sure you want to delete this item?"),
+                            title: const Text('Rename'),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(5)),
+                            content: SingleChildScrollView(
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: <Widget>[
+                                  const SizedBox(height: 17),
+                                  SizedBox(
+                                    height: 30,
+                                    child: TextField(
+                                      controller: textFolderController2,
+                                      decoration: const InputDecoration(
+                                        labelText: 'Untitled folder',
+                                        border: OutlineInputBorder(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(10))),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
                             actions: <Widget>[
                               TextButton(
+                                child: const Text(
+                                  'Cancel',
+                                  style: TextStyle(color: Colors.black),
+                                ),
                                 onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                              ),
+                              Observer(builder: (_) {
+                                return TextButton(
+                                  child: const Text(
+                                    'Rename',
+                                    style: TextStyle(color: Colors.black),
+                                  ),
+                                  onPressed: () {
+                                    print('sss');
+
+                                    String folderName =
+                                        textFolderController2.text;
+                                    print(folderName);
+                                    if (folderName.isNotEmpty) {
+                                      print('iiiiii');
+
+                                      vmOhs.folderrenameviewmodelfunction(
+                                          folderName, id);
+                                      print('api');
+                                    } else {}
+                                    Navigator.of(context).pop();
+                                  },
+                                );
+                              }),
+                            ],
+                          );
+                        },
+                      );
+                    },
+                    child: const Icon(Icons.edit, color: Colors.black26),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      // customPrint(content: id);
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(5)),
+                            title: const Text("Delete"),
+                            content: const Text("Are you sure"),
+                            actions: [
+                              TextButton(
+                                onPressed: () {
+                                  print('as$id');
+                                  vmOhs.folderdeleteviewmodelfunction(
+                                      'folders', id, parentId);
                                   Navigator.of(context)
                                       .pop(); // Close the dialog
                                 },
-                                child: Text("Cancel"),
+                                child: const Text(
+                                  "Delete",
+                                  style: TextStyle(color: Colors.black),
+                                ),
                               ),
                               TextButton(
                                 onPressed: () {
-                                  vmOhs.folderdeleteviewmodelfunction(
-                                      'folders', id);
-                                  Navigator.of(context)
-                                      .pop(); // Close the dialog
+                                  Navigator.of(context).pop();
                                 },
-                                child: Text("Delete"),
+                                child: const Text(
+                                  "Cancel",
+                                  style: TextStyle(color: Colors.black),
+                                ),
                               ),
                             ],
                           );
                         },
                       );
                     },
-                  )
+                    child: const Icon(Icons.delete, color: Colors.black26),
+                  ),
                 ],
               ),
             ],
