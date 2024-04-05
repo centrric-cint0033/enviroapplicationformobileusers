@@ -73,6 +73,7 @@ void navigateToSiteDetailScreen({
         context: context,
         type: SiteType.permananet,
       )
+      ..selectedWasteTypeModel = null
       ..getWasteTypesInSite(id: siteId)
       ..getSiteFolders(id: siteId);
     vmPreviousSale.getPreviousSales(
