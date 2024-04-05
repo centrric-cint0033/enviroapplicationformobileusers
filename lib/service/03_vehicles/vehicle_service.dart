@@ -154,7 +154,7 @@ class VehicleService implements IVehicleService {
     request.fields['registration'] = 'e';
 
     var response =
-        await getIt<HttpService>().multipartRequest(request: request);
+        await getIt<HttpService>().multipartRequest(mRequest: request);
 
     return response.fold(
       (l) {
@@ -248,7 +248,7 @@ class VehicleService implements IVehicleService {
     request.fields['registration'] = 'e';
 
     var response =
-        await getIt<HttpService>().multipartRequest(request: request);
+        await getIt<HttpService>().multipartRequest(mRequest: request);
     return response.fold(
       (l) {
         // Show Error
@@ -340,7 +340,7 @@ class VehicleService implements IVehicleService {
     request.fields['registration'] = 'e';
 
     var response =
-        await getIt<HttpService>().multipartRequest(request: request);
+        await getIt<HttpService>().multipartRequest(mRequest: request);
 
     return response.fold(
       (l) {

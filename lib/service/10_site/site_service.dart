@@ -150,7 +150,7 @@ class SiteService implements ISiteService {
         "POST", Uri.parse("$baseUrl${ApiEndPoints.endpointSearchSite}"));
     request.fields['key'] = key;
     var response =
-        await getIt<HttpService>().multipartRequest(request: request);
+        await getIt<HttpService>().multipartRequest(mRequest: request);
 
     return response.fold(
       (l) {
@@ -178,7 +178,7 @@ class SiteService implements ISiteService {
     request.fields['folder_id'] = "1";
     request.fields['search_type'] = "site-individual-private";
     var response =
-        await getIt<HttpService>().multipartRequest(request: request);
+        await getIt<HttpService>().multipartRequest(mRequest: request);
 
     return response.fold(
       (l) {

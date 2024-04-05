@@ -146,7 +146,7 @@ class OhsService implements IohsService {
     request.fields['parent_folder'] = '1';
 
     var response =
-        await getIt<HttpService>().multipartRequest(request: request);
+        await getIt<HttpService>().multipartRequest(mRequest: request);
 
     return response.fold(
       (l) {
@@ -176,7 +176,7 @@ class OhsService implements IohsService {
     request.fields['parent_folder'] = '1';
 
     var response =
-        await getIt<HttpService>().multipartRequest(request: request);
+        await getIt<HttpService>().multipartRequest(mRequest: request);
 
     return response.fold(
       (l) {
@@ -206,7 +206,7 @@ class OhsService implements IohsService {
     print(folderName);
 
     var response =
-        await getIt<HttpService>().multipartRequest(request: request);
+        await getIt<HttpService>().multipartRequest(mRequest: request);
 
     return response.fold(
       (l) {
