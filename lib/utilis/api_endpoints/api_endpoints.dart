@@ -92,5 +92,6 @@ class ApiEndPoints {
   static const endpointterminatedemployeelist =
       '/api/v1/team/status/terminated/?limit=10&page=1';
   static const endpointteamprofileemployeedetailList = '/api/v1/team/employee';
-    static const endpointgetteamfolder = '/api/v1/drive/team/folder';
+  static const endpointgetteamfolder = '/api/v1/drive/team/folder';
+    static const endpointaddteamfolder = '/api/v1/drive/create/team/folder/';
 }

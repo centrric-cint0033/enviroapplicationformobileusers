@@ -17,10 +17,6 @@ class TerminatedEmployeeListWidget extends StatelessWidget {
         itemCount: vmTeam.terminatedEmployeeResponse.data?.length ?? 0,
         separatorBuilder: (BuildContext context, int index) => sized0hx10,
         itemBuilder: (context, index) => InkWell(
-            onTap: () {
-              // context.router.push(
-              //     SalesDetailRoute(data: vmSales.joblistResponse.data?[index]));
-            },
             child: listTile(
                 vmTeam.terminatedEmployeeResponse.data?[index], context)));
   }
@@ -33,6 +29,7 @@ class TerminatedEmployeeListWidget extends StatelessWidget {
         child: InkWell(
           onTap: () {
             vmTeam.getTeamProfileEmployeeDetails(employeeID: data?.id ?? 0);
+            vmTeam.getTeamFolders(id: data?.id ?? 0);
             context.router.push(TeamProfileRoute());
           },
           child: Container(

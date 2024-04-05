@@ -125,7 +125,7 @@ class HttpService {
   }
 
   Future<Either<Map<MainFailure, dynamic>, Response>> multipartRequest({
-    MultipartRequest? request,
+    MultipartRequest? mRequest,
     String? apiUrl,
     String? method,
     List<Map<String, String>>? data,
@@ -133,7 +133,8 @@ class HttpService {
     final url = "$baseUrl$apiUrl";
 
     // if (method != null) {
-    MultipartRequest request = MultipartRequest(method!, Uri.parse(url));
+    MultipartRequest request =
+        mRequest ?? MultipartRequest(method!, Uri.parse(url));
     // }
 
     try {

@@ -63,6 +63,38 @@ mixin _$TeamViewModel on TeamViewModelBase, Store {
     });
   }
 
+  late final _$teamFoldersResponseAtom =
+      Atom(name: 'TeamViewModelBase.teamFoldersResponse', context: context);
+
+  @override
+  ApiResponse<dynamic> get teamFoldersResponse {
+    _$teamFoldersResponseAtom.reportRead();
+    return super.teamFoldersResponse;
+  }
+
+  @override
+  set teamFoldersResponse(ApiResponse<dynamic> value) {
+    _$teamFoldersResponseAtom.reportWrite(value, super.teamFoldersResponse, () {
+      super.teamFoldersResponse = value;
+    });
+  }
+
+  late final _$addFolderResponseAtom =
+      Atom(name: 'TeamViewModelBase.addFolderResponse', context: context);
+
+  @override
+  ApiResponse<dynamic> get addFolderResponse {
+    _$addFolderResponseAtom.reportRead();
+    return super.addFolderResponse;
+  }
+
+  @override
+  set addFolderResponse(ApiResponse<dynamic> value) {
+    _$addFolderResponseAtom.reportWrite(value, super.addFolderResponse, () {
+      super.addFolderResponse = value;
+    });
+  }
+
   late final _$getCurrentEmployeeAsyncAction =
       AsyncAction('TeamViewModelBase.getCurrentEmployee', context: context);
 
@@ -91,12 +123,32 @@ mixin _$TeamViewModel on TeamViewModelBase, Store {
         .run(() => super.getTeamProfileEmployeeDetails(employeeID: employeeID));
   }
 
+  late final _$getTeamFoldersAsyncAction =
+      AsyncAction('TeamViewModelBase.getTeamFolders', context: context);
+
+  @override
+  Future<void> getTeamFolders({required num id}) {
+    return _$getTeamFoldersAsyncAction.run(() => super.getTeamFolders(id: id));
+  }
+
+  late final _$addTeamFolderAsyncAction =
+      AsyncAction('TeamViewModelBase.addTeamFolder', context: context);
+
+  @override
+  Future<void> addTeamFolder(
+      {required TeamCreateFolderReqModel data, required BuildContext context}) {
+    return _$addTeamFolderAsyncAction
+        .run(() => super.addTeamFolder(data: data, context: context));
+  }
+
   @override
   String toString() {
     return '''
 currentEmployeeResponse: ${currentEmployeeResponse},
 terminatedEmployeeResponse: ${terminatedEmployeeResponse},
-teamProfileEmployeeDetailListResponse: ${teamProfileEmployeeDetailListResponse}
+teamProfileEmployeeDetailListResponse: ${teamProfileEmployeeDetailListResponse},
+teamFoldersResponse: ${teamFoldersResponse},
+addFolderResponse: ${addFolderResponse}
     ''';
   }
 }

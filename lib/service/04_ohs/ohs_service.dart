@@ -1,6 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
-
 import 'package:dartz/dartz.dart';
 import 'package:enviro_mobile_application/constant/base_url.dart';
 import 'package:enviro_mobile_application/model/04_ohs/oh&s_resp_model.dart';
@@ -146,7 +144,7 @@ class OhsService implements IohsService {
     request.fields['parent_folder'] = '1';
 
     var response =
-        await getIt<HttpService>().multipartRequest(request: request);
+        await getIt<HttpService>().multipartRequest(mRequest: request);
 
     return response.fold(
       (l) {
@@ -176,7 +174,7 @@ class OhsService implements IohsService {
     request.fields['parent_folder'] = '1';
 
     var response =
-        await getIt<HttpService>().multipartRequest(request: request);
+        await getIt<HttpService>().multipartRequest(mRequest: request);
 
     return response.fold(
       (l) {
@@ -206,7 +204,7 @@ class OhsService implements IohsService {
     print(folderName);
 
     var response =
-        await getIt<HttpService>().multipartRequest(request: request);
+        await getIt<HttpService>().multipartRequest(mRequest: request);
 
     return response.fold(
       (l) {

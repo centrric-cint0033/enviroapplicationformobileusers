@@ -1,5 +1,8 @@
+import 'dart:developer';
+
 import 'package:auto_route/auto_route.dart';
-import 'package:enviro_mobile_application/model/10_team/team_folder_res_model/team_folder_res_model.dart';
+import 'package:enviro_mobile_application/model/10_team/team_folder_req_model/team_create_folder_req_model.dart';
+import 'package:enviro_mobile_application/model/10_team/team_folder_resp_model/team_folder_resp_model.dart';
 import 'package:enviro_mobile_application/model/10_team/team_profile_employee_details_res_model/team_profile_employee_details_res_model.dart';
 import 'package:enviro_mobile_application/utilis/Appthemes.dart';
 import 'package:enviro_mobile_application/utilis/constant.dart';
@@ -33,6 +36,8 @@ class TeamProfileScreen extends StatelessWidget {
           builder: (context) {
             final res = vmTeam.teamProfileEmployeeDetailListResponse;
             TeamProfileEmployeeDetailsResModel? employeeDetails = res.data;
+            final ress = vmTeam.teamFoldersResponse;
+            TeamFolderRespModel? folderList = ress.data;
             return res.loading
                 ? Center(child: wwCustomLoader())
                 : SingleChildScrollView(
@@ -90,6 +95,7 @@ class TeamProfileScreen extends StatelessWidget {
                       listData(employeeDetails),
                       gapField,
                       cmTitle('Employees Folder'),
+                      gapField,
                       Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -97,58 +103,59 @@ class TeamProfileScreen extends StatelessWidget {
                               padding: EdgeInsets.all(8.0),
                               child: Text('Folders'),
                             ),
-                            Observer(builder: (_) {
-                              return TextButton(
-                                onPressed: () {
-                                  showMyfolderDialog(
-                                      context, textFolderController, () {});
-                                },
-                                style: ButtonStyle(
-                                  side: MaterialStateProperty.all<BorderSide>(
-                                    const BorderSide(color: Colors.blue),
-                                  ),
-                                  backgroundColor:
-                                      MaterialStateProperty.all<Color>(
-                                    const Color.fromARGB(255, 188, 209, 228),
-                                  ),
-                                  shape:
-                                      MaterialStateProperty.all<OutlinedBorder>(
-                                    RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(18.0),
-                                    ),
+                            TextButton(
+                              onPressed: () {
+                                showMyfolderDialog(
+                                    context, textFolderController, () {
+                                  String folderName = textFolderController.text;
+                                  log(folderName);
+                                  vmTeam.addTeamFolder(
+                                      context: context,
+                                      data: TeamCreateFolderReqModel(
+                                          employee: employeeDetails?.id ?? 0,
+                                          name: folderName,
+                                          parent_folder: 1));
+                                });
+                              },
+                              style: ButtonStyle(
+                                side: MaterialStateProperty.all<BorderSide>(
+                                  const BorderSide(color: Appthemes.cPrimary),
+                                ),
+                                // backgroundColor:
+                                //     MaterialStateProperty.all<Color>(
+                                //   const Color.fromARGB(255, 188, 209, 228),
+                                // ),
+                                shape:
+                                    MaterialStateProperty.all<OutlinedBorder>(
+                                  RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(18.0),
                                   ),
                                 ),
-                                child: const Text(
-                                  'Add folder+',
-                                  style: TextStyle(color: Colors.blue),
-                                ),
-                              );
-                            }),
+                              ),
+                              child: const Text(
+                                'Add folder+',
+                                style: TextStyle(color: Colors.blue),
+                              ),
+                            )
                           ]),
-                      Observer(
-                        builder: (context) {
-                          final res = vmTeam.teamFoldersResponse;
-                          TeamFolderResModel? folderList = res.data;
-                          return ListView.separated(
-                            shrinkWrap: true,
-                            separatorBuilder:
-                                (BuildContext context, int index) => sized0hx10,
-                            itemCount: folderList?.folders?.isEmpty ?? true
-                                ? 0
-                                : folderList?.folders?[0].folders?.length ?? 0,
-                            itemBuilder: (context, index) {
-                              var data = vmTeam.teamFoldersResponse.data
-                                  ?.folders?[0].folders?[index];
+                      ListView.separated(
+                        physics: const NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        separatorBuilder: (BuildContext context, int index) =>
+                            sized0hx10,
+                        itemCount: folderList?.folders?[0].folders?.length ?? 0,
+                        itemBuilder: (context, index) {
+                          var data = vmTeam.teamFoldersResponse.data
+                              ?.folders?[0].folders?[index];
 
-                              if (data != null) {
-                                return _buildCard("folderName", context, 3);
-                              } else {
-                                return Container();
-                              }
-                            },
-                          );
+                          if (data != null) {
+                            return _buildCard(
+                                data.name ?? "", context, data.id ?? 0);
+                          } else {
+                            return Container();
+                          }
                         },
-                      ),
+                      )
                     ]),
                   );
           },
@@ -193,8 +200,8 @@ class TeamProfileScreen extends StatelessWidget {
         // print('cdvfsdg $id');
         // newsfolderclickfunction(context, id);
       },
-      child: Container(
-        height: 57,
+      child: SizedBox(
+        height: 57.h,
         width: double.infinity,
         child: Card(
           color: Colors.white,
@@ -275,7 +282,6 @@ class TeamProfileScreen extends StatelessWidget {
                                       return TextButton(
                                         child: const Text(
                                           'Rename',
-                                          style: TextStyle(color: Colors.black),
                                         ),
                                         onPressed: () {
                                           print('sss');

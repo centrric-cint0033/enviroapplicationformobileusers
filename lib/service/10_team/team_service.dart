@@ -1,13 +1,15 @@
 import 'dart:convert';
-
 import 'package:dartz/dartz.dart';
-import 'package:enviro_mobile_application/model/10_team/team_folder_res_model/team_folder_res_model.dart';
+import 'package:enviro_mobile_application/constant/base_url.dart';
+import 'package:enviro_mobile_application/model/10_team/team_folder_req_model/team_create_folder_req_model.dart';
+import 'package:enviro_mobile_application/model/10_team/team_folder_resp_model/team_folder_resp_model.dart';
 import 'package:enviro_mobile_application/model/10_team/team_profile_employee_details_res_model/team_profile_employee_details_res_model.dart';
 import 'package:enviro_mobile_application/model/10_team/team_res_model/team_res_model.dart';
 import 'package:enviro_mobile_application/utilis/api_endpoints/api_endpoints.dart';
 import 'package:enviro_mobile_application/utilis/httpservice.dart';
 import 'package:enviro_mobile_application/utilis/injection.dart';
 import 'package:enviro_mobile_application/utilis/main_failure.dart';
+import 'package:http/http.dart';
 import 'package:injectable/injectable.dart';
 
 abstract class IteamService {
@@ -17,8 +19,10 @@ abstract class IteamService {
       getTerminatedEmployee();
   Future<Either<Map<MainFailure, dynamic>, TeamProfileEmployeeDetailsResModel>>
       getTeamProfileEmployeeDetails({required num employeeID});
-  Future<Either<MainFailure, TeamFolderResModel>> getTeamFolders(
+  Future<Either<MainFailure, TeamFolderRespModel>> getTeamFolders(
       {required num id});
+  Future<Either<MainFailure, TeamCreateFolderReqModel>> addTeamFolders(
+      {required TeamCreateFolderReqModel data});
 }
 
 @LazySingleton(as: IteamService)
@@ -82,7 +86,7 @@ class TeamService implements IteamService {
   }
 
   @override
-  Future<Either<MainFailure, TeamFolderResModel>> getTeamFolders(
+  Future<Either<MainFailure, TeamFolderRespModel>> getTeamFolders(
       {required num id}) async {
     var response = await getIt<HttpService>().request(
         authenticated: true,
@@ -95,10 +99,43 @@ class TeamService implements IteamService {
         return Left(l.keys.first);
       },
       (res) async {
-        TeamFolderResModel teamFolderList =
-            TeamFolderResModel.fromJson(jsonDecode(res.body));
+        TeamFolderRespModel teamFolderList =
+            TeamFolderRespModel.fromJson(jsonDecode(res.body));
 
         return Right(teamFolderList);
+      },
+    );
+  }
+
+  @override
+  Future<Either<MainFailure, TeamCreateFolderReqModel>> addTeamFolders(
+      {required TeamCreateFolderReqModel data}) async {
+    // var response = await getIt<HttpService>().multipartRequest(
+    //   data: ,
+    //     method: 'POST', apiUrl: ApiEndPoints.endpointaddteamfolder);
+    String apiUrl;
+
+    apiUrl = ApiEndPoints.endpointaddteamfolder;
+
+    MultipartRequest request =
+        MultipartRequest("POST", Uri.parse("$baseUrl$apiUrl"));
+    request.fields['name'] = data.name ?? "";
+    request.fields['employee'] = data.employee.toString();
+    request.fields['parent_folder'] = '1';
+    var response =
+        await getIt<HttpService>().multipartRequest(mRequest: request);
+
+    return response.fold(
+      (l) {
+        // Show Error
+        (l.values.first);
+        return Left(l.keys.first);
+      },
+      (res) async {
+        var data = jsonDecode(res.body);
+        TeamCreateFolderReqModel createFolderList =
+            TeamCreateFolderReqModel.fromJson(data);
+        return Right(createFolderList);
       },
     );
   }

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
@@ -45,7 +47,9 @@ Future<void> showMyfolderDialog(BuildContext context,
                   'Create',
                   style: TextStyle(color: Colors.black),
                 ),
-                onPressed: () => onPressed);
+                onPressed: () {
+                  onPressed();
+                });
           }),
         ],
       );

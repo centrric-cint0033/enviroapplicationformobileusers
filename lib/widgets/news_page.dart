@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:enviro_mobile_application/Routepage/approutes.gr.dart';
 import 'package:enviro_mobile_application/view_model/04_ohs/ohs_view_model.dart';
@@ -152,11 +154,14 @@ class NewsPage extends StatelessWidget {
                 Observer(builder: (_) {
                   return TextButton(
                     onPressed: () {
-                      showMyfolderDialog(context, textFolderController, () {
+                      showMyfolderDialog(context, textFolderController,
+                          () async {
                         String folderName = textFolderController.text;
+
+                        log(textFolderController.text);
                         if (folderName.isNotEmpty) {
                           Navigator.of(context).pop();
-                          vmOhs.ohsfoldercreationviewmodelfunction(
+                          await vmOhs.ohsfoldercreationviewmodelfunction(
                               folderName, 1);
                         } else {}
                       });

@@ -23,6 +23,8 @@ mixin _$Folder {
   String? get type => throw _privateConstructorUsedError;
   List<dynamic>? get files => throw _privateConstructorUsedError;
   List<Folder>? get folders => throw _privateConstructorUsedError;
+  int? get id => throw _privateConstructorUsedError;
+  String? get name => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -34,7 +36,12 @@ abstract class $FolderCopyWith<$Res> {
   factory $FolderCopyWith(Folder value, $Res Function(Folder) then) =
       _$FolderCopyWithImpl<$Res, Folder>;
   @useResult
-  $Res call({String? type, List<dynamic>? files, List<Folder>? folders});
+  $Res call(
+      {String? type,
+      List<dynamic>? files,
+      List<Folder>? folders,
+      int? id,
+      String? name});
 }
 
 /// @nodoc
@@ -53,6 +60,8 @@ class _$FolderCopyWithImpl<$Res, $Val extends Folder>
     Object? type = freezed,
     Object? files = freezed,
     Object? folders = freezed,
+    Object? id = freezed,
+    Object? name = freezed,
   }) {
     return _then(_value.copyWith(
       type: freezed == type
@@ -67,6 +76,14 @@ class _$FolderCopyWithImpl<$Res, $Val extends Folder>
           ? _value.folders
           : folders // ignore: cast_nullable_to_non_nullable
               as List<Folder>?,
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
+      name: freezed == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -78,7 +95,12 @@ abstract class _$$FolderImplCopyWith<$Res> implements $FolderCopyWith<$Res> {
       __$$FolderImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? type, List<dynamic>? files, List<Folder>? folders});
+  $Res call(
+      {String? type,
+      List<dynamic>? files,
+      List<Folder>? folders,
+      int? id,
+      String? name});
 }
 
 /// @nodoc
@@ -95,6 +117,8 @@ class __$$FolderImplCopyWithImpl<$Res>
     Object? type = freezed,
     Object? files = freezed,
     Object? folders = freezed,
+    Object? id = freezed,
+    Object? name = freezed,
   }) {
     return _then(_$FolderImpl(
       type: freezed == type
@@ -109,6 +133,14 @@ class __$$FolderImplCopyWithImpl<$Res>
           ? _value._folders
           : folders // ignore: cast_nullable_to_non_nullable
               as List<Folder>?,
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
+      name: freezed == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -117,7 +149,11 @@ class __$$FolderImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$FolderImpl implements _Folder {
   _$FolderImpl(
-      {this.type, final List<dynamic>? files, final List<Folder>? folders})
+      {this.type,
+      final List<dynamic>? files,
+      final List<Folder>? folders,
+      this.id,
+      this.name})
       : _files = files,
         _folders = folders;
 
@@ -147,8 +183,13 @@ class _$FolderImpl implements _Folder {
   }
 
   @override
+  final int? id;
+  @override
+  final String? name;
+
+  @override
   String toString() {
-    return 'Folder(type: $type, files: $files, folders: $folders)';
+    return 'Folder(type: $type, files: $files, folders: $folders, id: $id, name: $name)';
   }
 
   @override
@@ -158,7 +199,9 @@ class _$FolderImpl implements _Folder {
             other is _$FolderImpl &&
             (identical(other.type, type) || other.type == type) &&
             const DeepCollectionEquality().equals(other._files, _files) &&
-            const DeepCollectionEquality().equals(other._folders, _folders));
+            const DeepCollectionEquality().equals(other._folders, _folders) &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.name, name) || other.name == name));
   }
 
   @JsonKey(ignore: true)
@@ -167,7 +210,9 @@ class _$FolderImpl implements _Folder {
       runtimeType,
       type,
       const DeepCollectionEquality().hash(_files),
-      const DeepCollectionEquality().hash(_folders));
+      const DeepCollectionEquality().hash(_folders),
+      id,
+      name);
 
   @JsonKey(ignore: true)
   @override
@@ -187,7 +232,9 @@ abstract class _Folder implements Folder {
   factory _Folder(
       {final String? type,
       final List<dynamic>? files,
-      final List<Folder>? folders}) = _$FolderImpl;
+      final List<Folder>? folders,
+      final int? id,
+      final String? name}) = _$FolderImpl;
 
   factory _Folder.fromJson(Map<String, dynamic> json) = _$FolderImpl.fromJson;
 
@@ -197,6 +244,10 @@ abstract class _Folder implements Folder {
   List<dynamic>? get files;
   @override
   List<Folder>? get folders;
+  @override
+  int? get id;
+  @override
+  String? get name;
   @override
   @JsonKey(ignore: true)
   _$$FolderImplCopyWith<_$FolderImpl> get copyWith =>

@@ -1,22 +1,21 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'folder.dart';
+part of 'team_folder_resp_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$FolderImpl _$$FolderImplFromJson(Map<String, dynamic> json) => _$FolderImpl(
-      type: json['type'] as String?,
-      files: json['files'] as List<dynamic>?,
+_$TeamFolderRespModelImpl _$$TeamFolderRespModelImplFromJson(
+        Map<String, dynamic> json) =>
+    _$TeamFolderRespModelImpl(
       folders: (json['folders'] as List<dynamic>?)
           ?.map((e) => Folder.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
-Map<String, dynamic> _$$FolderImplToJson(_$FolderImpl instance) =>
+Map<String, dynamic> _$$TeamFolderRespModelImplToJson(
+        _$TeamFolderRespModelImpl instance) =>
     <String, dynamic>{
-      'type': instance.type,
-      'files': instance.files,
       'folders': instance.folders,
     };
