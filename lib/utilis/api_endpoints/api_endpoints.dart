@@ -97,4 +97,5 @@ class ApiEndPoints {
   static const endpointaddteamfolder = '/api/v1/drive/create/team/folder/';
   static const endpointteamfolderdelete = '/api/v1/drive/folder/delete';
   static const endpointteamfolderedit = '/api/v1/drive/folder/rename';
+  static const endpointteamdesignations = '/api/v1/team/designations/';
 }

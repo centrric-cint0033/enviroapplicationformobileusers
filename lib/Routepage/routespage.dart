@@ -13,6 +13,7 @@ class RouteNames {
   static const String rNotificationdetailpage = '/notificationdetailpage';
   static const String teamPage = '/teampage';
   static const String teamProfileSceen = '/teamprofilescreen';
+  static const String teamEditSceen = '/teameditscreen';
   static const String rintranetinsidepage = '/intranetinsidepage';
   static const String drawerpage = '/drawerpage';
   static const String rprofilepage = '/profilepage';

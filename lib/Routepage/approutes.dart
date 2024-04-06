@@ -34,6 +34,7 @@ class AppRouter extends $AppRouter {
         ),
         AutoRoute(
             page: TeamProfileRoute.page, path: RouteNames.teamProfileSceen),
+        AutoRoute(page: TeamEditRoute.page, path: RouteNames.teamEditSceen),
         AutoRoute(
             page: IntranetInsideRoute.page,
             path: RouteNames.rintranetinsidepage),

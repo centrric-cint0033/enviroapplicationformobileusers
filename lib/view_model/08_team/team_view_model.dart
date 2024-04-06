@@ -2,12 +2,14 @@ import 'dart:developer';
 
 import 'package:auto_route/auto_route.dart';
 import 'package:enviro_mobile_application/api_response/api_response.dart';
+import 'package:enviro_mobile_application/model/10_team/team_designtion_res_model/team_designtion_res_model.dart';
 import 'package:enviro_mobile_application/model/10_team/team_folder_req_model/team_create_folder_req_model.dart';
 import 'package:enviro_mobile_application/model/10_team/team_folder_resp_model/team_folder_resp_model.dart';
 import 'package:enviro_mobile_application/model/10_team/team_profile_employee_details_res_model/team_profile_employee_details_res_model.dart';
 import 'package:enviro_mobile_application/model/10_team/team_res_model/team_res_model.dart';
 import 'package:enviro_mobile_application/service/10_team/team_service.dart';
 import 'package:enviro_mobile_application/utilis/api_endpoints/customprint.dart';
+import 'package:enviro_mobile_application/utilis/image_picker_service/image_file_picker.dart';
 import 'package:enviro_mobile_application/utilis/injection.dart';
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
@@ -47,9 +49,37 @@ abstract class TeamViewModelBase with Store {
   ApiResponse<String> deleteFolderResponse = ApiResponse<String>();
   @observable
   ApiResponse<String> editFolderResponse = ApiResponse<String>();
+  @observable
+  ApiResponse<TeamDesigntionResModel> designationsResponse =
+      ApiResponse<TeamDesigntionResModel>();
+  @observable
+  ImageFilePickerModel? profileImage;
+  @observable
+  bool profileImageLoader = false;
+  @observable
+  bool showDecoration = false;
+  @observable
+  DateTime selectedJoiningDate = DateTime.now();
+    @observable
+  DateTime selectedTerminationDate = DateTime.now();
+    @observable
+  DateTime selectedDob = DateTime.now();
 
   TextEditingController textFolderAddController = TextEditingController();
   TextEditingController textFolderEditController = TextEditingController();
+  TextEditingController textEditTeamNameController = TextEditingController();
+  TextEditingController textEditTeamAddressController = TextEditingController();
+
+  TextEditingController textEditTeamEmailController = TextEditingController();
+  TextEditingController textEditTeamContactNumberController =
+      TextEditingController();
+  TextEditingController textEditTeamWorkEmailController =
+      TextEditingController();
+  TextEditingController textEditTeamEmergencyContactController =
+      TextEditingController();
+  TextEditingController textEditTeamEmergencyContactNumberController =
+      TextEditingController();
+
   @action
   Future<void> getCurrentEmployee() async {
     try {
@@ -236,5 +266,41 @@ abstract class TeamViewModelBase with Store {
         context.router.pop();
       },
     );
+  }
+
+  @action
+  Future<void> dpImageUpdate() async {
+    try {
+      profileImageLoader = true;
+      profileImage = await getIt<ImagePickerService>().imagePicker();
+    } catch (e) {
+      customPrint(content: e);
+    } finally {
+      profileImageLoader = false;
+    }
+  }
+
+  @action
+  Future<void> getTeamDesignationsApi() async {
+    try {
+      designationsResponse =
+          designationsResponse.copyWith(errors: null, loading: true);
+      final result = await teamService.getTeamDesignations();
+      return result.fold(
+        (l) {
+          designationsResponse =
+              designationsResponse.copyWith(errors: l, loading: false);
+        },
+        (r) {
+          designationsResponse = designationsResponse.copyWith(
+              data: r, errors: null, loading: false);
+          log(designationsResponse.toString());
+        },
+      );
+    } catch (e) {
+      customPrint(content: e, name: 'Error getDesignationsApi');
+    } finally {
+      designationsResponse = designationsResponse.copyWith(loading: false);
+    }
   }
 }

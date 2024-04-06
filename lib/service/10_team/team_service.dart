@@ -1,6 +1,6 @@
 import 'dart:convert';
-import 'dart:developer';
 import 'package:dartz/dartz.dart';
+import 'package:enviro_mobile_application/model/10_team/team_designtion_res_model/team_designtion_res_model.dart';
 import 'package:enviro_mobile_application/model/10_team/team_folder_req_model/team_create_folder_req_model.dart';
 import 'package:enviro_mobile_application/model/10_team/team_folder_resp_model/team_folder_resp_model.dart';
 import 'package:enviro_mobile_application/model/10_team/team_profile_employee_details_res_model/team_profile_employee_details_res_model.dart';
@@ -25,6 +25,8 @@ abstract class IteamService {
   Future<Either<MainFailure, String>> deleteTeamFolders({required num id});
   Future<Either<MainFailure, String>> editTeamFolders(
       {required Map<String, String> data, required int id});
+  Future<Either<Map<MainFailure, dynamic>, TeamDesigntionResModel>>
+      getTeamDesignations();
 }
 
 @LazySingleton(as: IteamService)
@@ -165,6 +167,25 @@ class TeamService implements IteamService {
       (res) async {
         var data = jsonDecode(res.body);
         return const Right('success');
+      },
+    );
+  }
+
+  @override
+  Future<Either<Map<MainFailure, dynamic>, TeamDesigntionResModel>>
+      getTeamDesignations() async {
+    var response = await getIt<HttpService>().request(
+        authenticated: true,
+        method: HttpMethod.get,
+        apiUrl: ApiEndPoints.endpointteamdesignations);
+
+    return response.fold(
+      (l) => Left(l),
+      (res) async {
+        var data = jsonDecode(res.body);
+        TeamDesigntionResModel designationsList =
+            TeamDesigntionResModel.fromJson(data);
+        return Right(designationsList);
       },
     );
   }

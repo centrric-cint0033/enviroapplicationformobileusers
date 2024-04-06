@@ -128,6 +128,120 @@ mixin _$TeamViewModel on TeamViewModelBase, Store {
     });
   }
 
+  late final _$designationsResponseAtom =
+      Atom(name: 'TeamViewModelBase.designationsResponse', context: context);
+
+  @override
+  ApiResponse<TeamDesigntionResModel> get designationsResponse {
+    _$designationsResponseAtom.reportRead();
+    return super.designationsResponse;
+  }
+
+  @override
+  set designationsResponse(ApiResponse<TeamDesigntionResModel> value) {
+    _$designationsResponseAtom.reportWrite(value, super.designationsResponse,
+        () {
+      super.designationsResponse = value;
+    });
+  }
+
+  late final _$profileImageAtom =
+      Atom(name: 'TeamViewModelBase.profileImage', context: context);
+
+  @override
+  ImageFilePickerModel? get profileImage {
+    _$profileImageAtom.reportRead();
+    return super.profileImage;
+  }
+
+  @override
+  set profileImage(ImageFilePickerModel? value) {
+    _$profileImageAtom.reportWrite(value, super.profileImage, () {
+      super.profileImage = value;
+    });
+  }
+
+  late final _$profileImageLoaderAtom =
+      Atom(name: 'TeamViewModelBase.profileImageLoader', context: context);
+
+  @override
+  bool get profileImageLoader {
+    _$profileImageLoaderAtom.reportRead();
+    return super.profileImageLoader;
+  }
+
+  @override
+  set profileImageLoader(bool value) {
+    _$profileImageLoaderAtom.reportWrite(value, super.profileImageLoader, () {
+      super.profileImageLoader = value;
+    });
+  }
+
+  late final _$showDecorationAtom =
+      Atom(name: 'TeamViewModelBase.showDecoration', context: context);
+
+  @override
+  bool get showDecoration {
+    _$showDecorationAtom.reportRead();
+    return super.showDecoration;
+  }
+
+  @override
+  set showDecoration(bool value) {
+    _$showDecorationAtom.reportWrite(value, super.showDecoration, () {
+      super.showDecoration = value;
+    });
+  }
+
+  late final _$selectedJoiningDateAtom =
+      Atom(name: 'TeamViewModelBase.selectedJoiningDate', context: context);
+
+  @override
+  DateTime get selectedJoiningDate {
+    _$selectedJoiningDateAtom.reportRead();
+    return super.selectedJoiningDate;
+  }
+
+  @override
+  set selectedJoiningDate(DateTime value) {
+    _$selectedJoiningDateAtom.reportWrite(value, super.selectedJoiningDate, () {
+      super.selectedJoiningDate = value;
+    });
+  }
+
+  late final _$selectedTerminationDateAtom =
+      Atom(name: 'TeamViewModelBase.selectedTerminationDate', context: context);
+
+  @override
+  DateTime get selectedTerminationDate {
+    _$selectedTerminationDateAtom.reportRead();
+    return super.selectedTerminationDate;
+  }
+
+  @override
+  set selectedTerminationDate(DateTime value) {
+    _$selectedTerminationDateAtom
+        .reportWrite(value, super.selectedTerminationDate, () {
+      super.selectedTerminationDate = value;
+    });
+  }
+
+  late final _$selectedDobAtom =
+      Atom(name: 'TeamViewModelBase.selectedDob', context: context);
+
+  @override
+  DateTime get selectedDob {
+    _$selectedDobAtom.reportRead();
+    return super.selectedDob;
+  }
+
+  @override
+  set selectedDob(DateTime value) {
+    _$selectedDobAtom.reportWrite(value, super.selectedDob, () {
+      super.selectedDob = value;
+    });
+  }
+
   late final _$getCurrentEmployeeAsyncAction =
       AsyncAction('TeamViewModelBase.getCurrentEmployee', context: context);
 
@@ -205,6 +319,23 @@ mixin _$TeamViewModel on TeamViewModelBase, Store {
         folder: folder, name: name, context: context, employeeID: employeeID));
   }
 
+  late final _$dpImageUpdateAsyncAction =
+      AsyncAction('TeamViewModelBase.dpImageUpdate', context: context);
+
+  @override
+  Future<void> dpImageUpdate() {
+    return _$dpImageUpdateAsyncAction.run(() => super.dpImageUpdate());
+  }
+
+  late final _$getTeamDesignationsApiAsyncAction =
+      AsyncAction('TeamViewModelBase.getTeamDesignationsApi', context: context);
+
+  @override
+  Future<void> getTeamDesignationsApi() {
+    return _$getTeamDesignationsApiAsyncAction
+        .run(() => super.getTeamDesignationsApi());
+  }
+
   @override
   String toString() {
     return '''
@@ -214,7 +345,14 @@ teamProfileEmployeeDetailListResponse: ${teamProfileEmployeeDetailListResponse},
 teamFoldersResponse: ${teamFoldersResponse},
 addFolderResponse: ${addFolderResponse},
 deleteFolderResponse: ${deleteFolderResponse},
-editFolderResponse: ${editFolderResponse}
+editFolderResponse: ${editFolderResponse},
+designationsResponse: ${designationsResponse},
+profileImage: ${profileImage},
+profileImageLoader: ${profileImageLoader},
+showDecoration: ${showDecoration},
+selectedJoiningDate: ${selectedJoiningDate},
+selectedTerminationDate: ${selectedTerminationDate},
+selectedDob: ${selectedDob}
     ''';
   }
 }
