@@ -48,7 +48,8 @@ abstract class TeamViewModelBase with Store {
   @observable
   ApiResponse<String> editFolderResponse = ApiResponse<String>();
 
-  TextEditingController textFolderController = TextEditingController();
+  TextEditingController textFolderAddController = TextEditingController();
+  TextEditingController textFolderEditController = TextEditingController();
   @action
   Future<void> getCurrentEmployee() async {
     try {
@@ -172,7 +173,7 @@ abstract class TeamViewModelBase with Store {
         addFolderResponse =
             addFolderResponse.copyWith(data: r, error: null, loading: false);
         getTeamFolders(id: employee);
-        vmTeam.textFolderController.clear();
+        vmTeam.textFolderAddController.clear();
         context.router.pop();
       },
     );
@@ -210,12 +211,14 @@ abstract class TeamViewModelBase with Store {
   @action
   Future<void> editTeamFolderApi(
       {required Folder folder,
+      required String name,
       required BuildContext context,
       required num employeeID}) async {
     editFolderResponse =
         editFolderResponse.copyWith(error: null, loading: true);
 
-    final result = await teamService.editTeamFolders(id: folder.id!);
+    final result =
+        await teamService.editTeamFolders(data: {"name": name}, id: folder.id!);
     return result.fold(
       (l) {
         editFolderResponse = editFolderResponse.copyWith(
@@ -229,7 +232,6 @@ abstract class TeamViewModelBase with Store {
           error: null,
           loading: false,
         );
-        log(editFolderResponse.toString() + "90327");
         getTeamFolders(id: employeeID);
         context.router.pop();
       },

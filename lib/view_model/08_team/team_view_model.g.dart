@@ -198,10 +198,11 @@ mixin _$TeamViewModel on TeamViewModelBase, Store {
   @override
   Future<void> editTeamFolderApi(
       {required Folder folder,
+      required String name,
       required BuildContext context,
       required num employeeID}) {
     return _$editTeamFolderApiAsyncAction.run(() => super.editTeamFolderApi(
-        folder: folder, context: context, employeeID: employeeID));
+        folder: folder, name: name, context: context, employeeID: employeeID));
   }
 
   @override

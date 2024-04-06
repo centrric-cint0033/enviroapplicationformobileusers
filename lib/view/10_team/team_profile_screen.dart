@@ -107,9 +107,10 @@ class TeamProfileScreen extends StatelessWidget {
                             TextButton(
                               onPressed: () {
                                 showMyfolderDialog(
-                                    context, vmTeam.textFolderController, () {
+                                    context, vmTeam.textFolderAddController,
+                                    () {
                                   String folderName =
-                                      vmTeam.textFolderController.text;
+                                      vmTeam.textFolderAddController.text;
                                   log(folderName);
                                   vmTeam.addTeamFolder(
                                       context: context,
@@ -240,8 +241,6 @@ class TeamProfileScreen extends StatelessWidget {
                       children: [
                         GestureDetector(
                           onTap: () {
-                            TextEditingController textFolderController2 =
-                                TextEditingController();
                             showDialog(
                               context: context,
                               builder: (BuildContext context) {
@@ -257,7 +256,8 @@ class TeamProfileScreen extends StatelessWidget {
                                         SizedBox(
                                           height: 30,
                                           child: TextField(
-                                            controller: textFolderController2,
+                                            controller:
+                                                vmTeam.textFolderEditController,
                                             decoration: const InputDecoration(
                                               labelText: 'Untitled folder',
                                               border: OutlineInputBorder(
@@ -281,24 +281,25 @@ class TeamProfileScreen extends StatelessWidget {
                                       },
                                     ),
                                     Observer(builder: (_) {
+                                      vmTeam.textFolderEditController.text =
+                                          data.name ?? "";
                                       return TextButton(
                                         child: const Text(
-                                          'Rename',
+                                          'Rename', 
                                         ),
                                         onPressed: () {
-                                          print('sss');
-
-                                          String folderName =
-                                              textFolderController2.text;
-                                          print(folderName);
+                                          String folderName = vmTeam
+                                              .textFolderEditController.text;
                                           if (folderName.isNotEmpty) {
-                                            print('iiiiii');
+                                            vmTeam.editTeamFolderApi(
+                                                name: folderName,
+                                                folder: data,
+                                                context: context,
+                                                employeeID: id);
                                             // Navigator.of(context).pop();
                                             // vmOhs.folderrenameviewmodelfunction(
                                             //     folderName, id);
-                                            print('api');
                                           } else {}
-                                          Navigator.of(context).pop();
                                         },
                                       );
                                     }),
@@ -335,10 +336,7 @@ class TeamProfileScreen extends StatelessWidget {
                                     ),
                                     TextButton(
                                       onPressed: () {
-                                        vmTeam.editTeamFolderApi(
-                                            folder: data,
-                                            context: context,
-                                            employeeID: id);
+                                        Navigator.pop(context);
                                       },
                                       child: const Text(
                                         "Cancel",
