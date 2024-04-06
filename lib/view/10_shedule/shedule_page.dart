@@ -1,4 +1,7 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:enviro_mobile_application/widgets/cmn_action_icon.dart';
+import 'package:enviro_mobile_application/widgets/cmn_title_textwidget.dart';
+import 'package:enviro_mobile_application/widgets/drawer.dart';
 import 'package:flutter/material.dart';
 
 @RoutePage()
@@ -8,17 +11,10 @@ class SchedulePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: CmnDrawer(context),
       appBar: AppBar(
-        title: const Text('Schedule'),
-        actions: [
-          IconButton(
-            onPressed: () {
-              // Handle notification button press
-            },
-            icon: const Icon(Icons.notifications),
-          ),
-        ],
-      ),
+          title: cmnTitleWidget('Profile'),
+          actions: [notificationButton(context)]),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -37,9 +33,7 @@ class SchedulePage extends StatelessWidget {
                   ),
                   const SizedBox(height: 10),
                   ElevatedButton(
-                    onPressed: () {
-                      // Handle schedule button press
-                    },
+                    onPressed: () {},
                     child: const Text('Schedule'),
                     style: ElevatedButton.styleFrom(
                       primary: Colors.white,
@@ -70,9 +64,7 @@ class SchedulePage extends StatelessWidget {
                             ),
                           ),
                           ElevatedButton(
-                            onPressed: () {
-                              // Handle next job button press
-                            },
+                            onPressed: () {},
                             child: const Text('Next job'),
                             style: ElevatedButton.styleFrom(
                               primary: Colors.white,
@@ -177,23 +169,43 @@ class SchedulePage extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 20),
-            const Card(
-              margin: EdgeInsets.symmetric(horizontal: 20),
+            Card(
+              margin: const EdgeInsets.symmetric(horizontal: 20),
               elevation: 4,
               child: Padding(
-                padding: EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(8.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      'New Card Title 1',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
+                    const Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'New Card Title 1',
+                          style: TextStyle(),
+                        ),
+                        Text(
+                          'job2675',
+                          style: TextStyle(),
+                        ),
+                      ],
                     ),
-                    SizedBox(height: 10),
-                    Text('Some Text Here'),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text('Some Text Here2'),
+                        ElevatedButton(
+                          onPressed: () {},
+                          child: const Text('Next job'),
+                          style: ElevatedButton.styleFrom(
+                            primary: Colors.white,
+                            onPrimary: Colors.black,
+                          ),
+                        ),
+                        const SizedBox(child: Card())
+                      ],
+                    ),
+                    const Text('Some Text Here3'),
                   ],
                 ),
               ),
@@ -202,20 +214,44 @@ class SchedulePage extends StatelessWidget {
             Card(
               margin: const EdgeInsets.symmetric(horizontal: 20),
               elevation: 4,
-              child: const Padding(
-                padding: EdgeInsets.all(8.0),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      'New Card Title 2',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
+                    const Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'New Card Title 2',
+                        ),
+                        Text(
+                          'job7654',
+                        ),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text('Some Text Here'),
+                        ElevatedButton(
+                          onPressed: () {},
+                          child: const Text('pending'),
+                          style: ElevatedButton.styleFrom(
+                            primary: Colors.white,
+                            onPrimary: Colors.black,
+                          ),
+                        ),
+                      ],
+                    ),
+                    const Text('Some Text Here'),
+                    const SizedBox(
+                      height: 10,
+                      child: Card(
+                        color: Colors.blue,
+                        child: Column(),
                       ),
                     ),
-                    SizedBox(height: 10),
-                    Text('Some Text Here'),
                   ],
                 ),
               ),
