@@ -4,13 +4,10 @@ import 'package:enviro_mobile_application/view/03_vehicles/master_car_page.dart'
 import 'package:enviro_mobile_application/view/03_vehicles/master_truck_page.dart';
 
 import 'package:enviro_mobile_application/widgets/cmn_action_icon.dart';
-import 'package:enviro_mobile_application/widgets/cmn_leading_icon.dart';
 import 'package:enviro_mobile_application/widgets/cmn_title_textwidget.dart';
+import 'package:enviro_mobile_application/widgets/common_tababr.dart';
 import 'package:enviro_mobile_application/widgets/drawer.dart';
 
-import 'package:enviro_mobile_application/widgets/vehicle_tab_bar.dart';
-
-import 'package:enviro_mobile_application/widgets/cmappbar.dart';
 import 'package:flutter/material.dart';
 
 @RoutePage()
@@ -27,10 +24,10 @@ class VehiclePage extends StatelessWidget {
             // leading: const cmn_leading_icon(),
             title: cmnTitleWidget('Vehicles'),
             actions: [notificationButton(context)]),
-        body: const Column(
+        body: Column(
           children: [
-            VehicleTabbar(),
-            Expanded(
+            commonTabbar('Master truck', 'Master Car', 'Semi_Trailors'),
+            const Expanded(
               child: TabBarView(
                 children: <Widget>[
                   MasterTruckPage(),

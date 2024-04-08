@@ -5,8 +5,6 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:enviro_mobile_application/widgets/ww_search_widget.dart';
 import 'package:mobx/mobx.dart';
 
-TextEditingController textController = TextEditingController();
-
 class MasterTruckPage extends StatelessWidget {
   const MasterTruckPage({Key? key}) : super(key: key);
 
@@ -56,21 +54,23 @@ class MasterTruckPage extends StatelessWidget {
                                         print('azeemsss: $selectedtruck');
                                         vmVehicle
                                             .setSelectedTruck(selectedtruck);
-                                        ActionType? actionType;
+                                        VehicleActionType? actionType;
                                         switch (selectedtruck) {
                                           case 'Vehicle list':
-                                            actionType = ActionType.vehiclelist;
+                                            actionType =
+                                                VehicleActionType.vehicleList;
                                             break;
                                           case 'Preinspectioncheck':
-                                            actionType =
-                                                ActionType.Preinspectioncheck;
+                                            actionType = VehicleActionType
+                                                .preInspectionCheck;
                                             break;
                                           case 'Maintenance check':
-                                            actionType =
-                                                ActionType.MaintenanceCheck;
+                                            actionType = VehicleActionType
+                                                .maintenanceCheck;
                                             break;
                                           case 'Fuel Expense':
-                                            actionType = ActionType.fuelexpence;
+                                            actionType =
+                                                VehicleActionType.fuelExpence;
                                             break;
                                         }
                                         if (actionType != null) {
@@ -119,7 +119,7 @@ class MasterTruckPage extends StatelessWidget {
                               child: Observer(builder: (_) {
                                 return TextField(
                                   onChanged: (value) {
-                                    ActionType? actionType;
+                                    VehicleActionType? actionType;
                                     if (value.isEmpty) {
                                       vmVehicle.truckPageFunction();
                                     } else {
@@ -129,7 +129,7 @@ class MasterTruckPage extends StatelessWidget {
                                       );
                                     }
                                   },
-                                  controller: textController,
+                                  controller: vmVehicle.vehSemiTrailorCtr,
                                   style: const TextStyle(color: Colors.black),
                                   decoration: InputDecoration(
                                     hintText: 'Search By client',
@@ -360,7 +360,7 @@ class MasterTruckPage extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 8.0),
-              if (vmVehicle.status == ActionType.fuelexpence)
+              if (vmVehicle.status == VehicleActionType.fuelExpence)
                 Observer(builder: (_) {
                   return Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -13,25 +13,11 @@ import 'package:enviro_mobile_application/view/03_vehicles/master_truck_page.dar
 import 'package:http/http.dart';
 import 'package:injectable/injectable.dart';
 
-enum CarActionType {
-  Preinspectioncheck,
-  MaintenanceCheck,
-  vehiclelist,
-  fuelexpence
-}
-
-enum ActionType {
-  Preinspectioncheck,
-  MaintenanceCheck,
-  vehiclelist,
-  fuelexpence
-}
-
-enum MasterTruckActionType {
-  Preinspectioncheck,
-  MaintenanceCheck,
-  vehiclelist,
-  fuelexpence
+enum VehicleActionType {
+  preInspectionCheck,
+  maintenanceCheck,
+  vehicleList,
+  fuelExpence,
 }
 
 abstract class IVehicleService {
@@ -83,17 +69,17 @@ class VehicleService implements IVehicleService {
     String apiUrl;
     switch (drop) {
       case MasterCarpage:
-      case CarActionType.vehiclelist:
+      case VehicleActionType.vehicleList:
         apiUrl = ApiEndPoints.endpointcarpage;
         break;
-      case CarActionType.Preinspectioncheck:
+      case VehicleActionType.preInspectionCheck:
         apiUrl = ApiEndPoints.endpointpreinspectioncarcheckpage;
         break;
       case MasterTruckPage:
-      case CarActionType.MaintenanceCheck:
+      case VehicleActionType.maintenanceCheck:
         apiUrl = ApiEndPoints.endpointmaintancecarcheckpage;
         break;
-      case CarActionType.fuelexpence:
+      case VehicleActionType.fuelExpence:
         apiUrl = ApiEndPoints.endpointfuelcarcheckpage;
 
         break;
@@ -128,19 +114,19 @@ class VehicleService implements IVehicleService {
     String apiUrl;
     print('awww$searchdrop');
     switch (searchdrop) {
-      case CarActionType.vehiclelist:
+      case VehicleActionType.vehicleList:
         apiUrl = ApiEndPoints.endpointvehiclecarlistsearch;
         break;
-      case CarActionType.Preinspectioncheck:
+      case VehicleActionType.preInspectionCheck:
         apiUrl = ApiEndPoints.endpointpreinspectioncarsearch;
         break;
-      case CarActionType.MaintenanceCheck:
+      case VehicleActionType.maintenanceCheck:
         apiUrl = ApiEndPoints.endpointmaintancecarsearchcheckpage;
         MultipartRequest request =
             MultipartRequest("POST", Uri.parse("$baseUrl$apiUrl"));
         request.fields['key'] = 'e';
         break;
-      case CarActionType.fuelexpence:
+      case VehicleActionType.fuelExpence:
         apiUrl = ApiEndPoints.endpointmasterfuelcarsearch;
         break;
       default:
@@ -177,17 +163,17 @@ class VehicleService implements IVehicleService {
       semitruckdrop) async {
     String apiUrl;
     switch (semitruckdrop) {
-      case MasterTruckActionType.vehiclelist:
+      case VehicleActionType.vehicleList:
         apiUrl = ApiEndPoints.endpointsemitrailorpage;
         break;
-      case MasterTruckActionType.Preinspectioncheck:
+      case VehicleActionType.preInspectionCheck:
         apiUrl = ApiEndPoints.endpointpreinspectionsemitruckcheckpage;
         break;
 
-      case MasterTruckActionType.MaintenanceCheck:
+      case VehicleActionType.maintenanceCheck:
         apiUrl = ApiEndPoints.endpointmaintancesemitruckcheckpage;
         break;
-      case MasterTruckActionType.fuelexpence:
+      case VehicleActionType.fuelExpence:
         apiUrl = ApiEndPoints.endpointfuelsemitruckcheckpage;
         break;
 
@@ -222,19 +208,19 @@ class VehicleService implements IVehicleService {
     String apiUrl;
     print('awww$searchsemidrop');
     switch (searchsemidrop) {
-      case CarActionType.vehiclelist:
+      case VehicleActionType.vehicleList:
         apiUrl = ApiEndPoints.endpointvehiclesemitrucklistsearch;
         break;
-      case CarActionType.Preinspectioncheck:
+      case VehicleActionType.preInspectionCheck:
         apiUrl = ApiEndPoints.endpointpreinspectionsemitrucksearch;
         break;
-      case CarActionType.MaintenanceCheck:
+      case VehicleActionType.maintenanceCheck:
         apiUrl = ApiEndPoints.endpointmaintancesemitruckcheckpage;
         MultipartRequest request =
             MultipartRequest("POST", Uri.parse("$baseUrl$apiUrl"));
         request.fields['key'] = 'e';
         break;
-      case CarActionType.fuelexpence:
+      case VehicleActionType.fuelExpence:
         apiUrl = ApiEndPoints.endpointmasterfuelcarsearch;
         break;
       default:
@@ -270,17 +256,17 @@ class VehicleService implements IVehicleService {
       truckdrop) async {
     String apiUrl;
     switch (truckdrop) {
-      case ActionType.vehiclelist:
+      case VehicleActionType.vehicleList:
         apiUrl = ApiEndPoints.endpointtruckpage;
         break;
-      case ActionType.Preinspectioncheck:
+      case VehicleActionType.preInspectionCheck:
         apiUrl = ApiEndPoints.endpointpreinspectiontruckcheckpage;
         break;
 
-      case ActionType.MaintenanceCheck:
+      case VehicleActionType.maintenanceCheck:
         apiUrl = ApiEndPoints.endpointmaintancetruckcheckpage;
         break;
-      case ActionType.fuelexpence:
+      case VehicleActionType.fuelExpence:
         apiUrl = ApiEndPoints.endpointfueltruckcheckpage;
         break;
 
@@ -314,19 +300,19 @@ class VehicleService implements IVehicleService {
     String apiUrl;
     print('awww$trucksearchdrop');
     switch (trucksearchdrop) {
-      case CarActionType.vehiclelist:
+      case VehicleActionType.vehicleList:
         apiUrl = ApiEndPoints.endpointtruckpage;
         break;
-      case CarActionType.Preinspectioncheck:
+      case VehicleActionType.preInspectionCheck:
         apiUrl = ApiEndPoints.endpointpreinspectiontrucksearch;
         break;
-      case CarActionType.MaintenanceCheck:
+      case VehicleActionType.maintenanceCheck:
         apiUrl = ApiEndPoints.endpointmaintancetrucksearchcheckpage;
         MultipartRequest request =
             MultipartRequest("POST", Uri.parse("$baseUrl$apiUrl"));
         request.fields['key'] = 'e';
         break;
-      case CarActionType.fuelexpence:
+      case VehicleActionType.fuelExpence:
         apiUrl = ApiEndPoints.endpointtruckfuelsearch;
         break;
       default:

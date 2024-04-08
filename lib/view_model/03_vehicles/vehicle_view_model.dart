@@ -1,9 +1,12 @@
+import 'dart:async';
+
 import 'package:enviro_mobile_application/api_response/api_response.dart';
 import 'package:enviro_mobile_application/model/03_vehicle/vehicle_model/vehicle_model.dart';
 import 'package:enviro_mobile_application/model/truck_page/res_model/truckpage_model.dart';
 import 'package:enviro_mobile_application/service/03_vehicles/vehicle_service.dart';
 
 import 'package:enviro_mobile_application/utilis/injection.dart';
+import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 import 'package:mobx/mobx.dart';
 
@@ -22,8 +25,22 @@ abstract class VehicleViewModelBase with Store {
 
   VehicleViewModelBase(this.vehicleService);
 
+  TextEditingController vehSemiTrailorCtr = TextEditingController();
+  TextEditingController vehMasterCarrCtr = TextEditingController();
+  TextEditingController vehMasterTruckCtr = TextEditingController();
+
+  Timer? debouce;
+
+  void onTextChanged(Function() function) {
+    // Clear the previous debounce timer
+    if (debouce?.isActive ?? false) debouce?.cancel();
+
+    // Set up a new debounce timer
+    debouce = Timer(const Duration(milliseconds: 500), () => function());
+  }
+
   @observable
-  CarActionType? carStatus;
+  VehicleActionType? carStatus;
 
   @observable
   String? selectedcarstatus;
@@ -38,7 +55,7 @@ abstract class VehicleViewModelBase with Store {
       ApiResponse<List<VehicleModel>>();
 
   @action
-  Future<void> mastercarfunction({CarActionType? drop}) async {
+  Future<void> mastercarfunction({VehicleActionType? drop}) async {
     carPageResponse = carPageResponse.copyWith(error: null, loading: true);
     carStatus = drop;
     final result = await vehicleService.preinspectionfunction(drop);
@@ -64,7 +81,7 @@ abstract class VehicleViewModelBase with Store {
       ApiResponse<List<VehicleModel>>();
 
   @action
-  Future<void> fuelsearchfunction({ActionType? searchdrop}) async {
+  Future<void> fuelsearchfunction({VehicleActionType? searchdrop}) async {
     carPageResponse = carPageResponse.copyWith(error: null, loading: true);
 
     final result = await vehicleService.masterfuelsearchfunction(searchdrop);
@@ -109,7 +126,7 @@ abstract class VehicleViewModelBase with Store {
   // }
 
   @observable
-  MasterTruckActionType? status;
+  VehicleActionType? status;
 
   @observable
   String? selectedVehicle;
@@ -124,7 +141,7 @@ abstract class VehicleViewModelBase with Store {
       ApiResponse<List<VehicleModel>>();
 
   @action
-  Future<void> trailorfunction({MasterTruckActionType? semitruckdrop}) async {
+  Future<void> trailorfunction({VehicleActionType? semitruckdrop}) async {
     semitrailorPageResponse =
         semitrailorPageResponse.copyWith(error: null, loading: true);
     status = semitruckdrop;
@@ -151,7 +168,8 @@ abstract class VehicleViewModelBase with Store {
       ApiResponse<List<VehicleModel>>();
 
   @action
-  Future<void> semifueltrucksearchfunction({ActionType? searchsemidrop}) async {
+  Future<void> semifueltrucksearchfunction(
+      {VehicleActionType? searchsemidrop}) async {
     semitrailorPageResponse =
         semitrailorPageResponse.copyWith(error: null, loading: true);
 
@@ -175,7 +193,7 @@ abstract class VehicleViewModelBase with Store {
   }
 
   @observable
-  ActionType? sstatus;
+  VehicleActionType? sstatus;
 
   @observable
   String? selectedTruckresponse;
@@ -190,7 +208,7 @@ abstract class VehicleViewModelBase with Store {
       ApiResponse<List<VehicleModel>>();
 
   @action
-  Future<void> truckPageFunction({ActionType? truckdrop}) async {
+  Future<void> truckPageFunction({VehicleActionType? truckdrop}) async {
     truckPageResponse = truckPageResponse.copyWith(error: null, loading: true);
     sstatus = truckdrop;
     final result = await vehicleService.mastertruckfunction(truckdrop);
@@ -217,7 +235,7 @@ abstract class VehicleViewModelBase with Store {
 
   @action
   Future<void> fueltrucksearchfunction(
-      {value, ActionType? searchtrucksemidrop}) async {
+      {value, VehicleActionType? searchtrucksemidrop}) async {
     print(value);
     truckPagefuelResponse =
         truckPagefuelResponse.copyWith(error: null, loading: true);

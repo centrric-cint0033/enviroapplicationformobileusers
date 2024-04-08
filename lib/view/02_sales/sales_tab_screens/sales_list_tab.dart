@@ -44,11 +44,8 @@ class SalesListWidget extends StatelessWidget {
       image: data?.profile,
       [
         expandedRowShowText1('Total Quote Won', ": ${data?.won ?? ""}"),
-        gapField,
         expandedRowShowText1('Total Quote Lost:', ": ${data?.lost ?? ""}"),
-        gapField,
         expandedRowShowText1('Total Quote Pending', ": ${data?.pending ?? ""}"),
-        gapField,
         expandedRowShowText1('Total Quote Made', ": ${data?.total ?? ""}"),
       ],
     );

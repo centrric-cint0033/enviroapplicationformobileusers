@@ -26,11 +26,29 @@ class ApiEndPoints {
 
   // VEHICLE APIS
 
-  static const endPointallvehiclelisting = '/api/v1/vehicles/waste/truck/list/';
   static const endpointtruckpage = '/api/v1/vehicles/waste/truck/all/1/';
-  static const endpointcarpage = '/api/v1/vehicles/waste/car/all/1/';
+
+  static const endpointtruckfuelsearch =
+      '/api/v1/vehicles/waste/truck/fuelExpense/search/vehicle/';
+
   static const endpointsemitrailorpage =
       '/api/v1/vehicles/waste/forklift/all/1/';
+
+  static const endpointcarpage = '/api/v1/vehicles/waste/car/all/1/';
+
+  static const endpointpreinspectioncarcheckpage =
+      '/api/v1/vehicles/waste/car/pre-inspection/1/';
+
+  static const endpointmaintancecarcheckpage =
+      '/api/v1/vehicles/waste/car/maintenance/reports/1/';
+
+  static const endpointfuelcarcheckpage =
+      '/api/v1/vehicles/waste/car/getFuelExpenses/1/';
+
+  //
+
+  static const endPointallvehiclelisting = '/api/v1/vehicles/waste/truck/list/';
+
   static const endpointpreinspectiontruckcheckpage =
       '/api/v1/vehicles/waste/truck/pre-inspection/1/';
   static const endpointmaintancetruckcheckpage =
@@ -43,21 +61,12 @@ class ApiEndPoints {
       '/api/v1/vehicles/waste/fork-lift/maintenance/reports/1/';
   static const endpointfuelsemitruckcheckpage =
       '/api/v1/vehicles/waste/fork-lift/getFuelExpenses/1/';
-  static const endpointmaintancecarcheckpage =
-      '/api/v1/vehicles/waste/car/maintenance/reports/1/';
-  static const endpointpreinspectioncarcheckpage =
-      '/api/v1/vehicles/waste/car/pre-inspection/1/';
-  static const endpointfuelcarcheckpage =
-      '/api/v1/vehicles/waste/car/getFuelExpenses/1/';
   static const endpointmaintancecarsearchcheckpage =
       '/api/v1/vehicles/waste/car/maintenance/reports/search/';
   static const endpointmaintancetrucksearchcheckpage =
       '/api/v1/vehicles/waste/truck/maintenance/reports/search/';
   static const endpointmasterfuelcarsearch =
       '/api/v1/vehicles/waste/car/fuelExpense/search/vehicle/';
-
-  static const endpointtruckfuelsearch =
-      '/api/v1/vehicles/waste/truck/fuelExpense/search/vehicle/';
 
   static const endpointsemitruckfuelsearch =
       '/api/v1/vehicles/waste/fork-lift/fuelExpense/search/vehicle/';

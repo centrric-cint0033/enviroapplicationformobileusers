@@ -13,13 +13,13 @@ mixin _$VehicleViewModel on VehicleViewModelBase, Store {
       Atom(name: 'VehicleViewModelBase.carStatus', context: context);
 
   @override
-  CarActionType? get carStatus {
+  VehicleActionType? get carStatus {
     _$carStatusAtom.reportRead();
     return super.carStatus;
   }
 
   @override
-  set carStatus(CarActionType? value) {
+  set carStatus(VehicleActionType? value) {
     _$carStatusAtom.reportWrite(value, super.carStatus, () {
       super.carStatus = value;
     });
@@ -77,13 +77,13 @@ mixin _$VehicleViewModel on VehicleViewModelBase, Store {
       Atom(name: 'VehicleViewModelBase.status', context: context);
 
   @override
-  MasterTruckActionType? get status {
+  VehicleActionType? get status {
     _$statusAtom.reportRead();
     return super.status;
   }
 
   @override
-  set status(MasterTruckActionType? value) {
+  set status(VehicleActionType? value) {
     _$statusAtom.reportWrite(value, super.status, () {
       super.status = value;
     });
@@ -143,13 +143,13 @@ mixin _$VehicleViewModel on VehicleViewModelBase, Store {
       Atom(name: 'VehicleViewModelBase.sstatus', context: context);
 
   @override
-  ActionType? get sstatus {
+  VehicleActionType? get sstatus {
     _$sstatusAtom.reportRead();
     return super.sstatus;
   }
 
   @override
-  set sstatus(ActionType? value) {
+  set sstatus(VehicleActionType? value) {
     _$sstatusAtom.reportWrite(value, super.sstatus, () {
       super.sstatus = value;
     });
@@ -209,7 +209,7 @@ mixin _$VehicleViewModel on VehicleViewModelBase, Store {
       AsyncAction('VehicleViewModelBase.mastercarfunction', context: context);
 
   @override
-  Future<void> mastercarfunction({CarActionType? drop}) {
+  Future<void> mastercarfunction({VehicleActionType? drop}) {
     return _$mastercarfunctionAsyncAction
         .run(() => super.mastercarfunction(drop: drop));
   }
@@ -218,7 +218,7 @@ mixin _$VehicleViewModel on VehicleViewModelBase, Store {
       AsyncAction('VehicleViewModelBase.fuelsearchfunction', context: context);
 
   @override
-  Future<void> fuelsearchfunction({ActionType? searchdrop}) {
+  Future<void> fuelsearchfunction({VehicleActionType? searchdrop}) {
     return _$fuelsearchfunctionAsyncAction
         .run(() => super.fuelsearchfunction(searchdrop: searchdrop));
   }
@@ -227,7 +227,7 @@ mixin _$VehicleViewModel on VehicleViewModelBase, Store {
       AsyncAction('VehicleViewModelBase.trailorfunction', context: context);
 
   @override
-  Future<void> trailorfunction({MasterTruckActionType? semitruckdrop}) {
+  Future<void> trailorfunction({VehicleActionType? semitruckdrop}) {
     return _$trailorfunctionAsyncAction
         .run(() => super.trailorfunction(semitruckdrop: semitruckdrop));
   }
@@ -237,7 +237,8 @@ mixin _$VehicleViewModel on VehicleViewModelBase, Store {
       context: context);
 
   @override
-  Future<void> semifueltrucksearchfunction({ActionType? searchsemidrop}) {
+  Future<void> semifueltrucksearchfunction(
+      {VehicleActionType? searchsemidrop}) {
     return _$semifueltrucksearchfunctionAsyncAction.run(() =>
         super.semifueltrucksearchfunction(searchsemidrop: searchsemidrop));
   }
@@ -246,7 +247,7 @@ mixin _$VehicleViewModel on VehicleViewModelBase, Store {
       AsyncAction('VehicleViewModelBase.truckPageFunction', context: context);
 
   @override
-  Future<void> truckPageFunction({ActionType? truckdrop}) {
+  Future<void> truckPageFunction({VehicleActionType? truckdrop}) {
     return _$truckPageFunctionAsyncAction
         .run(() => super.truckPageFunction(truckdrop: truckdrop));
   }
@@ -257,7 +258,7 @@ mixin _$VehicleViewModel on VehicleViewModelBase, Store {
 
   @override
   Future<void> fueltrucksearchfunction(
-      {dynamic value, ActionType? searchtrucksemidrop}) {
+      {dynamic value, VehicleActionType? searchtrucksemidrop}) {
     return _$fueltrucksearchfunctionAsyncAction.run(() => super
         .fueltrucksearchfunction(
             value: value, searchtrucksemidrop: searchtrucksemidrop));

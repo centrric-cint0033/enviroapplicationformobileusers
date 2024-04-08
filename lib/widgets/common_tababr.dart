@@ -2,7 +2,11 @@ import 'package:enviro_mobile_application/utilis/Appthemes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-Padding CommonTabbar() {
+Padding commonTabbar(
+  String value1,
+  String value2,
+  String value3,
+) {
   return Padding(
     padding: EdgeInsets.only(left: 15.w, right: 15.w),
     child: Container(
@@ -21,10 +25,10 @@ Padding CommonTabbar() {
         labelColor: Colors.black,
         unselectedLabelColor: Colors.white,
         indicatorColor: Colors.black,
-        tabs: const [
-          Tab(text: 'Job List'),
-          Tab(text: 'Quote Reg'),
-          Tab(text: 'Sales List'),
+        tabs: [
+          Tab(text: value1),
+          Tab(text: value2),
+          Tab(text: value3),
         ],
       ),
     ),

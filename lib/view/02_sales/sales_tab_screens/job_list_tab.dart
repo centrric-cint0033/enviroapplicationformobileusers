@@ -66,13 +66,9 @@ class SalesJobListWidget extends StatelessWidget {
     return buildCardDataOrder(
       [
         expandedRowShowText('Date', ': ${data?.date ?? ""}'),
-        gapField,
         expandedRowShowText('clientName', ': ${data?.clientName ?? ""}'),
-        gapField,
         expandedRowShowText('Quoted By', ': ${data?.quotedBy ?? ""}'),
-        gapField,
         expandedRowShowText('Amount', ': ${data?.amount ?? ""}'),
-        gapField,
         expandedRowShowText('Status', ': ${data?.status ?? ""}'),
       ],
     );

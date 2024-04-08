@@ -5,9 +5,11 @@ class WWSearchField extends StatelessWidget {
   final Function(String)? onChanged;
   final TextEditingController controller;
   final Function() searchTap;
+  final String? hintText;
   const WWSearchField(
       {super.key,
       this.onChanged,
+      this.hintText,
       required this.controller,
       required this.searchTap});
 
@@ -25,7 +27,7 @@ class WWSearchField extends StatelessWidget {
             controller: controller,
             style: const TextStyle(color: Colors.black),
             decoration: InputDecoration(
-                hintText: 'Search By client',
+                hintText: hintText ?? 'Search here',
                 border: InputBorder.none,
                 contentPadding: const EdgeInsets.all(10),
                 suffixIcon: Observer(builder: (_) {

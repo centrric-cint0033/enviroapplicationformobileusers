@@ -71,16 +71,11 @@ class QuoteReqisterListWidget extends StatelessWidget {
     return buildCardDataOrder(
       [
         expandedRowShowText('ID', ": ${data?.id ?? ""}"),
-        gapField,
         expandedRowShowText(
             'Won/Lose Status', ": ${data?.wonLoseStatus ?? ""}"),
-        gapField,
         expandedRowShowText('Created By', ": ${data?.createdBy ?? ""}"),
-        gapField,
         expandedRowShowText('Client Type', ": ${data?.clientType ?? ""}"),
-        gapField,
         expandedRowShowText('Schedule ID', ": ${data?.scheduleId ?? ""}"),
-        gapField,
         expandedRowShowText('Client Email', ": ${data?.clientEmail ?? ""}"),
       ],
     );

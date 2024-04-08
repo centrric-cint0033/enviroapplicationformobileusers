@@ -23,7 +23,7 @@ class SalesPage extends StatelessWidget {
               actions: [notificationButton(context)]),
           body: Column(
             children: [
-              CommonTabbar(),
+              commonTabbar('Job List', 'Quote Reg', 'Sales List'),
               const Expanded(
                 child: TabBarView(
                   children: <Widget>[

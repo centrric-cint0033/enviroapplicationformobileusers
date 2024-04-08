@@ -1,4 +1,7 @@
+import 'package:enviro_mobile_application/model/03_vehicle/vehicle_model/vehicle_model.dart';
 import 'package:enviro_mobile_application/service/03_vehicles/vehicle_service.dart';
+import 'package:enviro_mobile_application/view/02_sales/sales_widgets.dart/sales_widget.dart';
+import 'package:enviro_mobile_application/view/03_vehicles/vehicle_widget/vehicle_widget.dart';
 import 'package:enviro_mobile_application/view_model/03_vehicles/vehicle_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -10,8 +13,6 @@ class MasterCarpage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print("azeem: ${vmVehicle.carPageResponse}");
-
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Scaffold(
@@ -23,7 +24,6 @@ class MasterCarpage extends StatelessWidget {
                 String? selectedcar =
                     vmVehicle.selectedcarstatus ?? 'Vehicle list';
 
-                print('azsssxx$selectedcar');
                 List<String> vehicleOptions = [
                   'Vehicle list',
                   'Preinspectioncheck',
@@ -31,7 +31,7 @@ class MasterCarpage extends StatelessWidget {
                   'Fuel Expense',
                 ];
 
-                return Container(
+                return SizedBox(
                   width: double.infinity,
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -55,23 +55,23 @@ class MasterCarpage extends StatelessWidget {
                                       value: selectedcar,
                                       onChanged: (String? selectedcar) {
                                         vmVehicle.setSelectedCar(selectedcar);
-                                        CarActionType? actionType;
+                                        VehicleActionType? actionType;
                                         switch (selectedcar) {
                                           case 'Vehicle list':
                                             actionType =
-                                                CarActionType.vehiclelist;
+                                                VehicleActionType.vehicleList;
                                             break;
                                           case 'Preinspectioncheck':
-                                            actionType = CarActionType
-                                                .Preinspectioncheck;
+                                            actionType = VehicleActionType
+                                                .preInspectionCheck;
                                             break;
                                           case 'Maintenance check':
-                                            actionType =
-                                                CarActionType.MaintenanceCheck;
+                                            actionType = VehicleActionType
+                                                .maintenanceCheck;
                                             break;
                                           case 'Fuel Expense':
                                             actionType =
-                                                CarActionType.fuelexpence;
+                                                VehicleActionType.fuelExpence;
 
                                             break;
                                         }
@@ -169,19 +169,7 @@ class MasterCarpage extends StatelessWidget {
                           const SizedBox(height: 12.0),
                       itemBuilder: (context, index) {
                         var data = vmVehicle.carPageResponse.data?[index];
-                        return _buildJobCard(
-                          registrationno: data?.registration ?? "",
-                          RegoDue: data?.editedDateTime,
-                          Type: data?.types ?? "",
-                          year: data?.year,
-                          odometer: data?.odometer,
-                          drivername: data?.driverName,
-                          Date: data?.dateTime,
-                          servicedate: data?.serviceProvided ?? "",
-                          labourcost: data?.lCost ?? "",
-                          spareparts: data?.sPart ?? "",
-                          totalcost: data?.totalCost ?? "",
-                        );
+                        return showData(data: data);
                       },
                     ),
                   );
@@ -369,7 +357,7 @@ class MasterCarpage extends StatelessWidget {
                     ),
                   ],
                 ),
-                if (vmVehicle.status == CarActionType.fuelexpence)
+                if (vmVehicle.status == VehicleActionType.fuelExpence)
                   Observer(builder: (_) {
                     return Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -383,9 +371,7 @@ class MasterCarpage extends StatelessWidget {
                                 color: Color(0XFF949494),
                               ),
                             ),
-                            onPressed: () {
-                              print('vgjhsdvbsjhdb');
-                            },
+                            onPressed: () {},
                             child: const Padding(
                               padding: EdgeInsets.only(top: 3.0, bottom: 3.0),
                               child: Text(
@@ -404,9 +390,7 @@ class MasterCarpage extends StatelessWidget {
                                 color: Color(0XFF949494),
                               ),
                             ),
-                            onPressed: () {
-                              print('vgjhsdvbsjhdb');
-                            },
+                            onPressed: () {},
                             child: const Padding(
                               padding: EdgeInsets.only(top: 3.0, bottom: 3.0),
                               child: Text(

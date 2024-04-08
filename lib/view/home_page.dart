@@ -196,7 +196,6 @@ void calenderfunction(BuildContext context) {
 void vehiclefunction(BuildContext context) async {
   context.router.pushNamed(RouteNames.vehiclemainpage);
   vmVehicle.truckPageFunction();
-
   vmVehicle.mastercarfunction();
   vmVehicle.trailorfunction();
 }
