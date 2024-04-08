@@ -1,7 +1,6 @@
-import 'dart:developer';
-
 import 'package:auto_route/auto_route.dart';
 import 'package:enviro_mobile_application/api_response/api_response.dart';
+import 'package:enviro_mobile_application/model/10_team/team_designtion_res_model/designation.dart';
 import 'package:enviro_mobile_application/model/10_team/team_designtion_res_model/team_designtion_res_model.dart';
 import 'package:enviro_mobile_application/model/10_team/team_folder_req_model/team_create_folder_req_model.dart';
 import 'package:enviro_mobile_application/model/10_team/team_folder_resp_model/team_folder_resp_model.dart';
@@ -60,10 +59,17 @@ abstract class TeamViewModelBase with Store {
   bool showDecoration = false;
   @observable
   DateTime selectedJoiningDate = DateTime.now();
-    @observable
-  DateTime selectedTerminationDate = DateTime.now();
-    @observable
-  DateTime selectedDob = DateTime.now();
+  @observable
+  DateTime selectedTerminationDate = DateTime(2015, 8, 2);
+  @observable
+  DateTime selectedDob = DateTime(2019, 1, 4);
+
+  @observable
+  List<String> employmentStatusList = ["full_time", "part_time", "casual"];
+  @observable
+  Designation? selectedDesignation;
+  @observable
+  String selectedEmploymentStatus = "";
 
   TextEditingController textFolderAddController = TextEditingController();
   TextEditingController textFolderEditController = TextEditingController();
@@ -294,7 +300,6 @@ abstract class TeamViewModelBase with Store {
         (r) {
           designationsResponse = designationsResponse.copyWith(
               data: r, errors: null, loading: false);
-          log(designationsResponse.toString());
         },
       );
     } catch (e) {

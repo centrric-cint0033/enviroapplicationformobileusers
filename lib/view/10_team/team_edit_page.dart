@@ -1,13 +1,14 @@
 import 'dart:developer';
-
 import 'package:auto_route/auto_route.dart';
 import 'package:enviro_mobile_application/model/10_team/team_profile_employee_details_res_model/team_profile_employee_details_res_model.dart';
 import 'package:enviro_mobile_application/utilis/Appthemes.dart';
+import 'package:enviro_mobile_application/utilis/constant.dart';
 import 'package:enviro_mobile_application/view/02_sales/sales_widgets.dart/sales_widget.dart';
 import 'package:enviro_mobile_application/view/10_team/team_widgets/cm_elevated_button.dart';
 import 'package:enviro_mobile_application/view/10_team/team_widgets/date_picker.dart';
 import 'package:enviro_mobile_application/view/10_team/team_widgets/designation_dropdown_widget.dart';
 import 'package:enviro_mobile_application/view/10_team/team_widgets/dp_image_widget.dart';
+import 'package:enviro_mobile_application/view/10_team/team_widgets/employment_status_dropdown_widget.dart';
 import 'package:enviro_mobile_application/view_model/08_team/team_view_model.dart';
 import 'package:enviro_mobile_application/widgets/cmn_title_textwidget.dart';
 import 'package:flutter/material.dart';
@@ -18,10 +19,17 @@ import 'package:intl/intl.dart';
 @RoutePage()
 class TeamEditPage extends StatelessWidget {
   final TeamProfileEmployeeDetailsResModel employeeDetatils;
-  const TeamEditPage({
+  TeamEditPage({
     super.key,
     required this.employeeDetatils,
   });
+
+  DateTime selectedJoiningDate = DateTime.now();
+
+  DateTime selectedTerminationDate = DateTime(2015, 8, 2);
+
+  DateTime selectedDob = DateTime(2019, 1, 4);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,14 +37,13 @@ class TeamEditPage extends StatelessWidget {
         title: cmnTitleWidget('Edit Team'),
       ),
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 15.w),
-        child: Observer(
-          builder: (context) {
-            return SingleChildScrollView(
-              child: Column(children: [
-                gapField,
-                Container(
-                  height: 82.h,
+          padding: EdgeInsets.symmetric(horizontal: 15.w),
+          child: SingleChildScrollView(
+            child: Column(children: [
+              gapField,
+              SizedBox(
+                height: 82.h,
+                child: DecoratedBox(
                   decoration: BoxDecoration(
                       color: Appthemes.cLightGrey,
                       borderRadius: BorderRadius.circular(12),
@@ -80,21 +87,26 @@ class TeamEditPage extends StatelessWidget {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
-                              const Row(
+                              Row(
                                 children: [
-                                  Expanded(
-                                    child: Text(
-                                      "Position Title:",
-                                      style:
-                                          TextStyle(color: Appthemes.cPrimary),
-                                    ),
+                                  const Text(
+                                    "Position Title:",
+                                    style: TextStyle(color: Appthemes.cPrimary),
                                   ),
-                                  DesignationDownWidget()
+                                  sized0wx05,
+                                  DesignationDownWidget(
+                                    employeeDetatils: employeeDetatils,
+                                  ),
+                                  sized0wx05,
                                 ],
                               ),
-                              cmTextField(
-                                  controller: vmTeam.textEditTeamNameController,
-                                  showDecoration: true)
+                              Padding(
+                                padding: EdgeInsets.only(right: 25.w),
+                                child: cmTextField(
+                                    controller:
+                                        vmTeam.textEditTeamNameController,
+                                    showDecoration: true),
+                              )
                             ],
                           ),
                         )
@@ -102,37 +114,41 @@ class TeamEditPage extends StatelessWidget {
                     ))
                   ]),
                 ),
-                gapField,
-                listEditData(context),
-                gapField,
-                cmElevatedButton(() {}, Appthemes.cPrimary)
-              ]),
-            );
-          },
-        ),
-      ),
+              ),
+              gapField,
+              listEditData(context, employeeDetatils),
+              gapField,
+              cmElevatedButton(() {}, Appthemes.cPrimary)
+            ]),
+          )),
     );
   }
 
-  Widget listEditData(BuildContext context) {
+  Widget listEditData(BuildContext context,
+      TeamProfileEmployeeDetailsResModel? employeeDetatils) {
     return buildCardDataOrder(
       [
         expandedRowShowWidget('Address: ',
             cmTextField(controller: vmTeam.textEditTeamAddressController)),
-        expandedRowShowWidget('Joining Date: ',
-            cmDatePicker(context, vmTeam.selectedJoiningDate)),
+        expandedRowShowWidget(
+            'Joining Date: ',
+            cmDatePicker(
+                context, employeeDetatils?.dateJoined, selectedJoiningDate)),
         expandedRowShowWidget('Email Address: ',
             cmTextField(controller: vmTeam.textEditTeamEmailController)),
+        expandedRowShowWidget('Employment Status: ',
+            EmploymentStatusDropDown(employeeDetatils: employeeDetatils)),
         expandedRowShowWidget(
-            'Employment Status: ',
-            DropdownButton(
-              items: [],
-              onChanged: (value) {},
+            'Termination Date: ',
+            cmDatePicker(context, employeeDetatils?.terminationDate,
+                selectedTerminationDate)),
+        expandedRowShowWidget(
+            'Date of Birth: ',
+            cmDatePicker(
+              context,
+              employeeDetatils?.dateOfBirth,
+              selectedDob,
             )),
-        expandedRowShowWidget('Termination Date: ',
-            cmDatePicker(context, vmTeam.selectedTerminationDate)),
-        expandedRowShowWidget(
-            'Date of Birth: ', cmDatePicker(context, vmTeam.selectedDob)),
         expandedRowShowWidget(
             'Contact Number: ',
             cmTextField(
@@ -167,7 +183,9 @@ class TeamEditPage extends StatelessWidget {
     return TextField(
       controller: controller,
       decoration: showDecoration == true
-          ? const InputDecoration()
+          ? InputDecoration(
+              focusedBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(color: Colors.grey.shade600)))
           : const InputDecoration(
               border: InputBorder.none,
             ),
@@ -177,8 +195,8 @@ class TeamEditPage extends StatelessWidget {
     );
   }
 
-  Widget cmDatePicker(BuildContext context, DateTime selectedDate) {
-    log(selectedDate.toString());
+  Widget cmDatePicker(
+      BuildContext context, String? date, DateTime selectedDate) {
     return Row(
       children: [
         Observer(

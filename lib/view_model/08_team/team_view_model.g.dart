@@ -242,6 +242,56 @@ mixin _$TeamViewModel on TeamViewModelBase, Store {
     });
   }
 
+  late final _$employmentStatusListAtom =
+      Atom(name: 'TeamViewModelBase.employmentStatusList', context: context);
+
+  @override
+  List<String> get employmentStatusList {
+    _$employmentStatusListAtom.reportRead();
+    return super.employmentStatusList;
+  }
+
+  @override
+  set employmentStatusList(List<String> value) {
+    _$employmentStatusListAtom.reportWrite(value, super.employmentStatusList,
+        () {
+      super.employmentStatusList = value;
+    });
+  }
+
+  late final _$selectedDesignationAtom =
+      Atom(name: 'TeamViewModelBase.selectedDesignation', context: context);
+
+  @override
+  Designation? get selectedDesignation {
+    _$selectedDesignationAtom.reportRead();
+    return super.selectedDesignation;
+  }
+
+  @override
+  set selectedDesignation(Designation? value) {
+    _$selectedDesignationAtom.reportWrite(value, super.selectedDesignation, () {
+      super.selectedDesignation = value;
+    });
+  }
+
+  late final _$selectedEmploymentStatusAtom = Atom(
+      name: 'TeamViewModelBase.selectedEmploymentStatus', context: context);
+
+  @override
+  String get selectedEmploymentStatus {
+    _$selectedEmploymentStatusAtom.reportRead();
+    return super.selectedEmploymentStatus;
+  }
+
+  @override
+  set selectedEmploymentStatus(String value) {
+    _$selectedEmploymentStatusAtom
+        .reportWrite(value, super.selectedEmploymentStatus, () {
+      super.selectedEmploymentStatus = value;
+    });
+  }
+
   late final _$getCurrentEmployeeAsyncAction =
       AsyncAction('TeamViewModelBase.getCurrentEmployee', context: context);
 
@@ -352,7 +402,10 @@ profileImageLoader: ${profileImageLoader},
 showDecoration: ${showDecoration},
 selectedJoiningDate: ${selectedJoiningDate},
 selectedTerminationDate: ${selectedTerminationDate},
-selectedDob: ${selectedDob}
+selectedDob: ${selectedDob},
+employmentStatusList: ${employmentStatusList},
+selectedDesignation: ${selectedDesignation},
+selectedEmploymentStatus: ${selectedEmploymentStatus}
     ''';
   }
 }

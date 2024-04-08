@@ -145,8 +145,6 @@ class TeamService implements IteamService {
         return Left(l.keys.first);
       },
       (res) async {
-        var data = jsonDecode(res.body);
-
         return const Right('success');
       },
     );
@@ -165,7 +163,6 @@ class TeamService implements IteamService {
         return Left(l.keys.first);
       },
       (res) async {
-        var data = jsonDecode(res.body);
         return const Right('success');
       },
     );
