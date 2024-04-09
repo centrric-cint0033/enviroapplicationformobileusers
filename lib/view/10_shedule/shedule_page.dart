@@ -168,42 +168,53 @@ class SchedulePage extends StatelessWidget {
             Card(
               margin: const EdgeInsets.symmetric(horizontal: 20),
               elevation: 4,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'New Card Title 2',
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'New Card Title 2',
+                      ),
+                      Text(
+                        'job7654',
+                      ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text('Some Text Here'),
+                      ElevatedButton(
+                        onPressed: () {},
+                        child: const Text('pending'),
+                        style: ElevatedButton.styleFrom(
+                          primary: Colors.white,
+                          onPrimary: Colors.black,
                         ),
-                        Text(
-                          'job7654',
-                        ),
-                      ],
+                      ),
+                    ],
+                  ),
+                  const Text('Some Text Here'),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  const SizedBox(
+                    height: 90,
+                    child: Card(
+                      color: Colors.blue,
+                      child: Column(
+                        children: [
+                          Text('New Card Title'),
+                          Row(
+                            children: [],
+                          )
+                        ],
+                      ),
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        const Text('Some Text Here'),
-                        ElevatedButton(
-                          onPressed: () {},
-                          child: const Text('pending'),
-                          style: ElevatedButton.styleFrom(
-                            primary: Colors.white,
-                            onPrimary: Colors.black,
-                          ),
-                        ),
-                      ],
-                    ),
-                    const Text('Some Text Here'),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
             const SizedBox(height: 20),
