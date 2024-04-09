@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:enviro_mobile_application/Routepage/approutes.gr.dart';
 import 'package:enviro_mobile_application/utilis/Appthemes.dart';
 import 'package:enviro_mobile_application/view/02_sales/sales_widgets.dart/sales_widget.dart';
 import 'package:enviro_mobile_application/view/10_team/current_employee_screen.dart';
@@ -33,10 +34,13 @@ class TeamPage extends StatelessWidget {
               Align(
                 alignment: Alignment.centerRight,
                 child: CmButton(
-                  text: 'Job Card',
+                  onPressed: () {
+                    context.router.push(const AddTeamRoute());
+                  },
+                  text: 'Add a team member',
                   color: Appthemes.cPrimary,
                   height: ScreenUtil().screenWidth / 10,
-                  width: ScreenUtil().screenWidth / 3,
+                  width: ScreenUtil().screenWidth / 2.6,
                 ),
               ),
               gapField,

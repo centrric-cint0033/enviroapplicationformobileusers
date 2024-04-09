@@ -386,6 +386,42 @@ mixin _$TeamViewModel on TeamViewModelBase, Store {
         .run(() => super.getTeamDesignationsApi());
   }
 
+  late final _$TeamViewModelBaseActionController =
+      ActionController(name: 'TeamViewModelBase', context: context);
+
+  @override
+  dynamic datePickerFn1(dynamic date) {
+    final _$actionInfo = _$TeamViewModelBaseActionController.startAction(
+        name: 'TeamViewModelBase.datePickerFn1');
+    try {
+      return super.datePickerFn1(date);
+    } finally {
+      _$TeamViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic datePickerFn2(dynamic date) {
+    final _$actionInfo = _$TeamViewModelBaseActionController.startAction(
+        name: 'TeamViewModelBase.datePickerFn2');
+    try {
+      return super.datePickerFn2(date);
+    } finally {
+      _$TeamViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic datePickerFn3(dynamic date) {
+    final _$actionInfo = _$TeamViewModelBaseActionController.startAction(
+        name: 'TeamViewModelBase.datePickerFn3');
+    try {
+      return super.datePickerFn3(date);
+    } finally {
+      _$TeamViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
   @override
   String toString() {
     return '''

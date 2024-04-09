@@ -60,9 +60,9 @@ abstract class TeamViewModelBase with Store {
   @observable
   DateTime selectedJoiningDate = DateTime.now();
   @observable
-  DateTime selectedTerminationDate = DateTime(2015, 8, 2);
+  DateTime selectedTerminationDate = DateTime.now();
   @observable
-  DateTime selectedDob = DateTime(2019, 1, 4);
+  DateTime selectedDob = DateTime.now();
 
   @observable
   List<String> employmentStatusList = ["full_time", "part_time", "casual"];
@@ -75,7 +75,7 @@ abstract class TeamViewModelBase with Store {
   TextEditingController textFolderEditController = TextEditingController();
   TextEditingController textEditTeamNameController = TextEditingController();
   TextEditingController textEditTeamAddressController = TextEditingController();
-
+ TextEditingController textAddeamNameController = TextEditingController();
   TextEditingController textEditTeamEmailController = TextEditingController();
   TextEditingController textEditTeamContactNumberController =
       TextEditingController();
@@ -307,5 +307,20 @@ abstract class TeamViewModelBase with Store {
     } finally {
       designationsResponse = designationsResponse.copyWith(loading: false);
     }
+  }
+
+  @action
+  datePickerFn1(date) {
+    selectedJoiningDate = date;
+  }
+
+  @action
+  datePickerFn2(date) {
+    selectedTerminationDate = date;
+  }
+
+  @action
+  datePickerFn3(date) {
+    selectedDob = date;
   }
 }

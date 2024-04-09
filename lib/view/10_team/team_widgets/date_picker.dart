@@ -1,7 +1,7 @@
-import 'dart:developer';
 import 'package:flutter/material.dart';
 
-Widget datePicker(BuildContext context, DateTime selectedDate) {
+Widget datePicker(
+    BuildContext context, selectedDate, Function(DateTime date) pickerDate) {
   return IconButton(
       onPressed: () async {
         final DateTime? picked = await showDatePicker(
@@ -11,8 +11,7 @@ Widget datePicker(BuildContext context, DateTime selectedDate) {
             lastDate: DateTime(2101));
         if (picked != null && picked != selectedDate) {
           selectedDate = picked;
-          
-          log(selectedDate.toString());
+          pickerDate(picked);
         }
       },
       icon: const Icon(Icons.calendar_month_outlined));

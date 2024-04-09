@@ -75,17 +75,40 @@ class TeamProfileScreen extends StatelessWidget {
                                             const SizedBox(
                                               width: 16,
                                             ),
-                                            SizedBox(
-                                              height: 26.h,
-                                              child: customButton(() {
-                                                vmTeam.getTeamDesignationsApi();
-                                                addingDataToControllerEdit(
-                                                    employeeDetails);
-                                                context.router.push(
-                                                    TeamEditRoute(
-                                                        employeeDetatils:
-                                                            employeeDetails!));
-                                              }, Appthemes.cPrimary, "Edit"),
+                                            Observer(
+                                              builder: (context) => SizedBox(
+                                                height: 26.h,
+                                                child: customButton(() {
+                                                  vmTeam
+                                                      .getTeamDesignationsApi();
+                                                  addingDataToControllerEdit(
+                                                      employeeDetails);
+                                                  try {
+                                                    vmTeam.selectedJoiningDate =
+                                                        DateTime.parse(
+                                                            employeeDetails
+                                                                    ?.dateJoined ??
+                                                                "");
+                                                  } catch (e) {}
+                                                  try {
+                                                    vmTeam.selectedTerminationDate =
+                                                        DateTime.parse(
+                                                            employeeDetails
+                                                                    ?.terminationDate ??
+                                                                "");
+                                                  } catch (e) {}
+                                                  try {
+                                                    vmTeam.selectedDob = DateTime
+                                                        .parse(employeeDetails
+                                                                ?.dateOfBirth ??
+                                                            "");
+                                                  } catch (e) {}
+                                                  context.router.push(
+                                                      TeamEditRoute(
+                                                          employeeDetatils:
+                                                              employeeDetails!));
+                                                }, Appthemes.cPrimary, "Edit"),
+                                              ),
                                             )
                                           ],
                                         )
