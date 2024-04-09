@@ -43,103 +43,99 @@ class SchedulePage extends StatelessWidget {
                 ],
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(18.0),
-              child: Card(
-                margin: const EdgeInsets.all(20),
-                elevation: 4,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          const Text(
-                            'Recharge',
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                            ),
+            Card(
+              margin: const EdgeInsets.all(20),
+              elevation: 4,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text(
+                          'Recharge',
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
                           ),
-                          ElevatedButton(
-                            onPressed: () {},
-                            child: const Text('Next job'),
-                            style: ElevatedButton.styleFrom(
-                              primary: Colors.white,
-                              onPrimary: Colors.black,
-                            ),
+                        ),
+                        ElevatedButton(
+                          onPressed: () {},
+                          child: const Text('Next job'),
+                          style: ElevatedButton.styleFrom(
+                            primary: Colors.white,
+                            onPrimary: Colors.black,
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
-                    const SizedBox(height: 10),
-                    const Padding(
-                      padding: EdgeInsets.only(left: 22.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text('Day      : 9-8-209'),
-                          Text('Time     : 3:00 PM'),
-                          Text('Type     :bdgbnfgn '),
-                          Text('Company : dvsdv'),
-                          Text('Company  : dvsdv'),
-                        ],
-                      ),
+                  ),
+                  const SizedBox(height: 10),
+                  const Padding(
+                    padding: EdgeInsets.only(left: 22.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('Day      : 9-8-209'),
+                        Text('Time     : 3:00 PM'),
+                        Text('Type     :bdgbnfgn '),
+                        Text('Company : dvsdv'),
+                        Text('Company  : dvsdv'),
+                      ],
                     ),
-                    const SizedBox(height: 10),
-                    const Card(
-                      color: Colors.blue,
-                      child: Column(
-                        children: [
-                          Text('New Card Title'),
-                          Row(
-                            children: [
-                              Expanded(
-                                child: Card(
-                                  color: Colors.white,
-                                  child: Column(
-                                    children: [
-                                      Text('beverytyh'),
-                                      Text("vghadxcsdgjhacb")
-                                    ],
-                                  ),
+                  ),
+                  const SizedBox(height: 10),
+                  const Card(
+                    color: Colors.blue,
+                    child: Column(
+                      children: [
+                        Text('New Card Title'),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: Card(
+                                color: Colors.white,
+                                child: Column(
+                                  children: [
+                                    Text('beverytyh'),
+                                    Text("vghadxcsdgjhacb")
+                                  ],
                                 ),
                               ),
-                              Expanded(
-                                child: Card(
-                                  color: Colors.white,
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        'First Text',
-                                        style: TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.bold,
-                                        ),
+                            ),
+                            Expanded(
+                              child: Card(
+                                color: Colors.white,
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      'First Text',
+                                      style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold,
                                       ),
-                                      Text(
-                                        'Second Text',
-                                        style: TextStyle(
-                                          fontSize: 14,
-                                          fontStyle: FontStyle.italic,
-                                        ),
+                                    ),
+                                    Text(
+                                      'Second Text',
+                                      style: TextStyle(
+                                        fontSize: 14,
+                                        fontStyle: FontStyle.italic,
                                       ),
-                                    ],
-                                  ),
+                                    ),
+                                  ],
                                 ),
-                              )
-                            ],
-                          )
-                        ],
-                      ),
+                              ),
+                            )
+                          ],
+                        )
+                      ],
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
             Padding(
@@ -181,48 +177,6 @@ class SchedulePage extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          'New Card Title 1',
-                          style: TextStyle(),
-                        ),
-                        Text(
-                          'job2675',
-                          style: TextStyle(),
-                        ),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        const Text('Some Text Here2'),
-                        ElevatedButton(
-                          onPressed: () {},
-                          child: const Text('Next job'),
-                          style: ElevatedButton.styleFrom(
-                            primary: Colors.white,
-                            onPrimary: Colors.black,
-                          ),
-                        ),
-                        const SizedBox(child: Card())
-                      ],
-                    ),
-                    const Text('Some Text Here3'),
-                  ],
-                ),
-              ),
-            ),
-            const SizedBox(height: 20),
-            Card(
-              margin: const EdgeInsets.symmetric(horizontal: 20),
-              elevation: 4,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
                           'New Card Title 2',
                         ),
                         Text(
@@ -247,13 +201,66 @@ class SchedulePage extends StatelessWidget {
                     const Text('Some Text Here'),
                     const SizedBox(
                       height: 10,
-                      child: Card(
-                        color: Colors.blue,
-                        child: Column(),
-                      ),
                     ),
                   ],
                 ),
+              ),
+            ),
+            const SizedBox(height: 20),
+            Card(
+              margin: const EdgeInsets.symmetric(horizontal: 20),
+              elevation: 4,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'New Card Title 2',
+                      ),
+                      Text(
+                        'job7654',
+                      ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text('Some Text Here'),
+                      ElevatedButton(
+                        onPressed: () {},
+                        child: const Text('pending'),
+                        style: ElevatedButton.styleFrom(
+                          primary: Colors.white,
+                          onPrimary: Colors.black,
+                        ),
+                      ),
+                    ],
+                  ),
+                  const Text('Some Text Here'),
+                  const SizedBox(
+                    height: 10,
+                    child: Card(
+                      color: Colors.blue,
+                      child: Column(),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 90,
+                    child: Card(
+                      color: Colors.blue,
+                      child: Column(
+                        children: [
+                          Text('New Card Title'),
+                          Row(
+                            children: [],
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
           ],
