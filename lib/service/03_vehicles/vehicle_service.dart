@@ -3,13 +3,10 @@ import 'dart:convert';
 import 'package:dartz/dartz.dart';
 import 'package:enviro_mobile_application/constant/base_url.dart';
 import 'package:enviro_mobile_application/model/03_vehicle/vehicle_model/vehicle_model.dart';
-import 'package:enviro_mobile_application/model/truck_page/res_model/truckpage_model.dart';
 import 'package:enviro_mobile_application/utilis/api_endpoints/api_endpoints.dart';
 import 'package:enviro_mobile_application/utilis/httpservice.dart';
 import 'package:enviro_mobile_application/utilis/injection.dart';
 import 'package:enviro_mobile_application/utilis/main_failure.dart';
-import 'package:enviro_mobile_application/view/03_vehicles/master_car_page.dart';
-import 'package:enviro_mobile_application/view/03_vehicles/master_truck_page.dart';
 import 'package:http/http.dart';
 import 'package:injectable/injectable.dart';
 
@@ -21,13 +18,14 @@ enum VehicleActionType {
 }
 
 abstract class IVehicleService {
-  Future<Either<MainFailure, List<VehicleModel>>> preinspectionfunction(drop);
+  Future<Either<MainFailure, List<VehicleModel>>> preinspectionfunction(
+      VehicleActionType? status);
 
   Future<Either<MainFailure, List<VehicleModel>>> masterfuelsearchfunction(
       searchdrop);
 
   Future<Either<MainFailure, List<VehicleModel>>> pretrailorfunction(
-      semitruckdrop);
+      VehicleActionType? semitruckdrop);
 
   Future<Either<MainFailure, List<VehicleModel>>> masterfuelsemitruckfunction(
       searchdrop);
@@ -65,17 +63,15 @@ class VehicleService implements IVehicleService {
 
   @override
   Future<Either<MainFailure, List<VehicleModel>>> preinspectionfunction(
-      drop) async {
+      VehicleActionType? status) async {
     String apiUrl;
-    switch (drop) {
-      case MasterCarpage:
+    switch (status) {
       case VehicleActionType.vehicleList:
         apiUrl = ApiEndPoints.endpointcarpage;
         break;
       case VehicleActionType.preInspectionCheck:
         apiUrl = ApiEndPoints.endpointpreinspectioncarcheckpage;
         break;
-      case MasterTruckPage:
       case VehicleActionType.maintenanceCheck:
         apiUrl = ApiEndPoints.endpointmaintancecarcheckpage;
         break;
@@ -160,23 +156,21 @@ class VehicleService implements IVehicleService {
 
   @override
   Future<Either<MainFailure, List<VehicleModel>>> pretrailorfunction(
-      semitruckdrop) async {
+      VehicleActionType? semitruckdrop) async {
     String apiUrl;
     switch (semitruckdrop) {
-      case VehicleActionType.vehicleList:
+      case 'Vehicle list':
         apiUrl = ApiEndPoints.endpointsemitrailorpage;
         break;
-      case VehicleActionType.preInspectionCheck:
+      case 'Pre Inspection check':
         apiUrl = ApiEndPoints.endpointpreinspectionsemitruckcheckpage;
         break;
-
-      case VehicleActionType.maintenanceCheck:
+      case 'Maintenance check':
         apiUrl = ApiEndPoints.endpointmaintancesemitruckcheckpage;
         break;
-      case VehicleActionType.fuelExpence:
+      case 'Fuel Expense':
         apiUrl = ApiEndPoints.endpointfuelsemitruckcheckpage;
         break;
-
       default:
         apiUrl = ApiEndPoints.endpointsemitrailorpage;
     }

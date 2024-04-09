@@ -13,3 +13,10 @@ SizedBox sized0wx15 = SizedBox(width: 15.h);
 SizedBox sized0wx20 = SizedBox(width: 20.h);
 SizedBox sized0wx30 = SizedBox(width: 30.h);
 SizedBox sized0wx40 = SizedBox(width: 40.h);
+
+List<String> vehicleOptions = [
+  'Vehicle list',
+  'Pre Inspection check',
+  'Maintenance Report',
+  'Fuel Expense',
+];

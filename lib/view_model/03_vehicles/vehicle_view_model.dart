@@ -40,25 +40,18 @@ abstract class VehicleViewModelBase with Store {
   }
 
   @observable
-  VehicleActionType? carStatus;
-
-  @observable
-  String? selectedcarstatus;
-
-  @action
-  void setSelectedCar(String? newValue) {
-    selectedcarstatus = newValue;
-  }
-
-  @observable
   ApiResponse<List<VehicleModel>> carPageResponse =
       ApiResponse<List<VehicleModel>>();
 
   @action
-  Future<void> mastercarfunction({VehicleActionType? drop}) async {
+  Future<void> mastercarfunction(
+      {VehicleActionType? statusType, String? statusString}) async {
+    vehicleStatusType = statusType;
+    selectedVehicle = statusString;
+
     carPageResponse = carPageResponse.copyWith(error: null, loading: true);
-    carStatus = drop;
-    final result = await vehicleService.preinspectionfunction(drop);
+    final result =
+        await vehicleService.preinspectionfunction(vehicleStatusType);
     return result.fold(
       (l) {
         carPageResponse = carPageResponse.copyWith(
@@ -126,26 +119,24 @@ abstract class VehicleViewModelBase with Store {
   // }
 
   @observable
-  VehicleActionType? status;
-
-  @observable
   String? selectedVehicle;
 
-  @action
-  void setSelectedVehicle(String? newValue) {
-    selectedVehicle = newValue;
-  }
+  @observable
+  VehicleActionType? vehicleStatusType;
 
   @observable
   ApiResponse<List<VehicleModel>> semitrailorPageResponse =
       ApiResponse<List<VehicleModel>>();
 
   @action
-  Future<void> trailorfunction({VehicleActionType? semitruckdrop}) async {
+  Future<void> trailorfunction(
+      {VehicleActionType? statusType, String? statusString}) async {
+    vehicleStatusType = statusType;
+    selectedVehicle = statusString;
+
     semitrailorPageResponse =
         semitrailorPageResponse.copyWith(error: null, loading: true);
-    status = semitruckdrop;
-    final result = await vehicleService.pretrailorfunction(semitruckdrop);
+    final result = await vehicleService.pretrailorfunction(statusType);
     return result.fold(
       (l) {
         semitrailorPageResponse = semitrailorPageResponse.copyWith(
@@ -208,10 +199,13 @@ abstract class VehicleViewModelBase with Store {
       ApiResponse<List<VehicleModel>>();
 
   @action
-  Future<void> truckPageFunction({VehicleActionType? truckdrop}) async {
+  Future<void> truckPageFunction(
+      {VehicleActionType? statusType, String? statusString}) async {
+    vehicleStatusType = statusType;
+    selectedVehicle = statusString;
+
     truckPageResponse = truckPageResponse.copyWith(error: null, loading: true);
-    sstatus = truckdrop;
-    final result = await vehicleService.mastertruckfunction(truckdrop);
+    final result = await vehicleService.mastertruckfunction(vehicleStatusType);
     return result.fold(
       (l) {
         truckPageResponse = truckPageResponse.copyWith(

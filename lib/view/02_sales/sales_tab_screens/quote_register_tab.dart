@@ -10,7 +10,6 @@ import 'package:enviro_mobile_application/widgets/ww_response_handler.dart';
 import 'package:enviro_mobile_application/widgets/ww_search_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class QuoteRegisterTab extends StatelessWidget {
   const QuoteRegisterTab({Key? key}) : super(key: key);
@@ -18,30 +17,26 @@ class QuoteRegisterTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Padding(
-      padding: EdgeInsets.symmetric(horizontal: 15.w),
-      child: Column(
-        children: [
-          gapField,
-          WWSearchField(
-            controller: vmSales.salesQuoteListSearchCtr,
-            onChanged: (v) => vmSales.onTextChanged(() => v.isEmpty
-                ? vmSales.quoteRegisterApi()
-                : vmSales.salesQuoteListSearchApi(v)),
-            searchTap: () {},
-          ),
-          gapField,
-          Observer(builder: (_) {
-            return Expanded(
-              child: WWResponseHandler(
-                  data: vmSales.quoteRegResponse,
-                  isEmpty: vmSales.quoteRegResponse.data?.isEmpty ?? true,
-                  onTap: () => vmSales.quoteRegisterApi(),
-                  child: const QuoteReqisterListWidget()),
-            );
-          }),
-        ],
-      ),
+        body: Column(
+      children: [
+        WWSearchField(
+          controller: vmSales.salesQuoteListSearchCtr,
+          onChanged: (v) => vmSales.onTextChanged(() => v.isEmpty
+              ? vmSales.quoteRegisterApi()
+              : vmSales.salesQuoteListSearchApi(v)),
+          searchTap: () {},
+        ),
+        gapField,
+        Observer(builder: (_) {
+          return Expanded(
+            child: WWResponseHandler(
+                data: vmSales.quoteRegResponse,
+                isEmpty: vmSales.quoteRegResponse.data?.isEmpty ?? true,
+                onTap: () => vmSales.quoteRegisterApi(),
+                child: const QuoteReqisterListWidget()),
+          );
+        }),
+      ],
     ));
   }
 }
@@ -54,7 +49,7 @@ class QuoteReqisterListWidget extends StatelessWidget {
     return ListView.separated(
       padding: const EdgeInsets.symmetric(vertical: 10),
       itemCount: vmSales.quoteRegResponse.data?.length ?? 0,
-      separatorBuilder: (BuildContext context, int index) => sized0hx10,
+      separatorBuilder: (BuildContext context, int index) => gapField,
       itemBuilder: (context, index) {
         var data = vmSales.quoteRegResponse.data?[index];
         return InkWell(

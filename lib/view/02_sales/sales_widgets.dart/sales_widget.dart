@@ -4,7 +4,7 @@ import 'package:enviro_mobile_application/utilis/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-final gapField = sized0hx10;
+final gapField = sized0hx05;
 
 Card customCard({required Widget child}) => Card(
     shape: RoundedRectangleBorder(
