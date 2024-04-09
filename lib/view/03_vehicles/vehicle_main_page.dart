@@ -52,7 +52,7 @@ class VehiclePage extends StatelessWidget {
                   children: <Widget>[
                     MasterTruckTab(),
                     MasterCarTab(),
-                    SemiTrailers()
+                    SemiTrailersTab()
                   ],
                 ),
               ),
