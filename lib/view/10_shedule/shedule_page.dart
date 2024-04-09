@@ -1,5 +1,4 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:enviro_mobile_application/utilis/constant.dart';
 import 'package:enviro_mobile_application/widgets/cmn_action_icon.dart';
 import 'package:enviro_mobile_application/widgets/cmn_title_textwidget.dart';
 import 'package:enviro_mobile_application/widgets/drawer.dart';
@@ -153,9 +152,7 @@ class SchedulePage extends StatelessWidget {
                   ),
                   const SizedBox(height: 10),
                   ElevatedButton(
-                    onPressed: () {
-                      // Handle week button press
-                    },
+                    onPressed: () {},
                     child: const Text('Week'),
                     style: ElevatedButton.styleFrom(
                       primary: Colors.white,
@@ -189,11 +186,11 @@ class SchedulePage extends StatelessWidget {
                       const Text('Some Text Here'),
                       ElevatedButton(
                         onPressed: () {},
-                        child: const Text('pending'),
                         style: ElevatedButton.styleFrom(
                           primary: Colors.white,
                           onPrimary: Colors.black,
                         ),
+                        child: const Text('pending'),
                       ),
                     ],
                   ),
