@@ -46,7 +46,7 @@ class QuoteReqisterListWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.separated(
-      padding: const EdgeInsets.symmetric(vertical: 10),
+      // padding: const EdgeInsets.symmetric(vertical: 10),
       itemCount: vmSales.quoteRegResponse.data?.length ?? 0,
       separatorBuilder: (BuildContext context, int index) => gapField,
       itemBuilder: (context, index) {
@@ -64,13 +64,12 @@ class QuoteReqisterListWidget extends StatelessWidget {
   Widget listData(SalesModel? data) {
     return buildCardDataOrder(
       [
-        expandedRowShowText('ID', ": ${data?.id ?? ""}"),
-        expandedRowShowText(
-            'Won/Lose Status', ": ${data?.wonLoseStatus ?? ""}"),
-        expandedRowShowText('Created By', ": ${data?.createdBy ?? ""}"),
-        expandedRowShowText('Client Type', ": ${data?.clientType ?? ""}"),
-        expandedRowShowText('Schedule ID', ": ${data?.scheduleId ?? ""}"),
-        expandedRowShowText('Client Email', ": ${data?.clientEmail ?? ""}"),
+        expandedRowShowText('ID', "${data?.id ?? ""}"),
+        expandedRowShowText('Won/Lose Status', data?.wonLoseStatus ?? ""),
+        expandedRowShowText('Created By', "${data?.createdBy ?? ""}"),
+        expandedRowShowText('Client Type', data?.clientType ?? ""),
+        expandedRowShowText('Schedule ID', "${data?.scheduleId ?? ""}"),
+        expandedRowShowText('Client Email', data?.clientEmail ?? ""),
       ],
     );
   }

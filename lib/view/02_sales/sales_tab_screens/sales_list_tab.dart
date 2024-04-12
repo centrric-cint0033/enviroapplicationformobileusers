@@ -37,10 +37,10 @@ class SalesListWidget extends StatelessWidget {
     return buildCardDataOrder(
       image: data?.profile,
       [
-        expandedRowShowText1('Total Quote Won', ": ${data?.won ?? ""}"),
-        expandedRowShowText1('Total Quote Lost:', ": ${data?.lost ?? ""}"),
-        expandedRowShowText1('Total Quote Pending', ": ${data?.pending ?? ""}"),
-        expandedRowShowText1('Total Quote Made', ": ${data?.total ?? ""}"),
+        expandedRowShowText1('Total Quote Won', "${data?.won ?? ""}"),
+        expandedRowShowText1('Total Quote Lost:', "${data?.lost ?? ""}"),
+        expandedRowShowText1('Total Quote Pending', "${data?.pending ?? ""}"),
+        expandedRowShowText1('Total Quote Made', "${data?.total ?? ""}"),
       ],
     );
   }

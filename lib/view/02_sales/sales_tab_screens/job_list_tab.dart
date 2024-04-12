@@ -57,11 +57,11 @@ class SalesJobListWidget extends StatelessWidget {
   Widget listData(SalesModel? data) {
     return buildCardDataOrder(
       [
-        expandedRowShowText('Date', ': ${data?.date ?? ""}'),
-        expandedRowShowText('clientName', ': ${data?.clientName ?? ""}'),
-        expandedRowShowText('Quoted By', ': ${data?.quotedBy ?? ""}'),
-        expandedRowShowText('Amount', ': ${data?.amount ?? ""}'),
-        expandedRowShowText('Status', ': ${data?.status ?? ""}'),
+        expandedRowShowText('Date', data?.date ?? ""),
+        expandedRowShowText('clientName', data?.clientName ?? ""),
+        expandedRowShowText('Quoted By', data?.quotedBy ?? ""),
+        expandedRowShowText('Amount', data?.amount ?? ""),
+        expandedRowShowText('Status', data?.status ?? ""),
       ],
     );
   }

@@ -21,12 +21,21 @@ Expanded expandedShowText(String value) =>
     Expanded(flex: 3, child: showText(value));
 
 Row expandedRowShowText(String firsValue, String secondValue) => Row(
-      children: [expandedShowText(firsValue), expandedShowText(secondValue)],
+      children: [
+        expandedShowText(firsValue),
+        sized0wx05,
+        showText(':'),
+        sized0wx05,
+        expandedShowText(secondValue)
+      ],
     );
 
 Row expandedRowShowText1(String firsValue, String secondValue) => Row(
       children: [
         Expanded(flex: 3, child: showText(firsValue)),
+        sized0wx05,
+        showText(':'),
+        sized0wx05,
         Expanded(flex: 1, child: showText(secondValue))
       ],
     );
