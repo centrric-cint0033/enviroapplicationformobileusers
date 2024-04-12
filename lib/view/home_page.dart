@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:enviro_mobile_application/Routepage/routespage.dart';
+import 'package:enviro_mobile_application/utilis/Appthemes.dart';
 import 'package:enviro_mobile_application/utilis/api_endpoints/customprint.dart';
 import 'package:enviro_mobile_application/view_model/02_sales/sales_view_model.dart';
 import 'package:enviro_mobile_application/view_model/03_vehicles/vehicle_view_model.dart';
@@ -11,10 +12,12 @@ import 'package:enviro_mobile_application/view_model/home_page/home_page_viewmod
 import 'package:enviro_mobile_application/widgets/drawer.dart';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:enviro_mobile_application/widgets/cmn_action_icon.dart';
 import 'package:enviro_mobile_application/widgets/cmn_title_textwidget.dart';
+
+import '../view_model/10_site/site_view_model.dart';
 
 @RoutePage()
 class HomePage extends StatelessWidget {
@@ -43,85 +46,34 @@ class HomePage extends StatelessWidget {
                     Observer(builder: (_) {
                       return GestureDetector(
                         onTap: () => onsalesfunction(context),
-                        child: _buildBox(
-                          'assets/images/star.svg',
-                          'Sales',
-                          Colors.blue,
-                          width: 30.0,
-                          height: 30.0,
-                        ),
+                        child: _buildBox('assets/images/star.svg', 'Sales'),
                       );
                     }),
                     GestureDetector(
                       onTap: () => vehiclefunction(context),
-                      child: _buildBox(
-                        'assets/images/truck.svg',
-                        'Vehicle',
-                        Colors.blue,
-                        width: 30.0,
-                        height: 30.0,
-                      ),
+                      child: _buildBox('assets/images/truck.svg', 'Vehicle'),
                     ),
                     GestureDetector(
                       onTap: () => ohsfunction(context),
-                      child: _buildBox(
-                        'assets/images/move(1).svg',
-                        'OH&S',
-                        Colors.blue,
-                        width: 30.0,
-                        height: 30.0,
-                      ),
+                      child: _buildBox('assets/images/move(1).svg', 'OH&S'),
                     ),
-                    _buildBox(
-                      'assets/images/user.svg',
-                      'Site',
-                      Colors.blue,
-                      width: 30.0,
-                      height: 30.0,
+                    GestureDetector(
+                      onTap: () => navigateToSitesPage(context: context),
+                      child: _buildBox('assets/images/user.svg', 'Site'),
                     ),
                     GestureDetector(
                       onTap: () => calenderfunction(context),
-                      child: _buildBox(
-                        'assets/images/calendar.svg',
-                        'Scheduling',
-                        Colors.blue,
-                        width: 30.0,
-                        height: 30.0,
-                      ),
+                      child:
+                          _buildBox('assets/images/calendar.svg', 'Scheduling'),
                     ),
                     GestureDetector(
                       onTap: () => intranetfuntion(context),
-                      child: _buildBox(
-                        'assets/images/globe.svg',
-                        'Intranet',
-                        Colors.blue,
-                        width: 30.0,
-                        height: 30.0,
-                      ),
+                      child: _buildBox('assets/images/globe.svg', 'Intranet'),
                     ),
                     GestureDetector(
                       onTap: () => teamfuntion(context),
-                      child: _buildBox(
-                        'assets/images/users.svg',
-                        'Team',
-                        Colors.blue,
-                        width: 30.0,
-                        height: 30.0,
-                      ),
-                    ),
-                    // InkWell(
-                    //   onTap: () async {
-                    //     context.router.replaceAll([LoginRoute()]);
-                    //     await SecureStorage().clearData();
-                    //   },
-                    //   child: _buildBox(
-                    //     'assets/images/users.svg',
-                    //     'LogOut',
-                    //     Colors.blue,
-                    //     width: 30.0,
-                    //     height: 30.0,
-                    //   ),
-                    // ),
+                      child: _buildBox('assets/images/users.svg', 'Team'),
+                    )
                   ],
                 ),
         );
@@ -129,8 +81,10 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  Widget _buildBox(String svgPath, String text, Color iconColor,
-      {double width = 15.0, double height = 15.0}) {
+  Widget _buildBox(String svgPath, String text,
+      {Color iconColor = Appthemes.cPrimary,
+      double width = 30.0,
+      double height = 30.0}) {
     return Container(
       padding: const EdgeInsets.all(8.0),
       decoration: BoxDecoration(
@@ -189,12 +143,10 @@ void ohsfunction(BuildContext context) {
 void intranetfuntion(BuildContext context) {
   vmIntranet.intranetviewmodelfunction(1);
   context.router.pushNamed(RouteNames.intranetpage);
-  print('Notification button tapped!');
 }
 
 void calenderfunction(BuildContext context) {
   context.router.pushNamed(RouteNames.rSchedulingPage);
-  print('Notification button tapped!');
 }
 
 void vehiclefunction(BuildContext context) async {
@@ -208,5 +160,12 @@ void teamfuntion(BuildContext context) {
   vmTeam.getCurrentEmployee();
   vmTeam.getTerminatedEmployee();
   context.router.pushNamed(RouteNames.teamPage);
-  print('TeamPage button tapped!');
+}
+
+void navigateToSitesPage({required BuildContext context}) {
+  vmSite
+    ..getPermanentSites()
+    ..getTemporarySites()
+    ..getDeletedSites();
+  context.router.pushNamed(RouteNames.siteListPage);
 }
