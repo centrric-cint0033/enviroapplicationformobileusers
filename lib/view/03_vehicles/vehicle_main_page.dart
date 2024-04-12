@@ -58,7 +58,7 @@ class VehiclePage extends StatelessWidget {
         child: WWdropDown(
             newValue: vmVehicle.selectedVehicle ?? 'Vehicle list',
             dropDownTap: () {
-              vmVehicle.truckPageFunction(
+              vmVehicle.masterTruckApi(
                 statusType: vmVehicle.vehicleStatusType,
                 statusString: vmVehicle.selectedVehicle,
               );

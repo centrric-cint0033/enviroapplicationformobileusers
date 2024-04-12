@@ -169,6 +169,8 @@ class HttpService {
       StreamedResponse streamedResponse = await request.send();
       final response = await Response.fromStream(streamedResponse);
       customPrint(content: response.body, name: "StreamedResponse");
+      customPrint(content: response.statusCode, name: "multiPart statusCode");
+
       if (response.statusCode == HttpStatus.ok ||
           response.statusCode == HttpStatus.created) {
         return Right(response);

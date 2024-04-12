@@ -30,10 +30,10 @@ abstract class IVehicleService {
   Future<Either<MainFailure, List<VehicleModel>>> masterfuelsemitruckfunction(
       searchdrop);
 
-  Future<Either<MainFailure, List<VehicleModel>>> mastertruckfunction(
-      truckdrop);
-  Future<Either<MainFailure, List<VehicleModel>>> masterfueltruckfunction(
-      searchtrucksemidrop, value);
+  Future<Either<Map<MainFailure, dynamic>, List<VehicleModel>>>
+      masterTruckServiceApi(truckdrop);
+  Future<Either<Map<MainFailure, dynamic>, List<VehicleModel>>>
+      masterTruckSearchApi(searchtrucksemidrop, value);
 }
 
 @LazySingleton(as: IVehicleService)
@@ -246,8 +246,8 @@ class VehicleService implements IVehicleService {
   }
 
   @override
-  Future<Either<MainFailure, List<VehicleModel>>> mastertruckfunction(
-      truckdrop) async {
+  Future<Either<Map<MainFailure, dynamic>, List<VehicleModel>>>
+      masterTruckServiceApi(truckdrop) async {
     String apiUrl;
     switch (truckdrop) {
       case VehicleActionType.vehicleList:
@@ -275,10 +275,7 @@ class VehicleService implements IVehicleService {
     );
 
     return response.fold(
-      (l) {
-        (l.values.first);
-        return Left(l.keys.first);
-      },
+      (l) => Left(l),
       (res) async {
         var data = jsonDecode(res.body) as List;
         List<VehicleModel> vehicles =
@@ -289,10 +286,10 @@ class VehicleService implements IVehicleService {
   }
 
   @override
-  Future<Either<MainFailure, List<VehicleModel>>> masterfueltruckfunction(
-      trucksearchdrop, value) async {
+  Future<Either<Map<MainFailure, dynamic>, List<VehicleModel>>>
+      masterTruckSearchApi(trucksearchdrop, value) async {
     String apiUrl;
-    print('awww$trucksearchdrop');
+    print('awww $trucksearchdrop');
     switch (trucksearchdrop) {
       case VehicleActionType.vehicleList:
         apiUrl = ApiEndPoints.endpointtruckpage;
@@ -314,26 +311,15 @@ class VehicleService implements IVehicleService {
         break;
     }
 
-    MultipartRequest request =
-        MultipartRequest("POST", Uri.parse("$baseUrl$apiUrl"));
-
-    request.fields['registration'] = 'e';
-
-    var response =
-        await getIt<HttpService>().multipartRequest(mRequest: request);
+    var response = await getIt<HttpService>().multipartRequest(
+        apiUrl: apiUrl, method: 'POST', data: {"request": value});
 
     return response.fold(
-      (l) {
-        // Show Error
-        (l.values.first);
-        return Left(l.keys.first);
-      },
+      (l) => Left(l),
       (res) async {
         var data = jsonDecode(res.body) as List;
-
         List<VehicleModel> fuelcarsearch =
             data.map((e) => VehicleModel.fromJson(e)).toList();
-        print('OFF$fuelcarsearch');
         return Right(fuelcarsearch);
       },
     );

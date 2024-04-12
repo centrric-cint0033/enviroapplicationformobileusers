@@ -95,29 +95,6 @@ abstract class VehicleViewModelBase with Store {
     );
   }
 
-  // @action
-  // Future<void> preinspectionfunction() async {
-  //   carPageResponse = carPageResponse.copyWith(error: null, loading: true);
-
-  //   final result = await MastercarService.preinspectionfunction();
-  //   print("gxcvqsh");
-  //   return result.fold(
-  //     (l) {
-  //       carPageResponse = carPageResponse.copyWith(
-  //         error: l,
-  //         loading: false,
-  //       );
-  //     },
-  //     (r) {
-  //       carPageResponse = carPageResponse.copyWith(
-  //         data: r,
-  //         error: null,
-  //         loading: false,
-  //       );
-  //     },
-  //   );
-  // }
-
   @observable
   String? selectedVehicle;
 
@@ -195,60 +172,46 @@ abstract class VehicleViewModelBase with Store {
   }
 
   @observable
-  ApiResponse<List<VehicleModel>> truckPageResponse =
+  ApiResponse<List<VehicleModel>> masterTruckApiResponse =
       ApiResponse<List<VehicleModel>>();
 
   @action
-  Future<void> truckPageFunction(
+  Future<void> masterTruckApi(
       {VehicleActionType? statusType, String? statusString}) async {
     vehicleStatusType = statusType;
     selectedVehicle = statusString;
 
-    truckPageResponse = truckPageResponse.copyWith(error: null, loading: true);
-    final result = await vehicleService.mastertruckfunction(vehicleStatusType);
+    masterTruckApiResponse =
+        masterTruckApiResponse.copyWith(errors: null, loading: true);
+    final result =
+        await vehicleService.masterTruckServiceApi(vehicleStatusType);
     return result.fold(
       (l) {
-        truckPageResponse = truckPageResponse.copyWith(
-          error: l,
-          loading: false,
-        );
+        masterTruckApiResponse =
+            masterTruckApiResponse.copyWith(errors: l, loading: false);
       },
       (r) {
-        truckPageResponse = truckPageResponse.copyWith(
-          data: r,
-          error: null,
-          loading: false,
-        );
+        masterTruckApiResponse = masterTruckApiResponse.copyWith(
+            data: r, errors: null, loading: false);
       },
     );
   }
 
-  @observable
-  ApiResponse<List<VehicleModel>> truckPagefuelResponse =
-      ApiResponse<List<VehicleModel>>();
-
   @action
-  Future<void> fueltrucksearchfunction(
-      {value, VehicleActionType? searchtrucksemidrop}) async {
-    print(value);
-    truckPagefuelResponse =
-        truckPagefuelResponse.copyWith(error: null, loading: true);
+  Future<void> masterTruckSearchApi({value}) async {
+    masterTruckApiResponse =
+        masterTruckApiResponse.copyWith(errors: null, loading: true);
 
-    final result = await vehicleService.masterfueltruckfunction(
-        searchtrucksemidrop, value);
+    final result =
+        await vehicleService.masterTruckSearchApi(vehicleStatusType, value);
     return result.fold(
       (l) {
-        truckPagefuelResponse = truckPagefuelResponse.copyWith(
-          error: l,
-          loading: false,
-        );
+        masterTruckApiResponse =
+            masterTruckApiResponse.copyWith(errors: l, loading: false);
       },
       (r) {
-        truckPagefuelResponse = truckPagefuelResponse.copyWith(
-          data: r,
-          error: null,
-          loading: false,
-        );
+        masterTruckApiResponse = masterTruckApiResponse.copyWith(
+            data: r, errors: null, loading: false);
       },
     );
   }

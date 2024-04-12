@@ -11,21 +11,14 @@ class MasterTruckTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     //
-    _onChanged(String s) => vmVehicle.onTextChanged(() {
-          if (s.isEmpty) {
-            vmVehicle.truckPageFunction();
-          } else {
-            // vmVehicle.fueltrucksearchfunction(
-            //   value: v,
-            //   searchtrucksemidrop: actionType,
-            // );
-          }
-        });
+    _onChanged(String s) => vmVehicle.onTextChanged(() => (s.isEmpty)
+        ? vmVehicle.masterTruckApi()
+        : vmVehicle.masterTruckSearchApi(value: s));
 
     return Scaffold(
         body: Column(children: [
       WWSearchField(
-        controller: vmVehicle.vehSemiTrailorCtr,
+        controller: vmVehicle.vehMasterTruckCtr,
         onChanged: _onChanged,
         searchTap: () {},
       ),
@@ -33,11 +26,12 @@ class MasterTruckTab extends StatelessWidget {
       Observer(builder: (_) {
         return Expanded(
             child: WWResponseHandler(
-                data: vmVehicle.truckPageResponse,
-                isEmpty: vmVehicle.truckPageResponse.data?.isEmpty ?? true,
+                data: vmVehicle.masterTruckApiResponse,
+                isEmpty: vmVehicle.masterTruckApiResponse.data?.isEmpty ?? true,
                 onTap: () => vmVehicle.vehSemiTrailorCtr.text.isNotEmpty
-                    ? vmVehicle.semifueltrucksearchfunction()
-                    : vmVehicle.trailorfunction(),
+                    ? vmVehicle.masterTruckSearchApi(
+                        value: vmVehicle.vehMasterTruckCtr.text)
+                    : vmVehicle.masterTruckApi(),
                 child: const MasterTruckList()));
       }),
     ]));
@@ -52,10 +46,10 @@ class MasterTruckList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.separated(
-      itemCount: vmVehicle.truckPageResponse.data?.length ?? 0,
+      itemCount: vmVehicle.masterTruckApiResponse.data?.length ?? 0,
       separatorBuilder: (BuildContext context, int index) => gapFieldVeh,
       itemBuilder: (context, index) => showData(
-          data: vmVehicle.truckPageResponse.data?[index],
+          data: vmVehicle.masterTruckApiResponse.data?[index],
           status: vmVehicle.vehicleStatusType),
     );
   }
