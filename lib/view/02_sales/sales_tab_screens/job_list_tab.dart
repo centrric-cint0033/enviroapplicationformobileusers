@@ -14,7 +14,6 @@ class JobListTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-<<<<<<< HEAD
         body: Column(children: [
       WWSearchField(
         controller: vmSales.salesJobListSearchCtr,
@@ -36,34 +35,6 @@ class JobListTab extends StatelessWidget {
                 child: const SalesJobListWidget()));
       }),
     ]));
-=======
-        body: Padding(
-      padding: EdgeInsets.symmetric(horizontal: 15.w),
-      child: Column(children: [
-        gapField,
-        WWSearchField(
-          controller: vmSales.salesJobListSearchCtr,
-          onChanged: (v) => vmSales.onTextChanged(() => v.isEmpty
-              ? vmSales.saleJobListApi()
-              : vmSales.salesJobListSearchApi(v)),
-          searchTap: () {},
-          hintText: 'Search By Client',
-        ),
-        gapField,
-        Observer(builder: (_) {
-          return Expanded(
-              child: WWResponseHandler(
-                  data: vmSales.joblistResponse,
-                  isEmpty: vmSales.joblistResponse.data?.isEmpty ?? true,
-                  onTap: () => vmSales.salesJobListSearchCtr.text.isNotEmpty
-                      ? vmSales.salesJobListSearchApi(
-                          vmSales.salesJobListSearchCtr.text)
-                      : vmSales.saleJobListApi(),
-                  child: const SalesJobListWidget()));
-        }),
-      ]),
-    ));
->>>>>>> dev_jishnu_team
   }
 }
 
