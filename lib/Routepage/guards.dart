@@ -9,7 +9,7 @@ import 'package:jwt_decode/jwt_decode.dart';
 class AuthGuard extends AutoRouteGuard {
   @override
   void onNavigation(NavigationResolver resolver, StackRouter router) async {
-    String? token = await SecureStorage().readData(key: "token");
+    String? token = await SecureStorage().readData(key: "refresh");
 
     final isAuthenticated = (token != null && token.isNotEmpty)
         ? jwtTokenChecker(Jwt.parseJwt(token))

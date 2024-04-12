@@ -3,6 +3,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:enviro_mobile_application/Routepage/securestorage.dart';
+import 'package:enviro_mobile_application/Routepage/token_expire.dart';
 import 'package:enviro_mobile_application/constant/base_url.dart';
 import 'package:enviro_mobile_application/utilis/api_endpoints/customprint.dart';
 import 'package:enviro_mobile_application/utilis/injection.dart';
@@ -17,6 +18,7 @@ import 'package:http_interceptor/http/interceptor_contract.dart';
 import 'package:http_interceptor/models/request_data.dart';
 import 'package:http_interceptor/models/response_data.dart';
 import 'package:injectable/injectable.dart';
+import 'package:jwt_decode/jwt_decode.dart';
 import 'package:retry/retry.dart';
 
 enum HttpMethod { get, post, put, patch, delete }
@@ -79,7 +81,9 @@ class HttpService {
           break;
       }
 
-      customPrint(content: data, name: "Payload");
+      if (data != null) customPrint(content: data, name: "Payload");
+
+      customPrint(content: response.statusCode, name: "Status Code");
       customPrint(content: response.body, name: "Response");
 
       if (response.statusCode == HttpStatus.ok ||
@@ -91,6 +95,13 @@ class HttpService {
             key: "token",
             value: jsonDecode(response.body)["access"],
           );
+
+          if (jsonDecode(response.body)["refresh"] != null) {
+            await SecureStorage().writeData(
+              key: "refresh",
+              value: jsonDecode(response.body)["refresh"],
+            );
+          }
         }
         return Right(response);
       } else {
@@ -116,12 +127,14 @@ class HttpService {
     }
   }
 
-  Future<Response> retryMethod(Future<Response> apiCall) {
-    return retry(
-      () => apiCall,
-      maxAttempts: 3,
-      retryIf: (e) => e is SocketException || e is TimeoutException,
-    );
+  Future<Response> retryMethod(Future<Response> apiCall) async {
+    var res = await apiCall;
+    int statusCode = res.statusCode;
+    if (statusCode == 401) await generateNewToken();
+    return retry(() => apiCall,
+        maxAttempts: 3,
+        retryIf: (e) =>
+            e is SocketException || e is TimeoutException || statusCode == 401);
   }
 
   Future<Either<Map<MainFailure, dynamic>, Response>> multipartRequest({
@@ -134,6 +147,7 @@ class HttpService {
 
     // if (method != null) {
     MultipartRequest request = MultipartRequest(method!, Uri.parse(url));
+    customPrint(content: url, name: "multiPart url");
     // }
 
     try {
@@ -200,26 +214,29 @@ class LoggingInterceptor implements InterceptorContract {
   }
 }
 
-Future<String?> generateNewToken() async {
-  final refresh = await SecureStorage().readData(key: "refresh");
-  if (refresh != null) {
-    final res = await HttpService().request(
-      apiUrl: 'url',
-      authenticated: false,
-      method: HttpMethod.post,
-      data: jsonEncode({"refresh_token": refresh}),
-    );
-    res.fold(
-      (l) async {
-        await getIt<SecureStorage>().removeData(key: 'token');
-      },
-      (r) async {
-        final token = jsonDecode(r.body)["token"];
-        await getIt<SecureStorage>().writeData(key: 'token', value: token);
-        return token;
-      },
-    );
-    return null;
+Future<void> generateNewToken() async {
+  final access = await SecureStorage().readData(key: "token");
+  bool authenticated = (access != null && access.isNotEmpty)
+      ? jwtTokenChecker(Jwt.parseJwt(access))
+      : false;
+
+  if (!authenticated) {
+    final refresh = await SecureStorage().readData(key: "refresh");
+    if (refresh != null) {
+      final res = await HttpService().multipartRequest(
+        apiUrl: '/api/token/refresh/',
+        method: 'POST',
+        data: {"refresh": refresh},
+      );
+      res.fold(
+        (l) async {
+          await getIt<SecureStorage>().removeData(key: 'token');
+        },
+        (r) async {
+          final token = jsonDecode(r.body)["access"];
+          await getIt<SecureStorage>().writeData(key: 'token', value: token);
+        },
+      );
+    }
   }
-  return null;
 }

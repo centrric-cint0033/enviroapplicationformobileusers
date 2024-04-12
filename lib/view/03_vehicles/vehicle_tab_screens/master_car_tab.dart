@@ -5,8 +5,6 @@ import 'package:enviro_mobile_application/widgets/ww_search_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
-TextEditingController textController = TextEditingController();
-
 class MasterCarTab extends StatelessWidget {
   const MasterCarTab({Key? key}) : super(key: key);
 

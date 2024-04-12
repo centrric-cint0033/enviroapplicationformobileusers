@@ -33,33 +33,37 @@ class VehiclePage extends StatelessWidget {
             children: [
               commonTabbar('Master truck', 'Master Car', 'Semi Trailers'),
               gapFieldVeh,
-              Observer(builder: (_) {
-                return SizedBox(
-                  width: double.infinity,
-                  child: WWdropDown(
-                      newValue: vmVehicle.selectedVehicle ?? 'Vehicle list',
-                      dropDownTap: () {
-                        vmVehicle.truckPageFunction(
-                          statusType: vmVehicle.vehicleStatusType,
-                          statusString: vmVehicle.selectedVehicle,
-                        );
-                      }),
-                );
-              }),
+              wwDropDown(),
               gapFieldVeh,
-              const Expanded(
-                child: TabBarView(
-                  children: <Widget>[
-                    MasterTruckTab(),
-                    MasterCarTab(),
-                    SemiTrailersTab()
-                  ],
-                ),
-              ),
+              wwTabs(),
             ],
           ),
         ),
       ),
     );
+  }
+
+  Expanded wwTabs() {
+    return const Expanded(
+      child: TabBarView(
+        children: <Widget>[MasterTruckTab(), MasterCarTab(), SemiTrailersTab()],
+      ),
+    );
+  }
+
+  Observer wwDropDown() {
+    return Observer(builder: (_) {
+      return SizedBox(
+        width: double.infinity,
+        child: WWdropDown(
+            newValue: vmVehicle.selectedVehicle ?? 'Vehicle list',
+            dropDownTap: () {
+              vmVehicle.truckPageFunction(
+                statusType: vmVehicle.vehicleStatusType,
+                statusString: vmVehicle.selectedVehicle,
+              );
+            }),
+      );
+    });
   }
 }

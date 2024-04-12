@@ -10,12 +10,9 @@ class MasterTruckTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: Column(children: [
-      WWSearchField(
-        controller: vmVehicle.vehSemiTrailorCtr,
-        onChanged: (v) => vmVehicle.onTextChanged(() {
-          if (v.isEmpty) {
+    //
+    _onChanged(String s) => vmVehicle.onTextChanged(() {
+          if (s.isEmpty) {
             vmVehicle.truckPageFunction();
           } else {
             // vmVehicle.fueltrucksearchfunction(
@@ -23,7 +20,13 @@ class MasterTruckTab extends StatelessWidget {
             //   searchtrucksemidrop: actionType,
             // );
           }
-        }),
+        });
+
+    return Scaffold(
+        body: Column(children: [
+      WWSearchField(
+        controller: vmVehicle.vehSemiTrailorCtr,
+        onChanged: _onChanged,
         searchTap: () {},
       ),
       gapFieldVeh,
