@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:enviro_mobile_application/view/03_vehicles/vehicle_tab_screens/master_car_tab.dart';
-import 'package:enviro_mobile_application/view/03_vehicles/vehicle_tab_screens/master_truck_tab.dart';
-import 'package:enviro_mobile_application/view/03_vehicles/vehicle_tab_screens/semi_Trailor_tab.dart';
+import 'package:enviro_mobile_application/view/03_vehicles/vehicle_tab_screens/02_master_car_tab.dart';
+import 'package:enviro_mobile_application/view/03_vehicles/vehicle_tab_screens/01_master_truck_tab.dart';
+import 'package:enviro_mobile_application/view/03_vehicles/vehicle_tab_screens/03_semi_Trailor_tab.dart';
 import 'package:enviro_mobile_application/view/03_vehicles/vehicle_widget/vehicle_widget.dart';
 import 'package:enviro_mobile_application/view_model/03_vehicles/vehicle_view_model.dart';
 
