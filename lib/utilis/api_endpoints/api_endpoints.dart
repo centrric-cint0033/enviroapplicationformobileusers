@@ -95,4 +95,16 @@ class ApiEndPoints {
       '/api/v1/intranet_archive/folder/segment';
   static const endpointprofilelstng = '/api/v1/accounts/profile/view/';
   static const endpointprofileedit = '/api/v1/team/employee/edit';
+
+  // TEAM APIS
+  static const endpointcurrentemployeelist =
+      '/api/v1/team/status/current/?limit=10&page=1';
+  static const endpointterminatedemployeelist =
+      '/api/v1/team/status/terminated/?limit=10&page=1';
+  static const endpointteamprofileemployeedetailList = '/api/v1/team/employee';
+  static const endpointgetteamfolder = '/api/v1/drive/team/folder';
+  static const endpointaddteamfolder = '/api/v1/drive/create/team/folder/';
+  static const endpointteamfolderdelete = '/api/v1/drive/folder/delete';
+  static const endpointteamfolderedit = '/api/v1/drive/folder/rename';
+  static const endpointteamdesignations = '/api/v1/team/designations/';
 }

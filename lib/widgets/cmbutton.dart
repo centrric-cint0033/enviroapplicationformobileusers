@@ -1,7 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:enviro_mobile_application/utilis/Appthemes.dart';
-import 'package:flutter/rendering.dart';
 
 class CmButton extends StatelessWidget {
   const CmButton(
@@ -57,6 +55,7 @@ class CmButton extends StatelessWidget {
               : widget ??
                   Text(
                     text ?? "",
+                    textAlign: TextAlign.center,
                     style:
                         buttonTextStyle ?? const TextStyle(color: Colors.white),
                   ),

@@ -200,8 +200,9 @@ abstract class SalesViewModelBase with Store {
     try {
       quoteRegResponse = quoteRegResponse.copyWith(errors: null, loading: true);
 
-      final result = await salesService
-          .salesQuoteListSearchServiceApi(data: {"key": searchData});
+      final result = await salesService.salesQuoteListSearchServiceApi(data: {
+        "key": searchData,
+      });
       return result.fold(
         (l) {
           quoteRegResponse =

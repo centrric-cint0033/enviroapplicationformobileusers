@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:enviro_mobile_application/model/02_sales/sales_model/sales_model.dart';
 import 'package:enviro_mobile_application/utilis/Appthemes.dart';
 import 'package:enviro_mobile_application/view/02_sales/sales_widgets.dart/sales_widget.dart';
+import 'package:enviro_mobile_application/widgets/cm_title.dart';
 import 'package:enviro_mobile_application/widgets/cmbutton.dart';
 import 'package:enviro_mobile_application/widgets/cmn_title_textwidget.dart';
 import 'package:flutter/material.dart';
@@ -33,7 +34,7 @@ class SalesDetailPage extends StatelessWidget {
             gapField,
             listData(data),
             gapField,
-            quoteRegisterTitle(),
+            cmTitle('Quote Attachments and Quote Files'),
             gapField,
             Align(
               alignment: Alignment.centerLeft,
@@ -44,19 +45,6 @@ class SalesDetailPage extends StatelessWidget {
               ),
             )
           ]),
-        ),
-      ),
-    );
-  }
-
-  SizedBox quoteRegisterTitle() {
-    return SizedBox(
-      width: double.infinity,
-      child: ColoredBox(
-        color: Appthemes.cLightGrey,
-        child: Padding(
-          padding: EdgeInsets.all(10.w),
-          child: showText('Quote Attachments and Quote Files'),
         ),
       ),
     );

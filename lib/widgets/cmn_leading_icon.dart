@@ -11,9 +11,7 @@ class cmn_leading_icon extends StatelessWidget {
       padding: const EdgeInsets.only(left: 12),
       child: IconButton(
         iconSize: 32,
-        onPressed: () {
-        
-        },
+        onPressed: () {},
         icon: const Icon(Icons.menu),
       ),
     );

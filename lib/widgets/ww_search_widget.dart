@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
 
 class WWSearchField extends StatelessWidget {
   final Function(String)? onChanged;
@@ -9,9 +8,9 @@ class WWSearchField extends StatelessWidget {
   const WWSearchField(
       {super.key,
       this.onChanged,
-      this.hintText,
       required this.controller,
-      required this.searchTap});
+      required this.searchTap,
+      this.hintText});
 
   @override
   Widget build(BuildContext context) {
@@ -30,13 +29,11 @@ class WWSearchField extends StatelessWidget {
                 hintText: hintText ?? 'Search here',
                 border: InputBorder.none,
                 contentPadding: const EdgeInsets.all(10),
-                suffixIcon: Observer(builder: (_) {
-                  return GestureDetector(
-                      onTap: searchTap,
-                      child: const Icon(
-                        Icons.search,
-                        color: Colors.black,
-                      ));
-                }))));
+                suffixIcon: GestureDetector(
+                    onTap: searchTap,
+                    child: const Icon(
+                      Icons.search,
+                      color: Colors.black,
+                    )))));
   }
 }

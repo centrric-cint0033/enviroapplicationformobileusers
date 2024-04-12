@@ -1,17 +1,17 @@
+import 'dart:developer';
+
 import 'package:auto_route/auto_route.dart';
-import 'package:dartz/dartz.dart';
 import 'package:enviro_mobile_application/Routepage/approutes.gr.dart';
-import 'package:enviro_mobile_application/Routepage/routespage.dart';
-import 'package:enviro_mobile_application/utilis/api_endpoints/customprint.dart';
-
 import 'package:enviro_mobile_application/view_model/04_ohs/ohs_view_model.dart';
-import 'package:enviro_mobile_application/view_model/10_profile/profile_view_model.dart';
-
+import 'package:enviro_mobile_application/widgets/cm_show_folder_dialoque.dart';
 import 'package:enviro_mobile_application/widgets/cmcustomformfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
 class NewsPage extends StatelessWidget {
+  TextEditingController textFolderController = TextEditingController();
+
+  NewsPage({super.key});
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -154,7 +154,17 @@ class NewsPage extends StatelessWidget {
                 Observer(builder: (_) {
                   return TextButton(
                     onPressed: () {
-                      _showMyfolderDialog(context);
+                      showMyfolderDialog(context, textFolderController,
+                          () async {
+                        String folderName = textFolderController.text;
+
+                        log(textFolderController.text);
+                        if (folderName.isNotEmpty) {
+                          Navigator.of(context).pop();
+                          await vmOhs.ohsfoldercreationviewmodelfunction(
+                              folderName, 1);
+                        } else {}
+                      });
                     },
                     style: ButtonStyle(
                       side: MaterialStateProperty.all<BorderSide>(
@@ -328,68 +338,7 @@ class NewsPage extends StatelessWidget {
     );
   }
 
-  Future<void> _showMyfolderDialog(BuildContext context) async {
-    TextEditingController textFolderController = TextEditingController();
-
-    showDialog<void>(
-      context: context,
-      barrierDismissible: false,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text('New Folder'),
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
-          content: SingleChildScrollView(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                const SizedBox(height: 17),
-                SizedBox(
-                  height: 30,
-                  child: TextField(
-                    controller: textFolderController,
-                    decoration: const InputDecoration(
-                      labelText: 'Untitled folder',
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(10))),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          actions: <Widget>[
-            TextButton(
-              child: const Text(
-                'Cancel',
-                style: TextStyle(color: Colors.black),
-              ),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-            Observer(builder: (_) {
-              return TextButton(
-                child: const Text(
-                  'Create',
-                  style: TextStyle(color: Colors.black),
-                ),
-                onPressed: () {
-                  String folderName = textFolderController.text;
-                  if (folderName.isNotEmpty) {
-                    Navigator.of(context).pop();
-                    vmOhs.ohsfoldercreationviewmodelfunction(folderName, 1);
-                  } else {}
-                },
-              );
-            }),
-          ],
-        );
-      },
-    );
-  }
-
   Widget _buildCard(String folderName, BuildContext context, int id) {
-    TextEditingController textFolderController = TextEditingController();
     return GestureDetector(
       onTap: () {
         // print('cdvfsdg $id');

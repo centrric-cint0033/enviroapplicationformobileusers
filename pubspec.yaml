@@ -44,6 +44,9 @@ dependencies:
   http: ^0.13.6
   retry: ^3.1.2
   http_interceptor: ^1.0.1
+  image_picker: ^1.0.4
+  file_picker: ^6.0.0
+  image_cropper:
   
   flutter_svg: ^2.0.9
 

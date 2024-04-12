@@ -138,7 +138,7 @@ class HttpService {
   }
 
   Future<Either<Map<MainFailure, dynamic>, Response>> multipartRequest({
-    MultipartRequest? request,
+    MultipartRequest? mRequest,
     String? apiUrl,
     String? method,
     Map<String, String>? data,

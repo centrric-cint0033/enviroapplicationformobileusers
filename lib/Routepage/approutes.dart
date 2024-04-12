@@ -25,8 +25,17 @@ class AppRouter extends $AppRouter {
             path: RouteNames.rNewsfolderinsidepage),
         AutoRoute(page: OhsDetailRoute.page, path: RouteNames.rOhsdetailpage),
         AutoRoute(
-            page: NotificationDetailRoute.page,
-            path: RouteNames.rNotificationdetailpage),
+          page: NotificationDetailRoute.page,
+          path: RouteNames.rNotificationdetailpage,
+        ),
+        AutoRoute(
+          page: TeamRoute.page,
+          path: RouteNames.teamPage,
+        ),
+        AutoRoute(
+            page: TeamProfileRoute.page, path: RouteNames.teamProfileScreen),
+        AutoRoute(page: TeamEditRoute.page, path: RouteNames.teamEditScreen),
+        AutoRoute(page: AddTeamRoute.page, path: RouteNames.addTeamScreen),
         AutoRoute(
             page: IntranetInsideRoute.page,
             path: RouteNames.rintranetinsidepage),
