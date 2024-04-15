@@ -24,24 +24,32 @@ class TeamEditPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: cmnTitleWidget('Edit Team'),
+    return WillPopScope(
+      onWillPop: () async {
+        vmTeam.selectedJoiningDate = null;
+        vmTeam.selectedDob = null;
+        vmTeam.selectedTerminationDate = null;
+        return true;
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          title: cmnTitleWidget('Edit Team'),
+        ),
+        body: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 15.w),
+            child: SingleChildScrollView(
+              child: Column(children: [
+                gapField,
+                CommonTeamProfileTile(
+                  employeeDetatils: employeeDetatils,
+                ),
+                gapField,
+                listEditData(context, employeeDetatils),
+                gapField,
+                cmElevatedButton(() {}, Appthemes.cPrimary, "EDIT")
+              ]),
+            )),
       ),
-      body: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 15.w),
-          child: SingleChildScrollView(
-            child: Column(children: [
-              gapField,
-              CommonTeamProfileTile(
-                employeeDetatils: employeeDetatils,
-              ),
-              gapField,
-              listEditData(context, employeeDetatils),
-              gapField,
-              cmElevatedButton(() {}, Appthemes.cPrimary)
-            ]),
-          )),
     );
   }
 
@@ -108,12 +116,16 @@ class TeamEditPage extends StatelessWidget {
         ],
       );
 
-
-  Widget cmDatePicker(BuildContext context, String? date, DateTime selectedDate,
-      Function(DateTime date) pickedDate) {
+  Widget cmDatePicker(BuildContext context, String? date,
+      DateTime? selectedDate, Function(DateTime date) pickedDate) {
     return Row(
       children: [
-        Text(DateFormat('dd-MM-yyyy').format(selectedDate)),
+        Text(
+          selectedDate != null
+              ? DateFormat('dd-MM-yyyy').format(selectedDate)
+              : "",
+          style: TextStyle(fontSize: 10.w),
+        ),
         datePicker(context, selectedDate, pickedDate),
       ],
     );

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-Widget cmElevatedButton(Function onPressed, Color bgColor) {
+Widget cmElevatedButton(Function onPressed, Color bgColor,String buttonName) {
   return ElevatedButton(
       style: ElevatedButton.styleFrom(
           padding:
@@ -11,8 +11,8 @@ Widget cmElevatedButton(Function onPressed, Color bgColor) {
       onPressed: () {
         onPressed();
       },
-      child: const Text(
-        "Edit",
-        style: TextStyle(color: Colors.white),
+      child:  Text(
+        buttonName,
+        style: const TextStyle(color: Colors.white),
       ));
 }

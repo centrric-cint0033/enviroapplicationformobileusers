@@ -3,14 +3,22 @@ import 'package:enviro_mobile_application/model/10_team/team_profile_employee_de
 import 'package:enviro_mobile_application/utilis/Appthemes.dart';
 import 'package:enviro_mobile_application/utilis/constant.dart';
 import 'package:enviro_mobile_application/view/02_sales/sales_widgets.dart/sales_widget.dart';
+import 'package:enviro_mobile_application/view/10_team/team_widgets/cm_credentials_enviro_card.dart';
+import 'package:enviro_mobile_application/view/10_team/team_widgets/cm_elevated_button.dart';
+import 'package:enviro_mobile_application/view/10_team/team_widgets/cm_id_proofs_card_widget.dart';
+import 'package:enviro_mobile_application/view/10_team/team_widgets/cm_required_text.dart';
 import 'package:enviro_mobile_application/view/10_team/team_widgets/cm_textfield_widget.dart';
+import 'package:enviro_mobile_application/view/10_team/team_widgets/date_picker.dart';
 import 'package:enviro_mobile_application/view/10_team/team_widgets/designation_dropdown_widget.dart';
-import 'package:enviro_mobile_application/view/10_team/team_widgets/dp_image_widget.dart';
+import 'package:enviro_mobile_application/view/10_team/team_widgets/employment_status_dropdown_widget.dart';
 import 'package:enviro_mobile_application/view_model/08_team/team_view_model.dart';
 import 'package:enviro_mobile_application/widgets/cmn_title_textwidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/intl.dart';
+
+import '../../widgets/cm_title.dart';
 
 @RoutePage()
 class AddTeamPage extends StatelessWidget {
@@ -18,7 +26,15 @@ class AddTeamPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return WillPopScope(
+      onWillPop: () async {
+        vmTeam.selectedJoiningDateAddTeam = null;
+        vmTeam.selectedDobAddTeam = null;
+        vmTeam.selectedLicenceExpiryDate = null;
+        vmTeam.selectedLicenceAlertDate = null;
+        return true;
+      },
+      child: Scaffold(
         appBar: AppBar(
           title: cmnTitleWidget('Add Team'),
         ),
@@ -86,29 +102,256 @@ class AddTeamPage extends StatelessWidget {
                                       sized0wx05,
                                       DesignationDownWidget(
                                         employeeDetatils: employeeDetails,
+                                        fromAddTeam: true,
                                       ),
                                       sized0wx05,
                                     ],
                                   ),
-                                  Padding(
-                                    padding: EdgeInsets.only(right: 25.w),
-                                    child: cmTextField(
-                                        controller:
-                                            vmTeam.textAddeamNameController,
-                                        showDecoration: true),
+                                  Row(
+                                    children: [
+                                      const Text(
+                                        '*',
+                                        style: TextStyle(
+                                            color: Colors.red,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 22),
+                                      ),
+                                      sized0wx05,
+                                      Expanded(
+                                        child: Padding(
+                                          padding: EdgeInsets.only(right: 25.w),
+                                          child: cmTextField(
+                                              hintText: 'Name',
+                                              hintStyle: TextStyle(
+                                                  color: Colors.grey.shade400),
+                                              controller: vmTeam
+                                                  .textAddteamNameController,
+                                              showDecoration: true),
+                                        ),
+                                      ),
+                                    ],
                                   )
                                 ],
                               ),
                             )
                           ],
-                        ))
+                        )),
                       ]),
                     ),
-                  )
+                  ),
+                  sized0hx10,
+                  listAddData(context, employeeDetails),
+                  sized0hx10,
+                  cmTitle('ID Poofs'),
+                  sized0hx10,
+                  cmIdProofCard(
+                      context,
+                      Observer(
+                          builder: (context) => cmDatePicker(
+                              context,
+                              "",
+                              vmTeam.selectedLicenceExpiryDate,
+                              (date) => vmTeam.datePickerFn6(date))),
+                      Observer(
+                          builder: (context) => cmDatePicker(
+                              context,
+                              "",
+                              vmTeam.selectedLicenceAlertDate,
+                              (date) => vmTeam.datePickerFn7(date)))),
+                  sized0hx10,
+                  cmTitle('Credentials For Enviro'),
+                  sized0hx10,
+                  cmCredentialsForEnviro(context),
+                  sized0hx10,
+                  cmElevatedButton(() {}, Appthemes.cPrimary, "CREATE"),
+                  sized0hx40,
                 ],
               ),
             ),
           );
-        }));
+        }),
+      ),
+    );
+  }
+
+  Widget listAddData(BuildContext context,
+      TeamProfileEmployeeDetailsResModel? employeeDetatils) {
+    return buildCardDataOrder(
+      [
+        expandedRowShowWidget(
+            Row(
+              children: [
+                showText('Emp Id'),
+                sized0wx05,
+                cmRequiredText(),
+              ],
+            ),
+            Row(children: [
+              const Text(': '),
+              Expanded(
+                child: cmTextField(
+                    controller: vmTeam.textAddTeamEmpIdController,
+                    hintText: "Emp Id",
+                    hintStyle: TextStyle(color: Colors.grey.shade400)),
+              )
+            ])),
+        expandedRowShowWidget(
+            Row(
+              children: [
+                showText('Address'),
+                sized0wx05,
+                cmRequiredText(),
+              ],
+            ),
+            Row(children: [
+              const Text(': '),
+              Expanded(
+                  child: cmTextField(
+                      controller: vmTeam.textAddTeamAddressController,
+                      hintText: "Address",
+                      hintStyle: TextStyle(color: Colors.grey.shade400)))
+            ])),
+        expandedRowShowWidget(
+            Row(
+              children: [
+                showText('Date of Birth'),
+                sized0wx05,
+                cmRequiredText(),
+              ],
+            ),
+            Row(children: [
+              const Text(': '),
+              Observer(
+                builder: (context) => cmDatePicker(
+                    context,
+                    employeeDetatils?.dateJoined ?? "",
+                    vmTeam.selectedDobAddTeam,
+                    (date) => vmTeam.datePickerFn4(date)),
+              )
+            ])),
+        expandedRowShowWidget(
+            Row(
+              children: [
+                showText('Joining Date'),
+                sized0wx05,
+                cmRequiredText(),
+              ],
+            ),
+            Row(children: [
+              const Text(': '),
+              Observer(
+                  builder: (context) => cmDatePicker(
+                      context,
+                      employeeDetatils?.terminationDate ?? "",
+                      vmTeam.selectedJoiningDateAddTeam,
+                      (date) => vmTeam.datePickerFn5(date)))
+            ])),
+        expandedRowShowWidget(
+            Row(
+              children: [
+                showText('Email Address'),
+                sized0wx05,
+                cmRequiredText(),
+              ],
+            ),
+            Row(children: [
+              const Text(': '),
+              Expanded(
+                  child: cmTextField(
+                      controller: vmTeam.textAddTeamEmailController,
+                      hintText: "Email Address",
+                      hintStyle: TextStyle(color: Colors.grey.shade400)))
+            ])),
+        expandedRowShowWidget(
+            Row(
+              children: [
+                showText('Contact Number'),
+                sized0wx05,
+                cmRequiredText(),
+              ],
+            ),
+            Row(children: [
+              const Text(': '),
+              Expanded(
+                  child: cmTextField(
+                      controller: vmTeam.textAddTeamContactNumberController,
+                      hintText: "Number",
+                      hintStyle: TextStyle(color: Colors.grey.shade400)))
+            ])),
+        expandedRowShowWidget(
+            Row(
+              children: [
+                showText('Employment Status'),
+                sized0wx05,
+                cmRequiredText(),
+              ],
+            ),
+            Row(children: [
+              const Text(': '),
+              Expanded(
+                  child: EmploymentStatusDropDown(
+                      employeeDetatils: employeeDetatils, fromAddTeam: true))
+            ])),
+        expandedRowShowWidget(
+            Row(
+              children: [
+                showText('Emergency Contact'),
+                sized0wx05,
+                cmRequiredText(),
+              ],
+            ),
+            Row(children: [
+              const Text(': '),
+              Expanded(
+                child: cmTextField(
+                    controller: vmTeam.textAddTeamEmergencyContactController,
+                    hintText: "Name",
+                    hintStyle: TextStyle(color: Colors.grey.shade400)),
+              )
+            ])),
+        expandedRowShowWidget(
+            Row(
+              children: [
+                showText('Emergency Contact No'),
+                sized0wx05,
+                cmRequiredText(),
+              ],
+            ),
+            Row(children: [
+              const Text(': '),
+              Expanded(
+                child: cmTextField(
+                    controller:
+                        vmTeam.textAddTeamEmergencyContactNumberController,
+                    hintText: "Number",
+                    hintStyle: TextStyle(color: Colors.grey.shade400)),
+              )
+            ])),
+      ],
+    );
+  }
+
+  Widget expandedShowWidget(Widget value) => value;
+
+  Row expandedRowShowWidget(Widget firsValue, Widget secondValue) => Row(
+        children: [
+          Expanded(flex: 3, child: expandedShowWidget(firsValue)),
+          Expanded(flex: 2, child: expandedShowWidget(secondValue))
+        ],
+      );
+
+  Widget cmDatePicker(BuildContext context, String? date,
+      DateTime? selectedDate, Function(DateTime date) pickedDate) {
+    return Row(
+      children: [
+        Text(
+          selectedDate != null
+              ? DateFormat('dd-MM-yyyy').format(selectedDate)
+              : "",
+          style: TextStyle(fontSize: 10.w),
+        ),
+        datePicker(context, selectedDate, pickedDate),
+      ],
+    );
   }
 }

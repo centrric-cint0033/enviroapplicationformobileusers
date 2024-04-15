@@ -27,6 +27,7 @@ abstract class IteamService {
       {required Map<String, String> data, required int id});
   Future<Either<Map<MainFailure, dynamic>, TeamDesigntionResModel>>
       getTeamDesignations();
+  Future<Either<MainFailure, String>> deleteEmployeeApi({required num id});
 }
 
 @LazySingleton(as: IteamService)
@@ -183,6 +184,24 @@ class TeamService implements IteamService {
         TeamDesigntionResModel designationsList =
             TeamDesigntionResModel.fromJson(data);
         return Right(designationsList);
+      },
+    );
+  }
+
+  @override
+  Future<Either<MainFailure, String>> deleteEmployeeApi(
+      {required num id}) async {
+    var response = await getIt<HttpService>().request(
+        authenticated: true,
+        method: HttpMethod.delete,
+        apiUrl: '${ApiEndPoints.endpointdeleteemployee}/$id/');
+    return response.fold(
+      (l) {
+        (l.values.first);
+        return Left(l.keys.first);
+      },
+      (res) async {
+        return const Right('success');
       },
     );
   }

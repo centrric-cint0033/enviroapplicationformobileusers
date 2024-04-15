@@ -54,7 +54,17 @@ class TeamProfileScreen extends StatelessWidget {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceEvenly,
                                   children: [
-                                    dpImage(employeeDetails?.dp ?? ""),
+                                    SizedBox(
+                                      height: 60.w,
+                                      width: 60.w,
+                                      child: DecoratedBox(
+                                        decoration: BoxDecoration(
+                                            color: Colors.grey.shade700,
+                                            shape: BoxShape.circle),
+                                        child:
+                                            dpImage(employeeDetails?.dp ?? ""),
+                                      ),
+                                    ),
                                     Column(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
@@ -69,47 +79,48 @@ class TeamProfileScreen extends StatelessWidget {
                                           children: [
                                             SizedBox(
                                               height: 26.h,
-                                              child: customButton(() {},
-                                                  Appthemes.cPrimary, "Delete"),
+                                              child: customButton(() {
+                                                vmTeam.deleteEmployeeApi(
+                                                    context: context,
+                                                    employeeID:
+                                                        employeeDetails?.id ??
+                                                            0);
+                                              }, Appthemes.cPrimary, "Delete"),
                                             ),
                                             const SizedBox(
                                               width: 16,
                                             ),
-                                            Observer(
-                                              builder: (context) => SizedBox(
-                                                height: 26.h,
-                                                child: customButton(() {
-                                                  vmTeam
-                                                      .getTeamDesignationsApi();
-                                                  addingDataToControllerEdit(
-                                                      employeeDetails);
-                                                  try {
-                                                    vmTeam.selectedJoiningDate =
-                                                        DateTime.parse(
-                                                            employeeDetails
-                                                                    ?.dateJoined ??
-                                                                "");
-                                                  } catch (e) {}
-                                                  try {
-                                                    vmTeam.selectedTerminationDate =
-                                                        DateTime.parse(
-                                                            employeeDetails
-                                                                    ?.terminationDate ??
-                                                                "");
-                                                  } catch (e) {}
-                                                  try {
-                                                    vmTeam.selectedDob = DateTime
-                                                        .parse(employeeDetails
-                                                                ?.dateOfBirth ??
-                                                            "");
-                                                  } catch (e) {}
-                                                  context.router.push(
-                                                      TeamEditRoute(
-                                                          employeeDetatils:
-                                                              employeeDetails!));
-                                                }, Appthemes.cPrimary, "Edit"),
-                                              ),
-                                            )
+                                            SizedBox(
+                                              height: 26.h,
+                                              child: customButton(() {
+                                                vmTeam.getTeamDesignationsApi();
+                                                addingDataToControllerEdit(
+                                                    employeeDetails);
+                                                try {
+                                                  vmTeam.selectedJoiningDate =
+                                                      DateTime.parse(
+                                                          employeeDetails
+                                                                  ?.dateJoined ??
+                                                              "");
+                                                } catch (e) {}
+                                                try {
+                                                  vmTeam.selectedTerminationDate =
+                                                      DateTime.parse(employeeDetails
+                                                              ?.terminationDate ??
+                                                          "");
+                                                } catch (e) {}
+                                                try {
+                                                  vmTeam.selectedDob = DateTime
+                                                      .parse(employeeDetails
+                                                              ?.dateOfBirth ??
+                                                          "");
+                                                } catch (e) {}
+                                                context.router.push(
+                                                    TeamEditRoute(
+                                                        employeeDetatils:
+                                                            employeeDetails!));
+                                              }, Appthemes.cPrimary, "Edit"),
+                                            ),
                                           ],
                                         )
                                       ],

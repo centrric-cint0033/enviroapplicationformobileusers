@@ -13,6 +13,8 @@ import 'package:enviro_mobile_application/view/10_team/team_widgets/team_tab_bar
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../view_model/08_team/team_view_model.dart';
+
 @RoutePage()
 class TeamPage extends StatelessWidget {
   const TeamPage({super.key});
@@ -35,6 +37,8 @@ class TeamPage extends StatelessWidget {
                 alignment: Alignment.centerRight,
                 child: CmButton(
                   onPressed: () {
+                    vmTeam
+                        .getTeamDesignationsApi();
                     context.router.push(const AddTeamRoute());
                   },
                   text: 'Add a team member',

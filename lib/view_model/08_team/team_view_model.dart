@@ -15,6 +15,7 @@ import 'package:injectable/injectable.dart';
 import 'package:mobx/mobx.dart';
 
 import '../../model/10_team/team_folder_resp_model/folder.dart';
+
 part 'team_view_model.g.dart';
 
 final vmTeam = getIt<TeamViewModel>();
@@ -27,6 +28,7 @@ class TeamViewModel extends TeamViewModelBase with _$TeamViewModel {
 
 abstract class TeamViewModelBase with Store {
   final IteamService teamService;
+
   TeamViewModelBase(this.teamService);
 
   @observable
@@ -52,30 +54,44 @@ abstract class TeamViewModelBase with Store {
   ApiResponse<TeamDesigntionResModel> designationsResponse =
       ApiResponse<TeamDesigntionResModel>();
   @observable
+  ApiResponse<String> deleteEmployeeResponse = ApiResponse<String>();
+  @observable
   ImageFilePickerModel? profileImage;
   @observable
   bool profileImageLoader = false;
   @observable
   bool showDecoration = false;
   @observable
-  DateTime selectedJoiningDate = DateTime.now();
+  DateTime? selectedJoiningDate;
   @observable
-  DateTime selectedTerminationDate = DateTime.now();
+  DateTime? selectedTerminationDate;
   @observable
-  DateTime selectedDob = DateTime.now();
-
+  DateTime? selectedDob;
+  @observable
+  DateTime? selectedDobAddTeam;
+  @observable
+  DateTime? selectedJoiningDateAddTeam;
+  @observable
+  DateTime? selectedLicenceExpiryDate;
+  @observable
+  DateTime? selectedLicenceAlertDate;
   @observable
   List<String> employmentStatusList = ["full_time", "part_time", "casual"];
   @observable
   Designation? selectedDesignation;
   @observable
+  Designation? selectedDesignationAddTeam;
+  @observable
   String selectedEmploymentStatus = "";
-
+  @observable
+  String selectedAddEmploymentStatus = "full_time";
+  @observable
+  bool showDate = false;
   TextEditingController textFolderAddController = TextEditingController();
   TextEditingController textFolderEditController = TextEditingController();
   TextEditingController textEditTeamNameController = TextEditingController();
   TextEditingController textEditTeamAddressController = TextEditingController();
- TextEditingController textAddeamNameController = TextEditingController();
+
   TextEditingController textEditTeamEmailController = TextEditingController();
   TextEditingController textEditTeamContactNumberController =
       TextEditingController();
@@ -85,7 +101,18 @@ abstract class TeamViewModelBase with Store {
       TextEditingController();
   TextEditingController textEditTeamEmergencyContactNumberController =
       TextEditingController();
-
+  TextEditingController textAddteamNameController = TextEditingController();
+  TextEditingController textAddTeamEmpIdController = TextEditingController();
+  TextEditingController textAddTeamAddressController = TextEditingController();
+  TextEditingController textAddTeamDobController = TextEditingController();
+  TextEditingController textAddJoiningDateController = TextEditingController();
+  TextEditingController textAddTeamContactNumberController =
+      TextEditingController();
+  TextEditingController textAddTeamEmailController = TextEditingController();
+  TextEditingController textAddTeamEmergencyContactController =
+      TextEditingController();
+  TextEditingController textAddTeamEmergencyContactNumberController =
+      TextEditingController();
   @action
   Future<void> getCurrentEmployee() async {
     try {
@@ -275,6 +302,33 @@ abstract class TeamViewModelBase with Store {
   }
 
   @action
+  Future<void> deleteEmployeeApi(
+      {required BuildContext context, required num employeeID}) async {
+    deleteEmployeeResponse =
+        deleteEmployeeResponse.copyWith(error: null, loading: true);
+
+    final result = await teamService.deleteEmployeeApi(id: employeeID);
+    return result.fold(
+      (l) {
+        deleteEmployeeResponse = deleteEmployeeResponse.copyWith(
+          error: l,
+          loading: false,
+        );
+      },
+      (r) {
+        deleteEmployeeResponse = deleteEmployeeResponse.copyWith(
+          data: r,
+          error: null,
+          loading: false,
+        );
+        getCurrentEmployee();
+        getTerminatedEmployee(); 
+        context.router.pop();
+      },
+    );
+  }
+
+  @action
   Future<void> dpImageUpdate() async {
     try {
       profileImageLoader = true;
@@ -322,5 +376,25 @@ abstract class TeamViewModelBase with Store {
   @action
   datePickerFn3(date) {
     selectedDob = date;
+  }
+
+  @action
+  datePickerFn4(date) {
+    selectedDobAddTeam = date;
+  }
+
+  @action
+  datePickerFn5(date) {
+    selectedJoiningDateAddTeam = date;
+  }
+
+  @action
+  datePickerFn6(date) {
+    selectedLicenceExpiryDate = date;
+  }
+
+  @action
+  datePickerFn7(date) {
+    selectedLicenceAlertDate = date;
   }
 }

@@ -5,9 +5,11 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 
 class EmploymentStatusDropDown extends StatelessWidget {
   final TeamProfileEmployeeDetailsResModel? employeeDetatils;
-  const EmploymentStatusDropDown({
+  bool? fromAddTeam;
+   EmploymentStatusDropDown({
     super.key,
     required this.employeeDetatils,
+    this.fromAddTeam = false
   });
 
   @override
@@ -24,7 +26,7 @@ class EmploymentStatusDropDown extends StatelessWidget {
             );
           }).toList(),
           isExpanded: true,
-          value: vmTeam.selectedEmploymentStatus,
+          value:fromAddTeam == true ? vmTeam.selectedAddEmploymentStatus: vmTeam.selectedEmploymentStatus,
           onChanged: (String? newValue) {
             vmTeam.selectedEmploymentStatus = newValue!;
           },

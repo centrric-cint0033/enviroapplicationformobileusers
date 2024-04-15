@@ -6,9 +6,11 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 
 class DesignationDownWidget extends StatelessWidget {
   final TeamProfileEmployeeDetailsResModel? employeeDetatils;
-  const DesignationDownWidget({
+  bool? fromAddTeam;
+   DesignationDownWidget({
     super.key,
     this.employeeDetatils,
+    this.fromAddTeam = false
   });
 
   @override
@@ -22,6 +24,11 @@ class DesignationDownWidget extends StatelessWidget {
             (designation) => designation.userType == employeeDetatils?.userType,
             orElse: () => Designation(userType: ""),
           );
+          vmTeam.selectedDesignationAddTeam = designations.firstWhere(
+                (designation) => designation.userType == "accounts-manager",
+            orElse: () => Designation(userType: ""),
+          );
+
           return DropdownButtonFormField<Designation>(
             icon: const Icon(Icons.keyboard_arrow_down_outlined),
             items: designations.map(
@@ -35,7 +42,7 @@ class DesignationDownWidget extends StatelessWidget {
               },
             ).toList(),
             isExpanded: true,
-            value: vmTeam.selectedDesignation,
+            value: fromAddTeam == true ? vmTeam.selectedDesignationAddTeam : vmTeam.selectedDesignation,
             onChanged: (newValue) {},
             // value: selectedTax,
             decoration: const InputDecoration.collapsed(hintText: ''),
