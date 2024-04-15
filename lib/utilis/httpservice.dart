@@ -42,67 +42,20 @@ class HttpService {
     } else {
       client = Client();
     }
-    try {
+
+    return tryCatch(client, () async {
       final url = "$baseUrl$apiUrl";
       customPrint(content: url, name: "url");
-      final headers = {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      };
       final Response response;
-      switch (method) {
-        case HttpMethod.get:
-          response = await retryMethod(client.get(Uri.parse(url)));
-          break;
-        case HttpMethod.post:
-          response = await retryMethod(
-            client.post(Uri.parse(url), body: data, headers: headers),
-          );
-          break;
-        case HttpMethod.put:
-          response = response = await retryMethod(
-            client.put(Uri.parse(url), body: data),
-          );
-          break;
-        case HttpMethod.patch:
-          response = await retryMethod(
-            client.patch(Uri.parse(url), body: data),
-          );
-          break;
-        case HttpMethod.delete:
-          response = response = await retryMethod(
-            client.delete(Uri.parse(url), body: data),
-          );
-          break;
-        default:
-          response = await retryMethod(
-            client.get(Uri.parse(url)),
-          );
-          break;
-      }
-
+      response = await httpSwitchMethod(method, client, url, data);
       if (data != null) customPrint(content: data, name: "Payload");
-
       customPrint(content: response.statusCode, name: "Status Code");
       customPrint(content: response.body, name: "Response");
 
       if (response.statusCode == HttpStatus.ok ||
           response.statusCode == HttpStatus.created) {
-        // for app login
-        if (jsonDecode(response.body) is! List &&
-            jsonDecode(response.body)["access"] != null) {
-          await SecureStorage().writeData(
-            key: "token",
-            value: jsonDecode(response.body)["access"],
-          );
-
-          if (jsonDecode(response.body)["refresh"] != null) {
-            await SecureStorage().writeData(
-              key: "refresh",
-              value: jsonDecode(response.body)["refresh"],
-            );
-          }
-        }
+        // for app login || opt || sign up
+        await tokenStore(response);
         return Right(response);
       } else {
         return Left({
@@ -111,30 +64,7 @@ class HttpService {
                   jsonDecode(response.body)["app_data"]
         });
       }
-    } on FormatException catch (_) {
-      return Left({const MainFailure.clientFailure(): null});
-    } on HttpException catch (_) {
-      return Left({const MainFailure.clientFailure(): null});
-    } on TimeoutException catch (_) {
-      return Left({const MainFailure.timeout(): null});
-    } on SocketException catch (_) {
-      return Left({const MainFailure.networkFailure(): null});
-    } catch (e) {
-      debugPrint(e.toString());
-      return Left({const MainFailure.clientFailure(): null});
-    } finally {
-      client.close();
-    }
-  }
-
-  Future<Response> retryMethod(Future<Response> apiCall) async {
-    var res = await apiCall;
-    int statusCode = res.statusCode;
-    if (statusCode == 401) await generateNewToken();
-    return retry(() => apiCall,
-        maxAttempts: 3,
-        retryIf: (e) =>
-            e is SocketException || e is TimeoutException || statusCode == 401);
+    });
   }
 
   Future<Either<Map<MainFailure, dynamic>, Response>> multipartRequest({
@@ -150,7 +80,7 @@ class HttpService {
     customPrint(content: url, name: "multiPart url");
     // }
 
-    try {
+    return tryCatch(null, () async {
       final token = await SecureStorage().readData(key: "token");
       request.headers.addAll({
         'Accept': 'application/json',
@@ -181,20 +111,70 @@ class HttpService {
                   jsonDecode(response.body)["app_data"]
         });
       }
-    } on FormatException catch (_) {
-      return Left({const MainFailure.clientFailure(): null});
-    } on HttpException catch (_) {
-      return Left({const MainFailure.clientFailure(): null});
-    } on TimeoutException catch (_) {
-      return Left({const MainFailure.timeout(): null});
-    } on SocketException catch (_) {
-      return Left({const MainFailure.networkFailure(): null});
-    } catch (e) {
-      debugPrint(e.toString());
-      return Left({const MainFailure.clientFailure(): null});
-    } finally {
-      // client.close();
+    });
+  }
+}
+
+Future<Either<Map<MainFailure, dynamic>, Response>> tryCatch(
+    Client? client,
+    Future<Either<Map<MainFailure, dynamic>, Response>> Function()
+        function) async {
+  try {
+    return function();
+  } on FormatException catch (_) {
+    return Left({const MainFailure.clientFailure(): null});
+  } on HttpException catch (_) {
+    return Left({const MainFailure.clientFailure(): null});
+  } on TimeoutException catch (_) {
+    return Left({const MainFailure.timeout(): null});
+  } on SocketException catch (_) {
+    return Left({const MainFailure.networkFailure(): null});
+  } catch (e) {
+    debugPrint(e.toString());
+    return Left({const MainFailure.clientFailure(): null});
+  } finally {
+    client?.close();
+  }
+}
+
+Future<Response> retryMethod(Future<Response> apiCall) async {
+  return retry(() => apiCall,
+      maxAttempts: 3,
+      retryIf: (e) => e is SocketException || e is TimeoutException);
+}
+
+Future<void> tokenStore(Response response) async {
+  if (jsonDecode(response.body) is! List &&
+      jsonDecode(response.body)["access"] != null) {
+    await SecureStorage().writeData(
+      key: "token",
+      value: jsonDecode(response.body)["access"],
+    );
+
+    if (jsonDecode(response.body)["refresh"] != null) {
+      await SecureStorage().writeData(
+        key: "refresh",
+        value: jsonDecode(response.body)["refresh"],
+      );
     }
+  }
+}
+
+Future<Response> httpSwitchMethod(
+    HttpMethod method, Client client, String url, Object? data) async {
+  switch (method) {
+    case HttpMethod.get:
+      return await retryMethod(client.get(Uri.parse(url)));
+    case HttpMethod.post:
+      return await retryMethod(client.post(Uri.parse(url), body: data));
+    case HttpMethod.put:
+      return await retryMethod(client.put(Uri.parse(url), body: data));
+    case HttpMethod.patch:
+      return await retryMethod(client.patch(Uri.parse(url), body: data));
+    case HttpMethod.delete:
+      return await retryMethod(client.delete(Uri.parse(url), body: data));
+    default:
+      return await retryMethod(client.get(Uri.parse(url)));
   }
 }
 
@@ -212,6 +192,7 @@ class LoggingInterceptor implements InterceptorContract {
 
   @override
   Future<ResponseData> interceptResponse({required ResponseData data}) async {
+    if (data.statusCode == 401) await generateNewToken();
     return data;
   }
 }
