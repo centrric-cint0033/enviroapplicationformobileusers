@@ -16,4 +16,5 @@ class RouteNames {
   static const String rprofilepage = '/profilepage';
   static const String rnotificationpage = '/notificationpage';
   static const String rshedulepage = '/shedulepage';
+  static const String rcalenderpage = '/calenderpage';
 }
