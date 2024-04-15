@@ -89,7 +89,8 @@ extension GetItInjectableX on _i1.GetIt {
     gh.lazySingleton<_i9.IHomeService>(() => _i10.HomeRepository());
     gh.lazySingleton<_i11.IPreviousSaleService>(
         () => _i12.PreviousSaleService());
-    gh.lazySingleton<_i13.ISalesService>(() => _i13.SalesService());
+    gh.lazySingleton<_i13.ISalesService>(
+        () => _i13.SalesService(gh<_i5.HttpService>()));
     gh.lazySingleton<_i14.ISiteService>(() => _i15.SiteService());
     gh.lazySingleton<_i16.IVehicleService>(() => _i16.VehicleService());
     gh.lazySingleton<_i17.IintranetService>(() => _i17.IntranetService());
@@ -105,7 +106,7 @@ extension GetItInjectableX on _i1.GetIt {
         () => _i24.PreviousSaleViewModel(gh<_i11.IPreviousSaleService>()));
     gh.factory<_i25.ProfileViewModel>(
         () => _i25.ProfileViewModel(gh<_i21.IprofileService>()));
-    gh.factory<_i26.SalesViewModel>(
+    gh.lazySingleton<_i26.SalesViewModel>(
         () => _i26.SalesViewModel(gh<_i13.ISalesService>()));
     gh.lazySingleton<_i27.SecureStorage>(() => _i27.SecureStorage());
     gh.factory<_i28.SiteViewModel>(

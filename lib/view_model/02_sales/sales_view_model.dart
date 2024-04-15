@@ -13,7 +13,6 @@ part 'sales_view_model.g.dart';
 
 final vmSales = getIt<SalesViewModel>();
 
-@injectable
 @lazySingleton
 class SalesViewModel extends SalesViewModelBase with _$SalesViewModel {
   SalesViewModel(super.salesService);
