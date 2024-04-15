@@ -38,5 +38,7 @@ class AppRouter extends $AppRouter {
             page: SalesDetailRoute.page, path: RouteNames.rSalesDetailPage),
         AutoRoute(page: ScheduleRoute.page, path: RouteNames.rshedulepage),
         AutoRoute(page: CalenderRoute.page, path: RouteNames.rcalenderpage),
+        AutoRoute(
+            page: SheduledetailRoute.page, path: RouteNames.rsheduledetailpage),
       ];
 }

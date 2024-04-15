@@ -66,9 +66,12 @@ class SchedulePage extends StatelessWidget {
                         ),
                         ElevatedButton(
                           onPressed: () {},
-                          child: const Text('Next job'),
+                          child: const Text(
+                            'Next job',
+                            style: TextStyle(color: Colors.white),
+                          ),
                           style: ElevatedButton.styleFrom(
-                            primary: Colors.white,
+                            primary: Colors.green,
                             onPrimary: Colors.black,
                           ),
                         ),
@@ -156,7 +159,10 @@ class SchedulePage extends StatelessWidget {
                   const SizedBox(height: 10),
                   ElevatedButton(
                     onPressed: () {},
-                    child: const Text('Week'),
+                    child: const Text(
+                      'Week',
+                      style: TextStyle(color: Colors.green),
+                    ),
                     style: ElevatedButton.styleFrom(
                       primary: Colors.white,
                       onPrimary: Colors.black,
@@ -188,7 +194,9 @@ class SchedulePage extends StatelessWidget {
                     children: [
                       const Text('Some Text Here'),
                       ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          sheduledetailfunction(context);
+                        },
                         style: ElevatedButton.styleFrom(
                           primary: Colors.white,
                           onPrimary: Colors.black,
@@ -466,4 +474,9 @@ class SchedulePage extends StatelessWidget {
 void calenderfunction(BuildContext context) {
   print('calenderclicked');
   context.router.pushNamed(RouteNames.rcalenderpage);
+}
+
+void sheduledetailfunction(BuildContext context) {
+  print('ssssspendingclicked');
+  context.router.pushNamed(RouteNames.rsheduledetailpage);
 }
