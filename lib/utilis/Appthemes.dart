@@ -22,11 +22,11 @@ abstract class Appthemes {
     textTheme: TextTheme(
       //textfield hint style using default
 
-      // titleSmall: TextStyle(
-      //   fontSize: 12.sp,
-      //   color: primaryColor,
-      //   fontFamily: 'Inter',
-      // ),
+      titleSmall: TextStyle(
+        fontSize: 12.sp,
+        color: primaryColor,
+        fontFamily: 'Inter',
+      ),
 
       titleMedium: TextStyle(
         color: Colors.black,

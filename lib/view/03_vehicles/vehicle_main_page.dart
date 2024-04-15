@@ -31,7 +31,10 @@ class VehiclePage extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 15.w),
           child: Column(
             children: [
-              commonTabbar('Master truck', 'Master Car', 'Semi Trailers'),
+              commonTabbar(
+                  value1: 'Master truck',
+                  value2: 'Master Car',
+                  value3: 'Semi Trailers'),
               gapFieldVeh,
               wwDropDown(),
               gapFieldVeh,
