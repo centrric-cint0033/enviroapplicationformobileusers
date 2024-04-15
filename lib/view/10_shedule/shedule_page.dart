@@ -13,7 +13,7 @@ class SchedulePage extends StatelessWidget {
     return Scaffold(
       drawer: CmnDrawer(context),
       appBar: AppBar(
-          title: cmnTitleWidget('Profile'),
+          title: cmnTitleWidget('Profilee'),
           actions: [notificationButton(context)]),
       body: SingleChildScrollView(
         child: Column(
@@ -194,21 +194,101 @@ class SchedulePage extends StatelessWidget {
                       ),
                     ],
                   ),
-                  const Text('Some Text Here'),
+                  const Text('Some Text Herwwwe'),
                   const SizedBox(
                     height: 10,
                   ),
                   const SizedBox(
-                    height: 90,
-                    child: Card(
-                      color: Colors.blue,
-                      child: Column(
-                        children: [
-                          Text('New Card Title'),
-                          Row(
-                            children: [],
-                          )
-                        ],
+                    child: Flexible(
+                      child: Card(
+                        color: Colors.blue,
+                        child: Column(
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  'New Card Title 2',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                Text(
+                                  'job7654',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Divider(
+                              color: Colors.white,
+                              thickness: 1,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  'New Card Title 2',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                Divider(
+                                  color: Colors.black,
+                                ),
+                                Text(
+                                  'job7654',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Divider(
+                              color: Colors.white,
+                              thickness: 1,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  'New Card Title 2',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                Text(
+                                  'job7654',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Divider(
+                              color: Colors.white,
+                              thickness: 1,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  'New Card Title 2',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                Text(
+                                  'job7654',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
@@ -278,6 +358,10 @@ class SchedulePage extends StatelessWidget {
                                   ),
                                 ),
                               ],
+                            ),
+                            Divider(
+                              color: Colors.white,
+                              thickness: 1,
                             ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
