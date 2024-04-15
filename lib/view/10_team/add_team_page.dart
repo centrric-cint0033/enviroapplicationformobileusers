@@ -12,6 +12,7 @@ import 'package:enviro_mobile_application/view/10_team/team_widgets/date_picker.
 import 'package:enviro_mobile_application/view/10_team/team_widgets/designation_dropdown_widget.dart';
 import 'package:enviro_mobile_application/view/10_team/team_widgets/employment_status_dropdown_widget.dart';
 import 'package:enviro_mobile_application/view_model/08_team/team_view_model.dart';
+import 'package:enviro_mobile_application/widgets/cm_show_toast.dart';
 import 'package:enviro_mobile_application/widgets/cmn_title_textwidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -32,6 +33,7 @@ class AddTeamPage extends StatelessWidget {
         vmTeam.selectedDobAddTeam = null;
         vmTeam.selectedLicenceExpiryDate = null;
         vmTeam.selectedLicenceAlertDate = null;
+        vmTeam.showRequredText = false;
         return true;
       },
       child: Scaffold(
@@ -163,7 +165,9 @@ class AddTeamPage extends StatelessWidget {
                   sized0hx10,
                   cmCredentialsForEnviro(context),
                   sized0hx10,
-                  cmElevatedButton(() {}, Appthemes.cPrimary, "CREATE"),
+                  cmElevatedButton(() {
+                    cmOnpressedFn(context);
+                  }, Appthemes.cPrimary, "CREATE"),
                   sized0hx40,
                 ],
               ),
@@ -224,7 +228,7 @@ class AddTeamPage extends StatelessWidget {
               Observer(
                 builder: (context) => cmDatePicker(
                     context,
-                    employeeDetatils?.dateJoined ?? "",
+                    "",
                     vmTeam.selectedDobAddTeam,
                     (date) => vmTeam.datePickerFn4(date)),
               )
@@ -242,7 +246,7 @@ class AddTeamPage extends StatelessWidget {
               Observer(
                   builder: (context) => cmDatePicker(
                       context,
-                      employeeDetatils?.terminationDate ?? "",
+                      "",
                       vmTeam.selectedJoiningDateAddTeam,
                       (date) => vmTeam.datePickerFn5(date)))
             ])),
@@ -353,5 +357,21 @@ class AddTeamPage extends StatelessWidget {
         datePicker(context, selectedDate, pickedDate),
       ],
     );
+  }
+
+  cmOnpressedFn(BuildContext context) {
+    if (vmTeam.textAddteamNameController.text.isNotEmpty ||
+        vmTeam.textAddTeamEmpIdController.text.isNotEmpty ||
+        vmTeam.textAddTeamAddressController.text.isNotEmpty ||
+        vmTeam.selectedDobAddTeam != null ||
+        vmTeam.selectedJoiningDateAddTeam != null ||
+        vmTeam.textAddTeamEmailController.text.isNotEmpty ||
+        vmTeam.textAddTeamContactNumberController.text.isNotEmpty ||
+        vmTeam.textAddTeamEmergencyContactController.text.isNotEmpty ||
+        vmTeam.textAddTeamEmergencyContactNumberController.text.isNotEmpty ||
+        vmTeam.textAddTeamPasswordController.text.isNotEmpty) {
+    } else {
+      showToast(context, msg: "Fields Required", color: Colors.red);
+    }
   }
 }

@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:dartz/dartz.dart';
+import 'package:enviro_mobile_application/model/10_team/create_team_req_model/create_team_req_model.dart';
 import 'package:enviro_mobile_application/model/10_team/team_designtion_res_model/team_designtion_res_model.dart';
 import 'package:enviro_mobile_application/model/10_team/team_folder_req_model/team_create_folder_req_model.dart';
 import 'package:enviro_mobile_application/model/10_team/team_folder_resp_model/team_folder_resp_model.dart';
@@ -30,6 +31,8 @@ abstract class IteamService {
   Future<Either<MainFailure, String>> deleteEmployeeApi({required num id});
   Future<Either<Map<MainFailure, dynamic>, List<TeamResModel>>>
       employeeSearchApi({required Map<String, String> data});
+        Future<Either<MainFailure, CreateTeamReqModel>> createTeam(
+      {required Map<String, String> data});
 }
 
 @LazySingleton(as: IteamService)
@@ -209,11 +212,9 @@ class TeamService implements IteamService {
 
   @override
   Future<Either<Map<MainFailure, dynamic>, List<TeamResModel>>>
-   employeeSearchApi({required Map<String, String> data}) async {
+      employeeSearchApi({required Map<String, String> data}) async {
     var response = await getIt<HttpService>().multipartRequest(
-        data: data,
-        method: 'POST',
-        apiUrl: ApiEndPoints.searchEmployeeList);
+        data: data, method: 'POST', apiUrl: ApiEndPoints.searchEmployeeList);
     return response.fold(
       (l) => Left(l),
       (res) async {
@@ -221,6 +222,25 @@ class TeamService implements IteamService {
         List<TeamResModel> searchedEmployeList =
             data.map((e) => TeamResModel.fromJson(e)).toList();
         return Right(searchedEmployeList);
+      },
+    );
+  }
+  
+  @override
+  Future<Either<MainFailure, CreateTeamReqModel>> createTeam({required Map<String, String> data}) async {
+     var response = await getIt<HttpService>().multipartRequest(
+        data: data, method: 'POST', apiUrl: ApiEndPoints.createEmployee);
+    return response.fold(
+      (l) {
+        // Show Error
+        (l.values.first);
+        return Left(l.keys.first);
+      },
+      (res) async {
+        var data = jsonDecode(res.body);
+        CreateTeamReqModel createTeamList =
+            CreateTeamReqModel.fromJson(data);
+        return Right(createTeamList);
       },
     );
   }

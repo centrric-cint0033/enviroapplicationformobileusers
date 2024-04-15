@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:auto_route/auto_route.dart';
 import 'package:enviro_mobile_application/api_response/api_response.dart';
+import 'package:enviro_mobile_application/model/10_team/create_team_req_model/create_team_req_model.dart';
 import 'package:enviro_mobile_application/model/10_team/team_designtion_res_model/designation.dart';
 import 'package:enviro_mobile_application/model/10_team/team_designtion_res_model/team_designtion_res_model.dart';
 import 'package:enviro_mobile_application/model/10_team/team_folder_req_model/team_create_folder_req_model.dart';
@@ -58,11 +59,15 @@ abstract class TeamViewModelBase with Store {
   @observable
   ApiResponse<String> deleteEmployeeResponse = ApiResponse<String>();
   @observable
+  ApiResponse createTeamResponse = ApiResponse<CreateTeamReqModel>();
+  @observable
   ImageFilePickerModel? profileImage;
   @observable
   bool profileImageLoader = false;
   @observable
   bool showDecoration = false;
+  @observable
+  bool showRequredText = false;
   @observable
   DateTime? selectedJoiningDate;
   @observable
@@ -89,6 +94,8 @@ abstract class TeamViewModelBase with Store {
   String selectedAddEmploymentStatus = "full_time";
   @observable
   bool showDate = false;
+  @observable
+  String? selectedFileName;
   TextEditingController textFolderAddController = TextEditingController();
   TextEditingController textFolderEditController = TextEditingController();
   TextEditingController textEditTeamNameController = TextEditingController();
@@ -115,8 +122,10 @@ abstract class TeamViewModelBase with Store {
       TextEditingController();
   TextEditingController textAddTeamEmergencyContactNumberController =
       TextEditingController();
+  TextEditingController textAddTeamPasswordController = TextEditingController();
   TextEditingController currentEmployeeSearchCntrlr = TextEditingController();
-    TextEditingController terminatedEmployeeSearchCntrlr = TextEditingController();
+  TextEditingController terminatedEmployeeSearchCntrlr =
+      TextEditingController();
 
   Timer? debouce;
   void onTextChanged(Function() function) {
@@ -427,6 +436,43 @@ abstract class TeamViewModelBase with Store {
     } finally {
       designationsResponse = designationsResponse.copyWith(loading: false);
     }
+  }
+
+  @action
+  Future<void> createTeam(
+      {required CreateTeamReqModel? data,
+      required BuildContext context}) async {
+    addFolderResponse = createTeamResponse.copyWith(error: null, loading: true);
+
+    final result = await teamService.addTeamFolders(data: {
+      "employee_id": "${data?.employee_id}",
+      "name": data?.name ?? "",
+      "designation": data?.designation ?? "",
+      "contact_number": "${data?.contact_number}",
+      "date_joined": data?.date_joined ?? "",
+      "password": data?.password ?? "",
+      "email": data?.email ?? "",
+      "date_of_birth": data?.date_of_birth ?? "",
+      "alert_before": data?.alert_before ?? "",
+      "expiry_date": data?.expiry_date ?? "",
+      "username": data?.username ?? "",
+      "dp": data?.dp ?? "",
+      "cover_image": data?.cover_image ?? "",
+      "bio": data?.bio ?? "",
+      "user_type": data?.user_type ?? ""
+    });
+    return result.fold(
+      (l) {
+        createTeamResponse =
+            createTeamResponse.copyWith(error: l, loading: false);
+      },
+      (r) {
+        createTeamResponse =
+            createTeamResponse.copyWith(data: r, error: null, loading: false);
+
+        context.router.pop();
+      },
+    );
   }
 
   @action

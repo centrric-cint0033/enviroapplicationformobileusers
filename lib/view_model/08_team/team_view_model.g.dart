@@ -162,6 +162,22 @@ mixin _$TeamViewModel on TeamViewModelBase, Store {
     });
   }
 
+  late final _$createTeamResponseAtom =
+      Atom(name: 'TeamViewModelBase.createTeamResponse', context: context);
+
+  @override
+  ApiResponse<dynamic> get createTeamResponse {
+    _$createTeamResponseAtom.reportRead();
+    return super.createTeamResponse;
+  }
+
+  @override
+  set createTeamResponse(ApiResponse<dynamic> value) {
+    _$createTeamResponseAtom.reportWrite(value, super.createTeamResponse, () {
+      super.createTeamResponse = value;
+    });
+  }
+
   late final _$profileImageAtom =
       Atom(name: 'TeamViewModelBase.profileImage', context: context);
 
@@ -207,6 +223,22 @@ mixin _$TeamViewModel on TeamViewModelBase, Store {
   set showDecoration(bool value) {
     _$showDecorationAtom.reportWrite(value, super.showDecoration, () {
       super.showDecoration = value;
+    });
+  }
+
+  late final _$showRequredTextAtom =
+      Atom(name: 'TeamViewModelBase.showRequredText', context: context);
+
+  @override
+  bool get showRequredText {
+    _$showRequredTextAtom.reportRead();
+    return super.showRequredText;
+  }
+
+  @override
+  set showRequredText(bool value) {
+    _$showRequredTextAtom.reportWrite(value, super.showRequredText, () {
+      super.showRequredText = value;
     });
   }
 
@@ -426,6 +458,22 @@ mixin _$TeamViewModel on TeamViewModelBase, Store {
     });
   }
 
+  late final _$selectedFileNameAtom =
+      Atom(name: 'TeamViewModelBase.selectedFileName', context: context);
+
+  @override
+  String? get selectedFileName {
+    _$selectedFileNameAtom.reportRead();
+    return super.selectedFileName;
+  }
+
+  @override
+  set selectedFileName(String? value) {
+    _$selectedFileNameAtom.reportWrite(value, super.selectedFileName, () {
+      super.selectedFileName = value;
+    });
+  }
+
   late final _$getCurrentEmployeeAsyncAction =
       AsyncAction('TeamViewModelBase.getCurrentEmployee', context: context);
 
@@ -550,6 +598,16 @@ mixin _$TeamViewModel on TeamViewModelBase, Store {
         .run(() => super.getTeamDesignationsApi());
   }
 
+  late final _$createTeamAsyncAction =
+      AsyncAction('TeamViewModelBase.createTeam', context: context);
+
+  @override
+  Future<void> createTeam(
+      {required CreateTeamReqModel? data, required BuildContext context}) {
+    return _$createTeamAsyncAction
+        .run(() => super.createTeam(data: data, context: context));
+  }
+
   late final _$TeamViewModelBaseActionController =
       ActionController(name: 'TeamViewModelBase', context: context);
 
@@ -642,9 +700,11 @@ deleteFolderResponse: ${deleteFolderResponse},
 editFolderResponse: ${editFolderResponse},
 designationsResponse: ${designationsResponse},
 deleteEmployeeResponse: ${deleteEmployeeResponse},
+createTeamResponse: ${createTeamResponse},
 profileImage: ${profileImage},
 profileImageLoader: ${profileImageLoader},
 showDecoration: ${showDecoration},
+showRequredText: ${showRequredText},
 selectedJoiningDate: ${selectedJoiningDate},
 selectedTerminationDate: ${selectedTerminationDate},
 selectedDob: ${selectedDob},
@@ -657,7 +717,8 @@ selectedDesignation: ${selectedDesignation},
 selectedDesignationAddTeam: ${selectedDesignationAddTeam},
 selectedEmploymentStatus: ${selectedEmploymentStatus},
 selectedAddEmploymentStatus: ${selectedAddEmploymentStatus},
-showDate: ${showDate}
+showDate: ${showDate},
+selectedFileName: ${selectedFileName}
     ''';
   }
 }
