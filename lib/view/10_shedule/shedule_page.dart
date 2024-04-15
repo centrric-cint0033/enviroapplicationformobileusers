@@ -21,8 +21,8 @@ class SchedulePage extends StatelessWidget {
           children: [
             Padding(
               padding: const EdgeInsets.all(18.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   const Text(
                     "Today's Schedule",
@@ -34,7 +34,7 @@ class SchedulePage extends StatelessWidget {
                   const SizedBox(height: 10),
                   ElevatedButton(
                     onPressed: () {},
-                    child: const Text('Schedule'),
+                    child: const Text('Calender'),
                     style: ElevatedButton.styleFrom(
                       primary: Colors.white,
                       onPrimary: Colors.black,
