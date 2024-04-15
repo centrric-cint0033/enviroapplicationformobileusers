@@ -137,12 +137,6 @@ Future<Either<Map<MainFailure, dynamic>, Response>> tryCatch(
   }
 }
 
-Future<Response> retryMethod(Future<Response> apiCall) async {
-  return retry(() => apiCall,
-      maxAttempts: 3,
-      retryIf: (e) => e is SocketException || e is TimeoutException);
-}
-
 Future<void> tokenStore(Response response) async {
   if (jsonDecode(response.body) is! List &&
       jsonDecode(response.body)["access"] != null) {
@@ -176,6 +170,12 @@ Future<Response> httpSwitchMethod(
     default:
       return await retryMethod(client.get(Uri.parse(url)));
   }
+}
+
+Future<Response> retryMethod(Future<Response> apiCall) async {
+  return retry(() => apiCall,
+      maxAttempts: 3,
+      retryIf: (e) => e is SocketException || e is TimeoutException);
 }
 
 class LoggingInterceptor implements InterceptorContract {
