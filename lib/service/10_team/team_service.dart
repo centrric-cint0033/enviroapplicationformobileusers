@@ -28,6 +28,8 @@ abstract class IteamService {
   Future<Either<Map<MainFailure, dynamic>, TeamDesigntionResModel>>
       getTeamDesignations();
   Future<Either<MainFailure, String>> deleteEmployeeApi({required num id});
+  Future<Either<Map<MainFailure, dynamic>, List<TeamResModel>>>
+      employeeSearchApi({required Map<String, String> data});
 }
 
 @LazySingleton(as: IteamService)
@@ -38,7 +40,7 @@ class TeamService implements IteamService {
     var response = await getIt<HttpService>().request(
         authenticated: true,
         method: HttpMethod.get,
-        apiUrl: ApiEndPoints.endpointcurrentemployeelist);
+        apiUrl: ApiEndPoints.currentEmployeelist);
 
     return response.fold(
       (l) => Left(l),
@@ -57,7 +59,7 @@ class TeamService implements IteamService {
     var response = await getIt<HttpService>().request(
         authenticated: true,
         method: HttpMethod.get,
-        apiUrl: ApiEndPoints.endpointterminatedemployeelist);
+        apiUrl: ApiEndPoints.terminatedEmployeelist);
 
     return response.fold(
       (l) => Left(l),
@@ -76,8 +78,7 @@ class TeamService implements IteamService {
     var response = await getIt<HttpService>().request(
         authenticated: true,
         method: HttpMethod.get,
-        apiUrl:
-            "${ApiEndPoints.endpointteamprofileemployeedetailList}/$employeeID/");
+        apiUrl: "${ApiEndPoints.teamprofileEmployeeDetailList}/$employeeID/");
 
     return response.fold(
       (l) => Left(l),
@@ -96,7 +97,7 @@ class TeamService implements IteamService {
     var response = await getIt<HttpService>().request(
         authenticated: true,
         method: HttpMethod.get,
-        apiUrl: '${ApiEndPoints.endpointgetteamfolder}/$id/1');
+        apiUrl: '${ApiEndPoints.teamFolder}/$id/1');
 
     return response.fold(
       (l) {
@@ -116,7 +117,7 @@ class TeamService implements IteamService {
   Future<Either<MainFailure, TeamCreateFolderReqModel>> addTeamFolders(
       {required Map<String, String> data}) async {
     var response = await getIt<HttpService>().multipartRequest(
-        data: data, method: 'POST', apiUrl: ApiEndPoints.endpointaddteamfolder);
+        data: data, method: 'POST', apiUrl: ApiEndPoints.addTeamFolder);
     return response.fold(
       (l) {
         // Show Error
@@ -138,7 +139,7 @@ class TeamService implements IteamService {
     var response = await getIt<HttpService>().request(
         authenticated: true,
         method: HttpMethod.delete,
-        apiUrl: '${ApiEndPoints.endpointteamfolderdelete}/$id/');
+        apiUrl: '${ApiEndPoints.teamFolderDelete}/$id/');
 
     return response.fold(
       (l) {
@@ -157,7 +158,7 @@ class TeamService implements IteamService {
     var response = await getIt<HttpService>().multipartRequest(
         data: data,
         method: 'PUT',
-        apiUrl: '${ApiEndPoints.endpointteamfolderedit}/$id/');
+        apiUrl: '${ApiEndPoints.teamFolderEdit}/$id/');
     return response.fold(
       (l) {
         (l.values.first);
@@ -175,7 +176,7 @@ class TeamService implements IteamService {
     var response = await getIt<HttpService>().request(
         authenticated: true,
         method: HttpMethod.get,
-        apiUrl: ApiEndPoints.endpointteamdesignations);
+        apiUrl: ApiEndPoints.teamDesignations);
 
     return response.fold(
       (l) => Left(l),
@@ -194,7 +195,7 @@ class TeamService implements IteamService {
     var response = await getIt<HttpService>().request(
         authenticated: true,
         method: HttpMethod.delete,
-        apiUrl: '${ApiEndPoints.endpointdeleteemployee}/$id/');
+        apiUrl: '${ApiEndPoints.deleteEmployee}/$id/');
     return response.fold(
       (l) {
         (l.values.first);
@@ -202,6 +203,24 @@ class TeamService implements IteamService {
       },
       (res) async {
         return const Right('success');
+      },
+    );
+  }
+
+  @override
+  Future<Either<Map<MainFailure, dynamic>, List<TeamResModel>>>
+   employeeSearchApi({required Map<String, String> data}) async {
+    var response = await getIt<HttpService>().multipartRequest(
+        data: data,
+        method: 'POST',
+        apiUrl: ApiEndPoints.searchEmployeeList);
+    return response.fold(
+      (l) => Left(l),
+      (res) async {
+        var data = jsonDecode(res.body) as List;
+        List<TeamResModel> searchedEmployeList =
+            data.map((e) => TeamResModel.fromJson(e)).toList();
+        return Right(searchedEmployeList);
       },
     );
   }

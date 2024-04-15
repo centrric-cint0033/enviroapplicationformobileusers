@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:enviro_mobile_application/api_response/api_response.dart';
 import 'package:enviro_mobile_application/model/10_team/team_designtion_res_model/designation.dart';
@@ -113,6 +115,18 @@ abstract class TeamViewModelBase with Store {
       TextEditingController();
   TextEditingController textAddTeamEmergencyContactNumberController =
       TextEditingController();
+  TextEditingController currentEmployeeSearchCntrlr = TextEditingController();
+    TextEditingController terminatedEmployeeSearchCntrlr = TextEditingController();
+
+  Timer? debouce;
+  void onTextChanged(Function() function) {
+    // Clear the previous debounce timer
+    if (debouce?.isActive ?? false) debouce?.cancel();
+
+    // Set up a new debounce timer
+    debouce = Timer(const Duration(milliseconds: 500), () => function());
+  }
+
   @action
   Future<void> getCurrentEmployee() async {
     try {
@@ -186,6 +200,58 @@ abstract class TeamViewModelBase with Store {
     } finally {
       teamProfileEmployeeDetailListResponse =
           teamProfileEmployeeDetailListResponse.copyWith(loading: false);
+    }
+  }
+
+  @action
+  Future<void> currentEmployeeSearchApi(String searchData) async {
+    try {
+      currentEmployeeResponse =
+          currentEmployeeResponse.copyWith(errors: null, loading: true);
+
+      final result =
+          await teamService.employeeSearchApi(data: {"key": searchData});
+      return result.fold(
+        (l) {
+          currentEmployeeResponse =
+              currentEmployeeResponse.copyWith(errors: l, loading: false);
+        },
+        (r) {
+          currentEmployeeResponse = currentEmployeeResponse.copyWith(
+              data: r, errors: null, loading: false);
+        },
+      );
+    } catch (e) {
+      customPrint(content: e, name: 'Error currentEmployeeSearchApi');
+    } finally {
+      currentEmployeeResponse =
+          currentEmployeeResponse.copyWith(loading: false);
+    }
+  }
+
+  @action
+  Future<void> terminatedEmployeeSearchApi(String searchData) async {
+    try {
+      terminatedEmployeeResponse =
+          terminatedEmployeeResponse.copyWith(errors: null, loading: true);
+
+      final result =
+          await teamService.employeeSearchApi(data: {"key": searchData});
+      return result.fold(
+        (l) {
+          terminatedEmployeeResponse =
+              terminatedEmployeeResponse.copyWith(errors: l, loading: false);
+        },
+        (r) {
+          terminatedEmployeeResponse = terminatedEmployeeResponse.copyWith(
+              data: r, errors: null, loading: false);
+        },
+      );
+    } catch (e) {
+      customPrint(content: e, name: 'Error terminatedEmployeeSearchApi');
+    } finally {
+      terminatedEmployeeResponse =
+          terminatedEmployeeResponse.copyWith(loading: false);
     }
   }
 
@@ -322,7 +388,7 @@ abstract class TeamViewModelBase with Store {
           loading: false,
         );
         getCurrentEmployee();
-        getTerminatedEmployee(); 
+        getTerminatedEmployee();
         context.router.pop();
       },
     );

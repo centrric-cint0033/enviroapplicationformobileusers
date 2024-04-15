@@ -454,6 +454,26 @@ mixin _$TeamViewModel on TeamViewModelBase, Store {
         .run(() => super.getTeamProfileEmployeeDetails(employeeID: employeeID));
   }
 
+  late final _$currentEmployeeSearchApiAsyncAction = AsyncAction(
+      'TeamViewModelBase.currentEmployeeSearchApi',
+      context: context);
+
+  @override
+  Future<void> currentEmployeeSearchApi(String searchData) {
+    return _$currentEmployeeSearchApiAsyncAction
+        .run(() => super.currentEmployeeSearchApi(searchData));
+  }
+
+  late final _$terminatedEmployeeSearchApiAsyncAction = AsyncAction(
+      'TeamViewModelBase.terminatedEmployeeSearchApi',
+      context: context);
+
+  @override
+  Future<void> terminatedEmployeeSearchApi(String searchData) {
+    return _$terminatedEmployeeSearchApiAsyncAction
+        .run(() => super.terminatedEmployeeSearchApi(searchData));
+  }
+
   late final _$getTeamFoldersAsyncAction =
       AsyncAction('TeamViewModelBase.getTeamFolders', context: context);
 

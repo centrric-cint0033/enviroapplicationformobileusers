@@ -12,6 +12,7 @@ _$TeamResModelImpl _$$TeamResModelImplFromJson(Map<String, dynamic> json) =>
       employeeId: json['employee_id'] as num?,
       name: json['name'] as String?,
       dpThumbnail: json['dp_thumbnail'] as String?,
+      dp: json['dp'] as String?,
     );
 
 Map<String, dynamic> _$$TeamResModelImplToJson(_$TeamResModelImpl instance) =>
@@ -20,4 +21,5 @@ Map<String, dynamic> _$$TeamResModelImplToJson(_$TeamResModelImpl instance) =>
       'employee_id': instance.employeeId,
       'name': instance.name,
       'dp_thumbnail': instance.dpThumbnail,
+      'dp': instance.dp,
     };

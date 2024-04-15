@@ -38,7 +38,7 @@ class CurrentEmployeeListWidget extends StatelessWidget {
         onTap: () {
           vmTeam.getTeamProfileEmployeeDetails(employeeID: data?.id ?? 0);
           vmTeam.getTeamFolders(id: data?.id ?? 0);
-          context.router.push(TeamProfileRoute());
+          context.router.push(const TeamProfileRoute());
         },
         child: Container(
           height: 50.h,
@@ -49,7 +49,7 @@ class CurrentEmployeeListWidget extends StatelessWidget {
                     borderRadius: BorderRadius.only(
                         topRight: Radius.circular(32),
                         bottomRight: Radius.circular(32))),
-                leading: dpImage(data?.dpThumbnail ?? ""),
+                leading: dpImage(data?.dpThumbnail ?? data?.dp ?? ""),
                 title: Text(data?.name ?? ""),
                 trailing: customContainerWidget(Appthemes.cPrimary, "View")),
           ),

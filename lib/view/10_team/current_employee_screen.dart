@@ -1,6 +1,5 @@
 import 'package:enviro_mobile_application/view/02_sales/sales_widgets.dart/sales_widget.dart';
 import 'package:enviro_mobile_application/view/10_team/team_widgets/current_employeelist_widget.dart';
-import 'package:enviro_mobile_application/view_model/02_sales/sales_view_model.dart';
 import 'package:enviro_mobile_application/view_model/08_team/team_view_model.dart';
 import 'package:enviro_mobile_application/widgets/ww_search_widget.dart';
 import 'package:enviro_mobile_application/widgets/ww_response_handler.dart';
@@ -16,10 +15,10 @@ class CurrentEmployeeScreen extends StatelessWidget {
         body: Column(children: [
       gapField,
       WWSearchField(
-        controller: vmSales.salesJobListSearchCtr,
-        onChanged: (v) => vmSales.onTextChanged(() => v.isEmpty
-            ? vmSales.saleJobListApi()
-            : vmSales.salesJobListSearchApi(v)),
+        controller: vmTeam.currentEmployeeSearchCntrlr,
+        onChanged: (v) => vmTeam.onTextChanged(() => v.isEmpty
+            ? vmTeam.getCurrentEmployee()
+            : vmTeam.currentEmployeeSearchApi(v)),
         searchTap: () {},
         hintText: 'Search Employee',
       ),
