@@ -10,6 +10,7 @@ import 'package:enviro_mobile_application/view/10_team/team_widgets/cm_required_
 import 'package:enviro_mobile_application/view/10_team/team_widgets/cm_textfield_widget.dart';
 import 'package:enviro_mobile_application/view/10_team/team_widgets/date_picker.dart';
 import 'package:enviro_mobile_application/view/10_team/team_widgets/designation_dropdown_widget.dart';
+import 'package:enviro_mobile_application/view/10_team/team_widgets/dp_image_widget.dart';
 import 'package:enviro_mobile_application/view/10_team/team_widgets/employment_status_dropdown_widget.dart';
 import 'package:enviro_mobile_application/view_model/08_team/team_view_model.dart';
 import 'package:enviro_mobile_application/widgets/cm_show_toast.dart';
@@ -64,28 +65,39 @@ class AddTeamPage extends StatelessWidget {
                             SizedBox(
                               width: 15.w,
                             ),
-                            SizedBox(
-                              height: 60.w,
-                              width: 60.w,
-                              child: DecoratedBox(
-                                  decoration: BoxDecoration(
-                                      color: Colors.grey.shade700,
-                                      shape: BoxShape.circle),
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      const Icon(
-                                        Icons.person,
-                                        color: Colors.white,
-                                      ),
-                                      Text(
-                                        "Add Image",
-                                        style: TextStyle(
-                                            fontSize: 10.w,
-                                            color: Colors.white),
-                                      )
-                                    ],
-                                  )),
+                            InkWell(
+                              onTap: () async {
+                                await vmTeam.dpImageUpdate();
+                              },
+                              child: SizedBox(
+                                height: 60.w,
+                                width: 60.w,
+                                child: DecoratedBox(
+                                    decoration: BoxDecoration(
+                                        color: Colors.grey.shade700,
+                                        shape: BoxShape.circle),
+                                    child: vmTeam.profileImage?.imagePath ==
+                                            null
+                                        ? Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              const Icon(
+                                                Icons.person,
+                                                color: Colors.white,
+                                              ),
+                                              Text(
+                                                "Add Image",
+                                                style: TextStyle(
+                                                    fontSize: 10.w,
+                                                    color: Colors.white),
+                                              )
+                                            ],
+                                          )
+                                        : dpImage(
+                                            vmTeam.profileImage?.imageUUID ??
+                                                "")),
+                              ),
                             ),
                             SizedBox(
                               width: 15.w,
