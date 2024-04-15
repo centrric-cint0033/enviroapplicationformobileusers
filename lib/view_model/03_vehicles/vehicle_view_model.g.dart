@@ -9,6 +9,23 @@ part of 'vehicle_view_model.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$VehicleViewModel on VehicleViewModelBase, Store {
+  late final _$masterTruckApiResponseAtom = Atom(
+      name: 'VehicleViewModelBase.masterTruckApiResponse', context: context);
+
+  @override
+  ApiResponse<List<VehicleModel>> get masterTruckApiResponse {
+    _$masterTruckApiResponseAtom.reportRead();
+    return super.masterTruckApiResponse;
+  }
+
+  @override
+  set masterTruckApiResponse(ApiResponse<List<VehicleModel>> value) {
+    _$masterTruckApiResponseAtom
+        .reportWrite(value, super.masterTruckApiResponse, () {
+      super.masterTruckApiResponse = value;
+    });
+  }
+
   late final _$carPageResponseAtom =
       Atom(name: 'VehicleViewModelBase.carPageResponse', context: context);
 
@@ -140,21 +157,24 @@ mixin _$VehicleViewModel on VehicleViewModelBase, Store {
     });
   }
 
-  late final _$masterTruckApiResponseAtom = Atom(
-      name: 'VehicleViewModelBase.masterTruckApiResponse', context: context);
+  late final _$masterTruckApiAsyncAction =
+      AsyncAction('VehicleViewModelBase.masterTruckApi', context: context);
 
   @override
-  ApiResponse<List<VehicleModel>> get masterTruckApiResponse {
-    _$masterTruckApiResponseAtom.reportRead();
-    return super.masterTruckApiResponse;
+  Future<void> masterTruckApi(
+      {VehicleActionType? statusType, String? statusString}) {
+    return _$masterTruckApiAsyncAction.run(() => super
+        .masterTruckApi(statusType: statusType, statusString: statusString));
   }
 
+  late final _$masterTruckSearchServiceApiAsyncAction = AsyncAction(
+      'VehicleViewModelBase.masterTruckSearchServiceApi',
+      context: context);
+
   @override
-  set masterTruckApiResponse(ApiResponse<List<VehicleModel>> value) {
-    _$masterTruckApiResponseAtom
-        .reportWrite(value, super.masterTruckApiResponse, () {
-      super.masterTruckApiResponse = value;
-    });
+  Future<void> masterTruckSearchServiceApi({dynamic value}) {
+    return _$masterTruckSearchServiceApiAsyncAction
+        .run(() => super.masterTruckSearchServiceApi(value: value));
   }
 
   late final _$mastercarfunctionAsyncAction =
@@ -197,26 +217,6 @@ mixin _$VehicleViewModel on VehicleViewModelBase, Store {
         super.semifueltrucksearchfunction(searchsemidrop: searchsemidrop));
   }
 
-  late final _$masterTruckApiAsyncAction =
-      AsyncAction('VehicleViewModelBase.masterTruckApi', context: context);
-
-  @override
-  Future<void> masterTruckApi(
-      {VehicleActionType? statusType, String? statusString}) {
-    return _$masterTruckApiAsyncAction.run(() => super
-        .masterTruckApi(statusType: statusType, statusString: statusString));
-  }
-
-  late final _$masterTruckSearchApiAsyncAction = AsyncAction(
-      'VehicleViewModelBase.masterTruckSearchApi',
-      context: context);
-
-  @override
-  Future<void> masterTruckSearchApi({dynamic value}) {
-    return _$masterTruckSearchApiAsyncAction
-        .run(() => super.masterTruckSearchApi(value: value));
-  }
-
   late final _$VehicleViewModelBaseActionController =
       ActionController(name: 'VehicleViewModelBase', context: context);
 
@@ -234,6 +234,7 @@ mixin _$VehicleViewModel on VehicleViewModelBase, Store {
   @override
   String toString() {
     return '''
+masterTruckApiResponse: ${masterTruckApiResponse},
 carPageResponse: ${carPageResponse},
 carPagefuelResponse: ${carPagefuelResponse},
 selectedVehicle: ${selectedVehicle},
@@ -241,8 +242,7 @@ vehicleStatusType: ${vehicleStatusType},
 semitrailorPageResponse: ${semitrailorPageResponse},
 semitruckPagefuelResponse: ${semitruckPagefuelResponse},
 sstatus: ${sstatus},
-selectedTruckresponse: ${selectedTruckresponse},
-masterTruckApiResponse: ${masterTruckApiResponse}
+selectedTruckresponse: ${selectedTruckresponse}
     ''';
   }
 }

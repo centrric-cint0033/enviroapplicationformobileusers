@@ -40,6 +40,51 @@ abstract class VehicleViewModelBase with Store {
   }
 
   @observable
+  ApiResponse<List<VehicleModel>> masterTruckApiResponse =
+      ApiResponse<List<VehicleModel>>();
+
+  @action
+  Future<void> masterTruckApi(
+      {VehicleActionType? statusType, String? statusString}) async {
+    vehicleStatusType = statusType;
+    selectedVehicle = statusString;
+
+    masterTruckApiResponse =
+        masterTruckApiResponse.copyWith(errors: null, loading: true);
+    final result =
+        await vehicleService.masterTruckServiceApi(vehicleStatusType);
+    return result.fold(
+      (l) {
+        masterTruckApiResponse =
+            masterTruckApiResponse.copyWith(errors: l, loading: false);
+      },
+      (r) {
+        masterTruckApiResponse = masterTruckApiResponse.copyWith(
+            data: r, errors: null, loading: false);
+      },
+    );
+  }
+
+  @action
+  Future<void> masterTruckSearchServiceApi({value}) async {
+    masterTruckApiResponse =
+        masterTruckApiResponse.copyWith(errors: null, loading: true);
+
+    final result = await vehicleService.masterTruckSearchServiceApi(
+        vehicleStatusType, value);
+    return result.fold(
+      (l) {
+        masterTruckApiResponse =
+            masterTruckApiResponse.copyWith(errors: l, loading: false);
+      },
+      (r) {
+        masterTruckApiResponse = masterTruckApiResponse.copyWith(
+            data: r, errors: null, loading: false);
+      },
+    );
+  }
+
+  @observable
   ApiResponse<List<VehicleModel>> carPageResponse =
       ApiResponse<List<VehicleModel>>();
 
@@ -169,50 +214,5 @@ abstract class VehicleViewModelBase with Store {
   @action
   void setSelectedTruck(String? newValue) {
     selectedTruckresponse = newValue;
-  }
-
-  @observable
-  ApiResponse<List<VehicleModel>> masterTruckApiResponse =
-      ApiResponse<List<VehicleModel>>();
-
-  @action
-  Future<void> masterTruckApi(
-      {VehicleActionType? statusType, String? statusString}) async {
-    vehicleStatusType = statusType;
-    selectedVehicle = statusString;
-
-    masterTruckApiResponse =
-        masterTruckApiResponse.copyWith(errors: null, loading: true);
-    final result =
-        await vehicleService.masterTruckServiceApi(vehicleStatusType);
-    return result.fold(
-      (l) {
-        masterTruckApiResponse =
-            masterTruckApiResponse.copyWith(errors: l, loading: false);
-      },
-      (r) {
-        masterTruckApiResponse = masterTruckApiResponse.copyWith(
-            data: r, errors: null, loading: false);
-      },
-    );
-  }
-
-  @action
-  Future<void> masterTruckSearchApi({value}) async {
-    masterTruckApiResponse =
-        masterTruckApiResponse.copyWith(errors: null, loading: true);
-
-    final result =
-        await vehicleService.masterTruckSearchApi(vehicleStatusType, value);
-    return result.fold(
-      (l) {
-        masterTruckApiResponse =
-            masterTruckApiResponse.copyWith(errors: l, loading: false);
-      },
-      (r) {
-        masterTruckApiResponse = masterTruckApiResponse.copyWith(
-            data: r, errors: null, loading: false);
-      },
-    );
   }
 }

@@ -26,10 +26,39 @@ class ApiEndPoints {
 
   // VEHICLE APIS
 
-  static const endpointtruckpage = '/api/v1/vehicles/waste/truck/all/1/';
+  // Master Truck Apis
 
-  static const endpointtruckfuelsearch =
+  static const vehTruck = '/api/v1/vehicles/waste/truck/all/1/';
+
+  static const vehTruckPreInspection =
+      '/api/v1/vehicles/waste/truck/pre-inspection/1/';
+
+  static const vehTruckPreMaintenance =
+      '/api/v1/vehicles/waste/truck/maintenance/reports/1/';
+
+  static const vehTruckFuelExpense =
+      '/api/v1/vehicles/waste/truck/getFuelExpenses/1/';
+
+  // search
+
+  static const vehTruckSearch = '/api/v1/vehicles/waste/truck/search/';
+
+  static const vehTruckPreInspectionSearch =
+      '/api/v1/vehicles/waste/truck/pre-inspection/filter/vehicle/';
+
+  static const vehTruckPreMaintenanceSearch =
+      '/api/v1/vehicles/waste/truck/maintenance/reports/search/';
+
+  static const vehTruckFuelExpenseSearch =
       '/api/v1/vehicles/waste/truck/fuelExpense/search/vehicle/';
+
+  // Master Car Apis
+
+  static const vehCarSearch = '/api/v1/vehicles/waste/car/1/';
+
+  // Semi Trailers Apis
+
+  static const vehTrailorsSearch = '/api/v1/vehicles/waste/truck/1/';
 
   static const endpointsemitrailorpage =
       '/api/v1/vehicles/waste/forklift/all/1/';
@@ -49,12 +78,6 @@ class ApiEndPoints {
 
   static const endPointallvehiclelisting = '/api/v1/vehicles/waste/truck/list/';
 
-  static const endpointpreinspectiontruckcheckpage =
-      '/api/v1/vehicles/waste/truck/pre-inspection/1/';
-  static const endpointmaintancetruckcheckpage =
-      '/api/v1/vehicles/waste/truck/maintenance/reports/1/';
-  static const endpointfueltruckcheckpage =
-      '/api/v1/vehicles/waste/truck/getFuelExpenses/1/';
   static const endpointpreinspectionsemitruckcheckpage =
       '/api/v1/vehicles/waste/fork-lift/pre-inspection/1/';
   static const endpointmaintancesemitruckcheckpage =
@@ -63,15 +86,13 @@ class ApiEndPoints {
       '/api/v1/vehicles/waste/fork-lift/getFuelExpenses/1/';
   static const endpointmaintancecarsearchcheckpage =
       '/api/v1/vehicles/waste/car/maintenance/reports/search/';
-  static const endpointmaintancetrucksearchcheckpage =
-      '/api/v1/vehicles/waste/truck/maintenance/reports/search/';
+
   static const endpointmasterfuelcarsearch =
       '/api/v1/vehicles/waste/car/fuelExpense/search/vehicle/';
 
   static const endpointsemitruckfuelsearch =
       '/api/v1/vehicles/waste/fork-lift/fuelExpense/search/vehicle/';
-  static const endpointpreinspectiontrucksearch =
-      '/api/v1/vehicles/waste/truck/pre-inspection/filter/vehicle/';
+
   static const endpointpreinspectioncarsearch =
       '/api/v1/vehicles/waste/car/pre-inspection/filter/vehicle/';
   static const endpointvehiclecarlistsearch =

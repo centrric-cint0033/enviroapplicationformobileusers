@@ -33,33 +33,90 @@ abstract class IVehicleService {
   Future<Either<Map<MainFailure, dynamic>, List<VehicleModel>>>
       masterTruckServiceApi(truckdrop);
   Future<Either<Map<MainFailure, dynamic>, List<VehicleModel>>>
-      masterTruckSearchApi(searchtrucksemidrop, value);
+      masterTruckSearchServiceApi(searchtrucksemidrop, value);
 }
 
 @LazySingleton(as: IVehicleService)
 class VehicleService implements IVehicleService {
-  // @override
-  // Future<Either<MainFailure, List<CmnvehiclepageModel>>>
-  //     mastercarfunction() async {
-  //   var response = await getIt<HttpService>().request(
-  //     authenticated: true,
-  //     method: HttpMethod.get,
-  //     apiUrl: ApiEndPoints.endpointcarpage,
-  //   );
-  //   return response.fold(
-  //     (l) {
-  //       (l.values.first);
-  //       return Left(l.keys.first);
-  //     },
-  //     (res) async {
-  //       var data = jsonDecode(res.body) as List;
+  @override
+  Future<Either<Map<MainFailure, dynamic>, List<VehicleModel>>>
+      masterTruckServiceApi(truckdrop) async {
+    String apiUrl;
+    // ignore: unused_local_variable
+    String pagination = '?page=1&limit=10';
 
-  //       List<CmnvehiclepageModel> vehicles =
-  //           data.map((e) => CmnvehiclepageModel.fromJson(e)).toList();
-  //       return Right(vehicles);
-  //     },
-  //   );
-  // }
+    switch (truckdrop) {
+      case VehicleActionType.vehicleList:
+        apiUrl = ApiEndPoints.vehTruck;
+        break;
+      case VehicleActionType.preInspectionCheck:
+        apiUrl = ApiEndPoints.vehTruckPreInspection;
+        break;
+      case VehicleActionType.maintenanceCheck:
+        apiUrl = ApiEndPoints.vehTruckPreMaintenance;
+        break;
+      case VehicleActionType.fuelExpence:
+        apiUrl = ApiEndPoints.vehTruckFuelExpense;
+        break;
+      default:
+        apiUrl = ApiEndPoints.vehTruck;
+    }
+
+    var response = await getIt<HttpService>().request(
+      authenticated: true,
+      method: HttpMethod.get,
+      apiUrl: apiUrl,
+    );
+
+    return response.fold(
+      (l) => Left(l),
+      (res) async {
+        var data = jsonDecode(res.body) as List;
+        List<VehicleModel> vehicles =
+            data.map((e) => VehicleModel.fromJson(e)).toList();
+        return Right(vehicles);
+      },
+    );
+  }
+
+  @override
+  Future<Either<Map<MainFailure, dynamic>, List<VehicleModel>>>
+      masterTruckSearchServiceApi(trucksearchdrop, value) async {
+    String apiUrl;
+    switch (trucksearchdrop) {
+      case VehicleActionType.vehicleList:
+        apiUrl = ApiEndPoints.vehTruckSearch;
+        break;
+      case VehicleActionType.preInspectionCheck:
+        apiUrl = ApiEndPoints.vehTruckPreInspectionSearch;
+        break;
+      case VehicleActionType.maintenanceCheck:
+        apiUrl = ApiEndPoints.vehTruckPreMaintenanceSearch;
+        // MultipartRequest request =
+        //     MultipartRequest("POST", Uri.parse("$baseUrl$apiUrl"));
+        // request.fields['key'] = 'e';
+        break;
+      case VehicleActionType.fuelExpence:
+        apiUrl = ApiEndPoints.vehTruckFuelExpenseSearch;
+        break;
+      default:
+        apiUrl = ApiEndPoints.vehTruckSearch;
+        break;
+    }
+
+    var response = await getIt<HttpService>()
+        .multipartRequest(apiUrl: apiUrl, method: 'POST', data: {"key": value});
+
+    return response.fold(
+      (l) => Left(l),
+      (res) async {
+        var data = jsonDecode(res.body) as List;
+        List<VehicleModel> fuelcarsearch =
+            data.map((e) => VehicleModel.fromJson(e)).toList();
+        return Right(fuelcarsearch);
+      },
+    );
+  }
 
   @override
   Future<Either<MainFailure, List<VehicleModel>>> preinspectionfunction(
@@ -238,86 +295,6 @@ class VehicleService implements IVehicleService {
       (res) async {
         var data = jsonDecode(res.body) as List;
 
-        List<VehicleModel> fuelcarsearch =
-            data.map((e) => VehicleModel.fromJson(e)).toList();
-        return Right(fuelcarsearch);
-      },
-    );
-  }
-
-  @override
-  Future<Either<Map<MainFailure, dynamic>, List<VehicleModel>>>
-      masterTruckServiceApi(truckdrop) async {
-    String apiUrl;
-    switch (truckdrop) {
-      case VehicleActionType.vehicleList:
-        apiUrl = ApiEndPoints.endpointtruckpage;
-        break;
-      case VehicleActionType.preInspectionCheck:
-        apiUrl = ApiEndPoints.endpointpreinspectiontruckcheckpage;
-        break;
-
-      case VehicleActionType.maintenanceCheck:
-        apiUrl = ApiEndPoints.endpointmaintancetruckcheckpage;
-        break;
-      case VehicleActionType.fuelExpence:
-        apiUrl = ApiEndPoints.endpointfueltruckcheckpage;
-        break;
-
-      default:
-        apiUrl = ApiEndPoints.endpointtruckpage;
-    }
-
-    var response = await getIt<HttpService>().request(
-      authenticated: true,
-      method: HttpMethod.get,
-      apiUrl: apiUrl,
-    );
-
-    return response.fold(
-      (l) => Left(l),
-      (res) async {
-        var data = jsonDecode(res.body) as List;
-        List<VehicleModel> vehicles =
-            data.map((e) => VehicleModel.fromJson(e)).toList();
-        return Right(vehicles);
-      },
-    );
-  }
-
-  @override
-  Future<Either<Map<MainFailure, dynamic>, List<VehicleModel>>>
-      masterTruckSearchApi(trucksearchdrop, value) async {
-    String apiUrl;
-    print('awww $trucksearchdrop');
-    switch (trucksearchdrop) {
-      case VehicleActionType.vehicleList:
-        apiUrl = ApiEndPoints.endpointtruckpage;
-        break;
-      case VehicleActionType.preInspectionCheck:
-        apiUrl = ApiEndPoints.endpointpreinspectiontrucksearch;
-        break;
-      case VehicleActionType.maintenanceCheck:
-        apiUrl = ApiEndPoints.endpointmaintancetrucksearchcheckpage;
-        MultipartRequest request =
-            MultipartRequest("POST", Uri.parse("$baseUrl$apiUrl"));
-        request.fields['key'] = 'e';
-        break;
-      case VehicleActionType.fuelExpence:
-        apiUrl = ApiEndPoints.endpointtruckfuelsearch;
-        break;
-      default:
-        apiUrl = ApiEndPoints.endpointtruckfuelsearch;
-        break;
-    }
-
-    var response = await getIt<HttpService>().multipartRequest(
-        apiUrl: apiUrl, method: 'POST', data: {"request": value});
-
-    return response.fold(
-      (l) => Left(l),
-      (res) async {
-        var data = jsonDecode(res.body) as List;
         List<VehicleModel> fuelcarsearch =
             data.map((e) => VehicleModel.fromJson(e)).toList();
         return Right(fuelcarsearch);
