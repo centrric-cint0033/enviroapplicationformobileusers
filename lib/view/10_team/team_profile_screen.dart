@@ -9,6 +9,7 @@ import 'package:enviro_mobile_application/view/10_team/team_widgets/cm_button.da
 import 'package:enviro_mobile_application/view/10_team/team_widgets/dp_image_widget.dart';
 import 'package:enviro_mobile_application/view/10_team/team_widgets/folder_list_card_widget.dart';
 import 'package:enviro_mobile_application/view_model/08_team/team_view_model.dart';
+import 'package:enviro_mobile_application/widgets/cm_show_delete_dialoque.dart';
 import 'package:enviro_mobile_application/widgets/cm_show_folder_dialoque.dart';
 import 'package:enviro_mobile_application/widgets/cm_title.dart';
 import 'package:enviro_mobile_application/widgets/cmn_title_textwidget.dart';
@@ -80,11 +81,17 @@ class TeamProfileScreen extends StatelessWidget {
                                             SizedBox(
                                               height: 26.h,
                                               child: customButton(() {
-                                                vmTeam.deleteEmployeeApi(
-                                                    context: context,
-                                                    employeeID:
-                                                        employeeDetails?.id ??
-                                                            0);
+                                                showDeleteDialoq(context,
+                                                    () async {
+                                                  await vmTeam
+                                                      .deleteEmployeeApi(
+                                                          context: context,
+                                                          employeeID:
+                                                              employeeDetails
+                                                                      ?.id ??
+                                                                  0);
+                                                  context.router.pop();
+                                                });
                                               }, Appthemes.cPrimary, "Delete"),
                                             ),
                                             const SizedBox(
