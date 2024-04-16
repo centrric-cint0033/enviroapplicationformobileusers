@@ -5,6 +5,7 @@ import 'package:enviro_mobile_application/utilis/api_endpoints/api_endpoints.dar
 import 'package:enviro_mobile_application/utilis/httpservice.dart';
 import 'package:enviro_mobile_application/utilis/injection.dart';
 import 'package:enviro_mobile_application/utilis/main_failure.dart';
+import 'package:http/http.dart';
 import 'package:injectable/injectable.dart';
 
 abstract class ISalesService {
@@ -26,10 +27,13 @@ abstract class ISalesService {
 
 @LazySingleton(as: ISalesService)
 class SalesService implements ISalesService {
+  final HttpService httpService;
+  SalesService(this.httpService);
+
   @override
   Future<Either<Map<MainFailure, dynamic>, List<SalesModel>>>
       saleslistServiceApi() async {
-    var response = await getIt<HttpService>().request(
+    var response = await httpService.request(
         authenticated: true,
         method: HttpMethod.get,
         apiUrl: ApiEndPoints.endpointsaleslist);
@@ -48,7 +52,7 @@ class SalesService implements ISalesService {
   @override
   Future<Either<Map<MainFailure, dynamic>, List<SalesModel>>>
       salesJobListSearchServiceApi({required Map<String, String> data}) async {
-    var response = await getIt<HttpService>().multipartRequest(
+    var response = await httpService.multipartRequest(
         data: data,
         method: 'POST',
         apiUrl: ApiEndPoints.endpointSalesJobSearch);
@@ -66,7 +70,7 @@ class SalesService implements ISalesService {
   @override
   Future<Either<Map<MainFailure, dynamic>, List<SalesModel>>>
       saleJoblistApiService() async {
-    var response = await getIt<HttpService>().request(
+    var response = await httpService.request(
         authenticated: true,
         method: HttpMethod.get,
         apiUrl: ApiEndPoints.endpointjoblist);
@@ -85,7 +89,7 @@ class SalesService implements ISalesService {
   @override
   Future<Either<Map<MainFailure, dynamic>, List<SalesModel>>>
       quoteRegisterServiceApi() async {
-    var response = await getIt<HttpService>().request(
+    var response = await httpService.request(
         authenticated: true,
         method: HttpMethod.get,
         apiUrl: ApiEndPoints.endpointquoteregvehiclelist);
@@ -105,7 +109,7 @@ class SalesService implements ISalesService {
   Future<Either<Map<MainFailure, dynamic>, List<SalesModel>>>
       salesQuoteListSearchServiceApi(
           {required Map<String, String> data}) async {
-    var response = await getIt<HttpService>().multipartRequest(
+    var response = await httpService.multipartRequest(
         data: data,
         method: 'POST',
         apiUrl: ApiEndPoints.endpointSaleQuoteSearch);

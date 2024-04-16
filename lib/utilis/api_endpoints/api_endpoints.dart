@@ -26,43 +26,73 @@ class ApiEndPoints {
 
   // VEHICLE APIS
 
-  static const endPointallvehiclelisting = '/api/v1/vehicles/waste/truck/list/';
-  static const endpointtruckpage = '/api/v1/vehicles/waste/truck/all/1/';
-  static const endpointcarpage = '/api/v1/vehicles/waste/car/all/1/';
+  // Master Truck Apis
+
+  static const vehTruck = '/api/v1/vehicles/waste/truck/all/1/';
+
+  static const vehTruckPreInspection =
+      '/api/v1/vehicles/waste/truck/pre-inspection/1/';
+
+  static const vehTruckPreMaintenance =
+      '/api/v1/vehicles/waste/truck/maintenance/reports/1/';
+
+  static const vehTruckFuelExpense =
+      '/api/v1/vehicles/waste/truck/getFuelExpenses/1/';
+
+  // search
+
+  static const vehTruckSearch = '/api/v1/vehicles/waste/truck/search/';
+
+  static const vehTruckPreInspectionSearch =
+      '/api/v1/vehicles/waste/truck/pre-inspection/filter/vehicle/';
+
+  static const vehTruckPreMaintenanceSearch =
+      '/api/v1/vehicles/waste/truck/maintenance/reports/search/';
+
+  static const vehTruckFuelExpenseSearch =
+      '/api/v1/vehicles/waste/truck/fuelExpense/search/vehicle/';
+
+  // Master Car Apis
+
+  static const vehCarSearch = '/api/v1/vehicles/waste/car/1/';
+
+  // Semi Trailers Apis
+
+  static const vehTrailorsSearch = '/api/v1/vehicles/waste/truck/1/';
+
   static const endpointsemitrailorpage =
       '/api/v1/vehicles/waste/forklift/all/1/';
-  static const endpointpreinspectiontruckcheckpage =
-      '/api/v1/vehicles/waste/truck/pre-inspection/1/';
-  static const endpointmaintancetruckcheckpage =
-      '/api/v1/vehicles/waste/truck/maintenance/reports/1/';
-  static const endpointfueltruckcheckpage =
-      '/api/v1/vehicles/waste/truck/getFuelExpenses/1/';
+
+  static const endpointcarpage = '/api/v1/vehicles/waste/car/all/1/';
+
+  static const endpointpreinspectioncarcheckpage =
+      '/api/v1/vehicles/waste/car/pre-inspection/1/';
+
+  static const endpointmaintancecarcheckpage =
+      '/api/v1/vehicles/waste/car/maintenance/reports/1/';
+
+  static const endpointfuelcarcheckpage =
+      '/api/v1/vehicles/waste/car/getFuelExpenses/1/';
+
+  //
+
+  static const endPointallvehiclelisting = '/api/v1/vehicles/waste/truck/list/';
+
   static const endpointpreinspectionsemitruckcheckpage =
       '/api/v1/vehicles/waste/fork-lift/pre-inspection/1/';
   static const endpointmaintancesemitruckcheckpage =
       '/api/v1/vehicles/waste/fork-lift/maintenance/reports/1/';
   static const endpointfuelsemitruckcheckpage =
       '/api/v1/vehicles/waste/fork-lift/getFuelExpenses/1/';
-  static const endpointmaintancecarcheckpage =
-      '/api/v1/vehicles/waste/car/maintenance/reports/1/';
-  static const endpointpreinspectioncarcheckpage =
-      '/api/v1/vehicles/waste/car/pre-inspection/1/';
-  static const endpointfuelcarcheckpage =
-      '/api/v1/vehicles/waste/car/getFuelExpenses/1/';
   static const endpointmaintancecarsearchcheckpage =
       '/api/v1/vehicles/waste/car/maintenance/reports/search/';
-  static const endpointmaintancetrucksearchcheckpage =
-      '/api/v1/vehicles/waste/truck/maintenance/reports/search/';
+
   static const endpointmasterfuelcarsearch =
       '/api/v1/vehicles/waste/car/fuelExpense/search/vehicle/';
 
-  static const endpointtruckfuelsearch =
-      '/api/v1/vehicles/waste/truck/fuelExpense/search/vehicle/';
-
   static const endpointsemitruckfuelsearch =
       '/api/v1/vehicles/waste/fork-lift/fuelExpense/search/vehicle/';
-  static const endpointpreinspectiontrucksearch =
-      '/api/v1/vehicles/waste/truck/pre-inspection/filter/vehicle/';
+
   static const endpointpreinspectioncarsearch =
       '/api/v1/vehicles/waste/car/pre-inspection/filter/vehicle/';
   static const endpointvehiclecarlistsearch =
@@ -81,6 +111,16 @@ class ApiEndPoints {
   static const endpointnotificationlist =
       '/api/v1/oh_and_s/notification/view/1/?limit=8';
   static const endpointnewsfldrrename = '/api/v1/drive/folder/rename/3260/';
+  static const endpointPermanentSites = '/api/v1/clients/all/alpha_asc/waste/';
+  static const endpointTemporarySites =
+      '/api/v1/clients/temporary-client/list/alpha_asc/waste/';
+  static const endpointDeletedSites =
+      '/api/v1/clients/deleted-client/list/alpha_asc/waste/';
+  static const endpointSiteDetail = '/api/v1/clients/single/';
+  static const endpointPreviousSale = '/api/v1/jobs/previous/sale/';
+  static const endpointSiteFolders = '/api/v1/drive/site/folder/';
+  static const endpointSearchSite = '/api/v1/clients/searchClient/all/waste/';
+  static const endpointSearchSiteFolder = '/api/v1/drive/site/search/folder/';
   static const endpointnewsfldrdlte = '/api/v1/drive/folder/delete';
   static const endpointintranetfldrlstng =
       '/api/v1/intranet_archive/folder/segment';
@@ -92,7 +132,7 @@ class ApiEndPoints {
       '/api/v1/team/status/current/?limit=10&page=1';
   static const terminatedEmployeelist =
       '/api/v1/team/status/terminated/?limit=10&page=1';
-      static const searchEmployeeList = '/api/v1/team/searchEmployee/';
+  static const searchEmployeeList = '/api/v1/team/searchEmployee/';
   static const teamprofileEmployeeDetailList = '/api/v1/team/employee';
   static const teamFolder = '/api/v1/drive/team/folder';
   static const addTeamFolder = '/api/v1/drive/create/team/folder/';
@@ -101,4 +141,7 @@ class ApiEndPoints {
   static const teamDesignations = '/api/v1/team/designations/';
   static const deleteEmployee = '/api/v1/team/employee/delete';
   static const createEmployee = '/api/v1/team/create/';
+
+  // SITE APIS
+  static const endpointWasteTypeInSite = '/api/v1/clients/childs/available/';
 }

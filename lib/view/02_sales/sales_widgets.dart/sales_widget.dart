@@ -4,7 +4,7 @@ import 'package:enviro_mobile_application/utilis/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-final gapField = sized0hx10;
+final gapField = sized0hx05;
 
 Card customCard({required Widget child}) => Card(
     shape: RoundedRectangleBorder(
@@ -21,27 +21,24 @@ Expanded expandedShowText(String value) =>
     Expanded(flex: 3, child: showText(value));
 
 Row expandedRowShowText(String firsValue, String secondValue) => Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [expandedShowText(firsValue), expandedShowText(secondValue)],
+      children: [
+        expandedShowText(firsValue),
+        sized0wx05,
+        showText(':'),
+        sized0wx05,
+        expandedShowText(secondValue)
+      ],
     );
 
 Row expandedRowShowText1(String firsValue, String secondValue) => Row(
       children: [
         Expanded(flex: 3, child: showText(firsValue)),
+        sized0wx05,
+        showText(':'),
+        sized0wx05,
         Expanded(flex: 1, child: showText(secondValue))
       ],
     );
-
-Widget buildCardDataOrder(List<Widget> widget, {String? image}) => customCard(
-    child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Row(children: [
-          if (image != null) ...[
-            imageAndName(image),
-            sized0wx10,
-          ],
-          Expanded(flex: 7, child: Column(children: widget)),
-        ])));
 
 Expanded imageAndName(String image) => Expanded(
     flex: 2,
@@ -54,3 +51,22 @@ Expanded imageAndName(String image) => Expanded(
       gapField,
       showText('Name')
     ]));
+
+Widget buildCardDataOrder(List<Widget> widget, {String? image}) => customCard(
+    child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Row(children: [
+          if (image != null) ...[
+            imageAndName(image),
+            sized0wx10,
+          ],
+          Expanded(
+              flex: 7,
+              child: ListView.separated(
+                physics: const NeverScrollableScrollPhysics(),
+                separatorBuilder: (context, index) => gapField,
+                itemCount: widget.length,
+                itemBuilder: (context, index) => widget[index],
+                shrinkWrap: true,
+              )),
+        ])));

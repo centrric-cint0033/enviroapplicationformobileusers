@@ -3,14 +3,12 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:enviro_mobile_application/Routepage/approutes.gr.dart';
 import 'package:enviro_mobile_application/model/02_sales/sales_model/sales_model.dart';
-import 'package:enviro_mobile_application/utilis/constant.dart';
 import 'package:enviro_mobile_application/view/02_sales/sales_widgets.dart/sales_widget.dart';
 import 'package:enviro_mobile_application/view_model/02_sales/sales_view_model.dart';
 import 'package:enviro_mobile_application/widgets/ww_response_handler.dart';
 import 'package:enviro_mobile_application/widgets/ww_search_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class QuoteRegisterTab extends StatelessWidget {
   const QuoteRegisterTab({Key? key}) : super(key: key);
@@ -18,31 +16,26 @@ class QuoteRegisterTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Padding(
-      padding: EdgeInsets.symmetric(horizontal: 15.w),
-      child: Column(
-        children: [
-          gapField,
-          WWSearchField(
-            controller: vmSales.salesQuoteListSearchCtr,
-            onChanged: (v) => vmSales.onTextChanged(() => v.isEmpty
-                ? vmSales.quoteRegisterApi()
-                : vmSales.salesQuoteListSearchApi(v)),
-            searchTap: () {},
-            hintText: 'Search By Client',
-          ),
-          gapField,
-          Observer(builder: (_) {
-            return Expanded(
-              child: WWResponseHandler(
-                  data: vmSales.quoteRegResponse,
-                  isEmpty: vmSales.quoteRegResponse.data?.isEmpty ?? true,
-                  onTap: () => vmSales.quoteRegisterApi(),
-                  child: const QuoteReqisterListWidget()),
-            );
-          }),
-        ],
-      ),
+        body: Column(
+      children: [
+        WWSearchField(
+          controller: vmSales.salesQuoteListSearchCtr,
+          onChanged: (v) => vmSales.onTextChanged(() => v.isEmpty
+              ? vmSales.quoteRegisterApi()
+              : vmSales.salesQuoteListSearchApi(v)),
+          searchTap: () {},
+        ),
+        gapField,
+        Observer(builder: (_) {
+          return Expanded(
+            child: WWResponseHandler(
+                data: vmSales.quoteRegResponse,
+                isEmpty: vmSales.quoteRegResponse.data?.isEmpty ?? true,
+                onTap: () => vmSales.quoteRegisterApi(),
+                child: const QuoteReqisterListWidget()),
+          );
+        }),
+      ],
     ));
   }
 }
@@ -53,9 +46,9 @@ class QuoteReqisterListWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.separated(
-      padding: const EdgeInsets.symmetric(vertical: 10),
+      // padding: const EdgeInsets.symmetric(vertical: 10),
       itemCount: vmSales.quoteRegResponse.data?.length ?? 0,
-      separatorBuilder: (BuildContext context, int index) => sized0hx10,
+      separatorBuilder: (BuildContext context, int index) => gapField,
       itemBuilder: (context, index) {
         var data = vmSales.quoteRegResponse.data?[index];
         return InkWell(
@@ -71,18 +64,12 @@ class QuoteReqisterListWidget extends StatelessWidget {
   Widget listData(SalesModel? data) {
     return buildCardDataOrder(
       [
-        expandedRowShowText('ID', ": ${data?.id ?? ""}"),
-        gapField,
-        expandedRowShowText(
-            'Won/Lose Status', ": ${data?.wonLoseStatus ?? ""}"),
-        gapField,
-        expandedRowShowText('Created By', ": ${data?.createdBy ?? ""}"),
-        gapField,
-        expandedRowShowText('Client Type', ": ${data?.clientType ?? ""}"),
-        gapField,
-        expandedRowShowText('Schedule ID', ": ${data?.scheduleId ?? ""}"),
-        gapField,
-        expandedRowShowText('Client Email', ": ${data?.clientEmail ?? ""}"),
+        expandedRowShowText('ID', "${data?.id ?? ""}"),
+        expandedRowShowText('Won/Lose Status', data?.wonLoseStatus ?? ""),
+        expandedRowShowText('Created By', "${data?.createdBy ?? ""}"),
+        expandedRowShowText('Client Type', data?.clientType ?? ""),
+        expandedRowShowText('Schedule ID', "${data?.scheduleId ?? ""}"),
+        expandedRowShowText('Client Email', data?.clientEmail ?? ""),
       ],
     );
   }

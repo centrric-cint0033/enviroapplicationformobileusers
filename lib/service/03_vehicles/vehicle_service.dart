@@ -3,97 +3,136 @@ import 'dart:convert';
 import 'package:dartz/dartz.dart';
 import 'package:enviro_mobile_application/constant/base_url.dart';
 import 'package:enviro_mobile_application/model/03_vehicle/vehicle_model/vehicle_model.dart';
-import 'package:enviro_mobile_application/model/truck_page/res_model/truckpage_model.dart';
 import 'package:enviro_mobile_application/utilis/api_endpoints/api_endpoints.dart';
 import 'package:enviro_mobile_application/utilis/httpservice.dart';
 import 'package:enviro_mobile_application/utilis/injection.dart';
 import 'package:enviro_mobile_application/utilis/main_failure.dart';
-import 'package:enviro_mobile_application/view/03_vehicles/master_car_page.dart';
-import 'package:enviro_mobile_application/view/03_vehicles/master_truck_page.dart';
 import 'package:http/http.dart';
 import 'package:injectable/injectable.dart';
 
-enum CarActionType {
-  Preinspectioncheck,
-  MaintenanceCheck,
-  vehiclelist,
-  fuelexpence
-}
-
-enum ActionType {
-  Preinspectioncheck,
-  MaintenanceCheck,
-  vehiclelist,
-  fuelexpence
-}
-
-enum MasterTruckActionType {
-  Preinspectioncheck,
-  MaintenanceCheck,
-  vehiclelist,
-  fuelexpence
+enum VehicleActionType {
+  preInspectionCheck,
+  maintenanceCheck,
+  vehicleList,
+  fuelExpence,
 }
 
 abstract class IVehicleService {
-  Future<Either<MainFailure, List<VehicleModel>>> preinspectionfunction(drop);
+  Future<Either<MainFailure, List<VehicleModel>>> preinspectionfunction(
+      VehicleActionType? status);
 
   Future<Either<MainFailure, List<VehicleModel>>> masterfuelsearchfunction(
       searchdrop);
 
   Future<Either<MainFailure, List<VehicleModel>>> pretrailorfunction(
-      semitruckdrop);
+      VehicleActionType? semitruckdrop);
 
   Future<Either<MainFailure, List<VehicleModel>>> masterfuelsemitruckfunction(
       searchdrop);
 
-  Future<Either<MainFailure, List<VehicleModel>>> mastertruckfunction(
-      truckdrop);
-  Future<Either<MainFailure, List<VehicleModel>>> masterfueltruckfunction(
-      searchtrucksemidrop, value);
+  Future<Either<Map<MainFailure, dynamic>, List<VehicleModel>>>
+      masterTruckServiceApi(truckdrop);
+  Future<Either<Map<MainFailure, dynamic>, List<VehicleModel>>>
+      masterTruckSearchServiceApi(searchtrucksemidrop, value);
 }
 
 @LazySingleton(as: IVehicleService)
 class VehicleService implements IVehicleService {
-  // @override
-  // Future<Either<MainFailure, List<CmnvehiclepageModel>>>
-  //     mastercarfunction() async {
-  //   var response = await getIt<HttpService>().request(
-  //     authenticated: true,
-  //     method: HttpMethod.get,
-  //     apiUrl: ApiEndPoints.endpointcarpage,
-  //   );
-  //   return response.fold(
-  //     (l) {
-  //       (l.values.first);
-  //       return Left(l.keys.first);
-  //     },
-  //     (res) async {
-  //       var data = jsonDecode(res.body) as List;
+  @override
+  Future<Either<Map<MainFailure, dynamic>, List<VehicleModel>>>
+      masterTruckServiceApi(truckdrop) async {
+    String apiUrl;
+    // ignore: unused_local_variable
+    String pagination = '?page=1&limit=10';
 
-  //       List<CmnvehiclepageModel> vehicles =
-  //           data.map((e) => CmnvehiclepageModel.fromJson(e)).toList();
-  //       return Right(vehicles);
-  //     },
-  //   );
-  // }
+    switch (truckdrop) {
+      case VehicleActionType.vehicleList:
+        apiUrl = ApiEndPoints.vehTruck;
+        break;
+      case VehicleActionType.preInspectionCheck:
+        apiUrl = ApiEndPoints.vehTruckPreInspection;
+        break;
+      case VehicleActionType.maintenanceCheck:
+        apiUrl = ApiEndPoints.vehTruckPreMaintenance;
+        break;
+      case VehicleActionType.fuelExpence:
+        apiUrl = ApiEndPoints.vehTruckFuelExpense;
+        break;
+      default:
+        apiUrl = ApiEndPoints.vehTruck;
+    }
+
+    var response = await getIt<HttpService>().request(
+      authenticated: true,
+      method: HttpMethod.get,
+      apiUrl: apiUrl,
+    );
+
+    return response.fold(
+      (l) => Left(l),
+      (res) async {
+        var data = jsonDecode(res.body) as List;
+        List<VehicleModel> vehicles =
+            data.map((e) => VehicleModel.fromJson(e)).toList();
+        return Right(vehicles);
+      },
+    );
+  }
+
+  @override
+  Future<Either<Map<MainFailure, dynamic>, List<VehicleModel>>>
+      masterTruckSearchServiceApi(trucksearchdrop, value) async {
+    String apiUrl;
+    switch (trucksearchdrop) {
+      case VehicleActionType.vehicleList:
+        apiUrl = ApiEndPoints.vehTruckSearch;
+        break;
+      case VehicleActionType.preInspectionCheck:
+        apiUrl = ApiEndPoints.vehTruckPreInspectionSearch;
+        break;
+      case VehicleActionType.maintenanceCheck:
+        apiUrl = ApiEndPoints.vehTruckPreMaintenanceSearch;
+        // MultipartRequest request =
+        //     MultipartRequest("POST", Uri.parse("$baseUrl$apiUrl"));
+        // request.fields['key'] = 'e';
+        break;
+      case VehicleActionType.fuelExpence:
+        apiUrl = ApiEndPoints.vehTruckFuelExpenseSearch;
+        break;
+      default:
+        apiUrl = ApiEndPoints.vehTruckSearch;
+        break;
+    }
+
+    var response = await getIt<HttpService>()
+        .multipartRequest(apiUrl: apiUrl, method: 'POST', data: {"key": value});
+
+    return response.fold(
+      (l) => Left(l),
+      (res) async {
+        var data = jsonDecode(res.body) as List;
+        List<VehicleModel> fuelcarsearch =
+            data.map((e) => VehicleModel.fromJson(e)).toList();
+        return Right(fuelcarsearch);
+      },
+    );
+  }
 
   @override
   Future<Either<MainFailure, List<VehicleModel>>> preinspectionfunction(
-      drop) async {
+      VehicleActionType? status) async {
     String apiUrl;
-    switch (drop) {
-      case MasterCarpage:
-      case CarActionType.vehiclelist:
+    switch (status) {
+      case VehicleActionType.vehicleList:
         apiUrl = ApiEndPoints.endpointcarpage;
         break;
-      case CarActionType.Preinspectioncheck:
+      case VehicleActionType.preInspectionCheck:
         apiUrl = ApiEndPoints.endpointpreinspectioncarcheckpage;
         break;
-      case MasterTruckPage:
-      case CarActionType.MaintenanceCheck:
+      case VehicleActionType.maintenanceCheck:
         apiUrl = ApiEndPoints.endpointmaintancecarcheckpage;
         break;
-      case CarActionType.fuelexpence:
+      case VehicleActionType.fuelExpence:
         apiUrl = ApiEndPoints.endpointfuelcarcheckpage;
 
         break;
@@ -128,19 +167,19 @@ class VehicleService implements IVehicleService {
     String apiUrl;
     print('awww$searchdrop');
     switch (searchdrop) {
-      case CarActionType.vehiclelist:
+      case VehicleActionType.vehicleList:
         apiUrl = ApiEndPoints.endpointvehiclecarlistsearch;
         break;
-      case CarActionType.Preinspectioncheck:
+      case VehicleActionType.preInspectionCheck:
         apiUrl = ApiEndPoints.endpointpreinspectioncarsearch;
         break;
-      case CarActionType.MaintenanceCheck:
+      case VehicleActionType.maintenanceCheck:
         apiUrl = ApiEndPoints.endpointmaintancecarsearchcheckpage;
         MultipartRequest request =
             MultipartRequest("POST", Uri.parse("$baseUrl$apiUrl"));
         request.fields['key'] = 'e';
         break;
-      case CarActionType.fuelexpence:
+      case VehicleActionType.fuelExpence:
         apiUrl = ApiEndPoints.endpointmasterfuelcarsearch;
         break;
       default:
@@ -174,23 +213,21 @@ class VehicleService implements IVehicleService {
 
   @override
   Future<Either<MainFailure, List<VehicleModel>>> pretrailorfunction(
-      semitruckdrop) async {
+      VehicleActionType? semitruckdrop) async {
     String apiUrl;
     switch (semitruckdrop) {
-      case MasterTruckActionType.vehiclelist:
+      case 'Vehicle list':
         apiUrl = ApiEndPoints.endpointsemitrailorpage;
         break;
-      case MasterTruckActionType.Preinspectioncheck:
+      case 'Pre Inspection check':
         apiUrl = ApiEndPoints.endpointpreinspectionsemitruckcheckpage;
         break;
-
-      case MasterTruckActionType.MaintenanceCheck:
+      case 'Maintenance check':
         apiUrl = ApiEndPoints.endpointmaintancesemitruckcheckpage;
         break;
-      case MasterTruckActionType.fuelexpence:
+      case 'Fuel Expense':
         apiUrl = ApiEndPoints.endpointfuelsemitruckcheckpage;
         break;
-
       default:
         apiUrl = ApiEndPoints.endpointsemitrailorpage;
     }
@@ -222,19 +259,19 @@ class VehicleService implements IVehicleService {
     String apiUrl;
     print('awww$searchsemidrop');
     switch (searchsemidrop) {
-      case CarActionType.vehiclelist:
+      case VehicleActionType.vehicleList:
         apiUrl = ApiEndPoints.endpointvehiclesemitrucklistsearch;
         break;
-      case CarActionType.Preinspectioncheck:
+      case VehicleActionType.preInspectionCheck:
         apiUrl = ApiEndPoints.endpointpreinspectionsemitrucksearch;
         break;
-      case CarActionType.MaintenanceCheck:
+      case VehicleActionType.maintenanceCheck:
         apiUrl = ApiEndPoints.endpointmaintancesemitruckcheckpage;
         MultipartRequest request =
             MultipartRequest("POST", Uri.parse("$baseUrl$apiUrl"));
         request.fields['key'] = 'e';
         break;
-      case CarActionType.fuelexpence:
+      case VehicleActionType.fuelExpence:
         apiUrl = ApiEndPoints.endpointmasterfuelcarsearch;
         break;
       default:
@@ -260,100 +297,6 @@ class VehicleService implements IVehicleService {
 
         List<VehicleModel> fuelcarsearch =
             data.map((e) => VehicleModel.fromJson(e)).toList();
-        return Right(fuelcarsearch);
-      },
-    );
-  }
-
-  @override
-  Future<Either<MainFailure, List<VehicleModel>>> mastertruckfunction(
-      truckdrop) async {
-    String apiUrl;
-    switch (truckdrop) {
-      case ActionType.vehiclelist:
-        apiUrl = ApiEndPoints.endpointtruckpage;
-        break;
-      case ActionType.Preinspectioncheck:
-        apiUrl = ApiEndPoints.endpointpreinspectiontruckcheckpage;
-        break;
-
-      case ActionType.MaintenanceCheck:
-        apiUrl = ApiEndPoints.endpointmaintancetruckcheckpage;
-        break;
-      case ActionType.fuelexpence:
-        apiUrl = ApiEndPoints.endpointfueltruckcheckpage;
-        break;
-
-      default:
-        apiUrl = ApiEndPoints.endpointtruckpage;
-    }
-
-    var response = await getIt<HttpService>().request(
-      authenticated: true,
-      method: HttpMethod.get,
-      apiUrl: apiUrl,
-    );
-
-    return response.fold(
-      (l) {
-        (l.values.first);
-        return Left(l.keys.first);
-      },
-      (res) async {
-        var data = jsonDecode(res.body) as List;
-        List<VehicleModel> vehicles =
-            data.map((e) => VehicleModel.fromJson(e)).toList();
-        return Right(vehicles);
-      },
-    );
-  }
-
-  @override
-  Future<Either<MainFailure, List<VehicleModel>>> masterfueltruckfunction(
-      trucksearchdrop, value) async {
-    String apiUrl;
-    print('awww$trucksearchdrop');
-    switch (trucksearchdrop) {
-      case CarActionType.vehiclelist:
-        apiUrl = ApiEndPoints.endpointtruckpage;
-        break;
-      case CarActionType.Preinspectioncheck:
-        apiUrl = ApiEndPoints.endpointpreinspectiontrucksearch;
-        break;
-      case CarActionType.MaintenanceCheck:
-        apiUrl = ApiEndPoints.endpointmaintancetrucksearchcheckpage;
-        MultipartRequest request =
-            MultipartRequest("POST", Uri.parse("$baseUrl$apiUrl"));
-        request.fields['key'] = 'e';
-        break;
-      case CarActionType.fuelexpence:
-        apiUrl = ApiEndPoints.endpointtruckfuelsearch;
-        break;
-      default:
-        apiUrl = ApiEndPoints.endpointtruckfuelsearch;
-        break;
-    }
-
-    MultipartRequest request =
-        MultipartRequest("POST", Uri.parse("$baseUrl$apiUrl"));
-
-    request.fields['registration'] = 'e';
-
-    var response =
-        await getIt<HttpService>().multipartRequest(mRequest: request);
-
-    return response.fold(
-      (l) {
-        // Show Error
-        (l.values.first);
-        return Left(l.keys.first);
-      },
-      (res) async {
-        var data = jsonDecode(res.body) as List;
-
-        List<VehicleModel> fuelcarsearch =
-            data.map((e) => VehicleModel.fromJson(e)).toList();
-        print('OFF$fuelcarsearch');
         return Right(fuelcarsearch);
       },
     );

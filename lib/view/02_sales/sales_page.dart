@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:enviro_mobile_application/view/02_sales/sales_tab_screens/job_list_tab.dart';
+import 'package:enviro_mobile_application/view/02_sales/sales_widgets.dart/sales_widget.dart';
 import 'package:enviro_mobile_application/widgets/cmn_action_icon.dart';
 import 'package:enviro_mobile_application/widgets/cmn_title_textwidget.dart';
 import 'package:enviro_mobile_application/widgets/common_tababr.dart';
@@ -7,6 +8,7 @@ import 'package:enviro_mobile_application/view/02_sales/sales_tab_screens/quote_
 import 'package:enviro_mobile_application/view/02_sales/sales_tab_screens/sales_list_tab.dart';
 import 'package:enviro_mobile_application/widgets/drawer.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 @RoutePage()
 class SalesPage extends StatelessWidget {
@@ -21,19 +23,26 @@ class SalesPage extends StatelessWidget {
           appBar: AppBar(
               title: cmnTitleWidget('Sales'),
               actions: [notificationButton(context)]),
-          body: Column(
-            children: [
-              CommonTabbar(),
-              const Expanded(
-                child: TabBarView(
-                  children: <Widget>[
-                    JobListTab(),
-                    QuoteRegisterTab(),
-                    SalesListTab()
-                  ],
+          body: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 15.w),
+            child: Column(
+              children: [
+                commonTabbar(
+                    value1: 'Job List',
+                    value2: 'Quote Reg',
+                    value3: 'Sales List'),
+                gapField,
+                const Expanded(
+                  child: TabBarView(
+                    children: <Widget>[
+                      JobListTab(),
+                      QuoteRegisterTab(),
+                      SalesListTab()
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ));
   }

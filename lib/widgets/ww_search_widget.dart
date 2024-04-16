@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
 
 class WWSearchField extends StatelessWidget {
   final Function(String)? onChanged;
   final TextEditingController controller;
   final Function() searchTap;
-  final String hintText;
+  final String? hintText;
   const WWSearchField(
       {super.key,
       this.onChanged,
       required this.controller,
       required this.searchTap,
-      required this.hintText});
+      this.hintText});
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +26,7 @@ class WWSearchField extends StatelessWidget {
             controller: controller,
             style: const TextStyle(color: Colors.black),
             decoration: InputDecoration(
-                hintText: hintText,
+                hintText: hintText ?? 'Search here',
                 border: InputBorder.none,
                 contentPadding: const EdgeInsets.all(10),
                 suffixIcon: GestureDetector(
