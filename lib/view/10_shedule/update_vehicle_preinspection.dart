@@ -171,7 +171,7 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                             'Engine OIl steel',
                           ),
                           Checkbox(
-                            side: const BorderSide(color: Colors.red),
+                            side: const BorderSide(color: Colors.black),
                             value: false,
                             onChanged: (bool? value) {},
                             checkColor: Colors.red,
@@ -185,7 +185,7 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                             'Warning system',
                           ),
                           Checkbox(
-                            side: const BorderSide(color: Colors.red),
+                            side: const BorderSide(color: Colors.black),
                             value: false,
                             onChanged: (bool? value) {},
                             checkColor: Colors.red,
@@ -199,7 +199,7 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                             'Steering',
                           ),
                           Checkbox(
-                            side: const BorderSide(color: Colors.red),
+                            side: const BorderSide(color: Colors.black),
                             value: false,
                             onChanged: (bool? value) {},
                             checkColor: Colors.red,
@@ -213,7 +213,7 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                             'safty/Emergy stops',
                           ),
                           Checkbox(
-                            side: const BorderSide(color: Colors.red),
+                            side: const BorderSide(color: Colors.black),
                             value: false,
                             onChanged: (bool? value) {},
                             checkColor: Colors.red,
@@ -227,7 +227,7 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                             'Hand break alarm',
                           ),
                           Checkbox(
-                            side: const BorderSide(color: Colors.red),
+                            side: const BorderSide(color: Colors.black),
                             value: false,
                             onChanged: (bool? value) {},
                             checkColor: Colors.red,
@@ -241,7 +241,7 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                             'PTO/vac pumb',
                           ),
                           Checkbox(
-                            side: const BorderSide(color: Colors.red),
+                            side: const BorderSide(color: Colors.black),
                             value: false,
                             onChanged: (bool? value) {},
                             checkColor: Colors.red,
@@ -255,7 +255,7 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                             'Horn',
                           ),
                           Checkbox(
-                            side: const BorderSide(color: Colors.red),
+                            side: const BorderSide(color: Colors.black),
                             value: false,
                             onChanged: (bool? value) {},
                             checkColor: Colors.red,
@@ -269,7 +269,7 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                             'Rev/alarmcamera',
                           ),
                           Checkbox(
-                            side: const BorderSide(color: Colors.red),
+                            side: const BorderSide(color: Colors.black),
                             value: false,
                             onChanged: (bool? value) {},
                             checkColor: Colors.red,
@@ -283,7 +283,7 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                             'Lights head',
                           ),
                           Checkbox(
-                            side: const BorderSide(color: Colors.red),
+                            side: const BorderSide(color: Colors.black),
                             value: false,
                             onChanged: (bool? value) {},
                             checkColor: Colors.red,
@@ -297,7 +297,7 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                             'Lights tail',
                           ),
                           Checkbox(
-                            side: const BorderSide(color: Colors.red),
+                            side: const BorderSide(color: Colors.black),
                             value: false,
                             onChanged: (bool? value) {},
                             checkColor: Colors.red,
@@ -311,7 +311,7 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                             'Light beacons',
                           ),
                           Checkbox(
-                            side: const BorderSide(color: Colors.red),
+                            side: const BorderSide(color: Colors.black),
                             value: false,
                             onChanged: (bool? value) {},
                             checkColor: Colors.red,
@@ -326,7 +326,7 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                             'Hazard lights',
                           ),
                           Checkbox(
-                            side: const BorderSide(color: Colors.red),
+                            side: const BorderSide(color: Colors.black),
                             value: false,
                             onChanged: (bool? value) {},
                             checkColor: Colors.red,
@@ -340,7 +340,7 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                             'Rims&wheelnuts',
                           ),
                           Checkbox(
-                            side: const BorderSide(color: Colors.red),
+                            side: const BorderSide(color: Colors.black),
                             value: false,
                             onChanged: (bool? value) {},
                             checkColor: Colors.red,
@@ -354,7 +354,7 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                             'Coolant',
                           ),
                           Checkbox(
-                            side: const BorderSide(color: Colors.red),
+                            side: const BorderSide(color: Colors.black),
                             value: false,
                             onChanged: (bool? value) {},
                             checkColor: Colors.red,
@@ -368,7 +368,7 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                             'Wheels&tyres',
                           ),
                           Checkbox(
-                            side: const BorderSide(color: Colors.red),
+                            side: const BorderSide(color: Colors.black),
                             value: false,
                             onChanged: (bool? value) {},
                             checkColor: Colors.red,
@@ -382,7 +382,7 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                             'Mirrors &windscreen',
                           ),
                           Checkbox(
-                            side: const BorderSide(color: Colors.red),
+                            side: const BorderSide(color: Colors.black),
                             value: false,
                             onChanged: (bool? value) {},
                             checkColor: Colors.red,
@@ -396,7 +396,7 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                             'Structure and bodywork',
                           ),
                           Checkbox(
-                            side: const BorderSide(color: Colors.red),
+                            side: const BorderSide(color: Colors.black),
                             value: false,
                             onChanged: (bool? value) {},
                             checkColor: Colors.red,
@@ -410,7 +410,7 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                             'wipers',
                           ),
                           Checkbox(
-                            side: const BorderSide(color: Colors.red),
+                            side: const BorderSide(color: Colors.black),
                             value: false,
                             onChanged: (bool? value) {},
                             checkColor: Colors.red,
@@ -424,7 +424,7 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                             'Full level pumb',
                           ),
                           Checkbox(
-                            side: const BorderSide(color: Colors.red),
+                            side: const BorderSide(color: Colors.black),
                             value: false,
                             onChanged: (bool? value) {},
                             checkColor: Colors.red,
@@ -438,7 +438,7 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                             'Full level truck',
                           ),
                           Checkbox(
-                            side: const BorderSide(color: Colors.red),
+                            side: const BorderSide(color: Colors.black),
                             value: false,
                             onChanged: (bool? value) {},
                             checkColor: Colors.red,
@@ -452,7 +452,7 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                             'Seat/seatbelt',
                           ),
                           Checkbox(
-                            side: const BorderSide(color: Colors.red),
+                            side: const BorderSide(color: Colors.black),
                             value: false,
                             onChanged: (bool? value) {},
                             checkColor: Colors.red,
@@ -466,7 +466,7 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                             'parkbeat/trailor',
                           ),
                           Checkbox(
-                            side: const BorderSide(color: Colors.red),
+                            side: const BorderSide(color: Colors.black),
                             value: false,
                             onChanged: (bool? value) {},
                             checkColor: Colors.red,
@@ -480,7 +480,7 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                             'Footbrake',
                           ),
                           Checkbox(
-                            side: const BorderSide(color: Colors.red),
+                            side: const BorderSide(color: Colors.black),
                             value: false,
                             onChanged: (bool? value) {},
                             checkColor: Colors.red,
@@ -494,7 +494,7 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                             'Electrical',
                           ),
                           Checkbox(
-                            side: const BorderSide(color: Colors.red),
+                            side: const BorderSide(color: Colors.black),
                             value: false,
                             onChanged: (bool? value) {},
                             checkColor: Colors.red,
