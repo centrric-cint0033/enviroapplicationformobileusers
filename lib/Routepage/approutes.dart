@@ -4,6 +4,7 @@ import 'package:enviro_mobile_application/Routepage/guards.dart';
 
 import 'package:enviro_mobile_application/Routepage/routespage.dart';
 import 'package:enviro_mobile_application/view/10_shedule/shedule_calender_page.dart';
+import 'package:enviro_mobile_application/view/10_shedule/update_vehicle_preinspection.dart';
 
 @AutoRouterConfig()
 class AppRouter extends $AppRouter {
@@ -40,5 +41,8 @@ class AppRouter extends $AppRouter {
         AutoRoute(page: CalenderRoute.page, path: RouteNames.rcalenderpage),
         AutoRoute(
             page: SheduledetailRoute.page, path: RouteNames.rsheduledetailpage),
+        AutoRoute(
+            page: UpdateVehiclepreinspectionRoute.page,
+            path: RouteNames.rupdatevehiclepreinspectionpage),
       ];
 }

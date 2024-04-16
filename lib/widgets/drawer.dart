@@ -38,7 +38,7 @@ Drawer CmnDrawer(BuildContext context) {
                                 vmProfile.profilepageResponse.data!.dp!,
                                 fit: BoxFit.cover,
                               )
-                            : Container(), // You can replace Container() with any placeholder widget you desire
+                            : Container(),
                       );
                     }),
                     Observer(builder: (_) {

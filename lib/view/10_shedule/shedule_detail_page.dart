@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:enviro_mobile_application/Routepage/routespage.dart';
 import 'package:enviro_mobile_application/view/02_sales/sales_widgets.dart/sales_widget.dart';
 import 'package:enviro_mobile_application/widgets/cmbutton.dart';
 import 'package:enviro_mobile_application/widgets/cmn_action_icon.dart';
@@ -26,9 +27,7 @@ class SheduledetailPage extends StatelessWidget {
               return Align(
                 alignment: Alignment.topRight,
                 child: ElevatedButton(
-                  onPressed: () {
-                    // Add your functionality here
-                  },
+                  onPressed: () {},
                   child: const Text('Job Card'),
                   style: ElevatedButton.styleFrom(
                     primary: Colors.white,
@@ -52,13 +51,15 @@ class SheduledetailPage extends StatelessWidget {
               return CmButton(
                 color: Colors.green,
                 buttonTextStyle: const TextStyle(color: Colors.white),
-                onPressed: () {},
+                onPressed: () {
+                  updatevehiclepreinspection(context);
+                },
                 text: "Update vehicle preinspection",
               );
             }
           },
           separatorBuilder: (context, index) => const SizedBox(height: 20),
-          itemCount: 12, // Change this based on your actual item count
+          itemCount: 12,
         ),
       ),
     );
@@ -88,4 +89,9 @@ class SheduledetailPage extends StatelessWidget {
         return Container();
     }
   }
+}
+
+void updatevehiclepreinspection(BuildContext context) {
+  print('ssssspendingclicked');
+  context.router.pushNamed(RouteNames.rupdatevehiclepreinspectionpage);
 }

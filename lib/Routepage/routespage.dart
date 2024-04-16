@@ -18,4 +18,6 @@ class RouteNames {
   static const String rshedulepage = '/shedulepage';
   static const String rcalenderpage = '/calenderpage';
   static const String rsheduledetailpage = '/sheduledetailpage';
+  static const String rupdatevehiclepreinspectionpage =
+      '/updatevehiclepreinspectionpage ';
 }

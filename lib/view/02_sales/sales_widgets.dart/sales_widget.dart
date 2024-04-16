@@ -16,12 +16,19 @@ Card customCard({required Widget child}) => Card(
 
 Text showText(String value) =>
     Text(value, style: const TextStyle(color: Appthemes.cPrimary));
+Text showsText(String value) =>
+    Text(value, style: const TextStyle(color: Colors.black));
 
 Expanded expandedShowText(String value) =>
     Expanded(flex: 3, child: showText(value));
+Expanded expandedShowsText(String value) =>
+    Expanded(flex: 3, child: showsText(value));
 
 Row expandedRowShowText(String firsValue, String secondValue) => Row(
       children: [expandedShowText(firsValue), expandedShowText(secondValue)],
+    );
+Row expandedRowShowsText(String firsValue, String secondValue) => Row(
+      children: [expandedShowsText(firsValue), expandedShowsText(secondValue)],
     );
 
 Row expandedRowShowText1(String firsValue, String secondValue) => Row(
