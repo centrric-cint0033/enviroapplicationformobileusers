@@ -37,11 +37,8 @@ class HttpService {
     HttpMethod method = HttpMethod.get,
   }) async {
     Client client;
-    if (authenticated) {
-      client = InterceptedClient.build(interceptors: [LoggingInterceptor()]);
-    } else {
-      client = Client();
-    }
+    client = InterceptedClient.build(
+        interceptors: [LoggingInterceptor(authenticated)]);
 
     return tryCatch(client, () async {
       final url = "$baseUrl$apiUrl";
@@ -179,14 +176,26 @@ Future<Response> retryMethod(Future<Response> apiCall) async {
 }
 
 class LoggingInterceptor implements InterceptorContract {
+  final bool authenticated;
+
+  LoggingInterceptor(this.authenticated);
   @override
   Future<RequestData> interceptRequest({required RequestData data}) async {
     final token = await SecureStorage().readData(key: "token");
-    data.headers.addAll({
-      'Accept': 'application/json',
-      'Authorization': 'Bearer $token',
-      'Content-Type': 'application/json',
-    });
+
+    if (authenticated) {
+      data.headers.addAll({
+        'Accept': 'application/json',
+        'Authorization': 'Bearer $token',
+        'Content-Type': 'application/json',
+      });
+    } else {
+      data.headers.addAll({
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      });
+    }
+
     return data;
   }
 
