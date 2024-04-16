@@ -46,6 +46,7 @@ Drawer CmnDrawer(BuildContext context) {
                         padding: const EdgeInsets.only(left: 23.0),
                         child: Text(
                           vmProfile.profilepageResponse.data?.username ?? '',
+                          style: const TextStyle(overflow: TextOverflow.clip),
                         ),
                       );
                     }),
