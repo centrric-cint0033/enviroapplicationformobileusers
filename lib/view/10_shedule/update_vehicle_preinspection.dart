@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:dartz/dartz.dart';
 import 'package:enviro_mobile_application/utilis/constant.dart';
 import 'package:enviro_mobile_application/view/02_sales/sales_widgets.dart/sales_widget.dart';
 import 'package:enviro_mobile_application/widgets/cmn_action_icon.dart';
@@ -616,6 +617,101 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                             checkColor: Colors.red,
                           ),
                         ],
+                      ),
+                      sized0hx10,
+                      Container(
+                        decoration: BoxDecoration(
+                          color: Colors.yellow,
+                          border: Border.all(color: Colors.yellow),
+                          borderRadius: BorderRadius.circular(5.0),
+                        ),
+                        child: const Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Any Faults to report( of any category)& Any additional information',
+                                style: TextStyle(),
+                              ),
+                              SizedBox(height: 8),
+                              TextField(
+                                decoration: InputDecoration(
+                                  hintText: 'Type Here...',
+                                  border: InputBorder.none,
+                                ),
+                                style: TextStyle(),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 16,
+                      ),
+                      const Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text("Action Taken By"),
+                          Text("Authorised By"),
+                        ],
+                      ),
+                      sized0hx40,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Checkbox(
+                            side: const BorderSide(color: Colors.red),
+                            value: false,
+                            onChanged: (bool? value) {},
+                            checkColor: Colors.red,
+                          ),
+                          const Expanded(
+                            child: Text(
+                              'I have conducted the abouve pre_start  checklist and satisfied that the vehiclke is safe and readyb to operatate.',
+                              style: TextStyle(fontSize: 13),
+                            ),
+                          ),
+                        ],
+                      ),
+                      sized0hx10,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Checkbox(
+                            side: const BorderSide(color: Colors.red),
+                            value: false,
+                            onChanged: (bool? value) {},
+                            checkColor: Colors.red,
+                          ),
+                          const Expanded(
+                            child: Text(
+                              'I have conducted the abouve pre_start  checklist and satisfied that the vehiclke is safe and readyb to operatate.',
+                              style: TextStyle(fontSize: 13),
+                            ),
+                          ),
+                        ],
+                      ),
+                      sized0hx10,
+                      Align(
+                        alignment: Alignment.bottomRight,
+                        child: ElevatedButton(
+                          onPressed: () {},
+                          style: ElevatedButton.styleFrom(
+                            primary: Colors.blue,
+                            onPrimary: Colors.blue,
+                            side: const BorderSide(color: Colors.blue),
+                          ),
+                          child: const Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: Text(
+                              'Submit',
+                              style: TextStyle(
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                        ),
                       ),
                     ],
                   ),
