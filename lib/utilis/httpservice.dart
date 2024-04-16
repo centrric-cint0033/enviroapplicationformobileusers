@@ -124,11 +124,15 @@ class HttpService {
     );
   }
 
+  bool isFilePath(String path) {
+    return File(path).existsSync();
+  }
+
   Future<Either<Map<MainFailure, dynamic>, Response>> multipartRequest({
     MultipartRequest? mRequest,
     String? apiUrl,
     String? method,
-    Map<String, String>? data,
+    Map<String, dynamic>? data,
   }) async {
     final url = "$baseUrl$apiUrl";
 
@@ -148,8 +152,12 @@ class HttpService {
       }
 
       if (data != null) {
-        data.forEach((key, value) {
-          request.fields[key] = value.toString();
+        data.forEach((key, value) async {
+          if (isFilePath(value)) {
+            request.files.add(await MultipartFile.fromPath(key, value));
+          } else {
+            request.fields[key] = value.toString();
+          }
         });
       }
 

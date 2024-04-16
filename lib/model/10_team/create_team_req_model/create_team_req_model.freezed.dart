@@ -20,16 +20,17 @@ CreateTeamReqModel _$CreateTeamReqModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$CreateTeamReqModel {
-  num? get employee_id => throw _privateConstructorUsedError;
+  String? get employee_id => throw _privateConstructorUsedError;
+  String? get address => throw _privateConstructorUsedError;
   String? get name => throw _privateConstructorUsedError;
   String? get designation => throw _privateConstructorUsedError;
-  num? get contact_number => throw _privateConstructorUsedError;
+  String? get contact_number => throw _privateConstructorUsedError;
   String? get date_joined => throw _privateConstructorUsedError;
   String? get password => throw _privateConstructorUsedError;
   String? get email => throw _privateConstructorUsedError;
   String? get date_of_birth => throw _privateConstructorUsedError;
-  String? get alert_before => throw _privateConstructorUsedError;
-  String? get expiry_date => throw _privateConstructorUsedError;
+  DateTime? get alert_before => throw _privateConstructorUsedError;
+  DateTime? get expiry_date => throw _privateConstructorUsedError;
   String? get username => throw _privateConstructorUsedError;
   String? get dp => throw _privateConstructorUsedError;
   String? get cover_image => throw _privateConstructorUsedError;
@@ -37,6 +38,10 @@ mixin _$CreateTeamReqModel {
   String? get user_type => throw _privateConstructorUsedError;
   String? get termination_date => throw _privateConstructorUsedError;
   String? get personal_email => throw _privateConstructorUsedError;
+  String? get emergency_contact_name => throw _privateConstructorUsedError;
+  String? get emergency_contact => throw _privateConstructorUsedError;
+  String? get employment_status => throw _privateConstructorUsedError;
+  String? get driving_license => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -51,23 +56,28 @@ abstract class $CreateTeamReqModelCopyWith<$Res> {
       _$CreateTeamReqModelCopyWithImpl<$Res, CreateTeamReqModel>;
   @useResult
   $Res call(
-      {num? employee_id,
+      {String? employee_id,
+      String? address,
       String? name,
       String? designation,
-      num? contact_number,
+      String? contact_number,
       String? date_joined,
       String? password,
       String? email,
       String? date_of_birth,
-      String? alert_before,
-      String? expiry_date,
+      DateTime? alert_before,
+      DateTime? expiry_date,
       String? username,
       String? dp,
       String? cover_image,
       String? bio,
       String? user_type,
       String? termination_date,
-      String? personal_email});
+      String? personal_email,
+      String? emergency_contact_name,
+      String? emergency_contact,
+      String? employment_status,
+      String? driving_license});
 }
 
 /// @nodoc
@@ -84,6 +94,7 @@ class _$CreateTeamReqModelCopyWithImpl<$Res, $Val extends CreateTeamReqModel>
   @override
   $Res call({
     Object? employee_id = freezed,
+    Object? address = freezed,
     Object? name = freezed,
     Object? designation = freezed,
     Object? contact_number = freezed,
@@ -100,12 +111,20 @@ class _$CreateTeamReqModelCopyWithImpl<$Res, $Val extends CreateTeamReqModel>
     Object? user_type = freezed,
     Object? termination_date = freezed,
     Object? personal_email = freezed,
+    Object? emergency_contact_name = freezed,
+    Object? emergency_contact = freezed,
+    Object? employment_status = freezed,
+    Object? driving_license = freezed,
   }) {
     return _then(_value.copyWith(
       employee_id: freezed == employee_id
           ? _value.employee_id
           : employee_id // ignore: cast_nullable_to_non_nullable
-              as num?,
+              as String?,
+      address: freezed == address
+          ? _value.address
+          : address // ignore: cast_nullable_to_non_nullable
+              as String?,
       name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -117,7 +136,7 @@ class _$CreateTeamReqModelCopyWithImpl<$Res, $Val extends CreateTeamReqModel>
       contact_number: freezed == contact_number
           ? _value.contact_number
           : contact_number // ignore: cast_nullable_to_non_nullable
-              as num?,
+              as String?,
       date_joined: freezed == date_joined
           ? _value.date_joined
           : date_joined // ignore: cast_nullable_to_non_nullable
@@ -137,11 +156,11 @@ class _$CreateTeamReqModelCopyWithImpl<$Res, $Val extends CreateTeamReqModel>
       alert_before: freezed == alert_before
           ? _value.alert_before
           : alert_before // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as DateTime?,
       expiry_date: freezed == expiry_date
           ? _value.expiry_date
           : expiry_date // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as DateTime?,
       username: freezed == username
           ? _value.username
           : username // ignore: cast_nullable_to_non_nullable
@@ -169,6 +188,22 @@ class _$CreateTeamReqModelCopyWithImpl<$Res, $Val extends CreateTeamReqModel>
       personal_email: freezed == personal_email
           ? _value.personal_email
           : personal_email // ignore: cast_nullable_to_non_nullable
+              as String?,
+      emergency_contact_name: freezed == emergency_contact_name
+          ? _value.emergency_contact_name
+          : emergency_contact_name // ignore: cast_nullable_to_non_nullable
+              as String?,
+      emergency_contact: freezed == emergency_contact
+          ? _value.emergency_contact
+          : emergency_contact // ignore: cast_nullable_to_non_nullable
+              as String?,
+      employment_status: freezed == employment_status
+          ? _value.employment_status
+          : employment_status // ignore: cast_nullable_to_non_nullable
+              as String?,
+      driving_license: freezed == driving_license
+          ? _value.driving_license
+          : driving_license // ignore: cast_nullable_to_non_nullable
               as String?,
     ) as $Val);
   }
@@ -183,23 +218,28 @@ abstract class _$$CreateTeamReqModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {num? employee_id,
+      {String? employee_id,
+      String? address,
       String? name,
       String? designation,
-      num? contact_number,
+      String? contact_number,
       String? date_joined,
       String? password,
       String? email,
       String? date_of_birth,
-      String? alert_before,
-      String? expiry_date,
+      DateTime? alert_before,
+      DateTime? expiry_date,
       String? username,
       String? dp,
       String? cover_image,
       String? bio,
       String? user_type,
       String? termination_date,
-      String? personal_email});
+      String? personal_email,
+      String? emergency_contact_name,
+      String? emergency_contact,
+      String? employment_status,
+      String? driving_license});
 }
 
 /// @nodoc
@@ -214,6 +254,7 @@ class __$$CreateTeamReqModelImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? employee_id = freezed,
+    Object? address = freezed,
     Object? name = freezed,
     Object? designation = freezed,
     Object? contact_number = freezed,
@@ -230,12 +271,20 @@ class __$$CreateTeamReqModelImplCopyWithImpl<$Res>
     Object? user_type = freezed,
     Object? termination_date = freezed,
     Object? personal_email = freezed,
+    Object? emergency_contact_name = freezed,
+    Object? emergency_contact = freezed,
+    Object? employment_status = freezed,
+    Object? driving_license = freezed,
   }) {
     return _then(_$CreateTeamReqModelImpl(
       employee_id: freezed == employee_id
           ? _value.employee_id
           : employee_id // ignore: cast_nullable_to_non_nullable
-              as num?,
+              as String?,
+      address: freezed == address
+          ? _value.address
+          : address // ignore: cast_nullable_to_non_nullable
+              as String?,
       name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -247,7 +296,7 @@ class __$$CreateTeamReqModelImplCopyWithImpl<$Res>
       contact_number: freezed == contact_number
           ? _value.contact_number
           : contact_number // ignore: cast_nullable_to_non_nullable
-              as num?,
+              as String?,
       date_joined: freezed == date_joined
           ? _value.date_joined
           : date_joined // ignore: cast_nullable_to_non_nullable
@@ -267,11 +316,11 @@ class __$$CreateTeamReqModelImplCopyWithImpl<$Res>
       alert_before: freezed == alert_before
           ? _value.alert_before
           : alert_before // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as DateTime?,
       expiry_date: freezed == expiry_date
           ? _value.expiry_date
           : expiry_date // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as DateTime?,
       username: freezed == username
           ? _value.username
           : username // ignore: cast_nullable_to_non_nullable
@@ -300,6 +349,22 @@ class __$$CreateTeamReqModelImplCopyWithImpl<$Res>
           ? _value.personal_email
           : personal_email // ignore: cast_nullable_to_non_nullable
               as String?,
+      emergency_contact_name: freezed == emergency_contact_name
+          ? _value.emergency_contact_name
+          : emergency_contact_name // ignore: cast_nullable_to_non_nullable
+              as String?,
+      emergency_contact: freezed == emergency_contact
+          ? _value.emergency_contact
+          : emergency_contact // ignore: cast_nullable_to_non_nullable
+              as String?,
+      employment_status: freezed == employment_status
+          ? _value.employment_status
+          : employment_status // ignore: cast_nullable_to_non_nullable
+              as String?,
+      driving_license: freezed == driving_license
+          ? _value.driving_license
+          : driving_license // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -309,6 +374,7 @@ class __$$CreateTeamReqModelImplCopyWithImpl<$Res>
 class _$CreateTeamReqModelImpl implements _CreateTeamReqModel {
   _$CreateTeamReqModelImpl(
       {this.employee_id,
+      this.address,
       this.name,
       this.designation,
       this.contact_number,
@@ -324,19 +390,25 @@ class _$CreateTeamReqModelImpl implements _CreateTeamReqModel {
       this.bio,
       this.user_type,
       this.termination_date,
-      this.personal_email});
+      this.personal_email,
+      this.emergency_contact_name,
+      this.emergency_contact,
+      this.employment_status,
+      this.driving_license});
 
   factory _$CreateTeamReqModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$CreateTeamReqModelImplFromJson(json);
 
   @override
-  final num? employee_id;
+  final String? employee_id;
+  @override
+  final String? address;
   @override
   final String? name;
   @override
   final String? designation;
   @override
-  final num? contact_number;
+  final String? contact_number;
   @override
   final String? date_joined;
   @override
@@ -346,9 +418,9 @@ class _$CreateTeamReqModelImpl implements _CreateTeamReqModel {
   @override
   final String? date_of_birth;
   @override
-  final String? alert_before;
+  final DateTime? alert_before;
   @override
-  final String? expiry_date;
+  final DateTime? expiry_date;
   @override
   final String? username;
   @override
@@ -363,10 +435,18 @@ class _$CreateTeamReqModelImpl implements _CreateTeamReqModel {
   final String? termination_date;
   @override
   final String? personal_email;
+  @override
+  final String? emergency_contact_name;
+  @override
+  final String? emergency_contact;
+  @override
+  final String? employment_status;
+  @override
+  final String? driving_license;
 
   @override
   String toString() {
-    return 'CreateTeamReqModel(employee_id: $employee_id, name: $name, designation: $designation, contact_number: $contact_number, date_joined: $date_joined, password: $password, email: $email, date_of_birth: $date_of_birth, alert_before: $alert_before, expiry_date: $expiry_date, username: $username, dp: $dp, cover_image: $cover_image, bio: $bio, user_type: $user_type, termination_date: $termination_date, personal_email: $personal_email)';
+    return 'CreateTeamReqModel(employee_id: $employee_id, address: $address, name: $name, designation: $designation, contact_number: $contact_number, date_joined: $date_joined, password: $password, email: $email, date_of_birth: $date_of_birth, alert_before: $alert_before, expiry_date: $expiry_date, username: $username, dp: $dp, cover_image: $cover_image, bio: $bio, user_type: $user_type, termination_date: $termination_date, personal_email: $personal_email, emergency_contact_name: $emergency_contact_name, emergency_contact: $emergency_contact, employment_status: $employment_status, driving_license: $driving_license)';
   }
 
   @override
@@ -376,6 +456,7 @@ class _$CreateTeamReqModelImpl implements _CreateTeamReqModel {
             other is _$CreateTeamReqModelImpl &&
             (identical(other.employee_id, employee_id) ||
                 other.employee_id == employee_id) &&
+            (identical(other.address, address) || other.address == address) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.designation, designation) ||
                 other.designation == designation) &&
@@ -403,30 +484,44 @@ class _$CreateTeamReqModelImpl implements _CreateTeamReqModel {
             (identical(other.termination_date, termination_date) ||
                 other.termination_date == termination_date) &&
             (identical(other.personal_email, personal_email) ||
-                other.personal_email == personal_email));
+                other.personal_email == personal_email) &&
+            (identical(other.emergency_contact_name, emergency_contact_name) ||
+                other.emergency_contact_name == emergency_contact_name) &&
+            (identical(other.emergency_contact, emergency_contact) ||
+                other.emergency_contact == emergency_contact) &&
+            (identical(other.employment_status, employment_status) ||
+                other.employment_status == employment_status) &&
+            (identical(other.driving_license, driving_license) ||
+                other.driving_license == driving_license));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      employee_id,
-      name,
-      designation,
-      contact_number,
-      date_joined,
-      password,
-      email,
-      date_of_birth,
-      alert_before,
-      expiry_date,
-      username,
-      dp,
-      cover_image,
-      bio,
-      user_type,
-      termination_date,
-      personal_email);
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        employee_id,
+        address,
+        name,
+        designation,
+        contact_number,
+        date_joined,
+        password,
+        email,
+        date_of_birth,
+        alert_before,
+        expiry_date,
+        username,
+        dp,
+        cover_image,
+        bio,
+        user_type,
+        termination_date,
+        personal_email,
+        emergency_contact_name,
+        emergency_contact,
+        employment_status,
+        driving_license
+      ]);
 
   @JsonKey(ignore: true)
   @override
@@ -445,35 +540,42 @@ class _$CreateTeamReqModelImpl implements _CreateTeamReqModel {
 
 abstract class _CreateTeamReqModel implements CreateTeamReqModel {
   factory _CreateTeamReqModel(
-      {final num? employee_id,
+      {final String? employee_id,
+      final String? address,
       final String? name,
       final String? designation,
-      final num? contact_number,
+      final String? contact_number,
       final String? date_joined,
       final String? password,
       final String? email,
       final String? date_of_birth,
-      final String? alert_before,
-      final String? expiry_date,
+      final DateTime? alert_before,
+      final DateTime? expiry_date,
       final String? username,
       final String? dp,
       final String? cover_image,
       final String? bio,
       final String? user_type,
       final String? termination_date,
-      final String? personal_email}) = _$CreateTeamReqModelImpl;
+      final String? personal_email,
+      final String? emergency_contact_name,
+      final String? emergency_contact,
+      final String? employment_status,
+      final String? driving_license}) = _$CreateTeamReqModelImpl;
 
   factory _CreateTeamReqModel.fromJson(Map<String, dynamic> json) =
       _$CreateTeamReqModelImpl.fromJson;
 
   @override
-  num? get employee_id;
+  String? get employee_id;
+  @override
+  String? get address;
   @override
   String? get name;
   @override
   String? get designation;
   @override
-  num? get contact_number;
+  String? get contact_number;
   @override
   String? get date_joined;
   @override
@@ -483,9 +585,9 @@ abstract class _CreateTeamReqModel implements CreateTeamReqModel {
   @override
   String? get date_of_birth;
   @override
-  String? get alert_before;
+  DateTime? get alert_before;
   @override
-  String? get expiry_date;
+  DateTime? get expiry_date;
   @override
   String? get username;
   @override
@@ -500,6 +602,14 @@ abstract class _CreateTeamReqModel implements CreateTeamReqModel {
   String? get termination_date;
   @override
   String? get personal_email;
+  @override
+  String? get emergency_contact_name;
+  @override
+  String? get emergency_contact;
+  @override
+  String? get employment_status;
+  @override
+  String? get driving_license;
   @override
   @JsonKey(ignore: true)
   _$$CreateTeamReqModelImplCopyWith<_$CreateTeamReqModelImpl> get copyWith =>

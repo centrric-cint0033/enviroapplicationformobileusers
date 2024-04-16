@@ -19,7 +19,9 @@ Widget cmCredentialsForEnviro(BuildContext context) {
                 controller: vmTeam.textAddTeamEmailController)),
         cmRow(
             Row(children: [showText("Password"), sized0wx05, cmRequiredText()]),
-            cmTextField(showDecoration: true))
+            cmTextField(
+                showDecoration: true,
+                controller: vmTeam.textAddTeamPasswordController))
       ]),
     ),
   );

@@ -1,3 +1,4 @@
+import 'package:enviro_mobile_application/utilis/constant.dart';
 import 'package:enviro_mobile_application/view/02_sales/sales_widgets.dart/sales_widget.dart';
 import 'package:enviro_mobile_application/view/10_team/team_widgets/current_employeelist_widget.dart';
 import 'package:enviro_mobile_application/view_model/08_team/team_view_model.dart';
@@ -11,26 +12,32 @@ class CurrentEmployeeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: Column(children: [
-      gapField,
-      WWSearchField(
-        controller: vmTeam.currentEmployeeSearchCntrlr,
-        onChanged: (v) => vmTeam.onTextChanged(() => v.isEmpty
-            ? vmTeam.getCurrentEmployee()
-            : vmTeam.currentEmployeeSearchApi(v)),
-        searchTap: () {},
-        hintText: 'Search Employee',
-      ),
-      gapField,
-      Observer(builder: (_) {
-        return Expanded(
-            child: WWResponseHandler(
-                data: vmTeam.currentEmployeeResponse,
-                isEmpty: vmTeam.currentEmployeeResponse.data?.isEmpty ?? true,
-                onTap: () => vmTeam.getCurrentEmployee(),
-                child: const CurrentEmployeeListWidget()));
-      }),
-    ]));
+    return WillPopScope(
+      onWillPop: () async {
+        vmTeam.currentEmployeeSearchCntrlr.clear();
+        return true;
+      },
+      child: Scaffold(
+          body: Column(children: [
+        sized0hx10,
+        WWSearchField(
+          controller: vmTeam.currentEmployeeSearchCntrlr,
+          onChanged: (v) => vmTeam.onTextChanged(() => v.isEmpty
+              ? vmTeam.getCurrentEmployee()
+              : vmTeam.currentEmployeeSearchApi(v)),
+          searchTap: () {},
+          hintText: 'Search Employee',
+        ),
+        sized0hx10,
+        Observer(builder: (_) {
+          return Expanded(
+              child: WWResponseHandler(
+                  data: vmTeam.currentEmployeeResponse,
+                  isEmpty: vmTeam.currentEmployeeResponse.data?.isEmpty ?? true,
+                  onTap: () => vmTeam.getCurrentEmployee(),
+                  child: const CurrentEmployeeListWidget()));
+        }),
+      ])),
+    );
   }
 }

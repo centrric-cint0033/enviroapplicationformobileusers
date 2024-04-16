@@ -226,19 +226,20 @@ mixin _$TeamViewModel on TeamViewModelBase, Store {
     });
   }
 
-  late final _$showRequredTextAtom =
-      Atom(name: 'TeamViewModelBase.showRequredText', context: context);
+  late final _$showRequredTextLicenseAtom =
+      Atom(name: 'TeamViewModelBase.showRequredTextLicense', context: context);
 
   @override
-  bool get showRequredText {
-    _$showRequredTextAtom.reportRead();
-    return super.showRequredText;
+  bool get showRequredTextLicense {
+    _$showRequredTextLicenseAtom.reportRead();
+    return super.showRequredTextLicense;
   }
 
   @override
-  set showRequredText(bool value) {
-    _$showRequredTextAtom.reportWrite(value, super.showRequredText, () {
-      super.showRequredText = value;
+  set showRequredTextLicense(bool value) {
+    _$showRequredTextLicenseAtom
+        .reportWrite(value, super.showRequredTextLicense, () {
+      super.showRequredTextLicense = value;
     });
   }
 
@@ -458,19 +459,37 @@ mixin _$TeamViewModel on TeamViewModelBase, Store {
     });
   }
 
-  late final _$selectedFileNameAtom =
-      Atom(name: 'TeamViewModelBase.selectedFileName', context: context);
+  late final _$selectedFileNameLicenseAtom =
+      Atom(name: 'TeamViewModelBase.selectedFileNameLicense', context: context);
 
   @override
-  String? get selectedFileName {
-    _$selectedFileNameAtom.reportRead();
-    return super.selectedFileName;
+  String? get selectedFileNameLicense {
+    _$selectedFileNameLicenseAtom.reportRead();
+    return super.selectedFileNameLicense;
   }
 
   @override
-  set selectedFileName(String? value) {
-    _$selectedFileNameAtom.reportWrite(value, super.selectedFileName, () {
-      super.selectedFileName = value;
+  set selectedFileNameLicense(String? value) {
+    _$selectedFileNameLicenseAtom
+        .reportWrite(value, super.selectedFileNameLicense, () {
+      super.selectedFileNameLicense = value;
+    });
+  }
+
+  late final _$selectedFilePathLicenseAtom =
+      Atom(name: 'TeamViewModelBase.selectedFilePathLicense', context: context);
+
+  @override
+  String? get selectedFilePathLicense {
+    _$selectedFilePathLicenseAtom.reportRead();
+    return super.selectedFilePathLicense;
+  }
+
+  @override
+  set selectedFilePathLicense(String? value) {
+    _$selectedFilePathLicenseAtom
+        .reportWrite(value, super.selectedFilePathLicense, () {
+      super.selectedFilePathLicense = value;
     });
   }
 
@@ -603,7 +622,7 @@ mixin _$TeamViewModel on TeamViewModelBase, Store {
 
   @override
   Future<void> createTeam(
-      {required CreateTeamReqModel? data, required BuildContext context}) {
+      {required CreateTeamReqModel data, required BuildContext context}) {
     return _$createTeamAsyncAction
         .run(() => super.createTeam(data: data, context: context));
   }
@@ -689,6 +708,17 @@ mixin _$TeamViewModel on TeamViewModelBase, Store {
   }
 
   @override
+  dynamic employmentStatusonChanged(dynamic newValue) {
+    final _$actionInfo = _$TeamViewModelBaseActionController.startAction(
+        name: 'TeamViewModelBase.employmentStatusonChanged');
+    try {
+      return super.employmentStatusonChanged(newValue);
+    } finally {
+      _$TeamViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 currentEmployeeResponse: ${currentEmployeeResponse},
@@ -704,7 +734,7 @@ createTeamResponse: ${createTeamResponse},
 profileImage: ${profileImage},
 profileImageLoader: ${profileImageLoader},
 showDecoration: ${showDecoration},
-showRequredText: ${showRequredText},
+showRequredTextLicense: ${showRequredTextLicense},
 selectedJoiningDate: ${selectedJoiningDate},
 selectedTerminationDate: ${selectedTerminationDate},
 selectedDob: ${selectedDob},
@@ -718,7 +748,8 @@ selectedDesignationAddTeam: ${selectedDesignationAddTeam},
 selectedEmploymentStatus: ${selectedEmploymentStatus},
 selectedAddEmploymentStatus: ${selectedAddEmploymentStatus},
 showDate: ${showDate},
-selectedFileName: ${selectedFileName}
+selectedFileNameLicense: ${selectedFileNameLicense},
+selectedFilePathLicense: ${selectedFilePathLicense}
     ''';
   }
 }

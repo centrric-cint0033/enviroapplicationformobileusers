@@ -3,14 +3,14 @@ import 'package:enviro_mobile_application/view/02_sales/sales_widgets.dart/sales
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-Widget cmTitle(String text) {
+Widget cmTitle(String text,{FontWeight? fontWeight}) {
   return SizedBox(
     width: double.infinity,
     child: ColoredBox(
       color: Appthemes.cLightGrey,
       child: Padding(
         padding: EdgeInsets.all(10.w),
-        child: showText(text),
+        child: showText(text,fontWeight: fontWeight),
       ),
     ),
   );

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:enviro_mobile_application/utilis/constant.dart';
 import 'package:enviro_mobile_application/view/10_team/team_widgets/cm_button.dart';
 import 'package:enviro_mobile_application/view/10_team/team_widgets/cm_required_text.dart';
@@ -24,7 +26,7 @@ Widget cmIdProofCard(
                   "License File",
                 ),
                 sized0wx05,
-                vmTeam.showRequredText ? cmRequiredText() : const Text("")
+                vmTeam.showRequredTextLicense ? cmRequiredText() : const Text("")
               ],
             );
           },
@@ -37,12 +39,14 @@ Widget cmIdProofCard(
                         await FilePicker.platform.pickFiles();
                     if (result != null) {
                       String fileName = result.files.single.name;
-                      vmTeam.selectedFileName = fileName;
+                      vmTeam.selectedFileNameLicense = fileName;
+                      PlatformFile file = result.files.single;
+                      vmTeam.selectedFilePathLicense = file.path!;
                     }
                   }, Colors.grey, "Select File"),
                   Expanded(
                     child: Text(
-                      vmTeam.selectedFileName ?? "",
+                      "  ${vmTeam.selectedFileNameLicense ?? ""}",
                       style: const TextStyle(overflow: TextOverflow.ellipsis),
                     ),
                   )
@@ -57,7 +61,7 @@ Widget cmIdProofCard(
                   "License Expiry",
                 ),
                 sized0wx05,
-                vmTeam.showRequredText ? cmRequiredText() : const Text("")
+                vmTeam.showRequredTextLicense ? cmRequiredText() : const Text("")
               ],
             );
           },
@@ -70,7 +74,7 @@ Widget cmIdProofCard(
                   "License Alert",
                 ),
                 sized0wx05,
-                vmTeam.showRequredText ? cmRequiredText() : const Text("")
+                vmTeam.showRequredTextLicense ? cmRequiredText() : const Text("")
               ],
             );
           },

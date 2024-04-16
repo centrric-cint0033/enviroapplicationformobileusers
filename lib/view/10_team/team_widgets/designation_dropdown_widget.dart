@@ -48,11 +48,10 @@ class DesignationDownWidget extends StatelessWidget {
             onChanged: (newValue) {
               if (newValue?.userType == "driver-factory-hand" ||
                   newValue?.userType == "driver-liquid-waste-technician") {
-                vmTeam.showRequredText = true;
+                vmTeam.showRequredTextLicense = true;
               } else {
-                vmTeam.showRequredText = false;
+                vmTeam.showRequredTextLicense = false;
               }
-              log(vmTeam.showRequredText.toString());
             },
             // value: selectedTax,
             decoration: const InputDecoration.collapsed(hintText: ''),

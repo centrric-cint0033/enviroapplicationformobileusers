@@ -1,5 +1,5 @@
 import 'dart:async';
-
+import 'dart:developer';
 import 'package:auto_route/auto_route.dart';
 import 'package:enviro_mobile_application/api_response/api_response.dart';
 import 'package:enviro_mobile_application/model/10_team/create_team_req_model/create_team_req_model.dart';
@@ -13,10 +13,11 @@ import 'package:enviro_mobile_application/service/10_team/team_service.dart';
 import 'package:enviro_mobile_application/utilis/api_endpoints/customprint.dart';
 import 'package:enviro_mobile_application/utilis/image_picker_service/image_file_picker.dart';
 import 'package:enviro_mobile_application/utilis/injection.dart';
+import 'package:enviro_mobile_application/widgets/cm_show_toast.dart';
+import 'package:enviro_mobile_application/widgets/ww_popup_error.dart';
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 import 'package:mobx/mobx.dart';
-
 import '../../model/10_team/team_folder_resp_model/folder.dart';
 
 part 'team_view_model.g.dart';
@@ -67,7 +68,7 @@ abstract class TeamViewModelBase with Store {
   @observable
   bool showDecoration = false;
   @observable
-  bool showRequredText = false;
+  bool showRequredTextLicense = false;
   @observable
   DateTime? selectedJoiningDate;
   @observable
@@ -95,7 +96,9 @@ abstract class TeamViewModelBase with Store {
   @observable
   bool showDate = false;
   @observable
-  String? selectedFileName;
+  String? selectedFileNameLicense;
+  @observable
+  String? selectedFilePathLicense;
   TextEditingController textFolderAddController = TextEditingController();
   TextEditingController textFolderEditController = TextEditingController();
   TextEditingController textEditTeamNameController = TextEditingController();
@@ -275,7 +278,7 @@ abstract class TeamViewModelBase with Store {
     return result.fold(
       (l) {
         teamFoldersResponse = teamFoldersResponse.copyWith(
-          error: l,
+          errors: l,
           loading: false,
         );
       },
@@ -305,7 +308,7 @@ abstract class TeamViewModelBase with Store {
     return result.fold(
       (l) {
         addFolderResponse =
-            addFolderResponse.copyWith(error: l, loading: false);
+            addFolderResponse.copyWith(errors: l, loading: false);
       },
       (r) {
         addFolderResponse =
@@ -329,7 +332,7 @@ abstract class TeamViewModelBase with Store {
     return result.fold(
       (l) {
         deleteFolderResponse = deleteFolderResponse.copyWith(
-          error: l,
+          errors: l,
           loading: false,
         );
       },
@@ -360,7 +363,7 @@ abstract class TeamViewModelBase with Store {
     return result.fold(
       (l) {
         editFolderResponse = editFolderResponse.copyWith(
-          error: l,
+          errors: l,
           loading: false,
         );
       },
@@ -386,7 +389,7 @@ abstract class TeamViewModelBase with Store {
     return result.fold(
       (l) {
         deleteEmployeeResponse = deleteEmployeeResponse.copyWith(
-          error: l,
+          errors: l,
           loading: false,
         );
       },
@@ -440,37 +443,46 @@ abstract class TeamViewModelBase with Store {
 
   @action
   Future<void> createTeam(
-      {required CreateTeamReqModel? data,
-      required BuildContext context}) async {
+      {required CreateTeamReqModel data, required BuildContext context}) async {
     addFolderResponse = createTeamResponse.copyWith(error: null, loading: true);
+    final result = await teamService.createTeamApi(data: data.toJson()
+        // {
+        //   "employee_id": data?.employee_id ?? "",
+        //   "name": data?.name ?? "",
+        //   "address": data?.address ?? "",
+        //   "contact_number": data?.contact_number ?? "",
+        //   "date_joined": data?.date_joined ?? "",
+        //   "password": data?.password ?? "",
+        //   "email": data?.email ?? "",
+        //   "date_of_birth": data?.date_of_birth ?? "",
+        //   "alert_before": data?.alert_before ?? "",
+        //   "expiry_date": data?.expiry_date ?? "",
+        //   "username": data?.username ?? "",
+        //   "dp": data?.dp ?? "",
+        //   "cover_image": data?.cover_image ?? "",
+        //   "bio": data?.bio ?? "",
+        //   "user_type": data?.user_type ?? "",
+        //   "driving_license": data?.driving_license ?? "",
+        //   "employment_status": data?.employment_status ?? "",
+        //   "emergency_contact": data?.emergency_contact ?? "",
+        //   "emergency_contact_name": data?.emergency_contact_name ?? ""
+        // }
 
-    final result = await teamService.addTeamFolders(data: {
-      "employee_id": "${data?.employee_id}",
-      "name": data?.name ?? "",
-      "designation": data?.designation ?? "",
-      "contact_number": "${data?.contact_number}",
-      "date_joined": data?.date_joined ?? "",
-      "password": data?.password ?? "",
-      "email": data?.email ?? "",
-      "date_of_birth": data?.date_of_birth ?? "",
-      "alert_before": data?.alert_before ?? "",
-      "expiry_date": data?.expiry_date ?? "",
-      "username": data?.username ?? "",
-      "dp": data?.dp ?? "",
-      "cover_image": data?.cover_image ?? "",
-      "bio": data?.bio ?? "",
-      "user_type": data?.user_type ?? ""
-    });
+        );
     return result.fold(
       (l) {
         createTeamResponse =
-            createTeamResponse.copyWith(error: l, loading: false);
+            createTeamResponse.copyWith(errors: l, loading: false);
+
+        popupErrorData(context, mainFailure: l);
       },
       (r) {
         createTeamResponse =
             createTeamResponse.copyWith(data: r, error: null, loading: false);
-
-        context.router.pop();
+        log(createTeamResponse.toString() + "dkgfm");
+        getCurrentEmployee();
+        textControllersClearFn();
+        showToast(context, msg: "Successfully Created Employee");
       },
     );
   }
@@ -508,5 +520,27 @@ abstract class TeamViewModelBase with Store {
   @action
   datePickerFn7(date) {
     selectedLicenceAlertDate = date;
+  }
+
+  @action
+  employmentStatusonChanged(newValue) {
+    selectedAddEmploymentStatus = newValue;
+  }
+
+  textControllersClearFn() {
+    textAddTeamEmpIdController.clear();
+    textAddTeamAddressController.clear();
+    selectedDobAddTeam = null;
+    selectedJoiningDateAddTeam = null;
+    textAddTeamEmailController.clear();
+    textAddteamNameController.clear();
+    textAddTeamContactNumberController.clear();
+    selectedAddEmploymentStatus = "full_time";
+    textAddTeamEmergencyContactController.clear();
+    textAddTeamEmergencyContactNumberController.clear();
+    selectedFileNameLicense = "";
+    selectedLicenceExpiryDate = null;
+    selectedLicenceAlertDate = null;
+    textAddTeamPasswordController.clear();
   }
 }

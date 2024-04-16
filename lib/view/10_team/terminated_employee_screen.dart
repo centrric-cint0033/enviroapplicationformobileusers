@@ -11,27 +11,33 @@ class TerminatedEmployeeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: Column(children: [
-      gapField,
-      WWSearchField(
-        controller: vmTeam.terminatedEmployeeSearchCntrlr,
-        onChanged: (v) => vmTeam.onTextChanged(() => v.isEmpty
-            ? vmTeam.getTerminatedEmployee()
-            : vmTeam.terminatedEmployeeSearchApi(v)),
-        searchTap: () {},
-        hintText: 'Search Employee',
-      ),
-      gapField,
-      Observer(builder: (_) {
-        return Expanded(
-            child: WWResponseHandler(
-                data: vmTeam.terminatedEmployeeResponse,
-                isEmpty:
-                    vmTeam.terminatedEmployeeResponse.data?.isEmpty ?? true,
-                onTap: () => vmTeam.getTerminatedEmployee(),
-                child: const TerminatedEmployeeListWidget()));
-      }),
-    ]));
+    return WillPopScope(
+      onWillPop: () async {
+        vmTeam.terminatedEmployeeSearchCntrlr.clear();
+        return true;
+      },
+      child: Scaffold(
+          body: Column(children: [
+        gapField,
+        WWSearchField(
+          controller: vmTeam.terminatedEmployeeSearchCntrlr,
+          onChanged: (v) => vmTeam.onTextChanged(() => v.isEmpty
+              ? vmTeam.getTerminatedEmployee()
+              : vmTeam.terminatedEmployeeSearchApi(v)),
+          searchTap: () {},
+          hintText: 'Search Employee',
+        ),
+        gapField,
+        Observer(builder: (_) {
+          return Expanded(
+              child: WWResponseHandler(
+                  data: vmTeam.terminatedEmployeeResponse,
+                  isEmpty:
+                      vmTeam.terminatedEmployeeResponse.data?.isEmpty ?? true,
+                  onTap: () => vmTeam.getTerminatedEmployee(),
+                  child: const TerminatedEmployeeListWidget()));
+        }),
+      ])),
+    );
   }
 }

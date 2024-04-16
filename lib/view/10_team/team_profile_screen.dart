@@ -41,7 +41,7 @@ class TeamProfileScreen extends StatelessWidget {
                 ? Center(child: wwCustomLoader())
                 : SingleChildScrollView(
                     child: Column(children: [
-                      gapField,
+                      sized0hx10,
                       Container(
                         height: 82.h,
                         decoration: BoxDecoration(
@@ -137,11 +137,11 @@ class TeamProfileScreen extends StatelessWidget {
                           ],
                         ),
                       ),
-                      gapField,
+                      sized0hx10,
                       listData(employeeDetails),
-                      gapField,
-                      cmTitle('Employees Folder'),
-                      gapField,
+                      sized0hx10,
+                      cmTitle('Employees Folder', fontWeight: FontWeight.bold),
+                      sized0hx10,
                       Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -215,26 +215,26 @@ class TeamProfileScreen extends StatelessWidget {
     return buildCardDataOrder(
       [
         expandedRowShowText('Address', ': ${data?.address ?? ""}'),
-        gapField,
+        sized0hx05,
         expandedRowShowText('Date of Birth', ': ${data?.dateOfBirth ?? ""}'),
-        gapField,
+        sized0hx05,
         expandedRowShowText('Joining Date', ': ${data?.dateJoined ?? ""}'),
-        gapField,
+        sized0hx05,
         expandedRowShowText('Email Address', ': ${data?.personalEmail ?? ""}'),
-        gapField,
+        sized0hx05,
         expandedRowShowText('Contact Number', ': ${data?.contactNumber ?? ""}'),
-        gapField,
+        sized0hx05,
         expandedRowShowText(
             'Termination Date', ': ${data?.terminationDate ?? ""}'),
-        gapField,
+        sized0hx05,
         expandedRowShowText(
             'Employment Status', ': ${data?.employementStatus ?? ""}'),
-        gapField,
+        sized0hx05,
         expandedRowShowText('Work Email Address', ': ${data?.email ?? ""}'),
-        gapField,
+        sized0hx05,
         expandedRowShowText(
             'Emergency Contact', ': ${data?.emergencyContactName ?? ""}'),
-        gapField,
+        sized0hx05,
         expandedRowShowText(
             'Emergency Contact No', ': ${data?.emergencyContact ?? ""}'),
       ],

@@ -1,4 +1,6 @@
+import 'dart:io';
 import 'package:auto_route/auto_route.dart';
+import 'package:enviro_mobile_application/model/10_team/create_team_req_model/create_team_req_model.dart';
 import 'package:enviro_mobile_application/model/10_team/team_profile_employee_details_res_model/team_profile_employee_details_res_model.dart';
 import 'package:enviro_mobile_application/utilis/Appthemes.dart';
 import 'package:enviro_mobile_application/utilis/constant.dart';
@@ -10,7 +12,6 @@ import 'package:enviro_mobile_application/view/10_team/team_widgets/cm_required_
 import 'package:enviro_mobile_application/view/10_team/team_widgets/cm_textfield_widget.dart';
 import 'package:enviro_mobile_application/view/10_team/team_widgets/date_picker.dart';
 import 'package:enviro_mobile_application/view/10_team/team_widgets/designation_dropdown_widget.dart';
-import 'package:enviro_mobile_application/view/10_team/team_widgets/dp_image_widget.dart';
 import 'package:enviro_mobile_application/view/10_team/team_widgets/employment_status_dropdown_widget.dart';
 import 'package:enviro_mobile_application/view_model/08_team/team_view_model.dart';
 import 'package:enviro_mobile_application/widgets/cm_show_toast.dart';
@@ -19,7 +20,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
-
 import '../../widgets/cm_title.dart';
 
 @RoutePage()
@@ -34,7 +34,8 @@ class AddTeamPage extends StatelessWidget {
         vmTeam.selectedDobAddTeam = null;
         vmTeam.selectedLicenceExpiryDate = null;
         vmTeam.selectedLicenceAlertDate = null;
-        vmTeam.showRequredText = false;
+        vmTeam.showRequredTextLicense = false;
+        vmTeam.selectedAddEmploymentStatus = "full_time";
         return true;
       },
       child: Scaffold(
@@ -76,37 +77,45 @@ class AddTeamPage extends StatelessWidget {
                                     decoration: BoxDecoration(
                                         color: Colors.grey.shade700,
                                         shape: BoxShape.circle),
-                                    child: vmTeam.profileImage?.imagePath ==
-                                            null
-                                        ? Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              const Icon(
-                                                Icons.person,
-                                                color: Colors.white,
-                                              ),
-                                              Text(
-                                                "Add Image",
-                                                style: TextStyle(
-                                                    fontSize: 10.w,
-                                                    color: Colors.white),
+                                    child:
+                                        vmTeam.profileImage?.imagePath == null
+                                            ? Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  const Icon(
+                                                    Icons.person,
+                                                    color: Colors.white,
+                                                  ),
+                                                  Text(
+                                                    "Add Image",
+                                                    style: TextStyle(
+                                                        fontSize: 10.w,
+                                                        color: Colors.white),
+                                                  )
+                                                ],
                                               )
-                                            ],
-                                          )
-                                        : dpImage(
-                                            vmTeam.profileImage?.imageUUID ??
-                                                "")),
+                                            : DecoratedBox(
+                                                decoration: const BoxDecoration(
+                                                    shape: BoxShape.circle),
+                                                child: ClipRRect(
+                                                  borderRadius:
+                                                      BorderRadius.circular(60),
+                                                  child: Image.file(
+                                                    File(vmTeam.profileImage
+                                                            ?.imagePath ??
+                                                        ""),
+                                                  ),
+                                                ))),
                               ),
                             ),
-                            SizedBox(
-                              width: 15.w,
-                            ),
+                            sized0wx15,
                             Expanded(
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Row(
+                                    crossAxisAlignment: CrossAxisAlignment.end,
                                     children: [
                                       const Text(
                                         "Position Title:",
@@ -156,7 +165,7 @@ class AddTeamPage extends StatelessWidget {
                   sized0hx10,
                   listAddData(context, employeeDetails),
                   sized0hx10,
-                  cmTitle('ID Poofs'),
+                  cmTitle('ID Poofs', fontWeight: FontWeight.bold),
                   sized0hx10,
                   cmIdProofCard(
                       context,
@@ -173,12 +182,13 @@ class AddTeamPage extends StatelessWidget {
                               vmTeam.selectedLicenceAlertDate,
                               (date) => vmTeam.datePickerFn7(date)))),
                   sized0hx10,
-                  cmTitle('Credentials For Enviro'),
+                  cmTitle('Credentials For Enviro',
+                      fontWeight: FontWeight.bold),
                   sized0hx10,
                   cmCredentialsForEnviro(context),
                   sized0hx10,
                   cmElevatedButton(() {
-                    cmOnpressedFn(context);
+                    cmOnpressedFnCreateTeam(context);
                   }, Appthemes.cPrimary, "CREATE"),
                   sized0hx40,
                 ],
@@ -208,6 +218,7 @@ class AddTeamPage extends StatelessWidget {
                 child: cmTextField(
                     controller: vmTeam.textAddTeamEmpIdController,
                     hintText: "Emp Id",
+                    keyboardType: const TextInputType.numberWithOptions(),
                     hintStyle: TextStyle(color: Colors.grey.shade400)),
               )
             ])),
@@ -292,6 +303,7 @@ class AddTeamPage extends StatelessWidget {
                   child: cmTextField(
                       controller: vmTeam.textAddTeamContactNumberController,
                       hintText: "Number",
+                      keyboardType: const TextInputType.numberWithOptions(),
                       hintStyle: TextStyle(color: Colors.grey.shade400)))
             ])),
         expandedRowShowWidget(
@@ -340,6 +352,7 @@ class AddTeamPage extends StatelessWidget {
                     controller:
                         vmTeam.textAddTeamEmergencyContactNumberController,
                     hintText: "Number",
+                    keyboardType: const TextInputType.numberWithOptions(),
                     hintStyle: TextStyle(color: Colors.grey.shade400)),
               )
             ])),
@@ -371,19 +384,87 @@ class AddTeamPage extends StatelessWidget {
     );
   }
 
-  cmOnpressedFn(BuildContext context) {
-    if (vmTeam.textAddteamNameController.text.isNotEmpty ||
-        vmTeam.textAddTeamEmpIdController.text.isNotEmpty ||
-        vmTeam.textAddTeamAddressController.text.isNotEmpty ||
-        vmTeam.selectedDobAddTeam != null ||
-        vmTeam.selectedJoiningDateAddTeam != null ||
-        vmTeam.textAddTeamEmailController.text.isNotEmpty ||
-        vmTeam.textAddTeamContactNumberController.text.isNotEmpty ||
-        vmTeam.textAddTeamEmergencyContactController.text.isNotEmpty ||
-        vmTeam.textAddTeamEmergencyContactNumberController.text.isNotEmpty ||
-        vmTeam.textAddTeamPasswordController.text.isNotEmpty) {
+  cmOnpressedFnCreateTeam(BuildContext context) {
+    if (vmTeam.showRequredTextLicense == false) {
+      if (vmTeam.textAddteamNameController.text.isNotEmpty &&
+          vmTeam.textAddTeamEmpIdController.text.isNotEmpty &&
+          vmTeam.textAddTeamAddressController.text.isNotEmpty &&
+          vmTeam.selectedDobAddTeam != null &&
+          vmTeam.selectedJoiningDateAddTeam != null &&
+          vmTeam.textAddTeamEmailController.text.isNotEmpty &&
+          vmTeam.textAddTeamContactNumberController.text.isNotEmpty &&
+          vmTeam.textAddTeamEmergencyContactController.text.isNotEmpty &&
+          vmTeam.textAddTeamEmergencyContactNumberController.text.isNotEmpty &&
+          vmTeam.textAddTeamPasswordController.text.isNotEmpty) {
+        vmTeam.createTeam(
+            data: CreateTeamReqModel(
+                dp: vmTeam.profileImage?.imagePath ?? "",
+                name: vmTeam.textAddteamNameController.text,
+                employee_id: vmTeam.textAddTeamEmpIdController.text,
+                address: vmTeam.textAddTeamAddressController.text,
+                user_type: vmTeam.selectedDesignationAddTeam?.userType ?? "",
+                date_of_birth:
+                    DateFormat('yyyy-MM-dd').format(vmTeam.selectedDobAddTeam!),
+                date_joined: DateFormat('yyyy-MM-dd')
+                    .format(vmTeam.selectedJoiningDateAddTeam!),
+                email: vmTeam.textAddTeamEmailController.text,
+                contact_number: vmTeam.textAddTeamContactNumberController.text,
+                username: vmTeam.textAddTeamEmailController.text,
+                password: vmTeam.textAddTeamPasswordController.text,
+                employment_status: vmTeam.selectedAddEmploymentStatus,
+                emergency_contact:
+                    vmTeam.textAddTeamEmergencyContactNumberController.text,
+                emergency_contact_name:
+                    vmTeam.textAddTeamEmergencyContactController.text),
+            context: context);
+      } else {
+        showToast(context, msg: "Fields Required", color: Colors.red);
+      }
     } else {
-      showToast(context, msg: "Fields Required", color: Colors.red);
+      {
+        if (vmTeam.textAddteamNameController.text.isNotEmpty &&
+            vmTeam.textAddTeamEmpIdController.text.isNotEmpty &&
+            vmTeam.textAddTeamAddressController.text.isNotEmpty &&
+            vmTeam.selectedDobAddTeam != null &&
+            vmTeam.selectedJoiningDateAddTeam != null &&
+            vmTeam.textAddTeamEmailController.text.isNotEmpty &&
+            vmTeam.textAddTeamContactNumberController.text.isNotEmpty &&
+            vmTeam.textAddTeamEmergencyContactController.text.isNotEmpty &&
+            vmTeam
+                .textAddTeamEmergencyContactNumberController.text.isNotEmpty &&
+            vmTeam.textAddTeamPasswordController.text.isNotEmpty &&
+            vmTeam.selectedFilePathLicense != null &&
+            vmTeam.selectedLicenceExpiryDate != null &&
+            vmTeam.selectedLicenceAlertDate != null) {
+          vmTeam.createTeam(
+              data: CreateTeamReqModel(
+                  dp: vmTeam.profileImage?.imagePath ?? "",
+                  name: vmTeam.textAddteamNameController.text,
+                  employee_id: vmTeam.textAddTeamEmpIdController.text,
+                  address: vmTeam.textAddTeamAddressController.text,
+                  user_type: vmTeam.selectedDesignationAddTeam?.userType ?? "",
+                  date_of_birth: DateFormat('yyyy-MM-dd')
+                      .format(vmTeam.selectedDobAddTeam!),
+                  date_joined: DateFormat('yyyy-MM-dd')
+                      .format(vmTeam.selectedJoiningDateAddTeam!),
+                  email: vmTeam.textAddTeamEmailController.text,
+                  contact_number:
+                      vmTeam.textAddTeamContactNumberController.text,
+                  driving_license: vmTeam.selectedFilePathLicense ?? "",
+                  expiry_date: vmTeam.selectedLicenceExpiryDate,
+                  alert_before: vmTeam.selectedLicenceAlertDate,
+                  username: vmTeam.textAddTeamEmailController.text,
+                  password: vmTeam.textAddTeamPasswordController.text,
+                  employment_status: vmTeam.selectedAddEmploymentStatus,
+                  emergency_contact:
+                      vmTeam.textAddTeamEmergencyContactNumberController.text,
+                  emergency_contact_name:
+                      vmTeam.textAddTeamEmergencyContactController.text),
+              context: context);
+        } else {
+          showToast(context, msg: "Fields Required", color: Colors.red);
+        }
+      }
     }
   }
 }

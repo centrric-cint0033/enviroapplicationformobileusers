@@ -6,14 +6,18 @@ Widget cmTextField(
     bool? showDecoration,
     bool? readOnly = false,
     String? hintText,
-    TextStyle? hintStyle}) {
+    TextStyle? hintStyle,TextInputType? keyboardType
+}) {
   return TextField(
+    keyboardType: keyboardType,
     readOnly: readOnly!,
     controller: controller,
     decoration: showDecoration == true
+    
         ? InputDecoration(
             hintText: hintText,
             hintStyle: hintStyle,
+
             focusedBorder: UnderlineInputBorder(
                 borderSide: BorderSide(color: Colors.grey.shade600)))
         : InputDecoration(
@@ -22,7 +26,7 @@ Widget cmTextField(
             border: InputBorder.none,
           ),
     onChanged: (value) {
-      onChanged!(value);
+      onChanged;
     },
   );
 }
