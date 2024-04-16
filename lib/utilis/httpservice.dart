@@ -133,7 +133,7 @@ Future<Either<Map<MainFailure, dynamic>, Response>> tryCatch(
     debugPrint(e.toString());
     return Left({const MainFailure.clientFailure(): null});
   } finally {
-    client?.close();
+    // client?.close();
   }
 }
 
@@ -192,12 +192,18 @@ class LoggingInterceptor implements InterceptorContract {
 
   @override
   Future<ResponseData> interceptResponse({required ResponseData data}) async {
-    if (data.statusCode == 401) await generateNewToken();
+    if (data.statusCode == 401) {
+      String? newToken = await generateNewToken();
+      customPrint(content: newToken, name: 'new token generated');
+      if (newToken != null) {
+        data.headers!["Authorization"] = 'Bearer $newToken';
+      }
+    }
     return data;
   }
 }
 
-Future<void> generateNewToken() async {
+Future<String?> generateNewToken() async {
   final access = await SecureStorage().readData(key: "token");
   bool authenticated = (access != null && access.isNotEmpty)
       ? jwtTokenChecker(Jwt.parseJwt(access))
@@ -211,15 +217,20 @@ Future<void> generateNewToken() async {
         method: 'POST',
         data: {"refresh": refresh},
       );
-      res.fold(
+      return await res.fold(
         (l) async {
           await getIt<SecureStorage>().removeData(key: 'token');
+          return;
         },
         (r) async {
           final token = jsonDecode(r.body)["access"];
           await getIt<SecureStorage>().writeData(key: 'token', value: token);
+          customPrint(
+              content: token, name: 'NewToken from generateNewToken function');
+          return token;
         },
       );
     }
   }
+  return null;
 }
