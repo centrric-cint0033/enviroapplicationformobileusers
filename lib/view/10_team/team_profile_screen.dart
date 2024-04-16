@@ -80,6 +80,7 @@ class TeamProfileScreen extends StatelessWidget {
                                           children: [
                                             SizedBox(
                                               height: 26.h,
+                                              width: 55.h,
                                               child: customButton(() {
                                                 showDeleteDialoq(context,
                                                     () async {
@@ -99,6 +100,7 @@ class TeamProfileScreen extends StatelessWidget {
                                             ),
                                             SizedBox(
                                               height: 26.h,
+                                              width: 55.h,
                                               child: customButton(() {
                                                 vmTeam.getTeamDesignationsApi();
                                                 addingDataToControllerEdit(
@@ -214,29 +216,28 @@ class TeamProfileScreen extends StatelessWidget {
   Widget listData(TeamProfileEmployeeDetailsResModel? data) {
     return buildCardDataOrder(
       [
-        expandedRowShowText('Address', ': ${data?.address ?? ""}'),
+        expandedRowShowText('Address', data?.address ?? ""),
         sized0hx05,
-        expandedRowShowText('Date of Birth', ': ${data?.dateOfBirth ?? ""}'),
+        expandedRowShowText('Date of Birth', data?.dateOfBirth ?? ""),
         sized0hx05,
-        expandedRowShowText('Joining Date', ': ${data?.dateJoined ?? ""}'),
+        expandedRowShowText('Joining Date', data?.dateJoined ?? ""),
         sized0hx05,
-        expandedRowShowText('Email Address', ': ${data?.personalEmail ?? ""}'),
+        expandedRowShowText('Email Address', data?.personalEmail ?? ""),
         sized0hx05,
-        expandedRowShowText('Contact Number', ': ${data?.contactNumber ?? ""}'),
-        sized0hx05,
-        expandedRowShowText(
-            'Termination Date', ': ${data?.terminationDate ?? ""}'),
+        expandedRowShowText('Contact Number', data?.contactNumber ?? ""),
         sized0hx05,
         expandedRowShowText(
-            'Employment Status', ': ${data?.employementStatus ?? ""}'),
+            'Termination Date', '${data?.terminationDate ?? ""}'),
         sized0hx05,
-        expandedRowShowText('Work Email Address', ': ${data?.email ?? ""}'),
+        expandedRowShowText('Employment Status', data?.employementStatus ?? ""),
+        sized0hx05,
+        expandedRowShowText('Work Email Address', data?.email ?? ""),
         sized0hx05,
         expandedRowShowText(
-            'Emergency Contact', ': ${data?.emergencyContactName ?? ""}'),
+            'Emergency Contact', data?.emergencyContactName ?? ""),
         sized0hx05,
         expandedRowShowText(
-            'Emergency Contact No', ': ${data?.emergencyContact ?? ""}'),
+            'Emergency Contact No', data?.emergencyContact ?? ""),
       ],
     );
   }

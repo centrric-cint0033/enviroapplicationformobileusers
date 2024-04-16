@@ -409,6 +409,23 @@ mixin _$TeamViewModel on TeamViewModelBase, Store {
     });
   }
 
+  late final _$selectedDesignationAddTeam2Atom = Atom(
+      name: 'TeamViewModelBase.selectedDesignationAddTeam2', context: context);
+
+  @override
+  String? get selectedDesignationAddTeam2 {
+    _$selectedDesignationAddTeam2Atom.reportRead();
+    return super.selectedDesignationAddTeam2;
+  }
+
+  @override
+  set selectedDesignationAddTeam2(String? value) {
+    _$selectedDesignationAddTeam2Atom
+        .reportWrite(value, super.selectedDesignationAddTeam2, () {
+      super.selectedDesignationAddTeam2 = value;
+    });
+  }
+
   late final _$selectedEmploymentStatusAtom = Atom(
       name: 'TeamViewModelBase.selectedEmploymentStatus', context: context);
 
@@ -617,14 +634,14 @@ mixin _$TeamViewModel on TeamViewModelBase, Store {
         .run(() => super.getTeamDesignationsApi());
   }
 
-  late final _$createTeamAsyncAction =
-      AsyncAction('TeamViewModelBase.createTeam', context: context);
+  late final _$createTeamApiAsyncAction =
+      AsyncAction('TeamViewModelBase.createTeamApi', context: context);
 
   @override
-  Future<void> createTeam(
+  Future<void> createTeamApi(
       {required CreateTeamReqModel data, required BuildContext context}) {
-    return _$createTeamAsyncAction
-        .run(() => super.createTeam(data: data, context: context));
+    return _$createTeamApiAsyncAction
+        .run(() => super.createTeamApi(data: data, context: context));
   }
 
   late final _$TeamViewModelBaseActionController =
@@ -719,6 +736,17 @@ mixin _$TeamViewModel on TeamViewModelBase, Store {
   }
 
   @override
+  dynamic cmFunction(dynamic value) {
+    final _$actionInfo = _$TeamViewModelBaseActionController.startAction(
+        name: 'TeamViewModelBase.cmFunction');
+    try {
+      return super.cmFunction(value);
+    } finally {
+      _$TeamViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 currentEmployeeResponse: ${currentEmployeeResponse},
@@ -745,6 +773,7 @@ selectedLicenceAlertDate: ${selectedLicenceAlertDate},
 employmentStatusList: ${employmentStatusList},
 selectedDesignation: ${selectedDesignation},
 selectedDesignationAddTeam: ${selectedDesignationAddTeam},
+selectedDesignationAddTeam2: ${selectedDesignationAddTeam2},
 selectedEmploymentStatus: ${selectedEmploymentStatus},
 selectedAddEmploymentStatus: ${selectedAddEmploymentStatus},
 showDate: ${showDate},

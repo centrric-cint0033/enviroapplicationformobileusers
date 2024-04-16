@@ -90,6 +90,8 @@ abstract class TeamViewModelBase with Store {
   @observable
   Designation? selectedDesignationAddTeam;
   @observable
+  String? selectedDesignationAddTeam2 = "accounts-manager";
+  @observable
   String selectedEmploymentStatus = "";
   @observable
   String selectedAddEmploymentStatus = "full_time";
@@ -442,7 +444,7 @@ abstract class TeamViewModelBase with Store {
   }
 
   @action
-  Future<void> createTeam(
+  Future<void> createTeamApi(
       {required CreateTeamReqModel data, required BuildContext context}) async {
     addFolderResponse = createTeamResponse.copyWith(error: null, loading: true);
     final result = await teamService.createTeamApi(data: data.toJson()
@@ -525,6 +527,11 @@ abstract class TeamViewModelBase with Store {
   @action
   employmentStatusonChanged(newValue) {
     selectedAddEmploymentStatus = newValue;
+  }
+
+  @action
+  cmFunction(value) {
+    selectedDesignationAddTeam2 = value;
   }
 
   textControllersClearFn() {

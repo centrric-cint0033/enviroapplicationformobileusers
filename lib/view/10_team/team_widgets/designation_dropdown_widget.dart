@@ -46,6 +46,8 @@ class DesignationDownWidget extends StatelessWidget {
                 ? vmTeam.selectedDesignationAddTeam
                 : vmTeam.selectedDesignation,
             onChanged: (newValue) {
+              vmTeam.selectedDesignationAddTeam = newValue;
+              vmTeam.cmFunction(vmTeam.selectedDesignationAddTeam?.userType);
               if (newValue?.userType == "driver-factory-hand" ||
                   newValue?.userType == "driver-liquid-waste-technician") {
                 vmTeam.showRequredTextLicense = true;

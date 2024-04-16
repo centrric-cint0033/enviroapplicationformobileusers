@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:enviro_mobile_application/model/10_team/team_profile_employee_details_res_model/team_profile_employee_details_res_model.dart';
 import 'package:enviro_mobile_application/utilis/Appthemes.dart';
+import 'package:enviro_mobile_application/utilis/constant.dart';
 import 'package:enviro_mobile_application/view/02_sales/sales_widgets.dart/sales_widget.dart';
 import 'package:enviro_mobile_application/view/10_team/team_widgets/cm_elevated_button.dart';
 import 'package:enviro_mobile_application/view/10_team/team_widgets/cm_textfield_widget.dart';
@@ -57,10 +58,10 @@ class TeamEditPage extends StatelessWidget {
       TeamProfileEmployeeDetailsResModel? employeeDetatils) {
     return buildCardDataOrder(
       [
-        expandedRowShowWidget('Address: ',
+        expandedRowShowWidget('Address',
             cmTextField(controller: vmTeam.textEditTeamAddressController)),
         expandedRowShowWidget(
-            'Joining Date: ',
+            'Joining Date',
             Observer(
               builder: (context) => cmDatePicker(
                   context,
@@ -68,12 +69,12 @@ class TeamEditPage extends StatelessWidget {
                   vmTeam.selectedJoiningDate,
                   (date) => vmTeam.datePickerFn1(date)),
             )),
-        expandedRowShowWidget('Email Address: ',
+        expandedRowShowWidget('Email Address',
             cmTextField(controller: vmTeam.textEditTeamEmailController)),
-        expandedRowShowWidget('Employment Status: ',
+        expandedRowShowWidget('Employment Status',
             EmploymentStatusDropDown(employeeDetatils: employeeDetatils)),
         expandedRowShowWidget(
-            'Termination Date: ',
+            'Termination Date',
             Observer(
                 builder: (context) => cmDatePicker(
                     context,
@@ -81,7 +82,7 @@ class TeamEditPage extends StatelessWidget {
                     vmTeam.selectedTerminationDate,
                     (date) => vmTeam.datePickerFn2(date)))),
         expandedRowShowWidget(
-            'Date of Birth: ',
+            'Date of Birth',
             Observer(
                 builder: (context) => cmDatePicker(
                     context,
@@ -89,17 +90,17 @@ class TeamEditPage extends StatelessWidget {
                     vmTeam.selectedDob,
                     (date) => vmTeam.datePickerFn3(date)))),
         expandedRowShowWidget(
-            'Contact Number: ',
+            'Contact Number',
             cmTextField(
                 controller: vmTeam.textEditTeamContactNumberController)),
         expandedRowShowWidget('Work Email Address: ',
             cmTextField(controller: vmTeam.textEditTeamWorkEmailController)),
         expandedRowShowWidget(
-            'Emergency Contact: ',
+            'Emergency Contact',
             cmTextField(
                 controller: vmTeam.textEditTeamEmergencyContactController)),
         expandedRowShowWidget(
-            'Emergency Contact No: ',
+            'Emergency Contact No',
             cmTextField(
                 controller:
                     vmTeam.textEditTeamEmergencyContactNumberController)),
@@ -112,6 +113,9 @@ class TeamEditPage extends StatelessWidget {
   Row expandedRowShowWidget(String firsValue, Widget secondValue) => Row(
         children: [
           expandedShowText(firsValue),
+          sized0wx05,
+          showText(':'),
+          sized0wx05,
           expandedShowWidget(secondValue)
         ],
       );

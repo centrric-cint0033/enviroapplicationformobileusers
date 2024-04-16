@@ -29,8 +29,7 @@ class CreateTeamReqModel with _$CreateTeamReqModel {
       String? emergency_contact_name,
       String? emergency_contact,
       String? employment_status,
-      String? driving_license
-      }) = _CreateTeamReqModel;
+      String? driving_license}) = _CreateTeamReqModel;
 
   factory CreateTeamReqModel.fromJson(Map<String, dynamic> json) =>
       _$CreateTeamReqModelFromJson(json);

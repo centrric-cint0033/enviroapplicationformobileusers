@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 import 'package:auto_route/auto_route.dart';
 import 'package:enviro_mobile_application/model/10_team/create_team_req_model/create_team_req_model.dart';
@@ -36,6 +37,7 @@ class AddTeamPage extends StatelessWidget {
         vmTeam.selectedLicenceAlertDate = null;
         vmTeam.showRequredTextLicense = false;
         vmTeam.selectedAddEmploymentStatus = "full_time";
+        vmTeam.selectedDesignationAddTeam2 = "accounts_manager";
         return true;
       },
       child: Scaffold(
@@ -385,6 +387,8 @@ class AddTeamPage extends StatelessWidget {
   }
 
   cmOnpressedFnCreateTeam(BuildContext context) {
+    log(vmTeam.selectedAddEmploymentStatus);
+    log(vmTeam.selectedDesignationAddTeam2.toString());
     if (vmTeam.showRequredTextLicense == false) {
       if (vmTeam.textAddteamNameController.text.isNotEmpty &&
           vmTeam.textAddTeamEmpIdController.text.isNotEmpty &&
@@ -396,13 +400,13 @@ class AddTeamPage extends StatelessWidget {
           vmTeam.textAddTeamEmergencyContactController.text.isNotEmpty &&
           vmTeam.textAddTeamEmergencyContactNumberController.text.isNotEmpty &&
           vmTeam.textAddTeamPasswordController.text.isNotEmpty) {
-        vmTeam.createTeam(
+        vmTeam.createTeamApi(
             data: CreateTeamReqModel(
                 dp: vmTeam.profileImage?.imagePath ?? "",
                 name: vmTeam.textAddteamNameController.text,
                 employee_id: vmTeam.textAddTeamEmpIdController.text,
                 address: vmTeam.textAddTeamAddressController.text,
-                user_type: vmTeam.selectedDesignationAddTeam?.userType ?? "",
+                user_type: vmTeam.selectedDesignationAddTeam2 ?? "",
                 date_of_birth:
                     DateFormat('yyyy-MM-dd').format(vmTeam.selectedDobAddTeam!),
                 date_joined: DateFormat('yyyy-MM-dd')
@@ -436,13 +440,13 @@ class AddTeamPage extends StatelessWidget {
             vmTeam.selectedFilePathLicense != null &&
             vmTeam.selectedLicenceExpiryDate != null &&
             vmTeam.selectedLicenceAlertDate != null) {
-          vmTeam.createTeam(
+          vmTeam.createTeamApi(
               data: CreateTeamReqModel(
                   dp: vmTeam.profileImage?.imagePath ?? "",
                   name: vmTeam.textAddteamNameController.text,
                   employee_id: vmTeam.textAddTeamEmpIdController.text,
                   address: vmTeam.textAddTeamAddressController.text,
-                  user_type: vmTeam.selectedDesignationAddTeam?.userType ?? "",
+                  user_type: vmTeam.selectedDesignationAddTeam2 ?? "",
                   date_of_birth: DateFormat('yyyy-MM-dd')
                       .format(vmTeam.selectedDobAddTeam!),
                   date_joined: DateFormat('yyyy-MM-dd')
