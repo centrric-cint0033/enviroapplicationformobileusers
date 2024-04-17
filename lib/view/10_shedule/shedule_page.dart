@@ -197,7 +197,7 @@ class SchedulePage extends StatelessWidget {
                         const Text('Some Text Here'),
                         ElevatedButton(
                           onPressed: () {
-                            // sheduledetailfunction(context);
+                            sheduledetailfunction(context);
                           },
                           style: ElevatedButton.styleFrom(
                             primary: Colors.white,
@@ -314,161 +314,171 @@ class SchedulePage extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 20),
-            Card(
-              margin: const EdgeInsets.symmetric(horizontal: 20),
-              elevation: 4,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'New Card Title 2',
-                      ),
-                      Text(
-                        'job7654',
-                      ),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const Text('Some Text Here'),
-                      ElevatedButton(
-                        onPressed: () {},
-                        child: const Text('pending'),
-                        style: ElevatedButton.styleFrom(
-                          primary: Colors.white,
-                          onPrimary: Colors.black,
+            GestureDetector(
+              onTap: () => sheduledetailsfunction2(context),
+              child: Card(
+                margin: const EdgeInsets.symmetric(horizontal: 20),
+                elevation: 4,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'New Card Title 2',
                         ),
-                      ),
-                    ],
-                  ),
-                  const Text('Some Text Here'),
-                  const SizedBox(
-                    height: 10,
-                    child: Card(
-                      color: Colors.blue,
-                      child: Column(),
+                        Text(
+                          'job7654',
+                        ),
+                      ],
                     ),
-                  ),
-                  const SizedBox(
-                    child: Flexible(
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text('Some Text Here'),
+                        ElevatedButton(
+                          onPressed: () {
+                            sheduledetailsfunction2(context);
+                          },
+                          child: const Text('pending'),
+                          style: ElevatedButton.styleFrom(
+                            primary: Colors.white,
+                            onPrimary: Colors.black,
+                          ),
+                        ),
+                      ],
+                    ),
+                    const Text('Some Text Here'),
+                    const SizedBox(
+                      height: 10,
                       child: Card(
-                        color: Color.fromRGBO(33, 150, 243, 1),
-                        child: Column(
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  'New Card Title 2',
-                                  style: TextStyle(
-                                    color: Colors.white,
+                        color: Colors.blue,
+                        child: Column(),
+                      ),
+                    ),
+                    const SizedBox(
+                      child: Flexible(
+                        child: Card(
+                          color: Color.fromRGBO(33, 150, 243, 1),
+                          child: Column(
+                            children: [
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    'New Card Title 2',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                    ),
                                   ),
-                                ),
-                                Text(
-                                  'job7654',
-                                  style: TextStyle(
-                                    color: Colors.white,
+                                  Text(
+                                    'job7654',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                    ),
                                   ),
-                                ),
-                              ],
-                            ),
-                            Divider(
-                              color: Colors.white,
-                              thickness: 1,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  'New Card Title 2',
-                                  style: TextStyle(
-                                    color: Colors.white,
+                                ],
+                              ),
+                              Divider(
+                                color: Colors.white,
+                                thickness: 1,
+                              ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    'New Card Title 2',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                    ),
                                   ),
-                                ),
-                                Divider(
-                                  color: Colors.black,
-                                ),
-                                Text(
-                                  'job7654',
-                                  style: TextStyle(
-                                    color: Colors.white,
+                                  Divider(
+                                    color: Colors.black,
                                   ),
-                                ),
-                              ],
-                            ),
-                            Divider(
-                              color: Colors.white,
-                              thickness: 1,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  'New Card Title 2',
-                                  style: TextStyle(
-                                    color: Colors.white,
+                                  Text(
+                                    'job7654',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                    ),
                                   ),
-                                ),
-                                Text(
-                                  'job7654',
-                                  style: TextStyle(
-                                    color: Colors.white,
+                                ],
+                              ),
+                              Divider(
+                                color: Colors.white,
+                                thickness: 1,
+                              ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    'New Card Title 2',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                    ),
                                   ),
-                                ),
-                              ],
-                            ),
-                            Divider(
-                              color: Colors.white,
-                              thickness: 1,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  'New Card Title 2',
-                                  style: TextStyle(
-                                    color: Colors.white,
+                                  Text(
+                                    'job7654',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                    ),
                                   ),
-                                ),
-                                Text(
-                                  'job7654',
-                                  style: TextStyle(
-                                    color: Colors.white,
+                                ],
+                              ),
+                              Divider(
+                                color: Colors.white,
+                                thickness: 1,
+                              ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    'New Card Title 2',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                    ),
                                   ),
-                                ),
-                              ],
-                            ),
-                            Divider(
-                              color: Colors.white,
-                              thickness: 1,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  'New Card Title 2',
-                                  style: TextStyle(
-                                    color: Colors.white,
+                                  Text(
+                                    'job7654',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                    ),
                                   ),
-                                ),
-                                Text(
-                                  'job7654',
-                                  style: TextStyle(
-                                    color: Colors.white,
+                                ],
+                              ),
+                              Divider(
+                                color: Colors.white,
+                                thickness: 1,
+                              ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    'New Card Title 2',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                    ),
                                   ),
-                                ),
-                              ],
-                            ),
-                          ],
+                                  Text(
+                                    'job765',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ],
@@ -486,4 +496,9 @@ void calenderfunction(BuildContext context) {
 void sheduledetailfunction(BuildContext context) {
   print('ssssspendingclicked');
   context.router.pushNamed(RouteNames.rsheduledetailpage);
+}
+
+void sheduledetailsfunction2(BuildContext context) {
+  print('ssssspendingclicked');
+  context.router.pushNamed(RouteNames.rsheduledetail2page);
 }
