@@ -141,6 +141,7 @@ class ApiEndPoints {
   static const teamDesignations = '/api/v1/team/designations/';
   static const deleteEmployee = '/api/v1/team/employee/delete';
   static const createEmployee = '/api/v1/team/create/';
+  static const editEmployee = '/api/v1/team/employee/edit';
 
   // SITE APIS
   static const endpointWasteTypeInSite = '/api/v1/clients/childs/available/';

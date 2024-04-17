@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:enviro_mobile_application/Routepage/approutes.gr.dart';
 import 'package:enviro_mobile_application/utilis/Appthemes.dart';
-import 'package:enviro_mobile_application/view/02_sales/sales_widgets.dart/sales_widget.dart';
+import 'package:enviro_mobile_application/utilis/constant.dart';
 import 'package:enviro_mobile_application/view/10_team/current_employee_screen.dart';
 import 'package:enviro_mobile_application/view/10_team/terminated_employee_screen.dart';
 import 'package:enviro_mobile_application/widgets/cmappbar.dart';
@@ -37,9 +37,8 @@ class TeamPage extends StatelessWidget {
                 alignment: Alignment.centerRight,
                 child: CmButton(
                   onPressed: () {
-                    vmTeam
-                        .getTeamDesignationsApi();
-                    context.router.push( AddTeamRoute());
+                    vmTeam.getTeamDesignationsApi();
+                    context.router.push(AddTeamRoute());
                   },
                   text: 'Add a team member',
                   color: Appthemes.cPrimary,
@@ -47,9 +46,9 @@ class TeamPage extends StatelessWidget {
                   width: ScreenUtil().screenWidth / 2.6,
                 ),
               ),
-              gapField,
+              sized0hx05,
               const TeamTabbar(),
-              gapField,
+              sized0hx05,
               const Expanded(
                 child: TabBarView(
                   children: <Widget>[

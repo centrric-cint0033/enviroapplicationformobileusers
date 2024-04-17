@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:io';
 import 'package:auto_route/auto_route.dart';
 import 'package:enviro_mobile_application/model/10_team/create_team_req_model/create_team_req_model.dart';
@@ -40,6 +39,7 @@ class AddTeamPage extends StatelessWidget {
         ),
         body: Observer(builder: (context) {
           final res = vmTeam.teamProfileEmployeeDetailListResponse;
+          final ress = vmTeam.createTeamResponse;
           TeamProfileEmployeeDetailsResModel? employeeDetails = res.data;
           return Padding(
             padding: EdgeInsets.symmetric(horizontal: 15.w),
@@ -196,7 +196,7 @@ class AddTeamPage extends StatelessWidget {
                     sized0hx10,
                     cmElevatedButton(() {
                       cmOnpressedFnCreateTeam(context);
-                    }, Appthemes.cPrimary, "CREATE"),
+                    }, Appthemes.cPrimary, "CREATE", loading: ress.loading),
                     sized0hx40,
                   ],
                 ),
@@ -394,7 +394,7 @@ class AddTeamPage extends StatelessWidget {
                     hintStyle: TextStyle(color: Colors.grey.shade400),
                     validator: (value) {
                       if (value!.isEmpty) {
-                        return "Number dis required";
+                        return "Number is required";
                       }
                       return null;
                     }),
@@ -444,7 +444,6 @@ class AddTeamPage extends StatelessWidget {
           showToast(context, msg: "Please Select License Alert");
         }
       } else {
-        log("kkw");
         vmTeam.createTeamApi(
             data: CreateTeamReqModel(
                 dp: vmTeam.profileImage?.imagePath ?? "",
@@ -480,12 +479,5 @@ class AddTeamPage extends StatelessWidget {
       showToast(context,
           msg: "Please Fill All Required Fields", color: Colors.red);
     }
-  }
-
-  cmValidatorFn(value) {
-    if (value!.isEmpty) {
-      return "Name is required";
-    }
-    return null;
   }
 }

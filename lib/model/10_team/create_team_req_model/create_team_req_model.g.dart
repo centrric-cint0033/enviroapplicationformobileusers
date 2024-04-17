@@ -34,6 +34,7 @@ _$CreateTeamReqModelImpl _$$CreateTeamReqModelImplFromJson(
       emergency_contact_name: json['emergency_contact_name'] as String?,
       emergency_contact: json['emergency_contact'] as String?,
       employement_status: json['employement_status'] as String?,
+      id: json['id'] as String?,
       driving_license: json['driving_license'] as String?,
     );
 
@@ -61,5 +62,6 @@ Map<String, dynamic> _$$CreateTeamReqModelImplToJson(
       'emergency_contact_name': instance.emergency_contact_name,
       'emergency_contact': instance.emergency_contact,
       'employement_status': instance.employement_status,
+      'id': instance.id,
       'driving_license': instance.driving_license,
     };

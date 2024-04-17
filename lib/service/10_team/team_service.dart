@@ -35,6 +35,8 @@ abstract class IteamService {
       employeeSearchApi({required Map<String, String> data});
   Future<Either<Map<MainFailure, dynamic>, CreateTeamReqModel>> createTeamApi(
       {required Map<String, dynamic> data});
+  Future<Either<Map<MainFailure, dynamic>, CreateTeamReqModel>> editTeamApi(
+      {required Map<String, dynamic> data, required String employeeId});
 }
 
 @LazySingleton(as: IteamService)
@@ -223,6 +225,24 @@ class TeamService implements IteamService {
         var data = jsonDecode(res.body);
         CreateTeamReqModel createTeamList = CreateTeamReqModel.fromJson(data);
         return Right(createTeamList);
+      },
+    );
+  }
+
+  @override
+  Future<Either<Map<MainFailure, dynamic>, CreateTeamReqModel>> editTeamApi(
+      {required Map<String, dynamic> data, required String employeeId}) async {
+    var response = await getIt<HttpService>().multipartRequest(
+        data: data,
+        method: 'PATCH',
+        apiUrl: "${ApiEndPoints.editEmployee}/$employeeId/");
+    return response.fold(
+      (l) => Left(l),
+      (res) async {
+        var data = jsonDecode(res.body);
+        CreateTeamReqModel editTeamList =
+            CreateTeamReqModel(); //  CreateTeamReqModel.fromJson(data);
+        return Right(editTeamList);
       },
     );
   }

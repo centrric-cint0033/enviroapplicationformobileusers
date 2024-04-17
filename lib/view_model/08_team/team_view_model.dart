@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 import 'package:auto_route/auto_route.dart';
 import 'package:enviro_mobile_application/api_response/api_response.dart';
 import 'package:enviro_mobile_application/model/10_team/create_team_req_model/create_team_req_model.dart';
@@ -60,6 +61,8 @@ abstract class TeamViewModelBase with Store {
   ApiResponse<String> deleteEmployeeResponse = ApiResponse<String>();
   @observable
   ApiResponse createTeamResponse = ApiResponse<CreateTeamReqModel>();
+  @observable
+  ApiResponse editTeamResponse = ApiResponse<CreateTeamReqModel>();
   @observable
   ImageFilePickerModel? profileImage;
   @observable
@@ -445,7 +448,8 @@ abstract class TeamViewModelBase with Store {
   @action
   Future<void> createTeamApi(
       {required CreateTeamReqModel data, required BuildContext context}) async {
-    addFolderResponse = createTeamResponse.copyWith(error: null, loading: true);
+    createTeamResponse =
+        createTeamResponse.copyWith(error: null, loading: true);
     final result = await teamService.createTeamApi(data: data.toJson());
     return result.fold(
       (l) {
@@ -460,6 +464,32 @@ abstract class TeamViewModelBase with Store {
         getCurrentEmployee();
         textControllersClearFn();
         showToast(context, msg: "Successfully Created Employee");
+      },
+    );
+  }
+
+  @action
+  Future<void> editTeamApi(
+      {required CreateTeamReqModel data, required BuildContext context}) async {
+    editTeamResponse = editTeamResponse.copyWith(error: null, loading: true);
+
+    final result = await teamService.editTeamApi(
+        data: data.toJson(), employeeId: data.id!);
+
+    return result.fold(
+      (l) {
+        editTeamResponse = editTeamResponse.copyWith(errors: l, loading: false);
+
+        popupErrorData(context, mainFailure: l);
+      },
+      (r) {
+        log("result.toString()");
+        editTeamResponse =
+            editTeamResponse.copyWith(data: r, error: null, loading: false);
+        getCurrentEmployee();
+        textControllersClearFn();
+        context.router.pop();
+        showToast(context, msg: "Successfully Edited Employee");
       },
     );
   }

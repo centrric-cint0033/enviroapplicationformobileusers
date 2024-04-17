@@ -94,7 +94,7 @@ class HttpService {
       if (data != null) {
         data.forEach((key, value) async {
           if (value != null && value.isNotEmpty) {
-            customPrint(content: '$key : $value');
+            customPrint(content: '$key : $value ${value is String}');
             if (isFilePath(value)) {
               request.files
                   .add(await MultipartFile.fromPath(key, value.toString()));
@@ -104,17 +104,6 @@ class HttpService {
           }
         });
       }
-      // Response response = Response('body', 200);
-      // if (response.statusCode == HttpStatus.ok ||
-      //     response.statusCode == HttpStatus.created) {
-      //   return Right(response);
-      // } else {
-      //   return Left({
-      //     const MainFailure.clientFailure():
-      //         jsonDecode(response.body)["detail"] ??
-      //             jsonDecode(response.body)["app_data"]
-      //   });
-      // }
 
       StreamedResponse streamedResponse = await request.send();
       final response = await Response.fromStream(streamedResponse);

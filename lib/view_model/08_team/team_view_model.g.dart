@@ -178,6 +178,22 @@ mixin _$TeamViewModel on TeamViewModelBase, Store {
     });
   }
 
+  late final _$editTeamResponseAtom =
+      Atom(name: 'TeamViewModelBase.editTeamResponse', context: context);
+
+  @override
+  ApiResponse<dynamic> get editTeamResponse {
+    _$editTeamResponseAtom.reportRead();
+    return super.editTeamResponse;
+  }
+
+  @override
+  set editTeamResponse(ApiResponse<dynamic> value) {
+    _$editTeamResponseAtom.reportWrite(value, super.editTeamResponse, () {
+      super.editTeamResponse = value;
+    });
+  }
+
   late final _$profileImageAtom =
       Atom(name: 'TeamViewModelBase.profileImage', context: context);
 
@@ -644,6 +660,16 @@ mixin _$TeamViewModel on TeamViewModelBase, Store {
         .run(() => super.createTeamApi(data: data, context: context));
   }
 
+  late final _$editTeamApiAsyncAction =
+      AsyncAction('TeamViewModelBase.editTeamApi', context: context);
+
+  @override
+  Future<void> editTeamApi(
+      {required CreateTeamReqModel data, required BuildContext context}) {
+    return _$editTeamApiAsyncAction
+        .run(() => super.editTeamApi(data: data, context: context));
+  }
+
   late final _$TeamViewModelBaseActionController =
       ActionController(name: 'TeamViewModelBase', context: context);
 
@@ -759,6 +785,7 @@ editFolderResponse: ${editFolderResponse},
 designationsResponse: ${designationsResponse},
 deleteEmployeeResponse: ${deleteEmployeeResponse},
 createTeamResponse: ${createTeamResponse},
+editTeamResponse: ${editTeamResponse},
 profileImage: ${profileImage},
 profileImageLoader: ${profileImageLoader},
 showDecoration: ${showDecoration},

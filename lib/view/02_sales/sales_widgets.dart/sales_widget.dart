@@ -21,6 +21,7 @@ Expanded expandedShowText(String value) =>
     Expanded(flex: 3, child: showText(value));
 
 Row expandedRowShowText(String firsValue, String secondValue) => Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         expandedShowText(firsValue),
         sized0wx05,

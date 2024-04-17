@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:enviro_mobile_application/model/10_team/create_team_req_model/create_team_req_model.dart';
 import 'package:enviro_mobile_application/model/10_team/team_profile_employee_details_res_model/team_profile_employee_details_res_model.dart';
 import 'package:enviro_mobile_application/utilis/Appthemes.dart';
 import 'package:enviro_mobile_application/utilis/constant.dart';
@@ -30,6 +31,7 @@ class TeamEditPage extends StatelessWidget {
         vmTeam.selectedJoiningDate = null;
         vmTeam.selectedDob = null;
         vmTeam.selectedTerminationDate = null;
+        vmTeam.selectedDesignationAddTeam2 = employeeDetatils.userType;
         return true;
       },
       child: Scaffold(
@@ -39,16 +41,22 @@ class TeamEditPage extends StatelessWidget {
         body: Padding(
             padding: EdgeInsets.symmetric(horizontal: 15.w),
             child: SingleChildScrollView(
-              child: Column(children: [
-                gapField,
-                CommonTeamProfileTile(
-                  employeeDetatils: employeeDetatils,
-                ),
-                gapField,
-                listEditData(context, employeeDetatils),
-                gapField,
-                cmElevatedButton(() {}, Appthemes.cPrimary, "EDIT")
-              ]),
+              child: Observer(
+                builder: (context) {
+                  return Column(children: [
+                    sized0hx05,
+                    CommonTeamProfileTile(
+                      employeeDetatils: employeeDetatils,
+                    ),
+                    sized0hx05,
+                    listEditData(context, employeeDetatils),
+                    sized0hx05,
+                    cmElevatedButton(() {
+                      cmOnpressedFnCreateTeam(context, employeeDetatils);
+                    }, Appthemes.cPrimary, "EDIT"),
+                  ]);
+                },
+              ),
             )),
       ),
     );
@@ -93,8 +101,10 @@ class TeamEditPage extends StatelessWidget {
             'Contact Number',
             cmTextFormField(
                 controller: vmTeam.textEditTeamContactNumberController)),
-        expandedRowShowWidget('Work Email Address: ',
-            cmTextFormField(controller: vmTeam.textEditTeamWorkEmailController)),
+        expandedRowShowWidget(
+            'Work Email Address: ',
+            cmTextFormField(
+                controller: vmTeam.textEditTeamWorkEmailController)),
         expandedRowShowWidget(
             'Emergency Contact',
             cmTextFormField(
@@ -133,5 +143,27 @@ class TeamEditPage extends StatelessWidget {
         datePicker(context, selectedDate, pickedDate),
       ],
     );
+  }
+
+  cmOnpressedFnCreateTeam(BuildContext context,
+      TeamProfileEmployeeDetailsResModel employeeDetails) {
+    vmTeam.editTeamApi(
+        data: CreateTeamReqModel(
+            dp: vmTeam.profileImage?.imagePath ?? "",
+            name: vmTeam.textEditTeamNameController.text,
+            address: vmTeam.textEditTeamAddressController.text,
+            id: "${employeeDetails.id}",
+            user_type: vmTeam.selectedDesignationAddTeam2 ?? "",
+            date_of_birth: DateFormat('yyyy-MM-dd').format(vmTeam.selectedDob!),
+            // date_joined:
+            //     DateFormat('yyyy-MM-dd').format(vmTeam.selectedJoiningDate!),
+            email: vmTeam.textAddTeamEmailController.text,
+            contact_number: vmTeam.textEditTeamContactNumberController.text,
+            employement_status: vmTeam.selectedEmploymentStatus,
+            emergency_contact:
+                vmTeam.textEditTeamEmergencyContactNumberController.text,
+            emergency_contact_name:
+                vmTeam.textEditTeamEmergencyContactController.text),
+        context: context);
   }
 }

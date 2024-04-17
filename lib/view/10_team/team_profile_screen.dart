@@ -124,6 +124,8 @@ class TeamProfileScreen extends StatelessWidget {
                                                               ?.dateOfBirth ??
                                                           "");
                                                 } catch (e) {}
+                                                vmTeam.selectedDesignationAddTeam2 =
+                                                    employeeDetails?.userType;
                                                 context.router.push(
                                                     TeamEditRoute(
                                                         employeeDetatils:
