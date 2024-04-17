@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:enviro_mobile_application/utilis/constant.dart';
+import 'package:enviro_mobile_application/view/10_shedule/shedule_page.dart';
 import 'package:enviro_mobile_application/widgets/cmn_action_icon.dart';
 import 'package:enviro_mobile_application/widgets/cmn_title_textwidget.dart';
 import 'package:enviro_mobile_application/widgets/drawer.dart';
@@ -75,7 +76,9 @@ class CalenderPage extends StatelessWidget {
                     children: [
                       const Text('Some Text Here'),
                       ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          sheduledetailsfunction2(context);
+                        },
                         child: const Text('pending'),
                         style: ElevatedButton.styleFrom(
                           primary: Colors.white,
@@ -84,100 +87,109 @@ class CalenderPage extends StatelessWidget {
                       ),
                     ],
                   ),
-                  const SizedBox(
+                  SizedBox(
                     child: Flexible(
-                      child: Card(
-                        color: Color.fromRGBO(33, 150, 243, 1),
-                        child: Column(
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  'New Card Title 2',
-                                  style: TextStyle(
-                                    color: Colors.white,
+                      child: GestureDetector(
+                        onTap: () {
+                          sheduledetailsfunction2(context);
+                        },
+                        child: const Card(
+                          color: Color.fromRGBO(33, 150, 243, 1),
+                          child: Column(
+                            children: [
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    'New Card Title 2',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                    ),
                                   ),
-                                ),
-                                Text(
-                                  'job7654',
-                                  style: TextStyle(
-                                    color: Colors.white,
+                                  Text(
+                                    'job7654',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                    ),
                                   ),
-                                ),
-                              ],
-                            ),
-                            Divider(
-                              color: Colors.white,
-                              thickness: 1,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  'New Card Title 2',
-                                  style: TextStyle(
-                                    color: Colors.white,
+                                ],
+                              ),
+                              Divider(
+                                color: Colors.white,
+                                thickness: 1,
+                              ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    'New Card Title 2',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                    ),
                                   ),
-                                ),
-                                Divider(
-                                  color: Colors.black,
-                                ),
-                                Text(
-                                  'job7654',
-                                  style: TextStyle(
-                                    color: Colors.white,
+                                  Divider(
+                                    color: Colors.black,
                                   ),
-                                ),
-                              ],
-                            ),
-                            Divider(
-                              color: Colors.white,
-                              thickness: 1,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  'New Card Title 2',
-                                  style: TextStyle(
-                                    color: Colors.white,
+                                  Text(
+                                    'job7654',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                    ),
                                   ),
-                                ),
-                                Text(
-                                  'job7654',
-                                  style: TextStyle(
-                                    color: Colors.white,
+                                ],
+                              ),
+                              Divider(
+                                color: Colors.white,
+                                thickness: 1,
+                              ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    'New Card Title 2',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                    ),
                                   ),
-                                ),
-                              ],
-                            ),
-                            Divider(
-                              color: Colors.white,
-                              thickness: 1,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  'New Card Title 2',
-                                  style: TextStyle(
-                                    color: Colors.white,
+                                  Text(
+                                    'job7654',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                    ),
                                   ),
-                                ),
-                                Text(
-                                  'job7654',
-                                  style: TextStyle(
-                                    color: Colors.white,
+                                ],
+                              ),
+                              Divider(
+                                color: Colors.white,
+                                thickness: 1,
+                              ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    'New Card Title 2',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                    ),
                                   ),
-                                ),
-                              ],
-                            ),
-                            Divider(
-                              color: Colors.white,
-                              thickness: 1,
-                            ),
-                          ],
+                                  Text(
+                                    'job7654',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Divider(
+                                color: Colors.white,
+                                thickness: 1,
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),
@@ -208,7 +220,9 @@ class CalenderPage extends StatelessWidget {
                     children: [
                       const Text('Some Text Here'),
                       ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          sheduledetailfunction(context);
+                        },
                         child: const Text('pending'),
                         style: ElevatedButton.styleFrom(
                           primary: Colors.white,
@@ -217,121 +231,129 @@ class CalenderPage extends StatelessWidget {
                       ),
                     ],
                   ),
-                  const SizedBox(
-                    child: Flexible(
-                      child: Card(
-                        color: Color.fromRGBO(33, 150, 243, 1),
-                        child: Column(
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  'New Card Title 2',
-                                  style: TextStyle(
-                                    color: Colors.white,
+                  SizedBox(
+                    child: GestureDetector(
+                      onTap: () => sheduledetailfunction(context),
+                      child: const Flexible(
+                        child: Card(
+                          color: Color.fromRGBO(33, 150, 243, 1),
+                          child: Column(
+                            children: [
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    'New Card Title 2',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                    ),
                                   ),
-                                ),
-                                Text(
-                                  'job7654',
-                                  style: TextStyle(
-                                    color: Colors.white,
+                                  Text(
+                                    'job7654',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                    ),
                                   ),
-                                ),
-                              ],
-                            ),
-                            Divider(
-                              color: Colors.white,
-                              thickness: 1,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  'New Card Title 2',
-                                  style: TextStyle(
-                                    color: Colors.white,
+                                ],
+                              ),
+                              Divider(
+                                color: Colors.white,
+                                thickness: 1,
+                              ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    'New Card Title 2',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                    ),
                                   ),
-                                ),
-                                Divider(
-                                  color: Colors.black,
-                                ),
-                                Text(
-                                  'job7654',
-                                  style: TextStyle(
-                                    color: Colors.white,
+                                  Divider(
+                                    color: Colors.black,
                                   ),
-                                ),
-                              ],
-                            ),
-                            Divider(
-                              color: Colors.white,
-                              thickness: 1,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  'New Card Title 2',
-                                  style: TextStyle(
-                                    color: Colors.white,
+                                  Text(
+                                    'job7654',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                    ),
                                   ),
-                                ),
-                                Text(
-                                  'job7654',
-                                  style: TextStyle(
-                                    color: Colors.white,
+                                ],
+                              ),
+                              Divider(
+                                color: Colors.white,
+                                thickness: 1,
+                              ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    'New Card Title 2',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                    ),
                                   ),
-                                ),
-                              ],
-                            ),
-                            Divider(
-                              color: Colors.white,
-                              thickness: 1,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  'New Card Title 2',
-                                  style: TextStyle(
-                                    color: Colors.white,
+                                  Text(
+                                    'job7654',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                    ),
                                   ),
-                                ),
-                                Text(
-                                  'job7654',
-                                  style: TextStyle(
-                                    color: Colors.white,
+                                ],
+                              ),
+                              Divider(
+                                color: Colors.white,
+                                thickness: 1,
+                              ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    'New Card Title 2',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                    ),
                                   ),
-                                ),
-                              ],
-                            ),
-                            Divider(
-                              color: Colors.white,
-                              thickness: 1,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  'New Card Title 2',
-                                  style: TextStyle(
-                                    color: Colors.white,
+                                  Text(
+                                    'job7654',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                    ),
                                   ),
-                                ),
-                                Text(
-                                  'job754',
-                                  style: TextStyle(
-                                    color: Colors.white,
+                                ],
+                              ),
+                              Divider(
+                                color: Colors.white,
+                                thickness: 1,
+                              ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    'New Card Title 2',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                    ),
                                   ),
-                                ),
-                              ],
-                            ),
-                            Divider(
-                              color: Colors.white,
-                              thickness: 1,
-                            ),
-                          ],
+                                  Text(
+                                    'job754',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Divider(
+                                color: Colors.white,
+                                thickness: 1,
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),

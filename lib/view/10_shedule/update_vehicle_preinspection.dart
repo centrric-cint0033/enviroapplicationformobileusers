@@ -96,8 +96,9 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                           ),
                           const Text('I have approruiate valid  licence'),
                           const Icon(
-                            Icons.star, size: 13,
-                            color: Colors.red, // Set icon color to red
+                            Icons.star,
+                            size: 13,
+                            color: Colors.red,
                           ),
                         ],
                       ),
@@ -133,9 +134,7 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                               children: [
                                 TextSpan(
                                   text: 'Category A fault vehicle ',
-                                  style: TextStyle(
-                                      color: Colors
-                                          .black), // Set the color for Category A
+                                  style: TextStyle(color: Colors.black),
                                 ),
                                 TextSpan(
                                   text: ' MUST NOT be operated  ',
@@ -143,9 +142,7 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                                 ),
                                 TextSpan(
                                   text: 'until fault is rectified',
-                                  style: TextStyle(
-                                      color: Colors
-                                          .black), // Set the color for Category B
+                                  style: TextStyle(color: Colors.black),
                                 ),
                                 TextSpan(
                                   text: ' Fault Vehicle ',

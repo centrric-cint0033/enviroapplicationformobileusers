@@ -21,4 +21,5 @@ class RouteNames {
   static const String rupdatevehiclepreinspectionpage =
       '/updatevehiclepreinspectionpage ';
   static const String rsheduledetail2page = '/sheduledetail2page ';
+  static const String rjobcardpage = '/jobcardpage ';
 }

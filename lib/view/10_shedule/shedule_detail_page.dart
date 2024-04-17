@@ -27,7 +27,9 @@ class SheduledetailPage extends StatelessWidget {
               return Align(
                 alignment: Alignment.topRight,
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    jobCardFunction(context);
+                  },
                   child: const Text('Job Card'),
                   style: ElevatedButton.styleFrom(
                     primary: Colors.white,
@@ -94,4 +96,9 @@ class SheduledetailPage extends StatelessWidget {
 void updatevehiclepreinspection(BuildContext context) {
   print('ssssspendingclicked');
   context.router.pushNamed(RouteNames.rupdatevehiclepreinspectionpage);
+}
+
+void jobCardFunction(BuildContext context) {
+  print('jobclicked');
+  context.router.pushNamed(RouteNames.rjobcardpage);
 }
