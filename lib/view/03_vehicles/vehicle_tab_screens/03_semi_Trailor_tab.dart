@@ -8,6 +8,12 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 class SemiTrailersTab extends StatelessWidget {
   const SemiTrailersTab({Key? key}) : super(key: key);
 
+  _onChanged(String v) => vmVehicle.onTextChanged(() {
+        v.isEmpty
+            ? vmVehicle.trailorfunction()
+            : vmVehicle.semifueltrucksearchfunction();
+      });
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -15,13 +21,7 @@ class SemiTrailersTab extends StatelessWidget {
         children: [
           WWSearchField(
             controller: vmVehicle.vehSemiTrailorCtr,
-            onChanged: (v) => vmVehicle.onTextChanged(() {
-              if (v.isEmpty) {
-                vmVehicle.trailorfunction();
-              } else {
-                vmVehicle.semifueltrucksearchfunction();
-              }
-            }),
+            onChanged: _onChanged,
             searchTap: () {},
           ),
           gapFieldVeh,

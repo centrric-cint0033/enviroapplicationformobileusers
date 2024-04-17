@@ -8,19 +8,19 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 class MasterCarTab extends StatelessWidget {
   const MasterCarTab({Key? key}) : super(key: key);
 
+  _onChanged(String v) => vmVehicle.onTextChanged(() {
+        v.isEmpty
+            ? vmVehicle.mastercarfunction()
+            : vmVehicle.fuelsearchfunction();
+      });
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         body: Column(children: [
       WWSearchField(
         controller: vmVehicle.vehSemiTrailorCtr,
-        onChanged: (v) => vmVehicle.onTextChanged(() {
-          if (v.isEmpty) {
-            vmVehicle.mastercarfunction();
-          } else {
-            vmVehicle.fuelsearchfunction();
-          }
-        }),
+        onChanged: _onChanged,
         searchTap: () {},
       ),
       gapFieldVeh,

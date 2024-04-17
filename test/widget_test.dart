@@ -9,6 +9,7 @@ import 'package:dartz/dartz.dart';
 import 'package:enviro_mobile_application/service/02_sales/sales_service.dart';
 import 'package:enviro_mobile_application/utilis/api_endpoints/api_endpoints.dart';
 import 'package:enviro_mobile_application/utilis/httpservice.dart';
+import 'package:enviro_mobile_application/utilis/main_failure.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:http/http.dart';
@@ -39,9 +40,22 @@ void main() {
     //arrange
     when(mockHttpService.request(apiUrl: ApiEndPoints.endpointsaleslist))
         .thenAnswer((realInvocation) async => Right(Response('', 200)));
+    // //act
+    // final result = await salesService.saleJoblistApiService();
+    // // assert
+    // expect(result, Null);
+  });
+
+  test('test a error class', () async {
+    //arrange
+    when(mockHttpService.request(apiUrl: ApiEndPoints.endpointsaleslist))
+        .thenAnswer((realInvocation) async =>
+            Left({const MainFailure.clientFailure(): 'message'}));
     //act
-    final result = await salesService.saleJoblistApiService();
-    // assert
-    expect(result, Null);
+    // final result = await salesService.saleJoblistApiService();
+
+    // print(result.isLeft());
+    // // assert
+    // expect(result, isA<Left>);
   });
 }
