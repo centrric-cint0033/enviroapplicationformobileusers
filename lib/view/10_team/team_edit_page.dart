@@ -59,7 +59,7 @@ class TeamEditPage extends StatelessWidget {
     return buildCardDataOrder(
       [
         expandedRowShowWidget('Address',
-            cmTextField(controller: vmTeam.textEditTeamAddressController)),
+            cmTextFormField(controller: vmTeam.textEditTeamAddressController)),
         expandedRowShowWidget(
             'Joining Date',
             Observer(
@@ -70,7 +70,7 @@ class TeamEditPage extends StatelessWidget {
                   (date) => vmTeam.datePickerFn1(date)),
             )),
         expandedRowShowWidget('Email Address',
-            cmTextField(controller: vmTeam.textEditTeamEmailController)),
+            cmTextFormField(controller: vmTeam.textEditTeamEmailController)),
         expandedRowShowWidget('Employment Status',
             EmploymentStatusDropDown(employeeDetatils: employeeDetatils)),
         expandedRowShowWidget(
@@ -91,17 +91,17 @@ class TeamEditPage extends StatelessWidget {
                     (date) => vmTeam.datePickerFn3(date)))),
         expandedRowShowWidget(
             'Contact Number',
-            cmTextField(
+            cmTextFormField(
                 controller: vmTeam.textEditTeamContactNumberController)),
         expandedRowShowWidget('Work Email Address: ',
-            cmTextField(controller: vmTeam.textEditTeamWorkEmailController)),
+            cmTextFormField(controller: vmTeam.textEditTeamWorkEmailController)),
         expandedRowShowWidget(
             'Emergency Contact',
-            cmTextField(
+            cmTextFormField(
                 controller: vmTeam.textEditTeamEmergencyContactController)),
         expandedRowShowWidget(
             'Emergency Contact No',
-            cmTextField(
+            cmTextFormField(
                 controller:
                     vmTeam.textEditTeamEmergencyContactNumberController)),
       ],

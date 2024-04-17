@@ -40,7 +40,7 @@ mixin _$CreateTeamReqModel {
   String? get personal_email => throw _privateConstructorUsedError;
   String? get emergency_contact_name => throw _privateConstructorUsedError;
   String? get emergency_contact => throw _privateConstructorUsedError;
-  String? get employment_status => throw _privateConstructorUsedError;
+  String? get employement_status => throw _privateConstructorUsedError;
   String? get driving_license => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -76,7 +76,7 @@ abstract class $CreateTeamReqModelCopyWith<$Res> {
       String? personal_email,
       String? emergency_contact_name,
       String? emergency_contact,
-      String? employment_status,
+      String? employement_status,
       String? driving_license});
 }
 
@@ -113,7 +113,7 @@ class _$CreateTeamReqModelCopyWithImpl<$Res, $Val extends CreateTeamReqModel>
     Object? personal_email = freezed,
     Object? emergency_contact_name = freezed,
     Object? emergency_contact = freezed,
-    Object? employment_status = freezed,
+    Object? employement_status = freezed,
     Object? driving_license = freezed,
   }) {
     return _then(_value.copyWith(
@@ -197,9 +197,9 @@ class _$CreateTeamReqModelCopyWithImpl<$Res, $Val extends CreateTeamReqModel>
           ? _value.emergency_contact
           : emergency_contact // ignore: cast_nullable_to_non_nullable
               as String?,
-      employment_status: freezed == employment_status
-          ? _value.employment_status
-          : employment_status // ignore: cast_nullable_to_non_nullable
+      employement_status: freezed == employement_status
+          ? _value.employement_status
+          : employement_status // ignore: cast_nullable_to_non_nullable
               as String?,
       driving_license: freezed == driving_license
           ? _value.driving_license
@@ -238,7 +238,7 @@ abstract class _$$CreateTeamReqModelImplCopyWith<$Res>
       String? personal_email,
       String? emergency_contact_name,
       String? emergency_contact,
-      String? employment_status,
+      String? employement_status,
       String? driving_license});
 }
 
@@ -273,7 +273,7 @@ class __$$CreateTeamReqModelImplCopyWithImpl<$Res>
     Object? personal_email = freezed,
     Object? emergency_contact_name = freezed,
     Object? emergency_contact = freezed,
-    Object? employment_status = freezed,
+    Object? employement_status = freezed,
     Object? driving_license = freezed,
   }) {
     return _then(_$CreateTeamReqModelImpl(
@@ -357,9 +357,9 @@ class __$$CreateTeamReqModelImplCopyWithImpl<$Res>
           ? _value.emergency_contact
           : emergency_contact // ignore: cast_nullable_to_non_nullable
               as String?,
-      employment_status: freezed == employment_status
-          ? _value.employment_status
-          : employment_status // ignore: cast_nullable_to_non_nullable
+      employement_status: freezed == employement_status
+          ? _value.employement_status
+          : employement_status // ignore: cast_nullable_to_non_nullable
               as String?,
       driving_license: freezed == driving_license
           ? _value.driving_license
@@ -393,7 +393,7 @@ class _$CreateTeamReqModelImpl implements _CreateTeamReqModel {
       this.personal_email,
       this.emergency_contact_name,
       this.emergency_contact,
-      this.employment_status,
+      this.employement_status,
       this.driving_license});
 
   factory _$CreateTeamReqModelImpl.fromJson(Map<String, dynamic> json) =>
@@ -440,13 +440,13 @@ class _$CreateTeamReqModelImpl implements _CreateTeamReqModel {
   @override
   final String? emergency_contact;
   @override
-  final String? employment_status;
+  final String? employement_status;
   @override
   final String? driving_license;
 
   @override
   String toString() {
-    return 'CreateTeamReqModel(employee_id: $employee_id, address: $address, name: $name, designation: $designation, contact_number: $contact_number, date_joined: $date_joined, password: $password, email: $email, date_of_birth: $date_of_birth, alert_before: $alert_before, expiry_date: $expiry_date, username: $username, dp: $dp, cover_image: $cover_image, bio: $bio, user_type: $user_type, termination_date: $termination_date, personal_email: $personal_email, emergency_contact_name: $emergency_contact_name, emergency_contact: $emergency_contact, employment_status: $employment_status, driving_license: $driving_license)';
+    return 'CreateTeamReqModel(employee_id: $employee_id, address: $address, name: $name, designation: $designation, contact_number: $contact_number, date_joined: $date_joined, password: $password, email: $email, date_of_birth: $date_of_birth, alert_before: $alert_before, expiry_date: $expiry_date, username: $username, dp: $dp, cover_image: $cover_image, bio: $bio, user_type: $user_type, termination_date: $termination_date, personal_email: $personal_email, emergency_contact_name: $emergency_contact_name, emergency_contact: $emergency_contact, employement_status: $employement_status, driving_license: $driving_license)';
   }
 
   @override
@@ -489,8 +489,8 @@ class _$CreateTeamReqModelImpl implements _CreateTeamReqModel {
                 other.emergency_contact_name == emergency_contact_name) &&
             (identical(other.emergency_contact, emergency_contact) ||
                 other.emergency_contact == emergency_contact) &&
-            (identical(other.employment_status, employment_status) ||
-                other.employment_status == employment_status) &&
+            (identical(other.employement_status, employement_status) ||
+                other.employement_status == employement_status) &&
             (identical(other.driving_license, driving_license) ||
                 other.driving_license == driving_license));
   }
@@ -519,7 +519,7 @@ class _$CreateTeamReqModelImpl implements _CreateTeamReqModel {
         personal_email,
         emergency_contact_name,
         emergency_contact,
-        employment_status,
+        employement_status,
         driving_license
       ]);
 
@@ -560,7 +560,7 @@ abstract class _CreateTeamReqModel implements CreateTeamReqModel {
       final String? personal_email,
       final String? emergency_contact_name,
       final String? emergency_contact,
-      final String? employment_status,
+      final String? employement_status,
       final String? driving_license}) = _$CreateTeamReqModelImpl;
 
   factory _CreateTeamReqModel.fromJson(Map<String, dynamic> json) =
@@ -607,7 +607,7 @@ abstract class _CreateTeamReqModel implements CreateTeamReqModel {
   @override
   String? get emergency_contact;
   @override
-  String? get employment_status;
+  String? get employement_status;
   @override
   String? get driving_license;
   @override

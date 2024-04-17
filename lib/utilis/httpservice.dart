@@ -93,13 +93,28 @@ class HttpService {
 
       if (data != null) {
         data.forEach((key, value) async {
-          if (isFilePath(value)) {
-            request.files.add(await MultipartFile.fromPath(key, value));
-          } else {
-            request.fields[key] = value.toString();
+          if (value != null && value.isNotEmpty) {
+            customPrint(content: '$key : $value');
+            if (isFilePath(value)) {
+              request.files
+                  .add(await MultipartFile.fromPath(key, value.toString()));
+            } else {
+              request.fields[key] = value.toString();
+            }
           }
         });
       }
+      // Response response = Response('body', 200);
+      // if (response.statusCode == HttpStatus.ok ||
+      //     response.statusCode == HttpStatus.created) {
+      //   return Right(response);
+      // } else {
+      //   return Left({
+      //     const MainFailure.clientFailure():
+      //         jsonDecode(response.body)["detail"] ??
+      //             jsonDecode(response.body)["app_data"]
+      //   });
+      // }
 
       StreamedResponse streamedResponse = await request.send();
       final response = await Response.fromStream(streamedResponse);

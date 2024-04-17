@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'create_team_req_model.freezed.dart';
@@ -28,7 +26,7 @@ class CreateTeamReqModel with _$CreateTeamReqModel {
       String? personal_email,
       String? emergency_contact_name,
       String? emergency_contact,
-      String? employment_status,
+      String? employement_status,
       String? driving_license}) = _CreateTeamReqModel;
 
   factory CreateTeamReqModel.fromJson(Map<String, dynamic> json) =>

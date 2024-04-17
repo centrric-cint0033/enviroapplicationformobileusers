@@ -21,14 +21,16 @@ abstract class IteamService {
       getTeamProfileEmployeeDetails({required num employeeID});
   Future<Either<Map<MainFailure, dynamic>, TeamFolderRespModel>> getTeamFolders(
       {required num id});
-  Future<Either<Map<MainFailure, dynamic>, TeamCreateFolderReqModel>> addTeamFolders(
-      {required Map<String, String> data});
-  Future<Either<Map<MainFailure, dynamic>, String>> deleteTeamFolders({required num id});
+  Future<Either<Map<MainFailure, dynamic>, TeamCreateFolderReqModel>>
+      addTeamFolders({required Map<String, String> data});
+  Future<Either<Map<MainFailure, dynamic>, String>> deleteTeamFolders(
+      {required num id});
   Future<Either<Map<MainFailure, dynamic>, String>> editTeamFolders(
       {required Map<String, String> data, required int id});
   Future<Either<Map<MainFailure, dynamic>, TeamDesigntionResModel>>
       getTeamDesignations();
-  Future<Either<Map<MainFailure, dynamic>, String>> deleteEmployeeApi({required num id});
+  Future<Either<Map<MainFailure, dynamic>, String>> deleteEmployeeApi(
+      {required num id});
   Future<Either<Map<MainFailure, dynamic>, List<TeamResModel>>>
       employeeSearchApi({required Map<String, String> data});
   Future<Either<Map<MainFailure, dynamic>, CreateTeamReqModel>> createTeamApi(
@@ -103,7 +105,7 @@ class TeamService implements IteamService {
         apiUrl: '${ApiEndPoints.teamFolder}/$id/1');
 
     return response.fold(
-     (l) => Left(l),
+      (l) => Left(l),
       (res) async {
         TeamFolderRespModel teamFolderList =
             TeamFolderRespModel.fromJson(jsonDecode(res.body));
@@ -114,12 +116,12 @@ class TeamService implements IteamService {
   }
 
   @override
-  Future<Either<Map<MainFailure, dynamic>, TeamCreateFolderReqModel>> addTeamFolders(
-      {required Map<String, String> data}) async {
+  Future<Either<Map<MainFailure, dynamic>, TeamCreateFolderReqModel>>
+      addTeamFolders({required Map<String, String> data}) async {
     var response = await getIt<HttpService>().multipartRequest(
         data: data, method: 'POST', apiUrl: ApiEndPoints.addTeamFolder);
     return response.fold(
-     (l) => Left(l),
+      (l) => Left(l),
       (res) async {
         var data = jsonDecode(res.body);
         TeamCreateFolderReqModel createFolderList =
@@ -138,7 +140,7 @@ class TeamService implements IteamService {
         apiUrl: '${ApiEndPoints.teamFolderDelete}/$id/');
 
     return response.fold(
-     (l) => Left(l),
+      (l) => Left(l),
       (res) async {
         return const Right('success');
       },
@@ -187,7 +189,7 @@ class TeamService implements IteamService {
         method: HttpMethod.delete,
         apiUrl: '${ApiEndPoints.deleteEmployee}/$id/');
     return response.fold(
-     (l) => Left(l),
+      (l) => Left(l),
       (res) async {
         return const Right('success');
       },

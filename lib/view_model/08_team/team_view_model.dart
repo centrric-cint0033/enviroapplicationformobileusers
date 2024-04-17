@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:developer';
 import 'package:auto_route/auto_route.dart';
 import 'package:enviro_mobile_application/api_response/api_response.dart';
 import 'package:enviro_mobile_application/model/10_team/create_team_req_model/create_team_req_model.dart';
@@ -447,30 +446,7 @@ abstract class TeamViewModelBase with Store {
   Future<void> createTeamApi(
       {required CreateTeamReqModel data, required BuildContext context}) async {
     addFolderResponse = createTeamResponse.copyWith(error: null, loading: true);
-    final result = await teamService.createTeamApi(data: data.toJson()
-        // {
-        //   "employee_id": data?.employee_id ?? "",
-        //   "name": data?.name ?? "",
-        //   "address": data?.address ?? "",
-        //   "contact_number": data?.contact_number ?? "",
-        //   "date_joined": data?.date_joined ?? "",
-        //   "password": data?.password ?? "",
-        //   "email": data?.email ?? "",
-        //   "date_of_birth": data?.date_of_birth ?? "",
-        //   "alert_before": data?.alert_before ?? "",
-        //   "expiry_date": data?.expiry_date ?? "",
-        //   "username": data?.username ?? "",
-        //   "dp": data?.dp ?? "",
-        //   "cover_image": data?.cover_image ?? "",
-        //   "bio": data?.bio ?? "",
-        //   "user_type": data?.user_type ?? "",
-        //   "driving_license": data?.driving_license ?? "",
-        //   "employment_status": data?.employment_status ?? "",
-        //   "emergency_contact": data?.emergency_contact ?? "",
-        //   "emergency_contact_name": data?.emergency_contact_name ?? ""
-        // }
-
-        );
+    final result = await teamService.createTeamApi(data: data.toJson());
     return result.fold(
       (l) {
         createTeamResponse =
@@ -481,7 +457,6 @@ abstract class TeamViewModelBase with Store {
       (r) {
         createTeamResponse =
             createTeamResponse.copyWith(data: r, error: null, loading: false);
-        log(createTeamResponse.toString() + "dkgfm");
         getCurrentEmployee();
         textControllersClearFn();
         showToast(context, msg: "Successfully Created Employee");
@@ -543,6 +518,7 @@ abstract class TeamViewModelBase with Store {
     textAddteamNameController.clear();
     textAddTeamContactNumberController.clear();
     selectedAddEmploymentStatus = "full_time";
+    selectedDesignationAddTeam = null;
     textAddTeamEmergencyContactController.clear();
     textAddTeamEmergencyContactNumberController.clear();
     selectedFileNameLicense = "";

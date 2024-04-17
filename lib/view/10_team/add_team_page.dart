@@ -25,8 +25,8 @@ import '../../widgets/cm_title.dart';
 
 @RoutePage()
 class AddTeamPage extends StatelessWidget {
-  const AddTeamPage({super.key});
-
+  AddTeamPage({super.key});
+  final formkey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -50,150 +50,162 @@ class AddTeamPage extends StatelessWidget {
           return Padding(
             padding: EdgeInsets.symmetric(horizontal: 15.w),
             child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  gapField,
-                  SizedBox(
-                    height: 82.h,
-                    child: DecoratedBox(
-                      decoration: BoxDecoration(
-                          color: Appthemes.cLightGrey,
-                          borderRadius: BorderRadius.circular(12),
-                          border: Border.all(color: Colors.grey.shade300)),
-                      child: Column(children: [
-                        Expanded(
-                            child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            SizedBox(
-                              width: 15.w,
-                            ),
-                            InkWell(
-                              onTap: () async {
-                                await vmTeam.dpImageUpdate();
-                              },
-                              child: SizedBox(
-                                height: 60.w,
-                                width: 60.w,
-                                child: DecoratedBox(
-                                    decoration: BoxDecoration(
-                                        color: Colors.grey.shade700,
-                                        shape: BoxShape.circle),
-                                    child:
-                                        vmTeam.profileImage?.imagePath == null
-                                            ? Column(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: [
-                                                  const Icon(
-                                                    Icons.person,
-                                                    color: Colors.white,
-                                                  ),
-                                                  Text(
-                                                    "Add Image",
-                                                    style: TextStyle(
-                                                        fontSize: 10.w,
-                                                        color: Colors.white),
-                                                  )
-                                                ],
-                                              )
-                                            : DecoratedBox(
-                                                decoration: const BoxDecoration(
-                                                    shape: BoxShape.circle),
-                                                child: ClipRRect(
-                                                  borderRadius:
-                                                      BorderRadius.circular(60),
-                                                  child: Image.file(
-                                                    File(vmTeam.profileImage
-                                                            ?.imagePath ??
-                                                        ""),
-                                                  ),
-                                                ))),
+              child: Form(
+                key: formkey,
+                child: Column(
+                  children: [
+                    gapField,
+                    SizedBox(
+                      height: 82.h,
+                      child: DecoratedBox(
+                        decoration: BoxDecoration(
+                            color: Appthemes.cLightGrey,
+                            borderRadius: BorderRadius.circular(12),
+                            border: Border.all(color: Colors.grey.shade300)),
+                        child: Column(children: [
+                          Expanded(
+                              child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              SizedBox(
+                                width: 15.w,
                               ),
-                            ),
-                            sized0wx15,
-                            Expanded(
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Row(
-                                    crossAxisAlignment: CrossAxisAlignment.end,
-                                    children: [
-                                      const Text(
-                                        "Position Title:",
-                                        style: TextStyle(
-                                            color: Appthemes.cPrimary),
-                                      ),
-                                      sized0wx05,
-                                      DesignationDownWidget(
-                                        employeeDetatils: employeeDetails,
-                                        fromAddTeam: true,
-                                      ),
-                                      sized0wx05,
-                                    ],
-                                  ),
-                                  Row(
-                                    children: [
-                                      const Text(
-                                        '*',
-                                        style: TextStyle(
-                                            color: Colors.red,
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 22),
-                                      ),
-                                      sized0wx05,
-                                      Expanded(
-                                        child: Padding(
-                                          padding: EdgeInsets.only(right: 25.w),
-                                          child: cmTextField(
-                                              hintText: 'Name',
-                                              hintStyle: TextStyle(
-                                                  color: Colors.grey.shade400),
-                                              controller: vmTeam
-                                                  .textAddteamNameController,
-                                              showDecoration: true),
+                              InkWell(
+                                onTap: () async {
+                                  await vmTeam.dpImageUpdate();
+                                },
+                                child: SizedBox(
+                                  height: 60.w,
+                                  width: 60.w,
+                                  child: DecoratedBox(
+                                      decoration: BoxDecoration(
+                                          color: Colors.grey.shade700,
+                                          shape: BoxShape.circle),
+                                      child: vmTeam.profileImage?.imagePath ==
+                                              null
+                                          ? Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                const Icon(
+                                                  Icons.person,
+                                                  color: Colors.white,
+                                                ),
+                                                Text(
+                                                  "Add Image",
+                                                  style: TextStyle(
+                                                      fontSize: 10.w,
+                                                      color: Colors.white),
+                                                )
+                                              ],
+                                            )
+                                          : DecoratedBox(
+                                              decoration: const BoxDecoration(
+                                                  shape: BoxShape.circle),
+                                              child: ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(60),
+                                                child: Image.file(
+                                                  File(vmTeam.profileImage
+                                                          ?.imagePath ??
+                                                      ""),
+                                                ),
+                                              ))),
+                                ),
+                              ),
+                              sized0wx15,
+                              Expanded(
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.end,
+                                      children: [
+                                        const Text(
+                                          "Position Title:",
+                                          style: TextStyle(
+                                              color: Appthemes.cPrimary),
                                         ),
-                                      ),
-                                    ],
-                                  )
-                                ],
-                              ),
-                            )
-                          ],
-                        )),
-                      ]),
+                                        sized0wx05,
+                                        DesignationDownWidget(
+                                          employeeDetatils: employeeDetails,
+                                          fromAddTeam: true,
+                                        ),
+                                        sized0wx05,
+                                      ],
+                                    ),
+                                    Row(
+                                      children: [
+                                        const Text(
+                                          '*',
+                                          style: TextStyle(
+                                              color: Colors.red,
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 22),
+                                        ),
+                                        sized0wx05,
+                                        Expanded(
+                                          child: Padding(
+                                            padding:
+                                                EdgeInsets.only(right: 25.w),
+                                            child: cmTextFormField(
+                                                hintText: 'Name',
+                                                hintStyle: TextStyle(
+                                                    color:
+                                                        Colors.grey.shade400),
+                                                controller: vmTeam
+                                                    .textAddteamNameController,
+                                                showDecoration: true,
+                                                validator: (value) {
+                                                  if (value!.isEmpty) {
+                                                    return "Name is required";
+                                                  }
+                                                  return null;
+                                                }),
+                                          ),
+                                        ),
+                                      ],
+                                    )
+                                  ],
+                                ),
+                              )
+                            ],
+                          )),
+                        ]),
+                      ),
                     ),
-                  ),
-                  sized0hx10,
-                  listAddData(context, employeeDetails),
-                  sized0hx10,
-                  cmTitle('ID Poofs', fontWeight: FontWeight.bold),
-                  sized0hx10,
-                  cmIdProofCard(
-                      context,
-                      Observer(
-                          builder: (context) => cmDatePicker(
-                              context,
-                              "",
-                              vmTeam.selectedLicenceExpiryDate,
-                              (date) => vmTeam.datePickerFn6(date))),
-                      Observer(
-                          builder: (context) => cmDatePicker(
-                              context,
-                              "",
-                              vmTeam.selectedLicenceAlertDate,
-                              (date) => vmTeam.datePickerFn7(date)))),
-                  sized0hx10,
-                  cmTitle('Credentials For Enviro',
-                      fontWeight: FontWeight.bold),
-                  sized0hx10,
-                  cmCredentialsForEnviro(context),
-                  sized0hx10,
-                  cmElevatedButton(() {
-                    cmOnpressedFnCreateTeam(context);
-                  }, Appthemes.cPrimary, "CREATE"),
-                  sized0hx40,
-                ],
+                    sized0hx10,
+                    listAddData(context, employeeDetails),
+                    sized0hx10,
+                    cmTitle('ID Poofs', fontWeight: FontWeight.bold),
+                    sized0hx10,
+                    cmIdProofCard(
+                        context,
+                        Observer(
+                            builder: (context) => cmDatePicker(
+                                context,
+                                "",
+                                vmTeam.selectedLicenceExpiryDate,
+                                (date) => vmTeam.datePickerFn6(date))),
+                        Observer(
+                            builder: (context) => cmDatePicker(
+                                context,
+                                "",
+                                vmTeam.selectedLicenceAlertDate,
+                                (date) => vmTeam.datePickerFn7(date)))),
+                    sized0hx10,
+                    cmTitle('Credentials For Enviro',
+                        fontWeight: FontWeight.bold),
+                    sized0hx10,
+                    cmCredentialsForEnviro(context),
+                    sized0hx10,
+                    cmElevatedButton(() {
+                      cmOnpressedFnCreateTeam(context);
+                    }, Appthemes.cPrimary, "CREATE"),
+                    sized0hx40,
+                  ],
+                ),
               ),
             ),
           );
@@ -217,11 +229,17 @@ class AddTeamPage extends StatelessWidget {
             Row(children: [
               const Text(': '),
               Expanded(
-                child: cmTextField(
+                child: cmTextFormField(
                     controller: vmTeam.textAddTeamEmpIdController,
                     hintText: "Emp Id",
                     keyboardType: const TextInputType.numberWithOptions(),
-                    hintStyle: TextStyle(color: Colors.grey.shade400)),
+                    hintStyle: TextStyle(color: Colors.grey.shade400),
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return "Emp Id is required";
+                      }
+                      return null;
+                    }),
               )
             ])),
         expandedRowShowWidget(
@@ -235,10 +253,16 @@ class AddTeamPage extends StatelessWidget {
             Row(children: [
               const Text(': '),
               Expanded(
-                  child: cmTextField(
+                  child: cmTextFormField(
                       controller: vmTeam.textAddTeamAddressController,
                       hintText: "Address",
-                      hintStyle: TextStyle(color: Colors.grey.shade400)))
+                      hintStyle: TextStyle(color: Colors.grey.shade400),
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return "Address is required";
+                        }
+                        return null;
+                      }))
             ])),
         expandedRowShowWidget(
             Row(
@@ -286,10 +310,16 @@ class AddTeamPage extends StatelessWidget {
             Row(children: [
               const Text(': '),
               Expanded(
-                  child: cmTextField(
+                  child: cmTextFormField(
                       controller: vmTeam.textAddTeamEmailController,
                       hintText: "Email Address",
-                      hintStyle: TextStyle(color: Colors.grey.shade400)))
+                      hintStyle: TextStyle(color: Colors.grey.shade400),
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return "Email is required";
+                        }
+                        return null;
+                      }))
             ])),
         expandedRowShowWidget(
             Row(
@@ -302,11 +332,17 @@ class AddTeamPage extends StatelessWidget {
             Row(children: [
               const Text(': '),
               Expanded(
-                  child: cmTextField(
+                  child: cmTextFormField(
                       controller: vmTeam.textAddTeamContactNumberController,
                       hintText: "Number",
                       keyboardType: const TextInputType.numberWithOptions(),
-                      hintStyle: TextStyle(color: Colors.grey.shade400)))
+                      hintStyle: TextStyle(color: Colors.grey.shade400),
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return "Number is required";
+                        }
+                        return null;
+                      }))
             ])),
         expandedRowShowWidget(
             Row(
@@ -333,10 +369,16 @@ class AddTeamPage extends StatelessWidget {
             Row(children: [
               const Text(': '),
               Expanded(
-                child: cmTextField(
+                child: cmTextFormField(
                     controller: vmTeam.textAddTeamEmergencyContactController,
                     hintText: "Name",
-                    hintStyle: TextStyle(color: Colors.grey.shade400)),
+                    hintStyle: TextStyle(color: Colors.grey.shade400),
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return "Name is required";
+                      }
+                      return null;
+                    }),
               )
             ])),
         expandedRowShowWidget(
@@ -350,12 +392,18 @@ class AddTeamPage extends StatelessWidget {
             Row(children: [
               const Text(': '),
               Expanded(
-                child: cmTextField(
+                child: cmTextFormField(
                     controller:
                         vmTeam.textAddTeamEmergencyContactNumberController,
                     hintText: "Number",
                     keyboardType: const TextInputType.numberWithOptions(),
-                    hintStyle: TextStyle(color: Colors.grey.shade400)),
+                    hintStyle: TextStyle(color: Colors.grey.shade400),
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return "Number is required";
+                      }
+                      return null;
+                    }),
               )
             ])),
       ],
@@ -388,44 +436,9 @@ class AddTeamPage extends StatelessWidget {
 
   cmOnpressedFnCreateTeam(BuildContext context) {
     log(vmTeam.selectedAddEmploymentStatus);
-    log(vmTeam.selectedDesignationAddTeam2.toString());
-    if (vmTeam.showRequredTextLicense == false) {
-      if (vmTeam.textAddteamNameController.text.isNotEmpty &&
-          vmTeam.textAddTeamEmpIdController.text.isNotEmpty &&
-          vmTeam.textAddTeamAddressController.text.isNotEmpty &&
-          vmTeam.selectedDobAddTeam != null &&
-          vmTeam.selectedJoiningDateAddTeam != null &&
-          vmTeam.textAddTeamEmailController.text.isNotEmpty &&
-          vmTeam.textAddTeamContactNumberController.text.isNotEmpty &&
-          vmTeam.textAddTeamEmergencyContactController.text.isNotEmpty &&
-          vmTeam.textAddTeamEmergencyContactNumberController.text.isNotEmpty &&
-          vmTeam.textAddTeamPasswordController.text.isNotEmpty) {
-        vmTeam.createTeamApi(
-            data: CreateTeamReqModel(
-                dp: vmTeam.profileImage?.imagePath ?? "",
-                name: vmTeam.textAddteamNameController.text,
-                employee_id: vmTeam.textAddTeamEmpIdController.text,
-                address: vmTeam.textAddTeamAddressController.text,
-                user_type: vmTeam.selectedDesignationAddTeam2 ?? "",
-                date_of_birth:
-                    DateFormat('yyyy-MM-dd').format(vmTeam.selectedDobAddTeam!),
-                date_joined: DateFormat('yyyy-MM-dd')
-                    .format(vmTeam.selectedJoiningDateAddTeam!),
-                email: vmTeam.textAddTeamEmailController.text,
-                contact_number: vmTeam.textAddTeamContactNumberController.text,
-                username: vmTeam.textAddTeamEmailController.text,
-                password: vmTeam.textAddTeamPasswordController.text,
-                employment_status: vmTeam.selectedAddEmploymentStatus,
-                emergency_contact:
-                    vmTeam.textAddTeamEmergencyContactNumberController.text,
-                emergency_contact_name:
-                    vmTeam.textAddTeamEmergencyContactController.text),
-            context: context);
-      } else {
-        showToast(context, msg: "Fields Required", color: Colors.red);
-      }
-    } else {
-      {
+    if (formkey.currentState!.validate()) {
+      log(vmTeam.selectedDesignationAddTeam2.toString());
+      if (vmTeam.showRequredTextLicense == false) {
         if (vmTeam.textAddteamNameController.text.isNotEmpty &&
             vmTeam.textAddTeamEmpIdController.text.isNotEmpty &&
             vmTeam.textAddTeamAddressController.text.isNotEmpty &&
@@ -436,10 +449,7 @@ class AddTeamPage extends StatelessWidget {
             vmTeam.textAddTeamEmergencyContactController.text.isNotEmpty &&
             vmTeam
                 .textAddTeamEmergencyContactNumberController.text.isNotEmpty &&
-            vmTeam.textAddTeamPasswordController.text.isNotEmpty &&
-            vmTeam.selectedFilePathLicense != null &&
-            vmTeam.selectedLicenceExpiryDate != null &&
-            vmTeam.selectedLicenceAlertDate != null) {
+            vmTeam.textAddTeamPasswordController.text.isNotEmpty) {
           vmTeam.createTeamApi(
               data: CreateTeamReqModel(
                   dp: vmTeam.profileImage?.imagePath ?? "",
@@ -454,12 +464,9 @@ class AddTeamPage extends StatelessWidget {
                   email: vmTeam.textAddTeamEmailController.text,
                   contact_number:
                       vmTeam.textAddTeamContactNumberController.text,
-                  driving_license: vmTeam.selectedFilePathLicense ?? "",
-                  expiry_date: vmTeam.selectedLicenceExpiryDate,
-                  alert_before: vmTeam.selectedLicenceAlertDate,
                   username: vmTeam.textAddTeamEmailController.text,
                   password: vmTeam.textAddTeamPasswordController.text,
-                  employment_status: vmTeam.selectedAddEmploymentStatus,
+                  employement_status: vmTeam.selectedAddEmploymentStatus,
                   emergency_contact:
                       vmTeam.textAddTeamEmergencyContactNumberController.text,
                   emergency_contact_name:
@@ -468,7 +475,59 @@ class AddTeamPage extends StatelessWidget {
         } else {
           showToast(context, msg: "Fields Required", color: Colors.red);
         }
+      } else {
+        {
+          if (vmTeam.textAddteamNameController.text.isNotEmpty &&
+              vmTeam.textAddTeamEmpIdController.text.isNotEmpty &&
+              vmTeam.textAddTeamAddressController.text.isNotEmpty &&
+              vmTeam.selectedDobAddTeam != null &&
+              vmTeam.selectedJoiningDateAddTeam != null &&
+              vmTeam.textAddTeamEmailController.text.isNotEmpty &&
+              vmTeam.textAddTeamContactNumberController.text.isNotEmpty &&
+              vmTeam.textAddTeamEmergencyContactController.text.isNotEmpty &&
+              vmTeam.textAddTeamEmergencyContactNumberController.text
+                  .isNotEmpty &&
+              vmTeam.textAddTeamPasswordController.text.isNotEmpty &&
+              vmTeam.selectedFilePathLicense != null &&
+              vmTeam.selectedLicenceExpiryDate != null &&
+              vmTeam.selectedLicenceAlertDate != null) {
+            vmTeam.createTeamApi(
+                data: CreateTeamReqModel(
+                    dp: vmTeam.profileImage?.imagePath ?? "",
+                    name: vmTeam.textAddteamNameController.text,
+                    employee_id: vmTeam.textAddTeamEmpIdController.text,
+                    address: vmTeam.textAddTeamAddressController.text,
+                    user_type: vmTeam.selectedDesignationAddTeam2 ?? "",
+                    date_of_birth: DateFormat('yyyy-MM-dd')
+                        .format(vmTeam.selectedDobAddTeam!),
+                    date_joined: DateFormat('yyyy-MM-dd')
+                        .format(vmTeam.selectedJoiningDateAddTeam!),
+                    email: vmTeam.textAddTeamEmailController.text,
+                    contact_number:
+                        vmTeam.textAddTeamContactNumberController.text,
+                    driving_license: vmTeam.selectedFilePathLicense ?? "",
+                    expiry_date: vmTeam.selectedLicenceExpiryDate,
+                    alert_before: vmTeam.selectedLicenceAlertDate,
+                    username: vmTeam.textAddTeamEmailController.text,
+                    password: vmTeam.textAddTeamPasswordController.text,
+                    employement_status: vmTeam.selectedAddEmploymentStatus,
+                    emergency_contact:
+                        vmTeam.textAddTeamEmergencyContactNumberController.text,
+                    emergency_contact_name:
+                        vmTeam.textAddTeamEmergencyContactController.text),
+                context: context);
+          } else {
+            showToast(context, msg: "Fields Required", color: Colors.red);
+          }
+        }
       }
     }
+  }
+
+  cmValidatorFn(value) {
+    if (value!.isEmpty) {
+      return "Name is required";
+    }
+    return null;
   }
 }

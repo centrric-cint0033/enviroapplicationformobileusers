@@ -13,13 +13,13 @@ Widget cmCredentialsForEnviro(BuildContext context) {
       child: Column(children: [
         cmRow(
             Row(children: [showText("Username"), sized0wx05, cmRequiredText()]),
-            cmTextField(
+            cmTextFormField(
                 readOnly: true,
                 showDecoration: true,
                 controller: vmTeam.textAddTeamEmailController)),
         cmRow(
             Row(children: [showText("Password"), sized0wx05, cmRequiredText()]),
-            cmTextField(
+            cmTextFormField(
                 showDecoration: true,
                 controller: vmTeam.textAddTeamPasswordController))
       ]),

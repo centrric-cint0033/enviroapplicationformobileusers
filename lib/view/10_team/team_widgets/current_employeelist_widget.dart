@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:auto_route/auto_route.dart';
 import 'package:enviro_mobile_application/Routepage/approutes.gr.dart';
 import 'package:enviro_mobile_application/model/10_team/team_res_model/team_res_model.dart';
