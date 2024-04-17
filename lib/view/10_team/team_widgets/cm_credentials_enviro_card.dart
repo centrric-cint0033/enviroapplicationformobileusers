@@ -21,7 +21,13 @@ Widget cmCredentialsForEnviro(BuildContext context) {
             Row(children: [showText("Password"), sized0wx05, cmRequiredText()]),
             cmTextFormField(
                 showDecoration: true,
-                controller: vmTeam.textAddTeamPasswordController))
+                controller: vmTeam.textAddTeamPasswordController,
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return "Password is required";
+                  }
+                  return null;
+                }))
       ]),
     ),
   );

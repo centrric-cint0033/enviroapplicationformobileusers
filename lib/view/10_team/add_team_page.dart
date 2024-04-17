@@ -31,13 +31,7 @@ class AddTeamPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        vmTeam.selectedJoiningDateAddTeam = null;
-        vmTeam.selectedDobAddTeam = null;
-        vmTeam.selectedLicenceExpiryDate = null;
-        vmTeam.selectedLicenceAlertDate = null;
-        vmTeam.showRequredTextLicense = false;
-        vmTeam.selectedAddEmploymentStatus = "full_time";
-        vmTeam.selectedDesignationAddTeam2 = "accounts_manager";
+        vmTeam.textControllersClearFn();
         return true;
       },
       child: Scaffold(
@@ -400,7 +394,7 @@ class AddTeamPage extends StatelessWidget {
                     hintStyle: TextStyle(color: Colors.grey.shade400),
                     validator: (value) {
                       if (value!.isEmpty) {
-                        return "Number is required";
+                        return "Number dis required";
                       }
                       return null;
                     }),
@@ -435,92 +429,56 @@ class AddTeamPage extends StatelessWidget {
   }
 
   cmOnpressedFnCreateTeam(BuildContext context) {
-    log(vmTeam.selectedAddEmploymentStatus);
-    if (formkey.currentState!.validate()) {
-      log(vmTeam.selectedDesignationAddTeam2.toString());
-      if (vmTeam.showRequredTextLicense == false) {
-        if (vmTeam.textAddteamNameController.text.isNotEmpty &&
-            vmTeam.textAddTeamEmpIdController.text.isNotEmpty &&
-            vmTeam.textAddTeamAddressController.text.isNotEmpty &&
-            vmTeam.selectedDobAddTeam != null &&
-            vmTeam.selectedJoiningDateAddTeam != null &&
-            vmTeam.textAddTeamEmailController.text.isNotEmpty &&
-            vmTeam.textAddTeamContactNumberController.text.isNotEmpty &&
-            vmTeam.textAddTeamEmergencyContactController.text.isNotEmpty &&
-            vmTeam
-                .textAddTeamEmergencyContactNumberController.text.isNotEmpty &&
-            vmTeam.textAddTeamPasswordController.text.isNotEmpty) {
-          vmTeam.createTeamApi(
-              data: CreateTeamReqModel(
-                  dp: vmTeam.profileImage?.imagePath ?? "",
-                  name: vmTeam.textAddteamNameController.text,
-                  employee_id: vmTeam.textAddTeamEmpIdController.text,
-                  address: vmTeam.textAddTeamAddressController.text,
-                  user_type: vmTeam.selectedDesignationAddTeam2 ?? "",
-                  date_of_birth: DateFormat('yyyy-MM-dd')
-                      .format(vmTeam.selectedDobAddTeam!),
-                  date_joined: DateFormat('yyyy-MM-dd')
-                      .format(vmTeam.selectedJoiningDateAddTeam!),
-                  email: vmTeam.textAddTeamEmailController.text,
-                  contact_number:
-                      vmTeam.textAddTeamContactNumberController.text,
-                  username: vmTeam.textAddTeamEmailController.text,
-                  password: vmTeam.textAddTeamPasswordController.text,
-                  employement_status: vmTeam.selectedAddEmploymentStatus,
-                  emergency_contact:
-                      vmTeam.textAddTeamEmergencyContactNumberController.text,
-                  emergency_contact_name:
-                      vmTeam.textAddTeamEmergencyContactController.text),
-              context: context);
-        } else {
-          showToast(context, msg: "Fields Required", color: Colors.red);
+    if (formkey.currentState!.validate() &&
+        vmTeam.selectedDobAddTeam != null &&
+        vmTeam.selectedJoiningDateAddTeam != null) {
+      if (vmTeam.showRequredTextLicense == true &&
+          vmTeam.selectedFilePathLicense == null &&
+          vmTeam.selectedLicenceExpiryDate == null &&
+          vmTeam.selectedLicenceAlertDate == null) {
+        if (vmTeam.selectedFilePathLicense == null) {
+          showToast(context, msg: "Please Select License File");
+        } else if (vmTeam.selectedLicenceExpiryDate == null) {
+          showToast(context, msg: "Please Select License Expiry");
+        } else if (vmTeam.selectedLicenceAlertDate == null) {
+          showToast(context, msg: "Please Select License Alert");
         }
       } else {
-        {
-          if (vmTeam.textAddteamNameController.text.isNotEmpty &&
-              vmTeam.textAddTeamEmpIdController.text.isNotEmpty &&
-              vmTeam.textAddTeamAddressController.text.isNotEmpty &&
-              vmTeam.selectedDobAddTeam != null &&
-              vmTeam.selectedJoiningDateAddTeam != null &&
-              vmTeam.textAddTeamEmailController.text.isNotEmpty &&
-              vmTeam.textAddTeamContactNumberController.text.isNotEmpty &&
-              vmTeam.textAddTeamEmergencyContactController.text.isNotEmpty &&
-              vmTeam.textAddTeamEmergencyContactNumberController.text
-                  .isNotEmpty &&
-              vmTeam.textAddTeamPasswordController.text.isNotEmpty &&
-              vmTeam.selectedFilePathLicense != null &&
-              vmTeam.selectedLicenceExpiryDate != null &&
-              vmTeam.selectedLicenceAlertDate != null) {
-            vmTeam.createTeamApi(
-                data: CreateTeamReqModel(
-                    dp: vmTeam.profileImage?.imagePath ?? "",
-                    name: vmTeam.textAddteamNameController.text,
-                    employee_id: vmTeam.textAddTeamEmpIdController.text,
-                    address: vmTeam.textAddTeamAddressController.text,
-                    user_type: vmTeam.selectedDesignationAddTeam2 ?? "",
-                    date_of_birth: DateFormat('yyyy-MM-dd')
-                        .format(vmTeam.selectedDobAddTeam!),
-                    date_joined: DateFormat('yyyy-MM-dd')
-                        .format(vmTeam.selectedJoiningDateAddTeam!),
-                    email: vmTeam.textAddTeamEmailController.text,
-                    contact_number:
-                        vmTeam.textAddTeamContactNumberController.text,
-                    driving_license: vmTeam.selectedFilePathLicense ?? "",
-                    expiry_date: vmTeam.selectedLicenceExpiryDate,
-                    alert_before: vmTeam.selectedLicenceAlertDate,
-                    username: vmTeam.textAddTeamEmailController.text,
-                    password: vmTeam.textAddTeamPasswordController.text,
-                    employement_status: vmTeam.selectedAddEmploymentStatus,
-                    emergency_contact:
-                        vmTeam.textAddTeamEmergencyContactNumberController.text,
-                    emergency_contact_name:
-                        vmTeam.textAddTeamEmergencyContactController.text),
-                context: context);
-          } else {
-            showToast(context, msg: "Fields Required", color: Colors.red);
-          }
-        }
+        log("kkw");
+        vmTeam.createTeamApi(
+            data: CreateTeamReqModel(
+                dp: vmTeam.profileImage?.imagePath ?? "",
+                name: vmTeam.textAddteamNameController.text,
+                employee_id: vmTeam.textAddTeamEmpIdController.text,
+                address: vmTeam.textAddTeamAddressController.text,
+                user_type: vmTeam.selectedDesignationAddTeam2 ?? "",
+                date_of_birth:
+                    DateFormat('yyyy-MM-dd').format(vmTeam.selectedDobAddTeam!),
+                date_joined: DateFormat('yyyy-MM-dd')
+                    .format(vmTeam.selectedJoiningDateAddTeam!),
+                email: vmTeam.textAddTeamEmailController.text,
+                contact_number: vmTeam.textAddTeamContactNumberController.text,
+                driving_license: vmTeam.selectedFilePathLicense ?? "",
+                expiry_date: vmTeam.selectedLicenceExpiryDate,
+                alert_before: vmTeam.selectedLicenceAlertDate,
+                username: vmTeam.textAddTeamEmailController.text,
+                password: vmTeam.textAddTeamPasswordController.text,
+                employement_status: vmTeam.selectedAddEmploymentStatus,
+                emergency_contact:
+                    vmTeam.textAddTeamEmergencyContactNumberController.text,
+                emergency_contact_name:
+                    vmTeam.textAddTeamEmergencyContactController.text),
+            context: context);
       }
+    } else if (formkey.currentState!.validate() &&
+        vmTeam.selectedDobAddTeam == null) {
+      showToast(context, msg: "Please Select Date of Birth", color: Colors.red);
+    } else if (formkey.currentState!.validate() &&
+        vmTeam.selectedJoiningDateAddTeam == null) {
+      showToast(context, msg: "Please Select Joining Date", color: Colors.red);
+    } else {
+      showToast(context,
+          msg: "Please Fill All Required Fields", color: Colors.red);
     }
   }
 
