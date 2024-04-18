@@ -111,8 +111,9 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                           ),
                           const Text('I have approruiate  licence'),
                           const Icon(
-                            Icons.star, size: 13,
-                            color: Colors.red, // Set icon color to red
+                            Icons.star,
+                            size: 13,
+                            color: Colors.red,
                           ),
                         ],
                       ),
