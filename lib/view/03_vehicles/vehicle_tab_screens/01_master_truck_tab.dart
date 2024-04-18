@@ -13,12 +13,12 @@ class MasterTruckTab extends StatelessWidget {
     //
     _onChanged(String s) => vmVehicle.onTextChanged(() => (s.isEmpty)
         ? vmVehicle.masterTruckApi()
-        : vmVehicle.masterTruckSearchServiceApi(value: s));
+        : vmVehicle.masterTruckSearchServiceApi(s));
 
     return Scaffold(
         body: Column(children: [
       WWSearchField(
-        controller: vmVehicle.vehMasterTruckCtr,
+        controller: vmVehicle.vehicleTextCtr,
         onChanged: _onChanged,
         searchTap: () {},
       ),
@@ -28,9 +28,9 @@ class MasterTruckTab extends StatelessWidget {
             child: WWResponseHandler(
                 data: vmVehicle.masterTruckApiResponse,
                 isEmpty: vmVehicle.masterTruckApiResponse.data?.isEmpty ?? true,
-                onTap: () => vmVehicle.vehSemiTrailorCtr.text.isNotEmpty
+                onTap: () => vmVehicle.vehicleTextCtr.text.isNotEmpty
                     ? vmVehicle.masterTruckSearchServiceApi(
-                        value: vmVehicle.vehMasterTruckCtr.text)
+                        vmVehicle.vehicleTextCtr.text)
                     : vmVehicle.masterTruckApi(),
                 child: const MasterTruckList()));
       }),

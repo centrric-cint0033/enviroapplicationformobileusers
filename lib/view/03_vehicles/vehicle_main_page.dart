@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:enviro_mobile_application/utilis/api_endpoints/customprint.dart';
 import 'package:enviro_mobile_application/view/03_vehicles/vehicle_tab_screens/02_master_car_tab.dart';
 import 'package:enviro_mobile_application/view/03_vehicles/vehicle_tab_screens/01_master_truck_tab.dart';
 import 'package:enviro_mobile_application/view/03_vehicles/vehicle_tab_screens/03_semi_Trailor_tab.dart';
@@ -36,7 +37,7 @@ class VehiclePage extends StatelessWidget {
                   value2: 'Master Car',
                   value3: 'Semi Trailers'),
               gapFieldVeh,
-              wwDropDown(),
+              wwDropDown(context),
               gapFieldVeh,
               wwTabs(),
             ],
@@ -54,17 +55,22 @@ class VehiclePage extends StatelessWidget {
     );
   }
 
-  Observer wwDropDown() {
+  Observer wwDropDown(BuildContext context) {
     return Observer(builder: (_) {
       return SizedBox(
         width: double.infinity,
         child: WWdropDown(
             newValue: vmVehicle.selectedVehicle ?? 'Vehicle list',
             dropDownTap: () {
-              vmVehicle.masterTruckApi(
-                statusType: vmVehicle.vehicleStatusType,
-                statusString: vmVehicle.selectedVehicle,
-              );
+              switch (vmVehicle.vehicleTabIndex) {
+                case 0:
+                  vmVehicle.masterTruckApi();
+                  break;
+                case 1:
+                  vmVehicle.masterCarApi();
+                  break;
+                default:
+              }
             }),
       );
     });

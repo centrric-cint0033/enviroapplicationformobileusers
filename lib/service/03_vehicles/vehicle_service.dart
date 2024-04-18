@@ -18,22 +18,23 @@ enum VehicleActionType {
 }
 
 abstract class IVehicleService {
-  Future<Either<MainFailure, List<VehicleModel>>> preinspectionfunction(
-      VehicleActionType? status);
+  Future<Either<Map<MainFailure, dynamic>, List<VehicleModel>>>
+      masterTruckServiceApi(truckdrop);
 
-  Future<Either<MainFailure, List<VehicleModel>>> masterfuelsearchfunction(
-      searchdrop);
+  Future<Either<Map<MainFailure, dynamic>, List<VehicleModel>>>
+      masterTruckSearchServiceApi(searchtrucksemidrop, value);
+
+  Future<Either<Map<MainFailure, dynamic>, List<VehicleModel>>>
+      masterCarServiceApi(VehicleActionType? status);
+
+  Future<Either<Map<MainFailure, dynamic>, List<VehicleModel>>>
+      masterCarSearchServiceApi(VehicleActionType? status, String value);
 
   Future<Either<MainFailure, List<VehicleModel>>> pretrailorfunction(
       VehicleActionType? semitruckdrop);
 
   Future<Either<MainFailure, List<VehicleModel>>> masterfuelsemitruckfunction(
       searchdrop);
-
-  Future<Either<Map<MainFailure, dynamic>, List<VehicleModel>>>
-      masterTruckServiceApi(truckdrop);
-  Future<Either<Map<MainFailure, dynamic>, List<VehicleModel>>>
-      masterTruckSearchServiceApi(searchtrucksemidrop, value);
 }
 
 @LazySingleton(as: IVehicleService)
@@ -83,29 +84,32 @@ class VehicleService implements IVehicleService {
   Future<Either<Map<MainFailure, dynamic>, List<VehicleModel>>>
       masterTruckSearchServiceApi(trucksearchdrop, value) async {
     String apiUrl;
+    Map<String, String>? _data = {"key": value};
     switch (trucksearchdrop) {
       case VehicleActionType.vehicleList:
         apiUrl = ApiEndPoints.vehTruckSearch;
+        _data = {"key": value};
         break;
       case VehicleActionType.preInspectionCheck:
         apiUrl = ApiEndPoints.vehTruckPreInspectionSearch;
+        _data = {"registration": value};
         break;
       case VehicleActionType.maintenanceCheck:
         apiUrl = ApiEndPoints.vehTruckPreMaintenanceSearch;
-        // MultipartRequest request =
-        //     MultipartRequest("POST", Uri.parse("$baseUrl$apiUrl"));
-        // request.fields['key'] = 'e';
+        _data = {"key": value};
         break;
       case VehicleActionType.fuelExpence:
+        _data = {"registration": value};
         apiUrl = ApiEndPoints.vehTruckFuelExpenseSearch;
         break;
       default:
+        _data = {"key": value};
         apiUrl = ApiEndPoints.vehTruckSearch;
         break;
     }
 
     var response = await getIt<HttpService>()
-        .multipartRequest(apiUrl: apiUrl, method: 'POST', data: {"key": value});
+        .multipartRequest(apiUrl: apiUrl, method: 'POST', data: _data);
 
     return response.fold(
       (l) => Left(l),
@@ -119,26 +123,24 @@ class VehicleService implements IVehicleService {
   }
 
   @override
-  Future<Either<MainFailure, List<VehicleModel>>> preinspectionfunction(
-      VehicleActionType? status) async {
+  Future<Either<Map<MainFailure, dynamic>, List<VehicleModel>>>
+      masterCarServiceApi(VehicleActionType? status) async {
     String apiUrl;
     switch (status) {
       case VehicleActionType.vehicleList:
-        apiUrl = ApiEndPoints.endpointcarpage;
+        apiUrl = ApiEndPoints.vehCar;
         break;
       case VehicleActionType.preInspectionCheck:
-        apiUrl = ApiEndPoints.endpointpreinspectioncarcheckpage;
+        apiUrl = ApiEndPoints.vehCarPreInspection;
         break;
       case VehicleActionType.maintenanceCheck:
-        apiUrl = ApiEndPoints.endpointmaintancecarcheckpage;
+        apiUrl = ApiEndPoints.vehCarPreMaintenance;
         break;
       case VehicleActionType.fuelExpence:
-        apiUrl = ApiEndPoints.endpointfuelcarcheckpage;
-
+        apiUrl = ApiEndPoints.vehCarFuelExpense;
         break;
-
       default:
-        apiUrl = ApiEndPoints.endpointcarpage;
+        apiUrl = ApiEndPoints.vehCar;
     }
 
     var response = await getIt<HttpService>().request(
@@ -148,10 +150,7 @@ class VehicleService implements IVehicleService {
     );
 
     return response.fold(
-      (l) {
-        (l.values.first);
-        return Left(l.keys.first);
-      },
+      (l) => Left(l),
       (res) async {
         var data = jsonDecode(res.body) as List;
         List<VehicleModel> vehicles =
@@ -162,45 +161,32 @@ class VehicleService implements IVehicleService {
   }
 
   @override
-  Future<Either<MainFailure, List<VehicleModel>>> masterfuelsearchfunction(
-      searchdrop) async {
+  Future<Either<Map<MainFailure, dynamic>, List<VehicleModel>>>
+      masterCarSearchServiceApi(VehicleActionType? status, String value) async {
     String apiUrl;
-    print('awww$searchdrop');
-    switch (searchdrop) {
+    switch (status) {
       case VehicleActionType.vehicleList:
-        apiUrl = ApiEndPoints.endpointvehiclecarlistsearch;
+        apiUrl = ApiEndPoints.vehCarSearch;
         break;
       case VehicleActionType.preInspectionCheck:
-        apiUrl = ApiEndPoints.endpointpreinspectioncarsearch;
+        apiUrl = ApiEndPoints.vehCarPreInspectionSearch;
         break;
       case VehicleActionType.maintenanceCheck:
-        apiUrl = ApiEndPoints.endpointmaintancecarsearchcheckpage;
-        MultipartRequest request =
-            MultipartRequest("POST", Uri.parse("$baseUrl$apiUrl"));
-        request.fields['key'] = 'e';
+        apiUrl = ApiEndPoints.vehCarPreMaintenanceSearch;
         break;
       case VehicleActionType.fuelExpence:
-        apiUrl = ApiEndPoints.endpointmasterfuelcarsearch;
+        apiUrl = ApiEndPoints.vehCarFuelExpenseSearch;
         break;
       default:
-        apiUrl = ApiEndPoints.endpointmasterfuelcarsearch;
+        apiUrl = ApiEndPoints.vehCarSearch;
         break;
     }
 
-    MultipartRequest request =
-        MultipartRequest("POST", Uri.parse("$baseUrl$apiUrl"));
-
-    request.fields['registration'] = 'e';
-
-    var response =
-        await getIt<HttpService>().multipartRequest(mRequest: request);
+    var response = await getIt<HttpService>().multipartRequest(
+        apiUrl: apiUrl, method: 'POST', data: {"registration": value});
 
     return response.fold(
-      (l) {
-        // Show Error
-        (l.values.first);
-        return Left(l.keys.first);
-      },
+      (l) => Left(l),
       (res) async {
         var data = jsonDecode(res.body) as List;
 
@@ -272,10 +258,10 @@ class VehicleService implements IVehicleService {
         request.fields['key'] = 'e';
         break;
       case VehicleActionType.fuelExpence:
-        apiUrl = ApiEndPoints.endpointmasterfuelcarsearch;
+        apiUrl = ApiEndPoints.vehCarFuelExpenseSearch;
         break;
       default:
-        apiUrl = ApiEndPoints.endpointmasterfuelcarsearch;
+        apiUrl = ApiEndPoints.vehCarFuelExpenseSearch;
         break;
     }
 

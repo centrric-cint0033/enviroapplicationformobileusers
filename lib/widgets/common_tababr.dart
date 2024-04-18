@@ -1,8 +1,10 @@
 import 'package:enviro_mobile_application/utilis/Appthemes.dart';
+import 'package:enviro_mobile_application/view_model/03_vehicles/vehicle_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 Container commonTabbar({
+  TabController? controller,
   String? value1,
   String? value2,
   String? value3,
@@ -14,6 +16,7 @@ Container commonTabbar({
       borderRadius: BorderRadius.circular(8.0),
     ),
     child: TabBar(
+      controller: controller,
       indicatorSize: TabBarIndicatorSize.tab,
       indicator: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
@@ -23,6 +26,7 @@ Container commonTabbar({
       labelColor: Colors.black,
       unselectedLabelColor: Colors.white,
       indicatorColor: Colors.black,
+      onTap: (i) => vmVehicle.vehicleTabIndex = i,
       tabs: [
         if (value1 != null) Tab(text: value1),
         if (value2 != null) Tab(text: value2),

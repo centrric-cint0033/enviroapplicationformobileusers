@@ -95,24 +95,21 @@ class WWdropDown extends StatelessWidget {
               if (newValue != null) {
                 switch (newValue) {
                   case 'Vehicle list':
-                    vmVehicle.vehicleStatusType = VehicleActionType.vehicleList;
-                    vmVehicle.selectedVehicle = newValue;
+                    vmVehicle.dropDownUpdate(
+                        VehicleActionType.vehicleList, newValue);
                     break;
                   case 'Pre Inspection check':
-                    vmVehicle.vehicleStatusType =
-                        VehicleActionType.preInspectionCheck;
-                    vmVehicle.selectedVehicle = newValue;
+                    vmVehicle.dropDownUpdate(
+                        VehicleActionType.preInspectionCheck, newValue);
                     break;
-                  case 'Maintenance check':
-                    vmVehicle.vehicleStatusType =
-                        VehicleActionType.maintenanceCheck;
-                    vmVehicle.selectedVehicle = newValue;
+                  case 'Maintenance Report':
+                    vmVehicle.dropDownUpdate(
+                        VehicleActionType.maintenanceCheck, newValue);
 
                     break;
                   case 'Fuel Expense':
-                    vmVehicle.vehicleStatusType = VehicleActionType.fuelExpence;
-                    vmVehicle.selectedVehicle = newValue;
-
+                    vmVehicle.dropDownUpdate(
+                        VehicleActionType.fuelExpence, newValue);
                     break;
                 }
                 if (vmVehicle.vehicleStatusType != null) {

@@ -25,9 +25,9 @@ abstract class VehicleViewModelBase with Store {
 
   VehicleViewModelBase(this.vehicleService);
 
-  TextEditingController vehSemiTrailorCtr = TextEditingController();
-  TextEditingController vehMasterCarrCtr = TextEditingController();
-  TextEditingController vehMasterTruckCtr = TextEditingController();
+  TextEditingController vehicleTextCtr = TextEditingController();
+
+  int vehicleTabIndex = 0;
 
   Timer? debouce;
 
@@ -40,33 +40,51 @@ abstract class VehicleViewModelBase with Store {
   }
 
   @observable
+  String? selectedVehicle;
+
+  @observable
+  VehicleActionType? vehicleStatusType;
+
+  @action
+  void dropDownUpdate(VehicleActionType statusType, String statusString) {
+    vehicleStatusType = statusType;
+    selectedVehicle = statusString;
+  }
+
+//      _      ____    ___      ____      _      _       _       ____
+//     / \    |  _ \  |_ _|    / ___|    / \    | |     | |     / ___|
+//    / _ \   | |_) |  | |    | |       / _ \   | |     | |     \___ \
+//   / ___ \  |  __/   | |    | |___   / ___ \  | |___  | |___   ___) |
+//  /_/   \_\ |_|     |___|    \____| /_/   \_\ |_____| |_____| |____/
+
+  @observable
   ApiResponse<List<VehicleModel>> masterTruckApiResponse =
       ApiResponse<List<VehicleModel>>();
 
   @action
-  Future<void> masterTruckApi(
-      {VehicleActionType? statusType, String? statusString}) async {
-    vehicleStatusType = statusType;
-    selectedVehicle = statusString;
-
-    masterTruckApiResponse =
-        masterTruckApiResponse.copyWith(errors: null, loading: true);
-    final result =
-        await vehicleService.masterTruckServiceApi(vehicleStatusType);
-    return result.fold(
-      (l) {
-        masterTruckApiResponse =
-            masterTruckApiResponse.copyWith(errors: l, loading: false);
-      },
-      (r) {
-        masterTruckApiResponse = masterTruckApiResponse.copyWith(
-            data: r, errors: null, loading: false);
-      },
-    );
+  Future<void> masterTruckApi() async {
+    if (vehicleTextCtr.text.isNotEmpty) {
+      masterTruckSearchServiceApi(vehicleTextCtr.text);
+    } else {
+      masterTruckApiResponse =
+          masterTruckApiResponse.copyWith(errors: null, loading: true);
+      final result =
+          await vehicleService.masterTruckServiceApi(vehicleStatusType);
+      return result.fold(
+        (l) {
+          masterTruckApiResponse =
+              masterTruckApiResponse.copyWith(errors: l, loading: false);
+        },
+        (r) {
+          masterTruckApiResponse = masterTruckApiResponse.copyWith(
+              data: r, errors: null, loading: false);
+        },
+      );
+    }
   }
 
   @action
-  Future<void> masterTruckSearchServiceApi({value}) async {
+  Future<void> masterTruckSearchServiceApi(String value) async {
     masterTruckApiResponse =
         masterTruckApiResponse.copyWith(errors: null, loading: true);
 
@@ -84,67 +102,56 @@ abstract class VehicleViewModelBase with Store {
     );
   }
 
+//     _  _       _  _       _  _       _  _       _  _       _  _       _  _       _  _
+//   _| || |_   _| || |_   _| || |_   _| || |_   _| || |_   _| || |_   _| || |_   _| || |_
+//  |_  ..  _| |_  ..  _| |_  ..  _| |_  ..  _| |_  ..  _| |_  ..  _| |_  ..  _| |_  ..  _|
+//  |_      _| |_      _| |_      _| |_      _| |_      _| |_      _| |_      _| |_      _|
+//    |_||_|     |_||_|     |_||_|     |_||_|     |_||_|     |_||_|     |_||_|     |_||_|
+
   @observable
-  ApiResponse<List<VehicleModel>> carPageResponse =
+  ApiResponse<List<VehicleModel>> masterCarApiResponse =
       ApiResponse<List<VehicleModel>>();
 
   @action
-  Future<void> mastercarfunction(
-      {VehicleActionType? statusType, String? statusString}) async {
-    vehicleStatusType = statusType;
-    selectedVehicle = statusString;
-
-    carPageResponse = carPageResponse.copyWith(error: null, loading: true);
-    final result =
-        await vehicleService.preinspectionfunction(vehicleStatusType);
-    return result.fold(
-      (l) {
-        carPageResponse = carPageResponse.copyWith(
-          error: l,
-          loading: false,
-        );
-      },
-      (r) {
-        carPageResponse = carPageResponse.copyWith(
-          data: r,
-          error: null,
-          loading: false,
-        );
-      },
-    );
+  Future<void> masterCarApi() async {
+    if (vehicleTextCtr.text.isNotEmpty) {
+      masterCarSearchApi(vehicleTextCtr.text);
+    } else {
+      masterCarApiResponse =
+          masterCarApiResponse.copyWith(errors: null, loading: true);
+      final result =
+          await vehicleService.masterCarServiceApi(vehicleStatusType);
+      return result.fold(
+        (l) {
+          masterCarApiResponse =
+              masterCarApiResponse.copyWith(errors: l, loading: false);
+        },
+        (r) {
+          masterCarApiResponse = masterCarApiResponse.copyWith(
+              data: r, errors: null, loading: false);
+        },
+      );
+    }
   }
-
-  @observable
-  ApiResponse<List<VehicleModel>> carPagefuelResponse =
-      ApiResponse<List<VehicleModel>>();
 
   @action
-  Future<void> fuelsearchfunction({VehicleActionType? searchdrop}) async {
-    carPageResponse = carPageResponse.copyWith(error: null, loading: true);
+  Future<void> masterCarSearchApi(String value) async {
+    masterCarApiResponse =
+        masterCarApiResponse.copyWith(errors: null, loading: true);
 
-    final result = await vehicleService.masterfuelsearchfunction(searchdrop);
+    final result = await vehicleService.masterCarSearchServiceApi(
+        vehicleStatusType, value);
     return result.fold(
       (l) {
-        carPagefuelResponse = carPagefuelResponse.copyWith(
-          error: l,
-          loading: false,
-        );
+        masterCarApiResponse =
+            masterCarApiResponse.copyWith(errors: l, loading: false);
       },
       (r) {
-        carPageResponse = carPageResponse.copyWith(
-          data: r,
-          error: null,
-          loading: false,
-        );
+        masterCarApiResponse = masterCarApiResponse.copyWith(
+            data: r, errors: null, loading: false);
       },
     );
   }
-
-  @observable
-  String? selectedVehicle;
-
-  @observable
-  VehicleActionType? vehicleStatusType;
 
   @observable
   ApiResponse<List<VehicleModel>> semitrailorPageResponse =

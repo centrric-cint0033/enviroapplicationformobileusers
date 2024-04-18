@@ -9,9 +9,7 @@ class MasterCarTab extends StatelessWidget {
   const MasterCarTab({Key? key}) : super(key: key);
 
   _onChanged(String v) => vmVehicle.onTextChanged(() {
-        v.isEmpty
-            ? vmVehicle.mastercarfunction()
-            : vmVehicle.fuelsearchfunction();
+        v.isEmpty ? vmVehicle.masterCarApi() : vmVehicle.masterCarSearchApi(v);
       });
 
   @override
@@ -19,7 +17,7 @@ class MasterCarTab extends StatelessWidget {
     return Scaffold(
         body: Column(children: [
       WWSearchField(
-        controller: vmVehicle.vehSemiTrailorCtr,
+        controller: vmVehicle.vehicleTextCtr,
         onChanged: _onChanged,
         searchTap: () {},
       ),
@@ -27,11 +25,12 @@ class MasterCarTab extends StatelessWidget {
       Observer(builder: (_) {
         return Expanded(
             child: WWResponseHandler(
-                data: vmVehicle.carPageResponse,
-                isEmpty: vmVehicle.carPageResponse.data?.isEmpty ?? true,
-                onTap: () => vmVehicle.vehSemiTrailorCtr.text.isNotEmpty
-                    ? vmVehicle.semifueltrucksearchfunction()
-                    : vmVehicle.trailorfunction(),
+                data: vmVehicle.masterCarApiResponse,
+                isEmpty: vmVehicle.masterCarApiResponse.data?.isEmpty ?? true,
+                onTap: () => vmVehicle.vehicleTextCtr.text.isNotEmpty
+                    ? vmVehicle
+                        .masterCarSearchApi(vmVehicle.vehicleTextCtr.text)
+                    : vmVehicle.masterCarApi(),
                 child: const MasterCarList()));
       })
     ]));
@@ -46,10 +45,10 @@ class MasterCarList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.separated(
-        itemCount: vmVehicle.carPageResponse.data?.length ?? 0,
+        itemCount: vmVehicle.masterCarApiResponse.data?.length ?? 0,
         separatorBuilder: (BuildContext context, int index) => gapFieldVeh,
         itemBuilder: (context, index) {
-          var data = vmVehicle.carPageResponse.data?[index];
+          var data = vmVehicle.masterCarApiResponse.data?[index];
           return showData(data: data);
         });
   }

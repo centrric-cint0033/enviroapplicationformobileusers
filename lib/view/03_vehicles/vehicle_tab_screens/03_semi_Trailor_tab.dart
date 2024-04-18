@@ -20,7 +20,7 @@ class SemiTrailersTab extends StatelessWidget {
       body: Column(
         children: [
           WWSearchField(
-            controller: vmVehicle.vehSemiTrailorCtr,
+            controller: vmVehicle.vehicleTextCtr,
             onChanged: _onChanged,
             searchTap: () {},
           ),
@@ -31,7 +31,7 @@ class SemiTrailersTab extends StatelessWidget {
                     data: vmVehicle.semitrailorPageResponse,
                     isEmpty:
                         vmVehicle.semitrailorPageResponse.data?.isEmpty ?? true,
-                    onTap: () => vmVehicle.vehSemiTrailorCtr.text.isNotEmpty
+                    onTap: () => vmVehicle.vehicleTextCtr.text.isNotEmpty
                         ? vmVehicle.semifueltrucksearchfunction()
                         : vmVehicle.trailorfunction(),
                     child: const SemiTrailersList()));

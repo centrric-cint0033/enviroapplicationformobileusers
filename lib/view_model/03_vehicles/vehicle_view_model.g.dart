@@ -9,55 +9,6 @@ part of 'vehicle_view_model.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$VehicleViewModel on VehicleViewModelBase, Store {
-  late final _$masterTruckApiResponseAtom = Atom(
-      name: 'VehicleViewModelBase.masterTruckApiResponse', context: context);
-
-  @override
-  ApiResponse<List<VehicleModel>> get masterTruckApiResponse {
-    _$masterTruckApiResponseAtom.reportRead();
-    return super.masterTruckApiResponse;
-  }
-
-  @override
-  set masterTruckApiResponse(ApiResponse<List<VehicleModel>> value) {
-    _$masterTruckApiResponseAtom
-        .reportWrite(value, super.masterTruckApiResponse, () {
-      super.masterTruckApiResponse = value;
-    });
-  }
-
-  late final _$carPageResponseAtom =
-      Atom(name: 'VehicleViewModelBase.carPageResponse', context: context);
-
-  @override
-  ApiResponse<List<VehicleModel>> get carPageResponse {
-    _$carPageResponseAtom.reportRead();
-    return super.carPageResponse;
-  }
-
-  @override
-  set carPageResponse(ApiResponse<List<VehicleModel>> value) {
-    _$carPageResponseAtom.reportWrite(value, super.carPageResponse, () {
-      super.carPageResponse = value;
-    });
-  }
-
-  late final _$carPagefuelResponseAtom =
-      Atom(name: 'VehicleViewModelBase.carPagefuelResponse', context: context);
-
-  @override
-  ApiResponse<List<VehicleModel>> get carPagefuelResponse {
-    _$carPagefuelResponseAtom.reportRead();
-    return super.carPagefuelResponse;
-  }
-
-  @override
-  set carPagefuelResponse(ApiResponse<List<VehicleModel>> value) {
-    _$carPagefuelResponseAtom.reportWrite(value, super.carPagefuelResponse, () {
-      super.carPagefuelResponse = value;
-    });
-  }
-
   late final _$selectedVehicleAtom =
       Atom(name: 'VehicleViewModelBase.selectedVehicle', context: context);
 
@@ -87,6 +38,40 @@ mixin _$VehicleViewModel on VehicleViewModelBase, Store {
   set vehicleStatusType(VehicleActionType? value) {
     _$vehicleStatusTypeAtom.reportWrite(value, super.vehicleStatusType, () {
       super.vehicleStatusType = value;
+    });
+  }
+
+  late final _$masterTruckApiResponseAtom = Atom(
+      name: 'VehicleViewModelBase.masterTruckApiResponse', context: context);
+
+  @override
+  ApiResponse<List<VehicleModel>> get masterTruckApiResponse {
+    _$masterTruckApiResponseAtom.reportRead();
+    return super.masterTruckApiResponse;
+  }
+
+  @override
+  set masterTruckApiResponse(ApiResponse<List<VehicleModel>> value) {
+    _$masterTruckApiResponseAtom
+        .reportWrite(value, super.masterTruckApiResponse, () {
+      super.masterTruckApiResponse = value;
+    });
+  }
+
+  late final _$masterCarApiResponseAtom =
+      Atom(name: 'VehicleViewModelBase.masterCarApiResponse', context: context);
+
+  @override
+  ApiResponse<List<VehicleModel>> get masterCarApiResponse {
+    _$masterCarApiResponseAtom.reportRead();
+    return super.masterCarApiResponse;
+  }
+
+  @override
+  set masterCarApiResponse(ApiResponse<List<VehicleModel>> value) {
+    _$masterCarApiResponseAtom.reportWrite(value, super.masterCarApiResponse,
+        () {
+      super.masterCarApiResponse = value;
     });
   }
 
@@ -161,10 +146,8 @@ mixin _$VehicleViewModel on VehicleViewModelBase, Store {
       AsyncAction('VehicleViewModelBase.masterTruckApi', context: context);
 
   @override
-  Future<void> masterTruckApi(
-      {VehicleActionType? statusType, String? statusString}) {
-    return _$masterTruckApiAsyncAction.run(() => super
-        .masterTruckApi(statusType: statusType, statusString: statusString));
+  Future<void> masterTruckApi() {
+    return _$masterTruckApiAsyncAction.run(() => super.masterTruckApi());
   }
 
   late final _$masterTruckSearchServiceApiAsyncAction = AsyncAction(
@@ -172,28 +155,26 @@ mixin _$VehicleViewModel on VehicleViewModelBase, Store {
       context: context);
 
   @override
-  Future<void> masterTruckSearchServiceApi({dynamic value}) {
+  Future<void> masterTruckSearchServiceApi(String value) {
     return _$masterTruckSearchServiceApiAsyncAction
-        .run(() => super.masterTruckSearchServiceApi(value: value));
+        .run(() => super.masterTruckSearchServiceApi(value));
   }
 
-  late final _$mastercarfunctionAsyncAction =
-      AsyncAction('VehicleViewModelBase.mastercarfunction', context: context);
+  late final _$masterCarApiAsyncAction =
+      AsyncAction('VehicleViewModelBase.masterCarApi', context: context);
 
   @override
-  Future<void> mastercarfunction(
-      {VehicleActionType? statusType, String? statusString}) {
-    return _$mastercarfunctionAsyncAction.run(() => super
-        .mastercarfunction(statusType: statusType, statusString: statusString));
+  Future<void> masterCarApi() {
+    return _$masterCarApiAsyncAction.run(() => super.masterCarApi());
   }
 
-  late final _$fuelsearchfunctionAsyncAction =
-      AsyncAction('VehicleViewModelBase.fuelsearchfunction', context: context);
+  late final _$masterCarSearchApiAsyncAction =
+      AsyncAction('VehicleViewModelBase.masterCarSearchApi', context: context);
 
   @override
-  Future<void> fuelsearchfunction({VehicleActionType? searchdrop}) {
-    return _$fuelsearchfunctionAsyncAction
-        .run(() => super.fuelsearchfunction(searchdrop: searchdrop));
+  Future<void> masterCarSearchApi(String value) {
+    return _$masterCarSearchApiAsyncAction
+        .run(() => super.masterCarSearchApi(value));
   }
 
   late final _$trailorfunctionAsyncAction =
@@ -221,6 +202,17 @@ mixin _$VehicleViewModel on VehicleViewModelBase, Store {
       ActionController(name: 'VehicleViewModelBase', context: context);
 
   @override
+  void dropDownUpdate(VehicleActionType statusType, String statusString) {
+    final _$actionInfo = _$VehicleViewModelBaseActionController.startAction(
+        name: 'VehicleViewModelBase.dropDownUpdate');
+    try {
+      return super.dropDownUpdate(statusType, statusString);
+    } finally {
+      _$VehicleViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   void setSelectedTruck(String? newValue) {
     final _$actionInfo = _$VehicleViewModelBaseActionController.startAction(
         name: 'VehicleViewModelBase.setSelectedTruck');
@@ -234,11 +226,10 @@ mixin _$VehicleViewModel on VehicleViewModelBase, Store {
   @override
   String toString() {
     return '''
-masterTruckApiResponse: ${masterTruckApiResponse},
-carPageResponse: ${carPageResponse},
-carPagefuelResponse: ${carPagefuelResponse},
 selectedVehicle: ${selectedVehicle},
 vehicleStatusType: ${vehicleStatusType},
+masterTruckApiResponse: ${masterTruckApiResponse},
+masterCarApiResponse: ${masterCarApiResponse},
 semitrailorPageResponse: ${semitrailorPageResponse},
 semitruckPagefuelResponse: ${semitruckPagefuelResponse},
 sstatus: ${sstatus},
