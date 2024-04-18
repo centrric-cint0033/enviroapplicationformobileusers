@@ -38,7 +38,7 @@ class JobCardPage extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(left: 14.0),
               child: expandedRowShowsText(
-                  "Type of Waste(site \n profile)", "KL-02333"),
+                  "Type of Waste(site \n profile)", "KL-0233"),
             ),
             const SizedBox(
               height: 20,
@@ -46,7 +46,7 @@ class JobCardPage extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(left: 14.0),
               child: expandedRowShowsText(
-                  "Site Address", "Kalamassery, Cochi, Kerala, India"),
+                  "Site Address", "Kalamassery, Cochin, Kerala, India"),
             ),
             const SizedBox(
               height: 20,

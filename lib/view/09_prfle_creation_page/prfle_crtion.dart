@@ -149,32 +149,31 @@ class ProfileCreationPage extends StatelessWidget {
                 const SizedBox(height: 22),
                 Padding(
                   padding: const EdgeInsets.only(left: 12.0, right: 12.0),
-                  child: SizedBox(
-                    height: 48,
-                    child: TextFormField(
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter the Username';
-                        }
-                        return null;
-                      },
-                      controller: _controllerusername
-                        ..text =
-                            vmProfile.profilepageResponse.data?.username ?? '',
-                      decoration: InputDecoration(
-                        suffixIcon: IconButton(
-                          onPressed: () {},
-                          icon: const Icon(Icons.edit),
-                        ),
-                        filled: true,
-                        fillColor: Colors.grey[200],
-                        border: const OutlineInputBorder(
-                            borderSide: BorderSide.none,
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(24.0))),
-                        labelText: 'Username',
-                        labelStyle: const TextStyle(color: Colors.blue),
+                  child: TextFormField(
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter the Username';
+                      }
+                      return null;
+                    },
+                    controller: _controllerusername
+                      ..text =
+                          vmProfile.profilepageResponse.data?.username ?? '',
+                    decoration: InputDecoration(
+                      contentPadding: const EdgeInsets.symmetric(
+                          vertical: 0, horizontal: 12),
+                      suffixIcon: IconButton(
+                        onPressed: () {},
+                        icon: const Icon(Icons.edit),
                       ),
+                      filled: true,
+                      fillColor: Colors.grey[200],
+                      border: const OutlineInputBorder(
+                          borderSide: BorderSide.none,
+                          borderRadius:
+                              BorderRadius.all(Radius.circular(24.0))),
+                      labelText: 'Username',
+                      labelStyle: const TextStyle(color: Colors.blue),
                     ),
                   ),
                 ),
