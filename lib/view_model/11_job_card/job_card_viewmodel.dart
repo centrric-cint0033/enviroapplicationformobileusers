@@ -1,8 +1,6 @@
 import 'package:enviro_mobile_application/api_response/api_response.dart';
 import 'package:enviro_mobile_application/model/06_profile/profile_model/profile_res_model.dart';
-import 'package:enviro_mobile_application/service/06_profile/profile_service.dart';
 import 'package:enviro_mobile_application/service/07_job_card/job_card_service.dart';
-import 'package:enviro_mobile_application/utilis/api_endpoints/customprint.dart';
 import 'package:enviro_mobile_application/utilis/injection.dart';
 import 'package:injectable/injectable.dart';
 import 'package:mobx/mobx.dart';
