@@ -154,60 +154,45 @@ abstract class VehicleViewModelBase with Store {
   }
 
   @observable
-  ApiResponse<List<VehicleModel>> semitrailorPageResponse =
+  ApiResponse<List<VehicleModel>> semiTrailorApiResponse =
       ApiResponse<List<VehicleModel>>();
 
   @action
-  Future<void> trailorfunction(
-      {VehicleActionType? statusType, String? statusString}) async {
-    vehicleStatusType = statusType;
-    selectedVehicle = statusString;
-
-    semitrailorPageResponse =
-        semitrailorPageResponse.copyWith(error: null, loading: true);
-    final result = await vehicleService.pretrailorfunction(statusType);
-    return result.fold(
-      (l) {
-        semitrailorPageResponse = semitrailorPageResponse.copyWith(
-          error: l,
-          loading: false,
-        );
-      },
-      (r) {
-        semitrailorPageResponse = semitrailorPageResponse.copyWith(
-          data: r,
-          error: null,
-          loading: false,
-        );
-      },
-    );
+  Future<void> semiTrailorApi() async {
+    if (vehicleTextCtr.text.isNotEmpty) {
+      semiTrailorSearchApi(vehicleTextCtr.text);
+    } else {
+      semiTrailorApiResponse =
+          semiTrailorApiResponse.copyWith(errors: null, loading: true);
+      final result =
+          await vehicleService.semiTrailorServiceApi(vehicleStatusType);
+      return result.fold(
+        (l) {
+          semiTrailorApiResponse =
+              semiTrailorApiResponse.copyWith(errors: l, loading: false);
+        },
+        (r) {
+          semiTrailorApiResponse = semiTrailorApiResponse.copyWith(
+              data: r, errors: null, loading: false);
+        },
+      );
+    }
   }
 
-  @observable
-  ApiResponse<List<VehicleModel>> semitruckPagefuelResponse =
-      ApiResponse<List<VehicleModel>>();
-
   @action
-  Future<void> semifueltrucksearchfunction(
-      {VehicleActionType? searchsemidrop}) async {
-    semitrailorPageResponse =
-        semitrailorPageResponse.copyWith(error: null, loading: true);
-
-    final result =
-        await vehicleService.masterfuelsemitruckfunction(searchsemidrop);
+  Future<void> semiTrailorSearchApi(String value) async {
+    semiTrailorApiResponse =
+        semiTrailorApiResponse.copyWith(errors: null, loading: true);
+    final result = await vehicleService.semiTrailorSearchServiceApi(
+        vehicleStatusType, value);
     return result.fold(
       (l) {
-        semitruckPagefuelResponse = semitruckPagefuelResponse.copyWith(
-          error: l,
-          loading: false,
-        );
+        semiTrailorApiResponse =
+            semiTrailorApiResponse.copyWith(errors: l, loading: false);
       },
       (r) {
-        semitrailorPageResponse = semitrailorPageResponse.copyWith(
-          data: r,
-          error: null,
-          loading: false,
-        );
+        semiTrailorApiResponse = semiTrailorApiResponse.copyWith(
+            data: r, errors: null, loading: false);
       },
     );
   }

@@ -80,30 +80,32 @@ class ApiEndPoints {
 
   // Semi Trailers Apis
 
-  static const vehTrailorsSearch = '/api/v1/vehicles/waste/truck/1/';
+  static const vehSemiTrailer = '/api/v1/vehicles/waste/forklift/all/1/';
 
-  static const endpointsemitrailorpage =
-      '/api/v1/vehicles/waste/forklift/all/1/';
-
-  static const endPointallvehiclelisting = '/api/v1/vehicles/waste/truck/list/';
-
-  static const endpointpreinspectionsemitruckcheckpage =
+  static const vehSemiTrailerPreInspection =
       '/api/v1/vehicles/waste/fork-lift/pre-inspection/1/';
-  static const endpointmaintancesemitruckcheckpage =
-      '/api/v1/vehicles/waste/fork-lift/maintenance/reports/1/';
-  static const endpointfuelsemitruckcheckpage =
+
+  static const vehSemiTailerMaintenance =
+      '/api/v1/vehicles/waste/fork-lift/maintenance/reports/1/?limit=15';
+
+  static const vehSemiTailerFuelExpenses =
       '/api/v1/vehicles/waste/fork-lift/getFuelExpenses/1/';
 
-  static const endpointsemitruckfuelsearch =
-      '/api/v1/vehicles/waste/fork-lift/fuelExpense/search/vehicle/';
+  // Search
 
-  static const endpointvehiclesemitrucklistsearch =
+  static const vehSemiTrailerSearch =
       '/api/v1/vehicles/waste/fork-lift/search/';
 
-  static const endpointpreinspectionsemitrucksearch =
+  static const vehSemiTrailerPreInspectionSearch =
       '/api/v1/vehicles/waste/fork-lift/pre-inspection/filter/vehicle/';
-  static const endpointfuelexpensessemitrucksearch =
+
+  static const vehSemiTrailerMaintenanceSearch =
+      '/api/v1/vehicles/waste/fork-lift/maintenance/reports/search/?page=1&limit=15';
+
+  static const vehSemiTrailerFuelExpenseSearch =
       '/api/v1/vehicles/waste/fork-lift/fuelExpense/search/vehicle/';
+
+  //
 
   static const endpointohsnews = '/api/v1/oh_and_s/news/view/1/?limit=8';
   static const endpointnewsfolder = '/api/v1/oh_and_s/folder/segment/list';

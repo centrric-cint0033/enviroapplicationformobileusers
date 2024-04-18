@@ -31,53 +31,57 @@ class HomePage extends StatelessWidget {
           // leading: const cmn_leading_icon(),
           title: cmnTitleWidget('Home'),
           actions: [notificationButton(context)]),
-      body: Observer(builder: (context) {
-        return Padding(
-          padding: const EdgeInsets.all(36.0),
-          child: vmselection.permissionsResponse.loading
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 25),
+        child: Observer(builder: (context) {
+          return vmselection.permissionsResponse.loading
               ? const Center(
                   child: CircularProgressIndicator(),
                 )
-              : GridView.count(
-                  crossAxisCount: 3,
-                  crossAxisSpacing: 16.0,
-                  mainAxisSpacing: 16.0,
-                  children: [
-                    Observer(builder: (_) {
-                      return GestureDetector(
+              : Center(
+                  child: GridView.count(
+                    crossAxisCount: 3,
+                    crossAxisSpacing: 16.0,
+                    mainAxisSpacing: 16.0,
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    children: [
+                      InkWell(
                         onTap: () => onsalesfunction(context),
                         child: _buildBox('assets/images/star.svg', 'Sales'),
-                      );
-                    }),
-                    GestureDetector(
-                      onTap: () => vehiclefunction(context),
-                      child: _buildBox('assets/images/truck.svg', 'Vehicle'),
-                    ),
-                    GestureDetector(
-                      onTap: () => ohsfunction(context),
-                      child: _buildBox('assets/images/move(1).svg', 'OH&S'),
-                    ),
-                    GestureDetector(
-                      onTap: () => navigateToSitesPage(context: context),
-                      child: _buildBox('assets/images/user.svg', 'Site'),
-                    ),
-                    GestureDetector(
-                      onTap: () => calenderfunction(context),
-                      child:
-                          _buildBox('assets/images/calendar.svg', 'Scheduling'),
-                    ),
-                    GestureDetector(
-                      onTap: () => intranetfuntion(context),
-                      child: _buildBox('assets/images/globe.svg', 'Intranet'),
-                    ),
-                    GestureDetector(
-                      onTap: () => teamfuntion(context),
-                      child: _buildBox('assets/images/users.svg', 'Team'),
-                    )
-                  ],
-                ),
-        );
-      }),
+                      ),
+                      InkWell(
+                        onTap: () => vehiclefunction(context),
+                        child: _buildBox('assets/images/truck.svg', 'Vehicle'),
+                      ),
+                      InkWell(
+                        onTap: () => ohsfunction(context),
+                        child: _buildBox('assets/images/move(1).svg', 'OH&S'),
+                      ),
+                      InkWell(
+                        onTap: () => navigateToSitesPage(context: context),
+                        child: _buildBox('assets/images/user.svg', 'Site'),
+                      ),
+                      InkWell(
+                        onTap: () => calenderfunction(context),
+                        child: _buildBox(
+                            'assets/images/calendar.svg', 'Scheduling'),
+                      ),
+                      InkWell(
+                        onTap: () => intranetfuntion(context),
+                        child: _buildBox('assets/images/globe.svg', 'Intranet'),
+                      ),
+                      const SizedBox(),
+                      InkWell(
+                        onTap: () => teamfuntion(context),
+                        child: _buildBox('assets/images/users.svg', 'Team'),
+                      ),
+                      const SizedBox(),
+                    ],
+                  ),
+                );
+        }),
+      ),
     );
   }
 
@@ -88,9 +92,16 @@ class HomePage extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(8.0),
       decoration: BoxDecoration(
-        border: Border.all(color: Colors.grey),
-        borderRadius: BorderRadius.circular(18.0),
-      ),
+          color: Appthemes.cWhite,
+          // border: Border.all(color: Appthemes.cLightGrey),
+          borderRadius: BorderRadius.circular(18.0),
+          boxShadow: [
+            BoxShadow(
+              offset: const Offset(0, 0),
+              blurRadius: 10,
+              color: Colors.black.withOpacity(0.1),
+            )
+          ]),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -153,7 +164,7 @@ void vehiclefunction(BuildContext context) async {
   context.router.pushNamed(RouteNames.vehiclemainpage);
   await vmVehicle.masterTruckApi();
   await vmVehicle.masterCarApi();
-  await vmVehicle.trailorfunction();
+  await vmVehicle.semiTrailorApi();
 }
 
 void teamfuntion(BuildContext context) {

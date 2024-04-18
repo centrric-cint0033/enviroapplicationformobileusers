@@ -75,37 +75,20 @@ mixin _$VehicleViewModel on VehicleViewModelBase, Store {
     });
   }
 
-  late final _$semitrailorPageResponseAtom = Atom(
-      name: 'VehicleViewModelBase.semitrailorPageResponse', context: context);
+  late final _$semiTrailorApiResponseAtom = Atom(
+      name: 'VehicleViewModelBase.semiTrailorApiResponse', context: context);
 
   @override
-  ApiResponse<List<VehicleModel>> get semitrailorPageResponse {
-    _$semitrailorPageResponseAtom.reportRead();
-    return super.semitrailorPageResponse;
+  ApiResponse<List<VehicleModel>> get semiTrailorApiResponse {
+    _$semiTrailorApiResponseAtom.reportRead();
+    return super.semiTrailorApiResponse;
   }
 
   @override
-  set semitrailorPageResponse(ApiResponse<List<VehicleModel>> value) {
-    _$semitrailorPageResponseAtom
-        .reportWrite(value, super.semitrailorPageResponse, () {
-      super.semitrailorPageResponse = value;
-    });
-  }
-
-  late final _$semitruckPagefuelResponseAtom = Atom(
-      name: 'VehicleViewModelBase.semitruckPagefuelResponse', context: context);
-
-  @override
-  ApiResponse<List<VehicleModel>> get semitruckPagefuelResponse {
-    _$semitruckPagefuelResponseAtom.reportRead();
-    return super.semitruckPagefuelResponse;
-  }
-
-  @override
-  set semitruckPagefuelResponse(ApiResponse<List<VehicleModel>> value) {
-    _$semitruckPagefuelResponseAtom
-        .reportWrite(value, super.semitruckPagefuelResponse, () {
-      super.semitruckPagefuelResponse = value;
+  set semiTrailorApiResponse(ApiResponse<List<VehicleModel>> value) {
+    _$semiTrailorApiResponseAtom
+        .reportWrite(value, super.semiTrailorApiResponse, () {
+      super.semiTrailorApiResponse = value;
     });
   }
 
@@ -177,25 +160,22 @@ mixin _$VehicleViewModel on VehicleViewModelBase, Store {
         .run(() => super.masterCarSearchApi(value));
   }
 
-  late final _$trailorfunctionAsyncAction =
-      AsyncAction('VehicleViewModelBase.trailorfunction', context: context);
+  late final _$semiTrailorApiAsyncAction =
+      AsyncAction('VehicleViewModelBase.semiTrailorApi', context: context);
 
   @override
-  Future<void> trailorfunction(
-      {VehicleActionType? statusType, String? statusString}) {
-    return _$trailorfunctionAsyncAction.run(() => super
-        .trailorfunction(statusType: statusType, statusString: statusString));
+  Future<void> semiTrailorApi() {
+    return _$semiTrailorApiAsyncAction.run(() => super.semiTrailorApi());
   }
 
-  late final _$semifueltrucksearchfunctionAsyncAction = AsyncAction(
-      'VehicleViewModelBase.semifueltrucksearchfunction',
+  late final _$semiTrailorSearchApiAsyncAction = AsyncAction(
+      'VehicleViewModelBase.semiTrailorSearchApi',
       context: context);
 
   @override
-  Future<void> semifueltrucksearchfunction(
-      {VehicleActionType? searchsemidrop}) {
-    return _$semifueltrucksearchfunctionAsyncAction.run(() =>
-        super.semifueltrucksearchfunction(searchsemidrop: searchsemidrop));
+  Future<void> semiTrailorSearchApi(String value) {
+    return _$semiTrailorSearchApiAsyncAction
+        .run(() => super.semiTrailorSearchApi(value));
   }
 
   late final _$VehicleViewModelBaseActionController =
@@ -230,8 +210,7 @@ selectedVehicle: ${selectedVehicle},
 vehicleStatusType: ${vehicleStatusType},
 masterTruckApiResponse: ${masterTruckApiResponse},
 masterCarApiResponse: ${masterCarApiResponse},
-semitrailorPageResponse: ${semitrailorPageResponse},
-semitruckPagefuelResponse: ${semitruckPagefuelResponse},
+semiTrailorApiResponse: ${semiTrailorApiResponse},
 sstatus: ${sstatus},
 selectedTruckresponse: ${selectedTruckresponse}
     ''';

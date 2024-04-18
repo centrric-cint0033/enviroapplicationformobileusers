@@ -69,6 +69,8 @@ class VehiclePage extends StatelessWidget {
                 case 1:
                   vmVehicle.masterCarApi();
                   break;
+                case 2:
+                  vmVehicle.semiTrailorApi();
                 default:
               }
             }),

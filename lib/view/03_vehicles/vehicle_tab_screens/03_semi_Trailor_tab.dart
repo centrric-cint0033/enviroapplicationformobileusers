@@ -10,8 +10,8 @@ class SemiTrailersTab extends StatelessWidget {
 
   _onChanged(String v) => vmVehicle.onTextChanged(() {
         v.isEmpty
-            ? vmVehicle.trailorfunction()
-            : vmVehicle.semifueltrucksearchfunction();
+            ? vmVehicle.semiTrailorApi()
+            : vmVehicle.semiTrailorSearchApi(v);
       });
 
   @override
@@ -28,12 +28,13 @@ class SemiTrailersTab extends StatelessWidget {
           Observer(builder: (_) {
             return Expanded(
                 child: WWResponseHandler(
-                    data: vmVehicle.semitrailorPageResponse,
+                    data: vmVehicle.semiTrailorApiResponse,
                     isEmpty:
-                        vmVehicle.semitrailorPageResponse.data?.isEmpty ?? true,
+                        vmVehicle.semiTrailorApiResponse.data?.isEmpty ?? true,
                     onTap: () => vmVehicle.vehicleTextCtr.text.isNotEmpty
-                        ? vmVehicle.semifueltrucksearchfunction()
-                        : vmVehicle.trailorfunction(),
+                        ? vmVehicle
+                            .semiTrailorSearchApi(vmVehicle.vehicleTextCtr.text)
+                        : vmVehicle.semiTrailorApi(),
                     child: const SemiTrailersList()));
           }),
         ],
@@ -50,10 +51,10 @@ class SemiTrailersList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.separated(
-      itemCount: vmVehicle.semitrailorPageResponse.data?.length ?? 0,
+      itemCount: vmVehicle.semiTrailorApiResponse.data?.length ?? 0,
       separatorBuilder: (BuildContext context, int index) => gapFieldVeh,
       itemBuilder: (context, index) => showData(
-          data: vmVehicle.semitrailorPageResponse.data?[index],
+          data: vmVehicle.semiTrailorApiResponse.data?[index],
           status: vmVehicle.vehicleStatusType),
     );
   }

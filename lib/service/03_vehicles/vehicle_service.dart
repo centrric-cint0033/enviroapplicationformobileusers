@@ -30,11 +30,11 @@ abstract class IVehicleService {
   Future<Either<Map<MainFailure, dynamic>, List<VehicleModel>>>
       masterCarSearchServiceApi(VehicleActionType? status, String value);
 
-  Future<Either<MainFailure, List<VehicleModel>>> pretrailorfunction(
-      VehicleActionType? semitruckdrop);
+  Future<Either<Map<MainFailure, dynamic>, List<VehicleModel>>>
+      semiTrailorServiceApi(VehicleActionType? status);
 
-  Future<Either<MainFailure, List<VehicleModel>>> masterfuelsemitruckfunction(
-      searchdrop);
+  Future<Either<Map<MainFailure, dynamic>, List<VehicleModel>>>
+      semiTrailorSearchServiceApi(VehicleActionType? status, String value);
 }
 
 @LazySingleton(as: IVehicleService)
@@ -198,24 +198,24 @@ class VehicleService implements IVehicleService {
   }
 
   @override
-  Future<Either<MainFailure, List<VehicleModel>>> pretrailorfunction(
-      VehicleActionType? semitruckdrop) async {
+  Future<Either<Map<MainFailure, dynamic>, List<VehicleModel>>>
+      semiTrailorServiceApi(VehicleActionType? status) async {
     String apiUrl;
-    switch (semitruckdrop) {
-      case 'Vehicle list':
-        apiUrl = ApiEndPoints.endpointsemitrailorpage;
+    switch (status) {
+      case VehicleActionType.vehicleList:
+        apiUrl = ApiEndPoints.vehSemiTrailer;
         break;
-      case 'Pre Inspection check':
-        apiUrl = ApiEndPoints.endpointpreinspectionsemitruckcheckpage;
+      case VehicleActionType.preInspectionCheck:
+        apiUrl = ApiEndPoints.vehSemiTrailerPreInspection;
         break;
-      case 'Maintenance check':
-        apiUrl = ApiEndPoints.endpointmaintancesemitruckcheckpage;
+      case VehicleActionType.maintenanceCheck:
+        apiUrl = ApiEndPoints.vehSemiTailerMaintenance;
         break;
-      case 'Fuel Expense':
-        apiUrl = ApiEndPoints.endpointfuelsemitruckcheckpage;
+      case VehicleActionType.fuelExpence:
+        apiUrl = ApiEndPoints.vehSemiTailerFuelExpenses;
         break;
       default:
-        apiUrl = ApiEndPoints.endpointsemitrailorpage;
+        apiUrl = ApiEndPoints.vehSemiTrailer;
     }
 
     var response = await getIt<HttpService>().request(
@@ -225,13 +225,9 @@ class VehicleService implements IVehicleService {
     );
 
     return response.fold(
-      (l) {
-        (l.values.first);
-        return Left(l.keys.first);
-      },
+      (l) => Left(l),
       (res) async {
         var data = jsonDecode(res.body) as List;
-
         List<VehicleModel> vehicles =
             data.map((e) => VehicleModel.fromJson(e)).toList();
         return Right(vehicles);
@@ -240,47 +236,40 @@ class VehicleService implements IVehicleService {
   }
 
   @override
-  Future<Either<MainFailure, List<VehicleModel>>> masterfuelsemitruckfunction(
-      searchsemidrop) async {
+  Future<Either<Map<MainFailure, dynamic>, List<VehicleModel>>>
+      semiTrailorSearchServiceApi(
+          VehicleActionType? status, String value) async {
+    Map<String, String>? _data = {"key": value};
+
     String apiUrl;
-    print('awww$searchsemidrop');
-    switch (searchsemidrop) {
+    switch (status) {
       case VehicleActionType.vehicleList:
-        apiUrl = ApiEndPoints.endpointvehiclesemitrucklistsearch;
+        _data = {"key": value};
+        apiUrl = ApiEndPoints.vehSemiTrailerSearch;
         break;
       case VehicleActionType.preInspectionCheck:
-        apiUrl = ApiEndPoints.endpointpreinspectionsemitrucksearch;
+        _data = {"registration": value};
+        apiUrl = ApiEndPoints.vehSemiTrailerPreInspectionSearch;
         break;
       case VehicleActionType.maintenanceCheck:
-        apiUrl = ApiEndPoints.endpointmaintancesemitruckcheckpage;
-        MultipartRequest request =
-            MultipartRequest("POST", Uri.parse("$baseUrl$apiUrl"));
-        request.fields['key'] = 'e';
+        _data = {"key": value};
+        apiUrl = ApiEndPoints.vehSemiTrailerMaintenanceSearch;
         break;
       case VehicleActionType.fuelExpence:
-        apiUrl = ApiEndPoints.vehCarFuelExpenseSearch;
+        _data = {"registration": value};
+        apiUrl = ApiEndPoints.vehSemiTrailerFuelExpenseSearch;
         break;
       default:
-        apiUrl = ApiEndPoints.vehCarFuelExpenseSearch;
+        apiUrl = ApiEndPoints.vehSemiTrailerSearch;
         break;
     }
 
-    MultipartRequest request =
-        MultipartRequest("POST", Uri.parse("$baseUrl$apiUrl"));
-
-    request.fields['registration'] = 'e';
-
-    var response =
-        await getIt<HttpService>().multipartRequest(mRequest: request);
+    var response = await getIt<HttpService>()
+        .multipartRequest(apiUrl: apiUrl, method: 'POST', data: _data);
     return response.fold(
-      (l) {
-        // Show Error
-        (l.values.first);
-        return Left(l.keys.first);
-      },
+      (l) => Left(l),
       (res) async {
         var data = jsonDecode(res.body) as List;
-
         List<VehicleModel> fuelcarsearch =
             data.map((e) => VehicleModel.fromJson(e)).toList();
         return Right(fuelcarsearch);
