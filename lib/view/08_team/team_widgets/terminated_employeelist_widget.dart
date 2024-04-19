@@ -2,8 +2,8 @@ import 'package:auto_route/auto_route.dart';
 import 'package:enviro_mobile_application/Routepage/approutes.gr.dart';
 import 'package:enviro_mobile_application/model/10_team/team_res_model/team_res_model.dart';
 import 'package:enviro_mobile_application/utilis/constant.dart';
-import 'package:enviro_mobile_application/view/10_team/team_widgets/custom_container_widget.dart';
-import 'package:enviro_mobile_application/view/10_team/team_widgets/dp_image_widget.dart';
+import 'package:enviro_mobile_application/view/08_team/team_widgets/custom_container_widget.dart';
+import 'package:enviro_mobile_application/view/08_team/team_widgets/dp_image_widget.dart';
 import 'package:enviro_mobile_application/view_model/08_team/team_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -41,7 +41,7 @@ class TerminatedEmployeeListWidget extends StatelessWidget {
                       borderRadius: BorderRadius.only(
                           topRight: Radius.circular(32),
                           bottomRight: Radius.circular(32))),
-                  leading: dpImage(data?.dpThumbnail ??data?.dp ??  ""),
+                  leading: dpImage(data?.dpThumbnail ?? data?.dp ?? ""),
                   title: Text(data?.name ?? ""),
                   trailing: customContainerWidget(Colors.blue, "View")),
             ),

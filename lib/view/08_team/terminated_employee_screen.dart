@@ -1,5 +1,5 @@
 import 'package:enviro_mobile_application/view/02_sales/sales_widgets.dart/sales_widget.dart';
-import 'package:enviro_mobile_application/view/10_team/team_widgets/terminated_employeelist_widget.dart';
+import 'package:enviro_mobile_application/view/08_team/team_widgets/terminated_employeelist_widget.dart';
 import 'package:enviro_mobile_application/view_model/08_team/team_view_model.dart';
 import 'package:enviro_mobile_application/widgets/ww_search_widget.dart';
 import 'package:enviro_mobile_application/widgets/ww_response_handler.dart';

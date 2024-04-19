@@ -37,20 +37,20 @@ import 'package:enviro_mobile_application/view/07_intranet/intranet_page.dart'
     as _i4;
 import 'package:enviro_mobile_application/view/08_notification_page/notification_page.dart'
     as _i8;
+import 'package:enviro_mobile_application/view/08_team/add_team_page.dart'
+    as _i1;
+import 'package:enviro_mobile_application/view/08_team/team_edit_page.dart'
+    as _i17;
+import 'package:enviro_mobile_application/view/08_team/team_main_page.dart'
+    as _i18;
+import 'package:enviro_mobile_application/view/08_team/team_profile_screen.dart'
+    as _i19;
 import 'package:enviro_mobile_application/view/09_prfle_creation_page/prfle_crtion.dart'
     as _i11;
 import 'package:enviro_mobile_application/view/10_site/site_detail_screen.dart'
     as _i15;
 import 'package:enviro_mobile_application/view/10_site/site_list_screen.dart'
     as _i16;
-import 'package:enviro_mobile_application/view/10_team/add_team_page.dart'
-    as _i1;
-import 'package:enviro_mobile_application/view/10_team/team_edit_page.dart'
-    as _i17;
-import 'package:enviro_mobile_application/view/10_team/team_main_page.dart'
-    as _i18;
-import 'package:enviro_mobile_application/view/10_team/team_profile_screen.dart'
-    as _i19;
 import 'package:enviro_mobile_application/view/home_page.dart' as _i2;
 import 'package:enviro_mobile_application/view_model/10_site/site_view_model.dart'
     as _i25;

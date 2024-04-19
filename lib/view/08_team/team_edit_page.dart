@@ -4,11 +4,11 @@ import 'package:enviro_mobile_application/model/10_team/team_profile_employee_de
 import 'package:enviro_mobile_application/utilis/Appthemes.dart';
 import 'package:enviro_mobile_application/utilis/constant.dart';
 import 'package:enviro_mobile_application/view/02_sales/sales_widgets.dart/sales_widget.dart';
-import 'package:enviro_mobile_application/view/10_team/team_widgets/cm_elevated_button.dart';
-import 'package:enviro_mobile_application/view/10_team/team_widgets/cm_textfield_widget.dart';
-import 'package:enviro_mobile_application/view/10_team/team_widgets/common_team_profile_tile.dart';
-import 'package:enviro_mobile_application/view/10_team/team_widgets/date_picker.dart';
-import 'package:enviro_mobile_application/view/10_team/team_widgets/employment_status_dropdown_widget.dart';
+import 'package:enviro_mobile_application/view/08_team/team_widgets/cm_elevated_button.dart';
+import 'package:enviro_mobile_application/view/08_team/team_widgets/cm_textfield_widget.dart';
+import 'package:enviro_mobile_application/view/08_team/team_widgets/common_team_profile_tile.dart';
+import 'package:enviro_mobile_application/view/08_team/team_widgets/date_picker.dart';
+import 'package:enviro_mobile_application/view/08_team/team_widgets/employment_status_dropdown_widget.dart';
 import 'package:enviro_mobile_application/view_model/08_team/team_view_model.dart';
 import 'package:enviro_mobile_application/widgets/cmn_title_textwidget.dart';
 import 'package:flutter/material.dart';

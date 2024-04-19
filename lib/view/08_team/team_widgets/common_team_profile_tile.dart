@@ -1,9 +1,9 @@
 import 'package:enviro_mobile_application/model/10_team/team_profile_employee_details_res_model/team_profile_employee_details_res_model.dart';
 import 'package:enviro_mobile_application/utilis/Appthemes.dart';
 import 'package:enviro_mobile_application/utilis/constant.dart';
-import 'package:enviro_mobile_application/view/10_team/team_widgets/cm_textfield_widget.dart';
-import 'package:enviro_mobile_application/view/10_team/team_widgets/designation_dropdown_widget.dart';
-import 'package:enviro_mobile_application/view/10_team/team_widgets/dp_image_widget.dart';
+import 'package:enviro_mobile_application/view/08_team/team_widgets/cm_textfield_widget.dart';
+import 'package:enviro_mobile_application/view/08_team/team_widgets/designation_dropdown_widget.dart';
+import 'package:enviro_mobile_application/view/08_team/team_widgets/dp_image_widget.dart';
 import 'package:enviro_mobile_application/view_model/08_team/team_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

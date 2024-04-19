@@ -1,8 +1,8 @@
 import 'dart:io';
 
 import 'package:enviro_mobile_application/utilis/constant.dart';
-import 'package:enviro_mobile_application/view/10_team/team_widgets/cm_button.dart';
-import 'package:enviro_mobile_application/view/10_team/team_widgets/cm_required_text.dart';
+import 'package:enviro_mobile_application/view/08_team/team_widgets/cm_button.dart';
+import 'package:enviro_mobile_application/view/08_team/team_widgets/cm_required_text.dart';
 import 'package:enviro_mobile_application/view_model/08_team/team_view_model.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
@@ -26,7 +26,9 @@ Widget cmIdProofCard(
                   "License File",
                 ),
                 sized0wx05,
-                vmTeam.showRequredTextLicense ? cmRequiredText() : const Text("")
+                vmTeam.showRequredTextLicense
+                    ? cmRequiredText()
+                    : const Text("")
               ],
             );
           },
@@ -61,7 +63,9 @@ Widget cmIdProofCard(
                   "License Expiry",
                 ),
                 sized0wx05,
-                vmTeam.showRequredTextLicense ? cmRequiredText() : const Text("")
+                vmTeam.showRequredTextLicense
+                    ? cmRequiredText()
+                    : const Text("")
               ],
             );
           },
@@ -74,7 +78,9 @@ Widget cmIdProofCard(
                   "License Alert",
                 ),
                 sized0wx05,
-                vmTeam.showRequredTextLicense ? cmRequiredText() : const Text("")
+                vmTeam.showRequredTextLicense
+                    ? cmRequiredText()
+                    : const Text("")
               ],
             );
           },

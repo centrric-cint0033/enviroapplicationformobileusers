@@ -5,9 +5,9 @@ import 'package:enviro_mobile_application/model/10_team/team_profile_employee_de
 import 'package:enviro_mobile_application/utilis/Appthemes.dart';
 import 'package:enviro_mobile_application/utilis/constant.dart';
 import 'package:enviro_mobile_application/view/02_sales/sales_widgets.dart/sales_widget.dart';
-import 'package:enviro_mobile_application/view/10_team/team_widgets/cm_button.dart';
-import 'package:enviro_mobile_application/view/10_team/team_widgets/dp_image_widget.dart';
-import 'package:enviro_mobile_application/view/10_team/team_widgets/folder_list_card_widget.dart';
+import 'package:enviro_mobile_application/view/08_team/team_widgets/cm_button.dart';
+import 'package:enviro_mobile_application/view/08_team/team_widgets/dp_image_widget.dart';
+import 'package:enviro_mobile_application/view/08_team/team_widgets/folder_list_card_widget.dart';
 import 'package:enviro_mobile_application/view_model/08_team/team_view_model.dart';
 import 'package:enviro_mobile_application/widgets/cm_show_delete_dialoque.dart';
 import 'package:enviro_mobile_application/widgets/cm_show_folder_dialoque.dart';
