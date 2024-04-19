@@ -53,14 +53,14 @@ class SalesDetailPage extends StatelessWidget {
   Widget listData(SalesModel? data) {
     return buildCardDataOrder(
       [
-        expandedRowShowText('client Name', ': ${data?.clientName ?? ""}'),
-        expandedRowShowText('client Type', ': ${data?.clientType ?? ""}'),
-        expandedRowShowText('Tab Type', ': ${data?.tabType ?? ""}'),
-        expandedRowShowText('Amount', ': ${data?.amount ?? ""}'),
-        expandedRowShowText('Status', ': ${data?.status ?? ""}'),
-        expandedRowShowText('Quoted By', ': ${data?.quotedBy ?? ""}'),
-        expandedRowShowText('Waste Type', ': ${data?.wasteTypeStr ?? ""}'),
-        expandedRowShowText('Frequency', ': ${data?.frequency ?? ""}'),
+        expandedRowShowText('client Name', data?.clientName ?? ""),
+        expandedRowShowText('client Type', data?.clientType ?? ""),
+        expandedRowShowText('Tab Type', data?.tabType ?? ""),
+        expandedRowShowText('Amount', data?.amount ?? ""),
+        expandedRowShowText('Status', data?.status ?? ""),
+        expandedRowShowText('Quoted By', data?.quotedBy ?? ""),
+        expandedRowShowText('Waste Type', data?.wasteTypeStr ?? ""),
+        expandedRowShowText('Frequency', data?.frequency ?? ""),
       ],
     );
   }
