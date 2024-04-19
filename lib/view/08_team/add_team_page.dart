@@ -28,183 +28,174 @@ class AddTeamPage extends StatelessWidget {
   final formkey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async {
-        vmTeam.textControllersClearFn();
-        return true;
-      },
-      child: Scaffold(
-        appBar: AppBar(
-          title: cmnTitleWidget('Add Team'),
-        ),
-        body: Observer(builder: (context) {
-          final res = vmTeam.teamProfileEmployeeDetailListResponse;
-          final ress = vmTeam.createTeamResponse;
-          TeamProfileEmployeeDetailsResModel? employeeDetails = res.data;
-          return Padding(
-            padding: EdgeInsets.symmetric(horizontal: 15.w),
-            child: SingleChildScrollView(
-              child: Form(
-                key: formkey,
-                child: Column(
-                  children: [
-                    gapField,
-                    SizedBox(
-                      height: 82.h,
-                      child: DecoratedBox(
-                        decoration: BoxDecoration(
-                            color: Appthemes.cLightGrey,
-                            borderRadius: BorderRadius.circular(12),
-                            border: Border.all(color: Colors.grey.shade300)),
-                        child: Column(children: [
-                          Expanded(
-                              child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              SizedBox(
-                                width: 15.w,
+    return Scaffold(
+      appBar: AppBar(
+        title: cmnTitleWidget('Add Team'),
+      ),
+      body: Observer(builder: (context) {
+        final res = vmTeam.teamProfileEmployeeDetailListResponse;
+        final ress = vmTeam.createTeamResponse;
+        TeamProfileEmployeeDetailsResModel? employeeDetails = res.data;
+        return Padding(
+          padding: EdgeInsets.symmetric(horizontal: 15.w),
+          child: SingleChildScrollView(
+            child: Form(
+              key: formkey,
+              child: Column(
+                children: [
+                  gapField,
+                  SizedBox(
+                    height: 82.h,
+                    child: DecoratedBox(
+                      decoration: BoxDecoration(
+                          color: Appthemes.cLightGrey,
+                          borderRadius: BorderRadius.circular(12),
+                          border: Border.all(color: Colors.grey.shade300)),
+                      child: Column(children: [
+                        Expanded(
+                            child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            SizedBox(
+                              width: 15.w,
+                            ),
+                            InkWell(
+                              onTap: () async {
+                                await vmTeam.dpImageUpdate();
+                              },
+                              child: SizedBox(
+                                height: 60.w,
+                                width: 60.w,
+                                child: DecoratedBox(
+                                    decoration: BoxDecoration(
+                                        color: Colors.grey.shade700,
+                                        shape: BoxShape.circle),
+                                    child:
+                                        vmTeam.profileImage?.imagePath == null
+                                            ? Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  const Icon(
+                                                    Icons.person,
+                                                    color: Colors.white,
+                                                  ),
+                                                  Text(
+                                                    "Add Image",
+                                                    style: TextStyle(
+                                                        fontSize: 10.w,
+                                                        color: Colors.white),
+                                                  )
+                                                ],
+                                              )
+                                            : DecoratedBox(
+                                                decoration: const BoxDecoration(
+                                                    shape: BoxShape.circle),
+                                                child: ClipRRect(
+                                                  borderRadius:
+                                                      BorderRadius.circular(60),
+                                                  child: Image.file(
+                                                    File(vmTeam.profileImage
+                                                            ?.imagePath ??
+                                                        ""),
+                                                  ),
+                                                ))),
                               ),
-                              InkWell(
-                                onTap: () async {
-                                  await vmTeam.dpImageUpdate();
-                                },
-                                child: SizedBox(
-                                  height: 60.w,
-                                  width: 60.w,
-                                  child: DecoratedBox(
-                                      decoration: BoxDecoration(
-                                          color: Colors.grey.shade700,
-                                          shape: BoxShape.circle),
-                                      child: vmTeam.profileImage?.imagePath ==
-                                              null
-                                          ? Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                const Icon(
-                                                  Icons.person,
-                                                  color: Colors.white,
-                                                ),
-                                                Text(
-                                                  "Add Image",
-                                                  style: TextStyle(
-                                                      fontSize: 10.w,
-                                                      color: Colors.white),
-                                                )
-                                              ],
-                                            )
-                                          : DecoratedBox(
-                                              decoration: const BoxDecoration(
-                                                  shape: BoxShape.circle),
-                                              child: ClipRRect(
-                                                borderRadius:
-                                                    BorderRadius.circular(60),
-                                                child: Image.file(
-                                                  File(vmTeam.profileImage
-                                                          ?.imagePath ??
-                                                      ""),
-                                                ),
-                                              ))),
-                                ),
+                            ),
+                            sized0wx15,
+                            Expanded(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Row(
+                                    crossAxisAlignment: CrossAxisAlignment.end,
+                                    children: [
+                                      const Text(
+                                        "Position Title:",
+                                        style: TextStyle(
+                                            color: Appthemes.cPrimary),
+                                      ),
+                                      sized0wx05,
+                                      DesignationDownWidget(
+                                        employeeDetatils: employeeDetails,
+                                        fromAddTeam: true,
+                                      ),
+                                      sized0wx05,
+                                    ],
+                                  ),
+                                  Row(
+                                    children: [
+                                      const Text(
+                                        '*',
+                                        style: TextStyle(
+                                            color: Colors.red,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 22),
+                                      ),
+                                      sized0wx05,
+                                      Expanded(
+                                        child: Padding(
+                                          padding: EdgeInsets.only(right: 25.w),
+                                          child: cmTextFormField(
+                                              hintText: 'Name',
+                                              hintStyle: TextStyle(
+                                                  color: Colors.grey.shade400),
+                                              controller: vmTeam
+                                                  .textAddteamNameController,
+                                              showDecoration: true,
+                                              validator: (value) {
+                                                if (value!.isEmpty) {
+                                                  return "Name is required";
+                                                }
+                                                return null;
+                                              }),
+                                        ),
+                                      ),
+                                    ],
+                                  )
+                                ],
                               ),
-                              sized0wx15,
-                              Expanded(
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Row(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.end,
-                                      children: [
-                                        const Text(
-                                          "Position Title:",
-                                          style: TextStyle(
-                                              color: Appthemes.cPrimary),
-                                        ),
-                                        sized0wx05,
-                                        DesignationDownWidget(
-                                          employeeDetatils: employeeDetails,
-                                          fromAddTeam: true,
-                                        ),
-                                        sized0wx05,
-                                      ],
-                                    ),
-                                    Row(
-                                      children: [
-                                        const Text(
-                                          '*',
-                                          style: TextStyle(
-                                              color: Colors.red,
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 22),
-                                        ),
-                                        sized0wx05,
-                                        Expanded(
-                                          child: Padding(
-                                            padding:
-                                                EdgeInsets.only(right: 25.w),
-                                            child: cmTextFormField(
-                                                hintText: 'Name',
-                                                hintStyle: TextStyle(
-                                                    color:
-                                                        Colors.grey.shade400),
-                                                controller: vmTeam
-                                                    .textAddteamNameController,
-                                                showDecoration: true,
-                                                validator: (value) {
-                                                  if (value!.isEmpty) {
-                                                    return "Name is required";
-                                                  }
-                                                  return null;
-                                                }),
-                                          ),
-                                        ),
-                                      ],
-                                    )
-                                  ],
-                                ),
-                              )
-                            ],
-                          )),
-                        ]),
-                      ),
+                            )
+                          ],
+                        )),
+                      ]),
                     ),
-                    sized0hx10,
-                    listAddData(context, employeeDetails),
-                    sized0hx10,
-                    cmTitle('ID Poofs', fontWeight: FontWeight.bold),
-                    sized0hx10,
-                    cmIdProofCard(
-                        context,
-                        Observer(
-                            builder: (context) => cmDatePicker(
-                                context,
-                                "",
-                                vmTeam.selectedLicenceExpiryDate,
-                                (date) => vmTeam.datePickerFn6(date))),
-                        Observer(
-                            builder: (context) => cmDatePicker(
-                                context,
-                                "",
-                                vmTeam.selectedLicenceAlertDate,
-                                (date) => vmTeam.datePickerFn7(date)))),
-                    sized0hx10,
-                    cmTitle('Credentials For Enviro',
-                        fontWeight: FontWeight.bold),
-                    sized0hx10,
-                    cmCredentialsForEnviro(context),
-                    sized0hx10,
-                    cmElevatedButton(() {
-                      cmOnpressedFnCreateTeam(context);
-                    }, Appthemes.cPrimary, "CREATE", loading: ress.loading),
-                    sized0hx40,
-                  ],
-                ),
+                  ),
+                  sized0hx10,
+                  listAddData(context, employeeDetails),
+                  sized0hx10,
+                  cmTitle('ID Poofs', fontWeight: FontWeight.bold),
+                  sized0hx10,
+                  cmIdProofCard(
+                      context,
+                      Observer(
+                          builder: (context) => cmDatePicker(
+                              context,
+                              "",
+                              vmTeam.selectedLicenceExpiryDate,
+                              (date) => vmTeam.datePickerFn6(date))),
+                      Observer(
+                          builder: (context) => cmDatePicker(
+                              context,
+                              "",
+                              vmTeam.selectedLicenceAlertDate,
+                              (date) => vmTeam.datePickerFn7(date)))),
+                  sized0hx10,
+                  cmTitle('Credentials For Enviro',
+                      fontWeight: FontWeight.bold),
+                  sized0hx10,
+                  cmCredentialsForEnviro(context),
+                  sized0hx10,
+                  cmElevatedButton(() {
+                    cmOnpressedFnCreateTeam(context);
+                  }, Appthemes.cPrimary, "CREATE", loading: ress.loading),
+                  sized0hx40,
+                ],
               ),
             ),
-          );
-        }),
-      ),
+          ),
+        );
+      }),
     );
   }
 
