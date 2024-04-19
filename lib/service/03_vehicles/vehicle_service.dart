@@ -164,17 +164,22 @@ class VehicleService implements IVehicleService {
   Future<Either<Map<MainFailure, dynamic>, List<VehicleModel>>>
       masterCarSearchServiceApi(VehicleActionType? status, String value) async {
     String apiUrl;
+    Map<String, String>? _data = {"key": value};
     switch (status) {
       case VehicleActionType.vehicleList:
+        _data = {"key": value};
         apiUrl = ApiEndPoints.vehCarSearch;
         break;
       case VehicleActionType.preInspectionCheck:
+        _data = {"registration": value};
         apiUrl = ApiEndPoints.vehCarPreInspectionSearch;
         break;
       case VehicleActionType.maintenanceCheck:
+        _data = {"key": value};
         apiUrl = ApiEndPoints.vehCarPreMaintenanceSearch;
         break;
       case VehicleActionType.fuelExpence:
+        _data = {"registration": value};
         apiUrl = ApiEndPoints.vehCarFuelExpenseSearch;
         break;
       default:
@@ -182,8 +187,8 @@ class VehicleService implements IVehicleService {
         break;
     }
 
-    var response = await getIt<HttpService>().multipartRequest(
-        apiUrl: apiUrl, method: 'POST', data: {"registration": value});
+    var response = await getIt<HttpService>()
+        .multipartRequest(apiUrl: apiUrl, method: 'POST', data: _data);
 
     return response.fold(
       (l) => Left(l),
@@ -270,9 +275,9 @@ class VehicleService implements IVehicleService {
       (l) => Left(l),
       (res) async {
         var data = jsonDecode(res.body) as List;
-        List<VehicleModel> fuelcarsearch =
+        List<VehicleModel> vehicles =
             data.map((e) => VehicleModel.fromJson(e)).toList();
-        return Right(fuelcarsearch);
+        return Right(vehicles);
       },
     );
   }

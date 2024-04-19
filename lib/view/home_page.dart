@@ -32,53 +32,51 @@ class HomePage extends StatelessWidget {
           title: cmnTitleWidget('Home'),
           actions: [notificationButton(context)]),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 25),
+        padding: const EdgeInsets.all(25),
         child: Observer(builder: (context) {
           return vmselection.permissionsResponse.loading
               ? const Center(
                   child: CircularProgressIndicator(),
                 )
-              : Center(
-                  child: GridView.count(
-                    crossAxisCount: 3,
-                    crossAxisSpacing: 16.0,
-                    mainAxisSpacing: 16.0,
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    children: [
-                      InkWell(
-                        onTap: () => onsalesfunction(context),
-                        child: _buildBox('assets/images/star.svg', 'Sales'),
-                      ),
-                      InkWell(
-                        onTap: () => vehiclefunction(context),
-                        child: _buildBox('assets/images/truck.svg', 'Vehicle'),
-                      ),
-                      InkWell(
-                        onTap: () => ohsfunction(context),
-                        child: _buildBox('assets/images/move(1).svg', 'OH&S'),
-                      ),
-                      InkWell(
-                        onTap: () => navigateToSitesPage(context: context),
-                        child: _buildBox('assets/images/user.svg', 'Site'),
-                      ),
-                      InkWell(
-                        onTap: () => calenderfunction(context),
-                        child: _buildBox(
-                            'assets/images/calendar.svg', 'Scheduling'),
-                      ),
-                      InkWell(
-                        onTap: () => intranetfuntion(context),
-                        child: _buildBox('assets/images/globe.svg', 'Intranet'),
-                      ),
-                      const SizedBox(),
-                      InkWell(
-                        onTap: () => teamfuntion(context),
-                        child: _buildBox('assets/images/users.svg', 'Team'),
-                      ),
-                      const SizedBox(),
-                    ],
-                  ),
+              : GridView.count(
+                  crossAxisCount: 3,
+                  crossAxisSpacing: 16.0,
+                  mainAxisSpacing: 16.0,
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  children: [
+                    InkWell(
+                      onTap: () => onsalesfunction(context),
+                      child: _buildBox('assets/images/star.svg', 'Sales'),
+                    ),
+                    InkWell(
+                      onTap: () => vehiclefunction(context),
+                      child: _buildBox('assets/images/truck.svg', 'Vehicle'),
+                    ),
+                    InkWell(
+                      onTap: () => ohsfunction(context),
+                      child: _buildBox('assets/images/move(1).svg', 'OH&S'),
+                    ),
+                    InkWell(
+                      onTap: () => navigateToSitesPage(context: context),
+                      child: _buildBox('assets/images/user.svg', 'Site'),
+                    ),
+                    InkWell(
+                      onTap: () => calenderfunction(context),
+                      child:
+                          _buildBox('assets/images/calendar.svg', 'Scheduling'),
+                    ),
+                    InkWell(
+                      onTap: () => intranetfuntion(context),
+                      child: _buildBox('assets/images/globe.svg', 'Intranet'),
+                    ),
+                    const SizedBox(),
+                    InkWell(
+                      onTap: () => teamfuntion(context),
+                      child: _buildBox('assets/images/users.svg', 'Team'),
+                    ),
+                    const SizedBox(),
+                  ],
                 );
         }),
       ),

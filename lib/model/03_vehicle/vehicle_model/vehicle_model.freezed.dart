@@ -86,7 +86,7 @@ mixin _$VehicleModel {
   String? get serviceDate => throw _privateConstructorUsedError;
   String? get ometer => throw _privateConstructorUsedError;
   @JsonKey(name: 'invoice_number')
-  int? get invoiceNumber => throw _privateConstructorUsedError;
+  String? get invoiceNumber => throw _privateConstructorUsedError;
   @JsonKey(name: 'service_provided')
   String? get serviceProvided => throw _privateConstructorUsedError;
   String? get hours => throw _privateConstructorUsedError;
@@ -259,7 +259,7 @@ abstract class $VehicleModelCopyWith<$Res> {
       @JsonKey(name: 'invoice_date') String? invoiceDate,
       @JsonKey(name: 'service_date') String? serviceDate,
       String? ometer,
-      @JsonKey(name: 'invoice_number') int? invoiceNumber,
+      @JsonKey(name: 'invoice_number') String? invoiceNumber,
       @JsonKey(name: 'service_provided') String? serviceProvided,
       String? hours,
       @JsonKey(name: 'l_cost') String? lCost,
@@ -632,7 +632,7 @@ class _$VehicleModelCopyWithImpl<$Res, $Val extends VehicleModel>
       invoiceNumber: freezed == invoiceNumber
           ? _value.invoiceNumber
           : invoiceNumber // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as String?,
       serviceProvided: freezed == serviceProvided
           ? _value.serviceProvided
           : serviceProvided // ignore: cast_nullable_to_non_nullable
@@ -950,7 +950,7 @@ abstract class _$$VehicleModelImplCopyWith<$Res>
       @JsonKey(name: 'invoice_date') String? invoiceDate,
       @JsonKey(name: 'service_date') String? serviceDate,
       String? ometer,
-      @JsonKey(name: 'invoice_number') int? invoiceNumber,
+      @JsonKey(name: 'invoice_number') String? invoiceNumber,
       @JsonKey(name: 'service_provided') String? serviceProvided,
       String? hours,
       @JsonKey(name: 'l_cost') String? lCost,
@@ -1321,7 +1321,7 @@ class __$$VehicleModelImplCopyWithImpl<$Res>
       invoiceNumber: freezed == invoiceNumber
           ? _value.invoiceNumber
           : invoiceNumber // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as String?,
       serviceProvided: freezed == serviceProvided
           ? _value.serviceProvided
           : serviceProvided // ignore: cast_nullable_to_non_nullable
@@ -1826,7 +1826,7 @@ class _$VehicleModelImpl implements _VehicleModel {
   final String? ometer;
   @override
   @JsonKey(name: 'invoice_number')
-  final int? invoiceNumber;
+  final String? invoiceNumber;
   @override
   @JsonKey(name: 'service_provided')
   final String? serviceProvided;
@@ -2358,7 +2358,7 @@ abstract class _VehicleModel implements VehicleModel {
       @JsonKey(name: 'invoice_date') final String? invoiceDate,
       @JsonKey(name: 'service_date') final String? serviceDate,
       final String? ometer,
-      @JsonKey(name: 'invoice_number') final int? invoiceNumber,
+      @JsonKey(name: 'invoice_number') final String? invoiceNumber,
       @JsonKey(name: 'service_provided') final String? serviceProvided,
       final String? hours,
       @JsonKey(name: 'l_cost') final String? lCost,
@@ -2543,7 +2543,7 @@ abstract class _VehicleModel implements VehicleModel {
   String? get ometer;
   @override
   @JsonKey(name: 'invoice_number')
-  int? get invoiceNumber;
+  String? get invoiceNumber;
   @override
   @JsonKey(name: 'service_provided')
   String? get serviceProvided;

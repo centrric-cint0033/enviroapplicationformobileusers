@@ -54,7 +54,7 @@ class VehicleModel with _$VehicleModel {
     @JsonKey(name: 'invoice_date') String? invoiceDate,
     @JsonKey(name: 'service_date') String? serviceDate,
     String? ometer,
-    @JsonKey(name: 'invoice_number') int? invoiceNumber,
+    @JsonKey(name: 'invoice_number') String? invoiceNumber,
     @JsonKey(name: 'service_provided') String? serviceProvided,
     String? hours,
     @JsonKey(name: 'l_cost') String? lCost,

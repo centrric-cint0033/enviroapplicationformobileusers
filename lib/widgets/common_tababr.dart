@@ -26,7 +26,20 @@ Container commonTabbar({
       labelColor: Colors.black,
       unselectedLabelColor: Colors.white,
       indicatorColor: Colors.black,
-      onTap: (i) => vmVehicle.vehicleTabIndex = i,
+      onTap: (i) {
+        vmVehicle.vehicleTabIndex = i;
+        switch (i) {
+          case 0:
+            vmVehicle.masterTruckApi();
+            break;
+          case 1:
+            vmVehicle.masterCarApi();
+            break;
+          case 2:
+            vmVehicle.semiTrailorApi();
+          default:
+        }
+      },
       tabs: [
         if (value1 != null) Tab(text: value1),
         if (value2 != null) Tab(text: value2),
