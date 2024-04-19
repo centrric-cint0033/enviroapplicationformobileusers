@@ -16,7 +16,7 @@ class JobCardPage extends StatelessWidget {
     return Scaffold(
       drawer: CmnDrawer(context),
       appBar: AppBar(
-        title: cmnTitleWidget('Scheduling'),
+        title: cmnTitleWidget('Job Card'),
         actions: [notificationButton(context)],
       ),
       body: SingleChildScrollView(
