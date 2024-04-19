@@ -86,4 +86,5 @@ class ApiEndPoints {
       '/api/v1/intranet_archive/folder/segment';
   static const endpointprofilelstng = '/api/v1/accounts/profile/view/';
   static const endpointprofileedit = '/api/v1/accounts/profile/view/';
+  static const endpointjobcard = '/api/v1/accounts/profile/view/';
 }
