@@ -2,8 +2,8 @@ import 'package:auto_route/auto_route.dart';
 import 'package:enviro_mobile_application/Routepage/approutes.gr.dart';
 import 'package:enviro_mobile_application/utilis/Appthemes.dart';
 import 'package:enviro_mobile_application/utilis/constant.dart';
-import 'package:enviro_mobile_application/view/08_team/current_employee_screen.dart';
-import 'package:enviro_mobile_application/view/08_team/terminated_employee_screen.dart';
+import 'package:enviro_mobile_application/view/08_team/team_tab_screens/current_employee_tab.dart';
+import 'package:enviro_mobile_application/view/08_team/team_tab_screens/terminated_employee_tab.dart';
 import 'package:enviro_mobile_application/widgets/cmappbar.dart';
 import 'package:enviro_mobile_application/widgets/cmbutton.dart';
 import 'package:enviro_mobile_application/widgets/cmn_action_icon.dart';
@@ -52,8 +52,8 @@ class TeamPage extends StatelessWidget {
               const Expanded(
                 child: TabBarView(
                   children: <Widget>[
-                    CurrentEmployeeScreen(),
-                    TerminatedEmployeeScreen()
+                    CurrentEmployeeTab(),
+                    TerminatedEmployeeTab()
                   ],
                 ),
               ),
