@@ -3,12 +3,12 @@ import 'package:enviro_mobile_application/view_model/08_team/team_view_model.dar
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
+// ignore: must_be_immutable
 class EmploymentStatusDropDown extends StatelessWidget {
   final TeamProfileEmployeeDetailsResModel? employeeDetatils;
-  const EmploymentStatusDropDown({
-    super.key,
-    required this.employeeDetatils,
-  });
+  bool? fromAddTeam;
+  EmploymentStatusDropDown(
+      {super.key, required this.employeeDetatils, this.fromAddTeam = false});
 
   @override
   Widget build(BuildContext context) {
@@ -24,9 +24,11 @@ class EmploymentStatusDropDown extends StatelessWidget {
             );
           }).toList(),
           isExpanded: true,
-          value: vmTeam.selectedEmploymentStatus,
+          value: fromAddTeam == true
+              ? vmTeam.selectedAddEmploymentStatus
+              : vmTeam.selectedEmploymentStatus,
           onChanged: (String? newValue) {
-            vmTeam.selectedEmploymentStatus = newValue!;
+            vmTeam.employmentStatusonChanged(newValue);
           },
         );
       },

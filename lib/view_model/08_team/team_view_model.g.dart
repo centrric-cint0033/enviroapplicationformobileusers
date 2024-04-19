@@ -145,6 +145,55 @@ mixin _$TeamViewModel on TeamViewModelBase, Store {
     });
   }
 
+  late final _$deleteEmployeeResponseAtom =
+      Atom(name: 'TeamViewModelBase.deleteEmployeeResponse', context: context);
+
+  @override
+  ApiResponse<String> get deleteEmployeeResponse {
+    _$deleteEmployeeResponseAtom.reportRead();
+    return super.deleteEmployeeResponse;
+  }
+
+  @override
+  set deleteEmployeeResponse(ApiResponse<String> value) {
+    _$deleteEmployeeResponseAtom
+        .reportWrite(value, super.deleteEmployeeResponse, () {
+      super.deleteEmployeeResponse = value;
+    });
+  }
+
+  late final _$createTeamResponseAtom =
+      Atom(name: 'TeamViewModelBase.createTeamResponse', context: context);
+
+  @override
+  ApiResponse<dynamic> get createTeamResponse {
+    _$createTeamResponseAtom.reportRead();
+    return super.createTeamResponse;
+  }
+
+  @override
+  set createTeamResponse(ApiResponse<dynamic> value) {
+    _$createTeamResponseAtom.reportWrite(value, super.createTeamResponse, () {
+      super.createTeamResponse = value;
+    });
+  }
+
+  late final _$editTeamResponseAtom =
+      Atom(name: 'TeamViewModelBase.editTeamResponse', context: context);
+
+  @override
+  ApiResponse<dynamic> get editTeamResponse {
+    _$editTeamResponseAtom.reportRead();
+    return super.editTeamResponse;
+  }
+
+  @override
+  set editTeamResponse(ApiResponse<dynamic> value) {
+    _$editTeamResponseAtom.reportWrite(value, super.editTeamResponse, () {
+      super.editTeamResponse = value;
+    });
+  }
+
   late final _$profileImageAtom =
       Atom(name: 'TeamViewModelBase.profileImage', context: context);
 
@@ -193,17 +242,34 @@ mixin _$TeamViewModel on TeamViewModelBase, Store {
     });
   }
 
+  late final _$showRequredTextLicenseAtom =
+      Atom(name: 'TeamViewModelBase.showRequredTextLicense', context: context);
+
+  @override
+  bool get showRequredTextLicense {
+    _$showRequredTextLicenseAtom.reportRead();
+    return super.showRequredTextLicense;
+  }
+
+  @override
+  set showRequredTextLicense(bool value) {
+    _$showRequredTextLicenseAtom
+        .reportWrite(value, super.showRequredTextLicense, () {
+      super.showRequredTextLicense = value;
+    });
+  }
+
   late final _$selectedJoiningDateAtom =
       Atom(name: 'TeamViewModelBase.selectedJoiningDate', context: context);
 
   @override
-  DateTime get selectedJoiningDate {
+  DateTime? get selectedJoiningDate {
     _$selectedJoiningDateAtom.reportRead();
     return super.selectedJoiningDate;
   }
 
   @override
-  set selectedJoiningDate(DateTime value) {
+  set selectedJoiningDate(DateTime? value) {
     _$selectedJoiningDateAtom.reportWrite(value, super.selectedJoiningDate, () {
       super.selectedJoiningDate = value;
     });
@@ -213,13 +279,13 @@ mixin _$TeamViewModel on TeamViewModelBase, Store {
       Atom(name: 'TeamViewModelBase.selectedTerminationDate', context: context);
 
   @override
-  DateTime get selectedTerminationDate {
+  DateTime? get selectedTerminationDate {
     _$selectedTerminationDateAtom.reportRead();
     return super.selectedTerminationDate;
   }
 
   @override
-  set selectedTerminationDate(DateTime value) {
+  set selectedTerminationDate(DateTime? value) {
     _$selectedTerminationDateAtom
         .reportWrite(value, super.selectedTerminationDate, () {
       super.selectedTerminationDate = value;
@@ -230,15 +296,82 @@ mixin _$TeamViewModel on TeamViewModelBase, Store {
       Atom(name: 'TeamViewModelBase.selectedDob', context: context);
 
   @override
-  DateTime get selectedDob {
+  DateTime? get selectedDob {
     _$selectedDobAtom.reportRead();
     return super.selectedDob;
   }
 
   @override
-  set selectedDob(DateTime value) {
+  set selectedDob(DateTime? value) {
     _$selectedDobAtom.reportWrite(value, super.selectedDob, () {
       super.selectedDob = value;
+    });
+  }
+
+  late final _$selectedDobAddTeamAtom =
+      Atom(name: 'TeamViewModelBase.selectedDobAddTeam', context: context);
+
+  @override
+  DateTime? get selectedDobAddTeam {
+    _$selectedDobAddTeamAtom.reportRead();
+    return super.selectedDobAddTeam;
+  }
+
+  @override
+  set selectedDobAddTeam(DateTime? value) {
+    _$selectedDobAddTeamAtom.reportWrite(value, super.selectedDobAddTeam, () {
+      super.selectedDobAddTeam = value;
+    });
+  }
+
+  late final _$selectedJoiningDateAddTeamAtom = Atom(
+      name: 'TeamViewModelBase.selectedJoiningDateAddTeam', context: context);
+
+  @override
+  DateTime? get selectedJoiningDateAddTeam {
+    _$selectedJoiningDateAddTeamAtom.reportRead();
+    return super.selectedJoiningDateAddTeam;
+  }
+
+  @override
+  set selectedJoiningDateAddTeam(DateTime? value) {
+    _$selectedJoiningDateAddTeamAtom
+        .reportWrite(value, super.selectedJoiningDateAddTeam, () {
+      super.selectedJoiningDateAddTeam = value;
+    });
+  }
+
+  late final _$selectedLicenceExpiryDateAtom = Atom(
+      name: 'TeamViewModelBase.selectedLicenceExpiryDate', context: context);
+
+  @override
+  DateTime? get selectedLicenceExpiryDate {
+    _$selectedLicenceExpiryDateAtom.reportRead();
+    return super.selectedLicenceExpiryDate;
+  }
+
+  @override
+  set selectedLicenceExpiryDate(DateTime? value) {
+    _$selectedLicenceExpiryDateAtom
+        .reportWrite(value, super.selectedLicenceExpiryDate, () {
+      super.selectedLicenceExpiryDate = value;
+    });
+  }
+
+  late final _$selectedLicenceAlertDateAtom = Atom(
+      name: 'TeamViewModelBase.selectedLicenceAlertDate', context: context);
+
+  @override
+  DateTime? get selectedLicenceAlertDate {
+    _$selectedLicenceAlertDateAtom.reportRead();
+    return super.selectedLicenceAlertDate;
+  }
+
+  @override
+  set selectedLicenceAlertDate(DateTime? value) {
+    _$selectedLicenceAlertDateAtom
+        .reportWrite(value, super.selectedLicenceAlertDate, () {
+      super.selectedLicenceAlertDate = value;
     });
   }
 
@@ -275,6 +408,40 @@ mixin _$TeamViewModel on TeamViewModelBase, Store {
     });
   }
 
+  late final _$selectedDesignationAddTeamAtom = Atom(
+      name: 'TeamViewModelBase.selectedDesignationAddTeam', context: context);
+
+  @override
+  Designation? get selectedDesignationAddTeam {
+    _$selectedDesignationAddTeamAtom.reportRead();
+    return super.selectedDesignationAddTeam;
+  }
+
+  @override
+  set selectedDesignationAddTeam(Designation? value) {
+    _$selectedDesignationAddTeamAtom
+        .reportWrite(value, super.selectedDesignationAddTeam, () {
+      super.selectedDesignationAddTeam = value;
+    });
+  }
+
+  late final _$selectedDesignationAddTeam2Atom = Atom(
+      name: 'TeamViewModelBase.selectedDesignationAddTeam2', context: context);
+
+  @override
+  String? get selectedDesignationAddTeam2 {
+    _$selectedDesignationAddTeam2Atom.reportRead();
+    return super.selectedDesignationAddTeam2;
+  }
+
+  @override
+  set selectedDesignationAddTeam2(String? value) {
+    _$selectedDesignationAddTeam2Atom
+        .reportWrite(value, super.selectedDesignationAddTeam2, () {
+      super.selectedDesignationAddTeam2 = value;
+    });
+  }
+
   late final _$selectedEmploymentStatusAtom = Atom(
       name: 'TeamViewModelBase.selectedEmploymentStatus', context: context);
 
@@ -289,6 +456,73 @@ mixin _$TeamViewModel on TeamViewModelBase, Store {
     _$selectedEmploymentStatusAtom
         .reportWrite(value, super.selectedEmploymentStatus, () {
       super.selectedEmploymentStatus = value;
+    });
+  }
+
+  late final _$selectedAddEmploymentStatusAtom = Atom(
+      name: 'TeamViewModelBase.selectedAddEmploymentStatus', context: context);
+
+  @override
+  String get selectedAddEmploymentStatus {
+    _$selectedAddEmploymentStatusAtom.reportRead();
+    return super.selectedAddEmploymentStatus;
+  }
+
+  @override
+  set selectedAddEmploymentStatus(String value) {
+    _$selectedAddEmploymentStatusAtom
+        .reportWrite(value, super.selectedAddEmploymentStatus, () {
+      super.selectedAddEmploymentStatus = value;
+    });
+  }
+
+  late final _$showDateAtom =
+      Atom(name: 'TeamViewModelBase.showDate', context: context);
+
+  @override
+  bool get showDate {
+    _$showDateAtom.reportRead();
+    return super.showDate;
+  }
+
+  @override
+  set showDate(bool value) {
+    _$showDateAtom.reportWrite(value, super.showDate, () {
+      super.showDate = value;
+    });
+  }
+
+  late final _$selectedFileNameLicenseAtom =
+      Atom(name: 'TeamViewModelBase.selectedFileNameLicense', context: context);
+
+  @override
+  String? get selectedFileNameLicense {
+    _$selectedFileNameLicenseAtom.reportRead();
+    return super.selectedFileNameLicense;
+  }
+
+  @override
+  set selectedFileNameLicense(String? value) {
+    _$selectedFileNameLicenseAtom
+        .reportWrite(value, super.selectedFileNameLicense, () {
+      super.selectedFileNameLicense = value;
+    });
+  }
+
+  late final _$selectedFilePathLicenseAtom =
+      Atom(name: 'TeamViewModelBase.selectedFilePathLicense', context: context);
+
+  @override
+  String? get selectedFilePathLicense {
+    _$selectedFilePathLicenseAtom.reportRead();
+    return super.selectedFilePathLicense;
+  }
+
+  @override
+  set selectedFilePathLicense(String? value) {
+    _$selectedFilePathLicenseAtom
+        .reportWrite(value, super.selectedFilePathLicense, () {
+      super.selectedFilePathLicense = value;
     });
   }
 
@@ -318,6 +552,26 @@ mixin _$TeamViewModel on TeamViewModelBase, Store {
   Future<void> getTeamProfileEmployeeDetails({required num employeeID}) {
     return _$getTeamProfileEmployeeDetailsAsyncAction
         .run(() => super.getTeamProfileEmployeeDetails(employeeID: employeeID));
+  }
+
+  late final _$currentEmployeeSearchApiAsyncAction = AsyncAction(
+      'TeamViewModelBase.currentEmployeeSearchApi',
+      context: context);
+
+  @override
+  Future<void> currentEmployeeSearchApi(String searchData) {
+    return _$currentEmployeeSearchApiAsyncAction
+        .run(() => super.currentEmployeeSearchApi(searchData));
+  }
+
+  late final _$terminatedEmployeeSearchApiAsyncAction = AsyncAction(
+      'TeamViewModelBase.terminatedEmployeeSearchApi',
+      context: context);
+
+  @override
+  Future<void> terminatedEmployeeSearchApi(String searchData) {
+    return _$terminatedEmployeeSearchApiAsyncAction
+        .run(() => super.terminatedEmployeeSearchApi(searchData));
   }
 
   late final _$getTeamFoldersAsyncAction =
@@ -369,6 +623,16 @@ mixin _$TeamViewModel on TeamViewModelBase, Store {
         folder: folder, name: name, context: context, employeeID: employeeID));
   }
 
+  late final _$deleteEmployeeApiAsyncAction =
+      AsyncAction('TeamViewModelBase.deleteEmployeeApi', context: context);
+
+  @override
+  Future<void> deleteEmployeeApi(
+      {required BuildContext context, required num employeeID}) {
+    return _$deleteEmployeeApiAsyncAction.run(() =>
+        super.deleteEmployeeApi(context: context, employeeID: employeeID));
+  }
+
   late final _$dpImageUpdateAsyncAction =
       AsyncAction('TeamViewModelBase.dpImageUpdate', context: context);
 
@@ -384,6 +648,26 @@ mixin _$TeamViewModel on TeamViewModelBase, Store {
   Future<void> getTeamDesignationsApi() {
     return _$getTeamDesignationsApiAsyncAction
         .run(() => super.getTeamDesignationsApi());
+  }
+
+  late final _$createTeamApiAsyncAction =
+      AsyncAction('TeamViewModelBase.createTeamApi', context: context);
+
+  @override
+  Future<void> createTeamApi(
+      {required CreateTeamReqModel data, required BuildContext context}) {
+    return _$createTeamApiAsyncAction
+        .run(() => super.createTeamApi(data: data, context: context));
+  }
+
+  late final _$editTeamApiAsyncAction =
+      AsyncAction('TeamViewModelBase.editTeamApi', context: context);
+
+  @override
+  Future<void> editTeamApi(
+      {required CreateTeamReqModel data, required BuildContext context}) {
+    return _$editTeamApiAsyncAction
+        .run(() => super.editTeamApi(data: data, context: context));
   }
 
   late final _$TeamViewModelBaseActionController =
@@ -423,6 +707,72 @@ mixin _$TeamViewModel on TeamViewModelBase, Store {
   }
 
   @override
+  dynamic datePickerFn4(dynamic date) {
+    final _$actionInfo = _$TeamViewModelBaseActionController.startAction(
+        name: 'TeamViewModelBase.datePickerFn4');
+    try {
+      return super.datePickerFn4(date);
+    } finally {
+      _$TeamViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic datePickerFn5(dynamic date) {
+    final _$actionInfo = _$TeamViewModelBaseActionController.startAction(
+        name: 'TeamViewModelBase.datePickerFn5');
+    try {
+      return super.datePickerFn5(date);
+    } finally {
+      _$TeamViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic datePickerFn6(dynamic date) {
+    final _$actionInfo = _$TeamViewModelBaseActionController.startAction(
+        name: 'TeamViewModelBase.datePickerFn6');
+    try {
+      return super.datePickerFn6(date);
+    } finally {
+      _$TeamViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic datePickerFn7(dynamic date) {
+    final _$actionInfo = _$TeamViewModelBaseActionController.startAction(
+        name: 'TeamViewModelBase.datePickerFn7');
+    try {
+      return super.datePickerFn7(date);
+    } finally {
+      _$TeamViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic employmentStatusonChanged(dynamic newValue) {
+    final _$actionInfo = _$TeamViewModelBaseActionController.startAction(
+        name: 'TeamViewModelBase.employmentStatusonChanged');
+    try {
+      return super.employmentStatusonChanged(newValue);
+    } finally {
+      _$TeamViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic cmFunction(dynamic value) {
+    final _$actionInfo = _$TeamViewModelBaseActionController.startAction(
+        name: 'TeamViewModelBase.cmFunction');
+    try {
+      return super.cmFunction(value);
+    } finally {
+      _$TeamViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 currentEmployeeResponse: ${currentEmployeeResponse},
@@ -433,15 +783,29 @@ addFolderResponse: ${addFolderResponse},
 deleteFolderResponse: ${deleteFolderResponse},
 editFolderResponse: ${editFolderResponse},
 designationsResponse: ${designationsResponse},
+deleteEmployeeResponse: ${deleteEmployeeResponse},
+createTeamResponse: ${createTeamResponse},
+editTeamResponse: ${editTeamResponse},
 profileImage: ${profileImage},
 profileImageLoader: ${profileImageLoader},
 showDecoration: ${showDecoration},
+showRequredTextLicense: ${showRequredTextLicense},
 selectedJoiningDate: ${selectedJoiningDate},
 selectedTerminationDate: ${selectedTerminationDate},
 selectedDob: ${selectedDob},
+selectedDobAddTeam: ${selectedDobAddTeam},
+selectedJoiningDateAddTeam: ${selectedJoiningDateAddTeam},
+selectedLicenceExpiryDate: ${selectedLicenceExpiryDate},
+selectedLicenceAlertDate: ${selectedLicenceAlertDate},
 employmentStatusList: ${employmentStatusList},
 selectedDesignation: ${selectedDesignation},
-selectedEmploymentStatus: ${selectedEmploymentStatus}
+selectedDesignationAddTeam: ${selectedDesignationAddTeam},
+selectedDesignationAddTeam2: ${selectedDesignationAddTeam2},
+selectedEmploymentStatus: ${selectedEmploymentStatus},
+selectedAddEmploymentStatus: ${selectedAddEmploymentStatus},
+showDate: ${showDate},
+selectedFileNameLicense: ${selectedFileNameLicense},
+selectedFilePathLicense: ${selectedFilePathLicense}
     ''';
   }
 }

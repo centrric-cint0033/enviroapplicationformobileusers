@@ -10,6 +10,7 @@ class TeamResModel with _$TeamResModel {
     @JsonKey(name: 'employee_id') num? employeeId,
     String? name,
     @JsonKey(name: 'dp_thumbnail') String? dpThumbnail,
+    String? dp,
   }) = _TeamResModel;
 
   factory TeamResModel.fromJson(Map<String, dynamic> json) =>

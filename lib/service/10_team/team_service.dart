@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:dartz/dartz.dart';
+import 'package:enviro_mobile_application/model/10_team/create_team_req_model/create_team_req_model.dart';
 import 'package:enviro_mobile_application/model/10_team/team_designtion_res_model/team_designtion_res_model.dart';
 import 'package:enviro_mobile_application/model/10_team/team_folder_req_model/team_create_folder_req_model.dart';
 import 'package:enviro_mobile_application/model/10_team/team_folder_resp_model/team_folder_resp_model.dart';
@@ -18,15 +19,24 @@ abstract class IteamService {
       getTerminatedEmployee();
   Future<Either<Map<MainFailure, dynamic>, TeamProfileEmployeeDetailsResModel>>
       getTeamProfileEmployeeDetails({required num employeeID});
-  Future<Either<MainFailure, TeamFolderRespModel>> getTeamFolders(
+  Future<Either<Map<MainFailure, dynamic>, TeamFolderRespModel>> getTeamFolders(
       {required num id});
-  Future<Either<MainFailure, TeamCreateFolderReqModel>> addTeamFolders(
-      {required Map<String, String> data});
-  Future<Either<MainFailure, String>> deleteTeamFolders({required num id});
-  Future<Either<MainFailure, String>> editTeamFolders(
+  Future<Either<Map<MainFailure, dynamic>, TeamCreateFolderReqModel>>
+      addTeamFolders({required Map<String, String> data});
+  Future<Either<Map<MainFailure, dynamic>, String>> deleteTeamFolders(
+      {required num id});
+  Future<Either<Map<MainFailure, dynamic>, String>> editTeamFolders(
       {required Map<String, String> data, required int id});
   Future<Either<Map<MainFailure, dynamic>, TeamDesigntionResModel>>
       getTeamDesignations();
+  Future<Either<Map<MainFailure, dynamic>, String>> deleteEmployeeApi(
+      {required num id});
+  Future<Either<Map<MainFailure, dynamic>, List<TeamResModel>>>
+      employeeSearchApi({required Map<String, String> data});
+  Future<Either<Map<MainFailure, dynamic>, CreateTeamReqModel>> createTeamApi(
+      {required Map<String, dynamic> data});
+  Future<Either<Map<MainFailure, dynamic>, CreateTeamReqModel>> editTeamApi(
+      {required Map<String, dynamic> data, required String employeeId});
 }
 
 @LazySingleton(as: IteamService)
@@ -37,7 +47,7 @@ class TeamService implements IteamService {
     var response = await getIt<HttpService>().request(
         authenticated: true,
         method: HttpMethod.get,
-        apiUrl: ApiEndPoints.endpointcurrentemployeelist);
+        apiUrl: ApiEndPoints.currentEmployeelist);
 
     return response.fold(
       (l) => Left(l),
@@ -56,7 +66,7 @@ class TeamService implements IteamService {
     var response = await getIt<HttpService>().request(
         authenticated: true,
         method: HttpMethod.get,
-        apiUrl: ApiEndPoints.endpointterminatedemployeelist);
+        apiUrl: ApiEndPoints.terminatedEmployeelist);
 
     return response.fold(
       (l) => Left(l),
@@ -75,8 +85,7 @@ class TeamService implements IteamService {
     var response = await getIt<HttpService>().request(
         authenticated: true,
         method: HttpMethod.get,
-        apiUrl:
-            "${ApiEndPoints.endpointteamprofileemployeedetailList}/$employeeID/");
+        apiUrl: "${ApiEndPoints.teamprofileEmployeeDetailList}/$employeeID/");
 
     return response.fold(
       (l) => Left(l),
@@ -90,18 +99,15 @@ class TeamService implements IteamService {
   }
 
   @override
-  Future<Either<MainFailure, TeamFolderRespModel>> getTeamFolders(
+  Future<Either<Map<MainFailure, dynamic>, TeamFolderRespModel>> getTeamFolders(
       {required num id}) async {
     var response = await getIt<HttpService>().request(
         authenticated: true,
         method: HttpMethod.get,
-        apiUrl: '${ApiEndPoints.endpointgetteamfolder}/$id/1');
+        apiUrl: '${ApiEndPoints.teamFolder}/$id/1');
 
     return response.fold(
-      (l) {
-        (l.values.first);
-        return Left(l.keys.first);
-      },
+      (l) => Left(l),
       (res) async {
         TeamFolderRespModel teamFolderList =
             TeamFolderRespModel.fromJson(jsonDecode(res.body));
@@ -112,16 +118,12 @@ class TeamService implements IteamService {
   }
 
   @override
-  Future<Either<MainFailure, TeamCreateFolderReqModel>> addTeamFolders(
-      {required Map<String, String> data}) async {
+  Future<Either<Map<MainFailure, dynamic>, TeamCreateFolderReqModel>>
+      addTeamFolders({required Map<String, String> data}) async {
     var response = await getIt<HttpService>().multipartRequest(
-        data: data, method: 'POST', apiUrl: ApiEndPoints.endpointaddteamfolder);
+        data: data, method: 'POST', apiUrl: ApiEndPoints.addTeamFolder);
     return response.fold(
-      (l) {
-        // Show Error
-        (l.values.first);
-        return Left(l.keys.first);
-      },
+      (l) => Left(l),
       (res) async {
         var data = jsonDecode(res.body);
         TeamCreateFolderReqModel createFolderList =
@@ -132,18 +134,15 @@ class TeamService implements IteamService {
   }
 
   @override
-  Future<Either<MainFailure, String>> deleteTeamFolders(
+  Future<Either<Map<MainFailure, dynamic>, String>> deleteTeamFolders(
       {required num id}) async {
     var response = await getIt<HttpService>().request(
         authenticated: true,
         method: HttpMethod.delete,
-        apiUrl: '${ApiEndPoints.endpointteamfolderdelete}/$id/');
+        apiUrl: '${ApiEndPoints.teamFolderDelete}/$id/');
 
     return response.fold(
-      (l) {
-        (l.values.first);
-        return Left(l.keys.first);
-      },
+      (l) => Left(l),
       (res) async {
         return const Right('success');
       },
@@ -151,17 +150,14 @@ class TeamService implements IteamService {
   }
 
   @override
-  Future<Either<MainFailure, String>> editTeamFolders(
+  Future<Either<Map<MainFailure, dynamic>, String>> editTeamFolders(
       {required Map<String, String> data, required int id}) async {
     var response = await getIt<HttpService>().multipartRequest(
         data: data,
         method: 'PUT',
-        apiUrl: '${ApiEndPoints.endpointteamfolderedit}/$id/');
+        apiUrl: '${ApiEndPoints.teamFolderEdit}/$id/');
     return response.fold(
-      (l) {
-        (l.values.first);
-        return Left(l.keys.first);
-      },
+      (l) => Left(l),
       (res) async {
         return const Right('success');
       },
@@ -174,7 +170,7 @@ class TeamService implements IteamService {
     var response = await getIt<HttpService>().request(
         authenticated: true,
         method: HttpMethod.get,
-        apiUrl: ApiEndPoints.endpointteamdesignations);
+        apiUrl: ApiEndPoints.teamDesignations);
 
     return response.fold(
       (l) => Left(l),
@@ -183,6 +179,70 @@ class TeamService implements IteamService {
         TeamDesigntionResModel designationsList =
             TeamDesigntionResModel.fromJson(data);
         return Right(designationsList);
+      },
+    );
+  }
+
+  @override
+  Future<Either<Map<MainFailure, dynamic>, String>> deleteEmployeeApi(
+      {required num id}) async {
+    var response = await getIt<HttpService>().request(
+        authenticated: true,
+        method: HttpMethod.delete,
+        apiUrl: '${ApiEndPoints.deleteEmployee}/$id/');
+    return response.fold(
+      (l) => Left(l),
+      (res) async {
+        return const Right('success');
+      },
+    );
+  }
+
+  @override
+  Future<Either<Map<MainFailure, dynamic>, List<TeamResModel>>>
+      employeeSearchApi({required Map<String, String> data}) async {
+    var response = await getIt<HttpService>().multipartRequest(
+        data: data, method: 'POST', apiUrl: ApiEndPoints.searchEmployeeList);
+    return response.fold(
+      (l) => Left(l),
+      (res) async {
+        var data = jsonDecode(res.body) as List;
+        List<TeamResModel> searchedEmployeList =
+            data.map((e) => TeamResModel.fromJson(e)).toList();
+        return Right(searchedEmployeList);
+      },
+    );
+  }
+
+  @override
+  Future<Either<Map<MainFailure, dynamic>, CreateTeamReqModel>> createTeamApi(
+      {required Map<String, dynamic> data}) async {
+    var response = await getIt<HttpService>().multipartRequest(
+        data: data, method: 'POST', apiUrl: ApiEndPoints.createEmployee);
+    return response.fold(
+      (l) => Left(l),
+      (res) async {
+        var data = jsonDecode(res.body);
+        CreateTeamReqModel createTeamList = CreateTeamReqModel.fromJson(data);
+        return Right(createTeamList);
+      },
+    );
+  }
+
+  @override
+  Future<Either<Map<MainFailure, dynamic>, CreateTeamReqModel>> editTeamApi(
+      {required Map<String, dynamic> data, required String employeeId}) async {
+    var response = await getIt<HttpService>().multipartRequest(
+        data: data,
+        method: 'PATCH',
+        apiUrl: "${ApiEndPoints.editEmployee}/$employeeId/");
+    return response.fold(
+      (l) => Left(l),
+      (res) async {
+        var data = jsonDecode(res.body);
+        CreateTeamReqModel editTeamList =
+            CreateTeamReqModel(); //  CreateTeamReqModel.fromJson(data);
+        return Right(editTeamList);
       },
     );
   }

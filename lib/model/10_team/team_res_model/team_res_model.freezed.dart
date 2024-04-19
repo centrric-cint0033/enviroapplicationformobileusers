@@ -26,6 +26,7 @@ mixin _$TeamResModel {
   String? get name => throw _privateConstructorUsedError;
   @JsonKey(name: 'dp_thumbnail')
   String? get dpThumbnail => throw _privateConstructorUsedError;
+  String? get dp => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -43,7 +44,8 @@ abstract class $TeamResModelCopyWith<$Res> {
       {num? id,
       @JsonKey(name: 'employee_id') num? employeeId,
       String? name,
-      @JsonKey(name: 'dp_thumbnail') String? dpThumbnail});
+      @JsonKey(name: 'dp_thumbnail') String? dpThumbnail,
+      String? dp});
 }
 
 /// @nodoc
@@ -63,6 +65,7 @@ class _$TeamResModelCopyWithImpl<$Res, $Val extends TeamResModel>
     Object? employeeId = freezed,
     Object? name = freezed,
     Object? dpThumbnail = freezed,
+    Object? dp = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -81,6 +84,10 @@ class _$TeamResModelCopyWithImpl<$Res, $Val extends TeamResModel>
           ? _value.dpThumbnail
           : dpThumbnail // ignore: cast_nullable_to_non_nullable
               as String?,
+      dp: freezed == dp
+          ? _value.dp
+          : dp // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -97,7 +104,8 @@ abstract class _$$TeamResModelImplCopyWith<$Res>
       {num? id,
       @JsonKey(name: 'employee_id') num? employeeId,
       String? name,
-      @JsonKey(name: 'dp_thumbnail') String? dpThumbnail});
+      @JsonKey(name: 'dp_thumbnail') String? dpThumbnail,
+      String? dp});
 }
 
 /// @nodoc
@@ -115,6 +123,7 @@ class __$$TeamResModelImplCopyWithImpl<$Res>
     Object? employeeId = freezed,
     Object? name = freezed,
     Object? dpThumbnail = freezed,
+    Object? dp = freezed,
   }) {
     return _then(_$TeamResModelImpl(
       id: freezed == id
@@ -133,6 +142,10 @@ class __$$TeamResModelImplCopyWithImpl<$Res>
           ? _value.dpThumbnail
           : dpThumbnail // ignore: cast_nullable_to_non_nullable
               as String?,
+      dp: freezed == dp
+          ? _value.dp
+          : dp // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -144,7 +157,8 @@ class _$TeamResModelImpl implements _TeamResModel {
       {this.id,
       @JsonKey(name: 'employee_id') this.employeeId,
       this.name,
-      @JsonKey(name: 'dp_thumbnail') this.dpThumbnail});
+      @JsonKey(name: 'dp_thumbnail') this.dpThumbnail,
+      this.dp});
 
   factory _$TeamResModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$TeamResModelImplFromJson(json);
@@ -159,10 +173,12 @@ class _$TeamResModelImpl implements _TeamResModel {
   @override
   @JsonKey(name: 'dp_thumbnail')
   final String? dpThumbnail;
+  @override
+  final String? dp;
 
   @override
   String toString() {
-    return 'TeamResModel(id: $id, employeeId: $employeeId, name: $name, dpThumbnail: $dpThumbnail)';
+    return 'TeamResModel(id: $id, employeeId: $employeeId, name: $name, dpThumbnail: $dpThumbnail, dp: $dp)';
   }
 
   @override
@@ -175,13 +191,14 @@ class _$TeamResModelImpl implements _TeamResModel {
                 other.employeeId == employeeId) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.dpThumbnail, dpThumbnail) ||
-                other.dpThumbnail == dpThumbnail));
+                other.dpThumbnail == dpThumbnail) &&
+            (identical(other.dp, dp) || other.dp == dp));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, id, employeeId, name, dpThumbnail);
+      Object.hash(runtimeType, id, employeeId, name, dpThumbnail, dp);
 
   @JsonKey(ignore: true)
   @override
@@ -199,11 +216,11 @@ class _$TeamResModelImpl implements _TeamResModel {
 
 abstract class _TeamResModel implements TeamResModel {
   factory _TeamResModel(
-          {final num? id,
-          @JsonKey(name: 'employee_id') final num? employeeId,
-          final String? name,
-          @JsonKey(name: 'dp_thumbnail') final String? dpThumbnail}) =
-      _$TeamResModelImpl;
+      {final num? id,
+      @JsonKey(name: 'employee_id') final num? employeeId,
+      final String? name,
+      @JsonKey(name: 'dp_thumbnail') final String? dpThumbnail,
+      final String? dp}) = _$TeamResModelImpl;
 
   factory _TeamResModel.fromJson(Map<String, dynamic> json) =
       _$TeamResModelImpl.fromJson;
@@ -218,6 +235,8 @@ abstract class _TeamResModel implements TeamResModel {
   @override
   @JsonKey(name: 'dp_thumbnail')
   String? get dpThumbnail;
+  @override
+  String? get dp;
   @override
   @JsonKey(ignore: true)
   _$$TeamResModelImplCopyWith<_$TeamResModelImpl> get copyWith =>

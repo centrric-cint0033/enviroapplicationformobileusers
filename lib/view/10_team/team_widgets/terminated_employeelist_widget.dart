@@ -41,7 +41,7 @@ class TerminatedEmployeeListWidget extends StatelessWidget {
                       borderRadius: BorderRadius.only(
                           topRight: Radius.circular(32),
                           bottomRight: Radius.circular(32))),
-                  leading: dpImage(data?.dpThumbnail ?? ""),
+                  leading: dpImage(data?.dpThumbnail ??data?.dp ??  ""),
                   title: Text(data?.name ?? ""),
                   trailing: customContainerWidget(Colors.blue, "View")),
             ),

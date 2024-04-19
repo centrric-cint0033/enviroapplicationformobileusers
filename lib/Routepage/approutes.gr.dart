@@ -62,9 +62,11 @@ abstract class $AppRouter extends _i21.RootStackRouter {
   @override
   final Map<String, _i21.PageFactory> pagesMap = {
     AddTeamRoute.name: (routeData) {
+      final args = routeData.argsAs<AddTeamRouteArgs>(
+          orElse: () => const AddTeamRouteArgs());
       return _i21.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i1.AddTeamPage(),
+        child: _i1.AddTeamPage(key: args.key),
       );
     },
     HomeRoute.name: (routeData) {
@@ -219,16 +221,31 @@ abstract class $AppRouter extends _i21.RootStackRouter {
 
 /// generated route for
 /// [_i1.AddTeamPage]
-class AddTeamRoute extends _i21.PageRouteInfo<void> {
-  const AddTeamRoute({List<_i21.PageRouteInfo>? children})
-      : super(
+class AddTeamRoute extends _i21.PageRouteInfo<AddTeamRouteArgs> {
+  AddTeamRoute({
+    _i22.Key? key,
+    List<_i21.PageRouteInfo>? children,
+  }) : super(
           AddTeamRoute.name,
+          args: AddTeamRouteArgs(key: key),
           initialChildren: children,
         );
 
   static const String name = 'AddTeamRoute';
 
-  static const _i21.PageInfo<void> page = _i21.PageInfo<void>(name);
+  static const _i21.PageInfo<AddTeamRouteArgs> page =
+      _i21.PageInfo<AddTeamRouteArgs>(name);
+}
+
+class AddTeamRouteArgs {
+  const AddTeamRouteArgs({this.key});
+
+  final _i22.Key? key;
+
+  @override
+  String toString() {
+    return 'AddTeamRouteArgs{key: $key}';
+  }
 }
 
 /// generated route for

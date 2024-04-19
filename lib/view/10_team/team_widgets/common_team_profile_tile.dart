@@ -44,16 +44,21 @@ class CommonTeamProfileTile extends StatelessWidget {
                   Positioned(
                     bottom: 0,
                     right: 0,
-                    child: CircleAvatar(
-                      radius: 10.h,
-                      backgroundColor: Colors.grey.shade400,
-                      child: IconButton(
-                        onPressed: () {
-                          vmTeam.dpImageUpdate();
-                        },
-                        icon: Icon(
-                          Icons.camera_enhance,
-                          size: 13.h,
+                    child: InkWell(
+                      onTap: () async {
+                        await vmTeam.dpImageUpdate();
+                      },
+                      child: SizedBox(
+                        height: 20.h,
+                        width: 20.h,
+                        child: DecoratedBox(
+                          decoration: BoxDecoration(
+                              color: Colors.grey.shade400,
+                              shape: BoxShape.circle),
+                          child: Icon(
+                            Icons.camera_enhance,
+                            size: 13.h,
+                          ),
                         ),
                       ),
                     ),
@@ -68,6 +73,7 @@ class CommonTeamProfileTile extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Row(
+                      crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
                         const Text(
                           "Position Title:",
@@ -82,7 +88,7 @@ class CommonTeamProfileTile extends StatelessWidget {
                     ),
                     Padding(
                       padding: EdgeInsets.only(right: 25.w),
-                      child: cmTextField(
+                      child: cmTextFormField(
                           controller: vmTeam.textEditTeamNameController,
                           showDecoration: true),
                     )

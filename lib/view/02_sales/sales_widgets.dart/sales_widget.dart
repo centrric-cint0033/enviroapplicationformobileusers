@@ -14,13 +14,14 @@ Card customCard({required Widget child}) => Card(
     color: Colors.white,
     child: child);
 
-Text showText(String value) =>
-    Text(value, style: const TextStyle(color: Appthemes.cPrimary));
+Text showText(String value, {FontWeight? fontWeight}) => Text(value,
+    style: TextStyle(color: Appthemes.cPrimary, fontWeight: fontWeight));
 
 Expanded expandedShowText(String value) =>
     Expanded(flex: 3, child: showText(value));
 
 Row expandedRowShowText(String firsValue, String secondValue) => Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         expandedShowText(firsValue),
         sized0wx05,

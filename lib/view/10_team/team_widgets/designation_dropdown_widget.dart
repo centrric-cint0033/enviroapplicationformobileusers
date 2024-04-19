@@ -4,12 +4,12 @@ import 'package:enviro_mobile_application/view_model/08_team/team_view_model.dar
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
+// ignore: must_be_immutable
 class DesignationDownWidget extends StatelessWidget {
   final TeamProfileEmployeeDetailsResModel? employeeDetatils;
-  const DesignationDownWidget({
-    super.key,
-    this.employeeDetatils,
-  });
+  bool? fromAddTeam;
+  DesignationDownWidget(
+      {super.key, this.employeeDetatils, this.fromAddTeam = false});
 
   @override
   Widget build(BuildContext context) {
@@ -22,6 +22,11 @@ class DesignationDownWidget extends StatelessWidget {
             (designation) => designation.userType == employeeDetatils?.userType,
             orElse: () => Designation(userType: ""),
           );
+          vmTeam.selectedDesignationAddTeam = designations.firstWhere(
+            (designation) => designation.userType == "accounts-manager",
+            orElse: () => Designation(userType: ""),
+          );
+
           return DropdownButtonFormField<Designation>(
             icon: const Icon(Icons.keyboard_arrow_down_outlined),
             items: designations.map(
@@ -35,8 +40,19 @@ class DesignationDownWidget extends StatelessWidget {
               },
             ).toList(),
             isExpanded: true,
-            value: vmTeam.selectedDesignation,
-            onChanged: (newValue) {},
+            value: fromAddTeam == true
+                ? vmTeam.selectedDesignationAddTeam
+                : vmTeam.selectedDesignation,
+            onChanged: (newValue) {
+              vmTeam.selectedDesignationAddTeam = newValue;
+              vmTeam.cmFunction(vmTeam.selectedDesignationAddTeam?.userType);
+              if (newValue?.userType == "driver-factory-hand" ||
+                  newValue?.userType == "driver-liquid-waste-technician") {
+                vmTeam.showRequredTextLicense = true;
+              } else {
+                vmTeam.showRequredTextLicense = false;
+              }
+            },
             // value: selectedTax,
             decoration: const InputDecoration.collapsed(hintText: ''),
           );

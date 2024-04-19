@@ -9,6 +9,7 @@ import 'package:enviro_mobile_application/view/10_team/team_widgets/cm_button.da
 import 'package:enviro_mobile_application/view/10_team/team_widgets/dp_image_widget.dart';
 import 'package:enviro_mobile_application/view/10_team/team_widgets/folder_list_card_widget.dart';
 import 'package:enviro_mobile_application/view_model/08_team/team_view_model.dart';
+import 'package:enviro_mobile_application/widgets/cm_show_delete_dialoque.dart';
 import 'package:enviro_mobile_application/widgets/cm_show_folder_dialoque.dart';
 import 'package:enviro_mobile_application/widgets/cm_title.dart';
 import 'package:enviro_mobile_application/widgets/cmn_title_textwidget.dart';
@@ -40,7 +41,7 @@ class TeamProfileScreen extends StatelessWidget {
                 ? Center(child: wwCustomLoader())
                 : SingleChildScrollView(
                     child: Column(children: [
-                      gapField,
+                      sized0hx10,
                       Container(
                         height: 82.h,
                         decoration: BoxDecoration(
@@ -54,7 +55,17 @@ class TeamProfileScreen extends StatelessWidget {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceEvenly,
                                   children: [
-                                    dpImage(employeeDetails?.dp ?? ""),
+                                    SizedBox(
+                                      height: 60.w,
+                                      width: 60.w,
+                                      child: DecoratedBox(
+                                        decoration: BoxDecoration(
+                                            color: Colors.grey.shade700,
+                                            shape: BoxShape.circle),
+                                        child:
+                                            dpImage(employeeDetails?.dp ?? ""),
+                                      ),
+                                    ),
                                     Column(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
@@ -69,47 +80,58 @@ class TeamProfileScreen extends StatelessWidget {
                                           children: [
                                             SizedBox(
                                               height: 26.h,
-                                              child: customButton(() {},
-                                                  Appthemes.cPrimary, "Delete"),
+                                              width: 55.h,
+                                              child: customButton(() {
+                                                showDeleteDialoq(context,
+                                                    () async {
+                                                  await vmTeam
+                                                      .deleteEmployeeApi(
+                                                          context: context,
+                                                          employeeID:
+                                                              employeeDetails
+                                                                      ?.id ??
+                                                                  0);
+                                                  context.router.pop();
+                                                });
+                                              }, Appthemes.cPrimary, "Delete"),
                                             ),
                                             const SizedBox(
                                               width: 16,
                                             ),
-                                            Observer(
-                                              builder: (context) => SizedBox(
-                                                height: 26.h,
-                                                child: customButton(() {
-                                                  vmTeam
-                                                      .getTeamDesignationsApi();
-                                                  addingDataToControllerEdit(
-                                                      employeeDetails);
-                                                  try {
-                                                    vmTeam.selectedJoiningDate =
-                                                        DateTime.parse(
-                                                            employeeDetails
-                                                                    ?.dateJoined ??
-                                                                "");
-                                                  } catch (e) {}
-                                                  try {
-                                                    vmTeam.selectedTerminationDate =
-                                                        DateTime.parse(
-                                                            employeeDetails
-                                                                    ?.terminationDate ??
-                                                                "");
-                                                  } catch (e) {}
-                                                  try {
-                                                    vmTeam.selectedDob = DateTime
-                                                        .parse(employeeDetails
-                                                                ?.dateOfBirth ??
-                                                            "");
-                                                  } catch (e) {}
-                                                  context.router.push(
-                                                      TeamEditRoute(
-                                                          employeeDetatils:
-                                                              employeeDetails!));
-                                                }, Appthemes.cPrimary, "Edit"),
-                                              ),
-                                            )
+                                            SizedBox(
+                                              height: 26.h,
+                                              width: 55.h,
+                                              child: customButton(() {
+                                                vmTeam.getTeamDesignationsApi();
+                                                addingDataToControllerEdit(
+                                                    employeeDetails);
+                                                try {
+                                                  vmTeam.selectedJoiningDate =
+                                                      DateTime.parse(
+                                                          employeeDetails
+                                                                  ?.dateJoined ??
+                                                              "");
+                                                } catch (e) {}
+                                                try {
+                                                  vmTeam.selectedTerminationDate =
+                                                      DateTime.parse(employeeDetails
+                                                              ?.terminationDate ??
+                                                          "");
+                                                } catch (e) {}
+                                                try {
+                                                  vmTeam.selectedDob = DateTime
+                                                      .parse(employeeDetails
+                                                              ?.dateOfBirth ??
+                                                          "");
+                                                } catch (e) {}
+                                                vmTeam.selectedDesignationAddTeam2 =
+                                                    employeeDetails?.userType;
+                                                context.router.push(
+                                                    TeamEditRoute(
+                                                        employeeDetatils:
+                                                            employeeDetails!));
+                                              }, Appthemes.cPrimary, "Edit"),
+                                            ),
                                           ],
                                         )
                                       ],
@@ -119,11 +141,11 @@ class TeamProfileScreen extends StatelessWidget {
                           ],
                         ),
                       ),
-                      gapField,
+                      sized0hx10,
                       listData(employeeDetails),
-                      gapField,
-                      cmTitle('Employees Folder'),
-                      gapField,
+                      sized0hx10,
+                      cmTitle('Employees Folder', fontWeight: FontWeight.bold),
+                      sized0hx10,
                       Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -196,29 +218,28 @@ class TeamProfileScreen extends StatelessWidget {
   Widget listData(TeamProfileEmployeeDetailsResModel? data) {
     return buildCardDataOrder(
       [
-        expandedRowShowText('Address', ': ${data?.address ?? ""}'),
-        gapField,
-        expandedRowShowText('Date of Birth', ': ${data?.dateOfBirth ?? ""}'),
-        gapField,
-        expandedRowShowText('Joining Date', ': ${data?.dateJoined ?? ""}'),
-        gapField,
-        expandedRowShowText('Email Address', ': ${data?.personalEmail ?? ""}'),
-        gapField,
-        expandedRowShowText('Contact Number', ': ${data?.contactNumber ?? ""}'),
-        gapField,
+        expandedRowShowText('Address', data?.address ?? ""),
+        sized0hx05,
+        expandedRowShowText('Date of Birth', data?.dateOfBirth ?? ""),
+        sized0hx05,
+        expandedRowShowText('Joining Date', data?.dateJoined ?? ""),
+        sized0hx05,
+        expandedRowShowText('Email Address', data?.personalEmail ?? ""),
+        sized0hx05,
+        expandedRowShowText('Contact Number', data?.contactNumber ?? ""),
+        sized0hx05,
         expandedRowShowText(
-            'Termination Date', ': ${data?.terminationDate ?? ""}'),
-        gapField,
+            'Termination Date', '${data?.terminationDate ?? ""}'),
+        sized0hx05,
+        expandedRowShowText('Employment Status', data?.employementStatus ?? ""),
+        sized0hx05,
+        expandedRowShowText('Work Email Address', data?.email ?? ""),
+        sized0hx05,
         expandedRowShowText(
-            'Employment Status', ': ${data?.employementStatus ?? ""}'),
-        gapField,
-        expandedRowShowText('Work Email Address', ': ${data?.email ?? ""}'),
-        gapField,
+            'Emergency Contact', data?.emergencyContactName ?? ""),
+        sized0hx05,
         expandedRowShowText(
-            'Emergency Contact', ': ${data?.emergencyContactName ?? ""}'),
-        gapField,
-        expandedRowShowText(
-            'Emergency Contact No', ': ${data?.emergencyContact ?? ""}'),
+            'Emergency Contact No', data?.emergencyContact ?? ""),
       ],
     );
   }

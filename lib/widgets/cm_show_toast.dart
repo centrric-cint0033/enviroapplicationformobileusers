@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 
-void showToast({required String msg, Color? color}) {
-  showToast(msg: msg, color: color);
+void showToast(BuildContext context, {required String msg, Color? color}) {
+  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+    duration: Duration(milliseconds: 250),
+    content: Text(msg),
+    backgroundColor: color,
+  ));
 }

@@ -130,18 +130,21 @@ class ApiEndPoints {
   static const endpointprofileedit = '/api/v1/team/employee/edit';
 
   // TEAM APIS
-  static const endpointcurrentemployeelist =
+  static const currentEmployeelist =
       '/api/v1/team/status/current/?limit=10&page=1';
-  static const endpointterminatedemployeelist =
+  static const terminatedEmployeelist =
       '/api/v1/team/status/terminated/?limit=10&page=1';
-  static const endpointteamprofileemployeedetailList = '/api/v1/team/employee';
-  static const endpointgetteamfolder = '/api/v1/drive/team/folder';
-  static const endpointaddteamfolder = '/api/v1/drive/create/team/folder/';
-  static const endpointteamfolderdelete = '/api/v1/drive/folder/delete';
-  static const endpointteamfolderedit = '/api/v1/drive/folder/rename';
-  static const endpointteamdesignations = '/api/v1/team/designations/';
+  static const searchEmployeeList = '/api/v1/team/searchEmployee/';
+  static const teamprofileEmployeeDetailList = '/api/v1/team/employee';
+  static const teamFolder = '/api/v1/drive/team/folder';
+  static const addTeamFolder = '/api/v1/drive/create/team/folder/';
+  static const teamFolderDelete = '/api/v1/drive/folder/delete';
+  static const teamFolderEdit = '/api/v1/drive/folder/rename';
+  static const teamDesignations = '/api/v1/team/designations/';
+  static const deleteEmployee = '/api/v1/team/employee/delete';
+  static const createEmployee = '/api/v1/team/create/';
+  static const editEmployee = '/api/v1/team/employee/edit';
 
-  // SITES APIS
-
+  // SITE APIS
   static const endpointWasteTypeInSite = '/api/v1/clients/childs/available/';
 }

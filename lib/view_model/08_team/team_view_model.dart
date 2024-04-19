@@ -1,5 +1,8 @@
+import 'dart:async';
+import 'dart:developer';
 import 'package:auto_route/auto_route.dart';
 import 'package:enviro_mobile_application/api_response/api_response.dart';
+import 'package:enviro_mobile_application/model/10_team/create_team_req_model/create_team_req_model.dart';
 import 'package:enviro_mobile_application/model/10_team/team_designtion_res_model/designation.dart';
 import 'package:enviro_mobile_application/model/10_team/team_designtion_res_model/team_designtion_res_model.dart';
 import 'package:enviro_mobile_application/model/10_team/team_folder_req_model/team_create_folder_req_model.dart';
@@ -10,11 +13,13 @@ import 'package:enviro_mobile_application/service/10_team/team_service.dart';
 import 'package:enviro_mobile_application/utilis/api_endpoints/customprint.dart';
 import 'package:enviro_mobile_application/utilis/image_picker_service/image_file_picker.dart';
 import 'package:enviro_mobile_application/utilis/injection.dart';
+import 'package:enviro_mobile_application/widgets/cm_show_toast.dart';
+import 'package:enviro_mobile_application/widgets/ww_popup_error.dart';
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 import 'package:mobx/mobx.dart';
-
 import '../../model/10_team/team_folder_resp_model/folder.dart';
+
 part 'team_view_model.g.dart';
 
 final vmTeam = getIt<TeamViewModel>();
@@ -27,6 +32,7 @@ class TeamViewModel extends TeamViewModelBase with _$TeamViewModel {
 
 abstract class TeamViewModelBase with Store {
   final IteamService teamService;
+
   TeamViewModelBase(this.teamService);
 
   @observable
@@ -52,30 +58,56 @@ abstract class TeamViewModelBase with Store {
   ApiResponse<TeamDesigntionResModel> designationsResponse =
       ApiResponse<TeamDesigntionResModel>();
   @observable
+  ApiResponse<String> deleteEmployeeResponse = ApiResponse<String>();
+  @observable
+  ApiResponse createTeamResponse = ApiResponse<CreateTeamReqModel>();
+  @observable
+  ApiResponse editTeamResponse = ApiResponse<CreateTeamReqModel>();
+  @observable
   ImageFilePickerModel? profileImage;
   @observable
   bool profileImageLoader = false;
   @observable
   bool showDecoration = false;
   @observable
-  DateTime selectedJoiningDate = DateTime.now();
+  bool showRequredTextLicense = false;
   @observable
-  DateTime selectedTerminationDate = DateTime.now();
+  DateTime? selectedJoiningDate;
   @observable
-  DateTime selectedDob = DateTime.now();
-
+  DateTime? selectedTerminationDate;
+  @observable
+  DateTime? selectedDob;
+  @observable
+  DateTime? selectedDobAddTeam;
+  @observable
+  DateTime? selectedJoiningDateAddTeam;
+  @observable
+  DateTime? selectedLicenceExpiryDate;
+  @observable
+  DateTime? selectedLicenceAlertDate;
   @observable
   List<String> employmentStatusList = ["full_time", "part_time", "casual"];
   @observable
   Designation? selectedDesignation;
   @observable
+  Designation? selectedDesignationAddTeam;
+  @observable
+  String? selectedDesignationAddTeam2 = "accounts-manager";
+  @observable
   String selectedEmploymentStatus = "";
-
+  @observable
+  String selectedAddEmploymentStatus = "full_time";
+  @observable
+  bool showDate = false;
+  @observable
+  String? selectedFileNameLicense;
+  @observable
+  String? selectedFilePathLicense;
   TextEditingController textFolderAddController = TextEditingController();
   TextEditingController textFolderEditController = TextEditingController();
   TextEditingController textEditTeamNameController = TextEditingController();
   TextEditingController textEditTeamAddressController = TextEditingController();
- TextEditingController textAddeamNameController = TextEditingController();
+
   TextEditingController textEditTeamEmailController = TextEditingController();
   TextEditingController textEditTeamContactNumberController =
       TextEditingController();
@@ -85,6 +117,31 @@ abstract class TeamViewModelBase with Store {
       TextEditingController();
   TextEditingController textEditTeamEmergencyContactNumberController =
       TextEditingController();
+  TextEditingController textAddteamNameController = TextEditingController();
+  TextEditingController textAddTeamEmpIdController = TextEditingController();
+  TextEditingController textAddTeamAddressController = TextEditingController();
+  TextEditingController textAddTeamDobController = TextEditingController();
+  TextEditingController textAddJoiningDateController = TextEditingController();
+  TextEditingController textAddTeamContactNumberController =
+      TextEditingController();
+  TextEditingController textAddTeamEmailController = TextEditingController();
+  TextEditingController textAddTeamEmergencyContactController =
+      TextEditingController();
+  TextEditingController textAddTeamEmergencyContactNumberController =
+      TextEditingController();
+  TextEditingController textAddTeamPasswordController = TextEditingController();
+  TextEditingController currentEmployeeSearchCntrlr = TextEditingController();
+  TextEditingController terminatedEmployeeSearchCntrlr =
+      TextEditingController();
+
+  Timer? debouce;
+  void onTextChanged(Function() function) {
+    // Clear the previous debounce timer
+    if (debouce?.isActive ?? false) debouce?.cancel();
+
+    // Set up a new debounce timer
+    debouce = Timer(const Duration(milliseconds: 500), () => function());
+  }
 
   @action
   Future<void> getCurrentEmployee() async {
@@ -163,6 +220,58 @@ abstract class TeamViewModelBase with Store {
   }
 
   @action
+  Future<void> currentEmployeeSearchApi(String searchData) async {
+    try {
+      currentEmployeeResponse =
+          currentEmployeeResponse.copyWith(errors: null, loading: true);
+
+      final result =
+          await teamService.employeeSearchApi(data: {"key": searchData});
+      return result.fold(
+        (l) {
+          currentEmployeeResponse =
+              currentEmployeeResponse.copyWith(errors: l, loading: false);
+        },
+        (r) {
+          currentEmployeeResponse = currentEmployeeResponse.copyWith(
+              data: r, errors: null, loading: false);
+        },
+      );
+    } catch (e) {
+      customPrint(content: e, name: 'Error currentEmployeeSearchApi');
+    } finally {
+      currentEmployeeResponse =
+          currentEmployeeResponse.copyWith(loading: false);
+    }
+  }
+
+  @action
+  Future<void> terminatedEmployeeSearchApi(String searchData) async {
+    try {
+      terminatedEmployeeResponse =
+          terminatedEmployeeResponse.copyWith(errors: null, loading: true);
+
+      final result =
+          await teamService.employeeSearchApi(data: {"key": searchData});
+      return result.fold(
+        (l) {
+          terminatedEmployeeResponse =
+              terminatedEmployeeResponse.copyWith(errors: l, loading: false);
+        },
+        (r) {
+          terminatedEmployeeResponse = terminatedEmployeeResponse.copyWith(
+              data: r, errors: null, loading: false);
+        },
+      );
+    } catch (e) {
+      customPrint(content: e, name: 'Error terminatedEmployeeSearchApi');
+    } finally {
+      terminatedEmployeeResponse =
+          terminatedEmployeeResponse.copyWith(loading: false);
+    }
+  }
+
+  @action
   Future<void> getTeamFolders({
     required num id,
   }) async {
@@ -173,7 +282,7 @@ abstract class TeamViewModelBase with Store {
     return result.fold(
       (l) {
         teamFoldersResponse = teamFoldersResponse.copyWith(
-          error: l,
+          errors: l,
           loading: false,
         );
       },
@@ -203,7 +312,7 @@ abstract class TeamViewModelBase with Store {
     return result.fold(
       (l) {
         addFolderResponse =
-            addFolderResponse.copyWith(error: l, loading: false);
+            addFolderResponse.copyWith(errors: l, loading: false);
       },
       (r) {
         addFolderResponse =
@@ -227,7 +336,7 @@ abstract class TeamViewModelBase with Store {
     return result.fold(
       (l) {
         deleteFolderResponse = deleteFolderResponse.copyWith(
-          error: l,
+          errors: l,
           loading: false,
         );
       },
@@ -258,7 +367,7 @@ abstract class TeamViewModelBase with Store {
     return result.fold(
       (l) {
         editFolderResponse = editFolderResponse.copyWith(
-          error: l,
+          errors: l,
           loading: false,
         );
       },
@@ -269,6 +378,33 @@ abstract class TeamViewModelBase with Store {
           loading: false,
         );
         getTeamFolders(id: employeeID);
+        context.router.pop();
+      },
+    );
+  }
+
+  @action
+  Future<void> deleteEmployeeApi(
+      {required BuildContext context, required num employeeID}) async {
+    deleteEmployeeResponse =
+        deleteEmployeeResponse.copyWith(error: null, loading: true);
+
+    final result = await teamService.deleteEmployeeApi(id: employeeID);
+    return result.fold(
+      (l) {
+        deleteEmployeeResponse = deleteEmployeeResponse.copyWith(
+          errors: l,
+          loading: false,
+        );
+      },
+      (r) {
+        deleteEmployeeResponse = deleteEmployeeResponse.copyWith(
+          data: r,
+          error: null,
+          loading: false,
+        );
+        getCurrentEmployee();
+        getTerminatedEmployee();
         context.router.pop();
       },
     );
@@ -310,6 +446,55 @@ abstract class TeamViewModelBase with Store {
   }
 
   @action
+  Future<void> createTeamApi(
+      {required CreateTeamReqModel data, required BuildContext context}) async {
+    createTeamResponse =
+        createTeamResponse.copyWith(error: null, loading: true);
+    final result = await teamService.createTeamApi(data: data.toJson());
+    return result.fold(
+      (l) {
+        createTeamResponse =
+            createTeamResponse.copyWith(errors: l, loading: false);
+
+        popupErrorData(context, mainFailure: l);
+      },
+      (r) {
+        createTeamResponse =
+            createTeamResponse.copyWith(data: r, error: null, loading: false);
+        getCurrentEmployee();
+        textControllersClearFn();
+        showToast(context, msg: "Successfully Created Employee");
+      },
+    );
+  }
+
+  @action
+  Future<void> editTeamApi(
+      {required CreateTeamReqModel data, required BuildContext context}) async {
+    editTeamResponse = editTeamResponse.copyWith(error: null, loading: true);
+
+    final result = await teamService.editTeamApi(
+        data: data.toJson(), employeeId: data.id!);
+
+    return result.fold(
+      (l) {
+        editTeamResponse = editTeamResponse.copyWith(errors: l, loading: false);
+
+        popupErrorData(context, mainFailure: l);
+      },
+      (r) {
+        log("result.toString()");
+        editTeamResponse =
+            editTeamResponse.copyWith(data: r, error: null, loading: false);
+        getCurrentEmployee();
+        textControllersClearFn();
+        context.router.pop();
+        showToast(context, msg: "Successfully Edited Employee");
+      },
+    );
+  }
+
+  @action
   datePickerFn1(date) {
     selectedJoiningDate = date;
   }
@@ -322,5 +507,53 @@ abstract class TeamViewModelBase with Store {
   @action
   datePickerFn3(date) {
     selectedDob = date;
+  }
+
+  @action
+  datePickerFn4(date) {
+    selectedDobAddTeam = date;
+  }
+
+  @action
+  datePickerFn5(date) {
+    selectedJoiningDateAddTeam = date;
+  }
+
+  @action
+  datePickerFn6(date) {
+    selectedLicenceExpiryDate = date;
+  }
+
+  @action
+  datePickerFn7(date) {
+    selectedLicenceAlertDate = date;
+  }
+
+  @action
+  employmentStatusonChanged(newValue) {
+    selectedAddEmploymentStatus = newValue;
+  }
+
+  @action
+  cmFunction(value) {
+    selectedDesignationAddTeam2 = value;
+  }
+
+  textControllersClearFn() {
+    textAddTeamEmpIdController.clear();
+    textAddTeamAddressController.clear();
+    selectedDobAddTeam = null;
+    selectedJoiningDateAddTeam = null;
+    textAddTeamEmailController.clear();
+    textAddteamNameController.clear();
+    textAddTeamContactNumberController.clear();
+    selectedAddEmploymentStatus = "full_time";
+    selectedDesignationAddTeam = null;
+    textAddTeamEmergencyContactController.clear();
+    textAddTeamEmergencyContactNumberController.clear();
+    selectedFileNameLicense = "";
+    selectedLicenceExpiryDate = null;
+    selectedLicenceAlertDate = null;
+    textAddTeamPasswordController.clear();
   }
 }
