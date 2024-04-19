@@ -32,7 +32,7 @@ class VehiclePage extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 15.w),
           child: Column(
             children: [
-              commonTabbar(
+              const WWcommonTabBar(
                   value1: 'Master truck',
                   value2: 'Master Car',
                   value3: 'Semi Trailers'),

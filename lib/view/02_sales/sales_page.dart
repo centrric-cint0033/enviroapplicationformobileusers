@@ -27,7 +27,7 @@ class SalesPage extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: 15.w),
             child: Column(
               children: [
-                commonTabbar(
+                const WWcommonTabBar(
                     value1: 'Job List',
                     value2: 'Quote Reg',
                     value3: 'Sales List'),
