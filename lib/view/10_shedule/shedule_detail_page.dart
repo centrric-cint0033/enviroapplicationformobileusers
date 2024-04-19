@@ -7,6 +7,7 @@ import 'package:enviro_mobile_application/widgets/cmn_action_icon.dart';
 import 'package:enviro_mobile_application/widgets/cmn_title_textwidget.dart';
 import 'package:enviro_mobile_application/widgets/drawer.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 
 @RoutePage()
 class SheduledetailPage extends StatelessWidget {
@@ -22,48 +23,54 @@ class SheduledetailPage extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: ListView.separated(
-          itemBuilder: (context, index) {
-            if (index == 0) {
-              return Align(
-                alignment: Alignment.topRight,
-                child: ElevatedButton(
+        child: Observer(builder: (context) {
+          return ListView.separated(
+            itemBuilder: (context, index) {
+              if (index == 0) {
+                return Align(
+                  alignment: Alignment.topRight,
+                  child: Observer(builder: (_) {
+                    return CmButton(
+                      borderRadius: 34,
+                      width: 110,
+                      loading: vmJobcard.jobcardResponse.loading,
+                      color: Colors.white,
+                      text: 'job card',
+                      buttonTextStyle: const TextStyle(color: Colors.black),
+                      onPressed: () {
+                        jobCardFunction(context);
+                      },
+                      loadingColor: Colors.blue,
+                    );
+                  }),
+                );
+              } else if (index == 1) {
+                return const SizedBox(height: 5);
+              } else if (index == 2) {
+                return const Text(
+                  'Schedule Details',
+                  style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.blue),
+                );
+              } else if (index >= 3 && index <= 10) {
+                return buildCardDataOrder(index);
+              } else {
+                return CmButton(
+                  color: Colors.green,
+                  buttonTextStyle: const TextStyle(color: Colors.white),
                   onPressed: () {
-                    jobCardFunction(context);
+                    updatevehiclepreinspection(context);
                   },
-                  child: const Text('Job Card'),
-                  style: ElevatedButton.styleFrom(
-                    primary: Colors.white,
-                    onPrimary: Colors.black,
-                  ),
-                ),
-              );
-            } else if (index == 1) {
-              return const SizedBox(height: 5);
-            } else if (index == 2) {
-              return const Text(
-                'Schedule Details',
-                style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.blue),
-              );
-            } else if (index >= 3 && index <= 10) {
-              return buildCardDataOrder(index);
-            } else {
-              return CmButton(
-                color: Colors.green,
-                buttonTextStyle: const TextStyle(color: Colors.white),
-                onPressed: () {
-                  updatevehiclepreinspection(context);
-                },
-                text: "Update vehicle preinspection",
-              );
-            }
-          },
-          separatorBuilder: (context, index) => const SizedBox(height: 20),
-          itemCount: 12,
-        ),
+                  text: "Update vehicle preinspection",
+                );
+              }
+            },
+            separatorBuilder: (context, index) => const SizedBox(height: 20),
+            itemCount: 12,
+          );
+        }),
       ),
     );
   }
@@ -99,8 +106,8 @@ void updatevehiclepreinspection(BuildContext context) {
   context.router.pushNamed(RouteNames.rupdatevehiclepreinspectionpage);
 }
 
-void jobCardFunction(BuildContext context) {
-  vmJobcard.jobcardviewmodelfunction();
+void jobCardFunction(BuildContext context) async {
+  await vmJobcard.jobcardviewmodelfunction(); // Add await here
   print('jobclicked');
   context.router.pushNamed(RouteNames.rjobcardpage);
 }

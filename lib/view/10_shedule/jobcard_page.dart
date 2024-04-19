@@ -26,7 +26,7 @@ class JobCardPage extends StatelessWidget {
             const SizedBox(height: 20),
             _buildSectionHeader('Site Details'),
             const SizedBox(
-              height: 20,
+              height: 30,
             ),
             Observer(builder: (_) {
               return Padding(
@@ -36,7 +36,7 @@ class JobCardPage extends StatelessWidget {
               );
             }),
             const SizedBox(
-              height: 20,
+              height: 30,
             ),
             Observer(builder: (_) {
               return Padding(
@@ -46,7 +46,7 @@ class JobCardPage extends StatelessWidget {
               );
             }),
             const SizedBox(
-              height: 20,
+              height: 30,
             ),
             Observer(builder: (_) {
               return Padding(
@@ -56,7 +56,7 @@ class JobCardPage extends StatelessWidget {
               );
             }),
             const SizedBox(
-              height: 20,
+              height: 30,
             ),
             Observer(builder: (_) {
               return Padding(
@@ -66,7 +66,7 @@ class JobCardPage extends StatelessWidget {
               );
             }),
             const SizedBox(
-              height: 20,
+              height: 30,
             ),
             Observer(builder: (_) {
               return Padding(
@@ -76,7 +76,7 @@ class JobCardPage extends StatelessWidget {
               );
             }),
             const SizedBox(
-              height: 20,
+              height: 30,
             ),
             Observer(builder: (_) {
               return Padding(
@@ -86,7 +86,7 @@ class JobCardPage extends StatelessWidget {
               );
             }),
             const SizedBox(
-              height: 20,
+              height: 30,
             ),
             Observer(builder: (_) {
               return Padding(
@@ -96,7 +96,7 @@ class JobCardPage extends StatelessWidget {
               );
             }),
             const SizedBox(
-              height: 20,
+              height: 30,
             ),
             Observer(builder: (_) {
               return Padding(
@@ -106,7 +106,7 @@ class JobCardPage extends StatelessWidget {
               );
             }),
             const SizedBox(
-              height: 20,
+              height: 30,
             ),
             Observer(builder: (_) {
               return Padding(
@@ -116,7 +116,7 @@ class JobCardPage extends StatelessWidget {
               );
             }),
             const SizedBox(
-              height: 20,
+              height: 30,
             ),
             Observer(builder: (_) {
               return Padding(
@@ -126,7 +126,7 @@ class JobCardPage extends StatelessWidget {
               );
             }),
             const SizedBox(
-              height: 20,
+              height: 30,
             ),
             const SizedBox(height: 10),
             const Padding(
@@ -139,7 +139,7 @@ class JobCardPage extends StatelessWidget {
               ),
             ),
             const SizedBox(
-              height: 14,
+              height: 30,
             ),
             Observer(builder: (_) {
               return Padding(
@@ -149,7 +149,7 @@ class JobCardPage extends StatelessWidget {
               );
             }),
             const SizedBox(
-              height: 20,
+              height: 30,
             ),
             Observer(builder: (_) {
               return Padding(
@@ -159,7 +159,7 @@ class JobCardPage extends StatelessWidget {
               );
             }),
             const SizedBox(
-              height: 20,
+              height: 30,
             ),
             Observer(builder: (_) {
               return Padding(
@@ -167,16 +167,18 @@ class JobCardPage extends StatelessWidget {
                 child: expandedRowShowsText("Induction Type", ""),
               );
             }),
-            const SizedBox(height: 20),
+            const SizedBox(
+              height: 30,
+            ),
             Observer(builder: (_) {
               return _buildSectionHeader('Additional Information');
             }),
             const SizedBox(
-              height: 20,
+              height: 30,
             ),
             _buildInfoText("Access Restrictions"),
             const SizedBox(
-              height: 20,
+              height: 30,
             ),
             Observer(builder: (_) {
               return Padding(
@@ -186,11 +188,11 @@ class JobCardPage extends StatelessWidget {
               );
             }),
             const SizedBox(
-              height: 20,
+              height: 30,
             ),
             _buildInfoText("TC required | comments"),
             const SizedBox(
-              height: 20,
+              height: 30,
             ),
             Observer(builder: (_) {
               return Padding(
@@ -200,9 +202,15 @@ class JobCardPage extends StatelessWidget {
                         .toString()),
               );
             }),
-            _buildInfoText("Purchaseorder | comments"),
             const SizedBox(
-              height: 20,
+              height: 30,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 14.0, right: 14.0),
+              child: _buildInfoText("Purchaseorder | comments"),
+            ),
+            const SizedBox(
+              height: 30,
             ),
             Observer(builder: (_) {
               return Padding(
@@ -212,11 +220,11 @@ class JobCardPage extends StatelessWidget {
               );
             }),
             const SizedBox(
-              height: 20,
+              height: 30,
             ),
             _buildInfoText("Manifest | comments"),
             const SizedBox(
-              height: 20,
+              height: 30,
             ),
             Observer(builder: (_) {
               return Padding(
@@ -226,7 +234,7 @@ class JobCardPage extends StatelessWidget {
               );
             }),
             const SizedBox(
-              height: 20,
+              height: 30,
             ),
             Observer(builder: (_) {
               return Padding(
@@ -235,7 +243,7 @@ class JobCardPage extends StatelessWidget {
               );
             }),
             const SizedBox(
-              height: 20,
+              height: 30,
             ),
             Padding(
               padding: const EdgeInsets.only(left: 14.0, right: 14.0),
@@ -243,7 +251,7 @@ class JobCardPage extends StatelessWidget {
                   vmJobcard.jobcardResponse.data?.additionalImages ?? ''),
             ),
             const SizedBox(
-              height: 20,
+              height: 30,
             ),
             Observer(builder: (_) {
               return Padding(
@@ -255,7 +263,7 @@ class JobCardPage extends StatelessWidget {
                           ''));
             }),
             const SizedBox(
-              height: 20,
+              height: 30,
             ),
             Observer(builder: (_) {
               return Padding(
@@ -264,7 +272,7 @@ class JobCardPage extends StatelessWidget {
                       vmJobcard.jobcardResponse.data?.accessHeight ?? ''));
             }),
             const SizedBox(
-              height: 20,
+              height: 30,
             ),
             Observer(builder: (_) {
               return Padding(
@@ -275,7 +283,7 @@ class JobCardPage extends StatelessWidget {
                           ''));
             }),
             const SizedBox(
-              height: 20,
+              height: 30,
             ),
             Observer(builder: (_) {
               return Padding(
@@ -288,7 +296,7 @@ class JobCardPage extends StatelessWidget {
               );
             }),
             const SizedBox(
-              height: 20,
+              height: 30,
             ),
             Observer(builder: (_) {
               return Padding(
@@ -301,7 +309,7 @@ class JobCardPage extends StatelessWidget {
               );
             }),
             const SizedBox(
-              height: 20,
+              height: 30,
             ),
             Observer(builder: (_) {
               return Padding(
@@ -314,7 +322,7 @@ class JobCardPage extends StatelessWidget {
               );
             }),
             const SizedBox(
-              height: 20,
+              height: 30,
             ),
             Observer(builder: (_) {
               return Padding(
@@ -326,7 +334,7 @@ class JobCardPage extends StatelessWidget {
               );
             }),
             const SizedBox(
-              height: 20,
+              height: 30,
             ),
             Observer(builder: (_) {
               return Padding(
@@ -339,7 +347,7 @@ class JobCardPage extends StatelessWidget {
               );
             }),
             const SizedBox(
-              height: 20,
+              height: 30,
             ),
             Observer(builder: (_) {
               return Padding(
@@ -352,7 +360,7 @@ class JobCardPage extends StatelessWidget {
               );
             }),
             const SizedBox(
-              height: 20,
+              height: 30,
             ),
             Observer(builder: (_) {
               return Padding(
@@ -365,7 +373,7 @@ class JobCardPage extends StatelessWidget {
               );
             }),
             const SizedBox(
-              height: 20,
+              height: 30,
             ),
             Observer(builder: (_) {
               return Padding(
@@ -378,7 +386,7 @@ class JobCardPage extends StatelessWidget {
               );
             }),
             const SizedBox(
-              height: 20,
+              height: 30,
             ),
             Observer(builder: (_) {
               return Padding(
@@ -391,7 +399,7 @@ class JobCardPage extends StatelessWidget {
               );
             }),
             const SizedBox(
-              height: 20,
+              height: 30,
             ),
             Observer(builder: (_) {
               return Padding(
@@ -404,7 +412,7 @@ class JobCardPage extends StatelessWidget {
               );
             }),
             const SizedBox(
-              height: 20,
+              height: 30,
             ),
             Observer(builder: (_) {
               return Padding(
@@ -417,7 +425,7 @@ class JobCardPage extends StatelessWidget {
               );
             }),
             const SizedBox(
-              height: 20,
+              height: 30,
             ),
             Observer(builder: (_) {
               return Padding(
@@ -430,17 +438,14 @@ class JobCardPage extends StatelessWidget {
               );
             }),
             const SizedBox(
-              height: 20,
+              height: 30,
             ),
             Padding(
               padding: const EdgeInsets.only(left: 17.0),
               child: expandedRowShowsText("Additional information", ""),
             ),
             const SizedBox(
-              height: 20,
-            ),
-            const SizedBox(
-              height: 20,
+              height: 30,
             ),
             Observer(builder: (_) {
               return Padding(
@@ -452,10 +457,7 @@ class JobCardPage extends StatelessWidget {
               );
             }),
             const SizedBox(
-              height: 20,
-            ),
-            const SizedBox(
-              height: 20,
+              height: 30,
             ),
             Observer(builder: (_) {
               return Padding(
@@ -465,7 +467,7 @@ class JobCardPage extends StatelessWidget {
               );
             }),
             const SizedBox(
-              height: 20,
+              height: 30,
             ),
             Observer(builder: (_) {
               return Padding(
@@ -475,7 +477,7 @@ class JobCardPage extends StatelessWidget {
               );
             }),
             const SizedBox(
-              height: 20,
+              height: 30,
             ),
             Padding(
               padding: const EdgeInsets.only(left: 17.0),
@@ -483,7 +485,7 @@ class JobCardPage extends StatelessWidget {
                   vmJobcard.jobcardResponse.data?.jobStatus?.toString() ?? ''),
             ),
             const SizedBox(
-              height: 20,
+              height: 30,
             ),
             Padding(
               padding: const EdgeInsets.only(left: 17.0),
@@ -493,7 +495,7 @@ class JobCardPage extends StatelessWidget {
                       ''),
             ),
             const SizedBox(
-              height: 20,
+              height: 30,
             ),
             Observer(builder: (_) {
               return Padding(
@@ -504,7 +506,7 @@ class JobCardPage extends StatelessWidget {
               );
             }),
             const SizedBox(
-              height: 20,
+              height: 30,
             ),
             Observer(builder: (_) {
               return Padding(
@@ -516,7 +518,7 @@ class JobCardPage extends StatelessWidget {
               );
             }),
             const SizedBox(
-              height: 20,
+              height: 30,
             ),
           ],
         ),
