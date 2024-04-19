@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:enviro_mobile_application/Routepage/routespage.dart';
 import 'package:enviro_mobile_application/view/02_sales/sales_widgets.dart/sales_widget.dart';
+import 'package:enviro_mobile_application/view_model/11_job_card/job_card_view_model.dart';
 import 'package:enviro_mobile_application/widgets/cmbutton.dart';
 import 'package:enviro_mobile_application/widgets/cmn_action_icon.dart';
 import 'package:enviro_mobile_application/widgets/cmn_title_textwidget.dart';
@@ -99,6 +100,7 @@ void updatevehiclepreinspection(BuildContext context) {
 }
 
 void jobCardFunction(BuildContext context) {
+  vmJobcard.jobcardviewmodelfunction();
   print('jobclicked');
   context.router.pushNamed(RouteNames.rjobcardpage);
 }
