@@ -53,12 +53,12 @@ class SchedulePage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.only(left: 90.0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         const Text(
-                          'Recharge',
+                          'Recharfudge',
                           style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
