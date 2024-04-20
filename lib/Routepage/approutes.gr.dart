@@ -49,7 +49,7 @@ import 'package:enviro_mobile_application/view/09_prfle_creation_page/prfle_crti
     as _i11;
 import 'package:enviro_mobile_application/view/10_site/site_detail_screen.dart'
     as _i15;
-import 'package:enviro_mobile_application/view/10_site/site_list_screen.dart'
+import 'package:enviro_mobile_application/view/10_site/site_main_screen.dart'
     as _i16;
 import 'package:enviro_mobile_application/view/home_page.dart' as _i2;
 import 'package:enviro_mobile_application/view_model/10_site/site_view_model.dart'
@@ -182,10 +182,10 @@ abstract class $AppRouter extends _i21.RootStackRouter {
         ),
       );
     },
-    SiteListRoute.name: (routeData) {
+    SiteMainRoute.name: (routeData) {
       return _i21.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i16.SiteListScreen(),
+        child: const _i16.SiteMainScreen(),
       );
     },
     TeamEditRoute.name: (routeData) {
@@ -627,15 +627,15 @@ class SiteDetailRouteArgs {
 }
 
 /// generated route for
-/// [_i16.SiteListScreen]
-class SiteListRoute extends _i21.PageRouteInfo<void> {
-  const SiteListRoute({List<_i21.PageRouteInfo>? children})
+/// [_i16.SiteMainScreen]
+class SiteMainRoute extends _i21.PageRouteInfo<void> {
+  const SiteMainRoute({List<_i21.PageRouteInfo>? children})
       : super(
-          SiteListRoute.name,
+          SiteMainRoute.name,
           initialChildren: children,
         );
 
-  static const String name = 'SiteListRoute';
+  static const String name = 'SiteMainRoute';
 
   static const _i21.PageInfo<void> page = _i21.PageInfo<void>(name);
 }

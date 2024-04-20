@@ -1,3 +1,4 @@
+import 'package:enviro_mobile_application/utilis/api_endpoints/customprint.dart';
 import 'package:mobx/mobx.dart';
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
@@ -310,6 +311,9 @@ abstract class SiteViewModelBase with Store {
     required String key,
     SiteType type = SiteType.permananet,
   }) async {
+    customPrint(content: key);
+    customPrint(content: type);
+
     final response = await siteService.searchSites(key: key);
 
     response.fold(

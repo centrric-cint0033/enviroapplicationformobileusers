@@ -1,5 +1,4 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:enviro_mobile_application/utilis/api_endpoints/customprint.dart';
 import 'package:enviro_mobile_application/view/03_vehicles/vehicle_tab_screens/02_master_car_tab.dart';
 import 'package:enviro_mobile_application/view/03_vehicles/vehicle_tab_screens/01_master_truck_tab.dart';
 import 'package:enviro_mobile_application/view/03_vehicles/vehicle_tab_screens/03_semi_Trailor_tab.dart';
@@ -21,6 +20,21 @@ class VehiclePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    tabsApis(int i) {
+      vmVehicle.vehicleTabIndex = i;
+      switch (i) {
+        case 0:
+          vmVehicle.masterTruckApi();
+          break;
+        case 1:
+          vmVehicle.masterCarApi();
+          break;
+        case 2:
+          vmVehicle.semiTrailorApi();
+        default:
+      }
+    }
+
     return DefaultTabController(
       length: 3,
       child: Scaffold(
@@ -32,10 +46,12 @@ class VehiclePage extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 15.w),
           child: Column(
             children: [
-              const WWcommonTabBar(
-                  value1: 'Master truck',
-                  value2: 'Master Car',
-                  value3: 'Semi Trailers'),
+              WWcommonTabBar(
+                value1: 'Master truck',
+                value2: 'Master Car',
+                value3: 'Semi Trailers',
+                onTap: tabsApis,
+              ),
               gapFieldVeh,
               wwDropDown(context),
               gapFieldVeh,
