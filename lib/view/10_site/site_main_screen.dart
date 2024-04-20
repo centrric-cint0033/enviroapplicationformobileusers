@@ -3,7 +3,7 @@ import 'package:enviro_mobile_application/view/10_site/site_tab_screens/01_peman
 import 'package:enviro_mobile_application/view/10_site/site_tab_screens/02_temporary_sites_tab.dart';
 import 'package:enviro_mobile_application/view/10_site/site_tab_screens/03_deleted_sites_tab.dart';
 import 'package:enviro_mobile_application/view/10_site/utils/site_utils.dart';
-import 'package:enviro_mobile_application/view/10_site/widgets/site_widgets.dart';
+import 'package:enviro_mobile_application/view/10_site/widgets/01_site_widgets.dart';
 import 'package:enviro_mobile_application/widgets/common_tababr.dart';
 import 'package:enviro_mobile_application/widgets/ww_search_widget.dart';
 import 'package:flutter/material.dart';
