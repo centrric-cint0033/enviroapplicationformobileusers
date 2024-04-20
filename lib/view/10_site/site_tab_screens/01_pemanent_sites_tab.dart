@@ -1,11 +1,9 @@
-import 'package:auto_route/auto_route.dart';
-import 'package:enviro_mobile_application/Routepage/approutes.gr.dart';
 import 'package:enviro_mobile_application/model/10_site/site_res_model/site_res_model.dart';
 import 'package:enviro_mobile_application/utilis/constant.dart';
+import 'package:enviro_mobile_application/view/10_site/utils/site_utils.dart';
 import 'package:enviro_mobile_application/view/10_site/widgets/site_tile_widget.dart';
 import 'package:enviro_mobile_application/view_model/10_site/site_view_model.dart';
-import 'package:enviro_mobile_application/view_model/11_previous_sale/previous_sale_view_model.dart';
-import 'package:enviro_mobile_application/widgets/empty_data_widget.dart';
+import 'package:enviro_mobile_application/widgets/ww_response_handler.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -21,15 +19,14 @@ class PermanentSitesTab extends StatelessWidget {
         List<SiteResModel> sites =
             vmSite.permanentSiteResponse.data?.toList() ?? [];
         return RefreshIndicator(
-          onRefresh: () async {
-            return vmSite.getPermanentSites();
-          },
-          child: vmSite.permanentSiteResponse.loading
-              ? const Center(child: CupertinoActivityIndicator())
-              : sites.isEmpty
-                  ? const EmptyDataWidget()
-                  : PermanentSitesLIstWidget(sites: sites),
-        );
+            onRefresh: () async => vmSite.getPermanentSites(),
+            child: WWResponseHandler(
+                data: vmSite.permanentSiteResponse,
+                isEmpty: vmSite.permanentSiteResponse.data?.isEmpty ?? true,
+                onTap: () => vmSite.searchCtr.text.isNotEmpty
+                    ? onChanged(vmSite.searchCtr.text)
+                    : vmSite.permanentSitesPagination(),
+                child: PermanentSitesLIstWidget(sites: sites)));
       },
     );
   }
@@ -69,34 +66,6 @@ class PermanentSitesLIstWidget extends StatelessWidget {
                 address: sites[index].siteAddress ?? "",
               );
       },
-    );
-  }
-}
-
-void navigateToSiteDetailScreen({
-  int? siteId,
-  required int index,
-  SiteType? siteType,
-  required BuildContext context,
-}) {
-  if (siteId != null) {
-    vmSite
-      ..getDetails(
-        id: siteId,
-        context: context,
-        type: SiteType.permananet,
-      )
-      ..selectedWasteTypeModel = null
-      ..getWasteTypesInSite(id: siteId)
-      ..getSiteFolders(id: siteId);
-    vmPreviousSale.getPreviousSales(
-      siteId: siteId,
-    );
-    context.router.push(
-      SiteDetailRoute(
-        index: index,
-        type: siteType ?? SiteType.permananet,
-      ),
     );
   }
 }

@@ -17,7 +17,8 @@ import '../../model/02_sales/waste_type_model/waste_type_model.dart';
 @LazySingleton(as: ISiteService)
 class SiteService implements ISiteService {
   @override
-  Future<Either<MainFailure, List<SiteResModel>>> getPermanantSites({
+  Future<Either<Map<MainFailure, dynamic>, List<SiteResModel>>>
+      getPermanantSites({
     int? page,
   }) async {
     String url =
@@ -29,13 +30,9 @@ class SiteService implements ISiteService {
     );
 
     return response.fold(
-      (l) {
-        (l.values.first);
-        return Left(l.keys.first);
-      },
+      (l) => Left(l),
       (res) async {
         var data = jsonDecode(res.body) as List;
-
         List<SiteResModel> sites =
             data.map((e) => SiteResModel.fromJson(e)).toList();
         return Right(sites);
@@ -44,7 +41,8 @@ class SiteService implements ISiteService {
   }
 
   @override
-  Future<Either<MainFailure, List<SiteResModel>>> getDeletedSites({
+  Future<Either<Map<MainFailure, dynamic>, List<SiteResModel>>>
+      getDeletedSites({
     int? page,
   }) async {
     String url =
@@ -56,13 +54,9 @@ class SiteService implements ISiteService {
     );
 
     return response.fold(
-      (l) {
-        (l.values.first);
-        return Left(l.keys.first);
-      },
+      (l) => Left(l),
       (res) async {
         var data = jsonDecode(res.body) as List;
-
         List<SiteResModel> sites =
             data.map((e) => SiteResModel.fromJson(e)).toList();
         return Right(sites);
@@ -71,7 +65,8 @@ class SiteService implements ISiteService {
   }
 
   @override
-  Future<Either<MainFailure, List<SiteResModel>>> getTemporarySites({
+  Future<Either<Map<MainFailure, dynamic>, List<SiteResModel>>>
+      getTemporarySites({
     int? page,
   }) async {
     String url =
@@ -83,13 +78,9 @@ class SiteService implements ISiteService {
     );
 
     return response.fold(
-      (l) {
-        (l.values.first);
-        return Left(l.keys.first);
-      },
+      (l) => Left(l),
       (res) async {
         var data = jsonDecode(res.body) as List;
-
         List<SiteResModel> sites =
             data.map((e) => SiteResModel.fromJson(e)).toList();
         return Right(sites);
@@ -98,7 +89,7 @@ class SiteService implements ISiteService {
   }
 
   @override
-  Future<Either<MainFailure, SiteResModel>> getSiteDetails({
+  Future<Either<Map<MainFailure, dynamic>, SiteResModel>> getSiteDetails({
     required int id,
   }) async {
     var response = await getIt<HttpService>().request(
@@ -108,20 +99,16 @@ class SiteService implements ISiteService {
     );
 
     return response.fold(
-      (l) {
-        (l.values.first);
-        return Left(l.keys.first);
-      },
+      (l) => Left(l),
       (res) async {
         var data = jsonDecode(res.body);
-
         return Right(SiteResModel.fromJson(data));
       },
     );
   }
 
   @override
-  Future<Either<MainFailure, FolderResModel>> getSiteFolders({
+  Future<Either<Map<MainFailure, dynamic>, FolderResModel>> getSiteFolders({
     required int id,
   }) async {
     var response = await getIt<HttpService>().request(
@@ -131,20 +118,16 @@ class SiteService implements ISiteService {
     );
 
     return response.fold(
-      (l) {
-        (l.values.first);
-        return Left(l.keys.first);
-      },
+      (l) => Left(l),
       (res) async {
         var data = jsonDecode(res.body);
-
         return Right(FolderResModel.fromJson(data));
       },
     );
   }
 
   @override
-  Future<Either<MainFailure, List<SiteResModel>>> searchSites({
+  Future<Either<Map<MainFailure, dynamic>, List<SiteResModel>>> searchSites({
     required String key,
   }) async {
     MultipartRequest request = MultipartRequest(
@@ -154,13 +137,9 @@ class SiteService implements ISiteService {
         await getIt<HttpService>().multipartRequest(mRequest: request);
 
     return response.fold(
-      (l) {
-        (l.values.first);
-        return Left(l.keys.first);
-      },
+      (l) => Left(l),
       (res) async {
         var data = jsonDecode(res.body) as List;
-
         List<SiteResModel> sites =
             data.map((e) => SiteResModel.fromJson(e)).toList();
         return Right(sites);
@@ -169,7 +148,7 @@ class SiteService implements ISiteService {
   }
 
   @override
-  Future<Either<MainFailure, List<Folder>>> searchSiteFolder({
+  Future<Either<Map<MainFailure, dynamic>, List<Folder>>> searchSiteFolder({
     required String key,
   }) async {
     MultipartRequest request = MultipartRequest(
@@ -182,10 +161,7 @@ class SiteService implements ISiteService {
         await getIt<HttpService>().multipartRequest(mRequest: request);
 
     return response.fold(
-      (l) {
-        (l.values.first);
-        return Left(l.keys.first);
-      },
+      (l) => Left(l),
       (res) async {
         var data = jsonDecode(res.body) as List;
 
@@ -196,8 +172,8 @@ class SiteService implements ISiteService {
   }
 
   @override
-  Future<Either<MainFailure, List<WasteTypeModel>>> getWasteTypeInSites(
-      {required int id}) async {
+  Future<Either<Map<MainFailure, dynamic>, List<WasteTypeModel>>>
+      getWasteTypeInSites({required int id}) async {
     var response = await getIt<HttpService>().request(
       authenticated: true,
       method: HttpMethod.get,
@@ -205,10 +181,7 @@ class SiteService implements ISiteService {
     );
 
     return response.fold(
-      (l) {
-        (l.values.first);
-        return Left(l.keys.first);
-      },
+      (l) => Left(l),
       (res) async {
         var data = jsonDecode(res.body) as List;
         List<WasteTypeModel> wasteTypes =

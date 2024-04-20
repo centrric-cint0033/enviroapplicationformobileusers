@@ -47,6 +47,8 @@ abstract class SiteViewModelBase with Store {
 
   TextEditingController searchCtr = TextEditingController();
 
+  int selectedTab = 0;
+
   @observable
   bool detailLoading = false;
 
@@ -70,10 +72,7 @@ abstract class SiteViewModelBase with Store {
     response.fold(
       (l) {
         permanentSiteResponse = permanentSiteResponse.copyWith(
-          error: l,
-          loading: false,
-          paginationLoading: false,
-        );
+            errors: l, loading: false, paginationLoading: false);
       },
       (res) {
         List<SiteResModel> sites = permanentSiteResponse.data?.toList() ?? [];
@@ -108,10 +107,7 @@ abstract class SiteViewModelBase with Store {
     response.fold(
       (l) {
         tempSiteResponse = tempSiteResponse.copyWith(
-          error: l,
-          loading: false,
-          paginationLoading: false,
-        );
+            errors: l, loading: false, paginationLoading: false);
       },
       (res) {
         List<SiteResModel> sites = tempSiteResponse.data?.toList() ?? [];
@@ -146,10 +142,7 @@ abstract class SiteViewModelBase with Store {
     response.fold(
       (l) {
         delSiteResponse = delSiteResponse.copyWith(
-          error: l,
-          loading: false,
-          paginationLoading: false,
-        );
+            errors: l, loading: false, paginationLoading: false);
       },
       (res) {
         List<SiteResModel> sites = delSiteResponse.data?.toList() ?? [];
@@ -286,15 +279,11 @@ abstract class SiteViewModelBase with Store {
       error: null,
       loading: true,
     );
-
     final response = await siteService.getSiteFolders(id: id);
-
     response.fold(
       (l) {
-        siteFolderResponse = siteFolderResponse.copyWith(
-          error: l,
-          loading: false,
-        );
+        siteFolderResponse =
+            siteFolderResponse.copyWith(errors: l, loading: false);
       },
       (res) {
         siteFolderResponse = siteFolderResponse.copyWith(
@@ -313,9 +302,7 @@ abstract class SiteViewModelBase with Store {
   }) async {
     customPrint(content: key);
     customPrint(content: type);
-
     final response = await siteService.searchSites(key: key);
-
     response.fold(
       (l) {},
       (res) {
@@ -345,7 +332,7 @@ abstract class SiteViewModelBase with Store {
     response.fold(
       (l) {
         siteFolderResponse = siteFolderResponse.copyWith(
-          error: l,
+          errors: l,
           loading: false,
         );
       },
@@ -369,15 +356,10 @@ abstract class SiteViewModelBase with Store {
       error: null,
       loading: true,
     );
-
     final response = await siteService.getWasteTypeInSites(id: id);
-
     response.fold(
       (l) {
-        wasteTypesInSite = wasteTypesInSite.copyWith(
-          error: l,
-          loading: false,
-        );
+        wasteTypesInSite = wasteTypesInSite.copyWith(errors: l, loading: false);
       },
       (res) {
         wasteTypesInSite = wasteTypesInSite.copyWith(

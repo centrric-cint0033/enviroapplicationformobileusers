@@ -1,5 +1,5 @@
+import 'package:enviro_mobile_application/widgets/01_widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class KeyValueTextWidget extends StatelessWidget {
   final int? maxLines;
@@ -17,24 +17,10 @@ class KeyValueTextWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
+        Expanded(child: showBlueText(keyName)),
         Expanded(
-          child: Text(
-            keyName,
-            style: keyStyle ??
-                Theme.of(context)
-                    .textTheme
-                    .titleSmall
-                    ?.copyWith(fontSize: 12.sp),
-          ),
-        ),
-        Expanded(
-          child: Text(
-            value,
-            maxLines: maxLines ?? 1,
-            style: TextStyle(fontSize: 12.sp),
-            overflow: TextOverflow.ellipsis,
-          ),
-        )
+            child: showBlackText(value,
+                maxLines: maxLines ?? 1, overflow: TextOverflow.ellipsis))
       ],
     );
   }
