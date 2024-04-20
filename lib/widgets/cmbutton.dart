@@ -4,20 +4,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CmButton extends StatelessWidget {
-  const CmButton(
-      {Key? key,
-      this.alignment,
-      this.buttonTextStyle,
-      this.height,
-      this.width,
-      this.text,
-      this.onPressed,
-      this.widget,
-      this.buttonStyle,
-      this.color,
-      this.borderRadius,
-      this.loading = false})
-      : super(key: key);
+  const CmButton({
+    Key? key,
+    this.alignment,
+    this.buttonTextStyle,
+    this.height,
+    this.width,
+    this.text,
+    this.onPressed,
+    this.widget,
+    this.buttonStyle,
+    this.color,
+    this.borderRadius,
+    this.loading = false,
+    this.loadingColor, // Optional loading color
+  }) : super(key: key);
 
   final ButtonStyle? buttonStyle;
   final Alignment? alignment;
@@ -30,6 +31,7 @@ class CmButton extends StatelessWidget {
   final double? borderRadius;
   final VoidCallback? onPressed;
   final bool loading;
+  final Color? loadingColor; // Optional loading color
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +55,9 @@ class CmButton extends StatelessWidget {
             ),
           ),
           child: loading
-              ? const CupertinoActivityIndicator(color: Colors.white)
+              ? CupertinoActivityIndicator(
+                  color: loadingColor ?? color ?? Colors.white,
+                )
               : widget ??
                   Text(
                     text ?? "",

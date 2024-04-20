@@ -25,6 +25,22 @@ mixin _$ProfileViewModel on ProfileViewModelBase, Store {
     });
   }
 
+  late final _$profileeditResponseAtom =
+      Atom(name: 'ProfileViewModelBase.profileeditResponse', context: context);
+
+  @override
+  ApiResponse<ProfileRespModel> get profileeditResponse {
+    _$profileeditResponseAtom.reportRead();
+    return super.profileeditResponse;
+  }
+
+  @override
+  set profileeditResponse(ApiResponse<ProfileRespModel> value) {
+    _$profileeditResponseAtom.reportWrite(value, super.profileeditResponse, () {
+      super.profileeditResponse = value;
+    });
+  }
+
   late final _$profileviewmodelfunctionAsyncAction = AsyncAction(
       'ProfileViewModelBase.profileviewmodelfunction',
       context: context);
@@ -35,10 +51,21 @@ mixin _$ProfileViewModel on ProfileViewModelBase, Store {
         .run(() => super.profileviewmodelfunction());
   }
 
+  late final _$profileeditviewmodelAsyncAction = AsyncAction(
+      'ProfileViewModelBase.profileeditviewmodel',
+      context: context);
+
+  @override
+  Future<void> profileeditviewmodel(String username, String password) {
+    return _$profileeditviewmodelAsyncAction
+        .run(() => super.profileeditviewmodel(username, password));
+  }
+
   @override
   String toString() {
     return '''
-profilepageResponse: ${profilepageResponse}
+profilepageResponse: ${profilepageResponse},
+profileeditResponse: ${profileeditResponse}
     ''';
   }
 }

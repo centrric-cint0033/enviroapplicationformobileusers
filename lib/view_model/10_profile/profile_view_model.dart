@@ -51,27 +51,32 @@ abstract class ProfileViewModelBase with Store {
     );
   }
 
-  // @action
-  // Future<void> salesJobListSearchApi(String searchData) async {
-  //   try {
-  //     joblistResponse = joblistResponse.copyWith(errors: null, loading: true);
+  @observable
+  ApiResponse<ProfileRespModel> profileeditResponse =
+      ApiResponse<ProfileRespModel>();
 
-  //     final result = await salesService.salesJobListSearchServiceApi(data: [
-  //       {"key": searchData}
-  //     ]);
-  //     return result.fold(
-  //       (l) {
-  //         joblistResponse = joblistResponse.copyWith(errors: l, loading: false);
-  //       },
-  //       (r) {
-  //         joblistResponse =
-  //             joblistResponse.copyWith(data: r, errors: null, loading: false);
-  //       },
-  //     );
-  //   } catch (e) {
-  //     customPrint(content: e, name: 'Error salesJobListSearchApi');
-  //   } finally {
-  //     joblistResponse = joblistResponse.copyWith(loading: false);
-  //   }
-  // }
+  @action
+  Future<void> profileeditviewmodel(String username, String password) async {
+    try {
+      profileeditResponse =
+          profileeditResponse.copyWith(errors: null, loading: true);
+
+      final result = await profileService
+          .profileEditApi(data: {"username": username, "password": password});
+      return result.fold(
+        (l) {
+          profileeditResponse =
+              profileeditResponse.copyWith(errors: l, loading: false);
+        },
+        (r) {
+          profileeditResponse = profileeditResponse.copyWith(
+              data: r, errors: null, loading: false);
+        },
+      );
+    } catch (e) {
+      customPrint(content: e, name: 'Error salesJobListSearchApi');
+    } finally {
+      profileeditResponse = profileeditResponse.copyWith(loading: false);
+    }
+  }
 }

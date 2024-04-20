@@ -155,7 +155,8 @@ void intranetfuntion(BuildContext context) {
 }
 
 void calenderfunction(BuildContext context) {
-  context.router.pushNamed(RouteNames.rSchedulingPage);
+  context.router.pushNamed(RouteNames.rshedulepage);
+  print('Notification button tapped!');
 }
 
 void vehiclefunction(BuildContext context) async {
@@ -177,4 +178,8 @@ void navigateToSitesPage({required BuildContext context}) {
     ..getTemporarySites()
     ..getDeletedSites();
   context.router.pushNamed(RouteNames.siteListPage);
+}
+
+void shedulepagefunction(BuildContext context) async {
+  context.router.pushNamed(RouteNames.rshedulepage);
 }

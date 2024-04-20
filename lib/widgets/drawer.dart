@@ -38,7 +38,7 @@ Drawer CmnDrawer(BuildContext context) {
                                 vmProfile.profilepageResponse.data!.dp!,
                                 fit: BoxFit.cover,
                               )
-                            : Container(), // You can replace Container() with any placeholder widget you desire
+                            : Container(),
                       );
                     }),
                     Observer(builder: (_) {
@@ -46,6 +46,7 @@ Drawer CmnDrawer(BuildContext context) {
                         padding: const EdgeInsets.only(left: 23.0),
                         child: Text(
                           vmProfile.profilepageResponse.data?.username ?? '',
+                          style: const TextStyle(overflow: TextOverflow.clip),
                         ),
                       );
                     }),

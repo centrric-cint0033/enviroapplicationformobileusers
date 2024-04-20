@@ -5,6 +5,7 @@ import 'package:enviro_mobile_application/Routepage/approutes.gr.dart';
 import 'package:enviro_mobile_application/view_model/04_ohs/ohs_view_model.dart';
 import 'package:enviro_mobile_application/widgets/cm_show_folder_dialoque.dart';
 import 'package:enviro_mobile_application/widgets/cmcustomformfield.dart';
+import 'package:enviro_mobile_application/widgets/ww_response_handler.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
@@ -54,93 +55,100 @@ class NewsPage extends StatelessWidget {
               Observer(
                 builder: (_) {
                   return SizedBox(
-                    child: ListView.separated(
-                      physics: const NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      itemCount: vmOhs.newspageResponse.data?.length ?? 0,
-                      separatorBuilder: (BuildContext context, int index) =>
-                          const SizedBox(height: 12.0),
-                      itemBuilder: (context, index) {
-                        var data = vmOhs.newspageResponse.data?[index];
-                        return GestureDetector(
-                          onTap: () => _handleViewButtonTap(context),
-                          child: Container(
-                            height: 120,
-                            width: double.infinity,
-                            child: GestureDetector(
-                              onTap: () => ohsdetailpagefunction(context, data),
-                              child: Card(
-                                color: const Color.fromARGB(255, 188, 209, 228),
-                                child: Container(
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(left: 94),
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        // Text(
-                                        //   data?.description ?? '',
-                                        // ),
-                                        ListTile(
-                                          title: Text(
-                                            data?.title ?? '',
-                                            style: const TextStyle(
-                                              fontSize: 18,
-                                              fontWeight: FontWeight.bold,
+                    child: WWResponseHandler(
+                      data: vmOhs.newspageResponse,
+                      isEmpty: vmOhs.newspageResponse.data?.isEmpty ?? true,
+                      onTap: () => vmOhs.ohsnewsviewmodelfunction(),
+                      child: ListView.separated(
+                        physics: const NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemCount: vmOhs.newspageResponse.data?.length ?? 0,
+                        separatorBuilder: (BuildContext context, int index) =>
+                            const SizedBox(height: 12.0),
+                        itemBuilder: (context, index) {
+                          var data = vmOhs.newspageResponse.data?[index];
+                          return GestureDetector(
+                            onTap: () => _handleViewButtonTap(context),
+                            child: Container(
+                              height: 120,
+                              width: double.infinity,
+                              child: GestureDetector(
+                                onTap: () =>
+                                    ohsdetailpagefunction(context, data),
+                                child: Card(
+                                  color:
+                                      const Color.fromARGB(255, 188, 209, 228),
+                                  child: Container(
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(left: 94),
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          // Text(
+                                          //   data?.description ?? '',
+                                          // ),
+                                          ListTile(
+                                            title: Text(
+                                              data?.title ?? '',
+                                              style: const TextStyle(
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.bold,
+                                              ),
                                             ),
-                                          ),
-                                          subtitle: Text(
-                                            data?.created_by ?? '',
-                                            style:
-                                                const TextStyle(fontSize: 16),
-                                          ),
-                                          trailing: TextButton(
-                                            onPressed: () =>
-                                                _handleViewButtonTap(context),
-                                            style: ButtonStyle(
-                                              side: MaterialStateProperty.all<
-                                                  BorderSide>(
-                                                const BorderSide(
-                                                    color: Colors.blue),
+                                            subtitle: Text(
+                                              data?.created_by ?? '',
+                                              style:
+                                                  const TextStyle(fontSize: 16),
+                                            ),
+                                            trailing: TextButton(
+                                              onPressed: () =>
+                                                  _handleViewButtonTap(context),
+                                              style: ButtonStyle(
+                                                side: MaterialStateProperty.all<
+                                                    BorderSide>(
+                                                  const BorderSide(
+                                                      color: Colors.blue),
+                                                ),
+                                                backgroundColor:
+                                                    MaterialStateProperty.all<
+                                                        Color>(
+                                                  const Color.fromARGB(
+                                                      255, 188, 209, 228),
+                                                ),
+                                                shape: MaterialStateProperty
+                                                    .all<OutlinedBorder>(
+                                                  RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            18.0),
+                                                  ),
+                                                ),
                                               ),
-                                              backgroundColor:
-                                                  MaterialStateProperty.all<
-                                                      Color>(
-                                                const Color.fromARGB(
-                                                    255, 188, 209, 228),
-                                              ),
-                                              shape: MaterialStateProperty.all<
-                                                  OutlinedBorder>(
-                                                RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          18.0),
+                                              child: GestureDetector(
+                                                onTap: () =>
+                                                    ohsdetailpagefunction(
+                                                        context, data),
+                                                child: const Text(
+                                                  'View',
+                                                  style: TextStyle(
+                                                      color: Colors.blue),
                                                 ),
                                               ),
                                             ),
-                                            child: GestureDetector(
-                                              onTap: () =>
-                                                  ohsdetailpagefunction(
-                                                      context, data),
-                                              child: const Text(
-                                                'View',
-                                                style: TextStyle(
-                                                    color: Colors.blue),
-                                              ),
-                                            ),
                                           ),
-                                        ),
-                                      ],
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 ),
                               ),
                             ),
-                          ),
-                        );
-                      },
+                          );
+                        },
+                      ),
                     ),
                   );
                 },

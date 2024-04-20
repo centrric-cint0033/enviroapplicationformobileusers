@@ -127,7 +127,8 @@ class ApiEndPoints {
   static const endpointintranetfldrlstng =
       '/api/v1/intranet_archive/folder/segment';
   static const endpointprofilelstng = '/api/v1/accounts/profile/view/';
-  static const endpointprofileedit = '/api/v1/team/employee/edit';
+  static const endpointprofileedit = '/api/v1/accounts/profile/view/';
+  static const endpointjobcard = '/api/v1/jobs/card/info/view/2054865';
 
   // TEAM APIS
   static const currentEmployeelist =

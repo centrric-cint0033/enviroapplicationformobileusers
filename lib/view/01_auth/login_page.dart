@@ -8,7 +8,6 @@ import 'package:enviro_mobile_application/widgets/cmbutton.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import '../../widgets/cmappbar.dart';
 import '../../widgets/cmcustomformfield.dart';
 import '../../widgets/cmimage.dart';
 import '../../utilis/imagepath.dart';
@@ -25,7 +24,7 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(),
+      // appBar: const CustomAppBar(),
       body: Form(
         key: _formKey,
         child: SingleChildScrollView(

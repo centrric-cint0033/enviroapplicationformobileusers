@@ -1,11 +1,12 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:enviro_mobile_application/utilis/constant.dart';
 import 'package:enviro_mobile_application/view_model/10_profile/profile_view_model.dart';
-import 'package:enviro_mobile_application/view_model/10_profile/profile_view_model.dart';
+import 'package:enviro_mobile_application/widgets/cmbutton.dart';
 import 'package:enviro_mobile_application/widgets/cmn_action_icon.dart';
 import 'package:enviro_mobile_application/widgets/cmn_title_textwidget.dart';
 import 'package:enviro_mobile_application/widgets/drawer.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 
 @RoutePage()
 class ProfileCreationPage extends StatelessWidget {
@@ -148,32 +149,31 @@ class ProfileCreationPage extends StatelessWidget {
                 const SizedBox(height: 22),
                 Padding(
                   padding: const EdgeInsets.only(left: 12.0, right: 12.0),
-                  child: SizedBox(
-                    height: 48,
-                    child: TextFormField(
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter the Username';
-                        }
-                        return null;
-                      },
-                      controller: _controllerusername
-                        ..text =
-                            vmProfile.profilepageResponse.data?.username ?? '',
-                      decoration: InputDecoration(
-                        suffixIcon: IconButton(
-                          onPressed: () {},
-                          icon: const Icon(Icons.edit),
-                        ),
-                        filled: true,
-                        fillColor: Colors.grey[200],
-                        border: const OutlineInputBorder(
-                            borderSide: BorderSide.none,
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(24.0))),
-                        labelText: 'Username',
-                        labelStyle: const TextStyle(color: Colors.blue),
+                  child: TextFormField(
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter the Username';
+                      }
+                      return null;
+                    },
+                    controller: _controllerusername
+                      ..text =
+                          vmProfile.profilepageResponse.data?.username ?? '',
+                    decoration: InputDecoration(
+                      contentPadding: const EdgeInsets.symmetric(
+                          vertical: 0, horizontal: 12),
+                      suffixIcon: IconButton(
+                        onPressed: () {},
+                        icon: const Icon(Icons.edit),
                       ),
+                      filled: true,
+                      fillColor: Colors.grey[200],
+                      border: const OutlineInputBorder(
+                          borderSide: BorderSide.none,
+                          borderRadius:
+                              BorderRadius.all(Radius.circular(24.0))),
+                      labelText: 'Username',
+                      labelStyle: const TextStyle(color: Colors.blue),
                     ),
                   ),
                 ),
@@ -183,12 +183,6 @@ class ProfileCreationPage extends StatelessWidget {
                   child: SizedBox(
                     height: 48,
                     child: TextFormField(
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter the passwords';
-                        }
-                        return null;
-                      },
                       controller: _controllerpassword,
                       decoration: InputDecoration(
                         suffixIcon: IconButton(
@@ -215,27 +209,20 @@ class ProfileCreationPage extends StatelessWidget {
                   width: 34,
                   child: Padding(
                     padding: const EdgeInsets.only(left: 15.0, right: 15),
-                    child: ElevatedButton(
-                      style: ButtonStyle(
-                        backgroundColor:
-                            MaterialStateProperty.resolveWith<Color>(
-                          (Set<MaterialState> states) {
-                            return Colors.blue; // Background color
-                          },
-                        ),
-                        foregroundColor:
-                            MaterialStateProperty.resolveWith<Color>(
-                          (Set<MaterialState> states) {
-                            return Colors.white; // Text color
-                          },
-                        ),
-                      ),
-                      onPressed: () {
-                        if (_formKey.currentState!.validate()) {}
-                        // Add your save logic here
-                      },
-                      child: const Text('Save'),
-                    ),
+                    child: Observer(builder: (_) {
+                      return CmButton(
+                        loading: vmProfile.profileeditResponse.loading,
+                        text: 'Save',
+                        onPressed: () {
+                          if (_formKey.currentState!.validate()) {
+                            String username = _controllerusername.text;
+                            String password = _controllerpassword.text;
+
+                            vmProfile.profileeditviewmodel(username, password);
+                          }
+                        },
+                      );
+                    }),
                   ),
                 ),
               ],

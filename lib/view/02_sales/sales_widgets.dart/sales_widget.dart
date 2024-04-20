@@ -28,6 +28,9 @@ Row expandedRowShowText(String firsValue, String secondValue) => Row(
         expandedShowText(secondValue)
       ],
     );
+Row expandedRowShowsText(String firsValue, String secondValue) => Row(
+      children: [expandedShowText(firsValue), expandedShowText(secondValue)],
+    );
 
 Row expandedRowShowText1(String firsValue, String secondValue) => Row(
       children: [
