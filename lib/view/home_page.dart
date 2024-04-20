@@ -62,7 +62,7 @@ class HomePage extends StatelessWidget {
                       child: _buildBox('assets/images/user.svg', 'Site'),
                     ),
                     InkWell(
-                      // onTap: () => calenderfunction(context),
+                      onTap: () => calenderfunction(context),
                       child:
                           _buildBox('assets/images/calendar.svg', 'Scheduling'),
                     ),
@@ -154,10 +154,10 @@ void intranetfuntion(BuildContext context) {
   context.router.pushNamed(RouteNames.intranetpage);
 }
 
-// void calenderfunction(BuildContext context) {
-//   context.router.pushNamed(RouteNames.rshedulepage);
-//   print('Notification button tapped!');
-// }
+void calenderfunction(BuildContext context) {
+  context.router.pushNamed(RouteNames.rshedulepage);
+  print('Notification button tapped!');
+}
 
 void vehiclefunction(BuildContext context) async {
   context.router.pushNamed(RouteNames.vehiclemainpage);
