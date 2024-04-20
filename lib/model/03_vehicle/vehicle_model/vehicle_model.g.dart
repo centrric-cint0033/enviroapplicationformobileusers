@@ -56,7 +56,7 @@ _$VehicleModelImpl _$$VehicleModelImplFromJson(Map<String, dynamic> json) =>
       invoiceDate: json['invoice_date'] as String?,
       serviceDate: json['service_date'] as String?,
       ometer: json['ometer'] as String?,
-      invoiceNumber: json['invoice_number'] as int?,
+      invoiceNumber: json['invoice_number'] as String?,
       serviceProvided: json['service_provided'] as String?,
       hours: json['hours'] as String?,
       lCost: json['l_cost'] as String?,

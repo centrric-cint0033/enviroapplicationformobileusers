@@ -1,5 +1,7 @@
+import 'package:enviro_mobile_application/utilis/Appthemes.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CmButton extends StatelessWidget {
   const CmButton({
@@ -42,10 +44,10 @@ class CmButton extends StatelessWidget {
           onPressed: onPressed,
           style: ButtonStyle(
             backgroundColor:
-                MaterialStateProperty.all<Color>(color ?? Colors.blue),
-            fixedSize: MaterialStateProperty.all<Size>(
-              Size(width ?? double.maxFinite, height ?? 50.0),
-            ),
+                MaterialStateProperty.all<Color>(color ?? Appthemes.cPrimary),
+            // fixedSize: MaterialStateProperty.all<Size>(
+            //   Size(width ?? double.maxFinite, height ?? 50.0),
+            // ),
             shape: MaterialStateProperty.all<OutlinedBorder>(
               RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(borderRadius ?? 10.0),
@@ -59,8 +61,9 @@ class CmButton extends StatelessWidget {
               : widget ??
                   Text(
                     text ?? "",
-                    style:
-                        buttonTextStyle ?? const TextStyle(color: Colors.white),
+                    textAlign: TextAlign.center,
+                    style: buttonTextStyle ??
+                        TextStyle(color: Colors.white, fontSize: 12.sp),
                   ),
         ),
       ),

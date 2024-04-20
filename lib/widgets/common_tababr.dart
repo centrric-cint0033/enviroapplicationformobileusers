@@ -2,31 +2,48 @@ import 'package:enviro_mobile_application/utilis/Appthemes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-Padding CommonTabbar() {
-  return Padding(
-    padding: EdgeInsets.only(left: 15.w, right: 15.w),
-    child: Container(
-      height: 32.w,
-      decoration: BoxDecoration(
-        color: Appthemes.cPrimary,
-        border: Border.all(color: Appthemes.cPrimary),
-        borderRadius: BorderRadius.circular(8.0),
-      ),
-      child: TabBar(
-        indicatorSize: TabBarIndicatorSize.tab,
-        indicator: BoxDecoration(
-          borderRadius: BorderRadius.circular(8),
-          color: Colors.white,
-        ),
-        labelColor: Colors.black,
-        unselectedLabelColor: Colors.white,
-        indicatorColor: Colors.black,
-        tabs: const [
-          Tab(text: 'Job List'),
-          Tab(text: 'Quote Reg'),
-          Tab(text: 'Sales List'),
-        ],
-      ),
-    ),
-  );
+class WWcommonTabBar extends StatelessWidget {
+  final TabController? controller;
+  final String? value1;
+  final String? value2;
+  final String? value3;
+  final Function(int)? onTap;
+
+  const WWcommonTabBar(
+      {super.key,
+      this.controller,
+      this.value1,
+      this.value2,
+      this.value3,
+      this.onTap});
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+        height: 32.w,
+        child: DecoratedBox(
+          decoration: BoxDecoration(
+            color: Appthemes.cPrimary,
+            borderRadius: BorderRadius.circular(8.0),
+          ),
+          child: TabBar(
+            controller: controller,
+            indicatorSize: TabBarIndicatorSize.tab,
+            indicator: BoxDecoration(
+              borderRadius: BorderRadius.circular(8),
+              color: Colors.white,
+              border: Border.all(color: Appthemes.cPrimary),
+            ),
+            labelColor: Colors.black,
+            unselectedLabelColor: Colors.white,
+            indicatorColor: Colors.black,
+            onTap: onTap,
+            tabs: [
+              if (value1 != null) Tab(text: value1),
+              if (value2 != null) Tab(text: value2),
+              if (value3 != null) Tab(text: value3),
+            ],
+          ),
+        ));
+  }
 }

@@ -1,6 +1,6 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:enviro_mobile_application/Routepage/approutes.gr.dart';
 import 'package:enviro_mobile_application/Routepage/guards.dart';
+import 'package:enviro_mobile_application/Routepage/approutes.gr.dart';
 
 import 'package:enviro_mobile_application/Routepage/routespage.dart';
 
@@ -24,8 +24,17 @@ class AppRouter extends $AppRouter {
             path: RouteNames.rNewsfolderinsidepage),
         AutoRoute(page: OhsDetailRoute.page, path: RouteNames.rOhsdetailpage),
         AutoRoute(
-            page: NotificationDetailRoute.page,
-            path: RouteNames.rNotificationdetailpage),
+          page: NotificationDetailRoute.page,
+          path: RouteNames.rNotificationdetailpage,
+        ),
+        AutoRoute(
+          page: TeamRoute.page,
+          path: RouteNames.teamPage,
+        ),
+        AutoRoute(
+            page: TeamProfileRoute.page, path: RouteNames.teamProfileScreen),
+        AutoRoute(page: TeamEditRoute.page, path: RouteNames.teamEditScreen),
+        AutoRoute(page: AddTeamRoute.page, path: RouteNames.addTeamScreen),
         AutoRoute(
             page: IntranetInsideRoute.page,
             path: RouteNames.rintranetinsidepage),
@@ -46,5 +55,13 @@ class AppRouter extends $AppRouter {
             page: SheduledetailRoute2.page,
             path: RouteNames.rsheduledetail2page),
         AutoRoute(page: JobCardRoute.page, path: RouteNames.rjobcardpage),
+        AutoRoute(
+          page: SiteMainRoute.page,
+          path: RouteNames.siteListPage,
+        ),
+        AutoRoute(
+          page: SiteDetailRoute.page,
+          path: RouteNames.siteDetailPage,
+        ),
       ];
 }

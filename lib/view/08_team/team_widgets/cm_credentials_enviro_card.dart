@@ -1,0 +1,48 @@
+import 'package:enviro_mobile_application/utilis/constant.dart';
+import 'package:enviro_mobile_application/view/08_team/team_widgets/01_team_widgets.dart';
+import 'package:enviro_mobile_application/view/08_team/team_widgets/cm_textfield_widget.dart';
+import 'package:enviro_mobile_application/view_model/08_team/team_view_model.dart';
+import 'package:enviro_mobile_application/widgets/widgets.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+Widget cmCredentialsForEnviro(BuildContext context) {
+  return Card(
+    child: Padding(
+      padding: EdgeInsets.all(8.h),
+      child: Column(children: [
+        cmRow(
+            Row(children: [
+              showBlueText("Username"),
+              sized0wx05,
+              cmRequiredText()
+            ]),
+            cmTextFormField(
+                readOnly: true,
+                showDecoration: true,
+                controller: vmTeam.textAddTeamEmailController)),
+        cmRow(
+            Row(children: [
+              showBlueText("Password"),
+              sized0wx05,
+              cmRequiredText()
+            ]),
+            cmTextFormField(
+                showDecoration: true,
+                controller: vmTeam.textAddTeamPasswordController,
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return "Password is required";
+                  }
+                  return null;
+                }))
+      ]),
+    ),
+  );
+}
+
+Widget cmRow(Widget widget1, Widget widget2) {
+  return Row(
+    children: [Expanded(child: widget1), Expanded(flex: 2, child: widget2)],
+  );
+}
