@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:enviro_mobile_application/utilis/Appthemes.dart';
 import 'package:enviro_mobile_application/utilis/constant.dart';
+import 'package:enviro_mobile_application/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -14,18 +15,15 @@ Card customCard({required Widget child}) => Card(
     color: Colors.white,
     child: child);
 
-Text showText(String value, {FontWeight? fontWeight}) => Text(value,
-    style: TextStyle(color: Appthemes.cPrimary, fontWeight: fontWeight));
-
 Expanded expandedShowText(String value) =>
-    Expanded(flex: 3, child: showText(value));
+    Expanded(flex: 3, child: showBlueText(value));
 
 Row expandedRowShowText(String firsValue, String secondValue) => Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         expandedShowText(firsValue),
         sized0wx05,
-        showText(':'),
+        showBlueText(':'),
         sized0wx05,
         expandedShowText(secondValue)
       ],
@@ -33,11 +31,11 @@ Row expandedRowShowText(String firsValue, String secondValue) => Row(
 
 Row expandedRowShowText1(String firsValue, String secondValue) => Row(
       children: [
-        Expanded(flex: 3, child: showText(firsValue)),
+        Expanded(flex: 3, child: showBlueText(firsValue)),
         sized0wx05,
-        showText(':'),
+        showBlueText(':'),
         sized0wx05,
-        Expanded(flex: 1, child: showText(secondValue))
+        Expanded(flex: 1, child: showBlueText(secondValue))
       ],
     );
 
@@ -50,7 +48,7 @@ Expanded imageAndName(String image) => Expanded(
         width: 60.w,
       ),
       gapField,
-      showText('Name')
+      showBlueText('Name')
     ]));
 
 Widget buildCardDataOrder(List<Widget> widget, {String? image}) => customCard(

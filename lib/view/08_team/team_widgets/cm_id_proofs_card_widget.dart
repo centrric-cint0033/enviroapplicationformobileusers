@@ -1,8 +1,6 @@
-import 'dart:io';
-
 import 'package:enviro_mobile_application/utilis/constant.dart';
+import 'package:enviro_mobile_application/view/08_team/team_widgets/01_team_widgets.dart';
 import 'package:enviro_mobile_application/view/08_team/team_widgets/cm_button.dart';
-import 'package:enviro_mobile_application/view/08_team/team_widgets/cm_required_text.dart';
 import 'package:enviro_mobile_application/view_model/08_team/team_view_model.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';

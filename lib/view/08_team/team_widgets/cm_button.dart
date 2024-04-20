@@ -1,4 +1,4 @@
-import 'package:enviro_mobile_application/view/02_sales/sales_widgets.dart/sales_widget.dart';
+import 'package:enviro_mobile_application/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
 Widget customButton(Function onPressed, Color color, String text) {
@@ -16,5 +16,5 @@ Widget customButton(Function onPressed, Color color, String text) {
           ),
         ),
       ),
-      child: showText(text));
+      child: showBlueText(text));
 }

@@ -1,21 +1,22 @@
 import 'dart:io';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:enviro_mobile_application/model/10_team/create_team_req_model/create_team_req_model.dart';
 import 'package:enviro_mobile_application/model/10_team/team_profile_employee_details_res_model/team_profile_employee_details_res_model.dart';
 import 'package:enviro_mobile_application/utilis/Appthemes.dart';
 import 'package:enviro_mobile_application/utilis/constant.dart';
-import 'package:enviro_mobile_application/view/02_sales/sales_widgets.dart/sales_widget.dart';
+import 'package:enviro_mobile_application/view/08_team/team_widgets/01_team_widgets.dart';
 import 'package:enviro_mobile_application/view/08_team/team_widgets/cm_credentials_enviro_card.dart';
-import 'package:enviro_mobile_application/view/08_team/team_widgets/cm_elevated_button.dart';
 import 'package:enviro_mobile_application/view/08_team/team_widgets/cm_id_proofs_card_widget.dart';
-import 'package:enviro_mobile_application/view/08_team/team_widgets/cm_required_text.dart';
 import 'package:enviro_mobile_application/view/08_team/team_widgets/cm_textfield_widget.dart';
 import 'package:enviro_mobile_application/view/08_team/team_widgets/date_picker.dart';
 import 'package:enviro_mobile_application/view/08_team/team_widgets/designation_dropdown_widget.dart';
 import 'package:enviro_mobile_application/view/08_team/team_widgets/employment_status_dropdown_widget.dart';
 import 'package:enviro_mobile_application/view_model/08_team/team_view_model.dart';
 import 'package:enviro_mobile_application/widgets/cm_show_toast.dart';
+import 'package:enviro_mobile_application/widgets/cmbutton.dart';
 import 'package:enviro_mobile_application/widgets/cmn_title_textwidget.dart';
+import 'package:enviro_mobile_application/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -43,7 +44,7 @@ class AddTeamPage extends StatelessWidget {
               key: formkey,
               child: Column(
                 children: [
-                  gapField,
+                  gapFieldSales,
                   SizedBox(
                     height: 82.h,
                     child: DecoratedBox(
@@ -186,9 +187,12 @@ class AddTeamPage extends StatelessWidget {
                   sized0hx10,
                   cmCredentialsForEnviro(context),
                   sized0hx10,
-                  cmElevatedButton(() {
-                    cmOnpressedFnCreateTeam(context);
-                  }, Appthemes.cPrimary, "CREATE", loading: ress.loading),
+                  CmButton(
+                      width: double.infinity,
+                      loading: ress.loading,
+                      height: 45,
+                      text: 'CREATE',
+                      onPressed: () => cmOnpressedFnCreateTeam(context)),
                   sized0hx40,
                 ],
               ),
@@ -204,203 +208,120 @@ class AddTeamPage extends StatelessWidget {
     return buildCardDataOrder(
       [
         expandedRowShowWidget(
-            Row(
-              children: [
-                showText('Emp Id'),
-                sized0wx05,
-                cmRequiredText(),
-              ],
-            ),
-            Row(children: [
-              const Text(': '),
-              Expanded(
-                child: cmTextFormField(
-                    controller: vmTeam.textAddTeamEmpIdController,
-                    hintText: "Emp Id",
-                    keyboardType: const TextInputType.numberWithOptions(),
-                    hintStyle: TextStyle(color: Colors.grey.shade400),
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return "Emp Id is required";
-                      }
-                      return null;
-                    }),
-              )
-            ])),
+            'Emp Id',
+            cmTextFormField(
+                controller: vmTeam.textAddTeamEmpIdController,
+                hintText: "Emp Id",
+                keyboardType: const TextInputType.numberWithOptions(),
+                hintStyle: TextStyle(color: Colors.grey.shade400),
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return "Emp Id is required";
+                  }
+                  return null;
+                })),
         expandedRowShowWidget(
-            Row(
-              children: [
-                showText('Address'),
-                sized0wx05,
-                cmRequiredText(),
-              ],
-            ),
-            Row(children: [
-              const Text(': '),
-              Expanded(
-                  child: cmTextFormField(
-                      controller: vmTeam.textAddTeamAddressController,
-                      hintText: "Address",
-                      hintStyle: TextStyle(color: Colors.grey.shade400),
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return "Address is required";
-                        }
-                        return null;
-                      }))
-            ])),
+            'Address',
+            cmTextFormField(
+                controller: vmTeam.textAddTeamAddressController,
+                hintText: "Address",
+                hintStyle: TextStyle(color: Colors.grey.shade400),
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return "Address is required";
+                  }
+                  return null;
+                })),
         expandedRowShowWidget(
-            Row(
-              children: [
-                showText('Date of Birth'),
-                sized0wx05,
-                cmRequiredText(),
-              ],
-            ),
-            Row(children: [
-              const Text(': '),
-              Observer(
+            'Date of Birth',
+            Observer(
+              builder: (context) => cmDatePicker(
+                  context,
+                  "",
+                  vmTeam.selectedDobAddTeam,
+                  (date) => vmTeam.datePickerFn4(date)),
+            )),
+        expandedRowShowWidget(
+            'Joining Date',
+            Observer(
                 builder: (context) => cmDatePicker(
                     context,
                     "",
-                    vmTeam.selectedDobAddTeam,
-                    (date) => vmTeam.datePickerFn4(date)),
-              )
-            ])),
+                    vmTeam.selectedJoiningDateAddTeam,
+                    (date) => vmTeam.datePickerFn5(date)))),
         expandedRowShowWidget(
-            Row(
-              children: [
-                showText('Joining Date'),
-                sized0wx05,
-                cmRequiredText(),
-              ],
-            ),
-            Row(children: [
-              const Text(': '),
-              Observer(
-                  builder: (context) => cmDatePicker(
-                      context,
-                      "",
-                      vmTeam.selectedJoiningDateAddTeam,
-                      (date) => vmTeam.datePickerFn5(date)))
-            ])),
+            'Email Address',
+            cmTextFormField(
+                controller: vmTeam.textAddTeamEmailController,
+                hintText: "Email Address",
+                hintStyle: TextStyle(color: Colors.grey.shade400),
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return "Email is required";
+                  }
+                  return null;
+                })),
         expandedRowShowWidget(
-            Row(
-              children: [
-                showText('Email Address'),
-                sized0wx05,
-                cmRequiredText(),
-              ],
-            ),
-            Row(children: [
-              const Text(': '),
-              Expanded(
-                  child: cmTextFormField(
-                      controller: vmTeam.textAddTeamEmailController,
-                      hintText: "Email Address",
-                      hintStyle: TextStyle(color: Colors.grey.shade400),
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return "Email is required";
-                        }
-                        return null;
-                      }))
-            ])),
+            'Contact Number',
+            cmTextFormField(
+                controller: vmTeam.textAddTeamContactNumberController,
+                hintText: "Number",
+                keyboardType: const TextInputType.numberWithOptions(),
+                hintStyle: TextStyle(color: Colors.grey.shade400),
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return "Number is required";
+                  }
+                  return null;
+                })),
         expandedRowShowWidget(
-            Row(
-              children: [
-                showText('Contact Number'),
-                sized0wx05,
-                cmRequiredText(),
-              ],
-            ),
-            Row(children: [
-              const Text(': '),
-              Expanded(
-                  child: cmTextFormField(
-                      controller: vmTeam.textAddTeamContactNumberController,
-                      hintText: "Number",
-                      keyboardType: const TextInputType.numberWithOptions(),
-                      hintStyle: TextStyle(color: Colors.grey.shade400),
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return "Number is required";
-                        }
-                        return null;
-                      }))
-            ])),
+            'Employment Status',
+            EmploymentStatusDropDown(
+                employeeDetatils: employeeDetatils, fromAddTeam: true)),
         expandedRowShowWidget(
-            Row(
-              children: [
-                showText('Employment Status'),
-                sized0wx05,
-                cmRequiredText(),
-              ],
-            ),
-            Row(children: [
-              const Text(': '),
-              Expanded(
-                  child: EmploymentStatusDropDown(
-                      employeeDetatils: employeeDetatils, fromAddTeam: true))
-            ])),
+            'Emergency Contact',
+            cmTextFormField(
+                controller: vmTeam.textAddTeamEmergencyContactController,
+                hintText: "Name",
+                hintStyle: TextStyle(color: Colors.grey.shade400),
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return "Name is required";
+                  }
+                  return null;
+                })),
         expandedRowShowWidget(
-            Row(
-              children: [
-                showText('Emergency Contact'),
-                sized0wx05,
-                cmRequiredText(),
-              ],
-            ),
-            Row(children: [
-              const Text(': '),
-              Expanded(
-                child: cmTextFormField(
-                    controller: vmTeam.textAddTeamEmergencyContactController,
-                    hintText: "Name",
-                    hintStyle: TextStyle(color: Colors.grey.shade400),
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return "Name is required";
-                      }
-                      return null;
-                    }),
-              )
-            ])),
-        expandedRowShowWidget(
-            Row(
-              children: [
-                showText('Emergency Contact No'),
-                sized0wx05,
-                cmRequiredText(),
-              ],
-            ),
-            Row(children: [
-              const Text(': '),
-              Expanded(
-                child: cmTextFormField(
-                    controller:
-                        vmTeam.textAddTeamEmergencyContactNumberController,
-                    hintText: "Number",
-                    keyboardType: const TextInputType.numberWithOptions(),
-                    hintStyle: TextStyle(color: Colors.grey.shade400),
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return "Number is required";
-                      }
-                      return null;
-                    }),
-              )
-            ])),
+            'Emergency Contact No',
+            cmTextFormField(
+                controller: vmTeam.textAddTeamEmergencyContactNumberController,
+                hintText: "Number",
+                keyboardType: const TextInputType.numberWithOptions(),
+                hintStyle: TextStyle(color: Colors.grey.shade400),
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return "Number is required";
+                  }
+                  return null;
+                })),
       ],
     );
   }
 
-  Widget expandedShowWidget(Widget value) => value;
+  Widget expandedShowWidget(Widget value) => Expanded(child: value);
 
-  Row expandedRowShowWidget(Widget firsValue, Widget secondValue) => Row(
+  Widget expandedRowShowWidget(String firsValue, Widget secondValue) => Row(
         children: [
-          Expanded(flex: 3, child: expandedShowWidget(firsValue)),
-          Expanded(flex: 2, child: expandedShowWidget(secondValue))
+          Expanded(
+              child: Row(children: [
+            Flexible(child: showBlueText(firsValue)),
+            // expandedShowWidget(firsValue),
+            sized0wx05,
+            cmRequiredText(),
+          ])),
+          sized0wx05,
+          const Text(':'),
+          sized0wx05,
+          Expanded(child: secondValue)
         ],
       );
 

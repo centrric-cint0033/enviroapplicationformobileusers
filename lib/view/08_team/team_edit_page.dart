@@ -1,16 +1,16 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:enviro_mobile_application/model/10_team/create_team_req_model/create_team_req_model.dart';
 import 'package:enviro_mobile_application/model/10_team/team_profile_employee_details_res_model/team_profile_employee_details_res_model.dart';
-import 'package:enviro_mobile_application/utilis/Appthemes.dart';
 import 'package:enviro_mobile_application/utilis/constant.dart';
 import 'package:enviro_mobile_application/view/02_sales/sales_widgets.dart/sales_widget.dart';
-import 'package:enviro_mobile_application/view/08_team/team_widgets/cm_elevated_button.dart';
 import 'package:enviro_mobile_application/view/08_team/team_widgets/cm_textfield_widget.dart';
 import 'package:enviro_mobile_application/view/08_team/team_widgets/common_team_profile_tile.dart';
 import 'package:enviro_mobile_application/view/08_team/team_widgets/date_picker.dart';
 import 'package:enviro_mobile_application/view/08_team/team_widgets/employment_status_dropdown_widget.dart';
 import 'package:enviro_mobile_application/view_model/08_team/team_view_model.dart';
+import 'package:enviro_mobile_application/widgets/cmbutton.dart';
 import 'package:enviro_mobile_application/widgets/cmn_title_textwidget.dart';
+import 'package:enviro_mobile_application/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -38,26 +38,34 @@ class TeamEditPage extends StatelessWidget {
         appBar: AppBar(
           title: cmnTitleWidget('Edit Team'),
         ),
-        body: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 15.w),
-            child: SingleChildScrollView(
-              child: Observer(
-                builder: (context) {
-                  return Column(children: [
-                    sized0hx05,
-                    CommonTeamProfileTile(
-                      employeeDetatils: employeeDetatils,
-                    ),
-                    sized0hx05,
-                    listEditData(context, employeeDetatils),
-                    sized0hx05,
-                    cmElevatedButton(() {
-                      cmOnpressedFnCreateTeam(context, employeeDetatils);
-                    }, Appthemes.cPrimary, "EDIT"),
-                  ]);
-                },
-              ),
-            )),
+        body: SafeArea(
+          child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 15.w),
+              child: SingleChildScrollView(
+                child: Observer(
+                  builder: (context) {
+                    return Column(children: [
+                      sized0hx05,
+                      CommonTeamProfileTile(employeeDetatils: employeeDetatils),
+                      sized0hx05,
+                      listEditData(context, employeeDetatils),
+                      sized0hx05,
+                      CmButton(
+                          width: double.infinity,
+                          height: 45,
+                          text: 'EDIT',
+                          onPressed: () {
+                            cmOnpressedFnCreateTeam(context, employeeDetatils);
+                          }),
+                      // cmElevatedButton(() {
+                      //   cmOnpressedFnCreateTeam(context, employeeDetatils);
+                      // }, Appthemes.cPrimary, "EDIT"),
+                      // sized0hx30,
+                    ]);
+                  },
+                ),
+              )),
+        ),
       ),
     );
   }
@@ -124,7 +132,7 @@ class TeamEditPage extends StatelessWidget {
         children: [
           expandedShowText(firsValue),
           sized0wx05,
-          showText(':'),
+          showBlueText(':'),
           sized0wx05,
           expandedShowWidget(secondValue)
         ],

@@ -1,8 +1,8 @@
 import 'package:enviro_mobile_application/utilis/constant.dart';
-import 'package:enviro_mobile_application/view/02_sales/sales_widgets.dart/sales_widget.dart';
-import 'package:enviro_mobile_application/view/08_team/team_widgets/cm_required_text.dart';
+import 'package:enviro_mobile_application/view/08_team/team_widgets/01_team_widgets.dart';
 import 'package:enviro_mobile_application/view/08_team/team_widgets/cm_textfield_widget.dart';
 import 'package:enviro_mobile_application/view_model/08_team/team_view_model.dart';
+import 'package:enviro_mobile_application/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -12,13 +12,21 @@ Widget cmCredentialsForEnviro(BuildContext context) {
       padding: EdgeInsets.all(8.h),
       child: Column(children: [
         cmRow(
-            Row(children: [showText("Username"), sized0wx05, cmRequiredText()]),
+            Row(children: [
+              showBlueText("Username"),
+              sized0wx05,
+              cmRequiredText()
+            ]),
             cmTextFormField(
                 readOnly: true,
                 showDecoration: true,
                 controller: vmTeam.textAddTeamEmailController)),
         cmRow(
-            Row(children: [showText("Password"), sized0wx05, cmRequiredText()]),
+            Row(children: [
+              showBlueText("Password"),
+              sized0wx05,
+              cmRequiredText()
+            ]),
             cmTextFormField(
                 showDecoration: true,
                 controller: vmTeam.textAddTeamPasswordController,
