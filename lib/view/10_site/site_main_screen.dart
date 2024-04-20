@@ -1,6 +1,6 @@
 import 'package:enviro_mobile_application/utilis/api_endpoints/customprint.dart';
 import 'package:enviro_mobile_application/utilis/constant.dart';
-import 'package:enviro_mobile_application/view/10_site/site_tab_screens/pemanent_sites_tab.dart';
+import 'package:enviro_mobile_application/view/10_site/site_tab_screens/01_pemanent_sites_tab.dart';
 import 'package:enviro_mobile_application/view/10_site/widgets/site_widgets.dart';
 import 'package:enviro_mobile_application/widgets/common_tababr.dart';
 import 'package:enviro_mobile_application/widgets/ww_search_widget.dart';
@@ -78,8 +78,8 @@ class SiteMainScreen extends StatelessWidget {
                 child: TabBarView(
                   children: [
                     PermanentSitesTab(),
-                    TempSiteListWidget(),
-                    DelSiteListWidget(),
+                    TemporarySitesTab(),
+                    DeletedSiteTab(),
                   ],
                 ),
               )
