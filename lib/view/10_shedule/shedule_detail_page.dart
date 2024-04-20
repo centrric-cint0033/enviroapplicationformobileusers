@@ -32,7 +32,7 @@ class SheduledetailPage extends StatelessWidget {
                   child: Observer(builder: (_) {
                     return CmButton(
                       borderRadius: 34,
-                      width: 110,
+                      width: 130,
                       loading: vmJobcard.jobcardResponse.loading,
                       color: Colors.white,
                       text: 'job card',
@@ -78,7 +78,10 @@ class SheduledetailPage extends StatelessWidget {
   Widget buildCardDataOrder(int index) {
     switch (index) {
       case 3:
-        return expandedRowShowText("Client Name", ":qhdbn");
+        return expandedRowShowText(
+          "Client Name",
+          ":qhdbn",
+        );
       case 4:
         return expandedRowShowText("Client Type", ":qhdbn");
       case 5:

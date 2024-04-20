@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:enviro_mobile_application/view/02_sales/sales_widgets.dart/sales_widget.dart';
+import 'package:enviro_mobile_application/view/10_shedule/shedule_widget.dart';
 import 'package:enviro_mobile_application/view_model/11_job_card/job_card_view_model.dart';
 import 'package:enviro_mobile_application/widgets/cmn_action_icon.dart';
 import 'package:enviro_mobile_application/widgets/cmn_title_textwidget.dart';
@@ -31,7 +32,7 @@ class JobCardPage extends StatelessWidget {
             Observer(builder: (_) {
               return Padding(
                 padding: const EdgeInsets.only(left: 14.0),
-                child: expandedRowShowsText("Site Name",
+                child: expandedRowShowText2("Site Name",
                     vmJobcard.jobcardResponse.data?.siteName ?? ''),
               );
             }),
@@ -41,7 +42,7 @@ class JobCardPage extends StatelessWidget {
             Observer(builder: (_) {
               return Padding(
                 padding: const EdgeInsets.only(left: 14.0),
-                child: expandedRowShowsText("Type of Waste(site \n profile)",
+                child: expandedRowShowText2("Type of Waste(site \n profile)",
                     vmJobcard.jobcardResponse.data?.typeOfWasteStr ?? ''),
               );
             }),
@@ -51,7 +52,7 @@ class JobCardPage extends StatelessWidget {
             Observer(builder: (_) {
               return Padding(
                 padding: const EdgeInsets.only(left: 14.0),
-                child: expandedRowShowsText("Site Address",
+                child: expandedRowShowText2("Site Address",
                     vmJobcard.jobcardResponse.data?.siteAddress ?? ''),
               );
             }),
@@ -61,7 +62,7 @@ class JobCardPage extends StatelessWidget {
             Observer(builder: (_) {
               return Padding(
                 padding: const EdgeInsets.only(left: 14.0),
-                child: expandedRowShowsText("Site postcode",
+                child: expandedRowShowText2("Site postcode",
                     vmJobcard.jobcardResponse.data?.sitePostCode ?? ''),
               );
             }),
@@ -71,7 +72,7 @@ class JobCardPage extends StatelessWidget {
             Observer(builder: (_) {
               return Padding(
                 padding: const EdgeInsets.only(left: 14.0),
-                child: expandedRowShowsText("Site Contact name",
+                child: expandedRowShowText2("Site Contact name",
                     vmJobcard.jobcardResponse.data?.siteContactPerson ?? ''),
               );
             }),
@@ -81,7 +82,7 @@ class JobCardPage extends StatelessWidget {
             Observer(builder: (_) {
               return Padding(
                 padding: const EdgeInsets.only(left: 14.0),
-                child: expandedRowShowsText("Site Contact Phone",
+                child: expandedRowShowText2("Site Contact Phone",
                     vmJobcard.jobcardResponse.data?.siteContactPhone ?? ''),
               );
             }),
@@ -91,7 +92,7 @@ class JobCardPage extends StatelessWidget {
             Observer(builder: (_) {
               return Padding(
                 padding: const EdgeInsets.only(left: 14.0),
-                child: expandedRowShowsText("Site Contact Mob",
+                child: expandedRowShowText2("Site Contact Mob",
                     vmJobcard.jobcardResponse.data?.siteContactMob ?? ''),
               );
             }),
@@ -101,7 +102,7 @@ class JobCardPage extends StatelessWidget {
             Observer(builder: (_) {
               return Padding(
                 padding: const EdgeInsets.only(left: 14.0),
-                child: expandedRowShowsText("Site Contact Email",
+                child: expandedRowShowsText2("Site Contact Email",
                     vmJobcard.jobcardResponse.data?.siteContactEmail ?? ''),
               );
             }),
@@ -111,7 +112,7 @@ class JobCardPage extends StatelessWidget {
             Observer(builder: (_) {
               return Padding(
                 padding: const EdgeInsets.only(left: 14.0),
-                child: expandedRowShowsText(
+                child: expandedRowShowsText2(
                     "Price", vmJobcard.jobcardResponse.data?.price ?? ''),
               );
             }),
@@ -121,7 +122,7 @@ class JobCardPage extends StatelessWidget {
             Observer(builder: (_) {
               return Padding(
                 padding: const EdgeInsets.only(left: 14.0),
-                child: expandedRowShowsText("Account Status",
+                child: expandedRowShowsText2("Account Status",
                     vmJobcard.jobcardResponse.data?.accountStatus ?? ''),
               );
             }),
@@ -144,7 +145,7 @@ class JobCardPage extends StatelessWidget {
             Observer(builder: (_) {
               return Padding(
                 padding: const EdgeInsets.only(left: 14.0),
-                child: expandedRowShowsText(
+                child: expandedRowShowsText2(
                     "Date", vmJobcard.jobcardResponse.data?.date ?? ''),
               );
             }),
@@ -154,7 +155,7 @@ class JobCardPage extends StatelessWidget {
             Observer(builder: (_) {
               return Padding(
                 padding: const EdgeInsets.only(left: 14.0),
-                child: expandedRowShowsText("Sales Person",
+                child: expandedRowShowsText2("Sales Person",
                     vmJobcard.jobcardResponse.data?.salesPerson ?? ''),
               );
             }),
@@ -164,7 +165,7 @@ class JobCardPage extends StatelessWidget {
             Observer(builder: (_) {
               return Padding(
                 padding: const EdgeInsets.only(left: 14.0),
-                child: expandedRowShowsText("Induction Type", ""),
+                child: expandedRowShowsText2("Induction Type", ""),
               );
             }),
             const SizedBox(
@@ -256,7 +257,7 @@ class JobCardPage extends StatelessWidget {
             Observer(builder: (_) {
               return Padding(
                   padding: const EdgeInsets.only(left: 17.0),
-                  child: expandedRowShowsText(
+                  child: expandedRowShowsText2(
                       "Data from Required",
                       vmJobcard.jobcardResponse.data?.wasteDataForm
                               ?.toString() ??
@@ -268,7 +269,7 @@ class JobCardPage extends StatelessWidget {
             Observer(builder: (_) {
               return Padding(
                   padding: const EdgeInsets.only(left: 17.0),
-                  child: expandedRowShowsText("AccessHieght",
+                  child: expandedRowShowsText2("AccessHieght",
                       vmJobcard.jobcardResponse.data?.accessHeight ?? ''));
             }),
             const SizedBox(
@@ -277,7 +278,7 @@ class JobCardPage extends StatelessWidget {
             Observer(builder: (_) {
               return Padding(
                   padding: const EdgeInsets.only(left: 17.0),
-                  child: expandedRowShowsText(
+                  child: expandedRowShowsText2(
                       "KeyRequired",
                       vmJobcard.jobcardResponse.data?.keyRequired?.toString() ??
                           ''));
@@ -288,7 +289,7 @@ class JobCardPage extends StatelessWidget {
             Observer(builder: (_) {
               return Padding(
                 padding: const EdgeInsets.only(left: 17.0),
-                child: expandedRowShowsText(
+                child: expandedRowShowsText2(
                     "PitDistance from truck",
                     vmJobcard.jobcardResponse.data?.pitDistanceFromTruckLocation
                             ?.toString() ??
@@ -301,7 +302,7 @@ class JobCardPage extends StatelessWidget {
             Observer(builder: (_) {
               return Padding(
                 padding: const EdgeInsets.only(left: 17.0),
-                child: expandedRowShowsText(
+                child: expandedRowShowsText2(
                     "Water tap location",
                     vmJobcard.jobcardResponse.data?.waterTapLocation
                             ?.toString() ??
@@ -314,7 +315,7 @@ class JobCardPage extends StatelessWidget {
             Observer(builder: (_) {
               return Padding(
                 padding: const EdgeInsets.only(left: 17.0),
-                child: expandedRowShowsText(
+                child: expandedRowShowsText2(
                     "Gurney REquired",
                     vmJobcard.jobcardResponse.data?.gurneyRequired
                             ?.toString() ??
@@ -327,7 +328,7 @@ class JobCardPage extends StatelessWidget {
             Observer(builder: (_) {
               return Padding(
                 padding: const EdgeInsets.only(left: 17.0),
-                child: expandedRowShowsText(
+                child: expandedRowShowsText2(
                     "Confined space \n required",
                     vmJobcard.jobcardResponse.data?.confinedSpace?.toString() ??
                         ''),
@@ -339,7 +340,7 @@ class JobCardPage extends StatelessWidget {
             Observer(builder: (_) {
               return Padding(
                 padding: const EdgeInsets.only(left: 17.0),
-                child: expandedRowShowsText(
+                child: expandedRowShowsText2(
                     "Number of trucks",
                     vmJobcard.jobcardResponse.data?.numberOfTrucksRequired
                             ?.toString() ??
@@ -352,7 +353,7 @@ class JobCardPage extends StatelessWidget {
             Observer(builder: (_) {
               return Padding(
                 padding: const EdgeInsets.only(left: 17.0),
-                child: expandedRowShowsText(
+                child: expandedRowShowsText2(
                     "Estimated job duration",
                     vmJobcard.jobcardResponse.data?.estimatedJobDuration
                             ?.toString() ??
@@ -365,7 +366,7 @@ class JobCardPage extends StatelessWidget {
             Observer(builder: (_) {
               return Padding(
                 padding: const EdgeInsets.only(left: 17.0),
-                child: expandedRowShowsText(
+                child: expandedRowShowsText2(
                     "Besttime for service",
                     vmJobcard.jobcardResponse.data?.timeForService
                             ?.toString() ??
@@ -378,7 +379,7 @@ class JobCardPage extends StatelessWidget {
             Observer(builder: (_) {
               return Padding(
                 padding: const EdgeInsets.only(left: 17.0),
-                child: expandedRowShowsText(
+                child: expandedRowShowsText2(
                     "SpecificPPE",
                     vmJobcard.jobcardResponse.data?.specificPpeReqired
                             ?.toString() ??
@@ -391,7 +392,7 @@ class JobCardPage extends StatelessWidget {
             Observer(builder: (_) {
               return Padding(
                 padding: const EdgeInsets.only(left: 17.0),
-                child: expandedRowShowsText(
+                child: expandedRowShowsText2(
                     "Weigh bridge required",
                     vmJobcard.jobcardResponse.data?.weighBridgeRequired
                             ?.toString() ??
@@ -404,7 +405,7 @@ class JobCardPage extends StatelessWidget {
             Observer(builder: (_) {
               return Padding(
                 padding: const EdgeInsets.only(left: 17.0),
-                child: expandedRowShowsText(
+                child: expandedRowShowsText2(
                     "Number and type of \n pallets to be exchanged",
                     vmJobcard.jobcardResponse.data?.noAndTypePalletToBeExchanged
                             ?.toString() ??
@@ -417,7 +418,7 @@ class JobCardPage extends StatelessWidget {
             Observer(builder: (_) {
               return Padding(
                 padding: const EdgeInsets.only(left: 17.0),
-                child: expandedRowShowsText(
+                child: expandedRowShowsText2(
                     "Safer data sheet \n required",
                     vmJobcard.jobcardResponse.data?.safetyDataSheetRequired
                             ?.toString() ??
@@ -430,7 +431,7 @@ class JobCardPage extends StatelessWidget {
             Observer(builder: (_) {
               return Padding(
                 padding: const EdgeInsets.only(left: 17.0),
-                child: expandedRowShowsText(
+                child: expandedRowShowsText2(
                     "chemist approval",
                     vmJobcard.jobcardResponse.data?.chemistApproval
                             ?.toString() ??
@@ -442,7 +443,7 @@ class JobCardPage extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.only(left: 17.0),
-              child: expandedRowShowsText("Additional information", ""),
+              child: expandedRowShowsText2("Additional information", ""),
             ),
             const SizedBox(
               height: 30,
@@ -462,7 +463,7 @@ class JobCardPage extends StatelessWidget {
             Observer(builder: (_) {
               return Padding(
                 padding: const EdgeInsets.only(left: 17.0),
-                child: expandedRowShowsText("Capacity",
+                child: expandedRowShowsText2("Capacity",
                     vmJobcard.jobcardResponse.data?.capacity?.toString() ?? ''),
               );
             }),
@@ -472,7 +473,7 @@ class JobCardPage extends StatelessWidget {
             Observer(builder: (_) {
               return Padding(
                 padding: const EdgeInsets.only(left: 17.0),
-                child: expandedRowShowsText("Barcode",
+                child: expandedRowShowsText2("Barcode",
                     vmJobcard.jobcardResponse.data?.barcode?.toString() ?? ''),
               );
             }),
@@ -481,7 +482,7 @@ class JobCardPage extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.only(left: 17.0),
-              child: expandedRowShowsText("Job status",
+              child: expandedRowShowsText2("Job status",
                   vmJobcard.jobcardResponse.data?.jobStatus?.toString() ?? ''),
             ),
             const SizedBox(
@@ -489,7 +490,7 @@ class JobCardPage extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.only(left: 17.0),
-              child: expandedRowShowsText(
+              child: expandedRowShowsText2(
                   "Pit Location",
                   vmJobcard.jobcardResponse.data?.pitLocation?.toString() ??
                       ''),
@@ -511,7 +512,7 @@ class JobCardPage extends StatelessWidget {
             Observer(builder: (_) {
               return Padding(
                 padding: const EdgeInsets.only(left: 17.0),
-                child: expandedRowShowsText(
+                child: expandedRowShowsText2(
                     "Smoke alarm",
                     vmJobcard.jobcardResponse.data?.smokeAlarms?.toString() ??
                         ''),
