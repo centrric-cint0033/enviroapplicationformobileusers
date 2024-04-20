@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'job_card_view_model.dart';
+part of 'shedule_page_view_model.dart';
 
 // **************************************************************************
 // StoreGenerator
@@ -25,6 +25,22 @@ mixin _$JobCardViewModel on JobCardViewModelBase, Store {
     });
   }
 
+  late final _$shedulecardResponseAtom =
+      Atom(name: 'JobCardViewModelBase.shedulecardResponse', context: context);
+
+  @override
+  ApiResponse<SheduleCardRespModel> get shedulecardResponse {
+    _$shedulecardResponseAtom.reportRead();
+    return super.shedulecardResponse;
+  }
+
+  @override
+  set shedulecardResponse(ApiResponse<SheduleCardRespModel> value) {
+    _$shedulecardResponseAtom.reportWrite(value, super.shedulecardResponse, () {
+      super.shedulecardResponse = value;
+    });
+  }
+
   late final _$jobcardviewmodelfunctionAsyncAction = AsyncAction(
       'JobCardViewModelBase.jobcardviewmodelfunction',
       context: context);
@@ -35,10 +51,21 @@ mixin _$JobCardViewModel on JobCardViewModelBase, Store {
         .run(() => super.jobcardviewmodelfunction());
   }
 
+  late final _$shedulecardviewmodelfunctionAsyncAction = AsyncAction(
+      'JobCardViewModelBase.shedulecardviewmodelfunction',
+      context: context);
+
+  @override
+  Future<void> shedulecardviewmodelfunction() {
+    return _$shedulecardviewmodelfunctionAsyncAction
+        .run(() => super.shedulecardviewmodelfunction());
+  }
+
   @override
   String toString() {
     return '''
-jobcardResponse: ${jobcardResponse}
+jobcardResponse: ${jobcardResponse},
+shedulecardResponse: ${shedulecardResponse}
     ''';
   }
 }

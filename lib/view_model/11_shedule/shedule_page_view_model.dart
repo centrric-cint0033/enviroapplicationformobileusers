@@ -1,11 +1,12 @@
 import 'package:enviro_mobile_application/api_response/api_response.dart';
 import 'package:enviro_mobile_application/model/07_Jobcard/job_card_model.dart';
-import 'package:enviro_mobile_application/service/07_job_card/job_card_service.dart';
+import 'package:enviro_mobile_application/model/12_shedulecard/shedule_card_resp_model.dart';
+import 'package:enviro_mobile_application/service/07_shedule/job_card/shedule_page_service.dart';
 import 'package:enviro_mobile_application/utilis/injection.dart';
 import 'package:injectable/injectable.dart';
 import 'package:mobx/mobx.dart';
 
-part 'job_card_view_model.g.dart';
+part 'shedule_page_view_model.g.dart';
 
 final vmJobcard = getIt<JobCardViewModel>();
 
@@ -41,6 +42,36 @@ abstract class JobCardViewModelBase with Store {
       },
       (r) {
         jobcardResponse = jobcardResponse.copyWith(
+          data: r,
+          error: null,
+          loading: false,
+        );
+      },
+    );
+  }
+
+  @observable
+  ApiResponse<SheduleCardRespModel> shedulecardResponse =
+      ApiResponse<SheduleCardRespModel>();
+
+  @action
+  Future<void> shedulecardviewmodelfunction() async {
+    print('aaaaa$jobcardResponse');
+    print('aaaaa$jobcardResponse');
+
+    shedulecardResponse =
+        shedulecardResponse.copyWith(error: null, loading: true);
+
+    final result = await jobcardService.shedulecardservicefunction();
+    return result.fold(
+      (l) {
+        shedulecardResponse = shedulecardResponse.copyWith(
+          error: l,
+          loading: false,
+        );
+      },
+      (r) {
+        shedulecardResponse = shedulecardResponse.copyWith(
           data: r,
           error: null,
           loading: false,

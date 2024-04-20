@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:enviro_mobile_application/Routepage/routespage.dart';
 import 'package:enviro_mobile_application/view/02_sales/sales_widgets.dart/sales_widget.dart';
-import 'package:enviro_mobile_application/view_model/11_job_card/job_card_view_model.dart';
+import 'package:enviro_mobile_application/view_model/11_shedule/shedule_page_view_model.dart';
 import 'package:enviro_mobile_application/widgets/cmbutton.dart';
 import 'package:enviro_mobile_application/widgets/cmn_action_icon.dart';
 import 'package:enviro_mobile_application/widgets/cmn_title_textwidget.dart';
@@ -105,6 +105,7 @@ class SheduledetailPage extends StatelessWidget {
 }
 
 void updatevehiclepreinspection(BuildContext context) {
+  vmJobcard.shedulecardviewmodelfunction();
   print('ssssspendingclicked');
   context.router.pushNamed(RouteNames.rupdatevehiclepreinspectionpage);
 }
