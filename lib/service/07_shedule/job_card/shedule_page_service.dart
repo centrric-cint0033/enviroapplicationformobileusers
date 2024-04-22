@@ -12,7 +12,7 @@ import 'package:injectable/injectable.dart';
 
 abstract class IJobCardService {
   Future<Either<MainFailure, JobCardRespModel>> jobcardservicefunction();
-  Future<Either<MainFailure, SheduleCardRespModel>>
+  Future<Either<MainFailure, List<SheduleCardRespModel>>>
       shedulecardservicefunction();
 }
 
@@ -41,7 +41,7 @@ class SalesService implements IJobCardService {
   }
 
   @override
-  Future<Either<MainFailure, SheduleCardRespModel>>
+  Future<Either<MainFailure, List<SheduleCardRespModel>>>
       shedulecardservicefunction() async {
     var response = await getIt<HttpService>().request(
         authenticated: true,
@@ -54,8 +54,10 @@ class SalesService implements IJobCardService {
         return Left(l.keys.first);
       },
       (res) async {
-        SheduleCardRespModel shedulecardlist =
-            SheduleCardRespModel.fromJson(jsonDecode(res.body));
+        var data = jsonDecode(res.body) as List;
+        List<SheduleCardRespModel> shedulecardlist =
+            List<SheduleCardRespModel>.from(
+                data.map((e) => SheduleCardRespModel.fromJson(e)));
         return Right(shedulecardlist);
       },
     );

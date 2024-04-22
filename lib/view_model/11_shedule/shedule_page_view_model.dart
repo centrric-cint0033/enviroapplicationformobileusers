@@ -51,8 +51,8 @@ abstract class JobCardViewModelBase with Store {
   }
 
   @observable
-  ApiResponse<SheduleCardRespModel> shedulecardResponse =
-      ApiResponse<SheduleCardRespModel>();
+  ApiResponse<List<SheduleCardRespModel>> shedulecardResponse =
+      ApiResponse<List<SheduleCardRespModel>>();
 
   @action
   Future<void> shedulecardviewmodelfunction() async {

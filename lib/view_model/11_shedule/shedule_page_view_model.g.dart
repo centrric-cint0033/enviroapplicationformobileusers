@@ -29,13 +29,13 @@ mixin _$JobCardViewModel on JobCardViewModelBase, Store {
       Atom(name: 'JobCardViewModelBase.shedulecardResponse', context: context);
 
   @override
-  ApiResponse<SheduleCardRespModel> get shedulecardResponse {
+  ApiResponse<List<SheduleCardRespModel>> get shedulecardResponse {
     _$shedulecardResponseAtom.reportRead();
     return super.shedulecardResponse;
   }
 
   @override
-  set shedulecardResponse(ApiResponse<SheduleCardRespModel> value) {
+  set shedulecardResponse(ApiResponse<List<SheduleCardRespModel>> value) {
     _$shedulecardResponseAtom.reportWrite(value, super.shedulecardResponse, () {
       super.shedulecardResponse = value;
     });

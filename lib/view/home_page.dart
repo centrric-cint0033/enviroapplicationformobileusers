@@ -184,6 +184,6 @@ void navigateToSitesPage({required BuildContext context}) {
 
 void shedulepagefunction(BuildContext context) async {
   vmJobcard.shedulecardviewmodelfunction();
-  vmJobcard.shedulecardviewmodelfunction();
+
   context.router.pushNamed(RouteNames.rshedulepage);
 }
