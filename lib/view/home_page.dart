@@ -8,6 +8,7 @@ import 'package:enviro_mobile_application/view_model/04_ohs/ohs_view_model.dart'
 import 'package:enviro_mobile_application/view_model/07_intranet/intranet_view_model.dart';
 import 'package:enviro_mobile_application/view_model/08_team/team_view_model.dart';
 import 'package:enviro_mobile_application/view_model/10_profile/profile_view_model.dart';
+import 'package:enviro_mobile_application/view_model/11_shedule/shedule_page_view_model.dart';
 import 'package:enviro_mobile_application/view_model/home_page/home_page_viewmodel.dart';
 import 'package:enviro_mobile_application/widgets/drawer.dart';
 
@@ -151,6 +152,7 @@ void ohsfunction(BuildContext context) {
 
 void intranetfuntion(BuildContext context) {
   vmIntranet.intranetviewmodelfunction(1);
+
   context.router.pushNamed(RouteNames.intranetpage);
 }
 
@@ -181,5 +183,7 @@ void navigateToSitesPage({required BuildContext context}) {
 }
 
 void shedulepagefunction(BuildContext context) async {
+  vmJobcard.shedulecardviewmodelfunction();
+  vmJobcard.shedulecardviewmodelfunction();
   context.router.pushNamed(RouteNames.rshedulepage);
 }

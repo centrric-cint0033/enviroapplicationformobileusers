@@ -1,5 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:enviro_mobile_application/Routepage/routespage.dart';
+import 'package:enviro_mobile_application/view/10_shedule/shedule_widget.dart';
+import 'package:enviro_mobile_application/view_model/11_shedule/shedule_page_view_model.dart';
 import 'package:enviro_mobile_application/widgets/cmn_action_icon.dart';
 import 'package:enviro_mobile_application/widgets/cmn_title_textwidget.dart';
 import 'package:enviro_mobile_application/widgets/drawer.dart';
@@ -79,15 +81,16 @@ class SchedulePage extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 10),
-                  const Padding(
+                  Padding(
                     padding: EdgeInsets.only(left: 22.0),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('Day      : 9-8-209'),
+                        expandedRowShowText2("Type of Waste(site \n profile)",
+                            vmJobcard.shedulecardResponse.data?.amount ?? ''),
                         Text('Time     : 3:00 PM'),
-                        Text('Type     :bdgbnfgn '),
-                        Text('Company : dvsdv'),
+                        Text('Type     : bdgbnfgn '),
+                        Text('Company  : dvsdv'),
                         Text('Company  : dvsdv'),
                       ],
                     ),

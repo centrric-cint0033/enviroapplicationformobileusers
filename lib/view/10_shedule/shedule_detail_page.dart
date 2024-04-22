@@ -106,7 +106,7 @@ class SheduledetailPage extends StatelessWidget {
 
 void updatevehiclepreinspection(BuildContext context) {
   vmJobcard.shedulecardviewmodelfunction();
-  print('ssssspendingclicked');
+  print('ssssspendingclickedhhhh');
   context.router.pushNamed(RouteNames.rupdatevehiclepreinspectionpage);
 }
 
