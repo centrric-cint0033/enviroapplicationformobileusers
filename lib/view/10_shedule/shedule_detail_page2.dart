@@ -46,7 +46,6 @@ class SheduledetailPage2 extends StatelessWidget {
             } else if (index >= 3 && index <= 10) {
               return buildCardDataOrder(index);
             }
-            // Removed the else block for the button
           },
           separatorBuilder: (context, index) => const SizedBox(height: 20),
           itemCount: 12,
