@@ -56,7 +56,7 @@ class SchedulePage extends StatelessWidget {
               width: 400,
               child: Observer(builder: (_) {
                 return ListView.builder(
-                  scrollDirection: Axis.horizontal,
+                  // scrollDirection: Axis.horizontal,
                   itemCount: vmJobcard.shedulecardResponse.data?.length ?? 0,
                   itemBuilder: (BuildContext context, int index) {
                     return Padding(
