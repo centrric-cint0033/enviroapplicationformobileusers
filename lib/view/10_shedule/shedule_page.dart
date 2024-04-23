@@ -18,7 +18,7 @@ class SchedulePage extends StatelessWidget {
     return Scaffold(
       drawer: CmnDrawer(context),
       appBar: AppBar(
-        title: cmnTitleWidget('Shedule'),
+        title: cmnTitleWidget('Schedule'),
         actions: [notificationButton(context)],
       ),
       body: SingleChildScrollView(
@@ -26,7 +26,7 @@ class SchedulePage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Padding(
-              padding: const EdgeInsets.all(18.0),
+              padding: const EdgeInsets.only(left: 18.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -53,13 +53,19 @@ class SchedulePage extends StatelessWidget {
             ),
             SizedBox(
               height: 400,
+              width: 400,
               child: Observer(builder: (_) {
                 return ListView.builder(
+                  scrollDirection: Axis.horizontal,
                   itemCount: vmJobcard.shedulecardResponse.data?.length ?? 0,
                   itemBuilder: (BuildContext context, int index) {
                     return Padding(
                       padding: const EdgeInsets.all(20),
                       child: Card(
+                        shape: RoundedRectangleBorder(
+                          side: const BorderSide(color: Colors.blue, width: 1),
+                          borderRadius: BorderRadius.circular(8),
+                        ),
                         elevation: 4,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -84,19 +90,21 @@ class SchedulePage extends StatelessWidget {
                                     onPressed: () {
                                       nextjobfnction(context);
                                     },
+                                    style: ElevatedButton.styleFrom(
+                                      primary: Colors.blue,
+                                      onPrimary: Colors.black,
+                                    ),
                                     child: const Text(
                                       'Next job',
-                                      style: TextStyle(color: Colors.white),
-                                    ),
-                                    style: ElevatedButton.styleFrom(
-                                      primary: Colors.green,
-                                      onPrimary: Colors.black,
+                                      style: TextStyle(
+                                        fontSize: 13,
+                                        color: Colors.white,
+                                      ),
                                     ),
                                   ),
                                 ],
                               ),
                             ),
-                            const SizedBox(height: 10),
                             Observer(builder: (_) {
                               return Padding(
                                 padding:
@@ -145,7 +153,16 @@ class SchedulePage extends StatelessWidget {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.stretch,
                                 children: [
-                                  Text('New Card Title'),
+                                  Align(
+                                    alignment: Alignment.topCenter,
+                                    child: Text(
+                                      'Drivers and vehicles',
+                                      style: TextStyle(
+                                        fontSize: 15,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ),
                                   SizedBox(height: 10),
                                   Row(
                                     children: [
