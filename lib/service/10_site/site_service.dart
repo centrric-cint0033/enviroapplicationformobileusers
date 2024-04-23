@@ -1,10 +1,8 @@
 import 'dart:convert';
 
 import 'package:enviro_mobile_application/utilis/api_endpoints/customprint.dart';
-import 'package:http/http.dart';
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
-import 'package:enviro_mobile_application/constant/base_url.dart';
 import 'package:enviro_mobile_application/utilis/main_failure.dart';
 import 'package:enviro_mobile_application/service/10_site/i_site_service.dart';
 import 'package:enviro_mobile_application/model/10_site/site_res_model/site_res_model.dart';
@@ -22,8 +20,7 @@ class SiteService implements ISiteService {
       getPermanantSites({
     int? page,
   }) async {
-    String url =
-        "${ApiEndPoints.endpointPermanentSites}?page=${page ?? 1}&limit=10";
+    String url = "${ApiEndPoints().permanentSites}?page=${page ?? 1}&limit=10";
     var response = await getIt<HttpService>().request(
       apiUrl: url,
       authenticated: true,
@@ -46,8 +43,7 @@ class SiteService implements ISiteService {
       getDeletedSites({
     int? page,
   }) async {
-    String url =
-        "${ApiEndPoints.endpointDeletedSites}?page=${page ?? 1}&limit=10";
+    String url = "${ApiEndPoints().deletedSites}?page=${page ?? 1}&limit=10";
     var response = await getIt<HttpService>().request(
       apiUrl: url,
       authenticated: true,
@@ -70,8 +66,7 @@ class SiteService implements ISiteService {
       getTemporarySites({
     int? page,
   }) async {
-    String url =
-        "${ApiEndPoints.endpointTemporarySites}?page=${page ?? 1}&limit=10";
+    String url = "${ApiEndPoints().temporarySites}?page=${page ?? 1}&limit=10";
     var response = await getIt<HttpService>().request(
       apiUrl: url,
       authenticated: true,
@@ -96,7 +91,7 @@ class SiteService implements ISiteService {
     var response = await getIt<HttpService>().request(
       authenticated: true,
       method: HttpMethod.get,
-      apiUrl: "${ApiEndPoints.endpointSiteDetail}$id/",
+      apiUrl: "${ApiEndPoints().siteDetail}$id/",
     );
 
     return response.fold(
@@ -115,7 +110,7 @@ class SiteService implements ISiteService {
     var response = await getIt<HttpService>().request(
       authenticated: true,
       method: HttpMethod.get,
-      apiUrl: "${ApiEndPoints.endpointSiteFolders}$id/1/",
+      apiUrl: "${ApiEndPoints().siteFolders}$id/1/",
     );
 
     return response.fold(
@@ -134,7 +129,7 @@ class SiteService implements ISiteService {
   }) async {
     customPrint(content: key);
     var response = await getIt<HttpService>().multipartRequest(
-      apiUrl: ApiEndPoints.endpointSearchSite,
+      apiUrl: ApiEndPoints().searchSite,
       data: {"key": key},
       method: "POST",
     );
@@ -157,7 +152,7 @@ class SiteService implements ISiteService {
     customPrint(content: key);
     var response = await getIt<HttpService>().multipartRequest(
       method: "POST",
-      apiUrl: ApiEndPoints.endpointSearchSiteFolder,
+      apiUrl: ApiEndPoints().searchSiteFolder,
       data: {
         "key": key,
         "site": 1294,
@@ -181,7 +176,7 @@ class SiteService implements ISiteService {
     var response = await getIt<HttpService>().request(
       authenticated: true,
       method: HttpMethod.get,
-      apiUrl: "${ApiEndPoints.endpointWasteTypeInSite}$id/",
+      apiUrl: "${ApiEndPoints().wasteTypeInSite}$id/",
     );
 
     return response.fold(

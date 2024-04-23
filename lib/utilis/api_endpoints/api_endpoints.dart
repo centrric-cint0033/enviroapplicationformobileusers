@@ -1,8 +1,10 @@
 import 'package:enviro_mobile_application/utilis/api_endpoints/01_sales_endpoints.dart';
 import 'package:enviro_mobile_application/utilis/api_endpoints/02_vehicle_endpoints.dart';
+import 'package:enviro_mobile_application/utilis/api_endpoints/04_site_endpoints.dart';
 import 'package:enviro_mobile_application/utilis/api_endpoints/07_team_endpoints.dart';
 
-class ApiEndPoints with SalesEndpoint, VehicleEndpoint, TeamEndpoints {
+class ApiEndPoints
+    with SalesEndpoint, VehicleEndpoint, TeamEndpoints, SiteEndpoint {
   static final ApiEndPoints _singleton = ApiEndPoints._internal();
 
   factory ApiEndPoints() {
@@ -29,16 +31,8 @@ class ApiEndPoints with SalesEndpoint, VehicleEndpoint, TeamEndpoints {
   static const endpointnotificationlist =
       '/api/v1/oh_and_s/notification/view/1/?limit=8';
   static const endpointnewsfldrrename = '/api/v1/drive/folder/rename/3260/';
-  static const endpointPermanentSites = '/api/v1/clients/all/alpha_asc/waste/';
-  static const endpointTemporarySites =
-      '/api/v1/clients/temporary-client/list/alpha_asc/waste/';
-  static const endpointDeletedSites =
-      '/api/v1/clients/deleted-client/list/alpha_asc/waste/';
-  static const endpointSiteDetail = '/api/v1/clients/single/';
+
   static const endpointPreviousSale = '/api/v1/jobs/previous/sale/';
-  static const endpointSiteFolders = '/api/v1/drive/site/folder/';
-  static const endpointSearchSite = '/api/v1/clients/searchClient/all/waste/';
-  static const endpointSearchSiteFolder = '/api/v1/drive/site/search/folder/';
   static const endpointnewsfldrdlte = '/api/v1/drive/folder/delete';
   static const endpointintranetfldrlstng =
       '/api/v1/intranet_archive/folder/segment';
@@ -47,5 +41,4 @@ class ApiEndPoints with SalesEndpoint, VehicleEndpoint, TeamEndpoints {
   static const endpointjobcard = '/api/v1/jobs/card/info/view/2054865';
 
   // SITE APIS
-  static const endpointWasteTypeInSite = '/api/v1/clients/childs/available/';
 }
