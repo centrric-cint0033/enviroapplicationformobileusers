@@ -59,157 +59,166 @@ class SchedulePage extends StatelessWidget {
                   scrollDirection: Axis.horizontal,
                   itemCount: vmJobcard.shedulecardResponse.data?.length ?? 0,
                   itemBuilder: (BuildContext context, int index) {
-                    return Padding(
-                      padding: const EdgeInsets.all(20),
-                      child: Card(
-                        shape: RoundedRectangleBorder(
-                          side: const BorderSide(color: Colors.blue, width: 1),
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        elevation: 4,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 20, vertical: 20),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 68.0),
-                                    child: Text(
-                                      vmJobcard.shedulecardResponse.data?[index]
-                                              .salesPerson
-                                              .toString() ??
-                                          '',
-                                    ),
-                                  ),
-                                  ElevatedButton(
-                                    onPressed: () {
-                                      nextjobfnction(context);
-                                    },
-                                    style: ElevatedButton.styleFrom(
-                                      primary: Colors.blue,
-                                      onPrimary: Colors.black,
-                                    ),
-                                    child: const Text(
-                                      'Next job',
-                                      style: TextStyle(
-                                        fontSize: 13,
-                                        color: Colors.white,
+                    return SizedBox(
+                      width: 400,
+                      child: Padding(
+                        padding: const EdgeInsets.all(20),
+                        child: Card(
+                          shape: RoundedRectangleBorder(
+                            side:
+                                const BorderSide(color: Colors.blue, width: 1),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          elevation: 4,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 20, vertical: 20),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Padding(
+                                      padding:
+                                          const EdgeInsets.only(left: 68.0),
+                                      child: Text(
+                                        vmJobcard.shedulecardResponse
+                                                .data?[index].salesPerson
+                                                .toString() ??
+                                            '',
                                       ),
                                     ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Observer(builder: (_) {
-                              return Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 22),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    expandedRowShowText2(
-                                      "Day",
-                                      (vmJobcard.shedulecardResponse
-                                                  .data?[index].startDate ??
-                                              '')
-                                          .toString(),
-                                    ),
-                                    expandedRowShowText2(
-                                      "Time",
-                                      vmJobcard.shedulecardResponse.data?[index]
-                                              .startTime ??
-                                          '',
-                                    ),
-                                    expandedRowShowText2(
-                                      "Type",
-                                      vmJobcard.shedulecardResponse.data?[index]
-                                              .wasteTypeStr ??
-                                          '',
-                                    ),
-                                    expandedRowShowText2(
-                                      "Company",
-                                      vmJobcard.shedulecardResponse.data?[index]
-                                              .outsourcedCompanyName ??
-                                          '',
-                                    ),
-                                    expandedRowShowText2(
-                                      "Status",
-                                      vmJobcard.shedulecardResponse.data?[index]
-                                              .status ??
-                                          '',
+                                    ElevatedButton(
+                                      onPressed: () {
+                                        nextjobfnction(context);
+                                      },
+                                      style: ElevatedButton.styleFrom(
+                                        primary: Colors.blue,
+                                        onPrimary: Colors.black,
+                                      ),
+                                      child: const Text(
+                                        'Next job',
+                                        style: TextStyle(
+                                          fontSize: 13,
+                                          color: Colors.white,
+                                        ),
+                                      ),
                                     ),
                                   ],
                                 ),
-                              );
-                            }),
-                            const SizedBox(height: 10),
-                            const Card(
-                              color: Colors.blue,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.stretch,
-                                children: [
-                                  Align(
-                                    alignment: Alignment.topCenter,
-                                    child: Text(
-                                      'Drivers and vehicles',
-                                      style: TextStyle(
-                                        fontSize: 15,
-                                        color: Colors.white,
+                              ),
+                              Observer(builder: (_) {
+                                return Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 22),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      expandedRowShowText2(
+                                        "Day",
+                                        (vmJobcard.shedulecardResponse
+                                                    .data?[index].startDate ??
+                                                '')
+                                            .toString(),
+                                      ),
+                                      expandedRowShowText2(
+                                        "Time",
+                                        vmJobcard.shedulecardResponse
+                                                .data?[index].startTime ??
+                                            '',
+                                      ),
+                                      expandedRowShowText2(
+                                        "Type",
+                                        vmJobcard.shedulecardResponse
+                                                .data?[index].wasteTypeStr ??
+                                            '',
+                                      ),
+                                      expandedRowShowText2(
+                                        "Company",
+                                        vmJobcard
+                                                .shedulecardResponse
+                                                .data?[index]
+                                                .outsourcedCompanyName ??
+                                            '',
+                                      ),
+                                      expandedRowShowText2(
+                                        "Status",
+                                        vmJobcard.shedulecardResponse
+                                                .data?[index].status ??
+                                            '',
+                                      ),
+                                    ],
+                                  ),
+                                );
+                              }),
+                              const SizedBox(height: 10),
+                              const Card(
+                                color: Colors.blue,
+                                child: Column(
+                                  crossAxisAlignment:
+                                      CrossAxisAlignment.stretch,
+                                  children: [
+                                    Align(
+                                      alignment: Alignment.topCenter,
+                                      child: Text(
+                                        'Drivers and vehicles',
+                                        style: TextStyle(
+                                          fontSize: 15,
+                                          color: Colors.white,
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                  SizedBox(height: 10),
-                                  Row(
-                                    children: [
-                                      Expanded(
-                                        child: Card(
-                                          color: Colors.white,
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text('beverytyh'),
-                                              Text("vghadxcsdgjhacb")
-                                            ],
+                                    SizedBox(height: 10),
+                                    Row(
+                                      children: [
+                                        Expanded(
+                                          child: Card(
+                                            color: Colors.white,
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text('beverytyh'),
+                                                Text("vghadxcsdgjhacb")
+                                              ],
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                      Expanded(
-                                        child: Card(
-                                          color: Colors.white,
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                'First Text',
-                                                style: TextStyle(
-                                                  fontSize: 16,
-                                                  fontWeight: FontWeight.bold,
+                                        Expanded(
+                                          child: Card(
+                                            color: Colors.white,
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  'First Text',
+                                                  style: TextStyle(
+                                                    fontSize: 16,
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
                                                 ),
-                                              ),
-                                              Text(
-                                                'Second Text',
-                                                style: TextStyle(
-                                                  fontSize: 14,
-                                                  fontStyle: FontStyle.italic,
+                                                Text(
+                                                  'Second Text',
+                                                  style: TextStyle(
+                                                    fontSize: 14,
+                                                    fontStyle: FontStyle.italic,
+                                                  ),
                                                 ),
-                                              ),
-                                            ],
+                                              ],
+                                            ),
                                           ),
-                                        ),
-                                      )
-                                    ],
-                                  )
-                                ],
+                                        )
+                                      ],
+                                    )
+                                  ],
+                                ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
                     );
