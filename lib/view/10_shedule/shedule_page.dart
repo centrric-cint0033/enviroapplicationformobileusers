@@ -155,13 +155,13 @@ class SchedulePage extends StatelessWidget {
                                 );
                               }),
                               const SizedBox(height: 10),
-                              const Card(
+                              Card(
                                 color: Colors.blue,
                                 child: Column(
                                   crossAxisAlignment:
                                       CrossAxisAlignment.stretch,
                                   children: [
-                                    Align(
+                                    const Align(
                                       alignment: Alignment.topCenter,
                                       child: Text(
                                         'Drivers and vehicles',
@@ -175,43 +175,45 @@ class SchedulePage extends StatelessWidget {
                                     Row(
                                       children: [
                                         Expanded(
-                                          child: Card(
-                                            color: Colors.white,
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Text('beverytyh'),
-                                                Text("vghadxcsdgjhacb")
-                                              ],
-                                            ),
-                                          ),
+                                          child: Observer(builder: (_) {
+                                            return ListView.builder(
+                                              scrollDirection: Axis.horizontal,
+                                              itemCount: vmJobcard
+                                                      .shedulecardResponse
+                                                      .data
+                                                      ?.length ??
+                                                  0,
+                                              itemBuilder:
+                                                  (BuildContext context,
+                                                      int index) {
+                                                return Padding(
+                                                  padding: EdgeInsets.all(8.0),
+                                                  child: Card(
+                                                    color: Colors.white,
+                                                    child: Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Observer(builder: (_) {
+                                                          return Text(
+                                                            vmJobcard
+                                                                    .shedulecardResponse
+                                                                    .data?[
+                                                                        index]
+                                                                    .status ??
+                                                                '',
+                                                          );
+                                                        }),
+                                                        Text("vghadxcsdgjhacb"),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                );
+                                              },
+                                            );
+                                          }),
                                         ),
-                                        Expanded(
-                                          child: Card(
-                                            color: Colors.white,
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                  'First Text',
-                                                  style: TextStyle(
-                                                    fontSize: 16,
-                                                    fontWeight: FontWeight.bold,
-                                                  ),
-                                                ),
-                                                Text(
-                                                  'Second Text',
-                                                  style: TextStyle(
-                                                    fontSize: 14,
-                                                    fontStyle: FontStyle.italic,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        )
                                       ],
                                     )
                                   ],
