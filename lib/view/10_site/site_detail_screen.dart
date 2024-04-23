@@ -33,7 +33,6 @@ class SiteDetailScreen extends StatelessWidget {
         SiteResModel? site = _getSite(index: index, type: type);
         Map<String, String> map = _getSiteMap(site!);
         Map<String, String> company = _getEntityMap(site);
-        List<Folder> folders = _getFolderData();
         return Scaffold(
           appBar: AppBar(
             elevation: 1,
@@ -110,7 +109,8 @@ class SiteDetailScreen extends StatelessWidget {
                     ),
                   },
                   FolderTitleAndSearchWidget(id: site.id),
-                  SiteFolderListWidget(folders: folders),
+                  SiteFolderListWidget(
+                      folderData: vmSite.siteFolderResponse, id: site.id),
                   sized0hx10,
                   const PreviouseSalesWidget(),
                 ],
@@ -120,14 +120,6 @@ class SiteDetailScreen extends StatelessWidget {
         );
       },
     );
-  }
-}
-
-List<Folder> _getFolderData() {
-  try {
-    return vmSite.siteFolderResponse.data?.folders?.first.folders ?? [];
-  } catch (e) {
-    return [];
   }
 }
 

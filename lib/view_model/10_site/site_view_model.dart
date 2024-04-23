@@ -289,10 +289,8 @@ abstract class SiteViewModelBase with Store {
 
   @action
   Future<void> getSiteFolders({required int id}) async {
-    siteFolderResponse = siteFolderResponse.copyWith(
-      error: null,
-      loading: true,
-    );
+    siteFolderResponse =
+        siteFolderResponse.copyWith(errors: null, loading: true);
     final response = await siteService.getSiteFolders(id: id);
     response.fold(
       (l) {
@@ -301,10 +299,7 @@ abstract class SiteViewModelBase with Store {
       },
       (res) {
         siteFolderResponse = siteFolderResponse.copyWith(
-          data: res,
-          error: null,
-          loading: false,
-        );
+            data: res, errors: null, loading: false);
       },
     );
   }
@@ -342,19 +337,19 @@ abstract class SiteViewModelBase with Store {
 
   @action
   Future<void> searchSiteFolders({required String key}) async {
+    siteFolderResponse =
+        siteFolderResponse.copyWith(errors: null, loading: true);
     final response = await siteService.searchSiteFolder(key: key);
     response.fold(
       (l) {
-        siteFolderResponse = siteFolderResponse.copyWith(
-          errors: l,
-          loading: false,
-        );
+        siteFolderResponse =
+            siteFolderResponse.copyWith(errors: l, loading: false);
       },
       (res) {
         FolderResModel? data = siteFolderResponse.data;
         FolderListModel? model = data?.folders?.first;
         siteFolderResponse = siteFolderResponse.copyWith(
-          error: null,
+          errors: null,
           loading: false,
           data: data?.copyWith(
             folders: [if (model != null) model.copyWith(folders: res)],
