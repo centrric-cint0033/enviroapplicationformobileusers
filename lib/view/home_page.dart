@@ -157,6 +157,7 @@ void intranetfuntion(BuildContext context) {
 }
 
 void calenderfunction(BuildContext context) {
+  vmJobcard.shedulecardviewmodelfunction();
   context.router.pushNamed(RouteNames.rshedulepage);
   print('Notification button tapped!');
 }
@@ -183,6 +184,7 @@ void navigateToSitesPage({required BuildContext context}) {
 }
 
 void shedulepagefunction(BuildContext context) async {
+  print('dvsdv');
   vmJobcard.shedulecardviewmodelfunction();
 
   context.router.pushNamed(RouteNames.rshedulepage);
