@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:enviro_mobile_application/utilis/api_endpoints/customprint.dart';
 import 'package:mobx/mobx.dart';
 import 'package:flutter/material.dart';
@@ -24,6 +26,18 @@ class SiteViewModel extends SiteViewModelBase with _$SiteViewModel {
 abstract class SiteViewModelBase with Store {
   final ISiteService siteService;
   SiteViewModelBase(this.siteService);
+
+  TextEditingController siteFolderCtr = TextEditingController();
+
+  Timer? debouce;
+
+  void onTextChanged(Function() function) {
+    // Clear the previous debounce timer
+    if (debouce?.isActive ?? false) debouce?.cancel();
+
+    // Set up a new debounce timer
+    debouce = Timer(const Duration(milliseconds: 500), () => function());
+  }
 
   @observable
   ApiResponse<List<SiteResModel>> permanentSiteResponse =
@@ -302,7 +316,7 @@ abstract class SiteViewModelBase with Store {
   }) async {
     customPrint(content: key);
     customPrint(content: type);
-    final response = await siteService.searchSites(key: key);
+    final response = await siteService.searchSitesServiceApi(key: key);
     response.fold(
       (l) {},
       (res) {

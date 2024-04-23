@@ -25,7 +25,8 @@ abstract class ISiteService {
     required int id,
   });
 
-  Future<Either<Map<MainFailure, dynamic>, List<SiteResModel>>> searchSites({
+  Future<Either<Map<MainFailure, dynamic>, List<SiteResModel>>>
+      searchSitesServiceApi({
     required String key,
   });
   Future<Either<Map<MainFailure, dynamic>, List<Folder>>> searchSiteFolder({

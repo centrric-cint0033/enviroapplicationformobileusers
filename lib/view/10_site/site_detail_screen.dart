@@ -109,7 +109,7 @@ class SiteDetailScreen extends StatelessWidget {
                       ),
                     ),
                   },
-                  const FolderTitleAndSearchWidget(),
+                  FolderTitleAndSearchWidget(id: site.id),
                   SiteFolderListWidget(folders: folders),
                   sized0hx10,
                   const PreviouseSalesWidget(),

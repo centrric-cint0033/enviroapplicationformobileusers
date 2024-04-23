@@ -22,7 +22,9 @@ SiteType getSiteType(int tab) {
 
 dynamic onChanged(String v) {
   customPrint(content: v);
-  vmSite.searchSites(key: v, type: getSiteType(vmSite.selectedTab));
+
+  vmSite.onTextChanged(
+      () => vmSite.searchSites(key: v, type: getSiteType(vmSite.selectedTab)));
 }
 
 void navigateToSiteDetailScreen({

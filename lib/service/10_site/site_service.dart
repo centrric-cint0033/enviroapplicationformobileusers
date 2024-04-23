@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:enviro_mobile_application/utilis/api_endpoints/customprint.dart';
 import 'package:http/http.dart';
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
@@ -127,14 +128,16 @@ class SiteService implements ISiteService {
   }
 
   @override
-  Future<Either<Map<MainFailure, dynamic>, List<SiteResModel>>> searchSites({
+  Future<Either<Map<MainFailure, dynamic>, List<SiteResModel>>>
+      searchSitesServiceApi({
     required String key,
   }) async {
-    MultipartRequest request = MultipartRequest(
-        "POST", Uri.parse("$baseUrl${ApiEndPoints.endpointSearchSite}"));
-    request.fields['key'] = key;
-    var response =
-        await getIt<HttpService>().multipartRequest(mRequest: request);
+    customPrint(content: key);
+    var response = await getIt<HttpService>().multipartRequest(
+      apiUrl: ApiEndPoints.endpointSearchSite,
+      data: {"key": key},
+      method: "POST",
+    );
 
     return response.fold(
       (l) => Left(l),
@@ -151,20 +154,21 @@ class SiteService implements ISiteService {
   Future<Either<Map<MainFailure, dynamic>, List<Folder>>> searchSiteFolder({
     required String key,
   }) async {
-    MultipartRequest request = MultipartRequest(
-        "POST", Uri.parse("$baseUrl${ApiEndPoints.endpointSearchSiteFolder}"));
-    request.fields['key'] = key;
-    request.fields['site'] = "1294";
-    request.fields['folder_id'] = "1";
-    request.fields['search_type'] = "site-individual-private";
-    var response =
-        await getIt<HttpService>().multipartRequest(mRequest: request);
-
+    customPrint(content: key);
+    var response = await getIt<HttpService>().multipartRequest(
+      method: "POST",
+      apiUrl: ApiEndPoints.endpointSearchSiteFolder,
+      data: {
+        "key": key,
+        "site": 1294,
+        "folder_id": 1,
+        "search_type": "site-individual-private",
+      },
+    );
     return response.fold(
       (l) => Left(l),
       (res) async {
         var data = jsonDecode(res.body) as List;
-
         List<Folder> folders = data.map((e) => Folder.fromJson(e)).toList();
         return Right(folders);
       },
