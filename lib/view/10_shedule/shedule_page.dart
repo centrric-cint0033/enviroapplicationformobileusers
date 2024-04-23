@@ -52,7 +52,7 @@ class SchedulePage extends StatelessWidget {
               ),
             ),
             SizedBox(
-              height: 250,
+              height: 400,
               child: Observer(builder: (_) {
                 return ListView.builder(
                   itemCount: vmJobcard.shedulecardResponse.data?.length ?? 0,
@@ -71,11 +71,13 @@ class SchedulePage extends StatelessWidget {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  const Text(
-                                    'Recharge',
-                                    style: TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold,
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 68.0),
+                                    child: Text(
+                                      vmJobcard.shedulecardResponse.data?[index]
+                                              .salesPerson
+                                              .toString() ??
+                                          '',
                                     ),
                                   ),
                                   ElevatedButton(
@@ -103,14 +105,36 @@ class SchedulePage extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     expandedRowShowText2(
-                                      "Site Name",
+                                      "Day",
+                                      (vmJobcard.shedulecardResponse
+                                                  .data?[index].startDate ??
+                                              '')
+                                          .toString(),
+                                    ),
+                                    expandedRowShowText2(
+                                      "Time",
+                                      vmJobcard.shedulecardResponse.data?[index]
+                                              .startTime ??
+                                          '',
+                                    ),
+                                    expandedRowShowText2(
+                                      "Type",
+                                      vmJobcard.shedulecardResponse.data?[index]
+                                              .wasteTypeStr ??
+                                          '',
+                                    ),
+                                    expandedRowShowText2(
+                                      "Company",
+                                      vmJobcard.shedulecardResponse.data?[index]
+                                              .outsourcedCompanyName ??
+                                          '',
+                                    ),
+                                    expandedRowShowText2(
+                                      "Status",
                                       vmJobcard.shedulecardResponse.data?[index]
                                               .status ??
                                           '',
                                     ),
-                                    const Text('Type     : bdgbnfgn '),
-                                    const Text('Company  : dvsdv'),
-                                    const Text('Company  : dvsdv'),
                                   ],
                                 ),
                               );
