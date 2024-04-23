@@ -47,7 +47,7 @@ class TeamService implements IteamService {
     var response = await getIt<HttpService>().request(
         authenticated: true,
         method: HttpMethod.get,
-        apiUrl: ApiEndPoints.currentEmployeelist);
+        apiUrl: ApiEndPoints().currentEmployeelist);
 
     return response.fold(
       (l) => Left(l),
@@ -66,7 +66,7 @@ class TeamService implements IteamService {
     var response = await getIt<HttpService>().request(
         authenticated: true,
         method: HttpMethod.get,
-        apiUrl: ApiEndPoints.terminatedEmployeelist);
+        apiUrl: ApiEndPoints().terminatedEmployeelist);
 
     return response.fold(
       (l) => Left(l),
@@ -85,7 +85,7 @@ class TeamService implements IteamService {
     var response = await getIt<HttpService>().request(
         authenticated: true,
         method: HttpMethod.get,
-        apiUrl: "${ApiEndPoints.teamprofileEmployeeDetailList}/$employeeID/");
+        apiUrl: "${ApiEndPoints().teamprofileEmployeeDetailList}/$employeeID/");
 
     return response.fold(
       (l) => Left(l),
@@ -104,7 +104,7 @@ class TeamService implements IteamService {
     var response = await getIt<HttpService>().request(
         authenticated: true,
         method: HttpMethod.get,
-        apiUrl: '${ApiEndPoints.teamFolder}/$id/1');
+        apiUrl: '${ApiEndPoints().teamFolder}/$id/1');
 
     return response.fold(
       (l) => Left(l),
@@ -121,7 +121,7 @@ class TeamService implements IteamService {
   Future<Either<Map<MainFailure, dynamic>, TeamCreateFolderReqModel>>
       addTeamFolders({required Map<String, String> data}) async {
     var response = await getIt<HttpService>().multipartRequest(
-        data: data, method: 'POST', apiUrl: ApiEndPoints.addTeamFolder);
+        data: data, method: 'POST', apiUrl: ApiEndPoints().addTeamFolder);
     return response.fold(
       (l) => Left(l),
       (res) async {
@@ -139,7 +139,7 @@ class TeamService implements IteamService {
     var response = await getIt<HttpService>().request(
         authenticated: true,
         method: HttpMethod.delete,
-        apiUrl: '${ApiEndPoints.teamFolderDelete}/$id/');
+        apiUrl: '${ApiEndPoints().teamFolderDelete}/$id/');
 
     return response.fold(
       (l) => Left(l),
@@ -155,7 +155,7 @@ class TeamService implements IteamService {
     var response = await getIt<HttpService>().multipartRequest(
         data: data,
         method: 'PUT',
-        apiUrl: '${ApiEndPoints.teamFolderEdit}/$id/');
+        apiUrl: '${ApiEndPoints().teamFolderEdit}/$id/');
     return response.fold(
       (l) => Left(l),
       (res) async {
@@ -170,7 +170,7 @@ class TeamService implements IteamService {
     var response = await getIt<HttpService>().request(
         authenticated: true,
         method: HttpMethod.get,
-        apiUrl: ApiEndPoints.teamDesignations);
+        apiUrl: ApiEndPoints().teamDesignations);
 
     return response.fold(
       (l) => Left(l),
@@ -189,7 +189,7 @@ class TeamService implements IteamService {
     var response = await getIt<HttpService>().request(
         authenticated: true,
         method: HttpMethod.delete,
-        apiUrl: '${ApiEndPoints.deleteEmployee}/$id/');
+        apiUrl: '${ApiEndPoints().deleteEmployee}/$id/');
     return response.fold(
       (l) => Left(l),
       (res) async {
@@ -202,7 +202,7 @@ class TeamService implements IteamService {
   Future<Either<Map<MainFailure, dynamic>, List<TeamResModel>>>
       employeeSearchApi({required Map<String, String> data}) async {
     var response = await getIt<HttpService>().multipartRequest(
-        data: data, method: 'POST', apiUrl: ApiEndPoints.searchEmployeeList);
+        data: data, method: 'POST', apiUrl: ApiEndPoints().searchEmployeeList);
     return response.fold(
       (l) => Left(l),
       (res) async {
@@ -218,7 +218,7 @@ class TeamService implements IteamService {
   Future<Either<Map<MainFailure, dynamic>, CreateTeamReqModel>> createTeamApi(
       {required Map<String, dynamic> data}) async {
     var response = await getIt<HttpService>().multipartRequest(
-        data: data, method: 'POST', apiUrl: ApiEndPoints.createEmployee);
+        data: data, method: 'POST', apiUrl: ApiEndPoints().createEmployee);
     return response.fold(
       (l) => Left(l),
       (res) async {
@@ -235,7 +235,7 @@ class TeamService implements IteamService {
     var response = await getIt<HttpService>().multipartRequest(
         data: data,
         method: 'PATCH',
-        apiUrl: "${ApiEndPoints.editEmployee}/$employeeId/");
+        apiUrl: "${ApiEndPoints().editEmployee}/$employeeId/");
     return response.fold(
       (l) => Left(l),
       (res) async {
