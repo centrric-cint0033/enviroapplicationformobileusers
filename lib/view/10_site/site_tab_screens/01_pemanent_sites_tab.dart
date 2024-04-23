@@ -5,7 +5,6 @@ import 'package:enviro_mobile_application/view/10_site/widgets/site_tile_widget.
 import 'package:enviro_mobile_application/view_model/10_site/site_view_model.dart';
 import 'package:enviro_mobile_application/widgets/ww_response_handler.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -18,15 +17,14 @@ class PermanentSitesTab extends StatelessWidget {
       builder: (context) {
         List<SiteResModel> sites =
             vmSite.permanentSiteResponse.data?.toList() ?? [];
-        return RefreshIndicator(
+        return WWResponseHandler(
+            data: vmSite.permanentSiteResponse,
             onRefresh: () async => vmSite.getPermanentSites(),
-            child: WWResponseHandler(
-                data: vmSite.permanentSiteResponse,
-                isEmpty: vmSite.permanentSiteResponse.data?.isEmpty ?? true,
-                onTap: () => vmSite.searchCtr.text.isNotEmpty
-                    ? onChanged(vmSite.searchCtr.text)
-                    : vmSite.permanentSitesPagination(),
-                child: PermanentSitesLIstWidget(sites: sites)));
+            isEmpty: vmSite.permanentSiteResponse.data?.isEmpty ?? true,
+            onTap: () => vmSite.searchCtr.text.isNotEmpty
+                ? onChanged(vmSite.searchCtr.text)
+                : vmSite.getPermanentSites(),
+            child: PermanentSitesLIstWidget(sites: sites));
       },
     );
   }

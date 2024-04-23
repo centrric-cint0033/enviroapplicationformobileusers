@@ -26,6 +26,7 @@ class MasterCarTab extends StatelessWidget {
         return Expanded(
             child: WWResponseHandler(
                 data: vmVehicle.masterCarApiResponse,
+                onRefresh: () async => vmVehicle.masterCarApi(),
                 isEmpty: vmVehicle.masterCarApiResponse.data?.isEmpty ?? true,
                 onTap: () => vmVehicle.vehicleTextCtr.text.isNotEmpty
                     ? vmVehicle

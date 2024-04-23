@@ -27,6 +27,7 @@ class MasterTruckTab extends StatelessWidget {
         return Expanded(
             child: WWResponseHandler(
                 data: vmVehicle.masterTruckApiResponse,
+                onRefresh: () async => vmVehicle.masterTruckApi(),
                 isEmpty: vmVehicle.masterTruckApiResponse.data?.isEmpty ?? true,
                 onTap: () => vmVehicle.vehicleTextCtr.text.isNotEmpty
                     ? vmVehicle.masterTruckSearchServiceApi(
