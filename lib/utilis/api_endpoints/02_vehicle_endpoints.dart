@@ -1,3 +1,4 @@
+// ignore: file_names
 mixin class VehicleEndpoint {
   // VEHICLE APIS
 

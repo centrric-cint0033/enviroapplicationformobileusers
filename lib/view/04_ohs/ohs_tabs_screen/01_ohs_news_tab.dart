@@ -9,170 +9,25 @@ import 'package:enviro_mobile_application/widgets/ww_response_handler.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
-class NewsPage extends StatelessWidget {
+class NewsOhsTab extends StatelessWidget {
   TextEditingController textFolderController = TextEditingController();
 
-  NewsPage({super.key});
+  NewsOhsTab({super.key});
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: Scaffold(
-        body: SingleChildScrollView(
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(right: 16.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    TextButton(
-                      onPressed: () {
-                        _showMyDialog(context);
-                      },
-                      style: ButtonStyle(
-                        side: MaterialStateProperty.all<BorderSide>(
-                          const BorderSide(color: Colors.blue),
-                        ),
-                        backgroundColor: MaterialStateProperty.all<Color>(
-                          const Color.fromARGB(255, 188, 209, 228),
-                        ),
-                        shape: MaterialStateProperty.all<OutlinedBorder>(
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(18.0),
-                          ),
-                        ),
-                      ),
-                      child: const Text(
-                        'Add New+',
-                        style: TextStyle(color: Colors.blue),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 15),
-              Observer(
-                builder: (_) {
-                  return SizedBox(
-                    child: WWResponseHandler(
-                      data: vmOhs.newspageResponse,
-                      isEmpty: vmOhs.newspageResponse.data?.isEmpty ?? true,
-                      onTap: () => vmOhs.ohsnewsviewmodelfunction(),
-                      child: ListView.separated(
-                        physics: const NeverScrollableScrollPhysics(),
-                        shrinkWrap: true,
-                        itemCount: vmOhs.newspageResponse.data?.length ?? 0,
-                        separatorBuilder: (BuildContext context, int index) =>
-                            const SizedBox(height: 12.0),
-                        itemBuilder: (context, index) {
-                          var data = vmOhs.newspageResponse.data?[index];
-                          return GestureDetector(
-                            onTap: () => _handleViewButtonTap(context),
-                            child: Container(
-                              height: 120,
-                              width: double.infinity,
-                              child: GestureDetector(
-                                onTap: () =>
-                                    ohsdetailpagefunction(context, data),
-                                child: Card(
-                                  color:
-                                      const Color.fromARGB(255, 188, 209, 228),
-                                  child: Container(
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(left: 94),
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        children: [
-                                          // Text(
-                                          //   data?.description ?? '',
-                                          // ),
-                                          ListTile(
-                                            title: Text(
-                                              data?.title ?? '',
-                                              style: const TextStyle(
-                                                fontSize: 18,
-                                                fontWeight: FontWeight.bold,
-                                              ),
-                                            ),
-                                            subtitle: Text(
-                                              data?.created_by ?? '',
-                                              style:
-                                                  const TextStyle(fontSize: 16),
-                                            ),
-                                            trailing: TextButton(
-                                              onPressed: () =>
-                                                  _handleViewButtonTap(context),
-                                              style: ButtonStyle(
-                                                side: MaterialStateProperty.all<
-                                                    BorderSide>(
-                                                  const BorderSide(
-                                                      color: Colors.blue),
-                                                ),
-                                                backgroundColor:
-                                                    MaterialStateProperty.all<
-                                                        Color>(
-                                                  const Color.fromARGB(
-                                                      255, 188, 209, 228),
-                                                ),
-                                                shape: MaterialStateProperty
-                                                    .all<OutlinedBorder>(
-                                                  RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            18.0),
-                                                  ),
-                                                ),
-                                              ),
-                                              child: GestureDetector(
-                                                onTap: () =>
-                                                    ohsdetailpagefunction(
-                                                        context, data),
-                                                child: const Text(
-                                                  'View',
-                                                  style: TextStyle(
-                                                      color: Colors.blue),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          );
-                        },
-                      ),
-                    ),
-                  );
-                },
-              ),
-              const SizedBox(height: 10),
-              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-                const Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Text('Folders'),
-                ),
-                Observer(builder: (_) {
-                  return TextButton(
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(right: 16.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  TextButton(
                     onPressed: () {
-                      showMyfolderDialog(context, textFolderController,
-                          () async {
-                        String folderName = textFolderController.text;
-
-                        log(textFolderController.text);
-                        if (folderName.isNotEmpty) {
-                          Navigator.of(context).pop();
-                          await vmOhs.ohsfoldercreationviewmodelfunction(
-                              folderName, 1);
-                        } else {}
-                      });
+                      _showMyDialog(context);
                     },
                     style: ButtonStyle(
                       side: MaterialStateProperty.all<BorderSide>(
@@ -188,54 +43,194 @@ class NewsPage extends StatelessWidget {
                       ),
                     ),
                     child: const Text(
-                      'Add folder+',
+                      'Add New+',
                       style: TextStyle(color: Colors.blue),
                     ),
-                  );
-                }),
-              ]),
-              const SizedBox(height: 18),
-              Container(
-                height: 50,
-                width: double.infinity,
-                child: Cmformfield(
-                  borderColor: Colors.black12,
-                  cursorHeight: 15,
-                  hinttext: 'Search by folder name',
-                  width: double.infinity,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(35),
                   ),
-                ),
+                ],
               ),
-              const SizedBox(height: 16),
+            ),
+            const SizedBox(height: 15),
+            Observer(
+              builder: (_) {
+                return SizedBox(
+                  child: WWResponseHandler(
+                    data: vmOhs.newspageResponse,
+                    isEmpty: vmOhs.newspageResponse.data?.isEmpty ?? true,
+                    onTap: () => vmOhs.ohsnewsviewmodelfunction(),
+                    child: ListView.separated(
+                      physics: const NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      itemCount: vmOhs.newspageResponse.data?.length ?? 0,
+                      separatorBuilder: (BuildContext context, int index) =>
+                          const SizedBox(height: 12.0),
+                      itemBuilder: (context, index) {
+                        var data = vmOhs.newspageResponse.data?[index];
+                        return GestureDetector(
+                          onTap: () => _handleViewButtonTap(context),
+                          child: Container(
+                            height: 120,
+                            width: double.infinity,
+                            child: GestureDetector(
+                              onTap: () => ohsdetailpagefunction(context, data),
+                              child: Card(
+                                color: const Color.fromARGB(255, 188, 209, 228),
+                                child: Container(
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(left: 94),
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        // Text(
+                                        //   data?.description ?? '',
+                                        // ),
+                                        ListTile(
+                                          title: Text(
+                                            data?.title ?? '',
+                                            style: const TextStyle(
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                          subtitle: Text(
+                                            data?.created_by ?? '',
+                                            style:
+                                                const TextStyle(fontSize: 16),
+                                          ),
+                                          trailing: TextButton(
+                                            onPressed: () =>
+                                                _handleViewButtonTap(context),
+                                            style: ButtonStyle(
+                                              side: MaterialStateProperty.all<
+                                                  BorderSide>(
+                                                const BorderSide(
+                                                    color: Colors.blue),
+                                              ),
+                                              backgroundColor:
+                                                  MaterialStateProperty.all<
+                                                      Color>(
+                                                const Color.fromARGB(
+                                                    255, 188, 209, 228),
+                                              ),
+                                              shape: MaterialStateProperty.all<
+                                                  OutlinedBorder>(
+                                                RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          18.0),
+                                                ),
+                                              ),
+                                            ),
+                                            child: GestureDetector(
+                                              onTap: () =>
+                                                  ohsdetailpagefunction(
+                                                      context, data),
+                                              child: const Text(
+                                                'View',
+                                                style: TextStyle(
+                                                    color: Colors.blue),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                );
+              },
+            ),
+            const SizedBox(height: 10),
+            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+              const Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Text('Folders'),
+              ),
               Observer(builder: (_) {
-                return ListView.separated(
-                  shrinkWrap: true,
-                  itemCount:
-                      vmOhs.newspagefolderResponse.data?.folders.isEmpty ?? true
-                          ? 0
-                          : vmOhs.newspagefolderResponse.data?.folders[0]
-                                  .folders.length ??
-                              0,
-                  physics: const NeverScrollableScrollPhysics(),
-                  separatorBuilder: (BuildContext context, int index) =>
-                      const SizedBox(height: 6.0),
-                  itemBuilder: (BuildContext context, int index) {
-                    var data = vmOhs
-                        .newspagefolderResponse.data?.folders[0].folders[index];
+                return TextButton(
+                  onPressed: () {
+                    showMyfolderDialog(context, textFolderController, () async {
+                      String folderName = textFolderController.text;
 
-                    if (data != null) {
-                      String folderName = data.name;
-                      return _buildCard(folderName, context, data.id);
-                    } else {
-                      return Container();
-                    }
+                      log(textFolderController.text);
+                      if (folderName.isNotEmpty) {
+                        Navigator.of(context).pop();
+                        await vmOhs.ohsfoldercreationviewmodelfunction(
+                            folderName, 1);
+                      } else {}
+                    });
                   },
+                  style: ButtonStyle(
+                    side: MaterialStateProperty.all<BorderSide>(
+                      const BorderSide(color: Colors.blue),
+                    ),
+                    backgroundColor: MaterialStateProperty.all<Color>(
+                      const Color.fromARGB(255, 188, 209, 228),
+                    ),
+                    shape: MaterialStateProperty.all<OutlinedBorder>(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(18.0),
+                      ),
+                    ),
+                  ),
+                  child: const Text(
+                    'Add folder+',
+                    style: TextStyle(color: Colors.blue),
+                  ),
                 );
               }),
-            ],
-          ),
+            ]),
+            const SizedBox(height: 18),
+            Container(
+              height: 50,
+              width: double.infinity,
+              child: Cmformfield(
+                borderColor: Colors.black12,
+                cursorHeight: 15,
+                hinttext: 'Search by folder name',
+                width: double.infinity,
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(35),
+                ),
+              ),
+            ),
+            const SizedBox(height: 16),
+            Observer(builder: (_) {
+              return ListView.separated(
+                shrinkWrap: true,
+                itemCount:
+                    vmOhs.newspagefolderResponse.data?.folders.isEmpty ?? true
+                        ? 0
+                        : vmOhs.newspagefolderResponse.data?.folders[0].folders
+                                .length ??
+                            0,
+                physics: const NeverScrollableScrollPhysics(),
+                separatorBuilder: (BuildContext context, int index) =>
+                    const SizedBox(height: 6.0),
+                itemBuilder: (BuildContext context, int index) {
+                  var data = vmOhs
+                      .newspagefolderResponse.data?.folders[0].folders[index];
+
+                  if (data != null) {
+                    String folderName = data.name;
+                    return _buildCard(folderName, context, data.id);
+                  } else {
+                    return Container();
+                  }
+                },
+              );
+            }),
+          ],
         ),
       ),
     );

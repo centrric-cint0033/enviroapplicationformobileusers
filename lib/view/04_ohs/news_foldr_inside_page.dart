@@ -8,10 +8,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
 @RoutePage()
-class NewsPageInsidePage extends StatelessWidget {
+class NewsOhsTabInsidePage extends StatelessWidget {
   final int parentId;
 
-  const NewsPageInsidePage({Key? key, required this.parentId})
+  const NewsOhsTabInsidePage({Key? key, required this.parentId})
       : super(key: key);
 
   @override

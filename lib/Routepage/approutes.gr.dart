@@ -28,7 +28,8 @@ import 'package:enviro_mobile_application/view/04_ohs/notifcation_detail_page.da
     as _i9;
 import 'package:enviro_mobile_application/view/04_ohs/oh&s_detail_page.dart'
     as _i11;
-import 'package:enviro_mobile_application/view/04_ohs/ohs_page.dart' as _i12;
+import 'package:enviro_mobile_application/view/04_ohs/ohs_main_page.dart'
+    as _i12;
 import 'package:enviro_mobile_application/view/07_intranet/intranet_inside_page.dart'
     as _i4;
 import 'package:enviro_mobile_application/view/07_intranet/intranet_page.dart'
@@ -125,7 +126,7 @@ abstract class $AppRouter extends _i26.RootStackRouter {
       final args = routeData.argsAs<NewsRouteInsideRouteArgs>();
       return _i26.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i8.NewsPageInsidePage(
+        child: _i8.NewsOhsTabInsidePage(
           key: args.key,
           parentId: args.parentId,
         ),
@@ -160,7 +161,7 @@ abstract class $AppRouter extends _i26.RootStackRouter {
     OhsRoute.name: (routeData) {
       return _i26.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i12.OhsPage(),
+        child: const _i12.OhsMainPage(),
       );
     },
     ProfileCreationRoute.name: (routeData) {
@@ -412,7 +413,7 @@ class LoginRouteArgs {
 }
 
 /// generated route for
-/// [_i8.NewsPageInsidePage]
+/// [_i8.NewsOhsTabInsidePage]
 class NewsRouteInsideRoute
     extends _i26.PageRouteInfo<NewsRouteInsideRouteArgs> {
   NewsRouteInsideRoute({
@@ -542,7 +543,7 @@ class OhsDetailRouteArgs {
 }
 
 /// generated route for
-/// [_i12.OhsPage]
+/// [_i12.OhsMainPage]
 class OhsRoute extends _i26.PageRouteInfo<void> {
   const OhsRoute({List<_i26.PageRouteInfo>? children})
       : super(
