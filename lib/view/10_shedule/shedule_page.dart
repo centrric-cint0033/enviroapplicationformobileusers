@@ -178,11 +178,12 @@ class SchedulePage extends StatelessWidget {
                                         builder: (_) {
                                           return ListView.builder(
                                             scrollDirection: Axis.horizontal,
-                                            itemCount: vmJobcard
+                                            itemCount: (vmJobcard
                                                     .shedulecardResponse
-                                                    .data
+                                                    .data?[index]
+                                                    .drivers
                                                     ?.length ??
-                                                0,
+                                                0),
                                             itemBuilder: (BuildContext context,
                                                 int index) {
                                               return Card(
@@ -199,15 +200,9 @@ class SchedulePage extends StatelessWidget {
                                                       children: [
                                                         Observer(
                                                           builder: (_) {
-                                                            return Text(
-                                                              vmJobcard
-                                                                      .shedulecardResponse
-                                                                      .data?[
-                                                                          index]
-                                                                      .status ??
-                                                                  '',
-                                                              style:
-                                                                  const TextStyle(
+                                                            return const Text(
+                                                              'dfsdfsdf',
+                                                              style: TextStyle(
                                                                 fontWeight:
                                                                     FontWeight
                                                                         .bold,
