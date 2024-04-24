@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 class WWResponseHandler extends StatelessWidget {
   final ApiResponse<dynamic> data;
   final Future<void> Function()? onRefresh;
-  final bool isEmpty;
+  final bool? isEmpty;
   final Function() onTap;
   final Widget child;
   const WWResponseHandler({
@@ -25,7 +25,7 @@ class WWResponseHandler extends StatelessWidget {
         ? wwCustomLoader()
         : data.errors != null
             ? Center(child: wwErrorData(onTap: onTap, mainFailure: data.errors))
-            : isEmpty
+            : isEmpty ?? true
                 ? const EmptyDataWidget()
                 : child;
 

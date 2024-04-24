@@ -1,10 +1,16 @@
 import 'package:enviro_mobile_application/utilis/api_endpoints/01_sales_endpoints.dart';
 import 'package:enviro_mobile_application/utilis/api_endpoints/02_vehicle_endpoints.dart';
+import 'package:enviro_mobile_application/utilis/api_endpoints/03_ohs_endpoints.dart';
 import 'package:enviro_mobile_application/utilis/api_endpoints/04_site_endpoints.dart';
 import 'package:enviro_mobile_application/utilis/api_endpoints/07_team_endpoints.dart';
 
 class ApiEndPoints
-    with SalesEndpoint, VehicleEndpoint, TeamEndpoints, SiteEndpoint {
+    with
+        SalesEndpoint,
+        VehicleEndpoint,
+        TeamEndpoints,
+        SiteEndpoint,
+        OhsEndpoints {
   static final ApiEndPoints _singleton = ApiEndPoints._internal();
 
   factory ApiEndPoints() {
@@ -25,11 +31,8 @@ class ApiEndPoints
 
   //
 
-  static const endpointohsnews = '/api/v1/oh_and_s/news/view/1/?limit=8';
   static const endpointnewsfolder = '/api/v1/oh_and_s/folder/segment/list';
   static const endpointfoldercreation = '/api/v1/drive/folder/create/';
-  static const endpointnotificationlist =
-      '/api/v1/oh_and_s/notification/view/1/?limit=8';
   static const endpointnewsfldrrename = '/api/v1/drive/folder/rename/3260/';
 
   static const endpointPreviousSale = '/api/v1/jobs/previous/sale/';

@@ -57,7 +57,7 @@ class NewsOhsTab extends StatelessWidget {
                   child: WWResponseHandler(
                     data: vmOhs.newspageResponse,
                     isEmpty: vmOhs.newspageResponse.data?.isEmpty ?? true,
-                    onTap: () => vmOhs.ohsnewsviewmodelfunction(),
+                    onTap: () => vmOhs.ohsNewsApi(),
                     child: ListView.separated(
                       physics: const NeverScrollableScrollPhysics(),
                       shrinkWrap: true,

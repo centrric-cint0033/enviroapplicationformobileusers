@@ -1,12 +1,18 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:enviro_mobile_application/Routepage/approutes.gr.dart';
 import 'package:enviro_mobile_application/Routepage/routespage.dart';
+import 'package:enviro_mobile_application/utilis/Appthemes.dart';
 import 'package:enviro_mobile_application/utilis/api_endpoints/customprint.dart';
+import 'package:enviro_mobile_application/utilis/constant.dart';
 import 'package:enviro_mobile_application/view/04_ohs/ohs_widget/01_ohs_widgets.dart';
 import 'package:enviro_mobile_application/view_model/04_ohs/ohs_view_model.dart';
+import 'package:enviro_mobile_application/widgets/01_widgets.dart';
 import 'package:enviro_mobile_application/widgets/cmbutton.dart';
+import 'package:enviro_mobile_application/widgets/ww_response_handler.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 void _handleRightButtonTap() {
   customPrint(name: 'Right button tapped!', content: null);
@@ -32,95 +38,70 @@ class NotificationTab extends StatelessWidget {
         gapFieldOhs,
         Observer(builder: (_) {
           return Expanded(
-            child: ListView.separated(
-              shrinkWrap: true,
-              itemCount: vmOhs.notificationpageResponse.data?.length ?? 0,
-              separatorBuilder: (BuildContext context, int index) =>
-                  const SizedBox(height: 12.0),
-              itemBuilder: (context, index) {
-                var data = vmOhs.notificationpageResponse.data?[index];
-                return GestureDetector(
-                  onTap: () => ohsdetailpagefunction(context, data),
-                  child: Container(
-                    height: 120,
-                    width: double.infinity,
-                    child: Card(
-                      color: const Color.fromARGB(255, 188, 209, 228),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Row(
-                          children: [
-                            // Display image from the view model
-
-                            SizedBox(
-                              width: 100,
-                              height: 100,
-                              child: data?.dp != null
-                                  ? Image.network(
-                                      data!.dp!,
-                                      fit: BoxFit.cover,
-                                    )
-                                  : const Placeholder(), // Placeholder if image is not available
-                            ),
-                            Expanded(
-                              child: Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 8.0),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      data?.title ?? '',
-                                      style: const TextStyle(
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                      overflow: TextOverflow.ellipsis,
-                                      maxLines: 2,
-                                    ),
-                                    Text(
-                                      data?.created_by ?? '',
-                                      style: const TextStyle(fontSize: 16),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            TextButton(
-                              onPressed: () =>
-                                  notificationdetailpagefunction(context, data),
-                              style: ButtonStyle(
-                                side: MaterialStateProperty.all<BorderSide>(
-                                  const BorderSide(color: Colors.blue),
-                                ),
-                                backgroundColor:
-                                    MaterialStateProperty.all<Color>(
-                                  const Color.fromARGB(255, 188, 209, 228),
-                                ),
-                                shape:
-                                    MaterialStateProperty.all<OutlinedBorder>(
-                                  RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(18.0),
-                                  ),
-                                ),
-                              ),
-                              child: const Text(
-                                'View',
-                                style: TextStyle(color: Colors.blue),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                );
-              },
-            ),
-          );
+              child: WWResponseHandler(
+                  data: vmOhs.notificationpageResponse,
+                  isEmpty: vmOhs.notificationpageResponse.data?.isEmpty,
+                  onTap: () => vmOhs.ohsNotificationApi(),
+                  child: const NotificationTabList()));
         }),
       ],
+    );
+  }
+}
+
+class NotificationTabList extends StatelessWidget {
+  const NotificationTabList({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.separated(
+      shrinkWrap: true,
+      itemCount: vmOhs.notificationpageResponse.data?.length ?? 0,
+      separatorBuilder: (BuildContext context, int index) => gapFieldOhs,
+      itemBuilder: (context, index) {
+        var data = vmOhs.notificationpageResponse.data?[index];
+        return InkWell(
+          onTap: () => notificationdetailpagefunction(context, data),
+          child: Card(
+            color: Appthemes.cWhite,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                children: [
+                  data?.dp != null
+                      ? CachedNetworkImage(
+                          height: 60.w,
+                          width: 60.w,
+                          imageUrl: data!.dp!,
+                          fit: BoxFit.cover)
+                      : const Placeholder(),
+                  sized0wx10,
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        showBlackText(data?.title ?? '',
+                            maxLines: 2,
+                            fontWeight: FontWeight.bold,
+                            overflow: TextOverflow.ellipsis),
+                        gapFieldOhs,
+                        showBlackText(data?.created_by ?? '')
+                      ],
+                    ),
+                  ),
+                  sized0wx05,
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 15, vertical: 10),
+                    child: showBlueText('View', fontWeight: FontWeight.bold),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
     );
   }
 }
@@ -227,10 +208,6 @@ Future<void> _showMyDialognotification(BuildContext context) async {
       );
     },
   );
-}
-
-void ohsdetailpagefunction(BuildContext context, data) {
-  print('Opening details page for notification: ${data.title}');
 }
 
 void notificationdetailpagefunction(BuildContext context, data) {

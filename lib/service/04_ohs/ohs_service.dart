@@ -13,9 +13,11 @@ import 'package:http/http.dart';
 import 'package:injectable/injectable.dart';
 
 abstract class IohsService {
-  Future<Either<MainFailure, List<OhsRespModel>>> ohsnewsfunction();
-  Future<Either<MainFailure, List<OhsRespModel>>> ohsnewsfunction1();
-  Future<Either<MainFailure, List<OhsRespModel>>> ohsnotificationfunction();
+  Future<Either<Map<MainFailure, dynamic>, List<OhsRespModel>>>
+      ohsNewsServiceApi();
+  Future<Either<MainFailure, List<OhsRespModel>>> ohsNewsServiceApi1();
+  Future<Either<Map<MainFailure, dynamic>, List<OhsRespModel>>>
+      ohsNotificationServiceApi();
   Future<Either<MainFailure, OhsNewsfldrRespModel>>
       ohsnewsfolderservicefunction(int id);
 
@@ -34,17 +36,15 @@ abstract class IohsService {
 @LazySingleton(as: IohsService)
 class OhsService implements IohsService {
   @override
-  Future<Either<MainFailure, List<OhsRespModel>>> ohsnewsfunction() async {
+  Future<Either<Map<MainFailure, dynamic>, List<OhsRespModel>>>
+      ohsNewsServiceApi() async {
     var response = await getIt<HttpService>().request(
         authenticated: true,
         method: HttpMethod.get,
-        apiUrl: ApiEndPoints.endpointohsnews);
+        apiUrl: ApiEndPoints().ohsNewsList);
 
     return response.fold(
-      (l) {
-        (l.values.first);
-        return Left(l.keys.first);
-      },
+      (l) => Left(l),
       (res) async {
         var data = jsonDecode(res.body) as List;
         List<OhsRespModel> ohsnewslist = [];
@@ -60,11 +60,11 @@ class OhsService implements IohsService {
   }
 
   @override
-  Future<Either<MainFailure, List<OhsRespModel>>> ohsnewsfunction1() async {
+  Future<Either<MainFailure, List<OhsRespModel>>> ohsNewsServiceApi1() async {
     var response = await getIt<HttpService>().request(
         authenticated: true,
         method: HttpMethod.get,
-        apiUrl: ApiEndPoints.endpointohsnews);
+        apiUrl: ApiEndPoints().ohsNewsList);
 
     return response.fold(
       (l) {
@@ -83,24 +83,19 @@ class OhsService implements IohsService {
   }
 
   @override
-  Future<Either<MainFailure, List<OhsRespModel>>>
-      ohsnotificationfunction() async {
+  Future<Either<Map<MainFailure, dynamic>, List<OhsRespModel>>>
+      ohsNotificationServiceApi() async {
     var response = await getIt<HttpService>().request(
         authenticated: true,
         method: HttpMethod.get,
-        apiUrl: ApiEndPoints.endpointnotificationlist);
+        apiUrl: ApiEndPoints().ohsNotificationList);
 
     return response.fold(
-      (l) {
-        (l.values.first);
-        return Left(l.keys.first);
-      },
+      (l) => Left(l),
       (res) async {
         var data = jsonDecode(res.body) as List;
-
         List<OhsRespModel> ohsnotificationlist =
             List<OhsRespModel>.from(data.map((e) => OhsRespModel.fromJson(e)));
-
         return Right(ohsnotificationlist);
       },
     );

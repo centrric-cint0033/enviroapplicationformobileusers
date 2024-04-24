@@ -23,32 +23,37 @@ abstract class OHSViewModelBase with Store {
 
   OHSViewModelBase(this.ohsService);
 
+//      _      ____    ___      ____      _      _       _       ____
+//     / \    |  _ \  |_ _|    / ___|    / \    | |     | |     / ___|
+//    / _ \   | |_) |  | |    | |       / _ \   | |     | |     \___ \
+//   / ___ \  |  __/   | |    | |___   / ___ \  | |___  | |___   ___) |
+//  /_/   \_\ |_|     |___|    \____| /_/   \_\ |_____| |_____| |____/
+
   @observable
   ApiResponse<List<OhsRespModel>> newspageResponse =
       ApiResponse<List<OhsRespModel>>();
 
   @action
-  Future<void> ohsnewsviewmodelfunction() async {
-    print('aaaaa$newspageResponse');
-    newspageResponse = newspageResponse.copyWith(error: null, loading: true);
+  Future<void> ohsNewsApi() async {
+    newspageResponse = newspageResponse.copyWith(errors: null, loading: true);
 
-    final result = await ohsService.ohsnewsfunction();
+    final result = await ohsService.ohsNewsServiceApi();
     return result.fold(
       (l) {
-        newspageResponse = newspageResponse.copyWith(
-          error: l,
-          loading: false,
-        );
+        newspageResponse = newspageResponse.copyWith(errors: l, loading: false);
       },
       (r) {
-        newspageResponse = newspageResponse.copyWith(
-          data: r,
-          error: null,
-          loading: false,
-        );
+        newspageResponse =
+            newspageResponse.copyWith(data: r, errors: null, loading: false);
       },
     );
   }
+
+//     _  _       _  _       _  _       _  _       _  _       _  _       _  _       _  _
+//   _| || |_   _| || |_   _| || |_   _| || |_   _| || |_   _| || |_   _| || |_   _| || |_
+//  |_  ..  _| |_  ..  _| |_  ..  _| |_  ..  _| |_  ..  _| |_  ..  _| |_  ..  _| |_  ..  _|
+//  |_      _| |_      _| |_      _| |_      _| |_      _| |_      _| |_      _| |_      _|
+//    |_||_|     |_||_|     |_||_|     |_||_|     |_||_|     |_||_|     |_||_|     |_||_|
 
   @observable
   ApiResponse<String> FoldercreationResponse = ApiResponse<String>();
@@ -56,7 +61,6 @@ abstract class OHSViewModelBase with Store {
   @action
   Future<void> ohsfoldercreationviewmodelfunction(
       String folderName, int id) async {
-    print('aaaaa$FoldercreationResponse');
     FoldercreationResponse =
         FoldercreationResponse.copyWith(error: null, loading: true);
 
@@ -143,25 +147,18 @@ abstract class OHSViewModelBase with Store {
       ApiResponse<List<OhsRespModel>>();
 
   @action
-  Future<void> ohsnotificationviewmodelfunction() async {
-    print('aaaaa$notificationpageResponse');
+  Future<void> ohsNotificationApi() async {
     notificationpageResponse =
-        notificationpageResponse.copyWith(error: null, loading: true);
-
-    final result = await ohsService.ohsnotificationfunction();
+        notificationpageResponse.copyWith(errors: null, loading: true);
+    final result = await ohsService.ohsNotificationServiceApi();
     return result.fold(
       (l) {
-        notificationpageResponse = notificationpageResponse.copyWith(
-          error: l,
-          loading: false,
-        );
+        notificationpageResponse =
+            notificationpageResponse.copyWith(errors: l, loading: false);
       },
       (r) {
         notificationpageResponse = notificationpageResponse.copyWith(
-          data: r,
-          error: null,
-          loading: false,
-        );
+            data: r, errors: null, loading: false);
       },
     );
   }

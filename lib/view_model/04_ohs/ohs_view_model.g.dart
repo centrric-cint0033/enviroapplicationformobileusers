@@ -125,14 +125,12 @@ mixin _$OHSViewModel on OHSViewModelBase, Store {
     });
   }
 
-  late final _$ohsnewsviewmodelfunctionAsyncAction = AsyncAction(
-      'OHSViewModelBase.ohsnewsviewmodelfunction',
-      context: context);
+  late final _$ohsNewsApiAsyncAction =
+      AsyncAction('OHSViewModelBase.ohsNewsApi', context: context);
 
   @override
-  Future<void> ohsnewsviewmodelfunction() {
-    return _$ohsnewsviewmodelfunctionAsyncAction
-        .run(() => super.ohsnewsviewmodelfunction());
+  Future<void> ohsNewsApi() {
+    return _$ohsNewsApiAsyncAction.run(() => super.ohsNewsApi());
   }
 
   late final _$ohsfoldercreationviewmodelfunctionAsyncAction = AsyncAction(
@@ -165,14 +163,13 @@ mixin _$OHSViewModel on OHSViewModelBase, Store {
         .run(() => super.ohsnewsfolderviewmodelfunction(id));
   }
 
-  late final _$ohsnotificationviewmodelfunctionAsyncAction = AsyncAction(
-      'OHSViewModelBase.ohsnotificationviewmodelfunction',
-      context: context);
+  late final _$ohsNotificationApiAsyncAction =
+      AsyncAction('OHSViewModelBase.ohsNotificationApi', context: context);
 
   @override
-  Future<void> ohsnotificationviewmodelfunction() {
-    return _$ohsnotificationviewmodelfunctionAsyncAction
-        .run(() => super.ohsnotificationviewmodelfunction());
+  Future<void> ohsNotificationApi() {
+    return _$ohsNotificationApiAsyncAction
+        .run(() => super.ohsNotificationApi());
   }
 
   late final _$folderrenameviewmodelfunctionAsyncAction = AsyncAction(

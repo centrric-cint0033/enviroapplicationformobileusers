@@ -143,9 +143,9 @@ void onsalesfunction(BuildContext context) async {
 void ohsfunction(BuildContext context) {
   // vmProfile.profileviewmodelfunction();
   context.router.pushNamed(RouteNames.ohsPage);
-  vmOhs.ohsnotificationviewmodelfunction();
-  // vmOhs.ohsnewsviewmodelfunction();
-  // vmOhs.ohsnewsfolderviewmodelfunction(1);
+  vmOhs.ohsNotificationApi();
+  vmOhs.ohsNewsApi();
+  vmOhs.ohsnewsfolderviewmodelfunction(1);
 }
 
 void intranetfuntion(BuildContext context) {
