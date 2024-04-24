@@ -54,63 +54,59 @@ class SchedulePage extends StatelessWidget {
             SizedBox(
               height: 400,
               width: 400,
-              child: Observer(builder: (_) {
-                return ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: vmJobcard.shedulecardResponse.data?.length ?? 0,
-                  itemBuilder: (BuildContext context, int index) {
-                    return SizedBox(
-                      width: 400,
-                      child: Padding(
-                        padding: const EdgeInsets.all(20),
-                        child: Card(
-                          shape: RoundedRectangleBorder(
-                            side:
-                                const BorderSide(color: Colors.blue, width: 1),
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          elevation: 4,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 20, vertical: 20),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Padding(
-                                      padding:
-                                          const EdgeInsets.only(left: 68.0),
-                                      child: Text(
+              child: Observer(
+                builder: (_) {
+                  return ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: vmJobcard.shedulecardResponse.data?.length ?? 0,
+                    itemBuilder: (BuildContext context, int index) {
+                      return SizedBox(
+                        width: 480,
+                        child: Padding(
+                          padding: const EdgeInsets.all(20),
+                          child: Card(
+                            shape: RoundedRectangleBorder(
+                              side: const BorderSide(
+                                  color: Colors.blue, width: 1),
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            elevation: 4,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 20, vertical: 20),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
                                         vmJobcard.shedulecardResponse
                                                 .data?[index].salesPerson
-                                                .toString() ??
+                                                ?.toString() ??
                                             '',
                                       ),
-                                    ),
-                                    ElevatedButton(
-                                      onPressed: () {
-                                        nextjobfnction(context);
-                                      },
-                                      style: ElevatedButton.styleFrom(
-                                        primary: Colors.blue,
-                                        onPrimary: Colors.black,
-                                      ),
-                                      child: const Text(
-                                        'Next job',
-                                        style: TextStyle(
-                                          fontSize: 13,
-                                          color: Colors.white,
+                                      ElevatedButton(
+                                        onPressed: () {
+                                          nextjobfnction(context);
+                                        },
+                                        style: ElevatedButton.styleFrom(
+                                          primary: Colors.blue,
+                                          onPrimary: Colors.black,
+                                        ),
+                                        child: const Text(
+                                          'Next job',
+                                          style: TextStyle(
+                                            fontSize: 13,
+                                            color: Colors.white,
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
-                              ),
-                              Observer(builder: (_) {
-                                return Padding(
+                                Padding(
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 22),
                                   child: Column(
@@ -152,86 +148,80 @@ class SchedulePage extends StatelessWidget {
                                       ),
                                     ],
                                   ),
-                                );
-                              }),
-                              const SizedBox(height: 10),
-                              Card(
-                                color: Colors.blue,
-                                child: Column(
-                                  crossAxisAlignment:
-                                      CrossAxisAlignment.stretch,
-                                  children: [
-                                    const Align(
-                                      alignment: Alignment.topCenter,
-                                      child: Text(
-                                        'Drivers and vehicles',
-                                        style: TextStyle(
-                                          fontSize: 15,
-                                          color: Colors.white,
+                                ),
+                                const SizedBox(height: 10),
+                                Card(
+                                  color: Colors.blue,
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.stretch,
+                                    children: [
+                                      const Align(
+                                        alignment: Alignment.topCenter,
+                                        child: Text(
+                                          'Drivers and vehicles',
+                                          style: TextStyle(
+                                            fontSize: 15,
+                                            color: Colors.white,
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                    const SizedBox(height: 10),
-                                    SizedBox(
-                                      height: 84,
-                                      child: Observer(
-                                        builder: (_) {
-                                          return ListView.builder(
-                                            scrollDirection: Axis.horizontal,
-                                            itemCount: (vmJobcard
-                                                    .shedulecardResponse
-                                                    .data?[index]
-                                                    .drivers
-                                                    ?.length ??
-                                                0),
-                                            itemBuilder: (BuildContext context,
-                                                int index) {
-                                              return Card(
-                                                color: Colors.white,
-                                                child: Padding(
-                                                  padding:
-                                                      const EdgeInsets.all(8.0),
-                                                  child: SizedBox(
-                                                    width: 160,
-                                                    child: Column(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
-                                                      children: [
-                                                        Observer(
-                                                          builder: (_) {
-                                                            return const Text(
-                                                              'dfsdfsdf',
-                                                              style: TextStyle(
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold,
-                                                                fontSize: 16,
-                                                              ),
-                                                            );
-                                                          },
+                                      const SizedBox(height: 10),
+                                      SizedBox(
+                                        height: 94,
+                                        child: ListView.builder(
+                                          scrollDirection: Axis.horizontal,
+                                          itemCount: (vmJobcard
+                                                  .shedulecardResponse
+                                                  .data?[index]
+                                                  .drivers
+                                                  ?.length ??
+                                              0),
+                                          itemBuilder: (BuildContext context,
+                                              int driverIndex) {
+                                            return Card(
+                                              color: const Color.fromRGBO(
+                                                  255, 255, 255, 1),
+                                              child: SizedBox(
+                                                width: 130,
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Observer(builder: (_) {
+                                                      return Text(
+                                                        vmJobcard
+                                                                .shedulecardResponse
+                                                                .data?[index]
+                                                                .client
+                                                                ?.clientName ??
+                                                            '',
+                                                        style: const TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          fontSize: 16,
                                                         ),
-                                                      ],
-                                                    ),
-                                                  ),
+                                                      );
+                                                    }),
+                                                  ],
                                                 ),
-                                              );
-                                            },
-                                          );
-                                        },
+                                              ),
+                                            );
+                                          },
+                                        ),
                                       ),
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         ),
-                      ),
-                    );
-                  },
-                );
-              }),
+                      );
+                    },
+                  );
+                },
+              ),
             ),
             Padding(
               padding: const EdgeInsets.all(18.0),
