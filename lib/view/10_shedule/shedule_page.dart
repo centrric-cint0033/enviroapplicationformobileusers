@@ -171,51 +171,61 @@ class SchedulePage extends StatelessWidget {
                                         ),
                                       ),
                                     ),
-                                    SizedBox(height: 10),
-                                    Row(
-                                      children: [
-                                        Expanded(
-                                          child: Observer(builder: (_) {
-                                            return ListView.builder(
-                                              scrollDirection: Axis.horizontal,
-                                              itemCount: vmJobcard
-                                                      .shedulecardResponse
-                                                      .data
-                                                      ?.length ??
-                                                  0,
-                                              itemBuilder:
-                                                  (BuildContext context,
-                                                      int index) {
-                                                return Padding(
-                                                  padding: EdgeInsets.all(8.0),
-                                                  child: Card(
-                                                    color: Colors.white,
+                                    const SizedBox(height: 10),
+                                    SizedBox(
+                                      height: 84,
+                                      child: Observer(
+                                        builder: (_) {
+                                          return ListView.builder(
+                                            scrollDirection: Axis.horizontal,
+                                            itemCount: vmJobcard
+                                                    .shedulecardResponse
+                                                    .data
+                                                    ?.length ??
+                                                0,
+                                            itemBuilder: (BuildContext context,
+                                                int index) {
+                                              return Card(
+                                                color: Colors.white,
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(8.0),
+                                                  child: SizedBox(
+                                                    width: 160,
                                                     child: Column(
                                                       crossAxisAlignment:
                                                           CrossAxisAlignment
                                                               .start,
                                                       children: [
-                                                        Observer(builder: (_) {
-                                                          return Text(
-                                                            vmJobcard
-                                                                    .shedulecardResponse
-                                                                    .data?[
-                                                                        index]
-                                                                    .status ??
-                                                                '',
-                                                          );
-                                                        }),
-                                                        Text("vghadxcsdgjhacb"),
+                                                        Observer(
+                                                          builder: (_) {
+                                                            return Text(
+                                                              vmJobcard
+                                                                      .shedulecardResponse
+                                                                      .data?[
+                                                                          index]
+                                                                      .status ??
+                                                                  '',
+                                                              style:
+                                                                  const TextStyle(
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold,
+                                                                fontSize: 16,
+                                                              ),
+                                                            );
+                                                          },
+                                                        ),
                                                       ],
                                                     ),
                                                   ),
-                                                );
-                                              },
-                                            );
-                                          }),
-                                        ),
-                                      ],
-                                    )
+                                                ),
+                                              );
+                                            },
+                                          );
+                                        },
+                                      ),
+                                    ),
                                   ],
                                 ),
                               ),
@@ -291,7 +301,7 @@ class SchedulePage extends StatelessWidget {
                         ),
                       ],
                     ),
-                    const Text('Some Text Herwwwe'),
+                    const Text('Some Text Here'),
                     const SizedBox(
                       height: 10,
                     ),
