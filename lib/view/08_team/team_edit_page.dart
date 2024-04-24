@@ -163,8 +163,8 @@ class TeamEditPage extends StatelessWidget {
             id: "${employeeDetails.id}",
             user_type: vmTeam.selectedDesignationAddTeam2 ?? "",
             date_of_birth: DateFormat('yyyy-MM-dd').format(vmTeam.selectedDob!),
-            // date_joined:
-            //     DateFormat('yyyy-MM-dd').format(vmTeam.selectedJoiningDate!),
+            date_joined:
+                DateFormat('yyyy-MM-dd').format(vmTeam.selectedJoiningDate!),
             email: vmTeam.textAddTeamEmailController.text,
             contact_number: vmTeam.textEditTeamContactNumberController.text,
             employement_status: vmTeam.selectedEmploymentStatus,

@@ -28,7 +28,9 @@ class EmploymentStatusDropDown extends StatelessWidget {
               ? vmTeam.selectedAddEmploymentStatus
               : vmTeam.selectedEmploymentStatus,
           onChanged: (String? newValue) {
-            vmTeam.employmentStatusonChanged(newValue);
+            fromAddTeam == true
+                ? vmTeam.employmentStatusonChanged(newValue)
+                : vmTeam.employmentStatusonChangedEditPage(newValue);
           },
         );
       },

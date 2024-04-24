@@ -483,9 +483,9 @@ abstract class TeamViewModelBase with Store {
         popupErrorData(context, mainFailure: l);
       },
       (r) {
-        log("result.toString()");
         editTeamResponse =
             editTeamResponse.copyWith(data: r, error: null, loading: false);
+        getTeamProfileEmployeeDetails(employeeID: int.parse("${data.id}"));
         getCurrentEmployee();
         textControllersClearFn();
         context.router.pop();
@@ -532,6 +532,11 @@ abstract class TeamViewModelBase with Store {
   @action
   employmentStatusonChanged(newValue) {
     selectedAddEmploymentStatus = newValue;
+  }
+
+  @action
+  employmentStatusonChangedEditPage(newValue) {
+    selectedEmploymentStatus = newValue;
   }
 
   @action

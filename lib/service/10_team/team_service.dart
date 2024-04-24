@@ -239,7 +239,7 @@ class TeamService implements IteamService {
     return response.fold(
       (l) => Left(l),
       (res) async {
-        var data = jsonDecode(res.body);
+        // var data = jsonDecode(res.body);
         CreateTeamReqModel editTeamList =
             CreateTeamReqModel(); //  CreateTeamReqModel.fromJson(data);
         return Right(editTeamList);

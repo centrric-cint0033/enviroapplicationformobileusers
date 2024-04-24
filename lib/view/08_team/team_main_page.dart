@@ -30,6 +30,7 @@ class TeamPage extends StatelessWidget {
             CmButton(
               onPressed: () {
                 vmTeam.getTeamDesignationsApi();
+                vmTeam.showRequredTextLicense = false;
                 context.router.push(AddTeamRoute());
               },
               text: 'Add a team member',
