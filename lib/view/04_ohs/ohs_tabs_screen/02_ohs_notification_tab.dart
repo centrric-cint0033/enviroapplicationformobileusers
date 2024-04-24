@@ -2,7 +2,9 @@ import 'package:auto_route/auto_route.dart';
 import 'package:enviro_mobile_application/Routepage/approutes.gr.dart';
 import 'package:enviro_mobile_application/Routepage/routespage.dart';
 import 'package:enviro_mobile_application/utilis/api_endpoints/customprint.dart';
+import 'package:enviro_mobile_application/view/04_ohs/ohs_widget/01_ohs_widgets.dart';
 import 'package:enviro_mobile_application/view_model/04_ohs/ohs_view_model.dart';
+import 'package:enviro_mobile_application/widgets/cmbutton.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
@@ -15,165 +17,110 @@ class NotificationTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 10.0, right: 10),
-                child: Container(
-                  alignment: Alignment.topRight,
-                  child: Padding(
-                    padding: const EdgeInsets.only(right: 9.0),
-                    child: Row(
-                      children: [
-                        TextButton(
-                          onPressed: () {
-                            _showMyDialognotification(context);
-                          },
-                          style: ButtonStyle(
-                            side: MaterialStateProperty.all<BorderSide>(
-                              const BorderSide(color: Colors.blue),
-                            ),
-                            backgroundColor: MaterialStateProperty.all<Color>(
-                              const Color.fromARGB(255, 188, 209, 228),
-                            ),
-                            shape: MaterialStateProperty.all<OutlinedBorder>(
-                              RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(18.0),
-                              ),
-                            ),
-                          ),
-                          child: const Text(
-                            'Add New+',
-                            style: TextStyle(color: Colors.blue),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-              Container(
-                alignment: Alignment.topRight,
-                child: Padding(
-                  padding: const EdgeInsets.only(right: 9.0),
-                  child: TextButton(
-                    onPressed: _handleRightButtonTap,
-                    style: ButtonStyle(
-                      side: MaterialStateProperty.all<BorderSide>(
-                        const BorderSide(color: Colors.blue),
-                      ),
-                      backgroundColor: MaterialStateProperty.all<Color>(
-                        const Color.fromARGB(255, 188, 209, 228),
-                      ),
-                    ),
-                    child: const Text(
-                      'Archive',
-                      style: TextStyle(color: Colors.blue),
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 15),
-          Observer(builder: (_) {
-            return Expanded(
-              child: ListView.separated(
-                shrinkWrap: true,
-                itemCount: vmOhs.notificationpageResponse.data?.length ?? 0,
-                separatorBuilder: (BuildContext context, int index) =>
-                    const SizedBox(height: 12.0),
-                itemBuilder: (context, index) {
-                  var data = vmOhs.notificationpageResponse.data?[index];
-                  return GestureDetector(
-                    onTap: () => ohsdetailpagefunction(context, data),
-                    child: Container(
-                      height: 120,
-                      width: double.infinity,
-                      child: Card(
-                        color: const Color.fromARGB(255, 188, 209, 228),
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Row(
-                            children: [
-                              // Display image from the view model
+    return Column(
+      children: [
+        gapFieldOhs,
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            CmButton(
+                text: 'Add New+',
+                onPressed: () => _showMyDialognotification(context)),
+            const CmButton(text: 'Archive', onPressed: _handleRightButtonTap),
+          ],
+        ),
+        gapFieldOhs,
+        Observer(builder: (_) {
+          return Expanded(
+            child: ListView.separated(
+              shrinkWrap: true,
+              itemCount: vmOhs.notificationpageResponse.data?.length ?? 0,
+              separatorBuilder: (BuildContext context, int index) =>
+                  const SizedBox(height: 12.0),
+              itemBuilder: (context, index) {
+                var data = vmOhs.notificationpageResponse.data?[index];
+                return GestureDetector(
+                  onTap: () => ohsdetailpagefunction(context, data),
+                  child: Container(
+                    height: 120,
+                    width: double.infinity,
+                    child: Card(
+                      color: const Color.fromARGB(255, 188, 209, 228),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          children: [
+                            // Display image from the view model
 
-                              SizedBox(
-                                width: 100,
-                                height: 100,
-                                child: data?.dp != null
-                                    ? Image.network(
-                                        data!.dp!,
-                                        fit: BoxFit.cover,
-                                      )
-                                    : const Placeholder(), // Placeholder if image is not available
-                              ),
-                              Expanded(
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 8.0),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        data?.title ?? '',
-                                        style: const TextStyle(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                        overflow: TextOverflow.ellipsis,
-                                        maxLines: 2,
+                            SizedBox(
+                              width: 100,
+                              height: 100,
+                              child: data?.dp != null
+                                  ? Image.network(
+                                      data!.dp!,
+                                      fit: BoxFit.cover,
+                                    )
+                                  : const Placeholder(), // Placeholder if image is not available
+                            ),
+                            Expanded(
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 8.0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      data?.title ?? '',
+                                      style: const TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold,
                                       ),
-                                      Text(
-                                        data?.created_by ?? '',
-                                        style: const TextStyle(fontSize: 16),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              TextButton(
-                                onPressed: () => notificationdetailpagefunction(
-                                    context, data),
-                                style: ButtonStyle(
-                                  side: MaterialStateProperty.all<BorderSide>(
-                                    const BorderSide(color: Colors.blue),
-                                  ),
-                                  backgroundColor:
-                                      MaterialStateProperty.all<Color>(
-                                    const Color.fromARGB(255, 188, 209, 228),
-                                  ),
-                                  shape:
-                                      MaterialStateProperty.all<OutlinedBorder>(
-                                    RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(18.0),
+                                      overflow: TextOverflow.ellipsis,
+                                      maxLines: 2,
                                     ),
-                                  ),
-                                ),
-                                child: const Text(
-                                  'View',
-                                  style: TextStyle(color: Colors.blue),
+                                    Text(
+                                      data?.created_by ?? '',
+                                      style: const TextStyle(fontSize: 16),
+                                    ),
+                                  ],
                                 ),
                               ),
-                            ],
-                          ),
+                            ),
+                            TextButton(
+                              onPressed: () =>
+                                  notificationdetailpagefunction(context, data),
+                              style: ButtonStyle(
+                                side: MaterialStateProperty.all<BorderSide>(
+                                  const BorderSide(color: Colors.blue),
+                                ),
+                                backgroundColor:
+                                    MaterialStateProperty.all<Color>(
+                                  const Color.fromARGB(255, 188, 209, 228),
+                                ),
+                                shape:
+                                    MaterialStateProperty.all<OutlinedBorder>(
+                                  RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(18.0),
+                                  ),
+                                ),
+                              ),
+                              child: const Text(
+                                'View',
+                                style: TextStyle(color: Colors.blue),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ),
-                  );
-                },
-              ),
-            );
-          }),
-        ],
-      ),
+                  ),
+                );
+              },
+            ),
+          );
+        }),
+      ],
     );
   }
 }
