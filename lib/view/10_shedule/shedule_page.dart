@@ -1,12 +1,15 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:enviro_mobile_application/Routepage/routespage.dart';
+import 'package:enviro_mobile_application/model/12_shedulecard/shedule_card_resp_model.dart';
 import 'package:enviro_mobile_application/view/10_shedule/shedule_widget.dart';
+import 'package:enviro_mobile_application/view_model/10_profile/profile_view_model.dart';
 import 'package:enviro_mobile_application/view_model/11_shedule/shedule_page_view_model.dart';
 import 'package:enviro_mobile_application/widgets/cmn_action_icon.dart';
 import 'package:enviro_mobile_application/widgets/cmn_title_textwidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
+import '../../model/12_shedulecard/shedule_card_resp_model.dart';
 import '../../widgets/drawer.dart';
 
 @RoutePage()
@@ -59,7 +62,7 @@ class SchedulePage extends StatelessWidget {
                   return ListView.builder(
                     scrollDirection: Axis.horizontal,
                     itemCount: vmJobcard.shedulecardResponse.data?.length ?? 0,
-                    itemBuilder: (BuildContext context, int index) {
+                    itemBuilder: (BuildContext context, int i) {
                       return SizedBox(
                         width: 480,
                         child: Padding(
@@ -82,8 +85,8 @@ class SchedulePage extends StatelessWidget {
                                         MainAxisAlignment.spaceBetween,
                                     children: [
                                       Text(
-                                        vmJobcard.shedulecardResponse
-                                                .data?[index].salesPerson
+                                        vmJobcard.shedulecardResponse.data?[i]
+                                                .salesPerson
                                                 ?.toString() ??
                                             '',
                                       ),
@@ -115,35 +118,33 @@ class SchedulePage extends StatelessWidget {
                                     children: [
                                       expandedRowShowText2(
                                         "Day",
-                                        (vmJobcard.shedulecardResponse
-                                                    .data?[index].startDate ??
+                                        (vmJobcard.shedulecardResponse.data?[i]
+                                                    .startDate ??
                                                 '')
                                             .toString(),
                                       ),
                                       expandedRowShowText2(
                                         "Time",
-                                        vmJobcard.shedulecardResponse
-                                                .data?[index].startTime ??
+                                        vmJobcard.shedulecardResponse.data?[i]
+                                                .startTime ??
                                             '',
                                       ),
                                       expandedRowShowText2(
                                         "Type",
-                                        vmJobcard.shedulecardResponse
-                                                .data?[index].wasteTypeStr ??
+                                        vmJobcard.shedulecardResponse.data?[i]
+                                                .wasteTypeStr ??
                                             '',
                                       ),
                                       expandedRowShowText2(
                                         "Company",
-                                        vmJobcard
-                                                .shedulecardResponse
-                                                .data?[index]
+                                        vmJobcard.shedulecardResponse.data?[i]
                                                 .outsourcedCompanyName ??
                                             '',
                                       ),
                                       expandedRowShowText2(
                                         "Status",
-                                        vmJobcard.shedulecardResponse
-                                                .data?[index].status ??
+                                        vmJobcard.shedulecardResponse.data?[i]
+                                                .status ??
                                             '',
                                       ),
                                     ],
@@ -173,7 +174,7 @@ class SchedulePage extends StatelessWidget {
                                           scrollDirection: Axis.horizontal,
                                           itemCount: (vmJobcard
                                                   .shedulecardResponse
-                                                  .data?[index]
+                                                  .data?[i]
                                                   .drivers
                                                   ?.length ??
                                               0),
@@ -182,27 +183,81 @@ class SchedulePage extends StatelessWidget {
                                             return Card(
                                               color: const Color.fromRGBO(
                                                   255, 255, 255, 1),
-                                              child: SizedBox(
-                                                width: 130,
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.all(8.0),
                                                 child: Column(
                                                   crossAxisAlignment:
                                                       CrossAxisAlignment.start,
                                                   children: [
                                                     Observer(builder: (_) {
-                                                      return Text(
-                                                        vmJobcard
-                                                                .shedulecardResponse
-                                                                .data?[index]
-                                                                .client
-                                                                ?.clientName ??
-                                                            '',
-                                                        style: const TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          fontSize: 16,
-                                                        ),
+                                                      return Row(
+                                                        children: [
+                                                          const SizedBox(
+                                                              width: 8),
+                                                          Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .only(
+                                                                    left: 8.0,
+                                                                    right: 8),
+                                                            child: CircleAvatar(
+                                                              radius: 14,
+                                                              child: vmJobcard
+                                                                          .shedulecardResponse
+                                                                          .data?[
+                                                                              i]
+                                                                          .drivers?[
+                                                                              driverIndex]
+                                                                          .dp !=
+                                                                      null
+                                                                  ? Image
+                                                                      .network(
+                                                                      vmJobcard
+                                                                          .shedulecardResponse
+                                                                          .data![
+                                                                              i]
+                                                                          .drivers![
+                                                                              driverIndex]
+                                                                          .dp!,
+                                                                      fit: BoxFit
+                                                                          .cover,
+                                                                    )
+                                                                  : Container(),
+                                                            ),
+                                                          ),
+                                                          Text(
+                                                            vmJobcard
+                                                                    .shedulecardResponse
+                                                                    .data?[i]
+                                                                    .drivers?[
+                                                                        driverIndex]
+                                                                    .name ??
+                                                                '',
+                                                            style:
+                                                                const TextStyle(
+                                                                    fontSize:
+                                                                        15),
+                                                          ),
+                                                        ],
                                                       );
                                                     }),
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              left: 43.0),
+                                                      child: Text(
+                                                        vmJobcard
+                                                                .shedulecardResponse
+                                                                .data?[i]
+                                                                .drivers?[
+                                                                    driverIndex]
+                                                                .registration ??
+                                                            '',
+                                                        style: const TextStyle(
+                                                            fontSize: 15),
+                                                      ),
+                                                    ),
                                                   ],
                                                 ),
                                               ),
