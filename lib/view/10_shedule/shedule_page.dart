@@ -155,7 +155,7 @@ class SchedulePage extends StatelessWidget {
                                     ],
                                   ),
                                 ),
-                                const SizedBox(height: 10),
+                                const SizedBox(height: 25),
                                 Card(
                                   color: Colors.blue,
                                   child: Column(
@@ -164,15 +164,18 @@ class SchedulePage extends StatelessWidget {
                                     children: [
                                       const Align(
                                         alignment: Alignment.topCenter,
-                                        child: Text(
-                                          'Drivers and vehicles',
-                                          style: TextStyle(
-                                            fontSize: 15,
-                                            color: Colors.white,
+                                        child: Padding(
+                                          padding: EdgeInsets.all(8.0),
+                                          child: Text(
+                                            'Drivers and vehicles',
+                                            style: TextStyle(
+                                              fontSize: 15,
+                                              color: Colors.white,
+                                            ),
                                           ),
                                         ),
                                       ),
-                                      const SizedBox(height: 30),
+                                      const SizedBox(height: 5),
                                       SizedBox(
                                         height: 94,
                                         child: ListView.builder(
