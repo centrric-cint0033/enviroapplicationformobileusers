@@ -9,10 +9,8 @@ import 'package:enviro_mobile_application/widgets/ww_search_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
 
-import '../../widgets/cmappbar.dart';
-
 import '../../widgets/drawer.dart';
-import '../../widgets/cmn_leading_icon.dart';
+import '../../widgets/cmn_action_icon.dart';
 import '../../widgets/cmn_title_textwidget.dart';
 import '../../view_model/10_site/site_view_model.dart';
 
@@ -35,7 +33,10 @@ class SiteMainScreen extends StatelessWidget {
       child: SafeArea(
         child: Scaffold(
           drawer: CmnDrawer(context),
-          appBar: AppBar(title: cmnTitleWidget('Site')),
+          appBar: AppBar(
+            title: cmnTitleWidget('Site'),
+            actions: [notificationButton(context)],
+          ),
           body: Padding(
             padding: screenWidth,
             child: Column(
