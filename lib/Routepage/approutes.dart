@@ -16,11 +16,11 @@ class AppRouter extends $AppRouter {
           guards: [AuthGuard()],
         ),
         AutoRoute(page: SalesRoute.page, path: RouteNames.rSalesPpage),
-        AutoRoute(page: OhsRoute.page, path: RouteNames.ohsPage),
+        AutoRoute(page: OhsMainRoute.page, path: RouteNames.ohsPage),
         AutoRoute(page: IntranetRoute.page, path: RouteNames.intranetpage),
         AutoRoute(page: VehicleRoute.page, path: RouteNames.vehiclemainpage),
         AutoRoute(
-            page: NewsRouteInsideRoute.page,
+            page: NewsOhsFolderInsideRoute.page,
             path: RouteNames.rNewsfolderinsidepage),
         AutoRoute(page: OhsDetailRoute.page, path: RouteNames.rOhsdetailpage),
         AutoRoute(

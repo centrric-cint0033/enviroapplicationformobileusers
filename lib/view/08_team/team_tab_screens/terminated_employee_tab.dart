@@ -17,12 +17,12 @@ class TerminatedEmployeeTab extends StatelessWidget {
     return Scaffold(
         body: Column(children: [
       gapField,
-      WWSearchField(
+      WWTextField(
         controller: vmTeam.terminatedEmployeeSearchCntrlr,
         onChanged: (v) => vmTeam.onTextChanged(() => v.isEmpty
             ? vmTeam.getTerminatedEmployee()
             : vmTeam.terminatedEmployeeSearchApi(v)),
-        searchTap: () {},
+        suffixTap: () {},
         hintText: 'Search Employee',
       ),
       gapField,

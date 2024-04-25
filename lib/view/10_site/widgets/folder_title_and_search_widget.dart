@@ -28,7 +28,7 @@ class FolderTitleAndSearchWidget extends StatelessWidget {
                 fontWeight: FontWeight.bold),
           ),
           sized0hx05,
-          WWSearchField(
+          WWTextField(
             controller: vmSite.siteFolderCtr,
             hintText: 'Search by folder name',
             onChanged: _onChanged,

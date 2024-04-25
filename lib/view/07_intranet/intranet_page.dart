@@ -382,8 +382,8 @@ class IntranetPage extends StatelessWidget {
                                           if (folderName.isNotEmpty) {
                                             print('iiiiii');
                                             // Navigator.of(context).pop();
-                                            vmOhs.folderrenameviewmodelfunction(
-                                                folderName, id);
+                                            vmOhs.ohsFolerRenameApi(
+                                                context, folderName, id);
                                             print('api');
                                           } else {}
                                           Navigator.of(context).pop();

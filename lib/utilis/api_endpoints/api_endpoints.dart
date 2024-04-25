@@ -32,7 +32,6 @@ class ApiEndPoints
   //
 
   static const endpointnewsfolder = '/api/v1/oh_and_s/folder/segment/list';
-  static const endpointfoldercreation = '/api/v1/drive/folder/create/';
   static const endpointnewsfldrrename = '/api/v1/drive/folder/rename/3260/';
 
   static const endpointPreviousSale = '/api/v1/jobs/previous/sale/';
