@@ -11,6 +11,7 @@ import 'package:auto_route/auto_route.dart';
 
 import '../../widgets/cmappbar.dart';
 
+import '../../widgets/drawer.dart';
 import '../../widgets/cmn_leading_icon.dart';
 import '../../widgets/cmn_title_textwidget.dart';
 import '../../view_model/10_site/site_view_model.dart';
@@ -31,38 +32,38 @@ class SiteMainScreen extends StatelessWidget {
     );
     return DefaultTabController(
       length: 3,
-      child: Scaffold(
-        appBar: CustomAppBar(
-          leading: const cmn_leading_icon(),
-          title: cmnTitleWidget('Site'),
-        ),
-        body: Padding(
-          padding: screenWidth,
-          child: Column(
-            children: [
-              WWcommonTabBar(
-                value1: 'Permanent',
-                value2: 'Temporary',
-                value3: 'Deleted',
-                onTap: (i) => vmSite.selectedTab = i,
-              ),
-              gapFieldSite,
-              WWSearchField(
-                controller: vmSite.searchCtr,
-                hintText: "Search Site by Name",
-                onChanged: onChanged,
-                searchTap: () {},
-              ),
-              const Expanded(
-                child: TabBarView(
-                  children: [
-                    PermanentSitesTab(),
-                    TemporarySitesTab(),
-                    DeletedSiteTab(),
-                  ],
+      child: SafeArea(
+        child: Scaffold(
+          drawer: CmnDrawer(context),
+          appBar: AppBar(title: cmnTitleWidget('Site')),
+          body: Padding(
+            padding: screenWidth,
+            child: Column(
+              children: [
+                WWcommonTabBar(
+                  value1: 'Permanent',
+                  value2: 'Temporary',
+                  value3: 'Deleted',
+                  onTap: (i) => vmSite.selectedTab = i,
                 ),
-              )
-            ],
+                gapFieldSite,
+                WWSearchField(
+                  controller: vmSite.searchCtr,
+                  hintText: "Search Site by Name",
+                  onChanged: onChanged,
+                  searchTap: () {},
+                ),
+                const Expanded(
+                  child: TabBarView(
+                    children: [
+                      PermanentSitesTab(),
+                      TemporarySitesTab(),
+                      DeletedSiteTab(),
+                    ],
+                  ),
+                )
+              ],
+            ),
           ),
         ),
       ),
