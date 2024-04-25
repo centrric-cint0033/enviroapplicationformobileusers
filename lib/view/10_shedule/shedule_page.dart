@@ -89,11 +89,15 @@ class SchedulePage extends StatelessWidget {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Text(
-                                        vmJobcard.shedulecardResponse.data?[i]
-                                                .salesPerson
-                                                ?.toString() ??
-                                            '',
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(left: 68.0),
+                                        child: Text(
+                                          vmJobcard.shedulecardResponse.data?[i]
+                                                  .salesPerson
+                                                  ?.toString() ??
+                                              '',
+                                        ),
                                       ),
                                       ElevatedButton(
                                         onPressed: () {
@@ -143,7 +147,7 @@ class SchedulePage extends StatelessWidget {
                                       expandedRowShowText2(
                                         "Company",
                                         vmJobcard.shedulecardResponse.data?[i]
-                                                .outsourcedCompanyName ??
+                                                .client?.clientName ??
                                             '',
                                       ),
                                       expandedRowShowText2(
