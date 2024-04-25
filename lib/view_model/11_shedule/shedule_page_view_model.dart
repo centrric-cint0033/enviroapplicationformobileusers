@@ -79,4 +79,34 @@ abstract class JobCardViewModelBase with Store {
       },
     );
   }
+
+  @observable
+  ApiResponse<List<SheduleCardRespModel>> sheduleweekResponse =
+      ApiResponse<List<SheduleCardRespModel>>();
+
+  @action
+  Future<void> shedulecardviewmodelweekfunction() async {
+    print('aaaaa$jobcardResponse');
+    print('aaaaa$jobcardResponse');
+
+    sheduleweekResponse =
+        sheduleweekResponse.copyWith(error: null, loading: true);
+
+    final result = await jobcardService.shedulecardserviceweekfunction();
+    return result.fold(
+      (l) {
+        sheduleweekResponse = sheduleweekResponse.copyWith(
+          error: l,
+          loading: false,
+        );
+      },
+      (r) {
+        sheduleweekResponse = sheduleweekResponse.copyWith(
+          data: r,
+          error: null,
+          loading: false,
+        );
+      },
+    );
+  }
 }

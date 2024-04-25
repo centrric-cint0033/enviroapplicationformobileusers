@@ -30,7 +30,7 @@ class SchedulePage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Padding(
-              padding: const EdgeInsets.only(left: 18.0),
+              padding: const EdgeInsets.only(left: 18.0, top: 19),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -290,367 +290,254 @@ class SchedulePage extends StatelessWidget {
                 },
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(18.0),
+            const Padding(
+              padding: EdgeInsets.only(left: 28.0, right: 28, top: 40),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text(
-                    "Schedule List",
+                  Text(
+                    "Schedule List for this week",
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  const SizedBox(height: 10),
-                  ElevatedButton(
-                    onPressed: () {},
-                    child: const Text(
-                      'Week',
-                      style: TextStyle(color: Colors.green),
-                    ),
-                    style: ElevatedButton.styleFrom(
-                      primary: Colors.white,
-                      onPrimary: Colors.black,
-                    ),
-                  ),
+                  SizedBox(height: 10),
+                  // ElevatedButton(
+                  //   onPressed: () {},
+                  //   child: const Text(
+                  //     'Week',
+                  //     style: TextStyle(color: Colors.green),
+                  //   ),
+                  //   style: ElevatedButton.styleFrom(
+                  //     primary: Colors.white,
+                  //     onPrimary: Colors.black,
+                  //   ),
+                  // ),
                 ],
               ),
             ),
             const SizedBox(height: 20),
             GestureDetector(
               onTap: () => sheduledetailfunction(context),
-              child: Card(
-                margin: const EdgeInsets.symmetric(horizontal: 20),
-                elevation: 4,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'New Card Title 2',
-                        ),
-                        Text(
-                          'job7654',
-                        ),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        const Text('Some Text Here'),
-                        ElevatedButton(
-                          onPressed: () {
-                            sheduledetailfunction(context);
-                          },
-                          style: ElevatedButton.styleFrom(
-                            primary: Colors.white,
-                            onPrimary: Colors.black,
+              child: SizedBox(
+                height: 310,
+                child: Observer(builder: (_) {
+                  return ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount:
+                          vmJobcard.sheduleweekResponse.data?.length ?? 0,
+                      itemBuilder: (BuildContext context, int i) {
+                        return SizedBox(
+                          width: 400,
+                          child: Padding(
+                            padding: const EdgeInsets.only(right: 14.0),
+                            child: SingleChildScrollView(
+                              child: Card(
+                                margin:
+                                    const EdgeInsets.symmetric(horizontal: 20),
+                                elevation: 4,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Observer(builder: (_) {
+                                            return Text(
+                                              vmJobcard
+                                                      .sheduleweekResponse
+                                                      .data?[i]
+                                                      .client
+                                                      ?.clientName ??
+                                                  '',
+                                            );
+                                          }),
+                                          Text(
+                                            'job ${vmJobcard.sheduleweekResponse.data?[i].job ?? ''}',
+                                          ),
+                                        ],
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Observer(builder: (_) {
+                                            return Text(
+                                              vmJobcard.sheduleweekResponse
+                                                      .data?[i].startTime ??
+                                                  '',
+                                            );
+                                          }),
+                                          ElevatedButton(
+                                            onPressed: () {
+                                              sheduledetailfunction(context);
+                                            },
+                                            style: ElevatedButton.styleFrom(
+                                              primary: Colors.white,
+                                              onPrimary: Colors.black,
+                                            ),
+                                            child: const Text('pending'),
+                                          ),
+                                        ],
+                                      ),
+                                      Observer(builder: (_) {
+                                        return Text(
+                                          '${vmJobcard.sheduleweekResponse.data?[i].startDate ?? ''}${vmJobcard.sheduleweekResponse.data?[i].endDate ?? ''}',
+                                        );
+                                      }),
+                                      const SizedBox(
+                                        height: 10,
+                                      ),
+                                      const Card(
+                                        color: Colors.blue,
+                                        child: Column(),
+                                      ),
+                                      SizedBox(
+                                        child: Flexible(
+                                          child: Card(
+                                            color: const Color.fromRGBO(
+                                                33, 150, 243, 1),
+                                            child: Column(
+                                              children: [
+                                                const Padding(
+                                                  padding: EdgeInsets.all(8.0),
+                                                  child: Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceBetween,
+                                                    children: [
+                                                      Text(
+                                                        'Drivers',
+                                                        style: TextStyle(
+                                                            color: Colors.white,
+                                                            fontSize: 15),
+                                                      ),
+                                                      Text(
+                                                        'Vehicle assigned',
+                                                        style: TextStyle(
+                                                            color: Colors.white,
+                                                            fontSize: 15),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                                const Divider(
+                                                  color: Colors.white,
+                                                  thickness: 1,
+                                                ),
+                                                Observer(builder: (_) {
+                                                  return Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceBetween,
+                                                    children: [
+                                                      Text(
+                                                        vmJobcard
+                                                                .shedulecardResponse
+                                                                .data?[i]
+                                                                .drivers?[0]
+                                                                .name ??
+                                                            '',
+                                                        style: const TextStyle(
+                                                          color: Colors.white,
+                                                        ),
+                                                      ),
+                                                      const Divider(
+                                                        color: Colors.black,
+                                                      ),
+                                                      Text(
+                                                        vmJobcard
+                                                                .shedulecardResponse
+                                                                .data?[i]
+                                                                .drivers?[0]
+                                                                .registration ??
+                                                            '',
+                                                        style: const TextStyle(
+                                                          color: Colors.white,
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  );
+                                                }),
+                                                const Divider(
+                                                  color: Colors.white,
+                                                  thickness: 1,
+                                                ),
+                                                Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: [
+                                                    Observer(builder: (_) {
+                                                      return Text(
+                                                        vmJobcard
+                                                                .shedulecardResponse
+                                                                .data?[i]
+                                                                .jobCardKeys
+                                                                ?.weighBridgeRequiredMultipleFile
+                                                                ?.firstOrNull
+                                                                ?.name ??
+                                                            '',
+                                                        style: const TextStyle(
+                                                          color: Colors.white,
+                                                        ),
+                                                      );
+                                                    }),
+                                                    Observer(builder: (_) {
+                                                      return Text(
+                                                        vmJobcard
+                                                                .sheduleweekResponse
+                                                                .data?[i]
+                                                                .vehicle
+                                                                ?.toString() ??
+                                                            '',
+                                                        style: TextStyle(
+                                                          color: Colors.white,
+                                                        ),
+                                                      );
+                                                    }),
+                                                  ],
+                                                ),
+                                                const Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
                           ),
-                          child: const Text('pending'),
-                        ),
-                      ],
-                    ),
-                    const Text('Some Text Here'),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    const Card(
-                      color: Colors.blue,
-                      child: Column(),
-                    ),
-                    const SizedBox(
-                      child: Flexible(
-                        child: Card(
-                          color: Color.fromRGBO(33, 150, 243, 1),
-                          child: Column(
-                            children: [
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    'New Card Title 2',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                  Text(
-                                    'job7654',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              Divider(
-                                color: Colors.white,
-                                thickness: 1,
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    'New Card Title 2',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                  Divider(
-                                    color: Colors.black,
-                                  ),
-                                  Text(
-                                    'job7654',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              Divider(
-                                color: Colors.white,
-                                thickness: 1,
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    'New Card Title 2',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                  Text(
-                                    'job7654',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              Divider(
-                                color: Colors.white,
-                                thickness: 1,
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    'New Card Title 2',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                  Text(
-                                    'job7654',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              Divider(
-                                color: Colors.white,
-                                thickness: 1,
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    'New Card Title 2',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                  Text(
-                                    'job765',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+                        );
+                      });
+                }),
               ),
             ),
             const SizedBox(height: 20),
             GestureDetector(
               onTap: () => sheduledetailsfunction2(context),
-              child: Card(
-                margin: const EdgeInsets.symmetric(horizontal: 20),
+              child: const Card(
+                margin: EdgeInsets.symmetric(horizontal: 20),
                 elevation: 4,
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'New Card Title 2',
-                        ),
-                        Text(
-                          'job7654',
-                        ),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        const Text('Some Text Here'),
-                        ElevatedButton(
-                          onPressed: () {
-                            sheduledetailsfunction2(context);
-                          },
-                          child: const Text('pending'),
-                          style: ElevatedButton.styleFrom(
-                            primary: Colors.white,
-                            onPrimary: Colors.black,
-                          ),
-                        ),
-                      ],
-                    ),
-                    const Text('Some Text Here'),
-                    const SizedBox(
-                      height: 10,
-                      child: Card(
-                        color: Colors.blue,
-                        child: Column(),
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [],
                       ),
-                    ),
-                    const SizedBox(
-                      child: Flexible(
-                        child: Card(
-                          color: Color.fromRGBO(33, 150, 243, 1),
-                          child: Column(
-                            children: [
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    'New Card Title 2',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                  Text(
-                                    'job7654',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              Divider(
-                                color: Colors.white,
-                                thickness: 1,
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    'New Card Title 2',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                  Divider(
-                                    color: Colors.black,
-                                  ),
-                                  Text(
-                                    'job7654',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              Divider(
-                                color: Colors.white,
-                                thickness: 1,
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    'New Card Title 2',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                  Text(
-                                    'job7654',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              Divider(
-                                color: Colors.white,
-                                thickness: 1,
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    'New Card Title 2',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                  Text(
-                                    'job7654',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              Divider(
-                                color: Colors.white,
-                                thickness: 1,
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    'New Card Title 2',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                  Text(
-                                    'job765',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+                    ]),
               ),
             ),
           ],

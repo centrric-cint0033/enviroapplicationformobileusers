@@ -83,7 +83,10 @@ class SheduledetailPage extends StatelessWidget {
           ":qhdbn",
         );
       case 4:
-        return expandedRowShowText("Client Type", ":qhdbn");
+        return expandedRowShowText(
+          "Client Type",
+          vmJobcard.sheduleweekResponse.data.client?.clientName ?? '',
+        );
       case 5:
         return expandedRowShowText("Client Email", ":qhdbn");
       case 6:

@@ -14,6 +14,9 @@ abstract class IJobCardService {
   Future<Either<MainFailure, JobCardRespModel>> jobcardservicefunction();
   Future<Either<MainFailure, List<SheduleCardRespModel>>>
       shedulecardservicefunction();
+
+  Future<Either<MainFailure, List<SheduleCardRespModel>>>
+      shedulecardserviceweekfunction();
 }
 
 @LazySingleton(as: IJobCardService)
@@ -59,6 +62,29 @@ class SalesService implements IJobCardService {
             List<SheduleCardRespModel>.from(
                 data.map((e) => SheduleCardRespModel.fromJson(e)));
         return Right(shedulecardlist);
+      },
+    );
+  }
+
+  @override
+  Future<Either<MainFailure, List<SheduleCardRespModel>>>
+      shedulecardserviceweekfunction() async {
+    var response = await getIt<HttpService>().request(
+        authenticated: true,
+        method: HttpMethod.get,
+        apiUrl: ApiEndPoints.endpointsheduleweekcard);
+
+    return response.fold(
+      (l) {
+        (l.values.first);
+        return Left(l.keys.first);
+      },
+      (res) async {
+        var data = jsonDecode(res.body) as List;
+        List<SheduleCardRespModel> shedulecardweeklist =
+            List<SheduleCardRespModel>.from(
+                data.map((e) => SheduleCardRespModel.fromJson(e)));
+        return Right(shedulecardweeklist);
       },
     );
   }

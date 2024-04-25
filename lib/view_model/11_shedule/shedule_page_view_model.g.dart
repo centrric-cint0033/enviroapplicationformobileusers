@@ -41,6 +41,22 @@ mixin _$JobCardViewModel on JobCardViewModelBase, Store {
     });
   }
 
+  late final _$sheduleweekResponseAtom =
+      Atom(name: 'JobCardViewModelBase.sheduleweekResponse', context: context);
+
+  @override
+  ApiResponse<List<SheduleCardRespModel>> get sheduleweekResponse {
+    _$sheduleweekResponseAtom.reportRead();
+    return super.sheduleweekResponse;
+  }
+
+  @override
+  set sheduleweekResponse(ApiResponse<List<SheduleCardRespModel>> value) {
+    _$sheduleweekResponseAtom.reportWrite(value, super.sheduleweekResponse, () {
+      super.sheduleweekResponse = value;
+    });
+  }
+
   late final _$jobcardviewmodelfunctionAsyncAction = AsyncAction(
       'JobCardViewModelBase.jobcardviewmodelfunction',
       context: context);
@@ -61,11 +77,22 @@ mixin _$JobCardViewModel on JobCardViewModelBase, Store {
         .run(() => super.shedulecardviewmodelfunction());
   }
 
+  late final _$shedulecardviewmodelweekfunctionAsyncAction = AsyncAction(
+      'JobCardViewModelBase.shedulecardviewmodelweekfunction',
+      context: context);
+
+  @override
+  Future<void> shedulecardviewmodelweekfunction() {
+    return _$shedulecardviewmodelweekfunctionAsyncAction
+        .run(() => super.shedulecardviewmodelweekfunction());
+  }
+
   @override
   String toString() {
     return '''
 jobcardResponse: ${jobcardResponse},
-shedulecardResponse: ${shedulecardResponse}
+shedulecardResponse: ${shedulecardResponse},
+sheduleweekResponse: ${sheduleweekResponse}
     ''';
   }
 }
