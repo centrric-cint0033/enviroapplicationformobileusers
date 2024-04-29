@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:enviro_mobile_application/api_response/api_response.dart';
 import 'package:enviro_mobile_application/model/03_vehicle/vehicle_model/vehicle_model.dart';
-import 'package:enviro_mobile_application/model/truck_page/res_model/truckpage_model.dart';
 import 'package:enviro_mobile_application/service/03_vehicles/vehicle_service.dart';
 
 import 'package:enviro_mobile_application/utilis/injection.dart';

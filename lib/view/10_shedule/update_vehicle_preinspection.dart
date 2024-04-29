@@ -2,10 +2,15 @@ import 'package:auto_route/auto_route.dart';
 import 'package:dartz/dartz.dart';
 import 'package:enviro_mobile_application/utilis/constant.dart';
 import 'package:enviro_mobile_application/view/02_sales/sales_widgets.dart/sales_widget.dart';
+import 'package:enviro_mobile_application/view/10_shedule/shedule_widget.dart';
+import 'package:enviro_mobile_application/view_model/11_shedule/shedule_page_view_model.dart';
 import 'package:enviro_mobile_application/widgets/cmn_action_icon.dart';
 import 'package:enviro_mobile_application/widgets/cmn_title_textwidget.dart';
 import 'package:enviro_mobile_application/widgets/drawer.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:intl/intl.dart';
 
 @RoutePage()
 class UpdateVehiclepreinspectionPage extends StatelessWidget {
@@ -56,15 +61,71 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                   title: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      expandedRowShowsText("Date and Time", ":2-3-21929 48pm5"),
+                      Observer(builder: (_) {
+                        return Container(
+                          child: expandedRowShowText2(
+                              "Date and Time",
+                              DateFormat.yMMMMd().format(vmJobcard
+                                  .shedulecardResponse
+                                  .data![index]
+                                  .startDate!)),
+                        );
+                      }),
                       const SizedBox(height: 16),
-                      expandedRowShowsText("vehicle registration", ":qhdbn"),
+                      Observer(builder: (_) {
+                        return Container(
+                          child: expandedRowShowText2(
+                            "vehicle registration",
+                            vmJobcard.sheduleweekResponse.data?[index].vehicle
+                                    ?.toString() ??
+                                '',
+                          ),
+                        );
+                      }),
                       const SizedBox(height: 16),
-                      expandedRowShowsText("Odometer", ":"),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          const Text("Odometer"),
+                          const SizedBox(width: 8),
+                          Expanded(
+                            child: Padding(
+                              padding: const EdgeInsets.only(left: 98.0),
+                              child: TextField(
+                                decoration: const InputDecoration(
+                                    border: InputBorder.none),
+                                inputFormatters: [
+                                  FilteringTextInputFormatter.digitsOnly
+                                ],
+                                keyboardType: TextInputType.number,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                       const SizedBox(height: 16),
-                      expandedRowShowsText("Drivers Nmae", ":azeem"),
+                      expandedRowShowText2("Drivers name", "azeem"),
                       const SizedBox(height: 16),
-                      expandedRowShowsText("Hour Meter Start", ":"),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          const Text("Hours meter start"),
+                          const SizedBox(width: 8),
+                          Expanded(
+                            child: Padding(
+                              padding: const EdgeInsets.only(left: 38.0),
+                              child: TextField(
+                                decoration: const InputDecoration(
+                                    border: InputBorder.none),
+                                inputFormatters: [
+                                  FilteringTextInputFormatter
+                                      .singleLineFormatter
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                       const SizedBox(height: 16),
                       Row(
                         children: [
@@ -80,8 +141,9 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                                 'I am Fit for Work',
                               ),
                               Icon(
-                                Icons.star, size: 13,
-                                color: Colors.red, // Set icon color to red
+                                Icons.star,
+                                size: 13,
+                                color: Colors.red,
                               ),
                             ],
                           ),
