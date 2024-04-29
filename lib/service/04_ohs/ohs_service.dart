@@ -134,9 +134,7 @@ class OhsService implements IohsService {
 
     return response.fold(
       (l) => Left(l),
-      (res) async {
-        return const Right('success');
-      },
+      (res) async => const Right('success'),
     );
   }
 

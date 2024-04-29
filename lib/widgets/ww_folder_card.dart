@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class WWFolderCard extends StatelessWidget {
   final FolderModel folder;
+  final Function() onTap;
   final Function(String value) editTap;
   final Function() deleteTap;
 
@@ -14,39 +15,37 @@ class WWFolderCard extends StatelessWidget {
     required this.folder,
     required this.editTap,
     required this.deleteTap,
+    required this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      color: Colors.grey.shade200,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10.0),
-      ),
-      child: ListTile(
-        contentPadding: const EdgeInsets.only(left: 20),
-        leading: const Icon(
-          Icons.folder,
-          color: Colors.black54,
-        ),
-        title: Text(
-          folder.name ?? "",
-          overflow: TextOverflow.ellipsis,
-          style: Theme.of(context).textTheme.bodySmall,
-        ),
-        trailing: SizedBox(
-          width: 80.w,
-          child: Row(
-            children: [
-              CommonIconBtnWidget(
-                icon: Icons.edit,
-                onTap: () => showEditDialog(context, editTap: editTap),
-              ),
-              CommonIconBtnWidget(
-                icon: Icons.delete_forever,
-                onTap: () => showDeleteDialog(context, deleteTap: deleteTap),
-              ),
-            ],
+    return InkWell(
+      onTap: onTap,
+      child: Card(
+        color: Colors.grey.shade200,
+        shape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+        child: ListTile(
+          contentPadding: const EdgeInsets.only(left: 20),
+          leading: const Icon(Icons.folder, color: Colors.black54),
+          title: Text(folder.name ?? "",
+              overflow: TextOverflow.ellipsis,
+              style: Theme.of(context).textTheme.bodySmall),
+          trailing: SizedBox(
+            width: 80.w,
+            child: Row(
+              children: [
+                CommonIconBtnWidget(
+                  icon: Icons.edit,
+                  onTap: () => showEditDialog(context, editTap: editTap),
+                ),
+                CommonIconBtnWidget(
+                  icon: Icons.delete_forever,
+                  onTap: () => showDeleteDialog(context, deleteTap: deleteTap),
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -67,15 +66,8 @@ class WWFolderCard extends StatelessWidget {
                 deleteTap();
                 Navigator.of(context).pop();
               },
-
-              // () {
-              //   vmOhs.folderdeleteviewmodelfunction('folders', id, 1);
-              //   Navigator.of(context).pop();
-              // },
-              child: const Text(
-                "Delete",
-                style: TextStyle(color: Colors.black),
-              ),
+              child:
+                  const Text("Delete", style: TextStyle(color: Colors.black)),
             ),
             TextButton(
               onPressed: () {
