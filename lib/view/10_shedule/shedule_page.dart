@@ -9,6 +9,7 @@ import 'package:enviro_mobile_application/widgets/cmn_title_textwidget.dart';
 import 'package:enviro_mobile_application/widgets/ww_response_handler.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:intl/intl.dart';
 
 import '../../model/12_shedulecard/shedule_card_resp_model.dart';
 import '../../widgets/drawer.dart';
@@ -55,239 +56,243 @@ class SchedulePage extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(
-              height: 400,
-              width: 300,
-              child: Observer(
-                builder: (_) {
-                  return WWResponseHandler(
-                    data: vmJobcard.shedulecardResponse,
-                    isEmpty:
-                        vmJobcard.shedulecardResponse.data?.isEmpty ?? true,
-                    onTap: () => vmJobcard.shedulecardviewmodelfunction(),
-                    child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount:
-                          vmJobcard.shedulecardResponse.data?.length ?? 0,
-                      itemBuilder: (BuildContext context, int i) {
-                        return SizedBox(
-                          width: 380,
-                          child: Card(
-                            shape: RoundedRectangleBorder(
-                              side: const BorderSide(
-                                  color: Colors.blue, width: 1),
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            elevation: 4,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 20, vertical: 20),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(left: 68.0),
-                                        child: Text(
-                                          vmJobcard.shedulecardResponse.data?[i]
-                                                  .salesPerson
-                                                  ?.toString() ??
-                                              '',
-                                        ),
-                                      ),
-                                      ElevatedButton(
-                                        onPressed: () {
-                                          nextjobfnction(context);
-                                        },
-                                        style: ElevatedButton.styleFrom(
-                                          primary: Colors.blue,
-                                          onPrimary: Colors.black,
-                                        ),
-                                        child: const Text(
-                                          'Next job',
-                                          style: TextStyle(
-                                            fontSize: 13,
-                                            color: Colors.white,
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: SizedBox(
+                height: 400,
+                width: 300,
+                child: Observer(
+                  builder: (_) {
+                    return WWResponseHandler(
+                      data: vmJobcard.shedulecardResponse,
+                      isEmpty:
+                          vmJobcard.shedulecardResponse.data?.isEmpty ?? true,
+                      onTap: () => vmJobcard.shedulecardviewmodelfunction(),
+                      child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount:
+                            vmJobcard.shedulecardResponse.data?.length ?? 0,
+                        itemBuilder: (BuildContext context, int i) {
+                          return SizedBox(
+                            width: 380,
+                            child: Card(
+                              shape: RoundedRectangleBorder(
+                                side: const BorderSide(
+                                    color: Colors.blue, width: 1),
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              elevation: 4,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 20, vertical: 20),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(left: 68.0),
+                                          child: Text(
+                                            vmJobcard.shedulecardResponse
+                                                    .data?[i].salesPerson
+                                                    ?.toString() ??
+                                                '',
                                           ),
                                         ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 22),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      expandedRowShowText2(
-                                        "Day",
-                                        (vmJobcard.shedulecardResponse.data?[i]
-                                                    .startDate ??
-                                                '')
-                                            .toString(),
-                                      ),
-                                      expandedRowShowText2(
-                                        "Time",
-                                        vmJobcard.shedulecardResponse.data?[i]
-                                                .startTime ??
-                                            '',
-                                      ),
-                                      expandedRowShowText2(
-                                        "Type",
-                                        vmJobcard.shedulecardResponse.data?[i]
-                                                .wasteTypeStr ??
-                                            '',
-                                      ),
-                                      expandedRowShowText2(
-                                        "Company",
-                                        vmJobcard.shedulecardResponse.data?[i]
-                                                .client?.clientName ??
-                                            '',
-                                      ),
-                                      expandedRowShowText2(
-                                        "Status",
-                                        vmJobcard.shedulecardResponse.data?[i]
-                                                .status ??
-                                            '',
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                const SizedBox(height: 25),
-                                Card(
-                                  color: Colors.blue,
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.stretch,
-                                    children: [
-                                      const Align(
-                                        alignment: Alignment.topCenter,
-                                        child: Padding(
-                                          padding: EdgeInsets.all(8.0),
-                                          child: Text(
-                                            'Drivers and vehicles',
+                                        ElevatedButton(
+                                          onPressed: () {
+                                            nextjobfnction(context);
+                                          },
+                                          style: ElevatedButton.styleFrom(
+                                            primary: Colors.blue,
+                                            onPrimary: Colors.black,
+                                          ),
+                                          child: const Text(
+                                            'Next job',
                                             style: TextStyle(
-                                              fontSize: 15,
+                                              fontSize: 13,
                                               color: Colors.white,
                                             ),
                                           ),
                                         ),
-                                      ),
-                                      const SizedBox(height: 5),
-                                      SizedBox(
-                                        height: 94,
-                                        child: ListView.builder(
-                                          scrollDirection: Axis.horizontal,
-                                          itemCount: (vmJobcard
-                                                  .shedulecardResponse
-                                                  .data?[i]
-                                                  .drivers
-                                                  ?.length ??
-                                              0),
-                                          itemBuilder: (BuildContext context,
-                                              int driverIndex) {
-                                            return Card(
-                                              color: const Color.fromRGBO(
-                                                  255, 255, 255, 1),
-                                              child: Padding(
-                                                padding:
-                                                    const EdgeInsets.all(8.0),
-                                                child: Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    Observer(builder: (_) {
-                                                      return Row(
-                                                        children: [
-                                                          const SizedBox(
-                                                              width: 8),
-                                                          Padding(
-                                                            padding:
-                                                                const EdgeInsets
-                                                                    .only(
-                                                                    left: 8.0,
-                                                                    right: 8),
-                                                            child: CircleAvatar(
-                                                              radius: 14,
-                                                              child: vmJobcard
-                                                                          .shedulecardResponse
-                                                                          .data?[
-                                                                              i]
-                                                                          .drivers?[
-                                                                              driverIndex]
-                                                                          .dp !=
-                                                                      null
-                                                                  ? Image
-                                                                      .network(
-                                                                      vmJobcard
-                                                                          .shedulecardResponse
-                                                                          .data![
-                                                                              i]
-                                                                          .drivers![
-                                                                              driverIndex]
-                                                                          .dp!,
-                                                                      fit: BoxFit
-                                                                          .cover,
-                                                                    )
-                                                                  : Container(),
-                                                            ),
-                                                          ),
-                                                          Text(
-                                                            vmJobcard
-                                                                    .shedulecardResponse
-                                                                    .data?[i]
-                                                                    .drivers?[
-                                                                        driverIndex]
-                                                                    .name ??
-                                                                '',
-                                                            style:
-                                                                const TextStyle(
-                                                                    fontSize:
-                                                                        15),
-                                                          ),
-                                                        ],
-                                                      );
-                                                    }),
-                                                    Padding(
-                                                      padding:
-                                                          const EdgeInsets.only(
-                                                              left: 43.0),
-                                                      child: Text(
-                                                        vmJobcard
-                                                                .shedulecardResponse
-                                                                .data?[i]
-                                                                .drivers?[
-                                                                    driverIndex]
-                                                                .registration ??
-                                                            '',
-                                                        style: const TextStyle(
-                                                            fontSize: 15),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                            );
-                                          },
-                                        ),
-                                      ),
-                                    ],
+                                      ],
+                                    ),
                                   ),
-                                ),
-                              ],
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 22),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        expandedRowShowText2(
+                                            "Day",
+                                            DateFormat.yMMMMd().format(vmJobcard
+                                                .shedulecardResponse
+                                                .data![i]
+                                                .startDate!)),
+                                        expandedRowShowText2(
+                                          "Tme",
+                                          vmJobcard.shedulecardResponse.data?[i]
+                                                  .startTime ??
+                                              '',
+                                        ),
+                                        expandedRowShowText2(
+                                          "Type",
+                                          vmJobcard.shedulecardResponse.data?[i]
+                                                  .wasteTypeStr ??
+                                              '',
+                                        ),
+                                        expandedRowShowText2(
+                                          "Company",
+                                          vmJobcard.shedulecardResponse.data?[i]
+                                                  .client?.clientName ??
+                                              '',
+                                        ),
+                                        expandedRowShowText2(
+                                          "Status",
+                                          vmJobcard.shedulecardResponse.data?[i]
+                                                  .status ??
+                                              '',
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  const SizedBox(height: 25),
+                                  Card(
+                                    color: Colors.blue,
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.stretch,
+                                      children: [
+                                        const Align(
+                                          alignment: Alignment.topCenter,
+                                          child: Padding(
+                                            padding: EdgeInsets.all(8.0),
+                                            child: Text(
+                                              'Drivers and vehicles',
+                                              style: TextStyle(
+                                                fontSize: 15,
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        const SizedBox(height: 5),
+                                        SizedBox(
+                                          height: 94,
+                                          child: ListView.builder(
+                                            scrollDirection: Axis.horizontal,
+                                            itemCount: (vmJobcard
+                                                    .shedulecardResponse
+                                                    .data?[i]
+                                                    .drivers
+                                                    ?.length ??
+                                                0),
+                                            itemBuilder: (BuildContext context,
+                                                int driverIndex) {
+                                              return Card(
+                                                color: const Color.fromRGBO(
+                                                    255, 255, 255, 1),
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(8.0),
+                                                  child: Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      Observer(builder: (_) {
+                                                        return Row(
+                                                          children: [
+                                                            const SizedBox(
+                                                                width: 8),
+                                                            Padding(
+                                                              padding:
+                                                                  const EdgeInsets
+                                                                      .only(
+                                                                      left: 8.0,
+                                                                      right: 8),
+                                                              child:
+                                                                  CircleAvatar(
+                                                                radius: 14,
+                                                                child: vmJobcard
+                                                                            .shedulecardResponse
+                                                                            .data?[
+                                                                                i]
+                                                                            .drivers?[
+                                                                                driverIndex]
+                                                                            .dp !=
+                                                                        null
+                                                                    ? Image
+                                                                        .network(
+                                                                        vmJobcard
+                                                                            .shedulecardResponse
+                                                                            .data![i]
+                                                                            .drivers![driverIndex]
+                                                                            .dp!,
+                                                                        fit: BoxFit
+                                                                            .cover,
+                                                                      )
+                                                                    : Container(),
+                                                              ),
+                                                            ),
+                                                            Text(
+                                                              vmJobcard
+                                                                      .shedulecardResponse
+                                                                      .data?[i]
+                                                                      .drivers?[
+                                                                          driverIndex]
+                                                                      .name ??
+                                                                  '',
+                                                              style:
+                                                                  const TextStyle(
+                                                                      fontSize:
+                                                                          15),
+                                                            ),
+                                                          ],
+                                                        );
+                                                      }),
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .only(
+                                                                left: 43.0),
+                                                        child: Text(
+                                                          vmJobcard
+                                                                  .shedulecardResponse
+                                                                  .data?[i]
+                                                                  .drivers?[
+                                                                      driverIndex]
+                                                                  .registration ??
+                                                              '',
+                                                          style:
+                                                              const TextStyle(
+                                                                  fontSize: 15),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              );
+                                            },
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
-                          ),
-                        );
-                      },
-                    ),
-                  );
-                },
+                          );
+                        },
+                      ),
+                    );
+                  },
+                ),
               ),
             ),
             const Padding(
@@ -323,22 +328,22 @@ class SchedulePage extends StatelessWidget {
               child: SizedBox(
                 height: 310,
                 child: Observer(builder: (_) {
-                  return ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount:
-                          vmJobcard.sheduleweekResponse.data?.length ?? 0,
-                      itemBuilder: (BuildContext context, int i) {
-                        return SizedBox(
-                          width: 400,
-                          child: Padding(
-                            padding: const EdgeInsets.only(right: 14.0),
-                            child: SingleChildScrollView(
-                              child: Card(
-                                margin:
-                                    const EdgeInsets.symmetric(horizontal: 20),
-                                elevation: 4,
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount:
+                            vmJobcard.sheduleweekResponse.data?.length ?? 0,
+                        itemBuilder: (BuildContext context, int i) {
+                          return SizedBox(
+                            width: 400,
+                            child: Padding(
+                              padding: const EdgeInsets.only(right: 14.0),
+                              child: SingleChildScrollView(
+                                child: Card(
+                                  margin: const EdgeInsets.symmetric(
+                                      horizontal: 20),
+                                  elevation: 4,
                                   child: Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
@@ -348,17 +353,25 @@ class SchedulePage extends StatelessWidget {
                                             MainAxisAlignment.spaceBetween,
                                         children: [
                                           Observer(builder: (_) {
-                                            return Text(
-                                              vmJobcard
-                                                      .sheduleweekResponse
-                                                      .data?[i]
-                                                      .client
-                                                      ?.clientName ??
-                                                  '',
+                                            return Padding(
+                                              padding: const EdgeInsets.only(
+                                                  left: 8.0, top: 8),
+                                              child: Text(
+                                                vmJobcard
+                                                        .sheduleweekResponse
+                                                        .data?[i]
+                                                        .client
+                                                        ?.clientName ??
+                                                    '',
+                                              ),
                                             );
                                           }),
-                                          Text(
-                                            'job ${vmJobcard.sheduleweekResponse.data?[i].job ?? ''}',
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 8.0, top: 8, right: 8),
+                                            child: Text(
+                                              'job ${vmJobcard.sheduleweekResponse.data?[i].job ?? ''}',
+                                            ),
                                           ),
                                         ],
                                       ),
@@ -367,10 +380,14 @@ class SchedulePage extends StatelessWidget {
                                             MainAxisAlignment.spaceBetween,
                                         children: [
                                           Observer(builder: (_) {
-                                            return Text(
-                                              vmJobcard.sheduleweekResponse
-                                                      .data?[i].startTime ??
-                                                  '',
+                                            return Padding(
+                                              padding: const EdgeInsets.only(
+                                                  left: 8.0, top: 8),
+                                              child: Text(
+                                                vmJobcard.sheduleweekResponse
+                                                        .data?[i].startTime ??
+                                                    '',
+                                              ),
                                             );
                                           }),
                                           ElevatedButton(
@@ -386,8 +403,14 @@ class SchedulePage extends StatelessWidget {
                                         ],
                                       ),
                                       Observer(builder: (_) {
-                                        return Text(
-                                          '${vmJobcard.sheduleweekResponse.data?[i].startDate ?? ''}${vmJobcard.sheduleweekResponse.data?[i].endDate ?? ''}',
+                                        return Padding(
+                                          padding:
+                                              const EdgeInsets.only(left: 8.0),
+                                          child: Text(DateFormat.yMMMMd()
+                                              .format(vmJobcard
+                                                  .shedulecardResponse
+                                                  .data![i]
+                                                  .startDate!)),
                                         );
                                       }),
                                       const SizedBox(
@@ -398,33 +421,41 @@ class SchedulePage extends StatelessWidget {
                                         child: Column(),
                                       ),
                                       SizedBox(
+                                        width: 500,
                                         child: Flexible(
                                           child: Card(
                                             color: const Color.fromRGBO(
                                                 33, 150, 243, 1),
                                             child: Column(
                                               children: [
-                                                const Padding(
-                                                  padding: EdgeInsets.all(8.0),
-                                                  child: Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceBetween,
-                                                    children: [
-                                                      Text(
+                                                const Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: [
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              left: 8.0),
+                                                      child: Text(
                                                         'Drivers',
                                                         style: TextStyle(
                                                             color: Colors.white,
                                                             fontSize: 15),
                                                       ),
-                                                      Text(
+                                                    ),
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              right: 8.0),
+                                                      child: Text(
                                                         'Vehicle assigned',
                                                         style: TextStyle(
                                                             color: Colors.white,
                                                             fontSize: 15),
                                                       ),
-                                                    ],
-                                                  ),
+                                                    ),
+                                                  ],
                                                 ),
                                                 const Divider(
                                                   color: Colors.white,
@@ -436,29 +467,43 @@ class SchedulePage extends StatelessWidget {
                                                         MainAxisAlignment
                                                             .spaceBetween,
                                                     children: [
-                                                      Text(
-                                                        vmJobcard
-                                                                .shedulecardResponse
-                                                                .data?[i]
-                                                                .drivers?[0]
-                                                                .name ??
-                                                            '',
-                                                        style: const TextStyle(
-                                                          color: Colors.white,
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .only(
+                                                                left: 8.0),
+                                                        child: Text(
+                                                          vmJobcard
+                                                                  .shedulecardResponse
+                                                                  .data?[i]
+                                                                  .drivers?[0]
+                                                                  .name ??
+                                                              '',
+                                                          style:
+                                                              const TextStyle(
+                                                            color: Colors.white,
+                                                          ),
                                                         ),
                                                       ),
                                                       const Divider(
                                                         color: Colors.black,
                                                       ),
-                                                      Text(
-                                                        vmJobcard
-                                                                .shedulecardResponse
-                                                                .data?[i]
-                                                                .drivers?[0]
-                                                                .registration ??
-                                                            '',
-                                                        style: const TextStyle(
-                                                          color: Colors.white,
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .only(
+                                                                right: 8.0),
+                                                        child: Text(
+                                                          vmJobcard
+                                                                  .shedulecardResponse
+                                                                  .data?[i]
+                                                                  .drivers?[0]
+                                                                  .registration ??
+                                                              '',
+                                                          style:
+                                                              const TextStyle(
+                                                            color: Colors.white,
+                                                          ),
                                                         ),
                                                       ),
                                                     ],
@@ -474,30 +519,42 @@ class SchedulePage extends StatelessWidget {
                                                           .spaceBetween,
                                                   children: [
                                                     Observer(builder: (_) {
-                                                      return Text(
-                                                        vmJobcard
-                                                                .shedulecardResponse
-                                                                .data?[i]
-                                                                .jobCardKeys
-                                                                ?.weighBridgeRequiredMultipleFile
-                                                                ?.firstOrNull
-                                                                ?.name ??
-                                                            '',
-                                                        style: const TextStyle(
-                                                          color: Colors.white,
+                                                      return Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(8.0),
+                                                        child: Text(
+                                                          vmJobcard
+                                                                  .shedulecardResponse
+                                                                  .data?[i]
+                                                                  .jobCardKeys
+                                                                  ?.weighBridgeRequiredMultipleFile
+                                                                  ?.firstOrNull
+                                                                  ?.name ??
+                                                              '',
+                                                          style:
+                                                              const TextStyle(
+                                                            color: Colors.white,
+                                                          ),
                                                         ),
                                                       );
                                                     }),
                                                     Observer(builder: (_) {
-                                                      return Text(
-                                                        vmJobcard
-                                                                .sheduleweekResponse
-                                                                .data?[i]
-                                                                .vehicle
-                                                                ?.toString() ??
-                                                            '',
-                                                        style: TextStyle(
-                                                          color: Colors.white,
+                                                      return Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(8.0),
+                                                        child: Text(
+                                                          vmJobcard
+                                                                  .sheduleweekResponse
+                                                                  .data?[i]
+                                                                  .vehicle
+                                                                  ?.toString() ??
+                                                              '',
+                                                          style:
+                                                              const TextStyle(
+                                                            color: Colors.white,
+                                                          ),
                                                         ),
                                                       );
                                                     }),
@@ -518,9 +575,9 @@ class SchedulePage extends StatelessWidget {
                                 ),
                               ),
                             ),
-                          ),
-                        );
-                      });
+                          );
+                        }),
+                  );
                 }),
               ),
             ),
