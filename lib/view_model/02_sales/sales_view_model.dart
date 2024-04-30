@@ -102,6 +102,13 @@ abstract class SalesViewModelBase with Store {
           joblistResponse.pagination &&
           !joblistResponse.paginationLoading) {
         int pageNo = joblistResponse.pageNo + 1;
+        if (vmSales.salesJobListSearchCtr.text.isNotEmpty) {
+          salesJobListSearchApi(
+            page: pageNo,
+            vmSales.salesJobListSearchCtr.text,
+          );
+          return;
+        }
         saleJobListApi(page: pageNo);
       }
     });
@@ -141,25 +148,47 @@ abstract class SalesViewModelBase with Store {
   }
 
   @action
-  Future<void> salesJobListSearchApi(String searchData) async {
+  Future<void> salesJobListSearchApi(String searchData, {int? page}) async {
     try {
-      joblistResponse = joblistResponse.copyWith(errors: null, loading: true);
+      joblistResponse = joblistResponse.copyWith(
+        errors: null,
+        loading: page == null,
+        paginationLoading: page != null,
+      );
 
       final result = await salesService
-          .salesJobListSearchServiceApi(data: {"key": searchData});
+          .salesJobListSearchServiceApi(data: {"key": searchData}, page: page);
       return result.fold(
         (l) {
-          joblistResponse = joblistResponse.copyWith(errors: l, loading: false);
+          joblistResponse = joblistResponse.copyWith(
+            errors: l,
+            loading: false,
+            paginationLoading: false,
+          );
         },
         (r) {
-          joblistResponse =
-              joblistResponse.copyWith(data: r, errors: null, loading: false);
+          List<SalesModel> jobList = joblistResponse.data?.toList() ?? [];
+          if (page == null) {
+            jobList = r;
+          } else {
+            jobList.addAll(r);
+          }
+          joblistResponse = joblistResponse.copyWith(
+            data: jobList,
+            errors: null,
+            loading: false,
+            pageNo: page ?? 1,
+            paginationLoading: false,
+          );
         },
       );
     } catch (e) {
       customPrint(content: e, name: 'Error salesJobListSearchApi');
     } finally {
-      joblistResponse = joblistResponse.copyWith(loading: false);
+      joblistResponse = joblistResponse.copyWith(
+        loading: false,
+        paginationLoading: false,
+      );
     }
   }
 

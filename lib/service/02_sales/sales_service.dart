@@ -17,7 +17,10 @@ abstract class ISalesService {
       quoteRegisterServiceApi();
 
   Future<Either<Map<MainFailure, dynamic>, List<SalesModel>>>
-      salesJobListSearchServiceApi({required Map<String, String> data});
+      salesJobListSearchServiceApi({
+    required Map<String, String> data,
+    int? page,
+  });
 
   Future<Either<Map<MainFailure, dynamic>, List<SalesModel>>>
       salesQuoteListSearchServiceApi({required Map<String, String> data});
@@ -49,9 +52,17 @@ class SalesService implements ISalesService {
 
   @override
   Future<Either<Map<MainFailure, dynamic>, List<SalesModel>>>
-      salesJobListSearchServiceApi({required Map<String, String> data}) async {
+      salesJobListSearchServiceApi({
+    required Map<String, String> data,
+    int? page,
+  }) async {
+    String apiUrl =
+        "${ApiEndPoints().salesJobSearch}/?page=${page ?? 1}&limit=10";
     var response = await httpService.multipartRequest(
-        data: data, method: 'POST', apiUrl: ApiEndPoints().salesJobSearch);
+      data: data,
+      method: 'POST',
+      apiUrl: apiUrl,
+    );
     return response.fold(
       (l) => Left(l),
       (res) async {
