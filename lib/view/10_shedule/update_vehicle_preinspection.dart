@@ -71,7 +71,7 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                                   .startDate!)),
                         );
                       }),
-                      const SizedBox(height: 16),
+                      const SizedBox(height: 12),
                       Observer(builder: (_) {
                         return Container(
                           child: expandedRowShowText2(
@@ -82,7 +82,7 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                           ),
                         );
                       }),
-                      const SizedBox(height: 16),
+                      const SizedBox(height: 5),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
@@ -103,9 +103,9 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                           ),
                         ],
                       ),
-                      const SizedBox(height: 16),
+                      const SizedBox(height: 4),
                       expandedRowShowText2("Drivers name", "azeem"),
-                      const SizedBox(height: 16),
+                      const SizedBox(height: 4),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
@@ -126,51 +126,83 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                           ),
                         ],
                       ),
-                      const SizedBox(height: 16),
-                      Row(
-                        children: [
-                          Checkbox(
-                            side: const BorderSide(color: Colors.red),
-                            value: false,
-                            onChanged: (bool? value) {},
-                            checkColor: Colors.red,
-                          ),
-                          const Row(
-                            children: [
-                              Text(
-                                'I am Fit for Work',
-                              ),
-                              Icon(
-                                Icons.star,
-                                size: 13,
+                      const SizedBox(height: 4),
+                      Observer(builder: (_) {
+                        return Row(
+                          children: [
+                            Checkbox(
+                              side: const BorderSide(
+                                style: BorderStyle.solid,
                                 color: Colors.red,
                               ),
-                            ],
-                          ),
-                        ],
-                      ),
+                              value: vmJobcard.checkboxValue,
+                              onChanged: (bool? value) {
+                                if (value != null) {
+                                  vmJobcard.updateCheckboxValue(value);
+                                }
+                              },
+                              checkColor: Colors.red,
+                              activeColor: Colors.white,
+                              materialTapTargetSize:
+                                  MaterialTapTargetSize.padded,
+                            ),
+                            const Row(
+                              children: [
+                                Text(
+                                  'I am Fit for Work',
+                                ),
+                                Icon(
+                                  Icons.star,
+                                  size: 13,
+                                  color: Colors.red,
+                                ),
+                              ],
+                            ),
+                          ],
+                        );
+                      }),
+                      Observer(builder: (_) {
+                        return Row(
+                          children: [
+                            Checkbox(
+                              side: const BorderSide(color: Colors.red),
+                              value: vmJobcard.checkboxValue2,
+                              onChanged: (bool? value2) {
+                                if (value2 != null) {
+                                  vmJobcard.updateCheckboxValue2(value2);
+                                }
+                              },
+                              checkColor: Colors.red,
+                              activeColor: Colors.white,
+                              materialTapTargetSize:
+                                  MaterialTapTargetSize.padded,
+                            ),
+                            const Text('I have approruiate valid  licence'),
+                            const Icon(
+                              Icons.star,
+                              size: 13,
+                              color: Colors.red,
+                            ),
+                          ],
+                        );
+                      }),
                       Row(
                         children: [
-                          Checkbox(
-                            side: const BorderSide(color: Colors.red),
-                            value: false,
-                            onChanged: (bool? value) {},
-                          ),
-                          const Text('I have approruiate valid  licence'),
-                          const Icon(
-                            Icons.star,
-                            size: 13,
-                            color: Colors.red,
-                          ),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          Checkbox(
-                            side: const BorderSide(color: Colors.red),
-                            value: false,
-                            onChanged: (bool? value) {},
-                          ),
+                          Observer(builder: (_) {
+                            return Checkbox(
+                              side: const BorderSide(color: Colors.red),
+                              value: vmJobcard.checkboxValue3,
+                              onChanged: (bool? value) {
+                                if (value != null) {
+                                  vmJobcard.updateCheckboxValue3(value);
+                                }
+                              },
+                              checkColor: Colors.red,
+                              activeColor: Colors.white,
+                              materialTapTargetSize:
+                                  MaterialTapTargetSize.padded,
+                            );
+                          }),
                           const Text('I have approruiate  licence'),
                           const Icon(
                             Icons.star,

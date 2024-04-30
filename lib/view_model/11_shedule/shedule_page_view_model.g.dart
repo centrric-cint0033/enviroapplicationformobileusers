@@ -9,6 +9,54 @@ part of 'shedule_page_view_model.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$JobCardViewModel on JobCardViewModelBase, Store {
+  late final _$checkboxValueAtom =
+      Atom(name: 'JobCardViewModelBase.checkboxValue', context: context);
+
+  @override
+  bool get checkboxValue {
+    _$checkboxValueAtom.reportRead();
+    return super.checkboxValue;
+  }
+
+  @override
+  set checkboxValue(bool value) {
+    _$checkboxValueAtom.reportWrite(value, super.checkboxValue, () {
+      super.checkboxValue = value;
+    });
+  }
+
+  late final _$checkboxValue2Atom =
+      Atom(name: 'JobCardViewModelBase.checkboxValue2', context: context);
+
+  @override
+  bool get checkboxValue2 {
+    _$checkboxValue2Atom.reportRead();
+    return super.checkboxValue2;
+  }
+
+  @override
+  set checkboxValue2(bool value) {
+    _$checkboxValue2Atom.reportWrite(value, super.checkboxValue2, () {
+      super.checkboxValue2 = value;
+    });
+  }
+
+  late final _$checkboxValue3Atom =
+      Atom(name: 'JobCardViewModelBase.checkboxValue3', context: context);
+
+  @override
+  bool get checkboxValue3 {
+    _$checkboxValue3Atom.reportRead();
+    return super.checkboxValue3;
+  }
+
+  @override
+  set checkboxValue3(bool value) {
+    _$checkboxValue3Atom.reportWrite(value, super.checkboxValue3, () {
+      super.checkboxValue3 = value;
+    });
+  }
+
   late final _$jobcardResponseAtom =
       Atom(name: 'JobCardViewModelBase.jobcardResponse', context: context);
 
@@ -87,9 +135,48 @@ mixin _$JobCardViewModel on JobCardViewModelBase, Store {
         .run(() => super.shedulecardviewmodelweekfunction());
   }
 
+  late final _$JobCardViewModelBaseActionController =
+      ActionController(name: 'JobCardViewModelBase', context: context);
+
+  @override
+  void updateCheckboxValue(bool newValue) {
+    final _$actionInfo = _$JobCardViewModelBaseActionController.startAction(
+        name: 'JobCardViewModelBase.updateCheckboxValue');
+    try {
+      return super.updateCheckboxValue(newValue);
+    } finally {
+      _$JobCardViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void updateCheckboxValue2(bool newValue2) {
+    final _$actionInfo = _$JobCardViewModelBaseActionController.startAction(
+        name: 'JobCardViewModelBase.updateCheckboxValue2');
+    try {
+      return super.updateCheckboxValue2(newValue2);
+    } finally {
+      _$JobCardViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void updateCheckboxValue3(bool newValue3) {
+    final _$actionInfo = _$JobCardViewModelBaseActionController.startAction(
+        name: 'JobCardViewModelBase.updateCheckboxValue3');
+    try {
+      return super.updateCheckboxValue3(newValue3);
+    } finally {
+      _$JobCardViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
   @override
   String toString() {
     return '''
+checkboxValue: ${checkboxValue},
+checkboxValue2: ${checkboxValue2},
+checkboxValue3: ${checkboxValue3},
 jobcardResponse: ${jobcardResponse},
 shedulecardResponse: ${shedulecardResponse},
 sheduleweekResponse: ${sheduleweekResponse}

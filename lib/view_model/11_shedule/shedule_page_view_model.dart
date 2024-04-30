@@ -3,6 +3,7 @@ import 'package:enviro_mobile_application/model/07_Jobcard/job_card_model.dart';
 import 'package:enviro_mobile_application/model/12_shedulecard/shedule_card_resp_model.dart';
 import 'package:enviro_mobile_application/service/07_shedule/job_card/shedule_page_service.dart';
 import 'package:enviro_mobile_application/utilis/injection.dart';
+import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 import 'package:mobx/mobx.dart';
 
@@ -20,6 +21,30 @@ abstract class JobCardViewModelBase with Store {
   final IJobCardService jobcardService;
 
   JobCardViewModelBase(this.jobcardService);
+
+  @observable
+  bool checkboxValue = false;
+
+  @action
+  void updateCheckboxValue(bool newValue) {
+    checkboxValue = newValue;
+  }
+
+  @observable
+  bool checkboxValue2 = false;
+
+  @action
+  void updateCheckboxValue2(bool newValue2) {
+    checkboxValue2 = newValue2;
+  }
+
+  @observable
+  bool checkboxValue3 = false;
+
+  @action
+  void updateCheckboxValue3(bool newValue3) {
+    checkboxValue3 = newValue3;
+  }
 
   @observable
   ApiResponse<JobCardRespModel> jobcardResponse =
