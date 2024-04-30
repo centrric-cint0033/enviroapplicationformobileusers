@@ -49,7 +49,7 @@ class IntranetPage extends StatelessWidget {
                   data: vmIntranet.intranetpageResponse,
                   isEmpty:
                       vmIntranet.intranetpageResponse.data?.folders?.isEmpty,
-                  onTap: () {},
+                  onTap: () => vmIntranet.intranetviewmodelfunction(1),
                   child: const IntrapageStateless());
             }),
           ],
