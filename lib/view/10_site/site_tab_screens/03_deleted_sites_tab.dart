@@ -25,7 +25,7 @@ class DeletedSiteTab extends StatelessWidget {
             onTap: () => vmSite.searchCtr.text.isNotEmpty
                 ? onChanged(vmSite.searchCtr.text)
                 : vmSite.getDeletedSites(),
-            child: PermanentSitesLIstWidget(sites: sites));
+            child: DeletedSIteList(sites: sites));
       },
     );
   }
