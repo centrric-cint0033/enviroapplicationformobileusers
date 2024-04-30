@@ -32,7 +32,7 @@ import 'package:enviro_mobile_application/view/04_ohs/ohs_main_page.dart'
     as _i12;
 import 'package:enviro_mobile_application/view/07_intranet/intranet_inside_page.dart'
     as _i4;
-import 'package:enviro_mobile_application/view/07_intranet/intranet_page.dart'
+import 'package:enviro_mobile_application/view/07_intranet/intranet_main_page.dart'
     as _i5;
 import 'package:enviro_mobile_application/view/08_notification_page/notification_page.dart'
     as _i10;
@@ -99,13 +99,14 @@ abstract class $AppRouter extends _i26.RootStackRouter {
         child: _i4.IntranetInsidePage(
           key: args.key,
           parentId: args.parentId,
+          folderName: args.folderName,
         ),
       );
     },
-    IntranetRoute.name: (routeData) {
+    IntranetMainRoute.name: (routeData) {
       return _i26.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i5.IntranetPage(),
+        child: const _i5.IntranetMainPage(),
       );
     },
     JobCardRoute.name: (routeData) {
@@ -323,12 +324,14 @@ class IntranetInsideRoute extends _i26.PageRouteInfo<IntranetInsideRouteArgs> {
   IntranetInsideRoute({
     _i27.Key? key,
     required int parentId,
+    required String folderName,
     List<_i26.PageRouteInfo>? children,
   }) : super(
           IntranetInsideRoute.name,
           args: IntranetInsideRouteArgs(
             key: key,
             parentId: parentId,
+            folderName: folderName,
           ),
           initialChildren: children,
         );
@@ -343,28 +346,31 @@ class IntranetInsideRouteArgs {
   const IntranetInsideRouteArgs({
     this.key,
     required this.parentId,
+    required this.folderName,
   });
 
   final _i27.Key? key;
 
   final int parentId;
 
+  final String folderName;
+
   @override
   String toString() {
-    return 'IntranetInsideRouteArgs{key: $key, parentId: $parentId}';
+    return 'IntranetInsideRouteArgs{key: $key, parentId: $parentId, folderName: $folderName}';
   }
 }
 
 /// generated route for
-/// [_i5.IntranetPage]
-class IntranetRoute extends _i26.PageRouteInfo<void> {
-  const IntranetRoute({List<_i26.PageRouteInfo>? children})
+/// [_i5.IntranetMainPage]
+class IntranetMainRoute extends _i26.PageRouteInfo<void> {
+  const IntranetMainRoute({List<_i26.PageRouteInfo>? children})
       : super(
-          IntranetRoute.name,
+          IntranetMainRoute.name,
           initialChildren: children,
         );
 
-  static const String name = 'IntranetRoute';
+  static const String name = 'IntranetMainRoute';
 
   static const _i26.PageInfo<void> page = _i26.PageInfo<void>(name);
 }

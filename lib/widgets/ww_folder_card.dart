@@ -4,6 +4,8 @@ import 'package:enviro_mobile_application/widgets/ww_search_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+enum FolderEditCreate { create, edit }
+
 class WWFolderCard extends StatelessWidget {
   final FolderModel folder;
   final Function() onTap;
@@ -38,7 +40,8 @@ class WWFolderCard extends StatelessWidget {
               children: [
                 CommonIconBtnWidget(
                   icon: Icons.edit,
-                  onTap: () => showEditDialog(context, editTap: editTap),
+                  onTap: () => showCreateEditDialog(context,
+                      createEditTap: editTap, status: FolderEditCreate.edit),
                 ),
                 CommonIconBtnWidget(
                   icon: Icons.delete_forever,
@@ -83,71 +86,49 @@ class WWFolderCard extends StatelessWidget {
       },
     );
   }
+}
 
-  void showEditDialog(BuildContext context,
-      {required Function(String value) editTap}) {
-    TextEditingController controller = TextEditingController();
+void showCreateEditDialog(BuildContext context,
+    {required Function(String value) createEditTap,
+    FolderEditCreate status = FolderEditCreate.create}) {
+  TextEditingController controller = TextEditingController();
 
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text('Rename'),
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              const SizedBox(height: 17),
-
-              WWTextField(
-                controller: controller,
-                hintText: 'Untitled folder',
-              ),
-
-              // SizedBox(
-              //   height: 30,
-              //   child: TextField(
-              //     // controller: textFolderController2,
-              //     decoration: const InputDecoration(
-              //       labelText: 'Untitled folder',
-              //       border: OutlineInputBorder(
-              //           borderRadius: BorderRadius.all(Radius.circular(10))),
-              //     ),
-              //   ),
-              // ),
-            ],
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: status == FolderEditCreate.create
+            ? const Text('New Folder')
+            : const Text('Rename'),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            const SizedBox(height: 17),
+            WWTextField(
+              controller: controller,
+              hintText: 'Untitled folder',
+            ),
+          ],
+        ),
+        actions: <Widget>[
+          TextButton(
+            child: const Text('Cancel', style: TextStyle(color: Colors.black)),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
           ),
-          actions: <Widget>[
-            TextButton(
-              child: const Text(
-                'Cancel',
-                style: TextStyle(color: Colors.black),
+          TextButton(
+              child: Text(
+                status == FolderEditCreate.create ? 'Create' : 'Rename',
+                style: const TextStyle(color: Colors.black),
               ),
               onPressed: () {
+                createEditTap(controller.text);
                 Navigator.of(context).pop();
-              },
-            ),
-            TextButton(
-                child: const Text(
-                  'Rename',
-                  style: TextStyle(color: Colors.black),
-                ),
-                onPressed: () {
-                  editTap(controller.text);
-                  Navigator.of(context).pop();
-                }
-
-                // () {
-                //   // String folderName = textFolderController2.text;
-                //   if (folderName.isNotEmpty) {
-                //     vmOhs.ohsFolerRenameApi(folderName, id);
-                //   } else {}
-                //   Navigator.of(context).pop();
-                // },
-                )
-          ],
-        );
-      },
-    );
-  }
+              })
+        ],
+      );
+    },
+  );
 }

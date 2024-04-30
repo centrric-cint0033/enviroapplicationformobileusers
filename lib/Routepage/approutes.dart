@@ -17,7 +17,7 @@ class AppRouter extends $AppRouter {
         ),
         AutoRoute(page: SalesRoute.page, path: RouteNames.rSalesPpage),
         AutoRoute(page: OhsMainRoute.page, path: RouteNames.ohsPage),
-        AutoRoute(page: IntranetRoute.page, path: RouteNames.intranetpage),
+        AutoRoute(page: IntranetMainRoute.page, path: RouteNames.intranetpage),
         AutoRoute(page: VehicleRoute.page, path: RouteNames.vehiclemainpage),
         AutoRoute(
             page: NewsOhsFolderInsideRoute.page,
