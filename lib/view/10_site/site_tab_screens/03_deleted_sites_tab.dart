@@ -1,4 +1,3 @@
-import 'package:enviro_mobile_application/view/10_site/site_tab_screens/01_pemanent_sites_tab.dart';
 import 'package:enviro_mobile_application/view/10_site/utils/site_utils.dart';
 import 'package:enviro_mobile_application/view/10_site/widgets/site_tile_widget.dart';
 import 'package:enviro_mobile_application/widgets/ww_response_handler.dart';
