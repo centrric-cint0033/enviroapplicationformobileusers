@@ -48,11 +48,11 @@ class SiteMainScreen extends StatelessWidget {
                   onTap: (i) => vmSite.selectedTab = i,
                 ),
                 gapFieldSite,
-                WWSearchField(
+                WWTextField(
                   controller: vmSite.searchCtr,
                   hintText: "Search Site by Name",
                   onChanged: onChanged,
-                  searchTap: () {},
+                  suffixTap: () {},
                 ),
                 const Expanded(
                   child: TabBarView(
