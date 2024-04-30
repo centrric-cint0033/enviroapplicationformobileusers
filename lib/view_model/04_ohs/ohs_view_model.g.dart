@@ -46,13 +46,13 @@ mixin _$OHSViewModel on OHSViewModelBase, Store {
       name: 'OHSViewModelBase.newspagefolderinsideResponse', context: context);
 
   @override
-  ApiResponse<OhsNewsfldrRespModel> get newspagefolderinsideResponse {
+  ApiResponse<FolderListModel> get newspagefolderinsideResponse {
     _$newspagefolderinsideResponseAtom.reportRead();
     return super.newspagefolderinsideResponse;
   }
 
   @override
-  set newspagefolderinsideResponse(ApiResponse<OhsNewsfldrRespModel> value) {
+  set newspagefolderinsideResponse(ApiResponse<FolderListModel> value) {
     _$newspagefolderinsideResponseAtom
         .reportWrite(value, super.newspagefolderinsideResponse, () {
       super.newspagefolderinsideResponse = value;
@@ -63,13 +63,13 @@ mixin _$OHSViewModel on OHSViewModelBase, Store {
       Atom(name: 'OHSViewModelBase.newspagefolderResponse', context: context);
 
   @override
-  ApiResponse<OhsNewsfldrRespModel> get newspagefolderResponse {
+  ApiResponse<FolderListModel> get newspagefolderResponse {
     _$newspagefolderResponseAtom.reportRead();
     return super.newspagefolderResponse;
   }
 
   @override
-  set newspagefolderResponse(ApiResponse<OhsNewsfldrRespModel> value) {
+  set newspagefolderResponse(ApiResponse<FolderListModel> value) {
     _$newspagefolderResponseAtom
         .reportWrite(value, super.newspagefolderResponse, () {
       super.newspagefolderResponse = value;
@@ -172,14 +172,14 @@ mixin _$OHSViewModel on OHSViewModelBase, Store {
         .run(() => super.ohsNotificationApi());
   }
 
-  late final _$folderrenameviewmodelfunctionAsyncAction = AsyncAction(
-      'OHSViewModelBase.folderrenameviewmodelfunction',
-      context: context);
+  late final _$ohsFolerRenameApiAsyncAction =
+      AsyncAction('OHSViewModelBase.ohsFolerRenameApi', context: context);
 
   @override
-  Future<void> folderrenameviewmodelfunction(String folderName, int id) {
-    return _$folderrenameviewmodelfunctionAsyncAction
-        .run(() => super.folderrenameviewmodelfunction(folderName, id));
+  Future<void> ohsFolerRenameApi(
+      BuildContext context, String folderName, int id) {
+    return _$ohsFolerRenameApiAsyncAction
+        .run(() => super.ohsFolerRenameApi(context, folderName, id));
   }
 
   late final _$folderdeleteviewmodelfunctionAsyncAction = AsyncAction(

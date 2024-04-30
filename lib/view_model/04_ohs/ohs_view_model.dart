@@ -1,10 +1,12 @@
 import 'dart:developer';
 
 import 'package:enviro_mobile_application/api_response/api_response.dart';
+import 'package:enviro_mobile_application/model/00_common_model/folder_model/folder_model.dart';
 import 'package:enviro_mobile_application/model/04_ohs/oh&s_resp_model.dart';
-import 'package:enviro_mobile_application/model/04_ohs/oh&snews_fldr_model.dart';
 import 'package:enviro_mobile_application/service/04_ohs/ohs_service.dart';
 import 'package:enviro_mobile_application/utilis/injection.dart';
+import 'package:enviro_mobile_application/widgets/ww_popup_error.dart';
+import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 import 'package:mobx/mobx.dart';
 
@@ -85,8 +87,8 @@ abstract class OHSViewModelBase with Store {
   }
 
   @observable
-  ApiResponse<OhsNewsfldrRespModel> newspagefolderinsideResponse =
-      ApiResponse<OhsNewsfldrRespModel>();
+  ApiResponse<FolderListModel> newspagefolderinsideResponse =
+      ApiResponse<FolderListModel>();
 
   @action
   Future<void> newspagefolderinsidefunction(
@@ -116,8 +118,8 @@ abstract class OHSViewModelBase with Store {
   }
 
   @observable
-  ApiResponse<OhsNewsfldrRespModel> newspagefolderResponse =
-      ApiResponse<OhsNewsfldrRespModel>();
+  ApiResponse<FolderListModel> newspagefolderResponse =
+      ApiResponse<FolderListModel>();
 
   @action
   Future<void> ohsnewsfolderviewmodelfunction(int id) async {
@@ -167,30 +169,23 @@ abstract class OHSViewModelBase with Store {
   ApiResponse<String> renameResponse = ApiResponse<String>();
 
   @action
-  Future<void> folderrenameviewmodelfunction(String folderName, int id) async {
-    renameResponse = renameResponse.copyWith(error: null, loading: true);
+  Future<void> ohsFolerRenameApi(
+      BuildContext context, String folderName, int id) async {
+    renameResponse = renameResponse.copyWith(errors: null, loading: true);
 
     print(id);
     print(
       folderName,
     );
-    final result =
-        await ohsService.ohsnewsfldrenameservicefunction(folderName, id);
+    final result = await ohsService.ohsFolderRenameServiceApi(folderName, id);
     return result.fold(
       (l) {
-        print('Error occurred during folder rename: $l');
-        renameResponse = renameResponse.copyWith(
-          error: l,
-          loading: false,
-        );
+        popupErrorData(context, mainFailure: l);
+        renameResponse = renameResponse.copyWith(errors: l, loading: false);
       },
       (r) {
-        print('Folder rename successful!');
-        renameResponse = renameResponse.copyWith(
-          data: r,
-          error: null,
-          loading: false,
-        );
+        renameResponse =
+            renameResponse.copyWith(data: r, errors: null, loading: false);
         vmOhs.ohsnewsfolderviewmodelfunction(1);
       },
     );

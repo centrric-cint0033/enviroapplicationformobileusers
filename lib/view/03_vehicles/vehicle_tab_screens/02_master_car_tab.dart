@@ -16,10 +16,10 @@ class MasterCarTab extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         body: Column(children: [
-      WWSearchField(
+      WWTextField(
         controller: vmVehicle.vehicleTextCtr,
         onChanged: _onChanged,
-        searchTap: () {},
+        suffixTap: () {},
       ),
       gapFieldVeh,
       Observer(builder: (_) {

@@ -122,11 +122,11 @@ abstract class $AppRouter extends _i26.RootStackRouter {
         child: _i7.LoginPage(key: args.key),
       );
     },
-    NewsRouteInsideRoute.name: (routeData) {
-      final args = routeData.argsAs<NewsRouteInsideRouteArgs>();
+    NewsOhsFolderInsideRoute.name: (routeData) {
+      final args = routeData.argsAs<NewsOhsFolderInsideRouteArgs>();
       return _i26.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i8.NewsOhsTabInsidePage(
+        child: _i8.NewsOhsFolderInsidePage(
           key: args.key,
           parentId: args.parentId,
         ),
@@ -158,7 +158,7 @@ abstract class $AppRouter extends _i26.RootStackRouter {
         ),
       );
     },
-    OhsRoute.name: (routeData) {
+    OhsMainRoute.name: (routeData) {
       return _i26.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const _i12.OhsMainPage(),
@@ -413,30 +413,30 @@ class LoginRouteArgs {
 }
 
 /// generated route for
-/// [_i8.NewsOhsTabInsidePage]
-class NewsRouteInsideRoute
-    extends _i26.PageRouteInfo<NewsRouteInsideRouteArgs> {
-  NewsRouteInsideRoute({
+/// [_i8.NewsOhsFolderInsidePage]
+class NewsOhsFolderInsideRoute
+    extends _i26.PageRouteInfo<NewsOhsFolderInsideRouteArgs> {
+  NewsOhsFolderInsideRoute({
     _i27.Key? key,
     required int parentId,
     List<_i26.PageRouteInfo>? children,
   }) : super(
-          NewsRouteInsideRoute.name,
-          args: NewsRouteInsideRouteArgs(
+          NewsOhsFolderInsideRoute.name,
+          args: NewsOhsFolderInsideRouteArgs(
             key: key,
             parentId: parentId,
           ),
           initialChildren: children,
         );
 
-  static const String name = 'NewsRouteInsideRoute';
+  static const String name = 'NewsOhsFolderInsideRoute';
 
-  static const _i26.PageInfo<NewsRouteInsideRouteArgs> page =
-      _i26.PageInfo<NewsRouteInsideRouteArgs>(name);
+  static const _i26.PageInfo<NewsOhsFolderInsideRouteArgs> page =
+      _i26.PageInfo<NewsOhsFolderInsideRouteArgs>(name);
 }
 
-class NewsRouteInsideRouteArgs {
-  const NewsRouteInsideRouteArgs({
+class NewsOhsFolderInsideRouteArgs {
+  const NewsOhsFolderInsideRouteArgs({
     this.key,
     required this.parentId,
   });
@@ -447,7 +447,7 @@ class NewsRouteInsideRouteArgs {
 
   @override
   String toString() {
-    return 'NewsRouteInsideRouteArgs{key: $key, parentId: $parentId}';
+    return 'NewsOhsFolderInsideRouteArgs{key: $key, parentId: $parentId}';
   }
 }
 
@@ -544,14 +544,14 @@ class OhsDetailRouteArgs {
 
 /// generated route for
 /// [_i12.OhsMainPage]
-class OhsRoute extends _i26.PageRouteInfo<void> {
-  const OhsRoute({List<_i26.PageRouteInfo>? children})
+class OhsMainRoute extends _i26.PageRouteInfo<void> {
+  const OhsMainRoute({List<_i26.PageRouteInfo>? children})
       : super(
-          OhsRoute.name,
+          OhsMainRoute.name,
           initialChildren: children,
         );
 
-  static const String name = 'OhsRoute';
+  static const String name = 'OhsMainRoute';
 
   static const _i26.PageInfo<void> page = _i26.PageInfo<void>(name);
 }

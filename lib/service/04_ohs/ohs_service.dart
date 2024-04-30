@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'package:dartz/dartz.dart';
 import 'package:enviro_mobile_application/constant/base_url.dart';
+import 'package:enviro_mobile_application/model/00_common_model/folder_model/folder_model.dart';
 import 'package:enviro_mobile_application/model/04_ohs/oh&s_resp_model.dart';
-import 'package:enviro_mobile_application/model/04_ohs/oh&snews_fldr_model.dart';
 import 'package:enviro_mobile_application/utilis/api_endpoints/api_endpoints.dart';
 import 'package:enviro_mobile_application/utilis/api_endpoints/customprint.dart';
 import 'package:enviro_mobile_application/utilis/httpservice.dart';
@@ -18,13 +18,13 @@ abstract class IohsService {
   Future<Either<MainFailure, List<OhsRespModel>>> ohsNewsServiceApi1();
   Future<Either<Map<MainFailure, dynamic>, List<OhsRespModel>>>
       ohsNotificationServiceApi();
-  Future<Either<MainFailure, OhsNewsfldrRespModel>>
-      ohsnewsfolderservicefunction(int id);
+  Future<Either<MainFailure, FolderListModel>> ohsnewsfolderservicefunction(
+      int id);
 
   Future<Either<MainFailure, String>> ohsnewsfoldercreationfunction(
       String folderName, int id);
 
-  Future<Either<MainFailure, String>> ohsnewsfldrenameservicefunction(
+  Future<Either<Map<MainFailure, dynamic>, String>> ohsFolderRenameServiceApi(
       folderName, id);
 
   Future<Either<MainFailure, String>> ohsnewsfolderrenamefunction(
@@ -102,8 +102,7 @@ class OhsService implements IohsService {
   }
 
   @override
-  Future<Either<MainFailure, OhsNewsfldrRespModel>>
-      ohsnewsfolderservicefunction(
+  Future<Either<MainFailure, FolderListModel>> ohsnewsfolderservicefunction(
     int id,
   ) async {
     var response = await getIt<HttpService>().request(
@@ -117,8 +116,8 @@ class OhsService implements IohsService {
         return Left(l.keys.first);
       },
       (res) async {
-        OhsNewsfldrRespModel ohsnewsfldrlist =
-            OhsNewsfldrRespModel.fromJson(jsonDecode(res.body));
+        FolderListModel ohsnewsfldrlist =
+            FolderListModel.fromJson(jsonDecode(res.body));
 
         return Right(ohsnewsfldrlist);
       },
@@ -126,32 +125,16 @@ class OhsService implements IohsService {
   }
 
   @override
-  Future<Either<MainFailure, String>> ohsnewsfldrenameservicefunction(
+  Future<Either<Map<MainFailure, dynamic>, String>> ohsFolderRenameServiceApi(
       folderName, id) async {
-    String apiUrl;
-
-    apiUrl = ApiEndPoints.endpointfoldercreation;
-
-    MultipartRequest request =
-        MultipartRequest("POST", Uri.parse("$baseUrl$apiUrl"));
-
-    request.fields['name'] = folderName;
-    request.fields['parent_folder'] = '1';
-
-    var response =
-        await getIt<HttpService>().multipartRequest(mRequest: request);
+    var response = await getIt<HttpService>().multipartRequest(
+        apiUrl: ApiEndPoints().ohsFolderRename,
+        method: 'POST',
+        data: {"name": folderName, "parent_folder": "1"});
 
     return response.fold(
-      (l) {
-        // Show Error
-        (l.values.first);
-        return Left(l.keys.first);
-      },
-      (res) async {
-        var data = jsonDecode(res.body);
-
-        return Right('success');
-      },
+      (l) => Left(l),
+      (res) async => const Right('success'),
     );
   }
 
@@ -160,7 +143,7 @@ class OhsService implements IohsService {
       folderName, id) async {
     String apiUrl;
 
-    apiUrl = ApiEndPoints.endpointfoldercreation;
+    apiUrl = ApiEndPoints().ohsFolderRename;
 
     MultipartRequest request =
         MultipartRequest("POST", Uri.parse("$baseUrl$apiUrl"));

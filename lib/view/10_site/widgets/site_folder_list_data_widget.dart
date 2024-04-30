@@ -42,40 +42,62 @@ class SiteFolderListView extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 20.0),
       itemBuilder: (context, index) {
         Folder folder = folders[index];
-        return Card(
-          color: Colors.grey.shade200,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10.0),
-          ),
-          child: ListTile(
-            contentPadding: const EdgeInsets.only(left: 20),
-            leading: const Icon(
-              Icons.folder,
-              color: Colors.black54,
-            ),
-            title: Text(
-              folder.name ?? "",
-              overflow: TextOverflow.ellipsis,
-              style: Theme.of(context).textTheme.bodySmall,
-            ),
-            trailing: SizedBox(
-              width: 80.w,
-              child: Row(
-                children: [
-                  CommonIconBtnWidget(
-                    icon: Icons.edit,
-                    onTap: () {},
-                  ),
-                  CommonIconBtnWidget(
-                    icon: Icons.delete_forever,
-                    onTap: () {},
-                  ),
-                ],
-              ),
-            ),
-          ),
+        return WWFolderCard1(
+          folder: folder,
+          deleteTap: () {},
+          editTap: () {},
         );
       },
+    );
+  }
+}
+
+class WWFolderCard1 extends StatelessWidget {
+  final Folder folder;
+  final Function() editTap;
+  final Function() deleteTap;
+
+  const WWFolderCard1({
+    super.key,
+    required this.folder,
+    required this.editTap,
+    required this.deleteTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      color: Colors.grey.shade200,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10.0),
+      ),
+      child: ListTile(
+        contentPadding: const EdgeInsets.only(left: 20),
+        leading: const Icon(
+          Icons.folder,
+          color: Colors.black54,
+        ),
+        title: Text(
+          folder.name ?? "",
+          overflow: TextOverflow.ellipsis,
+          style: Theme.of(context).textTheme.bodySmall,
+        ),
+        trailing: SizedBox(
+          width: 80.w,
+          child: Row(
+            children: [
+              CommonIconBtnWidget(
+                icon: Icons.edit,
+                onTap: editTap,
+              ),
+              CommonIconBtnWidget(
+                icon: Icons.delete_forever,
+                onTap: deleteTap,
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

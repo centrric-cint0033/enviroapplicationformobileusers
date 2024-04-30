@@ -1,3 +1,59 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:enviro_mobile_application/model/04_ohs/oh&s_resp_model.dart';
+import 'package:enviro_mobile_application/utilis/Appthemes.dart';
 import 'package:enviro_mobile_application/utilis/constant.dart';
+import 'package:enviro_mobile_application/widgets/01_widgets.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 final gapFieldOhs = sized0hx05;
+
+class WWcard extends StatelessWidget {
+  const WWcard({
+    super.key,
+    required this.data,
+  });
+
+  final OhsRespModel? data;
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      color: Appthemes.cWhite,
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Row(
+          children: [
+            data?.dp != null
+                ? CachedNetworkImage(
+                    height: 60.w,
+                    width: 60.w,
+                    imageUrl: data!.dp!,
+                    fit: BoxFit.cover)
+                : const Placeholder(),
+            sized0wx10,
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  showBlackText(data?.title ?? '',
+                      maxLines: 2,
+                      fontWeight: FontWeight.bold,
+                      overflow: TextOverflow.ellipsis),
+                  gapFieldOhs,
+                  showBlackText(data?.created_by ?? '')
+                ],
+              ),
+            ),
+            sized0wx05,
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+              child: showBlueText('View', fontWeight: FontWeight.bold),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}

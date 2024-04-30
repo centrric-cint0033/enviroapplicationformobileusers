@@ -15,12 +15,12 @@ class JobListTab extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         body: Column(children: [
-      WWSearchField(
+      WWTextField(
         controller: vmSales.salesJobListSearchCtr,
         onChanged: (v) => vmSales.onTextChanged(() => v.isEmpty
             ? vmSales.saleJobListApi()
             : vmSales.salesJobListSearchApi(v)),
-        searchTap: () {},
+        suffixTap: () {},
       ),
       gapField,
       Observer(builder: (_) {

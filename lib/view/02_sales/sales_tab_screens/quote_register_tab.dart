@@ -16,12 +16,12 @@ class QuoteRegisterTab extends StatelessWidget {
     return Scaffold(
         body: Column(
       children: [
-        WWSearchField(
+        WWTextField(
           controller: vmSales.salesQuoteListSearchCtr,
           onChanged: (v) => vmSales.onTextChanged(() => v.isEmpty
               ? vmSales.quoteRegisterApi()
               : vmSales.salesQuoteListSearchApi(v)),
-          searchTap: () {},
+          suffixTap: () {},
         ),
         gapField,
         Observer(builder: (_) {
