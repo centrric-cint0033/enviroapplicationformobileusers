@@ -3,9 +3,7 @@ import 'package:dartz/dartz.dart';
 import 'package:enviro_mobile_application/model/02_sales/sales_model/sales_model.dart';
 import 'package:enviro_mobile_application/utilis/api_endpoints/api_endpoints.dart';
 import 'package:enviro_mobile_application/utilis/httpservice.dart';
-import 'package:enviro_mobile_application/utilis/injection.dart';
 import 'package:enviro_mobile_application/utilis/main_failure.dart';
-import 'package:http/http.dart';
 import 'package:injectable/injectable.dart';
 
 abstract class ISalesService {
@@ -13,7 +11,7 @@ abstract class ISalesService {
       saleslistServiceApi();
 
   Future<Either<Map<MainFailure, dynamic>, List<SalesModel>>>
-      saleJoblistApiService();
+      saleJoblistApiService({int? page});
 
   Future<Either<Map<MainFailure, dynamic>, List<SalesModel>>>
       quoteRegisterServiceApi();
@@ -67,11 +65,13 @@ class SalesService implements ISalesService {
 
   @override
   Future<Either<Map<MainFailure, dynamic>, List<SalesModel>>>
-      saleJoblistApiService() async {
+      saleJoblistApiService({int? page}) async {
+    String apiUrl = "${ApiEndPoints().joblist}/${page ?? 1}/?limit=10";
     var response = await httpService.request(
-        authenticated: true,
-        method: HttpMethod.get,
-        apiUrl: ApiEndPoints().joblist);
+      authenticated: true,
+      method: HttpMethod.get,
+      apiUrl: apiUrl,
+    );
 
     return response.fold(
       (l) => Left(l),

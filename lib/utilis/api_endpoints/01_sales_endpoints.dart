@@ -5,7 +5,7 @@ mixin class SalesEndpoint {
 
   final String quoteregvehiclelist = '/api/v1/sales/quote/waste/2/?limit=20';
 
-  final String joblist = '/api/v1/sales/jobs/waste/1/?limit=10';
+  final String joblist = '/api/v1/sales/jobs/waste';
 
   final String salesJobSearch =
       '/api/v1/jobs/search/site/waste/?limit=20&page=1';

@@ -61,8 +61,9 @@ mixin _$SalesViewModel on SalesViewModelBase, Store {
       AsyncAction('SalesViewModelBase.saleJobListApi', context: context);
 
   @override
-  Future<void> saleJobListApi() {
-    return _$saleJobListApiAsyncAction.run(() => super.saleJobListApi());
+  Future<void> saleJobListApi({int? page}) {
+    return _$saleJobListApiAsyncAction
+        .run(() => super.saleJobListApi(page: page));
   }
 
   late final _$salesJobListSearchApiAsyncAction =

@@ -45,25 +45,66 @@ abstract class SalesViewModelBase with Store {
   ApiResponse<List<SalesModel>> joblistResponse =
       ApiResponse<List<SalesModel>>();
 
+  ScrollController joblistController = ScrollController();
+
   @action
-  Future<void> saleJobListApi() async {
+  Future<void> saleJobListApi({int? page}) async {
     try {
-      joblistResponse = joblistResponse.copyWith(errors: null, loading: true);
-      final result = await salesService.saleJoblistApiService();
+      joblistResponse = joblistResponse.copyWith(
+        errors: null,
+        loading: page == null,
+        paginationLoading: page != null,
+      );
+      customPrint(
+          content: joblistResponse.paginationLoading,
+          name: "joblistResponse pagination");
+      final result = await salesService.saleJoblistApiService(page: page);
+
       return result.fold(
         (l) {
-          joblistResponse = joblistResponse.copyWith(errors: l, loading: false);
+          joblistResponse = joblistResponse.copyWith(
+            errors: l,
+            loading: false,
+            paginationLoading: false,
+          );
         },
         (r) {
-          joblistResponse =
-              joblistResponse.copyWith(data: r, errors: null, loading: false);
+          List<SalesModel> jobList = joblistResponse.data?.toList() ?? [];
+          if (page == null) {
+            jobList = r;
+          } else {
+            jobList.addAll(r);
+          }
+          joblistResponse = joblistResponse.copyWith(
+            data: jobList,
+            errors: null,
+            loading: false,
+            pageNo: page ?? 1,
+            paginationLoading: false,
+          );
         },
       );
     } catch (e) {
       customPrint(content: e, name: 'Error saleJobListApi');
     } finally {
-      joblistResponse = joblistResponse.copyWith(loading: false);
+      joblistResponse = joblistResponse.copyWith(
+        loading: false,
+        // paginationLoading: false,
+      );
     }
+  }
+
+  void saleJobListPagination() {
+    joblistController.addListener(() {
+      if (joblistController.position.pixels ==
+              joblistController.position.maxScrollExtent &&
+          !joblistController.position.outOfRange &&
+          joblistResponse.pagination &&
+          !joblistResponse.paginationLoading) {
+        int pageNo = joblistResponse.pageNo + 1;
+        saleJobListApi(page: pageNo);
+      }
+    });
   }
 
 //     _  _       _  _       _  _       _  _       _  _       _  _       _  _       _  _
