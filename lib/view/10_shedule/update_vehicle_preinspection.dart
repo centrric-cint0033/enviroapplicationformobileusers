@@ -1,7 +1,5 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:dartz/dartz.dart';
 import 'package:enviro_mobile_application/utilis/constant.dart';
-import 'package:enviro_mobile_application/view/02_sales/sales_widgets.dart/sales_widget.dart';
 import 'package:enviro_mobile_application/view/10_shedule/shedule_widget.dart';
 import 'package:enviro_mobile_application/view_model/11_shedule/shedule_page_view_model.dart';
 import 'package:enviro_mobile_application/widgets/cmn_action_icon.dart';
@@ -87,6 +85,14 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
                           const Text("Odometer"),
+                          const Padding(
+                            padding: EdgeInsets.only(bottom: 8.0),
+                            child: Icon(
+                              Icons.star,
+                              size: 10,
+                              color: Colors.red,
+                            ),
+                          ),
                           const SizedBox(width: 8),
                           Expanded(
                             child: Padding(
@@ -103,13 +109,44 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                           ),
                         ],
                       ),
-                      const SizedBox(height: 4),
-                      expandedRowShowText2("Drivers name", "azeem"),
+                      const Column(
+                        children: [
+                          SizedBox(height: 4),
+                          Row(
+                            children: [
+                              Text(
+                                "Driver's name",
+                              ),
+                              Padding(
+                                padding: EdgeInsets.only(bottom: 8.0),
+                                child: Icon(
+                                  Icons.star,
+                                  size: 10,
+                                  color: Colors.red,
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.only(left: 68.0),
+                                child: Text(':azeem'),
+                              ),
+                            ],
+                          ),
+                          SizedBox(height: 4),
+                        ],
+                      ),
                       const SizedBox(height: 4),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
                           const Text("Hours meter start"),
+                          const Padding(
+                            padding: EdgeInsets.only(bottom: 8.0),
+                            child: Icon(
+                              Icons.star,
+                              size: 10,
+                              color: Colors.red,
+                            ),
+                          ),
                           const SizedBox(width: 8),
                           Expanded(
                             child: Padding(
@@ -126,7 +163,6 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                           ),
                         ],
                       ),
-                      const SizedBox(height: 4),
                       Observer(builder: (_) {
                         return Row(
                           children: [
@@ -151,10 +187,13 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                                 Text(
                                   'I am Fit for Work',
                                 ),
-                                Icon(
-                                  Icons.star,
-                                  size: 13,
-                                  color: Colors.red,
+                                Padding(
+                                  padding: EdgeInsets.only(bottom: 8.0),
+                                  child: Icon(
+                                    Icons.star,
+                                    size: 10,
+                                    color: Colors.red,
+                                  ),
                                 ),
                               ],
                             ),
@@ -178,10 +217,13 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                                   MaterialTapTargetSize.padded,
                             ),
                             const Text('I have approruiate valid  licence'),
-                            const Icon(
-                              Icons.star,
-                              size: 13,
-                              color: Colors.red,
+                            const Padding(
+                              padding: EdgeInsets.only(bottom: 8.0),
+                              child: Icon(
+                                Icons.star,
+                                size: 10,
+                                color: Colors.red,
+                              ),
                             ),
                           ],
                         );
@@ -204,17 +246,20 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                             );
                           }),
                           const Text('I have approruiate  licence'),
-                          const Icon(
-                            Icons.star,
-                            size: 13,
-                            color: Colors.red,
+                          const Padding(
+                            padding: EdgeInsets.only(bottom: 8.0),
+                            child: Icon(
+                              Icons.star,
+                              size: 10,
+                              color: Colors.red,
+                            ),
                           ),
                         ],
                       ),
                       sized0hx05,
                       const Text(
                         ' pre-Start checklist- All fields are Mandatory(NO obvious Defect)(X-Fault identified)& N/A not applicable',
-                        style: const TextStyle(fontSize: 12),
+                        style: TextStyle(fontSize: 12),
                       ),
                       sized0hx10,
                       Container(
@@ -256,17 +301,24 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                           ),
                         ),
                       ),
-                      sized0hx05,
+                      const SizedBox(
+                        height: 0.05,
+                      ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           const Text(
-                            'Engine OIl steel',
+                            'Engine Oil steel',
                           ),
                           Checkbox(
                             side: const BorderSide(color: Colors.black),
                             value: false,
-                            onChanged: (bool? value) {},
+                            onChanged: (bool? value) {
+                              if (value != null && value) {
+                                _showPopup(context);
+                              }
+                              print('Checkbox state changed to: $value');
+                            },
                             checkColor: Colors.red,
                           ),
                         ],
@@ -280,7 +332,12 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                           Checkbox(
                             side: const BorderSide(color: Colors.black),
                             value: false,
-                            onChanged: (bool? value) {},
+                            onChanged: (bool? value) {
+                              if (value != null && value) {
+                                _showPopup(context);
+                              }
+                              print('Checkbox state changed to: $value');
+                            },
                             checkColor: Colors.red,
                           ),
                         ],
@@ -294,7 +351,12 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                           Checkbox(
                             side: const BorderSide(color: Colors.black),
                             value: false,
-                            onChanged: (bool? value) {},
+                            onChanged: (bool? value) {
+                              if (value != null && value) {
+                                _showPopup(context);
+                              }
+                              print('Checkbox state changed to: $value');
+                            },
                             checkColor: Colors.red,
                           ),
                         ],
@@ -308,7 +370,12 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                           Checkbox(
                             side: const BorderSide(color: Colors.black),
                             value: false,
-                            onChanged: (bool? value) {},
+                            onChanged: (bool? value) {
+                              if (value != null && value) {
+                                _showPopup(context);
+                              }
+                              print('Checkbox state changed to: $value');
+                            },
                             checkColor: Colors.red,
                           ),
                         ],
@@ -322,7 +389,12 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                           Checkbox(
                             side: const BorderSide(color: Colors.black),
                             value: false,
-                            onChanged: (bool? value) {},
+                            onChanged: (bool? value) {
+                              if (value != null && value) {
+                                _showPopup(context);
+                              }
+                              print('Checkbox state changed to: $value');
+                            },
                             checkColor: Colors.red,
                           ),
                         ],
@@ -336,7 +408,12 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                           Checkbox(
                             side: const BorderSide(color: Colors.black),
                             value: false,
-                            onChanged: (bool? value) {},
+                            onChanged: (bool? value) {
+                              if (value != null && value) {
+                                _showPopup(context);
+                              }
+                              print('Checkbox state changed to: $value');
+                            },
                             checkColor: Colors.red,
                           ),
                         ],
@@ -350,7 +427,12 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                           Checkbox(
                             side: const BorderSide(color: Colors.black),
                             value: false,
-                            onChanged: (bool? value) {},
+                            onChanged: (bool? value) {
+                              if (value != null && value) {
+                                _showPopup(context);
+                              }
+                              print('Checkbox state changed to: $value');
+                            },
                             checkColor: Colors.red,
                           ),
                         ],
@@ -364,7 +446,12 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                           Checkbox(
                             side: const BorderSide(color: Colors.black),
                             value: false,
-                            onChanged: (bool? value) {},
+                            onChanged: (bool? value) {
+                              if (value != null && value) {
+                                _showPopup(context);
+                              }
+                              print('Checkbox state changed to: $value');
+                            },
                             checkColor: Colors.red,
                           ),
                         ],
@@ -378,7 +465,12 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                           Checkbox(
                             side: const BorderSide(color: Colors.black),
                             value: false,
-                            onChanged: (bool? value) {},
+                            onChanged: (bool? value) {
+                              if (value != null && value) {
+                                _showPopup(context);
+                              }
+                              print('Checkbox state changed to: $value');
+                            },
                             checkColor: Colors.red,
                           ),
                         ],
@@ -392,7 +484,12 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                           Checkbox(
                             side: const BorderSide(color: Colors.black),
                             value: false,
-                            onChanged: (bool? value) {},
+                            onChanged: (bool? value) {
+                              if (value != null && value) {
+                                _showPopup(context);
+                              }
+                              print('Checkbox state changed to: $value');
+                            },
                             checkColor: Colors.red,
                           ),
                         ],
@@ -406,7 +503,12 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                           Checkbox(
                             side: const BorderSide(color: Colors.black),
                             value: false,
-                            onChanged: (bool? value) {},
+                            onChanged: (bool? value) {
+                              if (value != null && value) {
+                                _showPopup(context);
+                              }
+                              print('Checkbox state changed to: $value');
+                            },
                             checkColor: Colors.red,
                           ),
                         ],
@@ -421,7 +523,12 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                           Checkbox(
                             side: const BorderSide(color: Colors.black),
                             value: false,
-                            onChanged: (bool? value) {},
+                            onChanged: (bool? value) {
+                              if (value != null && value) {
+                                _showPopup(context);
+                              }
+                              print('Checkbox state changed to: $value');
+                            },
                             checkColor: Colors.red,
                           ),
                         ],
@@ -435,7 +542,12 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                           Checkbox(
                             side: const BorderSide(color: Colors.black),
                             value: false,
-                            onChanged: (bool? value) {},
+                            onChanged: (bool? value) {
+                              if (value != null && value) {
+                                _showPopup(context);
+                              }
+                              print('Checkbox state changed to: $value');
+                            },
                             checkColor: Colors.red,
                           ),
                         ],
@@ -449,7 +561,12 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                           Checkbox(
                             side: const BorderSide(color: Colors.black),
                             value: false,
-                            onChanged: (bool? value) {},
+                            onChanged: (bool? value) {
+                              if (value != null && value) {
+                                _showPopup(context);
+                              }
+                              print('Checkbox state changed to: $value');
+                            },
                             checkColor: Colors.red,
                           ),
                         ],
@@ -463,7 +580,12 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                           Checkbox(
                             side: const BorderSide(color: Colors.black),
                             value: false,
-                            onChanged: (bool? value) {},
+                            onChanged: (bool? value) {
+                              if (value != null && value) {
+                                _showPopup(context);
+                              }
+                              print('Checkbox state changed to: $value');
+                            },
                             checkColor: Colors.red,
                           ),
                         ],
@@ -477,7 +599,12 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                           Checkbox(
                             side: const BorderSide(color: Colors.black),
                             value: false,
-                            onChanged: (bool? value) {},
+                            onChanged: (bool? value) {
+                              if (value != null && value) {
+                                _showPopup(context);
+                              }
+                              print('Checkbox state changed to: $value');
+                            },
                             checkColor: Colors.red,
                           ),
                         ],
@@ -491,7 +618,12 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                           Checkbox(
                             side: const BorderSide(color: Colors.black),
                             value: false,
-                            onChanged: (bool? value) {},
+                            onChanged: (bool? value) {
+                              if (value != null && value) {
+                                _showPopup(context);
+                              }
+                              print('Checkbox state changed to: $value');
+                            },
                             checkColor: Colors.red,
                           ),
                         ],
@@ -505,7 +637,12 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                           Checkbox(
                             side: const BorderSide(color: Colors.black),
                             value: false,
-                            onChanged: (bool? value) {},
+                            onChanged: (bool? value) {
+                              if (value != null && value) {
+                                _showPopup(context);
+                              }
+                              print('Checkbox state changed to: $value');
+                            },
                             checkColor: Colors.red,
                           ),
                         ],
@@ -519,7 +656,12 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                           Checkbox(
                             side: const BorderSide(color: Colors.black),
                             value: false,
-                            onChanged: (bool? value) {},
+                            onChanged: (bool? value) {
+                              if (value != null && value) {
+                                _showPopup(context);
+                              }
+                              print('Checkbox state changed to: $value');
+                            },
                             checkColor: Colors.red,
                           ),
                         ],
@@ -533,7 +675,12 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                           Checkbox(
                             side: const BorderSide(color: Colors.black),
                             value: false,
-                            onChanged: (bool? value) {},
+                            onChanged: (bool? value) {
+                              if (value != null && value) {
+                                _showPopup(context);
+                              }
+                              print('Checkbox state changed to: $value');
+                            },
                             checkColor: Colors.red,
                           ),
                         ],
@@ -547,7 +694,12 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                           Checkbox(
                             side: const BorderSide(color: Colors.black),
                             value: false,
-                            onChanged: (bool? value) {},
+                            onChanged: (bool? value) {
+                              if (value != null && value) {
+                                _showPopup(context);
+                              }
+                              print('Checkbox state changed to: $value');
+                            },
                             checkColor: Colors.red,
                           ),
                         ],
@@ -561,7 +713,12 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                           Checkbox(
                             side: const BorderSide(color: Colors.black),
                             value: false,
-                            onChanged: (bool? value) {},
+                            onChanged: (bool? value) {
+                              if (value != null && value) {
+                                _showPopup(context);
+                              }
+                              print('Checkbox state changed to: $value');
+                            },
                             checkColor: Colors.red,
                           ),
                         ],
@@ -575,7 +732,12 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                           Checkbox(
                             side: const BorderSide(color: Colors.black),
                             value: false,
-                            onChanged: (bool? value) {},
+                            onChanged: (bool? value) {
+                              if (value != null && value) {
+                                _showPopup(context);
+                              }
+                              print('Checkbox state changed to: $value');
+                            },
                             checkColor: Colors.red,
                           ),
                         ],
@@ -589,7 +751,12 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                           Checkbox(
                             side: const BorderSide(color: Colors.black),
                             value: false,
-                            onChanged: (bool? value) {},
+                            onChanged: (bool? value) {
+                              if (value != null && value) {
+                                _showPopup(context);
+                              }
+                              print('Checkbox state changed to: $value');
+                            },
                             checkColor: Colors.red,
                           ),
                         ],
@@ -604,7 +771,12 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                           Checkbox(
                             side: const BorderSide(color: Colors.red),
                             value: false,
-                            onChanged: (bool? value) {},
+                            onChanged: (bool? value) {
+                              if (value != null && value) {
+                                _showPopup(context);
+                              }
+                              print('Checkbox state changed to: $value');
+                            },
                             checkColor: Colors.red,
                           ),
                         ],
@@ -618,7 +790,12 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                           Checkbox(
                             side: const BorderSide(color: Colors.red),
                             value: false,
-                            onChanged: (bool? value) {},
+                            onChanged: (bool? value) {
+                              if (value != null && value) {
+                                _showPopup(context);
+                              }
+                              print('Checkbox state changed to: $value');
+                            },
                             checkColor: Colors.red,
                           ),
                         ],
@@ -632,7 +809,12 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                           Checkbox(
                             side: const BorderSide(color: Colors.red),
                             value: false,
-                            onChanged: (bool? value) {},
+                            onChanged: (bool? value) {
+                              if (value != null && value) {
+                                _showPopup(context);
+                              }
+                              print('Checkbox state changed to: $value');
+                            },
                             checkColor: Colors.red,
                           ),
                         ],
@@ -646,7 +828,12 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                           Checkbox(
                             side: const BorderSide(color: Colors.red),
                             value: false,
-                            onChanged: (bool? value) {},
+                            onChanged: (bool? value) {
+                              if (value != null && value) {
+                                _showPopup(context);
+                              }
+                              print('Checkbox state changed to: $value');
+                            },
                             checkColor: Colors.red,
                           ),
                         ],
@@ -663,7 +850,12 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                           Checkbox(
                             side: const BorderSide(color: Colors.red),
                             value: false,
-                            onChanged: (bool? value) {},
+                            onChanged: (bool? value) {
+                              if (value != null && value) {
+                                _showPopup(context);
+                              }
+                              print('Checkbox state changed to: $value');
+                            },
                             checkColor: Colors.red,
                           ),
                         ],
@@ -677,7 +869,12 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                           Checkbox(
                             side: const BorderSide(color: Colors.red),
                             value: false,
-                            onChanged: (bool? value) {},
+                            onChanged: (bool? value) {
+                              if (value != null && value) {
+                                _showPopup(context);
+                              }
+                              print('Checkbox state changed to: $value');
+                            },
                             checkColor: Colors.red,
                           ),
                         ],
@@ -691,7 +888,12 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                           Checkbox(
                             side: const BorderSide(color: Colors.red),
                             value: false,
-                            onChanged: (bool? value) {},
+                            onChanged: (bool? value) {
+                              if (value != null && value) {
+                                _showPopup(context);
+                              }
+                              print('Checkbox state changed to: $value');
+                            },
                             checkColor: Colors.red,
                           ),
                         ],
@@ -705,7 +907,12 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                           Checkbox(
                             side: const BorderSide(color: Colors.red),
                             value: false,
-                            onChanged: (bool? value) {},
+                            onChanged: (bool? value) {
+                              if (value != null && value) {
+                                _showPopup(context);
+                              }
+                              print('Checkbox state changed to: $value');
+                            },
                             checkColor: Colors.red,
                           ),
                         ],
@@ -815,4 +1022,76 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
       ),
     );
   }
+}
+
+void _showPopup(BuildContext context) {
+  bool greenChecked = true;
+  bool blueChecked = true;
+  bool redChecked = true;
+
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10.0),
+          side: const BorderSide(color: Colors.black),
+        ),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Row(
+              children: [
+                const Text(
+                  'No issue',
+                  style: TextStyle(color: Colors.green),
+                ),
+                Checkbox(
+                  activeColor: Colors.green,
+                  materialTapTargetSize: MaterialTapTargetSize.padded,
+                  value: greenChecked,
+                  onChanged: (value) {
+                    greenChecked = value!;
+                  },
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                const Text(
+                  'Category A fault',
+                  style: TextStyle(
+                    color: Colors.red,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Checkbox(
+                  activeColor: Colors.red,
+                  materialTapTargetSize: MaterialTapTargetSize.padded,
+                  value: redChecked,
+                  onChanged: (value) {
+                    blueChecked = value!;
+                  },
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                const Text('Category B fault',
+                    style: TextStyle(color: Colors.blue)),
+                Checkbox(
+                  activeColor: Colors.blue,
+                  materialTapTargetSize: MaterialTapTargetSize.padded,
+                  value: blueChecked,
+                  onChanged: (value) {
+                    blueChecked = value!;
+                  },
+                ),
+              ],
+            ),
+          ],
+        ),
+      );
+    },
+  );
 }

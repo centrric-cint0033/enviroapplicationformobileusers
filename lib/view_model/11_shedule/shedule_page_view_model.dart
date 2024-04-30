@@ -23,6 +23,21 @@ abstract class JobCardViewModelBase with Store {
   JobCardViewModelBase(this.jobcardService);
 
   @observable
+  bool checkboxColor = false;
+  Color selectedColor = Colors.white; // Initialize with default color
+
+  @action
+  void updateCheckboxColor(Color color) {
+    selectedColor = color;
+    // Set checkboxColor based on selectedColor
+    if (selectedColor == Colors.red) {
+      checkboxColor = true; // Set to true if red is selected, false otherwise
+    } else {
+      checkboxColor = false; // Set to false for other colors
+    }
+  }
+
+  @observable
   bool checkboxValue = false;
 
   @action
