@@ -57,18 +57,21 @@ class SalesJobListWidget extends StatelessWidget {
       itemCount: length + 1,
       controller: vmSales.joblistController,
       separatorBuilder: (BuildContext context, int index) => gapField,
-      itemBuilder: (context, index) => InkWell(
-        onTap: () {
-          context.router.push(
-            SalesDetailRoute(data: vmSales.joblistResponse.data?[index]),
-          );
-        },
-        child: index == length
+      itemBuilder: (context, index) {
+        return index == length
             ? paginationLoading
                 ? const CupertinoActivityIndicator()
                 : const SizedBox.shrink()
-            : listData(vmSales.joblistResponse.data?[index]),
-      ),
+            : InkWell(
+                onTap: () {
+                  context.router.push(
+                    SalesDetailRoute(
+                        data: vmSales.joblistResponse.data?[index]),
+                  );
+                },
+                child: listData(vmSales.joblistResponse.data?[index]),
+              );
+      },
     );
   }
 

@@ -18,7 +18,9 @@ class SalesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      vmSales.saleJobListPagination();
+      vmSales
+        ..saleJobListPagination()
+        ..quoteRegListPagination();
     });
     return DefaultTabController(
         length: 3,

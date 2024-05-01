@@ -14,7 +14,7 @@ abstract class ISalesService {
       saleJoblistApiService({int? page});
 
   Future<Either<Map<MainFailure, dynamic>, List<SalesModel>>>
-      quoteRegisterServiceApi();
+      quoteRegisterServiceApi({int? page});
 
   Future<Either<Map<MainFailure, dynamic>, List<SalesModel>>>
       salesJobListSearchServiceApi({
@@ -23,7 +23,10 @@ abstract class ISalesService {
   });
 
   Future<Either<Map<MainFailure, dynamic>, List<SalesModel>>>
-      salesQuoteListSearchServiceApi({required Map<String, String> data});
+      salesQuoteListSearchServiceApi({
+    int? page,
+    required Map<String, String> data,
+  });
 }
 
 @LazySingleton(as: ISalesService)
@@ -97,11 +100,14 @@ class SalesService implements ISalesService {
 
   @override
   Future<Either<Map<MainFailure, dynamic>, List<SalesModel>>>
-      quoteRegisterServiceApi() async {
+      quoteRegisterServiceApi({int? page}) async {
+    String apiUrl =
+        "${ApiEndPoints().quoteregvehiclelist}/?page=${page ?? 1}&limit=10";
     var response = await httpService.request(
-        authenticated: true,
-        method: HttpMethod.get,
-        apiUrl: ApiEndPoints().quoteregvehiclelist);
+      apiUrl: apiUrl,
+      authenticated: true,
+      method: HttpMethod.get,
+    );
 
     return response.fold(
       (l) => Left(l),
@@ -116,10 +122,17 @@ class SalesService implements ISalesService {
 
   @override
   Future<Either<Map<MainFailure, dynamic>, List<SalesModel>>>
-      salesQuoteListSearchServiceApi(
-          {required Map<String, String> data}) async {
+      salesQuoteListSearchServiceApi({
+    int? page,
+    required Map<String, String> data,
+  }) async {
+    String apiUrl =
+        "${ApiEndPoints().saleQuoteSearch}/?page=${page ?? 1}&limit=10";
     var response = await httpService.multipartRequest(
-        data: data, method: 'POST', apiUrl: ApiEndPoints().saleQuoteSearch);
+      data: data,
+      method: 'POST',
+      apiUrl: apiUrl,
+    );
     return response.fold(
       (l) => Left(l),
       (res) async {

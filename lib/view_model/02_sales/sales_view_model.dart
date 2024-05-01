@@ -92,7 +92,29 @@ abstract class SalesViewModelBase with Store {
     }
   }
 
-  //     _  _       _  _       _  _       _  _       _  _       _  _       _  _       _  _
+  ScrollController joblistController = ScrollController();
+
+  void saleJobListPagination() {
+    joblistController.addListener(() {
+      if (joblistController.position.pixels ==
+              joblistController.position.maxScrollExtent &&
+          !joblistController.position.outOfRange &&
+          joblistResponse.pagination &&
+          !joblistResponse.paginationLoading) {
+        int pageNo = joblistResponse.pageNo + 1;
+        if (vmSales.salesJobListSearchCtr.text.isNotEmpty) {
+          salesJobListSearchApi(
+            page: pageNo,
+            vmSales.salesJobListSearchCtr.text,
+          );
+          return;
+        }
+        saleJobListApi(page: pageNo);
+      }
+    });
+  }
+
+//     _  _       _  _       _  _       _  _       _  _       _  _       _  _       _  _
 //   _| || |_   _| || |_   _| || |_   _| || |_   _| || |_   _| || |_   _| || |_   _| || |_
 //  |_  ..  _| |_  ..  _| |_  ..  _| |_  ..  _| |_  ..  _| |_  ..  _| |_  ..  _| |_  ..  _|
 //  |_      _| |_      _| |_      _| |_      _| |_      _| |_      _| |_      _| |_      _|
@@ -129,6 +151,7 @@ abstract class SalesViewModelBase with Store {
             errors: null,
             loading: false,
             pageNo: page ?? 1,
+            pagination: r.length == 10,
             paginationLoading: false,
           );
         },
@@ -187,25 +210,47 @@ abstract class SalesViewModelBase with Store {
       ApiResponse<List<SalesModel>>();
 
   @action
-  Future<void> quoteRegisterApi() async {
+  Future<void> quoteRegisterApi({int? page}) async {
     try {
-      quoteRegResponse = quoteRegResponse.copyWith(errors: null, loading: true);
+      quoteRegResponse = quoteRegResponse.copyWith(
+        errors: null,
+        loading: page == null,
+        paginationLoading: page != null,
+      );
 
-      final result = await salesService.quoteRegisterServiceApi();
+      final result = await salesService.quoteRegisterServiceApi(page: page);
       return result.fold(
         (l) {
-          quoteRegResponse =
-              quoteRegResponse.copyWith(errors: l, loading: false);
+          quoteRegResponse = quoteRegResponse.copyWith(
+            errors: l,
+            loading: false,
+            paginationLoading: false,
+          );
         },
         (r) {
-          quoteRegResponse =
-              quoteRegResponse.copyWith(data: r, errors: null, loading: false);
+          List<SalesModel> quoteReList = quoteRegResponse.data?.toList() ?? [];
+          if (page == null) {
+            quoteReList = r;
+          } else {
+            quoteReList.addAll(r);
+          }
+          quoteRegResponse = quoteRegResponse.copyWith(
+            errors: null,
+            loading: false,
+            data: quoteReList,
+            pageNo: page ?? 1,
+            paginationLoading: false,
+            pagination: r.length == 10,
+          );
         },
       );
     } catch (e) {
       customPrint(content: e, name: 'Error quoteRegisterApi');
     } finally {
-      quoteRegResponse = quoteRegResponse.copyWith(loading: false);
+      quoteRegResponse = quoteRegResponse.copyWith(
+        loading: false,
+        paginationLoading: false,
+      );
     }
   }
 
@@ -216,27 +261,74 @@ abstract class SalesViewModelBase with Store {
 //    |_||_|     |_||_|     |_||_|     |_||_|     |_||_|     |_||_|     |_||_|     |_||_|
 
   @action
-  Future<void> salesQuoteListSearchApi(String searchData) async {
+  Future<void> salesQuoteListSearchApi(String searchData, {int? page}) async {
     try {
-      quoteRegResponse = quoteRegResponse.copyWith(errors: null, loading: true);
+      quoteRegResponse = quoteRegResponse.copyWith(
+        errors: null,
+        loading: page == null,
+        paginationLoading: page != null,
+      );
 
-      final result = await salesService.salesQuoteListSearchServiceApi(data: {
-        "key": searchData,
-      });
+      final result = await salesService.salesQuoteListSearchServiceApi(
+        page: page,
+        data: {
+          "key": searchData,
+        },
+      );
       return result.fold(
         (l) {
-          quoteRegResponse =
-              quoteRegResponse.copyWith(errors: l, loading: false);
+          quoteRegResponse = quoteRegResponse.copyWith(
+            errors: l,
+            loading: false,
+            paginationLoading: false,
+          );
         },
         (r) {
-          quoteRegResponse =
-              quoteRegResponse.copyWith(data: r, errors: null, loading: false);
+          List<SalesModel> quoteReList = quoteRegResponse.data?.toList() ?? [];
+          if (page == null) {
+            quoteReList = r;
+          } else {
+            quoteReList.addAll(r);
+          }
+          quoteRegResponse = quoteRegResponse.copyWith(
+            errors: null,
+            loading: false,
+            data: quoteReList,
+            pageNo: page ?? 1,
+            paginationLoading: false,
+            pagination: r.length == 10,
+          );
         },
       );
     } catch (e) {
       customPrint(content: e, name: 'Error salesJobListSearchApi');
     } finally {
-      quoteRegResponse = quoteRegResponse.copyWith(loading: false);
+      quoteRegResponse = quoteRegResponse.copyWith(
+        loading: false,
+        paginationLoading: false,
+      );
     }
+  }
+
+  ScrollController quoteRegController = ScrollController();
+
+  void quoteRegListPagination() {
+    quoteRegController.addListener(() {
+      if (quoteRegController.position.pixels ==
+              quoteRegController.position.maxScrollExtent &&
+          !quoteRegController.position.outOfRange &&
+          quoteRegResponse.pagination &&
+          !quoteRegResponse.paginationLoading) {
+        int pageNo = quoteRegResponse.pageNo + 1;
+        if (vmSales.salesQuoteListSearchCtr.text.isNotEmpty) {
+          salesQuoteListSearchApi(
+            page: pageNo,
+            vmSales.salesQuoteListSearchCtr.text,
+          );
+          return;
+        }
+        quoteRegisterApi(page: pageNo);
+      }
+    });
   }
 }

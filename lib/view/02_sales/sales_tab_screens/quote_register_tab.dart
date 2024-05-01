@@ -5,6 +5,7 @@ import 'package:enviro_mobile_application/view/02_sales/sales_widgets.dart/sales
 import 'package:enviro_mobile_application/view_model/02_sales/sales_view_model.dart';
 import 'package:enviro_mobile_application/widgets/ww_response_handler.dart';
 import 'package:enviro_mobile_application/widgets/ww_search_widget.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
@@ -30,7 +31,9 @@ class QuoteRegisterTab extends StatelessWidget {
               data: vmSales.quoteRegResponse,
               isEmpty: vmSales.quoteRegResponse.data?.isEmpty ?? true,
               onTap: () => vmSales.quoteRegisterApi(),
-              child: const QuoteReqisterListWidget(),
+              child: QuoteReqisterListWidget(
+                paginationLoading: vmSales.quoteRegResponse.paginationLoading,
+              ),
             ),
           );
         }),
@@ -40,22 +43,31 @@ class QuoteRegisterTab extends StatelessWidget {
 }
 
 class QuoteReqisterListWidget extends StatelessWidget {
-  const QuoteReqisterListWidget({super.key});
+  final bool paginationLoading;
+  const QuoteReqisterListWidget({super.key, this.paginationLoading = false});
 
   @override
   Widget build(BuildContext context) {
+    int length = vmSales.quoteRegResponse.data?.length ?? 0;
     return ListView.separated(
       // padding: const EdgeInsets.symmetric(vertical: 10),
-      itemCount: vmSales.quoteRegResponse.data?.length ?? 0,
+      itemCount: length + 1,
+      controller: vmSales.quoteRegController,
       separatorBuilder: (BuildContext context, int index) => gapField,
       itemBuilder: (context, index) {
-        var data = vmSales.quoteRegResponse.data?[index];
-        return InkWell(
-            onTap: () {
-              context.router.push(
-                  SalesDetailRoute(data: vmSales.joblistResponse.data?[index]));
-            },
-            child: listData(data));
+        return index == length
+            ? paginationLoading
+                ? const CupertinoActivityIndicator()
+                : const SizedBox.shrink()
+            : InkWell(
+                onTap: () {
+                  context.router.push(
+                    SalesDetailRoute(
+                        data: vmSales.joblistResponse.data?[index]),
+                  );
+                },
+                child: listData(vmSales.quoteRegResponse.data?[index]),
+              );
       },
     );
   }

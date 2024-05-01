@@ -87,8 +87,9 @@ mixin _$SalesViewModel on SalesViewModelBase, Store {
       AsyncAction('SalesViewModelBase.quoteRegisterApi', context: context);
 
   @override
-  Future<void> quoteRegisterApi() {
-    return _$quoteRegisterApiAsyncAction.run(() => super.quoteRegisterApi());
+  Future<void> quoteRegisterApi({int? page}) {
+    return _$quoteRegisterApiAsyncAction
+        .run(() => super.quoteRegisterApi(page: page));
   }
 
   late final _$salesQuoteListSearchApiAsyncAction = AsyncAction(
@@ -96,9 +97,9 @@ mixin _$SalesViewModel on SalesViewModelBase, Store {
       context: context);
 
   @override
-  Future<void> salesQuoteListSearchApi(String searchData) {
+  Future<void> salesQuoteListSearchApi(String searchData, {int? page}) {
     return _$salesQuoteListSearchApiAsyncAction
-        .run(() => super.salesQuoteListSearchApi(searchData));
+        .run(() => super.salesQuoteListSearchApi(searchData, page: page));
   }
 
   @override
