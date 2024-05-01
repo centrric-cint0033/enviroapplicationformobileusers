@@ -1,16 +1,24 @@
 import 'package:flutter/material.dart';
 
-class WWSearchField extends StatelessWidget {
+class WWTextField extends StatelessWidget {
   final Function(String)? onChanged;
   final TextEditingController controller;
-  final Function() searchTap;
+  final Function()? suffixTap;
+  final IconData? suffixIcon;
   final String? hintText;
-  const WWSearchField(
+  final bool description;
+  final TextInputType keyboardType;
+  final int? maxLines;
+  const WWTextField(
       {super.key,
       this.onChanged,
       required this.controller,
-      required this.searchTap,
-      this.hintText});
+      this.suffixTap,
+      this.hintText,
+      this.suffixIcon,
+      this.description = false,
+      this.keyboardType = TextInputType.none,
+      this.maxLines});
 
   @override
   Widget build(BuildContext context) {
@@ -24,16 +32,22 @@ class WWSearchField extends StatelessWidget {
         child: TextField(
             onChanged: onChanged,
             controller: controller,
+            keyboardType: keyboardType,
+            expands: description,
+            maxLines: maxLines,
             style: const TextStyle(color: Colors.black),
             decoration: InputDecoration(
-                hintText: hintText ?? 'Search here',
-                border: InputBorder.none,
-                contentPadding: const EdgeInsets.all(10),
-                suffixIcon: GestureDetector(
-                    onTap: searchTap,
-                    child: const Icon(
-                      Icons.search,
-                      color: Colors.black,
-                    )))));
+              hintText: hintText ?? 'Search here',
+              border: InputBorder.none,
+              contentPadding: const EdgeInsets.all(10),
+              suffixIcon: suffixTap == null
+                  ? null
+                  : GestureDetector(
+                      onTap: () => suffixTap!(),
+                      child: Icon(
+                        suffixIcon ?? Icons.search,
+                        color: Colors.black,
+                      )),
+            )));
   }
 }

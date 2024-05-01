@@ -17,16 +17,17 @@ class MasterTruckTab extends StatelessWidget {
 
     return Scaffold(
         body: Column(children: [
-      WWSearchField(
+      WWTextField(
         controller: vmVehicle.vehicleTextCtr,
         onChanged: _onChanged,
-        searchTap: () {},
+        suffixTap: () {},
       ),
       gapFieldVeh,
       Observer(builder: (_) {
         return Expanded(
             child: WWResponseHandler(
                 data: vmVehicle.masterTruckApiResponse,
+                onRefresh: () async => vmVehicle.masterTruckApi(),
                 isEmpty: vmVehicle.masterTruckApiResponse.data?.isEmpty ?? true,
                 onTap: () => vmVehicle.vehicleTextCtr.text.isNotEmpty
                     ? vmVehicle.masterTruckSearchServiceApi(

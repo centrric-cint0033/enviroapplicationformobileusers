@@ -48,19 +48,19 @@ class VehicleService implements IVehicleService {
 
     switch (truckdrop) {
       case VehicleActionType.vehicleList:
-        apiUrl = ApiEndPoints.vehTruck;
+        apiUrl = ApiEndPoints().vehTruck;
         break;
       case VehicleActionType.preInspectionCheck:
-        apiUrl = ApiEndPoints.vehTruckPreInspection;
+        apiUrl = ApiEndPoints().vehTruckPreInspection;
         break;
       case VehicleActionType.maintenanceCheck:
-        apiUrl = ApiEndPoints.vehTruckPreMaintenance;
+        apiUrl = ApiEndPoints().vehTruckPreMaintenance;
         break;
       case VehicleActionType.fuelExpence:
-        apiUrl = ApiEndPoints.vehTruckFuelExpense;
+        apiUrl = ApiEndPoints().vehTruckFuelExpense;
         break;
       default:
-        apiUrl = ApiEndPoints.vehTruck;
+        apiUrl = ApiEndPoints().vehTruck;
     }
 
     var response = await getIt<HttpService>().request(
@@ -87,24 +87,24 @@ class VehicleService implements IVehicleService {
     Map<String, String>? _data = {"key": value};
     switch (trucksearchdrop) {
       case VehicleActionType.vehicleList:
-        apiUrl = ApiEndPoints.vehTruckSearch;
+        apiUrl = ApiEndPoints().vehTruckSearch;
         _data = {"key": value};
         break;
       case VehicleActionType.preInspectionCheck:
-        apiUrl = ApiEndPoints.vehTruckPreInspectionSearch;
+        apiUrl = ApiEndPoints().vehTruckPreInspectionSearch;
         _data = {"registration": value};
         break;
       case VehicleActionType.maintenanceCheck:
-        apiUrl = ApiEndPoints.vehTruckPreMaintenanceSearch;
+        apiUrl = ApiEndPoints().vehTruckPreMaintenanceSearch;
         _data = {"key": value};
         break;
       case VehicleActionType.fuelExpence:
         _data = {"registration": value};
-        apiUrl = ApiEndPoints.vehTruckFuelExpenseSearch;
+        apiUrl = ApiEndPoints().vehTruckFuelExpenseSearch;
         break;
       default:
         _data = {"key": value};
-        apiUrl = ApiEndPoints.vehTruckSearch;
+        apiUrl = ApiEndPoints().vehTruckSearch;
         break;
     }
 
@@ -128,19 +128,19 @@ class VehicleService implements IVehicleService {
     String apiUrl;
     switch (status) {
       case VehicleActionType.vehicleList:
-        apiUrl = ApiEndPoints.vehCar;
+        apiUrl = ApiEndPoints().vehCar;
         break;
       case VehicleActionType.preInspectionCheck:
-        apiUrl = ApiEndPoints.vehCarPreInspection;
+        apiUrl = ApiEndPoints().vehCarPreInspection;
         break;
       case VehicleActionType.maintenanceCheck:
-        apiUrl = ApiEndPoints.vehCarPreMaintenance;
+        apiUrl = ApiEndPoints().vehCarPreMaintenance;
         break;
       case VehicleActionType.fuelExpence:
-        apiUrl = ApiEndPoints.vehCarFuelExpense;
+        apiUrl = ApiEndPoints().vehCarFuelExpense;
         break;
       default:
-        apiUrl = ApiEndPoints.vehCar;
+        apiUrl = ApiEndPoints().vehCar;
     }
 
     var response = await getIt<HttpService>().request(
@@ -168,22 +168,22 @@ class VehicleService implements IVehicleService {
     switch (status) {
       case VehicleActionType.vehicleList:
         _data = {"key": value};
-        apiUrl = ApiEndPoints.vehCarSearch;
+        apiUrl = ApiEndPoints().vehCarSearch;
         break;
       case VehicleActionType.preInspectionCheck:
         _data = {"registration": value};
-        apiUrl = ApiEndPoints.vehCarPreInspectionSearch;
+        apiUrl = ApiEndPoints().vehCarPreInspectionSearch;
         break;
       case VehicleActionType.maintenanceCheck:
         _data = {"key": value};
-        apiUrl = ApiEndPoints.vehCarPreMaintenanceSearch;
+        apiUrl = ApiEndPoints().vehCarPreMaintenanceSearch;
         break;
       case VehicleActionType.fuelExpence:
         _data = {"registration": value};
-        apiUrl = ApiEndPoints.vehCarFuelExpenseSearch;
+        apiUrl = ApiEndPoints().vehCarFuelExpenseSearch;
         break;
       default:
-        apiUrl = ApiEndPoints.vehCarSearch;
+        apiUrl = ApiEndPoints().vehCarSearch;
         break;
     }
 
@@ -208,19 +208,19 @@ class VehicleService implements IVehicleService {
     String apiUrl;
     switch (status) {
       case VehicleActionType.vehicleList:
-        apiUrl = ApiEndPoints.vehSemiTrailer;
+        apiUrl = ApiEndPoints().vehSemiTrailer;
         break;
       case VehicleActionType.preInspectionCheck:
-        apiUrl = ApiEndPoints.vehSemiTrailerPreInspection;
+        apiUrl = ApiEndPoints().vehSemiTrailerPreInspection;
         break;
       case VehicleActionType.maintenanceCheck:
-        apiUrl = ApiEndPoints.vehSemiTailerMaintenance;
+        apiUrl = ApiEndPoints().vehSemiTailerMaintenance;
         break;
       case VehicleActionType.fuelExpence:
-        apiUrl = ApiEndPoints.vehSemiTailerFuelExpenses;
+        apiUrl = ApiEndPoints().vehSemiTailerFuelExpenses;
         break;
       default:
-        apiUrl = ApiEndPoints.vehSemiTrailer;
+        apiUrl = ApiEndPoints().vehSemiTrailer;
     }
 
     var response = await getIt<HttpService>().request(
@@ -250,22 +250,22 @@ class VehicleService implements IVehicleService {
     switch (status) {
       case VehicleActionType.vehicleList:
         _data = {"key": value};
-        apiUrl = ApiEndPoints.vehSemiTrailerSearch;
+        apiUrl = ApiEndPoints().vehSemiTrailerSearch;
         break;
       case VehicleActionType.preInspectionCheck:
         _data = {"registration": value};
-        apiUrl = ApiEndPoints.vehSemiTrailerPreInspectionSearch;
+        apiUrl = ApiEndPoints().vehSemiTrailerPreInspectionSearch;
         break;
       case VehicleActionType.maintenanceCheck:
         _data = {"key": value};
-        apiUrl = ApiEndPoints.vehSemiTrailerMaintenanceSearch;
+        apiUrl = ApiEndPoints().vehSemiTrailerMaintenanceSearch;
         break;
       case VehicleActionType.fuelExpence:
         _data = {"registration": value};
-        apiUrl = ApiEndPoints.vehSemiTrailerFuelExpenseSearch;
+        apiUrl = ApiEndPoints().vehSemiTrailerFuelExpenseSearch;
         break;
       default:
-        apiUrl = ApiEndPoints.vehSemiTrailerSearch;
+        apiUrl = ApiEndPoints().vehSemiTrailerSearch;
         break;
     }
 

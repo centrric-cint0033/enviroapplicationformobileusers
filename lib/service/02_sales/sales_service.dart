@@ -36,7 +36,7 @@ class SalesService implements ISalesService {
     var response = await httpService.request(
         authenticated: true,
         method: HttpMethod.get,
-        apiUrl: ApiEndPoints.endpointsaleslist);
+        apiUrl: ApiEndPoints().saleslist);
 
     return response.fold(
       (l) => Left(l),
@@ -53,9 +53,7 @@ class SalesService implements ISalesService {
   Future<Either<Map<MainFailure, dynamic>, List<SalesModel>>>
       salesJobListSearchServiceApi({required Map<String, String> data}) async {
     var response = await httpService.multipartRequest(
-        data: data,
-        method: 'POST',
-        apiUrl: ApiEndPoints.endpointSalesJobSearch);
+        data: data, method: 'POST', apiUrl: ApiEndPoints().salesJobSearch);
     return response.fold(
       (l) => Left(l),
       (res) async {
@@ -73,7 +71,7 @@ class SalesService implements ISalesService {
     var response = await httpService.request(
         authenticated: true,
         method: HttpMethod.get,
-        apiUrl: ApiEndPoints.endpointjoblist);
+        apiUrl: ApiEndPoints().joblist);
 
     return response.fold(
       (l) => Left(l),
@@ -92,7 +90,7 @@ class SalesService implements ISalesService {
     var response = await httpService.request(
         authenticated: true,
         method: HttpMethod.get,
-        apiUrl: ApiEndPoints.endpointquoteregvehiclelist);
+        apiUrl: ApiEndPoints().quoteregvehiclelist);
 
     return response.fold(
       (l) => Left(l),
@@ -110,9 +108,7 @@ class SalesService implements ISalesService {
       salesQuoteListSearchServiceApi(
           {required Map<String, String> data}) async {
     var response = await httpService.multipartRequest(
-        data: data,
-        method: 'POST',
-        apiUrl: ApiEndPoints.endpointSaleQuoteSearch);
+        data: data, method: 'POST', apiUrl: ApiEndPoints().saleQuoteSearch);
     return response.fold(
       (l) => Left(l),
       (res) async {

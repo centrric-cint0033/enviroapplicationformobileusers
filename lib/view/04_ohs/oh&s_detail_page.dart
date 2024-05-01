@@ -160,8 +160,8 @@ class OhsDetailPage extends StatelessWidget {
 
   void ohsfunction(BuildContext context) {
     vmOhs
-      ..ohsnotificationviewmodelfunction()
-      ..ohsnewsviewmodelfunction();
+      ..ohsNotificationApi()
+      ..ohsNewsApi();
     context.router.pushNamed(RouteNames.ohsPage);
 
     vmOhs.ohsnewsfolderviewmodelfunction(1);
