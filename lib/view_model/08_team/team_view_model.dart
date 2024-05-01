@@ -1,11 +1,11 @@
 import 'dart:async';
+import 'dart:developer';
 import 'package:auto_route/auto_route.dart';
 import 'package:enviro_mobile_application/api_response/api_response.dart';
 import 'package:enviro_mobile_application/model/00_common_model/folder_model/folder_model.dart';
 import 'package:enviro_mobile_application/model/10_team/create_team_req_model/create_team_req_model.dart';
 import 'package:enviro_mobile_application/model/10_team/team_designtion_res_model/designation.dart';
 import 'package:enviro_mobile_application/model/10_team/team_designtion_res_model/team_designtion_res_model.dart';
-import 'package:enviro_mobile_application/model/10_team/team_folder_req_model/team_create_folder_req_model.dart';
 import 'package:enviro_mobile_application/model/10_team/team_profile_employee_details_res_model/team_profile_employee_details_res_model.dart';
 import 'package:enviro_mobile_application/model/10_team/team_res_model/team_res_model.dart';
 import 'package:enviro_mobile_application/service/10_team/team_service.dart';
@@ -47,7 +47,10 @@ abstract class TeamViewModelBase with Store {
   ApiResponse<FolderListModel> teamFoldersResponse =
       ApiResponse<FolderListModel>();
   @observable
-  ApiResponse addFolderResponse = ApiResponse<TeamCreateFolderReqModel>();
+  ApiResponse<FolderListModel> teamFoldersResponse2 =
+      ApiResponse<FolderListModel>();
+  @observable
+  ApiResponse addFolderResponse = ApiResponse<FolderListModel>();
   @observable
   ApiResponse<String> deleteFolderResponse = ApiResponse<String>();
   @observable
@@ -61,6 +64,8 @@ abstract class TeamViewModelBase with Store {
   ApiResponse createTeamResponse = ApiResponse<CreateTeamReqModel>();
   @observable
   ApiResponse editTeamResponse = ApiResponse<CreateTeamReqModel>();
+  @observable
+  ApiResponse addFileResponse = ApiResponse<FolderListModel>();
   @observable
   ImageFilePickerModel? profileImage;
   @observable
@@ -101,6 +106,10 @@ abstract class TeamViewModelBase with Store {
   String? selectedFileNameLicense;
   @observable
   String? selectedFilePathLicense;
+  @observable
+  String? selectedFileName;
+  @observable
+  String? selectedFilePath;
   TextEditingController textFolderAddController = TextEditingController();
   TextEditingController textFolderEditController = TextEditingController();
   TextEditingController textEditTeamNameController = TextEditingController();
@@ -270,28 +279,51 @@ abstract class TeamViewModelBase with Store {
   }
 
   @action
-  Future<void> getTeamFolders({
-    required num id,
-  }) async {
-    teamFoldersResponse =
-        teamFoldersResponse.copyWith(error: null, loading: true);
+  Future<void> getTeamFolders(
+      {required num id, required num parentFolderId}) async {
+    if (parentFolderId == 1) {
+      teamFoldersResponse =
+          teamFoldersResponse.copyWith(error: null, loading: true);
 
-    final result = await teamService.getTeamFolders(id: id);
-    return result.fold(
-      (l) {
-        teamFoldersResponse = teamFoldersResponse.copyWith(
-          errors: l,
-          loading: false,
-        );
-      },
-      (r) {
-        teamFoldersResponse = teamFoldersResponse.copyWith(
-          data: r,
-          error: null,
-          loading: false,
-        );
-      },
-    );
+      final result = await teamService.getTeamFolders(
+          id: id, parentFolderId: parentFolderId);
+      return result.fold(
+        (l) {
+          teamFoldersResponse = teamFoldersResponse.copyWith(
+            errors: l,
+            loading: false,
+          );
+        },
+        (r) {
+          teamFoldersResponse = teamFoldersResponse.copyWith(
+            data: r,
+            error: null,
+            loading: false,
+          );
+        },
+      );
+    } else {
+      teamFoldersResponse2 =
+          teamFoldersResponse2.copyWith(error: null, loading: true);
+
+      final result = await teamService.getTeamFolders(
+          id: id, parentFolderId: parentFolderId);
+      return result.fold(
+        (l) {
+          teamFoldersResponse2 = teamFoldersResponse2.copyWith(
+            errors: l,
+            loading: false,
+          );
+        },
+        (r) {
+          teamFoldersResponse2 = teamFoldersResponse2.copyWith(
+            data: r,
+            error: null,
+            loading: false,
+          );
+        },
+      );
+    }
   }
 
   @action
@@ -299,13 +331,15 @@ abstract class TeamViewModelBase with Store {
       {required String name,
       required num employee,
       required num parentfolder,
+      String? files,
       required BuildContext context}) async {
     addFolderResponse = addFolderResponse.copyWith(error: null, loading: true);
 
     final result = await teamService.addTeamFolders(data: {
       "name": name,
       "employee": employee.toString(),
-      "parent_folder": parentfolder.toString()
+      "parent_folder": parentfolder.toString(),
+      "file": files ?? ""
     });
     return result.fold(
       (l) {
@@ -315,9 +349,9 @@ abstract class TeamViewModelBase with Store {
       (r) {
         addFolderResponse =
             addFolderResponse.copyWith(data: r, error: null, loading: false);
-        getTeamFolders(id: employee);
+        getTeamFolders(id: employee, parentFolderId: parentfolder);
         vmTeam.textFolderAddController.clear();
-        context.router.pop();
+        // context.router.pop();
       },
     );
   }
@@ -326,7 +360,8 @@ abstract class TeamViewModelBase with Store {
   Future<void> deleteTeamFolderApi(
       {required int folderId,
       required BuildContext context,
-      required num employeeID}) async {
+      required num employeeID,
+      required num parentFolderId}) async {
     deleteFolderResponse =
         deleteFolderResponse.copyWith(error: null, loading: true);
 
@@ -344,19 +379,20 @@ abstract class TeamViewModelBase with Store {
           error: null,
           loading: false,
         );
-
-        getTeamFolders(id: employeeID);
-        context.router.pop();
+        getTeamFolders(id: employeeID, parentFolderId: parentFolderId);
       },
     );
   }
 
   @action
-  Future<void> editTeamFolderApi(
-      {required int folderId,
-      required String name,
-      required BuildContext context,
-      required num employeeID}) async {
+  Future<void> editTeamFolderApi({
+    required int folderId,
+    required int parentFolderId,
+    required String name,
+    required BuildContext context,
+    required num employeeID,
+  }) async {
+    log(folderId.toString());
     editFolderResponse =
         editFolderResponse.copyWith(error: null, loading: true);
 
@@ -375,8 +411,7 @@ abstract class TeamViewModelBase with Store {
           error: null,
           loading: false,
         );
-        getTeamFolders(id: employeeID);
-        context.router.pop();
+        getTeamFolders(id: employeeID, parentFolderId: parentFolderId);
       },
     );
   }
@@ -488,6 +523,35 @@ abstract class TeamViewModelBase with Store {
         textControllersClearFn();
         context.router.pop();
         showToast(context, msg: "Successfully Edited Employee");
+      },
+    );
+  }
+
+  @action
+  Future<void> addTeamFile(
+      {required String name,
+      required num employee,
+      required num parentfolder,
+      String? files,
+      required BuildContext context}) async {
+    addFileResponse = addFileResponse.copyWith(error: null, loading: true);
+
+    final result = await teamService.addTeamFiles(data: {
+      "name": name,
+      "employee": employee.toString(),
+      "folder": parentfolder.toString(),
+      "file": files ?? ""
+    });
+    return result.fold(
+      (l) {
+        addFileResponse = addFileResponse.copyWith(errors: l, loading: false);
+      },
+      (r) {
+        addFileResponse =
+            addFileResponse.copyWith(data: r, error: null, loading: false);
+        getTeamFolders(id: employee, parentFolderId: parentfolder);
+        vmTeam.textFolderAddController.clear();
+        // context.router.pop();
       },
     );
   }

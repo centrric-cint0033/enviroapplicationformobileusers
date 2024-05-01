@@ -79,6 +79,23 @@ mixin _$TeamViewModel on TeamViewModelBase, Store {
     });
   }
 
+  late final _$teamFoldersResponse2Atom =
+      Atom(name: 'TeamViewModelBase.teamFoldersResponse2', context: context);
+
+  @override
+  ApiResponse<FolderListModel> get teamFoldersResponse2 {
+    _$teamFoldersResponse2Atom.reportRead();
+    return super.teamFoldersResponse2;
+  }
+
+  @override
+  set teamFoldersResponse2(ApiResponse<FolderListModel> value) {
+    _$teamFoldersResponse2Atom.reportWrite(value, super.teamFoldersResponse2,
+        () {
+      super.teamFoldersResponse2 = value;
+    });
+  }
+
   late final _$addFolderResponseAtom =
       Atom(name: 'TeamViewModelBase.addFolderResponse', context: context);
 
@@ -191,6 +208,22 @@ mixin _$TeamViewModel on TeamViewModelBase, Store {
   set editTeamResponse(ApiResponse<dynamic> value) {
     _$editTeamResponseAtom.reportWrite(value, super.editTeamResponse, () {
       super.editTeamResponse = value;
+    });
+  }
+
+  late final _$addFileResponseAtom =
+      Atom(name: 'TeamViewModelBase.addFileResponse', context: context);
+
+  @override
+  ApiResponse<dynamic> get addFileResponse {
+    _$addFileResponseAtom.reportRead();
+    return super.addFileResponse;
+  }
+
+  @override
+  set addFileResponse(ApiResponse<dynamic> value) {
+    _$addFileResponseAtom.reportWrite(value, super.addFileResponse, () {
+      super.addFileResponse = value;
     });
   }
 
@@ -526,6 +559,38 @@ mixin _$TeamViewModel on TeamViewModelBase, Store {
     });
   }
 
+  late final _$selectedFileNameAtom =
+      Atom(name: 'TeamViewModelBase.selectedFileName', context: context);
+
+  @override
+  String? get selectedFileName {
+    _$selectedFileNameAtom.reportRead();
+    return super.selectedFileName;
+  }
+
+  @override
+  set selectedFileName(String? value) {
+    _$selectedFileNameAtom.reportWrite(value, super.selectedFileName, () {
+      super.selectedFileName = value;
+    });
+  }
+
+  late final _$selectedFilePathAtom =
+      Atom(name: 'TeamViewModelBase.selectedFilePath', context: context);
+
+  @override
+  String? get selectedFilePath {
+    _$selectedFilePathAtom.reportRead();
+    return super.selectedFilePath;
+  }
+
+  @override
+  set selectedFilePath(String? value) {
+    _$selectedFilePathAtom.reportWrite(value, super.selectedFilePath, () {
+      super.selectedFilePath = value;
+    });
+  }
+
   late final _$getCurrentEmployeeAsyncAction =
       AsyncAction('TeamViewModelBase.getCurrentEmployee', context: context);
 
@@ -578,8 +643,9 @@ mixin _$TeamViewModel on TeamViewModelBase, Store {
       AsyncAction('TeamViewModelBase.getTeamFolders', context: context);
 
   @override
-  Future<void> getTeamFolders({required num id}) {
-    return _$getTeamFoldersAsyncAction.run(() => super.getTeamFolders(id: id));
+  Future<void> getTeamFolders({required num id, required num parentFolderId}) {
+    return _$getTeamFoldersAsyncAction.run(
+        () => super.getTeamFolders(id: id, parentFolderId: parentFolderId));
   }
 
   late final _$addTeamFolderAsyncAction =
@@ -590,11 +656,13 @@ mixin _$TeamViewModel on TeamViewModelBase, Store {
       {required String name,
       required num employee,
       required num parentfolder,
+      String? files,
       required BuildContext context}) {
     return _$addTeamFolderAsyncAction.run(() => super.addTeamFolder(
         name: name,
         employee: employee,
         parentfolder: parentfolder,
+        files: files,
         context: context));
   }
 
@@ -605,9 +673,13 @@ mixin _$TeamViewModel on TeamViewModelBase, Store {
   Future<void> deleteTeamFolderApi(
       {required int folderId,
       required BuildContext context,
-      required num employeeID}) {
+      required num employeeID,
+      required num parentFolderId}) {
     return _$deleteTeamFolderApiAsyncAction.run(() => super.deleteTeamFolderApi(
-        folderId: folderId, context: context, employeeID: employeeID));
+        folderId: folderId,
+        context: context,
+        employeeID: employeeID,
+        parentFolderId: parentFolderId));
   }
 
   late final _$editTeamFolderApiAsyncAction =
@@ -616,11 +688,13 @@ mixin _$TeamViewModel on TeamViewModelBase, Store {
   @override
   Future<void> editTeamFolderApi(
       {required int folderId,
+      required int parentFolderId,
       required String name,
       required BuildContext context,
       required num employeeID}) {
     return _$editTeamFolderApiAsyncAction.run(() => super.editTeamFolderApi(
         folderId: folderId,
+        parentFolderId: parentFolderId,
         name: name,
         context: context,
         employeeID: employeeID));
@@ -671,6 +745,24 @@ mixin _$TeamViewModel on TeamViewModelBase, Store {
       {required CreateTeamReqModel data, required BuildContext context}) {
     return _$editTeamApiAsyncAction
         .run(() => super.editTeamApi(data: data, context: context));
+  }
+
+  late final _$addTeamFileAsyncAction =
+      AsyncAction('TeamViewModelBase.addTeamFile', context: context);
+
+  @override
+  Future<void> addTeamFile(
+      {required String name,
+      required num employee,
+      required num parentfolder,
+      String? files,
+      required BuildContext context}) {
+    return _$addTeamFileAsyncAction.run(() => super.addTeamFile(
+        name: name,
+        employee: employee,
+        parentfolder: parentfolder,
+        files: files,
+        context: context));
   }
 
   late final _$TeamViewModelBaseActionController =
@@ -793,6 +885,7 @@ currentEmployeeResponse: ${currentEmployeeResponse},
 terminatedEmployeeResponse: ${terminatedEmployeeResponse},
 teamProfileEmployeeDetailListResponse: ${teamProfileEmployeeDetailListResponse},
 teamFoldersResponse: ${teamFoldersResponse},
+teamFoldersResponse2: ${teamFoldersResponse2},
 addFolderResponse: ${addFolderResponse},
 deleteFolderResponse: ${deleteFolderResponse},
 editFolderResponse: ${editFolderResponse},
@@ -800,6 +893,7 @@ designationsResponse: ${designationsResponse},
 deleteEmployeeResponse: ${deleteEmployeeResponse},
 createTeamResponse: ${createTeamResponse},
 editTeamResponse: ${editTeamResponse},
+addFileResponse: ${addFileResponse},
 profileImage: ${profileImage},
 profileImageLoader: ${profileImageLoader},
 showDecoration: ${showDecoration},
@@ -819,7 +913,9 @@ selectedEmploymentStatus: ${selectedEmploymentStatus},
 selectedAddEmploymentStatus: ${selectedAddEmploymentStatus},
 showDate: ${showDate},
 selectedFileNameLicense: ${selectedFileNameLicense},
-selectedFilePathLicense: ${selectedFilePathLicense}
+selectedFilePathLicense: ${selectedFilePathLicense},
+selectedFileName: ${selectedFileName},
+selectedFilePath: ${selectedFilePath}
     ''';
   }
 }

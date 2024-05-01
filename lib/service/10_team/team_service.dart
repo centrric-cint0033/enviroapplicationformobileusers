@@ -19,7 +19,8 @@ abstract class IteamService {
   Future<Either<Map<MainFailure, dynamic>, TeamProfileEmployeeDetailsResModel>>
       getTeamProfileEmployeeDetails({required num employeeID});
   Future<Either<Map<MainFailure, dynamic>, FolderListModel>> getTeamFolders(
-      {required num id});
+      {required num id,
+      required num parentFolderId});
   Future<Either<Map<MainFailure, dynamic>, FolderListModel>> addTeamFolders(
       {required Map<String, String> data});
   Future<Either<Map<MainFailure, dynamic>, String>> deleteTeamFolders(
@@ -36,6 +37,8 @@ abstract class IteamService {
       {required Map<String, dynamic> data});
   Future<Either<Map<MainFailure, dynamic>, CreateTeamReqModel>> editTeamApi(
       {required Map<String, dynamic> data, required String employeeId});
+        Future<Either<Map<MainFailure, dynamic>, FolderListModel>> addTeamFiles(
+      {required Map<String, String> data});
 }
 
 @LazySingleton(as: IteamService)
@@ -99,11 +102,12 @@ class TeamService implements IteamService {
 
   @override
   Future<Either<Map<MainFailure, dynamic>, FolderListModel>> getTeamFolders(
-      {required num id}) async {
+      {required num id,
+      required num parentFolderId}) async {
     var response = await getIt<HttpService>().request(
         authenticated: true,
         method: HttpMethod.get,
-        apiUrl: '${ApiEndPoints().teamFolder}/$id/1');
+        apiUrl: '${ApiEndPoints().teamFolder}/$id/$parentFolderId');
 
     return response.fold(
       (l) => Left(l),
@@ -241,6 +245,20 @@ class TeamService implements IteamService {
         CreateTeamReqModel editTeamList =
             CreateTeamReqModel(); //  CreateTeamReqModel.fromJson(data);
         return Right(editTeamList);
+      },
+    );
+  }
+  
+  @override
+  Future<Either<Map<MainFailure, dynamic>, FolderListModel>> addTeamFiles({required Map<String, String> data}) async {
+    var response = await getIt<HttpService>().multipartRequest(
+        data: data, method: 'POST', apiUrl: ApiEndPoints().addTeamFiles);
+    return response.fold(
+      (l) => Left(l),
+      (res) async {
+        var data = jsonDecode(res.body);
+        FolderListModel createFolderList = FolderListModel.fromJson(data);
+        return Right(createFolderList);
       },
     );
   }

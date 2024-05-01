@@ -96,6 +96,8 @@ abstract class $AppRouter extends _i27.RootStackRouter {
         child: _i3.EmployeeFilesPage(
           key: args.key,
           employeeId: args.employeeId,
+          folderName: args.folderName,
+          folderId: args.folderId,
         ),
       );
     },
@@ -323,12 +325,16 @@ class EmployeeFilesRoute extends _i27.PageRouteInfo<EmployeeFilesRouteArgs> {
   EmployeeFilesRoute({
     _i28.Key? key,
     num? employeeId,
+    String? folderName,
+    num? folderId,
     List<_i27.PageRouteInfo>? children,
   }) : super(
           EmployeeFilesRoute.name,
           args: EmployeeFilesRouteArgs(
             key: key,
             employeeId: employeeId,
+            folderName: folderName,
+            folderId: folderId,
           ),
           initialChildren: children,
         );
@@ -343,15 +349,21 @@ class EmployeeFilesRouteArgs {
   const EmployeeFilesRouteArgs({
     this.key,
     this.employeeId,
+    this.folderName,
+    this.folderId,
   });
 
   final _i28.Key? key;
 
   final num? employeeId;
 
+  final String? folderName;
+
+  final num? folderId;
+
   @override
   String toString() {
-    return 'EmployeeFilesRouteArgs{key: $key, employeeId: $employeeId}';
+    return 'EmployeeFilesRouteArgs{key: $key, employeeId: $employeeId, folderName: $folderName, folderId: $folderId}';
   }
 }
 

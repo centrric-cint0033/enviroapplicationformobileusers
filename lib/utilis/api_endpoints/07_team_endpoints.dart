@@ -25,4 +25,6 @@ mixin class TeamEndpoints {
   final String createEmployee = '/api/v1/team/create/';
 
   final String editEmployee = '/api/v1/team/employee/edit';
+
+  final String addTeamFiles = '/api/v1/drive/team/add/files/';
 }

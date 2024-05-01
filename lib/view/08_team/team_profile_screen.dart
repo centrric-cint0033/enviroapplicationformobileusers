@@ -179,19 +179,26 @@ class TeamProfileScreen extends StatelessWidget {
                             return WWFolderCard(
                                 folder: data,
                                 onTap: () {
+                                  vmTeam.getTeamFolders(
+                                      id: employeeDetails?.id ?? 0,
+                                      parentFolderId: data.id ?? 0);
                                   context.router.push(EmployeeFilesRoute(
-                                      employeeId: employeeDetails?.id));
+                                      employeeId: employeeDetails?.id,
+                                      folderName: data.name,
+                                      folderId: data.id));
                                 },
                                 folderName: data.name,
                                 editTap: (s) => vmTeam.editTeamFolderApi(
                                     name: s,
                                     folderId: data.id ?? 0,
+                                    parentFolderId: 1,
                                     context: context,
                                     employeeID: employeeDetails?.id ?? 0),
                                 deleteTap: () => vmTeam.deleteTeamFolderApi(
                                     folderId: data.id ?? 0,
                                     context: context,
-                                    employeeID: employeeDetails?.id ?? 0));
+                                    employeeID: employeeDetails?.id ?? 0,
+                                    parentFolderId: 1));
                           } else {
                             return Container();
                           }
