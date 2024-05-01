@@ -3,7 +3,7 @@ import 'package:enviro_mobile_application/model/07_Jobcard/job_card_model.dart';
 import 'package:enviro_mobile_application/model/12_shedulecard/shedule_card_resp_model.dart';
 import 'package:enviro_mobile_application/service/07_shedule/job_card/shedule_page_service.dart';
 import 'package:enviro_mobile_application/utilis/injection.dart';
-import 'package:flutter/material.dart';
+
 import 'package:injectable/injectable.dart';
 import 'package:mobx/mobx.dart';
 
@@ -13,6 +13,19 @@ final vmJobcard = getIt<JobCardViewModel>();
 
 @injectable
 @lazySingleton
+enum CheckBoxEnum { red, green, blue }
+
+class CheckBoxStatus {
+  final CheckBoxEnum checkBoxType;
+  final bool status;
+
+  CheckBoxStatus({required this.checkBoxType, required this.status});
+}
+
+@observable
+CheckBoxStatus checkbox =
+    CheckBoxStatus(checkBoxType: CheckBoxEnum.green, status: false);
+
 class JobCardViewModel extends JobCardViewModelBase with _$JobCardViewModel {
   JobCardViewModel(super.jobcardService);
 }
@@ -23,19 +36,15 @@ abstract class JobCardViewModelBase with Store {
   JobCardViewModelBase(this.jobcardService);
 
   @observable
-  bool checkboxColor = false;
-  Color selectedColor = Colors.white; // Initialize with default color
+  bool greenchecked = true;
 
   @action
-  void updateCheckboxColor(Color color) {
-    selectedColor = color;
-    // Set checkboxColor based on selectedColor
-    if (selectedColor == Colors.red) {
-      checkboxColor = true; // Set to true if red is selected, false otherwise
-    } else {
-      checkboxColor = false; // Set to false for other colors
-    }
+  void updategreencheckedValue(newValue) {
+    greenchecked = newValue;
   }
+
+  @observable
+  bool bluechecked = true;
 
   @observable
   bool checkboxValue = false;

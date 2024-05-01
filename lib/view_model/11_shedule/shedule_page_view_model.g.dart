@@ -9,6 +9,38 @@ part of 'shedule_page_view_model.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$JobCardViewModel on JobCardViewModelBase, Store {
+  late final _$greencheckedAtom =
+      Atom(name: 'JobCardViewModelBase.greenchecked', context: context);
+
+  @override
+  bool get greenchecked {
+    _$greencheckedAtom.reportRead();
+    return super.greenchecked;
+  }
+
+  @override
+  set greenchecked(bool value) {
+    _$greencheckedAtom.reportWrite(value, super.greenchecked, () {
+      super.greenchecked = value;
+    });
+  }
+
+  late final _$bluecheckedAtom =
+      Atom(name: 'JobCardViewModelBase.bluechecked', context: context);
+
+  @override
+  bool get bluechecked {
+    _$bluecheckedAtom.reportRead();
+    return super.bluechecked;
+  }
+
+  @override
+  set bluechecked(bool value) {
+    _$bluecheckedAtom.reportWrite(value, super.bluechecked, () {
+      super.bluechecked = value;
+    });
+  }
+
   late final _$checkboxValueAtom =
       Atom(name: 'JobCardViewModelBase.checkboxValue', context: context);
 
@@ -139,6 +171,17 @@ mixin _$JobCardViewModel on JobCardViewModelBase, Store {
       ActionController(name: 'JobCardViewModelBase', context: context);
 
   @override
+  void updategreencheckedValue(dynamic newValue) {
+    final _$actionInfo = _$JobCardViewModelBaseActionController.startAction(
+        name: 'JobCardViewModelBase.updategreencheckedValue');
+    try {
+      return super.updategreencheckedValue(newValue);
+    } finally {
+      _$JobCardViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   void updateCheckboxValue(bool newValue) {
     final _$actionInfo = _$JobCardViewModelBaseActionController.startAction(
         name: 'JobCardViewModelBase.updateCheckboxValue');
@@ -174,6 +217,8 @@ mixin _$JobCardViewModel on JobCardViewModelBase, Store {
   @override
   String toString() {
     return '''
+greenchecked: ${greenchecked},
+bluechecked: ${bluechecked},
 checkboxValue: ${checkboxValue},
 checkboxValue2: ${checkboxValue2},
 checkboxValue3: ${checkboxValue3},

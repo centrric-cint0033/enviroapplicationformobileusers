@@ -216,7 +216,7 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                               materialTapTargetSize:
                                   MaterialTapTargetSize.padded,
                             ),
-                            const Text('I have approruiate valid  licence'),
+                            const Text('I have approriate valid  licence'),
                             const Padding(
                               padding: EdgeInsets.only(bottom: 8.0),
                               child: Icon(
@@ -310,17 +310,19 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                           const Text(
                             'Engine Oil steel',
                           ),
-                          Checkbox(
-                            side: const BorderSide(color: Colors.black),
-                            value: false,
-                            onChanged: (bool? value) {
-                              if (value != null && value) {
-                                _showPopup(context);
-                              }
-                              print('Checkbox state changed to: $value');
-                            },
-                            checkColor: Colors.red,
-                          ),
+                          Observer(builder: (_) {
+                            return Checkbox(
+                              side: const BorderSide(color: Colors.black),
+                              value: vmJobcard.greenchecked,
+                              onChanged: (bool? value) {
+                                if (value != null && value) {
+                                  _showPopup(context);
+                                }
+                                print('Checkbox state changed to: $value');
+                              },
+                              checkColor: Colors.red,
+                            );
+                          }),
                         ],
                       ),
                       Row(
@@ -885,17 +887,19 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                           const Text(
                             'Bucket/Rags',
                           ),
-                          Checkbox(
-                            side: const BorderSide(color: Colors.red),
-                            value: false,
-                            onChanged: (bool? value) {
-                              if (value != null && value) {
-                                _showPopup(context);
-                              }
-                              print('Checkbox state changed to: $value');
-                            },
-                            checkColor: Colors.red,
-                          ),
+                          Observer(builder: (_) {
+                            return Checkbox(
+                              side: const BorderSide(color: Colors.red),
+                              value: vmJobcard.greenchecked,
+                              onChanged: (bool? value) {
+                                if (value != null && value) {
+                                  _showPopup(context);
+                                }
+                                print('Checkbox state changed to: $value');
+                              },
+                              checkColor: Colors.red,
+                            );
+                          }),
                         ],
                       ),
                       Row(
@@ -1025,7 +1029,6 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
 }
 
 void _showPopup(BuildContext context) {
-  bool greenChecked = true;
   bool blueChecked = true;
   bool redChecked = true;
 
@@ -1049,10 +1052,8 @@ void _showPopup(BuildContext context) {
                 Checkbox(
                   activeColor: Colors.green,
                   materialTapTargetSize: MaterialTapTargetSize.padded,
-                  value: greenChecked,
-                  onChanged: (value) {
-                    greenChecked = value!;
-                  },
+                  value: vmJobcard.greenchecked,
+                  onChanged: (value) {},
                 ),
               ],
             ),
