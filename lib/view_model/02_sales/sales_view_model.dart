@@ -98,55 +98,6 @@ abstract class SalesViewModelBase with Store {
 //  |_      _| |_      _| |_      _| |_      _| |_      _| |_      _| |_      _| |_      _|
 //    |_||_|     |_||_|     |_||_|     |_||_|     |_||_|     |_||_|     |_||_|     |_||_|
 
-  ScrollController joblistController = ScrollController();
-
-  void saleJobListPagination() {
-    joblistController.addListener(() {
-      if (joblistController.position.pixels ==
-              joblistController.position.maxScrollExtent &&
-          !joblistController.position.outOfRange &&
-          joblistResponse.pagination &&
-          !joblistResponse.paginationLoading) {
-        int pageNo = joblistResponse.pageNo + 1;
-        if (vmSales.salesJobListSearchCtr.text.isNotEmpty) {
-          salesJobListSearchApi(
-            page: pageNo,
-            vmSales.salesJobListSearchCtr.text,
-          );
-          return;
-        }
-        saleJobListApi(page: pageNo);
-      }
-    });
-  }
-
-  // ScrollController ctrSaleJobListScroll = ScrollController();
-
-  // int incPageTopRentAll = 1;
-
-  // void topRentViewAllListener() async {
-  //   if (ctrSaleJobListScroll.offset >=
-  //           ctrSaleJobListScroll.position.maxScrollExtent &&
-  //       !ctrSaleJobListScroll.position.outOfRange) {
-  //     //
-  //     int totalRec = joblistResponse.data?.length ?? 0;
-  //     int pageLength = joblistResponse.data?.length ?? 0;
-
-  //     if (totalRec == pageLength) {
-  //       customPrint(content: 'content maximum reached');
-  //       joblistResponse = joblistResponse.copyWith(pagination: false);
-  //     } else {
-  //       incPageTopRentAll = incPageTopRentAll + 1;
-
-  //       // await topRentAllApi(page: incPageTopRentAll);
-  //       customPrint(content: 'page reached maximum');
-  //     }
-
-  //     customPrint(content: totalRec, name: 'Total Rec');
-  //     customPrint(content: pageLength, name: 'page length');
-  //   }
-  // }
-
   @action
   Future<void> salesJobListSearchApi(String searchData, {int? page}) async {
     try {
