@@ -1,19 +1,19 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:enviro_mobile_application/Routepage/approutes.gr.dart';
-import 'package:enviro_mobile_application/model/10_team/team_folder_resp_model/team_folder_resp_model.dart';
+import 'package:enviro_mobile_application/model/00_common_model/folder_model/folder_model.dart';
 import 'package:enviro_mobile_application/model/10_team/team_profile_employee_details_res_model/team_profile_employee_details_res_model.dart';
 import 'package:enviro_mobile_application/utilis/Appthemes.dart';
 import 'package:enviro_mobile_application/utilis/constant.dart';
 import 'package:enviro_mobile_application/view/02_sales/sales_widgets.dart/sales_widget.dart';
 import 'package:enviro_mobile_application/view/08_team/team_widgets/cm_button.dart';
 import 'package:enviro_mobile_application/view/08_team/team_widgets/dp_image_widget.dart';
-import 'package:enviro_mobile_application/view/08_team/team_widgets/folder_list_card_widget.dart';
 import 'package:enviro_mobile_application/view_model/08_team/team_view_model.dart';
 import 'package:enviro_mobile_application/widgets/cm_show_delete_dialoque.dart';
-import 'package:enviro_mobile_application/widgets/cm_show_folder_dialoque.dart';
 import 'package:enviro_mobile_application/widgets/cm_title.dart';
+import 'package:enviro_mobile_application/widgets/cmbutton.dart';
 import 'package:enviro_mobile_application/widgets/cmn_title_textwidget.dart';
 import 'package:enviro_mobile_application/widgets/ww_customLoading.dart';
+import 'package:enviro_mobile_application/widgets/ww_folder_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -36,7 +36,7 @@ class TeamProfileScreen extends StatelessWidget {
             final res = vmTeam.teamProfileEmployeeDetailListResponse;
             TeamProfileEmployeeDetailsResModel? employeeDetails = res.data;
             final ress = vmTeam.teamFoldersResponse;
-            TeamFolderRespModel? folderList = ress.data;
+            FolderListModel? folderList = ress.data;
             return res.loading
                 ? Center(child: wwCustomLoader())
                 : SingleChildScrollView(
@@ -80,7 +80,7 @@ class TeamProfileScreen extends StatelessWidget {
                                           children: [
                                             SizedBox(
                                               height: 26.h,
-                                              width: 55.h,
+                                              width: 57.h,
                                               child: customButton(() {
                                                 showDeleteDialoq(context,
                                                     () async {
@@ -100,7 +100,7 @@ class TeamProfileScreen extends StatelessWidget {
                                             ),
                                             SizedBox(
                                               height: 26.h,
-                                              width: 55.h,
+                                              width: 57.h,
                                               child: customButton(() {
                                                 vmTeam.getTeamDesignationsApi();
                                                 addingDataToControllerEdit(
@@ -153,41 +153,18 @@ class TeamProfileScreen extends StatelessWidget {
                               padding: EdgeInsets.all(8.0),
                               child: Text('Folders'),
                             ),
-                            TextButton(
-                              onPressed: () {
-                                showMyfolderDialog(
-                                    context, vmTeam.textFolderAddController,
-                                    () {
-                                  String folderName =
-                                      vmTeam.textFolderAddController.text;
-
-                                  vmTeam.addTeamFolder(
-                                      context: context,
-                                      employee: employeeDetails?.id ?? 0,
-                                      name: folderName,
-                                      parentfolder: 1);
-                                });
-                              },
-                              style: ButtonStyle(
-                                side: MaterialStateProperty.all<BorderSide>(
-                                  const BorderSide(color: Appthemes.cPrimary),
-                                ),
-                                // backgroundColor:
-                                //     MaterialStateProperty.all<Color>(
-                                //   const Color.fromARGB(255, 188, 209, 228),
-                                // ),
-                                shape:
-                                    MaterialStateProperty.all<OutlinedBorder>(
-                                  RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(18.0),
-                                  ),
-                                ),
-                              ),
-                              child: const Text(
-                                'Add folder+',
-                                style: TextStyle(color: Colors.blue),
-                              ),
-                            )
+                            CmButton(
+                                text: 'Add folders+',
+                                onPressed: () {
+                                  showCreateEditDialog(context,
+                                      createEditTap: (v) {
+                                    vmTeam.addTeamFolder(
+                                        context: context,
+                                        employee: employeeDetails?.id ?? 0,
+                                        name: v,
+                                        parentfolder: 1);
+                                  });
+                                }),
                           ]),
                       ListView.separated(
                         physics: const NeverScrollableScrollPhysics(),
@@ -198,10 +175,23 @@ class TeamProfileScreen extends StatelessWidget {
                         itemBuilder: (context, index) {
                           var data = vmTeam.teamFoldersResponse.data
                               ?.folders?[0].folders?[index];
-
                           if (data != null) {
-                            return buildCard(context,
-                                data: data, id: employeeDetails?.id ?? 0);
+                            return WWFolderCard(
+                                folder: data,
+                                onTap: () {
+                                  context.router.push(EmployeeFilesRoute(
+                                      employeeId: employeeDetails?.id));
+                                },
+                                folderName: data.name,
+                                editTap: (s) => vmTeam.editTeamFolderApi(
+                                    name: s,
+                                    folderId: data.id ?? 0,
+                                    context: context,
+                                    employeeID: employeeDetails?.id ?? 0),
+                                deleteTap: () => vmTeam.deleteTeamFolderApi(
+                                    folderId: data.id ?? 0,
+                                    context: context,
+                                    employeeID: employeeDetails?.id ?? 0));
                           } else {
                             return Container();
                           }

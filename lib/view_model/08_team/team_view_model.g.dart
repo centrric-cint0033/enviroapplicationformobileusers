@@ -67,13 +67,13 @@ mixin _$TeamViewModel on TeamViewModelBase, Store {
       Atom(name: 'TeamViewModelBase.teamFoldersResponse', context: context);
 
   @override
-  ApiResponse<TeamFolderRespModel> get teamFoldersResponse {
+  ApiResponse<FolderListModel> get teamFoldersResponse {
     _$teamFoldersResponseAtom.reportRead();
     return super.teamFoldersResponse;
   }
 
   @override
-  set teamFoldersResponse(ApiResponse<TeamFolderRespModel> value) {
+  set teamFoldersResponse(ApiResponse<FolderListModel> value) {
     _$teamFoldersResponseAtom.reportWrite(value, super.teamFoldersResponse, () {
       super.teamFoldersResponse = value;
     });
@@ -603,11 +603,11 @@ mixin _$TeamViewModel on TeamViewModelBase, Store {
 
   @override
   Future<void> deleteTeamFolderApi(
-      {required Folder folder,
+      {required int folderId,
       required BuildContext context,
       required num employeeID}) {
     return _$deleteTeamFolderApiAsyncAction.run(() => super.deleteTeamFolderApi(
-        folder: folder, context: context, employeeID: employeeID));
+        folderId: folderId, context: context, employeeID: employeeID));
   }
 
   late final _$editTeamFolderApiAsyncAction =
@@ -615,12 +615,15 @@ mixin _$TeamViewModel on TeamViewModelBase, Store {
 
   @override
   Future<void> editTeamFolderApi(
-      {required Folder folder,
+      {required int folderId,
       required String name,
       required BuildContext context,
       required num employeeID}) {
     return _$editTeamFolderApiAsyncAction.run(() => super.editTeamFolderApi(
-        folder: folder, name: name, context: context, employeeID: employeeID));
+        folderId: folderId,
+        name: name,
+        context: context,
+        employeeID: employeeID));
   }
 
   late final _$deleteEmployeeApiAsyncAction =
@@ -756,6 +759,17 @@ mixin _$TeamViewModel on TeamViewModelBase, Store {
         name: 'TeamViewModelBase.employmentStatusonChanged');
     try {
       return super.employmentStatusonChanged(newValue);
+    } finally {
+      _$TeamViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic employmentStatusonChangedEditPage(dynamic newValue) {
+    final _$actionInfo = _$TeamViewModelBaseActionController.startAction(
+        name: 'TeamViewModelBase.employmentStatusonChangedEditPage');
+    try {
+      return super.employmentStatusonChangedEditPage(newValue);
     } finally {
       _$TeamViewModelBaseActionController.endAction(_$actionInfo);
     }

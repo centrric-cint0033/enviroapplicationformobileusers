@@ -15,6 +15,8 @@ class RouteNames {
   static const String teamProfileScreen = '/teamprofilescreen';
   static const String teamEditScreen = '/teameditscreen';
   static const String addTeamScreen = '/addteamscreen';
+  static const String employeeFilesScreen = '/employeefilesscreen';
+
   static const String siteListPage = '/site_list_page';
   static const String siteDetailPage = '/site_detail_page';
   static const String rintranetinsidepage = '/intranetinsidepage';

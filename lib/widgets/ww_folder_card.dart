@@ -11,6 +11,7 @@ class WWFolderCard extends StatelessWidget {
   final Function() onTap;
   final Function(String value) editTap;
   final Function() deleteTap;
+  final String? folderName;
 
   const WWFolderCard({
     super.key,
@@ -18,6 +19,7 @@ class WWFolderCard extends StatelessWidget {
     required this.editTap,
     required this.deleteTap,
     required this.onTap,
+    this.folderName,
   });
 
   @override
@@ -41,7 +43,9 @@ class WWFolderCard extends StatelessWidget {
                 CommonIconBtnWidget(
                   icon: Icons.edit,
                   onTap: () => showCreateEditDialog(context,
-                      createEditTap: editTap, status: FolderEditCreate.edit),
+                      createEditTap: editTap,
+                      folderName: folderName,
+                      status: FolderEditCreate.edit),
                 ),
                 CommonIconBtnWidget(
                   icon: Icons.delete_forever,
@@ -90,8 +94,9 @@ class WWFolderCard extends StatelessWidget {
 
 void showCreateEditDialog(BuildContext context,
     {required Function(String value) createEditTap,
+    String? folderName,
     FolderEditCreate status = FolderEditCreate.create}) {
-  TextEditingController controller = TextEditingController();
+  TextEditingController controller = TextEditingController(text: folderName);
 
   showDialog(
     context: context,

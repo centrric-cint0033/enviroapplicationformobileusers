@@ -42,29 +42,24 @@ class TeamEditPage extends StatelessWidget {
           child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 15.w),
               child: SingleChildScrollView(
-                child: Observer(
-                  builder: (context) {
-                    return Column(children: [
-                      sized0hx05,
-                      CommonTeamProfileTile(employeeDetatils: employeeDetatils),
-                      sized0hx05,
-                      listEditData(context, employeeDetatils),
-                      sized0hx05,
-                      CmButton(
-                          width: double.infinity,
-                          height: 45,
-                          text: 'EDIT',
-                          onPressed: () {
-                            cmOnpressedFnCreateTeam(context, employeeDetatils);
-                          }),
-                      // cmElevatedButton(() {
-                      //   cmOnpressedFnCreateTeam(context, employeeDetatils);
-                      // }, Appthemes.cPrimary, "EDIT"),
-                      // sized0hx30,
-                    ]);
-                  },
-                ),
-              )),
+                  child: Column(children: [
+                sized0hx05,
+                CommonTeamProfileTile(employeeDetatils: employeeDetatils),
+                sized0hx05,
+                listEditData(context, employeeDetatils),
+                sized0hx05,
+                CmButton(
+                    width: double.infinity,
+                    height: 45,
+                    text: 'EDIT',
+                    onPressed: () {
+                      cmOnpressedFnCreateTeam(context, employeeDetatils);
+                    }),
+                // cmElevatedButton(() {
+                //   cmOnpressedFnCreateTeam(context, employeeDetatils);
+                // }, Appthemes.cPrimary, "EDIT"),
+                // sized0hx30,
+              ]))),
         ),
       ),
     );

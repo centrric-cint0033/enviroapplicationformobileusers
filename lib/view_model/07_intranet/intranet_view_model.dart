@@ -1,6 +1,5 @@
 import 'package:enviro_mobile_application/api_response/api_response.dart';
 import 'package:enviro_mobile_application/model/00_common_model/folder_model/folder_model.dart';
-import 'package:enviro_mobile_application/model/04_ohs/oh&s_resp_model.dart';
 import 'package:enviro_mobile_application/service/05_intranet/intranet_service.dart';
 import 'package:enviro_mobile_application/utilis/injection.dart';
 import 'package:injectable/injectable.dart';

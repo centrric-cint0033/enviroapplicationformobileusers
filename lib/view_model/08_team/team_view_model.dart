@@ -1,12 +1,11 @@
 import 'dart:async';
-import 'dart:developer';
 import 'package:auto_route/auto_route.dart';
 import 'package:enviro_mobile_application/api_response/api_response.dart';
+import 'package:enviro_mobile_application/model/00_common_model/folder_model/folder_model.dart';
 import 'package:enviro_mobile_application/model/10_team/create_team_req_model/create_team_req_model.dart';
 import 'package:enviro_mobile_application/model/10_team/team_designtion_res_model/designation.dart';
 import 'package:enviro_mobile_application/model/10_team/team_designtion_res_model/team_designtion_res_model.dart';
 import 'package:enviro_mobile_application/model/10_team/team_folder_req_model/team_create_folder_req_model.dart';
-import 'package:enviro_mobile_application/model/10_team/team_folder_resp_model/team_folder_resp_model.dart';
 import 'package:enviro_mobile_application/model/10_team/team_profile_employee_details_res_model/team_profile_employee_details_res_model.dart';
 import 'package:enviro_mobile_application/model/10_team/team_res_model/team_res_model.dart';
 import 'package:enviro_mobile_application/service/10_team/team_service.dart';
@@ -18,7 +17,6 @@ import 'package:enviro_mobile_application/widgets/ww_popup_error.dart';
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 import 'package:mobx/mobx.dart';
-import '../../model/10_team/team_folder_resp_model/folder.dart';
 
 part 'team_view_model.g.dart';
 
@@ -46,8 +44,8 @@ abstract class TeamViewModelBase with Store {
       teamProfileEmployeeDetailListResponse =
       ApiResponse<TeamProfileEmployeeDetailsResModel>();
   @observable
-  ApiResponse<TeamFolderRespModel> teamFoldersResponse =
-      ApiResponse<TeamFolderRespModel>();
+  ApiResponse<FolderListModel> teamFoldersResponse =
+      ApiResponse<FolderListModel>();
   @observable
   ApiResponse addFolderResponse = ApiResponse<TeamCreateFolderReqModel>();
   @observable
@@ -326,13 +324,13 @@ abstract class TeamViewModelBase with Store {
 
   @action
   Future<void> deleteTeamFolderApi(
-      {required Folder folder,
+      {required int folderId,
       required BuildContext context,
       required num employeeID}) async {
     deleteFolderResponse =
         deleteFolderResponse.copyWith(error: null, loading: true);
 
-    final result = await teamService.deleteTeamFolders(id: folder.id!);
+    final result = await teamService.deleteTeamFolders(id: folderId);
     return result.fold(
       (l) {
         deleteFolderResponse = deleteFolderResponse.copyWith(
@@ -355,7 +353,7 @@ abstract class TeamViewModelBase with Store {
 
   @action
   Future<void> editTeamFolderApi(
-      {required Folder folder,
+      {required int folderId,
       required String name,
       required BuildContext context,
       required num employeeID}) async {
@@ -363,7 +361,7 @@ abstract class TeamViewModelBase with Store {
         editFolderResponse.copyWith(error: null, loading: true);
 
     final result =
-        await teamService.editTeamFolders(data: {"name": name}, id: folder.id!);
+        await teamService.editTeamFolders(data: {"name": name}, id: folderId);
     return result.fold(
       (l) {
         editFolderResponse = editFolderResponse.copyWith(

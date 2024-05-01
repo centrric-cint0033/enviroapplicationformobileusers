@@ -1,9 +1,8 @@
 import 'dart:convert';
 import 'package:dartz/dartz.dart';
+import 'package:enviro_mobile_application/model/00_common_model/folder_model/folder_model.dart';
 import 'package:enviro_mobile_application/model/10_team/create_team_req_model/create_team_req_model.dart';
 import 'package:enviro_mobile_application/model/10_team/team_designtion_res_model/team_designtion_res_model.dart';
-import 'package:enviro_mobile_application/model/10_team/team_folder_req_model/team_create_folder_req_model.dart';
-import 'package:enviro_mobile_application/model/10_team/team_folder_resp_model/team_folder_resp_model.dart';
 import 'package:enviro_mobile_application/model/10_team/team_profile_employee_details_res_model/team_profile_employee_details_res_model.dart';
 import 'package:enviro_mobile_application/model/10_team/team_res_model/team_res_model.dart';
 import 'package:enviro_mobile_application/utilis/api_endpoints/api_endpoints.dart';
@@ -19,10 +18,10 @@ abstract class IteamService {
       getTerminatedEmployee();
   Future<Either<Map<MainFailure, dynamic>, TeamProfileEmployeeDetailsResModel>>
       getTeamProfileEmployeeDetails({required num employeeID});
-  Future<Either<Map<MainFailure, dynamic>, TeamFolderRespModel>> getTeamFolders(
+  Future<Either<Map<MainFailure, dynamic>, FolderListModel>> getTeamFolders(
       {required num id});
-  Future<Either<Map<MainFailure, dynamic>, TeamCreateFolderReqModel>>
-      addTeamFolders({required Map<String, String> data});
+  Future<Either<Map<MainFailure, dynamic>, FolderListModel>> addTeamFolders(
+      {required Map<String, String> data});
   Future<Either<Map<MainFailure, dynamic>, String>> deleteTeamFolders(
       {required num id});
   Future<Either<Map<MainFailure, dynamic>, String>> editTeamFolders(
@@ -99,7 +98,7 @@ class TeamService implements IteamService {
   }
 
   @override
-  Future<Either<Map<MainFailure, dynamic>, TeamFolderRespModel>> getTeamFolders(
+  Future<Either<Map<MainFailure, dynamic>, FolderListModel>> getTeamFolders(
       {required num id}) async {
     var response = await getIt<HttpService>().request(
         authenticated: true,
@@ -109,8 +108,8 @@ class TeamService implements IteamService {
     return response.fold(
       (l) => Left(l),
       (res) async {
-        TeamFolderRespModel teamFolderList =
-            TeamFolderRespModel.fromJson(jsonDecode(res.body));
+        FolderListModel teamFolderList =
+            FolderListModel.fromJson(jsonDecode(res.body));
 
         return Right(teamFolderList);
       },
@@ -118,16 +117,15 @@ class TeamService implements IteamService {
   }
 
   @override
-  Future<Either<Map<MainFailure, dynamic>, TeamCreateFolderReqModel>>
-      addTeamFolders({required Map<String, String> data}) async {
+  Future<Either<Map<MainFailure, dynamic>, FolderListModel>> addTeamFolders(
+      {required Map<String, String> data}) async {
     var response = await getIt<HttpService>().multipartRequest(
         data: data, method: 'POST', apiUrl: ApiEndPoints().addTeamFolder);
     return response.fold(
       (l) => Left(l),
       (res) async {
         var data = jsonDecode(res.body);
-        TeamCreateFolderReqModel createFolderList =
-            TeamCreateFolderReqModel.fromJson(data);
+        FolderListModel createFolderList = FolderListModel.fromJson(data);
         return Right(createFolderList);
       },
     );
