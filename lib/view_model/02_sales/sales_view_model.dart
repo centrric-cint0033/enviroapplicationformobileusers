@@ -26,6 +26,7 @@ abstract class SalesViewModelBase with Store {
   TextEditingController salesQuoteListSearchCtr = TextEditingController();
 
   Timer? debouce;
+  DateTime currentDate = DateTime.now();
 
   @observable
   String? selectedMonth, selectedYear;
@@ -178,13 +179,40 @@ abstract class SalesViewModelBase with Store {
   @observable
   ApiResponse<List<SalesModel>> salespageResponse =
       ApiResponse<List<SalesModel>>();
+  Map<String, String> months = {
+    'Jan': "1",
+    'Feb': "2",
+    'Mar': "3",
+    'Apr': "4",
+    'May': "5",
+    'Jun': "6",
+    'Jul': "7",
+    'Aug': "8",
+    'Sep': "9",
+    'Oct': "10",
+    'Nov': "11",
+    'Dec': "12"
+  };
 
   @action
   Future<void> saleslistApi() async {
     try {
       salespageResponse =
           salespageResponse.copyWith(errors: null, loading: true);
-      final result = await salesService.saleslistServiceApi();
+      // Update year and month
+      selectedYear ??= currentDate.year.toString();
+      if (selectedMonth == null) {
+        months.forEach(
+          (key, value) {
+            if (value == currentDate.month.toString()) selectedMonth = key;
+          },
+        );
+      }
+
+      final result = await salesService.saleslistServiceApi(
+        year: selectedYear!,
+        month: months[selectedMonth]!,
+      );
       return result.fold(
         (l) {
           salespageResponse =

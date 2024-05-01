@@ -14,20 +14,6 @@ class SalesListTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<String> months = const [
-      'Jan',
-      'Feb',
-      'Mar',
-      'Apr',
-      'May',
-      'Jun',
-      'Jul',
-      'Aug',
-      'Sep',
-      'Oct',
-      'Nov',
-      'Dec'
-    ];
     List<String> years = List.generate(
       16,
       (index) => "${DateTime.now().year - 14 + index}",
@@ -45,6 +31,7 @@ class SalesListTab extends StatelessWidget {
                     menuMaxHeight: 200.h,
                     onChanged: (value) {
                       vmSales.selectedYear = value;
+                      vmSales.saleslistApi();
                     },
                     value: vmSales.selectedYear,
                   ),
@@ -52,10 +39,11 @@ class SalesListTab extends StatelessWidget {
                 sized0wx10,
                 Expanded(
                   child: CustomDropdownButton(
-                    items: months,
+                    items: vmSales.months.keys.toList(),
                     menuMaxHeight: 200.h,
                     onChanged: (value) {
                       vmSales.selectedMonth = value;
+                      vmSales.saleslistApi();
                     },
                     value: vmSales.selectedMonth,
                   ),

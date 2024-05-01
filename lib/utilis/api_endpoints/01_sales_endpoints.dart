@@ -1,7 +1,7 @@
 mixin class SalesEndpoint {
   //SALES APIS
 
-  final String saleslist = '/api/v1/sales/performance/waste/2024/2';
+  final String saleslist = '/api/v1/sales/performance/waste';
 
   final String quoteregvehiclelist = '/api/v1/sales/quote/waste/2';
 

@@ -8,7 +8,10 @@ import 'package:injectable/injectable.dart';
 
 abstract class ISalesService {
   Future<Either<Map<MainFailure, dynamic>, List<SalesModel>>>
-      saleslistServiceApi();
+      saleslistServiceApi({
+    required String year,
+    required String month,
+  });
 
   Future<Either<Map<MainFailure, dynamic>, List<SalesModel>>>
       saleJoblistApiService({int? page});
@@ -36,11 +39,13 @@ class SalesService implements ISalesService {
 
   @override
   Future<Either<Map<MainFailure, dynamic>, List<SalesModel>>>
-      saleslistServiceApi() async {
+      saleslistServiceApi({required String year, required String month}) async {
+    String? apiUrl = "${ApiEndPoints().saleslist}/$year/$month";
     var response = await httpService.request(
-        authenticated: true,
-        method: HttpMethod.get,
-        apiUrl: ApiEndPoints().saleslist);
+      apiUrl: apiUrl,
+      authenticated: true,
+      method: HttpMethod.get,
+    );
 
     return response.fold(
       (l) => Left(l),
