@@ -27,6 +27,9 @@ abstract class SalesViewModelBase with Store {
 
   Timer? debouce;
 
+  @observable
+  String? selectedMonth, selectedYear;
+
   void onTextChanged(Function() function) {
     // Clear the previous debounce timer
     if (debouce?.isActive ?? false) debouce?.cancel();

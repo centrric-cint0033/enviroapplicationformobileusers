@@ -9,6 +9,38 @@ part of 'sales_view_model.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$SalesViewModel on SalesViewModelBase, Store {
+  late final _$selectedMonthAtom =
+      Atom(name: 'SalesViewModelBase.selectedMonth', context: context);
+
+  @override
+  String? get selectedMonth {
+    _$selectedMonthAtom.reportRead();
+    return super.selectedMonth;
+  }
+
+  @override
+  set selectedMonth(String? value) {
+    _$selectedMonthAtom.reportWrite(value, super.selectedMonth, () {
+      super.selectedMonth = value;
+    });
+  }
+
+  late final _$selectedYearAtom =
+      Atom(name: 'SalesViewModelBase.selectedYear', context: context);
+
+  @override
+  String? get selectedYear {
+    _$selectedYearAtom.reportRead();
+    return super.selectedYear;
+  }
+
+  @override
+  set selectedYear(String? value) {
+    _$selectedYearAtom.reportWrite(value, super.selectedYear, () {
+      super.selectedYear = value;
+    });
+  }
+
   late final _$joblistResponseAtom =
       Atom(name: 'SalesViewModelBase.joblistResponse', context: context);
 
@@ -105,6 +137,8 @@ mixin _$SalesViewModel on SalesViewModelBase, Store {
   @override
   String toString() {
     return '''
+selectedMonth: ${selectedMonth},
+selectedYear: ${selectedYear},
 joblistResponse: ${joblistResponse},
 salespageResponse: ${salespageResponse},
 quoteRegResponse: ${quoteRegResponse}
