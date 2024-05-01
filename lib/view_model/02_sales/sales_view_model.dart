@@ -45,8 +45,6 @@ abstract class SalesViewModelBase with Store {
   ApiResponse<List<SalesModel>> joblistResponse =
       ApiResponse<List<SalesModel>>();
 
-  ScrollController joblistController = ScrollController();
-
   @action
   Future<void> saleJobListApi({int? page}) async {
     try {
@@ -94,6 +92,14 @@ abstract class SalesViewModelBase with Store {
     }
   }
 
+  //     _  _       _  _       _  _       _  _       _  _       _  _       _  _       _  _
+//   _| || |_   _| || |_   _| || |_   _| || |_   _| || |_   _| || |_   _| || |_   _| || |_
+//  |_  ..  _| |_  ..  _| |_  ..  _| |_  ..  _| |_  ..  _| |_  ..  _| |_  ..  _| |_  ..  _|
+//  |_      _| |_      _| |_      _| |_      _| |_      _| |_      _| |_      _| |_      _|
+//    |_||_|     |_||_|     |_||_|     |_||_|     |_||_|     |_||_|     |_||_|     |_||_|
+
+  ScrollController joblistController = ScrollController();
+
   void saleJobListPagination() {
     joblistController.addListener(() {
       if (joblistController.position.pixels ==
@@ -114,38 +120,32 @@ abstract class SalesViewModelBase with Store {
     });
   }
 
-//     _  _       _  _       _  _       _  _       _  _       _  _       _  _       _  _
-//   _| || |_   _| || |_   _| || |_   _| || |_   _| || |_   _| || |_   _| || |_   _| || |_
-//  |_  ..  _| |_  ..  _| |_  ..  _| |_  ..  _| |_  ..  _| |_  ..  _| |_  ..  _| |_  ..  _|
-//  |_      _| |_      _| |_      _| |_      _| |_      _| |_      _| |_      _| |_      _|
-//    |_||_|     |_||_|     |_||_|     |_||_|     |_||_|     |_||_|     |_||_|     |_||_|
+  // ScrollController ctrSaleJobListScroll = ScrollController();
 
-  ScrollController ctrSaleJobListScroll = ScrollController();
+  // int incPageTopRentAll = 1;
 
-  int incPageTopRentAll = 1;
+  // void topRentViewAllListener() async {
+  //   if (ctrSaleJobListScroll.offset >=
+  //           ctrSaleJobListScroll.position.maxScrollExtent &&
+  //       !ctrSaleJobListScroll.position.outOfRange) {
+  //     //
+  //     int totalRec = joblistResponse.data?.length ?? 0;
+  //     int pageLength = joblistResponse.data?.length ?? 0;
 
-  void topRentViewAllListener() async {
-    if (ctrSaleJobListScroll.offset >=
-            ctrSaleJobListScroll.position.maxScrollExtent &&
-        !ctrSaleJobListScroll.position.outOfRange) {
-      //
-      int totalRec = joblistResponse.data?.length ?? 0;
-      int pageLength = joblistResponse.data?.length ?? 0;
+  //     if (totalRec == pageLength) {
+  //       customPrint(content: 'content maximum reached');
+  //       joblistResponse = joblistResponse.copyWith(pagination: false);
+  //     } else {
+  //       incPageTopRentAll = incPageTopRentAll + 1;
 
-      if (totalRec == pageLength) {
-        customPrint(content: 'content maximum reached');
-        joblistResponse = joblistResponse.copyWith(pagination: false);
-      } else {
-        incPageTopRentAll = incPageTopRentAll + 1;
+  //       // await topRentAllApi(page: incPageTopRentAll);
+  //       customPrint(content: 'page reached maximum');
+  //     }
 
-        // await topRentAllApi(page: incPageTopRentAll);
-        customPrint(content: 'page reached maximum');
-      }
-
-      customPrint(content: totalRec, name: 'Total Rec');
-      customPrint(content: pageLength, name: 'page length');
-    }
-  }
+  //     customPrint(content: totalRec, name: 'Total Rec');
+  //     customPrint(content: pageLength, name: 'page length');
+  //   }
+  // }
 
   @action
   Future<void> salesJobListSearchApi(String searchData, {int? page}) async {

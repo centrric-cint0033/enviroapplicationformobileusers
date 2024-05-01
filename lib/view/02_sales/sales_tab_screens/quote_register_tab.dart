@@ -27,10 +27,11 @@ class QuoteRegisterTab extends StatelessWidget {
         Observer(builder: (_) {
           return Expanded(
             child: WWResponseHandler(
-                data: vmSales.quoteRegResponse,
-                isEmpty: vmSales.quoteRegResponse.data?.isEmpty ?? true,
-                onTap: () => vmSales.quoteRegisterApi(),
-                child: const QuoteReqisterListWidget()),
+              data: vmSales.quoteRegResponse,
+              isEmpty: vmSales.quoteRegResponse.data?.isEmpty ?? true,
+              onTap: () => vmSales.quoteRegisterApi(),
+              child: const QuoteReqisterListWidget(),
+            ),
           );
         }),
       ],
