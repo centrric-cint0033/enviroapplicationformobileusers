@@ -62,6 +62,7 @@ class SalesListTab extends StatelessWidget {
                 ),
               ],
             ),
+            sized0hx10,
             Expanded(
               child: WWResponseHandler(
                 data: vmSales.salespageResponse,
