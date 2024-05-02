@@ -81,6 +81,7 @@ class SalesListWidget extends StatelessWidget {
 
   Widget listData(SalesModel? data) {
     return buildCardDataOrder(
+      name: data?.name,
       image: data?.profile,
       [
         expandedRowShowText1('Total Quote Won', "${data?.won ?? ""}"),
