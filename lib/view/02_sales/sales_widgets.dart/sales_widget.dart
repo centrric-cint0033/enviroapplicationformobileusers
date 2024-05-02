@@ -59,20 +59,25 @@ Expanded imageAndName(String image, String name) => Expanded(
 
 Widget buildCardDataOrder(List<Widget> widget, {String? image, String? name}) =>
     customCard(
-        child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Row(children: [
-              if (image != null) ...[
-                imageAndName(image, name ?? ""),
-                sized0wx10,
-              ],
-              Expanded(
-                  flex: 7,
-                  child: ListView.separated(
-                    physics: const NeverScrollableScrollPhysics(),
-                    separatorBuilder: (context, index) => gapField,
-                    itemCount: widget.length,
-                    itemBuilder: (context, index) => widget[index],
-                    shrinkWrap: true,
-                  )),
-            ])));
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Row(
+          children: [
+            if (image != null) ...[
+              imageAndName(image, name ?? ""),
+              sized0wx10,
+            ],
+            Expanded(
+              flex: 7,
+              child: ListView.separated(
+                physics: const NeverScrollableScrollPhysics(),
+                separatorBuilder: (context, index) => gapField,
+                itemCount: widget.length,
+                itemBuilder: (context, index) => widget[index],
+                shrinkWrap: true,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );

@@ -63,5 +63,9 @@ class AppRouter extends $AppRouter {
           page: SiteDetailRoute.page,
           path: RouteNames.siteDetailPage,
         ),
+        AutoRoute(
+          page: SalesQuoteDetailListRoute.page,
+          path: RouteNames.salesQuoteDetailListPage,
+        ),
       ];
 }

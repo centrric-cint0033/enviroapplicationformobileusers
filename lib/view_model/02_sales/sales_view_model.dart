@@ -362,4 +362,82 @@ abstract class SalesViewModelBase with Store {
       }
     });
   }
+
+//     _  _       _  _       _  _       _  _       _  _       _  _       _  _       _  _
+//   _| || |_   _| || |_   _| || |_   _| || |_   _| || |_   _| || |_   _| || |_   _| || |_
+//  |_  ..  _| |_  ..  _| |_  ..  _| |_  ..  _| |_  ..  _| |_  ..  _| |_  ..  _| |_  ..  _|
+//  |_      _| |_      _| |_      _| |_      _| |_      _| |_      _| |_      _| |_      _|
+//    |_||_|     |_||_|     |_||_|     |_||_|     |_||_|     |_||_|     |_||_|     |_||_|
+
+  @observable
+  ApiResponse<List<SalesModel>> salesQuoteDetailsResponse =
+      ApiResponse<List<SalesModel>>();
+
+  late String saleQuoteDetailId;
+  @action
+  Future<void> getSalesQuoteDetails({int? page, String? id}) async {
+    try {
+      if (id != null) saleQuoteDetailId = id;
+      salesQuoteDetailsResponse = salesQuoteDetailsResponse.copyWith(
+        errors: null,
+        loading: page == null,
+        paginationLoading: page != null,
+      );
+
+      final result = await salesService.salesQuoteDetailApi(
+        page: page,
+        year: selectedYear!,
+        id: saleQuoteDetailId,
+        month: months[selectedMonth]!,
+      );
+      return result.fold(
+        (l) {
+          salesQuoteDetailsResponse = salesQuoteDetailsResponse.copyWith(
+            errors: l,
+            loading: false,
+            paginationLoading: false,
+          );
+        },
+        (r) {
+          List<SalesModel> salesQuoteDetails =
+              salesQuoteDetailsResponse.data?.toList() ?? [];
+          if (page == null) {
+            salesQuoteDetails = r;
+          } else {
+            salesQuoteDetails.addAll(r);
+          }
+          salesQuoteDetailsResponse = salesQuoteDetailsResponse.copyWith(
+            errors: null,
+            loading: false,
+            data: salesQuoteDetails,
+            pageNo: page ?? 1,
+            paginationLoading: false,
+            pagination: r.length == 10,
+          );
+        },
+      );
+    } catch (e) {
+      customPrint(content: e, name: 'Error salesJobListSearchApi');
+    } finally {
+      salesQuoteDetailsResponse = salesQuoteDetailsResponse.copyWith(
+        loading: false,
+        paginationLoading: false,
+      );
+    }
+  }
+
+  ScrollController saleQuoteDetailController = ScrollController();
+
+  void getSaleQuoteDetailListPagination() {
+    saleQuoteDetailController.addListener(() {
+      if (saleQuoteDetailController.position.pixels ==
+              saleQuoteDetailController.position.maxScrollExtent &&
+          !saleQuoteDetailController.position.outOfRange &&
+          salesQuoteDetailsResponse.pagination &&
+          !salesQuoteDetailsResponse.paginationLoading) {
+        int pageNo = salesQuoteDetailsResponse.pageNo + 1;
+        getSalesQuoteDetails(page: pageNo);
+      }
+    });
+  }
 }

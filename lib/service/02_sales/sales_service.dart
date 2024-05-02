@@ -30,6 +30,13 @@ abstract class ISalesService {
     int? page,
     required Map<String, String> data,
   });
+  Future<Either<Map<MainFailure, dynamic>, List<SalesModel>>>
+      salesQuoteDetailApi({
+    int? page,
+    required String id,
+    required String year,
+    required String month,
+  });
 }
 
 @LazySingleton(as: ISalesService)
@@ -138,6 +145,33 @@ class SalesService implements ISalesService {
       method: 'POST',
       apiUrl: apiUrl,
     );
+    return response.fold(
+      (l) => Left(l),
+      (res) async {
+        var data = jsonDecode(res.body) as List;
+        List<SalesModel> quoteregvehicle =
+            data.map((e) => SalesModel.fromJson(e)).toList();
+        return Right(quoteregvehicle);
+      },
+    );
+  }
+
+  @override
+  Future<Either<Map<MainFailure, dynamic>, List<SalesModel>>>
+      salesQuoteDetailApi({
+    int? page,
+    required String id,
+    required String year,
+    required String month,
+  }) async {
+    String apiUrl =
+        "${ApiEndPoints().salesQuoteDetails}/$id/${page ?? 1}/?limit=10&month=$month&year=$year";
+    var response = await httpService.request(
+      apiUrl: apiUrl,
+      authenticated: true,
+      method: HttpMethod.get,
+    );
+
     return response.fold(
       (l) => Left(l),
       (res) async {

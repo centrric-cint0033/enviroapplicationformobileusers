@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:enviro_mobile_application/utilis/constant.dart';
+import 'package:enviro_mobile_application/Routepage/routespage.dart';
 import 'package:enviro_mobile_application/widgets/ww_response_handler.dart';
 import 'package:enviro_mobile_application/view_model/02_sales/sales_view_model.dart';
 import 'package:enviro_mobile_application/model/02_sales/sales_model/sales_model.dart';
 import 'package:enviro_mobile_application/view/02_sales/sales_widgets.dart/sales_widget.dart';
 
+import '../../../widgets/cm_show_toast.dart';
 import '../../../widgets/custom_drop_down_btn.dart';
 
 class SalesListTab extends StatelessWidget {
@@ -72,11 +75,25 @@ class SalesListWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.separated(
-        padding: const EdgeInsets.symmetric(vertical: 10),
-        itemCount: vmSales.salespageResponse.data?.length ?? 0,
-        separatorBuilder: (BuildContext context, int index) => gapField,
-        itemBuilder: (context, index) =>
-            listData(vmSales.salespageResponse.data?[index]));
+      padding: const EdgeInsets.symmetric(vertical: 10),
+      itemCount: vmSales.salespageResponse.data?.length ?? 0,
+      separatorBuilder: (BuildContext context, int index) => gapField,
+      itemBuilder: (context, index) {
+        return InkWell(
+          onTap: () {
+            SalesModel? sale = vmSales.salespageResponse.data?[index];
+
+            if ((sale?.total ?? 0) != 0) {
+              vmSales.getSalesQuoteDetails(id: sale?.id?.toString() ?? "");
+              context.router.pushNamed(RouteNames.salesQuoteDetailListPage);
+            } else {
+              showToast(context, msg: "There is no quotes");
+            }
+          },
+          child: listData(vmSales.salespageResponse.data?[index]),
+        );
+      },
+    );
   }
 
   Widget listData(SalesModel? data) {

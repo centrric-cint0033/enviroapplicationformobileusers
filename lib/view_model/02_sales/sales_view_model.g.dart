@@ -89,6 +89,23 @@ mixin _$SalesViewModel on SalesViewModelBase, Store {
     });
   }
 
+  late final _$salesQuoteDetailsResponseAtom = Atom(
+      name: 'SalesViewModelBase.salesQuoteDetailsResponse', context: context);
+
+  @override
+  ApiResponse<List<SalesModel>> get salesQuoteDetailsResponse {
+    _$salesQuoteDetailsResponseAtom.reportRead();
+    return super.salesQuoteDetailsResponse;
+  }
+
+  @override
+  set salesQuoteDetailsResponse(ApiResponse<List<SalesModel>> value) {
+    _$salesQuoteDetailsResponseAtom
+        .reportWrite(value, super.salesQuoteDetailsResponse, () {
+      super.salesQuoteDetailsResponse = value;
+    });
+  }
+
   late final _$saleJobListApiAsyncAction =
       AsyncAction('SalesViewModelBase.saleJobListApi', context: context);
 
@@ -134,6 +151,15 @@ mixin _$SalesViewModel on SalesViewModelBase, Store {
         .run(() => super.salesQuoteListSearchApi(searchData, page: page));
   }
 
+  late final _$getSalesQuoteDetailsAsyncAction =
+      AsyncAction('SalesViewModelBase.getSalesQuoteDetails', context: context);
+
+  @override
+  Future<void> getSalesQuoteDetails({int? page, String? id}) {
+    return _$getSalesQuoteDetailsAsyncAction
+        .run(() => super.getSalesQuoteDetails(page: page, id: id));
+  }
+
   @override
   String toString() {
     return '''
@@ -141,7 +167,8 @@ selectedMonth: ${selectedMonth},
 selectedYear: ${selectedYear},
 joblistResponse: ${joblistResponse},
 salespageResponse: ${salespageResponse},
-quoteRegResponse: ${quoteRegResponse}
+quoteRegResponse: ${quoteRegResponse},
+salesQuoteDetailsResponse: ${salesQuoteDetailsResponse}
     ''';
   }
 }

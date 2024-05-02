@@ -10,4 +10,6 @@ mixin class SalesEndpoint {
   final String salesJobSearch = '/api/v1/jobs/search/site/waste';
 
   final String saleQuoteSearch = '/api/v1/sales/quote/search/site/waste';
+
+  final String salesQuoteDetails = '/api/v1/sales/manager/waste';
 }
