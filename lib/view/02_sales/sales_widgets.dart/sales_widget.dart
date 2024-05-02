@@ -28,6 +28,18 @@ Row expandedRowShowText(String firsValue, String secondValue) => Row(
         expandedShowText(secondValue)
       ],
     );
+Row expandedRowsShowingText(String firsValue, String secondValue) => Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        expandedShowText(firsValue),
+        sized0wx05,
+        showBlueText(':'),
+        sized0wx05,
+        expandedShowText(secondValue),
+        sized0wx05,
+        showIcon(icon: Icon(Icons.calendar_today)),
+      ],
+    );
 Row expandedRowShowsText(String firsValue, String secondValue) => Row(
       children: [expandedShowText(firsValue), expandedShowText(secondValue)],
     );

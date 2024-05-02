@@ -28,4 +28,5 @@ class RouteNames {
       '/updatevehiclepreinspectionpage ';
   static const String rsheduledetail2page = '/sheduledetail2page ';
   static const String rjobcardpage = '/jobcardpage ';
+  static const String rcurrentjobstatus = '/currentjobstatus ';
 }

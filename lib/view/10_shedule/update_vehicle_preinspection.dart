@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:enviro_mobile_application/Routepage/routespage.dart';
 import 'package:enviro_mobile_application/utilis/constant.dart';
 import 'package:enviro_mobile_application/view/10_shedule/shedule_widget.dart';
 import 'package:enviro_mobile_application/view_model/11_shedule/shedule_page_view_model.dart';
@@ -999,7 +1000,10 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                       Align(
                         alignment: Alignment.bottomRight,
                         child: ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            print('dfdfdf');
+                            UpdateVehicleStatusPage(context);
+                          },
                           style: ElevatedButton.styleFrom(
                             primary: Colors.blue,
                             onPrimary: Colors.blue,
@@ -1095,4 +1099,9 @@ void _showPopup(BuildContext context) {
       );
     },
   );
+}
+
+void UpdateVehicleStatusPage(BuildContext context) {
+  print('calenderclicked');
+  context.router.pushNamed(RouteNames.rcurrentjobstatus);
 }

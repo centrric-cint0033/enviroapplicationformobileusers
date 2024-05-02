@@ -2,7 +2,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:enviro_mobile_application/model/03_vehicle/vehicle_model/vehicle_model.dart';
 import 'package:enviro_mobile_application/service/03_vehicles/vehicle_service.dart';
 import 'package:enviro_mobile_application/utilis/Appthemes.dart';
-import 'package:enviro_mobile_application/utilis/constant.dart';
 import 'package:enviro_mobile_application/view/03_vehicles/vehicle_widget/vehicle_widget.dart';
 import 'package:enviro_mobile_application/widgets/widgets.dart';
 import 'package:flutter/material.dart';
@@ -35,6 +34,18 @@ Row expandedRowShowText2(String firsValue, String secondValue) => Row(
         showBlackText(':'),
         sized0wx05,
         expandedShowText2(secondValue),
+      ],
+    );
+
+Row expandedRowShowingText2(String firsValue, String secondValue) => Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        expandedShowText2(firsValue),
+        sized0wx05,
+        showBlackText(':'),
+        sized0wx05,
+        expandedShowText2(secondValue),
+        showIcon(icon: Icon(Icons.today))
       ],
     );
 

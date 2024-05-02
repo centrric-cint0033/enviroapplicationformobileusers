@@ -13,19 +13,6 @@ final vmJobcard = getIt<JobCardViewModel>();
 
 @injectable
 @lazySingleton
-enum CheckBoxEnum { red, green, blue }
-
-class CheckBoxStatus {
-  final CheckBoxEnum checkBoxType;
-  final bool status;
-
-  CheckBoxStatus({required this.checkBoxType, required this.status});
-}
-
-@observable
-CheckBoxStatus checkbox =
-    CheckBoxStatus(checkBoxType: CheckBoxEnum.green, status: false);
-
 class JobCardViewModel extends JobCardViewModelBase with _$JobCardViewModel {
   JobCardViewModel(super.jobcardService);
 }

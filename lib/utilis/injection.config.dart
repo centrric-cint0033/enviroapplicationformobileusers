@@ -8,7 +8,7 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:enviro_mobile_application/Routepage/securestorage.dart' as _i24;
+import 'package:enviro_mobile_application/Routepage/securestorage.dart' as _i25;
 import 'package:enviro_mobile_application/service/01_auth/authservice.dart'
     as _i4;
 import 'package:enviro_mobile_application/service/02_sales/sales_service.dart'
@@ -41,25 +41,27 @@ import 'package:enviro_mobile_application/utilis/httpservice.dart' as _i3;
 import 'package:enviro_mobile_application/utilis/image_picker_service/image_file_picker.dart'
     as _i15;
 import 'package:enviro_mobile_application/view_model/01_auth/auth_view_model.dart'
-    as _i28;
+    as _i29;
 import 'package:enviro_mobile_application/view_model/02_sales/sales_view_model.dart'
-    as _i23;
+    as _i24;
 import 'package:enviro_mobile_application/view_model/03_vehicles/vehicle_view_model.dart'
-    as _i27;
+    as _i28;
 import 'package:enviro_mobile_application/view_model/04_ohs/ohs_view_model.dart'
-    as _i20;
+    as _i21;
 import 'package:enviro_mobile_application/view_model/07_intranet/intranet_view_model.dart'
     as _i16;
 import 'package:enviro_mobile_application/view_model/08_team/team_view_model.dart'
-    as _i26;
+    as _i27;
 import 'package:enviro_mobile_application/view_model/10_profile/profile_view_model.dart'
-    as _i22;
+    as _i23;
 import 'package:enviro_mobile_application/view_model/10_site/site_view_model.dart'
-    as _i25;
+    as _i26;
 import 'package:enviro_mobile_application/view_model/11_previous_sale/previous_sale_view_model.dart'
-    as _i21;
+    as _i22;
+import 'package:enviro_mobile_application/view_model/11_shedule/shedule_page_view_model.dart'
+    as _i20;
 import 'package:enviro_mobile_application/view_model/home_page/home_page_viewmodel.dart'
-    as _i29;
+    as _i30;
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
 
@@ -91,25 +93,27 @@ extension GetItInjectableX on _i1.GetIt {
     gh.lazySingleton<_i17.IohsService>(() => _i17.OhsService());
     gh.lazySingleton<_i18.IprofileService>(() => _i18.ProfileService());
     gh.lazySingleton<_i19.IteamService>(() => _i19.TeamService());
-    gh.factory<_i20.OHSViewModel>(
-        () => _i20.OHSViewModel(gh<_i17.IohsService>()));
-    gh.factory<_i21.PreviousSaleViewModel>(
-        () => _i21.PreviousSaleViewModel(gh<_i8.IPreviousSaleService>()));
-    gh.factory<_i22.ProfileViewModel>(
-        () => _i22.ProfileViewModel(gh<_i18.IprofileService>()));
-    gh.lazySingleton<_i23.SalesViewModel>(
-        () => _i23.SalesViewModel(gh<_i10.ISalesService>()));
-    gh.lazySingleton<_i24.SecureStorage>(() => _i24.SecureStorage());
-    gh.factory<_i25.SiteViewModel>(
-        () => _i25.SiteViewModel(gh<_i11.ISiteService>()));
-    gh.factory<_i26.TeamViewModel>(
-        () => _i26.TeamViewModel(gh<_i19.IteamService>()));
-    gh.factory<_i27.VehicleViewModel>(
-        () => _i27.VehicleViewModel(gh<_i13.IVehicleService>()));
-    gh.factory<_i28.AuthViewModel>(
-        () => _i28.AuthViewModel(gh<_i4.IAuthService>()));
-    gh.factory<_i29.HomeViewModel>(
-        () => _i29.HomeViewModel(gh<_i5.IHomeService>()));
+    gh.factory<_i20.JobCardViewModel>(
+        () => _i20.JobCardViewModel(gh<_i7.IJobCardService>()));
+    gh.factory<_i21.OHSViewModel>(
+        () => _i21.OHSViewModel(gh<_i17.IohsService>()));
+    gh.factory<_i22.PreviousSaleViewModel>(
+        () => _i22.PreviousSaleViewModel(gh<_i8.IPreviousSaleService>()));
+    gh.factory<_i23.ProfileViewModel>(
+        () => _i23.ProfileViewModel(gh<_i18.IprofileService>()));
+    gh.lazySingleton<_i24.SalesViewModel>(
+        () => _i24.SalesViewModel(gh<_i10.ISalesService>()));
+    gh.lazySingleton<_i25.SecureStorage>(() => _i25.SecureStorage());
+    gh.factory<_i26.SiteViewModel>(
+        () => _i26.SiteViewModel(gh<_i11.ISiteService>()));
+    gh.factory<_i27.TeamViewModel>(
+        () => _i27.TeamViewModel(gh<_i19.IteamService>()));
+    gh.factory<_i28.VehicleViewModel>(
+        () => _i28.VehicleViewModel(gh<_i13.IVehicleService>()));
+    gh.factory<_i29.AuthViewModel>(
+        () => _i29.AuthViewModel(gh<_i4.IAuthService>()));
+    gh.factory<_i30.HomeViewModel>(
+        () => _i30.HomeViewModel(gh<_i5.IHomeService>()));
     return this;
   }
 }

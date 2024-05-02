@@ -1,19 +1,18 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:enviro_mobile_application/Routepage/routespage.dart';
-import 'package:enviro_mobile_application/utilis/constant.dart';
 import 'package:enviro_mobile_application/view/02_sales/sales_widgets.dart/sales_widget.dart';
-import 'package:enviro_mobile_application/view/10_shedule/shedule_widget.dart';
 import 'package:enviro_mobile_application/view_model/11_shedule/shedule_page_view_model.dart';
 import 'package:enviro_mobile_application/widgets/cmbutton.dart';
 import 'package:enviro_mobile_application/widgets/cmn_action_icon.dart';
 import 'package:enviro_mobile_application/widgets/cmn_title_textwidget.dart';
 import 'package:enviro_mobile_application/widgets/drawer.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
 @RoutePage()
-class SheduledetailPage extends StatelessWidget {
-  const SheduledetailPage({Key? key});
+class UpdateVehicleStatusPage extends StatelessWidget {
+  const UpdateVehicleStatusPage({Key? key});
 
   @override
   Widget build(BuildContext context) {
@@ -127,77 +126,7 @@ class SheduledetailPage extends StatelessWidget {
                       ),
                     );
                   }),
-                  const SizedBox(
-                    height: 50,
-                  ),
-                  Container(
-                    color: const Color.fromARGB(255, 240, 235, 235),
-                    child: Padding(
-                      padding: const EdgeInsets.all(5.0),
-                      child: Card(
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                            children: [
-                              const Align(
-                                alignment: Alignment.topLeft,
-                                child: Text(
-                                  'Current Job Status',
-                                  style: TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.blue,
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(height: 20),
-                              expandedRowsShowingText(
-                                "Departed Enviro facility",
-                                vmJobcard.sheduleweekResponse.data?[index]
-                                        .client?.clientType ??
-                                    '',
-                              ),
-                              const SizedBox(height: 20),
-                              expandedRowsShowingText(
-                                "Job Started",
-                                vmJobcard.sheduleweekResponse.data?[index]
-                                        .client?.clientEmail ??
-                                    '',
-                              ),
-                              const SizedBox(height: 20),
-                              expandedRowsShowingText(
-                                "job finished",
-                                vmJobcard.sheduleweekResponse.data?[index]
-                                        .status ??
-                                    '',
-                              ),
-                              const SizedBox(height: 20),
-                              expandedRowsShowingText(
-                                "job completed",
-                                vmJobcard.sheduleweekResponse.data?[index]
-                                        .amount ??
-                                    '',
-                              ),
-                              const SizedBox(height: 20),
-                              expandedRowsShowingText(
-                                  "Arrived at waste Depot",
-                                  vmJobcard.sheduleweekResponse.data?[index]
-                                          .createdBy ??
-                                      ''),
-                              const SizedBox(height: 20),
-                              expandedRowsShowingText(
-                                "Arrived at waste Depot",
-                                vmJobcard.sheduleweekResponse.data?[index]
-                                        .client?.deviceWaste ??
-                                    '',
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 5),
+                  const SizedBox(height: 20),
                   Container(
                     width: 359,
                     child: CmButton(
@@ -209,9 +138,6 @@ class SheduledetailPage extends StatelessWidget {
                       text: "Update vehicle preinspection",
                     ),
                   ),
-                  const SizedBox(height: 40),
-                  Text('Signature'),
-                  SizedBox(height: 40),
                 ],
               );
             },

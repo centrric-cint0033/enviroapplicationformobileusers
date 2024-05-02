@@ -7,3 +7,8 @@ Text showBlueText(String value, {FontWeight? fontWeight}) => Text(value,
     style: TextStyle(color: Appthemes.cPrimary, fontWeight: fontWeight));
 Text showBlackText(String value, {FontWeight? fontWeight}) => Text(value,
     style: TextStyle(color: Appthemes.blackColor, fontWeight: fontWeight));
+Icon showIcon({required Icon icon}) {
+  return Icon(
+    Icons.today,
+  );
+}
