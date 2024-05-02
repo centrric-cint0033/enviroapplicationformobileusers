@@ -25,13 +25,10 @@ abstract class JobCardViewModelBase with Store {
       ApiResponse<JobCardRespModel>();
 
   @action
-  Future<void> jobcardviewmodelfunction() async {
-    print('aaaaa$jobcardResponse');
-    print('aaaaa$jobcardResponse');
-
+  Future<void> getJobCard({required String id}) async {
     jobcardResponse = jobcardResponse.copyWith(error: null, loading: true);
 
-    final result = await jobcardService.jobcardservicefunction();
+    final result = await jobcardService.getJobCardInfo(quoteId: id);
     return result.fold(
       (l) {
         jobcardResponse = jobcardResponse.copyWith(

@@ -11,17 +11,23 @@ import 'package:enviro_mobile_application/utilis/main_failure.dart';
 import 'package:injectable/injectable.dart';
 
 abstract class IJobCardService {
-  Future<Either<MainFailure, JobCardRespModel>> jobcardservicefunction();
+  Future<Either<MainFailure, JobCardRespModel>> getJobCardInfo({
+    required String quoteId,
+  });
 }
 
 @LazySingleton(as: IJobCardService)
 class JobCardService implements IJobCardService {
   @override
-  Future<Either<MainFailure, JobCardRespModel>> jobcardservicefunction() async {
+  Future<Either<MainFailure, JobCardRespModel>> getJobCardInfo({
+    required String quoteId,
+  }) async {
+    String apiUrl = "${ApiEndPoints.endpointJobcard}/$quoteId";
     var response = await getIt<HttpService>().request(
-        authenticated: true,
-        method: HttpMethod.get,
-        apiUrl: ApiEndPoints.endpointjobcard);
+      apiUrl: apiUrl,
+      authenticated: true,
+      method: HttpMethod.get,
+    );
 
     return response.fold(
       (l) {

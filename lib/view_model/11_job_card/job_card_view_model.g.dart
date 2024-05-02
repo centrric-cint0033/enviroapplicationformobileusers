@@ -25,14 +25,12 @@ mixin _$JobCardViewModel on JobCardViewModelBase, Store {
     });
   }
 
-  late final _$jobcardviewmodelfunctionAsyncAction = AsyncAction(
-      'JobCardViewModelBase.jobcardviewmodelfunction',
-      context: context);
+  late final _$getJobCardAsyncAction =
+      AsyncAction('JobCardViewModelBase.getJobCard', context: context);
 
   @override
-  Future<void> jobcardviewmodelfunction() {
-    return _$jobcardviewmodelfunctionAsyncAction
-        .run(() => super.jobcardviewmodelfunction());
+  Future<void> getJobCard({required String id}) {
+    return _$getJobCardAsyncAction.run(() => super.getJobCard(id: id));
   }
 
   @override

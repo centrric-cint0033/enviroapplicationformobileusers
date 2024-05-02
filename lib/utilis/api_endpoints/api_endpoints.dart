@@ -40,7 +40,7 @@ class ApiEndPoints
   static const endpointnewsfldrdlte = '/api/v1/drive/folder/delete';
   static const endpointprofilelstng = '/api/v1/accounts/profile/view/';
   static const endpointprofileedit = '/api/v1/accounts/profile/view/';
-  static const endpointjobcard = '/api/v1/jobs/card/info/view/2054865';
+  static const endpointJobcard = '/api/v1/jobs/card/info/view';
 
   // SITE APIS
 }

@@ -11,7 +11,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 
 @RoutePage()
 class SheduledetailPage extends StatelessWidget {
-  const SheduledetailPage({Key? key});
+  const SheduledetailPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +38,7 @@ class SheduledetailPage extends StatelessWidget {
                       text: 'job card',
                       buttonTextStyle: const TextStyle(color: Colors.black),
                       onPressed: () {
-                        jobCardFunction(context);
+                        jobCardFunction(context, "");
                       },
                       loadingColor: Colors.blue,
                     );
@@ -106,8 +106,8 @@ void updatevehiclepreinspection(BuildContext context) {
   context.router.pushNamed(RouteNames.rupdatevehiclepreinspectionpage);
 }
 
-void jobCardFunction(BuildContext context) async {
-  await vmJobcard.jobcardviewmodelfunction(); // Add await here
-  print('jobclicked');
-  context.router.pushNamed(RouteNames.rjobcardpage);
+void jobCardFunction(BuildContext context, String id) async {
+  final router = context.router;
+  await vmJobcard.getJobCard(id: id); // Add await here
+  router.pushNamed(RouteNames.rjobcardpage);
 }
