@@ -154,41 +154,40 @@ class SheduledetailPage extends StatelessWidget {
                               expandedRowsShowingText(
                                 "Departed Enviro facility",
                                 vmJobcard.sheduleweekResponse.data?[index]
-                                        .client?.clientType ??
-                                    '',
+                                    .departEnviroFacility,
                               ),
                               const SizedBox(height: 20),
                               expandedRowsShowingText(
                                 "Job Started",
                                 vmJobcard.sheduleweekResponse.data?[index]
-                                        .client?.clientEmail ??
+                                        .startJob ??
                                     '',
                               ),
                               const SizedBox(height: 20),
                               expandedRowsShowingText(
                                 "job finished",
                                 vmJobcard.sheduleweekResponse.data?[index]
-                                        .status ??
+                                        .finishJob ??
                                     '',
                               ),
                               const SizedBox(height: 20),
                               expandedRowsShowingText(
                                 "job completed",
                                 vmJobcard.sheduleweekResponse.data?[index]
-                                        .amount ??
+                                        .completed ??
                                     '',
                               ),
                               const SizedBox(height: 20),
                               expandedRowsShowingText(
                                   "Arrived at waste Depot",
                                   vmJobcard.sheduleweekResponse.data?[index]
-                                          .createdBy ??
+                                          .arriveAtWasteDepot ??
                                       ''),
                               const SizedBox(height: 20),
                               expandedRowsShowingText(
-                                "Arrived at waste Depot",
+                                "Departed from waste Depot",
                                 vmJobcard.sheduleweekResponse.data?[index]
-                                        .client?.deviceWaste ??
+                                        .departWasteDepot ??
                                     '',
                               ),
                             ],
