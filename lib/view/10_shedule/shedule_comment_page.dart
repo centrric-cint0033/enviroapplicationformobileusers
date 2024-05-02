@@ -13,7 +13,7 @@ class SheduleCommentPage extends StatelessWidget {
     return Scaffold(
       drawer: CmnDrawer(context),
       appBar: AppBar(
-        title: cmnTitleWidget('Schedule'),
+        title: cmnTitleWidget('Comments'),
         actions: [notificationButton(context)],
       ),
       body: Padding(
@@ -80,11 +80,10 @@ class SheduleCommentPage extends StatelessWidget {
                         },
                       ),
                     ),
-                    // Add text here
                     const Positioned(
                       top: 10,
                       left: 10,
-                      child: const Text(
+                      child: Text(
                         "Yxaikcsd[vpdf]",
                         style: TextStyle(
                           fontSize: 18,

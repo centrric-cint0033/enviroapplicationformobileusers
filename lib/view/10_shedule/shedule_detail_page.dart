@@ -3,6 +3,7 @@ import 'package:enviro_mobile_application/Routepage/routespage.dart';
 import 'package:enviro_mobile_application/utilis/constant.dart';
 import 'package:enviro_mobile_application/view/02_sales/sales_widgets.dart/sales_widget.dart';
 import 'package:enviro_mobile_application/view/10_shedule/shedule_widget.dart';
+import 'package:enviro_mobile_application/view/10_shedule/update_vehicle_preinspection.dart';
 import 'package:enviro_mobile_application/view_model/11_shedule/shedule_page_view_model.dart';
 import 'package:enviro_mobile_application/widgets/cmbutton.dart';
 import 'package:enviro_mobile_application/widgets/cmn_action_icon.dart';
@@ -208,9 +209,21 @@ class SheduledetailPage extends StatelessWidget {
                       text: "Update vehicle preinspection",
                     ),
                   ),
+                  const SizedBox(height: 5),
+                  Container(
+                    width: 159,
+                    child: CmButton(
+                      color: const Color(0xFF4CAF9E),
+                      buttonTextStyle: const TextStyle(color: Colors.white),
+                      onPressed: () {
+                        shedulecommentfunction(context);
+                      },
+                      text: "Comments",
+                    ),
+                  ),
                   const SizedBox(height: 40),
-                  Text('Signature'),
-                  SizedBox(height: 40),
+                  const Text('Signature'),
+                  const SizedBox(height: 40),
                 ],
               );
             },
@@ -230,4 +243,9 @@ void jobCardFunction(BuildContext context) async {
   await vmJobcard.jobcardviewmodelfunction();
   print('Job card clicked');
   context.router.pushNamed(RouteNames.rjobcardpage);
+}
+
+void shedulecommentfunction(BuildContext context) {
+  print('calenderclicked');
+  context.router.pushNamed(RouteNames.rshedulecommandstatus);
 }
