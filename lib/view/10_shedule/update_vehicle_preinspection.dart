@@ -1002,7 +1002,7 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                         child: ElevatedButton(
                           onPressed: () {
                             print('dfdfdf');
-                            UpdateVehicleStatusPage(context);
+                            shedulecommentfunction(context);
                           },
                           style: ElevatedButton.styleFrom(
                             primary: Colors.blue,
@@ -1101,7 +1101,7 @@ void _showPopup(BuildContext context) {
   );
 }
 
-void UpdateVehicleStatusPage(BuildContext context) {
+void shedulecommentfunction(BuildContext context) {
   print('calenderclicked');
-  context.router.pushNamed(RouteNames.rcurrentjobstatus);
+  context.router.pushNamed(RouteNames.rshedulecommandstatus);
 }

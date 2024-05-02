@@ -4,6 +4,7 @@ import 'package:enviro_mobile_application/Routepage/approutes.gr.dart';
 
 import 'package:enviro_mobile_application/Routepage/routespage.dart';
 import 'package:enviro_mobile_application/view/10_shedule/current_job_status.dart';
+import 'package:enviro_mobile_application/view/10_shedule/shedule_comment_page.dart';
 
 @AutoRouterConfig()
 class AppRouter extends $AppRouter {
@@ -62,7 +63,7 @@ class AppRouter extends $AppRouter {
           path: RouteNames.siteDetailPage,
         ),
         AutoRoute(
-            page: UpdateVehicleStatusRoute.page,
-            path: RouteNames.rcurrentjobstatus),
+            page: SheduleCommentRoute.page,
+            path: RouteNames.rshedulecommandstatus),
       ];
 }
