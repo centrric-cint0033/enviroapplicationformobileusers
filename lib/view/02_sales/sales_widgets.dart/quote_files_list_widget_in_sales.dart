@@ -25,7 +25,7 @@ class QuoteFilesListWidgetInSales extends StatelessWidget {
           duration: const Duration(milliseconds: 500),
           firstChild: const SizedBox.shrink(),
           crossFadeState:
-              showData ? CrossFadeState.showFirst : CrossFadeState.showSecond,
+              !showData ? CrossFadeState.showFirst : CrossFadeState.showSecond,
           secondChild: showData
               ? Column(
                   children: [
