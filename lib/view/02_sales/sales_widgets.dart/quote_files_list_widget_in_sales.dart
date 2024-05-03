@@ -18,29 +18,37 @@ class QuoteFilesListWidgetInSales extends StatelessWidget {
       builder: (context) {
         List<AttachedFile> files =
             vmSales.jobDetailResponse.data?.attachedFiles ?? [];
-        return files.isNotEmpty
-            ? Column(
-                children: [
-                  gapField,
-                  cmTitle('Quote Attachments and Quote Files'),
-                  sized0hx10,
-                  SizedBox(
-                    height: 80.h,
-                    child: ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: files.length,
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (context, index) {
-                        return FileWithIconAndNameWidget(
-                          fileName:
-                              files[index].fileName ?? files[index].name ?? "",
-                        );
-                      },
+        return AnimatedCrossFade(
+          duration: const Duration(milliseconds: 500),
+          firstChild: const SizedBox.shrink(),
+          crossFadeState: files.isEmpty
+              ? CrossFadeState.showFirst
+              : CrossFadeState.showSecond,
+          secondChild: files.isNotEmpty
+              ? Column(
+                  children: [
+                    gapField,
+                    cmTitle('Quote Attachments and Quote Files'),
+                    sized0hx10,
+                    SizedBox(
+                      height: 80.h,
+                      child: ListView.builder(
+                        shrinkWrap: true,
+                        itemCount: files.length,
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (context, index) {
+                          return FileWithIconAndNameWidget(
+                            fileName: files[index].fileName ??
+                                files[index].name ??
+                                "",
+                          );
+                        },
+                      ),
                     ),
-                  ),
-                ],
-              )
-            : const SizedBox.shrink();
+                  ],
+                )
+              : const SizedBox.shrink(),
+        );
       },
     );
   }
