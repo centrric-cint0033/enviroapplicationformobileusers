@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'package:dartz/dartz.dart';
 import 'package:enviro_mobile_application/model/02_sales/sales_model/sales_model.dart';
 import 'package:enviro_mobile_application/utilis/api_endpoints/api_endpoints.dart';
@@ -58,6 +59,7 @@ class SalesService implements ISalesService {
       (l) => Left(l),
       (res) async {
         var data = jsonDecode(res.body);
+        log("$data", name: "data");
         List<SalesModel> saleslistvehicle = List<SalesModel>.from(
             data['app_data'].map((e) => SalesModel.fromJson(e)));
         return Right(saleslistvehicle);

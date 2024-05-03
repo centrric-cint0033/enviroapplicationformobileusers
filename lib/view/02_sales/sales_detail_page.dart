@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:enviro_mobile_application/utilis/constant.dart';
 import 'package:enviro_mobile_application/utilis/Appthemes.dart';
 import 'package:enviro_mobile_application/widgets/cm_title.dart';
 import 'package:enviro_mobile_application/widgets/cmbutton.dart';
@@ -10,6 +11,7 @@ import 'package:enviro_mobile_application/view/02_sales/sales_widgets.dart/sales
 
 import '../../Routepage/routespage.dart';
 import '../../view_model/11_job_card/job_card_view_model.dart';
+import 'sales_widgets.dart/quote_files_list_widget_in_sales.dart';
 
 @RoutePage()
 class SalesDetailPage extends StatelessWidget {
@@ -24,8 +26,9 @@ class SalesDetailPage extends StatelessWidget {
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 15.w),
-        child: Center(
-          child: Column(children: [
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
             Align(
               alignment: Alignment.centerRight,
               child: CmButton(
@@ -41,17 +44,16 @@ class SalesDetailPage extends StatelessWidget {
             gapField,
             listData(data),
             gapField,
-            cmTitle('Quote Attachments and Quote Files'),
+            CmButton(
+              text: data?.status,
+              color: Appthemes.cLightGreen,
+              width: ScreenUtil().screenWidth,
+            ),
             gapField,
-            Align(
-              alignment: Alignment.centerLeft,
-              child: CmButton(
-                text: data?.status,
-                color: Appthemes.cLightGreen,
-                width: ScreenUtil().screenWidth / 2,
-              ),
-            )
-          ]),
+            cmTitle('Quote Attachments and Quote Files'),
+            sized0hx30,
+            QuoteFilesListWidgetInSales(files: data?.attachedFiles ?? [])
+          ],
         ),
       ),
     );

@@ -9,7 +9,6 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await ScreenUtil.ensureScreenSize();
   configureLocalDependancies();
-
   runApp(MyApp());
 }
 

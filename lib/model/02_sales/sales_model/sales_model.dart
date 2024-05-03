@@ -1,5 +1,7 @@
 // ignore_for_file: invalid_annotation_target
 
+import 'package:enviro_mobile_application/model/02_sales/sales_model/attached_file.dart';
+import 'package:enviro_mobile_application/model/02_sales/sales_model/template_response.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'job_card_keys.dart';
@@ -80,6 +82,11 @@ class SalesModel with _$SalesModel {
     @JsonKey(name: 'scope_of_work_type') String? scopeOfWorkType,
     @JsonKey(name: 'sales_approve_date_time') dynamic salesApproveDateTime,
     @JsonKey(name: 'quote_type') String? quoteType,
+    @JsonKey(name: 'quote_file') String? quoteFile,
+    @JsonKey(name: 'received_file') String? receivedFile,
+    @JsonKey(name: 'attached_files') List<AttachedFile>? attachedFiles,
+    @JsonKey(name: 'template_response')
+    List<TemplateResponse>? templateResponse,
     @JsonKey(name: 'converted_to_recurring_quote_id')
     dynamic convertedToRecurringQuoteId,
     int? employee,

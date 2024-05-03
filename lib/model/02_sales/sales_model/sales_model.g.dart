@@ -83,6 +83,14 @@ _$SalesModelImpl _$$SalesModelImplFromJson(Map<String, dynamic> json) =>
       scopeOfWorkType: json['scope_of_work_type'] as String?,
       salesApproveDateTime: json['sales_approve_date_time'],
       quoteType: json['quote_type'] as String?,
+      quoteFile: json['quote_file'] as String?,
+      receivedFile: json['received_file'] as String?,
+      attachedFiles: (json['attached_files'] as List<dynamic>?)
+          ?.map((e) => AttachedFile.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      templateResponse: (json['template_response'] as List<dynamic>?)
+          ?.map((e) => TemplateResponse.fromJson(e as Map<String, dynamic>))
+          .toList(),
       convertedToRecurringQuoteId: json['converted_to_recurring_quote_id'],
       employee: json['employee'] as int?,
       mailBcc: json['mail_bcc'] as List<dynamic>?,
@@ -165,6 +173,10 @@ Map<String, dynamic> _$$SalesModelImplToJson(_$SalesModelImpl instance) =>
       'scope_of_work_type': instance.scopeOfWorkType,
       'sales_approve_date_time': instance.salesApproveDateTime,
       'quote_type': instance.quoteType,
+      'quote_file': instance.quoteFile,
+      'received_file': instance.receivedFile,
+      'attached_files': instance.attachedFiles,
+      'template_response': instance.templateResponse,
       'converted_to_recurring_quote_id': instance.convertedToRecurringQuoteId,
       'employee': instance.employee,
       'mail_bcc': instance.mailBcc,
