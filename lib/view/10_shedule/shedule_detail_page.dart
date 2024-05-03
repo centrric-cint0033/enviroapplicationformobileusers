@@ -210,7 +210,7 @@ class SheduledetailPage extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 5),
-                  Container(
+                  SizedBox(
                     width: 159,
                     child: CmButton(
                       color: const Color(0xFF4CAF9E),
@@ -219,6 +219,26 @@ class SheduledetailPage extends StatelessWidget {
                         shedulecommentfunction(context);
                       },
                       text: "Comments",
+                    ),
+                  ),
+                  const SizedBox(height: 5),
+                  SizedBox(
+                    width: 179,
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: CmButton(
+                            icon: Icons.add_a_photo,
+                            color: const Color.fromARGB(255, 0, 8, 14),
+                            buttonTextStyle:
+                                const TextStyle(color: Colors.white),
+                            onPressed: () {
+                              shedulevedeoandphotofunction(context);
+                            },
+                            text: "Add Media",
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                   const SizedBox(height: 40),
@@ -236,6 +256,11 @@ class SheduledetailPage extends StatelessWidget {
   void updatevehiclepreinspection(BuildContext context) {
     print('Updating vehicle preinspection');
     context.router.pushNamed(RouteNames.rupdatevehiclepreinspectionpage);
+  }
+
+  void shedulevedeoandphotofunction(BuildContext context) {
+    print('hjdcjndjcmk');
+    context.router.pushNamed(RouteNames.rshedulevedeoandphoto);
   }
 }
 

@@ -4,6 +4,7 @@ import 'package:enviro_mobile_application/Routepage/approutes.gr.dart';
 
 import 'package:enviro_mobile_application/Routepage/routespage.dart';
 import 'package:enviro_mobile_application/view/10_shedule/current_job_status.dart';
+import 'package:enviro_mobile_application/view/10_shedule/shedule_cmra_vdo_page.dart';
 import 'package:enviro_mobile_application/view/10_shedule/shedule_comment_page.dart';
 
 @AutoRouterConfig()
@@ -65,5 +66,8 @@ class AppRouter extends $AppRouter {
         AutoRoute(
             page: SheduleCommentRoute.page,
             path: RouteNames.rshedulecommandstatus),
+        AutoRoute(
+            page: SheduleVedeoandPhotoRoute.page,
+            path: RouteNames.rshedulevedeoandphoto),
       ];
 }

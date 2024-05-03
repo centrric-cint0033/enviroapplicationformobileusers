@@ -30,4 +30,5 @@ class RouteNames {
   static const String rjobcardpage = '/jobcardpage ';
   static const String rcurrentjobstatus = '/currentjobstatus ';
   static const String rshedulecommandstatus = '/shedulecommandstatus ';
+  static const String rshedulevedeoandphoto = '/shedulevedeoandphoto ';
 }
