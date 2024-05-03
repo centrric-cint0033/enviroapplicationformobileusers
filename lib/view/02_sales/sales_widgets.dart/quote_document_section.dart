@@ -24,7 +24,11 @@ class QuoteDocumentSection extends StatelessWidget {
             FileWithIconAndNameWidget(
               fileName: "Quote Document",
               onTap: () {
-                launchUrlFile(quoteDocument!, quoteDocument!.split(".").first);
+                launchUrlFile(
+                  quoteDocument!,
+                  quoteDocument!.split(".").first,
+                  context,
+                );
               },
             )
           },
@@ -34,7 +38,11 @@ class QuoteDocumentSection extends StatelessWidget {
               fileName: files[i].fileName ?? files[i].name ?? "",
               onTap: () {
                 if (files[i].url != null) {
-                  launchUrlFile(files[i].url!, files[i].url!.split(".").first);
+                  launchUrlFile(
+                    files[i].url!,
+                    files[i].url!.split(".").first,
+                    context,
+                  );
                 }
               },
             )

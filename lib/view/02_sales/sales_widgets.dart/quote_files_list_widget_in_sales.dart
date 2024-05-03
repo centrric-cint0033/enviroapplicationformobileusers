@@ -9,6 +9,7 @@ import 'package:enviro_mobile_application/model/02_sales/sales_model/attached_fi
 import 'package:enviro_mobile_application/model/02_sales/sales_model/template_response.dart';
 import 'package:enviro_mobile_application/view/02_sales/sales_widgets.dart/sales_widget.dart';
 
+import '../../../widgets/show_confirmation_alert.dart';
 import 'quote_document_section.dart';
 import '../../../utilis/constant.dart';
 import '../../../widgets/cm_title.dart';
@@ -62,6 +63,7 @@ class QuoteFilesListWidgetInSales extends StatelessWidget {
                             launchUrlFile(
                               receivedDocument,
                               receivedDocument.split(".").first,
+                              context,
                             );
                           },
                           fileName: "Quote file",
@@ -84,6 +86,7 @@ class QuoteFilesListWidgetInSales extends StatelessWidget {
                                         .templateReceiveResponse!
                                         .split(".")
                                         .first,
+                                    context,
                                   );
                                 }
                               },
@@ -103,15 +106,26 @@ class QuoteFilesListWidgetInSales extends StatelessWidget {
   }
 }
 
-Future<void> launchUrlFile(String url, String filename) async {
-  try {
-    final uri = Uri.parse(url);
-    if (await canLaunchUrl(uri)) {
-      launchUrl(uri);
-    } else {
-      throw Exception('Could not launch $url');
-    }
-  } catch (e) {
-    debugPrint("$e");
-  }
+Future<void> launchUrlFile(
+  String url,
+  String filename,
+  BuildContext context,
+) async {
+  showConfirmationAlert(
+    context: context,
+    submitText: "Yes",
+    content: "Are you sure want to open the file?",
+    onSubmit: () async {
+      try {
+        final uri = Uri.parse(url);
+        if (await canLaunchUrl(uri)) {
+          launchUrl(uri);
+        } else {
+          throw Exception('Could not launch $url');
+        }
+      } catch (e) {
+        debugPrint("$e");
+      }
+    },
+  );
 }
