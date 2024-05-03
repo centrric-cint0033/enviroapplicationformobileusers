@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../widgets/file_with_icon_and_name_widget.dart';
 import '../../../model/02_sales/sales_model/attached_file.dart';
+import 'quote_files_list_widget_in_sales.dart';
 
 class QuoteDocumentSection extends StatelessWidget {
   const QuoteDocumentSection({
@@ -22,14 +23,20 @@ class QuoteDocumentSection extends StatelessWidget {
           if (quoteDocument != null) ...{
             FileWithIconAndNameWidget(
               fileName: "Quote Document",
-              onTap: () {},
+              onTap: () {
+                launchUrlFile(quoteDocument!, quoteDocument!.split(".").first);
+              },
             )
           },
           for (int i = 0; i < files.length; i++) ...{
             FileWithIconAndNameWidget(
               hasIcon: true,
               fileName: files[i].fileName ?? files[i].name ?? "",
-              onTap: () {},
+              onTap: () {
+                if (files[i].url != null) {
+                  launchUrlFile(files[i].url!, files[i].url!.split(".").first);
+                }
+              },
             )
           }
         ],

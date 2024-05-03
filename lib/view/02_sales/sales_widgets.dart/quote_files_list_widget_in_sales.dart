@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:enviro_mobile_application/view_model/02_sales/sales_view_model.dart';
 import 'package:enviro_mobile_application/widgets/file_with_icon_and_name_widget.dart';
@@ -57,7 +58,12 @@ class QuoteFilesListWidgetInSales extends StatelessWidget {
                         FileWithIconAndNameWidget(
                           height: 50.h,
                           width: double.infinity,
-                          onTap: () {},
+                          onTap: () {
+                            launchUrlFile(
+                              receivedDocument,
+                              receivedDocument.split(".").first,
+                            );
+                          },
                           fileName: "Quote file",
                         ),
                       },
@@ -69,7 +75,18 @@ class QuoteFilesListWidgetInSales extends StatelessWidget {
                             child: FileWithIconAndNameWidget(
                               height: 50.h,
                               width: double.infinity,
-                              onTap: () {},
+                              onTap: () {
+                                if (clientFiles[i].templateReceiveResponse !=
+                                    null) {
+                                  launchUrlFile(
+                                    clientFiles[i].templateReceiveResponse!,
+                                    clientFiles[i]
+                                        .templateReceiveResponse!
+                                        .split(".")
+                                        .first,
+                                  );
+                                }
+                              },
                               fileName: clientFiles[i].templateName ?? "",
                             ),
                           ),
@@ -83,5 +100,18 @@ class QuoteFilesListWidgetInSales extends StatelessWidget {
         );
       },
     );
+  }
+}
+
+Future<void> launchUrlFile(String url, String filename) async {
+  try {
+    final uri = Uri.parse(url);
+    if (await canLaunchUrl(uri)) {
+      launchUrl(uri);
+    } else {
+      throw Exception('Could not launch $url');
+    }
+  } catch (e) {
+    debugPrint("$e");
   }
 }
