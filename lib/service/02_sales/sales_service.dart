@@ -40,6 +40,9 @@ abstract class ISalesService {
   Future<Either<Map<MainFailure, dynamic>, SalesModel>> salesJobDetailApi({
     required String id,
   });
+  Future<Either<Map<MainFailure, dynamic>, SalesModel>> quoteRegDetailApi({
+    required String id,
+  });
 }
 
 @LazySingleton(as: ISalesService)
@@ -194,6 +197,34 @@ class SalesService implements ISalesService {
       authenticated: true,
       method: HttpMethod.get,
       apiUrl: "${ApiEndPoints().salesJobDetails}/$id",
+    );
+
+    return response.fold(
+      (l) => Left(l),
+      (res) async {
+        var data = jsonDecode(res.body)["data"]["quote"];
+
+        /// Return the specific data due to type mismatch in the common model
+        return Right(
+          SalesModel.fromJson({
+            "quote_file": data["quote_file"],
+            "received_file": data["received_file"],
+            "attached_files": data["attached_files"],
+            "template_response": data["template_response"],
+          }),
+        );
+      },
+    );
+  }
+
+  @override
+  Future<Either<Map<MainFailure, dynamic>, SalesModel>> quoteRegDetailApi({
+    required String id,
+  }) async {
+    var response = await httpService.request(
+      authenticated: true,
+      method: HttpMethod.get,
+      apiUrl: "${ApiEndPoints().salesQuoteRegDetails}/$id",
     );
 
     return response.fold(

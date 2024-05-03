@@ -63,7 +63,11 @@ class QuoteReqisterListWidget extends StatelessWidget {
                 onTap: () {
                   context.router.push(
                     SalesDetailRoute(
-                        data: vmSales.joblistResponse.data?[index]),
+                        data: vmSales.quoteRegResponse.data?[index]),
+                  );
+                  vmSales.salesQuoteRegDetailApi(
+                    index,
+                    vmSales.quoteRegResponse.data?[index].id,
                   );
                 },
                 child: listData(vmSales.quoteRegResponse.data?[index]),

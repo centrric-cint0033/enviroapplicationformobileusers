@@ -442,11 +442,11 @@ abstract class SalesViewModelBase with Store {
   }
 
   @observable
-  ApiResponse<SalesModel> jobDetailResponse = ApiResponse<SalesModel>();
+  ApiResponse<SalesModel> saleDetailResponse = ApiResponse<SalesModel>();
 
   @action
   Future<void> salesJobDetailApi(int index, int? id) async {
-    jobDetailResponse = jobDetailResponse.copyWith(loading: true, data: null);
+    saleDetailResponse = saleDetailResponse.copyWith(loading: true, data: null);
     List<SalesModel> list = joblistResponse.data?.toList() ?? [];
 
     final response = await salesService.salesJobDetailApi(
@@ -455,7 +455,7 @@ abstract class SalesViewModelBase with Store {
 
     return response.fold(
       (l) {
-        jobDetailResponse = jobDetailResponse.copyWith(loading: false);
+        saleDetailResponse = saleDetailResponse.copyWith(loading: false);
       },
       (r) {
         list[index] = list[index].copyWith(
@@ -464,11 +464,40 @@ abstract class SalesViewModelBase with Store {
           attachedFiles: r.attachedFiles,
           templateResponse: r.templateResponse,
         );
-        jobDetailResponse = jobDetailResponse.copyWith(
+        saleDetailResponse = saleDetailResponse.copyWith(
           loading: false,
           data: list[index],
         );
         joblistResponse = joblistResponse.copyWith(data: list);
+      },
+    );
+  }
+
+  @action
+  Future<void> salesQuoteRegDetailApi(int index, int? id) async {
+    saleDetailResponse = saleDetailResponse.copyWith(loading: true, data: null);
+    List<SalesModel> list = quoteRegResponse.data?.toList() ?? [];
+
+    final response = await salesService.quoteRegDetailApi(
+      id: id?.toString() ?? "",
+    );
+
+    return response.fold(
+      (l) {
+        saleDetailResponse = saleDetailResponse.copyWith(loading: false);
+      },
+      (r) {
+        list[index] = list[index].copyWith(
+          quoteFile: r.quoteFile,
+          receivedFile: r.receivedFile,
+          attachedFiles: r.attachedFiles,
+          templateResponse: r.templateResponse,
+        );
+        saleDetailResponse = saleDetailResponse.copyWith(
+          loading: false,
+          data: list[index],
+        );
+        quoteRegResponse = quoteRegResponse.copyWith(data: list);
       },
     );
   }

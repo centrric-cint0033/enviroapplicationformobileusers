@@ -110,15 +110,15 @@ mixin _$SalesViewModel on SalesViewModelBase, Store {
       Atom(name: 'SalesViewModelBase.jobDetailResponse', context: context);
 
   @override
-  ApiResponse<SalesModel> get jobDetailResponse {
+  ApiResponse<SalesModel> get saleDetailResponse {
     _$jobDetailResponseAtom.reportRead();
-    return super.jobDetailResponse;
+    return super.saleDetailResponse;
   }
 
   @override
-  set jobDetailResponse(ApiResponse<SalesModel> value) {
-    _$jobDetailResponseAtom.reportWrite(value, super.jobDetailResponse, () {
-      super.jobDetailResponse = value;
+  set saleDetailResponse(ApiResponse<SalesModel> value) {
+    _$jobDetailResponseAtom.reportWrite(value, super.saleDetailResponse, () {
+      super.saleDetailResponse = value;
     });
   }
 
@@ -194,7 +194,7 @@ joblistResponse: ${joblistResponse},
 salespageResponse: ${salespageResponse},
 quoteRegResponse: ${quoteRegResponse},
 salesQuoteDetailsResponse: ${salesQuoteDetailsResponse},
-jobDetailResponse: ${jobDetailResponse}
+jobDetailResponse: ${saleDetailResponse}
     ''';
   }
 }

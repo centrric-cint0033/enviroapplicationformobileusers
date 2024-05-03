@@ -22,7 +22,7 @@ class QuoteFilesListWidgetInSales extends StatelessWidget {
   Widget build(BuildContext context) {
     return Observer(
       builder: (context) {
-        SalesModel? data = vmSales.jobDetailResponse.data;
+        SalesModel? data = vmSales.saleDetailResponse.data;
         List<AttachedFile> files = data?.attachedFiles ?? [];
         List<TemplateResponse> clientFiles = data?.templateResponse ?? [];
         String? quoteDocument = data?.quoteFile;

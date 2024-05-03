@@ -27,7 +27,7 @@ class SalesDetailPage extends StatelessWidget {
         actions: [
           Observer(
             builder: (context) {
-              return vmSales.jobDetailResponse.loading
+              return vmSales.saleDetailResponse.loading
                   ? Padding(
                       padding: EdgeInsets.only(right: 15.w),
                       child: const CupertinoActivityIndicator(),
