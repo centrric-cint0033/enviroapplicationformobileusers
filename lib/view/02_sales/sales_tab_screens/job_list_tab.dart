@@ -64,6 +64,8 @@ class SalesJobListWidget extends StatelessWidget {
                 : const SizedBox.shrink()
             : InkWell(
                 onTap: () {
+                  vmSales.salesJobDetailApi(
+                      index, vmSales.joblistResponse.data?[index].id);
                   context.router.push(
                     SalesDetailRoute(
                         data: vmSales.joblistResponse.data?[index]),

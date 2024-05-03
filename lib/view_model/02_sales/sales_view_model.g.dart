@@ -106,6 +106,22 @@ mixin _$SalesViewModel on SalesViewModelBase, Store {
     });
   }
 
+  late final _$jobDetailResponseAtom =
+      Atom(name: 'SalesViewModelBase.jobDetailResponse', context: context);
+
+  @override
+  ApiResponse<SalesModel> get jobDetailResponse {
+    _$jobDetailResponseAtom.reportRead();
+    return super.jobDetailResponse;
+  }
+
+  @override
+  set jobDetailResponse(ApiResponse<SalesModel> value) {
+    _$jobDetailResponseAtom.reportWrite(value, super.jobDetailResponse, () {
+      super.jobDetailResponse = value;
+    });
+  }
+
   late final _$saleJobListApiAsyncAction =
       AsyncAction('SalesViewModelBase.saleJobListApi', context: context);
 
@@ -160,6 +176,15 @@ mixin _$SalesViewModel on SalesViewModelBase, Store {
         .run(() => super.getSalesQuoteDetails(page: page, id: id));
   }
 
+  late final _$salesJobDetailApiAsyncAction =
+      AsyncAction('SalesViewModelBase.salesJobDetailApi', context: context);
+
+  @override
+  Future<void> salesJobDetailApi(int index, int? id) {
+    return _$salesJobDetailApiAsyncAction
+        .run(() => super.salesJobDetailApi(index, id));
+  }
+
   @override
   String toString() {
     return '''
@@ -168,7 +193,8 @@ selectedYear: ${selectedYear},
 joblistResponse: ${joblistResponse},
 salespageResponse: ${salespageResponse},
 quoteRegResponse: ${quoteRegResponse},
-salesQuoteDetailsResponse: ${salesQuoteDetailsResponse}
+salesQuoteDetailsResponse: ${salesQuoteDetailsResponse},
+jobDetailResponse: ${jobDetailResponse}
     ''';
   }
 }

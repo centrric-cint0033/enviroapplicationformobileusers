@@ -10,11 +10,11 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:auto_route/auto_route.dart' as _i27;
 import 'package:enviro_mobile_application/model/02_sales/sales_model/sales_model.dart'
-    as _i30;
+    as _i31;
 import 'package:enviro_mobile_application/model/04_ohs/oh&s_resp_model.dart'
     as _i29;
 import 'package:enviro_mobile_application/model/10_team/team_profile_employee_details_res_model/team_profile_employee_details_res_model.dart'
-    as _i32;
+    as _i33;
 import 'package:enviro_mobile_application/view/01_auth/login_page.dart' as _i7;
 import 'package:enviro_mobile_application/view/02_sales/sales_detail_page.dart'
     as _i14;
@@ -66,7 +66,8 @@ import 'package:enviro_mobile_application/view/10_site/site_main_screen.dart'
     as _i21;
 import 'package:enviro_mobile_application/view/home_page.dart' as _i3;
 import 'package:enviro_mobile_application/view_model/10_site/site_view_model.dart'
-    as _i31;
+    as _i32;
+import 'package:flutter/cupertino.dart' as _i30;
 import 'package:flutter/material.dart' as _i28;
 
 abstract class $AppRouter extends _i27.RootStackRouter {
@@ -598,8 +599,8 @@ class ProfileCreationRouteArgs {
 /// [_i14.SalesDetailPage]
 class SalesDetailRoute extends _i27.PageRouteInfo<SalesDetailRouteArgs> {
   SalesDetailRoute({
-    _i28.Key? key,
-    required _i30.SalesModel? data,
+    _i30.Key? key,
+    required _i31.SalesModel? data,
     List<_i27.PageRouteInfo>? children,
   }) : super(
           SalesDetailRoute.name,
@@ -622,9 +623,9 @@ class SalesDetailRouteArgs {
     required this.data,
   });
 
-  final _i28.Key? key;
+  final _i30.Key? key;
 
-  final _i30.SalesModel? data;
+  final _i31.SalesModel? data;
 
   @override
   String toString() {
@@ -708,7 +709,7 @@ class SiteDetailRoute extends _i27.PageRouteInfo<SiteDetailRouteArgs> {
   SiteDetailRoute({
     _i28.Key? key,
     required int index,
-    required _i31.SiteType type,
+    required _i32.SiteType type,
     List<_i27.PageRouteInfo>? children,
   }) : super(
           SiteDetailRoute.name,
@@ -737,7 +738,7 @@ class SiteDetailRouteArgs {
 
   final int index;
 
-  final _i31.SiteType type;
+  final _i32.SiteType type;
 
   @override
   String toString() {
@@ -764,7 +765,7 @@ class SiteMainRoute extends _i27.PageRouteInfo<void> {
 class TeamEditRoute extends _i27.PageRouteInfo<TeamEditRouteArgs> {
   TeamEditRoute({
     _i28.Key? key,
-    required _i32.TeamProfileEmployeeDetailsResModel employeeDetatils,
+    required _i33.TeamProfileEmployeeDetailsResModel employeeDetatils,
     List<_i27.PageRouteInfo>? children,
   }) : super(
           TeamEditRoute.name,
@@ -789,7 +790,7 @@ class TeamEditRouteArgs {
 
   final _i28.Key? key;
 
-  final _i32.TeamProfileEmployeeDetailsResModel employeeDetatils;
+  final _i33.TeamProfileEmployeeDetailsResModel employeeDetatils;
 
   @override
   String toString() {

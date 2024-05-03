@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
 import 'package:dartz/dartz.dart';
 import 'package:enviro_mobile_application/model/02_sales/sales_model/sales_model.dart';
 import 'package:enviro_mobile_application/utilis/api_endpoints/api_endpoints.dart';
@@ -38,6 +37,9 @@ abstract class ISalesService {
     required String year,
     required String month,
   });
+  Future<Either<Map<MainFailure, dynamic>, SalesModel>> salesJobDetailApi({
+    required String id,
+  });
 }
 
 @LazySingleton(as: ISalesService)
@@ -59,7 +61,6 @@ class SalesService implements ISalesService {
       (l) => Left(l),
       (res) async {
         var data = jsonDecode(res.body);
-        log("$data", name: "data");
         List<SalesModel> saleslistvehicle = List<SalesModel>.from(
             data['app_data'].map((e) => SalesModel.fromJson(e)));
         return Right(saleslistvehicle);
@@ -181,6 +182,34 @@ class SalesService implements ISalesService {
         List<SalesModel> quoteregvehicle =
             data.map((e) => SalesModel.fromJson(e)).toList();
         return Right(quoteregvehicle);
+      },
+    );
+  }
+
+  @override
+  Future<Either<Map<MainFailure, dynamic>, SalesModel>> salesJobDetailApi({
+    required String id,
+  }) async {
+    var response = await httpService.request(
+      authenticated: true,
+      method: HttpMethod.get,
+      apiUrl: "${ApiEndPoints().salesJobDetails}/$id",
+    );
+
+    return response.fold(
+      (l) => Left(l),
+      (res) async {
+        var data = jsonDecode(res.body)["data"]["quote"];
+
+        /// Return the specific data due to type mismatch in the common model
+        return Right(
+          SalesModel.fromJson({
+            "quote_file": data["quote_file"],
+            "received_file": data["received_file"],
+            "attached_files": data["attached_files"],
+            "template_response": data["template_response"],
+          }),
+        );
       },
     );
   }

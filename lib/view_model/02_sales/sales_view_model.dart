@@ -440,4 +440,33 @@ abstract class SalesViewModelBase with Store {
       }
     });
   }
+
+  @observable
+  ApiResponse<SalesModel> jobDetailResponse = ApiResponse<SalesModel>();
+
+  @action
+  Future<void> salesJobDetailApi(int index, int? id) async {
+    jobDetailResponse = jobDetailResponse.copyWith(loading: true);
+    List<SalesModel> list = joblistResponse.data?.toList() ?? [];
+
+    final response = await salesService.salesJobDetailApi(
+      id: id?.toString() ?? "",
+    );
+
+    return response.fold(
+      (l) {
+        jobDetailResponse = jobDetailResponse.copyWith(loading: false);
+      },
+      (r) {
+        jobDetailResponse = jobDetailResponse.copyWith(loading: false);
+        list[index] = list[index].copyWith(
+          quoteFile: r.quoteFile,
+          receivedFile: r.receivedFile,
+          attachedFiles: r.attachedFiles,
+          templateResponse: r.templateResponse,
+        );
+        joblistResponse = joblistResponse.copyWith(data: list);
+      },
+    );
+  }
 }

@@ -13,6 +13,7 @@ class FileWithIconAndNameWidget extends StatelessWidget {
     return Container(
       height: 70.h,
       width: 80.h,
+      margin: const EdgeInsets.symmetric(horizontal: 5),
       alignment: Alignment.center,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8.r),
@@ -25,6 +26,7 @@ class FileWithIconAndNameWidget extends StatelessWidget {
         children: [
           Expanded(
             child: Align(
+              alignment: Alignment.center,
               child: Icon(
                 Icons.file_copy_outlined,
                 size: 25.h,
@@ -32,7 +34,14 @@ class FileWithIconAndNameWidget extends StatelessWidget {
             ),
           ),
           Divider(color: Theme.of(context).colorScheme.tertiary),
-          showBlackText(fileName, maxLines: 1, overflow: TextOverflow.ellipsis),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            child: showBlackText(
+              fileName,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            ),
+          ),
           sized0hx03,
         ],
       ),

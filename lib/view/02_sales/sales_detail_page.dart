@@ -1,5 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:enviro_mobile_application/utilis/constant.dart';
 import 'package:enviro_mobile_application/utilis/Appthemes.dart';
@@ -10,6 +12,7 @@ import 'package:enviro_mobile_application/model/02_sales/sales_model/sales_model
 import 'package:enviro_mobile_application/view/02_sales/sales_widgets.dart/sales_widget.dart';
 
 import '../../Routepage/routespage.dart';
+import '../../view_model/02_sales/sales_view_model.dart';
 import '../../view_model/11_job_card/job_card_view_model.dart';
 import 'sales_widgets.dart/quote_files_list_widget_in_sales.dart';
 
@@ -23,6 +26,18 @@ class SalesDetailPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: cmnTitleWidget('Sales'),
+        actions: [
+          Observer(
+            builder: (context) {
+              return vmSales.jobDetailResponse.loading
+                  ? Padding(
+                      padding: EdgeInsets.only(right: 15.w),
+                      child: const CupertinoActivityIndicator(),
+                    )
+                  : const SizedBox.shrink();
+            },
+          ),
+        ],
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 15.w),
@@ -51,7 +66,7 @@ class SalesDetailPage extends StatelessWidget {
             ),
             gapField,
             cmTitle('Quote Attachments and Quote Files'),
-            sized0hx30,
+            sized0hx10,
             QuoteFilesListWidgetInSales(files: data?.attachedFiles ?? [])
           ],
         ),
