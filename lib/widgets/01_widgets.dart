@@ -10,10 +10,16 @@ Text showBlueText(String value,
       style: TextStyle(color: Appthemes.cPrimary, fontWeight: fontWeight),
     );
 
-Text showBlackText(String value,
-        {FontWeight? fontWeight, int? maxLines, TextOverflow? overflow}) =>
+Text showBlackText(
+  String value, {
+  int? maxLines,
+  TextAlign? align,
+  FontWeight? fontWeight,
+  TextOverflow? overflow,
+}) =>
     Text(
       value,
+      textAlign: align,
       maxLines: maxLines,
       overflow: overflow,
       style: TextStyle(color: Colors.black, fontWeight: fontWeight),

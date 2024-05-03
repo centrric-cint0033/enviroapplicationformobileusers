@@ -5,8 +5,13 @@ import 'package:enviro_mobile_application/widgets/01_widgets.dart';
 import '../utilis/constant.dart';
 
 class FileWithIconAndNameWidget extends StatelessWidget {
+  final bool hasIcon;
   final String fileName;
-  const FileWithIconAndNameWidget({super.key, required this.fileName});
+  const FileWithIconAndNameWidget({
+    super.key,
+    this.hasIcon = false,
+    required this.fileName,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -24,21 +29,24 @@ class FileWithIconAndNameWidget extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Expanded(
-            child: Align(
-              alignment: Alignment.center,
-              child: Icon(
-                Icons.file_copy_outlined,
-                size: 25.h,
+          if (hasIcon) ...{
+            Expanded(
+              child: Align(
+                alignment: Alignment.center,
+                child: Icon(
+                  Icons.file_copy_outlined,
+                  size: 25.h,
+                ),
               ),
             ),
-          ),
-          Divider(color: Theme.of(context).colorScheme.tertiary),
+            Divider(color: Theme.of(context).colorScheme.tertiary),
+          },
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8.0),
             child: showBlackText(
               fileName,
-              maxLines: 1,
+              align: TextAlign.center,
+              maxLines: hasIcon ? 1 : 2,
               overflow: TextOverflow.ellipsis,
             ),
           ),
