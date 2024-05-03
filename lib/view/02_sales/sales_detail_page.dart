@@ -3,9 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:enviro_mobile_application/utilis/constant.dart';
 import 'package:enviro_mobile_application/utilis/Appthemes.dart';
-import 'package:enviro_mobile_application/widgets/cm_title.dart';
 import 'package:enviro_mobile_application/widgets/cmbutton.dart';
 import 'package:enviro_mobile_application/widgets/cmn_title_textwidget.dart';
 import 'package:enviro_mobile_application/model/02_sales/sales_model/sales_model.dart';
@@ -64,10 +62,7 @@ class SalesDetailPage extends StatelessWidget {
               color: Appthemes.cLightGreen,
               width: ScreenUtil().screenWidth,
             ),
-            gapField,
-            cmTitle('Quote Attachments and Quote Files'),
-            sized0hx10,
-            QuoteFilesListWidgetInSales(files: data?.attachedFiles ?? [])
+            const QuoteFilesListWidgetInSales()
           ],
         ),
       ),

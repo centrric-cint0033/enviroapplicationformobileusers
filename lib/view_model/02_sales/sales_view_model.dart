@@ -446,7 +446,7 @@ abstract class SalesViewModelBase with Store {
 
   @action
   Future<void> salesJobDetailApi(int index, int? id) async {
-    jobDetailResponse = jobDetailResponse.copyWith(loading: true);
+    jobDetailResponse = jobDetailResponse.copyWith(loading: true, data: null);
     List<SalesModel> list = joblistResponse.data?.toList() ?? [];
 
     final response = await salesService.salesJobDetailApi(
@@ -458,12 +458,15 @@ abstract class SalesViewModelBase with Store {
         jobDetailResponse = jobDetailResponse.copyWith(loading: false);
       },
       (r) {
-        jobDetailResponse = jobDetailResponse.copyWith(loading: false);
         list[index] = list[index].copyWith(
           quoteFile: r.quoteFile,
           receivedFile: r.receivedFile,
           attachedFiles: r.attachedFiles,
           templateResponse: r.templateResponse,
+        );
+        jobDetailResponse = jobDetailResponse.copyWith(
+          loading: false,
+          data: list[index],
         );
         joblistResponse = joblistResponse.copyWith(data: list);
       },
