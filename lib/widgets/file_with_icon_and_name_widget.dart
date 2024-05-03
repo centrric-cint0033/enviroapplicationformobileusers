@@ -7,51 +7,59 @@ import '../utilis/constant.dart';
 class FileWithIconAndNameWidget extends StatelessWidget {
   final bool hasIcon;
   final String fileName;
+  final Function() onTap;
+  final double? height, width;
   const FileWithIconAndNameWidget({
     super.key,
+    this.width,
+    this.height,
+    required this.onTap,
     this.hasIcon = false,
     required this.fileName,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 70.h,
-      width: 80.h,
-      margin: const EdgeInsets.symmetric(horizontal: 5),
-      alignment: Alignment.center,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(8.r),
-        border: Border.all(
-          color: Theme.of(context).colorScheme.tertiary,
+    return InkWell(
+      onTap: onTap,
+      child: Container(
+        width: width ?? 80.h,
+        height: height ?? 70.h,
+        margin: const EdgeInsets.symmetric(horizontal: 5),
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(8.r),
+          border: Border.all(
+            color: Theme.of(context).colorScheme.tertiary,
+          ),
         ),
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          if (hasIcon) ...{
-            Expanded(
-              child: Align(
-                alignment: Alignment.center,
-                child: Icon(
-                  Icons.file_copy_outlined,
-                  size: 25.h,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            if (hasIcon) ...{
+              Expanded(
+                child: Align(
+                  alignment: Alignment.center,
+                  child: Icon(
+                    Icons.file_copy_outlined,
+                    size: 25.h,
+                  ),
                 ),
               ),
+              Divider(color: Theme.of(context).colorScheme.tertiary),
+            },
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: showBlackText(
+                fileName,
+                align: TextAlign.center,
+                maxLines: hasIcon ? 1 : 2,
+                overflow: TextOverflow.ellipsis,
+              ),
             ),
-            Divider(color: Theme.of(context).colorScheme.tertiary),
-          },
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0),
-            child: showBlackText(
-              fileName,
-              align: TextAlign.center,
-              maxLines: hasIcon ? 1 : 2,
-              overflow: TextOverflow.ellipsis,
-            ),
-          ),
-          sized0hx03,
-        ],
+            sized0hx03,
+          ],
+        ),
       ),
     );
   }

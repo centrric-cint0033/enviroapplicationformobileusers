@@ -37,33 +37,35 @@ class SalesDetailPage extends StatelessWidget {
           ),
         ],
       ),
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 15.w),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Align(
-              alignment: Alignment.centerRight,
-              child: CmButton(
-                onPressed: () => navigateToJobCardView(
-                  context,
-                  data?.quote?.toString() ?? "",
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 15.w),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Align(
+                alignment: Alignment.centerRight,
+                child: CmButton(
+                  onPressed: () => navigateToJobCardView(
+                    context,
+                    data?.quote?.toString() ?? "",
+                  ),
+                  text: 'Job Card',
+                  color: Appthemes.cPrimary,
+                  width: ScreenUtil().screenWidth / 3,
                 ),
-                text: 'Job Card',
-                color: Appthemes.cPrimary,
-                width: ScreenUtil().screenWidth / 3,
               ),
-            ),
-            gapField,
-            listData(data),
-            gapField,
-            CmButton(
-              text: data?.status,
-              color: Appthemes.cLightGreen,
-              width: ScreenUtil().screenWidth,
-            ),
-            const QuoteFilesListWidgetInSales()
-          ],
+              gapField,
+              listData(data),
+              gapField,
+              CmButton(
+                text: data?.status,
+                color: Appthemes.cLightGreen,
+                width: ScreenUtil().screenWidth,
+              ),
+              const QuoteFilesListWidgetInSales()
+            ],
+          ),
         ),
       ),
     );
