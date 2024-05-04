@@ -9,6 +9,38 @@ part of 'shedule_page_view_model.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$JobCardViewModel on JobCardViewModelBase, Store {
+  late final _$isImageSelectedAtom =
+      Atom(name: 'JobCardViewModelBase.isImageSelected', context: context);
+
+  @override
+  bool get isImageSelected {
+    _$isImageSelectedAtom.reportRead();
+    return super.isImageSelected;
+  }
+
+  @override
+  set isImageSelected(bool value) {
+    _$isImageSelectedAtom.reportWrite(value, super.isImageSelected, () {
+      super.isImageSelected = value;
+    });
+  }
+
+  late final _$selectedcameraImageAtom =
+      Atom(name: 'JobCardViewModelBase.selectedcameraImage', context: context);
+
+  @override
+  File? get selectedcameraImage {
+    _$selectedcameraImageAtom.reportRead();
+    return super.selectedcameraImage;
+  }
+
+  @override
+  set selectedcameraImage(File? value) {
+    _$selectedcameraImageAtom.reportWrite(value, super.selectedcameraImage, () {
+      super.selectedcameraImage = value;
+    });
+  }
+
   late final _$selectedImageAtom =
       Atom(name: 'JobCardViewModelBase.selectedImage', context: context);
 
@@ -153,6 +185,15 @@ mixin _$JobCardViewModel on JobCardViewModelBase, Store {
     });
   }
 
+  late final _$pickImageFromCameraAsyncAction =
+      AsyncAction('JobCardViewModelBase.pickImageFromCamera', context: context);
+
+  @override
+  Future<void> pickImageFromCamera() {
+    return _$pickImageFromCameraAsyncAction
+        .run(() => super.pickImageFromCamera());
+  }
+
   late final _$pickImageFromGalleryAsyncAction = AsyncAction(
       'JobCardViewModelBase.pickImageFromGallery',
       context: context);
@@ -243,6 +284,8 @@ mixin _$JobCardViewModel on JobCardViewModelBase, Store {
   @override
   String toString() {
     return '''
+isImageSelected: ${isImageSelected},
+selectedcameraImage: ${selectedcameraImage},
 selectedImage: ${selectedImage},
 greenchecked: ${greenchecked},
 bluechecked: ${bluechecked},

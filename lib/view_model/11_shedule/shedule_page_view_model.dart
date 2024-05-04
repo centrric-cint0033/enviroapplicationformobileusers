@@ -5,6 +5,7 @@ import 'package:enviro_mobile_application/model/07_Jobcard/job_card_model.dart';
 import 'package:enviro_mobile_application/model/12_shedulecard/shedule_card_resp_model.dart';
 import 'package:enviro_mobile_application/service/07_shedule/job_card/shedule_page_service.dart';
 import 'package:enviro_mobile_application/utilis/injection.dart';
+import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
 import 'package:injectable/injectable.dart';
@@ -24,6 +25,28 @@ abstract class JobCardViewModelBase with Store {
   final IJobCardService jobcardService;
 
   JobCardViewModelBase(this.jobcardService);
+
+  @observable
+  bool isImageSelected = false;
+
+  @observable
+  File? selectedcameraImage;
+
+  @action
+  Future<void> pickImageFromCamera() async {
+    final pickedImage =
+        await ImagePicker().pickImage(source: ImageSource.camera);
+    if (pickedImage != null) {
+      selectedcameraImage = File(pickedImage.path);
+      isImageSelected = true;
+
+      print('azeeembuibn');
+
+      Container(
+        child: Text('gshsh'),
+      );
+    }
+  }
 
   @observable
   File? selectedImage;

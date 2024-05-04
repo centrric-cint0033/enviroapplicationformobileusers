@@ -15,7 +15,6 @@ class ScheduleVideoAndPhotoPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      // Wrap with Center widget
       child: Scaffold(
         drawer: CmnDrawer(context),
         appBar: AppBar(
@@ -55,13 +54,21 @@ class ScheduleVideoAndPhotoPage extends StatelessWidget {
                         color: const Color.fromARGB(255, 0, 8, 14),
                         buttonTextStyle: const TextStyle(color: Colors.white),
                         onPressed: () {
-                          vmJobcard.pickImageFromGallery();
+                          vmJobcard.pickImageFromCamera();
                         },
                         text: "Upload from Camera",
                       );
                     }),
                   ),
                 ),
+                Observer(builder: (_) {
+                  return vmJobcard.selectedcameraImage != null
+                      ? SizedBox(
+                          height: 100,
+                          width: 400,
+                          child: Image.file(vmJobcard.selectedcameraImage!))
+                      : const Text('No image selected');
+                }),
                 Observer(builder: (_) {
                   return vmJobcard.selectedImage != null
                       ? SizedBox(
