@@ -208,9 +208,11 @@ abstract class $AppRouter extends _i30.RootStackRouter {
       );
     },
     ScheduleVideoAndPhotoRoute.name: (routeData) {
+      final args = routeData.argsAs<ScheduleVideoAndPhotoRouteArgs>(
+          orElse: () => const ScheduleVideoAndPhotoRouteArgs());
       return _i30.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i18.ScheduleVideoAndPhotoPage(),
+        child: _i18.ScheduleVideoAndPhotoPage(key: args.key),
       );
     },
     SheduleCommentRoute.name: (routeData) {
@@ -699,16 +701,32 @@ class ScheduleRoute extends _i30.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i18.ScheduleVideoAndPhotoPage]
-class ScheduleVideoAndPhotoRoute extends _i30.PageRouteInfo<void> {
-  const ScheduleVideoAndPhotoRoute({List<_i30.PageRouteInfo>? children})
-      : super(
+class ScheduleVideoAndPhotoRoute
+    extends _i30.PageRouteInfo<ScheduleVideoAndPhotoRouteArgs> {
+  ScheduleVideoAndPhotoRoute({
+    _i31.Key? key,
+    List<_i30.PageRouteInfo>? children,
+  }) : super(
           ScheduleVideoAndPhotoRoute.name,
+          args: ScheduleVideoAndPhotoRouteArgs(key: key),
           initialChildren: children,
         );
 
   static const String name = 'ScheduleVideoAndPhotoRoute';
 
-  static const _i30.PageInfo<void> page = _i30.PageInfo<void>(name);
+  static const _i30.PageInfo<ScheduleVideoAndPhotoRouteArgs> page =
+      _i30.PageInfo<ScheduleVideoAndPhotoRouteArgs>(name);
+}
+
+class ScheduleVideoAndPhotoRouteArgs {
+  const ScheduleVideoAndPhotoRouteArgs({this.key});
+
+  final _i31.Key? key;
+
+  @override
+  String toString() {
+    return 'ScheduleVideoAndPhotoRouteArgs{key: $key}';
+  }
 }
 
 /// generated route for

@@ -1,8 +1,11 @@
+import 'dart:io';
+
 import 'package:enviro_mobile_application/api_response/api_response.dart';
 import 'package:enviro_mobile_application/model/07_Jobcard/job_card_model.dart';
 import 'package:enviro_mobile_application/model/12_shedulecard/shedule_card_resp_model.dart';
 import 'package:enviro_mobile_application/service/07_shedule/job_card/shedule_page_service.dart';
 import 'package:enviro_mobile_application/utilis/injection.dart';
+import 'package:image_picker/image_picker.dart';
 
 import 'package:injectable/injectable.dart';
 import 'package:mobx/mobx.dart';
@@ -21,6 +24,18 @@ abstract class JobCardViewModelBase with Store {
   final IJobCardService jobcardService;
 
   JobCardViewModelBase(this.jobcardService);
+
+  @observable
+  File? selectedImage;
+
+  @action
+  Future<void> pickImageFromGallery() async {
+    final pickedImage =
+        await ImagePicker().pickImage(source: ImageSource.gallery);
+    if (pickedImage != null) {
+      selectedImage = File(pickedImage.path);
+    }
+  }
 
   @observable
   bool greenchecked = true;
