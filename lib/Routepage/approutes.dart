@@ -67,7 +67,7 @@ class AppRouter extends $AppRouter {
             page: SheduleCommentRoute.page,
             path: RouteNames.rshedulecommandstatus),
         AutoRoute(
-            page: SheduleVedeoandPhotoRoute.page,
+            page: ScheduleVideoAndPhotoRoute.page,
             path: RouteNames.rshedulevedeoandphoto),
       ];
 }

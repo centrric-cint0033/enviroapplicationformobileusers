@@ -31,8 +31,6 @@ import 'package:enviro_mobile_application/view/04_ohs/oh&s_detail_page.dart'
 import 'package:enviro_mobile_application/view/04_ohs/ohs_page.dart' as _i13;
 import 'package:enviro_mobile_application/view/07_intranet/intranet_inside_page.dart'
     as _i5;
-import 'package:enviro_mobile_application/view/07_intranet/intranet_page.dart'
-    as _i6;
 import 'package:enviro_mobile_application/view/08_notification_page/notification_page.dart'
     as _i11;
 import 'package:enviro_mobile_application/view/08_team/add_team_page.dart'
@@ -52,9 +50,9 @@ import 'package:enviro_mobile_application/view/10_shedule/jobcard_page.dart'
 import 'package:enviro_mobile_application/view/10_shedule/shedule_calender_page.dart'
     as _i2;
 import 'package:enviro_mobile_application/view/10_shedule/shedule_cmra_vdo_page.dart'
-    as _i19;
-import 'package:enviro_mobile_application/view/10_shedule/shedule_comment_page.dart'
     as _i18;
+import 'package:enviro_mobile_application/view/10_shedule/shedule_comment_page.dart'
+    as _i19;
 import 'package:enviro_mobile_application/view/10_shedule/shedule_detail_page.dart'
     as _i20;
 import 'package:enviro_mobile_application/view/10_shedule/shedule_detail_page2.dart'
@@ -70,6 +68,8 @@ import 'package:enviro_mobile_application/view/10_site/site_detail_screen.dart'
 import 'package:enviro_mobile_application/view/10_site/site_main_screen.dart'
     as _i23;
 import 'package:enviro_mobile_application/view/home_page.dart' as _i4;
+import 'package:enviro_mobile_application/view/intranet_page/intranet_page.dart'
+    as _i6;
 import 'package:enviro_mobile_application/view_model/10_site/site_view_model.dart'
     as _i34;
 import 'package:flutter/material.dart' as _i31;
@@ -207,16 +207,16 @@ abstract class $AppRouter extends _i30.RootStackRouter {
         child: const _i17.SchedulePage(),
       );
     },
+    ScheduleVideoAndPhotoRoute.name: (routeData) {
+      return _i30.AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const _i18.ScheduleVideoAndPhotoPage(),
+      );
+    },
     SheduleCommentRoute.name: (routeData) {
       return _i30.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i18.SheduleCommentPage(),
-      );
-    },
-    SheduleVedeoandPhotoRoute.name: (routeData) {
-      return _i30.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const _i19.SheduleVedeoandPhotoPage(),
+        child: const _i19.SheduleCommentPage(),
       );
     },
     SheduledetailRoute.name: (routeData) {
@@ -698,7 +698,21 @@ class ScheduleRoute extends _i30.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i18.SheduleCommentPage]
+/// [_i18.ScheduleVideoAndPhotoPage]
+class ScheduleVideoAndPhotoRoute extends _i30.PageRouteInfo<void> {
+  const ScheduleVideoAndPhotoRoute({List<_i30.PageRouteInfo>? children})
+      : super(
+          ScheduleVideoAndPhotoRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'ScheduleVideoAndPhotoRoute';
+
+  static const _i30.PageInfo<void> page = _i30.PageInfo<void>(name);
+}
+
+/// generated route for
+/// [_i19.SheduleCommentPage]
 class SheduleCommentRoute extends _i30.PageRouteInfo<void> {
   const SheduleCommentRoute({List<_i30.PageRouteInfo>? children})
       : super(
@@ -707,20 +721,6 @@ class SheduleCommentRoute extends _i30.PageRouteInfo<void> {
         );
 
   static const String name = 'SheduleCommentRoute';
-
-  static const _i30.PageInfo<void> page = _i30.PageInfo<void>(name);
-}
-
-/// generated route for
-/// [_i19.SheduleVedeoandPhotoPage]
-class SheduleVedeoandPhotoRoute extends _i30.PageRouteInfo<void> {
-  const SheduleVedeoandPhotoRoute({List<_i30.PageRouteInfo>? children})
-      : super(
-          SheduleVedeoandPhotoRoute.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'SheduleVedeoandPhotoRoute';
 
   static const _i30.PageInfo<void> page = _i30.PageInfo<void>(name);
 }

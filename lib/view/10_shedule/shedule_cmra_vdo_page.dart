@@ -1,13 +1,27 @@
+import 'dart:io';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:enviro_mobile_application/widgets/cmbutton.dart';
 import 'package:enviro_mobile_application/widgets/cmn_action_icon.dart';
 import 'package:enviro_mobile_application/widgets/cmn_title_textwidget.dart';
 import 'package:enviro_mobile_application/widgets/drawer.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:image_picker/image_picker.dart';
 
 @RoutePage()
-class SheduleVedeoandPhotoPage extends StatelessWidget {
-  const SheduleVedeoandPhotoPage({super.key});
+class ScheduleVideoAndPhotoPage extends StatefulWidget {
+  const ScheduleVideoAndPhotoPage({Key? key}) : super(key: key);
+
+  @override
+  _ScheduleVideoAndPhotoPageState createState() =>
+      _ScheduleVideoAndPhotoPageState();
+}
+
+class _ScheduleVideoAndPhotoPageState extends State<ScheduleVideoAndPhotoPage> {
+  final ImagePicker _imagePicker = ImagePicker();
+  File? selectedImage;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,13 +39,17 @@ class SheduleVedeoandPhotoPage extends StatelessWidget {
               child: Row(
                 children: [
                   Expanded(
-                    child: CmButton(
-                      borderRadius: 0,
-                      color: const Color.fromARGB(255, 0, 8, 14),
-                      buttonTextStyle: const TextStyle(color: Colors.white),
-                      onPressed: () {},
-                      text: "Upload from Gallery",
-                    ),
+                    child: Observer(builder: (_) {
+                      return CmButton(
+                        borderRadius: 0,
+                        color: const Color.fromARGB(255, 0, 8, 14),
+                        buttonTextStyle: const TextStyle(color: Colors.white),
+                        onPressed: () {
+                          pickImageFromGallery();
+                        },
+                        text: "Upload from Gallery",
+                      );
+                    }),
                   ),
                 ],
               ),
@@ -42,21 +60,46 @@ class SheduleVedeoandPhotoPage extends StatelessWidget {
               child: Row(
                 children: [
                   Expanded(
-                    child: CmButton(
-                      borderRadius: 0,
-                      // icon: Icons.add_a_photo,
-                      color: const Color.fromARGB(255, 0, 8, 14),
-                      buttonTextStyle: const TextStyle(color: Colors.white),
-                      onPressed: () {},
-                      text: "Upload from Camera",
-                    ),
+                    child: Observer(builder: (_) {
+                      return CmButton(
+                        borderRadius: 0,
+                        color: const Color.fromARGB(255, 0, 8, 14),
+                        buttonTextStyle: const TextStyle(color: Colors.white),
+                        onPressed: () {
+                          pickImageFromCamera();
+                        },
+                        text: "Upload from Camera",
+                      );
+                    }),
                   ),
                 ],
               ),
             ),
+            selectedImage != null
+                ? Container(child: Image.file(selectedImage!))
+                : const Text('No image selected'),
           ],
         ),
       ),
     );
+  }
+
+  Future<void> pickImageFromGallery() async {
+    final pickedFile =
+        await _imagePicker.pickImage(source: ImageSource.gallery);
+    if (pickedFile != null) {
+      setState(() {
+        selectedImage = File(pickedFile.path);
+      });
+    }
+  }
+
+  Future<void> pickImageFromCamera() async {
+    final pickedFile = await _imagePicker.pickImage(source: ImageSource.camera);
+    if (pickedFile != null) {
+      setState(() {
+        selectedImage = File(pickedFile.path);
+      });
+    }
   }
 }
