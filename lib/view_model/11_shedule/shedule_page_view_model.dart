@@ -27,11 +27,10 @@ abstract class JobCardViewModelBase with Store {
   JobCardViewModelBase(this.jobcardService);
 
   @observable
-  bool isImageSelected = false;
+  bool isImageSelected = true;
 
   @observable
   File? selectedcameraImage;
-
   @action
   Future<void> pickImageFromCamera() async {
     final pickedImage =
@@ -40,11 +39,7 @@ abstract class JobCardViewModelBase with Store {
       selectedcameraImage = File(pickedImage.path);
       isImageSelected = true;
 
-      print('azeeembuibn');
-
-      Container(
-        child: Text('gshsh'),
-      );
+      print('Image selected');
     }
   }
 

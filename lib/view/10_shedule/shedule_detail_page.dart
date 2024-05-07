@@ -138,61 +138,89 @@ class SheduledetailPage extends StatelessWidget {
                       child: Card(
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                            children: [
-                              const Align(
-                                alignment: Alignment.topLeft,
-                                child: Text(
-                                  'Current Job Status',
-                                  style: TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.blue,
+                          child: Observer(builder: (_) {
+                            return Column(
+                              children: [
+                                const Align(
+                                  alignment: Alignment.topLeft,
+                                  child: Text(
+                                    'Current Job Status',
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.blue,
+                                    ),
                                   ),
                                 ),
-                              ),
-                              const SizedBox(height: 20),
-                              expandedRowsShowingText(
-                                "Departed Enviro facility",
                                 vmJobcard.sheduleweekResponse.data?[index]
-                                    .departEnviroFacility,
-                              ),
-                              const SizedBox(height: 20),
-                              expandedRowsShowingText(
-                                "Job Started",
+                                            .departEnviroFacility !=
+                                        null
+                                    ? expandedRowsShowingText(
+                                        "Departed enviro facility",
+                                        vmJobcard
+                                                .sheduleweekResponse
+                                                .data?[index]
+                                                .departEnviroFacility ??
+                                            '',
+                                      )
+                                    : const SizedBox(height: 20),
                                 vmJobcard.sheduleweekResponse.data?[index]
-                                        .startJob ??
-                                    '',
-                              ),
-                              const SizedBox(height: 20),
-                              expandedRowsShowingText(
-                                "job finished",
+                                            .startJob !=
+                                        null
+                                    ? expandedRowsShowingText(
+                                        "job startedd",
+                                        vmJobcard.sheduleweekResponse
+                                                .data?[index].startJob ??
+                                            '',
+                                      )
+                                    : const SizedBox(height: 20),
                                 vmJobcard.sheduleweekResponse.data?[index]
-                                        .finishJob ??
-                                    '',
-                              ),
-                              const SizedBox(height: 20),
-                              expandedRowsShowingText(
-                                "job completed",
+                                            .finishJob !=
+                                        null
+                                    ? expandedRowsShowingText(
+                                        "job finished",
+                                        vmJobcard.sheduleweekResponse
+                                                .data?[index].finishJob ??
+                                            '',
+                                      )
+                                    : const SizedBox(height: 20),
                                 vmJobcard.sheduleweekResponse.data?[index]
-                                        .completed ??
-                                    '',
-                              ),
-                              const SizedBox(height: 20),
-                              expandedRowsShowingText(
-                                  "Arrived at waste Depot",
-                                  vmJobcard.sheduleweekResponse.data?[index]
-                                          .arriveAtWasteDepot ??
-                                      ''),
-                              const SizedBox(height: 20),
-                              expandedRowsShowingText(
-                                "Departed from waste Depot",
+                                            .finishJob !=
+                                        null
+                                    ? expandedRowsShowingText(
+                                        "job Completed",
+                                        vmJobcard.sheduleweekResponse
+                                                .data?[index].completed ??
+                                            '',
+                                      )
+                                    : const SizedBox(height: 20),
                                 vmJobcard.sheduleweekResponse.data?[index]
-                                        .departWasteDepot ??
-                                    '',
-                              ),
-                            ],
-                          ),
+                                            .arriveAtWasteDepot !=
+                                        null
+                                    ? expandedRowsShowingText(
+                                        "Arrived at waste Depot",
+                                        vmJobcard
+                                                .sheduleweekResponse
+                                                .data?[index]
+                                                .arriveAtWasteDepot ??
+                                            '',
+                                      )
+                                    : const SizedBox(height: 20),
+                                vmJobcard.sheduleweekResponse.data?[index]
+                                            .departWasteDepot !=
+                                        null
+                                    ? expandedRowsShowingText(
+                                        "Departed from Wastedepot",
+                                        vmJobcard
+                                                .sheduleweekResponse
+                                                .data?[index]
+                                                .departWasteDepot ??
+                                            '',
+                                      )
+                                    : const SizedBox(height: 20),
+                              ],
+                            );
+                          }),
                         ),
                       ),
                     ),

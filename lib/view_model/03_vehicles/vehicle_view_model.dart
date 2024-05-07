@@ -31,10 +31,8 @@ abstract class VehicleViewModelBase with Store {
   Timer? debouce;
 
   void onTextChanged(Function() function) {
-    // Clear the previous debounce timer
     if (debouce?.isActive ?? false) debouce?.cancel();
 
-    // Set up a new debounce timer
     debouce = Timer(const Duration(milliseconds: 500), () => function());
   }
 
