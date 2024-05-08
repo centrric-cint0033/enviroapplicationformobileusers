@@ -203,12 +203,14 @@ class SchedulePage extends StatelessWidget {
                                                     ?.clientName ??
                                                 '',
                                           ),
-                                          expandedRowShowText2(
-                                            "Status",
-                                            vmJobcard.shedulecardResponse
-                                                    .data?[i].status ??
-                                                '',
-                                          ),
+                                          (vmJobcard.shedulecardResponse.data !=
+                                                      null &&
+                                                  vmJobcard.shedulecardResponse
+                                                          .data?[i].status !=
+                                                      null)
+                                              ? expandedRowShowText2(
+                                                  "Status", "finished Job")
+                                              : Container()
                                         ],
                                       ),
                                     );
