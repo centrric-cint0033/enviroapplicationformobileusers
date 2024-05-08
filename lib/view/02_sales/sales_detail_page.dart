@@ -1,3 +1,4 @@
+import 'package:enviro_mobile_application/view_model/11_shedule/shedule_page_view_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
@@ -11,7 +12,7 @@ import 'package:enviro_mobile_application/view/02_sales/sales_widgets.dart/sales
 
 import '../../Routepage/routespage.dart';
 import '../../view_model/02_sales/sales_view_model.dart';
-import '../../view_model/11_job_card/job_card_view_model.dart';
+
 import 'sales_widgets.dart/quote_files_list_widget_in_sales.dart';
 
 @RoutePage()
@@ -46,7 +47,7 @@ class SalesDetailPage extends StatelessWidget {
               Align(
                 alignment: Alignment.centerRight,
                 child: CmButton(
-                  onPressed: () => navigateToJobCardView(
+                  onPressed: () => (
                     context,
                     data?.quote?.toString() ?? "",
                   ),
@@ -87,7 +88,7 @@ class SalesDetailPage extends StatelessWidget {
   }
 }
 
-void navigateToJobCardView(BuildContext context, String id) {
-  vmJobcard.getJobCard(id: id);
-  context.router.pushNamed(RouteNames.rjobcardpage);
-}
+// void navigateToJobCardView(BuildContext context, String id) {
+//   vmJobcard.getJobCard(id: id);
+//   context.router.pushNamed(RouteNames.rjobcardpage);
+// }

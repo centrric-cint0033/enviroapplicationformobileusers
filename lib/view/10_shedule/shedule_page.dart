@@ -1,18 +1,17 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:enviro_mobile_application/Routepage/routespage.dart';
-import 'package:enviro_mobile_application/model/12_shedulecard/shedule_card_resp_model.dart';
 import 'package:enviro_mobile_application/view/10_shedule/shedule_widget.dart';
 import 'package:enviro_mobile_application/view_model/10_profile/profile_view_model.dart';
+
 import 'package:enviro_mobile_application/view_model/11_shedule/shedule_page_view_model.dart';
 import 'package:enviro_mobile_application/widgets/cmn_action_icon.dart';
 import 'package:enviro_mobile_application/widgets/cmn_title_textwidget.dart';
-import 'package:enviro_mobile_application/widgets/ww_customLoading.dart';
+
 import 'package:enviro_mobile_application/widgets/ww_response_handler.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:intl/intl.dart';
 
-import '../../model/12_shedulecard/shedule_card_resp_model.dart';
 import '../../widgets/drawer.dart';
 
 @RoutePage()
@@ -86,26 +85,50 @@ class SchedulePage extends StatelessWidget {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 20, vertical: 20),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Padding(
-                                          padding:
-                                              const EdgeInsets.only(left: 68.0),
-                                          child: Observer(builder: (_) {
-                                            return Text(
-                                              vmJobcard.shedulecardResponse
-                                                      .data?[i].salesPerson
-                                                      ?.toString() ??
-                                                  '',
-                                            );
-                                          }),
-                                        ),
-                                        ElevatedButton(
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Observer(builder: (_) {
+                                        return Row(
+                                          children: [
+                                            const SizedBox(width: 8),
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  left: 13.0),
+                                              child: CircleAvatar(
+                                                radius: 14,
+                                                child: vmJobcard
+                                                            .shedulecardResponse
+                                                            .data?[i]
+                                                            .client
+                                                            ?.dp !=
+                                                        null
+                                                    ? Image.network(
+                                                        "${vmJobcard.shedulecardResponse.data![i].client?.dp}",
+                                                        fit: BoxFit.cover,
+                                                      )
+                                                    : Container(),
+                                              ),
+                                            ),
+                                          ],
+                                        );
+                                      }),
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(left: 18.0),
+                                        child: Observer(builder: (_) {
+                                          return Text(
+                                            vmJobcard.shedulecardResponse
+                                                    .data?[i].salesPerson
+                                                    ?.toString() ??
+                                                '',
+                                          );
+                                        }),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: ElevatedButton(
                                           onPressed: () {
                                             nextjobfnction(context);
                                           },
@@ -121,8 +144,8 @@ class SchedulePage extends StatelessWidget {
                                             ),
                                           ),
                                         ),
-                                      ],
-                                    ),
+                                      ),
+                                    ],
                                   ),
                                   Observer(builder: (_) {
                                     return Padding(
