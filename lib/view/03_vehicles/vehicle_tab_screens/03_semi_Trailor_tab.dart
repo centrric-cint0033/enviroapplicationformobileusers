@@ -19,16 +19,17 @@ class SemiTrailersTab extends StatelessWidget {
     return Scaffold(
       body: Column(
         children: [
-          WWSearchField(
+          WWTextField(
             controller: vmVehicle.vehicleTextCtr,
             onChanged: _onChanged,
-            searchTap: () {},
+            suffixTap: () {},
           ),
           gapFieldVeh,
           Observer(builder: (_) {
             return Expanded(
                 child: WWResponseHandler(
                     data: vmVehicle.semiTrailorApiResponse,
+                    onRefresh: () async => vmVehicle.semiTrailorApi(),
                     isEmpty:
                         vmVehicle.semiTrailorApiResponse.data?.isEmpty ?? true,
                     onTap: () => vmVehicle.vehicleTextCtr.text.isNotEmpty

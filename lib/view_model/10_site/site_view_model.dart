@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:enviro_mobile_application/utilis/api_endpoints/customprint.dart';
 import 'package:mobx/mobx.dart';
 import 'package:flutter/material.dart';
@@ -25,6 +27,18 @@ abstract class SiteViewModelBase with Store {
   final ISiteService siteService;
   SiteViewModelBase(this.siteService);
 
+  TextEditingController siteFolderCtr = TextEditingController();
+
+  Timer? debouce;
+
+  void onTextChanged(Function() function) {
+    // Clear the previous debounce timer
+    if (debouce?.isActive ?? false) debouce?.cancel();
+
+    // Set up a new debounce timer
+    debouce = Timer(const Duration(milliseconds: 500), () => function());
+  }
+
   @observable
   ApiResponse<List<SiteResModel>> permanentSiteResponse =
       ApiResponse<List<SiteResModel>>();
@@ -46,6 +60,8 @@ abstract class SiteViewModelBase with Store {
   ScrollController permanentSitesController = ScrollController();
 
   TextEditingController searchCtr = TextEditingController();
+
+  int selectedTab = 0;
 
   @observable
   bool detailLoading = false;
@@ -70,10 +86,7 @@ abstract class SiteViewModelBase with Store {
     response.fold(
       (l) {
         permanentSiteResponse = permanentSiteResponse.copyWith(
-          error: l,
-          loading: false,
-          paginationLoading: false,
-        );
+            errors: l, loading: false, paginationLoading: false);
       },
       (res) {
         List<SiteResModel> sites = permanentSiteResponse.data?.toList() ?? [];
@@ -108,10 +121,7 @@ abstract class SiteViewModelBase with Store {
     response.fold(
       (l) {
         tempSiteResponse = tempSiteResponse.copyWith(
-          error: l,
-          loading: false,
-          paginationLoading: false,
-        );
+            errors: l, loading: false, paginationLoading: false);
       },
       (res) {
         List<SiteResModel> sites = tempSiteResponse.data?.toList() ?? [];
@@ -146,10 +156,7 @@ abstract class SiteViewModelBase with Store {
     response.fold(
       (l) {
         delSiteResponse = delSiteResponse.copyWith(
-          error: l,
-          loading: false,
-          paginationLoading: false,
-        );
+            errors: l, loading: false, paginationLoading: false);
       },
       (res) {
         List<SiteResModel> sites = delSiteResponse.data?.toList() ?? [];
@@ -282,26 +289,17 @@ abstract class SiteViewModelBase with Store {
 
   @action
   Future<void> getSiteFolders({required int id}) async {
-    siteFolderResponse = siteFolderResponse.copyWith(
-      error: null,
-      loading: true,
-    );
-
+    siteFolderResponse =
+        siteFolderResponse.copyWith(errors: null, loading: true);
     final response = await siteService.getSiteFolders(id: id);
-
     response.fold(
       (l) {
-        siteFolderResponse = siteFolderResponse.copyWith(
-          error: l,
-          loading: false,
-        );
+        siteFolderResponse =
+            siteFolderResponse.copyWith(errors: l, loading: false);
       },
       (res) {
         siteFolderResponse = siteFolderResponse.copyWith(
-          data: res,
-          error: null,
-          loading: false,
-        );
+            data: res, errors: null, loading: false);
       },
     );
   }
@@ -313,9 +311,7 @@ abstract class SiteViewModelBase with Store {
   }) async {
     customPrint(content: key);
     customPrint(content: type);
-
-    final response = await siteService.searchSites(key: key);
-
+    final response = await siteService.searchSitesServiceApi(key: key);
     response.fold(
       (l) {},
       (res) {
@@ -341,19 +337,19 @@ abstract class SiteViewModelBase with Store {
 
   @action
   Future<void> searchSiteFolders({required String key}) async {
+    siteFolderResponse =
+        siteFolderResponse.copyWith(errors: null, loading: true);
     final response = await siteService.searchSiteFolder(key: key);
     response.fold(
       (l) {
-        siteFolderResponse = siteFolderResponse.copyWith(
-          error: l,
-          loading: false,
-        );
+        siteFolderResponse =
+            siteFolderResponse.copyWith(errors: l, loading: false);
       },
       (res) {
         FolderResModel? data = siteFolderResponse.data;
         FolderListModel? model = data?.folders?.first;
         siteFolderResponse = siteFolderResponse.copyWith(
-          error: null,
+          errors: null,
           loading: false,
           data: data?.copyWith(
             folders: [if (model != null) model.copyWith(folders: res)],
@@ -369,15 +365,10 @@ abstract class SiteViewModelBase with Store {
       error: null,
       loading: true,
     );
-
     final response = await siteService.getWasteTypeInSites(id: id);
-
     response.fold(
       (l) {
-        wasteTypesInSite = wasteTypesInSite.copyWith(
-          error: l,
-          loading: false,
-        );
+        wasteTypesInSite = wasteTypesInSite.copyWith(errors: l, loading: false);
       },
       (res) {
         wasteTypesInSite = wasteTypesInSite.copyWith(

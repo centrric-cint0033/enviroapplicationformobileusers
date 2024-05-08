@@ -64,9 +64,7 @@ class HttpService {
     });
   }
 
-  bool isFilePath(String path) {
-    return File(path).existsSync();
-  }
+  bool isFilePath(String path) => File(path).existsSync();
 
   Future<Either<Map<MainFailure, dynamic>, Response>> multipartRequest({
     MultipartRequest? mRequest,
@@ -93,11 +91,9 @@ class HttpService {
 
       if (data != null) {
         data.forEach((key, value) async {
-          if (value != null && value.isNotEmpty) {
-            customPrint(content: '$key : $value ${value is String}');
-            if (isFilePath(value)) {
-              request.files
-                  .add(await MultipartFile.fromPath(key, value.toString()));
+          if (value != null && value != '') {
+            if (value is String && isFilePath(value)) {
+              request.files.add(await MultipartFile.fromPath(key, value));
             } else {
               request.fields[key] = value.toString();
             }

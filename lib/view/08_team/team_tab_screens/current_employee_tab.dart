@@ -16,12 +16,12 @@ class CurrentEmployeeTab extends StatelessWidget {
     return Scaffold(
         body: Column(children: [
       sized0hx10,
-      WWSearchField(
+      WWTextField(
         controller: vmTeam.currentEmployeeSearchCntrlr,
         onChanged: (v) => vmTeam.onTextChanged(() => v.isEmpty
             ? vmTeam.getCurrentEmployee()
             : vmTeam.currentEmployeeSearchApi(v)),
-        searchTap: () {},
+        suffixTap: () {},
         hintText: 'Search Employee',
       ),
       sized0hx10,

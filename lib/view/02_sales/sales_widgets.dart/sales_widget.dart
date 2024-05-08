@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:enviro_mobile_application/utilis/Appthemes.dart';
 import 'package:enviro_mobile_application/utilis/constant.dart';
-import 'package:enviro_mobile_application/widgets/widgets.dart';
+import 'package:enviro_mobile_application/widgets/01_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -54,27 +54,32 @@ Row expandedRowShowText1(String firsValue, String secondValue) => Row(
       ],
     );
 
-Expanded imageAndName(String image) => Expanded(
-    flex: 2,
-    child: Column(children: [
-      CachedNetworkImage(
-        imageUrl: image,
-        height: 60.w,
-        width: 60.w,
+Expanded imageAndName(String image, String name) => Expanded(
+      flex: 3,
+      child: Column(
+        children: [
+          CachedNetworkImage(
+            imageUrl: image,
+            height: 60.w,
+            width: 60.w,
+          ),
+          gapField,
+          showBlueText(name, maxLines: 2, overflow: TextOverflow.ellipsis)
+        ],
       ),
-      gapField,
-      showBlueText('Name')
-    ]));
+    );
 
-Widget buildCardDataOrder(List<Widget> widget, {String? image}) => customCard(
-    child: Padding(
+Widget buildCardDataOrder(List<Widget> widget, {String? image, String? name}) =>
+    customCard(
+      child: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Row(children: [
-          if (image != null) ...[
-            imageAndName(image),
-            sized0wx10,
-          ],
-          Expanded(
+        child: Row(
+          children: [
+            if (image != null) ...[
+              imageAndName(image, name ?? ""),
+              sized0wx10,
+            ],
+            Expanded(
               flex: 7,
               child: ListView.separated(
                 physics: const NeverScrollableScrollPhysics(),
@@ -82,5 +87,9 @@ Widget buildCardDataOrder(List<Widget> widget, {String? image}) => customCard(
                 itemCount: widget.length,
                 itemBuilder: (context, index) => widget[index],
                 shrinkWrap: true,
-              )),
-        ])));
+              ),
+            ),
+          ],
+        ),
+      ),
+    );

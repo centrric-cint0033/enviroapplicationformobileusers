@@ -142,11 +142,10 @@ void onsalesfunction(BuildContext context) async {
 }
 
 void ohsfunction(BuildContext context) {
-  vmProfile.profileviewmodelfunction();
+  // vmProfile.profileviewmodelfunction();
   context.router.pushNamed(RouteNames.ohsPage);
-  customPrint(content: 'ohs');
-  vmOhs.ohsnotificationviewmodelfunction();
-  vmOhs.ohsnewsviewmodelfunction();
+  vmOhs.ohsNotificationApi();
+  vmOhs.ohsNewsApi();
   vmOhs.ohsnewsfolderviewmodelfunction(1);
 }
 

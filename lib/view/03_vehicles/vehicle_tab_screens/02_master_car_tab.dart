@@ -16,16 +16,17 @@ class MasterCarTab extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         body: Column(children: [
-      WWSearchField(
+      WWTextField(
         controller: vmVehicle.vehicleTextCtr,
         onChanged: _onChanged,
-        searchTap: () {},
+        suffixTap: () {},
       ),
       gapFieldVeh,
       Observer(builder: (_) {
         return Expanded(
             child: WWResponseHandler(
                 data: vmVehicle.masterCarApiResponse,
+                onRefresh: () async => vmVehicle.masterCarApi(),
                 isEmpty: vmVehicle.masterCarApiResponse.data?.isEmpty ?? true,
                 onTap: () => vmVehicle.vehicleTextCtr.text.isNotEmpty
                     ? vmVehicle

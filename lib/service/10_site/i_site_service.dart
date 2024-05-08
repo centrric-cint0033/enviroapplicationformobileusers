@@ -6,30 +6,35 @@ import '../../model/10_site/folder_res_model/folder_res_model.dart';
 import '../../model/02_sales/waste_type_model/waste_type_model.dart';
 
 abstract class ISiteService {
-  Future<Either<MainFailure, List<SiteResModel>>> getPermanantSites({
+  Future<Either<Map<MainFailure, dynamic>, List<SiteResModel>>>
+      getPermanantSites({
     int? page,
   });
-  Future<Either<MainFailure, List<SiteResModel>>> getTemporarySites({
+  Future<Either<Map<MainFailure, dynamic>, List<SiteResModel>>>
+      getTemporarySites({
     int? page,
   });
-  Future<Either<MainFailure, List<SiteResModel>>> getDeletedSites({
+  Future<Either<Map<MainFailure, dynamic>, List<SiteResModel>>>
+      getDeletedSites({
     int? page,
   });
-  Future<Either<MainFailure, SiteResModel>> getSiteDetails({
+  Future<Either<Map<MainFailure, dynamic>, SiteResModel>> getSiteDetails({
     required int id,
   });
-  Future<Either<MainFailure, FolderResModel>> getSiteFolders({
+  Future<Either<Map<MainFailure, dynamic>, FolderResModel>> getSiteFolders({
     required int id,
   });
 
-  Future<Either<MainFailure, List<SiteResModel>>> searchSites({
+  Future<Either<Map<MainFailure, dynamic>, List<SiteResModel>>>
+      searchSitesServiceApi({
     required String key,
   });
-  Future<Either<MainFailure, List<Folder>>> searchSiteFolder({
+  Future<Either<Map<MainFailure, dynamic>, List<Folder>>> searchSiteFolder({
     required String key,
   });
 
-  Future<Either<MainFailure, List<WasteTypeModel>>> getWasteTypeInSites({
+  Future<Either<Map<MainFailure, dynamic>, List<WasteTypeModel>>>
+      getWasteTypeInSites({
     required int id,
   });
 }

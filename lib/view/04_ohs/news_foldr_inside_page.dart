@@ -1,6 +1,5 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:enviro_mobile_application/model/04_ohs/oh&s_resp_model.dart';
-import 'package:enviro_mobile_application/model/04_ohs/oh&snews_fldr_model.dart';
+import 'package:enviro_mobile_application/model/00_common_model/folder_model/folder_model.dart';
 import 'package:enviro_mobile_application/view_model/04_ohs/ohs_view_model.dart';
 import 'package:enviro_mobile_application/widgets/cmn_action_icon.dart';
 import 'package:enviro_mobile_application/widgets/cmn_title_textwidget.dart';
@@ -8,10 +7,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
 @RoutePage()
-class NewsPageInsidePage extends StatelessWidget {
+class NewsOhsFolderInsidePage extends StatelessWidget {
   final int parentId;
 
-  const NewsPageInsidePage({Key? key, required this.parentId})
+  const NewsOhsFolderInsidePage({Key? key, required this.parentId})
       : super(key: key);
 
   @override
@@ -34,12 +33,12 @@ class NewsPageInsidePage extends StatelessWidget {
             child: Observer(builder: (_) {
               final response = vmOhs.newspagefolderinsideResponse.data;
               if (response != null) {
-                final List<OhsNewsfldrRespModelFolder> folders =
-                    response.folders;
-                if (folders.isNotEmpty) {
-                  final List<FolderFolder> subFolders = folders[0].folders;
+                final List<FolderModel>? folders = response.folders;
+                if (folders?.isNotEmpty ?? false) {
+                  final List<FolderModel> subFolders =
+                      folders![0].folders ?? [];
                   if (subFolders.isNotEmpty) {
-                    final String folderName = subFolders[0].name;
+                    final String folderName = subFolders[0].name ?? '';
                     return Text(
                       folderName,
                       style: const TextStyle(
@@ -98,31 +97,31 @@ class NewsPageInsidePage extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 14),
-          Expanded(
-            child: Observer(builder: (_) {
-              final response = vmOhs.newspagefolderinsideResponse.data;
-              if (response != null) {
-                final List<OhsNewsfldrRespModelFolder> folders =
-                    response.folders;
-                if (folders.isNotEmpty) {
-                  final List<FolderFolder> subFolders = folders[0].folders;
-                  return ListView.separated(
-                    shrinkWrap: true,
-                    itemCount: subFolders.length,
-                    physics: const NeverScrollableScrollPhysics(),
-                    separatorBuilder: (BuildContext context, int index) =>
-                        const SizedBox(height: 6.0),
-                    itemBuilder: (BuildContext context, int index) {
-                      final folderName = subFolders[index].name;
-                      return _buildCard(
-                          folderName, context, subFolders[index].id);
-                    },
-                  );
-                }
-              }
-              return const SizedBox();
-            }),
-          ),
+          // Expanded(
+          //   child: Observer(builder: (_) {
+          //     final response = vmOhs.newspagefolderinsideResponse.data;
+          //     if (response != null) {
+          //       final List<FolderModel> folders = response.folders ?? [];
+          //       if (folders.isNotEmpty) {
+          //         final List<FolderListModel> subFolders =
+          //             folders[0 ;
+          //         return ListView.separated(
+          //           shrinkWrap: true,
+          //           itemCount: subFolders.length,
+          //           physics: const NeverScrollableScrollPhysics(),
+          //           separatorBuilder: (BuildContext context, int index) =>
+          //               const SizedBox(height: 6.0),
+          //           itemBuilder: (BuildContext context, int index) {
+          //             final folderName = subFolders[index].name;
+          //             return _buildCard(
+          //                 folderName, context, subFolders[index].id);
+          //           },
+          //         );
+          //       }
+          //     }
+          //     return const SizedBox();
+          //   }),
+          // ),
         ],
       ),
     );
@@ -271,8 +270,8 @@ class NewsPageInsidePage extends StatelessWidget {
                                     if (folderName.isNotEmpty) {
                                       print('iiiiii');
 
-                                      vmOhs.folderrenameviewmodelfunction(
-                                          folderName, id);
+                                      vmOhs.ohsFolerRenameApi(
+                                          context, folderName, id);
                                       print('api');
                                     } else {}
                                     Navigator.of(context).pop();

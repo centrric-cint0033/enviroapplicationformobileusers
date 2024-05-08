@@ -17,8 +17,9 @@ abstract class Appthemes {
   static final ThemeData themeData = ThemeData(
     useMaterial3: true,
     dividerColor: Colors.grey.shade200,
-    colorScheme: const ColorScheme.light(
+    colorScheme: ColorScheme.light(
       primary: primaryColor,
+      tertiary: Colors.grey.shade400,
     ),
     textTheme: TextTheme(
       //textfield hint style using default

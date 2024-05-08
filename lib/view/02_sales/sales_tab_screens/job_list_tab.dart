@@ -5,6 +5,7 @@ import 'package:enviro_mobile_application/view/02_sales/sales_widgets.dart/sales
 import 'package:enviro_mobile_application/view_model/02_sales/sales_view_model.dart';
 import 'package:enviro_mobile_application/widgets/ww_search_widget.dart';
 import 'package:enviro_mobile_application/widgets/ww_response_handler.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
@@ -15,43 +16,65 @@ class JobListTab extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         body: Column(children: [
-      WWSearchField(
+      WWTextField(
         controller: vmSales.salesJobListSearchCtr,
         onChanged: (v) => vmSales.onTextChanged(() => v.isEmpty
             ? vmSales.saleJobListApi()
             : vmSales.salesJobListSearchApi(v)),
-        searchTap: () {},
+        suffixTap: () {},
       ),
       gapField,
       Observer(builder: (_) {
         return Expanded(
             child: WWResponseHandler(
-                data: vmSales.joblistResponse,
-                isEmpty: vmSales.joblistResponse.data?.isEmpty ?? true,
-                onTap: () => vmSales.salesJobListSearchCtr.text.isNotEmpty
-                    ? vmSales.salesJobListSearchApi(
-                        vmSales.salesJobListSearchCtr.text)
-                    : vmSales.saleJobListApi(),
-                child: const SalesJobListWidget()));
+          data: vmSales.joblistResponse,
+          isEmpty: vmSales.joblistResponse.data?.isEmpty ?? true,
+          onTap: () => vmSales.salesJobListSearchCtr.text.isNotEmpty
+              ? vmSales
+                  .salesJobListSearchApi(vmSales.salesJobListSearchCtr.text)
+              : vmSales.saleJobListApi(),
+          onRefresh: () => vmSales.salesJobListSearchCtr.text.isNotEmpty
+              ? vmSales
+                  .salesJobListSearchApi(vmSales.salesJobListSearchCtr.text)
+              : vmSales.saleJobListApi(),
+          child: SalesJobListWidget(
+            paginationLoading: vmSales.joblistResponse.paginationLoading,
+          ),
+        ));
       }),
     ]));
   }
 }
 
 class SalesJobListWidget extends StatelessWidget {
-  const SalesJobListWidget({super.key});
+  final bool paginationLoading;
+  const SalesJobListWidget({super.key, this.paginationLoading = false});
 
   @override
   Widget build(BuildContext context) {
+    final length = vmSales.joblistResponse.data?.length ?? 0;
     return ListView.separated(
-        itemCount: vmSales.joblistResponse.data?.length ?? 0,
-        separatorBuilder: (BuildContext context, int index) => gapField,
-        itemBuilder: (context, index) => InkWell(
-            onTap: () {
-              context.router.push(
-                  SalesDetailRoute(data: vmSales.joblistResponse.data?[index]));
-            },
-            child: listData(vmSales.joblistResponse.data?[index])));
+      itemCount: length + 1,
+      controller: vmSales.joblistController,
+      separatorBuilder: (BuildContext context, int index) => gapField,
+      itemBuilder: (context, index) {
+        return index == length
+            ? paginationLoading
+                ? const CupertinoActivityIndicator()
+                : const SizedBox.shrink()
+            : InkWell(
+                onTap: () {
+                  vmSales.salesJobDetailApi(
+                      index, vmSales.joblistResponse.data?[index].id);
+                  context.router.push(
+                    SalesDetailRoute(
+                        data: vmSales.joblistResponse.data?[index]),
+                  );
+                },
+                child: listData(vmSales.joblistResponse.data?[index]),
+              );
+      },
+    );
   }
 
   Widget listData(SalesModel? data) {

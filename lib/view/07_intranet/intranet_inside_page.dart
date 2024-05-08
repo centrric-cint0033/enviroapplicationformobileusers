@@ -1,6 +1,6 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:enviro_mobile_application/model/00_common_model/folder_model/folder_model.dart';
 
-import 'package:enviro_mobile_application/model/05_intranet/intranet_res_model.dart';
 import 'package:enviro_mobile_application/view_model/04_ohs/ohs_view_model.dart';
 
 import 'package:enviro_mobile_application/view_model/07_intranet/intranet_view_model.dart';
@@ -39,12 +39,11 @@ class IntranetInsidePage extends StatelessWidget {
             child: Observer(builder: (_) {
               final response = vmIntranet.intranetfolderinsideResponse.data;
               if (response != null) {
-                final List<intranetfldrRespModelFolder> folders =
-                    response.folders;
-                if (folders.isNotEmpty) {
-                  final List<FolderFolder> subFolders = folders[0].folders;
-                  if (subFolders.isNotEmpty) {
-                    final String folderName = subFolders[0].name;
+                final List<FolderModel>? folders = response.folders;
+                if (folders?.isNotEmpty ?? false) {
+                  final List<FolderModel>? subFolders = folders![0].folders;
+                  if (subFolders?.isNotEmpty ?? false) {
+                    final String folderName = subFolders![0].name ?? '';
                     return Text(
                       folderName,
                       style: const TextStyle(
@@ -116,20 +115,19 @@ class IntranetInsidePage extends StatelessWidget {
             child: Observer(builder: (_) {
               final response = vmIntranet.intranetfolderinsideResponse.data;
               if (response != null) {
-                final List<intranetfldrRespModelFolder> folders =
-                    response.folders;
-                if (folders.isNotEmpty) {
-                  final List<FolderFolder> subFolders = folders[0].folders;
+                final List<FolderModel>? folders = response.folders;
+                if (folders?.isNotEmpty ?? false) {
+                  final List<FolderModel>? subFolders = folders![0].folders;
                   return ListView.separated(
                     shrinkWrap: true,
-                    itemCount: subFolders.length,
+                    itemCount: subFolders?.length ?? 0,
                     physics: const NeverScrollableScrollPhysics(),
                     separatorBuilder: (BuildContext context, int index) =>
                         const SizedBox(height: 6.0),
                     itemBuilder: (BuildContext context, int index) {
-                      final folderName = subFolders[index].name;
+                      final folderName = subFolders![index].name ?? '';
                       return _buildCard(
-                          folderName, context, subFolders[index].id);
+                          folderName, context, subFolders[index].id!);
                     },
                   );
                 }
@@ -392,8 +390,8 @@ class IntranetInsidePage extends StatelessWidget {
                                     if (folderName.isNotEmpty) {
                                       print('iiiiii');
 
-                                      vmOhs.folderrenameviewmodelfunction(
-                                          folderName, id);
+                                      vmOhs.ohsFolerRenameApi(
+                                          context, folderName, id);
                                       print('api');
                                     } else {}
                                     Navigator.of(context).pop();

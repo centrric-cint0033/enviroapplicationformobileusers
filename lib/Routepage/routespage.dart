@@ -31,4 +31,5 @@ class RouteNames {
   static const String rcurrentjobstatus = '/currentjobstatus ';
   static const String rshedulecommandstatus = '/shedulecommandstatus ';
   static const String rshedulevedeoandphoto = '/shedulevedeoandphoto ';
+  static const String salesQuoteDetailListPage = '/sales_quote_detail_list ';
 }

@@ -3,9 +3,6 @@ import 'package:enviro_mobile_application/Routepage/guards.dart';
 import 'package:enviro_mobile_application/Routepage/approutes.gr.dart';
 
 import 'package:enviro_mobile_application/Routepage/routespage.dart';
-import 'package:enviro_mobile_application/view/10_shedule/current_job_status.dart';
-import 'package:enviro_mobile_application/view/10_shedule/shedule_cmra_vdo_page.dart';
-import 'package:enviro_mobile_application/view/10_shedule/shedule_comment_page.dart';
 
 @AutoRouterConfig()
 class AppRouter extends $AppRouter {
@@ -19,11 +16,11 @@ class AppRouter extends $AppRouter {
           guards: [AuthGuard()],
         ),
         AutoRoute(page: SalesRoute.page, path: RouteNames.rSalesPpage),
-        AutoRoute(page: OhsRoute.page, path: RouteNames.ohsPage),
+        AutoRoute(page: OhsMainRoute.page, path: RouteNames.ohsPage),
         AutoRoute(page: IntranetRoute.page, path: RouteNames.intranetpage),
         AutoRoute(page: VehicleRoute.page, path: RouteNames.vehiclemainpage),
         AutoRoute(
-            page: NewsRouteInsideRoute.page,
+            page: NewsOhsFolderInsideRoute.page,
             path: RouteNames.rNewsfolderinsidepage),
         AutoRoute(page: OhsDetailRoute.page, path: RouteNames.rOhsdetailpage),
         AutoRoute(
@@ -69,5 +66,9 @@ class AppRouter extends $AppRouter {
         AutoRoute(
             page: ScheduleVideoAndPhotoRoute.page,
             path: RouteNames.rshedulevedeoandphoto),
+        AutoRoute(
+          page: SalesQuoteDetailListRoute.page,
+          path: RouteNames.salesQuoteDetailListPage,
+        ),
       ];
 }

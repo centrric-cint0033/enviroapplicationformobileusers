@@ -13,13 +13,13 @@ mixin _$IntranetViewModel on IntranetViewModelBase, Store {
       name: 'IntranetViewModelBase.intranetpageResponse', context: context);
 
   @override
-  ApiResponse<intranetfldrRespModel> get intranetpageResponse {
+  ApiResponse<FolderListModel> get intranetpageResponse {
     _$intranetpageResponseAtom.reportRead();
     return super.intranetpageResponse;
   }
 
   @override
-  set intranetpageResponse(ApiResponse<intranetfldrRespModel> value) {
+  set intranetpageResponse(ApiResponse<FolderListModel> value) {
     _$intranetpageResponseAtom.reportWrite(value, super.intranetpageResponse,
         () {
       super.intranetpageResponse = value;
@@ -31,13 +31,13 @@ mixin _$IntranetViewModel on IntranetViewModelBase, Store {
       context: context);
 
   @override
-  ApiResponse<intranetfldrRespModel> get intranetfolderinsideResponse {
+  ApiResponse<FolderListModel> get intranetfolderinsideResponse {
     _$intranetfolderinsideResponseAtom.reportRead();
     return super.intranetfolderinsideResponse;
   }
 
   @override
-  set intranetfolderinsideResponse(ApiResponse<intranetfldrRespModel> value) {
+  set intranetfolderinsideResponse(ApiResponse<FolderListModel> value) {
     _$intranetfolderinsideResponseAtom
         .reportWrite(value, super.intranetfolderinsideResponse, () {
       super.intranetfolderinsideResponse = value;
