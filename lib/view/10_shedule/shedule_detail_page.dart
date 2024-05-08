@@ -185,7 +185,7 @@ class SheduledetailPage extends StatelessWidget {
                                       )
                                     : const SizedBox(height: 20),
                                 vmJobcard.sheduleweekResponse.data?[index]
-                                            .finishJob !=
+                                            .completed !=
                                         null
                                     ? expandedRowsShowingText(
                                         "job Completed",

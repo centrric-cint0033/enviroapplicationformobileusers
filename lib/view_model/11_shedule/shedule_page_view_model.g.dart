@@ -194,16 +194,6 @@ mixin _$JobCardViewModel on JobCardViewModelBase, Store {
         .run(() => super.pickImageFromCamera());
   }
 
-  late final _$pickImageFromGalleryAsyncAction = AsyncAction(
-      'JobCardViewModelBase.pickImageFromGallery',
-      context: context);
-
-  @override
-  Future<void> pickImageFromGallery() {
-    return _$pickImageFromGalleryAsyncAction
-        .run(() => super.pickImageFromGallery());
-  }
-
   late final _$jobcardviewmodelfunctionAsyncAction = AsyncAction(
       'JobCardViewModelBase.jobcardviewmodelfunction',
       context: context);

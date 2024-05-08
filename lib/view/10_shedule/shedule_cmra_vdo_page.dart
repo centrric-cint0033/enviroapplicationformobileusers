@@ -53,9 +53,7 @@ class ScheduleVideoAndPhotoPage extends StatelessWidget {
                         borderRadius: 0,
                         color: const Color.fromARGB(255, 0, 8, 14),
                         buttonTextStyle: const TextStyle(color: Colors.white),
-                        onPressed: () {
-                          vmJobcard.pickImageFromCamera();
-                        },
+                        onPressed: () {},
                         text: "Upload from Camera",
                       );
                     }),
