@@ -11,6 +11,7 @@ import 'package:enviro_mobile_application/widgets/ww_response_handler.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:intl/intl.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../widgets/drawer.dart';
 
@@ -126,24 +127,45 @@ class SchedulePage extends StatelessWidget {
                                           );
                                         }),
                                       ),
-                                      Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: ElevatedButton(
-                                          onPressed: () {
-                                            nextjobfnction(context);
-                                          },
-                                          style: ElevatedButton.styleFrom(
-                                            primary: Colors.blue,
-                                            onPrimary: Colors.black,
-                                          ),
-                                          child: const Text(
-                                            'Next job',
-                                            style: TextStyle(
-                                              fontSize: 13,
-                                              color: Colors.white,
+                                      Column(
+                                        children: [
+                                          ElevatedButton(
+                                            onPressed: () {
+                                              nextjobfnction(context);
+                                            },
+                                            style: ElevatedButton.styleFrom(
+                                              primary: Colors.blue,
+                                              onPrimary: Colors.black,
+                                            ),
+                                            child: const Text(
+                                              'Next job',
+                                              style: TextStyle(
+                                                fontSize: 13,
+                                                color: Colors.white,
+                                              ),
                                             ),
                                           ),
-                                        ),
+                                          InkWell(
+                                            onTap: () => openMap(
+                                                vmJobcard
+                                                        .shedulecardResponse
+                                                        .data?[i]
+                                                        .client
+                                                        ?.locationLatitude ??
+                                                    "",
+                                                vmJobcard
+                                                        .shedulecardResponse
+                                                        .data?[i]
+                                                        .client
+                                                        ?.locationLogitude ??
+                                                    ""),
+                                            child: Image.asset(
+                                              'assets/images/googlemap.jpg',
+                                              width: 60.0,
+                                              height: 60.0,
+                                            ),
+                                          ),
+                                        ],
                                       ),
                                     ],
                                   ),
@@ -657,6 +679,16 @@ class SchedulePage extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+Future<void> openMap(String latitude, String longitude) async {
+  String googleUrl =
+      'https://www.google.com/maps/search/?api=1&query=$latitude,$longitude';
+  if (await canLaunch(googleUrl)) {
+    await launch(googleUrl);
+  } else {
+    throw 'Could not open the map.';
   }
 }
 

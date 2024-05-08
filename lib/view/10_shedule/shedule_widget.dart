@@ -10,9 +10,9 @@ import 'package:intl/intl.dart';
 
 import '../../widgets/cmbutton.dart';
 
-final gapField = SizedBox(height: 0.5);
-final sized0wx05 = SizedBox(width: 0.5);
-final sized0wx10 = SizedBox(width: 10.0);
+final gapField = SizedBox(height: 0.3);
+final sized0wx05 = SizedBox(width: 0.3);
+final sized0wx10 = SizedBox(width: 2.0);
 
 Card customCard({required Widget child}) => Card(
       shape: RoundedRectangleBorder(
