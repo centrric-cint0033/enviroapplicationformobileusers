@@ -1,9 +1,12 @@
+import 'package:enviro_mobile_application/model/03_vehicle/vehicle_model/vehicle_model.dart';
 import 'package:enviro_mobile_application/view/03_vehicles/vehicle_widget/vehicle_widget.dart';
 import 'package:enviro_mobile_application/view_model/03_vehicles/vehicle_view_model.dart';
 import 'package:enviro_mobile_application/widgets/ww_response_handler.dart';
 import 'package:enviro_mobile_application/widgets/ww_search_widget.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class MasterCarTab extends StatelessWidget {
   const MasterCarTab({Key? key}) : super(key: key);
@@ -45,12 +48,23 @@ class MasterCarList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.separated(
-        itemCount: vmVehicle.masterCarApiResponse.data?.length ?? 0,
-        separatorBuilder: (BuildContext context, int index) => gapFieldVeh,
-        itemBuilder: (context, index) {
-          var data = vmVehicle.masterCarApiResponse.data?[index];
-          return showData(data: data);
-        });
+    return Observer(
+      builder: (context) {
+        List<VehicleModel> list = vmVehicle.masterCarApiResponse.data ?? [];
+        return ListView.separated(
+          itemCount: list.length + 1,
+          controller: vmVehicle.masterCarController,
+          padding: EdgeInsets.only(bottom: 20.h),
+          separatorBuilder: (BuildContext context, int index) => gapFieldVeh,
+          itemBuilder: (context, index) {
+            return index == list.length
+                ? vmVehicle.masterCarApiResponse.paginationLoading
+                    ? const CupertinoActivityIndicator()
+                    : const SizedBox.shrink()
+                : showData(data: vmVehicle.masterCarApiResponse.data?[index]);
+          },
+        );
+      },
+    );
   }
 }

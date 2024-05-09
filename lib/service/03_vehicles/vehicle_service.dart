@@ -25,10 +25,14 @@ abstract class IVehicleService {
       masterTruckSearchServiceApi(searchtrucksemidrop, value, {int? page});
 
   Future<Either<Map<MainFailure, dynamic>, List<VehicleModel>>>
-      masterCarServiceApi(VehicleActionType? status);
+      masterCarServiceApi(VehicleActionType? status, {int? page});
 
   Future<Either<Map<MainFailure, dynamic>, List<VehicleModel>>>
-      masterCarSearchServiceApi(VehicleActionType? status, String value);
+      masterCarSearchServiceApi(
+    VehicleActionType? status,
+    String value, {
+    int? page,
+  });
 
   Future<Either<Map<MainFailure, dynamic>, List<VehicleModel>>>
       semiTrailorServiceApi(VehicleActionType? status);
@@ -128,8 +132,10 @@ class VehicleService implements IVehicleService {
 
   @override
   Future<Either<Map<MainFailure, dynamic>, List<VehicleModel>>>
-      masterCarServiceApi(VehicleActionType? status) async {
+      masterCarServiceApi(VehicleActionType? status, {int? page}) async {
     String apiUrl;
+    String pagination = '?page=${page ?? 1}&limit=10';
+
     switch (status) {
       case VehicleActionType.vehicleList:
         apiUrl = ApiEndPoints().vehCar;
@@ -150,7 +156,7 @@ class VehicleService implements IVehicleService {
     var response = await getIt<HttpService>().request(
       authenticated: true,
       method: HttpMethod.get,
-      apiUrl: apiUrl,
+      apiUrl: apiUrl + pagination,
     );
 
     return response.fold(
@@ -166,8 +172,14 @@ class VehicleService implements IVehicleService {
 
   @override
   Future<Either<Map<MainFailure, dynamic>, List<VehicleModel>>>
-      masterCarSearchServiceApi(VehicleActionType? status, String value) async {
+      masterCarSearchServiceApi(
+    VehicleActionType? status,
+    String value, {
+    int? page,
+  }) async {
     String apiUrl;
+    String pagination = '?page=${page ?? 1}&limit=10';
+
     Map<String, String>? _data = {"key": value};
     switch (status) {
       case VehicleActionType.vehicleList:
@@ -191,8 +203,11 @@ class VehicleService implements IVehicleService {
         break;
     }
 
-    var response = await getIt<HttpService>()
-        .multipartRequest(apiUrl: apiUrl, method: 'POST', data: _data);
+    var response = await getIt<HttpService>().multipartRequest(
+      data: _data,
+      method: 'POST',
+      apiUrl: apiUrl + pagination,
+    );
 
     return response.fold(
       (l) => Left(l),

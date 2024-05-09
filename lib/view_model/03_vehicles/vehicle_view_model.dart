@@ -82,8 +82,11 @@ abstract class VehicleViewModelBase with Store {
 
   @action
   Future<void> masterTruckSearchServiceApi(String value, {int? page}) async {
-    masterTruckApiResponse =
-        masterTruckApiResponse.copyWith(errors: null, loading: true);
+    masterTruckApiResponse = masterTruckApiResponse.copyWith(
+      errors: null,
+      loading: page == null,
+      paginationLoading: page != null,
+    );
 
     final result = await vehicleService.masterTruckSearchServiceApi(
       vehicleStatusType,
@@ -155,45 +158,95 @@ abstract class VehicleViewModelBase with Store {
       ApiResponse<List<VehicleModel>>();
 
   @action
-  Future<void> masterCarApi() async {
+  Future<void> masterCarApi({int? page}) async {
     if (vehicleTextCtr.text.isNotEmpty) {
       masterCarSearchApi(vehicleTextCtr.text);
     } else {
-      masterCarApiResponse =
-          masterCarApiResponse.copyWith(errors: null, loading: true);
-      final result =
-          await vehicleService.masterCarServiceApi(vehicleStatusType);
-      return result.fold(
-        (l) {
-          masterCarApiResponse =
-              masterCarApiResponse.copyWith(errors: l, loading: false);
-        },
-        (r) {
-          masterCarApiResponse = masterCarApiResponse.copyWith(
-              data: r, errors: null, loading: false);
-        },
+      masterCarApiResponse = masterCarApiResponse.copyWith(
+        errors: null,
+        loading: page == null,
+        paginationLoading: page != null,
       );
+      final result = await vehicleService.masterCarServiceApi(
+        vehicleStatusType,
+        page: page,
+      );
+      return _commonMasterCarResultHandler(result: result, page: page);
     }
   }
 
   @action
-  Future<void> masterCarSearchApi(String value) async {
-    masterCarApiResponse =
-        masterCarApiResponse.copyWith(errors: null, loading: true);
+  Future<void> masterCarSearchApi(String value, {int? page}) async {
+    masterCarApiResponse = masterCarApiResponse.copyWith(
+      errors: null,
+      loading: page == null,
+      paginationLoading: page != null,
+    );
 
     final result = await vehicleService.masterCarSearchServiceApi(
-        vehicleStatusType, value);
-    return result.fold(
+      vehicleStatusType,
+      value,
+      page: page,
+    );
+    return _commonMasterCarResultHandler(result: result, page: page);
+  }
+
+  void _commonMasterCarResultHandler({
+    int? page,
+    required Either<Map<MainFailure, dynamic>, List<VehicleModel>> result,
+  }) {
+    result.fold(
       (l) {
-        masterCarApiResponse =
-            masterCarApiResponse.copyWith(errors: l, loading: false);
+        masterCarApiResponse = masterCarApiResponse.copyWith(
+          errors: l,
+          loading: false,
+          paginationLoading: false,
+        );
       },
       (r) {
+        List<VehicleModel> list = masterCarApiResponse.data?.toList() ?? [];
+        if (page == null) {
+          list = r;
+        } else {
+          list.addAll(r);
+        }
+
         masterCarApiResponse = masterCarApiResponse.copyWith(
-            data: r, errors: null, loading: false);
+          data: list,
+          errors: null,
+          loading: false,
+          pageNo: page ?? 1,
+          paginationLoading: false,
+          pagination: r.length == 10,
+        );
       },
     );
   }
+
+  ScrollController masterCarController = ScrollController();
+
+  void masterCarPagination() {
+    masterCarController.addListener(() {
+      if (masterCarController.position.pixels ==
+              masterCarController.position.maxScrollExtent &&
+          !masterCarController.position.outOfRange &&
+          masterCarApiResponse.pagination &&
+          !masterCarApiResponse.paginationLoading) {
+        int pageNo = masterCarApiResponse.pageNo + 1;
+        if (vehicleTextCtr.text.isNotEmpty) {
+          masterCarSearchApi(vehicleTextCtr.text, page: pageNo);
+          return;
+        }
+        masterCarApi(page: pageNo);
+      }
+    });
+  }
+
+//     _  _       _  _       _  _       _  _       _  _       _  _       _  _       _  _
+//   _| || |_   _| || |_   _| || |_   _| || |_   _| || |_   _| || |_   _| || |_   _| || |_
+//  |_  ..  _| |_  ..  _| |_  ..  _| |_  ..  _| |_  ..  _| |_  ..  _| |_  ..  _| |_  ..  _|
+//  |_      _| |_      _| |_      _| |_      _| |_      _| |_      _| |_      _| |_      _|
+//    |_||_|     |_||_|     |_||_|     |_||_|     |_||_|     |_||_|     |_||_|     |_||_|
 
   @observable
   ApiResponse<List<VehicleModel>> semiTrailorApiResponse =

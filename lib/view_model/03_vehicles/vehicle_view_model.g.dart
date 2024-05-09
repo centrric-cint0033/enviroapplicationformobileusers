@@ -148,17 +148,17 @@ mixin _$VehicleViewModel on VehicleViewModelBase, Store {
       AsyncAction('VehicleViewModelBase.masterCarApi', context: context);
 
   @override
-  Future<void> masterCarApi() {
-    return _$masterCarApiAsyncAction.run(() => super.masterCarApi());
+  Future<void> masterCarApi({int? page}) {
+    return _$masterCarApiAsyncAction.run(() => super.masterCarApi(page: page));
   }
 
   late final _$masterCarSearchApiAsyncAction =
       AsyncAction('VehicleViewModelBase.masterCarSearchApi', context: context);
 
   @override
-  Future<void> masterCarSearchApi(String value) {
+  Future<void> masterCarSearchApi(String value, {int? page}) {
     return _$masterCarSearchApiAsyncAction
-        .run(() => super.masterCarSearchApi(value));
+        .run(() => super.masterCarSearchApi(value, page: page));
   }
 
   late final _$semiTrailorApiAsyncAction =
