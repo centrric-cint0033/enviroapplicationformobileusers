@@ -20,6 +20,11 @@ class VehiclePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    WidgetsBinding.instance.addPostFrameCallback(
+      (timeStamp) {
+        vmVehicle.masterTruckPagination();
+      },
+    );
     tabsApis(int i) {
       vmVehicle.vehicleTabIndex = i;
       switch (i) {

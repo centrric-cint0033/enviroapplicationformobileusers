@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:dartz/dartz.dart';
 import 'package:enviro_mobile_application/api_response/api_response.dart';
 import 'package:enviro_mobile_application/model/03_vehicle/vehicle_model/vehicle_model.dart';
 import 'package:enviro_mobile_application/model/truck_page/res_model/truckpage_model.dart';
@@ -9,6 +10,8 @@ import 'package:enviro_mobile_application/utilis/injection.dart';
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 import 'package:mobx/mobx.dart';
+
+import '../../utilis/main_failure.dart';
 
 part 'vehicle_view_model.g.dart';
 
@@ -62,44 +65,83 @@ abstract class VehicleViewModelBase with Store {
       ApiResponse<List<VehicleModel>>();
 
   @action
-  Future<void> masterTruckApi() async {
+  Future<void> masterTruckApi({int? page}) async {
     if (vehicleTextCtr.text.isNotEmpty) {
       masterTruckSearchServiceApi(vehicleTextCtr.text);
     } else {
-      masterTruckApiResponse =
-          masterTruckApiResponse.copyWith(errors: null, loading: true);
-      final result =
-          await vehicleService.masterTruckServiceApi(vehicleStatusType);
-      return result.fold(
-        (l) {
-          masterTruckApiResponse =
-              masterTruckApiResponse.copyWith(errors: l, loading: false);
-        },
-        (r) {
-          masterTruckApiResponse = masterTruckApiResponse.copyWith(
-              data: r, errors: null, loading: false);
-        },
+      masterTruckApiResponse = masterTruckApiResponse.copyWith(
+        errors: null,
+        loading: page == null,
+        paginationLoading: page != null,
       );
+      final result = await vehicleService
+          .masterTruckServiceApi(vehicleStatusType, page: page);
+      return _commonMasterTruckResultHandler(result: result, page: page);
     }
   }
 
   @action
-  Future<void> masterTruckSearchServiceApi(String value) async {
+  Future<void> masterTruckSearchServiceApi(String value, {int? page}) async {
     masterTruckApiResponse =
         masterTruckApiResponse.copyWith(errors: null, loading: true);
 
     final result = await vehicleService.masterTruckSearchServiceApi(
-        vehicleStatusType, value);
-    return result.fold(
+      vehicleStatusType,
+      value,
+    );
+
+    return _commonMasterTruckResultHandler(result: result, page: page);
+  }
+
+  void _commonMasterTruckResultHandler({
+    int? page,
+    required Either<Map<MainFailure, dynamic>, List<VehicleModel>> result,
+  }) {
+    result.fold(
       (l) {
-        masterTruckApiResponse =
-            masterTruckApiResponse.copyWith(errors: l, loading: false);
+        masterTruckApiResponse = masterTruckApiResponse.copyWith(
+          errors: l,
+          loading: false,
+          paginationLoading: false,
+        );
       },
       (r) {
+        List<VehicleModel> list = masterTruckApiResponse.data?.toList() ?? [];
+        if (page == null) {
+          list = r;
+        } else {
+          list.addAll(r);
+        }
+
         masterTruckApiResponse = masterTruckApiResponse.copyWith(
-            data: r, errors: null, loading: false);
+          data: list,
+          errors: null,
+          loading: false,
+          pageNo: page ?? 1,
+          paginationLoading: false,
+          pagination: r.length == 10,
+        );
       },
     );
+  }
+
+  ScrollController masterTruckController = ScrollController();
+
+  void masterTruckPagination() {
+    masterTruckController.addListener(() {
+      if (masterTruckController.position.pixels ==
+              masterTruckController.position.maxScrollExtent &&
+          !masterTruckController.position.outOfRange &&
+          masterTruckApiResponse.pagination &&
+          !masterTruckApiResponse.paginationLoading) {
+        int pageNo = masterTruckApiResponse.pageNo + 1;
+        if (vehicleTextCtr.text.isNotEmpty) {
+          masterTruckSearchServiceApi(vehicleTextCtr.text, page: pageNo);
+          return;
+        }
+        masterTruckApi(page: pageNo);
+      }
+    });
   }
 
 //     _  _       _  _       _  _       _  _       _  _       _  _       _  _       _  _

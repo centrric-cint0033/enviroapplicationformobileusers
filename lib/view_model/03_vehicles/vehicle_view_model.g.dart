@@ -129,8 +129,9 @@ mixin _$VehicleViewModel on VehicleViewModelBase, Store {
       AsyncAction('VehicleViewModelBase.masterTruckApi', context: context);
 
   @override
-  Future<void> masterTruckApi() {
-    return _$masterTruckApiAsyncAction.run(() => super.masterTruckApi());
+  Future<void> masterTruckApi({int? page}) {
+    return _$masterTruckApiAsyncAction
+        .run(() => super.masterTruckApi(page: page));
   }
 
   late final _$masterTruckSearchServiceApiAsyncAction = AsyncAction(
@@ -138,9 +139,9 @@ mixin _$VehicleViewModel on VehicleViewModelBase, Store {
       context: context);
 
   @override
-  Future<void> masterTruckSearchServiceApi(String value) {
+  Future<void> masterTruckSearchServiceApi(String value, {int? page}) {
     return _$masterTruckSearchServiceApiAsyncAction
-        .run(() => super.masterTruckSearchServiceApi(value));
+        .run(() => super.masterTruckSearchServiceApi(value, page: page));
   }
 
   late final _$masterCarApiAsyncAction =

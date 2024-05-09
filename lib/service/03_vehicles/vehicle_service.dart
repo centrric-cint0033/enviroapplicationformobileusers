@@ -19,10 +19,10 @@ enum VehicleActionType {
 
 abstract class IVehicleService {
   Future<Either<Map<MainFailure, dynamic>, List<VehicleModel>>>
-      masterTruckServiceApi(truckdrop);
+      masterTruckServiceApi(truckdrop, {int? page});
 
   Future<Either<Map<MainFailure, dynamic>, List<VehicleModel>>>
-      masterTruckSearchServiceApi(searchtrucksemidrop, value);
+      masterTruckSearchServiceApi(searchtrucksemidrop, value, {int? page});
 
   Future<Either<Map<MainFailure, dynamic>, List<VehicleModel>>>
       masterCarServiceApi(VehicleActionType? status);
@@ -41,10 +41,10 @@ abstract class IVehicleService {
 class VehicleService implements IVehicleService {
   @override
   Future<Either<Map<MainFailure, dynamic>, List<VehicleModel>>>
-      masterTruckServiceApi(truckdrop) async {
+      masterTruckServiceApi(truckdrop, {int? page}) async {
     String apiUrl;
-    // ignore: unused_local_variable
-    String pagination = '?page=1&limit=10';
+
+    String pagination = '?page=${page ?? 1}&limit=10';
 
     switch (truckdrop) {
       case VehicleActionType.vehicleList:
@@ -66,7 +66,7 @@ class VehicleService implements IVehicleService {
     var response = await getIt<HttpService>().request(
       authenticated: true,
       method: HttpMethod.get,
-      apiUrl: apiUrl,
+      apiUrl: apiUrl + pagination,
     );
 
     return response.fold(
@@ -82,8 +82,9 @@ class VehicleService implements IVehicleService {
 
   @override
   Future<Either<Map<MainFailure, dynamic>, List<VehicleModel>>>
-      masterTruckSearchServiceApi(trucksearchdrop, value) async {
+      masterTruckSearchServiceApi(trucksearchdrop, value, {int? page}) async {
     String apiUrl;
+    String pagination = '?page=${page ?? 1}&limit=10';
     Map<String, String>? _data = {"key": value};
     switch (trucksearchdrop) {
       case VehicleActionType.vehicleList:
@@ -108,8 +109,11 @@ class VehicleService implements IVehicleService {
         break;
     }
 
-    var response = await getIt<HttpService>()
-        .multipartRequest(apiUrl: apiUrl, method: 'POST', data: _data);
+    var response = await getIt<HttpService>().multipartRequest(
+      data: _data,
+      method: 'POST',
+      apiUrl: apiUrl + pagination,
+    );
 
     return response.fold(
       (l) => Left(l),
