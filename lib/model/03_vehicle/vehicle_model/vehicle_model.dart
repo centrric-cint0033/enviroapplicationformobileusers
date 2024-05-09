@@ -42,7 +42,7 @@ class VehicleModel with _$VehicleModel {
     @JsonKey(name: 'created_date_time') DateTime? createdDateTime,
     @JsonKey(name: 'edited_date_time') DateTime? editedDateTime,
     String? date,
-    String? time,
+    dynamic? time,
     @JsonKey(name: 'truck_rego') String? truckRego,
     @JsonKey(name: 'current_reading_before') String? currentReadingBefore,
     @JsonKey(name: 'reading_after_filling') String? readingAfterFilling,

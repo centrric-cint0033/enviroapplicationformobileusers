@@ -44,7 +44,7 @@ _$VehicleModelImpl _$$VehicleModelImplFromJson(Map<String, dynamic> json) =>
           ? null
           : DateTime.parse(json['edited_date_time'] as String),
       date: json['date'] as String?,
-      time: json['time'] as String?,
+      time: json['time'] as int?,
       truckRego: json['truck_rego'] as String?,
       currentReadingBefore: json['current_reading_before'] as String?,
       readingAfterFilling: json['reading_after_filling'] as String?,

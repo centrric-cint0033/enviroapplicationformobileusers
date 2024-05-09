@@ -106,18 +106,18 @@ mixin _$SalesViewModel on SalesViewModelBase, Store {
     });
   }
 
-  late final _$jobDetailResponseAtom =
-      Atom(name: 'SalesViewModelBase.jobDetailResponse', context: context);
+  late final _$saleDetailResponseAtom =
+      Atom(name: 'SalesViewModelBase.saleDetailResponse', context: context);
 
   @override
   ApiResponse<SalesModel> get saleDetailResponse {
-    _$jobDetailResponseAtom.reportRead();
+    _$saleDetailResponseAtom.reportRead();
     return super.saleDetailResponse;
   }
 
   @override
   set saleDetailResponse(ApiResponse<SalesModel> value) {
-    _$jobDetailResponseAtom.reportWrite(value, super.saleDetailResponse, () {
+    _$saleDetailResponseAtom.reportWrite(value, super.saleDetailResponse, () {
       super.saleDetailResponse = value;
     });
   }
@@ -185,6 +185,16 @@ mixin _$SalesViewModel on SalesViewModelBase, Store {
         .run(() => super.salesJobDetailApi(index, id));
   }
 
+  late final _$salesQuoteRegDetailApiAsyncAction = AsyncAction(
+      'SalesViewModelBase.salesQuoteRegDetailApi',
+      context: context);
+
+  @override
+  Future<void> salesQuoteRegDetailApi(int index, int? id) {
+    return _$salesQuoteRegDetailApiAsyncAction
+        .run(() => super.salesQuoteRegDetailApi(index, id));
+  }
+
   @override
   String toString() {
     return '''
@@ -194,7 +204,7 @@ joblistResponse: ${joblistResponse},
 salespageResponse: ${salespageResponse},
 quoteRegResponse: ${quoteRegResponse},
 salesQuoteDetailsResponse: ${salesQuoteDetailsResponse},
-jobDetailResponse: ${saleDetailResponse}
+saleDetailResponse: ${saleDetailResponse}
     ''';
   }
 }
