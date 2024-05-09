@@ -24,7 +24,8 @@ class VehiclePage extends StatelessWidget {
       (timeStamp) {
         vmVehicle
           ..masterTruckPagination()
-          ..masterCarPagination();
+          ..masterCarPagination()
+          ..semiTrailorPagination();
       },
     );
     tabsApis(int i) {

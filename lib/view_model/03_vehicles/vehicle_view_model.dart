@@ -253,44 +253,92 @@ abstract class VehicleViewModelBase with Store {
       ApiResponse<List<VehicleModel>>();
 
   @action
-  Future<void> semiTrailorApi() async {
+  Future<void> semiTrailorApi({int? page}) async {
     if (vehicleTextCtr.text.isNotEmpty) {
       semiTrailorSearchApi(vehicleTextCtr.text);
     } else {
-      semiTrailorApiResponse =
-          semiTrailorApiResponse.copyWith(errors: null, loading: true);
-      final result =
-          await vehicleService.semiTrailorServiceApi(vehicleStatusType);
-      return result.fold(
-        (l) {
-          semiTrailorApiResponse =
-              semiTrailorApiResponse.copyWith(errors: l, loading: false);
-        },
-        (r) {
-          semiTrailorApiResponse = semiTrailorApiResponse.copyWith(
-              data: r, errors: null, loading: false);
-        },
+      semiTrailorApiResponse = semiTrailorApiResponse.copyWith(
+        errors: null,
+        loading: page == null,
+        paginationLoading: page != null,
       );
+      final result = await vehicleService
+          .semiTrailorServiceApi(vehicleStatusType, page: page);
+      return _commonSemiTrailorResultHandler(result: result, page: page);
     }
   }
 
   @action
-  Future<void> semiTrailorSearchApi(String value) async {
-    semiTrailorApiResponse =
-        semiTrailorApiResponse.copyWith(errors: null, loading: true);
+  Future<void> semiTrailorSearchApi(String value, {int? page}) async {
+    semiTrailorApiResponse = semiTrailorApiResponse.copyWith(
+      errors: null,
+      loading: page == null,
+      paginationLoading: page != null,
+    );
     final result = await vehicleService.semiTrailorSearchServiceApi(
-        vehicleStatusType, value);
-    return result.fold(
+      vehicleStatusType,
+      value,
+      page: page,
+    );
+    return _commonSemiTrailorResultHandler(result: result, page: page);
+  }
+
+  void _commonSemiTrailorResultHandler({
+    int? page,
+    required Either<Map<MainFailure, dynamic>, List<VehicleModel>> result,
+  }) {
+    result.fold(
       (l) {
-        semiTrailorApiResponse =
-            semiTrailorApiResponse.copyWith(errors: l, loading: false);
+        semiTrailorApiResponse = semiTrailorApiResponse.copyWith(
+          errors: l,
+          loading: false,
+          paginationLoading: false,
+        );
       },
       (r) {
+        List<VehicleModel> list = semiTrailorApiResponse.data?.toList() ?? [];
+        if (page == null) {
+          list = r;
+        } else {
+          list.addAll(r);
+        }
+
         semiTrailorApiResponse = semiTrailorApiResponse.copyWith(
-            data: r, errors: null, loading: false);
+          data: list,
+          errors: null,
+          loading: false,
+          pageNo: page ?? 1,
+          paginationLoading: false,
+          pagination: r.length == 10,
+        );
       },
     );
   }
+
+  ScrollController semiTrailorController = ScrollController();
+
+  void semiTrailorPagination() {
+    semiTrailorController.addListener(() {
+      if (semiTrailorController.position.pixels ==
+              semiTrailorController.position.maxScrollExtent &&
+          !semiTrailorController.position.outOfRange &&
+          semiTrailorApiResponse.pagination &&
+          !semiTrailorApiResponse.paginationLoading) {
+        int pageNo = semiTrailorApiResponse.pageNo + 1;
+        if (vehicleTextCtr.text.isNotEmpty) {
+          semiTrailorSearchApi(vehicleTextCtr.text, page: pageNo);
+          return;
+        }
+        semiTrailorApi(page: pageNo);
+      }
+    });
+  }
+
+//     _  _       _  _       _  _       _  _       _  _       _  _       _  _       _  _
+//   _| || |_   _| || |_   _| || |_   _| || |_   _| || |_   _| || |_   _| || |_   _| || |_
+//  |_  ..  _| |_  ..  _| |_  ..  _| |_  ..  _| |_  ..  _| |_  ..  _| |_  ..  _| |_  ..  _|
+//  |_      _| |_      _| |_      _| |_      _| |_      _| |_      _| |_      _| |_      _|
+//    |_||_|     |_||_|     |_||_|     |_||_|     |_||_|     |_||_|     |_||_|     |_||_|
 
   @observable
   VehicleActionType? sstatus;

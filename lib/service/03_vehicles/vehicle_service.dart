@@ -35,10 +35,14 @@ abstract class IVehicleService {
   });
 
   Future<Either<Map<MainFailure, dynamic>, List<VehicleModel>>>
-      semiTrailorServiceApi(VehicleActionType? status);
+      semiTrailorServiceApi(VehicleActionType? status, {int? page});
 
   Future<Either<Map<MainFailure, dynamic>, List<VehicleModel>>>
-      semiTrailorSearchServiceApi(VehicleActionType? status, String value);
+      semiTrailorSearchServiceApi(
+    VehicleActionType? status,
+    String value, {
+    int? page,
+  });
 }
 
 @LazySingleton(as: IVehicleService)
@@ -223,8 +227,10 @@ class VehicleService implements IVehicleService {
 
   @override
   Future<Either<Map<MainFailure, dynamic>, List<VehicleModel>>>
-      semiTrailorServiceApi(VehicleActionType? status) async {
+      semiTrailorServiceApi(VehicleActionType? status, {int? page}) async {
     String apiUrl;
+    String pagination = '?page=${page ?? 1}&limit=10';
+
     switch (status) {
       case VehicleActionType.vehicleList:
         apiUrl = ApiEndPoints().vehSemiTrailer;
@@ -245,7 +251,7 @@ class VehicleService implements IVehicleService {
     var response = await getIt<HttpService>().request(
       authenticated: true,
       method: HttpMethod.get,
-      apiUrl: apiUrl,
+      apiUrl: apiUrl + pagination,
     );
 
     return response.fold(
@@ -262,10 +268,15 @@ class VehicleService implements IVehicleService {
   @override
   Future<Either<Map<MainFailure, dynamic>, List<VehicleModel>>>
       semiTrailorSearchServiceApi(
-          VehicleActionType? status, String value) async {
+    VehicleActionType? status,
+    String value, {
+    int? page,
+  }) async {
     Map<String, String>? _data = {"key": value};
 
     String apiUrl;
+    String pagination = '?page=${page ?? 1}&limit=10';
+
     switch (status) {
       case VehicleActionType.vehicleList:
         _data = {"key": value};
@@ -288,8 +299,11 @@ class VehicleService implements IVehicleService {
         break;
     }
 
-    var response = await getIt<HttpService>()
-        .multipartRequest(apiUrl: apiUrl, method: 'POST', data: _data);
+    var response = await getIt<HttpService>().multipartRequest(
+      data: _data,
+      method: 'POST',
+      apiUrl: apiUrl + pagination,
+    );
     return response.fold(
       (l) => Left(l),
       (res) async {
