@@ -1,3 +1,5 @@
+import 'package:auto_route/auto_route.dart';
+import 'package:enviro_mobile_application/Routepage/approutes.gr.dart';
 import 'package:enviro_mobile_application/view/03_vehicles/vehicle_widget/vehicle_widget.dart';
 import 'package:enviro_mobile_application/view_model/03_vehicles/vehicle_view_model.dart';
 import 'package:enviro_mobile_application/widgets/ww_response_handler.dart';
@@ -49,9 +51,21 @@ class MasterTruckList extends StatelessWidget {
     return ListView.separated(
       itemCount: vmVehicle.masterTruckApiResponse.data?.length ?? 0,
       separatorBuilder: (BuildContext context, int index) => gapFieldVeh,
-      itemBuilder: (context, index) => showData(
+      itemBuilder: (context, index) => InkWell(
+        onTap: () {
+          if (vmVehicle.masterTruckApiResponse.data?[index] != null) {
+            context.router.push(
+              VehicleDetailRoute(
+                data: vmVehicle.masterTruckApiResponse.data![index],
+              ),
+            );
+          }
+        },
+        child: showData(
           data: vmVehicle.masterTruckApiResponse.data?[index],
-          status: vmVehicle.vehicleStatusType),
+          status: vmVehicle.vehicleStatusType,
+        ),
+      ),
     );
   }
 }
