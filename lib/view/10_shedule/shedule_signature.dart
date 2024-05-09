@@ -1,10 +1,16 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:enviro_mobile_application/utilis/constant.dart';
 import 'package:enviro_mobile_application/widgets/cmbutton.dart';
 import 'package:enviro_mobile_application/widgets/cmn_action_icon.dart';
 import 'package:enviro_mobile_application/widgets/cmn_title_textwidget.dart';
 import 'package:enviro_mobile_application/widgets/drawer.dart';
 import 'package:flutter/material.dart';
+import 'package:signature/signature.dart';
+
+final SignatureController _controller = SignatureController(
+  penStrokeWidth: 5,
+  penColor: Colors.black,
+  exportBackgroundColor: Colors.white,
+);
 
 @RoutePage()
 class SheduleSignaturePage extends StatelessWidget {
@@ -26,7 +32,7 @@ class SheduleSignaturePage extends StatelessWidget {
             children: [
               const SizedBox(
                 height: 20,
-              ), // Add some space between the two containers
+              ),
               Container(
                 height: 103,
                 decoration: BoxDecoration(
@@ -57,7 +63,7 @@ class SheduleSignaturePage extends StatelessWidget {
               ),
               const SizedBox(
                 height: 20,
-              ), // Add some space between the two containers
+              ),
               Container(
                 height: 103,
                 decoration: BoxDecoration(
@@ -86,7 +92,9 @@ class SheduleSignaturePage extends StatelessWidget {
                   ),
                 ),
               ),
-              sized0hx20,
+              const SizedBox(
+                height: 20,
+              ),
               Container(
                 height: 68,
                 decoration: BoxDecoration(
@@ -107,7 +115,9 @@ class SheduleSignaturePage extends StatelessWidget {
                   ),
                 ),
               ),
-              sized0hx20,
+              const SizedBox(
+                height: 20,
+              ),
               Container(
                 width: 430,
                 height: 288,
@@ -118,14 +128,22 @@ class SheduleSignaturePage extends StatelessWidget {
                 ),
                 child: Stack(
                   children: [
-                    const Column(
+                    Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Padding(
-                          padding: EdgeInsets.all(8.0),
+                          padding: const EdgeInsets.all(8.0),
                           child: Text(
                             'Please provide your signature:',
                             style: TextStyle(fontSize: 16),
+                          ),
+                        ),
+                        Container(
+                          width: 200,
+                          height: 200,
+                          child: Signature(
+                            controller: _controller,
+                            backgroundColor: Colors.white,
                           ),
                         ),
                         SizedBox(height: 20),
@@ -138,14 +156,42 @@ class SheduleSignaturePage extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           CmButton(
-                            color: Colors.white38,
-                            onPressed: () {},
+                            color: Colors.blue,
+                            onPressed: () {
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return AlertDialog(
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10.0),
+                                      side: BorderSide(color: Colors.black),
+                                    ),
+                                    content: const Text(
+                                      'Uploading signature',
+                                      style: TextStyle(
+                                          fontSize: 22,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    actions: <Widget>[
+                                      TextButton(
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                        },
+                                        child: Text('OK'),
+                                      ),
+                                    ],
+                                  );
+                                },
+                              );
+                            },
                             text: 'save',
                           ),
                           const SizedBox(width: 10),
                           CmButton(
-                            color: Colors.white38,
-                            onPressed: () {},
+                            color: Colors.blue,
+                            onPressed: () {
+                              _controller.clear();
+                            },
                             text: 'Reset',
                           ),
                         ],
@@ -154,7 +200,9 @@ class SheduleSignaturePage extends StatelessWidget {
                   ],
                 ),
               ),
-              sized0hx40,
+              const SizedBox(
+                height: 40,
+              ),
               const Text(
                 'Comments',
               ),
@@ -178,6 +226,9 @@ class SheduleSignaturePage extends StatelessWidget {
                   style: TextStyle(color: Colors.black),
                   maxLines: null,
                 ),
+              ),
+              const SizedBox(
+                height: 20,
               ),
             ],
           ),
