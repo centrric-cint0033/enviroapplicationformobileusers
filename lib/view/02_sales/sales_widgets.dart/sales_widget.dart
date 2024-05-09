@@ -28,7 +28,11 @@ Row expandedRowShowText(String firsValue, String secondValue) => Row(
         expandedShowText(secondValue)
       ],
     );
-Row expandedRowsShowingText(String firsValue, String secondValue) => Row(
+Row expandedRowsShowingText(
+  String firsValue,
+  String secondValue,
+) =>
+    Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         expandedShowText(firsValue),

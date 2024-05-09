@@ -37,6 +37,17 @@ Row expandedRowShowText2(String firsValue, String secondValue) => Row(
       ],
     );
 
+Row expandedRowShowTextDate(String firsValue, String secondValue) => Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        expandedShowText2(firsValue),
+        sized0wx05,
+        showBlackText(':'),
+        sized0wx05,
+        expandedShowText2(secondValue),
+      ],
+    );
+
 Row expandedRowShowingText2(String firsValue, String secondValue) => Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -114,6 +125,9 @@ Widget showData({VehicleModel? data, VehicleActionType? status}) {
           CmButton(height: 25.w, text: 'Folders'),
         ],
       ),
+      if (data?.editedDateTime != null)
+        expandedRowShowTextDate(
+            '', DateFormat.yMEd().add_jms().format(DateTime.now())),
       if (data?.registration != null)
         expandedRowShowText2('Registration no', data!.registration!),
       if (data?.editedDateTime != null)

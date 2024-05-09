@@ -239,7 +239,7 @@ class JobCardPage extends StatelessWidget {
                       Padding(
                           padding: const EdgeInsets.only(left: 17.0),
                           child: expandedRowShowsText(
-                              "Data from Required",
+                              "Data form Required",
                               vmJobcard.jobcardResponse.data?.wasteDataForm
                                       ?.toString() ??
                                   '')),

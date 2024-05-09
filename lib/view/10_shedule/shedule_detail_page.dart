@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:enviro_mobile_application/Routepage/routespage.dart';
 import 'package:enviro_mobile_application/view/02_sales/sales_widgets.dart/sales_widget.dart';
+import 'package:enviro_mobile_application/view/10_shedule/shedule_widget.dart';
 import 'package:enviro_mobile_application/view_model/11_shedule/shedule_page_view_model.dart';
 import 'package:enviro_mobile_application/widgets/cmbutton.dart';
 import 'package:enviro_mobile_application/widgets/cmn_action_icon.dart';
@@ -8,6 +9,7 @@ import 'package:enviro_mobile_application/widgets/cmn_title_textwidget.dart';
 import 'package:enviro_mobile_application/widgets/drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:intl/intl.dart';
 
 @RoutePage()
 class SheduledetailPage extends StatelessWidget {
@@ -152,13 +154,17 @@ class SheduledetailPage extends StatelessWidget {
                                 vmJobcard.sheduleweekResponse.data?[index]
                                             .departEnviroFacility !=
                                         null
-                                    ? expandedRowsShowingText(
+                                    ? expandedRowShowText(
                                         "Departed enviro facility",
+
+                                        // DateFormat.yMMMMd().format
+                                        // (
                                         vmJobcard
                                                 .sheduleweekResponse
                                                 .data?[index]
                                                 .departEnviroFacility ??
                                             '',
+                                        // )
                                       )
                                     : const SizedBox(height: 20),
                                 vmJobcard.sheduleweekResponse.data?[index]
@@ -246,6 +252,17 @@ class SheduledetailPage extends StatelessWidget {
                       text: "Comments",
                     ),
                   ),
+                  SizedBox(
+                    width: 159,
+                    child: CmButton(
+                      color: const Color(0xFF4CAF9E),
+                      buttonTextStyle: const TextStyle(color: Colors.white),
+                      onPressed: () {
+                        shedulesignaturefunction(context);
+                      },
+                      text: "Signature",
+                    ),
+                  ),
                   const SizedBox(height: 5),
                   SizedBox(
                     width: 179,
@@ -298,4 +315,9 @@ void jobCardFunction(BuildContext context) async {
 void shedulecommentfunction(BuildContext context) {
   print('calenderclicked');
   context.router.pushNamed(RouteNames.rshedulecommandstatus);
+}
+
+void shedulesignaturefunction(BuildContext context) {
+  print('calenderclicked');
+  context.router.pushNamed(RouteNames.rshedulesignaturePage);
 }

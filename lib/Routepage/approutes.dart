@@ -70,5 +70,9 @@ class AppRouter extends $AppRouter {
           page: SalesQuoteDetailListRoute.page,
           path: RouteNames.salesQuoteDetailListPage,
         ),
+        AutoRoute(
+          page: SheduleSignatureRoute.page,
+          path: RouteNames.rshedulesignaturePage,
+        ),
       ];
 }
