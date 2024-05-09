@@ -54,11 +54,22 @@ class MasterTruckList extends StatelessWidget {
       itemBuilder: (context, index) => InkWell(
         onTap: () {
           if (vmVehicle.masterTruckApiResponse.data?[index] != null) {
-            context.router.push(
-              VehicleDetailRoute(
-                data: vmVehicle.masterTruckApiResponse.data![index],
-              ),
-            );
+            switch (vmVehicle.selectedVehicle) {
+              case "Vehicle list":
+                context.router.push(
+                  VehicleDetailRoute(
+                    data: vmVehicle.masterTruckApiResponse.data![index],
+                  ),
+                );
+                break;
+              case "Pre Inspection check":
+                break;
+              case "Maintenance Report":
+                break;
+              case "Fuel Expense":
+                break;
+              default:
+            }
           }
         },
         child: showData(
