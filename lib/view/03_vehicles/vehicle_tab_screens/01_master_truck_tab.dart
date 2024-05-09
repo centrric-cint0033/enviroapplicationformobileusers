@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:enviro_mobile_application/Routepage/approutes.gr.dart';
 import 'package:enviro_mobile_application/widgets/ww_search_widget.dart';
 import 'package:enviro_mobile_application/widgets/ww_response_handler.dart';
@@ -56,8 +57,9 @@ class MasterTruckList extends StatelessWidget {
       builder: (context) {
         List<VehicleModel> list = vmVehicle.masterTruckApiResponse.data ?? [];
         return ListView.separated(
-          controller: vmVehicle.masterTruckController,
           itemCount: list.length + 1,
+          padding: EdgeInsets.only(bottom: 20.h),
+          controller: vmVehicle.masterTruckController,
           separatorBuilder: (BuildContext context, int index) => gapFieldVeh,
           itemBuilder: (context, index) => InkWell(
             onTap: () {
