@@ -3,8 +3,10 @@ import 'dart:convert';
 import 'package:dartz/dartz.dart';
 
 import 'package:enviro_mobile_application/model/07_Jobcard/job_card_model.dart';
+
 import 'package:enviro_mobile_application/model/12_shedulecard/shedule_card_resp_model.dart';
 import 'package:enviro_mobile_application/utilis/api_endpoints/api_endpoints.dart';
+
 import 'package:enviro_mobile_application/utilis/httpservice.dart';
 import 'package:enviro_mobile_application/utilis/injection.dart';
 import 'package:enviro_mobile_application/utilis/main_failure.dart';
@@ -88,4 +90,26 @@ class SalesService implements IJobCardService {
       },
     );
   }
+
+  // @override
+  // Future<Either<Map<MainFailure, dynamic>, List<SiteResModel>>>
+  //     shedulesignatureserviceapi({
+  //   required String key,
+  // }) async {
+  //   customPrint(content: key);
+  //   var response = await getIt<HttpService>().multipartRequest(
+  //     apiUrl: ApiEndPoints.endpointshedulesignature,
+  //     data: {"key": key},
+  //     method: "POST",
+  //   );
+
+  //   return response.fold(
+  //     (l) => Left(l),
+  //     (res) async {
+  //       var data = jsonDecode(res.body);
+  //       SiteResModel sites = data.map((e) => SiteResModel.fromJson(e));
+  //       return Right(sites);
+  //     },
+  //   );
+  // }
 }

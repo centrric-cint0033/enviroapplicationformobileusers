@@ -30,66 +30,204 @@ class SheduleSignaturePage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              Container(
+                width: 411,
+                height: 103,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  border: Border.all(color: Colors.black12),
+                  borderRadius: BorderRadius.circular(5.0),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        'Weigh bridge Required:',
+                        style: TextStyle(
+                            fontSize: 16, fontWeight: FontWeight.bold),
+                      ),
+                      const SizedBox(height: 8),
+                      CmButton(
+                        width: 108,
+                        color: Colors.blue,
+                        onPressed: () {
+                          _controller.clear();
+                        },
+                        text: 'AddFile ',
+                      ),
+                    ],
+                  ),
+                ),
+              ),
               const SizedBox(
                 height: 20,
               ),
               Container(
-                height: 103,
+                width: 411,
+                height: 55,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  border: Border.all(color: Colors.black12),
+                  borderRadius: BorderRadius.circular(5.0),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Job Details',
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          SizedBox(height: 8),
+                        ],
+                      ),
+                      DropdownButton<String>(
+                        underline: Container(),
+                        items: <String>['azeem', 'jithin', 'shofi', 'azhar']
+                            .map((String value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(value),
+                          );
+                        }).toList(),
+                        onChanged: (String? value) {},
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Container(
+                height: 77,
                 decoration: BoxDecoration(
                   color: const Color.fromARGB(255, 208, 247, 209),
                   border: Border.all(color: Colors.black12),
                   borderRadius: BorderRadius.circular(5.0),
                 ),
-                child: const Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Type of waste:',
-                        style: TextStyle(fontSize: 16),
-                      ),
-                      SizedBox(height: 8),
-                      TextField(
+                child: const Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Type of waste:',
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(left: 8.0),
+                      child: TextField(
                         decoration: InputDecoration(
                           hintText: 'Any change in waste is mentioned here...',
                           border: InputBorder.none,
                         ),
                         style: TextStyle(),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
               const SizedBox(
                 height: 20,
               ),
               Container(
-                height: 103,
+                height: 77,
                 decoration: BoxDecoration(
                   color: const Color.fromARGB(255, 208, 247, 209),
                   border: Border.all(color: Colors.black12),
                   borderRadius: BorderRadius.circular(5.0),
                 ),
-                child: const Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'WasteLiters:',
-                        style: TextStyle(fontSize: 16),
-                      ),
-                      TextField(
+                child: const Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'waste Liters:',
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(left: 8.0),
+                      child: TextField(
                         decoration: InputDecoration(
-                          hintText:
-                              'Any change in Amount of Liters collected mentioned here...',
+                          hintText: 'Any change in waste is mentioned here...',
                           border: InputBorder.none,
                         ),
                         style: TextStyle(),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Container(
+                height: 77,
+                decoration: BoxDecoration(
+                  color: const Color.fromARGB(255, 208, 247, 209),
+                  border: Border.all(color: Colors.black12),
+                  borderRadius: BorderRadius.circular(5.0),
+                ),
+                child: const Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Po Number:',
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(left: 8.0),
+                      child: TextField(
+                        decoration: InputDecoration(
+                          hintText: 'Purchase order Number...',
+                          border: InputBorder.none,
+                        ),
+                        style: TextStyle(),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Container(
+                height: 77,
+                decoration: BoxDecoration(
+                  color: const Color.fromARGB(255, 208, 247, 209),
+                  border: Border.all(color: Colors.black12),
+                  borderRadius: BorderRadius.circular(5.0),
+                ),
+                child: const Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'SignName:',
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(left: 8.0),
+                      child: TextField(
+                        decoration: InputDecoration(
+                          hintText: 'Sign name...',
+                          border: InputBorder.none,
+                        ),
+                        style: TextStyle(),
+                      ),
+                    ),
+                  ],
                 ),
               ),
               const SizedBox(
@@ -109,7 +247,8 @@ class SheduleSignaturePage extends StatelessWidget {
                     children: [
                       Text(
                         'Change in waste type and its liters will be uploaded with client\'s signature',
-                        style: TextStyle(fontSize: 16),
+                        style: TextStyle(
+                            fontSize: 12, fontWeight: FontWeight.bold),
                       ),
                     ],
                   ),
@@ -131,11 +270,12 @@ class SheduleSignaturePage extends StatelessWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
+                        const Padding(
+                          padding: EdgeInsets.all(8.0),
                           child: Text(
                             'Please provide your signature:',
-                            style: TextStyle(fontSize: 16),
+                            style: TextStyle(
+                                fontSize: 16, fontWeight: FontWeight.bold),
                           ),
                         ),
                         Container(
@@ -146,7 +286,7 @@ class SheduleSignaturePage extends StatelessWidget {
                             backgroundColor: Colors.white,
                           ),
                         ),
-                        SizedBox(height: 20),
+                        const SizedBox(height: 20),
                       ],
                     ),
                     Positioned(
@@ -164,7 +304,8 @@ class SheduleSignaturePage extends StatelessWidget {
                                   return AlertDialog(
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(10.0),
-                                      side: BorderSide(color: Colors.black),
+                                      side:
+                                          const BorderSide(color: Colors.black),
                                     ),
                                     content: const Text(
                                       'Uploading signature',
@@ -177,7 +318,7 @@ class SheduleSignaturePage extends StatelessWidget {
                                         onPressed: () {
                                           Navigator.of(context).pop();
                                         },
-                                        child: Text('OK'),
+                                        child: const Text('OK'),
                                       ),
                                     ],
                                   );
@@ -205,6 +346,7 @@ class SheduleSignaturePage extends StatelessWidget {
               ),
               const Text(
                 'Comments',
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 10),
               SizedBox(
@@ -223,7 +365,7 @@ class SheduleSignaturePage extends StatelessWidget {
                       onPressed: () {},
                     ),
                   ),
-                  style: TextStyle(color: Colors.black),
+                  style: const TextStyle(color: Colors.black),
                   maxLines: null,
                 ),
               ),
