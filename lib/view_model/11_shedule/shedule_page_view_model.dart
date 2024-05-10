@@ -32,7 +32,9 @@ abstract class JobCardViewModelBase with Store {
   @action
   Future<void> pickFilefromphone() async {
     picked = await FilePicker.platform.pickFiles(
-        type: FileType.custom, allowedExtensions: ['jpg', 'pdf', 'doc']);
+        allowMultiple: true,
+        type: FileType.custom,
+        allowedExtensions: ['jpg', 'pdf', 'doc']);
     if (picked == null) return;
     final file = picked?.files.first;
 
