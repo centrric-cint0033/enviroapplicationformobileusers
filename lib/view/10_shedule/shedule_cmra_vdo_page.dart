@@ -59,13 +59,13 @@ class ScheduleVideoAndPhotoPage extends StatelessWidget {
                     }),
                   ),
                 ),
-                if (vmJobcard.isImageSelected) // Check if image is selected
-                  ElevatedButton(
-                    onPressed: () {
-                      // Action when button is pressed
-                    },
-                    child: Text('Your Button Text'),
-                  ),
+                // if (vmJobcard.isImageSelected) // Check if image is selected
+                //   ElevatedButton(
+                //     onPressed: () {
+                //       // Action when button is pressed
+                //     },
+                //     child: Text('Your Button Text'),
+                //   ),
                 Observer(builder: (_) {
                   return vmJobcard.selectedcameraImage != null
                       ? SizedBox(

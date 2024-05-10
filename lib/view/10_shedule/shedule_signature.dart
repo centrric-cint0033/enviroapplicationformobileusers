@@ -1,9 +1,14 @@
+import 'dart:io';
+
 import 'package:auto_route/auto_route.dart';
+import 'package:enviro_mobile_application/view_model/11_shedule/shedule_page_view_model.dart';
 import 'package:enviro_mobile_application/widgets/cmbutton.dart';
 import 'package:enviro_mobile_application/widgets/cmn_action_icon.dart';
 import 'package:enviro_mobile_application/widgets/cmn_title_textwidget.dart';
 import 'package:enviro_mobile_application/widgets/drawer.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:signature/signature.dart';
 
 final SignatureController _controller = SignatureController(
@@ -32,7 +37,6 @@ class SheduleSignaturePage extends StatelessWidget {
             children: [
               Container(
                 width: 411,
-                height: 103,
                 decoration: BoxDecoration(
                   color: Colors.white,
                   border: Border.all(color: Colors.black12),
@@ -49,14 +53,43 @@ class SheduleSignaturePage extends StatelessWidget {
                             fontSize: 16, fontWeight: FontWeight.bold),
                       ),
                       const SizedBox(height: 8),
-                      CmButton(
-                        width: 108,
-                        color: Colors.blue,
-                        onPressed: () {
-                          _controller.clear();
-                        },
-                        text: 'AddFile ',
-                      ),
+                      Observer(builder: (_) {
+                        return Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              children: [
+                                CmButton(
+                                  width: 108,
+                                  color: Colors.blue,
+                                  onPressed: () async {
+                                    vmJobcard.pickFilefromphone();
+                                  },
+                                  text: 'AddFile ',
+                                ),
+                                const SizedBox(width: 8),
+                                CmButton(
+                                  width: 118,
+                                  color: Colors.blue,
+                                  onPressed: () async {
+                                    vmJobcard.pickImageFromCamera();
+                                  },
+                                  text: 'Camera ',
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 16),
+                            Observer(builder: (_) {
+                              return Text(
+                                vmJobcard.picked != null
+                                    ? vmJobcard.picked!.names.toString()
+                                    : 'No file selected',
+                                style: const TextStyle(fontSize: 16),
+                              );
+                            }),
+                          ],
+                        );
+                      }),
                     ],
                   ),
                 ),
@@ -66,7 +99,7 @@ class SheduleSignaturePage extends StatelessWidget {
               ),
               Container(
                 width: 411,
-                height: 55,
+                height: 48,
                 decoration: BoxDecoration(
                   color: Colors.white,
                   border: Border.all(color: Colors.black12),
@@ -84,7 +117,7 @@ class SheduleSignaturePage extends StatelessWidget {
                           Text(
                             'Job Details',
                             style: TextStyle(
-                              fontSize: 16,
+                              fontSize: 14,
                               fontWeight: FontWeight.bold,
                             ),
                           ),

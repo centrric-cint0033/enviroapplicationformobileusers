@@ -9,6 +9,40 @@ part of 'shedule_page_view_model.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$JobCardViewModel on JobCardViewModelBase, Store {
+  late final _$pickedAtom =
+      Atom(name: 'JobCardViewModelBase.picked', context: context);
+
+  @override
+  FilePickerResult? get picked {
+    _$pickedAtom.reportRead();
+    return super.picked;
+  }
+
+  @override
+  set picked(FilePickerResult? value) {
+    _$pickedAtom.reportWrite(value, super.picked, () {
+      super.picked = value;
+    });
+  }
+
+  late final _$selectedsignaturecameraImageAtom = Atom(
+      name: 'JobCardViewModelBase.selectedsignaturecameraImage',
+      context: context);
+
+  @override
+  File? get selectedsignaturecameraImage {
+    _$selectedsignaturecameraImageAtom.reportRead();
+    return super.selectedsignaturecameraImage;
+  }
+
+  @override
+  set selectedsignaturecameraImage(File? value) {
+    _$selectedsignaturecameraImageAtom
+        .reportWrite(value, super.selectedsignaturecameraImage, () {
+      super.selectedsignaturecameraImage = value;
+    });
+  }
+
   late final _$isImageSelectedAtom =
       Atom(name: 'JobCardViewModelBase.isImageSelected', context: context);
 
@@ -185,6 +219,24 @@ mixin _$JobCardViewModel on JobCardViewModelBase, Store {
     });
   }
 
+  late final _$pickFilefromphoneAsyncAction =
+      AsyncAction('JobCardViewModelBase.pickFilefromphone', context: context);
+
+  @override
+  Future<void> pickFilefromphone() {
+    return _$pickFilefromphoneAsyncAction.run(() => super.pickFilefromphone());
+  }
+
+  late final _$pickImageFromsignatureCameraAsyncAction = AsyncAction(
+      'JobCardViewModelBase.pickImageFromsignatureCamera',
+      context: context);
+
+  @override
+  Future<void> pickImageFromsignatureCamera() {
+    return _$pickImageFromsignatureCameraAsyncAction
+        .run(() => super.pickImageFromsignatureCamera());
+  }
+
   late final _$pickImageFromCameraAsyncAction =
       AsyncAction('JobCardViewModelBase.pickImageFromCamera', context: context);
 
@@ -284,6 +336,8 @@ mixin _$JobCardViewModel on JobCardViewModelBase, Store {
   @override
   String toString() {
     return '''
+picked: ${picked},
+selectedsignaturecameraImage: ${selectedsignaturecameraImage},
 isImageSelected: ${isImageSelected},
 selectedcameraImage: ${selectedcameraImage},
 selectedImage: ${selectedImage},

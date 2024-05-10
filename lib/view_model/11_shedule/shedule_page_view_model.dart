@@ -5,11 +5,11 @@ import 'package:enviro_mobile_application/model/07_Jobcard/job_card_model.dart';
 import 'package:enviro_mobile_application/model/12_shedulecard/shedule_card_resp_model.dart';
 import 'package:enviro_mobile_application/service/07_shedule/job_card/shedule_page_service.dart';
 import 'package:enviro_mobile_application/utilis/injection.dart';
-import 'package:flutter/material.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:image_picker/image_picker.dart';
-
 import 'package:injectable/injectable.dart';
 import 'package:mobx/mobx.dart';
+import 'package:open_file/open_file.dart';
 
 part 'shedule_page_view_model.g.dart';
 
@@ -27,10 +27,46 @@ abstract class JobCardViewModelBase with Store {
   JobCardViewModelBase(this.jobcardService);
 
   @observable
+  FilePickerResult? picked;
+
+  @action
+  Future<void> pickFilefromphone() async {
+    picked = await FilePicker.platform.pickFiles(
+        type: FileType.custom, allowedExtensions: ['jpg', 'pdf', 'doc']);
+    if (picked == null) return;
+    final file = picked?.files.first;
+
+    _openFile(file!);
+  }
+
+  void _openFile(PlatformFile file) {
+    OpenFile.open(file.path);
+
+    // OpenFile.open(file.path);
+  }
+
+  @observable
+  File? selectedsignaturecameraImage;
+
+  @action
+  Future<void> pickImageFromsignatureCamera() async {
+    final pickedsignaturecameraImage =
+        await ImagePicker().pickImage(source: ImageSource.camera);
+
+    if (pickedsignaturecameraImage != null) {
+      selectedsignaturecameraImage = File(pickedsignaturecameraImage.path);
+      // isImageSelected = true;
+
+      print('Image selected');
+    }
+  }
+
+  @observable
   bool isImageSelected = true;
 
   @observable
   File? selectedcameraImage;
+
   @action
   Future<void> pickImageFromCamera() async {
     final pickedImage =
