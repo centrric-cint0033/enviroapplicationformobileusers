@@ -234,9 +234,11 @@ abstract class $AppRouter extends _i32.RootStackRouter {
       );
     },
     SheduleSignatureRoute.name: (routeData) {
+      final args = routeData.argsAs<SheduleSignatureRouteArgs>(
+          orElse: () => const SheduleSignatureRouteArgs());
       return _i32.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i21.SheduleSignaturePage(),
+        child: _i21.SheduleSignaturePage(key: args.key),
       );
     },
     SheduledetailRoute.name: (routeData) {
@@ -777,16 +779,32 @@ class SheduleCommentRoute extends _i32.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i21.SheduleSignaturePage]
-class SheduleSignatureRoute extends _i32.PageRouteInfo<void> {
-  const SheduleSignatureRoute({List<_i32.PageRouteInfo>? children})
-      : super(
+class SheduleSignatureRoute
+    extends _i32.PageRouteInfo<SheduleSignatureRouteArgs> {
+  SheduleSignatureRoute({
+    _i33.Key? key,
+    List<_i32.PageRouteInfo>? children,
+  }) : super(
           SheduleSignatureRoute.name,
+          args: SheduleSignatureRouteArgs(key: key),
           initialChildren: children,
         );
 
   static const String name = 'SheduleSignatureRoute';
 
-  static const _i32.PageInfo<void> page = _i32.PageInfo<void>(name);
+  static const _i32.PageInfo<SheduleSignatureRouteArgs> page =
+      _i32.PageInfo<SheduleSignatureRouteArgs>(name);
+}
+
+class SheduleSignatureRouteArgs {
+  const SheduleSignatureRouteArgs({this.key});
+
+  final _i33.Key? key;
+
+  @override
+  String toString() {
+    return 'SheduleSignatureRouteArgs{key: $key}';
+  }
 }
 
 /// generated route for

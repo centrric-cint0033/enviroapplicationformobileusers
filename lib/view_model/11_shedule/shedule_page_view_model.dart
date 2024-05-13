@@ -43,8 +43,6 @@ abstract class JobCardViewModelBase with Store {
 
   void _openFile(PlatformFile file) {
     OpenFile.open(file.path);
-
-    // OpenFile.open(file.path);
   }
 
   @observable

@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:auto_route/auto_route.dart';
 import 'package:enviro_mobile_application/view_model/11_shedule/shedule_page_view_model.dart';
@@ -6,10 +7,11 @@ import 'package:enviro_mobile_application/widgets/cmbutton.dart';
 import 'package:enviro_mobile_application/widgets/cmn_action_icon.dart';
 import 'package:enviro_mobile_application/widgets/cmn_title_textwidget.dart';
 import 'package:enviro_mobile_application/widgets/drawer.dart';
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:signature/signature.dart';
+import 'package:path/path.dart';
 
 final SignatureController _controller = SignatureController(
   penStrokeWidth: 5,
@@ -19,7 +21,7 @@ final SignatureController _controller = SignatureController(
 
 @RoutePage()
 class SheduleSignaturePage extends StatelessWidget {
-  const SheduleSignaturePage({Key? key});
+  SheduleSignaturePage({Key? key});
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +74,7 @@ class SheduleSignaturePage extends StatelessWidget {
                                   width: 118,
                                   color: Colors.blue,
                                   onPressed: () async {
-                                    vmJobcard.pickImageFromCamera();
+                                    vmJobcard.pickImageFromsignatureCamera();
                                   },
                                   text: 'Camera ',
                                 ),
@@ -80,11 +82,46 @@ class SheduleSignaturePage extends StatelessWidget {
                             ),
                             const SizedBox(height: 16),
                             Observer(builder: (_) {
-                              return Text(
-                                vmJobcard.picked != null
-                                    ? vmJobcard.picked!.names.toString()
-                                    : 'No file selected',
-                                style: const TextStyle(fontSize: 16),
+                              return Column(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(right: 57.0),
+                                    child: Observer(builder: (_) {
+                                      if (vmJobcard.picked != null &&
+                                          vmJobcard.picked!.files.isNotEmpty) {
+                                        return ListView.builder(
+                                          shrinkWrap: true,
+                                          itemCount:
+                                              vmJobcard.picked!.files.length,
+                                          itemBuilder: (context, index) {
+                                            var file =
+                                                vmJobcard.picked!.files[index];
+
+                                            final icon = returnLogo(file.name,
+                                                file.path, file.size);
+                                            return ListTile(
+                                              leading: icon,
+                                              title: Text(
+                                                file.name,
+                                                style: const TextStyle(
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+                                                    fontSize: 16),
+                                              ),
+                                              subtitle: Text(file.name),
+                                              onTap: () {},
+                                            );
+                                          },
+                                        );
+                                      } else {
+                                        return const Text(
+                                          'No files selected',
+                                          style: TextStyle(fontSize: 16),
+                                        );
+                                      }
+                                    }),
+                                  )
+                                ],
                               );
                             }),
                           ],
@@ -410,5 +447,46 @@ class SheduleSignaturePage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  returnLogo(String filePath, dynamic image, int? filesize) {
+    List<String>? parts = filePath.split('.');
+    // if (parts.length < 2) {
+    //   return const Icon(
+    //     Icons.error_outline,
+    //     color: Colors.red,
+    //   );
+    // }
+
+    String? fileExtension = parts.last.toLowerCase();
+    print("File extension: $fileExtension");
+
+    switch (fileExtension) {
+      case 'jpeg':
+        if (vmJobcard.picked != null && vmJobcard.picked!.files.isNotEmpty) {
+          return SizedBox(
+            height: 100,
+            width: 400,
+            child: Image.file(File(image)),
+          );
+        } else {
+          return const Text("Image file is null");
+        }
+      case 'pdf':
+        return const Icon(
+          Icons.picture_as_pdf,
+          color: Colors.red,
+        );
+      case 'doc':
+        return const Icon(
+          Icons.insert_drive_file,
+          color: Colors.black12,
+        );
+      default:
+        return const Icon(
+          Icons.error_outline,
+          color: Colors.red,
+        );
+    }
   }
 }
