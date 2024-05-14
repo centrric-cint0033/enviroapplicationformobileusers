@@ -45,14 +45,16 @@ abstract class JobCardViewModelBase with Store {
     // picked?.files.addAll(pic?.files ?? []);
 
     // if (picked == null) return;
-    final file = pic?.files.first;
 
-    _openFile(file!);
+    // final file = pic?.files.first;
+
+    // _openFile(file!);
   }
 
-  void _openFile(PlatformFile file) {
-    OpenFile.open(file.path);
-  }
+  // void _openFile(PlatformFile file) {
+  //   OpenFile.open(file.path);
+  //   _openFile(file);
+  // }
 
   @observable
   File? selectedsignaturecameraImage;

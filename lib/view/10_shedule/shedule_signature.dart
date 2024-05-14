@@ -10,6 +10,7 @@ import 'package:enviro_mobile_application/widgets/drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:open_file/open_file.dart';
 import 'package:signature/signature.dart';
 import 'package:path/path.dart';
 
@@ -18,7 +19,6 @@ final SignatureController _controller = SignatureController(
   penColor: Colors.black,
   exportBackgroundColor: Colors.white,
 );
-var arrdata = [];
 
 @RoutePage()
 class SheduleSignaturePage extends StatelessWidget {
@@ -81,7 +81,6 @@ class SheduleSignaturePage extends StatelessWidget {
                                 ),
                               ],
                             ),
-                            const SizedBox(height: 16),
                             Observer(builder: (_) {
                               return Column(
                                 children: [
@@ -96,24 +95,58 @@ class SheduleSignaturePage extends StatelessWidget {
                                           itemBuilder: (context, index) {
                                             var file =
                                                 vmJobcard.pickedFiles[index];
-                                            arrdata.map((file) {
-                                              return Container();
-                                            }).toList();
-
                                             final icon = returnLogo(file.name,
                                                 file.path, file.size);
                                             return ListTile(
+                                              onLongPress: () {
+                                                showDialog(
+                                                  context: context,
+                                                  builder:
+                                                      (BuildContext context) {
+                                                    return AlertDialog(
+                                                      title:
+                                                          Text("Delete File"),
+                                                      content: Text(
+                                                          "Are you sure you want to delete ${file.name}?"),
+                                                      actions: <Widget>[
+                                                        TextButton(
+                                                          onPressed: () {
+                                                            Navigator.of(
+                                                                    context)
+                                                                .pop(); // Close the dialog
+                                                          },
+                                                          child: Text("Cancel"),
+                                                        ),
+                                                        TextButton(
+                                                          onPressed: () {
+                                                            // Remove the file from the list
+                                                            Navigator.of(
+                                                                    context)
+                                                                .pop();
+                                                            Navigator.of(
+                                                                    context)
+                                                                .pop(); // Close the dialog
+                                                          },
+                                                          child: Text("Delete"),
+                                                        ),
+                                                      ],
+                                                    );
+                                                  },
+                                                );
+                                              },
                                               title: Text(
                                                 file.name,
                                                 style: const TextStyle(
-                                                    overflow:
-                                                        TextOverflow.ellipsis,
-                                                    fontSize: 16),
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                  fontSize: 16,
+                                                ),
                                               ),
                                               leading: icon,
                                               subtitle: Text(file.extension!),
-
-                                              // onTap: () {},
+                                              onTap: () {
+                                                OpenFile.open(file.path);
+                                              },
                                             );
                                           },
                                         );
