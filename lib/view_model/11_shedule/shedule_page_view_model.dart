@@ -6,6 +6,7 @@ import 'package:enviro_mobile_application/model/12_shedulecard/shedule_card_resp
 import 'package:enviro_mobile_application/service/07_shedule/job_card/shedule_page_service.dart';
 import 'package:enviro_mobile_application/utilis/injection.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:injectable/injectable.dart';
 import 'package:mobx/mobx.dart';
@@ -25,6 +26,17 @@ abstract class JobCardViewModelBase with Store {
   final IJobCardService jobcardService;
 
   JobCardViewModelBase(this.jobcardService);
+
+  @observable
+  Color? signColor = Colors.white;
+
+  Future<void> updateSignatureButtonColor({bool state = false}) async {
+    if (state == true) {
+      signColor = Colors.blue;
+    } else if (state != true) {
+      signColor = Colors.white;
+    }
+  }
 
   @observable
   List<PlatformFile> pickedFiles = [];

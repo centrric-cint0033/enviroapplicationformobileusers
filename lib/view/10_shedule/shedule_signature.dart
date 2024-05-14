@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:auto_route/auto_route.dart';
+import 'package:enviro_mobile_application/view/08_team/team_widgets/01_team_widgets.dart';
 import 'package:enviro_mobile_application/view_model/11_shedule/shedule_page_view_model.dart';
 import 'package:enviro_mobile_application/widgets/cmbutton.dart';
 import 'package:enviro_mobile_application/widgets/cmn_action_icon.dart';
@@ -18,6 +19,9 @@ final SignatureController _controller = SignatureController(
   penStrokeWidth: 5,
   penColor: Colors.black,
   exportBackgroundColor: Colors.white,
+  onDrawEnd: () {
+    vmJobcard.updateSignatureButtonColor(state: true);
+  },
 );
 
 @RoutePage()
@@ -60,6 +64,7 @@ class SheduleSignaturePage extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Row(
+                              // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 CmButton(
                                   width: 108,
@@ -95,7 +100,7 @@ class SheduleSignaturePage extends StatelessWidget {
                                               file.name, file.path, file.size);
                                           return Padding(
                                             padding: const EdgeInsets.only(
-                                                top: 8, right: 8),
+                                                top: 8, right: 2),
                                             child: SizedBox(
                                               height: 70, // Set card height
                                               width: 140, // Set card width
@@ -193,172 +198,307 @@ class SheduleSignaturePage extends StatelessWidget {
               const SizedBox(
                 height: 20,
               ),
-              Container(
-                width: 411,
-                height: 48,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  border: Border.all(color: Colors.black12),
-                  borderRadius: BorderRadius.circular(5.0),
+              // Container(
+              //   width: 411,
+              //   height: 48,
+              //   decoration: BoxDecoration(
+              //     color: Colors.white,
+              //     border: Border.all(color: Colors.black12),
+              //     borderRadius: BorderRadius.circular(5.0),
+              //   ),
+              //   child: Padding(
+              //     padding: const EdgeInsets.all(8.0),
+              //     child: Row(
+              //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //       crossAxisAlignment: CrossAxisAlignment.start,
+              //       children: [
+              //         const Column(
+              //           crossAxisAlignment: CrossAxisAlignment.start,
+              //           children: [
+              //             Text(
+              //               'Job Details',
+              //               style: TextStyle(
+              //                 fontSize: 14,
+              //                 fontWeight: FontWeight.bold,
+              //               ),
+              //             ),
+              //             SizedBox(height: 8),
+              //           ],
+              //         ),
+              //         DropdownButton<String>(
+              //           underline: Container(),
+              //           items: <String>['azeem', 'jithin', 'shofi', 'azhar']
+              //               .map((String value) {
+              //             return DropdownMenuItem<String>(
+              //               value: value,
+              //               child: Text(value),
+              //             );
+              //           }).toList(),
+              //           onChanged: (String? value) {},
+              //         ),
+              //       ],
+              //     ),
+              //   ),
+              // ),
+              ExpansionTile(
+                title: const Text(
+                  'Job Details',
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Column(
+                children: [
+                  ListTile(
+                    title: Container(
+                      height: 83,
+                      decoration: BoxDecoration(
+                        color: const Color.fromARGB(255, 208, 247, 209),
+                        border: Border.all(color: Colors.black12),
+                        borderRadius: BorderRadius.circular(5.0),
+                      ),
+                      child: const Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Job Details',
+                            'Type of waste:',
                             style: TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.bold,
+                                fontSize: 16, fontWeight: FontWeight.bold),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(left: 8.0),
+                            child: TextField(
+                              decoration: InputDecoration(
+                                hintText:
+                                    'Any change in waste is mentioned here...',
+                                border: InputBorder.none,
+                              ),
+                              style: TextStyle(),
                             ),
                           ),
-                          SizedBox(height: 8),
                         ],
                       ),
-                      DropdownButton<String>(
-                        underline: Container(),
-                        items: <String>['azeem', 'jithin', 'shofi', 'azhar']
-                            .map((String value) {
-                          return DropdownMenuItem<String>(
-                            value: value,
-                            child: Text(value),
-                          );
-                        }).toList(),
-                        onChanged: (String? value) {},
-                      ),
-                    ],
+                    ),
                   ),
-                ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              Container(
-                height: 77,
-                decoration: BoxDecoration(
-                  color: const Color.fromARGB(255, 208, 247, 209),
-                  border: Border.all(color: Colors.black12),
-                  borderRadius: BorderRadius.circular(5.0),
-                ),
-                child: const Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Type of waste:',
-                      style:
-                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(left: 8.0),
-                      child: TextField(
-                        decoration: InputDecoration(
-                          hintText: 'Any change in waste is mentioned here...',
-                          border: InputBorder.none,
-                        ),
-                        style: TextStyle(),
+                  ListTile(
+                    title: Container(
+                      height: 83,
+                      decoration: BoxDecoration(
+                        color: const Color.fromARGB(255, 208, 247, 209),
+                        border: Border.all(color: Colors.black12),
+                        borderRadius: BorderRadius.circular(5.0),
+                      ),
+                      child: const Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'waste Liters:',
+                            style: TextStyle(
+                                fontSize: 16, fontWeight: FontWeight.bold),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(left: 8.0),
+                            child: TextField(
+                              decoration: InputDecoration(
+                                hintText:
+                                    'Any change in waste is mentioned here...',
+                                border: InputBorder.none,
+                              ),
+                              style: TextStyle(),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                  ],
-                ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              Container(
-                height: 77,
-                decoration: BoxDecoration(
-                  color: const Color.fromARGB(255, 208, 247, 209),
-                  border: Border.all(color: Colors.black12),
-                  borderRadius: BorderRadius.circular(5.0),
-                ),
-                child: const Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'waste Liters:',
-                      style:
-                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(left: 8.0),
-                      child: TextField(
-                        decoration: InputDecoration(
-                          hintText: 'Any change in waste is mentioned here...',
-                          border: InputBorder.none,
-                        ),
-                        style: TextStyle(),
+                  ),
+                  // Wrapped with ListTile to include it properly
+                  ListTile(
+                    title: Container(
+                      height: 83,
+                      decoration: BoxDecoration(
+                        color: const Color.fromARGB(255, 208, 247, 209),
+                        border: Border.all(color: Colors.black12),
+                        borderRadius: BorderRadius.circular(5.0),
+                      ),
+                      child: const Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Po Number:',
+                            style: TextStyle(
+                                fontSize: 16, fontWeight: FontWeight.bold),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(left: 8.0),
+                            child: TextField(
+                              decoration: InputDecoration(
+                                hintText: 'Purchase order Number...',
+                                border: InputBorder.none,
+                              ),
+                              style: TextStyle(),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                  ],
-                ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              Container(
-                height: 77,
-                decoration: BoxDecoration(
-                  color: const Color.fromARGB(255, 208, 247, 209),
-                  border: Border.all(color: Colors.black12),
-                  borderRadius: BorderRadius.circular(5.0),
-                ),
-                child: const Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Po Number:',
-                      style:
-                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(left: 8.0),
-                      child: TextField(
-                        decoration: InputDecoration(
-                          hintText: 'Purchase order Number...',
-                          border: InputBorder.none,
-                        ),
-                        style: TextStyle(),
+                  ),
+                  // Wrapped with ListTile to include it properly
+                  ListTile(
+                    title: Container(
+                      height: 83,
+                      decoration: BoxDecoration(
+                        color: const Color.fromARGB(255, 208, 247, 209),
+                        border: Border.all(color: Colors.black12),
+                        borderRadius: BorderRadius.circular(5.0),
+                      ),
+                      child: const Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'SignName:',
+                            style: TextStyle(
+                                fontSize: 16, fontWeight: FontWeight.bold),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 8.0),
+                            child: TextField(
+                              decoration: InputDecoration(
+                                hintText: 'Sign name...',
+                                border: InputBorder.none,
+                              ),
+                              style: TextStyle(),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-              const SizedBox(
-                height: 20,
-              ),
-              Container(
-                height: 77,
-                decoration: BoxDecoration(
-                  color: const Color.fromARGB(255, 208, 247, 209),
-                  border: Border.all(color: Colors.black12),
-                  borderRadius: BorderRadius.circular(5.0),
-                ),
-                child: const Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'SignName:',
-                      style:
-                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(left: 8.0),
-                      child: TextField(
-                        decoration: InputDecoration(
-                          hintText: 'Sign name...',
-                          border: InputBorder.none,
-                        ),
-                        style: TextStyle(),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+              // const SizedBox(
+              //   height: 20,
+              // ),
+              // Container(
+              //   height: 77,
+              //   decoration: BoxDecoration(
+              //     color: const Color.fromARGB(255, 208, 247, 209),
+              //     border: Border.all(color: Colors.black12),
+              //     borderRadius: BorderRadius.circular(5.0),
+              //   ),
+              //   child: const Column(
+              //     crossAxisAlignment: CrossAxisAlignment.start,
+              //     children: [
+              //       Text(
+              //         'Type of waste:',
+              //         style:
+              //             TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              //       ),
+              //       Padding(
+              //         padding: EdgeInsets.only(left: 8.0),
+              //         child: TextField(
+              //           decoration: InputDecoration(
+              //             hintText: 'Any change in waste is mentioned here...',
+              //             border: InputBorder.none,
+              //           ),
+              //           style: TextStyle(),
+              //         ),
+              //       ),
+              //     ],
+              //   ),
+              // ),
+              // const SizedBox(
+              //   height: 20,
+              // ),
+              // Container(
+              //   height: 77,
+              //   decoration: BoxDecoration(
+              //     color: const Color.fromARGB(255, 208, 247, 209),
+              //     border: Border.all(color: Colors.black12),
+              //     borderRadius: BorderRadius.circular(5.0),
+              //   ),
+              //   child: const Column(
+              //     crossAxisAlignment: CrossAxisAlignment.start,
+              //     children: [
+              //       Text(
+              //         'waste Liters:',
+              //         style:
+              //             TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              //       ),
+              //       Padding(
+              //         padding: EdgeInsets.only(left: 8.0),
+              //         child: TextField(
+              //           decoration: InputDecoration(
+              //             hintText: 'Any change in waste is mentioned here...',
+              //             border: InputBorder.none,
+              //           ),
+              //           style: TextStyle(),
+              //         ),
+              //       ),
+              //     ],
+              //   ),
+              // ),
+              // const SizedBox(
+              //   height: 20,
+              // ),
+              // Container(
+              //   height: 77,
+              //   decoration: BoxDecoration(
+              //     color: const Color.fromARGB(255, 208, 247, 209),
+              //     border: Border.all(color: Colors.black12),
+              //     borderRadius: BorderRadius.circular(5.0),
+              //   ),
+              //   child: const Column(
+              //     crossAxisAlignment: CrossAxisAlignment.start,
+              //     children: [
+              //       Text(
+              //         'Po Number:',
+              //         style:
+              //             TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              //       ),
+              //       Padding(
+              //         padding: EdgeInsets.only(left: 8.0),
+              //         child: TextField(
+              //           decoration: InputDecoration(
+              //             hintText: 'Purchase order Number...',
+              //             border: InputBorder.none,
+              //           ),
+              //           style: TextStyle(),
+              //         ),
+              //       ),
+              //     ],
+              //   ),
+              // ),
+              // const SizedBox(
+              //   height: 20,
+              // ),
+              // Container(
+              //   height: 77,
+              //   decoration: BoxDecoration(
+              //     color: const Color.fromARGB(255, 208, 247, 209),
+              //     border: Border.all(color: Colors.black12),
+              //     borderRadius: BorderRadius.circular(5.0),
+              //   ),
+              //   child: const Column(
+              //     crossAxisAlignment: CrossAxisAlignment.start,
+              //     children: [
+              //       Text(
+              //         'SignName:',
+              //         style:
+              //             TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              //       ),
+              //       Padding(
+              //         padding: EdgeInsets.only(left: 8.0),
+              //         child: TextField(
+              //           decoration: InputDecoration(
+              //             hintText: 'Sign name...',
+              //             border: InputBorder.none,
+              //           ),
+              //           style: TextStyle(),
+              //         ),
+              //       ),
+              //     ],
+              //   ),
+              // ),
               const SizedBox(
                 height: 20,
               ),
@@ -404,7 +544,7 @@ class SheduleSignaturePage extends StatelessWidget {
                           child: Text(
                             'Please provide your signature:',
                             style: TextStyle(
-                                fontSize: 16, fontWeight: FontWeight.bold),
+                                fontSize: 20, fontWeight: FontWeight.bold),
                           ),
                         ),
                         Container(
@@ -424,46 +564,51 @@ class SheduleSignaturePage extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          CmButton(
-                            color: Colors.blue,
-                            onPressed: () {
-                              showDialog(
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return AlertDialog(
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(10.0),
-                                      side:
-                                          const BorderSide(color: Colors.black),
-                                    ),
-                                    content: const Text(
-                                      'Uploading signature',
-                                      style: TextStyle(
-                                          fontSize: 22,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    actions: <Widget>[
-                                      TextButton(
-                                        onPressed: () {
-                                          Navigator.of(context).pop();
-                                        },
-                                        child: const Text('OK'),
+                          Observer(builder: (_) {
+                            return CmButton(
+                              color: vmJobcard.signColor,
+                              onPressed: () {
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(10.0),
+                                        side: const BorderSide(
+                                            color: Colors.black),
                                       ),
-                                    ],
-                                  );
-                                },
-                              );
-                            },
-                            text: 'save',
-                          ),
+                                      content: const Text(
+                                        'Uploading signature',
+                                        style: TextStyle(
+                                            fontSize: 22,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      actions: <Widget>[
+                                        TextButton(
+                                          onPressed: () {
+                                            Navigator.of(context).pop();
+                                          },
+                                          child: const Text('OK'),
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
+                              },
+                              text: 'save',
+                            );
+                          }),
                           const SizedBox(width: 10),
-                          CmButton(
-                            color: Colors.blue,
-                            onPressed: () {
-                              _controller.clear();
-                            },
-                            text: 'Reset',
-                          ),
+                          Observer(builder: (_) {
+                            return CmButton(
+                              color: vmJobcard.signColor,
+                              onPressed: () {
+                                _controller.clear();
+                              },
+                              text: 'Reset',
+                            );
+                          }),
                         ],
                       ),
                     ),

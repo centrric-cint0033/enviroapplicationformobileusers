@@ -34,8 +34,6 @@ import 'package:enviro_mobile_application/view/04_ohs/ohs_main_page.dart'
     as _i13;
 import 'package:enviro_mobile_application/view/07_intranet/intranet_inside_page.dart'
     as _i5;
-import 'package:enviro_mobile_application/view/07_intranet/intranet_page.dart'
-    as _i6;
 import 'package:enviro_mobile_application/view/08_notification_page/notification_page.dart'
     as _i11;
 import 'package:enviro_mobile_application/view/08_team/add_team_page.dart'
@@ -75,6 +73,8 @@ import 'package:enviro_mobile_application/view/10_site/site_detail_screen.dart'
 import 'package:enviro_mobile_application/view/10_site/site_main_screen.dart'
     as _i25;
 import 'package:enviro_mobile_application/view/home_page.dart' as _i4;
+import 'package:enviro_mobile_application/view/intranet_page/intranet_page.dart'
+    as _i6;
 import 'package:enviro_mobile_application/view_model/10_site/site_view_model.dart'
     as _i37;
 import 'package:flutter/cupertino.dart' as _i35;
