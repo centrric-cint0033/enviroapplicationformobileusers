@@ -39,7 +39,6 @@ class SheduleSignaturePage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                width: 411,
                 decoration: BoxDecoration(
                   color: Colors.white,
                   border: Border.all(color: Colors.black12),
@@ -82,83 +81,93 @@ class SheduleSignaturePage extends StatelessWidget {
                               ],
                             ),
                             Observer(builder: (_) {
-                              return Column(
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(right: 57.0),
-                                    child: Observer(builder: (_) {
-                                      if (vmJobcard.pickedFiles.isNotEmpty) {
-                                        return ListView.builder(
-                                          shrinkWrap: true,
-                                          itemCount:
-                                              vmJobcard.pickedFiles.length,
-                                          itemBuilder: (context, index) {
-                                            var file =
-                                                vmJobcard.pickedFiles[index];
-                                            final icon = returnLogo(file.name,
-                                                file.path, file.size);
-                                            return ListTile(
-                                              onLongPress: () {
-                                                showDialog(
-                                                  context: context,
-                                                  builder:
-                                                      (BuildContext context) {
-                                                    return AlertDialog(
-                                                      title:
-                                                          Text("Delete File"),
-                                                      content: Text(
-                                                          "Are you sure you want to delete ${file.name}?"),
-                                                      actions: <Widget>[
-                                                        TextButton(
-                                                          onPressed: () {
-                                                            Navigator.of(
-                                                                    context)
-                                                                .pop(); // Close the dialog
-                                                          },
-                                                          child: Text("Cancel"),
-                                                        ),
-                                                        TextButton(
-                                                          onPressed: () {
-                                                            // Remove the file from the list
-                                                            Navigator.of(
-                                                                    context)
-                                                                .pop();
-                                                            Navigator.of(
-                                                                    context)
-                                                                .pop(); // Close the dialog
-                                                          },
-                                                          child: Text("Delete"),
-                                                        ),
-                                                      ],
+                              return SingleChildScrollView(
+                                scrollDirection: Axis
+                                    .horizontal, // Set scroll direction to horizontal
+                                child: Padding(
+                                  padding: const EdgeInsets.only(right: 57.0),
+                                  child: Observer(builder: (_) {
+                                    if (vmJobcard.pickedFiles.isNotEmpty) {
+                                      return Row(
+                                        children:
+                                            vmJobcard.pickedFiles.map((file) {
+                                          final icon = returnLogo(
+                                              file.name, file.path, file.size);
+                                          return Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 8.0),
+                                            child: SizedBox(
+                                              height: 80, // Set card height
+                                              width: 150, // Set card width
+                                              child: Card(
+                                                child: ListTile(
+                                                  onLongPress: () {
+                                                    showDialog(
+                                                      context: context,
+                                                      builder: (BuildContext
+                                                          context) {
+                                                        return AlertDialog(
+                                                          title: const Text(
+                                                              "Delete File"),
+                                                          content: Text(
+                                                              "Are you sure you want to delete ${file.name}?"),
+                                                          actions: <Widget>[
+                                                            TextButton(
+                                                              onPressed: () {
+                                                                Navigator.of(
+                                                                        context)
+                                                                    .pop(); // Close the dialog
+                                                              },
+                                                              child: const Text(
+                                                                  "Cancel"),
+                                                            ),
+                                                            TextButton(
+                                                              onPressed: () {
+                                                                // Remove the file from the list
+                                                                vmJobcard
+                                                                    .pickedFiles
+                                                                    .remove(
+                                                                        file);
+                                                                Navigator.of(
+                                                                        context)
+                                                                    .pop(); // Close the dialog
+                                                              },
+                                                              child: const Text(
+                                                                  "Delete"),
+                                                            ),
+                                                          ],
+                                                        );
+                                                      },
                                                     );
                                                   },
-                                                );
-                                              },
-                                              title: Text(
-                                                file.name,
-                                                style: const TextStyle(
-                                                  overflow:
-                                                      TextOverflow.ellipsis,
-                                                  fontSize: 16,
+                                                  title: Text(
+                                                    file.name,
+                                                    style: const TextStyle(
+                                                      overflow:
+                                                          TextOverflow.ellipsis,
+                                                      fontSize: 16,
+                                                    ),
+                                                  ),
+                                                  leading: icon,
+                                                  subtitle:
+                                                      Text(file.extension!),
+                                                  onTap: () {
+                                                    OpenFile.open(file.path);
+                                                  },
                                                 ),
                                               ),
-                                              leading: icon,
-                                              subtitle: Text(file.extension!),
-                                              onTap: () {
-                                                OpenFile.open(file.path);
-                                              },
-                                            );
-                                          },
-                                        );
-                                      } else {
-                                        return const Text(
-                                          'No files selected',
-                                          style: TextStyle(fontSize: 16),
-                                        );
-                                      }
-                                    }),
-                                  )
-                                ],
+                                            ),
+                                          );
+                                        }).toList(),
+                                      );
+                                    } else {
+                                      return const Text(
+                                        'No files selected',
+                                        style: TextStyle(fontSize: 16),
+                                      );
+                                    }
+                                  }),
+                                ),
                               );
                             }),
                           ],
@@ -502,8 +511,8 @@ class SheduleSignaturePage extends StatelessWidget {
       case 'jpg':
         if (vmJobcard.pickedFiles.isNotEmpty) {
           return SizedBox(
-            height: 100,
-            width: 100,
+            height: 60,
+            width: 40,
             child: Image.file(File(image)),
           );
         } else {
