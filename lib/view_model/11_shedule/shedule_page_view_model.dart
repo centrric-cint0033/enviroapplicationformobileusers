@@ -31,10 +31,13 @@ abstract class JobCardViewModelBase with Store {
 
   @action
   Future<void> pickFilefromphone() async {
-    picked = await FilePicker.platform.pickFiles(
+    var pic = await FilePicker.platform.pickFiles(
         allowMultiple: true,
         type: FileType.custom,
         allowedExtensions: ['jpg', 'pdf', 'doc']);
+
+    // picked?.paths.addAll(pic?.paths ?? []);
+
     if (picked == null) return;
     final file = picked?.files.first;
 

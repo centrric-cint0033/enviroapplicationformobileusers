@@ -18,6 +18,7 @@ final SignatureController _controller = SignatureController(
   penColor: Colors.black,
   exportBackgroundColor: Colors.white,
 );
+var arrdata = [];
 
 @RoutePage()
 class SheduleSignaturePage extends StatelessWidget {
@@ -96,11 +97,13 @@ class SheduleSignaturePage extends StatelessWidget {
                                           itemBuilder: (context, index) {
                                             var file =
                                                 vmJobcard.picked!.files[index];
+                                            arrdata.map((file) {
+                                              return Container();
+                                            }).toList();
 
                                             final icon = returnLogo(file.name,
                                                 file.path, file.size);
                                             return ListTile(
-                                              leading: icon,
                                               title: Text(
                                                 file.name,
                                                 style: const TextStyle(
@@ -108,8 +111,10 @@ class SheduleSignaturePage extends StatelessWidget {
                                                         TextOverflow.ellipsis,
                                                     fontSize: 16),
                                               ),
-                                              subtitle: Text(file.name),
-                                              onTap: () {},
+                                              leading: icon,
+                                              subtitle: Text(file.extension!),
+
+                                              // onTap: () {},
                                             );
                                           },
                                         );
@@ -466,7 +471,7 @@ class SheduleSignaturePage extends StatelessWidget {
         if (vmJobcard.picked != null && vmJobcard.picked!.files.isNotEmpty) {
           return SizedBox(
             height: 100,
-            width: 400,
+            width: 100,
             child: Image.file(File(image)),
           );
         } else {
@@ -480,6 +485,11 @@ class SheduleSignaturePage extends StatelessWidget {
       case 'doc':
         return const Icon(
           Icons.insert_drive_file,
+          color: Colors.black12,
+        );
+      case 'mp4':
+        return const Icon(
+          Icons.video_file,
           color: Colors.black12,
         );
       default:
