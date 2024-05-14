@@ -69,7 +69,7 @@ class SheduleSignaturePage extends StatelessWidget {
                                   },
                                   text: 'AddFile ',
                                 ),
-                                const SizedBox(width: 8),
+                                const SizedBox(width: 18),
                                 CmButton(
                                   width: 118,
                                   color: Colors.blue,
@@ -94,12 +94,17 @@ class SheduleSignaturePage extends StatelessWidget {
                                           final icon = returnLogo(
                                               file.name, file.path, file.size);
                                           return Padding(
-                                            padding: const EdgeInsets.symmetric(
-                                                horizontal: 8.0),
+                                            padding: const EdgeInsets.only(
+                                                top: 8, right: 8),
                                             child: SizedBox(
-                                              height: 80, // Set card height
-                                              width: 150, // Set card width
+                                              height: 70, // Set card height
+                                              width: 140, // Set card width
                                               child: Card(
+                                                shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          0.0), // Adjust border radius as needed
+                                                ),
                                                 child: ListTile(
                                                   onLongPress: () {
                                                     showDialog(
@@ -145,14 +150,22 @@ class SheduleSignaturePage extends StatelessWidget {
                                                     style: const TextStyle(
                                                       overflow:
                                                           TextOverflow.ellipsis,
-                                                      fontSize: 16,
+                                                      fontSize: 13,
                                                     ),
                                                   ),
                                                   leading: icon,
-                                                  subtitle:
-                                                      Text(file.extension!),
+                                                  subtitle: Text(
+                                                    file.extension!,
+                                                    style: const TextStyle(
+                                                      overflow:
+                                                          TextOverflow.ellipsis,
+                                                      fontSize: 13,
+                                                    ),
+                                                  ),
                                                   onTap: () {
-                                                    OpenFile.open(file.path);
+                                                    OpenFile.open(
+                                                      file.path,
+                                                    );
                                                   },
                                                 ),
                                               ),
