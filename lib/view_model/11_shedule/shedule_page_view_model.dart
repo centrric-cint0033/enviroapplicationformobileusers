@@ -27,7 +27,7 @@ abstract class JobCardViewModelBase with Store {
   JobCardViewModelBase(this.jobcardService);
 
   @observable
-  FilePickerResult? picked;
+  List<PlatformFile> pickedFiles = [];
 
   @action
   Future<void> pickFilefromphone() async {
@@ -36,10 +36,16 @@ abstract class JobCardViewModelBase with Store {
         type: FileType.custom,
         allowedExtensions: ['jpg', 'pdf', 'doc']);
 
-    // picked?.paths.addAll(pic?.paths ?? []);
+    // pickedFiles = pic?.files ?? [];
 
-    if (picked == null) return;
-    final file = picked?.files.first;
+    pickedFiles.addAll(pic?.files ?? []);
+
+    pickedFiles = [...pickedFiles];
+
+    // picked?.files.addAll(pic?.files ?? []);
+
+    // if (picked == null) return;
+    final file = pic?.files.first;
 
     _openFile(file!);
   }

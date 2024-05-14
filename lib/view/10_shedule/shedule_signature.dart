@@ -88,15 +88,14 @@ class SheduleSignaturePage extends StatelessWidget {
                                   Padding(
                                     padding: const EdgeInsets.only(right: 57.0),
                                     child: Observer(builder: (_) {
-                                      if (vmJobcard.picked != null &&
-                                          vmJobcard.picked!.files.isNotEmpty) {
+                                      if (vmJobcard.pickedFiles.isNotEmpty) {
                                         return ListView.builder(
                                           shrinkWrap: true,
                                           itemCount:
-                                              vmJobcard.picked!.files.length,
+                                              vmJobcard.pickedFiles.length,
                                           itemBuilder: (context, index) {
                                             var file =
-                                                vmJobcard.picked!.files[index];
+                                                vmJobcard.pickedFiles[index];
                                             arrdata.map((file) {
                                               return Container();
                                             }).toList();
@@ -467,8 +466,8 @@ class SheduleSignaturePage extends StatelessWidget {
     print("File extension: $fileExtension");
 
     switch (fileExtension) {
-      case 'jpeg':
-        if (vmJobcard.picked != null && vmJobcard.picked!.files.isNotEmpty) {
+      case 'jpg':
+        if (vmJobcard.pickedFiles.isNotEmpty) {
           return SizedBox(
             height: 100,
             width: 100,
