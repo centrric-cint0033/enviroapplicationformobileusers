@@ -604,6 +604,8 @@ class SheduleSignaturePage extends StatelessWidget {
                             return CmButton(
                               color: vmJobcard.signColor,
                               onPressed: () {
+                                vmJobcard.updateSignatureButtonColor(
+                                    state: false);
                                 _controller.clear();
                               },
                               text: 'Reset',

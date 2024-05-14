@@ -235,6 +235,16 @@ mixin _$JobCardViewModel on JobCardViewModelBase, Store {
     });
   }
 
+  late final _$updateSignatureButtonColorAsyncAction = AsyncAction(
+      'JobCardViewModelBase.updateSignatureButtonColor',
+      context: context);
+
+  @override
+  Future<void> updateSignatureButtonColor({bool state = false}) {
+    return _$updateSignatureButtonColorAsyncAction
+        .run(() => super.updateSignatureButtonColor(state: state));
+  }
+
   late final _$pickFilefromphoneAsyncAction =
       AsyncAction('JobCardViewModelBase.pickFilefromphone', context: context);
 

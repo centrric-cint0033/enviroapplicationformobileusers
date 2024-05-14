@@ -29,12 +29,13 @@ abstract class JobCardViewModelBase with Store {
 
   @observable
   Color? signColor = Colors.white;
-
+  @action
   Future<void> updateSignatureButtonColor({bool state = false}) async {
     if (state == true) {
       signColor = Colors.blue;
-    } else if (state != true) {
+    } else if (state == false) {
       signColor = Colors.white;
+      print(signColor);
     }
   }
 
