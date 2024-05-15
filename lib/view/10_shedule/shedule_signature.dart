@@ -1,8 +1,6 @@
 import 'dart:io';
-import 'dart:typed_data';
 
 import 'package:auto_route/auto_route.dart';
-import 'package:enviro_mobile_application/view/08_team/team_widgets/01_team_widgets.dart';
 import 'package:enviro_mobile_application/view_model/11_shedule/shedule_page_view_model.dart';
 import 'package:enviro_mobile_application/widgets/cmbutton.dart';
 import 'package:enviro_mobile_application/widgets/cmn_action_icon.dart';
@@ -10,10 +8,8 @@ import 'package:enviro_mobile_application/widgets/cmn_title_textwidget.dart';
 import 'package:enviro_mobile_application/widgets/drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:open_file/open_file.dart';
 import 'package:signature/signature.dart';
-import 'package:path/path.dart';
 
 final SignatureController _controller = SignatureController(
   penStrokeWidth: 5,
@@ -26,7 +22,12 @@ final SignatureController _controller = SignatureController(
 
 @RoutePage()
 class SheduleSignaturePage extends StatelessWidget {
-  SheduleSignaturePage({Key? key});
+  SheduleSignaturePage({
+    super.key,
+    this.id,
+  });
+  final int? id;
+  List? weigh_bridge_required_multiple_file;
 
   @override
   Widget build(BuildContext context) {
@@ -102,13 +103,13 @@ class SheduleSignaturePage extends StatelessWidget {
                                             padding: const EdgeInsets.only(
                                                 top: 8, right: 2),
                                             child: SizedBox(
-                                              height: 70, // Set card height
-                                              width: 140, // Set card width
+                                              height: 70,
+                                              width: 140,
                                               child: Card(
                                                 shape: RoundedRectangleBorder(
                                                   borderRadius:
                                                       BorderRadius.circular(
-                                                          0.0), // Adjust border radius as needed
+                                                          0.0),
                                                 ),
                                                 child: ListTile(
                                                   onLongPress: () {
@@ -126,21 +127,20 @@ class SheduleSignaturePage extends StatelessWidget {
                                                               onPressed: () {
                                                                 Navigator.of(
                                                                         context)
-                                                                    .pop(); // Close the dialog
+                                                                    .pop();
                                                               },
                                                               child: const Text(
                                                                   "Cancel"),
                                                             ),
                                                             TextButton(
                                                               onPressed: () {
-                                                                // Remove the file from the list
                                                                 vmJobcard
                                                                     .pickedFiles
                                                                     .remove(
                                                                         file);
                                                                 Navigator.of(
                                                                         context)
-                                                                    .pop(); // Close the dialog
+                                                                    .pop();
                                                               },
                                                               child: const Text(
                                                                   "Delete"),
@@ -585,12 +585,14 @@ class SheduleSignaturePage extends StatelessWidget {
                                             fontWeight: FontWeight.bold),
                                       ),
                                       actions: <Widget>[
-                                        TextButton(
-                                          onPressed: () {
-                                            Navigator.of(context).pop();
-                                          },
-                                          child: const Text('OK'),
-                                        ),
+                                        Observer(builder: (_) {
+                                          return TextButton(
+                                            onPressed: () {
+                                              Navigator.of(context).pop();
+                                            },
+                                            child: const Text('OK'),
+                                          );
+                                        }),
                                       ],
                                     );
                                   },
@@ -604,6 +606,10 @@ class SheduleSignaturePage extends StatelessWidget {
                             return CmButton(
                               color: vmJobcard.signColor,
                               onPressed: () {
+                                vmJobcard.shedulesignatureviewmodelfunction(
+                                    id: id ?? 0,
+                                    weigh_bridge_required_multiple_file:
+                                        weigh_bridge_required_multiple_file);
                                 vmJobcard.updateSignatureButtonColor(
                                     state: false);
                                 _controller.clear();
@@ -626,14 +632,18 @@ class SheduleSignaturePage extends StatelessWidget {
               ),
               const SizedBox(height: 10),
               SizedBox(
-                height: 60,
                 child: TextField(
                   decoration: InputDecoration(
+                    focusColor: Colors.black12,
                     fillColor: Colors.grey[200],
                     filled: true,
+                    enabledBorder: const OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.grey)),
                     border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(40.0),
-                      borderSide: const BorderSide(color: Colors.black),
+                      borderRadius: BorderRadius.circular(10.0),
+                      borderSide: const BorderSide(
+                        color: Colors.grey,
+                      ),
                     ),
                     hintText: 'Enter your comments',
                     suffixIcon: IconButton(
@@ -648,6 +658,20 @@ class SheduleSignaturePage extends StatelessWidget {
               const SizedBox(
                 height: 20,
               ),
+              Observer(builder: (_) {
+                return Padding(
+                  padding: const EdgeInsets.only(left: 128.0),
+                  child: CmButton(
+                    width: 105,
+                    color: vmJobcard.signColor,
+                    onPressed: () {
+                      vmJobcard.updateSignatureButtonColor(state: true);
+                      _controller.clear();
+                    },
+                    text: 'Submit',
+                  ),
+                );
+              }),
             ],
           ),
         ),
@@ -678,7 +702,43 @@ class SheduleSignaturePage extends StatelessWidget {
         } else {
           return const Text("Image file is null");
         }
+      case 'jpeg':
+        if (vmJobcard.pickedFiles.isNotEmpty) {
+          return SizedBox(
+            height: 60,
+            width: 40,
+            child: Image.file(File(image)),
+          );
+        } else {
+          return const Text("Image file is null");
+        }
+      case 'png':
+        if (vmJobcard.pickedFiles.isNotEmpty) {
+          return SizedBox(
+            height: 60,
+            width: 40,
+            child: Image.file(File(image)),
+          );
+        } else {
+          return const Text("Image file is null");
+        }
+      case 'gif':
+        if (vmJobcard.pickedFiles.isNotEmpty) {
+          return SizedBox(
+            height: 60,
+            width: 40,
+            child: Image.file(File(image)),
+          );
+        } else {
+          return const Text("Image file is null");
+        }
+
       case 'pdf':
+        return const Icon(
+          Icons.picture_as_pdf,
+          color: Colors.red,
+        );
+      case 'PDF':
         return const Icon(
           Icons.picture_as_pdf,
           color: Colors.red,
@@ -690,8 +750,23 @@ class SheduleSignaturePage extends StatelessWidget {
         );
       case 'mp4':
         return const Icon(
+          Icons.video_collection,
+          color: Colors.blue,
+        );
+      case 'mov':
+        return const Icon(
           Icons.video_file,
-          color: Colors.black12,
+          color: Colors.red,
+        );
+      case 'avi':
+        return const Icon(
+          Icons.video_file,
+          color: Colors.red,
+        );
+      case 'mkv':
+        return const Icon(
+          Icons.video_file,
+          color: Colors.red,
         );
       default:
         return const Icon(

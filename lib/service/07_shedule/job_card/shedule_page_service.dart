@@ -5,11 +5,15 @@ import 'package:dartz/dartz.dart';
 import 'package:enviro_mobile_application/model/07_Jobcard/job_card_model.dart';
 
 import 'package:enviro_mobile_application/model/12_shedulecard/shedule_card_resp_model.dart';
+import 'package:enviro_mobile_application/model/12_shedulecard/shedule_sign_res_model.dart';
 import 'package:enviro_mobile_application/utilis/api_endpoints/api_endpoints.dart';
+import 'package:enviro_mobile_application/utilis/api_endpoints/customprint.dart';
 
 import 'package:enviro_mobile_application/utilis/httpservice.dart';
 import 'package:enviro_mobile_application/utilis/injection.dart';
 import 'package:enviro_mobile_application/utilis/main_failure.dart';
+import 'package:file_picker/file_picker.dart';
+import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 
 abstract class IJobCardService {
@@ -19,6 +23,8 @@ abstract class IJobCardService {
 
   Future<Either<MainFailure, List<SheduleCardRespModel>>>
       shedulecardserviceweekfunction();
+  Future<Either<Map<MainFailure, dynamic>, SheduleSignatureModel>>
+      shedulesignatureserviceapi({required int id, required List? pickedFiles});
 }
 
 @LazySingleton(as: IJobCardService)
@@ -91,25 +97,40 @@ class SalesService implements IJobCardService {
     );
   }
 
-  // @override
-  // Future<Either<Map<MainFailure, dynamic>, List<SiteResModel>>>
-  //     shedulesignatureserviceapi({
-  //   required String key,
-  // }) async {
-  //   customPrint(content: key);
-  //   var response = await getIt<HttpService>().multipartRequest(
-  //     apiUrl: ApiEndPoints.endpointshedulesignature,
-  //     data: {"key": key},
-  //     method: "POST",
-  //   );
+  @override
+  Future<Either<Map<MainFailure, dynamic>, SheduleSignatureModel>>
+      shedulesignatureserviceapi(
+          {required int id, required List<PlatformFile> pickedFiles}) async {
+    customPrint(content: id);
+    var response = await getIt<HttpService>().multipartRequest(
+      apiUrl: ApiEndPoints.endpointshedulesignature,
+      data: {
+        "id": id,
+        for (var file in pickedFiles)
+          "weigh_bridge_required_multiple_file": file
+      },
 
-  //   return response.fold(
-  //     (l) => Left(l),
-  //     (res) async {
-  //       var data = jsonDecode(res.body);
-  //       SiteResModel sites = data.map((e) => SiteResModel.fromJson(e));
-  //       return Right(sites);
-  //     },
-  //   );
-  // }
+      // for (var file in pickedFiles) {
+      //   var multipartFile = await http.MultipartFile.fromPath(
+      //     'pickedFiles[]',
+      //     file.path,
+      //     contentType: MediaType.parse(file.type),
+      //   );
+      //   request.files.add(multipartFile);
+      // }
+
+      method: "POST",
+    );
+    print('azeem$id');
+    ;
+    return response.fold(
+      (l) => Left(l),
+      (res) async {
+        var data = jsonDecode(res.body);
+        SheduleSignatureModel signingdata =
+            SheduleSignatureModel.fromJson(data);
+        return Right(signingdata);
+      },
+    );
+  }
 }

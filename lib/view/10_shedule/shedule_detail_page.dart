@@ -9,11 +9,15 @@ import 'package:enviro_mobile_application/widgets/cmn_title_textwidget.dart';
 import 'package:enviro_mobile_application/widgets/drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:intl/intl.dart';
 
 @RoutePage()
 class SheduledetailPage extends StatelessWidget {
-  const SheduledetailPage({super.key});
+  SheduledetailPage({
+    super.key,
+    this.id,
+  });
+  final int? id;
+  List? pickedFiles;
 
   @override
   Widget build(BuildContext context) {
@@ -254,14 +258,18 @@ class SheduledetailPage extends StatelessWidget {
                   ),
                   SizedBox(
                     width: 159,
-                    child: CmButton(
-                      color: const Color(0xFF4CAF9E),
-                      buttonTextStyle: const TextStyle(color: Colors.white),
-                      onPressed: () {
-                        shedulesignaturefunction(context);
-                      },
-                      text: "Signature",
-                    ),
+                    child: Observer(builder: (_) {
+                      return CmButton(
+                        color: const Color(0xFF4CAF9E),
+                        buttonTextStyle: const TextStyle(color: Colors.white),
+                        onPressed: () {
+                          // shedulesignaturefunction(context);
+                          // vmJobcard.shedulesignatureviewmodelfunction(
+                          //     id: id ?? 0, pickedFiles: vmJobcard.pickedFiles);
+                        },
+                        text: "Signature",
+                      );
+                    }),
                   ),
                   const SizedBox(height: 5),
                   SizedBox(

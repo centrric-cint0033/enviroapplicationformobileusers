@@ -238,13 +238,21 @@ abstract class $AppRouter extends _i32.RootStackRouter {
           orElse: () => const SheduleSignatureRouteArgs());
       return _i32.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i21.SheduleSignaturePage(key: args.key),
+        child: _i21.SheduleSignaturePage(
+          key: args.key,
+          id: args.id,
+        ),
       );
     },
     SheduledetailRoute.name: (routeData) {
+      final args = routeData.argsAs<SheduledetailRouteArgs>(
+          orElse: () => const SheduledetailRouteArgs());
       return _i32.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i22.SheduledetailPage(),
+        child: _i22.SheduledetailPage(
+          key: args.key,
+          id: args.id,
+        ),
       );
     },
     SheduledetailRoute2.name: (routeData) {
@@ -783,10 +791,14 @@ class SheduleSignatureRoute
     extends _i32.PageRouteInfo<SheduleSignatureRouteArgs> {
   SheduleSignatureRoute({
     _i33.Key? key,
+    int? id,
     List<_i32.PageRouteInfo>? children,
   }) : super(
           SheduleSignatureRoute.name,
-          args: SheduleSignatureRouteArgs(key: key),
+          args: SheduleSignatureRouteArgs(
+            key: key,
+            id: id,
+          ),
           initialChildren: children,
         );
 
@@ -797,28 +809,57 @@ class SheduleSignatureRoute
 }
 
 class SheduleSignatureRouteArgs {
-  const SheduleSignatureRouteArgs({this.key});
+  const SheduleSignatureRouteArgs({
+    this.key,
+    this.id,
+  });
 
   final _i33.Key? key;
 
+  final int? id;
+
   @override
   String toString() {
-    return 'SheduleSignatureRouteArgs{key: $key}';
+    return 'SheduleSignatureRouteArgs{key: $key, id: $id}';
   }
 }
 
 /// generated route for
 /// [_i22.SheduledetailPage]
-class SheduledetailRoute extends _i32.PageRouteInfo<void> {
-  const SheduledetailRoute({List<_i32.PageRouteInfo>? children})
-      : super(
+class SheduledetailRoute extends _i32.PageRouteInfo<SheduledetailRouteArgs> {
+  SheduledetailRoute({
+    _i33.Key? key,
+    int? id,
+    List<_i32.PageRouteInfo>? children,
+  }) : super(
           SheduledetailRoute.name,
+          args: SheduledetailRouteArgs(
+            key: key,
+            id: id,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'SheduledetailRoute';
 
-  static const _i32.PageInfo<void> page = _i32.PageInfo<void>(name);
+  static const _i32.PageInfo<SheduledetailRouteArgs> page =
+      _i32.PageInfo<SheduledetailRouteArgs>(name);
+}
+
+class SheduledetailRouteArgs {
+  const SheduledetailRouteArgs({
+    this.key,
+    this.id,
+  });
+
+  final _i33.Key? key;
+
+  final int? id;
+
+  @override
+  String toString() {
+    return 'SheduledetailRouteArgs{key: $key, id: $id}';
+  }
 }
 
 /// generated route for

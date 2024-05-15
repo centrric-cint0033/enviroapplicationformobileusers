@@ -3,15 +3,15 @@ import 'dart:io';
 import 'package:enviro_mobile_application/api_response/api_response.dart';
 import 'package:enviro_mobile_application/model/07_Jobcard/job_card_model.dart';
 import 'package:enviro_mobile_application/model/12_shedulecard/shedule_card_resp_model.dart';
+import 'package:enviro_mobile_application/model/12_shedulecard/shedule_sign_res_model.dart';
 import 'package:enviro_mobile_application/service/07_shedule/job_card/shedule_page_service.dart';
 import 'package:enviro_mobile_application/utilis/injection.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+
 import 'package:image_picker/image_picker.dart';
 import 'package:injectable/injectable.dart';
 import 'package:mobx/mobx.dart';
-import 'package:open_file/open_file.dart';
-
 part 'shedule_page_view_model.g.dart';
 
 final vmJobcard = getIt<JobCardViewModel>();
@@ -233,6 +233,37 @@ abstract class JobCardViewModelBase with Store {
         sheduleweekResponse = sheduleweekResponse.copyWith(
           data: r,
           error: null,
+          loading: false,
+        );
+      },
+    );
+  }
+
+  @observable
+  ApiResponse<SheduleSignatureModel> signatureResponse =
+      ApiResponse<SheduleSignatureModel>();
+
+  @action
+  Future<void> shedulesignatureviewmodelfunction(
+      {required int id, required List? pickedFiles}) async {
+    print('aaaaa$jobcardResponse');
+    print('aaaaa$jobcardResponse');
+
+    signatureResponse = signatureResponse.copyWith(errors: null, loading: true);
+
+    final result = await jobcardService.shedulesignatureserviceapi(
+        id: id, pickedFiles: pickedFiles);
+    return result.fold(
+      (l) {
+        signatureResponse = signatureResponse.copyWith(
+          errors: l,
+          loading: false,
+        );
+      },
+      (r) {
+        signatureResponse = signatureResponse.copyWith(
+          data: r,
+          errors: null,
           loading: false,
         );
       },

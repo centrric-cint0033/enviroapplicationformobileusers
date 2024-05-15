@@ -235,6 +235,22 @@ mixin _$JobCardViewModel on JobCardViewModelBase, Store {
     });
   }
 
+  late final _$signatureResponseAtom =
+      Atom(name: 'JobCardViewModelBase.signatureResponse', context: context);
+
+  @override
+  ApiResponse<SheduleSignatureModel> get signatureResponse {
+    _$signatureResponseAtom.reportRead();
+    return super.signatureResponse;
+  }
+
+  @override
+  set signatureResponse(ApiResponse<SheduleSignatureModel> value) {
+    _$signatureResponseAtom.reportWrite(value, super.signatureResponse, () {
+      super.signatureResponse = value;
+    });
+  }
+
   late final _$updateSignatureButtonColorAsyncAction = AsyncAction(
       'JobCardViewModelBase.updateSignatureButtonColor',
       context: context);
@@ -312,6 +328,17 @@ mixin _$JobCardViewModel on JobCardViewModelBase, Store {
         .run(() => super.shedulecardviewmodelweekfunction());
   }
 
+  late final _$shedulesignatureviewmodelfunctionAsyncAction = AsyncAction(
+      'JobCardViewModelBase.shedulesignatureviewmodelfunction',
+      context: context);
+
+  @override
+  Future<void> shedulesignatureviewmodelfunction(
+      {required int id, required List<dynamic>? pickedFiles}) {
+    return _$shedulesignatureviewmodelfunctionAsyncAction.run(() => super
+        .shedulesignatureviewmodelfunction(id: id, pickedFiles: pickedFiles));
+  }
+
   late final _$JobCardViewModelBaseActionController =
       ActionController(name: 'JobCardViewModelBase', context: context);
 
@@ -375,7 +402,8 @@ checkboxValue2: ${checkboxValue2},
 checkboxValue3: ${checkboxValue3},
 jobcardResponse: ${jobcardResponse},
 shedulecardResponse: ${shedulecardResponse},
-sheduleweekResponse: ${sheduleweekResponse}
+sheduleweekResponse: ${sheduleweekResponse},
+signatureResponse: ${signatureResponse}
     ''';
   }
 }
