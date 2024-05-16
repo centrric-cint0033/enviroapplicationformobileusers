@@ -27,7 +27,8 @@ abstract class IJobCardService {
       shedulesignatureserviceapi(
           {required int id,
           required List<PlatformFile> pickedFiles,
-          required String signature_name});
+          required String signature_name,
+          required String purchase_order_number});
 }
 
 @LazySingleton(as: IJobCardService)
@@ -105,14 +106,16 @@ class SalesService implements IJobCardService {
       shedulesignatureserviceapi(
           {required int id,
           required List<PlatformFile> pickedFiles,
-          required String signature_name}) async {
+          required String signature_name,
+          required String purchase_order_number}) async {
     customPrint(content: id);
     var response = await getIt<HttpService>().multipartRequest(
       apiUrl: ApiEndPoints.endpointshedulesignature,
       data: {
         "id": id,
         for (var file in pickedFiles) "pickedfile": file,
-        signature_name: signature_name
+        "signature_name": signature_name,
+        "purchase_order_number": purchase_order_number
       },
 
       // for (var file in pickedFiles) {

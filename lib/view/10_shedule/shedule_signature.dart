@@ -508,12 +508,8 @@ class SheduleSignaturePage extends StatelessWidget {
                             return CmButton(
                               color: vmJobcard.signColor,
                               onPressed: () {
-                                log(vmJobcard.signatureResponse.toString());
                                 print('reseeeeeeeeeeeet$id');
-                                vmJobcard.shedulesignatureviewmodelfunction(
-                                    signature_name: _signNameController.text,
-                                    id: id,
-                                    pickedFiles: vmJobcard.pickedFiles);
+
                                 vmJobcard.updateSignatureButtonColor(
                                     state: false);
                                 _controller.clear();
@@ -569,8 +565,14 @@ class SheduleSignaturePage extends StatelessWidget {
                     width: 105,
                     color: vmJobcard.signColor,
                     onPressed: () {
+                      vmJobcard.shedulesignatureviewmodelfunction(
+                          purchase_order_number: _controllerPonumber.text,
+                          signature_name: _signNameController.text,
+                          id: id,
+                          pickedFiles: vmJobcard.pickedFiles);
                       vmJobcard.updateSignatureButtonColor(state: true);
                       _controller.clear();
+                      log(vmJobcard.signatureResponse.toString());
                     },
                     text: 'Submit',
                   ),
