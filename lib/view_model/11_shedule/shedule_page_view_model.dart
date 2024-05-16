@@ -244,16 +244,19 @@ abstract class JobCardViewModelBase with Store {
       ApiResponse<SheduleSignatureModel>();
 
   @action
-  Future<void> shedulesignatureviewmodelfunction(
-      {required int id,
-      required List<PlatformFile> pickedFiles,
-      required String signature_name,
-      required String purchase_order_number,
-      required String extracted_waste_type,
-      required String extracted_litres_of_waste}) async {
+  Future<void> shedulesignatureviewmodelfunction({
+    required int id,
+    required List<PlatformFile> pickedFiles,
+    required String image,
+    required String signature_name,
+    required String purchase_order_number,
+    required String extracted_waste_type,
+    required String extracted_litres_of_waste,
+  }) async {
     signatureResponse = signatureResponse.copyWith(errors: null, loading: true);
 
     final result = await jobcardService.shedulesignatureserviceapi(
+        image: image,
         id: id,
         pickedFiles: pickedFiles,
         signature_name: signature_name,

@@ -27,6 +27,7 @@ abstract class IJobCardService {
       shedulesignatureserviceapi(
           {required int id,
           required List<PlatformFile> pickedFiles,
+          required String image,
           required String signature_name,
           required String purchase_order_number,
           required String extracted_litres_of_waste,
@@ -107,6 +108,7 @@ class SalesService implements IJobCardService {
   Future<Either<Map<MainFailure, dynamic>, SheduleSignatureModel>>
       shedulesignatureserviceapi(
           {required int id,
+          required String image,
           required List<PlatformFile> pickedFiles,
           required String signature_name,
           required String purchase_order_number,

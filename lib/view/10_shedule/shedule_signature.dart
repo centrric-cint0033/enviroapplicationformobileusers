@@ -566,6 +566,7 @@ class SheduleSignaturePage extends StatelessWidget {
                     color: vmJobcard.signColor,
                     onPressed: () {
                       vmJobcard.shedulesignatureviewmodelfunction(
+                          image: _signaturecontroller.toString(),
                           extracted_waste_type: _controllerTypeofwaste.text,
                           extracted_litres_of_waste: _controllerWateliters.text,
                           purchase_order_number: _controllerPonumber.text,

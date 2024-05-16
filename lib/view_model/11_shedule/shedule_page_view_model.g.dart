@@ -336,6 +336,7 @@ mixin _$JobCardViewModel on JobCardViewModelBase, Store {
   Future<void> shedulesignatureviewmodelfunction(
       {required int id,
       required List<PlatformFile> pickedFiles,
+      required String image,
       required String signature_name,
       required String purchase_order_number,
       required String extracted_waste_type,
@@ -344,6 +345,7 @@ mixin _$JobCardViewModel on JobCardViewModelBase, Store {
         .shedulesignatureviewmodelfunction(
             id: id,
             pickedFiles: pickedFiles,
+            image: image,
             signature_name: signature_name,
             purchase_order_number: purchase_order_number,
             extracted_waste_type: extracted_waste_type,
