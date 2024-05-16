@@ -28,7 +28,9 @@ abstract class IJobCardService {
           {required int id,
           required List<PlatformFile> pickedFiles,
           required String signature_name,
-          required String purchase_order_number});
+          required String purchase_order_number,
+          required String extracted_litres_of_waste,
+          required String extracted_waste_type});
 }
 
 @LazySingleton(as: IJobCardService)
@@ -107,7 +109,9 @@ class SalesService implements IJobCardService {
           {required int id,
           required List<PlatformFile> pickedFiles,
           required String signature_name,
-          required String purchase_order_number}) async {
+          required String purchase_order_number,
+          required String extracted_litres_of_waste,
+          required String extracted_waste_type}) async {
     customPrint(content: id);
     var response = await getIt<HttpService>().multipartRequest(
       apiUrl: ApiEndPoints.endpointshedulesignature,
@@ -115,7 +119,9 @@ class SalesService implements IJobCardService {
         "id": id,
         for (var file in pickedFiles) "pickedfile": file,
         "signature_name": signature_name,
-        "purchase_order_number": purchase_order_number
+        "purchase_order_number": purchase_order_number,
+        "extracted_litres_of_waste": extracted_litres_of_waste,
+        "extracted_waste_type": extracted_waste_type,
       },
 
       // for (var file in pickedFiles) {

@@ -12,7 +12,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:open_file/open_file.dart';
 import 'package:signature/signature.dart';
 
-final SignatureController _controller = SignatureController(
+final SignatureController _signaturecontroller = SignatureController(
   penStrokeWidth: 5,
   penColor: Colors.black,
   exportBackgroundColor: Colors.white,
@@ -453,7 +453,7 @@ class SheduleSignaturePage extends StatelessWidget {
                           width: 200,
                           height: 200,
                           child: Signature(
-                            controller: _controller,
+                            controller: _signaturecontroller,
                             backgroundColor: Colors.white,
                           ),
                         ),
@@ -512,7 +512,7 @@ class SheduleSignaturePage extends StatelessWidget {
 
                                 vmJobcard.updateSignatureButtonColor(
                                     state: false);
-                                _controller.clear();
+                                _signaturecontroller.clear();
                               },
                               text: 'Reset',
                             );
@@ -566,12 +566,14 @@ class SheduleSignaturePage extends StatelessWidget {
                     color: vmJobcard.signColor,
                     onPressed: () {
                       vmJobcard.shedulesignatureviewmodelfunction(
+                          extracted_waste_type: _controllerTypeofwaste.text,
+                          extracted_litres_of_waste: _controllerWateliters.text,
                           purchase_order_number: _controllerPonumber.text,
                           signature_name: _signNameController.text,
                           id: id,
                           pickedFiles: vmJobcard.pickedFiles);
                       vmJobcard.updateSignatureButtonColor(state: true);
-                      _controller.clear();
+                      _signaturecontroller.clear();
                       log(vmJobcard.signatureResponse.toString());
                     },
                     text: 'Submit',

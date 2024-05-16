@@ -248,17 +248,18 @@ abstract class JobCardViewModelBase with Store {
       {required int id,
       required List<PlatformFile> pickedFiles,
       required String signature_name,
-      required String purchase_order_number}) async {
-    print('aaaaa$jobcardResponse');
-    print('aaaaa$jobcardResponse');
-
+      required String purchase_order_number,
+      required String extracted_waste_type,
+      required String extracted_litres_of_waste}) async {
     signatureResponse = signatureResponse.copyWith(errors: null, loading: true);
 
     final result = await jobcardService.shedulesignatureserviceapi(
         id: id,
         pickedFiles: pickedFiles,
         signature_name: signature_name,
-        purchase_order_number: purchase_order_number);
+        purchase_order_number: purchase_order_number,
+        extracted_litres_of_waste: extracted_litres_of_waste,
+        extracted_waste_type: extracted_waste_type);
     return result.fold(
       (l) {
         signatureResponse = signatureResponse.copyWith(
