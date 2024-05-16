@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:dartz/dartz.dart';
 import 'package:enviro_mobile_application/Routepage/routespage.dart';
 import 'package:enviro_mobile_application/view/10_shedule/shedule_widget.dart';
 import 'package:enviro_mobile_application/view_model/10_profile/profile_view_model.dart';
@@ -13,11 +14,13 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../Routepage/approutes.gr.dart';
+import '../../view_model/11_shedule/shedule_page_view_model.dart';
 import '../../widgets/drawer.dart';
 
 @RoutePage()
 class SchedulePage extends StatelessWidget {
-  const SchedulePage({Key? key}) : super(key: key);
+  SchedulePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -383,7 +386,7 @@ class SchedulePage extends StatelessWidget {
             ),
             const SizedBox(height: 20),
             GestureDetector(
-              onTap: () => sheduledetailfunction(context),
+              onTap: () => sheduledetailfunction(context, id),
               child: SizedBox(
                 height: 310,
                 child: Observer(builder: (_) {
@@ -460,7 +463,12 @@ class SchedulePage extends StatelessWidget {
                                           }),
                                           ElevatedButton(
                                             onPressed: () {
-                                              sheduledetailfunction(context);
+                                              sheduledetailfunction(
+                                                context,
+                                                vmJobcard.sheduleweekResponse
+                                                        .data?[i].id ??
+                                                    '',
+                                              );
                                             },
                                             style: ElevatedButton.styleFrom(
                                               primary: Colors.white,
@@ -704,9 +712,9 @@ void calenderfunction(BuildContext context) {
   context.router.pushNamed(RouteNames.rcalenderpage);
 }
 
-void sheduledetailfunction(BuildContext context) {
-  print('ssssspendingclicked');
-  context.router.pushNamed(RouteNames.rsheduledetailpage);
+void sheduledetailfunction(BuildContext context, id) {
+  print('mmmmmmmmmmmmmmmmmmmm$id');
+  context.router.push(SheduledetailRoute(id: id));
 }
 
 void sheduledetailsfunction2(BuildContext context) {

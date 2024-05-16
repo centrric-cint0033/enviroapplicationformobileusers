@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:enviro_mobile_application/Routepage/approutes.gr.dart';
 import 'package:enviro_mobile_application/Routepage/routespage.dart';
 import 'package:enviro_mobile_application/view/02_sales/sales_widgets.dart/sales_widget.dart';
-import 'package:enviro_mobile_application/view/10_shedule/shedule_widget.dart';
 import 'package:enviro_mobile_application/view_model/11_shedule/shedule_page_view_model.dart';
 import 'package:enviro_mobile_application/widgets/cmbutton.dart';
 import 'package:enviro_mobile_application/widgets/cmn_action_icon.dart';
@@ -12,12 +12,13 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 
 @RoutePage()
 class SheduledetailPage extends StatelessWidget {
-  SheduledetailPage({
+  const SheduledetailPage({
     super.key,
-    this.id,
+    required this.id,
   });
-  final int? id;
-  List? pickedFiles;
+  final int id;
+
+  // List? pickedFiles;
 
   @override
   Widget build(BuildContext context) {
@@ -263,9 +264,11 @@ class SheduledetailPage extends StatelessWidget {
                         color: const Color(0xFF4CAF9E),
                         buttonTextStyle: const TextStyle(color: Colors.white),
                         onPressed: () {
-                          // shedulesignaturefunction(context);
+                          shedulesignaturefunction(context, id);
+                          print('shedule$id');
                           // vmJobcard.shedulesignatureviewmodelfunction(
-                          //     id: id ?? 0, pickedFiles: vmJobcard.pickedFiles);
+                          //     // id: id ?? 0, pickedFiles: vmJobcard.pickedFiles
+                          //     );
                         },
                         text: "Signature",
                       );
@@ -325,7 +328,7 @@ void shedulecommentfunction(BuildContext context) {
   context.router.pushNamed(RouteNames.rshedulecommandstatus);
 }
 
-void shedulesignaturefunction(BuildContext context) {
+void shedulesignaturefunction(BuildContext context, id) {
   print('calenderclicked');
-  context.router.pushNamed(RouteNames.rshedulesignaturePage);
+  context.router.push(SheduleSignatureRoute(id: id));
 }

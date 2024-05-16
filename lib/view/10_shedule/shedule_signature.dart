@@ -19,14 +19,18 @@ final SignatureController _controller = SignatureController(
     vmJobcard.updateSignatureButtonColor(state: true);
   },
 );
+final TextEditingController _ControllerTypeofwaste = TextEditingController();
+final TextEditingController _signNameController = TextEditingController();
+final TextEditingController _controllerPonumber = TextEditingController();
+final TextEditingController _controllerWateliters = TextEditingController();
 
 @RoutePage()
 class SheduleSignaturePage extends StatelessWidget {
   SheduleSignaturePage({
+    required this.id,
     super.key,
-    this.id,
   });
-  final int? id;
+  final int id;
   List? pickedFiles;
 
   @override
@@ -257,23 +261,27 @@ class SheduleSignaturePage extends StatelessWidget {
                         border: Border.all(color: Colors.black12),
                         borderRadius: BorderRadius.circular(5.0),
                       ),
-                      child: const Column(
+                      child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
+                          const Text(
                             'Type of waste:',
                             style: TextStyle(
                                 fontSize: 16, fontWeight: FontWeight.bold),
                           ),
                           Padding(
-                            padding: EdgeInsets.only(left: 8.0),
+                            padding: const EdgeInsets.only(left: 8.0),
                             child: TextField(
-                              decoration: InputDecoration(
+                              onChanged: (value) {
+                                _ControllerTypeofwaste.text = value;
+                                print('pooo$_ControllerTypeofwaste');
+                              },
+                              decoration: const InputDecoration(
                                 hintText:
                                     'Any change in waste is mentioned here...',
                                 border: InputBorder.none,
                               ),
-                              style: TextStyle(),
+                              style: const TextStyle(),
                             ),
                           ),
                         ],
@@ -288,23 +296,28 @@ class SheduleSignaturePage extends StatelessWidget {
                         border: Border.all(color: Colors.black12),
                         borderRadius: BorderRadius.circular(5.0),
                       ),
-                      child: const Column(
+                      child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
+                          const Text(
                             'waste Liters:',
                             style: TextStyle(
                                 fontSize: 16, fontWeight: FontWeight.bold),
                           ),
                           Padding(
-                            padding: EdgeInsets.only(left: 8.0),
+                            padding: const EdgeInsets.only(left: 8.0),
                             child: TextField(
-                              decoration: InputDecoration(
+                              onChanged: (value) {
+                                _controllerWateliters.text = value;
+                                print('pooo$_controllerWateliters');
+                              },
+                              controller: _controllerWateliters,
+                              decoration: const InputDecoration(
                                 hintText:
                                     'Any change in waste is mentioned here...',
                                 border: InputBorder.none,
                               ),
-                              style: TextStyle(),
+                              style: const TextStyle(),
                             ),
                           ),
                         ],
@@ -320,22 +333,27 @@ class SheduleSignaturePage extends StatelessWidget {
                         border: Border.all(color: Colors.black12),
                         borderRadius: BorderRadius.circular(5.0),
                       ),
-                      child: const Column(
+                      child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
+                          const Text(
                             'Po Number:',
                             style: TextStyle(
                                 fontSize: 16, fontWeight: FontWeight.bold),
                           ),
                           Padding(
-                            padding: EdgeInsets.only(left: 8.0),
+                            padding: const EdgeInsets.only(left: 8.0),
                             child: TextField(
-                              decoration: InputDecoration(
+                              onChanged: (value) {
+                                _controllerPonumber.text = value;
+                                print('pooo$_controllerPonumber');
+                              },
+                              controller: _controllerPonumber,
+                              decoration: const InputDecoration(
                                 hintText: 'Purchase order Number...',
                                 border: InputBorder.none,
                               ),
-                              style: TextStyle(),
+                              style: const TextStyle(),
                             ),
                           ),
                         ],
@@ -351,10 +369,10 @@ class SheduleSignaturePage extends StatelessWidget {
                         border: Border.all(color: Colors.black12),
                         borderRadius: BorderRadius.circular(5.0),
                       ),
-                      child: const Column(
+                      child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
+                          const Text(
                             'SignName:',
                             style: TextStyle(
                                 fontSize: 16, fontWeight: FontWeight.bold),
@@ -362,11 +380,16 @@ class SheduleSignaturePage extends StatelessWidget {
                           Padding(
                             padding: const EdgeInsets.only(left: 8.0),
                             child: TextField(
-                              decoration: InputDecoration(
+                              onChanged: (value) {
+                                _signNameController.text = value;
+                                print(
+                                    'azzzzzzzzzzzzzzzzzzzzzzzzz$_signNameController');
+                              },
+                              decoration: const InputDecoration(
                                 hintText: 'Sign name...',
                                 border: InputBorder.none,
                               ),
-                              style: TextStyle(),
+                              style: const TextStyle(),
                             ),
                           ),
                         ],
@@ -606,9 +629,9 @@ class SheduleSignaturePage extends StatelessWidget {
                             return CmButton(
                               color: vmJobcard.signColor,
                               onPressed: () {
+                                print('reseeeeeeeeeeeet$id');
                                 vmJobcard.shedulesignatureviewmodelfunction(
-                                    id: id ?? 0,
-                                    pickedFiles: vmJobcard.pickedFiles);
+                                    id: id, pickedFiles: vmJobcard.pickedFiles);
                                 vmJobcard.updateSignatureButtonColor(
                                     state: false);
                                 _controller.clear();
