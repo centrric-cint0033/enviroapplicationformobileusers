@@ -27,7 +27,7 @@ class SheduleSignaturePage extends StatelessWidget {
     this.id,
   });
   final int? id;
-  List? weigh_bridge_required_multiple_file;
+  List? pickedFiles;
 
   @override
   Widget build(BuildContext context) {
@@ -608,8 +608,7 @@ class SheduleSignaturePage extends StatelessWidget {
                               onPressed: () {
                                 vmJobcard.shedulesignatureviewmodelfunction(
                                     id: id ?? 0,
-                                    weigh_bridge_required_multiple_file:
-                                        weigh_bridge_required_multiple_file);
+                                    pickedFiles: vmJobcard.pickedFiles);
                                 vmJobcard.updateSignatureButtonColor(
                                     state: false);
                                 _controller.clear();

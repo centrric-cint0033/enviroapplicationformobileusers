@@ -13,7 +13,7 @@ import 'package:enviro_mobile_application/utilis/httpservice.dart';
 import 'package:enviro_mobile_application/utilis/injection.dart';
 import 'package:enviro_mobile_application/utilis/main_failure.dart';
 import 'package:file_picker/file_picker.dart';
-import 'package:flutter/material.dart';
+
 import 'package:injectable/injectable.dart';
 
 abstract class IJobCardService {
@@ -24,7 +24,8 @@ abstract class IJobCardService {
   Future<Either<MainFailure, List<SheduleCardRespModel>>>
       shedulecardserviceweekfunction();
   Future<Either<Map<MainFailure, dynamic>, SheduleSignatureModel>>
-      shedulesignatureserviceapi({required int id, required List? pickedFiles});
+      shedulesignatureserviceapi(
+          {required int id, required List<PlatformFile> pickedFiles});
 }
 
 @LazySingleton(as: IJobCardService)
@@ -104,11 +105,7 @@ class SalesService implements IJobCardService {
     customPrint(content: id);
     var response = await getIt<HttpService>().multipartRequest(
       apiUrl: ApiEndPoints.endpointshedulesignature,
-      data: {
-        "id": id,
-        for (var file in pickedFiles)
-          "weigh_bridge_required_multiple_file": file
-      },
+      data: {"id": id, for (var file in pickedFiles) "pickedfile": file},
 
       // for (var file in pickedFiles) {
       //   var multipartFile = await http.MultipartFile.fromPath(

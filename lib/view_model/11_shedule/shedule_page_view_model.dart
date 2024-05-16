@@ -245,7 +245,7 @@ abstract class JobCardViewModelBase with Store {
 
   @action
   Future<void> shedulesignatureviewmodelfunction(
-      {required int id, required List? pickedFiles}) async {
+      {required int id, required List<PlatformFile> pickedFiles}) async {
     print('aaaaa$jobcardResponse');
     print('aaaaa$jobcardResponse');
 
