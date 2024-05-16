@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:auto_route/auto_route.dart';
@@ -19,7 +20,7 @@ final SignatureController _controller = SignatureController(
     vmJobcard.updateSignatureButtonColor(state: true);
   },
 );
-final TextEditingController _ControllerTypeofwaste = TextEditingController();
+final TextEditingController _controllerTypeofwaste = TextEditingController();
 final TextEditingController _signNameController = TextEditingController();
 final TextEditingController _controllerPonumber = TextEditingController();
 final TextEditingController _controllerWateliters = TextEditingController();
@@ -273,8 +274,8 @@ class SheduleSignaturePage extends StatelessWidget {
                             padding: const EdgeInsets.only(left: 8.0),
                             child: TextField(
                               onChanged: (value) {
-                                _ControllerTypeofwaste.text = value;
-                                print('pooo$_ControllerTypeofwaste');
+                                _controllerTypeofwaste.text = value;
+                                print('pooo$_controllerTypeofwaste');
                               },
                               decoration: const InputDecoration(
                                 hintText:
@@ -382,6 +383,7 @@ class SheduleSignaturePage extends StatelessWidget {
                             child: TextField(
                               onChanged: (value) {
                                 _signNameController.text = value;
+
                                 print(
                                     'azzzzzzzzzzzzzzzzzzzzzzzzz$_signNameController');
                               },
@@ -398,130 +400,7 @@ class SheduleSignaturePage extends StatelessWidget {
                   ),
                 ],
               ),
-              // const SizedBox(
-              //   height: 20,
-              // ),
-              // Container(
-              //   height: 77,
-              //   decoration: BoxDecoration(
-              //     color: const Color.fromARGB(255, 208, 247, 209),
-              //     border: Border.all(color: Colors.black12),
-              //     borderRadius: BorderRadius.circular(5.0),
-              //   ),
-              //   child: const Column(
-              //     crossAxisAlignment: CrossAxisAlignment.start,
-              //     children: [
-              //       Text(
-              //         'Type of waste:',
-              //         style:
-              //             TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-              //       ),
-              //       Padding(
-              //         padding: EdgeInsets.only(left: 8.0),
-              //         child: TextField(
-              //           decoration: InputDecoration(
-              //             hintText: 'Any change in waste is mentioned here...',
-              //             border: InputBorder.none,
-              //           ),
-              //           style: TextStyle(),
-              //         ),
-              //       ),
-              //     ],
-              //   ),
-              // ),
-              // const SizedBox(
-              //   height: 20,
-              // ),
-              // Container(
-              //   height: 77,
-              //   decoration: BoxDecoration(
-              //     color: const Color.fromARGB(255, 208, 247, 209),
-              //     border: Border.all(color: Colors.black12),
-              //     borderRadius: BorderRadius.circular(5.0),
-              //   ),
-              //   child: const Column(
-              //     crossAxisAlignment: CrossAxisAlignment.start,
-              //     children: [
-              //       Text(
-              //         'waste Liters:',
-              //         style:
-              //             TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-              //       ),
-              //       Padding(
-              //         padding: EdgeInsets.only(left: 8.0),
-              //         child: TextField(
-              //           decoration: InputDecoration(
-              //             hintText: 'Any change in waste is mentioned here...',
-              //             border: InputBorder.none,
-              //           ),
-              //           style: TextStyle(),
-              //         ),
-              //       ),
-              //     ],
-              //   ),
-              // ),
-              // const SizedBox(
-              //   height: 20,
-              // ),
-              // Container(
-              //   height: 77,
-              //   decoration: BoxDecoration(
-              //     color: const Color.fromARGB(255, 208, 247, 209),
-              //     border: Border.all(color: Colors.black12),
-              //     borderRadius: BorderRadius.circular(5.0),
-              //   ),
-              //   child: const Column(
-              //     crossAxisAlignment: CrossAxisAlignment.start,
-              //     children: [
-              //       Text(
-              //         'Po Number:',
-              //         style:
-              //             TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-              //       ),
-              //       Padding(
-              //         padding: EdgeInsets.only(left: 8.0),
-              //         child: TextField(
-              //           decoration: InputDecoration(
-              //             hintText: 'Purchase order Number...',
-              //             border: InputBorder.none,
-              //           ),
-              //           style: TextStyle(),
-              //         ),
-              //       ),
-              //     ],
-              //   ),
-              // ),
-              // const SizedBox(
-              //   height: 20,
-              // ),
-              // Container(
-              //   height: 77,
-              //   decoration: BoxDecoration(
-              //     color: const Color.fromARGB(255, 208, 247, 209),
-              //     border: Border.all(color: Colors.black12),
-              //     borderRadius: BorderRadius.circular(5.0),
-              //   ),
-              //   child: const Column(
-              //     crossAxisAlignment: CrossAxisAlignment.start,
-              //     children: [
-              //       Text(
-              //         'SignName:',
-              //         style:
-              //             TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-              //       ),
-              //       Padding(
-              //         padding: EdgeInsets.only(left: 8.0),
-              //         child: TextField(
-              //           decoration: InputDecoration(
-              //             hintText: 'Sign name...',
-              //             border: InputBorder.none,
-              //           ),
-              //           style: TextStyle(),
-              //         ),
-              //       ),
-              //     ],
-              //   ),
-              // ),
+
               const SizedBox(
                 height: 20,
               ),
@@ -629,9 +508,12 @@ class SheduleSignaturePage extends StatelessWidget {
                             return CmButton(
                               color: vmJobcard.signColor,
                               onPressed: () {
+                                log(vmJobcard.signatureResponse.toString());
                                 print('reseeeeeeeeeeeet$id');
                                 vmJobcard.shedulesignatureviewmodelfunction(
-                                    id: id, pickedFiles: vmJobcard.pickedFiles);
+                                    signature_name: _signNameController.text,
+                                    id: id,
+                                    pickedFiles: vmJobcard.pickedFiles);
                                 vmJobcard.updateSignatureButtonColor(
                                     state: false);
                                 _controller.clear();

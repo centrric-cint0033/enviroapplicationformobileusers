@@ -334,9 +334,12 @@ mixin _$JobCardViewModel on JobCardViewModelBase, Store {
 
   @override
   Future<void> shedulesignatureviewmodelfunction(
-      {required int id, required List<PlatformFile> pickedFiles}) {
+      {required int id,
+      required List<PlatformFile> pickedFiles,
+      required String signature_name}) {
     return _$shedulesignatureviewmodelfunctionAsyncAction.run(() => super
-        .shedulesignatureviewmodelfunction(id: id, pickedFiles: pickedFiles));
+        .shedulesignatureviewmodelfunction(
+            id: id, pickedFiles: pickedFiles, signature_name: signature_name));
   }
 
   late final _$JobCardViewModelBaseActionController =

@@ -25,7 +25,9 @@ abstract class IJobCardService {
       shedulecardserviceweekfunction();
   Future<Either<Map<MainFailure, dynamic>, SheduleSignatureModel>>
       shedulesignatureserviceapi(
-          {required int id, required List<PlatformFile> pickedFiles});
+          {required int id,
+          required List<PlatformFile> pickedFiles,
+          required String signature_name});
 }
 
 @LazySingleton(as: IJobCardService)
@@ -101,11 +103,17 @@ class SalesService implements IJobCardService {
   @override
   Future<Either<Map<MainFailure, dynamic>, SheduleSignatureModel>>
       shedulesignatureserviceapi(
-          {required int id, required List<PlatformFile> pickedFiles}) async {
+          {required int id,
+          required List<PlatformFile> pickedFiles,
+          required String signature_name}) async {
     customPrint(content: id);
     var response = await getIt<HttpService>().multipartRequest(
       apiUrl: ApiEndPoints.endpointshedulesignature,
-      data: {"id": id, for (var file in pickedFiles) "pickedfile": file},
+      data: {
+        "id": id,
+        for (var file in pickedFiles) "pickedfile": file,
+        signature_name: signature_name
+      },
 
       // for (var file in pickedFiles) {
       //   var multipartFile = await http.MultipartFile.fromPath(
