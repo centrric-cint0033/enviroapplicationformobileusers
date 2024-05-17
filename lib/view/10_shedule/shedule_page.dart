@@ -63,7 +63,7 @@ class SchedulePage extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: SizedBox(
-                height: 400,
+                height: 420,
                 width: 300,
                 child: Observer(
                   builder: (_) {
@@ -219,131 +219,127 @@ class SchedulePage extends StatelessWidget {
                                     );
                                   }),
                                   const SizedBox(height: 25),
-                                  Card(
-                                    color: Colors.blue,
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.stretch,
-                                      children: [
-                                        const Align(
-                                          alignment: Alignment.topCenter,
-                                          child: Padding(
-                                            padding: EdgeInsets.all(8.0),
-                                            child: Text(
-                                              'Drivers and vehicles',
-                                              style: TextStyle(
-                                                fontSize: 15,
-                                                color: Colors.white,
+                                  Expanded(
+                                    child: Card(
+                                      color: Colors.blue,
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.stretch,
+                                        children: [
+                                          const Align(
+                                            alignment: Alignment.topCenter,
+                                            child: Padding(
+                                              padding: EdgeInsets.all(8.0),
+                                              child: Text(
+                                                'Drivers and vehicles',
+                                                style: TextStyle(
+                                                  fontSize: 15,
+                                                  color: Colors.white,
+                                                ),
                                               ),
                                             ),
                                           ),
-                                        ),
-                                        const SizedBox(height: 5),
-                                        SizedBox(
-                                          height: 94,
-                                          child: Observer(builder: (_) {
-                                            return ListView.builder(
-                                              scrollDirection: Axis.horizontal,
-                                              itemCount: (vmJobcard
-                                                      .shedulecardResponse
-                                                      .data?[i]
-                                                      .drivers
-                                                      ?.length ??
-                                                  0),
-                                              itemBuilder:
-                                                  (BuildContext context,
-                                                      int driverIndex) {
-                                                return Card(
-                                                  color: const Color.fromRGBO(
-                                                      255, 255, 255, 1),
-                                                  child: Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            8.0),
-                                                    child: Column(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
-                                                      children: [
-                                                        Observer(builder: (_) {
-                                                          return Row(
-                                                            children: [
-                                                              const SizedBox(
-                                                                  width: 8),
-                                                              Padding(
-                                                                padding:
-                                                                    const EdgeInsets
-                                                                        .only(
-                                                                        left:
-                                                                            8.0,
-                                                                        right:
-                                                                            8),
-                                                                child:
-                                                                    CircleAvatar(
-                                                                  radius: 14,
-                                                                  child: vmJobcard
-                                                                              .shedulecardResponse
-                                                                              .data?[i]
-                                                                              .drivers?[driverIndex]
-                                                                              .dp !=
-                                                                          null
-                                                                      ? Image.network(
-                                                                          vmJobcard
-                                                                              .shedulecardResponse
-                                                                              .data![i]
-                                                                              .drivers![driverIndex]
-                                                                              .dp!,
-                                                                          fit: BoxFit
-                                                                              .cover,
-                                                                        )
-                                                                      : Container(),
+                                          const SizedBox(height: 5),
+                                          SizedBox(
+                                            height: 94,
+                                            child: Observer(builder: (_) {
+                                              return ListView.builder(
+                                                scrollDirection:
+                                                    Axis.horizontal,
+                                                itemCount: (vmJobcard
+                                                        .shedulecardResponse
+                                                        .data?[i]
+                                                        .drivers
+                                                        ?.length ??
+                                                    0),
+                                                itemBuilder:
+                                                    (BuildContext context,
+                                                        int driverIndex) {
+                                                  return Card(
+                                                    color: const Color.fromRGBO(
+                                                        255, 255, 255, 1),
+                                                    child: Padding(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              8.0),
+                                                      child: Column(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Observer(
+                                                              builder: (_) {
+                                                            return Row(
+                                                              children: [
+                                                                const SizedBox(
+                                                                    width: 8),
+                                                                Padding(
+                                                                  padding:
+                                                                      const EdgeInsets
+                                                                          .only(
+                                                                          left:
+                                                                              8.0,
+                                                                          right:
+                                                                              8),
+                                                                  child:
+                                                                      CircleAvatar(
+                                                                    radius: 14,
+                                                                    child: vmJobcard.shedulecardResponse.data?[i].drivers?[driverIndex].dp !=
+                                                                            null
+                                                                        ? Image
+                                                                            .network(
+                                                                            vmJobcard.shedulecardResponse.data![i].drivers![driverIndex].dp!,
+                                                                            fit:
+                                                                                BoxFit.cover,
+                                                                          )
+                                                                        : Container(),
+                                                                  ),
                                                                 ),
-                                                              ),
-                                                              Text(
-                                                                vmJobcard
-                                                                        .shedulecardResponse
-                                                                        .data?[
-                                                                            i]
-                                                                        .drivers?[
-                                                                            driverIndex]
-                                                                        .name ??
-                                                                    '',
-                                                                style:
-                                                                    const TextStyle(
-                                                                        fontSize:
-                                                                            15),
-                                                              ),
-                                                            ],
-                                                          );
-                                                        }),
-                                                        Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                  .only(
-                                                                  left: 43.0),
-                                                          child: Text(
-                                                            vmJobcard
-                                                                    .shedulecardResponse
-                                                                    .data?[i]
-                                                                    .drivers?[
-                                                                        driverIndex]
-                                                                    .registration ??
-                                                                '',
-                                                            style:
-                                                                const TextStyle(
-                                                                    fontSize:
-                                                                        15),
+                                                                Text(
+                                                                  vmJobcard
+                                                                          .shedulecardResponse
+                                                                          .data?[
+                                                                              i]
+                                                                          .drivers?[
+                                                                              driverIndex]
+                                                                          .name ??
+                                                                      '',
+                                                                  style: const TextStyle(
+                                                                      fontSize:
+                                                                          15),
+                                                                ),
+                                                              ],
+                                                            );
+                                                          }),
+                                                          Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .only(
+                                                                    left: 43.0),
+                                                            child: Text(
+                                                              vmJobcard
+                                                                      .shedulecardResponse
+                                                                      .data?[i]
+                                                                      .drivers?[
+                                                                          driverIndex]
+                                                                      .registration ??
+                                                                  '',
+                                                              style:
+                                                                  const TextStyle(
+                                                                      fontSize:
+                                                                          15),
+                                                            ),
                                                           ),
-                                                        ),
-                                                      ],
+                                                        ],
+                                                      ),
                                                     ),
-                                                  ),
-                                                );
-                                              },
-                                            );
-                                          }),
-                                        ),
-                                      ],
+                                                  );
+                                                },
+                                              );
+                                            }),
+                                          ),
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 ],
