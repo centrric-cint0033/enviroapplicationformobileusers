@@ -79,7 +79,6 @@ abstract class JobCardViewModelBase with Store {
 
     if (pickedsignaturecameraImage != null) {
       selectedsignaturecameraImage = File(pickedsignaturecameraImage.path);
-      // isImageSelected = true;
 
       print('Image selected');
     }

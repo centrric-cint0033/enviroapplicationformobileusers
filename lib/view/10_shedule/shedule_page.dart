@@ -382,7 +382,11 @@ class SchedulePage extends StatelessWidget {
             ),
             const SizedBox(height: 20),
             GestureDetector(
-              onTap: () => sheduledetailfunction(context, id),
+              onTap: () {
+                sheduledetailfunction4(
+                  context,
+                );
+              },
               child: SizedBox(
                 height: 310,
                 child: Observer(builder: (_) {
@@ -403,258 +407,279 @@ class SchedulePage extends StatelessWidget {
                                     true,
                                 onTap: () => vmJobcard
                                     .shedulecardviewmodelweekfunction(),
-                                child: Card(
-                                  margin: const EdgeInsets.symmetric(
-                                      horizontal: 20),
-                                  elevation: 4,
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Observer(builder: (_) {
-                                            return Padding(
-                                              padding: const EdgeInsets.only(
-                                                  left: 8.0, top: 8),
-                                              child: Text(
-                                                vmJobcard
-                                                        .sheduleweekResponse
-                                                        .data?[i]
-                                                        .client
-                                                        ?.clientName ??
-                                                    '',
-                                              ),
-                                            );
-                                          }),
-                                          Observer(builder: (_) {
-                                            return Padding(
-                                              padding: const EdgeInsets.only(
-                                                  left: 8.0, top: 8, right: 8),
-                                              child: Text(
-                                                'job ${vmJobcard.sheduleweekResponse.data?[i].job ?? ''}',
-                                              ),
-                                            );
-                                          }),
-                                        ],
-                                      ),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Observer(builder: (_) {
-                                            return Padding(
-                                              padding: const EdgeInsets.only(
-                                                  left: 8.0, top: 8),
-                                              child: Observer(builder: (_) {
-                                                return Text(
+                                child: GestureDetector(
+                                  onTap: () {
+                                    sheduledetailfunction(
+                                      context,
+                                      vmJobcard.sheduleweekResponse.data?[i]
+                                              .id ??
+                                          '',
+                                    );
+                                  },
+                                  child: Card(
+                                    margin: const EdgeInsets.symmetric(
+                                        horizontal: 20),
+                                    elevation: 4,
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Observer(builder: (_) {
+                                              return Padding(
+                                                padding: const EdgeInsets.only(
+                                                    left: 8.0, top: 8),
+                                                child: Text(
+                                                  vmJobcard
+                                                          .sheduleweekResponse
+                                                          .data?[i]
+                                                          .client
+                                                          ?.clientName ??
+                                                      '',
+                                                ),
+                                              );
+                                            }),
+                                            Observer(builder: (_) {
+                                              return Padding(
+                                                padding: const EdgeInsets.only(
+                                                    left: 8.0,
+                                                    top: 8,
+                                                    right: 8),
+                                                child: Text(
+                                                  'job ${vmJobcard.sheduleweekResponse.data?[i].job ?? ''}',
+                                                ),
+                                              );
+                                            }),
+                                          ],
+                                        ),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Observer(builder: (_) {
+                                              return Padding(
+                                                padding: const EdgeInsets.only(
+                                                    left: 8.0, top: 8),
+                                                child: Observer(builder: (_) {
+                                                  return Text(
+                                                    vmJobcard
+                                                            .sheduleweekResponse
+                                                            .data?[i]
+                                                            .startTime ??
+                                                        '',
+                                                  );
+                                                }),
+                                              );
+                                            }),
+                                            ElevatedButton(
+                                              onPressed: () {
+                                                sheduledetailfunction(
+                                                  context,
                                                   vmJobcard.sheduleweekResponse
-                                                          .data?[i].startTime ??
+                                                          .data?[i].id ??
                                                       '',
                                                 );
-                                              }),
-                                            );
-                                          }),
-                                          ElevatedButton(
-                                            onPressed: () {
-                                              sheduledetailfunction(
-                                                context,
-                                                vmJobcard.sheduleweekResponse
-                                                        .data?[i].id ??
-                                                    '',
-                                              );
-                                            },
-                                            style: ElevatedButton.styleFrom(
-                                              primary: Colors.white,
-                                              onPrimary: Colors.black,
+                                              },
+                                              style: ElevatedButton.styleFrom(
+                                                primary: Colors.white,
+                                                onPrimary: Colors.black,
+                                              ),
+                                              child: const Text('pending'),
                                             ),
-                                            child: const Text('pending'),
-                                          ),
-                                        ],
-                                      ),
-                                      Observer(builder: (_) {
-                                        return Padding(
-                                          padding:
-                                              const EdgeInsets.only(left: 8.0),
-                                          child: Observer(builder: (_) {
-                                            return Text(DateFormat.yMMMMd()
-                                                .format(vmJobcard
-                                                    .shedulecardResponse
-                                                    .data![i]
-                                                    .startDate!));
-                                          }),
-                                        );
-                                      }),
-                                      const SizedBox(
-                                        height: 10,
-                                      ),
-                                      const Card(
-                                        color: Colors.blue,
-                                        child: Column(),
-                                      ),
-                                      SizedBox(
-                                        width: 500,
-                                        child: Flexible(
-                                          child: Card(
-                                            color: const Color.fromRGBO(
-                                                33, 150, 243, 1),
-                                            child: Column(
-                                              children: [
-                                                const Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
-                                                  children: [
-                                                    Padding(
-                                                      padding: EdgeInsets.only(
-                                                          left: 8.0),
-                                                      child: Text(
-                                                        'Drivers',
-                                                        style: TextStyle(
-                                                            color: Colors.white,
-                                                            fontSize: 15),
-                                                      ),
-                                                    ),
-                                                    Padding(
-                                                      padding: EdgeInsets.only(
-                                                          right: 8.0),
-                                                      child: Text(
-                                                        'Vehicle assigned',
-                                                        style: TextStyle(
-                                                            color: Colors.white,
-                                                            fontSize: 15),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                                const Divider(
-                                                  color: Colors.white,
-                                                  thickness: 1,
-                                                ),
-                                                Observer(builder: (_) {
-                                                  return Row(
+                                          ],
+                                        ),
+                                        Observer(builder: (_) {
+                                          return Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 8.0),
+                                            child: Observer(builder: (_) {
+                                              return Text(DateFormat.yMMMMd()
+                                                  .format(vmJobcard
+                                                      .shedulecardResponse
+                                                      .data![i]
+                                                      .startDate!));
+                                            }),
+                                          );
+                                        }),
+                                        const SizedBox(
+                                          height: 10,
+                                        ),
+                                        const Card(
+                                          color: Colors.blue,
+                                          child: Column(),
+                                        ),
+                                        SizedBox(
+                                          width: 500,
+                                          child: Flexible(
+                                            child: Card(
+                                              color: const Color.fromRGBO(
+                                                  33, 150, 243, 1),
+                                              child: Column(
+                                                children: [
+                                                  const Row(
                                                     mainAxisAlignment:
                                                         MainAxisAlignment
                                                             .spaceBetween,
                                                     children: [
                                                       Padding(
                                                         padding:
-                                                            const EdgeInsets
-                                                                .only(
+                                                            EdgeInsets.only(
                                                                 left: 8.0),
-                                                        child: Observer(
-                                                            builder: (_) {
-                                                          return Text(
-                                                            vmJobcard
-                                                                    .shedulecardResponse
-                                                                    .data?[i]
-                                                                    .drivers?[0]
-                                                                    .name ??
-                                                                '',
-                                                            style:
-                                                                const TextStyle(
+                                                        child: Text(
+                                                          'Drivers',
+                                                          style: TextStyle(
                                                               color:
                                                                   Colors.white,
-                                                            ),
-                                                          );
-                                                        }),
-                                                      ),
-                                                      const Divider(
-                                                        color: Colors.black,
+                                                              fontSize: 15),
+                                                        ),
                                                       ),
                                                       Padding(
                                                         padding:
-                                                            const EdgeInsets
-                                                                .only(
+                                                            EdgeInsets.only(
                                                                 right: 8.0),
-                                                        child: Observer(
-                                                            builder: (_) {
-                                                          return Text(
-                                                            vmJobcard
-                                                                    .shedulecardResponse
-                                                                    .data?[i]
-                                                                    .drivers?[0]
-                                                                    .registration ??
-                                                                '',
-                                                            style:
-                                                                const TextStyle(
+                                                        child: Text(
+                                                          'Vehicle assigned',
+                                                          style: TextStyle(
                                                               color:
                                                                   Colors.white,
-                                                            ),
-                                                          );
-                                                        }),
+                                                              fontSize: 15),
+                                                        ),
                                                       ),
                                                     ],
-                                                  );
-                                                }),
-                                                const Divider(
-                                                  color: Colors.white,
-                                                  thickness: 1,
-                                                ),
-                                                Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
-                                                  children: [
-                                                    Observer(builder: (_) {
-                                                      return Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .all(8.0),
-                                                        child: Observer(
-                                                            builder: (_) {
-                                                          return Text(
+                                                  ),
+                                                  const Divider(
+                                                    color: Colors.white,
+                                                    thickness: 1,
+                                                  ),
+                                                  Observer(builder: (_) {
+                                                    return Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
+                                                      children: [
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .only(
+                                                                  left: 8.0),
+                                                          child: Observer(
+                                                              builder: (_) {
+                                                            return Text(
+                                                              vmJobcard
+                                                                      .shedulecardResponse
+                                                                      .data?[i]
+                                                                      .drivers?[
+                                                                          0]
+                                                                      .name ??
+                                                                  '',
+                                                              style:
+                                                                  const TextStyle(
+                                                                color: Colors
+                                                                    .white,
+                                                              ),
+                                                            );
+                                                          }),
+                                                        ),
+                                                        const Divider(
+                                                          color: Colors.black,
+                                                        ),
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .only(
+                                                                  right: 8.0),
+                                                          child: Observer(
+                                                              builder: (_) {
+                                                            return Text(
+                                                              vmJobcard
+                                                                      .shedulecardResponse
+                                                                      .data?[i]
+                                                                      .drivers?[
+                                                                          0]
+                                                                      .registration ??
+                                                                  '',
+                                                              style:
+                                                                  const TextStyle(
+                                                                color: Colors
+                                                                    .white,
+                                                              ),
+                                                            );
+                                                          }),
+                                                        ),
+                                                      ],
+                                                    );
+                                                  }),
+                                                  const Divider(
+                                                    color: Colors.white,
+                                                    thickness: 1,
+                                                  ),
+                                                  Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceBetween,
+                                                    children: [
+                                                      Observer(builder: (_) {
+                                                        return Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(8.0),
+                                                          child: Observer(
+                                                              builder: (_) {
+                                                            return Text(
+                                                              vmJobcard
+                                                                      .shedulecardResponse
+                                                                      .data?[i]
+                                                                      .jobCardKeys
+                                                                      ?.weighBridgeRequiredMultipleFile
+                                                                      ?.firstOrNull
+                                                                      ?.name ??
+                                                                  '',
+                                                              style:
+                                                                  const TextStyle(
+                                                                color: Colors
+                                                                    .white,
+                                                              ),
+                                                            );
+                                                          }),
+                                                        );
+                                                      }),
+                                                      Observer(builder: (_) {
+                                                        return Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(8.0),
+                                                          child: Text(
                                                             vmJobcard
-                                                                    .shedulecardResponse
+                                                                    .sheduleweekResponse
                                                                     .data?[i]
-                                                                    .jobCardKeys
-                                                                    ?.weighBridgeRequiredMultipleFile
-                                                                    ?.firstOrNull
-                                                                    ?.name ??
+                                                                    .vehicle
+                                                                    ?.toString() ??
                                                                 '',
                                                             style:
                                                                 const TextStyle(
                                                               color:
                                                                   Colors.white,
                                                             ),
-                                                          );
-                                                        }),
-                                                      );
-                                                    }),
-                                                    Observer(builder: (_) {
-                                                      return Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .all(8.0),
-                                                        child: Text(
-                                                          vmJobcard
-                                                                  .sheduleweekResponse
-                                                                  .data?[i]
-                                                                  .vehicle
-                                                                  ?.toString() ??
-                                                              '',
-                                                          style:
-                                                              const TextStyle(
-                                                            color: Colors.white,
                                                           ),
-                                                        ),
-                                                      );
-                                                    }),
-                                                  ],
-                                                ),
-                                                const Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
-                                                ),
-                                              ],
+                                                        );
+                                                      }),
+                                                    ],
+                                                  ),
+                                                  const Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceBetween,
+                                                  ),
+                                                ],
+                                              ),
                                             ),
                                           ),
                                         ),
-                                      ),
-                                    ],
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ),
@@ -701,6 +726,12 @@ Future<void> openMap(String latitude, String longitude) async {
 void nextjobfnction(BuildContext context) {
   print('calenderclicked');
   vmJobcard.shedulecardviewmodelfunction();
+}
+
+void sheduledetailfunction4(BuildContext context) {
+  print('calenderclicked');
+
+  context.router.pushNamed(RouteNames.rsheduledetail2page);
 }
 
 void calenderfunction(BuildContext context) {
