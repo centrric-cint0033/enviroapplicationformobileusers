@@ -522,7 +522,8 @@ class SheduleSignaturePage extends StatelessWidget {
                                 if (pickedTypes != null) {
                                   final tempDir = await getTemporaryDirectory();
 
-                                  File file = await File('${tempDir.path}/.png')
+                                  File file = await File(
+                                          '${tempDir.path}/${DateTime.now()}.png')
                                       .create();
 
                                   await file.writeAsBytes(pickedTypes);
