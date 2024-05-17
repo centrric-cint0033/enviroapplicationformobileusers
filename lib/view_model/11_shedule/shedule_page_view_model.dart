@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:enviro_mobile_application/api_response/api_response.dart';
 import 'package:enviro_mobile_application/model/07_Jobcard/job_card_model.dart';
@@ -246,7 +247,7 @@ abstract class JobCardViewModelBase with Store {
   Future<void> shedulesignatureviewmodelfunction({
     required int id,
     required List<PlatformFile> pickedFiles,
-    required String image,
+    required Uint8List image,
     required String signature_name,
     required String purchase_order_number,
     required String extracted_waste_type,

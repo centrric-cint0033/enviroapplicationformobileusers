@@ -1,7 +1,9 @@
 import 'dart:developer';
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:auto_route/auto_route.dart';
+import 'package:enviro_mobile_application/utilis/constant.dart';
 import 'package:enviro_mobile_application/view_model/11_shedule/shedule_page_view_model.dart';
 import 'package:enviro_mobile_application/widgets/cmbutton.dart';
 import 'package:enviro_mobile_application/widgets/cmn_action_icon.dart';
@@ -10,27 +12,32 @@ import 'package:enviro_mobile_application/widgets/drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:open_file/open_file.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:signature/signature.dart';
-
-final SignatureController _signaturecontroller = SignatureController(
-  penStrokeWidth: 5,
-  penColor: Colors.black,
-  exportBackgroundColor: Colors.white,
-  onDrawEnd: () {
-    vmJobcard.updateSignatureButtonColor(state: true);
-  },
-);
-final TextEditingController _controllerTypeofwaste = TextEditingController();
-final TextEditingController _signNameController = TextEditingController();
-final TextEditingController _controllerPonumber = TextEditingController();
-final TextEditingController _controllerWateliters = TextEditingController();
 
 @RoutePage()
 class SheduleSignaturePage extends StatelessWidget {
   SheduleSignaturePage({
+    this.picker,
+    this.pickedtypes,
     required this.id,
     super.key,
   });
+  Uint8List? picker;
+  final TextEditingController _controllerTypeofwaste = TextEditingController();
+  final TextEditingController _signNameController = TextEditingController();
+  final TextEditingController _controllerPonumber = TextEditingController();
+  final TextEditingController _controllerWateliters = TextEditingController();
+  final SignatureController _signaturecontroller = SignatureController(
+    penStrokeWidth: 5,
+    penColor: Colors.black,
+    exportBackgroundColor: Colors.white,
+    onDrawEnd: () {
+      vmJobcard.updateSignatureButtonColor(state: true);
+    },
+  );
+
+  Uint8List? pickedtypes;
   final int id;
   List? pickedFiles;
 
@@ -507,12 +514,29 @@ class SheduleSignaturePage extends StatelessWidget {
                           Observer(builder: (_) {
                             return CmButton(
                               color: vmJobcard.signColor,
-                              onPressed: () {
-                                print('reseeeeeeeeeeeet$id');
+                              onPressed: () async {
+                                picker = pickedtypes;
+                                Uint8List? pickedTypes =
+                                    await _signaturecontroller.toPngBytes();
 
-                                vmJobcard.updateSignatureButtonColor(
-                                    state: false);
-                                _signaturecontroller.clear();
+                                if (pickedTypes != null) {
+                                  final tempDir = await getTemporaryDirectory();
+
+                                  File file = await File('${tempDir.path}/.png')
+                                      .create();
+
+                                  await file.writeAsBytes(pickedTypes);
+
+                                  print('Signature saved to: ${file.path}');
+                                  print('Reset ID: $id');
+
+                                  vmJobcard.updateSignatureButtonColor(
+                                      state: false);
+
+                                  _signaturecontroller.clear();
+                                } else {
+                                  print('No signature to save.');
+                                }
                               },
                               text: 'Reset',
                             );
@@ -530,6 +554,10 @@ class SheduleSignaturePage extends StatelessWidget {
                 'Comments',
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
               ),
+              SizedBox(
+                height: 40,
+              ),
+              if (pickedtypes != null) Image.memory(pickedtypes!),
               const SizedBox(height: 10),
               SizedBox(
                 child: TextField(
@@ -566,7 +594,7 @@ class SheduleSignaturePage extends StatelessWidget {
                     color: vmJobcard.signColor,
                     onPressed: () {
                       vmJobcard.shedulesignatureviewmodelfunction(
-                          image: _signaturecontroller.toString(),
+                          image: picker!,
                           extracted_waste_type: _controllerTypeofwaste.text,
                           extracted_litres_of_waste: _controllerWateliters.text,
                           purchase_order_number: _controllerPonumber.text,

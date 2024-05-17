@@ -336,7 +336,7 @@ mixin _$JobCardViewModel on JobCardViewModelBase, Store {
   Future<void> shedulesignatureviewmodelfunction(
       {required int id,
       required List<PlatformFile> pickedFiles,
-      required String image,
+      required Uint8List image,
       required String signature_name,
       required String purchase_order_number,
       required String extracted_waste_type,

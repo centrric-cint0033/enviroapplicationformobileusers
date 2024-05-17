@@ -8,13 +8,15 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
+import 'dart:typed_data' as _i36;
+
 import 'package:auto_route/auto_route.dart' as _i31;
 import 'package:enviro_mobile_application/model/02_sales/sales_model/sales_model.dart'
     as _i35;
 import 'package:enviro_mobile_application/model/04_ohs/oh&s_resp_model.dart'
     as _i33;
 import 'package:enviro_mobile_application/model/10_team/team_profile_employee_details_res_model/team_profile_employee_details_res_model.dart'
-    as _i37;
+    as _i38;
 import 'package:enviro_mobile_application/view/01_auth/login_page.dart' as _i7;
 import 'package:enviro_mobile_application/view/02_sales/sales_detail_page.dart'
     as _i14;
@@ -74,7 +76,7 @@ import 'package:enviro_mobile_application/view/home_page.dart' as _i3;
 import 'package:enviro_mobile_application/view/intranet_page/intranet_page.dart'
     as _i5;
 import 'package:enviro_mobile_application/view_model/10_site/site_view_model.dart'
-    as _i36;
+    as _i37;
 import 'package:flutter/cupertino.dart' as _i34;
 import 'package:flutter/material.dart' as _i32;
 
@@ -232,6 +234,8 @@ abstract class $AppRouter extends _i31.RootStackRouter {
       return _i31.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: _i20.SheduleSignaturePage(
+          picker: args.picker,
+          pickedtypes: args.pickedtypes,
           id: args.id,
           key: args.key,
         ),
@@ -783,12 +787,16 @@ class SheduleCommentRoute extends _i31.PageRouteInfo<void> {
 class SheduleSignatureRoute
     extends _i31.PageRouteInfo<SheduleSignatureRouteArgs> {
   SheduleSignatureRoute({
+    _i36.Uint8List? picker,
+    _i36.Uint8List? pickedtypes,
     required int id,
     _i32.Key? key,
     List<_i31.PageRouteInfo>? children,
   }) : super(
           SheduleSignatureRoute.name,
           args: SheduleSignatureRouteArgs(
+            picker: picker,
+            pickedtypes: pickedtypes,
             id: id,
             key: key,
           ),
@@ -803,9 +811,15 @@ class SheduleSignatureRoute
 
 class SheduleSignatureRouteArgs {
   const SheduleSignatureRouteArgs({
+    this.picker,
+    this.pickedtypes,
     required this.id,
     this.key,
   });
+
+  final _i36.Uint8List? picker;
+
+  final _i36.Uint8List? pickedtypes;
 
   final int id;
 
@@ -813,7 +827,7 @@ class SheduleSignatureRouteArgs {
 
   @override
   String toString() {
-    return 'SheduleSignatureRouteArgs{id: $id, key: $key}';
+    return 'SheduleSignatureRouteArgs{picker: $picker, pickedtypes: $pickedtypes, id: $id, key: $key}';
   }
 }
 
@@ -875,7 +889,7 @@ class SiteDetailRoute extends _i31.PageRouteInfo<SiteDetailRouteArgs> {
   SiteDetailRoute({
     _i32.Key? key,
     required int index,
-    required _i36.SiteType type,
+    required _i37.SiteType type,
     List<_i31.PageRouteInfo>? children,
   }) : super(
           SiteDetailRoute.name,
@@ -904,7 +918,7 @@ class SiteDetailRouteArgs {
 
   final int index;
 
-  final _i36.SiteType type;
+  final _i37.SiteType type;
 
   @override
   String toString() {
@@ -931,7 +945,7 @@ class SiteMainRoute extends _i31.PageRouteInfo<void> {
 class TeamEditRoute extends _i31.PageRouteInfo<TeamEditRouteArgs> {
   TeamEditRoute({
     _i32.Key? key,
-    required _i37.TeamProfileEmployeeDetailsResModel employeeDetatils,
+    required _i38.TeamProfileEmployeeDetailsResModel employeeDetatils,
     List<_i31.PageRouteInfo>? children,
   }) : super(
           TeamEditRoute.name,
@@ -956,7 +970,7 @@ class TeamEditRouteArgs {
 
   final _i32.Key? key;
 
-  final _i37.TeamProfileEmployeeDetailsResModel employeeDetatils;
+  final _i38.TeamProfileEmployeeDetailsResModel employeeDetatils;
 
   @override
   String toString() {
