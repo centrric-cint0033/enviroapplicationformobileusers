@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:developer';
 import 'dart:io';
 import 'dart:typed_data';
@@ -210,48 +212,6 @@ class SheduleSignaturePage extends StatelessWidget {
               const SizedBox(
                 height: 20,
               ),
-              // Container(
-              //   width: 411,
-              //   height: 48,
-              //   decoration: BoxDecoration(
-              //     color: Colors.white,
-              //     border: Border.all(color: Colors.black12),
-              //     borderRadius: BorderRadius.circular(5.0),
-              //   ),
-              //   child: Padding(
-              //     padding: const EdgeInsets.all(8.0),
-              //     child: Row(
-              //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              //       crossAxisAlignment: CrossAxisAlignment.start,
-              //       children: [
-              //         const Column(
-              //           crossAxisAlignment: CrossAxisAlignment.start,
-              //           children: [
-              //             Text(
-              //               'Job Details',
-              //               style: TextStyle(
-              //                 fontSize: 14,
-              //                 fontWeight: FontWeight.bold,
-              //               ),
-              //             ),
-              //             SizedBox(height: 8),
-              //           ],
-              //         ),
-              //         DropdownButton<String>(
-              //           underline: Container(),
-              //           items: <String>['azeem', 'jithin', 'shofi', 'azhar']
-              //               .map((String value) {
-              //             return DropdownMenuItem<String>(
-              //               value: value,
-              //               child: Text(value),
-              //             );
-              //           }).toList(),
-              //           onChanged: (String? value) {},
-              //         ),
-              //       ],
-              //     ),
-              //   ),
-              // ),
               ExpansionTile(
                 title: const Text(
                   'Job Details',
@@ -332,7 +292,6 @@ class SheduleSignaturePage extends StatelessWidget {
                       ),
                     ),
                   ),
-                  // Wrapped with ListTile to include it properly
                   ListTile(
                     title: Container(
                       height: 83,
@@ -368,7 +327,6 @@ class SheduleSignaturePage extends StatelessWidget {
                       ),
                     ),
                   ),
-                  // Wrapped with ListTile to include it properly
                   ListTile(
                     title: Container(
                       height: 83,
@@ -407,7 +365,6 @@ class SheduleSignaturePage extends StatelessWidget {
                   ),
                 ],
               ),
-
               const SizedBox(
                 height: 20,
               ),
@@ -476,7 +433,31 @@ class SheduleSignaturePage extends StatelessWidget {
                           Observer(builder: (_) {
                             return CmButton(
                               color: vmJobcard.signColor,
-                              onPressed: () {
+                              onPressed: () async {
+                                Uint8List? pickedTypes =
+                                    await _signaturecontroller.toPngBytes();
+
+                                if (pickedTypes != null) {
+                                  final tempDir = await getTemporaryDirectory();
+
+                                  File file = await File(
+                                          '${tempDir.path}/${DateTime.now()}.png')
+                                      .create();
+
+                                  await file.writeAsBytes(pickedTypes);
+
+                                  print('Signature saved to: ${file.path}');
+                                  print('Reset ID: $id');
+
+                                  vmJobcard.updateSignatureButtonColor(
+                                      state: false);
+
+                                  _signaturecontroller.clear();
+                                  picker = pickedTypes;
+                                  print('shamon$picker');
+                                } else {
+                                  print('No signature to save.');
+                                }
                                 showDialog(
                                   context: context,
                                   builder: (BuildContext context) {
@@ -488,7 +469,7 @@ class SheduleSignaturePage extends StatelessWidget {
                                             color: Colors.black),
                                       ),
                                       content: const Text(
-                                        'Uploading signature',
+                                        'Uploading your signature',
                                         style: TextStyle(
                                             fontSize: 22,
                                             fontWeight: FontWeight.bold),
@@ -515,29 +496,7 @@ class SheduleSignaturePage extends StatelessWidget {
                             return CmButton(
                               color: vmJobcard.signColor,
                               onPressed: () async {
-                                picker = pickedtypes;
-                                Uint8List? pickedTypes =
-                                    await _signaturecontroller.toPngBytes();
-
-                                if (pickedTypes != null) {
-                                  final tempDir = await getTemporaryDirectory();
-
-                                  File file = await File(
-                                          '${tempDir.path}/${DateTime.now()}.png')
-                                      .create();
-
-                                  await file.writeAsBytes(pickedTypes);
-
-                                  print('Signature saved to: ${file.path}');
-                                  print('Reset ID: $id');
-
-                                  vmJobcard.updateSignatureButtonColor(
-                                      state: false);
-
-                                  _signaturecontroller.clear();
-                                } else {
-                                  print('No signature to save.');
-                                }
+                                _signaturecontroller.clear();
                               },
                               text: 'Reset',
                             );
@@ -594,6 +553,7 @@ class SheduleSignaturePage extends StatelessWidget {
                     width: 105,
                     color: vmJobcard.signColor,
                     onPressed: () {
+                      print('derly$picker!');
                       vmJobcard.shedulesignatureviewmodelfunction(
                           image: picker!,
                           extracted_waste_type: _controllerTypeofwaste.text,
