@@ -542,10 +542,16 @@ class SheduleSignaturePage extends StatelessWidget {
                       ),
                     ),
                     hintText: 'Enter your comments',
-                    suffixIcon: IconButton(
-                      icon: const Icon(Icons.send),
-                      onPressed: () {},
-                    ),
+                    suffixIcon: Observer(builder: (_) {
+                      return IconButton(
+                        icon: const Icon(Icons.send),
+                        onPressed: () {
+                          vmJobcard.shedulecommentviewmodelfunction(
+                              id: id, comment: _commentController.text);
+                          _commentController.clear();
+                        },
+                      );
+                    }),
                   ),
                   style: const TextStyle(color: Colors.black),
                   maxLines: null,
