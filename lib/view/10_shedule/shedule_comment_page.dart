@@ -21,29 +21,43 @@ class SheduleCommentPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
+            const SizedBox(
+              height: 40,
+            ),
             const Text(
               'Comments',
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
-            const SizedBox(height: 10),
             SizedBox(
-              height: 60,
+              height: 20,
+            ),
+            SizedBox(
               child: TextField(
                 decoration: InputDecoration(
+                  focusColor: Colors.black12,
+                  fillColor: Colors.grey[200],
+                  filled: true,
+                  enabledBorder: const OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.grey)),
                   border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(40.0),
-                    borderSide: const BorderSide(color: Colors.black),
+                    borderRadius: BorderRadius.circular(10.0),
+                    borderSide: const BorderSide(
+                      color: Colors.grey,
+                    ),
                   ),
+                  hintText: 'Enter your comments',
                   suffixIcon: IconButton(
                     icon: const Icon(Icons.send),
                     onPressed: () {},
                   ),
                 ),
+                style: const TextStyle(color: Colors.black),
                 maxLines: null,
               ),
             ),
             sized0hx20,
             SizedBox(
-              height: 75,
+              height: 55,
               child: Card(
                 color: Colors.white70,
                 child: Stack(

@@ -33,6 +33,11 @@ abstract class IJobCardService {
           required String purchase_order_number,
           required String extracted_litres_of_waste,
           required String extracted_waste_type});
+
+  Future<Either<Map<MainFailure, dynamic>, SheduleSignatureModel>>
+      shedulecommentserviceapi({
+    required int id,
+  });
 }
 
 @LazySingleton(as: IJobCardService)
@@ -126,16 +131,32 @@ class SalesService implements IJobCardService {
         "extracted_litres_of_waste": extracted_litres_of_waste,
         "extracted_waste_type": extracted_waste_type,
       },
+      method: "POST",
+    );
+    print('azeem$id');
+    ;
+    return response.fold(
+      (l) => Left(l),
+      (res) async {
+        var data = jsonDecode(res.body);
+        SheduleSignatureModel signingdata =
+            SheduleSignatureModel.fromJson(data);
+        return Right(signingdata);
+      },
+    );
+  }
 
-      // for (var file in pickedFiles) {
-      //   var multipartFile = await http.MultipartFile.fromPath(
-      //     'pickedFiles[]',
-      //     file.path,
-      //     contentType: MediaType.parse(file.type),
-      //   );
-      //   request.files.add(multipartFile);
-      // }
-
+  @override
+  Future<Either<Map<MainFailure, dynamic>, SheduleSignatureModel>>
+      shedulecommentserviceapi({
+    required int id,
+  }) async {
+    customPrint(content: id);
+    var response = await getIt<HttpService>().multipartRequest(
+      apiUrl: ApiEndPoints.endpointcommentsignature,
+      data: {
+        "id": id,
+      },
       method: "POST",
     );
     print('azeem$id');

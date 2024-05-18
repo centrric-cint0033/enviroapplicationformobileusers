@@ -5,7 +5,7 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:auto_route/auto_route.dart';
-import 'package:enviro_mobile_application/utilis/constant.dart';
+
 import 'package:enviro_mobile_application/view_model/11_shedule/shedule_page_view_model.dart';
 import 'package:enviro_mobile_application/widgets/cmbutton.dart';
 import 'package:enviro_mobile_application/widgets/cmn_action_icon.dart';
@@ -496,6 +496,8 @@ class SheduleSignaturePage extends StatelessWidget {
                             return CmButton(
                               color: vmJobcard.signColor,
                               onPressed: () async {
+                                vmJobcard.shedulecommentviewmodelfunction(
+                                    id: id);
                                 _signaturecontroller.clear();
                               },
                               text: 'Reset',
@@ -514,8 +516,8 @@ class SheduleSignaturePage extends StatelessWidget {
                 'Comments',
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
               ),
-              SizedBox(
-                height: 40,
+              const SizedBox(
+                height: 20,
               ),
               if (pickedtypes != null) Image.memory(pickedtypes!),
               const SizedBox(height: 10),

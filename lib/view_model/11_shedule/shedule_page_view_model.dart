@@ -279,4 +279,34 @@ abstract class JobCardViewModelBase with Store {
       },
     );
   }
+
+  @observable
+  ApiResponse<SheduleSignatureModel> commentResponse =
+      ApiResponse<SheduleSignatureModel>();
+
+  @action
+  Future<void> shedulecommentviewmodelfunction({
+    required int id,
+  }) async {
+    commentResponse = commentResponse.copyWith(errors: null, loading: true);
+
+    final result = await jobcardService.shedulecommentserviceapi(
+      id: id,
+    );
+    return result.fold(
+      (l) {
+        commentResponse = commentResponse.copyWith(
+          errors: l,
+          loading: false,
+        );
+      },
+      (r) {
+        commentResponse = commentResponse.copyWith(
+          data: r,
+          errors: null,
+          loading: false,
+        );
+      },
+    );
+  }
 }

@@ -251,6 +251,22 @@ mixin _$JobCardViewModel on JobCardViewModelBase, Store {
     });
   }
 
+  late final _$commentResponseAtom =
+      Atom(name: 'JobCardViewModelBase.commentResponse', context: context);
+
+  @override
+  ApiResponse<SheduleSignatureModel> get commentResponse {
+    _$commentResponseAtom.reportRead();
+    return super.commentResponse;
+  }
+
+  @override
+  set commentResponse(ApiResponse<SheduleSignatureModel> value) {
+    _$commentResponseAtom.reportWrite(value, super.commentResponse, () {
+      super.commentResponse = value;
+    });
+  }
+
   late final _$updateSignatureButtonColorAsyncAction = AsyncAction(
       'JobCardViewModelBase.updateSignatureButtonColor',
       context: context);
@@ -352,6 +368,16 @@ mixin _$JobCardViewModel on JobCardViewModelBase, Store {
             extracted_litres_of_waste: extracted_litres_of_waste));
   }
 
+  late final _$shedulecommentviewmodelfunctionAsyncAction = AsyncAction(
+      'JobCardViewModelBase.shedulecommentviewmodelfunction',
+      context: context);
+
+  @override
+  Future<void> shedulecommentviewmodelfunction({required int id}) {
+    return _$shedulecommentviewmodelfunctionAsyncAction
+        .run(() => super.shedulecommentviewmodelfunction(id: id));
+  }
+
   late final _$JobCardViewModelBaseActionController =
       ActionController(name: 'JobCardViewModelBase', context: context);
 
@@ -416,7 +442,8 @@ checkboxValue3: ${checkboxValue3},
 jobcardResponse: ${jobcardResponse},
 shedulecardResponse: ${shedulecardResponse},
 sheduleweekResponse: ${sheduleweekResponse},
-signatureResponse: ${signatureResponse}
+signatureResponse: ${signatureResponse},
+commentResponse: ${commentResponse}
     ''';
   }
 }
