@@ -4,6 +4,7 @@ import 'dart:typed_data';
 import 'package:dartz/dartz.dart';
 
 import 'package:enviro_mobile_application/model/07_Jobcard/job_card_model.dart';
+import 'package:enviro_mobile_application/model/12_shedulecard/shedule_card_comnt_resp_model.dart';
 
 import 'package:enviro_mobile_application/model/12_shedulecard/shedule_card_resp_model.dart';
 import 'package:enviro_mobile_application/model/12_shedulecard/shedule_sign_res_model.dart';
@@ -34,8 +35,9 @@ abstract class IJobCardService {
           required String extracted_litres_of_waste,
           required String extracted_waste_type});
 
-  Future<Either<Map<MainFailure, dynamic>, SheduleSignatureModel>>
+  Future<Either<Map<MainFailure, dynamic>, SheduleCommentModel>>
       shedulecommentserviceapi({
+    required String comment,
     required int id,
   });
 }
@@ -147,16 +149,13 @@ class SalesService implements IJobCardService {
   }
 
   @override
-  Future<Either<Map<MainFailure, dynamic>, SheduleSignatureModel>>
-      shedulecommentserviceapi({
-    required int id,
-  }) async {
+  Future<Either<Map<MainFailure, dynamic>, SheduleCommentModel>>
+      shedulecommentserviceapi(
+          {required int id, required String comment}) async {
     customPrint(content: id);
     var response = await getIt<HttpService>().multipartRequest(
       apiUrl: ApiEndPoints.endpointcommentsignature,
-      data: {
-        "id": id,
-      },
+      data: {"schedule_id": id, "comment": comment},
       method: "POST",
     );
     print('azeem$id');
@@ -165,8 +164,7 @@ class SalesService implements IJobCardService {
       (l) => Left(l),
       (res) async {
         var data = jsonDecode(res.body);
-        SheduleSignatureModel signingdata =
-            SheduleSignatureModel.fromJson(data);
+        SheduleCommentModel signingdata = SheduleCommentModel.fromJson(data);
         return Right(signingdata);
       },
     );

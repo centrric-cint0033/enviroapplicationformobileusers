@@ -255,13 +255,13 @@ mixin _$JobCardViewModel on JobCardViewModelBase, Store {
       Atom(name: 'JobCardViewModelBase.commentResponse', context: context);
 
   @override
-  ApiResponse<SheduleSignatureModel> get commentResponse {
+  ApiResponse<SheduleCommentModel> get commentResponse {
     _$commentResponseAtom.reportRead();
     return super.commentResponse;
   }
 
   @override
-  set commentResponse(ApiResponse<SheduleSignatureModel> value) {
+  set commentResponse(ApiResponse<SheduleCommentModel> value) {
     _$commentResponseAtom.reportWrite(value, super.commentResponse, () {
       super.commentResponse = value;
     });
@@ -373,9 +373,10 @@ mixin _$JobCardViewModel on JobCardViewModelBase, Store {
       context: context);
 
   @override
-  Future<void> shedulecommentviewmodelfunction({required int id}) {
-    return _$shedulecommentviewmodelfunctionAsyncAction
-        .run(() => super.shedulecommentviewmodelfunction(id: id));
+  Future<void> shedulecommentviewmodelfunction(
+      {required int id, required String comment}) {
+    return _$shedulecommentviewmodelfunctionAsyncAction.run(
+        () => super.shedulecommentviewmodelfunction(id: id, comment: comment));
   }
 
   late final _$JobCardViewModelBaseActionController =

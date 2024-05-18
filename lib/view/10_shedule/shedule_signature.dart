@@ -5,6 +5,7 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:auto_route/auto_route.dart';
+import 'package:enviro_mobile_application/model/12_shedulecard/shedule_card_comnt_resp_model.dart';
 
 import 'package:enviro_mobile_application/view_model/11_shedule/shedule_page_view_model.dart';
 import 'package:enviro_mobile_application/widgets/cmbutton.dart';
@@ -26,6 +27,7 @@ class SheduleSignaturePage extends StatelessWidget {
     super.key,
   });
   Uint8List? picker;
+  final TextEditingController _commentController = TextEditingController();
   final TextEditingController _controllerTypeofwaste = TextEditingController();
   final TextEditingController _signNameController = TextEditingController();
   final TextEditingController _controllerPonumber = TextEditingController();
@@ -449,10 +451,10 @@ class SheduleSignaturePage extends StatelessWidget {
                                   print('Signature saved to: ${file.path}');
                                   print('Reset ID: $id');
 
-                                  vmJobcard.updateSignatureButtonColor(
-                                      state: false);
+                                  // vmJobcard.updateSignatureButtonColor(
+                                  //     state: false);
 
-                                  _signaturecontroller.clear();
+                                  // _signaturecontroller.clear();
                                   picker = pickedTypes;
                                   print('shamon$picker');
                                 } else {
@@ -496,9 +498,9 @@ class SheduleSignaturePage extends StatelessWidget {
                             return CmButton(
                               color: vmJobcard.signColor,
                               onPressed: () async {
-                                vmJobcard.shedulecommentviewmodelfunction(
-                                    id: id);
                                 _signaturecontroller.clear();
+                                vmJobcard.updateSignatureButtonColor(
+                                    state: false);
                               },
                               text: 'Reset',
                             );
@@ -519,10 +521,14 @@ class SheduleSignaturePage extends StatelessWidget {
               const SizedBox(
                 height: 20,
               ),
-              if (pickedtypes != null) Image.memory(pickedtypes!),
+              // if (pickedtypes != null) Image.memory(pickedtypes!),
               const SizedBox(height: 10),
               SizedBox(
                 child: TextField(
+                  onChanged: (value) {
+                    _commentController.text = value;
+                  },
+                  controller: _commentController,
                   decoration: InputDecoration(
                     focusColor: Colors.black12,
                     fillColor: Colors.grey[200],
@@ -555,6 +561,9 @@ class SheduleSignaturePage extends StatelessWidget {
                     width: 105,
                     color: vmJobcard.signColor,
                     onPressed: () {
+                      print('hrithik$picker');
+                      print("hrithik2$_controllerTypeofwaste");
+                      print("hrithik3$_commentController");
                       print('derly$picker!');
                       vmJobcard.shedulesignatureviewmodelfunction(
                           image: picker!,
@@ -564,7 +573,11 @@ class SheduleSignaturePage extends StatelessWidget {
                           signature_name: _signNameController.text,
                           id: id,
                           pickedFiles: vmJobcard.pickedFiles);
+                      vmJobcard.shedulecommentviewmodelfunction(
+                          id: id, comment: _commentController.text);
+                      print("com$_commentController");
                       vmJobcard.updateSignatureButtonColor(state: true);
+
                       _signaturecontroller.clear();
                       log(vmJobcard.signatureResponse.toString());
                     },

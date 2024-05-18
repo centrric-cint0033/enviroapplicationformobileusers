@@ -3,6 +3,7 @@ import 'dart:typed_data';
 
 import 'package:enviro_mobile_application/api_response/api_response.dart';
 import 'package:enviro_mobile_application/model/07_Jobcard/job_card_model.dart';
+import 'package:enviro_mobile_application/model/12_shedulecard/shedule_card_comnt_resp_model.dart';
 import 'package:enviro_mobile_application/model/12_shedulecard/shedule_card_resp_model.dart';
 import 'package:enviro_mobile_application/model/12_shedulecard/shedule_sign_res_model.dart';
 import 'package:enviro_mobile_application/service/07_shedule/job_card/shedule_page_service.dart';
@@ -281,18 +282,16 @@ abstract class JobCardViewModelBase with Store {
   }
 
   @observable
-  ApiResponse<SheduleSignatureModel> commentResponse =
-      ApiResponse<SheduleSignatureModel>();
+  ApiResponse<SheduleCommentModel> commentResponse =
+      ApiResponse<SheduleCommentModel>();
 
   @action
-  Future<void> shedulecommentviewmodelfunction({
-    required int id,
-  }) async {
+  Future<void> shedulecommentviewmodelfunction(
+      {required int id, required String comment}) async {
     commentResponse = commentResponse.copyWith(errors: null, loading: true);
 
-    final result = await jobcardService.shedulecommentserviceapi(
-      id: id,
-    );
+    final result =
+        await jobcardService.shedulecommentserviceapi(id: id, comment: comment);
     return result.fold(
       (l) {
         commentResponse = commentResponse.copyWith(
