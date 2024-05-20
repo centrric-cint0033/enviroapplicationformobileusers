@@ -224,9 +224,13 @@ abstract class $AppRouter extends _i31.RootStackRouter {
       );
     },
     SheduleCommentRoute.name: (routeData) {
+      final args = routeData.argsAs<SheduleCommentRouteArgs>();
       return _i31.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i19.SheduleCommentPage(),
+        child: _i19.SheduleCommentPage(
+          key: args.key,
+          id: args.id,
+        ),
       );
     },
     SheduleSignatureRoute.name: (routeData) {
@@ -770,16 +774,40 @@ class ScheduleVideoAndPhotoRouteArgs {
 
 /// generated route for
 /// [_i19.SheduleCommentPage]
-class SheduleCommentRoute extends _i31.PageRouteInfo<void> {
-  const SheduleCommentRoute({List<_i31.PageRouteInfo>? children})
-      : super(
+class SheduleCommentRoute extends _i31.PageRouteInfo<SheduleCommentRouteArgs> {
+  SheduleCommentRoute({
+    _i32.Key? key,
+    required int id,
+    List<_i31.PageRouteInfo>? children,
+  }) : super(
           SheduleCommentRoute.name,
+          args: SheduleCommentRouteArgs(
+            key: key,
+            id: id,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'SheduleCommentRoute';
 
-  static const _i31.PageInfo<void> page = _i31.PageInfo<void>(name);
+  static const _i31.PageInfo<SheduleCommentRouteArgs> page =
+      _i31.PageInfo<SheduleCommentRouteArgs>(name);
+}
+
+class SheduleCommentRouteArgs {
+  const SheduleCommentRouteArgs({
+    this.key,
+    required this.id,
+  });
+
+  final _i32.Key? key;
+
+  final int id;
+
+  @override
+  String toString() {
+    return 'SheduleCommentRouteArgs{key: $key, id: $id}';
+  }
 }
 
 /// generated route for

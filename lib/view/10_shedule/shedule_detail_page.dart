@@ -252,7 +252,7 @@ class SheduledetailPage extends StatelessWidget {
                       color: const Color(0xFF4CAF9E),
                       buttonTextStyle: const TextStyle(color: Colors.white),
                       onPressed: () {
-                        shedulecommentfunction(context);
+                        shedulecommentfunction(context, id);
                       },
                       text: "Comments",
                     ),
@@ -323,9 +323,9 @@ void jobCardFunction(BuildContext context) async {
   context.router.pushNamed(RouteNames.rjobcardpage);
 }
 
-void shedulecommentfunction(BuildContext context) {
+void shedulecommentfunction(BuildContext context, id) {
   print('calenderclicked');
-  context.router.pushNamed(RouteNames.rshedulecommandstatus);
+  context.router.push(SheduleCommentRoute(id: id));
 }
 
 void shedulesignaturefunction(BuildContext context, id) {

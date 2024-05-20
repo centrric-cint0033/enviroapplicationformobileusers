@@ -1,14 +1,22 @@
 import 'package:auto_route/annotations.dart';
 import 'package:enviro_mobile_application/utilis/constant.dart';
+import 'package:enviro_mobile_application/view_model/11_shedule/shedule_page_view_model.dart';
 import 'package:enviro_mobile_application/widgets/cmn_action_icon.dart';
 import 'package:enviro_mobile_application/widgets/cmn_title_textwidget.dart';
 import 'package:enviro_mobile_application/widgets/drawer.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 
 @RoutePage()
 class SheduleCommentPage extends StatelessWidget {
-  const SheduleCommentPage({super.key});
+  SheduleCommentPage({
+    super.key,
+    required this.id,
+  });
 
+  final TextEditingController _commentPageController = TextEditingController();
+
+  final int id;
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: CmnDrawer(context),
@@ -32,28 +40,38 @@ class SheduleCommentPage extends StatelessWidget {
               height: 20,
             ),
             SizedBox(
-              child: TextField(
-                decoration: InputDecoration(
-                  focusColor: Colors.black12,
-                  fillColor: Colors.grey[200],
-                  filled: true,
-                  enabledBorder: const OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey)),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                    borderSide: const BorderSide(
-                      color: Colors.grey,
+              child: Observer(builder: (_) {
+                return TextField(
+                  onChanged: (value) {
+                    _commentPageController.text = value;
+                    print('fffffffffffffffffffffooo$_commentPageController');
+                  },
+                  controller: _commentPageController,
+                  decoration: InputDecoration(
+                    focusColor: Colors.black12,
+                    fillColor: Colors.grey[200],
+                    filled: true,
+                    enabledBorder: const OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.grey)),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                      borderSide: const BorderSide(
+                        color: Colors.grey,
+                      ),
+                    ),
+                    hintText: 'Enter your comments',
+                    suffixIcon: IconButton(
+                      icon: const Icon(Icons.send),
+                      onPressed: () {
+                        vmJobcard.shedulecommentviewmodelfunction(
+                            id: id, comment: _commentPageController.text);
+                      },
                     ),
                   ),
-                  hintText: 'Enter your comments',
-                  suffixIcon: IconButton(
-                    icon: const Icon(Icons.send),
-                    onPressed: () {},
-                  ),
-                ),
-                style: const TextStyle(color: Colors.black),
-                maxLines: null,
-              ),
+                  style: const TextStyle(color: Colors.black),
+                  maxLines: null,
+                );
+              }),
             ),
             sized0hx20,
             SizedBox(
