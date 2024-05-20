@@ -45,17 +45,17 @@ mixin _$SheduleCardRespModel {
   @JsonKey(name: "vehicle")
   String? get vehicle => throw _privateConstructorUsedError;
   @JsonKey(name: "team_employees")
-  List<dynamic>? get teamEmployees => throw _privateConstructorUsedError;
+  List<TeamEmployee>? get teamEmployees => throw _privateConstructorUsedError;
   @JsonKey(name: "shift")
   String? get shift => throw _privateConstructorUsedError;
   @JsonKey(name: "before_pics")
-  List<dynamic>? get beforePics => throw _privateConstructorUsedError;
+  List<Pic>? get beforePics => throw _privateConstructorUsedError;
   @JsonKey(name: "after_pics")
-  List<dynamic>? get afterPics => throw _privateConstructorUsedError;
+  List<Pic>? get afterPics => throw _privateConstructorUsedError;
   @JsonKey(name: "gallery")
   List<dynamic>? get gallery => throw _privateConstructorUsedError;
   @JsonKey(name: "comments")
-  List<dynamic>? get comments => throw _privateConstructorUsedError;
+  List<Comment>? get comments => throw _privateConstructorUsedError;
   @JsonKey(name: "status")
   String? get status => throw _privateConstructorUsedError;
   @JsonKey(name: "frequency")
@@ -83,21 +83,21 @@ mixin _$SheduleCardRespModel {
   @JsonKey(name: "end_time")
   String? get endTime => throw _privateConstructorUsedError;
   @JsonKey(name: "image")
-  dynamic get image => throw _privateConstructorUsedError;
+  String? get image => throw _privateConstructorUsedError;
   @JsonKey(name: "created_date_time")
   String? get createdDateTime => throw _privateConstructorUsedError;
   @JsonKey(name: "end_date")
   DateTime? get endDate => throw _privateConstructorUsedError;
   @JsonKey(name: "extracted_waste_type")
-  dynamic get extractedWasteType => throw _privateConstructorUsedError;
+  String? get extractedWasteType => throw _privateConstructorUsedError;
   @JsonKey(name: "extracted_litres_of_waste")
-  dynamic get extractedLitresOfWaste => throw _privateConstructorUsedError;
+  String? get extractedLitresOfWaste => throw _privateConstructorUsedError;
   @JsonKey(name: "depart_enviro_facility")
   dynamic get departEnviroFacility => throw _privateConstructorUsedError;
   @JsonKey(name: "start_job")
-  dynamic get startJob => throw _privateConstructorUsedError;
+  String? get startJob => throw _privateConstructorUsedError;
   @JsonKey(name: "finish_job")
-  dynamic get finishJob => throw _privateConstructorUsedError;
+  String? get finishJob => throw _privateConstructorUsedError;
   @JsonKey(name: "arrive_at_waste_depot")
   dynamic get arriveAtWasteDepot => throw _privateConstructorUsedError;
   @JsonKey(name: "depart_waste_depot")
@@ -105,15 +105,15 @@ mixin _$SheduleCardRespModel {
   @JsonKey(name: "arrive_enviro_facility")
   dynamic get arriveEnviroFacility => throw _privateConstructorUsedError;
   @JsonKey(name: "schedule_completed_mail")
-  dynamic get scheduleCompletedMail => throw _privateConstructorUsedError;
+  String? get scheduleCompletedMail => throw _privateConstructorUsedError;
   @JsonKey(name: "completed")
-  dynamic get completed => throw _privateConstructorUsedError;
+  String? get completed => throw _privateConstructorUsedError;
   @JsonKey(name: "outsourced_job")
   bool? get outsourcedJob => throw _privateConstructorUsedError;
   @JsonKey(name: "purchase_order_number")
   dynamic get purchaseOrderNumber => throw _privateConstructorUsedError;
   @JsonKey(name: "signature_name")
-  dynamic get signatureName => throw _privateConstructorUsedError;
+  String? get signatureName => throw _privateConstructorUsedError;
   @JsonKey(name: "outsourced_company_name")
   dynamic get outsourcedCompanyName => throw _privateConstructorUsedError;
   @JsonKey(name: "active_status")
@@ -148,12 +148,12 @@ abstract class $SheduleCardRespModelCopyWith<$Res> {
       @JsonKey(name: "amount_total_paid_status") bool? amountTotalPaidStatus,
       @JsonKey(name: "pending_amount") String? pendingAmount,
       @JsonKey(name: "vehicle") String? vehicle,
-      @JsonKey(name: "team_employees") List<dynamic>? teamEmployees,
+      @JsonKey(name: "team_employees") List<TeamEmployee>? teamEmployees,
       @JsonKey(name: "shift") String? shift,
-      @JsonKey(name: "before_pics") List<dynamic>? beforePics,
-      @JsonKey(name: "after_pics") List<dynamic>? afterPics,
+      @JsonKey(name: "before_pics") List<Pic>? beforePics,
+      @JsonKey(name: "after_pics") List<Pic>? afterPics,
       @JsonKey(name: "gallery") List<dynamic>? gallery,
-      @JsonKey(name: "comments") List<dynamic>? comments,
+      @JsonKey(name: "comments") List<Comment>? comments,
       @JsonKey(name: "status") String? status,
       @JsonKey(name: "frequency") String? frequency,
       @JsonKey(name: "waste_type_str") String? wasteTypeStr,
@@ -168,23 +168,23 @@ abstract class $SheduleCardRespModelCopyWith<$Res> {
       @JsonKey(name: "start_date") DateTime? startDate,
       @JsonKey(name: "start_time") String? startTime,
       @JsonKey(name: "end_time") String? endTime,
-      @JsonKey(name: "image") dynamic image,
+      @JsonKey(name: "image") String? image,
       @JsonKey(name: "created_date_time") String? createdDateTime,
       @JsonKey(name: "end_date") DateTime? endDate,
-      @JsonKey(name: "extracted_waste_type") dynamic extractedWasteType,
+      @JsonKey(name: "extracted_waste_type") String? extractedWasteType,
       @JsonKey(name: "extracted_litres_of_waste")
-      dynamic extractedLitresOfWaste,
+      String? extractedLitresOfWaste,
       @JsonKey(name: "depart_enviro_facility") dynamic departEnviroFacility,
-      @JsonKey(name: "start_job") dynamic startJob,
-      @JsonKey(name: "finish_job") dynamic finishJob,
+      @JsonKey(name: "start_job") String? startJob,
+      @JsonKey(name: "finish_job") String? finishJob,
       @JsonKey(name: "arrive_at_waste_depot") dynamic arriveAtWasteDepot,
       @JsonKey(name: "depart_waste_depot") dynamic departWasteDepot,
       @JsonKey(name: "arrive_enviro_facility") dynamic arriveEnviroFacility,
-      @JsonKey(name: "schedule_completed_mail") dynamic scheduleCompletedMail,
-      @JsonKey(name: "completed") dynamic completed,
+      @JsonKey(name: "schedule_completed_mail") String? scheduleCompletedMail,
+      @JsonKey(name: "completed") String? completed,
       @JsonKey(name: "outsourced_job") bool? outsourcedJob,
       @JsonKey(name: "purchase_order_number") dynamic purchaseOrderNumber,
-      @JsonKey(name: "signature_name") dynamic signatureName,
+      @JsonKey(name: "signature_name") String? signatureName,
       @JsonKey(name: "outsourced_company_name") dynamic outsourcedCompanyName,
       @JsonKey(name: "active_status") bool? activeStatus,
       @JsonKey(name: "job") int? job,
@@ -313,7 +313,7 @@ class _$SheduleCardRespModelCopyWithImpl<$Res,
       teamEmployees: freezed == teamEmployees
           ? _value.teamEmployees
           : teamEmployees // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>?,
+              as List<TeamEmployee>?,
       shift: freezed == shift
           ? _value.shift
           : shift // ignore: cast_nullable_to_non_nullable
@@ -321,11 +321,11 @@ class _$SheduleCardRespModelCopyWithImpl<$Res,
       beforePics: freezed == beforePics
           ? _value.beforePics
           : beforePics // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>?,
+              as List<Pic>?,
       afterPics: freezed == afterPics
           ? _value.afterPics
           : afterPics // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>?,
+              as List<Pic>?,
       gallery: freezed == gallery
           ? _value.gallery
           : gallery // ignore: cast_nullable_to_non_nullable
@@ -333,7 +333,7 @@ class _$SheduleCardRespModelCopyWithImpl<$Res,
       comments: freezed == comments
           ? _value.comments
           : comments // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>?,
+              as List<Comment>?,
       status: freezed == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -389,7 +389,7 @@ class _$SheduleCardRespModelCopyWithImpl<$Res,
       image: freezed == image
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       createdDateTime: freezed == createdDateTime
           ? _value.createdDateTime
           : createdDateTime // ignore: cast_nullable_to_non_nullable
@@ -401,11 +401,11 @@ class _$SheduleCardRespModelCopyWithImpl<$Res,
       extractedWasteType: freezed == extractedWasteType
           ? _value.extractedWasteType
           : extractedWasteType // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       extractedLitresOfWaste: freezed == extractedLitresOfWaste
           ? _value.extractedLitresOfWaste
           : extractedLitresOfWaste // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       departEnviroFacility: freezed == departEnviroFacility
           ? _value.departEnviroFacility
           : departEnviroFacility // ignore: cast_nullable_to_non_nullable
@@ -413,11 +413,11 @@ class _$SheduleCardRespModelCopyWithImpl<$Res,
       startJob: freezed == startJob
           ? _value.startJob
           : startJob // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       finishJob: freezed == finishJob
           ? _value.finishJob
           : finishJob // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       arriveAtWasteDepot: freezed == arriveAtWasteDepot
           ? _value.arriveAtWasteDepot
           : arriveAtWasteDepot // ignore: cast_nullable_to_non_nullable
@@ -433,11 +433,11 @@ class _$SheduleCardRespModelCopyWithImpl<$Res,
       scheduleCompletedMail: freezed == scheduleCompletedMail
           ? _value.scheduleCompletedMail
           : scheduleCompletedMail // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       completed: freezed == completed
           ? _value.completed
           : completed // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       outsourcedJob: freezed == outsourcedJob
           ? _value.outsourcedJob
           : outsourcedJob // ignore: cast_nullable_to_non_nullable
@@ -449,7 +449,7 @@ class _$SheduleCardRespModelCopyWithImpl<$Res,
       signatureName: freezed == signatureName
           ? _value.signatureName
           : signatureName // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       outsourcedCompanyName: freezed == outsourcedCompanyName
           ? _value.outsourcedCompanyName
           : outsourcedCompanyName // ignore: cast_nullable_to_non_nullable
@@ -515,12 +515,12 @@ abstract class _$$SheduleCardRespModelImplCopyWith<$Res>
       @JsonKey(name: "amount_total_paid_status") bool? amountTotalPaidStatus,
       @JsonKey(name: "pending_amount") String? pendingAmount,
       @JsonKey(name: "vehicle") String? vehicle,
-      @JsonKey(name: "team_employees") List<dynamic>? teamEmployees,
+      @JsonKey(name: "team_employees") List<TeamEmployee>? teamEmployees,
       @JsonKey(name: "shift") String? shift,
-      @JsonKey(name: "before_pics") List<dynamic>? beforePics,
-      @JsonKey(name: "after_pics") List<dynamic>? afterPics,
+      @JsonKey(name: "before_pics") List<Pic>? beforePics,
+      @JsonKey(name: "after_pics") List<Pic>? afterPics,
       @JsonKey(name: "gallery") List<dynamic>? gallery,
-      @JsonKey(name: "comments") List<dynamic>? comments,
+      @JsonKey(name: "comments") List<Comment>? comments,
       @JsonKey(name: "status") String? status,
       @JsonKey(name: "frequency") String? frequency,
       @JsonKey(name: "waste_type_str") String? wasteTypeStr,
@@ -535,23 +535,23 @@ abstract class _$$SheduleCardRespModelImplCopyWith<$Res>
       @JsonKey(name: "start_date") DateTime? startDate,
       @JsonKey(name: "start_time") String? startTime,
       @JsonKey(name: "end_time") String? endTime,
-      @JsonKey(name: "image") dynamic image,
+      @JsonKey(name: "image") String? image,
       @JsonKey(name: "created_date_time") String? createdDateTime,
       @JsonKey(name: "end_date") DateTime? endDate,
-      @JsonKey(name: "extracted_waste_type") dynamic extractedWasteType,
+      @JsonKey(name: "extracted_waste_type") String? extractedWasteType,
       @JsonKey(name: "extracted_litres_of_waste")
-      dynamic extractedLitresOfWaste,
+      String? extractedLitresOfWaste,
       @JsonKey(name: "depart_enviro_facility") dynamic departEnviroFacility,
-      @JsonKey(name: "start_job") dynamic startJob,
-      @JsonKey(name: "finish_job") dynamic finishJob,
+      @JsonKey(name: "start_job") String? startJob,
+      @JsonKey(name: "finish_job") String? finishJob,
       @JsonKey(name: "arrive_at_waste_depot") dynamic arriveAtWasteDepot,
       @JsonKey(name: "depart_waste_depot") dynamic departWasteDepot,
       @JsonKey(name: "arrive_enviro_facility") dynamic arriveEnviroFacility,
-      @JsonKey(name: "schedule_completed_mail") dynamic scheduleCompletedMail,
-      @JsonKey(name: "completed") dynamic completed,
+      @JsonKey(name: "schedule_completed_mail") String? scheduleCompletedMail,
+      @JsonKey(name: "completed") String? completed,
       @JsonKey(name: "outsourced_job") bool? outsourcedJob,
       @JsonKey(name: "purchase_order_number") dynamic purchaseOrderNumber,
-      @JsonKey(name: "signature_name") dynamic signatureName,
+      @JsonKey(name: "signature_name") String? signatureName,
       @JsonKey(name: "outsourced_company_name") dynamic outsourcedCompanyName,
       @JsonKey(name: "active_status") bool? activeStatus,
       @JsonKey(name: "job") int? job,
@@ -679,7 +679,7 @@ class __$$SheduleCardRespModelImplCopyWithImpl<$Res>
       teamEmployees: freezed == teamEmployees
           ? _value._teamEmployees
           : teamEmployees // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>?,
+              as List<TeamEmployee>?,
       shift: freezed == shift
           ? _value.shift
           : shift // ignore: cast_nullable_to_non_nullable
@@ -687,11 +687,11 @@ class __$$SheduleCardRespModelImplCopyWithImpl<$Res>
       beforePics: freezed == beforePics
           ? _value._beforePics
           : beforePics // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>?,
+              as List<Pic>?,
       afterPics: freezed == afterPics
           ? _value._afterPics
           : afterPics // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>?,
+              as List<Pic>?,
       gallery: freezed == gallery
           ? _value._gallery
           : gallery // ignore: cast_nullable_to_non_nullable
@@ -699,7 +699,7 @@ class __$$SheduleCardRespModelImplCopyWithImpl<$Res>
       comments: freezed == comments
           ? _value._comments
           : comments // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>?,
+              as List<Comment>?,
       status: freezed == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -755,7 +755,7 @@ class __$$SheduleCardRespModelImplCopyWithImpl<$Res>
       image: freezed == image
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       createdDateTime: freezed == createdDateTime
           ? _value.createdDateTime
           : createdDateTime // ignore: cast_nullable_to_non_nullable
@@ -767,11 +767,11 @@ class __$$SheduleCardRespModelImplCopyWithImpl<$Res>
       extractedWasteType: freezed == extractedWasteType
           ? _value.extractedWasteType
           : extractedWasteType // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       extractedLitresOfWaste: freezed == extractedLitresOfWaste
           ? _value.extractedLitresOfWaste
           : extractedLitresOfWaste // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       departEnviroFacility: freezed == departEnviroFacility
           ? _value.departEnviroFacility
           : departEnviroFacility // ignore: cast_nullable_to_non_nullable
@@ -779,11 +779,11 @@ class __$$SheduleCardRespModelImplCopyWithImpl<$Res>
       startJob: freezed == startJob
           ? _value.startJob
           : startJob // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       finishJob: freezed == finishJob
           ? _value.finishJob
           : finishJob // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       arriveAtWasteDepot: freezed == arriveAtWasteDepot
           ? _value.arriveAtWasteDepot
           : arriveAtWasteDepot // ignore: cast_nullable_to_non_nullable
@@ -799,11 +799,11 @@ class __$$SheduleCardRespModelImplCopyWithImpl<$Res>
       scheduleCompletedMail: freezed == scheduleCompletedMail
           ? _value.scheduleCompletedMail
           : scheduleCompletedMail // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       completed: freezed == completed
           ? _value.completed
           : completed // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       outsourcedJob: freezed == outsourcedJob
           ? _value.outsourcedJob
           : outsourcedJob // ignore: cast_nullable_to_non_nullable
@@ -815,7 +815,7 @@ class __$$SheduleCardRespModelImplCopyWithImpl<$Res>
       signatureName: freezed == signatureName
           ? _value.signatureName
           : signatureName // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       outsourcedCompanyName: freezed == outsourcedCompanyName
           ? _value.outsourcedCompanyName
           : outsourcedCompanyName // ignore: cast_nullable_to_non_nullable
@@ -852,12 +852,12 @@ class _$SheduleCardRespModelImpl implements _SheduleCardRespModel {
       @JsonKey(name: "amount_total_paid_status") this.amountTotalPaidStatus,
       @JsonKey(name: "pending_amount") this.pendingAmount,
       @JsonKey(name: "vehicle") this.vehicle,
-      @JsonKey(name: "team_employees") final List<dynamic>? teamEmployees,
+      @JsonKey(name: "team_employees") final List<TeamEmployee>? teamEmployees,
       @JsonKey(name: "shift") this.shift,
-      @JsonKey(name: "before_pics") final List<dynamic>? beforePics,
-      @JsonKey(name: "after_pics") final List<dynamic>? afterPics,
+      @JsonKey(name: "before_pics") final List<Pic>? beforePics,
+      @JsonKey(name: "after_pics") final List<Pic>? afterPics,
       @JsonKey(name: "gallery") final List<dynamic>? gallery,
-      @JsonKey(name: "comments") final List<dynamic>? comments,
+      @JsonKey(name: "comments") final List<Comment>? comments,
       @JsonKey(name: "status") this.status,
       @JsonKey(name: "frequency") this.frequency,
       @JsonKey(name: "waste_type_str") this.wasteTypeStr,
@@ -949,10 +949,10 @@ class _$SheduleCardRespModelImpl implements _SheduleCardRespModel {
   @override
   @JsonKey(name: "vehicle")
   final String? vehicle;
-  final List<dynamic>? _teamEmployees;
+  final List<TeamEmployee>? _teamEmployees;
   @override
   @JsonKey(name: "team_employees")
-  List<dynamic>? get teamEmployees {
+  List<TeamEmployee>? get teamEmployees {
     final value = _teamEmployees;
     if (value == null) return null;
     if (_teamEmployees is EqualUnmodifiableListView) return _teamEmployees;
@@ -963,10 +963,10 @@ class _$SheduleCardRespModelImpl implements _SheduleCardRespModel {
   @override
   @JsonKey(name: "shift")
   final String? shift;
-  final List<dynamic>? _beforePics;
+  final List<Pic>? _beforePics;
   @override
   @JsonKey(name: "before_pics")
-  List<dynamic>? get beforePics {
+  List<Pic>? get beforePics {
     final value = _beforePics;
     if (value == null) return null;
     if (_beforePics is EqualUnmodifiableListView) return _beforePics;
@@ -974,10 +974,10 @@ class _$SheduleCardRespModelImpl implements _SheduleCardRespModel {
     return EqualUnmodifiableListView(value);
   }
 
-  final List<dynamic>? _afterPics;
+  final List<Pic>? _afterPics;
   @override
   @JsonKey(name: "after_pics")
-  List<dynamic>? get afterPics {
+  List<Pic>? get afterPics {
     final value = _afterPics;
     if (value == null) return null;
     if (_afterPics is EqualUnmodifiableListView) return _afterPics;
@@ -996,10 +996,10 @@ class _$SheduleCardRespModelImpl implements _SheduleCardRespModel {
     return EqualUnmodifiableListView(value);
   }
 
-  final List<dynamic>? _comments;
+  final List<Comment>? _comments;
   @override
   @JsonKey(name: "comments")
-  List<dynamic>? get comments {
+  List<Comment>? get comments {
     final value = _comments;
     if (value == null) return null;
     if (_comments is EqualUnmodifiableListView) return _comments;
@@ -1056,7 +1056,7 @@ class _$SheduleCardRespModelImpl implements _SheduleCardRespModel {
   final String? endTime;
   @override
   @JsonKey(name: "image")
-  final dynamic image;
+  final String? image;
   @override
   @JsonKey(name: "created_date_time")
   final String? createdDateTime;
@@ -1065,19 +1065,19 @@ class _$SheduleCardRespModelImpl implements _SheduleCardRespModel {
   final DateTime? endDate;
   @override
   @JsonKey(name: "extracted_waste_type")
-  final dynamic extractedWasteType;
+  final String? extractedWasteType;
   @override
   @JsonKey(name: "extracted_litres_of_waste")
-  final dynamic extractedLitresOfWaste;
+  final String? extractedLitresOfWaste;
   @override
   @JsonKey(name: "depart_enviro_facility")
   final dynamic departEnviroFacility;
   @override
   @JsonKey(name: "start_job")
-  final dynamic startJob;
+  final String? startJob;
   @override
   @JsonKey(name: "finish_job")
-  final dynamic finishJob;
+  final String? finishJob;
   @override
   @JsonKey(name: "arrive_at_waste_depot")
   final dynamic arriveAtWasteDepot;
@@ -1089,10 +1089,10 @@ class _$SheduleCardRespModelImpl implements _SheduleCardRespModel {
   final dynamic arriveEnviroFacility;
   @override
   @JsonKey(name: "schedule_completed_mail")
-  final dynamic scheduleCompletedMail;
+  final String? scheduleCompletedMail;
   @override
   @JsonKey(name: "completed")
-  final dynamic completed;
+  final String? completed;
   @override
   @JsonKey(name: "outsourced_job")
   final bool? outsourcedJob;
@@ -1101,7 +1101,7 @@ class _$SheduleCardRespModelImpl implements _SheduleCardRespModel {
   final dynamic purchaseOrderNumber;
   @override
   @JsonKey(name: "signature_name")
-  final dynamic signatureName;
+  final String? signatureName;
   @override
   @JsonKey(name: "outsourced_company_name")
   final dynamic outsourcedCompanyName;
@@ -1181,33 +1181,36 @@ class _$SheduleCardRespModelImpl implements _SheduleCardRespModel {
             (identical(other.startTime, startTime) ||
                 other.startTime == startTime) &&
             (identical(other.endTime, endTime) || other.endTime == endTime) &&
-            const DeepCollectionEquality().equals(other.image, image) &&
+            (identical(other.image, image) || other.image == image) &&
             (identical(other.createdDateTime, createdDateTime) ||
                 other.createdDateTime == createdDateTime) &&
             (identical(other.endDate, endDate) || other.endDate == endDate) &&
-            const DeepCollectionEquality()
-                .equals(other.extractedWasteType, extractedWasteType) &&
-            const DeepCollectionEquality()
-                .equals(other.extractedLitresOfWaste, extractedLitresOfWaste) &&
+            (identical(other.extractedWasteType, extractedWasteType) ||
+                other.extractedWasteType == extractedWasteType) &&
+            (identical(other.extractedLitresOfWaste, extractedLitresOfWaste) ||
+                other.extractedLitresOfWaste == extractedLitresOfWaste) &&
             const DeepCollectionEquality()
                 .equals(other.departEnviroFacility, departEnviroFacility) &&
-            const DeepCollectionEquality().equals(other.startJob, startJob) &&
-            const DeepCollectionEquality().equals(other.finishJob, finishJob) &&
+            (identical(other.startJob, startJob) ||
+                other.startJob == startJob) &&
+            (identical(other.finishJob, finishJob) ||
+                other.finishJob == finishJob) &&
             const DeepCollectionEquality()
                 .equals(other.arriveAtWasteDepot, arriveAtWasteDepot) &&
             const DeepCollectionEquality()
                 .equals(other.departWasteDepot, departWasteDepot) &&
             const DeepCollectionEquality()
                 .equals(other.arriveEnviroFacility, arriveEnviroFacility) &&
-            const DeepCollectionEquality()
-                .equals(other.scheduleCompletedMail, scheduleCompletedMail) &&
-            const DeepCollectionEquality().equals(other.completed, completed) &&
+            (identical(other.scheduleCompletedMail, scheduleCompletedMail) ||
+                other.scheduleCompletedMail == scheduleCompletedMail) &&
+            (identical(other.completed, completed) ||
+                other.completed == completed) &&
             (identical(other.outsourcedJob, outsourcedJob) ||
                 other.outsourcedJob == outsourcedJob) &&
             const DeepCollectionEquality()
                 .equals(other.purchaseOrderNumber, purchaseOrderNumber) &&
-            const DeepCollectionEquality()
-                .equals(other.signatureName, signatureName) &&
+            (identical(other.signatureName, signatureName) ||
+                other.signatureName == signatureName) &&
             const DeepCollectionEquality()
                 .equals(other.outsourcedCompanyName, outsourcedCompanyName) &&
             (identical(other.activeStatus, activeStatus) ||
@@ -1252,22 +1255,22 @@ class _$SheduleCardRespModelImpl implements _SheduleCardRespModel {
         startDate,
         startTime,
         endTime,
-        const DeepCollectionEquality().hash(image),
+        image,
         createdDateTime,
         endDate,
-        const DeepCollectionEquality().hash(extractedWasteType),
-        const DeepCollectionEquality().hash(extractedLitresOfWaste),
+        extractedWasteType,
+        extractedLitresOfWaste,
         const DeepCollectionEquality().hash(departEnviroFacility),
-        const DeepCollectionEquality().hash(startJob),
-        const DeepCollectionEquality().hash(finishJob),
+        startJob,
+        finishJob,
         const DeepCollectionEquality().hash(arriveAtWasteDepot),
         const DeepCollectionEquality().hash(departWasteDepot),
         const DeepCollectionEquality().hash(arriveEnviroFacility),
-        const DeepCollectionEquality().hash(scheduleCompletedMail),
-        const DeepCollectionEquality().hash(completed),
+        scheduleCompletedMail,
+        completed,
         outsourcedJob,
         const DeepCollectionEquality().hash(purchaseOrderNumber),
-        const DeepCollectionEquality().hash(signatureName),
+        signatureName,
         const DeepCollectionEquality().hash(outsourcedCompanyName),
         activeStatus,
         job,
@@ -1305,12 +1308,12 @@ abstract class _SheduleCardRespModel implements SheduleCardRespModel {
       final bool? amountTotalPaidStatus,
       @JsonKey(name: "pending_amount") final String? pendingAmount,
       @JsonKey(name: "vehicle") final String? vehicle,
-      @JsonKey(name: "team_employees") final List<dynamic>? teamEmployees,
+      @JsonKey(name: "team_employees") final List<TeamEmployee>? teamEmployees,
       @JsonKey(name: "shift") final String? shift,
-      @JsonKey(name: "before_pics") final List<dynamic>? beforePics,
-      @JsonKey(name: "after_pics") final List<dynamic>? afterPics,
+      @JsonKey(name: "before_pics") final List<Pic>? beforePics,
+      @JsonKey(name: "after_pics") final List<Pic>? afterPics,
       @JsonKey(name: "gallery") final List<dynamic>? gallery,
-      @JsonKey(name: "comments") final List<dynamic>? comments,
+      @JsonKey(name: "comments") final List<Comment>? comments,
       @JsonKey(name: "status") final String? status,
       @JsonKey(name: "frequency") final String? frequency,
       @JsonKey(name: "waste_type_str") final String? wasteTypeStr,
@@ -1325,26 +1328,26 @@ abstract class _SheduleCardRespModel implements SheduleCardRespModel {
       @JsonKey(name: "start_date") final DateTime? startDate,
       @JsonKey(name: "start_time") final String? startTime,
       @JsonKey(name: "end_time") final String? endTime,
-      @JsonKey(name: "image") final dynamic image,
+      @JsonKey(name: "image") final String? image,
       @JsonKey(name: "created_date_time") final String? createdDateTime,
       @JsonKey(name: "end_date") final DateTime? endDate,
-      @JsonKey(name: "extracted_waste_type") final dynamic extractedWasteType,
+      @JsonKey(name: "extracted_waste_type") final String? extractedWasteType,
       @JsonKey(name: "extracted_litres_of_waste")
-      final dynamic extractedLitresOfWaste,
+      final String? extractedLitresOfWaste,
       @JsonKey(name: "depart_enviro_facility")
       final dynamic departEnviroFacility,
-      @JsonKey(name: "start_job") final dynamic startJob,
-      @JsonKey(name: "finish_job") final dynamic finishJob,
+      @JsonKey(name: "start_job") final String? startJob,
+      @JsonKey(name: "finish_job") final String? finishJob,
       @JsonKey(name: "arrive_at_waste_depot") final dynamic arriveAtWasteDepot,
       @JsonKey(name: "depart_waste_depot") final dynamic departWasteDepot,
       @JsonKey(name: "arrive_enviro_facility")
       final dynamic arriveEnviroFacility,
       @JsonKey(name: "schedule_completed_mail")
-      final dynamic scheduleCompletedMail,
-      @JsonKey(name: "completed") final dynamic completed,
+      final String? scheduleCompletedMail,
+      @JsonKey(name: "completed") final String? completed,
       @JsonKey(name: "outsourced_job") final bool? outsourcedJob,
       @JsonKey(name: "purchase_order_number") final dynamic purchaseOrderNumber,
-      @JsonKey(name: "signature_name") final dynamic signatureName,
+      @JsonKey(name: "signature_name") final String? signatureName,
       @JsonKey(name: "outsourced_company_name")
       final dynamic outsourcedCompanyName,
       @JsonKey(name: "active_status") final bool? activeStatus,
@@ -1393,22 +1396,22 @@ abstract class _SheduleCardRespModel implements SheduleCardRespModel {
   String? get vehicle;
   @override
   @JsonKey(name: "team_employees")
-  List<dynamic>? get teamEmployees;
+  List<TeamEmployee>? get teamEmployees;
   @override
   @JsonKey(name: "shift")
   String? get shift;
   @override
   @JsonKey(name: "before_pics")
-  List<dynamic>? get beforePics;
+  List<Pic>? get beforePics;
   @override
   @JsonKey(name: "after_pics")
-  List<dynamic>? get afterPics;
+  List<Pic>? get afterPics;
   @override
   @JsonKey(name: "gallery")
   List<dynamic>? get gallery;
   @override
   @JsonKey(name: "comments")
-  List<dynamic>? get comments;
+  List<Comment>? get comments;
   @override
   @JsonKey(name: "status")
   String? get status;
@@ -1450,7 +1453,7 @@ abstract class _SheduleCardRespModel implements SheduleCardRespModel {
   String? get endTime;
   @override
   @JsonKey(name: "image")
-  dynamic get image;
+  String? get image;
   @override
   @JsonKey(name: "created_date_time")
   String? get createdDateTime;
@@ -1459,19 +1462,19 @@ abstract class _SheduleCardRespModel implements SheduleCardRespModel {
   DateTime? get endDate;
   @override
   @JsonKey(name: "extracted_waste_type")
-  dynamic get extractedWasteType;
+  String? get extractedWasteType;
   @override
   @JsonKey(name: "extracted_litres_of_waste")
-  dynamic get extractedLitresOfWaste;
+  String? get extractedLitresOfWaste;
   @override
   @JsonKey(name: "depart_enviro_facility")
   dynamic get departEnviroFacility;
   @override
   @JsonKey(name: "start_job")
-  dynamic get startJob;
+  String? get startJob;
   @override
   @JsonKey(name: "finish_job")
-  dynamic get finishJob;
+  String? get finishJob;
   @override
   @JsonKey(name: "arrive_at_waste_depot")
   dynamic get arriveAtWasteDepot;
@@ -1483,10 +1486,10 @@ abstract class _SheduleCardRespModel implements SheduleCardRespModel {
   dynamic get arriveEnviroFacility;
   @override
   @JsonKey(name: "schedule_completed_mail")
-  dynamic get scheduleCompletedMail;
+  String? get scheduleCompletedMail;
   @override
   @JsonKey(name: "completed")
-  dynamic get completed;
+  String? get completed;
   @override
   @JsonKey(name: "outsourced_job")
   bool? get outsourcedJob;
@@ -1495,7 +1498,7 @@ abstract class _SheduleCardRespModel implements SheduleCardRespModel {
   dynamic get purchaseOrderNumber;
   @override
   @JsonKey(name: "signature_name")
-  dynamic get signatureName;
+  String? get signatureName;
   @override
   @JsonKey(name: "outsourced_company_name")
   dynamic get outsourcedCompanyName;
@@ -1512,6 +1515,214 @@ abstract class _SheduleCardRespModel implements SheduleCardRespModel {
   @JsonKey(ignore: true)
   _$$SheduleCardRespModelImplCopyWith<_$SheduleCardRespModelImpl>
       get copyWith => throw _privateConstructorUsedError;
+}
+
+Pic _$PicFromJson(Map<String, dynamic> json) {
+  return _Pic.fromJson(json);
+}
+
+/// @nodoc
+mixin _$Pic {
+  @JsonKey(name: "id")
+  int? get id => throw _privateConstructorUsedError;
+  @JsonKey(name: "file")
+  String? get file => throw _privateConstructorUsedError;
+  @JsonKey(name: "created_date_time")
+  String? get createdDateTime => throw _privateConstructorUsedError;
+  @JsonKey(name: "edited_date_time")
+  String? get editedDateTime => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $PicCopyWith<Pic> get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $PicCopyWith<$Res> {
+  factory $PicCopyWith(Pic value, $Res Function(Pic) then) =
+      _$PicCopyWithImpl<$Res, Pic>;
+  @useResult
+  $Res call(
+      {@JsonKey(name: "id") int? id,
+      @JsonKey(name: "file") String? file,
+      @JsonKey(name: "created_date_time") String? createdDateTime,
+      @JsonKey(name: "edited_date_time") String? editedDateTime});
+}
+
+/// @nodoc
+class _$PicCopyWithImpl<$Res, $Val extends Pic> implements $PicCopyWith<$Res> {
+  _$PicCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? file = freezed,
+    Object? createdDateTime = freezed,
+    Object? editedDateTime = freezed,
+  }) {
+    return _then(_value.copyWith(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
+      file: freezed == file
+          ? _value.file
+          : file // ignore: cast_nullable_to_non_nullable
+              as String?,
+      createdDateTime: freezed == createdDateTime
+          ? _value.createdDateTime
+          : createdDateTime // ignore: cast_nullable_to_non_nullable
+              as String?,
+      editedDateTime: freezed == editedDateTime
+          ? _value.editedDateTime
+          : editedDateTime // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$PicImplCopyWith<$Res> implements $PicCopyWith<$Res> {
+  factory _$$PicImplCopyWith(_$PicImpl value, $Res Function(_$PicImpl) then) =
+      __$$PicImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {@JsonKey(name: "id") int? id,
+      @JsonKey(name: "file") String? file,
+      @JsonKey(name: "created_date_time") String? createdDateTime,
+      @JsonKey(name: "edited_date_time") String? editedDateTime});
+}
+
+/// @nodoc
+class __$$PicImplCopyWithImpl<$Res> extends _$PicCopyWithImpl<$Res, _$PicImpl>
+    implements _$$PicImplCopyWith<$Res> {
+  __$$PicImplCopyWithImpl(_$PicImpl _value, $Res Function(_$PicImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? file = freezed,
+    Object? createdDateTime = freezed,
+    Object? editedDateTime = freezed,
+  }) {
+    return _then(_$PicImpl(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
+      file: freezed == file
+          ? _value.file
+          : file // ignore: cast_nullable_to_non_nullable
+              as String?,
+      createdDateTime: freezed == createdDateTime
+          ? _value.createdDateTime
+          : createdDateTime // ignore: cast_nullable_to_non_nullable
+              as String?,
+      editedDateTime: freezed == editedDateTime
+          ? _value.editedDateTime
+          : editedDateTime // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$PicImpl implements _Pic {
+  const _$PicImpl(
+      {@JsonKey(name: "id") this.id,
+      @JsonKey(name: "file") this.file,
+      @JsonKey(name: "created_date_time") this.createdDateTime,
+      @JsonKey(name: "edited_date_time") this.editedDateTime});
+
+  factory _$PicImpl.fromJson(Map<String, dynamic> json) =>
+      _$$PicImplFromJson(json);
+
+  @override
+  @JsonKey(name: "id")
+  final int? id;
+  @override
+  @JsonKey(name: "file")
+  final String? file;
+  @override
+  @JsonKey(name: "created_date_time")
+  final String? createdDateTime;
+  @override
+  @JsonKey(name: "edited_date_time")
+  final String? editedDateTime;
+
+  @override
+  String toString() {
+    return 'Pic(id: $id, file: $file, createdDateTime: $createdDateTime, editedDateTime: $editedDateTime)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$PicImpl &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.file, file) || other.file == file) &&
+            (identical(other.createdDateTime, createdDateTime) ||
+                other.createdDateTime == createdDateTime) &&
+            (identical(other.editedDateTime, editedDateTime) ||
+                other.editedDateTime == editedDateTime));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, id, file, createdDateTime, editedDateTime);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$PicImplCopyWith<_$PicImpl> get copyWith =>
+      __$$PicImplCopyWithImpl<_$PicImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$PicImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _Pic implements Pic {
+  const factory _Pic(
+          {@JsonKey(name: "id") final int? id,
+          @JsonKey(name: "file") final String? file,
+          @JsonKey(name: "created_date_time") final String? createdDateTime,
+          @JsonKey(name: "edited_date_time") final String? editedDateTime}) =
+      _$PicImpl;
+
+  factory _Pic.fromJson(Map<String, dynamic> json) = _$PicImpl.fromJson;
+
+  @override
+  @JsonKey(name: "id")
+  int? get id;
+  @override
+  @JsonKey(name: "file")
+  String? get file;
+  @override
+  @JsonKey(name: "created_date_time")
+  String? get createdDateTime;
+  @override
+  @JsonKey(name: "edited_date_time")
+  String? get editedDateTime;
+  @override
+  @JsonKey(ignore: true)
+  _$$PicImplCopyWith<_$PicImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 Client _$ClientFromJson(Map<String, dynamic> json) {
@@ -1549,7 +1760,7 @@ mixin _$Client {
   @JsonKey(name: "site_suburb")
   dynamic get siteSuburb => throw _privateConstructorUsedError;
   @JsonKey(name: "post_code")
-  String? get postCode => throw _privateConstructorUsedError;
+  dynamic get postCode => throw _privateConstructorUsedError;
   @JsonKey(name: "bar_code_for_grease_trap_only")
   dynamic get barCodeForGreaseTrapOnly => throw _privateConstructorUsedError;
   @JsonKey(name: "account_type")
@@ -1561,15 +1772,15 @@ mixin _$Client {
   @JsonKey(name: "company_suburb")
   dynamic get companySuburb => throw _privateConstructorUsedError;
   @JsonKey(name: "company_contact_number")
-  String? get companyContactNumber => throw _privateConstructorUsedError;
+  dynamic get companyContactNumber => throw _privateConstructorUsedError;
   @JsonKey(name: "company_mobile_number")
   dynamic get companyMobileNumber => throw _privateConstructorUsedError;
   @JsonKey(name: "company_landline_number")
   dynamic get companyLandlineNumber => throw _privateConstructorUsedError;
   @JsonKey(name: "company_email")
-  String? get companyEmail => throw _privateConstructorUsedError;
+  dynamic get companyEmail => throw _privateConstructorUsedError;
   @JsonKey(name: "company_postcode")
-  String? get companyPostcode => throw _privateConstructorUsedError;
+  dynamic get companyPostcode => throw _privateConstructorUsedError;
   @JsonKey(name: "information")
   String? get information => throw _privateConstructorUsedError;
   @JsonKey(name: "company_name")
@@ -1600,18 +1811,18 @@ abstract class $ClientCopyWith<$Res> {
       @JsonKey(name: "barcode") String? barcode,
       @JsonKey(name: "site_address") String? siteAddress,
       @JsonKey(name: "site_suburb") dynamic siteSuburb,
-      @JsonKey(name: "post_code") String? postCode,
+      @JsonKey(name: "post_code") dynamic postCode,
       @JsonKey(name: "bar_code_for_grease_trap_only")
       dynamic barCodeForGreaseTrapOnly,
       @JsonKey(name: "account_type") String? accountType,
       @JsonKey(name: "pit_location") String? pitLocation,
       @JsonKey(name: "access_registration") String? accessRegistration,
       @JsonKey(name: "company_suburb") dynamic companySuburb,
-      @JsonKey(name: "company_contact_number") String? companyContactNumber,
+      @JsonKey(name: "company_contact_number") dynamic companyContactNumber,
       @JsonKey(name: "company_mobile_number") dynamic companyMobileNumber,
       @JsonKey(name: "company_landline_number") dynamic companyLandlineNumber,
-      @JsonKey(name: "company_email") String? companyEmail,
-      @JsonKey(name: "company_postcode") String? companyPostcode,
+      @JsonKey(name: "company_email") dynamic companyEmail,
+      @JsonKey(name: "company_postcode") dynamic companyPostcode,
       @JsonKey(name: "information") String? information,
       @JsonKey(name: "company_name") String? companyName});
 }
@@ -1717,7 +1928,7 @@ class _$ClientCopyWithImpl<$Res, $Val extends Client>
       postCode: freezed == postCode
           ? _value.postCode
           : postCode // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       barCodeForGreaseTrapOnly: freezed == barCodeForGreaseTrapOnly
           ? _value.barCodeForGreaseTrapOnly
           : barCodeForGreaseTrapOnly // ignore: cast_nullable_to_non_nullable
@@ -1741,7 +1952,7 @@ class _$ClientCopyWithImpl<$Res, $Val extends Client>
       companyContactNumber: freezed == companyContactNumber
           ? _value.companyContactNumber
           : companyContactNumber // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       companyMobileNumber: freezed == companyMobileNumber
           ? _value.companyMobileNumber
           : companyMobileNumber // ignore: cast_nullable_to_non_nullable
@@ -1753,11 +1964,11 @@ class _$ClientCopyWithImpl<$Res, $Val extends Client>
       companyEmail: freezed == companyEmail
           ? _value.companyEmail
           : companyEmail // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       companyPostcode: freezed == companyPostcode
           ? _value.companyPostcode
           : companyPostcode // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       information: freezed == information
           ? _value.information
           : information // ignore: cast_nullable_to_non_nullable
@@ -1792,18 +2003,18 @@ abstract class _$$ClientImplCopyWith<$Res> implements $ClientCopyWith<$Res> {
       @JsonKey(name: "barcode") String? barcode,
       @JsonKey(name: "site_address") String? siteAddress,
       @JsonKey(name: "site_suburb") dynamic siteSuburb,
-      @JsonKey(name: "post_code") String? postCode,
+      @JsonKey(name: "post_code") dynamic postCode,
       @JsonKey(name: "bar_code_for_grease_trap_only")
       dynamic barCodeForGreaseTrapOnly,
       @JsonKey(name: "account_type") String? accountType,
       @JsonKey(name: "pit_location") String? pitLocation,
       @JsonKey(name: "access_registration") String? accessRegistration,
       @JsonKey(name: "company_suburb") dynamic companySuburb,
-      @JsonKey(name: "company_contact_number") String? companyContactNumber,
+      @JsonKey(name: "company_contact_number") dynamic companyContactNumber,
       @JsonKey(name: "company_mobile_number") dynamic companyMobileNumber,
       @JsonKey(name: "company_landline_number") dynamic companyLandlineNumber,
-      @JsonKey(name: "company_email") String? companyEmail,
-      @JsonKey(name: "company_postcode") String? companyPostcode,
+      @JsonKey(name: "company_email") dynamic companyEmail,
+      @JsonKey(name: "company_postcode") dynamic companyPostcode,
       @JsonKey(name: "information") String? information,
       @JsonKey(name: "company_name") String? companyName});
 }
@@ -1907,7 +2118,7 @@ class __$$ClientImplCopyWithImpl<$Res>
       postCode: freezed == postCode
           ? _value.postCode
           : postCode // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       barCodeForGreaseTrapOnly: freezed == barCodeForGreaseTrapOnly
           ? _value.barCodeForGreaseTrapOnly
           : barCodeForGreaseTrapOnly // ignore: cast_nullable_to_non_nullable
@@ -1931,7 +2142,7 @@ class __$$ClientImplCopyWithImpl<$Res>
       companyContactNumber: freezed == companyContactNumber
           ? _value.companyContactNumber
           : companyContactNumber // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       companyMobileNumber: freezed == companyMobileNumber
           ? _value.companyMobileNumber
           : companyMobileNumber // ignore: cast_nullable_to_non_nullable
@@ -1943,11 +2154,11 @@ class __$$ClientImplCopyWithImpl<$Res>
       companyEmail: freezed == companyEmail
           ? _value.companyEmail
           : companyEmail // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       companyPostcode: freezed == companyPostcode
           ? _value.companyPostcode
           : companyPostcode // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       information: freezed == information
           ? _value.information
           : information // ignore: cast_nullable_to_non_nullable
@@ -2040,7 +2251,7 @@ class _$ClientImpl implements _Client {
   final dynamic siteSuburb;
   @override
   @JsonKey(name: "post_code")
-  final String? postCode;
+  final dynamic postCode;
   @override
   @JsonKey(name: "bar_code_for_grease_trap_only")
   final dynamic barCodeForGreaseTrapOnly;
@@ -2058,7 +2269,7 @@ class _$ClientImpl implements _Client {
   final dynamic companySuburb;
   @override
   @JsonKey(name: "company_contact_number")
-  final String? companyContactNumber;
+  final dynamic companyContactNumber;
   @override
   @JsonKey(name: "company_mobile_number")
   final dynamic companyMobileNumber;
@@ -2067,10 +2278,10 @@ class _$ClientImpl implements _Client {
   final dynamic companyLandlineNumber;
   @override
   @JsonKey(name: "company_email")
-  final String? companyEmail;
+  final dynamic companyEmail;
   @override
   @JsonKey(name: "company_postcode")
-  final String? companyPostcode;
+  final dynamic companyPostcode;
   @override
   @JsonKey(name: "information")
   final String? information;
@@ -2111,8 +2322,7 @@ class _$ClientImpl implements _Client {
                 other.siteAddress == siteAddress) &&
             const DeepCollectionEquality()
                 .equals(other.siteSuburb, siteSuburb) &&
-            (identical(other.postCode, postCode) ||
-                other.postCode == postCode) &&
+            const DeepCollectionEquality().equals(other.postCode, postCode) &&
             const DeepCollectionEquality().equals(
                 other.barCodeForGreaseTrapOnly, barCodeForGreaseTrapOnly) &&
             (identical(other.accountType, accountType) ||
@@ -2123,16 +2333,16 @@ class _$ClientImpl implements _Client {
                 other.accessRegistration == accessRegistration) &&
             const DeepCollectionEquality()
                 .equals(other.companySuburb, companySuburb) &&
-            (identical(other.companyContactNumber, companyContactNumber) ||
-                other.companyContactNumber == companyContactNumber) &&
+            const DeepCollectionEquality()
+                .equals(other.companyContactNumber, companyContactNumber) &&
             const DeepCollectionEquality()
                 .equals(other.companyMobileNumber, companyMobileNumber) &&
             const DeepCollectionEquality()
                 .equals(other.companyLandlineNumber, companyLandlineNumber) &&
-            (identical(other.companyEmail, companyEmail) ||
-                other.companyEmail == companyEmail) &&
-            (identical(other.companyPostcode, companyPostcode) ||
-                other.companyPostcode == companyPostcode) &&
+            const DeepCollectionEquality()
+                .equals(other.companyEmail, companyEmail) &&
+            const DeepCollectionEquality()
+                .equals(other.companyPostcode, companyPostcode) &&
             (identical(other.information, information) ||
                 other.information == information) &&
             (identical(other.companyName, companyName) ||
@@ -2157,17 +2367,17 @@ class _$ClientImpl implements _Client {
         barcode,
         siteAddress,
         const DeepCollectionEquality().hash(siteSuburb),
-        postCode,
+        const DeepCollectionEquality().hash(postCode),
         const DeepCollectionEquality().hash(barCodeForGreaseTrapOnly),
         accountType,
         pitLocation,
         accessRegistration,
         const DeepCollectionEquality().hash(companySuburb),
-        companyContactNumber,
+        const DeepCollectionEquality().hash(companyContactNumber),
         const DeepCollectionEquality().hash(companyMobileNumber),
         const DeepCollectionEquality().hash(companyLandlineNumber),
-        companyEmail,
-        companyPostcode,
+        const DeepCollectionEquality().hash(companyEmail),
+        const DeepCollectionEquality().hash(companyPostcode),
         information,
         companyName
       ]);
@@ -2202,7 +2412,7 @@ abstract class _Client implements Client {
       @JsonKey(name: "barcode") final String? barcode,
       @JsonKey(name: "site_address") final String? siteAddress,
       @JsonKey(name: "site_suburb") final dynamic siteSuburb,
-      @JsonKey(name: "post_code") final String? postCode,
+      @JsonKey(name: "post_code") final dynamic postCode,
       @JsonKey(name: "bar_code_for_grease_trap_only")
       final dynamic barCodeForGreaseTrapOnly,
       @JsonKey(name: "account_type") final String? accountType,
@@ -2210,12 +2420,12 @@ abstract class _Client implements Client {
       @JsonKey(name: "access_registration") final String? accessRegistration,
       @JsonKey(name: "company_suburb") final dynamic companySuburb,
       @JsonKey(name: "company_contact_number")
-      final String? companyContactNumber,
+      final dynamic companyContactNumber,
       @JsonKey(name: "company_mobile_number") final dynamic companyMobileNumber,
       @JsonKey(name: "company_landline_number")
       final dynamic companyLandlineNumber,
-      @JsonKey(name: "company_email") final String? companyEmail,
-      @JsonKey(name: "company_postcode") final String? companyPostcode,
+      @JsonKey(name: "company_email") final dynamic companyEmail,
+      @JsonKey(name: "company_postcode") final dynamic companyPostcode,
       @JsonKey(name: "information") final String? information,
       @JsonKey(name: "company_name") final String? companyName}) = _$ClientImpl;
 
@@ -2265,7 +2475,7 @@ abstract class _Client implements Client {
   dynamic get siteSuburb;
   @override
   @JsonKey(name: "post_code")
-  String? get postCode;
+  dynamic get postCode;
   @override
   @JsonKey(name: "bar_code_for_grease_trap_only")
   dynamic get barCodeForGreaseTrapOnly;
@@ -2283,7 +2493,7 @@ abstract class _Client implements Client {
   dynamic get companySuburb;
   @override
   @JsonKey(name: "company_contact_number")
-  String? get companyContactNumber;
+  dynamic get companyContactNumber;
   @override
   @JsonKey(name: "company_mobile_number")
   dynamic get companyMobileNumber;
@@ -2292,10 +2502,10 @@ abstract class _Client implements Client {
   dynamic get companyLandlineNumber;
   @override
   @JsonKey(name: "company_email")
-  String? get companyEmail;
+  dynamic get companyEmail;
   @override
   @JsonKey(name: "company_postcode")
-  String? get companyPostcode;
+  dynamic get companyPostcode;
   @override
   @JsonKey(name: "information")
   String? get information;
@@ -2305,6 +2515,217 @@ abstract class _Client implements Client {
   @override
   @JsonKey(ignore: true)
   _$$ClientImplCopyWith<_$ClientImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+Comment _$CommentFromJson(Map<String, dynamic> json) {
+  return _Comment.fromJson(json);
+}
+
+/// @nodoc
+mixin _$Comment {
+  @JsonKey(name: "id")
+  int? get id => throw _privateConstructorUsedError;
+  @JsonKey(name: "comment")
+  String? get comment => throw _privateConstructorUsedError;
+  @JsonKey(name: "created_by")
+  String? get createdBy => throw _privateConstructorUsedError;
+  @JsonKey(name: "editable")
+  bool? get editable => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $CommentCopyWith<Comment> get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $CommentCopyWith<$Res> {
+  factory $CommentCopyWith(Comment value, $Res Function(Comment) then) =
+      _$CommentCopyWithImpl<$Res, Comment>;
+  @useResult
+  $Res call(
+      {@JsonKey(name: "id") int? id,
+      @JsonKey(name: "comment") String? comment,
+      @JsonKey(name: "created_by") String? createdBy,
+      @JsonKey(name: "editable") bool? editable});
+}
+
+/// @nodoc
+class _$CommentCopyWithImpl<$Res, $Val extends Comment>
+    implements $CommentCopyWith<$Res> {
+  _$CommentCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? comment = freezed,
+    Object? createdBy = freezed,
+    Object? editable = freezed,
+  }) {
+    return _then(_value.copyWith(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
+      comment: freezed == comment
+          ? _value.comment
+          : comment // ignore: cast_nullable_to_non_nullable
+              as String?,
+      createdBy: freezed == createdBy
+          ? _value.createdBy
+          : createdBy // ignore: cast_nullable_to_non_nullable
+              as String?,
+      editable: freezed == editable
+          ? _value.editable
+          : editable // ignore: cast_nullable_to_non_nullable
+              as bool?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$CommentImplCopyWith<$Res> implements $CommentCopyWith<$Res> {
+  factory _$$CommentImplCopyWith(
+          _$CommentImpl value, $Res Function(_$CommentImpl) then) =
+      __$$CommentImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {@JsonKey(name: "id") int? id,
+      @JsonKey(name: "comment") String? comment,
+      @JsonKey(name: "created_by") String? createdBy,
+      @JsonKey(name: "editable") bool? editable});
+}
+
+/// @nodoc
+class __$$CommentImplCopyWithImpl<$Res>
+    extends _$CommentCopyWithImpl<$Res, _$CommentImpl>
+    implements _$$CommentImplCopyWith<$Res> {
+  __$$CommentImplCopyWithImpl(
+      _$CommentImpl _value, $Res Function(_$CommentImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? comment = freezed,
+    Object? createdBy = freezed,
+    Object? editable = freezed,
+  }) {
+    return _then(_$CommentImpl(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
+      comment: freezed == comment
+          ? _value.comment
+          : comment // ignore: cast_nullable_to_non_nullable
+              as String?,
+      createdBy: freezed == createdBy
+          ? _value.createdBy
+          : createdBy // ignore: cast_nullable_to_non_nullable
+              as String?,
+      editable: freezed == editable
+          ? _value.editable
+          : editable // ignore: cast_nullable_to_non_nullable
+              as bool?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$CommentImpl implements _Comment {
+  const _$CommentImpl(
+      {@JsonKey(name: "id") this.id,
+      @JsonKey(name: "comment") this.comment,
+      @JsonKey(name: "created_by") this.createdBy,
+      @JsonKey(name: "editable") this.editable});
+
+  factory _$CommentImpl.fromJson(Map<String, dynamic> json) =>
+      _$$CommentImplFromJson(json);
+
+  @override
+  @JsonKey(name: "id")
+  final int? id;
+  @override
+  @JsonKey(name: "comment")
+  final String? comment;
+  @override
+  @JsonKey(name: "created_by")
+  final String? createdBy;
+  @override
+  @JsonKey(name: "editable")
+  final bool? editable;
+
+  @override
+  String toString() {
+    return 'Comment(id: $id, comment: $comment, createdBy: $createdBy, editable: $editable)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$CommentImpl &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.comment, comment) || other.comment == comment) &&
+            (identical(other.createdBy, createdBy) ||
+                other.createdBy == createdBy) &&
+            (identical(other.editable, editable) ||
+                other.editable == editable));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, id, comment, createdBy, editable);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$CommentImplCopyWith<_$CommentImpl> get copyWith =>
+      __$$CommentImplCopyWithImpl<_$CommentImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$CommentImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _Comment implements Comment {
+  const factory _Comment(
+      {@JsonKey(name: "id") final int? id,
+      @JsonKey(name: "comment") final String? comment,
+      @JsonKey(name: "created_by") final String? createdBy,
+      @JsonKey(name: "editable") final bool? editable}) = _$CommentImpl;
+
+  factory _Comment.fromJson(Map<String, dynamic> json) = _$CommentImpl.fromJson;
+
+  @override
+  @JsonKey(name: "id")
+  int? get id;
+  @override
+  @JsonKey(name: "comment")
+  String? get comment;
+  @override
+  @JsonKey(name: "created_by")
+  String? get createdBy;
+  @override
+  @JsonKey(name: "editable")
+  bool? get editable;
+  @override
+  @JsonKey(ignore: true)
+  _$$CommentImplCopyWith<_$CommentImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -2649,9 +3070,9 @@ mixin _$JobCardKeys {
   @JsonKey(name: "photo_required")
   bool? get photoRequired => throw _privateConstructorUsedError;
   @JsonKey(name: "add_info_button")
-  String? get addInfoButton => throw _privateConstructorUsedError;
+  dynamic get addInfoButton => throw _privateConstructorUsedError;
   @JsonKey(name: "weigh_bridge_required_multiple_file")
-  List<WeighBridgeRequiredMultipleFile>? get weighBridgeRequiredMultipleFile =>
+  List<dynamic>? get weighBridgeRequiredMultipleFile =>
       throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -2669,9 +3090,9 @@ abstract class $JobCardKeysCopyWith<$Res> {
   $Res call(
       {@JsonKey(name: "weigh_bridge_required") String? weighBridgeRequired,
       @JsonKey(name: "photo_required") bool? photoRequired,
-      @JsonKey(name: "add_info_button") String? addInfoButton,
+      @JsonKey(name: "add_info_button") dynamic addInfoButton,
       @JsonKey(name: "weigh_bridge_required_multiple_file")
-      List<WeighBridgeRequiredMultipleFile>? weighBridgeRequiredMultipleFile});
+      List<dynamic>? weighBridgeRequiredMultipleFile});
 }
 
 /// @nodoc
@@ -2704,12 +3125,12 @@ class _$JobCardKeysCopyWithImpl<$Res, $Val extends JobCardKeys>
       addInfoButton: freezed == addInfoButton
           ? _value.addInfoButton
           : addInfoButton // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       weighBridgeRequiredMultipleFile: freezed ==
               weighBridgeRequiredMultipleFile
           ? _value.weighBridgeRequiredMultipleFile
           : weighBridgeRequiredMultipleFile // ignore: cast_nullable_to_non_nullable
-              as List<WeighBridgeRequiredMultipleFile>?,
+              as List<dynamic>?,
     ) as $Val);
   }
 }
@@ -2725,9 +3146,9 @@ abstract class _$$JobCardKeysImplCopyWith<$Res>
   $Res call(
       {@JsonKey(name: "weigh_bridge_required") String? weighBridgeRequired,
       @JsonKey(name: "photo_required") bool? photoRequired,
-      @JsonKey(name: "add_info_button") String? addInfoButton,
+      @JsonKey(name: "add_info_button") dynamic addInfoButton,
       @JsonKey(name: "weigh_bridge_required_multiple_file")
-      List<WeighBridgeRequiredMultipleFile>? weighBridgeRequiredMultipleFile});
+      List<dynamic>? weighBridgeRequiredMultipleFile});
 }
 
 /// @nodoc
@@ -2758,12 +3179,12 @@ class __$$JobCardKeysImplCopyWithImpl<$Res>
       addInfoButton: freezed == addInfoButton
           ? _value.addInfoButton
           : addInfoButton // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       weighBridgeRequiredMultipleFile: freezed ==
               weighBridgeRequiredMultipleFile
           ? _value._weighBridgeRequiredMultipleFile
           : weighBridgeRequiredMultipleFile // ignore: cast_nullable_to_non_nullable
-              as List<WeighBridgeRequiredMultipleFile>?,
+              as List<dynamic>?,
     ));
   }
 }
@@ -2776,8 +3197,7 @@ class _$JobCardKeysImpl implements _JobCardKeys {
       @JsonKey(name: "photo_required") this.photoRequired,
       @JsonKey(name: "add_info_button") this.addInfoButton,
       @JsonKey(name: "weigh_bridge_required_multiple_file")
-      final List<WeighBridgeRequiredMultipleFile>?
-          weighBridgeRequiredMultipleFile})
+      final List<dynamic>? weighBridgeRequiredMultipleFile})
       : _weighBridgeRequiredMultipleFile = weighBridgeRequiredMultipleFile;
 
   factory _$JobCardKeysImpl.fromJson(Map<String, dynamic> json) =>
@@ -2791,11 +3211,11 @@ class _$JobCardKeysImpl implements _JobCardKeys {
   final bool? photoRequired;
   @override
   @JsonKey(name: "add_info_button")
-  final String? addInfoButton;
-  final List<WeighBridgeRequiredMultipleFile>? _weighBridgeRequiredMultipleFile;
+  final dynamic addInfoButton;
+  final List<dynamic>? _weighBridgeRequiredMultipleFile;
   @override
   @JsonKey(name: "weigh_bridge_required_multiple_file")
-  List<WeighBridgeRequiredMultipleFile>? get weighBridgeRequiredMultipleFile {
+  List<dynamic>? get weighBridgeRequiredMultipleFile {
     final value = _weighBridgeRequiredMultipleFile;
     if (value == null) return null;
     if (_weighBridgeRequiredMultipleFile is EqualUnmodifiableListView)
@@ -2818,8 +3238,8 @@ class _$JobCardKeysImpl implements _JobCardKeys {
                 other.weighBridgeRequired == weighBridgeRequired) &&
             (identical(other.photoRequired, photoRequired) ||
                 other.photoRequired == photoRequired) &&
-            (identical(other.addInfoButton, addInfoButton) ||
-                other.addInfoButton == addInfoButton) &&
+            const DeepCollectionEquality()
+                .equals(other.addInfoButton, addInfoButton) &&
             const DeepCollectionEquality().equals(
                 other._weighBridgeRequiredMultipleFile,
                 _weighBridgeRequiredMultipleFile));
@@ -2831,7 +3251,7 @@ class _$JobCardKeysImpl implements _JobCardKeys {
       runtimeType,
       weighBridgeRequired,
       photoRequired,
-      addInfoButton,
+      const DeepCollectionEquality().hash(addInfoButton),
       const DeepCollectionEquality().hash(_weighBridgeRequiredMultipleFile));
 
   @JsonKey(ignore: true)
@@ -2850,13 +3270,13 @@ class _$JobCardKeysImpl implements _JobCardKeys {
 
 abstract class _JobCardKeys implements JobCardKeys {
   const factory _JobCardKeys(
-      {@JsonKey(name: "weigh_bridge_required")
-      final String? weighBridgeRequired,
-      @JsonKey(name: "photo_required") final bool? photoRequired,
-      @JsonKey(name: "add_info_button") final String? addInfoButton,
-      @JsonKey(name: "weigh_bridge_required_multiple_file")
-      final List<WeighBridgeRequiredMultipleFile>?
-          weighBridgeRequiredMultipleFile}) = _$JobCardKeysImpl;
+          {@JsonKey(name: "weigh_bridge_required")
+          final String? weighBridgeRequired,
+          @JsonKey(name: "photo_required") final bool? photoRequired,
+          @JsonKey(name: "add_info_button") final dynamic addInfoButton,
+          @JsonKey(name: "weigh_bridge_required_multiple_file")
+          final List<dynamic>? weighBridgeRequiredMultipleFile}) =
+      _$JobCardKeysImpl;
 
   factory _JobCardKeys.fromJson(Map<String, dynamic> json) =
       _$JobCardKeysImpl.fromJson;
@@ -2869,58 +3289,51 @@ abstract class _JobCardKeys implements JobCardKeys {
   bool? get photoRequired;
   @override
   @JsonKey(name: "add_info_button")
-  String? get addInfoButton;
+  dynamic get addInfoButton;
   @override
   @JsonKey(name: "weigh_bridge_required_multiple_file")
-  List<WeighBridgeRequiredMultipleFile>? get weighBridgeRequiredMultipleFile;
+  List<dynamic>? get weighBridgeRequiredMultipleFile;
   @override
   @JsonKey(ignore: true)
   _$$JobCardKeysImplCopyWith<_$JobCardKeysImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
-WeighBridgeRequiredMultipleFile _$WeighBridgeRequiredMultipleFileFromJson(
-    Map<String, dynamic> json) {
-  return _WeighBridgeRequiredMultipleFile.fromJson(json);
+TeamEmployee _$TeamEmployeeFromJson(Map<String, dynamic> json) {
+  return _TeamEmployee.fromJson(json);
 }
 
 /// @nodoc
-mixin _$WeighBridgeRequiredMultipleFile {
+mixin _$TeamEmployee {
   @JsonKey(name: "id")
   int? get id => throw _privateConstructorUsedError;
   @JsonKey(name: "name")
   String? get name => throw _privateConstructorUsedError;
-  @JsonKey(name: "file")
-  String? get file => throw _privateConstructorUsedError;
-  @JsonKey(name: "created_at")
-  String? get createdAt => throw _privateConstructorUsedError;
+  @JsonKey(name: "dp")
+  String? get dp => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $WeighBridgeRequiredMultipleFileCopyWith<WeighBridgeRequiredMultipleFile>
-      get copyWith => throw _privateConstructorUsedError;
+  $TeamEmployeeCopyWith<TeamEmployee> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $WeighBridgeRequiredMultipleFileCopyWith<$Res> {
-  factory $WeighBridgeRequiredMultipleFileCopyWith(
-          WeighBridgeRequiredMultipleFile value,
-          $Res Function(WeighBridgeRequiredMultipleFile) then) =
-      _$WeighBridgeRequiredMultipleFileCopyWithImpl<$Res,
-          WeighBridgeRequiredMultipleFile>;
+abstract class $TeamEmployeeCopyWith<$Res> {
+  factory $TeamEmployeeCopyWith(
+          TeamEmployee value, $Res Function(TeamEmployee) then) =
+      _$TeamEmployeeCopyWithImpl<$Res, TeamEmployee>;
   @useResult
   $Res call(
       {@JsonKey(name: "id") int? id,
       @JsonKey(name: "name") String? name,
-      @JsonKey(name: "file") String? file,
-      @JsonKey(name: "created_at") String? createdAt});
+      @JsonKey(name: "dp") String? dp});
 }
 
 /// @nodoc
-class _$WeighBridgeRequiredMultipleFileCopyWithImpl<$Res,
-        $Val extends WeighBridgeRequiredMultipleFile>
-    implements $WeighBridgeRequiredMultipleFileCopyWith<$Res> {
-  _$WeighBridgeRequiredMultipleFileCopyWithImpl(this._value, this._then);
+class _$TeamEmployeeCopyWithImpl<$Res, $Val extends TeamEmployee>
+    implements $TeamEmployeeCopyWith<$Res> {
+  _$TeamEmployeeCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -2932,8 +3345,7 @@ class _$WeighBridgeRequiredMultipleFileCopyWithImpl<$Res,
   $Res call({
     Object? id = freezed,
     Object? name = freezed,
-    Object? file = freezed,
-    Object? createdAt = freezed,
+    Object? dp = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -2944,42 +3356,34 @@ class _$WeighBridgeRequiredMultipleFileCopyWithImpl<$Res,
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String?,
-      file: freezed == file
-          ? _value.file
-          : file // ignore: cast_nullable_to_non_nullable
-              as String?,
-      createdAt: freezed == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
+      dp: freezed == dp
+          ? _value.dp
+          : dp // ignore: cast_nullable_to_non_nullable
               as String?,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$WeighBridgeRequiredMultipleFileImplCopyWith<$Res>
-    implements $WeighBridgeRequiredMultipleFileCopyWith<$Res> {
-  factory _$$WeighBridgeRequiredMultipleFileImplCopyWith(
-          _$WeighBridgeRequiredMultipleFileImpl value,
-          $Res Function(_$WeighBridgeRequiredMultipleFileImpl) then) =
-      __$$WeighBridgeRequiredMultipleFileImplCopyWithImpl<$Res>;
+abstract class _$$TeamEmployeeImplCopyWith<$Res>
+    implements $TeamEmployeeCopyWith<$Res> {
+  factory _$$TeamEmployeeImplCopyWith(
+          _$TeamEmployeeImpl value, $Res Function(_$TeamEmployeeImpl) then) =
+      __$$TeamEmployeeImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
       {@JsonKey(name: "id") int? id,
       @JsonKey(name: "name") String? name,
-      @JsonKey(name: "file") String? file,
-      @JsonKey(name: "created_at") String? createdAt});
+      @JsonKey(name: "dp") String? dp});
 }
 
 /// @nodoc
-class __$$WeighBridgeRequiredMultipleFileImplCopyWithImpl<$Res>
-    extends _$WeighBridgeRequiredMultipleFileCopyWithImpl<$Res,
-        _$WeighBridgeRequiredMultipleFileImpl>
-    implements _$$WeighBridgeRequiredMultipleFileImplCopyWith<$Res> {
-  __$$WeighBridgeRequiredMultipleFileImplCopyWithImpl(
-      _$WeighBridgeRequiredMultipleFileImpl _value,
-      $Res Function(_$WeighBridgeRequiredMultipleFileImpl) _then)
+class __$$TeamEmployeeImplCopyWithImpl<$Res>
+    extends _$TeamEmployeeCopyWithImpl<$Res, _$TeamEmployeeImpl>
+    implements _$$TeamEmployeeImplCopyWith<$Res> {
+  __$$TeamEmployeeImplCopyWithImpl(
+      _$TeamEmployeeImpl _value, $Res Function(_$TeamEmployeeImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -2987,10 +3391,9 @@ class __$$WeighBridgeRequiredMultipleFileImplCopyWithImpl<$Res>
   $Res call({
     Object? id = freezed,
     Object? name = freezed,
-    Object? file = freezed,
-    Object? createdAt = freezed,
+    Object? dp = freezed,
   }) {
-    return _then(_$WeighBridgeRequiredMultipleFileImpl(
+    return _then(_$TeamEmployeeImpl(
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -2999,13 +3402,9 @@ class __$$WeighBridgeRequiredMultipleFileImplCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String?,
-      file: freezed == file
-          ? _value.file
-          : file // ignore: cast_nullable_to_non_nullable
-              as String?,
-      createdAt: freezed == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
+      dp: freezed == dp
+          ? _value.dp
+          : dp // ignore: cast_nullable_to_non_nullable
               as String?,
     ));
   }
@@ -3013,17 +3412,14 @@ class __$$WeighBridgeRequiredMultipleFileImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$WeighBridgeRequiredMultipleFileImpl
-    implements _WeighBridgeRequiredMultipleFile {
-  const _$WeighBridgeRequiredMultipleFileImpl(
+class _$TeamEmployeeImpl implements _TeamEmployee {
+  const _$TeamEmployeeImpl(
       {@JsonKey(name: "id") this.id,
       @JsonKey(name: "name") this.name,
-      @JsonKey(name: "file") this.file,
-      @JsonKey(name: "created_at") this.createdAt});
+      @JsonKey(name: "dp") this.dp});
 
-  factory _$WeighBridgeRequiredMultipleFileImpl.fromJson(
-          Map<String, dynamic> json) =>
-      _$$WeighBridgeRequiredMultipleFileImplFromJson(json);
+  factory _$TeamEmployeeImpl.fromJson(Map<String, dynamic> json) =>
+      _$$TeamEmployeeImplFromJson(json);
 
   @override
   @JsonKey(name: "id")
@@ -3032,60 +3428,50 @@ class _$WeighBridgeRequiredMultipleFileImpl
   @JsonKey(name: "name")
   final String? name;
   @override
-  @JsonKey(name: "file")
-  final String? file;
-  @override
-  @JsonKey(name: "created_at")
-  final String? createdAt;
+  @JsonKey(name: "dp")
+  final String? dp;
 
   @override
   String toString() {
-    return 'WeighBridgeRequiredMultipleFile(id: $id, name: $name, file: $file, createdAt: $createdAt)';
+    return 'TeamEmployee(id: $id, name: $name, dp: $dp)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$WeighBridgeRequiredMultipleFileImpl &&
+            other is _$TeamEmployeeImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
-            (identical(other.file, file) || other.file == file) &&
-            (identical(other.createdAt, createdAt) ||
-                other.createdAt == createdAt));
+            (identical(other.dp, dp) || other.dp == dp));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, name, file, createdAt);
+  int get hashCode => Object.hash(runtimeType, id, name, dp);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$WeighBridgeRequiredMultipleFileImplCopyWith<
-          _$WeighBridgeRequiredMultipleFileImpl>
-      get copyWith => __$$WeighBridgeRequiredMultipleFileImplCopyWithImpl<
-          _$WeighBridgeRequiredMultipleFileImpl>(this, _$identity);
+  _$$TeamEmployeeImplCopyWith<_$TeamEmployeeImpl> get copyWith =>
+      __$$TeamEmployeeImplCopyWithImpl<_$TeamEmployeeImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$WeighBridgeRequiredMultipleFileImplToJson(
+    return _$$TeamEmployeeImplToJson(
       this,
     );
   }
 }
 
-abstract class _WeighBridgeRequiredMultipleFile
-    implements WeighBridgeRequiredMultipleFile {
-  const factory _WeighBridgeRequiredMultipleFile(
-          {@JsonKey(name: "id") final int? id,
-          @JsonKey(name: "name") final String? name,
-          @JsonKey(name: "file") final String? file,
-          @JsonKey(name: "created_at") final String? createdAt}) =
-      _$WeighBridgeRequiredMultipleFileImpl;
+abstract class _TeamEmployee implements TeamEmployee {
+  const factory _TeamEmployee(
+      {@JsonKey(name: "id") final int? id,
+      @JsonKey(name: "name") final String? name,
+      @JsonKey(name: "dp") final String? dp}) = _$TeamEmployeeImpl;
 
-  factory _WeighBridgeRequiredMultipleFile.fromJson(Map<String, dynamic> json) =
-      _$WeighBridgeRequiredMultipleFileImpl.fromJson;
+  factory _TeamEmployee.fromJson(Map<String, dynamic> json) =
+      _$TeamEmployeeImpl.fromJson;
 
   @override
   @JsonKey(name: "id")
@@ -3094,14 +3480,10 @@ abstract class _WeighBridgeRequiredMultipleFile
   @JsonKey(name: "name")
   String? get name;
   @override
-  @JsonKey(name: "file")
-  String? get file;
-  @override
-  @JsonKey(name: "created_at")
-  String? get createdAt;
+  @JsonKey(name: "dp")
+  String? get dp;
   @override
   @JsonKey(ignore: true)
-  _$$WeighBridgeRequiredMultipleFileImplCopyWith<
-          _$WeighBridgeRequiredMultipleFileImpl>
-      get copyWith => throw _privateConstructorUsedError;
+  _$$TeamEmployeeImplCopyWith<_$TeamEmployeeImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }

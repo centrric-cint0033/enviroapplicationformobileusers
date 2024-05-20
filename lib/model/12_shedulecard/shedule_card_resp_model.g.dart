@@ -23,12 +23,20 @@ _$SheduleCardRespModelImpl _$$SheduleCardRespModelImplFromJson(
       amountTotalPaidStatus: json['amount_total_paid_status'] as bool?,
       pendingAmount: json['pending_amount'] as String?,
       vehicle: json['vehicle'] as String?,
-      teamEmployees: json['team_employees'] as List<dynamic>?,
+      teamEmployees: (json['team_employees'] as List<dynamic>?)
+          ?.map((e) => TeamEmployee.fromJson(e as Map<String, dynamic>))
+          .toList(),
       shift: json['shift'] as String?,
-      beforePics: json['before_pics'] as List<dynamic>?,
-      afterPics: json['after_pics'] as List<dynamic>?,
+      beforePics: (json['before_pics'] as List<dynamic>?)
+          ?.map((e) => Pic.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      afterPics: (json['after_pics'] as List<dynamic>?)
+          ?.map((e) => Pic.fromJson(e as Map<String, dynamic>))
+          .toList(),
       gallery: json['gallery'] as List<dynamic>?,
-      comments: json['comments'] as List<dynamic>?,
+      comments: (json['comments'] as List<dynamic>?)
+          ?.map((e) => Comment.fromJson(e as Map<String, dynamic>))
+          .toList(),
       status: json['status'] as String?,
       frequency: json['frequency'] as String?,
       wasteTypeStr: json['waste_type_str'] as String?,
@@ -48,24 +56,24 @@ _$SheduleCardRespModelImpl _$$SheduleCardRespModelImplFromJson(
           : DateTime.parse(json['start_date'] as String),
       startTime: json['start_time'] as String?,
       endTime: json['end_time'] as String?,
-      image: json['image'],
+      image: json['image'] as String?,
       createdDateTime: json['created_date_time'] as String?,
       endDate: json['end_date'] == null
           ? null
           : DateTime.parse(json['end_date'] as String),
-      extractedWasteType: json['extracted_waste_type'],
-      extractedLitresOfWaste: json['extracted_litres_of_waste'],
+      extractedWasteType: json['extracted_waste_type'] as String?,
+      extractedLitresOfWaste: json['extracted_litres_of_waste'] as String?,
       departEnviroFacility: json['depart_enviro_facility'],
-      startJob: json['start_job'],
-      finishJob: json['finish_job'],
+      startJob: json['start_job'] as String?,
+      finishJob: json['finish_job'] as String?,
       arriveAtWasteDepot: json['arrive_at_waste_depot'],
       departWasteDepot: json['depart_waste_depot'],
       arriveEnviroFacility: json['arrive_enviro_facility'],
-      scheduleCompletedMail: json['schedule_completed_mail'],
-      completed: json['completed'],
+      scheduleCompletedMail: json['schedule_completed_mail'] as String?,
+      completed: json['completed'] as String?,
       outsourcedJob: json['outsourced_job'] as bool?,
       purchaseOrderNumber: json['purchase_order_number'],
-      signatureName: json['signature_name'],
+      signatureName: json['signature_name'] as String?,
       outsourcedCompanyName: json['outsourced_company_name'],
       activeStatus: json['active_status'] as bool?,
       job: json['job'] as int?,
@@ -131,6 +139,20 @@ Map<String, dynamic> _$$SheduleCardRespModelImplToJson(
       'additional_vehicle_drivers': instance.additionalVehicleDrivers,
     };
 
+_$PicImpl _$$PicImplFromJson(Map<String, dynamic> json) => _$PicImpl(
+      id: json['id'] as int?,
+      file: json['file'] as String?,
+      createdDateTime: json['created_date_time'] as String?,
+      editedDateTime: json['edited_date_time'] as String?,
+    );
+
+Map<String, dynamic> _$$PicImplToJson(_$PicImpl instance) => <String, dynamic>{
+      'id': instance.id,
+      'file': instance.file,
+      'created_date_time': instance.createdDateTime,
+      'edited_date_time': instance.editedDateTime,
+    };
+
 _$ClientImpl _$$ClientImplFromJson(Map<String, dynamic> json) => _$ClientImpl(
       clientId: json['client_id'],
       clientType: json['client_type'] as String?,
@@ -146,17 +168,17 @@ _$ClientImpl _$$ClientImplFromJson(Map<String, dynamic> json) => _$ClientImpl(
       barcode: json['barcode'] as String?,
       siteAddress: json['site_address'] as String?,
       siteSuburb: json['site_suburb'],
-      postCode: json['post_code'] as String?,
+      postCode: json['post_code'],
       barCodeForGreaseTrapOnly: json['bar_code_for_grease_trap_only'],
       accountType: json['account_type'] as String?,
       pitLocation: json['pit_location'] as String?,
       accessRegistration: json['access_registration'] as String?,
       companySuburb: json['company_suburb'],
-      companyContactNumber: json['company_contact_number'] as String?,
+      companyContactNumber: json['company_contact_number'],
       companyMobileNumber: json['company_mobile_number'],
       companyLandlineNumber: json['company_landline_number'],
-      companyEmail: json['company_email'] as String?,
-      companyPostcode: json['company_postcode'] as String?,
+      companyEmail: json['company_email'],
+      companyPostcode: json['company_postcode'],
       information: json['information'] as String?,
       companyName: json['company_name'] as String?,
     );
@@ -192,6 +214,22 @@ Map<String, dynamic> _$$ClientImplToJson(_$ClientImpl instance) =>
       'company_name': instance.companyName,
     };
 
+_$CommentImpl _$$CommentImplFromJson(Map<String, dynamic> json) =>
+    _$CommentImpl(
+      id: json['id'] as int?,
+      comment: json['comment'] as String?,
+      createdBy: json['created_by'] as String?,
+      editable: json['editable'] as bool?,
+    );
+
+Map<String, dynamic> _$$CommentImplToJson(_$CommentImpl instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'comment': instance.comment,
+      'created_by': instance.createdBy,
+      'editable': instance.editable,
+    };
+
 _$DriverImpl _$$DriverImplFromJson(Map<String, dynamic> json) => _$DriverImpl(
       id: json['id'] as int?,
       name: json['name'] as String?,
@@ -221,12 +259,9 @@ _$JobCardKeysImpl _$$JobCardKeysImplFromJson(Map<String, dynamic> json) =>
     _$JobCardKeysImpl(
       weighBridgeRequired: json['weigh_bridge_required'] as String?,
       photoRequired: json['photo_required'] as bool?,
-      addInfoButton: json['add_info_button'] as String?,
+      addInfoButton: json['add_info_button'],
       weighBridgeRequiredMultipleFile:
-          (json['weigh_bridge_required_multiple_file'] as List<dynamic>?)
-              ?.map((e) => WeighBridgeRequiredMultipleFile.fromJson(
-                  e as Map<String, dynamic>))
-              .toList(),
+          json['weigh_bridge_required_multiple_file'] as List<dynamic>?,
     );
 
 Map<String, dynamic> _$$JobCardKeysImplToJson(_$JobCardKeysImpl instance) =>
@@ -238,20 +273,16 @@ Map<String, dynamic> _$$JobCardKeysImplToJson(_$JobCardKeysImpl instance) =>
           instance.weighBridgeRequiredMultipleFile,
     };
 
-_$WeighBridgeRequiredMultipleFileImpl
-    _$$WeighBridgeRequiredMultipleFileImplFromJson(Map<String, dynamic> json) =>
-        _$WeighBridgeRequiredMultipleFileImpl(
-          id: json['id'] as int?,
-          name: json['name'] as String?,
-          file: json['file'] as String?,
-          createdAt: json['created_at'] as String?,
-        );
+_$TeamEmployeeImpl _$$TeamEmployeeImplFromJson(Map<String, dynamic> json) =>
+    _$TeamEmployeeImpl(
+      id: json['id'] as int?,
+      name: json['name'] as String?,
+      dp: json['dp'] as String?,
+    );
 
-Map<String, dynamic> _$$WeighBridgeRequiredMultipleFileImplToJson(
-        _$WeighBridgeRequiredMultipleFileImpl instance) =>
+Map<String, dynamic> _$$TeamEmployeeImplToJson(_$TeamEmployeeImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
-      'file': instance.file,
-      'created_at': instance.createdAt,
+      'dp': instance.dp,
     };

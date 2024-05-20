@@ -1,5 +1,6 @@
 import 'package:auto_route/annotations.dart';
 import 'package:enviro_mobile_application/utilis/constant.dart';
+import 'package:enviro_mobile_application/view/08_team/team_widgets/01_team_widgets.dart';
 import 'package:enviro_mobile_application/view_model/11_shedule/shedule_page_view_model.dart';
 import 'package:enviro_mobile_application/widgets/cmn_action_icon.dart';
 import 'package:enviro_mobile_application/widgets/cmn_title_textwidget.dart';
@@ -10,13 +11,15 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 @RoutePage()
 class SheduleCommentPage extends StatelessWidget {
   SheduleCommentPage({
-    super.key,
+    Key? key,
     required this.id,
-  });
+  }) : super(key: key);
 
   final TextEditingController _commentPageController = TextEditingController();
 
   final int id;
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: CmnDrawer(context),
@@ -44,7 +47,7 @@ class SheduleCommentPage extends StatelessWidget {
                 return TextField(
                   onChanged: (value) {
                     _commentPageController.text = value;
-                    print('fffffffffffffffffffffooo$_commentPageController');
+                    print('Comments: $_commentPageController');
                   },
                   controller: _commentPageController,
                   decoration: InputDecoration(
@@ -73,62 +76,140 @@ class SheduleCommentPage extends StatelessWidget {
                 );
               }),
             ),
-            sized0hx20,
-            SizedBox(
-              height: 55,
-              child: Card(
-                color: Colors.white70,
-                child: Stack(
-                  children: [
-                    Positioned(
-                      top: 0,
-                      right: 0,
-                      child: IconButton(
-                        icon: const Icon(Icons.delete),
-                        onPressed: () {
-                          showDialog(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return AlertDialog(
-                                content: const Text(
-                                    "Are you sure you want to delete?"),
-                                actions: [
-                                  ElevatedButton(
-                                    onPressed: () {
-                                      Navigator.pop(context);
+            const SizedBox(height: 20),
+            Expanded(
+              child: Observer(builder: (_) {
+                print('shaaaaaaaa$id');
+                // final comments =
+                //     vmJobcard.shedulecardResponse.data?[id].comments ?? [];
+
+                return ListView.separated(
+                  itemCount: 3,
+                  itemBuilder: (BuildContext context, int index) {
+                    return SizedBox(
+                      height: 55,
+                      child: Card(
+                        color: Colors.white70,
+                        child: Stack(
+                          children: [
+                            Positioned(
+                              top: 0,
+                              right: 0,
+                              child: IconButton(
+                                icon: const Icon(Icons.delete),
+                                onPressed: () {
+                                  showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return AlertDialog(
+                                        content: const Text(
+                                            "Are you sure you want to delete?"),
+                                        actions: [
+                                          ElevatedButton(
+                                            onPressed: () {
+                                              Navigator.pop(context);
+                                            },
+                                            child: const Text("Delete"),
+                                          ),
+                                          ElevatedButton(
+                                            onPressed: () {
+                                              Navigator.pop(context);
+                                            },
+                                            child: const Text("Back"),
+                                          ),
+                                        ],
+                                      );
                                     },
-                                    child: const Text("Delete"),
-                                  ),
-                                  ElevatedButton(
-                                    onPressed: () {
-                                      Navigator.pop(context);
-                                    },
-                                    child: const Text("Back"),
-                                  ),
-                                ],
-                              );
-                            },
-                          );
-                        },
-                      ),
-                    ),
-                    const Positioned(
-                      top: 10,
-                      left: 10,
-                      child: Text(
-                        "Yxaikcsd[vpdf]",
-                        style: TextStyle(
-                          fontSize: 18,
+                                  );
+                                },
+                              ),
+                            ),
+                            Positioned(
+                              top: 10,
+                              left: 10,
+                              child: Observer(builder: (_) {
+                                return Observer(builder: (_) {
+                                  return Text(
+                                    vmJobcard.shedulecardResponse.data?[index]
+                                            .comments
+                                            ?.toString() ??
+                                        'vip',
+                                    style: TextStyle(
+                                      fontSize: 18,
+                                    ),
+                                  );
+                                });
+                              }),
+                            ),
+                          ],
                         ),
                       ),
-                    ),
-                  ],
-                ),
-              ),
-            )
+                    );
+                  },
+                  separatorBuilder: (BuildContext context, int index) {
+                    return const Divider();
+                  },
+                );
+              }),
+            ),
           ],
         ),
       ),
     );
   }
 }
+
+
+
+      // SizedBox(
+      //         height: 55,
+      //         child: Card(
+      //           color: Colors.white70,
+      //           child: Stack(
+      //             children: [
+      //               Positioned(
+      //                 top: 0,
+      //                 right: 0,
+      //                 child: IconButton(
+      //                   icon: const Icon(Icons.delete),
+      //                   onPressed: () {
+      //                     showDialog(
+      //                       context: context,
+      //                       builder: (BuildContext context) {
+      //                         return AlertDialog(
+      //                           content: const Text(
+      //                               "Are you sure you want to delete?"),
+      //                           actions: [
+      //                             ElevatedButton(
+      //                               onPressed: () {
+      //                                 Navigator.pop(context);
+      //                               },
+      //                               child: const Text("Delete"),
+      //                             ),
+      //                             ElevatedButton(
+      //                               onPressed: () {
+      //                                 Navigator.pop(context);
+      //                               },
+      //                               child: const Text("Back"),
+      //                             ),
+      //                           ],
+      //                         );
+      //                       },
+      //                     );
+      //                   },
+      //                 ),
+      //               ),
+      //               const Positioned(
+      //                 top: 10,
+      //                 left: 10,
+      //                 child: Text(
+      //                   "Yxaikcsd[vpdf]",
+      //                   style: TextStyle(
+      //                     fontSize: 18,
+      //                   ),
+      //                 ),
+      //               ),
+      //             ],
+      //           ),
+      //         ),
+      //       )

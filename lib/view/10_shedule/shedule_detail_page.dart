@@ -253,6 +253,7 @@ class SheduledetailPage extends StatelessWidget {
                       buttonTextStyle: const TextStyle(color: Colors.white),
                       onPressed: () {
                         shedulecommentfunction(context, id);
+                        print('saheer$id');
                       },
                       text: "Comments",
                     ),

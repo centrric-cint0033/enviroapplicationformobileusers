@@ -30,12 +30,12 @@ class SheduleCardRespModel with _$SheduleCardRespModel {
     @JsonKey(name: "amount_total_paid_status") bool? amountTotalPaidStatus,
     @JsonKey(name: "pending_amount") String? pendingAmount,
     @JsonKey(name: "vehicle") String? vehicle,
-    @JsonKey(name: "team_employees") List<dynamic>? teamEmployees,
+    @JsonKey(name: "team_employees") List<TeamEmployee>? teamEmployees,
     @JsonKey(name: "shift") String? shift,
-    @JsonKey(name: "before_pics") List<dynamic>? beforePics,
-    @JsonKey(name: "after_pics") List<dynamic>? afterPics,
+    @JsonKey(name: "before_pics") List<Pic>? beforePics,
+    @JsonKey(name: "after_pics") List<Pic>? afterPics,
     @JsonKey(name: "gallery") List<dynamic>? gallery,
-    @JsonKey(name: "comments") List<dynamic>? comments,
+    @JsonKey(name: "comments") List<Comment>? comments,
     @JsonKey(name: "status") String? status,
     @JsonKey(name: "frequency") String? frequency,
     @JsonKey(name: "waste_type_str") String? wasteTypeStr,
@@ -50,22 +50,22 @@ class SheduleCardRespModel with _$SheduleCardRespModel {
     @JsonKey(name: "start_date") DateTime? startDate,
     @JsonKey(name: "start_time") String? startTime,
     @JsonKey(name: "end_time") String? endTime,
-    @JsonKey(name: "image") dynamic image,
+    @JsonKey(name: "image") String? image,
     @JsonKey(name: "created_date_time") String? createdDateTime,
     @JsonKey(name: "end_date") DateTime? endDate,
-    @JsonKey(name: "extracted_waste_type") dynamic extractedWasteType,
-    @JsonKey(name: "extracted_litres_of_waste") dynamic extractedLitresOfWaste,
+    @JsonKey(name: "extracted_waste_type") String? extractedWasteType,
+    @JsonKey(name: "extracted_litres_of_waste") String? extractedLitresOfWaste,
     @JsonKey(name: "depart_enviro_facility") dynamic departEnviroFacility,
-    @JsonKey(name: "start_job") dynamic startJob,
-    @JsonKey(name: "finish_job") dynamic finishJob,
+    @JsonKey(name: "start_job") String? startJob,
+    @JsonKey(name: "finish_job") String? finishJob,
     @JsonKey(name: "arrive_at_waste_depot") dynamic arriveAtWasteDepot,
     @JsonKey(name: "depart_waste_depot") dynamic departWasteDepot,
     @JsonKey(name: "arrive_enviro_facility") dynamic arriveEnviroFacility,
-    @JsonKey(name: "schedule_completed_mail") dynamic scheduleCompletedMail,
-    @JsonKey(name: "completed") dynamic completed,
+    @JsonKey(name: "schedule_completed_mail") String? scheduleCompletedMail,
+    @JsonKey(name: "completed") String? completed,
     @JsonKey(name: "outsourced_job") bool? outsourcedJob,
     @JsonKey(name: "purchase_order_number") dynamic purchaseOrderNumber,
-    @JsonKey(name: "signature_name") dynamic signatureName,
+    @JsonKey(name: "signature_name") String? signatureName,
     @JsonKey(name: "outsourced_company_name") dynamic outsourcedCompanyName,
     @JsonKey(name: "active_status") bool? activeStatus,
     @JsonKey(name: "job") int? job,
@@ -75,6 +75,18 @@ class SheduleCardRespModel with _$SheduleCardRespModel {
 
   factory SheduleCardRespModel.fromJson(Map<String, dynamic> json) =>
       _$SheduleCardRespModelFromJson(json);
+}
+
+@freezed
+class Pic with _$Pic {
+  const factory Pic({
+    @JsonKey(name: "id") int? id,
+    @JsonKey(name: "file") String? file,
+    @JsonKey(name: "created_date_time") String? createdDateTime,
+    @JsonKey(name: "edited_date_time") String? editedDateTime,
+  }) = _Pic;
+
+  factory Pic.fromJson(Map<String, dynamic> json) => _$PicFromJson(json);
 }
 
 @freezed
@@ -94,23 +106,36 @@ class Client with _$Client {
     @JsonKey(name: "barcode") String? barcode,
     @JsonKey(name: "site_address") String? siteAddress,
     @JsonKey(name: "site_suburb") dynamic siteSuburb,
-    @JsonKey(name: "post_code") String? postCode,
+    @JsonKey(name: "post_code") dynamic postCode,
     @JsonKey(name: "bar_code_for_grease_trap_only")
     dynamic barCodeForGreaseTrapOnly,
     @JsonKey(name: "account_type") String? accountType,
     @JsonKey(name: "pit_location") String? pitLocation,
     @JsonKey(name: "access_registration") String? accessRegistration,
     @JsonKey(name: "company_suburb") dynamic companySuburb,
-    @JsonKey(name: "company_contact_number") String? companyContactNumber,
+    @JsonKey(name: "company_contact_number") dynamic companyContactNumber,
     @JsonKey(name: "company_mobile_number") dynamic companyMobileNumber,
     @JsonKey(name: "company_landline_number") dynamic companyLandlineNumber,
-    @JsonKey(name: "company_email") String? companyEmail,
-    @JsonKey(name: "company_postcode") String? companyPostcode,
+    @JsonKey(name: "company_email") dynamic companyEmail,
+    @JsonKey(name: "company_postcode") dynamic companyPostcode,
     @JsonKey(name: "information") String? information,
     @JsonKey(name: "company_name") String? companyName,
   }) = _Client;
 
   factory Client.fromJson(Map<String, dynamic> json) => _$ClientFromJson(json);
+}
+
+@freezed
+class Comment with _$Comment {
+  const factory Comment({
+    @JsonKey(name: "id") int? id,
+    @JsonKey(name: "comment") String? comment,
+    @JsonKey(name: "created_by") String? createdBy,
+    @JsonKey(name: "editable") bool? editable,
+  }) = _Comment;
+
+  factory Comment.fromJson(Map<String, dynamic> json) =>
+      _$CommentFromJson(json);
 }
 
 @freezed
@@ -135,9 +160,9 @@ class JobCardKeys with _$JobCardKeys {
   const factory JobCardKeys({
     @JsonKey(name: "weigh_bridge_required") String? weighBridgeRequired,
     @JsonKey(name: "photo_required") bool? photoRequired,
-    @JsonKey(name: "add_info_button") String? addInfoButton,
+    @JsonKey(name: "add_info_button") dynamic addInfoButton,
     @JsonKey(name: "weigh_bridge_required_multiple_file")
-    List<WeighBridgeRequiredMultipleFile>? weighBridgeRequiredMultipleFile,
+    List<dynamic>? weighBridgeRequiredMultipleFile,
   }) = _JobCardKeys;
 
   factory JobCardKeys.fromJson(Map<String, dynamic> json) =>
@@ -145,14 +170,13 @@ class JobCardKeys with _$JobCardKeys {
 }
 
 @freezed
-class WeighBridgeRequiredMultipleFile with _$WeighBridgeRequiredMultipleFile {
-  const factory WeighBridgeRequiredMultipleFile({
+class TeamEmployee with _$TeamEmployee {
+  const factory TeamEmployee({
     @JsonKey(name: "id") int? id,
     @JsonKey(name: "name") String? name,
-    @JsonKey(name: "file") String? file,
-    @JsonKey(name: "created_at") String? createdAt,
-  }) = _WeighBridgeRequiredMultipleFile;
+    @JsonKey(name: "dp") String? dp,
+  }) = _TeamEmployee;
 
-  factory WeighBridgeRequiredMultipleFile.fromJson(Map<String, dynamic> json) =>
-      _$WeighBridgeRequiredMultipleFileFromJson(json);
+  factory TeamEmployee.fromJson(Map<String, dynamic> json) =>
+      _$TeamEmployeeFromJson(json);
 }
