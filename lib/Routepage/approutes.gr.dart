@@ -239,6 +239,7 @@ abstract class $AppRouter extends _i31.RootStackRouter {
       return _i31.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: _i20.SheduleSignaturePage(
+          i: args.i,
           picker: args.picker,
           pickedtypes: args.pickedtypes,
           id: args.id,
@@ -822,6 +823,7 @@ class SheduleCommentRouteArgs {
 class SheduleSignatureRoute
     extends _i31.PageRouteInfo<SheduleSignatureRouteArgs> {
   SheduleSignatureRoute({
+    required int i,
     _i36.Uint8List? picker,
     _i36.Uint8List? pickedtypes,
     required int id,
@@ -830,6 +832,7 @@ class SheduleSignatureRoute
   }) : super(
           SheduleSignatureRoute.name,
           args: SheduleSignatureRouteArgs(
+            i: i,
             picker: picker,
             pickedtypes: pickedtypes,
             id: id,
@@ -846,11 +849,14 @@ class SheduleSignatureRoute
 
 class SheduleSignatureRouteArgs {
   const SheduleSignatureRouteArgs({
+    required this.i,
     this.picker,
     this.pickedtypes,
     required this.id,
     this.key,
   });
+
+  final int i;
 
   final _i36.Uint8List? picker;
 
@@ -862,7 +868,7 @@ class SheduleSignatureRouteArgs {
 
   @override
   String toString() {
-    return 'SheduleSignatureRouteArgs{picker: $picker, pickedtypes: $pickedtypes, id: $id, key: $key}';
+    return 'SheduleSignatureRouteArgs{i: $i, picker: $picker, pickedtypes: $pickedtypes, id: $id, key: $key}';
   }
 }
 

@@ -267,7 +267,7 @@ class SheduledetailPage extends StatelessWidget {
                         color: const Color(0xFF4CAF9E),
                         buttonTextStyle: const TextStyle(color: Colors.white),
                         onPressed: () {
-                          shedulesignaturefunction(context, id);
+                          shedulesignaturefunction(context, id, i);
                           print('shedule$id');
                           // vmJobcard.shedulesignatureviewmodelfunction(
                           //     // id: id ?? 0, pickedFiles: vmJobcard.pickedFiles
@@ -334,7 +334,7 @@ void shedulecommentfunction(BuildContext context, id, i) {
   ));
 }
 
-void shedulesignaturefunction(BuildContext context, id) {
+void shedulesignaturefunction(BuildContext context, id, i) {
   print('calenderclicked');
-  context.router.push(SheduleSignatureRoute(id: id));
+  context.router.push(SheduleSignatureRoute(id: id, i: i));
 }
