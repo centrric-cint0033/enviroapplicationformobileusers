@@ -70,6 +70,8 @@ class SheduleCommentPage extends StatelessWidget {
                       onPressed: () {
                         vmJobcard.shedulecommentviewmodelfunction(
                             id: id, comment: _commentPageController.text);
+                        vmJobcard.shedulecardviewmodelfunction();
+                        _commentPageController.clear();
                       },
                     ),
                   ),
@@ -131,8 +133,7 @@ class SheduleCommentPage extends StatelessWidget {
                               left: 10,
                               child: Text(
                                 vmJobcard.shedulecardResponse.data?[i]
-                                        .comments?[index]
-                                        .toString() ??
+                                        .comments?[index].comment ??
                                     'nocomments',
                                 style: const TextStyle(
                                   fontSize: 18,
@@ -145,7 +146,7 @@ class SheduleCommentPage extends StatelessWidget {
                     );
                   },
                   separatorBuilder: (BuildContext context, int index) {
-                    return const Divider();
+                    return const SizedBox();
                   },
                 );
               }),
