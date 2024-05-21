@@ -13,11 +13,13 @@ class SheduleCommentPage extends StatelessWidget {
   SheduleCommentPage({
     Key? key,
     required this.id,
+    required this.i,
   }) : super(key: key);
 
   final TextEditingController _commentPageController = TextEditingController();
 
   final int id;
+  final int i;
 
   @override
   Widget build(BuildContext context) {
@@ -80,11 +82,11 @@ class SheduleCommentPage extends StatelessWidget {
             Expanded(
               child: Observer(builder: (_) {
                 print('shaaaaaaaa$id');
-                // final comments =
-                //     vmJobcard.shedulecardResponse.data?[id].comments ?? [];
+                final comments =
+                    vmJobcard.shedulecardResponse.data?[i].comments ?? [];
 
                 return ListView.separated(
-                  itemCount: 3,
+                  itemCount: comments.length,
                   itemBuilder: (BuildContext context, int index) {
                     return SizedBox(
                       height: 55,
@@ -127,19 +129,15 @@ class SheduleCommentPage extends StatelessWidget {
                             Positioned(
                               top: 10,
                               left: 10,
-                              child: Observer(builder: (_) {
-                                return Observer(builder: (_) {
-                                  return Text(
-                                    vmJobcard.shedulecardResponse.data?[index]
-                                            .comments
-                                            ?.toString() ??
-                                        'vip',
-                                    style: TextStyle(
-                                      fontSize: 18,
-                                    ),
-                                  );
-                                });
-                              }),
+                              child: Text(
+                                vmJobcard.shedulecardResponse.data?[i]
+                                        .comments?[index]
+                                        .toString() ??
+                                    'nocomments',
+                                style: const TextStyle(
+                                  fontSize: 18,
+                                ),
+                              ),
                             ),
                           ],
                         ),

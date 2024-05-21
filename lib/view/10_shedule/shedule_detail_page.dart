@@ -15,8 +15,10 @@ class SheduledetailPage extends StatelessWidget {
   const SheduledetailPage({
     super.key,
     required this.id,
+    required this.i,
   });
   final int id;
+  final int i;
 
   // List? pickedFiles;
 
@@ -252,7 +254,7 @@ class SheduledetailPage extends StatelessWidget {
                       color: const Color(0xFF4CAF9E),
                       buttonTextStyle: const TextStyle(color: Colors.white),
                       onPressed: () {
-                        shedulecommentfunction(context, id);
+                        shedulecommentfunction(context, id, index);
                         print('saheer$id');
                       },
                       text: "Comments",
@@ -324,9 +326,12 @@ void jobCardFunction(BuildContext context) async {
   context.router.pushNamed(RouteNames.rjobcardpage);
 }
 
-void shedulecommentfunction(BuildContext context, id) {
+void shedulecommentfunction(BuildContext context, id, i) {
   print('calenderclicked');
-  context.router.push(SheduleCommentRoute(id: id));
+  context.router.push(SheduleCommentRoute(
+    id: id,
+    i: i,
+  ));
 }
 
 void shedulesignaturefunction(BuildContext context, id) {

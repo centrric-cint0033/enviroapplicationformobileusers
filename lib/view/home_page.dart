@@ -63,7 +63,7 @@ class HomePage extends StatelessWidget {
                       child: _buildBox('assets/images/user.svg', 'Site'),
                     ),
                     InkWell(
-                      onTap: () => calenderfunction(context),
+                      onTap: () => shedulefunction(context),
                       child:
                           _buildBox('assets/images/calendar.svg', 'Scheduling'),
                     ),
@@ -155,7 +155,7 @@ void intranetfuntion(BuildContext context) {
   context.router.pushNamed(RouteNames.intranetpage);
 }
 
-void calenderfunction(BuildContext context) {
+void shedulefunction(BuildContext context) {
   vmJobcard.shedulecardviewmodelfunction();
   vmJobcard.shedulecardviewmodelweekfunction();
   print('cccc');
@@ -186,8 +186,8 @@ void navigateToSitesPage({required BuildContext context}) {
 
 void shedulepagefunction(BuildContext context) async {
   print('dvsdv');
-  // vmJobcard.shedulecardviewmodelfunction();
-  // vmJobcard.shedulecardviewmodelweekfunction();
+  vmJobcard.shedulecardviewmodelfunction();
+  vmJobcard.shedulecardviewmodelweekfunction();
 
   context.router.pushNamed(RouteNames.rshedulepage);
 }

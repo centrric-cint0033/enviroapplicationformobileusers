@@ -1,8 +1,6 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:dartz/dartz.dart';
 import 'package:enviro_mobile_application/Routepage/routespage.dart';
 import 'package:enviro_mobile_application/view/10_shedule/shedule_widget.dart';
-import 'package:enviro_mobile_application/view_model/10_profile/profile_view_model.dart';
 
 import 'package:enviro_mobile_application/view_model/11_shedule/shedule_page_view_model.dart';
 import 'package:enviro_mobile_application/widgets/cmn_action_icon.dart';
@@ -11,16 +9,18 @@ import 'package:enviro_mobile_application/widgets/cmn_title_textwidget.dart';
 import 'package:enviro_mobile_application/widgets/ww_response_handler.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:injectable/injectable.dart';
 import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../Routepage/approutes.gr.dart';
-import '../../view_model/11_shedule/shedule_page_view_model.dart';
 import '../../widgets/drawer.dart';
 
 @RoutePage()
 class SchedulePage extends StatelessWidget {
-  SchedulePage({Key? key}) : super(key: key);
+  SchedulePage({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -410,11 +410,11 @@ class SchedulePage extends StatelessWidget {
                                 child: GestureDetector(
                                   onTap: () {
                                     sheduledetailfunction(
-                                      context,
-                                      vmJobcard.sheduleweekResponse.data?[i]
-                                              .id ??
-                                          '',
-                                    );
+                                        context,
+                                        vmJobcard.sheduleweekResponse.data?[i]
+                                                .id ??
+                                            '',
+                                        i);
                                   },
                                   child: Card(
                                     margin: const EdgeInsets.symmetric(
@@ -477,11 +477,13 @@ class SchedulePage extends StatelessWidget {
                                             ElevatedButton(
                                               onPressed: () {
                                                 sheduledetailfunction(
-                                                  context,
-                                                  vmJobcard.sheduleweekResponse
-                                                          .data?[i].id ??
-                                                      '',
-                                                );
+                                                    context,
+                                                    vmJobcard
+                                                            .sheduleweekResponse
+                                                            .data?[i]
+                                                            .id ??
+                                                        '',
+                                                    i);
                                               },
                                               style: ElevatedButton.styleFrom(
                                                 primary: Colors.white,
@@ -728,10 +730,12 @@ void nextjobfnction(BuildContext context) {
   vmJobcard.shedulecardviewmodelfunction();
 }
 
-void sheduledetailfunction4(BuildContext context) {
+void sheduledetailfunction4(
+  BuildContext context,
+) {
   print('calenderclicked');
 
-  context.router.pushNamed(RouteNames.rsheduledetail2page);
+  context.router.push(SheduledetailRoute2());
 }
 
 void calenderfunction(BuildContext context) {
@@ -739,9 +743,9 @@ void calenderfunction(BuildContext context) {
   context.router.pushNamed(RouteNames.rcalenderpage);
 }
 
-void sheduledetailfunction(BuildContext context, id) {
+void sheduledetailfunction(BuildContext context, id, i) {
   print('mmmmmmmmmmmmmmmmmmmm$id');
-  context.router.push(SheduledetailRoute(id: id));
+  context.router.push(SheduledetailRoute(id: id, i: i));
 }
 
 void sheduledetailsfunction2(BuildContext context) {

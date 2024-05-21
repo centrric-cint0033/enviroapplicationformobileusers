@@ -230,6 +230,7 @@ abstract class $AppRouter extends _i31.RootStackRouter {
         child: _i19.SheduleCommentPage(
           key: args.key,
           id: args.id,
+          i: args.i,
         ),
       );
     },
@@ -252,6 +253,7 @@ abstract class $AppRouter extends _i31.RootStackRouter {
         child: _i21.SheduledetailPage(
           key: args.key,
           id: args.id,
+          i: args.i,
         ),
       );
     },
@@ -778,12 +780,14 @@ class SheduleCommentRoute extends _i31.PageRouteInfo<SheduleCommentRouteArgs> {
   SheduleCommentRoute({
     _i32.Key? key,
     required int id,
+    required int i,
     List<_i31.PageRouteInfo>? children,
   }) : super(
           SheduleCommentRoute.name,
           args: SheduleCommentRouteArgs(
             key: key,
             id: id,
+            i: i,
           ),
           initialChildren: children,
         );
@@ -798,15 +802,18 @@ class SheduleCommentRouteArgs {
   const SheduleCommentRouteArgs({
     this.key,
     required this.id,
+    required this.i,
   });
 
   final _i32.Key? key;
 
   final int id;
 
+  final int i;
+
   @override
   String toString() {
-    return 'SheduleCommentRouteArgs{key: $key, id: $id}';
+    return 'SheduleCommentRouteArgs{key: $key, id: $id, i: $i}';
   }
 }
 
@@ -865,12 +872,14 @@ class SheduledetailRoute extends _i31.PageRouteInfo<SheduledetailRouteArgs> {
   SheduledetailRoute({
     _i32.Key? key,
     required int id,
+    required int i,
     List<_i31.PageRouteInfo>? children,
   }) : super(
           SheduledetailRoute.name,
           args: SheduledetailRouteArgs(
             key: key,
             id: id,
+            i: i,
           ),
           initialChildren: children,
         );
@@ -885,15 +894,18 @@ class SheduledetailRouteArgs {
   const SheduledetailRouteArgs({
     this.key,
     required this.id,
+    required this.i,
   });
 
   final _i32.Key? key;
 
   final int id;
 
+  final int i;
+
   @override
   String toString() {
-    return 'SheduledetailRouteArgs{key: $key, id: $id}';
+    return 'SheduledetailRouteArgs{key: $key, id: $id, i: $i}';
   }
 }
 
