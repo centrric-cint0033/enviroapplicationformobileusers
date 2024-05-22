@@ -12,6 +12,7 @@ import 'package:enviro_mobile_application/widgets/cmn_title_textwidget.dart';
 import 'package:enviro_mobile_application/widgets/drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:open_file/open_file.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:signature/signature.dart';
@@ -548,6 +549,8 @@ class SheduleSignaturePage extends StatelessWidget {
                         onPressed: () {
                           vmJobcard.shedulecommentviewmodelfunction(
                               id: id, comment: _commentController.text);
+                          vmJobcard.shedulecardviewmodelfunction();
+
                           _commentController.clear();
                         },
                       );
@@ -598,9 +601,9 @@ class SheduleSignaturePage extends StatelessWidget {
                       vmJobcard.shedulecardResponse.data?[i].comments ?? [];
 
                   return SizedBox(
-                    height: MediaQuery.of(context).size.height,
+                    height: double.maxFinite,
                     child: ListView.separated(
-                      physics: NeverScrollableScrollPhysics(),
+                      physics: const NeverScrollableScrollPhysics(),
                       itemCount: comments.length,
                       itemBuilder: (BuildContext context, int index) {
                         return SizedBox(
@@ -645,7 +648,9 @@ class SheduleSignaturePage extends StatelessWidget {
                                   top: 10,
                                   left: 10,
                                   child: Text(
-                                    'nocomments',
+                                    vmJobcard.shedulecardResponse.data?[i]
+                                            .comments?[index].comment ??
+                                        'nocomments',
                                     style: const TextStyle(
                                       fontSize: 18,
                                     ),
