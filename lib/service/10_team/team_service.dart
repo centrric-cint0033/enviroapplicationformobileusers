@@ -13,15 +13,14 @@ import 'package:injectable/injectable.dart';
 
 abstract class IteamService {
   Future<Either<Map<MainFailure, dynamic>, List<TeamResModel>>>
-      getCurrentEmployee();
+      getCurrentEmployee({int? page});
   Future<Either<Map<MainFailure, dynamic>, List<TeamResModel>>>
-      getTerminatedEmployee();
+      getTerminatedEmployee({int? page});
   Future<Either<Map<MainFailure, dynamic>, TeamProfileEmployeeDetailsResModel>>
       getTeamProfileEmployeeDetails({required num employeeID});
   Future<Either<Map<MainFailure, dynamic>, FolderListModel>> getTeamFolders(
-      {required num id,
-      required num parentFolderId});
-  Future<Either<Map<MainFailure, dynamic>, FolderListModel>> addTeamFolders(
+      {required num id, required num parentFolderId});
+  Future<Either<Map<MainFailure, dynamic>, dynamic>> addTeamFolders(
       {required Map<String, String> data});
   Future<Either<Map<MainFailure, dynamic>, String>> deleteTeamFolders(
       {required num id});
@@ -37,19 +36,26 @@ abstract class IteamService {
       {required Map<String, dynamic> data});
   Future<Either<Map<MainFailure, dynamic>, CreateTeamReqModel>> editTeamApi(
       {required Map<String, dynamic> data, required String employeeId});
-        Future<Either<Map<MainFailure, dynamic>, FolderListModel>> addTeamFiles(
+  Future<Either<Map<MainFailure, dynamic>, dynamic>> addTeamFiles(
       {required Map<String, String> data});
+  Future<Either<Map<MainFailure, dynamic>, String>> editTeamFiles(
+      {required Map<String, String> data, required int id});
+  Future<Either<Map<MainFailure, dynamic>, String>> deleteTeamFiles(
+      {required num fileId, required num id});
+  Future<Either<Map<MainFailure, dynamic>, FolderListModel>> expiryDateFiles(
+      {required num fileId, required String expiry});
 }
 
 @LazySingleton(as: IteamService)
 class TeamService implements IteamService {
   @override
   Future<Either<Map<MainFailure, dynamic>, List<TeamResModel>>>
-      getCurrentEmployee() async {
+      getCurrentEmployee({int? page}) async {
+    String pagination = '?page=${page ?? 1}&limit=10';
     var response = await getIt<HttpService>().request(
         authenticated: true,
         method: HttpMethod.get,
-        apiUrl: ApiEndPoints().currentEmployeelist);
+        apiUrl: ApiEndPoints().currentEmployeelist + pagination);
 
     return response.fold(
       (l) => Left(l),
@@ -64,11 +70,12 @@ class TeamService implements IteamService {
 
   @override
   Future<Either<Map<MainFailure, dynamic>, List<TeamResModel>>>
-      getTerminatedEmployee() async {
+      getTerminatedEmployee({int? page}) async {
+    String pagination = '?page=${page ?? 1}&limit=10';
     var response = await getIt<HttpService>().request(
         authenticated: true,
         method: HttpMethod.get,
-        apiUrl: ApiEndPoints().terminatedEmployeelist);
+        apiUrl: ApiEndPoints().terminatedEmployeelist + pagination);
 
     return response.fold(
       (l) => Left(l),
@@ -102,8 +109,7 @@ class TeamService implements IteamService {
 
   @override
   Future<Either<Map<MainFailure, dynamic>, FolderListModel>> getTeamFolders(
-      {required num id,
-      required num parentFolderId}) async {
+      {required num id, required num parentFolderId}) async {
     var response = await getIt<HttpService>().request(
         authenticated: true,
         method: HttpMethod.get,
@@ -121,16 +127,14 @@ class TeamService implements IteamService {
   }
 
   @override
-  Future<Either<Map<MainFailure, dynamic>, FolderListModel>> addTeamFolders(
+  Future<Either<Map<MainFailure, dynamic>, dynamic>> addTeamFolders(
       {required Map<String, String> data}) async {
     var response = await getIt<HttpService>().multipartRequest(
         data: data, method: 'POST', apiUrl: ApiEndPoints().addTeamFolder);
     return response.fold(
       (l) => Left(l),
       (res) async {
-        var data = jsonDecode(res.body);
-        FolderListModel createFolderList = FolderListModel.fromJson(data);
-        return Right(createFolderList);
+        return const Right("Successfully added");
       },
     );
   }
@@ -248,17 +252,64 @@ class TeamService implements IteamService {
       },
     );
   }
-  
+
   @override
-  Future<Either<Map<MainFailure, dynamic>, FolderListModel>> addTeamFiles({required Map<String, String> data}) async {
+  Future<Either<Map<MainFailure, dynamic>, dynamic>> addTeamFiles(
+      {required Map<String, String> data}) async {
     var response = await getIt<HttpService>().multipartRequest(
         data: data, method: 'POST', apiUrl: ApiEndPoints().addTeamFiles);
     return response.fold(
       (l) => Left(l),
       (res) async {
+        return Right("Success");
+      },
+    );
+  }
+
+  @override
+  Future<Either<Map<MainFailure, dynamic>, String>> editTeamFiles(
+      {required Map<String, String> data, required int id}) async {
+    var response = await getIt<HttpService>().multipartRequest(
+        data: data,
+        method: 'PUT',
+        apiUrl: '${ApiEndPoints().teamFilesEdit}$id/');
+    return response.fold(
+      (l) => Left(l),
+      (res) async {
+        return const Right('success');
+      },
+    );
+  }
+
+  @override
+  Future<Either<Map<MainFailure, dynamic>, String>> deleteTeamFiles(
+      {required num fileId, required num id}) async {
+    var response = await getIt<HttpService>().request(
+        authenticated: true,
+        method: HttpMethod.delete,
+        apiUrl: '${ApiEndPoints().teamFilesDelete}$fileId/$id/');
+
+    return response.fold(
+      (l) => Left(l),
+      (res) async {
+        return const Right('success');
+      },
+    );
+  }
+
+  @override
+  Future<Either<Map<MainFailure, dynamic>, FolderListModel>> expiryDateFiles(
+      {required num fileId, required String expiry}) async {
+    var response = await getIt<HttpService>().multipartRequest(
+        data: {"date": expiry},
+        method: 'PUT',
+        apiUrl: "${ApiEndPoints().teamFilesExpiry}$fileId/");
+    return response.fold(
+      (l) => Left(l),
+      (res) async {
         var data = jsonDecode(res.body);
-        FolderListModel createFolderList = FolderListModel.fromJson(data);
-        return Right(createFolderList);
+        FolderListModel expiry = FolderListModel.fromJson(data);
+        return Right(expiry);
       },
     );
   }

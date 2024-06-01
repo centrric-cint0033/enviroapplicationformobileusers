@@ -1,28 +1,33 @@
 import 'package:enviro_mobile_application/model/00_common_model/folder_model/folder_model.dart';
+import 'package:enviro_mobile_application/view/08_team/team_widgets/date_picker.dart';
+import 'package:enviro_mobile_application/view_model/08_team/team_view_model.dart';
 import 'package:enviro_mobile_application/widgets/common_icon_btn_widget.dart';
-import 'package:enviro_mobile_application/widgets/ww_search_widget.dart';
+import 'package:enviro_mobile_application/widgets/ww_folder_card.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-enum FolderEditCreate { create, edit }
-
-class WWFolderCard extends StatelessWidget {
-  final FolderModel folder;
+class WWFileCard extends StatelessWidget {
+  final FolderModel file;
   final Function() onTap;
   final Function(String value) editTap;
   final Function() deleteTap;
-  final String? folderName;
+  final String? fileName;
   final bool? loading;
+  final num employeeID;
+  final num parentFolderId;
 
-  const WWFolderCard({
+  const WWFileCard({
     super.key,
-    required this.folder,
+    required this.file,
     required this.editTap,
     required this.deleteTap,
     required this.onTap,
-    this.folderName,
+    this.fileName,
     this.loading,
+    required this.employeeID,
+    required this.parentFolderId,
   });
 
   @override
@@ -35,10 +40,10 @@ class WWFolderCard extends StatelessWidget {
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
         child: ListTile(
           contentPadding: const EdgeInsets.only(left: 20),
-          leading: const Icon(Icons.folder, color: Colors.black54),
+          leading: const Icon(Icons.file_copy, color: Colors.black54),
           title: Row(
             children: [
-              Text(folder.name ?? "",
+              Text(file.name ?? "",
                   overflow: TextOverflow.ellipsis,
                   style: Theme.of(context).textTheme.bodySmall),
               loading == true
@@ -46,21 +51,42 @@ class WWFolderCard extends StatelessWidget {
                   : const SizedBox.shrink()
             ],
           ),
+          subtitle: Observer(builder: (context) {
+            final res = vmTeam.expiryFileResponse;
+            return Row(
+              children: [
+                Text("Expiry Date: ",
+                    overflow: TextOverflow.ellipsis,
+                    style: Theme.of(context).textTheme.bodySmall),
+                res.loading
+                    ? const CupertinoActivityIndicator()
+                    : Text(file.expiry_date ?? "",
+                        overflow: TextOverflow.ellipsis,
+                        style: Theme.of(context).textTheme.bodySmall),
+              ],
+            );
+          }),
           trailing: SizedBox(
-            width: 80.w,
+            width: 110.w,
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 CommonIconBtnWidget(
                   icon: Icons.edit,
                   onTap: () => showCreateEditDialog(context,
                       createEditTap: editTap,
-                      folderName: folderName,
+                      folderName: fileName,
                       status: FolderEditCreate.edit),
                 ),
                 CommonIconBtnWidget(
                   icon: Icons.delete_forever,
                   onTap: () => showDeleteDialog(context, deleteTap: deleteTap),
                 ),
+                datePicker(
+                    context,
+                    vmTeam.selectedExpiryDate,
+                    (date) => vmTeam.expiryDatePickerFn(context, date,
+                        file.id ?? 1, employeeID, parentFolderId))
               ],
             ),
           ),
@@ -100,50 +126,4 @@ class WWFolderCard extends StatelessWidget {
       },
     );
   }
-}
-
-void showCreateEditDialog(BuildContext context,
-    {required Function(String value) createEditTap,
-    String? folderName,
-    FolderEditCreate status = FolderEditCreate.create}) {
-  TextEditingController controller = TextEditingController(text: folderName);
-
-  showDialog(
-    context: context,
-    builder: (BuildContext context) {
-      return AlertDialog(
-        title: status == FolderEditCreate.create
-            ? const Text('New Folder')
-            : const Text('Rename'),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            const SizedBox(height: 17),
-            WWTextField(
-              controller: controller,
-              hintText: 'Untitled folder',
-            ),
-          ],
-        ),
-        actions: <Widget>[
-          TextButton(
-            child: const Text('Cancel', style: TextStyle(color: Colors.black)),
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-          ),
-          TextButton(
-              child: Text(
-                status == FolderEditCreate.create ? 'Create' : 'Rename',
-                style: const TextStyle(color: Colors.black),
-              ),
-              onPressed: () {
-                createEditTap(controller.text);
-                Navigator.of(context).pop();
-              })
-        ],
-      );
-    },
-  );
 }

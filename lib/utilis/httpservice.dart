@@ -77,6 +77,7 @@ class HttpService {
     // if (method != null) {
     MultipartRequest request = MultipartRequest(method!, Uri.parse(url));
     customPrint(content: url, name: "multiPart url");
+    customPrint(content: data.toString(), name: "multiPart payload");
     // }
 
     return tryCatch(null, () async {

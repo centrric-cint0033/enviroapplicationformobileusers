@@ -16,7 +16,7 @@ import 'package:enviro_mobile_application/model/02_sales/sales_model/sales_model
 import 'package:enviro_mobile_application/model/03_vehicle/vehicle_model/vehicle_model.dart'
     as _i42;
 import 'package:enviro_mobile_application/model/04_ohs/oh&s_resp_model.dart'
-    as _i36;
+    as _i37;
 import 'package:enviro_mobile_application/model/10_team/team_profile_employee_details_res_model/team_profile_employee_details_res_model.dart'
     as _i41;
 import 'package:enviro_mobile_application/view/01_auth/login_page.dart' as _i9;
@@ -85,7 +85,7 @@ import 'package:enviro_mobile_application/view/intranet_page/intranet_page.dart'
     as _i7;
 import 'package:enviro_mobile_application/view_model/10_site/site_view_model.dart'
     as _i40;
-import 'package:flutter/cupertino.dart' as _i37;
+import 'package:flutter/cupertino.dart' as _i36;
 import 'package:flutter/material.dart' as _i35;
 
 abstract class $AppRouter extends _i34.RootStackRouter {
@@ -409,7 +409,7 @@ class CurrentJobStatusRoute extends _i34.PageRouteInfo<void> {
 /// [_i3.EmployeeFilesPage]
 class EmployeeFilesRoute extends _i34.PageRouteInfo<EmployeeFilesRouteArgs> {
   EmployeeFilesRoute({
-    _i35.Key? key,
+    _i36.Key? key,
     num? employeeId,
     String? folderName,
     num? folderId,
@@ -439,7 +439,7 @@ class EmployeeFilesRouteArgs {
     this.folderId,
   });
 
-  final _i35.Key? key;
+  final _i36.Key? key;
 
   final num? employeeId;
 
@@ -626,7 +626,7 @@ class NotificationDetailRoute
     extends _i34.PageRouteInfo<NotificationDetailRouteArgs> {
   NotificationDetailRoute({
     _i35.Key? key,
-    required _i36.OhsRespModel data,
+    required _i37.OhsRespModel data,
     List<_i34.PageRouteInfo>? children,
   }) : super(
           NotificationDetailRoute.name,
@@ -651,7 +651,7 @@ class NotificationDetailRouteArgs {
 
   final _i35.Key? key;
 
-  final _i36.OhsRespModel data;
+  final _i37.OhsRespModel data;
 
   @override
   String toString() {
@@ -678,7 +678,7 @@ class NotificationRoute extends _i34.PageRouteInfo<void> {
 class OhsDetailRoute extends _i34.PageRouteInfo<OhsDetailRouteArgs> {
   OhsDetailRoute({
     _i35.Key? key,
-    required _i36.OhsRespModel data,
+    required _i37.OhsRespModel data,
     List<_i34.PageRouteInfo>? children,
   }) : super(
           OhsDetailRoute.name,
@@ -703,7 +703,7 @@ class OhsDetailRouteArgs {
 
   final _i35.Key? key;
 
-  final _i36.OhsRespModel data;
+  final _i37.OhsRespModel data;
 
   @override
   String toString() {
@@ -759,7 +759,7 @@ class ProfileCreationRouteArgs {
 /// [_i16.SalesDetailPage]
 class SalesDetailRoute extends _i34.PageRouteInfo<SalesDetailRouteArgs> {
   SalesDetailRoute({
-    _i37.Key? key,
+    _i36.Key? key,
     required _i38.SalesModel? data,
     List<_i34.PageRouteInfo>? children,
   }) : super(
@@ -783,7 +783,7 @@ class SalesDetailRouteArgs {
     required this.data,
   });
 
-  final _i37.Key? key;
+  final _i36.Key? key;
 
   final _i38.SalesModel? data;
 

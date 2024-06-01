@@ -15,6 +15,7 @@ import 'package:enviro_mobile_application/widgets/cm_show_toast.dart';
 import 'package:enviro_mobile_application/widgets/ww_popup_error.dart';
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
+import 'package:intl/intl.dart';
 import 'package:mobx/mobx.dart';
 
 part 'team_view_model.g.dart';
@@ -49,7 +50,7 @@ abstract class TeamViewModelBase with Store {
   ApiResponse<FolderListModel> teamFoldersResponse2 =
       ApiResponse<FolderListModel>();
   @observable
-  ApiResponse addFolderResponse = ApiResponse<FolderListModel>();
+  ApiResponse addFolderResponse = ApiResponse();
   @observable
   ApiResponse<String> deleteFolderResponse = ApiResponse<String>();
   @observable
@@ -64,7 +65,13 @@ abstract class TeamViewModelBase with Store {
   @observable
   ApiResponse editTeamResponse = ApiResponse<CreateTeamReqModel>();
   @observable
-  ApiResponse addFileResponse = ApiResponse<FolderListModel>();
+  ApiResponse addFileResponse = ApiResponse();
+  @observable
+  ApiResponse<String> editFileResponse = ApiResponse<String>();
+  @observable
+  ApiResponse<String> deleteFileResponse = ApiResponse<String>();
+  @observable
+  ApiResponse expiryFileResponse = ApiResponse<FolderListModel>();
   @observable
   ImageFilePickerModel? profileImage;
   @observable
@@ -88,6 +95,8 @@ abstract class TeamViewModelBase with Store {
   @observable
   DateTime? selectedLicenceAlertDate;
   @observable
+  DateTime? selectedExpiryDate;
+  @observable
   List<String> employmentStatusList = ["full_time", "part_time", "casual"];
   @observable
   Designation? selectedDesignation;
@@ -109,6 +118,11 @@ abstract class TeamViewModelBase with Store {
   String? selectedFileName;
   @observable
   String? selectedFilePath;
+  @observable
+  int? loadinIndexFolder;
+  @observable
+  int? loadinIndexFile;
+
   TextEditingController textFolderAddController = TextEditingController();
   TextEditingController textFolderEditController = TextEditingController();
   TextEditingController textEditTeamNameController = TextEditingController();
@@ -150,51 +164,107 @@ abstract class TeamViewModelBase with Store {
   }
 
   @action
-  Future<void> getCurrentEmployee() async {
-    try {
-      currentEmployeeResponse =
-          currentEmployeeResponse.copyWith(errors: null, loading: true);
-      final result = await teamService.getCurrentEmployee();
-      return result.fold(
-        (l) {
-          currentEmployeeResponse =
-              currentEmployeeResponse.copyWith(errors: l, loading: false);
-        },
-        (r) {
-          currentEmployeeResponse = currentEmployeeResponse.copyWith(
-              data: r, errors: null, loading: false);
-        },
-      );
-    } catch (e) {
-      customPrint(content: e, name: 'Error getCurrentEmployee');
-    } finally {
-      currentEmployeeResponse =
-          currentEmployeeResponse.copyWith(loading: false);
-    }
+  Future<void> getCurrentEmployee({int? page}) async {
+    currentEmployeeResponse = currentEmployeeResponse.copyWith(
+      errors: null,
+      loading: true,
+      paginationLoading: page != null,
+    );
+    final result = await teamService.getCurrentEmployee(
+      page: page,
+    );
+    return result.fold(
+      (l) {
+        currentEmployeeResponse = currentEmployeeResponse.copyWith(
+          errors: l,
+          loading: false,
+          paginationLoading: false,
+        );
+      },
+      (r) {
+        List<TeamResModel> empolyees =
+            currentEmployeeResponse.data?.toList() ?? [];
+
+        empolyees.addAll(r);
+
+        currentEmployeeResponse = currentEmployeeResponse.copyWith(
+          data: empolyees,
+          errors: null,
+          loading: false,
+          pageNo: page ?? 1,
+          paginationLoading: false,
+          pagination: r.length == 10,
+        );
+      },
+    );
+  }
+
+  ScrollController currentEmployeeController = ScrollController();
+
+  void currentEmployeePagination() {
+    currentEmployeeController.addListener(() {
+      if (currentEmployeeController.position.pixels ==
+              currentEmployeeController.position.maxScrollExtent &&
+          !currentEmployeeController.position.outOfRange &&
+          currentEmployeeResponse.pagination &&
+          !currentEmployeeResponse.paginationLoading) {
+        int pageNo = currentEmployeeResponse.pageNo + 1;
+        getCurrentEmployee(page: pageNo);
+        currentEmployeeResponse.copyWith(loading: false);
+      }
+    });
   }
 
   @action
-  Future<void> getTerminatedEmployee() async {
-    try {
-      terminatedEmployeeResponse =
-          terminatedEmployeeResponse.copyWith(errors: null, loading: true);
-      final result = await teamService.getTerminatedEmployee();
-      return result.fold(
-        (l) {
-          terminatedEmployeeResponse =
-              terminatedEmployeeResponse.copyWith(errors: l, loading: false);
-        },
-        (r) {
-          terminatedEmployeeResponse = terminatedEmployeeResponse.copyWith(
-              data: r, errors: null, loading: false);
-        },
-      );
-    } catch (e) {
-      customPrint(content: e, name: 'Error getTerminatedEmployee');
-    } finally {
-      terminatedEmployeeResponse =
-          terminatedEmployeeResponse.copyWith(loading: false);
-    }
+  Future<void> getTerminatedEmployee({int? page}) async {
+    terminatedEmployeeResponse = terminatedEmployeeResponse.copyWith(
+      errors: null,
+      loading: true,
+      paginationLoading: page != null,
+    );
+    final result = await teamService.getTerminatedEmployee(
+      page: page,
+    );
+    return result.fold(
+      (l) {
+        terminatedEmployeeResponse = terminatedEmployeeResponse.copyWith(
+          errors: l,
+          loading: false,
+          paginationLoading: false,
+        );
+      },
+      (r) {
+        List<TeamResModel> empolyees =
+            terminatedEmployeeResponse.data?.toList() ?? [];
+
+        empolyees.addAll(r);
+
+        terminatedEmployeeResponse = terminatedEmployeeResponse.copyWith(
+          data: r,
+          errors: null,
+          loading: false,
+          pageNo: page ?? 1,
+          paginationLoading: false,
+          pagination: r.length == 10,
+        );
+      },
+    );
+  }
+
+  ScrollController terminatedEmployeeController = ScrollController();
+
+  void terminatedEmployeePagination() {
+    terminatedEmployeeController.addListener(() {
+      if (terminatedEmployeeController.position.pixels ==
+              terminatedEmployeeController.position.maxScrollExtent &&
+          !terminatedEmployeeController.position.outOfRange &&
+          terminatedEmployeeResponse.pagination &&
+          !terminatedEmployeeResponse.paginationLoading) {
+        int pageNo = terminatedEmployeeResponse.pageNo + 1;
+        getTerminatedEmployee(page: pageNo);
+        terminatedEmployeeResponse.copyWith(loading: false);
+      }
+    });
   }
 
   @action
@@ -330,7 +400,6 @@ abstract class TeamViewModelBase with Store {
       {required String name,
       required num employee,
       required num parentfolder,
-      String? files,
       required BuildContext context}) async {
     addFolderResponse = addFolderResponse.copyWith(error: null, loading: true);
 
@@ -338,19 +407,23 @@ abstract class TeamViewModelBase with Store {
       "name": name,
       "employee": employee.toString(),
       "parent_folder": parentfolder.toString(),
-      "file": files ?? ""
     });
+
     return result.fold(
       (l) {
         addFolderResponse =
             addFolderResponse.copyWith(errors: l, loading: false);
+        popupErrorData(context, mainFailure: l);
       },
-      (r) {
-        addFolderResponse =
-            addFolderResponse.copyWith(data: r, error: null, loading: false);
+      (r) async {
         getTeamFolders(id: employee, parentFolderId: parentfolder);
+        teamFoldersResponse2 = teamFoldersResponse2.copyWith(
+          error: null,
+          loading: false,
+        );
+        addFolderResponse =
+            addFolderResponse.copyWith(error: null, loading: false);
         vmTeam.textFolderAddController.clear();
-        // context.router.pop();
       },
     );
   }
@@ -361,24 +434,27 @@ abstract class TeamViewModelBase with Store {
       required BuildContext context,
       required num employeeID,
       required num parentFolderId}) async {
-    deleteFolderResponse =
-        deleteFolderResponse.copyWith(error: null, loading: true);
+    addFolderResponse = addFolderResponse.copyWith(error: null, loading: true);
 
     final result = await teamService.deleteTeamFolders(id: folderId);
     return result.fold(
       (l) {
-        deleteFolderResponse = deleteFolderResponse.copyWith(
+        addFolderResponse = addFolderResponse.copyWith(
           errors: l,
           loading: false,
         );
       },
       (r) {
-        deleteFolderResponse = deleteFolderResponse.copyWith(
+        getTeamFolders(id: employeeID, parentFolderId: parentFolderId);
+        teamFoldersResponse2 = teamFoldersResponse2.copyWith(
+          error: null,
+          loading: false,
+        );
+        addFolderResponse = addFolderResponse.copyWith(
           data: r,
           error: null,
           loading: false,
         );
-        getTeamFolders(id: employeeID, parentFolderId: parentFolderId);
       },
     );
   }
@@ -404,12 +480,16 @@ abstract class TeamViewModelBase with Store {
         );
       },
       (r) {
+        getTeamFolders(id: employeeID, parentFolderId: parentFolderId);
+        teamFoldersResponse2 = teamFoldersResponse2.copyWith(
+          error: null,
+          loading: false,
+        );
         editFolderResponse = editFolderResponse.copyWith(
           data: r,
           error: null,
           loading: false,
         );
-        getTeamFolders(id: employeeID, parentFolderId: parentFolderId);
       },
     );
   }
@@ -543,6 +623,7 @@ abstract class TeamViewModelBase with Store {
     return result.fold(
       (l) {
         addFileResponse = addFileResponse.copyWith(errors: l, loading: false);
+        popupErrorData(context, mainFailure: l);
       },
       (r) {
         addFileResponse =
@@ -550,6 +631,103 @@ abstract class TeamViewModelBase with Store {
         getTeamFolders(id: employee, parentFolderId: parentfolder);
         vmTeam.textFolderAddController.clear();
         // context.router.pop();
+      },
+    );
+  }
+
+  @action
+  Future<void> editTeamFilesApi({
+    required int filesId,
+    required int parentFolderId,
+    required String name,
+    required BuildContext context,
+    required num employeeID,
+  }) async {
+    editFileResponse = editFileResponse.copyWith(error: null, loading: true);
+
+    final result =
+        await teamService.editTeamFiles(data: {"name": name}, id: filesId);
+    return result.fold(
+      (l) {
+        editFileResponse = editFileResponse.copyWith(
+          errors: l,
+          loading: false,
+        );
+        popupErrorData(context, mainFailure: l);
+      },
+      (r) {
+        getTeamFolders(id: employeeID, parentFolderId: parentFolderId);
+        editFileResponse = editFileResponse.copyWith(
+          data: r,
+          error: null,
+          loading: false,
+        );
+        teamFoldersResponse2 = teamFoldersResponse2.copyWith(
+          error: null,
+          loading: false,
+        );
+      },
+    );
+  }
+
+  @action
+  Future<void> deleteTeamFilesApi(
+      {required int fileId,
+      required BuildContext context,
+      required num employeeID,
+      required num parentFolderId}) async {
+    addFileResponse = addFileResponse.copyWith(error: null, loading: true);
+
+    final result =
+        await teamService.deleteTeamFiles(fileId: fileId, id: parentFolderId);
+    return result.fold(
+      (l) {
+        addFileResponse = addFileResponse.copyWith(
+          errors: l,
+          loading: false,
+        );
+      },
+      (r) {
+        getTeamFolders(id: employeeID, parentFolderId: parentFolderId);
+        teamFoldersResponse2 = teamFoldersResponse2.copyWith(
+          error: null,
+          loading: false,
+        );
+        addFileResponse = addFileResponse.copyWith(
+          data: r,
+          error: null,
+          loading: false,
+        );
+      },
+    );
+  }
+
+  @action
+  Future<void> exipryDateFileApi(
+      {required int fileId,
+      required String expiry,
+      required BuildContext context,
+      required num employeeID,
+      required num parentFolderId}) async {
+    expiryFileResponse =
+        expiryFileResponse.copyWith(error: null, loading: true);
+    final result =
+        await teamService.expiryDateFiles(fileId: fileId, expiry: expiry);
+
+    return result.fold(
+      (l) {
+        expiryFileResponse =
+            expiryFileResponse.copyWith(errors: l, loading: false);
+        popupErrorData(context, mainFailure: l);
+      },
+      (r) async {
+        getTeamFolders(id: employeeID, parentFolderId: parentFolderId);
+        teamFoldersResponse2 = teamFoldersResponse2.copyWith(
+          error: null,
+          loading: false,
+        );
+        expiryFileResponse =
+            expiryFileResponse.copyWith(error: null, loading: false);
       },
     );
   }
@@ -587,6 +765,19 @@ abstract class TeamViewModelBase with Store {
   @action
   datePickerFn7(date) {
     selectedLicenceAlertDate = date;
+  }
+
+  @action
+  expiryDatePickerFn(BuildContext context, date, int fileId, num employeeID,
+      num parentFolderId) {
+    selectedExpiryDate = date;
+    String dateString = DateFormat('yyyy-MM-dd').format(selectedExpiryDate!);
+    exipryDateFileApi(
+        fileId: fileId,
+        expiry: dateString,
+        context: context,
+        employeeID: employeeID,
+        parentFolderId: parentFolderId);
   }
 
   @action

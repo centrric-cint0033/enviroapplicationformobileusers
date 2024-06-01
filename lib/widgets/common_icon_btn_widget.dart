@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CommonIconBtnWidget extends StatelessWidget {
   final Color? color;
@@ -17,7 +18,7 @@ class CommonIconBtnWidget extends StatelessWidget {
       onPressed: onTap,
       icon: Icon(
         icon,
-        size: 19,
+        size: 16.w,
         color: color ?? Colors.black54,
       ),
     );

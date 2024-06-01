@@ -6,6 +6,7 @@ import 'package:enviro_mobile_application/view/08_team/team_widgets/01_team_widg
 import 'package:enviro_mobile_application/view_model/08_team/team_view_model.dart';
 import 'package:enviro_mobile_application/widgets/ww_search_widget.dart';
 import 'package:enviro_mobile_application/widgets/ww_response_handler.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
@@ -14,6 +15,11 @@ class TerminatedEmployeeTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    WidgetsBinding.instance.addPostFrameCallback(
+      (timeStamp) {
+        vmTeam.terminatedEmployeePagination();
+      },
+    );
     return Scaffold(
         body: Column(children: [
       gapField,
@@ -27,37 +33,46 @@ class TerminatedEmployeeTab extends StatelessWidget {
       ),
       gapField,
       Observer(builder: (_) {
+        final res = vmTeam.terminatedEmployeeResponse;
         return Expanded(
             child: WWResponseHandler(
-                data: vmTeam.terminatedEmployeeResponse,
+                data: res,
                 isEmpty:
                     vmTeam.terminatedEmployeeResponse.data?.isEmpty ?? true,
                 onTap: () => vmTeam.getTerminatedEmployee(),
-                child: const TerminatedEmployeeListWidget()));
+                child: TerminatedEmployeeListWidget(loading: res.loading)));
       }),
     ]));
   }
 }
 
 class TerminatedEmployeeListWidget extends StatelessWidget {
-  const TerminatedEmployeeListWidget({super.key});
-
+  const TerminatedEmployeeListWidget({super.key, required this.loading});
+  final bool loading;
   @override
   Widget build(BuildContext context) {
     return ListView.separated(
-        itemCount: vmTeam.terminatedEmployeeResponse.data?.length ?? 0,
+        itemCount: vmTeam.terminatedEmployeeResponse.data!.length + 1,
         separatorBuilder: (BuildContext context, int index) => sized0hx10,
-        itemBuilder: (context, index) => InkWell(
-                child: listTile(context,
-                    data: vmTeam.terminatedEmployeeResponse.data?[index],
-                    onTap: () {
-              vmTeam.getTeamProfileEmployeeDetails(
-                  employeeID:
-                      vmTeam.terminatedEmployeeResponse.data?[index].id ?? 0);
-              vmTeam.getTeamFolders(
-                  id: vmTeam.terminatedEmployeeResponse.data?[index].id ?? 0,
-                  parentFolderId: 1);
-              context.router.push(const TeamProfileRoute());
-            })));
+        controller: vmTeam.terminatedEmployeeController,
+        itemBuilder: (context, index) {
+          return index == vmTeam.terminatedEmployeeResponse.data?.length
+              ? loading
+                  ? const CupertinoActivityIndicator()
+                  : const SizedBox.shrink()
+              : listTile(context,
+                  data: vmTeam.terminatedEmployeeResponse.data?[index],
+                  onTap: () {
+                  vmTeam.getTeamProfileEmployeeDetails(
+                      employeeID:
+                          vmTeam.terminatedEmployeeResponse.data?[index].id ??
+                              0);
+                  vmTeam.getTeamFolders(
+                      id: vmTeam.terminatedEmployeeResponse.data?[index].id ??
+                          0,
+                      parentFolderId: 1);
+                  context.router.push(const TeamProfileRoute());
+                });
+        });
   }
 }

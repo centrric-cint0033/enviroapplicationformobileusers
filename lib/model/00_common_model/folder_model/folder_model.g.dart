@@ -32,7 +32,7 @@ _$FolderModelImpl _$$FolderModelImplFromJson(Map<String, dynamic> json) =>
       folders: (json['folders'] as List<dynamic>?)
           ?.map((e) => FolderModel.fromJson(e as Map<String, dynamic>))
           .toList(),
-      expiryDate: json['expiryDate'],
+      expiry_date: json['expiry_date'] as String?,
     );
 
 Map<String, dynamic> _$$FolderModelImplToJson(_$FolderModelImpl instance) =>
@@ -43,5 +43,5 @@ Map<String, dynamic> _$$FolderModelImplToJson(_$FolderModelImpl instance) =>
       'url': instance.url,
       'files': instance.files,
       'folders': instance.folders,
-      'expiryDate': instance.expiryDate,
+      'expiry_date': instance.expiry_date,
     };

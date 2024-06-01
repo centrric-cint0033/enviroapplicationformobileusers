@@ -173,7 +173,7 @@ mixin _$FolderModel {
   String? get url => throw _privateConstructorUsedError;
   List<FolderModel>? get files => throw _privateConstructorUsedError;
   List<FolderModel>? get folders => throw _privateConstructorUsedError;
-  dynamic get expiryDate => throw _privateConstructorUsedError;
+  String? get expiry_date => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -194,7 +194,7 @@ abstract class $FolderModelCopyWith<$Res> {
       String? url,
       List<FolderModel>? files,
       List<FolderModel>? folders,
-      dynamic expiryDate});
+      String? expiry_date});
 }
 
 /// @nodoc
@@ -216,7 +216,7 @@ class _$FolderModelCopyWithImpl<$Res, $Val extends FolderModel>
     Object? url = freezed,
     Object? files = freezed,
     Object? folders = freezed,
-    Object? expiryDate = freezed,
+    Object? expiry_date = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -243,10 +243,10 @@ class _$FolderModelCopyWithImpl<$Res, $Val extends FolderModel>
           ? _value.folders
           : folders // ignore: cast_nullable_to_non_nullable
               as List<FolderModel>?,
-      expiryDate: freezed == expiryDate
-          ? _value.expiryDate
-          : expiryDate // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+      expiry_date: freezed == expiry_date
+          ? _value.expiry_date
+          : expiry_date // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -266,7 +266,7 @@ abstract class _$$FolderModelImplCopyWith<$Res>
       String? url,
       List<FolderModel>? files,
       List<FolderModel>? folders,
-      dynamic expiryDate});
+      String? expiry_date});
 }
 
 /// @nodoc
@@ -286,7 +286,7 @@ class __$$FolderModelImplCopyWithImpl<$Res>
     Object? url = freezed,
     Object? files = freezed,
     Object? folders = freezed,
-    Object? expiryDate = freezed,
+    Object? expiry_date = freezed,
   }) {
     return _then(_$FolderModelImpl(
       id: freezed == id
@@ -313,10 +313,10 @@ class __$$FolderModelImplCopyWithImpl<$Res>
           ? _value._folders
           : folders // ignore: cast_nullable_to_non_nullable
               as List<FolderModel>?,
-      expiryDate: freezed == expiryDate
-          ? _value.expiryDate
-          : expiryDate // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+      expiry_date: freezed == expiry_date
+          ? _value.expiry_date
+          : expiry_date // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -331,7 +331,7 @@ class _$FolderModelImpl implements _FolderModel {
       this.url,
       final List<FolderModel>? files,
       final List<FolderModel>? folders,
-      this.expiryDate})
+      this.expiry_date})
       : _files = files,
         _folders = folders;
 
@@ -367,11 +367,11 @@ class _$FolderModelImpl implements _FolderModel {
   }
 
   @override
-  final dynamic expiryDate;
+  final String? expiry_date;
 
   @override
   String toString() {
-    return 'FolderModel(id: $id, name: $name, type: $type, url: $url, files: $files, folders: $folders, expiryDate: $expiryDate)';
+    return 'FolderModel(id: $id, name: $name, type: $type, url: $url, files: $files, folders: $folders, expiry_date: $expiry_date)';
   }
 
   @override
@@ -385,8 +385,8 @@ class _$FolderModelImpl implements _FolderModel {
             (identical(other.url, url) || other.url == url) &&
             const DeepCollectionEquality().equals(other._files, _files) &&
             const DeepCollectionEquality().equals(other._folders, _folders) &&
-            const DeepCollectionEquality()
-                .equals(other.expiryDate, expiryDate));
+            (identical(other.expiry_date, expiry_date) ||
+                other.expiry_date == expiry_date));
   }
 
   @JsonKey(ignore: true)
@@ -399,7 +399,7 @@ class _$FolderModelImpl implements _FolderModel {
       url,
       const DeepCollectionEquality().hash(_files),
       const DeepCollectionEquality().hash(_folders),
-      const DeepCollectionEquality().hash(expiryDate));
+      expiry_date);
 
   @JsonKey(ignore: true)
   @override
@@ -423,7 +423,7 @@ abstract class _FolderModel implements FolderModel {
       final String? url,
       final List<FolderModel>? files,
       final List<FolderModel>? folders,
-      final dynamic expiryDate}) = _$FolderModelImpl;
+      final String? expiry_date}) = _$FolderModelImpl;
 
   factory _FolderModel.fromJson(Map<String, dynamic> json) =
       _$FolderModelImpl.fromJson;
@@ -441,7 +441,7 @@ abstract class _FolderModel implements FolderModel {
   @override
   List<FolderModel>? get folders;
   @override
-  dynamic get expiryDate;
+  String? get expiry_date;
   @override
   @JsonKey(ignore: true)
   _$$FolderModelImplCopyWith<_$FolderModelImpl> get copyWith =>

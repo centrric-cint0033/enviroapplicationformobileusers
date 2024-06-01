@@ -227,6 +227,54 @@ mixin _$TeamViewModel on TeamViewModelBase, Store {
     });
   }
 
+  late final _$editFileResponseAtom =
+      Atom(name: 'TeamViewModelBase.editFileResponse', context: context);
+
+  @override
+  ApiResponse<String> get editFileResponse {
+    _$editFileResponseAtom.reportRead();
+    return super.editFileResponse;
+  }
+
+  @override
+  set editFileResponse(ApiResponse<String> value) {
+    _$editFileResponseAtom.reportWrite(value, super.editFileResponse, () {
+      super.editFileResponse = value;
+    });
+  }
+
+  late final _$deleteFileResponseAtom =
+      Atom(name: 'TeamViewModelBase.deleteFileResponse', context: context);
+
+  @override
+  ApiResponse<String> get deleteFileResponse {
+    _$deleteFileResponseAtom.reportRead();
+    return super.deleteFileResponse;
+  }
+
+  @override
+  set deleteFileResponse(ApiResponse<String> value) {
+    _$deleteFileResponseAtom.reportWrite(value, super.deleteFileResponse, () {
+      super.deleteFileResponse = value;
+    });
+  }
+
+  late final _$expiryFileResponseAtom =
+      Atom(name: 'TeamViewModelBase.expiryFileResponse', context: context);
+
+  @override
+  ApiResponse<dynamic> get expiryFileResponse {
+    _$expiryFileResponseAtom.reportRead();
+    return super.expiryFileResponse;
+  }
+
+  @override
+  set expiryFileResponse(ApiResponse<dynamic> value) {
+    _$expiryFileResponseAtom.reportWrite(value, super.expiryFileResponse, () {
+      super.expiryFileResponse = value;
+    });
+  }
+
   late final _$profileImageAtom =
       Atom(name: 'TeamViewModelBase.profileImage', context: context);
 
@@ -405,6 +453,22 @@ mixin _$TeamViewModel on TeamViewModelBase, Store {
     _$selectedLicenceAlertDateAtom
         .reportWrite(value, super.selectedLicenceAlertDate, () {
       super.selectedLicenceAlertDate = value;
+    });
+  }
+
+  late final _$selectedExpiryDateAtom =
+      Atom(name: 'TeamViewModelBase.selectedExpiryDate', context: context);
+
+  @override
+  DateTime? get selectedExpiryDate {
+    _$selectedExpiryDateAtom.reportRead();
+    return super.selectedExpiryDate;
+  }
+
+  @override
+  set selectedExpiryDate(DateTime? value) {
+    _$selectedExpiryDateAtom.reportWrite(value, super.selectedExpiryDate, () {
+      super.selectedExpiryDate = value;
     });
   }
 
@@ -591,22 +655,54 @@ mixin _$TeamViewModel on TeamViewModelBase, Store {
     });
   }
 
+  late final _$loadinIndexFolderAtom =
+      Atom(name: 'TeamViewModelBase.loadinIndexFolder', context: context);
+
+  @override
+  int? get loadinIndexFolder {
+    _$loadinIndexFolderAtom.reportRead();
+    return super.loadinIndexFolder;
+  }
+
+  @override
+  set loadinIndexFolder(int? value) {
+    _$loadinIndexFolderAtom.reportWrite(value, super.loadinIndexFolder, () {
+      super.loadinIndexFolder = value;
+    });
+  }
+
+  late final _$loadinIndexFileAtom =
+      Atom(name: 'TeamViewModelBase.loadinIndexFile', context: context);
+
+  @override
+  int? get loadinIndexFile {
+    _$loadinIndexFileAtom.reportRead();
+    return super.loadinIndexFile;
+  }
+
+  @override
+  set loadinIndexFile(int? value) {
+    _$loadinIndexFileAtom.reportWrite(value, super.loadinIndexFile, () {
+      super.loadinIndexFile = value;
+    });
+  }
+
   late final _$getCurrentEmployeeAsyncAction =
       AsyncAction('TeamViewModelBase.getCurrentEmployee', context: context);
 
   @override
-  Future<void> getCurrentEmployee() {
+  Future<void> getCurrentEmployee({int? page}) {
     return _$getCurrentEmployeeAsyncAction
-        .run(() => super.getCurrentEmployee());
+        .run(() => super.getCurrentEmployee(page: page));
   }
 
   late final _$getTerminatedEmployeeAsyncAction =
       AsyncAction('TeamViewModelBase.getTerminatedEmployee', context: context);
 
   @override
-  Future<void> getTerminatedEmployee() {
+  Future<void> getTerminatedEmployee({int? page}) {
     return _$getTerminatedEmployeeAsyncAction
-        .run(() => super.getTerminatedEmployee());
+        .run(() => super.getTerminatedEmployee(page: page));
   }
 
   late final _$getTeamProfileEmployeeDetailsAsyncAction = AsyncAction(
@@ -656,13 +752,11 @@ mixin _$TeamViewModel on TeamViewModelBase, Store {
       {required String name,
       required num employee,
       required num parentfolder,
-      String? files,
       required BuildContext context}) {
     return _$addTeamFolderAsyncAction.run(() => super.addTeamFolder(
         name: name,
         employee: employee,
         parentfolder: parentfolder,
-        files: files,
         context: context));
   }
 
@@ -765,6 +859,58 @@ mixin _$TeamViewModel on TeamViewModelBase, Store {
         context: context));
   }
 
+  late final _$editTeamFilesApiAsyncAction =
+      AsyncAction('TeamViewModelBase.editTeamFilesApi', context: context);
+
+  @override
+  Future<void> editTeamFilesApi(
+      {required int filesId,
+      required int parentFolderId,
+      required String name,
+      required BuildContext context,
+      required num employeeID}) {
+    return _$editTeamFilesApiAsyncAction.run(() => super.editTeamFilesApi(
+        filesId: filesId,
+        parentFolderId: parentFolderId,
+        name: name,
+        context: context,
+        employeeID: employeeID));
+  }
+
+  late final _$deleteTeamFilesApiAsyncAction =
+      AsyncAction('TeamViewModelBase.deleteTeamFilesApi', context: context);
+
+  @override
+  Future<void> deleteTeamFilesApi(
+      {required int fileId,
+      required BuildContext context,
+      required num employeeID,
+      required num parentFolderId}) {
+    return _$deleteTeamFilesApiAsyncAction.run(() => super.deleteTeamFilesApi(
+        fileId: fileId,
+        context: context,
+        employeeID: employeeID,
+        parentFolderId: parentFolderId));
+  }
+
+  late final _$exipryDateFileApiAsyncAction =
+      AsyncAction('TeamViewModelBase.exipryDateFileApi', context: context);
+
+  @override
+  Future<void> exipryDateFileApi(
+      {required int fileId,
+      required String expiry,
+      required BuildContext context,
+      required num employeeID,
+      required num parentFolderId}) {
+    return _$exipryDateFileApiAsyncAction.run(() => super.exipryDateFileApi(
+        fileId: fileId,
+        expiry: expiry,
+        context: context,
+        employeeID: employeeID,
+        parentFolderId: parentFolderId));
+  }
+
   late final _$TeamViewModelBaseActionController =
       ActionController(name: 'TeamViewModelBase', context: context);
 
@@ -846,6 +992,19 @@ mixin _$TeamViewModel on TeamViewModelBase, Store {
   }
 
   @override
+  dynamic expiryDatePickerFn(BuildContext context, dynamic date, int fileId,
+      num employeeID, num parentFolderId) {
+    final _$actionInfo = _$TeamViewModelBaseActionController.startAction(
+        name: 'TeamViewModelBase.expiryDatePickerFn');
+    try {
+      return super.expiryDatePickerFn(
+          context, date, fileId, employeeID, parentFolderId);
+    } finally {
+      _$TeamViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   dynamic employmentStatusonChanged(dynamic newValue) {
     final _$actionInfo = _$TeamViewModelBaseActionController.startAction(
         name: 'TeamViewModelBase.employmentStatusonChanged');
@@ -894,6 +1053,9 @@ deleteEmployeeResponse: ${deleteEmployeeResponse},
 createTeamResponse: ${createTeamResponse},
 editTeamResponse: ${editTeamResponse},
 addFileResponse: ${addFileResponse},
+editFileResponse: ${editFileResponse},
+deleteFileResponse: ${deleteFileResponse},
+expiryFileResponse: ${expiryFileResponse},
 profileImage: ${profileImage},
 profileImageLoader: ${profileImageLoader},
 showDecoration: ${showDecoration},
@@ -905,6 +1067,7 @@ selectedDobAddTeam: ${selectedDobAddTeam},
 selectedJoiningDateAddTeam: ${selectedJoiningDateAddTeam},
 selectedLicenceExpiryDate: ${selectedLicenceExpiryDate},
 selectedLicenceAlertDate: ${selectedLicenceAlertDate},
+selectedExpiryDate: ${selectedExpiryDate},
 employmentStatusList: ${employmentStatusList},
 selectedDesignation: ${selectedDesignation},
 selectedDesignationAddTeam: ${selectedDesignationAddTeam},
@@ -915,7 +1078,9 @@ showDate: ${showDate},
 selectedFileNameLicense: ${selectedFileNameLicense},
 selectedFilePathLicense: ${selectedFilePathLicense},
 selectedFileName: ${selectedFileName},
-selectedFilePath: ${selectedFilePath}
+selectedFilePath: ${selectedFilePath},
+loadinIndexFolder: ${loadinIndexFolder},
+loadinIndexFile: ${loadinIndexFile}
     ''';
   }
 }

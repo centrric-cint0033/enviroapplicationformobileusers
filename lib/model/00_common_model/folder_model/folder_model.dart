@@ -21,7 +21,7 @@ class FolderModel with _$FolderModel {
     String? url,
     List<FolderModel>? files,
     List<FolderModel>? folders,
-    dynamic expiryDate,
+    String? expiry_date,
   }) = _FolderModel;
 
   factory FolderModel.fromJson(Map<String, dynamic> json) =>
