@@ -25,7 +25,7 @@ class EmployeeFilesPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: cmnTitleWidget('Empolyee Files'),
+        title: cmnTitleWidget('Employee Files'),
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 15.w),

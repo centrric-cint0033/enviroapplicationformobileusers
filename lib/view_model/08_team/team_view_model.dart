@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:developer';
 import 'package:auto_route/auto_route.dart';
 import 'package:enviro_mobile_application/api_response/api_response.dart';
 import 'package:enviro_mobile_application/model/00_common_model/folder_model/folder_model.dart';
@@ -392,7 +391,6 @@ abstract class TeamViewModelBase with Store {
     required BuildContext context,
     required num employeeID,
   }) async {
-    log(folderId.toString());
     editFolderResponse =
         editFolderResponse.copyWith(error: null, loading: true);
 
