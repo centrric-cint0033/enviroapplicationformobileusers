@@ -66,7 +66,7 @@ mixin _$VehicleModel {
   @JsonKey(name: 'edited_date_time')
   DateTime? get editedDateTime => throw _privateConstructorUsedError;
   String? get date => throw _privateConstructorUsedError;
-  String? get time => throw _privateConstructorUsedError;
+  dynamic? get time => throw _privateConstructorUsedError;
   @JsonKey(name: 'truck_rego')
   String? get truckRego => throw _privateConstructorUsedError;
   @JsonKey(name: 'current_reading_before')
@@ -247,7 +247,7 @@ abstract class $VehicleModelCopyWith<$Res> {
       @JsonKey(name: 'created_date_time') DateTime? createdDateTime,
       @JsonKey(name: 'edited_date_time') DateTime? editedDateTime,
       String? date,
-      String? time,
+      dynamic? time,
       @JsonKey(name: 'truck_rego') String? truckRego,
       @JsonKey(name: 'current_reading_before') String? currentReadingBefore,
       @JsonKey(name: 'reading_after_filling') String? readingAfterFilling,
@@ -584,7 +584,7 @@ class _$VehicleModelCopyWithImpl<$Res, $Val extends VehicleModel>
       time: freezed == time
           ? _value.time
           : time // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic?,
       truckRego: freezed == truckRego
           ? _value.truckRego
           : truckRego // ignore: cast_nullable_to_non_nullable
@@ -938,7 +938,7 @@ abstract class _$$VehicleModelImplCopyWith<$Res>
       @JsonKey(name: 'created_date_time') DateTime? createdDateTime,
       @JsonKey(name: 'edited_date_time') DateTime? editedDateTime,
       String? date,
-      String? time,
+      dynamic? time,
       @JsonKey(name: 'truck_rego') String? truckRego,
       @JsonKey(name: 'current_reading_before') String? currentReadingBefore,
       @JsonKey(name: 'reading_after_filling') String? readingAfterFilling,
@@ -1273,7 +1273,7 @@ class __$$VehicleModelImplCopyWithImpl<$Res>
       time: freezed == time
           ? _value.time
           : time // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic?,
       truckRego: freezed == truckRego
           ? _value.truckRego
           : truckRego // ignore: cast_nullable_to_non_nullable
@@ -1794,7 +1794,7 @@ class _$VehicleModelImpl implements _VehicleModel {
   @override
   final String? date;
   @override
-  final String? time;
+  final dynamic? time;
   @override
   @JsonKey(name: 'truck_rego')
   final String? truckRego;
@@ -2071,7 +2071,7 @@ class _$VehicleModelImpl implements _VehicleModel {
             (identical(other.editedDateTime, editedDateTime) ||
                 other.editedDateTime == editedDateTime) &&
             (identical(other.date, date) || other.date == date) &&
-            (identical(other.time, time) || other.time == time) &&
+            const DeepCollectionEquality().equals(other.time, time) &&
             (identical(other.truckRego, truckRego) ||
                 other.truckRego == truckRego) &&
             (identical(other.currentReadingBefore, currentReadingBefore) ||
@@ -2216,7 +2216,7 @@ class _$VehicleModelImpl implements _VehicleModel {
         createdDateTime,
         editedDateTime,
         date,
-        time,
+        const DeepCollectionEquality().hash(time),
         truckRego,
         currentReadingBefore,
         readingAfterFilling,
@@ -2345,7 +2345,7 @@ abstract class _VehicleModel implements VehicleModel {
       @JsonKey(name: 'created_date_time') final DateTime? createdDateTime,
       @JsonKey(name: 'edited_date_time') final DateTime? editedDateTime,
       final String? date,
-      final String? time,
+      final dynamic? time,
       @JsonKey(name: 'truck_rego') final String? truckRego,
       @JsonKey(name: 'current_reading_before')
       final String? currentReadingBefore,
@@ -2511,7 +2511,7 @@ abstract class _VehicleModel implements VehicleModel {
   @override
   String? get date;
   @override
-  String? get time;
+  dynamic? get time;
   @override
   @JsonKey(name: 'truck_rego')
   String? get truckRego;

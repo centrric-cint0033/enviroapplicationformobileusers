@@ -25,18 +25,6 @@ class SalesDetailPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: cmnTitleWidget('Sales'),
-        actions: [
-          Observer(
-            builder: (context) {
-              return vmSales.saleDetailResponse.loading
-                  ? Padding(
-                      padding: EdgeInsets.only(right: 15.w),
-                      child: const CupertinoActivityIndicator(),
-                    )
-                  : const SizedBox.shrink();
-            },
-          ),
-        ],
       ),
       body: SingleChildScrollView(
         child: Padding(

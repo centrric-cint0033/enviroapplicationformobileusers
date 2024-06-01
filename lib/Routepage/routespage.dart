@@ -16,7 +16,6 @@ class RouteNames {
   static const String teamEditScreen = '/teameditscreen';
   static const String addTeamScreen = '/addteamscreen';
   static const String employeeFilesScreen = '/employeefilesscreen';
-
   static const String siteListPage = '/site_list_page';
   static const String siteDetailPage = '/site_detail_page';
   static const String rintranetinsidepage = '/intranetinsidepage';
@@ -34,5 +33,5 @@ class RouteNames {
   static const String rshedulecommandstatus = '/shedulecommandstatus ';
   static const String rshedulevedeoandphoto = '/shedulevedeoandphoto ';
   static const String salesQuoteDetailListPage = '/sales_quote_detail_list ';
-  static const String rshedulesignaturePage = '/shedulesignaturepage ';
+  static const String vehicleDetailPage = '/vehicle_detail_page ';
 }

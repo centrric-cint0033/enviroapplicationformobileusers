@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:dartz/dartz.dart';
 import 'package:enviro_mobile_application/api_response/api_response.dart';
 import 'package:enviro_mobile_application/model/03_vehicle/vehicle_model/vehicle_model.dart';
 import 'package:enviro_mobile_application/service/03_vehicles/vehicle_service.dart';
@@ -8,6 +9,8 @@ import 'package:enviro_mobile_application/utilis/injection.dart';
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 import 'package:mobx/mobx.dart';
+
+import '../../utilis/main_failure.dart';
 
 part 'vehicle_view_model.g.dart';
 
@@ -59,44 +62,86 @@ abstract class VehicleViewModelBase with Store {
       ApiResponse<List<VehicleModel>>();
 
   @action
-  Future<void> masterTruckApi() async {
+  Future<void> masterTruckApi({int? page}) async {
     if (vehicleTextCtr.text.isNotEmpty) {
       masterTruckSearchServiceApi(vehicleTextCtr.text);
     } else {
-      masterTruckApiResponse =
-          masterTruckApiResponse.copyWith(errors: null, loading: true);
-      final result =
-          await vehicleService.masterTruckServiceApi(vehicleStatusType);
-      return result.fold(
-        (l) {
-          masterTruckApiResponse =
-              masterTruckApiResponse.copyWith(errors: l, loading: false);
-        },
-        (r) {
-          masterTruckApiResponse = masterTruckApiResponse.copyWith(
-              data: r, errors: null, loading: false);
-        },
+      masterTruckApiResponse = masterTruckApiResponse.copyWith(
+        errors: null,
+        loading: page == null,
+        paginationLoading: page != null,
       );
+      final result = await vehicleService
+          .masterTruckServiceApi(vehicleStatusType, page: page);
+      return _commonMasterTruckResultHandler(result: result, page: page);
     }
   }
 
   @action
-  Future<void> masterTruckSearchServiceApi(String value) async {
-    masterTruckApiResponse =
-        masterTruckApiResponse.copyWith(errors: null, loading: true);
+  Future<void> masterTruckSearchServiceApi(String value, {int? page}) async {
+    masterTruckApiResponse = masterTruckApiResponse.copyWith(
+      errors: null,
+      loading: page == null,
+      paginationLoading: page != null,
+    );
 
     final result = await vehicleService.masterTruckSearchServiceApi(
-        vehicleStatusType, value);
-    return result.fold(
+      vehicleStatusType,
+      value,
+    );
+
+    return _commonMasterTruckResultHandler(result: result, page: page);
+  }
+
+  void _commonMasterTruckResultHandler({
+    int? page,
+    required Either<Map<MainFailure, dynamic>, List<VehicleModel>> result,
+  }) {
+    result.fold(
       (l) {
-        masterTruckApiResponse =
-            masterTruckApiResponse.copyWith(errors: l, loading: false);
+        masterTruckApiResponse = masterTruckApiResponse.copyWith(
+          errors: l,
+          loading: false,
+          paginationLoading: false,
+        );
       },
       (r) {
+        List<VehicleModel> list = masterTruckApiResponse.data?.toList() ?? [];
+        if (page == null) {
+          list = r;
+        } else {
+          list.addAll(r);
+        }
+
         masterTruckApiResponse = masterTruckApiResponse.copyWith(
-            data: r, errors: null, loading: false);
+          data: list,
+          errors: null,
+          loading: false,
+          pageNo: page ?? 1,
+          paginationLoading: false,
+          pagination: r.length == 10,
+        );
       },
     );
+  }
+
+  ScrollController masterTruckController = ScrollController();
+
+  void masterTruckPagination() {
+    masterTruckController.addListener(() {
+      if (masterTruckController.position.pixels ==
+              masterTruckController.position.maxScrollExtent &&
+          !masterTruckController.position.outOfRange &&
+          masterTruckApiResponse.pagination &&
+          !masterTruckApiResponse.paginationLoading) {
+        int pageNo = masterTruckApiResponse.pageNo + 1;
+        if (vehicleTextCtr.text.isNotEmpty) {
+          masterTruckSearchServiceApi(vehicleTextCtr.text, page: pageNo);
+          return;
+        }
+        masterTruckApi(page: pageNo);
+      }
+    });
   }
 
 //     _  _       _  _       _  _       _  _       _  _       _  _       _  _       _  _
@@ -110,89 +155,187 @@ abstract class VehicleViewModelBase with Store {
       ApiResponse<List<VehicleModel>>();
 
   @action
-  Future<void> masterCarApi() async {
+  Future<void> masterCarApi({int? page}) async {
     if (vehicleTextCtr.text.isNotEmpty) {
       masterCarSearchApi(vehicleTextCtr.text);
     } else {
-      masterCarApiResponse =
-          masterCarApiResponse.copyWith(errors: null, loading: true);
-      final result =
-          await vehicleService.masterCarServiceApi(vehicleStatusType);
-      return result.fold(
-        (l) {
-          masterCarApiResponse =
-              masterCarApiResponse.copyWith(errors: l, loading: false);
-        },
-        (r) {
-          masterCarApiResponse = masterCarApiResponse.copyWith(
-              data: r, errors: null, loading: false);
-        },
+      masterCarApiResponse = masterCarApiResponse.copyWith(
+        errors: null,
+        loading: page == null,
+        paginationLoading: page != null,
       );
+      final result = await vehicleService.masterCarServiceApi(
+        vehicleStatusType,
+        page: page,
+      );
+      return _commonMasterCarResultHandler(result: result, page: page);
     }
   }
 
   @action
-  Future<void> masterCarSearchApi(String value) async {
-    masterCarApiResponse =
-        masterCarApiResponse.copyWith(errors: null, loading: true);
+  Future<void> masterCarSearchApi(String value, {int? page}) async {
+    masterCarApiResponse = masterCarApiResponse.copyWith(
+      errors: null,
+      loading: page == null,
+      paginationLoading: page != null,
+    );
 
     final result = await vehicleService.masterCarSearchServiceApi(
-        vehicleStatusType, value);
-    return result.fold(
+      vehicleStatusType,
+      value,
+      page: page,
+    );
+    return _commonMasterCarResultHandler(result: result, page: page);
+  }
+
+  void _commonMasterCarResultHandler({
+    int? page,
+    required Either<Map<MainFailure, dynamic>, List<VehicleModel>> result,
+  }) {
+    result.fold(
       (l) {
-        masterCarApiResponse =
-            masterCarApiResponse.copyWith(errors: l, loading: false);
+        masterCarApiResponse = masterCarApiResponse.copyWith(
+          errors: l,
+          loading: false,
+          paginationLoading: false,
+        );
       },
       (r) {
+        List<VehicleModel> list = masterCarApiResponse.data?.toList() ?? [];
+        if (page == null) {
+          list = r;
+        } else {
+          list.addAll(r);
+        }
+
         masterCarApiResponse = masterCarApiResponse.copyWith(
-            data: r, errors: null, loading: false);
+          data: list,
+          errors: null,
+          loading: false,
+          pageNo: page ?? 1,
+          paginationLoading: false,
+          pagination: r.length == 10,
+        );
       },
     );
   }
+
+  ScrollController masterCarController = ScrollController();
+
+  void masterCarPagination() {
+    masterCarController.addListener(() {
+      if (masterCarController.position.pixels ==
+              masterCarController.position.maxScrollExtent &&
+          !masterCarController.position.outOfRange &&
+          masterCarApiResponse.pagination &&
+          !masterCarApiResponse.paginationLoading) {
+        int pageNo = masterCarApiResponse.pageNo + 1;
+        if (vehicleTextCtr.text.isNotEmpty) {
+          masterCarSearchApi(vehicleTextCtr.text, page: pageNo);
+          return;
+        }
+        masterCarApi(page: pageNo);
+      }
+    });
+  }
+
+//     _  _       _  _       _  _       _  _       _  _       _  _       _  _       _  _
+//   _| || |_   _| || |_   _| || |_   _| || |_   _| || |_   _| || |_   _| || |_   _| || |_
+//  |_  ..  _| |_  ..  _| |_  ..  _| |_  ..  _| |_  ..  _| |_  ..  _| |_  ..  _| |_  ..  _|
+//  |_      _| |_      _| |_      _| |_      _| |_      _| |_      _| |_      _| |_      _|
+//    |_||_|     |_||_|     |_||_|     |_||_|     |_||_|     |_||_|     |_||_|     |_||_|
 
   @observable
   ApiResponse<List<VehicleModel>> semiTrailorApiResponse =
       ApiResponse<List<VehicleModel>>();
 
   @action
-  Future<void> semiTrailorApi() async {
+  Future<void> semiTrailorApi({int? page}) async {
     if (vehicleTextCtr.text.isNotEmpty) {
       semiTrailorSearchApi(vehicleTextCtr.text);
     } else {
-      semiTrailorApiResponse =
-          semiTrailorApiResponse.copyWith(errors: null, loading: true);
-      final result =
-          await vehicleService.semiTrailorServiceApi(vehicleStatusType);
-      return result.fold(
-        (l) {
-          semiTrailorApiResponse =
-              semiTrailorApiResponse.copyWith(errors: l, loading: false);
-        },
-        (r) {
-          semiTrailorApiResponse = semiTrailorApiResponse.copyWith(
-              data: r, errors: null, loading: false);
-        },
+      semiTrailorApiResponse = semiTrailorApiResponse.copyWith(
+        errors: null,
+        loading: page == null,
+        paginationLoading: page != null,
       );
+      final result = await vehicleService
+          .semiTrailorServiceApi(vehicleStatusType, page: page);
+      return _commonSemiTrailorResultHandler(result: result, page: page);
     }
   }
 
   @action
-  Future<void> semiTrailorSearchApi(String value) async {
-    semiTrailorApiResponse =
-        semiTrailorApiResponse.copyWith(errors: null, loading: true);
+  Future<void> semiTrailorSearchApi(String value, {int? page}) async {
+    semiTrailorApiResponse = semiTrailorApiResponse.copyWith(
+      errors: null,
+      loading: page == null,
+      paginationLoading: page != null,
+    );
     final result = await vehicleService.semiTrailorSearchServiceApi(
-        vehicleStatusType, value);
-    return result.fold(
+      vehicleStatusType,
+      value,
+      page: page,
+    );
+    return _commonSemiTrailorResultHandler(result: result, page: page);
+  }
+
+  void _commonSemiTrailorResultHandler({
+    int? page,
+    required Either<Map<MainFailure, dynamic>, List<VehicleModel>> result,
+  }) {
+    result.fold(
       (l) {
-        semiTrailorApiResponse =
-            semiTrailorApiResponse.copyWith(errors: l, loading: false);
+        semiTrailorApiResponse = semiTrailorApiResponse.copyWith(
+          errors: l,
+          loading: false,
+          paginationLoading: false,
+        );
       },
       (r) {
+        List<VehicleModel> list = semiTrailorApiResponse.data?.toList() ?? [];
+        if (page == null) {
+          list = r;
+        } else {
+          list.addAll(r);
+        }
+
         semiTrailorApiResponse = semiTrailorApiResponse.copyWith(
-            data: r, errors: null, loading: false);
+          data: list,
+          errors: null,
+          loading: false,
+          pageNo: page ?? 1,
+          paginationLoading: false,
+          pagination: r.length == 10,
+        );
       },
     );
   }
+
+  ScrollController semiTrailorController = ScrollController();
+
+  void semiTrailorPagination() {
+    semiTrailorController.addListener(() {
+      if (semiTrailorController.position.pixels ==
+              semiTrailorController.position.maxScrollExtent &&
+          !semiTrailorController.position.outOfRange &&
+          semiTrailorApiResponse.pagination &&
+          !semiTrailorApiResponse.paginationLoading) {
+        int pageNo = semiTrailorApiResponse.pageNo + 1;
+        if (vehicleTextCtr.text.isNotEmpty) {
+          semiTrailorSearchApi(vehicleTextCtr.text, page: pageNo);
+          return;
+        }
+        semiTrailorApi(page: pageNo);
+      }
+    });
+  }
+
+//     _  _       _  _       _  _       _  _       _  _       _  _       _  _       _  _
+//   _| || |_   _| || |_   _| || |_   _| || |_   _| || |_   _| || |_   _| || |_   _| || |_
+//  |_  ..  _| |_  ..  _| |_  ..  _| |_  ..  _| |_  ..  _| |_  ..  _| |_  ..  _| |_  ..  _|
+//  |_      _| |_      _| |_      _| |_      _| |_      _| |_      _| |_      _| |_      _|
+//    |_||_|     |_||_|     |_||_|     |_||_|     |_||_|     |_||_|     |_||_|     |_||_|
 
   @observable
   VehicleActionType? sstatus;

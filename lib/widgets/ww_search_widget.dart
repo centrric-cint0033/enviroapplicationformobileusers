@@ -17,7 +17,7 @@ class WWTextField extends StatelessWidget {
       this.hintText,
       this.suffixIcon,
       this.description = false,
-      this.keyboardType = TextInputType.none,
+      this.keyboardType = TextInputType.text,
       this.maxLines});
 
   @override

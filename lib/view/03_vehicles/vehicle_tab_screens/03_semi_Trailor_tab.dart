@@ -1,9 +1,12 @@
+import 'package:enviro_mobile_application/model/03_vehicle/vehicle_model/vehicle_model.dart';
 import 'package:enviro_mobile_application/view/03_vehicles/vehicle_widget/vehicle_widget.dart';
 import 'package:enviro_mobile_application/view_model/03_vehicles/vehicle_view_model.dart';
 import 'package:enviro_mobile_application/widgets/ww_response_handler.dart';
 import 'package:enviro_mobile_application/widgets/ww_search_widget.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SemiTrailersTab extends StatelessWidget {
   const SemiTrailersTab({Key? key}) : super(key: key);
@@ -51,12 +54,23 @@ class SemiTrailersList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.separated(
-      itemCount: vmVehicle.semiTrailorApiResponse.data?.length ?? 0,
-      separatorBuilder: (BuildContext context, int index) => gapFieldVeh,
-      itemBuilder: (context, index) => showData(
-          data: vmVehicle.semiTrailorApiResponse.data?[index],
-          status: vmVehicle.vehicleStatusType),
+    return Observer(
+      builder: (context) {
+        List<VehicleModel> list = vmVehicle.semiTrailorApiResponse.data ?? [];
+        return ListView.separated(
+          itemCount: list.length + 1,
+          padding: EdgeInsets.only(bottom: 20.h),
+          controller: vmVehicle.semiTrailorController,
+          separatorBuilder: (BuildContext context, int index) => gapFieldVeh,
+          itemBuilder: (context, index) => index == list.length
+              ? vmVehicle.semiTrailorApiResponse.paginationLoading
+                  ? const CupertinoActivityIndicator()
+                  : const SizedBox.shrink()
+              : showData(
+                  data: vmVehicle.semiTrailorApiResponse.data?[index],
+                  status: vmVehicle.vehicleStatusType),
+        );
+      },
     );
   }
 }
