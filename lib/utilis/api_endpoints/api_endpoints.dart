@@ -41,6 +41,13 @@ class ApiEndPoints
   static const endpointprofilelstng = '/api/v1/accounts/profile/view/';
   static const endpointprofileedit = '/api/v1/accounts/profile/view/';
   static const endpointjobcard = '/api/v1/jobs/card/info/view/2054865';
-
+  static const endpointshedulecard =
+      '/api/v1/schedule/view/mobile/waste/?limit=20&from=2024-02-03&to=2024-02-05';
+  static const endpointsheduleweekcard =
+      '/api/v1/schedule/view/mobile/waste/?limit=20&from=2024-02-01&to=2024-02-07';
+  static const endpointshedulesignature =
+      "/api/v1/schedule/jobschedule/signature/add/";
+  static const endpointcommentsignature =
+      "/api/v1/schedule/jobschedule/comments/";
   // SITE APIS
 }

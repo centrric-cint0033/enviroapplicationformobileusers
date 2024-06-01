@@ -21,7 +21,7 @@ import 'package:enviro_mobile_application/service/05_intranet/intranet_service.d
     as _i14;
 import 'package:enviro_mobile_application/service/06_profile/profile_service.dart'
     as _i18;
-import 'package:enviro_mobile_application/service/07_job_card/job_card_service.dart'
+import 'package:enviro_mobile_application/service/07_shedule/job_card/shedule_page_service.dart'
     as _i7;
 import 'package:enviro_mobile_application/service/10_site/i_site_service.dart'
     as _i11;
@@ -56,10 +56,10 @@ import 'package:enviro_mobile_application/view_model/10_profile/profile_view_mod
     as _i23;
 import 'package:enviro_mobile_application/view_model/10_site/site_view_model.dart'
     as _i26;
-import 'package:enviro_mobile_application/view_model/11_job_card/job_card_view_model.dart'
-    as _i20;
 import 'package:enviro_mobile_application/view_model/11_previous_sale/previous_sale_view_model.dart'
     as _i22;
+import 'package:enviro_mobile_application/view_model/11_shedule/shedule_page_view_model.dart'
+    as _i20;
 import 'package:enviro_mobile_application/view_model/home_page/home_page_viewmodel.dart'
     as _i30;
 import 'package:get_it/get_it.dart' as _i1;
@@ -79,7 +79,8 @@ extension GetItInjectableX on _i1.GetIt {
     gh.lazySingleton<_i3.HttpService>(() => _i3.HttpService());
     gh.lazySingleton<_i4.IAuthService>(() => _i4.AuthRepository());
     gh.lazySingleton<_i5.IHomeService>(() => _i6.HomeRepository());
-    gh.lazySingleton<_i7.IJobCardService>(() => _i7.JobCardService());
+    gh.lazySingleton<_i7.IJobCardService>(
+        () => _i7.SalesService(gh<_i3.HttpService>()));
     gh.lazySingleton<_i8.IPreviousSaleService>(() => _i9.PreviousSaleService());
     gh.lazySingleton<_i10.ISalesService>(
         () => _i10.SalesService(gh<_i3.HttpService>()));

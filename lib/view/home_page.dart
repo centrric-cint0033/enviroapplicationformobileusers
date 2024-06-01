@@ -6,6 +6,7 @@ import 'package:enviro_mobile_application/view_model/03_vehicles/vehicle_view_mo
 import 'package:enviro_mobile_application/view_model/04_ohs/ohs_view_model.dart';
 import 'package:enviro_mobile_application/view_model/07_intranet/intranet_view_model.dart';
 import 'package:enviro_mobile_application/view_model/08_team/team_view_model.dart';
+import 'package:enviro_mobile_application/view_model/11_shedule/shedule_page_view_model.dart';
 import 'package:enviro_mobile_application/view_model/home_page/home_page_viewmodel.dart';
 import 'package:enviro_mobile_application/widgets/drawer.dart';
 
@@ -60,7 +61,7 @@ class HomePage extends StatelessWidget {
                       child: _buildBox('assets/images/user.svg', 'Site'),
                     ),
                     InkWell(
-                      onTap: () => calenderfunction(context),
+                      onTap: () => shedulefunction(context),
                       child:
                           _buildBox('assets/images/calendar.svg', 'Scheduling'),
                     ),
@@ -148,10 +149,14 @@ void ohsfunction(BuildContext context) {
 
 void intranetfuntion(BuildContext context) {
   vmIntranet.intranetviewmodelfunction(1);
+
   context.router.pushNamed(RouteNames.intranetpage);
 }
 
-void calenderfunction(BuildContext context) {
+void shedulefunction(BuildContext context) {
+  vmJobcard.shedulecardviewmodelfunction();
+  vmJobcard.shedulecardviewmodelweekfunction();
+  print('cccc');
   context.router.pushNamed(RouteNames.rshedulepage);
   print('Notification button tapped!');
 }
@@ -178,5 +183,9 @@ void navigateToSitesPage({required BuildContext context}) {
 }
 
 void shedulepagefunction(BuildContext context) async {
+  print('dvsdv');
+  vmJobcard.shedulecardviewmodelfunction();
+  vmJobcard.shedulecardviewmodelweekfunction();
+
   context.router.pushNamed(RouteNames.rshedulepage);
 }

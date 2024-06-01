@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:enviro_mobile_application/Routepage/guards.dart';
 import 'package:enviro_mobile_application/Routepage/approutes.gr.dart';
+
+import 'package:enviro_mobile_application/Routepage/guards.dart';
 
 import 'package:enviro_mobile_application/Routepage/routespage.dart';
 
@@ -48,15 +49,12 @@ class AppRouter extends $AppRouter {
         AutoRoute(
             page: SalesDetailRoute.page, path: RouteNames.rSalesDetailPage),
         AutoRoute(page: ScheduleRoute.page, path: RouteNames.rshedulepage),
-        AutoRoute(page: CalenderRoute.page, path: RouteNames.rcalenderpage),
+        // AutoRoute(page: CalenderRoute.page, path: RouteNames.rcalenderpage),
         AutoRoute(
             page: SheduledetailRoute.page, path: RouteNames.rsheduledetailpage),
         AutoRoute(
             page: UpdateVehiclepreinspectionRoute.page,
             path: RouteNames.rupdatevehiclepreinspectionpage),
-        AutoRoute(
-            page: SheduledetailRoute2.page,
-            path: RouteNames.rsheduledetail2page),
         AutoRoute(page: JobCardRoute.page, path: RouteNames.rjobcardpage),
         AutoRoute(
           page: SiteMainRoute.page,
@@ -65,6 +63,20 @@ class AppRouter extends $AppRouter {
         AutoRoute(
           page: SiteDetailRoute.page,
           path: RouteNames.siteDetailPage,
+        ),
+        AutoRoute(
+            page: SheduleCommentRoute.page,
+            path: RouteNames.rshedulecommandstatus),
+        AutoRoute(
+            page: ScheduleVideoAndPhotoRoute.page,
+            path: RouteNames.rshedulevedeoandphoto),
+        AutoRoute(
+          page: SalesQuoteDetailListRoute.page,
+          path: RouteNames.salesQuoteDetailListPage,
+        ),
+        AutoRoute(
+          page: SheduleSignatureRoute.page,
+          path: RouteNames.rshedulesignaturePage,
         ),
       ];
 }

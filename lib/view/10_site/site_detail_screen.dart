@@ -14,7 +14,7 @@ import '../../widgets/cmn_title_textwidget.dart';
 import 'widgets/site_folder_list_data_widget.dart';
 import 'widgets/folder_title_and_search_widget.dart';
 import '../11_previous_sale/widgets/previous_sales_widget.dart';
-import '../../model/10_site/folder_res_model/folder_res_model.dart';
+
 import '../../view_model/11_previous_sale/previous_sale_view_model.dart';
 
 @RoutePage()
@@ -26,8 +26,7 @@ class SiteDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     WidgetsBinding.instance.addPostFrameCallback(
-      (timeStamp) => vmPreviousSale.previousSalesPagination(),
-    );
+        (timeStamp) => vmPreviousSale.previousSalesPagination());
     return Observer(
       builder: (context) {
         SiteResModel? site = _getSite(index: index, type: type);

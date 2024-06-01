@@ -26,6 +26,10 @@ abstract class SalesViewModelBase with Store {
   TextEditingController salesQuoteListSearchCtr = TextEditingController();
 
   Timer? debouce;
+  DateTime currentDate = DateTime.now();
+
+  @observable
+  String? selectedMonth, selectedYear;
 
   void onTextChanged(Function() function) {
     // Clear the previous debounce timer
@@ -46,24 +50,72 @@ abstract class SalesViewModelBase with Store {
       ApiResponse<List<SalesModel>>();
 
   @action
-  Future<void> saleJobListApi() async {
+  Future<void> saleJobListApi({int? page}) async {
     try {
-      joblistResponse = joblistResponse.copyWith(errors: null, loading: true);
-      final result = await salesService.saleJoblistApiService();
+      joblistResponse = joblistResponse.copyWith(
+        errors: null,
+        loading: page == null,
+        paginationLoading: page != null,
+      );
+      customPrint(
+          content: joblistResponse.paginationLoading,
+          name: "joblistResponse pagination");
+      final result = await salesService.saleJoblistApiService(page: page);
+
       return result.fold(
         (l) {
-          joblistResponse = joblistResponse.copyWith(errors: l, loading: false);
+          joblistResponse = joblistResponse.copyWith(
+            errors: l,
+            loading: false,
+            paginationLoading: false,
+          );
         },
         (r) {
-          joblistResponse =
-              joblistResponse.copyWith(data: r, errors: null, loading: false);
+          List<SalesModel> jobList = joblistResponse.data?.toList() ?? [];
+          if (page == null) {
+            jobList = r;
+          } else {
+            jobList.addAll(r);
+          }
+          joblistResponse = joblistResponse.copyWith(
+            data: jobList,
+            errors: null,
+            loading: false,
+            pageNo: page ?? 1,
+            paginationLoading: false,
+          );
         },
       );
     } catch (e) {
       customPrint(content: e, name: 'Error saleJobListApi');
     } finally {
-      joblistResponse = joblistResponse.copyWith(loading: false);
+      joblistResponse = joblistResponse.copyWith(
+        loading: false,
+        // paginationLoading: false,
+      );
     }
+  }
+
+  ScrollController joblistController = ScrollController();
+
+  void saleJobListPagination() {
+    joblistController.addListener(() {
+      if (joblistController.position.pixels ==
+              joblistController.position.maxScrollExtent &&
+          !joblistController.position.outOfRange &&
+          joblistResponse.pagination &&
+          !joblistResponse.paginationLoading) {
+        int pageNo = joblistResponse.pageNo + 1;
+        if (vmSales.salesJobListSearchCtr.text.isNotEmpty) {
+          salesJobListSearchApi(
+            page: pageNo,
+            vmSales.salesJobListSearchCtr.text,
+          );
+          return;
+        }
+        saleJobListApi(page: pageNo);
+      }
+    });
   }
 
 //     _  _       _  _       _  _       _  _       _  _       _  _       _  _       _  _
@@ -72,53 +124,49 @@ abstract class SalesViewModelBase with Store {
 //  |_      _| |_      _| |_      _| |_      _| |_      _| |_      _| |_      _| |_      _|
 //    |_||_|     |_||_|     |_||_|     |_||_|     |_||_|     |_||_|     |_||_|     |_||_|
 
-  ScrollController ctrSaleJobListScroll = ScrollController();
-
-  int incPageTopRentAll = 1;
-
-  void topRentViewAllListener() async {
-    if (ctrSaleJobListScroll.offset >=
-            ctrSaleJobListScroll.position.maxScrollExtent &&
-        !ctrSaleJobListScroll.position.outOfRange) {
-      //
-      int totalRec = joblistResponse.data?.length ?? 0;
-      int pageLength = joblistResponse.data?.length ?? 0;
-
-      if (totalRec == pageLength) {
-        customPrint(content: 'content maximum reached');
-        joblistResponse = joblistResponse.copyWith(pagination: false);
-      } else {
-        incPageTopRentAll = incPageTopRentAll + 1;
-
-        // await topRentAllApi(page: incPageTopRentAll);
-        customPrint(content: 'page reached maximum');
-      }
-
-      customPrint(content: totalRec, name: 'Total Rec');
-      customPrint(content: pageLength, name: 'page length');
-    }
-  }
-
   @action
-  Future<void> salesJobListSearchApi(String searchData) async {
+  Future<void> salesJobListSearchApi(String searchData, {int? page}) async {
     try {
-      joblistResponse = joblistResponse.copyWith(errors: null, loading: true);
+      joblistResponse = joblistResponse.copyWith(
+        errors: null,
+        loading: page == null,
+        paginationLoading: page != null,
+      );
 
       final result = await salesService
-          .salesJobListSearchServiceApi(data: {"key": searchData});
+          .salesJobListSearchServiceApi(data: {"key": searchData}, page: page);
       return result.fold(
         (l) {
-          joblistResponse = joblistResponse.copyWith(errors: l, loading: false);
+          joblistResponse = joblistResponse.copyWith(
+            errors: l,
+            loading: false,
+            paginationLoading: false,
+          );
         },
         (r) {
-          joblistResponse =
-              joblistResponse.copyWith(data: r, errors: null, loading: false);
+          List<SalesModel> jobList = joblistResponse.data?.toList() ?? [];
+          if (page == null) {
+            jobList = r;
+          } else {
+            jobList.addAll(r);
+          }
+          joblistResponse = joblistResponse.copyWith(
+            data: jobList,
+            errors: null,
+            loading: false,
+            pageNo: page ?? 1,
+            pagination: r.length == 10,
+            paginationLoading: false,
+          );
         },
       );
     } catch (e) {
       customPrint(content: e, name: 'Error salesJobListSearchApi');
     } finally {
-      joblistResponse = joblistResponse.copyWith(loading: false);
+      joblistResponse = joblistResponse.copyWith(
+        loading: false,
+        paginationLoading: false,
+      );
     }
   }
 
@@ -131,13 +179,40 @@ abstract class SalesViewModelBase with Store {
   @observable
   ApiResponse<List<SalesModel>> salespageResponse =
       ApiResponse<List<SalesModel>>();
+  Map<String, String> months = {
+    'Jan': "1",
+    'Feb': "2",
+    'Mar': "3",
+    'Apr': "4",
+    'May': "5",
+    'Jun': "6",
+    'Jul': "7",
+    'Aug': "8",
+    'Sep': "9",
+    'Oct': "10",
+    'Nov': "11",
+    'Dec': "12"
+  };
 
   @action
   Future<void> saleslistApi() async {
     try {
       salespageResponse =
           salespageResponse.copyWith(errors: null, loading: true);
-      final result = await salesService.saleslistServiceApi();
+      // Update year and month
+      selectedYear ??= currentDate.year.toString();
+      if (selectedMonth == null) {
+        months.forEach(
+          (key, value) {
+            if (value == currentDate.month.toString()) selectedMonth = key;
+          },
+        );
+      }
+
+      final result = await salesService.saleslistServiceApi(
+        year: selectedYear!,
+        month: months[selectedMonth]!,
+      );
       return result.fold(
         (l) {
           salespageResponse =
@@ -166,25 +241,47 @@ abstract class SalesViewModelBase with Store {
       ApiResponse<List<SalesModel>>();
 
   @action
-  Future<void> quoteRegisterApi() async {
+  Future<void> quoteRegisterApi({int? page}) async {
     try {
-      quoteRegResponse = quoteRegResponse.copyWith(errors: null, loading: true);
+      quoteRegResponse = quoteRegResponse.copyWith(
+        errors: null,
+        loading: page == null,
+        paginationLoading: page != null,
+      );
 
-      final result = await salesService.quoteRegisterServiceApi();
+      final result = await salesService.quoteRegisterServiceApi(page: page);
       return result.fold(
         (l) {
-          quoteRegResponse =
-              quoteRegResponse.copyWith(errors: l, loading: false);
+          quoteRegResponse = quoteRegResponse.copyWith(
+            errors: l,
+            loading: false,
+            paginationLoading: false,
+          );
         },
         (r) {
-          quoteRegResponse =
-              quoteRegResponse.copyWith(data: r, errors: null, loading: false);
+          List<SalesModel> quoteReList = quoteRegResponse.data?.toList() ?? [];
+          if (page == null) {
+            quoteReList = r;
+          } else {
+            quoteReList.addAll(r);
+          }
+          quoteRegResponse = quoteRegResponse.copyWith(
+            errors: null,
+            loading: false,
+            data: quoteReList,
+            pageNo: page ?? 1,
+            paginationLoading: false,
+            pagination: r.length == 10,
+          );
         },
       );
     } catch (e) {
       customPrint(content: e, name: 'Error quoteRegisterApi');
     } finally {
-      quoteRegResponse = quoteRegResponse.copyWith(loading: false);
+      quoteRegResponse = quoteRegResponse.copyWith(
+        loading: false,
+        paginationLoading: false,
+      );
     }
   }
 
@@ -195,27 +292,213 @@ abstract class SalesViewModelBase with Store {
 //    |_||_|     |_||_|     |_||_|     |_||_|     |_||_|     |_||_|     |_||_|     |_||_|
 
   @action
-  Future<void> salesQuoteListSearchApi(String searchData) async {
+  Future<void> salesQuoteListSearchApi(String searchData, {int? page}) async {
     try {
-      quoteRegResponse = quoteRegResponse.copyWith(errors: null, loading: true);
+      quoteRegResponse = quoteRegResponse.copyWith(
+        errors: null,
+        loading: page == null,
+        paginationLoading: page != null,
+      );
 
-      final result = await salesService.salesQuoteListSearchServiceApi(data: {
-        "key": searchData,
-      });
+      final result = await salesService.salesQuoteListSearchServiceApi(
+        page: page,
+        data: {
+          "key": searchData,
+        },
+      );
       return result.fold(
         (l) {
-          quoteRegResponse =
-              quoteRegResponse.copyWith(errors: l, loading: false);
+          quoteRegResponse = quoteRegResponse.copyWith(
+            errors: l,
+            loading: false,
+            paginationLoading: false,
+          );
         },
         (r) {
-          quoteRegResponse =
-              quoteRegResponse.copyWith(data: r, errors: null, loading: false);
+          List<SalesModel> quoteReList = quoteRegResponse.data?.toList() ?? [];
+          if (page == null) {
+            quoteReList = r;
+          } else {
+            quoteReList.addAll(r);
+          }
+          quoteRegResponse = quoteRegResponse.copyWith(
+            errors: null,
+            loading: false,
+            data: quoteReList,
+            pageNo: page ?? 1,
+            paginationLoading: false,
+            pagination: r.length == 10,
+          );
         },
       );
     } catch (e) {
       customPrint(content: e, name: 'Error salesJobListSearchApi');
     } finally {
-      quoteRegResponse = quoteRegResponse.copyWith(loading: false);
+      quoteRegResponse = quoteRegResponse.copyWith(
+        loading: false,
+        paginationLoading: false,
+      );
     }
+  }
+
+  ScrollController quoteRegController = ScrollController();
+
+  void quoteRegListPagination() {
+    quoteRegController.addListener(() {
+      if (quoteRegController.position.pixels ==
+              quoteRegController.position.maxScrollExtent &&
+          !quoteRegController.position.outOfRange &&
+          quoteRegResponse.pagination &&
+          !quoteRegResponse.paginationLoading) {
+        int pageNo = quoteRegResponse.pageNo + 1;
+        if (vmSales.salesQuoteListSearchCtr.text.isNotEmpty) {
+          salesQuoteListSearchApi(
+            page: pageNo,
+            vmSales.salesQuoteListSearchCtr.text,
+          );
+          return;
+        }
+        quoteRegisterApi(page: pageNo);
+      }
+    });
+  }
+
+//     _  _       _  _       _  _       _  _       _  _       _  _       _  _       _  _
+//   _| || |_   _| || |_   _| || |_   _| || |_   _| || |_   _| || |_   _| || |_   _| || |_
+//  |_  ..  _| |_  ..  _| |_  ..  _| |_  ..  _| |_  ..  _| |_  ..  _| |_  ..  _| |_  ..  _|
+//  |_      _| |_      _| |_      _| |_      _| |_      _| |_      _| |_      _| |_      _|
+//    |_||_|     |_||_|     |_||_|     |_||_|     |_||_|     |_||_|     |_||_|     |_||_|
+
+  @observable
+  ApiResponse<List<SalesModel>> salesQuoteDetailsResponse =
+      ApiResponse<List<SalesModel>>();
+
+  late String saleQuoteDetailId;
+  @action
+  Future<void> getSalesQuoteDetails({int? page, String? id}) async {
+    try {
+      if (id != null) saleQuoteDetailId = id;
+      salesQuoteDetailsResponse = salesQuoteDetailsResponse.copyWith(
+        errors: null,
+        loading: page == null,
+        paginationLoading: page != null,
+      );
+
+      final result = await salesService.salesQuoteDetailApi(
+        page: page,
+        year: selectedYear!,
+        id: saleQuoteDetailId,
+        month: months[selectedMonth]!,
+      );
+      return result.fold(
+        (l) {
+          salesQuoteDetailsResponse = salesQuoteDetailsResponse.copyWith(
+            errors: l,
+            loading: false,
+            paginationLoading: false,
+          );
+        },
+        (r) {
+          List<SalesModel> salesQuoteDetails =
+              salesQuoteDetailsResponse.data?.toList() ?? [];
+          if (page == null) {
+            salesQuoteDetails = r;
+          } else {
+            salesQuoteDetails.addAll(r);
+          }
+          salesQuoteDetailsResponse = salesQuoteDetailsResponse.copyWith(
+            errors: null,
+            loading: false,
+            data: salesQuoteDetails,
+            pageNo: page ?? 1,
+            paginationLoading: false,
+            pagination: r.length == 10,
+          );
+        },
+      );
+    } catch (e) {
+      customPrint(content: e, name: 'Error salesJobListSearchApi');
+    } finally {
+      salesQuoteDetailsResponse = salesQuoteDetailsResponse.copyWith(
+        loading: false,
+        paginationLoading: false,
+      );
+    }
+  }
+
+  ScrollController saleQuoteDetailController = ScrollController();
+
+  void getSaleQuoteDetailListPagination() {
+    saleQuoteDetailController.addListener(() {
+      if (saleQuoteDetailController.position.pixels ==
+              saleQuoteDetailController.position.maxScrollExtent &&
+          !saleQuoteDetailController.position.outOfRange &&
+          salesQuoteDetailsResponse.pagination &&
+          !salesQuoteDetailsResponse.paginationLoading) {
+        int pageNo = salesQuoteDetailsResponse.pageNo + 1;
+        getSalesQuoteDetails(page: pageNo);
+      }
+    });
+  }
+
+  @observable
+  ApiResponse<SalesModel> saleDetailResponse = ApiResponse<SalesModel>();
+
+  @action
+  Future<void> salesJobDetailApi(int index, int? id) async {
+    saleDetailResponse = saleDetailResponse.copyWith(loading: true, data: null);
+    List<SalesModel> list = joblistResponse.data?.toList() ?? [];
+
+    final response = await salesService.salesJobDetailApi(
+      id: id?.toString() ?? "",
+    );
+
+    return response.fold(
+      (l) {
+        saleDetailResponse = saleDetailResponse.copyWith(loading: false);
+      },
+      (r) {
+        list[index] = list[index].copyWith(
+          quoteFile: r.quoteFile,
+          receivedFile: r.receivedFile,
+          attachedFiles: r.attachedFiles,
+          templateResponse: r.templateResponse,
+        );
+        saleDetailResponse = saleDetailResponse.copyWith(
+          loading: false,
+          data: list[index],
+        );
+        joblistResponse = joblistResponse.copyWith(data: list);
+      },
+    );
+  }
+
+  @action
+  Future<void> salesQuoteRegDetailApi(int index, int? id) async {
+    saleDetailResponse = saleDetailResponse.copyWith(loading: true, data: null);
+    List<SalesModel> list = quoteRegResponse.data?.toList() ?? [];
+
+    final response = await salesService.quoteRegDetailApi(
+      id: id?.toString() ?? "",
+    );
+
+    return response.fold(
+      (l) {
+        saleDetailResponse = saleDetailResponse.copyWith(loading: false);
+      },
+      (r) {
+        list[index] = list[index].copyWith(
+          quoteFile: r.quoteFile,
+          receivedFile: r.receivedFile,
+          attachedFiles: r.attachedFiles,
+          templateResponse: r.templateResponse,
+        );
+        saleDetailResponse = saleDetailResponse.copyWith(
+          loading: false,
+          data: list[index],
+        );
+        quoteRegResponse = quoteRegResponse.copyWith(data: list);
+      },
+    );
   }
 }

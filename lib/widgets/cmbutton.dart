@@ -16,10 +16,12 @@ class CmButton extends StatelessWidget {
     this.buttonStyle,
     this.color,
     this.borderRadius,
+    this.icon,
     this.loading = false,
-    this.loadingColor, // Optional loading color
+    this.loadingColor,
   }) : super(key: key);
 
+  final IconData? icon;
   final ButtonStyle? buttonStyle;
   final Alignment? alignment;
   final TextStyle? buttonTextStyle;
@@ -31,7 +33,7 @@ class CmButton extends StatelessWidget {
   final double? borderRadius;
   final VoidCallback? onPressed;
   final bool loading;
-  final Color? loadingColor; // Optional loading color
+  final Color? loadingColor;
 
   @override
   Widget build(BuildContext context) {
@@ -43,11 +45,9 @@ class CmButton extends StatelessWidget {
         child: ElevatedButton(
           onPressed: onPressed,
           style: ButtonStyle(
-            backgroundColor:
-                MaterialStateProperty.all<Color>(color ?? Appthemes.cPrimary),
-            // fixedSize: MaterialStateProperty.all<Size>(
-            //   Size(width ?? double.maxFinite, height ?? 50.0),
-            // ),
+            backgroundColor: MaterialStateProperty.all<Color>(
+              color ?? Appthemes.cPrimary,
+            ),
             shape: MaterialStateProperty.all<OutlinedBorder>(
               RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(borderRadius ?? 10.0),
@@ -55,15 +55,33 @@ class CmButton extends StatelessWidget {
             ),
           ),
           child: loading
-              ? CupertinoActivityIndicator(
-                  color: loadingColor ?? color ?? Colors.white,
+              ? CircularProgressIndicator(
+                  valueColor: AlwaysStoppedAnimation<Color>(
+                    loadingColor ?? Colors.white,
+                  ),
                 )
               : widget ??
-                  Text(
-                    text ?? "",
-                    textAlign: TextAlign.center,
-                    style: buttonTextStyle ??
-                        TextStyle(color: Colors.white, fontSize: 12.sp),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      if (icon != null)
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Icon(icon,
+                              size: 22,
+                              color: buttonTextStyle?.color ?? Colors.white),
+                        ),
+                      if (icon != null) const SizedBox(width: 5),
+                      Text(
+                        text ?? "",
+                        textAlign: TextAlign.center,
+                        style: buttonTextStyle ??
+                            TextStyle(
+                              color: Colors.white,
+                              fontSize: 12.sp,
+                            ),
+                      ),
+                    ],
                   ),
         ),
       ),
