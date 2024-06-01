@@ -1,5 +1,4 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:dartz/dartz.dart';
 import 'package:enviro_mobile_application/utilis/constant.dart';
 import 'package:enviro_mobile_application/view/02_sales/sales_widgets.dart/sales_widget.dart';
 import 'package:enviro_mobile_application/widgets/cmn_action_icon.dart';
@@ -28,8 +27,7 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
               child: ElevatedButton(
                 onPressed: () {},
                 style: ElevatedButton.styleFrom(
-                  primary: Colors.white,
-                  onPrimary: Colors.blue,
+                  foregroundColor: Colors.blue, backgroundColor: Colors.white,
                   side: const BorderSide(color: Colors.blue),
                 ),
                 child: const Padding(
@@ -696,8 +694,7 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                         child: ElevatedButton(
                           onPressed: () {},
                           style: ElevatedButton.styleFrom(
-                            primary: Colors.blue,
-                            onPrimary: Colors.blue,
+                            foregroundColor: Colors.blue, backgroundColor: Colors.blue,
                             side: const BorderSide(color: Colors.blue),
                           ),
                           child: const Padding(

@@ -81,8 +81,7 @@ class CalenderPage extends StatelessWidget {
                         },
                         child: const Text('pending'),
                         style: ElevatedButton.styleFrom(
-                          primary: Colors.white,
-                          onPrimary: Colors.black,
+                          foregroundColor: Colors.black, backgroundColor: Colors.white,
                         ),
                       ),
                     ],
@@ -225,8 +224,7 @@ class CalenderPage extends StatelessWidget {
                         },
                         child: const Text('pending'),
                         style: ElevatedButton.styleFrom(
-                          primary: Colors.white,
-                          onPrimary: Colors.black,
+                          foregroundColor: Colors.black, backgroundColor: Colors.white,
                         ),
                       ),
                     ],

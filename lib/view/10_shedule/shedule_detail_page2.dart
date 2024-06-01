@@ -28,8 +28,7 @@ class SheduledetailPage2 extends StatelessWidget {
                   onPressed: () {},
                   child: const Text('Job Card'),
                   style: ElevatedButton.styleFrom(
-                    primary: Colors.white,
-                    onPrimary: Colors.black,
+                    foregroundColor: Colors.black, backgroundColor: Colors.white,
                   ),
                 ),
               );
@@ -46,6 +45,7 @@ class SheduledetailPage2 extends StatelessWidget {
             } else if (index >= 3 && index <= 10) {
               return buildCardDataOrder(index);
             }
+            return null;
             // Removed the else block for the button
           },
           separatorBuilder: (context, index) => const SizedBox(height: 20),

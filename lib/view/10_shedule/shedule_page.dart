@@ -39,8 +39,7 @@ class SchedulePage extends StatelessWidget {
                     },
                     child: const Text('Calender'),
                     style: ElevatedButton.styleFrom(
-                      primary: Colors.white,
-                      onPrimary: Colors.black,
+                      foregroundColor: Colors.black, backgroundColor: Colors.white,
                     ),
                   ),
                 ],
@@ -66,13 +65,12 @@ class SchedulePage extends StatelessWidget {
                         ),
                         ElevatedButton(
                           onPressed: () {},
+                          style: ElevatedButton.styleFrom(
+                            foregroundColor: Colors.black, backgroundColor: Colors.green,
+                          ),
                           child: const Text(
                             'Next job',
                             style: TextStyle(color: Colors.white),
-                          ),
-                          style: ElevatedButton.styleFrom(
-                            primary: Colors.green,
-                            onPrimary: Colors.black,
                           ),
                         ),
                       ],
@@ -159,13 +157,12 @@ class SchedulePage extends StatelessWidget {
                   const SizedBox(height: 10),
                   ElevatedButton(
                     onPressed: () {},
+                    style: ElevatedButton.styleFrom(
+                      foregroundColor: Colors.black, backgroundColor: Colors.white,
+                    ),
                     child: const Text(
                       'Week',
                       style: TextStyle(color: Colors.green),
-                    ),
-                    style: ElevatedButton.styleFrom(
-                      primary: Colors.white,
-                      onPrimary: Colors.black,
                     ),
                   ),
                 ],
@@ -200,8 +197,7 @@ class SchedulePage extends StatelessWidget {
                             sheduledetailfunction(context);
                           },
                           style: ElevatedButton.styleFrom(
-                            primary: Colors.white,
-                            onPrimary: Colors.black,
+                            foregroundColor: Colors.black, backgroundColor: Colors.white,
                           ),
                           child: const Text('pending'),
                         ),
@@ -343,8 +339,7 @@ class SchedulePage extends StatelessWidget {
                           },
                           child: const Text('pending'),
                           style: ElevatedButton.styleFrom(
-                            primary: Colors.white,
-                            onPrimary: Colors.black,
+                            foregroundColor: Colors.black, backgroundColor: Colors.white,
                           ),
                         ),
                       ],
