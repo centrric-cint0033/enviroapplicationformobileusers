@@ -22,7 +22,7 @@ Map<String, dynamic> _$$FolderListModelImplToJson(
 
 _$FolderModelImpl _$$FolderModelImplFromJson(Map<String, dynamic> json) =>
     _$FolderModelImpl(
-      id: json['id'] as int?,
+      id: (json['id'] as num?)?.toInt(),
       name: json['name'] as String?,
       type: json['type'] as String?,
       url: json['url'] as String?,

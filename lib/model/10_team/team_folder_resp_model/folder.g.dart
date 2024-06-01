@@ -12,7 +12,7 @@ _$FolderImpl _$$FolderImplFromJson(Map<String, dynamic> json) => _$FolderImpl(
       folders: (json['folders'] as List<dynamic>?)
           ?.map((e) => Folder.fromJson(e as Map<String, dynamic>))
           .toList(),
-      id: json['id'] as int?,
+      id: (json['id'] as num?)?.toInt(),
       name: json['name'] as String?,
     );
 

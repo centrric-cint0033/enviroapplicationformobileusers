@@ -8,8 +8,8 @@ part of 'sales_model.dart';
 
 _$SalesModelImpl _$$SalesModelImplFromJson(Map<String, dynamic> json) =>
     _$SalesModelImpl(
-      id: json['id'] as int?,
-      client: json['client'] as int?,
+      id: (json['id'] as num?)?.toInt(),
+      client: (json['client'] as num?)?.toInt(),
       isMockJob: json['is_mock_job'] as bool?,
       jobCode: json['job_code'] as String?,
       quotedBy: json['quoted_by'] as String?,
@@ -18,7 +18,7 @@ _$SalesModelImpl _$$SalesModelImplFromJson(Map<String, dynamic> json) =>
       clientType: json['client_type'] as String?,
       paidStatus: json['paid_status'] as String?,
       date: json['date'] as String?,
-      jobCardId: json['job_card_id'] as int?,
+      jobCardId: (json['job_card_id'] as num?)?.toInt(),
       nextService2: json['next_service_2'],
       frequency: json['frequency'] as String?,
       wasteTypeStr: json['waste_type_str'] as String?,
@@ -51,8 +51,8 @@ _$SalesModelImpl _$$SalesModelImplFromJson(Map<String, dynamic> json) =>
       jobCardType: json['job_card_type'] as String?,
       recurringDate: json['recurring_date'] as String?,
       createdBy: json['created_by'],
-      quote: json['quote'] as int?,
-      jobCard: json['job_card'] as int?,
+      quote: (json['quote'] as num?)?.toInt(),
+      jobCard: (json['job_card'] as num?)?.toInt(),
       jobComments: json['job_comments'] as List<dynamic>?,
       wonLoseStatus: json['won_lose_status'] as String?,
       scheduleId: json['schedule_id'],
@@ -67,7 +67,7 @@ _$SalesModelImpl _$$SalesModelImplFromJson(Map<String, dynamic> json) =>
       company: json['company'],
       template: json['template'] as String?,
       templateName: json['template_name'],
-      autoCreate: json['auto_create'] as int?,
+      autoCreate: (json['auto_create'] as num?)?.toInt(),
       url: json['url'] as String?,
       invoiceAmt: json['invoice_amt'] as String?,
       companyName: json['company_name'] as String?,
@@ -92,13 +92,13 @@ _$SalesModelImpl _$$SalesModelImplFromJson(Map<String, dynamic> json) =>
           ?.map((e) => TemplateResponse.fromJson(e as Map<String, dynamic>))
           .toList(),
       convertedToRecurringQuoteId: json['converted_to_recurring_quote_id'],
-      employee: json['employee'] as int?,
+      employee: (json['employee'] as num?)?.toInt(),
       mailBcc: json['mail_bcc'] as List<dynamic>?,
       name: json['name'] as String?,
-      won: json['won'] as int?,
-      lost: json['lost'] as int?,
-      pending: json['pending'] as int?,
-      total: json['total'] as int?,
+      won: (json['won'] as num?)?.toInt(),
+      lost: (json['lost'] as num?)?.toInt(),
+      pending: (json['pending'] as num?)?.toInt(),
+      total: (json['total'] as num?)?.toInt(),
       profile: json['profile'] as String?,
     );
 

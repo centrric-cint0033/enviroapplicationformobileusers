@@ -9,13 +9,13 @@ part of 'profile_res_model.dart';
 _$ProfileRespModelImpl _$$ProfileRespModelImplFromJson(
         Map<String, dynamic> json) =>
     _$ProfileRespModelImpl(
-      id: json['id'] as int?,
+      id: (json['id'] as num?)?.toInt(),
       terminationDate: json['termination_date'],
       username: json['username'] as String?,
       expiryDate: json['expiry_date'] as String?,
       alertBefore: json['alert_before'] as String?,
       drivingLicense: json['driving_license'],
-      employeeId: json['employee_id'] as int?,
+      employeeId: (json['employee_id'] as num?)?.toInt(),
       name: json['name'] as String?,
       userType: json['user_type'] as String?,
       permissionType: json['permission_type'] as String?,
@@ -40,7 +40,7 @@ _$ProfileRespModelImpl _$$ProfileRespModelImplFromJson(
       address: json['address'] as String?,
       editedDateTime: json['edited_date_time'] as String?,
       isOccupied: json['is_occupied'] as bool?,
-      user: json['user'] as int?,
+      user: (json['user'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$$ProfileRespModelImplToJson(

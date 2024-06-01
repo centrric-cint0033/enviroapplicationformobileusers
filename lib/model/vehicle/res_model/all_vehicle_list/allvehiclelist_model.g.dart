@@ -9,7 +9,7 @@ part of 'allvehiclelist_model.dart';
 _$AllVehicleListModelImpl _$$AllVehicleListModelImplFromJson(
         Map<String, dynamic> json) =>
     _$AllVehicleListModelImpl(
-      id: json['id'] as int,
+      id: (json['id'] as num).toInt(),
       registration: json['registration'] as String,
     );
 

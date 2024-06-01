@@ -9,7 +9,7 @@ part of 'previous_sale_res_model.dart';
 _$PreviousSaleResModelImpl _$$PreviousSaleResModelImplFromJson(
         Map<String, dynamic> json) =>
     _$PreviousSaleResModelImpl(
-      id: json['id'] as int?,
+      id: (json['id'] as num?)?.toInt(),
       clientName: json['client_name'] as String?,
       dp: json['dp'] as String?,
       code: json['code'] as String?,

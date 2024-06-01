@@ -9,10 +9,10 @@ part of 'job_card_model.dart';
 _$JobCardRespModelImpl _$$JobCardRespModelImplFromJson(
         Map<String, dynamic> json) =>
     _$JobCardRespModelImpl(
-      id: json['id'] as int?,
+      id: (json['id'] as num?)?.toInt(),
       connected: json['connected'] as bool?,
       clientName: json['client_name'] as String?,
-      typeOfWasteStrId: json['type_of_waste_str_id'] as int?,
+      typeOfWasteStrId: (json['type_of_waste_str_id'] as num?)?.toInt(),
       files: json['files'] as List<dynamic>?,
       folder: json['folder'],
       salesPersonName: json['sales_person_name'] as String?,
@@ -134,8 +134,8 @@ _$JobCardRespModelImpl _$$JobCardRespModelImplFromJson(
       addInfoButton: json['add_info_button'],
       destructionCertificateUnread:
           json['destruction_certificate_unread'] as bool?,
-      quote: json['quote'] as int?,
-      client: json['client'] as int?,
+      quote: (json['quote'] as num?)?.toInt(),
+      client: (json['client'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$$JobCardRespModelImplToJson(
@@ -260,7 +260,7 @@ Map<String, dynamic> _$$JobCardRespModelImplToJson(
 _$IndustryTypeInfoImpl _$$IndustryTypeInfoImplFromJson(
         Map<String, dynamic> json) =>
     _$IndustryTypeInfoImpl(
-      id: json['id'] as int?,
+      id: (json['id'] as num?)?.toInt(),
       industryName: json['industry_name'] as String?,
     );
 

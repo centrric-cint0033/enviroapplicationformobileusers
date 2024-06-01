@@ -9,7 +9,7 @@ part of 'shedule_sign_res_model.dart';
 _$SheduleSignatureModelImpl _$$SheduleSignatureModelImplFromJson(
         Map<String, dynamic> json) =>
     _$SheduleSignatureModelImpl(
-      id: json['id'] as int?,
+      id: (json['id'] as num?)?.toInt(),
       jobVideo: json['job_video'] as List<dynamic>?,
       client: json['client'] as String?,
       address: json['address'] as String?,
@@ -28,7 +28,7 @@ _$SheduleSignatureModelImpl _$$SheduleSignatureModelImplFromJson(
       comments: json['comments'],
       status: json['status'] as String?,
       tabType: json['tab_type'] as String?,
-      quoteId: json['quote_id'] as int?,
+      quoteId: (json['quote_id'] as num?)?.toInt(),
       vehicles: (json['vehicles'] as List<dynamic>?)
           ?.map((e) => Vehicle.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -70,7 +70,7 @@ _$SheduleSignatureModelImpl _$$SheduleSignatureModelImplFromJson(
       signatureName: json['signature_name'] as String?,
       outsourcedCompanyName: json['outsourced_company_name'],
       activeStatus: json['active_status'] as bool?,
-      job: json['job'] as int?,
+      job: (json['job'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$$SheduleSignatureModelImplToJson(
@@ -133,8 +133,8 @@ _$VehicleDriverImpl _$$VehicleDriverImplFromJson(Map<String, dynamic> json) =>
     _$VehicleDriverImpl(
       dp: json['dp'] as String?,
       registration: json['registration'] as String?,
-      driverId: json['driver_id'] as int?,
-      vehicleId: json['vehicle_id'] as int?,
+      driverId: (json['driver_id'] as num?)?.toInt(),
+      vehicleId: (json['vehicle_id'] as num?)?.toInt(),
       designation: json['designation'] as String?,
       name: json['name'] as String?,
     );
@@ -151,7 +151,7 @@ Map<String, dynamic> _$$VehicleDriverImplToJson(_$VehicleDriverImpl instance) =>
 
 _$VehicleImpl _$$VehicleImplFromJson(Map<String, dynamic> json) =>
     _$VehicleImpl(
-      id: json['id'] as int?,
+      id: (json['id'] as num?)?.toInt(),
       registration: json['registration'] as String?,
       type: json['type'] as String?,
       vehicleType: json['vehicle_type'] as String?,

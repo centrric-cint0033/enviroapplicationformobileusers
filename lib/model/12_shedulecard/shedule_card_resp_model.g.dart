@@ -9,12 +9,12 @@ part of 'shedule_card_resp_model.dart';
 _$SheduleCardRespModelImpl _$$SheduleCardRespModelImplFromJson(
         Map<String, dynamic> json) =>
     _$SheduleCardRespModelImpl(
-      id: json['id'] as int?,
+      id: (json['id'] as num?)?.toInt(),
       jobVideo: json['job_video'] as List<dynamic>?,
       client: json['client'] == null
           ? null
           : Client.fromJson(json['client'] as Map<String, dynamic>),
-      quoteId: json['quote_id'] as int?,
+      quoteId: (json['quote_id'] as num?)?.toInt(),
       createdBy: json['created_by'] as String?,
       jobType: json['job_type'] as String?,
       amount: json['amount'] as String?,
@@ -76,10 +76,10 @@ _$SheduleCardRespModelImpl _$$SheduleCardRespModelImplFromJson(
       signatureName: json['signature_name'] as String?,
       outsourcedCompanyName: json['outsourced_company_name'],
       activeStatus: json['active_status'] as bool?,
-      job: json['job'] as int?,
+      job: (json['job'] as num?)?.toInt(),
       additionalVehicleDrivers:
           (json['additional_vehicle_drivers'] as List<dynamic>?)
-              ?.map((e) => e as int)
+              ?.map((e) => (e as num).toInt())
               .toList(),
     );
 
@@ -140,7 +140,7 @@ Map<String, dynamic> _$$SheduleCardRespModelImplToJson(
     };
 
 _$PicImpl _$$PicImplFromJson(Map<String, dynamic> json) => _$PicImpl(
-      id: json['id'] as int?,
+      id: (json['id'] as num?)?.toInt(),
       file: json['file'] as String?,
       createdDateTime: json['created_date_time'] as String?,
       editedDateTime: json['edited_date_time'] as String?,
@@ -216,7 +216,7 @@ Map<String, dynamic> _$$ClientImplToJson(_$ClientImpl instance) =>
 
 _$CommentImpl _$$CommentImplFromJson(Map<String, dynamic> json) =>
     _$CommentImpl(
-      id: json['id'] as int?,
+      id: (json['id'] as num?)?.toInt(),
       comment: json['comment'] as String?,
       createdBy: json['created_by'] as String?,
       editable: json['editable'] as bool?,
@@ -231,10 +231,10 @@ Map<String, dynamic> _$$CommentImplToJson(_$CommentImpl instance) =>
     };
 
 _$DriverImpl _$$DriverImplFromJson(Map<String, dynamic> json) => _$DriverImpl(
-      id: json['id'] as int?,
+      id: (json['id'] as num?)?.toInt(),
       name: json['name'] as String?,
       designation: json['designation'] as String?,
-      vehicleId: json['vehicle_id'] as int?,
+      vehicleId: (json['vehicle_id'] as num?)?.toInt(),
       dp: json['dp'] as String?,
       registration: json['registration'] as String?,
       preinspectioncheck: json['preinspectioncheck'] as bool?,
@@ -275,7 +275,7 @@ Map<String, dynamic> _$$JobCardKeysImplToJson(_$JobCardKeysImpl instance) =>
 
 _$TeamEmployeeImpl _$$TeamEmployeeImplFromJson(Map<String, dynamic> json) =>
     _$TeamEmployeeImpl(
-      id: json['id'] as int?,
+      id: (json['id'] as num?)?.toInt(),
       name: json['name'] as String?,
       dp: json['dp'] as String?,
     );

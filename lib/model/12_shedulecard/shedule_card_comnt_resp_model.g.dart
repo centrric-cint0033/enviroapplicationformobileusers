@@ -24,7 +24,7 @@ Map<String, dynamic> _$$SheduleCommentModelImplToJson(
 
 _$CommentImpl _$$CommentImplFromJson(Map<String, dynamic> json) =>
     _$CommentImpl(
-      id: json['id'] as int?,
+      id: (json['id'] as num?)?.toInt(),
       author: json['author'] as bool?,
       createdBy: json['created_by'] as String?,
       comment: json['comment'] as String?,

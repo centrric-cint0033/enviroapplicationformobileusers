@@ -8,7 +8,7 @@ part of 'vehicle_model.dart';
 
 _$VehicleModelImpl _$$VehicleModelImplFromJson(Map<String, dynamic> json) =>
     _$VehicleModelImpl(
-      id: json['id'] as int?,
+      id: (json['id'] as num?)?.toInt(),
       imageThumbnail: json['image_thumbnail'] as String?,
       image1: json['image1'] as String?,
       multipleImages: json['multiple_images'] as List<dynamic>?,
@@ -50,8 +50,8 @@ _$VehicleModelImpl _$$VehicleModelImplFromJson(Map<String, dynamic> json) =>
       readingAfterFilling: json['reading_after_filling'] as String?,
       filledBy: json['filled_by'] as String?,
       volumeUsedInLiter: json['volume_usedIn_liter'] as String?,
-      vehicle: json['vehicle'] as int?,
-      folder: json['folder'] as int?,
+      vehicle: (json['vehicle'] as num?)?.toInt(),
+      folder: (json['folder'] as num?)?.toInt(),
       description: json['description'] as String?,
       invoiceDate: json['invoice_date'] as String?,
       serviceDate: json['service_date'] as String?,
@@ -66,7 +66,7 @@ _$VehicleModelImpl _$$VehicleModelImplFromJson(Map<String, dynamic> json) =>
       dateTime: json['date_time'] == null
           ? null
           : DateTime.parse(json['date_time'] as String),
-      odometer: json['odometer'] as int?,
+      odometer: (json['odometer'] as num?)?.toInt(),
       odometdriverSignature: json['odometdriver_signature'] as String?,
       hourMeterStart: json['hour_meter_start'] as String?,
       fitForWork: json['fit_for_work'] as bool?,
@@ -121,11 +121,11 @@ _$VehicleModelImpl _$$VehicleModelImplFromJson(Map<String, dynamic> json) =>
       signature: json['signature'],
       dateNow: json['date_now'],
       reportedFaultString: json['reported_fault_string'],
-      driverName: json['driver_name'] as int?,
+      driverName: (json['driver_name'] as num?)?.toInt(),
       folders: (json['folders'] as List<dynamic>?)
           ?.map((e) => Folder.fromJson(e as Map<String, dynamic>))
           .toList(),
-      parentFolder: json['parent_folder'] as int?,
+      parentFolder: (json['parent_folder'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$$VehicleModelImplToJson(_$VehicleModelImpl instance) =>

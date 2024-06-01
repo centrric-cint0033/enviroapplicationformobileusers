@@ -11,7 +11,7 @@ _$TeamCreateFolderReqModelImpl _$$TeamCreateFolderReqModelImplFromJson(
     _$TeamCreateFolderReqModelImpl(
       name: json['name'] as String?,
       employee: json['employee'] as num?,
-      parent_folder: json['parent_folder'] as int?,
+      parent_folder: (json['parent_folder'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$$TeamCreateFolderReqModelImplToJson(
