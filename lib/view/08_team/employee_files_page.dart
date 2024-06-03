@@ -19,11 +19,17 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 @RoutePage()
 class EmployeeFilesPage extends StatelessWidget {
-  const EmployeeFilesPage(
-      {super.key, this.employeeId, this.folderName, this.folderId});
+  const EmployeeFilesPage({
+    super.key,
+    this.employeeId,
+    this.folderName,
+    this.folderId,
+    this.searchType,
+  });
   final num? employeeId;
   final String? folderName;
   final num? folderId;
+  final String? searchType;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,8 +42,7 @@ class EmployeeFilesPage extends StatelessWidget {
           builder: (context) {
             final res = vmTeam.teamFoldersResponse2;
             FolderListModel? folderList = res.data;
-            final ress = vmTeam.teamFoldersResponse2;
-            FolderListModel? fileList = ress.data;
+            FolderListModel? fileList = res.data;
             final editResponse = vmTeam.editFileResponse;
             final addFolderResponse = vmTeam.addFolderResponse;
             final addFileResponse = vmTeam.addFileResponse;
@@ -55,12 +60,17 @@ class EmployeeFilesPage extends StatelessWidget {
                             children: [
                               Expanded(
                                 child: WWTextField(
-                                  controller:
-                                      vmTeam.currentEmployeeSearchCntrlr,
+                                  controller: vmTeam.fileFolderSearchCntrlr,
                                   onChanged: (v) => vmTeam.onTextChanged(() =>
                                       v.isEmpty
-                                          ? vmTeam.getCurrentEmployee()
-                                          : vmTeam.currentEmployeeSearchApi(v)),
+                                          ? vmTeam.getTeamFolders(
+                                              id: employeeId ?? 0,
+                                              parentFolderId: folderId ?? 0)
+                                          : vmTeam.fileFolderSearchApi(
+                                              v,
+                                              folderId!,
+                                              searchType!,
+                                              employeeId!)),
                                   suffixTap: () {},
                                   hintText: 'Search',
                                 ),

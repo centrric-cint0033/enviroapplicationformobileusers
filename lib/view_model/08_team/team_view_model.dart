@@ -73,6 +73,9 @@ abstract class TeamViewModelBase with Store {
   @observable
   ApiResponse expiryFileResponse = ApiResponse<FolderListModel>();
   @observable
+  ApiResponse<TeamResModel> fileFolderSearchResponse =
+      ApiResponse<TeamResModel>();
+  @observable
   ImageFilePickerModel? profileImage;
   @observable
   bool profileImageLoader = false;
@@ -153,6 +156,7 @@ abstract class TeamViewModelBase with Store {
   TextEditingController currentEmployeeSearchCntrlr = TextEditingController();
   TextEditingController terminatedEmployeeSearchCntrlr =
       TextEditingController();
+  TextEditingController fileFolderSearchCntrlr = TextEditingController();
 
   Timer? debouce;
   void onTextChanged(Function() function) {
@@ -167,7 +171,7 @@ abstract class TeamViewModelBase with Store {
   Future<void> getCurrentEmployee({int? page}) async {
     currentEmployeeResponse = currentEmployeeResponse.copyWith(
       errors: null,
-      loading: true,
+      loading: page == null,
       paginationLoading: page != null,
     );
     final result = await teamService.getCurrentEmployee(
@@ -210,7 +214,6 @@ abstract class TeamViewModelBase with Store {
           !currentEmployeeResponse.paginationLoading) {
         int pageNo = currentEmployeeResponse.pageNo + 1;
         getCurrentEmployee(page: pageNo);
-        currentEmployeeResponse.copyWith(loading: false);
       }
     });
   }
@@ -219,7 +222,7 @@ abstract class TeamViewModelBase with Store {
   Future<void> getTerminatedEmployee({int? page}) async {
     terminatedEmployeeResponse = terminatedEmployeeResponse.copyWith(
       errors: null,
-      loading: true,
+      loading: page == null,
       paginationLoading: page != null,
     );
     final result = await teamService.getTerminatedEmployee(
@@ -262,7 +265,6 @@ abstract class TeamViewModelBase with Store {
           !terminatedEmployeeResponse.paginationLoading) {
         int pageNo = terminatedEmployeeResponse.pageNo + 1;
         getTerminatedEmployee(page: pageNo);
-        terminatedEmployeeResponse.copyWith(loading: false);
       }
     });
   }
@@ -349,7 +351,9 @@ abstract class TeamViewModelBase with Store {
 
   @action
   Future<void> getTeamFolders(
-      {required num id, required num parentFolderId}) async {
+      {required num id,
+      required num parentFolderId,
+      bool fromTeamProfileScreen = false}) async {
     if (parentFolderId == 1) {
       teamFoldersResponse =
           teamFoldersResponse.copyWith(error: null, loading: true);
@@ -372,8 +376,11 @@ abstract class TeamViewModelBase with Store {
         },
       );
     } else {
-      teamFoldersResponse2 =
-          teamFoldersResponse2.copyWith(error: null, loading: true);
+      teamFoldersResponse2 = teamFoldersResponse2.copyWith(
+          error: null,
+          loading: fromTeamProfileScreen == true
+              ? true
+              : teamFoldersResponse2.data == null);
 
       final result = await teamService.getTeamFolders(
           id: id, parentFolderId: parentFolderId);
@@ -416,11 +423,7 @@ abstract class TeamViewModelBase with Store {
         popupErrorData(context, mainFailure: l);
       },
       (r) async {
-        getTeamFolders(id: employee, parentFolderId: parentfolder);
-        teamFoldersResponse2 = teamFoldersResponse2.copyWith(
-          error: null,
-          loading: false,
-        );
+        await getTeamFolders(id: employee, parentFolderId: parentfolder);
         addFolderResponse =
             addFolderResponse.copyWith(error: null, loading: false);
         vmTeam.textFolderAddController.clear();
@@ -444,12 +447,8 @@ abstract class TeamViewModelBase with Store {
           loading: false,
         );
       },
-      (r) {
-        getTeamFolders(id: employeeID, parentFolderId: parentFolderId);
-        teamFoldersResponse2 = teamFoldersResponse2.copyWith(
-          error: null,
-          loading: false,
-        );
+      (r) async {
+        await getTeamFolders(id: employeeID, parentFolderId: parentFolderId);
         addFolderResponse = addFolderResponse.copyWith(
           data: r,
           error: null,
@@ -479,12 +478,8 @@ abstract class TeamViewModelBase with Store {
           loading: false,
         );
       },
-      (r) {
-        getTeamFolders(id: employeeID, parentFolderId: parentFolderId);
-        teamFoldersResponse2 = teamFoldersResponse2.copyWith(
-          error: null,
-          loading: false,
-        );
+      (r) async {
+        await getTeamFolders(id: employeeID, parentFolderId: parentFolderId);
         editFolderResponse = editFolderResponse.copyWith(
           data: r,
           error: null,
@@ -625,10 +620,10 @@ abstract class TeamViewModelBase with Store {
         addFileResponse = addFileResponse.copyWith(errors: l, loading: false);
         popupErrorData(context, mainFailure: l);
       },
-      (r) {
+      (r) async {
+        await getTeamFolders(id: employee, parentFolderId: parentfolder);
         addFileResponse =
             addFileResponse.copyWith(data: r, error: null, loading: false);
-        getTeamFolders(id: employee, parentFolderId: parentfolder);
         vmTeam.textFolderAddController.clear();
         // context.router.pop();
       },
@@ -655,14 +650,10 @@ abstract class TeamViewModelBase with Store {
         );
         popupErrorData(context, mainFailure: l);
       },
-      (r) {
-        getTeamFolders(id: employeeID, parentFolderId: parentFolderId);
+      (r) async {
+        await getTeamFolders(id: employeeID, parentFolderId: parentFolderId);
         editFileResponse = editFileResponse.copyWith(
           data: r,
-          error: null,
-          loading: false,
-        );
-        teamFoldersResponse2 = teamFoldersResponse2.copyWith(
           error: null,
           loading: false,
         );
@@ -687,12 +678,8 @@ abstract class TeamViewModelBase with Store {
           loading: false,
         );
       },
-      (r) {
-        getTeamFolders(id: employeeID, parentFolderId: parentFolderId);
-        teamFoldersResponse2 = teamFoldersResponse2.copyWith(
-          error: null,
-          loading: false,
-        );
+      (r) async {
+        await getTeamFolders(id: employeeID, parentFolderId: parentFolderId);
         addFileResponse = addFileResponse.copyWith(
           data: r,
           error: null,
@@ -709,8 +696,8 @@ abstract class TeamViewModelBase with Store {
       required BuildContext context,
       required num employeeID,
       required num parentFolderId}) async {
-    expiryFileResponse =
-        expiryFileResponse.copyWith(error: null, loading: true);
+    expiryFileResponse = expiryFileResponse.copyWith(
+        error: null, loading: expiryFileResponse.data == null);
     final result =
         await teamService.expiryDateFiles(fileId: fileId, expiry: expiry);
 
@@ -721,13 +708,33 @@ abstract class TeamViewModelBase with Store {
         popupErrorData(context, mainFailure: l);
       },
       (r) async {
-        getTeamFolders(id: employeeID, parentFolderId: parentFolderId);
-        teamFoldersResponse2 = teamFoldersResponse2.copyWith(
-          error: null,
-          loading: false,
-        );
+        await getTeamFolders(id: employeeID, parentFolderId: parentFolderId);
         expiryFileResponse =
             expiryFileResponse.copyWith(error: null, loading: false);
+      },
+    );
+  }
+
+  @action
+  Future<void> fileFolderSearchApi(String searchData, num folderId,
+      String searchType, num employeeId) async {
+    teamFoldersResponse2 =
+        teamFoldersResponse2.copyWith(errors: null, loading: true);
+
+    final result = await teamService.fileFolderSearchApi(data: {
+      "key": searchData,
+      "folder_id": "$folderId",
+      "search_type": searchType,
+      "employee": "$employeeId"
+    });
+    return result.fold(
+      (l) {
+        teamFoldersResponse2 =
+            teamFoldersResponse2.copyWith(errors: l, loading: false);
+      },
+      (r) {
+        teamFoldersResponse2 = teamFoldersResponse2.copyWith(
+            data: r, errors: null, loading: false);
       },
     );
   }

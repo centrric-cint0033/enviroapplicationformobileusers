@@ -275,6 +275,23 @@ mixin _$TeamViewModel on TeamViewModelBase, Store {
     });
   }
 
+  late final _$fileFolderSearchResponseAtom = Atom(
+      name: 'TeamViewModelBase.fileFolderSearchResponse', context: context);
+
+  @override
+  ApiResponse<TeamResModel> get fileFolderSearchResponse {
+    _$fileFolderSearchResponseAtom.reportRead();
+    return super.fileFolderSearchResponse;
+  }
+
+  @override
+  set fileFolderSearchResponse(ApiResponse<TeamResModel> value) {
+    _$fileFolderSearchResponseAtom
+        .reportWrite(value, super.fileFolderSearchResponse, () {
+      super.fileFolderSearchResponse = value;
+    });
+  }
+
   late final _$profileImageAtom =
       Atom(name: 'TeamViewModelBase.profileImage', context: context);
 
@@ -739,9 +756,14 @@ mixin _$TeamViewModel on TeamViewModelBase, Store {
       AsyncAction('TeamViewModelBase.getTeamFolders', context: context);
 
   @override
-  Future<void> getTeamFolders({required num id, required num parentFolderId}) {
-    return _$getTeamFoldersAsyncAction.run(
-        () => super.getTeamFolders(id: id, parentFolderId: parentFolderId));
+  Future<void> getTeamFolders(
+      {required num id,
+      required num parentFolderId,
+      bool fromTeamProfileScreen = false}) {
+    return _$getTeamFoldersAsyncAction.run(() => super.getTeamFolders(
+        id: id,
+        parentFolderId: parentFolderId,
+        fromTeamProfileScreen: fromTeamProfileScreen));
   }
 
   late final _$addTeamFolderAsyncAction =
@@ -911,6 +933,16 @@ mixin _$TeamViewModel on TeamViewModelBase, Store {
         parentFolderId: parentFolderId));
   }
 
+  late final _$fileFolderSearchApiAsyncAction =
+      AsyncAction('TeamViewModelBase.fileFolderSearchApi', context: context);
+
+  @override
+  Future<void> fileFolderSearchApi(
+      String searchData, num folderId, String searchType, num employeeId) {
+    return _$fileFolderSearchApiAsyncAction.run(() => super
+        .fileFolderSearchApi(searchData, folderId, searchType, employeeId));
+  }
+
   late final _$TeamViewModelBaseActionController =
       ActionController(name: 'TeamViewModelBase', context: context);
 
@@ -1056,6 +1088,7 @@ addFileResponse: ${addFileResponse},
 editFileResponse: ${editFileResponse},
 deleteFileResponse: ${deleteFileResponse},
 expiryFileResponse: ${expiryFileResponse},
+fileFolderSearchResponse: ${fileFolderSearchResponse},
 profileImage: ${profileImage},
 profileImageLoader: ${profileImageLoader},
 showDecoration: ${showDecoration},

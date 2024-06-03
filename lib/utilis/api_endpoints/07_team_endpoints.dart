@@ -1,10 +1,8 @@
 mixin class TeamEndpoints {
   // TEAM APIS
-  final String currentEmployeelist =
-      '/api/v1/team/status/current/';
+  final String currentEmployeelist = '/api/v1/team/status/current/';
 
-  final String terminatedEmployeelist =
-      '/api/v1/team/status/terminated/';
+  final String terminatedEmployeelist = '/api/v1/team/status/terminated/';
 
   final String searchEmployeeList = '/api/v1/team/searchEmployee/';
 
@@ -33,4 +31,6 @@ mixin class TeamEndpoints {
   final String teamFilesDelete = '/api/v1/drive/file/delete/';
 
   final String teamFilesExpiry = '/api/v1/drive/file/expiry-date/';
+
+  final String searchFileFolder = '/api/v1/drive/search/file/';
 }

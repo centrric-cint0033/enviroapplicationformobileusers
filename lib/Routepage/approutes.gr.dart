@@ -117,6 +117,7 @@ abstract class $AppRouter extends _i34.RootStackRouter {
           employeeId: args.employeeId,
           folderName: args.folderName,
           folderId: args.folderId,
+          searchType: args.searchType,
         ),
       );
     },
@@ -413,6 +414,7 @@ class EmployeeFilesRoute extends _i34.PageRouteInfo<EmployeeFilesRouteArgs> {
     num? employeeId,
     String? folderName,
     num? folderId,
+    String? searchType,
     List<_i34.PageRouteInfo>? children,
   }) : super(
           EmployeeFilesRoute.name,
@@ -421,6 +423,7 @@ class EmployeeFilesRoute extends _i34.PageRouteInfo<EmployeeFilesRouteArgs> {
             employeeId: employeeId,
             folderName: folderName,
             folderId: folderId,
+            searchType: searchType,
           ),
           initialChildren: children,
         );
@@ -437,6 +440,7 @@ class EmployeeFilesRouteArgs {
     this.employeeId,
     this.folderName,
     this.folderId,
+    this.searchType,
   });
 
   final _i36.Key? key;
@@ -447,9 +451,11 @@ class EmployeeFilesRouteArgs {
 
   final num? folderId;
 
+  final String? searchType;
+
   @override
   String toString() {
-    return 'EmployeeFilesRouteArgs{key: $key, employeeId: $employeeId, folderName: $folderName, folderId: $folderId}';
+    return 'EmployeeFilesRouteArgs{key: $key, employeeId: $employeeId, folderName: $folderName, folderId: $folderId, searchType: $searchType}';
   }
 }
 

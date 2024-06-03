@@ -38,9 +38,11 @@ class WWFolderCard extends StatelessWidget {
           leading: const Icon(Icons.folder, color: Colors.black54),
           title: Row(
             children: [
-              Text(folder.name ?? "",
-                  overflow: TextOverflow.ellipsis,
-                  style: Theme.of(context).textTheme.bodySmall),
+              Expanded(
+                child: Text(folder.name ?? "",
+                    overflow: TextOverflow.ellipsis,
+                    style: Theme.of(context).textTheme.bodySmall),
+              ),
               loading == true
                   ? const CupertinoActivityIndicator()
                   : const SizedBox.shrink()

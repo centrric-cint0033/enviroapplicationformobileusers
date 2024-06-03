@@ -35,7 +35,7 @@ class CurrentEmployeeTab extends StatelessWidget {
         final res = vmTeam.currentEmployeeResponse;
         return Expanded(
             child: WWResponseHandler(
-                data: vmTeam.currentEmployeeResponse,
+                data: res,
                 isEmpty: vmTeam.currentEmployeeResponse.data?.isEmpty ?? true,
                 onTap: () => vmTeam.getCurrentEmployee(),
                 child: CurrentEmployeeListWidget(loading: res.loading)));

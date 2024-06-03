@@ -181,11 +181,13 @@ class TeamProfileScreen extends StatelessWidget {
                                 onTap: () {
                                   vmTeam.getTeamFolders(
                                       id: employeeDetails?.id ?? 0,
-                                      parentFolderId: data.id ?? 0);
+                                      parentFolderId: data.id ?? 0,
+                                      fromTeamProfileScreen: true);
                                   context.router.push(EmployeeFilesRoute(
                                       employeeId: employeeDetails?.id,
                                       folderName: data.name,
-                                      folderId: data.id));
+                                      folderId: data.id,
+                                      searchType: data.type));
                                 },
                                 folderName: data.name,
                                 editTap: (s) => vmTeam.editTeamFolderApi(
