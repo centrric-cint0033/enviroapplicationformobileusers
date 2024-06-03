@@ -1,10 +1,9 @@
+// ignore_for_file: must_be_immutable
+
 import 'dart:developer';
 import 'dart:io';
 import 'dart:typed_data';
-
 import 'package:auto_route/auto_route.dart';
-import 'package:enviro_mobile_application/model/12_shedulecard/shedule_card_comnt_resp_model.dart';
-
 import 'package:enviro_mobile_application/view_model/11_shedule/shedule_page_view_model.dart';
 import 'package:enviro_mobile_application/widgets/cmbutton.dart';
 import 'package:enviro_mobile_application/widgets/cmn_action_icon.dart';
@@ -12,7 +11,6 @@ import 'package:enviro_mobile_application/widgets/cmn_title_textwidget.dart';
 import 'package:enviro_mobile_application/widgets/drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:open_file/open_file.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:signature/signature.dart';
@@ -49,7 +47,7 @@ class SheduleSignaturePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: CmnDrawer(context),
+      drawer: cmnDrawer(context),
       appBar: AppBar(
         title: cmnTitleWidget('Scheduling'),
         actions: [notificationButton(context)],

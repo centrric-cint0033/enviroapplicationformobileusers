@@ -2,9 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:enviro_mobile_application/Routepage/routespage.dart';
 import 'package:enviro_mobile_application/model/04_ohs/oh&s_resp_model.dart';
 import 'package:enviro_mobile_application/view_model/04_ohs/ohs_view_model.dart';
-import 'package:enviro_mobile_application/widgets/cmappbar.dart';
 import 'package:enviro_mobile_application/widgets/cmn_action_icon.dart';
-import 'package:enviro_mobile_application/widgets/cmn_leading_icon.dart';
 import 'package:enviro_mobile_application/widgets/cmn_title_textwidget.dart';
 import 'package:enviro_mobile_application/widgets/drawer.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +18,7 @@ class OhsDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: CmnDrawer(context),
+      drawer: cmnDrawer(context),
       appBar: AppBar(
           // leading: const cmn_leading_icon(),
           title: cmnTitleWidget('OH&S'),

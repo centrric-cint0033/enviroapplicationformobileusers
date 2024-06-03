@@ -25,7 +25,7 @@ class SheduledetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: CmnDrawer(context),
+      drawer: cmnDrawer(context),
       appBar: AppBar(
         title: cmnTitleWidget('Scheduling'),
         actions: [notificationButton(context)],

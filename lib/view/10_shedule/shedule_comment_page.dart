@@ -1,6 +1,4 @@
 import 'package:auto_route/annotations.dart';
-import 'package:enviro_mobile_application/utilis/constant.dart';
-import 'package:enviro_mobile_application/view/08_team/team_widgets/01_team_widgets.dart';
 import 'package:enviro_mobile_application/view_model/11_shedule/shedule_page_view_model.dart';
 import 'package:enviro_mobile_application/widgets/cmn_action_icon.dart';
 import 'package:enviro_mobile_application/widgets/cmn_title_textwidget.dart';
@@ -24,7 +22,7 @@ class SheduleCommentPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: CmnDrawer(context),
+      drawer: cmnDrawer(context),
       appBar: AppBar(
         title: cmnTitleWidget('Comments'),
         actions: [notificationButton(context)],
@@ -41,7 +39,7 @@ class SheduleCommentPage extends StatelessWidget {
               'Comments',
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             SizedBox(

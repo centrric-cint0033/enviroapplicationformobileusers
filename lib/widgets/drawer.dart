@@ -2,8 +2,6 @@ import 'package:auto_route/auto_route.dart';
 import 'package:enviro_mobile_application/Routepage/routespage.dart';
 import 'package:enviro_mobile_application/Routepage/securestorage.dart';
 import 'package:enviro_mobile_application/utilis/constant.dart';
-import 'package:enviro_mobile_application/view/09_prfle_creation_page/prfle_crtion.dart';
-import 'package:enviro_mobile_application/view/09_prfle_creation_page/prfle_crtion.dart';
 import 'package:enviro_mobile_application/view/home_page.dart';
 import 'package:enviro_mobile_application/view_model/10_profile/profile_view_model.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +10,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../Routepage/approutes.gr.dart';
 
-Drawer CmnDrawer(BuildContext context) {
+Drawer cmnDrawer(BuildContext context) {
   return Drawer(
     width: 210.w,
     child: ListView(
@@ -24,156 +22,154 @@ Drawer CmnDrawer(BuildContext context) {
         ),
         Padding(
           padding: const EdgeInsets.only(left: 35.0),
-          child: Container(
-            child: Column(
-              children: [
-                Row(
-                  children: [
-                    Observer(builder: (_) {
-                      return SizedBox(
-                        width: 50,
-                        height: 70,
-                        child: vmProfile.profilepageResponse.data?.dp != null
-                            ? Image.network(
-                                vmProfile.profilepageResponse.data!.dp!,
-                                fit: BoxFit.cover,
-                              )
-                            : Container(),
-                      );
-                    }),
-                    Observer(builder: (_) {
-                      return Padding(
-                        padding: const EdgeInsets.only(left: 23.0),
-                        child: Text(
-                          vmProfile.profilepageResponse.data?.username ?? '',
-                          style: const TextStyle(overflow: TextOverflow.clip),
-                        ),
-                      );
-                    }),
-                  ],
-                ),
-                const SizedBox(
-                  height: 8,
-                ),
-                Container(
-                  height: 33,
-                  child: ElevatedButton(
-                      onPressed: () {
-                        profileeditfunction(context);
-                      },
-                      style: ButtonStyle(
-                        side: MaterialStateProperty.all(
-                            const BorderSide(color: Colors.blue)),
+          child: Column(
+            children: [
+              Row(
+                children: [
+                  Observer(builder: (_) {
+                    return SizedBox(
+                      width: 45.w,
+                      height: 65.w,
+                      child: vmProfile.profilepageResponse.data?.dp != null
+                          ? Image.network(
+                              vmProfile.profilepageResponse.data!.dp!,
+                              fit: BoxFit.cover,
+                            )
+                          : Container(),
+                    );
+                  }),
+                  Observer(builder: (_) {
+                    return Padding(
+                      padding: const EdgeInsets.only(left: 23.0),
+                      child: Text(
+                        vmProfile.profilepageResponse.data?.username ?? '',
+                        style: const TextStyle(overflow: TextOverflow.clip),
                       ),
-                      child: Observer(builder: (_) {
-                        return Text(
-                          vmProfile.profilepageResponse.data?.permissionType ??
-                              '',
-                          style: const TextStyle(color: Colors.black),
-                        );
-                      })),
+                    );
+                  }),
+                ],
+              ),
+              SizedBox(
+                height: 8.w,
+              ),
+              SizedBox(
+                height: 33.w,
+                child: ElevatedButton(
+                    onPressed: () {
+                      profileeditfunction(context);
+                    },
+                    style: ButtonStyle(
+                      side: MaterialStateProperty.all(
+                          const BorderSide(color: Colors.blue)),
+                    ),
+                    child: Observer(builder: (_) {
+                      return Text(
+                        vmProfile.profilepageResponse.data?.permissionType ??
+                            '',
+                        style: const TextStyle(color: Colors.black),
+                      );
+                    })),
+              ),
+              SizedBox(
+                height: 35.w,
+              ),
+              ListTile(
+                leading: const Icon(
+                  Icons.home,
+                  color: Colors.blue,
                 ),
-                const SizedBox(
-                  height: 46,
+                title: const Text('Home'),
+                onTap: () {
+                  context.router.pushNamed(RouteNames.rHomePage);
+                  Navigator.pop(context);
+                },
+              ),
+              sized0hx05,
+              ListTile(
+                leading: const Icon(
+                  Icons.monetization_on,
+                  color: Colors.blue,
                 ),
-                ListTile(
-                  leading: const Icon(
-                    Icons.home,
-                    color: Colors.blue,
-                  ),
-                  title: const Text('Home'),
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
+                title: const Text('Sales'),
+                onTap: () {
+                  onsalesfunction(context);
+                  Navigator.pop(context);
+                },
+              ),
+              sized0hx05,
+              ListTile(
+                leading: const Icon(
+                  Icons.directions_car,
+                  color: Colors.blue,
                 ),
-                sized0hx05,
-                ListTile(
-                  leading: const Icon(
-                    Icons.monetization_on,
-                    color: Colors.blue,
-                  ),
-                  title: const Text('Sales'),
-                  onTap: () {
-                    onsalesfunction(context);
-                  },
+                title: const Text('Vehicle'),
+                onTap: () {
+                  vehiclefunction(context);
+                  Navigator.pop(context);
+                },
+              ),
+              sized0hx05,
+              ListTile(
+                leading: const Icon(
+                  Icons.location_on,
+                  color: Colors.blue,
                 ),
-                sized0hx05,
-                ListTile(
-                  leading: const Icon(
-                    Icons.directions_car,
-                    color: Colors.blue, // Set icon color to blue
-                  ),
-                  title: const Text('Vehicle'),
-                  onTap: () {
-                    vehiclefunction(context);
-                    // Add your functionality here
-                    Navigator.pop(context);
-                  },
+                title: const Text('Site'),
+                onTap: () {
+                  navigateToSitesPage(context: context);
+                  Navigator.pop(context);
+                },
+              ),
+              sized0hx05,
+              ListTile(
+                leading: const Icon(
+                  Icons.local_hospital,
+                  color: Colors.blue,
                 ),
-                sized0hx05,
-                ListTile(
-                  leading: const Icon(
-                    Icons.location_on,
-                    color: Colors.blue, // Set icon color to blue
-                  ),
-                  title: const Text('Site'),
-                  onTap: () {
-                    // Add your functionality here
-                    Navigator.pop(context);
-                  },
+                title: const Text('OH&S'),
+                onTap: () {
+                  ohsfunction(context);
+                  Navigator.pop(context);
+                },
+              ),
+              sized0hx05,
+              ListTile(
+                leading: const Icon(
+                  Icons.schedule,
+                  color: Colors.blue, // Set icon color to blue
                 ),
-                sized0hx05,
-                ListTile(
-                  leading: const Icon(
-                    Icons.local_hospital,
-                    color: Colors.blue, // Set icon color to blue
-                  ),
-                  title: const Text('OH&S'),
-                  onTap: () {
-                    ohsfunction(context);
-
-                    Navigator.pop(context);
-                  },
+                title: const Text('Scheduling'),
+                onTap: () {
+                  shedulepagefunction(context);
+                  Navigator.pop(context);
+                },
+              ),
+              sized0hx05,
+              ListTile(
+                leading: const Icon(
+                  Icons.business,
+                  color: Colors.blue, // Set icon color to blue
                 ),
-                sized0hx05,
-                ListTile(
-                  leading: const Icon(
-                    Icons.schedule,
-                    color: Colors.blue, // Set icon color to blue
-                  ),
-                  title: const Text('Scheduling'),
-                  onTap: () {
-                    // Add your functionality here
-                    Navigator.pop(context);
-                  },
+                title: const Text('Intranet'),
+                onTap: () {
+                  intranetfuntion(context);
+                  Navigator.pop(context);
+                },
+              ),
+              sized0hx05,
+              ListTile(
+                leading: const Icon(
+                  Icons.people,
+                  color: Colors.blue, // Set icon color to blue
                 ),
-                sized0hx05,
-                ListTile(
-                  leading: const Icon(
-                    Icons.business,
-                    color: Colors.blue, // Set icon color to blue
-                  ),
-                  title: const Text('Intranet'),
-                  onTap: () {
-                    intranetfuntion(context);
-                    // Add your functionality here
-                    Navigator.pop(context);
-                  },
-                ),
-                sized0hx05,
-                ListTile(
-                  leading: const Icon(
-                    Icons.people,
-                    color: Colors.blue, // Set icon color to blue
-                  ),
-                  title: const Text('Team'),
-                  onTap: () {
-                    // Add your functionality here
-                    Navigator.pop(context);
-                  },
-                ),
-              ],
-            ),
+                title: const Text('Team'),
+                onTap: () {
+                  teamfuntion(context);
+                  // Add your functionality here
+                  Navigator.pop(context);
+                },
+              ),
+            ],
           ),
         ),
         const SizedBox(

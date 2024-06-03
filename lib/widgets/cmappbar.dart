@@ -1,4 +1,3 @@
-import 'package:enviro_mobile_application/widgets/cmn_leading_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -49,7 +48,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       backgroundColor: color ?? Colors.white,
       automaticallyImplyLeading: automaticallyImplyLeading ?? true,
       flexibleSpace: flexible ?? Container(),
-      leading: const cmn_leading_icon(),
+      leading: leading,
       actions: updatedActions,
     );
   }

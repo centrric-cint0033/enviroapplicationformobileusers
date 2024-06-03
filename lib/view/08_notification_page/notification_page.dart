@@ -20,7 +20,7 @@ class NotificationPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        drawer: CmnDrawer(context),
+        drawer: cmnDrawer(context),
         appBar: AppBar(title: cmnTitleWidget('Notifications'), actions: [
           IconButton(
               onPressed: () {},

@@ -32,7 +32,7 @@ class SiteMainScreen extends StatelessWidget {
       length: 3,
       child: SafeArea(
         child: Scaffold(
-          drawer: CmnDrawer(context),
+          drawer: cmnDrawer(context),
           appBar: AppBar(
             title: cmnTitleWidget('Site'),
             actions: [notificationButton(context)],

@@ -46,7 +46,7 @@ class VehiclePage extends StatelessWidget {
     return DefaultTabController(
       length: 3,
       child: Scaffold(
-        drawer: CmnDrawer(context),
+        drawer: cmnDrawer(context),
         appBar: AppBar(
             title: cmnTitleWidget('Vehicles'),
             actions: [notificationButton(context)]),

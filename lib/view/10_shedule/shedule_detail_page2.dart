@@ -12,7 +12,7 @@ class SheduledetailPage2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: CmnDrawer(context),
+      drawer: cmnDrawer(context),
       appBar: AppBar(
         title: cmnTitleWidget('Scheduling'),
         actions: [notificationButton(context)],
@@ -45,6 +45,7 @@ class SheduledetailPage2 extends StatelessWidget {
             } else if (index >= 3 && index <= 10) {
               return buildCardDataOrder(index);
             }
+            return null;
           },
           separatorBuilder: (context, index) => const SizedBox(height: 20),
           itemCount: 12,

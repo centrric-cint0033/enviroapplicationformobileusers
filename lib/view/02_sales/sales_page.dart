@@ -25,7 +25,7 @@ class SalesPage extends StatelessWidget {
     return DefaultTabController(
         length: 3,
         child: Scaffold(
-          drawer: CmnDrawer(context),
+          drawer: cmnDrawer(context),
           appBar: AppBar(
               title: cmnTitleWidget('Sales'),
               actions: [notificationButton(context)]),

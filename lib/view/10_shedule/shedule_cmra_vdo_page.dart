@@ -6,7 +6,7 @@ import 'package:enviro_mobile_application/widgets/cmn_title_textwidget.dart';
 import 'package:enviro_mobile_application/widgets/drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:image_picker/image_picker.dart';
+
 
 @RoutePage()
 class ScheduleVideoAndPhotoPage extends StatelessWidget {
@@ -16,7 +16,7 @@ class ScheduleVideoAndPhotoPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Scaffold(
-        drawer: CmnDrawer(context),
+        drawer: cmnDrawer(context),
         appBar: AppBar(
           title: cmnTitleWidget('Scheduling'),
           actions: [notificationButton(context)],

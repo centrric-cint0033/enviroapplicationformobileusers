@@ -16,7 +16,7 @@ class OhsMainPage extends StatelessWidget {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
-        drawer: CmnDrawer(context),
+        drawer: cmnDrawer(context),
         appBar: AppBar(
             title: cmnTitleWidget('OH&S'),
             actions: [notificationButton(context)]),

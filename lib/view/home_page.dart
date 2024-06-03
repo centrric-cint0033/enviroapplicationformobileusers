@@ -25,7 +25,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: CmnDrawer(context),
+      drawer: cmnDrawer(context),
       appBar: AppBar(
           // leading: const cmn_leading_icon(),
           title: cmnTitleWidget('Home'),
@@ -183,7 +183,6 @@ void navigateToSitesPage({required BuildContext context}) {
 }
 
 void shedulepagefunction(BuildContext context) async {
-  print('dvsdv');
   vmJobcard.shedulecardviewmodelfunction();
   vmJobcard.shedulecardviewmodelweekfunction();
 
