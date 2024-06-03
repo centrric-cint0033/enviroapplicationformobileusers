@@ -35,4 +35,6 @@ mixin class TeamEndpoints {
   final String teamFilesExpiry = '/api/v1/drive/file/expiry-date/';
 
   final String searchFileFolder = '/api/v1/drive/search/file/';
+
+  final String searchFolder = '/api/v1/drive/search/folder/';
 }

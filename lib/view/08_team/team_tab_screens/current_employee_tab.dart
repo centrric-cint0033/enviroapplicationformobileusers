@@ -66,7 +66,9 @@ class CurrentEmployeeListWidget extends StatelessWidget {
                   vmTeam.getTeamFolders(
                       id: vmTeam.currentEmployeeResponse.data?[index].id ?? 0,
                       parentFolderId: 1);
-                  context.router.push(const TeamProfileRoute());
+                  context.router.push(TeamProfileRoute(
+                     id:
+                          vmTeam.currentEmployeeResponse.data?[index].id));
                 });
         });
   }

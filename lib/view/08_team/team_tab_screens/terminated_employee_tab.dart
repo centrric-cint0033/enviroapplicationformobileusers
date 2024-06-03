@@ -71,7 +71,8 @@ class TerminatedEmployeeListWidget extends StatelessWidget {
                       id: vmTeam.terminatedEmployeeResponse.data?[index].id ??
                           0,
                       parentFolderId: 1);
-                  context.router.push(const TeamProfileRoute());
+                  context.router.push(TeamProfileRoute(
+                      id: vmTeam.terminatedEmployeeResponse.data?[index].id));
                 });
         });
   }

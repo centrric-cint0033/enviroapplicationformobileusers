@@ -327,9 +327,14 @@ abstract class $AppRouter extends _i34.RootStackRouter {
       );
     },
     TeamProfileRoute.name: (routeData) {
+      final args = routeData.argsAs<TeamProfileRouteArgs>(
+          orElse: () => const TeamProfileRouteArgs());
       return _i34.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i29.TeamProfileScreen(),
+        child: _i29.TeamProfileScreen(
+          key: args.key,
+          id: args.id,
+        ),
       );
     },
     UpdateVehicleStatusRoute.name: (routeData) {
@@ -1151,16 +1156,40 @@ class TeamRoute extends _i34.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i29.TeamProfileScreen]
-class TeamProfileRoute extends _i34.PageRouteInfo<void> {
-  const TeamProfileRoute({List<_i34.PageRouteInfo>? children})
-      : super(
+class TeamProfileRoute extends _i34.PageRouteInfo<TeamProfileRouteArgs> {
+  TeamProfileRoute({
+    _i35.Key? key,
+    num? id,
+    List<_i34.PageRouteInfo>? children,
+  }) : super(
           TeamProfileRoute.name,
+          args: TeamProfileRouteArgs(
+            key: key,
+            id: id,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'TeamProfileRoute';
 
-  static const _i34.PageInfo<void> page = _i34.PageInfo<void>(name);
+  static const _i34.PageInfo<TeamProfileRouteArgs> page =
+      _i34.PageInfo<TeamProfileRouteArgs>(name);
+}
+
+class TeamProfileRouteArgs {
+  const TeamProfileRouteArgs({
+    this.key,
+    this.id,
+  });
+
+  final _i35.Key? key;
+
+  final num? id;
+
+  @override
+  String toString() {
+    return 'TeamProfileRouteArgs{key: $key, id: $id}';
+  }
 }
 
 /// generated route for

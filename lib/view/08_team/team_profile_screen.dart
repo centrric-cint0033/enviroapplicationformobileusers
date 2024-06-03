@@ -14,14 +14,17 @@ import 'package:enviro_mobile_application/widgets/cmbutton.dart';
 import 'package:enviro_mobile_application/widgets/cmn_title_textwidget.dart';
 import 'package:enviro_mobile_application/widgets/ww_customLoading.dart';
 import 'package:enviro_mobile_application/widgets/ww_folder_card.dart';
+import 'package:enviro_mobile_application/widgets/ww_search_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 @RoutePage()
 class TeamProfileScreen extends StatelessWidget {
+  final num? id;
   const TeamProfileScreen({
     super.key,
+    this.id,
   });
   @override
   Widget build(BuildContext context) {
@@ -166,6 +169,20 @@ class TeamProfileScreen extends StatelessWidget {
                                   });
                                 }),
                           ]),
+                      sized0hx10,
+                      WWTextField(
+                        controller: vmTeam.folderSearchCntrlr,
+                        onChanged: (v) => vmTeam.onTextChanged(() => v.isEmpty
+                            ? vmTeam.getTeamFolders(id: id!, parentFolderId: 1)
+                            : vmTeam.folderSearchApi(
+                                v,
+                                1,
+                                folderList!.folders?[0].type ?? "",
+                                employeeDetails!.id!)),
+                        suffixTap: () {},
+                        hintText: 'Search by Folder Name',
+                      ),
+                      sized0hx10,
                       ListView.separated(
                         physics: const NeverScrollableScrollPhysics(),
                         shrinkWrap: true,

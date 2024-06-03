@@ -161,6 +161,7 @@ abstract class TeamViewModelBase with Store {
   TextEditingController terminatedEmployeeSearchCntrlr =
       TextEditingController();
   TextEditingController fileFolderSearchCntrlr = TextEditingController();
+    TextEditingController folderSearchCntrlr = TextEditingController();
 
   Timer? debouce;
   void onTextChanged(Function() function) {
@@ -763,6 +764,30 @@ abstract class TeamViewModelBase with Store {
           errors: null,
           loading: false,
         );
+      },
+    );
+  }
+
+  @action
+  Future<void> folderSearchApi(String searchData, num folderId,
+      String searchType, num employeeId) async {
+    teamFoldersResponse =
+        teamFoldersResponse.copyWith(errors: null, loading: true);
+
+    final result = await teamService.folderSearchApi(data: {
+      "key": searchData,
+      "folder_id": "$folderId",
+      "search_type": searchType,
+      "employee": "$employeeId"
+    });
+    return result.fold(
+      (l) {
+        teamFoldersResponse =
+            teamFoldersResponse.copyWith(errors: l, loading: false);
+      },
+      (r) {
+        teamFoldersResponse =
+            teamFoldersResponse.copyWith(data: r, errors: null, loading: false);
       },
     );
   }

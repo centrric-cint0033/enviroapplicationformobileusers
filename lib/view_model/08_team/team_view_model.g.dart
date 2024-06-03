@@ -983,6 +983,16 @@ mixin _$TeamViewModel on TeamViewModelBase, Store {
     return _$getAllEmployeeAsyncAction.run(() => super.getAllEmployee());
   }
 
+  late final _$folderSearchApiAsyncAction =
+      AsyncAction('TeamViewModelBase.folderSearchApi', context: context);
+
+  @override
+  Future<void> folderSearchApi(
+      String searchData, num folderId, String searchType, num employeeId) {
+    return _$folderSearchApiAsyncAction.run(() =>
+        super.folderSearchApi(searchData, folderId, searchType, employeeId));
+  }
+
   late final _$TeamViewModelBaseActionController =
       ActionController(name: 'TeamViewModelBase', context: context);
 
