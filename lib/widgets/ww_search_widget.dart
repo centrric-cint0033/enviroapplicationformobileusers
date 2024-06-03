@@ -7,6 +7,7 @@ class WWTextField extends StatelessWidget {
   final IconData? suffixIcon;
   final String? hintText;
   final bool description;
+  final bool? enabled;
   final TextInputType keyboardType;
   final int? maxLines;
   const WWTextField(
@@ -18,7 +19,7 @@ class WWTextField extends StatelessWidget {
       this.suffixIcon,
       this.description = false,
       this.keyboardType = TextInputType.text,
-      this.maxLines});
+      this.maxLines, this.enabled});
 
   @override
   Widget build(BuildContext context) {
@@ -30,6 +31,7 @@ class WWTextField extends StatelessWidget {
               color: Colors.grey[200]!,
             )),
         child: TextField(
+          enabled: enabled,
             onChanged: onChanged,
             controller: controller,
             keyboardType: keyboardType,

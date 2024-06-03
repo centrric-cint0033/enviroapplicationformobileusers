@@ -4,6 +4,8 @@ mixin class TeamEndpoints {
 
   final String terminatedEmployeelist = '/api/v1/team/status/terminated/';
 
+  final String allEmployeelist = '/api/v1/team/employee/all/';
+
   final String searchEmployeeList = '/api/v1/team/searchEmployee/';
 
   final String teamprofileEmployeeDetailList = '/api/v1/team/employee';

@@ -4,7 +4,7 @@ import 'package:injectable/injectable.dart';
 import 'package:enviro_mobile_application/api_response/api_response.dart';
 
 import '../../utilis/injection.dart';
-import '../../service/11_previous_sale/i_previous_sale_service.dart';
+import '../../service/10_previous_sale/i_previous_sale_service.dart';
 import '../../model/11_previous_sale/previous_sale_res_model/previous_sale_res_model.dart';
 
 part 'previous_sale_view_model.g.dart';

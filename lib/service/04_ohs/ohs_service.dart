@@ -18,6 +18,8 @@ abstract class IohsService {
   Future<Either<MainFailure, List<OhsRespModel>>> ohsNewsServiceApi1();
   Future<Either<Map<MainFailure, dynamic>, List<OhsRespModel>>>
       ohsNotificationServiceApi();
+  Future<Either<Map<MainFailure, dynamic>, OhsRespModel>>
+      ohsAddNotificationServiceApi({required OhsRespModel data});
   Future<Either<MainFailure, FolderListModel>> ohsnewsfolderservicefunction(
       int id);
 
@@ -161,8 +163,6 @@ class OhsService implements IohsService {
         return Left(l.keys.first);
       },
       (res) async {
-        var data = jsonDecode(res.body);
-
         return Right('success');
       },
     );
@@ -179,7 +179,6 @@ class OhsService implements IohsService {
         MultipartRequest("PUT", Uri.parse("$baseUrl$apiUrl"));
 
     request.fields['name'] = folderName;
-    print(folderName);
 
     var response =
         await getIt<HttpService>().multipartRequest(mRequest: request);
@@ -191,8 +190,6 @@ class OhsService implements IohsService {
         return Left(l.keys.first);
       },
       (res) async {
-        var data = jsonDecode(res.body);
-        print('Response body: $data');
         return Right('success');
       },
     );
@@ -212,9 +209,26 @@ class OhsService implements IohsService {
         return Left(l.keys.first);
       },
       (res) async {
-        var data = jsonDecode(res.body);
-
         return const Right('success');
+      },
+    );
+  }
+
+  @override
+  Future<Either<Map<MainFailure, dynamic>, OhsRespModel>>
+      ohsAddNotificationServiceApi({required OhsRespModel data}) async {
+    var response = await getIt<HttpService>().multipartRequest(
+        apiUrl: ApiEndPoints().ohsAddNotification,
+        method: 'POST',
+        data: jsonDecode(data.toString()));
+
+    return response.fold(
+      (l) => Left(l),
+      (res) async {
+        OhsRespModel ohsAddNotification =
+            OhsRespModel.fromJson(jsonDecode(res.body));
+
+        return Right(ohsAddNotification);
       },
     );
   }

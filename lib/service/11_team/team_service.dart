@@ -46,6 +46,8 @@ abstract class IteamService {
       {required num fileId, required String expiry});
   Future<Either<Map<MainFailure, dynamic>, FolderListModel>>
       fileFolderSearchApi({required Map<String, String> data});
+  Future<Either<Map<MainFailure, dynamic>, List<TeamResModel>>>
+      getAllEmployeesApi();
 }
 
 @LazySingleton(as: IteamService)
@@ -328,6 +330,25 @@ class TeamService implements IteamService {
         FolderListModel searchedfileFolderList = FolderListModel.fromJson(data);
 
         return Right(searchedfileFolderList);
+      },
+    );
+  }
+
+  @override
+  Future<Either<Map<MainFailure, dynamic>, List<TeamResModel>>>
+      getAllEmployeesApi() async {
+    var response = await getIt<HttpService>().request(
+        authenticated: true,
+        method: HttpMethod.get,
+        apiUrl: ApiEndPoints().allEmployeelist);
+
+    return response.fold(
+      (l) => Left(l),
+      (res) async {
+        var data = jsonDecode(res.body);
+        List<TeamResModel> terminatedEmployeeList =
+            List<TeamResModel>.from(data.map((e) => TeamResModel.fromJson(e)));
+        return Right(terminatedEmployeeList);
       },
     );
   }

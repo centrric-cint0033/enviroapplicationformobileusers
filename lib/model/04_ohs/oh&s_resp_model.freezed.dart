@@ -29,6 +29,8 @@ mixin _$OhsRespModel {
   String? get fileAttachment => throw _privateConstructorUsedError;
   String? get edited_date_time => throw _privateConstructorUsedError;
   String? get createdDateTime => throw _privateConstructorUsedError;
+  String? get file_attachment => throw _privateConstructorUsedError;
+  num? get members => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -51,7 +53,9 @@ abstract class $OhsRespModelCopyWith<$Res> {
       String? description,
       String? fileAttachment,
       String? edited_date_time,
-      String? createdDateTime});
+      String? createdDateTime,
+      String? file_attachment,
+      num? members});
 }
 
 /// @nodoc
@@ -76,6 +80,8 @@ class _$OhsRespModelCopyWithImpl<$Res, $Val extends OhsRespModel>
     Object? fileAttachment = freezed,
     Object? edited_date_time = freezed,
     Object? createdDateTime = freezed,
+    Object? file_attachment = freezed,
+    Object? members = freezed,
   }) {
     return _then(_value.copyWith(
       userReadStatus: freezed == userReadStatus
@@ -114,6 +120,14 @@ class _$OhsRespModelCopyWithImpl<$Res, $Val extends OhsRespModel>
           ? _value.createdDateTime
           : createdDateTime // ignore: cast_nullable_to_non_nullable
               as String?,
+      file_attachment: freezed == file_attachment
+          ? _value.file_attachment
+          : file_attachment // ignore: cast_nullable_to_non_nullable
+              as String?,
+      members: freezed == members
+          ? _value.members
+          : members // ignore: cast_nullable_to_non_nullable
+              as num?,
     ) as $Val);
   }
 }
@@ -135,7 +149,9 @@ abstract class _$$OhsRespModelImplCopyWith<$Res>
       String? description,
       String? fileAttachment,
       String? edited_date_time,
-      String? createdDateTime});
+      String? createdDateTime,
+      String? file_attachment,
+      num? members});
 }
 
 /// @nodoc
@@ -158,6 +174,8 @@ class __$$OhsRespModelImplCopyWithImpl<$Res>
     Object? fileAttachment = freezed,
     Object? edited_date_time = freezed,
     Object? createdDateTime = freezed,
+    Object? file_attachment = freezed,
+    Object? members = freezed,
   }) {
     return _then(_$OhsRespModelImpl(
       userReadStatus: freezed == userReadStatus
@@ -196,6 +214,14 @@ class __$$OhsRespModelImplCopyWithImpl<$Res>
           ? _value.createdDateTime
           : createdDateTime // ignore: cast_nullable_to_non_nullable
               as String?,
+      file_attachment: freezed == file_attachment
+          ? _value.file_attachment
+          : file_attachment // ignore: cast_nullable_to_non_nullable
+              as String?,
+      members: freezed == members
+          ? _value.members
+          : members // ignore: cast_nullable_to_non_nullable
+              as num?,
     ));
   }
 }
@@ -204,15 +230,17 @@ class __$$OhsRespModelImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$OhsRespModelImpl implements _OhsRespModel {
   const _$OhsRespModelImpl(
-      {required this.userReadStatus,
-      required this.editStatus,
-      required this.dp,
-      required this.created_by,
-      required this.title,
-      required this.description,
-      required this.fileAttachment,
-      required this.edited_date_time,
-      required this.createdDateTime});
+      {this.userReadStatus,
+      this.editStatus,
+      this.dp,
+      this.created_by,
+      this.title,
+      this.description,
+      this.fileAttachment,
+      this.edited_date_time,
+      this.createdDateTime,
+      this.file_attachment,
+      this.members});
 
   factory _$OhsRespModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$OhsRespModelImplFromJson(json);
@@ -235,10 +263,14 @@ class _$OhsRespModelImpl implements _OhsRespModel {
   final String? edited_date_time;
   @override
   final String? createdDateTime;
+  @override
+  final String? file_attachment;
+  @override
+  final num? members;
 
   @override
   String toString() {
-    return 'OhsRespModel(userReadStatus: $userReadStatus, editStatus: $editStatus, dp: $dp, created_by: $created_by, title: $title, description: $description, fileAttachment: $fileAttachment, edited_date_time: $edited_date_time, createdDateTime: $createdDateTime)';
+    return 'OhsRespModel(userReadStatus: $userReadStatus, editStatus: $editStatus, dp: $dp, created_by: $created_by, title: $title, description: $description, fileAttachment: $fileAttachment, edited_date_time: $edited_date_time, createdDateTime: $createdDateTime, file_attachment: $file_attachment, members: $members)';
   }
 
   @override
@@ -261,7 +293,10 @@ class _$OhsRespModelImpl implements _OhsRespModel {
             (identical(other.edited_date_time, edited_date_time) ||
                 other.edited_date_time == edited_date_time) &&
             (identical(other.createdDateTime, createdDateTime) ||
-                other.createdDateTime == createdDateTime));
+                other.createdDateTime == createdDateTime) &&
+            (identical(other.file_attachment, file_attachment) ||
+                other.file_attachment == file_attachment) &&
+            (identical(other.members, members) || other.members == members));
   }
 
   @JsonKey(ignore: true)
@@ -276,7 +311,9 @@ class _$OhsRespModelImpl implements _OhsRespModel {
       description,
       fileAttachment,
       edited_date_time,
-      createdDateTime);
+      createdDateTime,
+      file_attachment,
+      members);
 
   @JsonKey(ignore: true)
   @override
@@ -294,15 +331,17 @@ class _$OhsRespModelImpl implements _OhsRespModel {
 
 abstract class _OhsRespModel implements OhsRespModel {
   const factory _OhsRespModel(
-      {required final bool? userReadStatus,
-      required final bool? editStatus,
-      required final String? dp,
-      required final String? created_by,
-      required final String? title,
-      required final String? description,
-      required final String? fileAttachment,
-      required final String? edited_date_time,
-      required final String? createdDateTime}) = _$OhsRespModelImpl;
+      {final bool? userReadStatus,
+      final bool? editStatus,
+      final String? dp,
+      final String? created_by,
+      final String? title,
+      final String? description,
+      final String? fileAttachment,
+      final String? edited_date_time,
+      final String? createdDateTime,
+      final String? file_attachment,
+      final num? members}) = _$OhsRespModelImpl;
 
   factory _OhsRespModel.fromJson(Map<String, dynamic> json) =
       _$OhsRespModelImpl.fromJson;
@@ -325,6 +364,10 @@ abstract class _OhsRespModel implements OhsRespModel {
   String? get edited_date_time;
   @override
   String? get createdDateTime;
+  @override
+  String? get file_attachment;
+  @override
+  num? get members;
   @override
   @JsonKey(ignore: true)
   _$$OhsRespModelImplCopyWith<_$OhsRespModelImpl> get copyWith =>

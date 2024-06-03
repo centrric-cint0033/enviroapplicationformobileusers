@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:enviro_mobile_application/api_response/api_response.dart';
 import 'package:enviro_mobile_application/model/00_common_model/folder_model/folder_model.dart';
 import 'package:enviro_mobile_application/model/04_ohs/oh&s_resp_model.dart';
@@ -34,7 +32,11 @@ abstract class OHSViewModelBase with Store {
   @observable
   ApiResponse<List<OhsRespModel>> newspageResponse =
       ApiResponse<List<OhsRespModel>>();
-
+  @observable
+  ApiResponse<OhsRespModel> addNotificationResponse =
+      ApiResponse<OhsRespModel>();
+  @observable
+  String? selectedFileNameNotification;
   @action
   Future<void> ohsNewsApi() async {
     newspageResponse = newspageResponse.copyWith(errors: null, loading: true);
@@ -221,6 +223,27 @@ abstract class OHSViewModelBase with Store {
         } else {
           newspagefolderinsidefunction(parentId);
         }
+      },
+    );
+  }
+
+  @action
+  Future<void> ohsAddNotificationApi(
+      {required BuildContext context, required OhsRespModel data}) async {
+    addNotificationResponse =
+        addNotificationResponse.copyWith(errors: null, loading: true);
+
+    final result = await ohsService.ohsAddNotificationServiceApi(data: data);
+    return result.fold(
+      (l) {
+        addNotificationResponse =
+            addNotificationResponse.copyWith(errors: l, loading: false);
+        popupErrorData(context, mainFailure: l);
+      },
+      (r) {
+        ohsNotificationApi();
+        addNotificationResponse = addNotificationResponse.copyWith(
+            data: r, errors: null, loading: false);
       },
     );
   }

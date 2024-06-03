@@ -25,6 +25,40 @@ mixin _$OHSViewModel on OHSViewModelBase, Store {
     });
   }
 
+  late final _$addNotificationResponseAtom =
+      Atom(name: 'OHSViewModelBase.addNotificationResponse', context: context);
+
+  @override
+  ApiResponse<OhsRespModel> get addNotificationResponse {
+    _$addNotificationResponseAtom.reportRead();
+    return super.addNotificationResponse;
+  }
+
+  @override
+  set addNotificationResponse(ApiResponse<OhsRespModel> value) {
+    _$addNotificationResponseAtom
+        .reportWrite(value, super.addNotificationResponse, () {
+      super.addNotificationResponse = value;
+    });
+  }
+
+  late final _$selectedFileNameNotificationAtom = Atom(
+      name: 'OHSViewModelBase.selectedFileNameNotification', context: context);
+
+  @override
+  String? get selectedFileNameNotification {
+    _$selectedFileNameNotificationAtom.reportRead();
+    return super.selectedFileNameNotification;
+  }
+
+  @override
+  set selectedFileNameNotification(String? value) {
+    _$selectedFileNameNotificationAtom
+        .reportWrite(value, super.selectedFileNameNotification, () {
+      super.selectedFileNameNotification = value;
+    });
+  }
+
   late final _$FoldercreationResponseAtom =
       Atom(name: 'OHSViewModelBase.FoldercreationResponse', context: context);
 
@@ -193,10 +227,22 @@ mixin _$OHSViewModel on OHSViewModelBase, Store {
         .run(() => super.folderdeleteviewmodelfunction(folders, id, parentId));
   }
 
+  late final _$ohsAddNotificationApiAsyncAction =
+      AsyncAction('OHSViewModelBase.ohsAddNotificationApi', context: context);
+
+  @override
+  Future<void> ohsAddNotificationApi(
+      {required BuildContext context, required OhsRespModel data}) {
+    return _$ohsAddNotificationApiAsyncAction
+        .run(() => super.ohsAddNotificationApi(context: context, data: data));
+  }
+
   @override
   String toString() {
     return '''
 newspageResponse: ${newspageResponse},
+addNotificationResponse: ${addNotificationResponse},
+selectedFileNameNotification: ${selectedFileNameNotification},
 FoldercreationResponse: ${FoldercreationResponse},
 newspagefolderinsideResponse: ${newspagefolderinsideResponse},
 newspagefolderResponse: ${newspagefolderResponse},

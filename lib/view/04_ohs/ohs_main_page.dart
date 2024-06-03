@@ -22,12 +22,12 @@ class OhsMainPage extends StatelessWidget {
             actions: [notificationButton(context)]),
         body: Padding(
           padding: screenWidth,
-          child: Column(
+          child: const Column(
             children: [
-              const WWcommonTabBar(value1: 'News', value2: 'Notifications'),
+              WWcommonTabBar(value1: 'News', value2: 'Notifications'),
               Expanded(
                 child: TabBarView(
-                  children: [NewsOhsTab(), const NotificationTab()],
+                  children: [NewsOhsTab(), NotificationTab()],
                 ),
               ),
             ],

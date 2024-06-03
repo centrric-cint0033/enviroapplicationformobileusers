@@ -9,6 +9,22 @@ part of 'team_view_model.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$TeamViewModel on TeamViewModelBase, Store {
+  late final _$allEmployeeResponseAtom =
+      Atom(name: 'TeamViewModelBase.allEmployeeResponse', context: context);
+
+  @override
+  ApiResponse<List<TeamResModel>> get allEmployeeResponse {
+    _$allEmployeeResponseAtom.reportRead();
+    return super.allEmployeeResponse;
+  }
+
+  @override
+  set allEmployeeResponse(ApiResponse<List<TeamResModel>> value) {
+    _$allEmployeeResponseAtom.reportWrite(value, super.allEmployeeResponse, () {
+      super.allEmployeeResponse = value;
+    });
+  }
+
   late final _$currentEmployeeResponseAtom =
       Atom(name: 'TeamViewModelBase.currentEmployeeResponse', context: context);
 
@@ -704,6 +720,22 @@ mixin _$TeamViewModel on TeamViewModelBase, Store {
     });
   }
 
+  late final _$selectedMemberAtom =
+      Atom(name: 'TeamViewModelBase.selectedMember', context: context);
+
+  @override
+  TeamResModel? get selectedMember {
+    _$selectedMemberAtom.reportRead();
+    return super.selectedMember;
+  }
+
+  @override
+  set selectedMember(TeamResModel? value) {
+    _$selectedMemberAtom.reportWrite(value, super.selectedMember, () {
+      super.selectedMember = value;
+    });
+  }
+
   late final _$getCurrentEmployeeAsyncAction =
       AsyncAction('TeamViewModelBase.getCurrentEmployee', context: context);
 
@@ -943,6 +975,14 @@ mixin _$TeamViewModel on TeamViewModelBase, Store {
         .fileFolderSearchApi(searchData, folderId, searchType, employeeId));
   }
 
+  late final _$getAllEmployeeAsyncAction =
+      AsyncAction('TeamViewModelBase.getAllEmployee', context: context);
+
+  @override
+  Future<void> getAllEmployee() {
+    return _$getAllEmployeeAsyncAction.run(() => super.getAllEmployee());
+  }
+
   late final _$TeamViewModelBaseActionController =
       ActionController(name: 'TeamViewModelBase', context: context);
 
@@ -1072,6 +1112,7 @@ mixin _$TeamViewModel on TeamViewModelBase, Store {
   @override
   String toString() {
     return '''
+allEmployeeResponse: ${allEmployeeResponse},
 currentEmployeeResponse: ${currentEmployeeResponse},
 terminatedEmployeeResponse: ${terminatedEmployeeResponse},
 teamProfileEmployeeDetailListResponse: ${teamProfileEmployeeDetailListResponse},
@@ -1113,7 +1154,8 @@ selectedFilePathLicense: ${selectedFilePathLicense},
 selectedFileName: ${selectedFileName},
 selectedFilePath: ${selectedFilePath},
 loadinIndexFolder: ${loadinIndexFolder},
-loadinIndexFile: ${loadinIndexFile}
+loadinIndexFile: ${loadinIndexFile},
+selectedMember: ${selectedMember}
     ''';
   }
 }

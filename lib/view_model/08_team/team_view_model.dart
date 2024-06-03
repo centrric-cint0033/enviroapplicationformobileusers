@@ -7,7 +7,7 @@ import 'package:enviro_mobile_application/model/10_team/team_designtion_res_mode
 import 'package:enviro_mobile_application/model/10_team/team_designtion_res_model/team_designtion_res_model.dart';
 import 'package:enviro_mobile_application/model/10_team/team_profile_employee_details_res_model/team_profile_employee_details_res_model.dart';
 import 'package:enviro_mobile_application/model/10_team/team_res_model/team_res_model.dart';
-import 'package:enviro_mobile_application/service/10_team/team_service.dart';
+import 'package:enviro_mobile_application/service/11_team/team_service.dart';
 import 'package:enviro_mobile_application/utilis/api_endpoints/customprint.dart';
 import 'package:enviro_mobile_application/utilis/image_picker_service/image_file_picker.dart';
 import 'package:enviro_mobile_application/utilis/injection.dart';
@@ -32,7 +32,9 @@ abstract class TeamViewModelBase with Store {
   final IteamService teamService;
 
   TeamViewModelBase(this.teamService);
-
+  @observable
+  ApiResponse<List<TeamResModel>> allEmployeeResponse =
+      ApiResponse<List<TeamResModel>>();
   @observable
   ApiResponse<List<TeamResModel>> currentEmployeeResponse =
       ApiResponse<List<TeamResModel>>();
@@ -125,6 +127,8 @@ abstract class TeamViewModelBase with Store {
   int? loadinIndexFolder;
   @observable
   int? loadinIndexFile;
+  @observable
+  TeamResModel? selectedMember;
 
   TextEditingController textFolderAddController = TextEditingController();
   TextEditingController textFolderEditController = TextEditingController();
@@ -735,6 +739,30 @@ abstract class TeamViewModelBase with Store {
       (r) {
         teamFoldersResponse2 = teamFoldersResponse2.copyWith(
             data: r, errors: null, loading: false);
+      },
+    );
+  }
+
+  @action
+  Future<void> getAllEmployee() async {
+    allEmployeeResponse = allEmployeeResponse.copyWith(
+      errors: null,
+      loading: true,
+    );
+    final result = await teamService.getAllEmployeesApi();
+    return result.fold(
+      (l) {
+        allEmployeeResponse = allEmployeeResponse.copyWith(
+          errors: l,
+          loading: false,
+        );
+      },
+      (r) {
+        allEmployeeResponse = allEmployeeResponse.copyWith(
+          data: r,
+          errors: null,
+          loading: false,
+        );
       },
     );
   }
