@@ -194,8 +194,11 @@ abstract class TeamViewModelBase with Store {
       (r) {
         List<TeamResModel> empolyees =
             currentEmployeeResponse.data?.toList() ?? [];
-
-        empolyees.addAll(r);
+        if (page != null) {
+          empolyees.addAll(r);
+        } else {
+          empolyees = r;
+        }
 
         currentEmployeeResponse = currentEmployeeResponse.copyWith(
           data: empolyees,
@@ -249,7 +252,7 @@ abstract class TeamViewModelBase with Store {
         empolyees.addAll(r);
 
         terminatedEmployeeResponse = terminatedEmployeeResponse.copyWith(
-          data: r,
+          data: empolyees,
           errors: null,
           loading: false,
           pageNo: page ?? 1,
@@ -579,6 +582,7 @@ abstract class TeamViewModelBase with Store {
         getCurrentEmployee();
         textControllersClearFn();
         showToast(context, msg: "Successfully Created Employee");
+        context.router.pop();
       },
     );
   }
@@ -876,5 +880,6 @@ abstract class TeamViewModelBase with Store {
     selectedLicenceExpiryDate = null;
     selectedLicenceAlertDate = null;
     textAddTeamPasswordController.clear();
+    vmTeam.profileImage = null;
   }
 }

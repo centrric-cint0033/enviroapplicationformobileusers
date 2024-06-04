@@ -1,6 +1,7 @@
 import 'package:enviro_mobile_application/model/10_team/team_designtion_res_model/designation.dart';
 import 'package:enviro_mobile_application/model/10_team/team_profile_employee_details_res_model/team_profile_employee_details_res_model.dart';
 import 'package:enviro_mobile_application/view_model/08_team/team_view_model.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
@@ -27,35 +28,39 @@ class DesignationDownWidget extends StatelessWidget {
             orElse: () => Designation(userType: ""),
           );
 
-          return DropdownButtonFormField<Designation>(
-            icon: const Icon(Icons.keyboard_arrow_down_outlined),
-            items: designations.map(
-              (Designation designation) {
-                return DropdownMenuItem(
-                  value: designation,
-                  child: Text(
-                    designation.userType ?? "",
-                  ),
+          return res.loading
+              ? const CupertinoActivityIndicator()
+              : DropdownButtonFormField<Designation>(
+                  icon: const Icon(Icons.keyboard_arrow_down_outlined),
+                  items: designations.map(
+                    (Designation designation) {
+                      return DropdownMenuItem(
+                        value: designation,
+                        child: Text(
+                          designation.userType ?? "",
+                        ),
+                      );
+                    },
+                  ).toList(),
+                  isExpanded: true,
+                  value: fromAddTeam == true
+                      ? vmTeam.selectedDesignationAddTeam
+                      : vmTeam.selectedDesignation,
+                  onChanged: (newValue) {
+                    vmTeam.selectedDesignationAddTeam = newValue;
+                    vmTeam.cmFunction(
+                        vmTeam.selectedDesignationAddTeam?.userType);
+                    if (newValue?.userType == "driver-factory-hand" ||
+                        newValue?.userType ==
+                            "driver-liquid-waste-technician") {
+                      vmTeam.showRequredTextLicense = true;
+                    } else {
+                      vmTeam.showRequredTextLicense = false;
+                    }
+                  },
+                  // value: selectedTax,
+                  decoration: const InputDecoration.collapsed(hintText: ''),
                 );
-              },
-            ).toList(),
-            isExpanded: true,
-            value: fromAddTeam == true
-                ? vmTeam.selectedDesignationAddTeam
-                : vmTeam.selectedDesignation,
-            onChanged: (newValue) {
-              vmTeam.selectedDesignationAddTeam = newValue;
-              vmTeam.cmFunction(vmTeam.selectedDesignationAddTeam?.userType);
-              if (newValue?.userType == "driver-factory-hand" ||
-                  newValue?.userType == "driver-liquid-waste-technician") {
-                vmTeam.showRequredTextLicense = true;
-              } else {
-                vmTeam.showRequredTextLicense = false;
-              }
-            },
-            // value: selectedTax,
-            decoration: const InputDecoration.collapsed(hintText: ''),
-          );
         },
       ),
     );

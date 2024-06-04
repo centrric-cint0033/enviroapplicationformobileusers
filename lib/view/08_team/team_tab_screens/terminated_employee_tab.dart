@@ -57,7 +57,7 @@ class TerminatedEmployeeListWidget extends StatelessWidget {
         controller: vmTeam.terminatedEmployeeController,
         itemBuilder: (context, index) {
           return index == vmTeam.terminatedEmployeeResponse.data?.length
-              ? loading
+              ? vmTeam.terminatedEmployeeResponse.paginationLoading
                   ? const CupertinoActivityIndicator()
                   : const SizedBox.shrink()
               : listTile(context,

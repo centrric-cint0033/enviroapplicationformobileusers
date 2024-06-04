@@ -30,13 +30,14 @@ class CurrentEmployeeTab extends StatelessWidget {
         suffixTap: () {},
         hintText: 'Search Employee',
       ),
+      
       sized0hx10,
       Observer(builder: (_) {
         final res = vmTeam.currentEmployeeResponse;
         return Expanded(
             child: WWResponseHandler(
                 data: res,
-                isEmpty: vmTeam.currentEmployeeResponse.data?.isEmpty ?? true,
+                isEmpty: res.data?.isEmpty ?? true,
                 onTap: () => vmTeam.getCurrentEmployee(),
                 child: CurrentEmployeeListWidget(loading: res.loading)));
       }),
@@ -55,7 +56,7 @@ class CurrentEmployeeListWidget extends StatelessWidget {
         separatorBuilder: (BuildContext context, int index) => sized0hx10,
         itemBuilder: (context, index) {
           return index == vmTeam.currentEmployeeResponse.data?.length
-              ? loading
+              ? vmTeam.currentEmployeeResponse.paginationLoading
                   ? const CupertinoActivityIndicator()
                   : const SizedBox.shrink()
               : listTile(context,
@@ -67,8 +68,7 @@ class CurrentEmployeeListWidget extends StatelessWidget {
                       id: vmTeam.currentEmployeeResponse.data?[index].id ?? 0,
                       parentFolderId: 1);
                   context.router.push(TeamProfileRoute(
-                     id:
-                          vmTeam.currentEmployeeResponse.data?[index].id));
+                      id: vmTeam.currentEmployeeResponse.data?[index].id));
                 });
         });
   }
