@@ -736,6 +736,22 @@ mixin _$TeamViewModel on TeamViewModelBase, Store {
     });
   }
 
+  late final _$searchTypeAtom =
+      Atom(name: 'TeamViewModelBase.searchType', context: context);
+
+  @override
+  String? get searchType {
+    _$searchTypeAtom.reportRead();
+    return super.searchType;
+  }
+
+  @override
+  set searchType(String? value) {
+    _$searchTypeAtom.reportWrite(value, super.searchType, () {
+      super.searchType = value;
+    });
+  }
+
   late final _$getCurrentEmployeeAsyncAction =
       AsyncAction('TeamViewModelBase.getCurrentEmployee', context: context);
 
@@ -1165,7 +1181,8 @@ selectedFileName: ${selectedFileName},
 selectedFilePath: ${selectedFilePath},
 loadinIndexFolder: ${loadinIndexFolder},
 loadinIndexFile: ${loadinIndexFile},
-selectedMember: ${selectedMember}
+selectedMember: ${selectedMember},
+searchType: ${searchType}
     ''';
   }
 }

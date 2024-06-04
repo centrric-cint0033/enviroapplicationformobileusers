@@ -18,6 +18,7 @@ import 'package:enviro_mobile_application/widgets/ww_search_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 
 @RoutePage()
 class TeamProfileScreen extends StatelessWidget {
@@ -40,6 +41,7 @@ class TeamProfileScreen extends StatelessWidget {
             TeamProfileEmployeeDetailsResModel? employeeDetails = res.data;
             final ress = vmTeam.teamFoldersResponse;
             FolderListModel? folderList = ress.data;
+
             return res.loading
                 ? Center(child: wwCustomLoader())
                 : SingleChildScrollView(
@@ -172,57 +174,71 @@ class TeamProfileScreen extends StatelessWidget {
                       sized0hx10,
                       WWTextField(
                         controller: vmTeam.folderSearchCntrlr,
-                        onChanged: (v) => vmTeam.onTextChanged(() => v.isEmpty
-                            ? vmTeam.getTeamFolders(id: id!, parentFolderId: 1)
-                            : vmTeam.folderSearchApi(
-                                v,
-                                1,
-                                folderList!.folders?[0].type ?? "",
-                                employeeDetails!.id!)),
+                        onChanged: (v) => vmTeam.onTextChanged(() {
+                          v.isEmpty
+                              ? vmTeam.getTeamFolders(
+                                  id: id!, parentFolderId: 1)
+                              : vmTeam.folderSearchApi(
+                                  v,
+                                  1,
+                                  vmTeam.searchType ?? "",
+                                  employeeDetails!.id!);
+                        }),
                         suffixTap: () {},
                         hintText: 'Search by Folder Name',
                       ),
                       sized0hx10,
-                      ListView.separated(
-                        physics: const NeverScrollableScrollPhysics(),
-                        shrinkWrap: true,
-                        separatorBuilder: (BuildContext context, int index) =>
-                            sized0hx10,
-                        itemCount: folderList?.folders?[0].folders?.length ?? 0,
-                        itemBuilder: (context, index) {
-                          var data = vmTeam.teamFoldersResponse.data
-                              ?.folders?[0].folders?[index];
-                          if (data != null) {
-                            return WWFolderCard(
-                                folder: data,
-                                onTap: () {
-                                  vmTeam.getTeamFolders(
-                                      id: employeeDetails?.id ?? 0,
-                                      parentFolderId: data.id ?? 0,
-                                      fromTeamProfileScreen: true);
-                                  context.router.push(EmployeeFilesRoute(
-                                      employeeId: employeeDetails?.id,
+                      folderList!.folders != null &&
+                              folderList.folders!.isNotEmpty
+                          ? ListView.separated(
+                              physics: const NeverScrollableScrollPhysics(),
+                              shrinkWrap: true,
+                              separatorBuilder:
+                                  (BuildContext context, int index) =>
+                                      sized0hx10,
+                              itemCount:
+                                  folderList.folders?[0].folders?.length ?? 0,
+                              itemBuilder: (context, index) {
+                                var data =
+                                    folderList.folders?[0].folders?[index];
+                                if (data != null) {
+                                  return WWFolderCard(
+                                      folder: data,
+                                      onTap: () {
+                                        vmTeam.getTeamFolders(
+                                            id: employeeDetails?.id ?? 0,
+                                            parentFolderId: data.id ?? 0,
+                                            fromTeamProfileScreen: true);
+                                        context.router.push(EmployeeFilesRoute(
+                                            employeeId: employeeDetails?.id,
+                                            folderName: data.name,
+                                            folderId: data.id,
+                                            searchType: data.type));
+                                      },
                                       folderName: data.name,
-                                      folderId: data.id,
-                                      searchType: data.type));
-                                },
-                                folderName: data.name,
-                                editTap: (s) => vmTeam.editTeamFolderApi(
-                                    name: s,
-                                    folderId: data.id ?? 0,
-                                    parentFolderId: 1,
-                                    context: context,
-                                    employeeID: employeeDetails?.id ?? 0),
-                                deleteTap: () => vmTeam.deleteTeamFolderApi(
-                                    folderId: data.id ?? 0,
-                                    context: context,
-                                    employeeID: employeeDetails?.id ?? 0,
-                                    parentFolderId: 1));
-                          } else {
-                            return Container();
-                          }
-                        },
-                      )
+                                      editTap: (s) => vmTeam.editTeamFolderApi(
+                                          name: s,
+                                          folderId: data.id ?? 0,
+                                          parentFolderId: 1,
+                                          context: context,
+                                          employeeID: employeeDetails?.id ?? 0),
+                                      deleteTap: () =>
+                                          vmTeam.deleteTeamFolderApi(
+                                              folderId: data.id ?? 0,
+                                              context: context,
+                                              employeeID:
+                                                  employeeDetails?.id ?? 0,
+                                              parentFolderId: 1));
+                                } else {
+                                  return Container();
+                                }
+                              },
+                            )
+                          : Center(
+                              child: SvgPicture.asset(
+                                "assets/images/empty1.svg",
+                              ),
+                            ),
                     ]),
                   );
           },

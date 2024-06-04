@@ -129,7 +129,8 @@ abstract class TeamViewModelBase with Store {
   int? loadinIndexFile;
   @observable
   TeamResModel? selectedMember;
-
+  @observable
+  String? searchType;
   TextEditingController textFolderAddController = TextEditingController();
   TextEditingController textFolderEditController = TextEditingController();
   TextEditingController textEditTeamNameController = TextEditingController();
@@ -161,7 +162,7 @@ abstract class TeamViewModelBase with Store {
   TextEditingController terminatedEmployeeSearchCntrlr =
       TextEditingController();
   TextEditingController fileFolderSearchCntrlr = TextEditingController();
-    TextEditingController folderSearchCntrlr = TextEditingController();
+  TextEditingController folderSearchCntrlr = TextEditingController();
 
   Timer? debouce;
   void onTextChanged(Function() function) {
@@ -378,6 +379,7 @@ abstract class TeamViewModelBase with Store {
             error: null,
             loading: false,
           );
+          searchType = teamFoldersResponse.data?.folders?[0].type;
         },
       );
     } else {

@@ -363,8 +363,15 @@ class TeamService implements IteamService {
     return response.fold(
       (l) => Left(l),
       (res) async {
-        FolderListModel searchedfileFolderList = FolderListModel.fromJson(data);
-        return Right(searchedfileFolderList);
+        var data = jsonDecode(res.body);
+        List<FolderModel> searchedFolderList =
+            List<FolderModel>.from(data.map((e) => FolderModel.fromJson(e)));
+        List<FolderModel> searchedFolderListt = List<FolderModel>.from(
+            data.map((e) => FolderModel(folders: searchedFolderList)));
+
+        FolderListModel searchedFolderListtt =
+            FolderListModel(folders: searchedFolderListt);
+        return Right(searchedFolderListtt);
       },
     );
   }
