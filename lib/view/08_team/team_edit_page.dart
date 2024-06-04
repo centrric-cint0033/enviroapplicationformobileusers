@@ -19,7 +19,7 @@ import 'package:intl/intl.dart';
 @RoutePage()
 class TeamEditPage extends StatelessWidget {
   final TeamProfileEmployeeDetailsResModel employeeDetatils;
-  TeamEditPage({
+  const TeamEditPage({
     super.key,
     required this.employeeDetatils,
   });
@@ -48,13 +48,18 @@ class TeamEditPage extends StatelessWidget {
                 sized0hx05,
                 listEditData(context, employeeDetatils),
                 sized0hx05,
-                CmButton(
+                Observer(builder: (context) {
+                  final res = vmTeam.editTeamResponse;
+                  return CmButton(
                     width: double.infinity,
                     height: 45,
                     text: 'EDIT',
+                    loading: res.loading,
                     onPressed: () {
                       cmOnpressedFnCreateTeam(context, employeeDetatils);
-                    }),
+                    },
+                  );
+                }),
                 // cmElevatedButton(() {
                 //   cmOnpressedFnCreateTeam(context, employeeDetatils);
                 // }, Appthemes.cPrimary, "EDIT"),

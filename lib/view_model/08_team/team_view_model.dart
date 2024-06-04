@@ -453,6 +453,7 @@ abstract class TeamViewModelBase with Store {
           errors: l,
           loading: false,
         );
+        popupErrorData(context, mainFailure: l);
       },
       (r) async {
         await getTeamFolders(id: employeeID, parentFolderId: parentFolderId);
@@ -484,6 +485,7 @@ abstract class TeamViewModelBase with Store {
           errors: l,
           loading: false,
         );
+        popupErrorData(context, mainFailure: l);
       },
       (r) async {
         await getTeamFolders(id: employeeID, parentFolderId: parentFolderId);
@@ -592,14 +594,15 @@ abstract class TeamViewModelBase with Store {
     return result.fold(
       (l) {
         editTeamResponse = editTeamResponse.copyWith(errors: l, loading: false);
-
         popupErrorData(context, mainFailure: l);
       },
-      (r) {
+      (r) async {
         editTeamResponse =
             editTeamResponse.copyWith(data: r, error: null, loading: false);
-        getTeamProfileEmployeeDetails(employeeID: int.parse("${data.id}"));
+        await getTeamProfileEmployeeDetails(
+            employeeID: int.parse("${data.id}"));
         getCurrentEmployee();
+        getTerminatedEmployee();
         textControllersClearFn();
         context.router.pop();
         showToast(context, msg: "Successfully Edited Employee");

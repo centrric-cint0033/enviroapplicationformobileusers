@@ -19,6 +19,7 @@ class NotificationPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    vmTeam.getAllEmployee();
     return Scaffold(
         drawer: cmnDrawer(context),
         appBar: AppBar(title: cmnTitleWidget('Notifications'), actions: [
@@ -37,7 +38,6 @@ class NotificationPage extends StatelessWidget {
                     width: 100.w,
                     onPressed: () {
                       vmTeam.selectedMember = null;
-                      vmTeam.getAllEmployee();
                       showMyDialognotification(context);
                     },
                     text: 'Add New +',

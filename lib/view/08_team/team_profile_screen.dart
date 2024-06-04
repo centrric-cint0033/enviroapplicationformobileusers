@@ -188,52 +188,59 @@ class TeamProfileScreen extends StatelessWidget {
                         hintText: 'Search by Folder Name',
                       ),
                       sized0hx10,
-                      folderList!.folders != null &&
-                              folderList.folders!.isNotEmpty
-                          ? ListView.separated(
-                              physics: const NeverScrollableScrollPhysics(),
-                              shrinkWrap: true,
-                              separatorBuilder:
-                                  (BuildContext context, int index) =>
-                                      sized0hx10,
-                              itemCount:
-                                  folderList.folders?[0].folders?.length ?? 0,
-                              itemBuilder: (context, index) {
-                                var data =
-                                    folderList.folders?[0].folders?[index];
-                                if (data != null) {
-                                  return WWFolderCard(
-                                      folder: data,
-                                      onTap: () {
-                                        vmTeam.getTeamFolders(
-                                            id: employeeDetails?.id ?? 0,
-                                            parentFolderId: data.id ?? 0,
-                                            fromTeamProfileScreen: true);
-                                        context.router.push(EmployeeFilesRoute(
-                                            employeeId: employeeDetails?.id,
-                                            folderName: data.name,
-                                            folderId: data.id,
-                                            searchType: data.type));
-                                      },
-                                      folderName: data.name,
-                                      editTap: (s) => vmTeam.editTeamFolderApi(
-                                          name: s,
-                                          folderId: data.id ?? 0,
-                                          parentFolderId: 1,
-                                          context: context,
-                                          employeeID: employeeDetails?.id ?? 0),
-                                      deleteTap: () =>
-                                          vmTeam.deleteTeamFolderApi(
-                                              folderId: data.id ?? 0,
-                                              context: context,
-                                              employeeID:
-                                                  employeeDetails?.id ?? 0,
-                                              parentFolderId: 1));
-                                } else {
-                                  return Container();
-                                }
-                              },
-                            )
+                      folderList?.folders != null &&
+                              folderList!.folders!.isNotEmpty
+                          ? ress.loading
+                              ? wwCustomLoader()
+                              : ListView.separated(
+                                  physics: const NeverScrollableScrollPhysics(),
+                                  shrinkWrap: true,
+                                  separatorBuilder:
+                                      (BuildContext context, int index) =>
+                                          sized0hx10,
+                                  itemCount:
+                                      folderList.folders?[0].folders?.length ??
+                                          0,
+                                  itemBuilder: (context, index) {
+                                    var data =
+                                        folderList.folders?[0].folders?[index];
+                                    if (data != null) {
+                                      return WWFolderCard(
+                                          folder: data,
+                                          onTap: () {
+                                            vmTeam.getTeamFolders(
+                                                id: employeeDetails?.id ?? 0,
+                                                parentFolderId: data.id ?? 0,
+                                                fromTeamProfileScreen: true);
+                                            context.router.push(
+                                                EmployeeFilesRoute(
+                                                    employeeId:
+                                                        employeeDetails?.id,
+                                                    folderName: data.name,
+                                                    folderId: data.id,
+                                                    searchType: data.type));
+                                          },
+                                          folderName: data.name,
+                                          editTap: (s) =>
+                                              vmTeam.editTeamFolderApi(
+                                                  name: s,
+                                                  folderId: data.id ?? 0,
+                                                  parentFolderId: 1,
+                                                  context: context,
+                                                  employeeID:
+                                                      employeeDetails?.id ?? 0),
+                                          deleteTap: () =>
+                                              vmTeam.deleteTeamFolderApi(
+                                                  folderId: data.id ?? 0,
+                                                  context: context,
+                                                  employeeID:
+                                                      employeeDetails?.id ?? 0,
+                                                  parentFolderId: 1));
+                                    } else {
+                                      return Container();
+                                    }
+                                  },
+                                )
                           : Center(
                               child: SvgPicture.asset(
                                 "assets/images/empty1.svg",
@@ -256,7 +263,7 @@ class TeamProfileScreen extends StatelessWidget {
         sized0hx05,
         expandedRowShowText('Joining Date', data?.dateJoined ?? ""),
         sized0hx05,
-        expandedRowShowText('Email Address', data?.personalEmail ?? ""),
+        expandedRowShowText('Email Address', data?.email ?? ""),
         sized0hx05,
         expandedRowShowText('Contact Number', data?.contactNumber ?? ""),
         sized0hx05,
