@@ -17,9 +17,9 @@ abstract class IohsService {
       ohsNewsServiceApi();
   Future<Either<MainFailure, List<OhsRespModel>>> ohsNewsServiceApi1();
   Future<Either<Map<MainFailure, dynamic>, List<OhsRespModel>>>
-      ohsNotificationServiceApi();
+      ohsNotificationServiceApi({int? page});
   Future<Either<Map<MainFailure, dynamic>, OhsRespModel>>
-      ohsAddNotificationServiceApi({required OhsRespModel data});
+      ohsAddNotificationServiceApi({required Map<String, String> data});
   Future<Either<MainFailure, FolderListModel>> ohsnewsfolderservicefunction(
       int id);
 
@@ -86,11 +86,12 @@ class OhsService implements IohsService {
 
   @override
   Future<Either<Map<MainFailure, dynamic>, List<OhsRespModel>>>
-      ohsNotificationServiceApi() async {
+      ohsNotificationServiceApi({int? page}) async {
+    String pagination = 'view/${page ?? 1}/?limit=8';
     var response = await getIt<HttpService>().request(
         authenticated: true,
         method: HttpMethod.get,
-        apiUrl: ApiEndPoints().ohsNotificationList);
+        apiUrl: ApiEndPoints().ohsNotificationList + pagination);
 
     return response.fold(
       (l) => Left(l),
@@ -216,17 +217,15 @@ class OhsService implements IohsService {
 
   @override
   Future<Either<Map<MainFailure, dynamic>, OhsRespModel>>
-      ohsAddNotificationServiceApi({required OhsRespModel data}) async {
+      ohsAddNotificationServiceApi({required Map<String, String> data}) async {
     var response = await getIt<HttpService>().multipartRequest(
-        apiUrl: ApiEndPoints().ohsAddNotification,
-        method: 'POST',
-        data: jsonDecode(data.toString()));
+        apiUrl: ApiEndPoints().ohsAddNotification, method: 'POST', data: data);
 
     return response.fold(
       (l) => Left(l),
       (res) async {
-        OhsRespModel ohsAddNotification =
-            OhsRespModel.fromJson(jsonDecode(res.body));
+        var data = jsonDecode(res.body);
+        OhsRespModel ohsAddNotification = OhsRespModel.fromJson(data);
 
         return Right(ohsAddNotification);
       },

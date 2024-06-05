@@ -20,46 +20,61 @@ class NotificationPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     vmTeam.getAllEmployee();
+    // WidgetsBinding.instance.addPostFrameCallback(
+    //   (timeStamp) {
+    //     vmOhs.notificationPagination();
+    //   },
+    // );
     return Scaffold(
-        drawer: cmnDrawer(context),
-        appBar: AppBar(title: cmnTitleWidget('Notifications'), actions: [
-          IconButton(
-              onPressed: () {},
-              icon: const Icon(Icons.notifications_active_rounded))
-        ]),
-        body: SingleChildScrollView(
-          child: Column(
-            children: [
-              Padding(
-                padding: EdgeInsets.only(right: 10.w),
-                child: Align(
-                  alignment: Alignment.topRight,
-                  child: CmButton(
-                    width: 100.w,
-                    onPressed: () {
-                      vmTeam.selectedMember = null;
-                      showMyDialognotification(context);
-                    },
-                    text: 'Add New +',
-                    color: Appthemes.cPrimary,
-                    buttonTextStyle:
-                        TextStyle(color: Appthemes.cWhite, fontSize: 10.sp),
-                  ),
+      drawer: cmnDrawer(context),
+      appBar: AppBar(title: cmnTitleWidget('Notifications'), actions: [
+        IconButton(
+            onPressed: () {},
+            icon: const Icon(Icons.notifications_active_rounded))
+      ]),
+      body: Column(
+        children: [
+          Padding(
+            padding: EdgeInsets.only(right: 10.w),
+            child: Align(
+              alignment: Alignment.topRight,
+              child: CmButton(
+                width: 100.w,
+                onPressed: () {
+                  vmTeam.selectedMember = null;
+                  vmOhs.selectedFileNameNotification = null;
+                  showMyDialognotification(context);
+                },
+                text: 'Add New +',
+                color: Appthemes.cPrimary,
+                buttonTextStyle: TextStyle(
+                  color: Appthemes.cWhite,
+                  fontSize: 10.sp,
                 ),
               ),
-              sized0hx10,
-              Padding(
-                padding: EdgeInsets.only(left: 10.w, right: 10.w),
-                child: Observer(builder: (_) {
-                  return WWResponseHandler(
-                      data: vmOhs.notificationpageResponse,
-                      isEmpty: vmOhs.notificationpageResponse.data?.isEmpty,
-                      onTap: () => vmOhs.ohsNotificationApi(),
-                      child: const NotificationTabList());
-                }),
-              )
-            ],
+            ),
           ),
-        ));
+          sized0hx10,
+          Expanded(
+            child: Padding(
+              padding: EdgeInsets.only(left: 10.w, right: 10.w),
+              child: Observer(
+                builder: (_) {
+                  final res = vmOhs.notificationpageResponse;
+                  return WWResponseHandler(
+                    data: res,
+                    isEmpty: res.data?.isEmpty ?? true,
+                    onTap: () => vmOhs.ohsNotificationApi(),
+                    child: NotificationTabList(
+                      loading: res.loading,
+                    ),
+                  );
+                },
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }

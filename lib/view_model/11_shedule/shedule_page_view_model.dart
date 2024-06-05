@@ -37,7 +37,6 @@ abstract class JobCardViewModelBase with Store {
       signColor = Colors.blue;
     } else if (state == false) {
       signColor = Colors.white;
-      print(signColor);
     }
   }
 

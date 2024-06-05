@@ -7,6 +7,7 @@ import 'package:enviro_mobile_application/view_model/04_ohs/ohs_view_model.dart'
 import 'package:enviro_mobile_application/widgets/cm_add_notification_dialog.dart';
 import 'package:enviro_mobile_application/widgets/cmbutton.dart';
 import 'package:enviro_mobile_application/widgets/ww_response_handler.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
@@ -33,12 +34,15 @@ class NotificationTab extends StatelessWidget {
         ),
         gapFieldOhs,
         Observer(builder: (_) {
+          final res = vmOhs.notificationpageResponse;
           return Expanded(
               child: WWResponseHandler(
-                  data: vmOhs.notificationpageResponse,
-                  isEmpty: vmOhs.notificationpageResponse.data?.isEmpty,
+                  data: res,
+                  isEmpty: res.data?.isEmpty ?? true,
                   onTap: () => vmOhs.ohsNotificationApi(),
-                  child: const NotificationTabList()));
+                  child: NotificationTabList(
+                    loading: res.loading,
+                  )));
         }),
       ],
     );
@@ -46,26 +50,29 @@ class NotificationTab extends StatelessWidget {
 }
 
 class NotificationTabList extends StatelessWidget {
-  const NotificationTabList({super.key});
-
+  const NotificationTabList({super.key, required this.loading});
+  final bool loading;
   @override
   Widget build(BuildContext context) {
     return ListView.separated(
-      shrinkWrap: true,
-      itemCount: vmOhs.notificationpageResponse.data?.length ?? 0,
+      controller: vmOhs.notificationController,
+      itemCount: vmOhs.notificationpageResponse.data!.length + 1,
       separatorBuilder: (BuildContext context, int index) => gapFieldOhs,
       itemBuilder: (context, index) {
-        var data = vmOhs.notificationpageResponse.data?[index];
-        return InkWell(
-          onTap: () => notificationdetailpagefunction(context, data),
-          child: WWcard(data: data),
-        );
+        return index == vmOhs.notificationpageResponse.data?.length
+            ? vmOhs.notificationpageResponse.paginationLoading
+                ? const CupertinoActivityIndicator()
+                : const SizedBox.shrink()
+            : InkWell(
+                onTap: () => notificationdetailpagefunction(
+                    context, vmOhs.notificationpageResponse.data?[index]),
+                child:
+                    WWcard(data: vmOhs.notificationpageResponse.data?[index]),
+              );
       },
     );
   }
 }
-
-
 
 void notificationdetailpagefunction(BuildContext context, data) {
   context.router.pushNamed(RouteNames.rNotificationdetailpage);

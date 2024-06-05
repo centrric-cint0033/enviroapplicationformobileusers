@@ -151,20 +151,50 @@ abstract class OHSViewModelBase with Store {
       ApiResponse<List<OhsRespModel>>();
 
   @action
-  Future<void> ohsNotificationApi() async {
-    notificationpageResponse =
-        notificationpageResponse.copyWith(errors: null, loading: true);
-    final result = await ohsService.ohsNotificationServiceApi();
+  Future<void> ohsNotificationApi({int? page}) async {
+    if (page == null) notificationPagination();
+    notificationpageResponse = notificationpageResponse.copyWith(
+        errors: null, loading: page == null, paginationLoading: page != null);
+    final result = await ohsService.ohsNotificationServiceApi(page: page);
     return result.fold(
       (l) {
-        notificationpageResponse =
-            notificationpageResponse.copyWith(errors: l, loading: false);
+        notificationpageResponse = notificationpageResponse.copyWith(
+            errors: l, loading: false, paginationLoading: false);
       },
       (r) {
+        List<OhsRespModel> notification =
+            notificationpageResponse.data?.toList() ?? [];
+        if (page != null) {
+          notification.addAll(r);
+        } else {
+          notification = r;
+        }
+
         notificationpageResponse = notificationpageResponse.copyWith(
-            data: r, errors: null, loading: false);
+          data: notification,
+          errors: null,
+          loading: false,
+          pageNo: page ?? 1,
+          paginationLoading: false,
+          pagination: r.length == 8,
+        );
       },
     );
+  }
+
+  ScrollController notificationController = ScrollController();
+
+  void notificationPagination() {
+    notificationController.addListener(() {
+      if (notificationController.position.pixels ==
+              notificationController.position.maxScrollExtent &&
+          !notificationController.position.outOfRange &&
+          notificationpageResponse.pagination &&
+          !notificationpageResponse.paginationLoading) {
+        int pageNo = notificationpageResponse.pageNo + 1;
+        ohsNotificationApi(page: pageNo);
+      }
+    });
   }
 
   @observable
@@ -233,7 +263,12 @@ abstract class OHSViewModelBase with Store {
     addNotificationResponse =
         addNotificationResponse.copyWith(errors: null, loading: true);
 
-    final result = await ohsService.ohsAddNotificationServiceApi(data: data);
+    final result = await ohsService.ohsAddNotificationServiceApi(data: {
+      "title": data.title ?? "",
+      "description": data.description ?? "",
+      "members": "${data.members}",
+      "file_attachment": data.file_attachment ?? ""
+    });
     return result.fold(
       (l) {
         addNotificationResponse =
@@ -241,9 +276,11 @@ abstract class OHSViewModelBase with Store {
         popupErrorData(context, mainFailure: l);
       },
       (r) {
-        ohsNotificationApi();
         addNotificationResponse = addNotificationResponse.copyWith(
             data: r, errors: null, loading: false);
+        ohsNotificationApi();
+        selectedFileNameNotification = null;
+        Navigator.of(context).pop();
       },
     );
   }

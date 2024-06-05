@@ -201,9 +201,9 @@ mixin _$OHSViewModel on OHSViewModelBase, Store {
       AsyncAction('OHSViewModelBase.ohsNotificationApi', context: context);
 
   @override
-  Future<void> ohsNotificationApi() {
+  Future<void> ohsNotificationApi({int? page}) {
     return _$ohsNotificationApiAsyncAction
-        .run(() => super.ohsNotificationApi());
+        .run(() => super.ohsNotificationApi(page: page));
   }
 
   late final _$ohsFolerRenameApiAsyncAction =

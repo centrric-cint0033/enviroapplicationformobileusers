@@ -128,9 +128,6 @@ class NewsOhsFolderInsidePage extends StatelessWidget {
   }
 
   Future<void> _showMyfolderDialog(BuildContext context) async {
-    TextEditingController textFieldController1 = TextEditingController();
-    TextEditingController textFieldController2 = TextEditingController();
-    TextEditingController textFieldController3 = TextEditingController();
     TextEditingController textFieldController4 = TextEditingController();
 
     showDialog<void>(
