@@ -22,8 +22,9 @@ class RouteNames {
   static const String drawerpage = '/drawerpage';
   static const String rprofilepage = '/profilepage';
   static const String rnotificationpage = '/notificationpage';
-  static const String rshedulepage = '/shedulepage';
+  static const String rschedulemainpage = '/schedulemainpage';
   static const String rcalenderpage = '/calenderpage';
+  static const String wastetabpage = '/wastetabpage';
   static const String rsheduledetailpage = '/sheduledetailpage';
   static const String rupdatevehiclepreinspectionpage =
       '/updatevehiclepreinspectionpage ';

@@ -157,7 +157,7 @@ void shedulefunction(BuildContext context) {
   vmJobcard.shedulecardviewmodelfunction();
   vmJobcard.shedulecardviewmodelweekfunction();
   print('cccc');
-  context.router.pushNamed(RouteNames.rshedulepage);
+  context.router.pushNamed(RouteNames.rschedulemainpage);
   print('Notification button tapped!');
 }
 
@@ -186,5 +186,5 @@ void shedulepagefunction(BuildContext context) async {
   vmJobcard.shedulecardviewmodelfunction();
   vmJobcard.shedulecardviewmodelweekfunction();
 
-  context.router.pushNamed(RouteNames.rshedulepage);
+  context.router.pushNamed(RouteNames.rschedulemainpage);
 }

@@ -1,5 +1,6 @@
 import 'package:enviro_mobile_application/widgets/01_widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 Widget customButton(Function onPressed, Color color, String text) {
   return TextButton(
@@ -16,5 +17,5 @@ Widget customButton(Function onPressed, Color color, String text) {
           ),
         ),
       ),
-      child: showBlueText(text));
+      child: Center(child: showBlueText(text, fontSize: 10.h)));
 }

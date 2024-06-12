@@ -7,6 +7,8 @@ class WWcommonTabBar extends StatelessWidget {
   final String? value1;
   final String? value2;
   final String? value3;
+  final String? value4;
+  final String? value5;
   final Function(int)? onTap;
 
   const WWcommonTabBar(
@@ -15,7 +17,9 @@ class WWcommonTabBar extends StatelessWidget {
       this.value1,
       this.value2,
       this.value3,
-      this.onTap});
+      this.onTap,
+      this.value4,
+      this.value5});
 
   @override
   Widget build(BuildContext context) {
@@ -27,8 +31,10 @@ class WWcommonTabBar extends StatelessWidget {
             borderRadius: BorderRadius.circular(8.0),
           ),
           child: TabBar(
+            tabAlignment: TabAlignment.start,
             controller: controller,
             indicatorSize: TabBarIndicatorSize.tab,
+            isScrollable: true,
             indicator: BoxDecoration(
               borderRadius: BorderRadius.circular(8),
               color: Colors.white,
@@ -42,6 +48,8 @@ class WWcommonTabBar extends StatelessWidget {
               if (value1 != null) Tab(text: value1),
               if (value2 != null) Tab(text: value2),
               if (value3 != null) Tab(text: value3),
+              if (value4 != null) Tab(text: value4),
+              if (value5 != null) Tab(text: value5),
             ],
           ),
         ));

@@ -45,9 +45,11 @@ class WWFileCard extends StatelessWidget {
                 leading: const Icon(Icons.file_copy, color: Colors.black54),
                 title: Row(
                   children: [
-                    Text(file.name ?? "",
-                        overflow: TextOverflow.ellipsis,
-                        style: Theme.of(context).textTheme.bodySmall),
+                    Expanded(
+                      child: Text(file.name ?? "",
+                          overflow: TextOverflow.ellipsis,
+                          style: Theme.of(context).textTheme.bodySmall),
+                    ),
                     loading == true
                         ? const CupertinoActivityIndicator()
                         : const SizedBox.shrink()

@@ -131,6 +131,9 @@ abstract class TeamViewModelBase with Store {
   TeamResModel? selectedMember;
   @observable
   String? searchType;
+  @observable
+  List<String> folderNames = [];
+
   TextEditingController textFolderAddController = TextEditingController();
   TextEditingController textFolderEditController = TextEditingController();
   TextEditingController textEditTeamNameController = TextEditingController();

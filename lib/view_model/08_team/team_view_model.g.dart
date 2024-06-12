@@ -752,6 +752,22 @@ mixin _$TeamViewModel on TeamViewModelBase, Store {
     });
   }
 
+  late final _$folderNamesAtom =
+      Atom(name: 'TeamViewModelBase.folderNames', context: context);
+
+  @override
+  List<String> get folderNames {
+    _$folderNamesAtom.reportRead();
+    return super.folderNames;
+  }
+
+  @override
+  set folderNames(List<String> value) {
+    _$folderNamesAtom.reportWrite(value, super.folderNames, () {
+      super.folderNames = value;
+    });
+  }
+
   late final _$getCurrentEmployeeAsyncAction =
       AsyncAction('TeamViewModelBase.getCurrentEmployee', context: context);
 
@@ -1182,7 +1198,8 @@ selectedFilePath: ${selectedFilePath},
 loadinIndexFolder: ${loadinIndexFolder},
 loadinIndexFile: ${loadinIndexFile},
 selectedMember: ${selectedMember},
-searchType: ${searchType}
+searchType: ${searchType},
+folderNames: ${folderNames}
     ''';
   }
 }

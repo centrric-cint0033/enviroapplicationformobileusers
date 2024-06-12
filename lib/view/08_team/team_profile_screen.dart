@@ -35,247 +35,258 @@ class TeamProfileScreen extends StatelessWidget {
         vmTeam.terminatedEmployeeSearchCntrlr.clear();
         return true;
       },
-      child: Scaffold(
-        appBar: AppBar(
-          title: cmnTitleWidget('Team Profile'),
-        ),
-        body: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 15.w),
-          child: Observer(
-            builder: (context) {
-              final res = vmTeam.teamProfileEmployeeDetailListResponse;
-              TeamProfileEmployeeDetailsResModel? employeeDetails = res.data;
-              final ress = vmTeam.teamFoldersResponse;
-              FolderListModel? folderList = ress.data;
-              return res.loading
-                  ? Center(child: wwCustomLoader())
-                  : SingleChildScrollView(
-                      child: Column(children: [
-                        sized0hx10,
-                        Container(
-                          height: 82.h,
-                          decoration: BoxDecoration(
-                              color: Appthemes.cLightGrey,
-                              borderRadius: BorderRadius.circular(12),
-                              border: Border.all(color: Colors.grey.shade300)),
-                          child: Column(
-                            children: [
-                              Expanded(
-                                child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
-                                    children: [
-                                      SizedBox(
-                                        height: 60.w,
-                                        width: 60.w,
-                                        child: DecoratedBox(
-                                          decoration: BoxDecoration(
-                                              color: Colors.grey.shade700,
-                                              shape: BoxShape.circle),
-                                          child: dpImage(
-                                              employeeDetails?.dp ?? ""),
-                                        ),
-                                      ),
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        mainAxisAlignment: employeeDetails
-                                                        ?.userType ==
-                                                    "driver-factory-hand" ||
-                                                employeeDetails?.userType ==
-                                                    "driver-liquid-waste-technician"
-                                            ? MainAxisAlignment.center
-                                            : MainAxisAlignment.spaceEvenly,
-                                        children: [
-                                          Text(
-                                            employeeDetails?.userType ?? "",
-                                            style: TextStyle(
-                                                color: Appthemes.cPrimary,
-                                                fontSize: 13.w),
+      child: SafeArea(
+        child: Scaffold(
+          appBar: AppBar(
+            title: cmnTitleWidget('Team Profile'),
+          ),
+          body: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 15.w),
+            child: Observer(
+              builder: (context) {
+                final res = vmTeam.teamProfileEmployeeDetailListResponse;
+                TeamProfileEmployeeDetailsResModel? employeeDetails = res.data;
+                final ress = vmTeam.teamFoldersResponse;
+                FolderListModel? folderList = ress.data;
+                return res.loading
+                    ? Center(child: wwCustomLoader())
+                    : SingleChildScrollView(
+                        child: Column(children: [
+                          sized0hx10,
+                          Container(
+                            height: 82.h,
+                            decoration: BoxDecoration(
+                                color: Appthemes.cLightGrey,
+                                borderRadius: BorderRadius.circular(12),
+                                border:
+                                    Border.all(color: Colors.grey.shade300)),
+                            child: Column(
+                              children: [
+                                Expanded(
+                                  child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      children: [
+                                        SizedBox(
+                                          height: 60.w,
+                                          width: 60.w,
+                                          child: DecoratedBox(
+                                            decoration: BoxDecoration(
+                                                color: Colors.grey.shade700,
+                                                shape: BoxShape.circle),
+                                            child: dpImage(
+                                                employeeDetails?.dp ?? ""),
                                           ),
-                                          Text(employeeDetails?.name ?? ""),
-                                          employeeDetails?.userType ==
+                                        ),
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          mainAxisAlignment: employeeDetails
+                                                          ?.userType ==
                                                       "driver-factory-hand" ||
                                                   employeeDetails?.userType ==
                                                       "driver-liquid-waste-technician"
-                                              ? const SizedBox.shrink()
-                                              : Row(
-                                                  children: [
-                                                    SizedBox(
-                                                      height: 26.h,
-                                                      width: 57.h,
-                                                      child: customButton(() {
-                                                        showDeleteDialoq(
-                                                            context, () {
-                                                          vmTeam.deleteEmployeeApi(
-                                                              context: context,
-                                                              employeeID:
-                                                                  employeeDetails
-                                                                          ?.id ??
-                                                                      0);
-                                                          context.router.pop();
-                                                        });
-                                                      }, Appthemes.cPrimary,
-                                                          "Delete"),
-                                                    ),
-                                                    const SizedBox(
-                                                      width: 16,
-                                                    ),
-                                                    SizedBox(
-                                                      height: 26.h,
-                                                      width: 57.h,
-                                                      child: customButton(() {
-                                                        vmTeam
-                                                            .getTeamDesignationsApi();
-                                                        addingDataToControllerEdit(
-                                                            employeeDetails);
-                                                        try {
-                                                          vmTeam.selectedJoiningDate =
-                                                              DateTime.parse(
-                                                                  employeeDetails
-                                                                          ?.dateJoined ??
-                                                                      "");
-                                                        } catch (e) {}
-                                                        try {
-                                                          vmTeam.selectedTerminationDate =
-                                                              DateTime.parse(
-                                                                  employeeDetails
-                                                                          ?.terminationDate ??
-                                                                      "");
-                                                        } catch (e) {}
-                                                        try {
-                                                          vmTeam.selectedDob =
-                                                              DateTime.parse(
-                                                                  employeeDetails
-                                                                          ?.dateOfBirth ??
-                                                                      "");
-                                                        } catch (e) {}
-                                                        vmTeam.selectedDesignationAddTeam2 =
-                                                            employeeDetails
-                                                                ?.userType;
-                                                        context.router.push(
-                                                            TeamEditRoute(
-                                                                employeeDetatils:
-                                                                    employeeDetails!));
-                                                      }, Appthemes.cPrimary,
-                                                          "Edit"),
-                                                    ),
-                                                  ],
-                                                )
-                                        ],
-                                      ),
-                                    ]),
-                              ),
-                            ],
-                          ),
-                        ),
-                        sized0hx10,
-                        listData(employeeDetails),
-                        sized0hx10,
-                        cmTitle('Employees Folder',
-                            fontWeight: FontWeight.bold),
-                        sized0hx10,
-                        Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              const Padding(
-                                padding: EdgeInsets.all(8.0),
-                                child: Text('Folders'),
-                              ),
-                              CmButton(
-                                  text: 'Add folders+',
-                                  onPressed: () {
-                                    showCreateEditDialog(context,
-                                        createEditTap: (v) {
-                                      vmTeam.addTeamFolder(
-                                          context: context,
-                                          employee: employeeDetails?.id ?? 0,
-                                          name: v,
-                                          parentfolder: 1);
-                                    });
-                                  }),
-                            ]),
-                        sized0hx10,
-                        WWTextField(
-                          controller: vmTeam.folderSearchCntrlr,
-                          onChanged: (v) => vmTeam.onTextChanged(() {
-                            v.isEmpty
-                                ? vmTeam.getTeamFolders(
-                                    id: id!, parentFolderId: 1)
-                                : vmTeam.folderSearchApi(
-                                    v,
-                                    1,
-                                    vmTeam.searchType ?? "",
-                                    employeeDetails!.id!);
-                          }),
-                          suffixTap: () {},
-                          hintText: 'Search by Folder Name',
-                        ),
-                        sized0hx10,
-                        folderList?.folders != null &&
-                                folderList!.folders!.isNotEmpty
-                            ? ress.loading
-                                ? wwCustomLoader()
-                                : ListView.separated(
-                                    physics:
-                                        const NeverScrollableScrollPhysics(),
-                                    shrinkWrap: true,
-                                    separatorBuilder:
-                                        (BuildContext context, int index) =>
-                                            sized0hx10,
-                                    itemCount: folderList
-                                            .folders?[0].folders?.length ??
-                                        0,
-                                    itemBuilder: (context, index) {
-                                      var data = folderList
-                                          .folders?[0].folders?[index];
-                                      if (data != null) {
-                                        return WWFolderCard(
-                                            folder: data,
-                                            onTap: () {
-                                              vmTeam.getTeamFolders(
-                                                  id: employeeDetails?.id ?? 0,
-                                                  parentFolderId: data.id ?? 0,
-                                                  fromTeamProfileScreen: true);
-                                              context.router.push(
-                                                  EmployeeFilesRoute(
-                                                      employeeId:
-                                                          employeeDetails?.id,
-                                                      folderName: data.name,
-                                                      folderId: data.id,
-                                                      searchType: data.type));
-                                            },
-                                            folderName: data.name,
-                                            editTap: (s) =>
-                                                vmTeam.editTeamFolderApi(
-                                                    name: s,
-                                                    folderId: data.id ?? 0,
-                                                    parentFolderId: 1,
-                                                    context: context,
-                                                    employeeID:
-                                                        employeeDetails?.id ??
-                                                            0),
-                                            deleteTap: () =>
-                                                vmTeam.deleteTeamFolderApi(
-                                                    folderId: data.id ?? 0,
-                                                    context: context,
-                                                    employeeID:
-                                                        employeeDetails?.id ??
-                                                            0,
-                                                    parentFolderId: 1));
-                                      } else {
-                                        return Container();
-                                      }
-                                    },
-                                  )
-                            : Center(
-                                child: SvgPicture.asset(
-                                  "assets/images/empty1.svg",
+                                              ? MainAxisAlignment.center
+                                              : MainAxisAlignment.spaceEvenly,
+                                          children: [
+                                            Text(
+                                              employeeDetails?.userType ?? "",
+                                              style: TextStyle(
+                                                  color: Appthemes.cPrimary,
+                                                  fontSize: 13.w),
+                                            ),
+                                            Text(employeeDetails?.name ?? ""),
+                                            employeeDetails?.userType ==
+                                                        "driver-factory-hand" ||
+                                                    employeeDetails?.userType ==
+                                                        "driver-liquid-waste-technician"
+                                                ? const SizedBox.shrink()
+                                                : Row(
+                                                    children: [
+                                                      SizedBox(
+                                                        height: 26.h,
+                                                        width: 57.h,
+                                                        child: customButton(() {
+                                                          showDeleteDialoq(
+                                                              context, () {
+                                                            vmTeam.deleteEmployeeApi(
+                                                                context:
+                                                                    context,
+                                                                employeeID:
+                                                                    employeeDetails
+                                                                            ?.id ??
+                                                                        0);
+                                                            context.router
+                                                                .pop();
+                                                          });
+                                                        }, Appthemes.cPrimary,
+                                                            "Delete"),
+                                                      ),
+                                                      const SizedBox(
+                                                        width: 16,
+                                                      ),
+                                                      SizedBox(
+                                                        height: 26.h,
+                                                        width: 57.h,
+                                                        child: customButton(() {
+                                                          vmTeam
+                                                              .getTeamDesignationsApi();
+                                                          addingDataToControllerEdit(
+                                                              employeeDetails);
+                                                          try {
+                                                            vmTeam.selectedJoiningDate =
+                                                                DateTime.parse(
+                                                                    employeeDetails
+                                                                            ?.dateJoined ??
+                                                                        "");
+                                                          } catch (e) {}
+                                                          try {
+                                                            vmTeam.selectedTerminationDate =
+                                                                DateTime.parse(
+                                                                    employeeDetails
+                                                                            ?.terminationDate ??
+                                                                        "");
+                                                          } catch (e) {}
+                                                          try {
+                                                            vmTeam.selectedDob =
+                                                                DateTime.parse(
+                                                                    employeeDetails
+                                                                            ?.dateOfBirth ??
+                                                                        "");
+                                                          } catch (e) {}
+                                                          vmTeam.selectedDesignationAddTeam2 =
+                                                              employeeDetails
+                                                                  ?.userType;
+                                                          context.router.push(
+                                                              TeamEditRoute(
+                                                                  employeeDetatils:
+                                                                      employeeDetails!));
+                                                        }, Appthemes.cPrimary,
+                                                            "Edit"),
+                                                      ),
+                                                    ],
+                                                  )
+                                          ],
+                                        ),
+                                      ]),
                                 ),
-                              ),
-                      ]),
-                    );
-            },
+                              ],
+                            ),
+                          ),
+                          sized0hx10,
+                          listData(employeeDetails),
+                          sized0hx10,
+                          cmTitle('Employees Folder',
+                              fontWeight: FontWeight.bold),
+                          sized0hx10,
+                          Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                const Padding(
+                                  padding: EdgeInsets.all(8.0),
+                                  child: Text('Folders'),
+                                ),
+                                CmButton(
+                                    text: 'Add folders+',
+                                    onPressed: () {
+                                      showCreateEditDialog(context,
+                                          createEditTap: (v) {
+                                        vmTeam.addTeamFolder(
+                                            context: context,
+                                            employee: employeeDetails?.id ?? 0,
+                                            name: v,
+                                            parentfolder: 1);
+                                      });
+                                    }),
+                              ]),
+                          sized0hx10,
+                          WWTextField(
+                            controller: vmTeam.folderSearchCntrlr,
+                            onChanged: (v) => vmTeam.onTextChanged(() {
+                              v.isEmpty
+                                  ? vmTeam.getTeamFolders(
+                                      id: id!, parentFolderId: 1)
+                                  : vmTeam.folderSearchApi(
+                                      v,
+                                      1,
+                                      vmTeam.searchType ?? "",
+                                      employeeDetails!.id!);
+                            }),
+                            suffixTap: () {},
+                            hintText: 'Search by Folder Name',
+                          ),
+                          sized0hx10,
+                          folderList?.folders != null &&
+                                  folderList!.folders!.isNotEmpty
+                              ? ress.loading
+                                  ? wwCustomLoader()
+                                  : ListView.separated(
+                                      physics:
+                                          const NeverScrollableScrollPhysics(),
+                                      shrinkWrap: true,
+                                      separatorBuilder:
+                                          (BuildContext context, int index) =>
+                                              sized0hx10,
+                                      itemCount: folderList
+                                              .folders?[0].folders?.length ??
+                                          0,
+                                      itemBuilder: (context, index) {
+                                        var data = folderList
+                                            .folders?[0].folders?[index];
+                                        if (data != null) {
+                                          return WWFolderCard(
+                                              folder: data,
+                                              onTap: () {
+                                                vmTeam.folderNames.clear();
+                                                vmTeam.getTeamFolders(
+                                                    id: employeeDetails?.id ??
+                                                        0,
+                                                    parentFolderId:
+                                                        data.id ?? 0,
+                                                    fromTeamProfileScreen:
+                                                        true);
+                                                vmTeam.folderNames
+                                                    .add("${data.name}");
+                                                context.router.push(
+                                                    EmployeeFilesRoute(
+                                                        employeeId:
+                                                            employeeDetails?.id,
+                                                        folderName: data.name,
+                                                        folderId: data.id,
+                                                        searchType: data.type));
+                                              },
+                                              folderName: data.name,
+                                              editTap: (s) =>
+                                                  vmTeam.editTeamFolderApi(
+                                                      name: s,
+                                                      folderId: data.id ?? 0,
+                                                      parentFolderId: 1,
+                                                      context: context,
+                                                      employeeID:
+                                                          employeeDetails?.id ??
+                                                              0),
+                                              deleteTap: () =>
+                                                  vmTeam.deleteTeamFolderApi(
+                                                      folderId: data.id ?? 0,
+                                                      context: context,
+                                                      employeeID:
+                                                          employeeDetails?.id ??
+                                                              0,
+                                                      parentFolderId: 1));
+                                        } else {
+                                          return Container();
+                                        }
+                                      },
+                                    )
+                              : Center(
+                                  child: SvgPicture.asset(
+                                    "assets/images/empty1.svg",
+                                  ),
+                                ),
+                        ]),
+                      );
+              },
+            ),
           ),
         ),
       ),
