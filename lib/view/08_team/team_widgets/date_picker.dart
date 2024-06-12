@@ -14,5 +14,8 @@ Widget datePicker(
           pickerDate(picked);
         }
       },
-      icon: const Icon(Icons.calendar_month_outlined));
+      icon: Icon(
+        Icons.calendar_month_outlined,
+        color: Colors.grey.shade700,
+      ));
 }

@@ -6,7 +6,6 @@ import 'package:enviro_mobile_application/widgets/ww_folder_card.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class WWFileCard extends StatelessWidget {
   final FolderModel file;
@@ -38,58 +37,65 @@ class WWFileCard extends StatelessWidget {
         color: Colors.grey.shade200,
         shape:
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
-        child: ListTile(
-          contentPadding: const EdgeInsets.only(left: 20),
-          leading: const Icon(Icons.file_copy, color: Colors.black54),
-          title: Row(
-            children: [
-              Text(file.name ?? "",
-                  overflow: TextOverflow.ellipsis,
-                  style: Theme.of(context).textTheme.bodySmall),
-              loading == true
-                  ? const CupertinoActivityIndicator()
-                  : const SizedBox.shrink()
-            ],
-          ),
-          subtitle: Observer(builder: (context) {
-            final res = vmTeam.expiryFileResponse;
-            return Row(
-              children: [
-                Text("Expiry Date: ",
-                    overflow: TextOverflow.ellipsis,
-                    style: Theme.of(context).textTheme.bodySmall),
-                res.loading
-                    ? const CupertinoActivityIndicator()
-                    : Text(file.expiry_date ?? "",
+        child: Row(
+          children: [
+            Expanded(
+              child: ListTile(
+                contentPadding: const EdgeInsets.only(left: 20),
+                leading: const Icon(Icons.file_copy, color: Colors.black54),
+                title: Row(
+                  children: [
+                    Text(file.name ?? "",
                         overflow: TextOverflow.ellipsis,
                         style: Theme.of(context).textTheme.bodySmall),
-              ],
-            );
-          }),
-          trailing: SizedBox(
-            width: 110.w,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                CommonIconBtnWidget(
-                  icon: Icons.edit,
-                  onTap: () => showCreateEditDialog(context,
-                      createEditTap: editTap,
-                      folderName: fileName,
-                      status: FolderEditCreate.edit),
+                    loading == true
+                        ? const CupertinoActivityIndicator()
+                        : const SizedBox.shrink()
+                  ],
                 ),
-                CommonIconBtnWidget(
-                  icon: Icons.delete_forever,
-                  onTap: () => showDeleteDialog(context, deleteTap: deleteTap),
-                ),
-                datePicker(
-                    context,
-                    vmTeam.selectedExpiryDate,
-                    (date) => vmTeam.expiryDatePickerFn(context, date,
-                        file.id ?? 1, employeeID, parentFolderId))
-              ],
+                subtitle: Observer(builder: (context) {
+                  final res = vmTeam.expiryFileResponse;
+                  return Row(
+                    children: [
+                      Text("Expiry Date: ",
+                          overflow: TextOverflow.ellipsis,
+                          style: Theme.of(context).textTheme.bodySmall),
+                      res.loading
+                          ? const CupertinoActivityIndicator()
+                          : Text(file.expiry_date ?? "",
+                              overflow: TextOverflow.ellipsis,
+                              style: Theme.of(context).textTheme.bodySmall),
+                    ],
+                  );
+                }),
+                // trailing: SizedBox(
+                //   width: 110.w,
+                //   child: Row(
+                //     mainAxisAlignment: MainAxisAlignment.end,
+                //     children: [
+
+                //     ],
+                //   ),
+                // ),
+              ),
             ),
-          ),
+            CommonIconBtnWidget(
+              icon: Icons.edit,
+              onTap: () => showCreateEditDialog(context,
+                  createEditTap: editTap,
+                  folderName: fileName,
+                  status: FolderEditCreate.edit),
+            ),
+            CommonIconBtnWidget(
+              icon: Icons.delete_forever,
+              onTap: () => showDeleteDialog(context, deleteTap: deleteTap),
+            ),
+            datePicker(
+                context,
+                vmTeam.selectedExpiryDate,
+                (date) => vmTeam.expiryDatePickerFn(
+                    context, date, file.id ?? 1, employeeID, parentFolderId))
+          ],
         ),
       ),
     );
