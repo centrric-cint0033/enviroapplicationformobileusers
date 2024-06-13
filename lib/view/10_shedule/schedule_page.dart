@@ -44,14 +44,14 @@ class SchedulePage extends StatelessWidget {
               child: Observer(
                 builder: (_) {
                   return WWResponseHandler(
-                    data: vmJobcard.shedulecardResponse,
+                    data: vmSchedule.shedulecardResponse,
                     isEmpty:
-                        vmJobcard.shedulecardResponse.data?.isEmpty ?? true,
-                    onTap: () => vmJobcard.shedulecardviewmodelfunction(),
+                        vmSchedule.shedulecardResponse.data?.isEmpty ?? true,
+                    onTap: () => vmSchedule.shedulecardviewmodelfunction(),
                     child: ListView.builder(
                       scrollDirection: Axis.horizontal,
                       itemCount:
-                          vmJobcard.shedulecardResponse.data?.length ?? 0,
+                          vmSchedule.shedulecardResponse.data?.length ?? 0,
                       itemBuilder: (BuildContext context, int i) {
                         return Card(
                           shape: RoundedRectangleBorder(
@@ -76,11 +76,11 @@ class SchedulePage extends StatelessWidget {
                                               const EdgeInsets.only(left: 13.0),
                                           child: CircleAvatar(
                                             radius: 14,
-                                            child: vmJobcard.shedulecardResponse
+                                            child: vmSchedule.shedulecardResponse
                                                         .data?[i].client?.dp !=
                                                     null
                                                 ? Image.network(
-                                                    "${vmJobcard.shedulecardResponse.data![i].client?.dp}",
+                                                    "${vmSchedule.shedulecardResponse.data![i].client?.dp}",
                                                     fit: BoxFit.cover,
                                                   )
                                                 : Container(),
@@ -93,7 +93,7 @@ class SchedulePage extends StatelessWidget {
                                     padding: const EdgeInsets.only(left: 18.0),
                                     child: Observer(builder: (_) {
                                       return Text(
-                                        vmJobcard.shedulecardResponse.data?[i]
+                                        vmSchedule.shedulecardResponse.data?[i]
                                                 .salesPerson
                                                 ?.toString() ??
                                             '',
@@ -120,13 +120,13 @@ class SchedulePage extends StatelessWidget {
                                       ),
                                       InkWell(
                                         onTap: () => openMap(
-                                            vmJobcard
+                                            vmSchedule
                                                     .shedulecardResponse
                                                     .data?[i]
                                                     .client
                                                     ?.locationLatitude ??
                                                 "",
-                                            vmJobcard
+                                            vmSchedule
                                                     .shedulecardResponse
                                                     .data?[i]
                                                     .client
@@ -152,31 +152,31 @@ class SchedulePage extends StatelessWidget {
                                     children: [
                                       expandedRowShowText2(
                                           "Day",
-                                          DateFormat.yMMMMd().format(vmJobcard
+                                          DateFormat.yMMMMd().format(vmSchedule
                                               .shedulecardResponse
                                               .data![i]
                                               .startDate!)),
                                       expandedRowShowText2(
                                         "Tme",
-                                        vmJobcard.shedulecardResponse.data?[i]
+                                        vmSchedule.shedulecardResponse.data?[i]
                                                 .startTime ??
                                             '',
                                       ),
                                       expandedRowShowText2(
                                         "Type",
-                                        vmJobcard.shedulecardResponse.data?[i]
+                                        vmSchedule.shedulecardResponse.data?[i]
                                                 .wasteTypeStr ??
                                             '',
                                       ),
                                       expandedRowShowText2(
                                         "Company",
-                                        vmJobcard.shedulecardResponse.data?[i]
+                                        vmSchedule.shedulecardResponse.data?[i]
                                                 .client?.clientName ??
                                             '',
                                       ),
-                                      (vmJobcard.shedulecardResponse.data !=
+                                      (vmSchedule.shedulecardResponse.data !=
                                                   null &&
-                                              vmJobcard.shedulecardResponse
+                                              vmSchedule.shedulecardResponse
                                                       .data?[i].status !=
                                                   null)
                                           ? expandedRowShowText2(
@@ -213,7 +213,7 @@ class SchedulePage extends StatelessWidget {
                                         child: Observer(builder: (_) {
                                           return ListView.builder(
                                             scrollDirection: Axis.horizontal,
-                                            itemCount: (vmJobcard
+                                            itemCount: (vmSchedule
                                                     .shedulecardResponse
                                                     .data?[i]
                                                     .drivers
@@ -246,7 +246,7 @@ class SchedulePage extends StatelessWidget {
                                                               child:
                                                                   CircleAvatar(
                                                                 radius: 14,
-                                                                child: vmJobcard
+                                                                child: vmSchedule
                                                                             .shedulecardResponse
                                                                             .data?[
                                                                                 i]
@@ -256,7 +256,7 @@ class SchedulePage extends StatelessWidget {
                                                                         null
                                                                     ? Image
                                                                         .network(
-                                                                        vmJobcard
+                                                                        vmSchedule
                                                                             .shedulecardResponse
                                                                             .data![i]
                                                                             .drivers![driverIndex]
@@ -268,7 +268,7 @@ class SchedulePage extends StatelessWidget {
                                                               ),
                                                             ),
                                                             Text(
-                                                              vmJobcard
+                                                              vmSchedule
                                                                       .shedulecardResponse
                                                                       .data?[i]
                                                                       .drivers?[
@@ -289,7 +289,7 @@ class SchedulePage extends StatelessWidget {
                                                                 .only(
                                                                 left: 43.0),
                                                         child: Text(
-                                                          vmJobcard
+                                                          vmSchedule
                                                                   .shedulecardResponse
                                                                   .data?[i]
                                                                   .drivers?[
@@ -336,22 +336,22 @@ class SchedulePage extends StatelessWidget {
               },
               child: Observer(builder: (_) {
                 return WWResponseHandler(
-                  data: vmJobcard.sheduleweekResponse,
-                  isEmpty: vmJobcard.sheduleweekResponse.data?.isEmpty ?? true,
-                  onTap: () => vmJobcard.shedulecardviewmodelweekfunction(),
+                  data: vmSchedule.sheduleweekResponse,
+                  isEmpty: vmSchedule.sheduleweekResponse.data?.isEmpty ?? true,
+                  onTap: () => vmSchedule.shedulecardviewmodelweekfunction(),
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: ListView.builder(
                         scrollDirection: Axis.horizontal,
                         itemCount:
-                            vmJobcard.sheduleweekResponse.data?.length ?? 0,
+                            vmSchedule.sheduleweekResponse.data?.length ?? 0,
                         itemBuilder: (BuildContext context, int i) {
                           return SingleChildScrollView(
                             child: GestureDetector(
                               onTap: () {
                                 sheduledetailfunction(
                                     context,
-                                    vmJobcard.sheduleweekResponse.data?[i].id ??
+                                    vmSchedule.sheduleweekResponse.data?[i].id ??
                                         '',
                                     i);
                               },
@@ -371,7 +371,7 @@ class SchedulePage extends StatelessWidget {
                                             padding: const EdgeInsets.only(
                                                 left: 8.0, top: 8),
                                             child: Text(
-                                              vmJobcard
+                                              vmSchedule
                                                       .sheduleweekResponse
                                                       .data?[i]
                                                       .client
@@ -385,7 +385,7 @@ class SchedulePage extends StatelessWidget {
                                             padding: const EdgeInsets.only(
                                                 left: 8.0, top: 8, right: 8),
                                             child: Text(
-                                              'job ${vmJobcard.sheduleweekResponse.data?[i].job ?? ''}',
+                                              'job ${vmSchedule.sheduleweekResponse.data?[i].job ?? ''}',
                                             ),
                                           );
                                         }),
@@ -401,7 +401,7 @@ class SchedulePage extends StatelessWidget {
                                                 left: 8.0, top: 8),
                                             child: Observer(builder: (_) {
                                               return Text(
-                                                vmJobcard.sheduleweekResponse
+                                                vmSchedule.sheduleweekResponse
                                                         .data?[i].startTime ??
                                                     '',
                                               );
@@ -412,7 +412,7 @@ class SchedulePage extends StatelessWidget {
                                           onPressed: () {
                                             sheduledetailfunction(
                                                 context,
-                                                vmJobcard.sheduleweekResponse
+                                                vmSchedule.sheduleweekResponse
                                                         .data?[i].id ??
                                                     '',
                                                 i);
@@ -431,7 +431,7 @@ class SchedulePage extends StatelessWidget {
                                             const EdgeInsets.only(left: 8.0),
                                         child: Observer(builder: (_) {
                                           return Text(DateFormat.yMMMMd()
-                                              .format(vmJobcard
+                                              .format(vmSchedule
                                                   .shedulecardResponse
                                                   .data![i]
                                                   .startDate!));
@@ -497,7 +497,7 @@ class SchedulePage extends StatelessWidget {
                                                       child: Observer(
                                                           builder: (_) {
                                                         return Text(
-                                                          vmJobcard
+                                                          vmSchedule
                                                                   .shedulecardResponse
                                                                   .data?[i]
                                                                   .drivers?[0]
@@ -520,7 +520,7 @@ class SchedulePage extends StatelessWidget {
                                                       child: Observer(
                                                           builder: (_) {
                                                         return Text(
-                                                          vmJobcard
+                                                          vmSchedule
                                                                   .shedulecardResponse
                                                                   .data?[i]
                                                                   .drivers?[0]
@@ -553,7 +553,7 @@ class SchedulePage extends StatelessWidget {
                                                       child: Observer(
                                                           builder: (_) {
                                                         return Text(
-                                                          vmJobcard
+                                                          vmSchedule
                                                                   .shedulecardResponse
                                                                   .data?[i]
                                                                   .jobCardKeys
@@ -575,7 +575,7 @@ class SchedulePage extends StatelessWidget {
                                                           const EdgeInsets.all(
                                                               8.0),
                                                       child: Text(
-                                                        vmJobcard
+                                                        vmSchedule
                                                                 .sheduleweekResponse
                                                                 .data?[i]
                                                                 .vehicle
@@ -675,7 +675,7 @@ Future<void> openMap(String latitude, String longitude) async {
 
 void nextjobfnction(BuildContext context) {
   print('calenderclicked');
-  vmJobcard.shedulecardviewmodelfunction();
+  vmSchedule.shedulecardviewmodelfunction();
 }
 
 void sheduledetailfunction4(

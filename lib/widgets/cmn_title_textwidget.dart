@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 Row cmnTitleWidget(String? text) {
   return Row(
     children: [
       Text(
         text ?? 'Default Text',
-        style: const TextStyle(
-          color: Colors.black,
-          fontSize: 19,
-          fontWeight: FontWeight.w600,
+        style: TextStyle(
+          fontSize: 17.h,
+          fontWeight: FontWeight.w400,
         ),
       ),
       const Spacer(),

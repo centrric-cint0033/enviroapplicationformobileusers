@@ -16,18 +16,18 @@ import 'package:injectable/injectable.dart';
 import 'package:mobx/mobx.dart';
 part 'shedule_page_view_model.g.dart';
 
-final vmJobcard = getIt<JobCardViewModel>();
+final vmSchedule = getIt<ScheduleViewModel>();
 
 @injectable
 @lazySingleton
-class JobCardViewModel extends JobCardViewModelBase with _$JobCardViewModel {
-  JobCardViewModel(super.jobcardService);
+class ScheduleViewModel extends ScheduleViewModelBase with _$ScheduleViewModel {
+  ScheduleViewModel(super.jobcardService);
 }
 
-abstract class JobCardViewModelBase with Store {
-  final IJobCardService jobcardService;
+abstract class ScheduleViewModelBase with Store {
+  final IScheduleService scheduleService;
 
-  JobCardViewModelBase(this.jobcardService);
+  ScheduleViewModelBase(this.scheduleService);
 
   @observable
   Color? signColor = Colors.white;
@@ -42,7 +42,10 @@ abstract class JobCardViewModelBase with Store {
 
   @observable
   List<PlatformFile> pickedFiles = [];
-
+  @observable
+  DateTime focusedDay = DateTime.now();
+  @observable
+  DateTime? selectedDay;
   @action
   Future<void> pickFilefromphone() async {
     var pic = await FilePicker.platform.pickFiles(
@@ -80,8 +83,6 @@ abstract class JobCardViewModelBase with Store {
 
     if (pickedsignaturecameraImage != null) {
       selectedsignaturecameraImage = File(pickedsignaturecameraImage.path);
-
-      print('Image selected');
     }
   }
 
@@ -98,8 +99,6 @@ abstract class JobCardViewModelBase with Store {
     if (pickedImage != null) {
       selectedcameraImage = File(pickedImage.path);
       isImageSelected = true;
-
-      print('Image selected');
     }
   }
 
@@ -156,12 +155,9 @@ abstract class JobCardViewModelBase with Store {
 
   @action
   Future<void> jobcardviewmodelfunction() async {
-    print('aaaaa$jobcardResponse');
-    print('aaaaa$jobcardResponse');
-
     jobcardResponse = jobcardResponse.copyWith(error: null, loading: true);
 
-    final result = await jobcardService.jobcardservicefunction();
+    final result = await scheduleService.jobcardservicefunction();
     return result.fold(
       (l) {
         jobcardResponse = jobcardResponse.copyWith(
@@ -185,13 +181,10 @@ abstract class JobCardViewModelBase with Store {
 
   @action
   Future<void> shedulecardviewmodelfunction() async {
-    print('aaaaa$jobcardResponse');
-    print('aaaaa$jobcardResponse');
-
     shedulecardResponse =
         shedulecardResponse.copyWith(error: null, loading: true);
 
-    final result = await jobcardService.shedulecardservicefunction();
+    final result = await scheduleService.shedulecardservicefunction();
     return result.fold(
       (l) {
         shedulecardResponse = shedulecardResponse.copyWith(
@@ -215,13 +208,10 @@ abstract class JobCardViewModelBase with Store {
 
   @action
   Future<void> shedulecardviewmodelweekfunction() async {
-    print('aaaaa$jobcardResponse');
-    print('aaaaa$jobcardResponse');
-
     sheduleweekResponse =
         sheduleweekResponse.copyWith(error: null, loading: true);
 
-    final result = await jobcardService.shedulecardserviceweekfunction();
+    final result = await scheduleService.shedulecardserviceweekfunction();
     return result.fold(
       (l) {
         sheduleweekResponse = sheduleweekResponse.copyWith(
@@ -248,21 +238,21 @@ abstract class JobCardViewModelBase with Store {
     required int id,
     required List<PlatformFile> pickedFiles,
     required Uint8List image,
-    required String signature_name,
-    required String purchase_order_number,
-    required String extracted_waste_type,
-    required String extracted_litres_of_waste,
+    required String signatureName,
+    required String purchaseOderNo,
+    required String extractedWasteType,
+    required String extractedLitres,
   }) async {
     signatureResponse = signatureResponse.copyWith(errors: null, loading: true);
 
-    final result = await jobcardService.shedulesignatureserviceapi(
+    final result = await scheduleService.shedulesignatureserviceapi(
         image: image,
         id: id,
         pickedFiles: pickedFiles,
-        signature_name: signature_name,
-        purchase_order_number: purchase_order_number,
-        extracted_litres_of_waste: extracted_litres_of_waste,
-        extracted_waste_type: extracted_waste_type);
+        signatureName: signatureName,
+        purchaseOderNo: purchaseOderNo,
+        extractedLitres: extractedLitres,
+        extractedWasteType: extractedWasteType);
     return result.fold(
       (l) {
         signatureResponse = signatureResponse.copyWith(
@@ -288,9 +278,8 @@ abstract class JobCardViewModelBase with Store {
   Future<void> shedulecommentviewmodelfunction(
       {required int id, required String comment}) async {
     commentResponse = commentResponse.copyWith(errors: null, loading: true);
-
-    final result =
-        await jobcardService.shedulecommentserviceapi(id: id, comment: comment);
+    final result = await scheduleService.shedulecommentserviceapi(
+        id: id, comment: comment);
     return result.fold(
       (l) {
         commentResponse = commentResponse.copyWith(
@@ -306,5 +295,11 @@ abstract class JobCardViewModelBase with Store {
         );
       },
     );
+  }
+
+  @action
+  dateSelectionFn(DateTime selectedday, DateTime focusedday) {
+    selectedDay = selectedday;
+    focusedDay = focusedday;
   }
 }

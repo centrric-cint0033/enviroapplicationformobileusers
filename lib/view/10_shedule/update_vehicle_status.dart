@@ -49,7 +49,7 @@ class UpdateVehicleStatusPage extends StatelessWidget {
                             child: CmButton(
                               borderRadius: 34,
                               width: 130,
-                              loading: vmJobcard.jobcardResponse.loading,
+                              loading: vmSchedule.jobcardResponse.loading,
                               color: Colors.white,
                               text: 'Job Card',
                               buttonTextStyle:
@@ -71,53 +71,53 @@ class UpdateVehicleStatusPage extends StatelessWidget {
                         children: [
                           expandedRowShowText(
                             "Client Name",
-                            vmJobcard.sheduleweekResponse.data?[index].client
+                            vmSchedule.sheduleweekResponse.data?[index].client
                                     ?.clientName ??
                                 '',
                           ),
                           const SizedBox(height: 20),
                           expandedRowShowText(
                             "Client Type",
-                            vmJobcard.sheduleweekResponse.data?[index].client
+                            vmSchedule.sheduleweekResponse.data?[index].client
                                     ?.clientType ??
                                 '',
                           ),
                           const SizedBox(height: 20),
                           expandedRowShowText(
                             "Client email",
-                            vmJobcard.sheduleweekResponse.data?[index].client
+                            vmSchedule.sheduleweekResponse.data?[index].client
                                     ?.clientEmail ??
                                 '',
                           ),
                           const SizedBox(height: 20),
                           expandedRowShowText(
                             "Status",
-                            vmJobcard.sheduleweekResponse.data?[index].status ??
+                            vmSchedule.sheduleweekResponse.data?[index].status ??
                                 '',
                           ),
                           const SizedBox(height: 20),
                           expandedRowShowText(
                             "Amount",
-                            vmJobcard.sheduleweekResponse.data?[index].amount ??
+                            vmSchedule.sheduleweekResponse.data?[index].amount ??
                                 '',
                           ),
                           const SizedBox(height: 20),
                           expandedRowShowText(
                               "CreatedBy",
-                              vmJobcard.sheduleweekResponse.data?[index]
+                              vmSchedule.sheduleweekResponse.data?[index]
                                       .createdBy ??
                                   ''),
                           const SizedBox(height: 20),
                           expandedRowShowText(
                             "Waste Type",
-                            vmJobcard.sheduleweekResponse.data?[index].client
+                            vmSchedule.sheduleweekResponse.data?[index].client
                                     ?.deviceWaste ??
                                 '',
                           ),
                           const SizedBox(height: 20),
                           expandedRowShowText(
                             "Frequency",
-                            vmJobcard.sheduleweekResponse.data?[index]
+                            vmSchedule.sheduleweekResponse.data?[index]
                                     .frequency ??
                                 '',
                           ),
@@ -153,7 +153,7 @@ class UpdateVehicleStatusPage extends StatelessWidget {
 }
 
 void jobCardFunction(BuildContext context) async {
-  await vmJobcard.jobcardviewmodelfunction();
+  await vmSchedule.jobcardviewmodelfunction();
   print('Job card clicked');
   context.router.pushNamed(RouteNames.rjobcardpage);
 }

@@ -8,9 +8,9 @@ part of 'shedule_page_view_model.dart';
 
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
-mixin _$JobCardViewModel on JobCardViewModelBase, Store {
+mixin _$ScheduleViewModel on ScheduleViewModelBase, Store {
   late final _$signColorAtom =
-      Atom(name: 'JobCardViewModelBase.signColor', context: context);
+      Atom(name: 'ScheduleViewModelBase.signColor', context: context);
 
   @override
   Color? get signColor {
@@ -26,7 +26,7 @@ mixin _$JobCardViewModel on JobCardViewModelBase, Store {
   }
 
   late final _$pickedFilesAtom =
-      Atom(name: 'JobCardViewModelBase.pickedFiles', context: context);
+      Atom(name: 'ScheduleViewModelBase.pickedFiles', context: context);
 
   @override
   List<PlatformFile> get pickedFiles {
@@ -41,8 +41,40 @@ mixin _$JobCardViewModel on JobCardViewModelBase, Store {
     });
   }
 
+  late final _$focusedDayAtom =
+      Atom(name: 'ScheduleViewModelBase.focusedDay', context: context);
+
+  @override
+  DateTime get focusedDay {
+    _$focusedDayAtom.reportRead();
+    return super.focusedDay;
+  }
+
+  @override
+  set focusedDay(DateTime value) {
+    _$focusedDayAtom.reportWrite(value, super.focusedDay, () {
+      super.focusedDay = value;
+    });
+  }
+
+  late final _$selectedDayAtom =
+      Atom(name: 'ScheduleViewModelBase.selectedDay', context: context);
+
+  @override
+  DateTime? get selectedDay {
+    _$selectedDayAtom.reportRead();
+    return super.selectedDay;
+  }
+
+  @override
+  set selectedDay(DateTime? value) {
+    _$selectedDayAtom.reportWrite(value, super.selectedDay, () {
+      super.selectedDay = value;
+    });
+  }
+
   late final _$selectedsignaturecameraImageAtom = Atom(
-      name: 'JobCardViewModelBase.selectedsignaturecameraImage',
+      name: 'ScheduleViewModelBase.selectedsignaturecameraImage',
       context: context);
 
   @override
@@ -60,7 +92,7 @@ mixin _$JobCardViewModel on JobCardViewModelBase, Store {
   }
 
   late final _$isImageSelectedAtom =
-      Atom(name: 'JobCardViewModelBase.isImageSelected', context: context);
+      Atom(name: 'ScheduleViewModelBase.isImageSelected', context: context);
 
   @override
   bool get isImageSelected {
@@ -76,7 +108,7 @@ mixin _$JobCardViewModel on JobCardViewModelBase, Store {
   }
 
   late final _$selectedcameraImageAtom =
-      Atom(name: 'JobCardViewModelBase.selectedcameraImage', context: context);
+      Atom(name: 'ScheduleViewModelBase.selectedcameraImage', context: context);
 
   @override
   File? get selectedcameraImage {
@@ -92,7 +124,7 @@ mixin _$JobCardViewModel on JobCardViewModelBase, Store {
   }
 
   late final _$selectedImageAtom =
-      Atom(name: 'JobCardViewModelBase.selectedImage', context: context);
+      Atom(name: 'ScheduleViewModelBase.selectedImage', context: context);
 
   @override
   File? get selectedImage {
@@ -108,7 +140,7 @@ mixin _$JobCardViewModel on JobCardViewModelBase, Store {
   }
 
   late final _$greencheckedAtom =
-      Atom(name: 'JobCardViewModelBase.greenchecked', context: context);
+      Atom(name: 'ScheduleViewModelBase.greenchecked', context: context);
 
   @override
   bool get greenchecked {
@@ -124,7 +156,7 @@ mixin _$JobCardViewModel on JobCardViewModelBase, Store {
   }
 
   late final _$bluecheckedAtom =
-      Atom(name: 'JobCardViewModelBase.bluechecked', context: context);
+      Atom(name: 'ScheduleViewModelBase.bluechecked', context: context);
 
   @override
   bool get bluechecked {
@@ -140,7 +172,7 @@ mixin _$JobCardViewModel on JobCardViewModelBase, Store {
   }
 
   late final _$checkboxValueAtom =
-      Atom(name: 'JobCardViewModelBase.checkboxValue', context: context);
+      Atom(name: 'ScheduleViewModelBase.checkboxValue', context: context);
 
   @override
   bool get checkboxValue {
@@ -156,7 +188,7 @@ mixin _$JobCardViewModel on JobCardViewModelBase, Store {
   }
 
   late final _$checkboxValue2Atom =
-      Atom(name: 'JobCardViewModelBase.checkboxValue2', context: context);
+      Atom(name: 'ScheduleViewModelBase.checkboxValue2', context: context);
 
   @override
   bool get checkboxValue2 {
@@ -172,7 +204,7 @@ mixin _$JobCardViewModel on JobCardViewModelBase, Store {
   }
 
   late final _$checkboxValue3Atom =
-      Atom(name: 'JobCardViewModelBase.checkboxValue3', context: context);
+      Atom(name: 'ScheduleViewModelBase.checkboxValue3', context: context);
 
   @override
   bool get checkboxValue3 {
@@ -188,7 +220,7 @@ mixin _$JobCardViewModel on JobCardViewModelBase, Store {
   }
 
   late final _$jobcardResponseAtom =
-      Atom(name: 'JobCardViewModelBase.jobcardResponse', context: context);
+      Atom(name: 'ScheduleViewModelBase.jobcardResponse', context: context);
 
   @override
   ApiResponse<JobCardRespModel> get jobcardResponse {
@@ -204,7 +236,7 @@ mixin _$JobCardViewModel on JobCardViewModelBase, Store {
   }
 
   late final _$shedulecardResponseAtom =
-      Atom(name: 'JobCardViewModelBase.shedulecardResponse', context: context);
+      Atom(name: 'ScheduleViewModelBase.shedulecardResponse', context: context);
 
   @override
   ApiResponse<List<SheduleCardRespModel>> get shedulecardResponse {
@@ -220,7 +252,7 @@ mixin _$JobCardViewModel on JobCardViewModelBase, Store {
   }
 
   late final _$sheduleweekResponseAtom =
-      Atom(name: 'JobCardViewModelBase.sheduleweekResponse', context: context);
+      Atom(name: 'ScheduleViewModelBase.sheduleweekResponse', context: context);
 
   @override
   ApiResponse<List<SheduleCardRespModel>> get sheduleweekResponse {
@@ -236,7 +268,7 @@ mixin _$JobCardViewModel on JobCardViewModelBase, Store {
   }
 
   late final _$signatureResponseAtom =
-      Atom(name: 'JobCardViewModelBase.signatureResponse', context: context);
+      Atom(name: 'ScheduleViewModelBase.signatureResponse', context: context);
 
   @override
   ApiResponse<SheduleSignatureModel> get signatureResponse {
@@ -252,7 +284,7 @@ mixin _$JobCardViewModel on JobCardViewModelBase, Store {
   }
 
   late final _$commentResponseAtom =
-      Atom(name: 'JobCardViewModelBase.commentResponse', context: context);
+      Atom(name: 'ScheduleViewModelBase.commentResponse', context: context);
 
   @override
   ApiResponse<SheduleCommentModel> get commentResponse {
@@ -268,7 +300,7 @@ mixin _$JobCardViewModel on JobCardViewModelBase, Store {
   }
 
   late final _$updateSignatureButtonColorAsyncAction = AsyncAction(
-      'JobCardViewModelBase.updateSignatureButtonColor',
+      'ScheduleViewModelBase.updateSignatureButtonColor',
       context: context);
 
   @override
@@ -278,7 +310,7 @@ mixin _$JobCardViewModel on JobCardViewModelBase, Store {
   }
 
   late final _$pickFilefromphoneAsyncAction =
-      AsyncAction('JobCardViewModelBase.pickFilefromphone', context: context);
+      AsyncAction('ScheduleViewModelBase.pickFilefromphone', context: context);
 
   @override
   Future<void> pickFilefromphone() {
@@ -286,7 +318,7 @@ mixin _$JobCardViewModel on JobCardViewModelBase, Store {
   }
 
   late final _$pickImageFromsignatureCameraAsyncAction = AsyncAction(
-      'JobCardViewModelBase.pickImageFromsignatureCamera',
+      'ScheduleViewModelBase.pickImageFromsignatureCamera',
       context: context);
 
   @override
@@ -295,8 +327,9 @@ mixin _$JobCardViewModel on JobCardViewModelBase, Store {
         .run(() => super.pickImageFromsignatureCamera());
   }
 
-  late final _$pickImageFromCameraAsyncAction =
-      AsyncAction('JobCardViewModelBase.pickImageFromCamera', context: context);
+  late final _$pickImageFromCameraAsyncAction = AsyncAction(
+      'ScheduleViewModelBase.pickImageFromCamera',
+      context: context);
 
   @override
   Future<void> pickImageFromCamera() {
@@ -305,7 +338,7 @@ mixin _$JobCardViewModel on JobCardViewModelBase, Store {
   }
 
   late final _$pickImageFromGalleryAsyncAction = AsyncAction(
-      'JobCardViewModelBase.pickImageFromGallery',
+      'ScheduleViewModelBase.pickImageFromGallery',
       context: context);
 
   @override
@@ -315,7 +348,7 @@ mixin _$JobCardViewModel on JobCardViewModelBase, Store {
   }
 
   late final _$jobcardviewmodelfunctionAsyncAction = AsyncAction(
-      'JobCardViewModelBase.jobcardviewmodelfunction',
+      'ScheduleViewModelBase.jobcardviewmodelfunction',
       context: context);
 
   @override
@@ -325,7 +358,7 @@ mixin _$JobCardViewModel on JobCardViewModelBase, Store {
   }
 
   late final _$shedulecardviewmodelfunctionAsyncAction = AsyncAction(
-      'JobCardViewModelBase.shedulecardviewmodelfunction',
+      'ScheduleViewModelBase.shedulecardviewmodelfunction',
       context: context);
 
   @override
@@ -335,7 +368,7 @@ mixin _$JobCardViewModel on JobCardViewModelBase, Store {
   }
 
   late final _$shedulecardviewmodelweekfunctionAsyncAction = AsyncAction(
-      'JobCardViewModelBase.shedulecardviewmodelweekfunction',
+      'ScheduleViewModelBase.shedulecardviewmodelweekfunction',
       context: context);
 
   @override
@@ -345,7 +378,7 @@ mixin _$JobCardViewModel on JobCardViewModelBase, Store {
   }
 
   late final _$shedulesignatureviewmodelfunctionAsyncAction = AsyncAction(
-      'JobCardViewModelBase.shedulesignatureviewmodelfunction',
+      'ScheduleViewModelBase.shedulesignatureviewmodelfunction',
       context: context);
 
   @override
@@ -353,23 +386,23 @@ mixin _$JobCardViewModel on JobCardViewModelBase, Store {
       {required int id,
       required List<PlatformFile> pickedFiles,
       required Uint8List image,
-      required String signature_name,
-      required String purchase_order_number,
-      required String extracted_waste_type,
-      required String extracted_litres_of_waste}) {
+      required String signatureName,
+      required String purchaseOderNo,
+      required String extractedWasteType,
+      required String extractedLitres}) {
     return _$shedulesignatureviewmodelfunctionAsyncAction.run(() => super
         .shedulesignatureviewmodelfunction(
             id: id,
             pickedFiles: pickedFiles,
             image: image,
-            signature_name: signature_name,
-            purchase_order_number: purchase_order_number,
-            extracted_waste_type: extracted_waste_type,
-            extracted_litres_of_waste: extracted_litres_of_waste));
+            signatureName: signatureName,
+            purchaseOderNo: purchaseOderNo,
+            extractedWasteType: extractedWasteType,
+            extractedLitres: extractedLitres));
   }
 
   late final _$shedulecommentviewmodelfunctionAsyncAction = AsyncAction(
-      'JobCardViewModelBase.shedulecommentviewmodelfunction',
+      'ScheduleViewModelBase.shedulecommentviewmodelfunction',
       context: context);
 
   @override
@@ -379,50 +412,61 @@ mixin _$JobCardViewModel on JobCardViewModelBase, Store {
         () => super.shedulecommentviewmodelfunction(id: id, comment: comment));
   }
 
-  late final _$JobCardViewModelBaseActionController =
-      ActionController(name: 'JobCardViewModelBase', context: context);
+  late final _$ScheduleViewModelBaseActionController =
+      ActionController(name: 'ScheduleViewModelBase', context: context);
 
   @override
   void updategreencheckedValue(dynamic newValue) {
-    final _$actionInfo = _$JobCardViewModelBaseActionController.startAction(
-        name: 'JobCardViewModelBase.updategreencheckedValue');
+    final _$actionInfo = _$ScheduleViewModelBaseActionController.startAction(
+        name: 'ScheduleViewModelBase.updategreencheckedValue');
     try {
       return super.updategreencheckedValue(newValue);
     } finally {
-      _$JobCardViewModelBaseActionController.endAction(_$actionInfo);
+      _$ScheduleViewModelBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   void updateCheckboxValue(bool newValue) {
-    final _$actionInfo = _$JobCardViewModelBaseActionController.startAction(
-        name: 'JobCardViewModelBase.updateCheckboxValue');
+    final _$actionInfo = _$ScheduleViewModelBaseActionController.startAction(
+        name: 'ScheduleViewModelBase.updateCheckboxValue');
     try {
       return super.updateCheckboxValue(newValue);
     } finally {
-      _$JobCardViewModelBaseActionController.endAction(_$actionInfo);
+      _$ScheduleViewModelBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   void updateCheckboxValue2(bool newValue2) {
-    final _$actionInfo = _$JobCardViewModelBaseActionController.startAction(
-        name: 'JobCardViewModelBase.updateCheckboxValue2');
+    final _$actionInfo = _$ScheduleViewModelBaseActionController.startAction(
+        name: 'ScheduleViewModelBase.updateCheckboxValue2');
     try {
       return super.updateCheckboxValue2(newValue2);
     } finally {
-      _$JobCardViewModelBaseActionController.endAction(_$actionInfo);
+      _$ScheduleViewModelBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   void updateCheckboxValue3(bool newValue3) {
-    final _$actionInfo = _$JobCardViewModelBaseActionController.startAction(
-        name: 'JobCardViewModelBase.updateCheckboxValue3');
+    final _$actionInfo = _$ScheduleViewModelBaseActionController.startAction(
+        name: 'ScheduleViewModelBase.updateCheckboxValue3');
     try {
       return super.updateCheckboxValue3(newValue3);
     } finally {
-      _$JobCardViewModelBaseActionController.endAction(_$actionInfo);
+      _$ScheduleViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic dateSelectionFn(DateTime selectedday, DateTime focusedday) {
+    final _$actionInfo = _$ScheduleViewModelBaseActionController.startAction(
+        name: 'ScheduleViewModelBase.dateSelectionFn');
+    try {
+      return super.dateSelectionFn(selectedday, focusedday);
+    } finally {
+      _$ScheduleViewModelBaseActionController.endAction(_$actionInfo);
     }
   }
 
@@ -431,6 +475,8 @@ mixin _$JobCardViewModel on JobCardViewModelBase, Store {
     return '''
 signColor: ${signColor},
 pickedFiles: ${pickedFiles},
+focusedDay: ${focusedDay},
+selectedDay: ${selectedDay},
 selectedsignaturecameraImage: ${selectedsignaturecameraImage},
 isImageSelected: ${isImageSelected},
 selectedcameraImage: ${selectedcameraImage},

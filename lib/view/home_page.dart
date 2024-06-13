@@ -154,8 +154,8 @@ void intranetfuntion(BuildContext context) {
 }
 
 void shedulefunction(BuildContext context) {
-  vmJobcard.shedulecardviewmodelfunction();
-  vmJobcard.shedulecardviewmodelweekfunction();
+  vmSchedule.shedulecardviewmodelfunction();
+  vmSchedule.shedulecardviewmodelweekfunction();
   print('cccc');
   context.router.pushNamed(RouteNames.rschedulemainpage);
   print('Notification button tapped!');
@@ -183,8 +183,8 @@ void navigateToSitesPage({required BuildContext context}) {
 }
 
 void shedulepagefunction(BuildContext context) async {
-  vmJobcard.shedulecardviewmodelfunction();
-  vmJobcard.shedulecardviewmodelweekfunction();
+  vmSchedule.shedulecardviewmodelfunction();
+  vmSchedule.shedulecardviewmodelweekfunction();
 
   context.router.pushNamed(RouteNames.rschedulemainpage);
 }

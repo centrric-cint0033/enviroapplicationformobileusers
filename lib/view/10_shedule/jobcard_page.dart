@@ -22,7 +22,7 @@ class JobCardPage extends StatelessWidget {
       ),
       body: Observer(
         builder: (context) {
-          return vmJobcard.jobcardResponse.loading
+          return vmSchedule.jobcardResponse.loading
               ? const Center(child: CircularProgressIndicator())
               : SingleChildScrollView(
                   child: Column(
@@ -36,7 +36,7 @@ class JobCardPage extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(left: 14.0),
                         child: expandedRowShowsText("Site Name",
-                            vmJobcard.jobcardResponse.data?.siteName ?? ''),
+                            vmSchedule.jobcardResponse.data?.siteName ?? ''),
                       ),
                       const SizedBox(
                         height: 30,
@@ -45,7 +45,7 @@ class JobCardPage extends StatelessWidget {
                         padding: const EdgeInsets.only(left: 14.0),
                         child: expandedRowShowsText(
                             "Type of Waste(site \n profile)",
-                            vmJobcard.jobcardResponse.data?.typeOfWasteStr ??
+                            vmSchedule.jobcardResponse.data?.typeOfWasteStr ??
                                 ''),
                       ),
                       const SizedBox(
@@ -54,7 +54,7 @@ class JobCardPage extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(left: 14.0),
                         child: expandedRowShowsText("Site Address",
-                            vmJobcard.jobcardResponse.data?.siteAddress ?? ''),
+                            vmSchedule.jobcardResponse.data?.siteAddress ?? ''),
                       ),
                       const SizedBox(
                         height: 30,
@@ -62,7 +62,7 @@ class JobCardPage extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(left: 14.0),
                         child: expandedRowShowsText("Site postcode",
-                            vmJobcard.jobcardResponse.data?.sitePostCode ?? ''),
+                            vmSchedule.jobcardResponse.data?.sitePostCode ?? ''),
                       ),
                       const SizedBox(
                         height: 30,
@@ -71,7 +71,7 @@ class JobCardPage extends StatelessWidget {
                         padding: const EdgeInsets.only(left: 14.0),
                         child: expandedRowShowsText(
                             "Site Contact name",
-                            vmJobcard.jobcardResponse.data?.siteContactPerson ??
+                            vmSchedule.jobcardResponse.data?.siteContactPerson ??
                                 ''),
                       ),
                       const SizedBox(
@@ -81,7 +81,7 @@ class JobCardPage extends StatelessWidget {
                         padding: const EdgeInsets.only(left: 14.0),
                         child: expandedRowShowsText(
                             "Site Contact Phone",
-                            vmJobcard.jobcardResponse.data?.siteContactPhone ??
+                            vmSchedule.jobcardResponse.data?.siteContactPhone ??
                                 ''),
                       ),
                       const SizedBox(
@@ -91,7 +91,7 @@ class JobCardPage extends StatelessWidget {
                         padding: const EdgeInsets.only(left: 14.0),
                         child: expandedRowShowsText(
                             "Site Contact Mob",
-                            vmJobcard.jobcardResponse.data?.siteContactMob ??
+                            vmSchedule.jobcardResponse.data?.siteContactMob ??
                                 ''),
                       ),
                       const SizedBox(
@@ -101,7 +101,7 @@ class JobCardPage extends StatelessWidget {
                         padding: const EdgeInsets.only(left: 14.0),
                         child: expandedRowShowsText(
                             "Site Contact Email",
-                            vmJobcard.jobcardResponse.data?.siteContactEmail ??
+                            vmSchedule.jobcardResponse.data?.siteContactEmail ??
                                 ''),
                       ),
                       const SizedBox(
@@ -110,7 +110,7 @@ class JobCardPage extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(left: 14.0),
                         child: expandedRowShowsText("Price",
-                            vmJobcard.jobcardResponse.data?.price ?? ''),
+                            vmSchedule.jobcardResponse.data?.price ?? ''),
                       ),
                       const SizedBox(
                         height: 30,
@@ -119,7 +119,7 @@ class JobCardPage extends StatelessWidget {
                         padding: const EdgeInsets.only(left: 14.0),
                         child: expandedRowShowsText(
                             "Account Status",
-                            vmJobcard.jobcardResponse.data?.accountStatus ??
+                            vmSchedule.jobcardResponse.data?.accountStatus ??
                                 ''),
                       ),
                       const SizedBox(
@@ -141,7 +141,7 @@ class JobCardPage extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(left: 14.0),
                         child: expandedRowShowsText(
-                            "Date", vmJobcard.jobcardResponse.data?.date ?? ''),
+                            "Date", vmSchedule.jobcardResponse.data?.date ?? ''),
                       ),
                       const SizedBox(
                         height: 30,
@@ -149,7 +149,7 @@ class JobCardPage extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(left: 14.0),
                         child: expandedRowShowsText("Sales Person",
-                            vmJobcard.jobcardResponse.data?.salesPerson ?? ''),
+                            vmSchedule.jobcardResponse.data?.salesPerson ?? ''),
                       ),
                       const SizedBox(
                         height: 30,
@@ -172,7 +172,7 @@ class JobCardPage extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(left: 14.0, right: 14.0),
                         child: _buildSectioncontainer(
-                            vmJobcard.jobcardResponse.data?.siteContactMob ??
+                            vmSchedule.jobcardResponse.data?.siteContactMob ??
                                 ''),
                       ),
                       const SizedBox(
@@ -184,7 +184,7 @@ class JobCardPage extends StatelessWidget {
                       ),
                       Padding(
                         padding: const EdgeInsets.only(left: 14.0, right: 14.0),
-                        child: _buildSectioncontainer((vmJobcard
+                        child: _buildSectioncontainer((vmSchedule
                                     .jobcardResponse.data?.tcRequiredComment ??
                                 '')
                             .toString()),
@@ -202,7 +202,7 @@ class JobCardPage extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(left: 14.0, right: 14.0),
                         child: _buildSectioncontainer(
-                            vmJobcard.jobcardResponse.data?.purchaseComment ??
+                            vmSchedule.jobcardResponse.data?.purchaseComment ??
                                 ''),
                       ),
                       const SizedBox(
@@ -215,7 +215,7 @@ class JobCardPage extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(left: 14.0, right: 14.0),
                         child: _buildSectioncontainer(
-                            vmJobcard.jobcardResponse.data?.manifest ?? ''),
+                            vmSchedule.jobcardResponse.data?.manifest ?? ''),
                       ),
                       const SizedBox(
                         height: 30,
@@ -230,7 +230,7 @@ class JobCardPage extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(left: 14.0, right: 14.0),
                         child: _buildSectioncontainer(
-                            vmJobcard.jobcardResponse.data?.additionalImages ??
+                            vmSchedule.jobcardResponse.data?.additionalImages ??
                                 ''),
                       ),
                       const SizedBox(
@@ -240,7 +240,7 @@ class JobCardPage extends StatelessWidget {
                           padding: const EdgeInsets.only(left: 17.0),
                           child: expandedRowShowsText(
                               "Data form Required",
-                              vmJobcard.jobcardResponse.data?.wasteDataForm
+                              vmSchedule.jobcardResponse.data?.wasteDataForm
                                       ?.toString() ??
                                   '')),
                       const SizedBox(
@@ -250,7 +250,7 @@ class JobCardPage extends StatelessWidget {
                           padding: const EdgeInsets.only(left: 17.0),
                           child: expandedRowShowsText(
                               "AccessHieght",
-                              vmJobcard.jobcardResponse.data?.accessHeight ??
+                              vmSchedule.jobcardResponse.data?.accessHeight ??
                                   '')),
                       const SizedBox(
                         height: 30,
@@ -259,7 +259,7 @@ class JobCardPage extends StatelessWidget {
                           padding: const EdgeInsets.only(left: 17.0),
                           child: expandedRowShowsText(
                               "KeyRequired",
-                              vmJobcard.jobcardResponse.data?.keyRequired
+                              vmSchedule.jobcardResponse.data?.keyRequired
                                       ?.toString() ??
                                   '')),
                       const SizedBox(
@@ -269,7 +269,7 @@ class JobCardPage extends StatelessWidget {
                         padding: const EdgeInsets.only(left: 17.0),
                         child: expandedRowShowsText(
                             "PitDistance from truck",
-                            vmJobcard.jobcardResponse.data
+                            vmSchedule.jobcardResponse.data
                                     ?.pitDistanceFromTruckLocation
                                     ?.toString() ??
                                 ''),
@@ -281,7 +281,7 @@ class JobCardPage extends StatelessWidget {
                         padding: const EdgeInsets.only(left: 17.0),
                         child: expandedRowShowsText(
                             "Water tap location",
-                            vmJobcard.jobcardResponse.data?.waterTapLocation
+                            vmSchedule.jobcardResponse.data?.waterTapLocation
                                     ?.toString() ??
                                 ''),
                       ),
@@ -292,7 +292,7 @@ class JobCardPage extends StatelessWidget {
                         padding: const EdgeInsets.only(left: 17.0),
                         child: expandedRowShowsText(
                             "Gurney REquired",
-                            vmJobcard.jobcardResponse.data?.gurneyRequired
+                            vmSchedule.jobcardResponse.data?.gurneyRequired
                                     ?.toString() ??
                                 ''),
                       ),
@@ -303,7 +303,7 @@ class JobCardPage extends StatelessWidget {
                         padding: const EdgeInsets.only(left: 17.0),
                         child: expandedRowShowsText(
                             "Confined space \n required",
-                            vmJobcard.jobcardResponse.data?.confinedSpace
+                            vmSchedule.jobcardResponse.data?.confinedSpace
                                     ?.toString() ??
                                 ''),
                       ),
@@ -314,7 +314,7 @@ class JobCardPage extends StatelessWidget {
                         padding: const EdgeInsets.only(left: 17.0),
                         child: expandedRowShowsText(
                             "Number of trucks",
-                            vmJobcard.jobcardResponse.data
+                            vmSchedule.jobcardResponse.data
                                     ?.numberOfTrucksRequired
                                     ?.toString() ??
                                 ''),
@@ -326,7 +326,7 @@ class JobCardPage extends StatelessWidget {
                         padding: const EdgeInsets.only(left: 17.0),
                         child: expandedRowShowsText(
                             "Estimated job duration",
-                            vmJobcard.jobcardResponse.data?.estimatedJobDuration
+                            vmSchedule.jobcardResponse.data?.estimatedJobDuration
                                     ?.toString() ??
                                 ''),
                       ),
@@ -337,7 +337,7 @@ class JobCardPage extends StatelessWidget {
                         padding: const EdgeInsets.only(left: 17.0),
                         child: expandedRowShowsText(
                             "Besttime for service",
-                            vmJobcard.jobcardResponse.data?.timeForService
+                            vmSchedule.jobcardResponse.data?.timeForService
                                     ?.toString() ??
                                 ''),
                       ),
@@ -348,7 +348,7 @@ class JobCardPage extends StatelessWidget {
                         padding: const EdgeInsets.only(left: 17.0),
                         child: expandedRowShowsText(
                             "SpecificPPE",
-                            vmJobcard.jobcardResponse.data?.specificPpeReqired
+                            vmSchedule.jobcardResponse.data?.specificPpeReqired
                                     ?.toString() ??
                                 ''),
                       ),
@@ -359,7 +359,7 @@ class JobCardPage extends StatelessWidget {
                         padding: const EdgeInsets.only(left: 17.0),
                         child: expandedRowShowsText(
                             "Weigh bridge required",
-                            vmJobcard.jobcardResponse.data?.weighBridgeRequired
+                            vmSchedule.jobcardResponse.data?.weighBridgeRequired
                                     ?.toString() ??
                                 ''),
                       ),
@@ -370,7 +370,7 @@ class JobCardPage extends StatelessWidget {
                         padding: const EdgeInsets.only(left: 17.0),
                         child: expandedRowShowsText(
                             "Number and type of \n pallets to be exchanged",
-                            vmJobcard.jobcardResponse.data
+                            vmSchedule.jobcardResponse.data
                                     ?.noAndTypePalletToBeExchanged
                                     ?.toString() ??
                                 ''),
@@ -382,7 +382,7 @@ class JobCardPage extends StatelessWidget {
                         padding: const EdgeInsets.only(left: 17.0),
                         child: expandedRowShowsText(
                             "Safer data sheet \n required",
-                            vmJobcard.jobcardResponse.data
+                            vmSchedule.jobcardResponse.data
                                     ?.safetyDataSheetRequired
                                     ?.toString() ??
                                 ''),
@@ -394,7 +394,7 @@ class JobCardPage extends StatelessWidget {
                         padding: const EdgeInsets.only(left: 17.0),
                         child: expandedRowShowsText(
                             "chemist approval",
-                            vmJobcard.jobcardResponse.data?.chemistApproval
+                            vmSchedule.jobcardResponse.data?.chemistApproval
                                     ?.toString() ??
                                 ''),
                       ),
@@ -411,7 +411,7 @@ class JobCardPage extends StatelessWidget {
                       ),
                       Padding(
                         padding: const EdgeInsets.only(left: 14.0, right: 14.0),
-                        child: _buildSectioncontainer(vmJobcard
+                        child: _buildSectioncontainer(vmSchedule
                                 .jobcardResponse.data?.additionalInformation
                                 ?.toString() ??
                             ''),
@@ -423,7 +423,7 @@ class JobCardPage extends StatelessWidget {
                         padding: const EdgeInsets.only(left: 17.0),
                         child: expandedRowShowsText(
                             "Capacity",
-                            vmJobcard.jobcardResponse.data?.capacity
+                            vmSchedule.jobcardResponse.data?.capacity
                                     ?.toString() ??
                                 ''),
                       ),
@@ -434,7 +434,7 @@ class JobCardPage extends StatelessWidget {
                         padding: const EdgeInsets.only(left: 17.0),
                         child: expandedRowShowsText(
                             "Barcode",
-                            vmJobcard.jobcardResponse.data?.barcode
+                            vmSchedule.jobcardResponse.data?.barcode
                                     ?.toString() ??
                                 ''),
                       ),
@@ -445,7 +445,7 @@ class JobCardPage extends StatelessWidget {
                         padding: const EdgeInsets.only(left: 17.0),
                         child: expandedRowShowsText(
                             "Job status",
-                            vmJobcard.jobcardResponse.data?.jobStatus
+                            vmSchedule.jobcardResponse.data?.jobStatus
                                     ?.toString() ??
                                 ''),
                       ),
@@ -456,7 +456,7 @@ class JobCardPage extends StatelessWidget {
                         padding: const EdgeInsets.only(left: 17.0),
                         child: expandedRowShowsText(
                             "Pit Location",
-                            vmJobcard.jobcardResponse.data?.pitLocation
+                            vmSchedule.jobcardResponse.data?.pitLocation
                                     ?.toString() ??
                                 ''),
                       ),
@@ -465,7 +465,7 @@ class JobCardPage extends StatelessWidget {
                       ),
                       Padding(
                         padding: const EdgeInsets.only(left: 14.0, right: 14.0),
-                        child: _buildSectioncontainer(vmJobcard
+                        child: _buildSectioncontainer(vmSchedule
                                 .jobcardResponse.data?.pitLocation
                                 ?.toString() ??
                             ''),
@@ -477,7 +477,7 @@ class JobCardPage extends StatelessWidget {
                         padding: const EdgeInsets.only(left: 17.0),
                         child: expandedRowShowsText(
                             "Smoke alarm",
-                            vmJobcard.jobcardResponse.data?.smokeAlarms
+                            vmSchedule.jobcardResponse.data?.smokeAlarms
                                     ?.toString() ??
                                 ''),
                       ),

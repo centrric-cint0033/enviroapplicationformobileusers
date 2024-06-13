@@ -58,7 +58,7 @@ class SheduledetailPage extends StatelessWidget {
                             child: CmButton(
                               borderRadius: 34,
                               width: 130,
-                              loading: vmJobcard.jobcardResponse.loading,
+                              loading: vmSchedule.jobcardResponse.loading,
                               color: Colors.white,
                               text: 'Job Card',
                               buttonTextStyle:
@@ -80,53 +80,53 @@ class SheduledetailPage extends StatelessWidget {
                         children: [
                           expandedRowShowText(
                             "Client Name",
-                            vmJobcard.sheduleweekResponse.data?[index].client
+                            vmSchedule.sheduleweekResponse.data?[index].client
                                     ?.clientName ??
                                 '',
                           ),
                           const SizedBox(height: 20),
                           expandedRowShowText(
                             "Client Type",
-                            vmJobcard.sheduleweekResponse.data?[index].client
+                            vmSchedule.sheduleweekResponse.data?[index].client
                                     ?.clientType ??
                                 '',
                           ),
                           const SizedBox(height: 20),
                           expandedRowShowText(
                             "Client email",
-                            vmJobcard.sheduleweekResponse.data?[index].client
+                            vmSchedule.sheduleweekResponse.data?[index].client
                                     ?.clientEmail ??
                                 '',
                           ),
                           const SizedBox(height: 20),
                           expandedRowShowText(
                             "Status",
-                            vmJobcard.sheduleweekResponse.data?[index].status ??
+                            vmSchedule.sheduleweekResponse.data?[index].status ??
                                 '',
                           ),
                           const SizedBox(height: 20),
                           expandedRowShowText(
                             "Amount",
-                            vmJobcard.sheduleweekResponse.data?[index].amount ??
+                            vmSchedule.sheduleweekResponse.data?[index].amount ??
                                 '',
                           ),
                           const SizedBox(height: 20),
                           expandedRowShowText(
                               "CreatedBy",
-                              vmJobcard.sheduleweekResponse.data?[index]
+                              vmSchedule.sheduleweekResponse.data?[index]
                                       .createdBy ??
                                   ''),
                           const SizedBox(height: 20),
                           expandedRowShowText(
                             "Waste Type",
-                            vmJobcard.sheduleweekResponse.data?[index].client
+                            vmSchedule.sheduleweekResponse.data?[index].client
                                     ?.deviceWaste ??
                                 '',
                           ),
                           const SizedBox(height: 20),
                           expandedRowShowText(
                             "Frequency",
-                            vmJobcard.sheduleweekResponse.data?[index]
+                            vmSchedule.sheduleweekResponse.data?[index]
                                     .frequency ??
                                 '',
                           ),
@@ -158,7 +158,7 @@ class SheduledetailPage extends StatelessWidget {
                                     ),
                                   ),
                                 ),
-                                vmJobcard.sheduleweekResponse.data?[index]
+                                vmSchedule.sheduleweekResponse.data?[index]
                                             .departEnviroFacility !=
                                         null
                                     ? expandedRowShowText(
@@ -166,7 +166,7 @@ class SheduledetailPage extends StatelessWidget {
 
                                         // DateFormat.yMMMMd().format
                                         // (
-                                        vmJobcard
+                                        vmSchedule
                                                 .sheduleweekResponse
                                                 .data?[index]
                                                 .departEnviroFacility ??
@@ -174,54 +174,54 @@ class SheduledetailPage extends StatelessWidget {
                                         // )
                                       )
                                     : const SizedBox(height: 20),
-                                vmJobcard.sheduleweekResponse.data?[index]
+                                vmSchedule.sheduleweekResponse.data?[index]
                                             .startJob !=
                                         null
                                     ? expandedRowsShowingText(
                                         "job startedd",
-                                        vmJobcard.sheduleweekResponse
+                                        vmSchedule.sheduleweekResponse
                                                 .data?[index].startJob ??
                                             '',
                                       )
                                     : const SizedBox(height: 20),
-                                vmJobcard.sheduleweekResponse.data?[index]
+                                vmSchedule.sheduleweekResponse.data?[index]
                                             .finishJob !=
                                         null
                                     ? expandedRowsShowingText(
                                         "job finished",
-                                        vmJobcard.sheduleweekResponse
+                                        vmSchedule.sheduleweekResponse
                                                 .data?[index].finishJob ??
                                             '',
                                       )
                                     : const SizedBox(height: 20),
-                                vmJobcard.sheduleweekResponse.data?[index]
+                                vmSchedule.sheduleweekResponse.data?[index]
                                             .completed !=
                                         null
                                     ? expandedRowsShowingText(
                                         "job Completed",
-                                        vmJobcard.sheduleweekResponse
+                                        vmSchedule.sheduleweekResponse
                                                 .data?[index].completed ??
                                             '',
                                       )
                                     : const SizedBox(height: 20),
-                                vmJobcard.sheduleweekResponse.data?[index]
+                                vmSchedule.sheduleweekResponse.data?[index]
                                             .arriveAtWasteDepot !=
                                         null
                                     ? expandedRowsShowingText(
                                         "Arrived at waste Depot",
-                                        vmJobcard
+                                        vmSchedule
                                                 .sheduleweekResponse
                                                 .data?[index]
                                                 .arriveAtWasteDepot ??
                                             '',
                                       )
                                     : const SizedBox(height: 20),
-                                vmJobcard.sheduleweekResponse.data?[index]
+                                vmSchedule.sheduleweekResponse.data?[index]
                                             .departWasteDepot !=
                                         null
                                     ? expandedRowsShowingText(
                                         "Departed from Wastedepot",
-                                        vmJobcard
+                                        vmSchedule
                                                 .sheduleweekResponse
                                                 .data?[index]
                                                 .departWasteDepot ??
@@ -269,8 +269,8 @@ class SheduledetailPage extends StatelessWidget {
                         onPressed: () {
                           shedulesignaturefunction(context, id, i);
                           print('shedule$id');
-                          // vmJobcard.shedulesignatureviewmodelfunction(
-                          //     // id: id ?? 0, pickedFiles: vmJobcard.pickedFiles
+                          // vmSchedule.shedulesignatureviewmodelfunction(
+                          //     // id: id ?? 0, pickedFiles: vmSchedule.pickedFiles
                           //     );
                         },
                         text: "Signature",
@@ -321,7 +321,7 @@ class SheduledetailPage extends StatelessWidget {
 }
 
 void jobCardFunction(BuildContext context) async {
-  await vmJobcard.jobcardviewmodelfunction();
+  await vmSchedule.jobcardviewmodelfunction();
   print('Job card clicked');
   context.router.pushNamed(RouteNames.rjobcardpage);
 }

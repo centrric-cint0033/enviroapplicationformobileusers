@@ -36,7 +36,7 @@ class ScheduleVideoAndPhotoPage extends StatelessWidget {
                         color: const Color.fromARGB(255, 0, 8, 14),
                         buttonTextStyle: const TextStyle(color: Colors.white),
                         onPressed: () {
-                          vmJobcard.pickImageFromGallery();
+                          vmSchedule.pickImageFromGallery();
                         },
                         text: "Upload from Gallery",
                       );
@@ -59,7 +59,7 @@ class ScheduleVideoAndPhotoPage extends StatelessWidget {
                     }),
                   ),
                 ),
-                // if (vmJobcard.isImageSelected) // Check if image is selected
+                // if (vmSchedule.isImageSelected) // Check if image is selected
                 //   ElevatedButton(
                 //     onPressed: () {
                 //       // Action when button is pressed
@@ -67,19 +67,19 @@ class ScheduleVideoAndPhotoPage extends StatelessWidget {
                 //     child: Text('Your Button Text'),
                 //   ),
                 Observer(builder: (_) {
-                  return vmJobcard.selectedcameraImage != null
+                  return vmSchedule.selectedcameraImage != null
                       ? SizedBox(
                           height: 100,
                           width: 400,
-                          child: Image.file(vmJobcard.selectedcameraImage!))
+                          child: Image.file(vmSchedule.selectedcameraImage!))
                       : const Text('No image selected');
                 }),
                 Observer(builder: (_) {
-                  return vmJobcard.selectedImage != null
+                  return vmSchedule.selectedImage != null
                       ? SizedBox(
                           height: 100,
                           width: 400,
-                          child: Image.file(vmJobcard.selectedImage!))
+                          child: Image.file(vmSchedule.selectedImage!))
                       : const Text('No image selected');
                 }),
               ],

@@ -96,76 +96,68 @@ class TeamProfileScreen extends StatelessWidget {
                                                   fontSize: 13.w),
                                             ),
                                             Text(employeeDetails?.name ?? ""),
-                                            employeeDetails?.userType ==
-                                                        "driver-factory-hand" ||
-                                                    employeeDetails?.userType ==
-                                                        "driver-liquid-waste-technician"
-                                                ? const SizedBox.shrink()
-                                                : Row(
-                                                    children: [
-                                                      SizedBox(
-                                                        height: 26.h,
-                                                        width: 57.h,
-                                                        child: customButton(() {
-                                                          showDeleteDialoq(
-                                                              context, () {
-                                                            vmTeam.deleteEmployeeApi(
-                                                                context:
-                                                                    context,
-                                                                employeeID:
-                                                                    employeeDetails
-                                                                            ?.id ??
-                                                                        0);
-                                                            context.router
-                                                                .pop();
-                                                          });
-                                                        }, Appthemes.cPrimary,
-                                                            "Delete"),
-                                                      ),
-                                                      const SizedBox(
-                                                        width: 16,
-                                                      ),
-                                                      SizedBox(
-                                                        height: 26.h,
-                                                        width: 57.h,
-                                                        child: customButton(() {
-                                                          vmTeam
-                                                              .getTeamDesignationsApi();
-                                                          addingDataToControllerEdit(
-                                                              employeeDetails);
-                                                          try {
-                                                            vmTeam.selectedJoiningDate =
-                                                                DateTime.parse(
-                                                                    employeeDetails
-                                                                            ?.dateJoined ??
-                                                                        "");
-                                                          } catch (e) {}
-                                                          try {
-                                                            vmTeam.selectedTerminationDate =
-                                                                DateTime.parse(
-                                                                    employeeDetails
-                                                                            ?.terminationDate ??
-                                                                        "");
-                                                          } catch (e) {}
-                                                          try {
-                                                            vmTeam.selectedDob =
-                                                                DateTime.parse(
-                                                                    employeeDetails
-                                                                            ?.dateOfBirth ??
-                                                                        "");
-                                                          } catch (e) {}
-                                                          vmTeam.selectedDesignationAddTeam2 =
+                                            Row(
+                                              children: [
+                                                SizedBox(
+                                                  height: 26.h,
+                                                  width: 57.h,
+                                                  child: customButton(() {
+                                                    showDeleteDialoq(context,
+                                                        () {
+                                                      vmTeam.deleteEmployeeApi(
+                                                          context: context,
+                                                          employeeID:
                                                               employeeDetails
-                                                                  ?.userType;
-                                                          context.router.push(
-                                                              TeamEditRoute(
-                                                                  employeeDetatils:
-                                                                      employeeDetails!));
-                                                        }, Appthemes.cPrimary,
-                                                            "Edit"),
-                                                      ),
-                                                    ],
-                                                  )
+                                                                      ?.id ??
+                                                                  0);
+                                                      context.router.pop();
+                                                    });
+                                                  }, Appthemes.cPrimary,
+                                                      "Delete"),
+                                                ),
+                                                const SizedBox(
+                                                  width: 16,
+                                                ),
+                                                SizedBox(
+                                                  height: 26.h,
+                                                  width: 57.h,
+                                                  child: customButton(() {
+                                                    vmTeam
+                                                        .getTeamDesignationsApi();
+                                                    addingDataToControllerEdit(
+                                                        employeeDetails);
+                                                    try {
+                                                      vmTeam.selectedJoiningDate =
+                                                          DateTime.parse(
+                                                              employeeDetails
+                                                                      ?.dateJoined ??
+                                                                  "");
+                                                    } catch (e) {}
+                                                    try {
+                                                      vmTeam.selectedTerminationDate =
+                                                          DateTime.parse(
+                                                              employeeDetails
+                                                                      ?.terminationDate ??
+                                                                  "");
+                                                    } catch (e) {}
+                                                    try {
+                                                      vmTeam.selectedDob = DateTime
+                                                          .parse(employeeDetails
+                                                                  ?.dateOfBirth ??
+                                                              "");
+                                                    } catch (e) {}
+                                                    vmTeam.selectedDesignationAddTeam2 =
+                                                        employeeDetails
+                                                            ?.userType;
+                                                    context.router.push(
+                                                        TeamEditRoute(
+                                                            employeeDetatils:
+                                                                employeeDetails!));
+                                                  }, Appthemes.cPrimary,
+                                                      "Edit"),
+                                                ),
+                                              ],
+                                            )
                                           ],
                                         ),
                                       ]),

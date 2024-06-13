@@ -15,7 +15,7 @@ class TodaysScheduleList extends StatelessWidget {
     return Observer(builder: (context) {
       return ListView.builder(
         scrollDirection: Axis.horizontal,
-        itemCount: vmJobcard.shedulecardResponse.data?.length ?? 0,
+        itemCount: vmSchedule.shedulecardResponse.data?.length ?? 0,
         itemBuilder: (BuildContext context, int i) {
           return Card(
             shape: RoundedRectangleBorder(
@@ -36,11 +36,11 @@ class TodaysScheduleList extends StatelessWidget {
                           padding: const EdgeInsets.only(left: 13.0),
                           child: CircleAvatar(
                             radius: 14,
-                            child: vmJobcard.shedulecardResponse.data?[i].client
+                            child: vmSchedule.shedulecardResponse.data?[i].client
                                         ?.dp !=
                                     null
                                 ? Image.network(
-                                    "${vmJobcard.shedulecardResponse.data![i].client?.dp}",
+                                    "${vmSchedule.shedulecardResponse.data![i].client?.dp}",
                                     fit: BoxFit.cover,
                                   )
                                 : Container(),
@@ -52,7 +52,7 @@ class TodaysScheduleList extends StatelessWidget {
                       padding: const EdgeInsets.only(left: 18.0),
                       child: Observer(builder: (_) {
                         return Text(
-                          vmJobcard.shedulecardResponse.data?[i].salesPerson
+                          vmSchedule.shedulecardResponse.data?[i].salesPerson
                                   ?.toString() ??
                               '',
                         );
@@ -78,10 +78,10 @@ class TodaysScheduleList extends StatelessWidget {
                         ),
                         InkWell(
                           onTap: () => openMap(
-                              vmJobcard.shedulecardResponse.data?[i].client
+                              vmSchedule.shedulecardResponse.data?[i].client
                                       ?.locationLatitude ??
                                   "",
-                              vmJobcard.shedulecardResponse.data?[i].client
+                              vmSchedule.shedulecardResponse.data?[i].client
                                       ?.locationLogitude ??
                                   ""),
                           child: Image.asset(
@@ -101,25 +101,25 @@ class TodaysScheduleList extends StatelessWidget {
                     children: [
                       expandedRowShowText2(
                           "Day",
-                          DateFormat.yMMMMd().format(vmJobcard
+                          DateFormat.yMMMMd().format(vmSchedule
                               .shedulecardResponse.data![i].startDate!)),
                       expandedRowShowText2(
                         "Tme",
-                        vmJobcard.shedulecardResponse.data?[i].startTime ?? '',
+                        vmSchedule.shedulecardResponse.data?[i].startTime ?? '',
                       ),
                       expandedRowShowText2(
                         "Type",
-                        vmJobcard.shedulecardResponse.data?[i].wasteTypeStr ??
+                        vmSchedule.shedulecardResponse.data?[i].wasteTypeStr ??
                             '',
                       ),
                       expandedRowShowText2(
                         "Company",
-                        vmJobcard.shedulecardResponse.data?[i].client
+                        vmSchedule.shedulecardResponse.data?[i].client
                                 ?.clientName ??
                             '',
                       ),
-                      (vmJobcard.shedulecardResponse.data != null &&
-                              vmJobcard.shedulecardResponse.data?[i].status !=
+                      (vmSchedule.shedulecardResponse.data != null &&
+                              vmSchedule.shedulecardResponse.data?[i].status !=
                                   null)
                           ? expandedRowShowText2("Status", "finished Job")
                           : Container()
@@ -152,7 +152,7 @@ class TodaysScheduleList extends StatelessWidget {
                           child: Observer(builder: (_) {
                             return ListView.builder(
                               scrollDirection: Axis.horizontal,
-                              itemCount: (vmJobcard.shedulecardResponse.data?[i]
+                              itemCount: (vmSchedule.shedulecardResponse.data?[i]
                                       .drivers?.length ??
                                   0),
                               itemBuilder:
@@ -174,7 +174,7 @@ class TodaysScheduleList extends StatelessWidget {
                                                     left: 8.0, right: 8),
                                                 child: CircleAvatar(
                                                   radius: 14,
-                                                  child: vmJobcard
+                                                  child: vmSchedule
                                                               .shedulecardResponse
                                                               .data?[i]
                                                               .drivers?[
@@ -182,7 +182,7 @@ class TodaysScheduleList extends StatelessWidget {
                                                               .dp !=
                                                           null
                                                       ? Image.network(
-                                                          vmJobcard
+                                                          vmSchedule
                                                               .shedulecardResponse
                                                               .data![i]
                                                               .drivers![
@@ -194,7 +194,7 @@ class TodaysScheduleList extends StatelessWidget {
                                                 ),
                                               ),
                                               Text(
-                                                vmJobcard
+                                                vmSchedule
                                                         .shedulecardResponse
                                                         .data?[i]
                                                         .drivers?[driverIndex]
@@ -210,7 +210,7 @@ class TodaysScheduleList extends StatelessWidget {
                                           padding:
                                               const EdgeInsets.only(left: 43.0),
                                           child: Text(
-                                            vmJobcard
+                                            vmSchedule
                                                     .shedulecardResponse
                                                     .data?[i]
                                                     .drivers?[driverIndex]

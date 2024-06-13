@@ -108,11 +108,9 @@ abstract class $AppRouter extends _i37.RootStackRouter {
       );
     },
     CalenderRoute.name: (routeData) {
-      final args = routeData.argsAs<CalenderRouteArgs>(
-          orElse: () => const CalenderRouteArgs());
       return _i37.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i2.CalenderPage(key: args.key),
+        child: const _i2.CalenderPage(),
       );
     },
     CurrentJobStatusRoute.name: (routeData) {
@@ -425,31 +423,16 @@ class AddTeamRouteArgs {
 
 /// generated route for
 /// [_i2.CalenderPage]
-class CalenderRoute extends _i37.PageRouteInfo<CalenderRouteArgs> {
-  CalenderRoute({
-    _i38.Key? key,
-    List<_i37.PageRouteInfo>? children,
-  }) : super(
+class CalenderRoute extends _i37.PageRouteInfo<void> {
+  const CalenderRoute({List<_i37.PageRouteInfo>? children})
+      : super(
           CalenderRoute.name,
-          args: CalenderRouteArgs(key: key),
           initialChildren: children,
         );
 
   static const String name = 'CalenderRoute';
 
-  static const _i37.PageInfo<CalenderRouteArgs> page =
-      _i37.PageInfo<CalenderRouteArgs>(name);
-}
-
-class CalenderRouteArgs {
-  const CalenderRouteArgs({this.key});
-
-  final _i38.Key? key;
-
-  @override
-  String toString() {
-    return 'CalenderRouteArgs{key: $key}';
-  }
+  static const _i37.PageInfo<void> page = _i37.PageInfo<void>(name);
 }
 
 /// generated route for

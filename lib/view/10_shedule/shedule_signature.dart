@@ -1,6 +1,4 @@
 // ignore_for_file: must_be_immutable
-
-import 'dart:developer';
 import 'dart:io';
 import 'dart:typed_data';
 import 'package:auto_route/auto_route.dart';
@@ -35,7 +33,7 @@ class SheduleSignaturePage extends StatelessWidget {
     penColor: Colors.black,
     exportBackgroundColor: Colors.white,
     onDrawEnd: () {
-      vmJobcard.updateSignatureButtonColor(state: true);
+      vmSchedule.updateSignatureButtonColor(state: true);
     },
   );
   final int i;
@@ -86,7 +84,7 @@ class SheduleSignaturePage extends StatelessWidget {
                                   width: 108,
                                   color: Colors.blue,
                                   onPressed: () async {
-                                    vmJobcard.pickFilefromphone();
+                                    vmSchedule.pickFilefromphone();
                                   },
                                   text: 'AddFile ',
                                 ),
@@ -95,7 +93,7 @@ class SheduleSignaturePage extends StatelessWidget {
                                   width: 118,
                                   color: Colors.blue,
                                   onPressed: () async {
-                                    vmJobcard.pickImageFromsignatureCamera();
+                                    vmSchedule.pickImageFromsignatureCamera();
                                   },
                                   text: 'Camera ',
                                 ),
@@ -108,10 +106,10 @@ class SheduleSignaturePage extends StatelessWidget {
                                 child: Padding(
                                   padding: const EdgeInsets.only(right: 57.0),
                                   child: Observer(builder: (_) {
-                                    if (vmJobcard.pickedFiles.isNotEmpty) {
+                                    if (vmSchedule.pickedFiles.isNotEmpty) {
                                       return Row(
                                         children:
-                                            vmJobcard.pickedFiles.map((file) {
+                                            vmSchedule.pickedFiles.map((file) {
                                           final icon = returnLogo(
                                               file.name, file.path, file.size);
                                           return Padding(
@@ -149,7 +147,7 @@ class SheduleSignaturePage extends StatelessWidget {
                                                             ),
                                                             TextButton(
                                                               onPressed: () {
-                                                                vmJobcard
+                                                                vmSchedule
                                                                     .pickedFiles
                                                                     .remove(
                                                                         file);
@@ -433,7 +431,7 @@ class SheduleSignaturePage extends StatelessWidget {
                         children: [
                           Observer(builder: (_) {
                             return CmButton(
-                              color: vmJobcard.signColor,
+                              color: vmSchedule.signColor,
                               onPressed: () async {
                                 Uint8List? pickedTypes =
                                     await _signaturecontroller.toPngBytes();
@@ -450,7 +448,7 @@ class SheduleSignaturePage extends StatelessWidget {
                                   print('Signature saved to: ${file.path}');
                                   print('Reset ID: $id');
 
-                                  // vmJobcard.updateSignatureButtonColor(
+                                  // vmSchedule.updateSignatureButtonColor(
                                   //     state: false);
 
                                   // _signaturecontroller.clear();
@@ -495,10 +493,10 @@ class SheduleSignaturePage extends StatelessWidget {
                           const SizedBox(width: 10),
                           Observer(builder: (_) {
                             return CmButton(
-                              color: vmJobcard.signColor,
+                              color: vmSchedule.signColor,
                               onPressed: () async {
                                 _signaturecontroller.clear();
-                                vmJobcard.updateSignatureButtonColor(
+                                vmSchedule.updateSignatureButtonColor(
                                     state: false);
                               },
                               text: 'Reset',
@@ -545,9 +543,9 @@ class SheduleSignaturePage extends StatelessWidget {
                       return IconButton(
                         icon: const Icon(Icons.send),
                         onPressed: () {
-                          vmJobcard.shedulecommentviewmodelfunction(
+                          vmSchedule.shedulecommentviewmodelfunction(
                               id: id, comment: _commentController.text);
-                          vmJobcard.shedulecardviewmodelfunction();
+                          vmSchedule.shedulecardviewmodelfunction();
 
                           _commentController.clear();
                         },
@@ -566,27 +564,20 @@ class SheduleSignaturePage extends StatelessWidget {
                   padding: const EdgeInsets.only(left: 128.0),
                   child: CmButton(
                     width: 105,
-                    color: vmJobcard.signColor,
+                    color: vmSchedule.signColor,
                     onPressed: () {
-                      print('hrithik$picker');
-                      print("hrithik2$_controllerTypeofwaste");
-                      print("hrithik3$_commentController");
-                      print('derly$picker!');
-                      vmJobcard.shedulesignatureviewmodelfunction(
+                      vmSchedule.shedulesignatureviewmodelfunction(
                           image: picker!,
-                          extracted_waste_type: _controllerTypeofwaste.text,
-                          extracted_litres_of_waste: _controllerWateliters.text,
-                          purchase_order_number: _controllerPonumber.text,
-                          signature_name: _signNameController.text,
+                          extractedWasteType: _controllerTypeofwaste.text,
+                          extractedLitres: _controllerWateliters.text,
+                          purchaseOderNo: _controllerPonumber.text,
+                          signatureName: _signNameController.text,
                           id: id,
-                          pickedFiles: vmJobcard.pickedFiles);
-                      vmJobcard.shedulecommentviewmodelfunction(
+                          pickedFiles: vmSchedule.pickedFiles);
+                      vmSchedule.shedulecommentviewmodelfunction(
                           id: id, comment: _commentController.text);
-                      print("com$_commentController");
-                      vmJobcard.updateSignatureButtonColor(state: true);
-
+                      vmSchedule.updateSignatureButtonColor(state: true);
                       _signaturecontroller.clear();
-                      log(vmJobcard.signatureResponse.toString());
                     },
                     text: 'Submit',
                   ),
@@ -594,10 +585,8 @@ class SheduleSignaturePage extends StatelessWidget {
               }),
               Observer(
                 builder: (_) {
-                  print('shaaaaaaaa$id');
                   final comments =
-                      vmJobcard.shedulecardResponse.data?[i].comments ?? [];
-
+                      vmSchedule.shedulecardResponse.data?[i].comments ?? [];
                   return SizedBox(
                     height: double.maxFinite,
                     child: ListView.separated(
@@ -646,7 +635,7 @@ class SheduleSignaturePage extends StatelessWidget {
                                   top: 10,
                                   left: 10,
                                   child: Text(
-                                    vmJobcard.shedulecardResponse.data?[i]
+                                    vmSchedule.shedulecardResponse.data?[i]
                                             .comments?[index].comment ??
                                         'nocomments',
                                     style: const TextStyle(
@@ -687,7 +676,7 @@ class SheduleSignaturePage extends StatelessWidget {
 
     switch (fileExtension) {
       case 'jpg':
-        if (vmJobcard.pickedFiles.isNotEmpty) {
+        if (vmSchedule.pickedFiles.isNotEmpty) {
           return SizedBox(
             height: 60,
             width: 40,
@@ -697,7 +686,7 @@ class SheduleSignaturePage extends StatelessWidget {
           return const Text("Image file is null");
         }
       case 'jpeg':
-        if (vmJobcard.pickedFiles.isNotEmpty) {
+        if (vmSchedule.pickedFiles.isNotEmpty) {
           return SizedBox(
             height: 60,
             width: 40,
@@ -707,7 +696,7 @@ class SheduleSignaturePage extends StatelessWidget {
           return const Text("Image file is null");
         }
       case 'png':
-        if (vmJobcard.pickedFiles.isNotEmpty) {
+        if (vmSchedule.pickedFiles.isNotEmpty) {
           return SizedBox(
             height: 60,
             width: 40,
@@ -717,7 +706,7 @@ class SheduleSignaturePage extends StatelessWidget {
           return const Text("Image file is null");
         }
       case 'gif':
-        if (vmJobcard.pickedFiles.isNotEmpty) {
+        if (vmSchedule.pickedFiles.isNotEmpty) {
           return SizedBox(
             height: 60,
             width: 40,

@@ -63,7 +63,7 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                         return Container(
                           child: expandedRowShowText2(
                               "Date and Time",
-                              DateFormat.yMMMMd().format(vmJobcard
+                              DateFormat.yMMMMd().format(vmSchedule
                                   .shedulecardResponse
                                   .data![index]
                                   .startDate!)),
@@ -74,7 +74,7 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                         return Container(
                           child: expandedRowShowText2(
                             "vehicle registration",
-                            vmJobcard.sheduleweekResponse.data?[index].vehicle
+                            vmSchedule.sheduleweekResponse.data?[index].vehicle
                                     ?.toString() ??
                                 '',
                           ),
@@ -171,10 +171,10 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                                 style: BorderStyle.solid,
                                 color: Colors.red,
                               ),
-                              value: vmJobcard.checkboxValue,
+                              value: vmSchedule.checkboxValue,
                               onChanged: (bool? value) {
                                 if (value != null) {
-                                  vmJobcard.updateCheckboxValue(value);
+                                  vmSchedule.updateCheckboxValue(value);
                                 }
                               },
                               checkColor: Colors.red,
@@ -205,10 +205,10 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                           children: [
                             Checkbox(
                               side: const BorderSide(color: Colors.red),
-                              value: vmJobcard.checkboxValue2,
+                              value: vmSchedule.checkboxValue2,
                               onChanged: (bool? value2) {
                                 if (value2 != null) {
-                                  vmJobcard.updateCheckboxValue2(value2);
+                                  vmSchedule.updateCheckboxValue2(value2);
                                 }
                               },
                               checkColor: Colors.red,
@@ -233,10 +233,10 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                           Observer(builder: (_) {
                             return Checkbox(
                               side: const BorderSide(color: Colors.red),
-                              value: vmJobcard.checkboxValue3,
+                              value: vmSchedule.checkboxValue3,
                               onChanged: (bool? value) {
                                 if (value != null) {
-                                  vmJobcard.updateCheckboxValue3(value);
+                                  vmSchedule.updateCheckboxValue3(value);
                                 }
                               },
                               checkColor: Colors.red,
@@ -313,7 +313,7 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                           Observer(builder: (_) {
                             return Checkbox(
                               side: const BorderSide(color: Colors.black),
-                              value: vmJobcard.greenchecked,
+                              value: vmSchedule.greenchecked,
                               onChanged: (bool? value) {
                                 if (value != null && value) {
                                   _showPopup(context);
@@ -890,7 +890,7 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                           Observer(builder: (_) {
                             return Checkbox(
                               side: const BorderSide(color: Colors.red),
-                              value: vmJobcard.greenchecked,
+                              value: vmSchedule.greenchecked,
                               onChanged: (bool? value) {
                                 if (value != null && value) {
                                   _showPopup(context);
@@ -1054,7 +1054,7 @@ void _showPopup(BuildContext context) {
                 Checkbox(
                   activeColor: Colors.green,
                   materialTapTargetSize: MaterialTapTargetSize.padded,
-                  value: vmJobcard.greenchecked,
+                  value: vmSchedule.greenchecked,
                   onChanged: (value) {},
                 ),
               ],

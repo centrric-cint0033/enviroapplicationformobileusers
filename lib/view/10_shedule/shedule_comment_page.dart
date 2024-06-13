@@ -66,9 +66,9 @@ class SheduleCommentPage extends StatelessWidget {
                     suffixIcon: IconButton(
                       icon: const Icon(Icons.send),
                       onPressed: () {
-                        vmJobcard.shedulecommentviewmodelfunction(
+                        vmSchedule.shedulecommentviewmodelfunction(
                             id: id, comment: _commentPageController.text);
-                        vmJobcard.shedulecardviewmodelfunction();
+                        vmSchedule.shedulecardviewmodelfunction();
                         _commentPageController.clear();
                       },
                     ),
@@ -83,7 +83,7 @@ class SheduleCommentPage extends StatelessWidget {
               child: Observer(builder: (_) {
                 print('shaaaaaaaa$id');
                 final comments =
-                    vmJobcard.shedulecardResponse.data?[i].comments ?? [];
+                    vmSchedule.shedulecardResponse.data?[i].comments ?? [];
 
                 return ListView.separated(
                   itemCount: comments.length,
@@ -130,7 +130,7 @@ class SheduleCommentPage extends StatelessWidget {
                               top: 10,
                               left: 10,
                               child: Text(
-                                vmJobcard.shedulecardResponse.data?[i]
+                                vmSchedule.shedulecardResponse.data?[i]
                                         .comments?[index].comment ??
                                     'nocomments',
                                 style: const TextStyle(

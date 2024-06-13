@@ -18,7 +18,7 @@ import 'package:file_picker/file_picker.dart';
 
 import 'package:injectable/injectable.dart';
 
-abstract class IJobCardService {
+abstract class IScheduleService {
   Future<Either<MainFailure, JobCardRespModel>> jobcardservicefunction();
   Future<Either<MainFailure, List<SheduleCardRespModel>>>
       shedulecardservicefunction();
@@ -30,10 +30,10 @@ abstract class IJobCardService {
           {required int id,
           required List<PlatformFile> pickedFiles,
           required Uint8List image,
-          required String signature_name,
-          required String purchase_order_number,
-          required String extracted_litres_of_waste,
-          required String extracted_waste_type});
+          required String signatureName,
+    required String purchaseOderNo,
+    required String extractedWasteType,
+    required String extractedLitres,});
 
   Future<Either<Map<MainFailure, dynamic>, SheduleCommentModel>>
       shedulecommentserviceapi({
@@ -42,8 +42,8 @@ abstract class IJobCardService {
   });
 }
 
-@LazySingleton(as: IJobCardService)
-class SalesService implements IJobCardService {
+@LazySingleton(as: IScheduleService)
+class SalesService implements IScheduleService {
   final HttpService httpService;
   SalesService(this.httpService);
   @override
@@ -118,20 +118,20 @@ class SalesService implements IJobCardService {
           {required int id,
           required Uint8List image,
           required List<PlatformFile> pickedFiles,
-          required String signature_name,
-          required String purchase_order_number,
-          required String extracted_litres_of_waste,
-          required String extracted_waste_type}) async {
+          required String signatureName,
+    required String purchaseOderNo,
+    required String extractedWasteType,
+    required String extractedLitres,}) async {
     customPrint(content: id);
     var response = await getIt<HttpService>().multipartRequest(
       apiUrl: ApiEndPoints.endpointshedulesignature,
       data: {
         "id": id,
         for (var file in pickedFiles) "pickedfile": file,
-        "signature_name": signature_name,
-        "purchase_order_number": purchase_order_number,
-        "extracted_litres_of_waste": extracted_litres_of_waste,
-        "extracted_waste_type": extracted_waste_type,
+        "signature_name": signatureName,
+        "purchase_order_number": purchaseOderNo,
+        "extracted_litres_of_waste": extractedWasteType,
+        "extracted_waste_type": extractedLitres,
       },
       method: "POST",
     );
