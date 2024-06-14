@@ -25,7 +25,7 @@ class WasteTab extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            sized0hx10,
+            sized0hx15,
             cmRowText("Today's Schedule", "Calender", () {
               calenderfunction(context);
             }, Colors.black, FontWeight.bold),
@@ -62,276 +62,283 @@ class WasteTab extends StatelessWidget {
                   onTap: () => vmSchedule.shedulecardviewmodelweekfunction(),
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        itemCount:
-                            vmSchedule.sheduleweekResponse.data?.length ?? 0,
-                        itemBuilder: (BuildContext context, int i) {
-                          return SingleChildScrollView(
-                            child: GestureDetector(
-                              onTap: () {
-                                sheduledetailfunction(
-                                    context,
-                                    vmSchedule
-                                            .sheduleweekResponse.data?[i].id ??
-                                        '',
-                                    i);
-                              },
-                              child: Card(
-                                margin:
-                                    const EdgeInsets.symmetric(horizontal: 20),
-                                elevation: 4,
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Observer(builder: (_) {
-                                          return Padding(
-                                            padding: const EdgeInsets.only(
-                                                left: 8.0, top: 8),
-                                            child: Text(
-                                              vmSchedule
-                                                      .sheduleweekResponse
-                                                      .data?[i]
-                                                      .client
-                                                      ?.clientName ??
-                                                  '',
-                                            ),
-                                          );
-                                        }),
-                                        Observer(builder: (_) {
-                                          return Padding(
-                                            padding: const EdgeInsets.only(
-                                                left: 8.0, top: 8, right: 8),
-                                            child: Text(
-                                              'job ${vmSchedule.sheduleweekResponse.data?[i].job ?? ''}',
-                                            ),
-                                          );
-                                        }),
-                                      ],
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Observer(builder: (_) {
-                                          return Padding(
-                                            padding: const EdgeInsets.only(
-                                                left: 8.0, top: 8),
-                                            child: Observer(builder: (_) {
-                                              return Text(
-                                                vmSchedule.sheduleweekResponse
-                                                        .data?[i].startTime ??
+                    child: SizedBox(
+                      height: 400,
+                      child: ListView.builder(
+                          shrinkWrap: true,
+                          scrollDirection: Axis.horizontal,
+                          itemCount:
+                              vmSchedule.sheduleweekResponse.data?.length ?? 0,
+                          itemBuilder: (BuildContext context, int i) {
+                            return SingleChildScrollView(
+                              child: GestureDetector(
+                                onTap: () {
+                                  sheduledetailfunction(
+                                      context,
+                                      vmSchedule.sheduleweekResponse.data?[i]
+                                              .id ??
+                                          '',
+                                      i);
+                                },
+                                child: Card(
+                                  margin: const EdgeInsets.symmetric(
+                                      horizontal: 20),
+                                  elevation: 4,
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Observer(builder: (_) {
+                                            return Padding(
+                                              padding: const EdgeInsets.only(
+                                                  left: 8.0, top: 8),
+                                              child: Text(
+                                                vmSchedule
+                                                        .sheduleweekResponse
+                                                        .data?[i]
+                                                        .client
+                                                        ?.clientName ??
                                                     '',
-                                              );
-                                            }),
-                                          );
-                                        }),
-                                        ElevatedButton(
-                                          onPressed: () {
-                                            sheduledetailfunction(
-                                                context,
-                                                vmSchedule.sheduleweekResponse
-                                                        .data?[i].id ??
-                                                    '',
-                                                i);
-                                          },
-                                          style: ElevatedButton.styleFrom(
-                                            foregroundColor: Colors.black,
-                                            backgroundColor: Colors.white,
+                                              ),
+                                            );
+                                          }),
+                                          Observer(builder: (_) {
+                                            return Padding(
+                                              padding: const EdgeInsets.only(
+                                                  left: 8.0, top: 8, right: 8),
+                                              child: Text(
+                                                'job ${vmSchedule.sheduleweekResponse.data?[i].job ?? ''}',
+                                              ),
+                                            );
+                                          }),
+                                        ],
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Observer(builder: (_) {
+                                            return Padding(
+                                              padding: const EdgeInsets.only(
+                                                  left: 8.0, top: 8),
+                                              child: Observer(builder: (_) {
+                                                return Text(
+                                                  vmSchedule.sheduleweekResponse
+                                                          .data?[i].startTime ??
+                                                      '',
+                                                );
+                                              }),
+                                            );
+                                          }),
+                                          ElevatedButton(
+                                            onPressed: () {
+                                              sheduledetailfunction(
+                                                  context,
+                                                  vmSchedule.sheduleweekResponse
+                                                          .data?[i].id ??
+                                                      '',
+                                                  i);
+                                            },
+                                            style: ElevatedButton.styleFrom(
+                                              foregroundColor: Colors.black,
+                                              backgroundColor: Colors.white,
+                                            ),
+                                            child: const Text('pending'),
                                           ),
-                                          child: const Text('pending'),
-                                        ),
-                                      ],
-                                    ),
-                                    Observer(builder: (_) {
-                                      return Padding(
-                                        padding:
-                                            const EdgeInsets.only(left: 8.0),
-                                        child: Observer(builder: (_) {
-                                          return Text(DateFormat.yMMMMd()
-                                              .format(vmSchedule
-                                                  .shedulecardResponse
-                                                  .data![i]
-                                                  .startDate!));
-                                        }),
-                                      );
-                                    }),
-                                    const SizedBox(
-                                      height: 10,
-                                    ),
-                                    const Card(
-                                      color: Colors.blue,
-                                      child: Column(),
-                                    ),
-                                    SizedBox(
-                                      width: 500,
-                                      child: Card(
-                                        color: const Color.fromRGBO(
-                                            33, 150, 243, 1),
-                                        child: Column(
-                                          children: [
-                                            const Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                Padding(
-                                                  padding: EdgeInsets.only(
-                                                      left: 8.0),
-                                                  child: Text(
-                                                    'Drivers',
-                                                    style: TextStyle(
-                                                        color: Colors.white,
-                                                        fontSize: 15),
-                                                  ),
-                                                ),
-                                                Padding(
-                                                  padding: EdgeInsets.only(
-                                                      right: 8.0),
-                                                  child: Text(
-                                                    'Vehicle assigned',
-                                                    style: TextStyle(
-                                                        color: Colors.white,
-                                                        fontSize: 15),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                            const Divider(
-                                              color: Colors.white,
-                                              thickness: 1,
-                                            ),
-                                            Observer(builder: (_) {
-                                              return Row(
+                                        ],
+                                      ),
+                                      Observer(builder: (_) {
+                                        return Padding(
+                                          padding:
+                                              const EdgeInsets.only(left: 8.0),
+                                          child: Observer(builder: (_) {
+                                            return Text(DateFormat.yMMMMd()
+                                                .format(vmSchedule
+                                                    .shedulecardResponse
+                                                    .data![i]
+                                                    .startDate!));
+                                          }),
+                                        );
+                                      }),
+                                      const SizedBox(
+                                        height: 10,
+                                      ),
+                                      const Card(
+                                        color: Colors.blue,
+                                        child: Column(),
+                                      ),
+                                      SizedBox(
+                                        width: 500,
+                                        child: Card(
+                                          color: const Color.fromRGBO(
+                                              33, 150, 243, 1),
+                                          child: Column(
+                                            children: [
+                                              const Row(
                                                 mainAxisAlignment:
                                                     MainAxisAlignment
                                                         .spaceBetween,
                                                 children: [
                                                   Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            left: 8.0),
-                                                    child:
-                                                        Observer(builder: (_) {
-                                                      return Text(
-                                                        vmSchedule
-                                                                .shedulecardResponse
-                                                                .data?[i]
-                                                                .drivers?[0]
-                                                                .name ??
-                                                            '',
-                                                        style: const TextStyle(
+                                                    padding: EdgeInsets.only(
+                                                        left: 8.0),
+                                                    child: Text(
+                                                      'Drivers',
+                                                      style: TextStyle(
                                                           color: Colors.white,
-                                                        ),
-                                                      );
-                                                    }),
-                                                  ),
-                                                  const Divider(
-                                                    color: Colors.black,
+                                                          fontSize: 15),
+                                                    ),
                                                   ),
                                                   Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            right: 8.0),
-                                                    child:
-                                                        Observer(builder: (_) {
-                                                      return Text(
-                                                        vmSchedule
-                                                                .shedulecardResponse
-                                                                .data?[i]
-                                                                .drivers?[0]
-                                                                .registration ??
-                                                            '',
-                                                        style: const TextStyle(
+                                                    padding: EdgeInsets.only(
+                                                        right: 8.0),
+                                                    child: Text(
+                                                      'Vehicle assigned',
+                                                      style: TextStyle(
                                                           color: Colors.white,
-                                                        ),
-                                                      );
-                                                    }),
+                                                          fontSize: 15),
+                                                    ),
                                                   ),
                                                 ],
-                                              );
-                                            }),
-                                            const Divider(
-                                              color: Colors.white,
-                                              thickness: 1,
-                                            ),
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                Observer(builder: (_) {
-                                                  return Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            8.0),
-                                                    child:
-                                                        Observer(builder: (_) {
-                                                      return Text(
+                                              ),
+                                              const Divider(
+                                                color: Colors.white,
+                                                thickness: 1,
+                                              ),
+                                              Observer(builder: (_) {
+                                                return Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: [
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              left: 8.0),
+                                                      child: Observer(
+                                                          builder: (_) {
+                                                        return Text(
+                                                          vmSchedule
+                                                                  .shedulecardResponse
+                                                                  .data?[i]
+                                                                  .drivers?[0]
+                                                                  .name ??
+                                                              '',
+                                                          style:
+                                                              const TextStyle(
+                                                            color: Colors.white,
+                                                          ),
+                                                        );
+                                                      }),
+                                                    ),
+                                                    const Divider(
+                                                      color: Colors.black,
+                                                    ),
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              right: 8.0),
+                                                      child: Observer(
+                                                          builder: (_) {
+                                                        return Text(
+                                                          vmSchedule
+                                                                  .shedulecardResponse
+                                                                  .data?[i]
+                                                                  .drivers?[0]
+                                                                  .registration ??
+                                                              '',
+                                                          style:
+                                                              const TextStyle(
+                                                            color: Colors.white,
+                                                          ),
+                                                        );
+                                                      }),
+                                                    ),
+                                                  ],
+                                                );
+                                              }),
+                                              const Divider(
+                                                color: Colors.white,
+                                                thickness: 1,
+                                              ),
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  Observer(builder: (_) {
+                                                    return Padding(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              8.0),
+                                                      child: Observer(
+                                                          builder: (_) {
+                                                        return Text(
+                                                          vmSchedule
+                                                                  .shedulecardResponse
+                                                                  .data?[i]
+                                                                  .jobCardKeys
+                                                                  ?.weighBridgeRequiredMultipleFile
+                                                                  ?.firstOrNull
+                                                                  ?.name ??
+                                                              '',
+                                                          style:
+                                                              const TextStyle(
+                                                            color: Colors.white,
+                                                          ),
+                                                        );
+                                                      }),
+                                                    );
+                                                  }),
+                                                  Observer(builder: (_) {
+                                                    return Padding(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              8.0),
+                                                      child: Text(
                                                         vmSchedule
-                                                                .shedulecardResponse
+                                                                .sheduleweekResponse
                                                                 .data?[i]
-                                                                .jobCardKeys
-                                                                ?.weighBridgeRequiredMultipleFile
-                                                                ?.firstOrNull
-                                                                ?.name ??
+                                                                .vehicle
+                                                                ?.toString() ??
                                                             '',
                                                         style: const TextStyle(
                                                           color: Colors.white,
                                                         ),
-                                                      );
-                                                    }),
-                                                  );
-                                                }),
-                                                Observer(builder: (_) {
-                                                  return Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            8.0),
-                                                    child: Text(
-                                                      vmSchedule
-                                                              .sheduleweekResponse
-                                                              .data?[i]
-                                                              .vehicle
-                                                              ?.toString() ??
-                                                          '',
-                                                      style: const TextStyle(
-                                                        color: Colors.white,
                                                       ),
-                                                    ),
-                                                  );
-                                                }),
-                                              ],
-                                            ),
-                                            const Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                            ),
-                                          ],
+                                                    );
+                                                  }),
+                                                ],
+                                              ),
+                                              const Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                              ),
+                                            ],
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
                               ),
-                            ),
-                          );
-                        }),
+                            );
+                          }),
+                    ),
                   ),
                 );
               }),
             ),
-            const SizedBox(height: 20),
+            sized0hx20,
             GestureDetector(
               onTap: () => sheduledetailsfunction2(context),
               child: const Card(
                 margin: EdgeInsets.symmetric(horizontal: 20),
-                elevation: 4,
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -366,7 +373,7 @@ Widget cmRowText(String text, String buttonText, Function()? onPressed,
         style: ElevatedButton.styleFrom(
           foregroundColor: Colors.black,
           backgroundColor: Colors.white,
-          minimumSize: Size(90.h, 28.h),
+          minimumSize: Size(90.h, 25.h),
         ),
         child: Text(
           buttonText,

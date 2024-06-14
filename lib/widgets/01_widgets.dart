@@ -20,11 +20,12 @@ Text showBlackText(String value,
         {int? maxLines,
         TextAlign? align,
         FontWeight? fontWeight,
+        double? fontSize,
         TextOverflow? overflow}) =>
     Text(
       value,
       textAlign: align,
       maxLines: maxLines,
       overflow: overflow,
-      style: TextStyle(color: Colors.black, fontWeight: fontWeight),
+      style: TextStyle(color: Colors.black, fontWeight: fontWeight,fontSize: fontSize),
     );

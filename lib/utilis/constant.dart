@@ -6,6 +6,7 @@ EdgeInsetsGeometry screenWidth = EdgeInsets.symmetric(horizontal: 15.w);
 SizedBox sized0hx03 = SizedBox(height: 3.h);
 SizedBox sized0hx05 = SizedBox(height: 5.h);
 SizedBox sized0hx10 = SizedBox(height: 10.h);
+SizedBox sized0hx15 = SizedBox(height: 15.h);
 SizedBox sized0hx20 = SizedBox(height: 20.h);
 SizedBox sized0hx30 = SizedBox(height: 30.h);
 SizedBox sized0hx40 = SizedBox(height: 40.h);
