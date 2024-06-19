@@ -50,7 +50,6 @@ class AppRouter extends $AppRouter {
             page: SalesDetailRoute.page, path: RouteNames.rSalesDetailPage),
         AutoRoute(
             page: ScheduleMainRoute.page, path: RouteNames.rschedulemainpage),
-        AutoRoute(page: WasteTab.page, path: RouteNames.wastetabpage),
         AutoRoute(page: CalenderRoute.page, path: RouteNames.rcalenderpage),
         AutoRoute(
             page: SheduledetailRoute.page, path: RouteNames.rsheduledetailpage),

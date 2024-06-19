@@ -10,9 +10,9 @@ import 'package:intl/intl.dart';
 
 import '../../widgets/cmbutton.dart';
 
-final gapField = SizedBox(height: 0.3);
-final sized0wx05 = SizedBox(width: 0.3);
-final sized0wx10 = SizedBox(width: 2.0);
+const gapField = SizedBox(height: 0.3);
+const sized0wx05 = SizedBox(width: 0.3);
+const sized0wx10 = SizedBox(width: 2.0);
 
 Card customCard({required Widget child}) => Card(
       shape: RoundedRectangleBorder(
@@ -23,44 +23,44 @@ Card customCard({required Widget child}) => Card(
       child: child,
     );
 
-Expanded expandedShowText2(String value) =>
-    Expanded(flex: 2, child: showBlackText(value, fontSize: 10.w));
+expandedShowText2(String value, int flex) =>
+    Expanded(flex: flex, child: showBlackText(value, fontSize: 10.w));
 
 Row expandedRowShowText2(String firsValue, String secondValue) => Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        expandedShowText2(firsValue),
-        expandedShowText2(":$secondValue"),
+        expandedShowText2(firsValue, 1),
+        expandedShowText2(":$secondValue", 2),
       ],
     );
 
 Row expandedRowShowTextDate(String firsValue, String secondValue) => Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        expandedShowText2(firsValue),
+        expandedShowText2(firsValue, 2),
         sized0wx05,
         showBlackText(':'),
         sized0wx05,
-        expandedShowText2(secondValue),
+        expandedShowText2(secondValue, 2),
       ],
     );
 
 Row expandedRowShowingText2(String firsValue, String secondValue) => Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        expandedShowText2(firsValue),
+        expandedShowText2(firsValue, 2),
         sized0wx05,
         showBlackText(':'),
         sized0wx05,
-        expandedShowText2(secondValue),
+        expandedShowText2(secondValue, 2),
         // showIcon(icon: Icon(Icons.today))
       ],
     );
 
 Row expandedRowShowsText2(String firsValue, String secondValue) => Row(
       children: [
-        expandedShowText2(firsValue),
-        expandedShowText2(secondValue),
+        expandedShowText2(firsValue, 2),
+        expandedShowText2(secondValue, 2),
       ],
     );
 

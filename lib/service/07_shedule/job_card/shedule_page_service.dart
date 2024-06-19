@@ -26,14 +26,15 @@ abstract class IScheduleService {
   Future<Either<MainFailure, List<SheduleCardRespModel>>>
       shedulecardserviceweekfunction();
   Future<Either<Map<MainFailure, dynamic>, SheduleSignatureModel>>
-      shedulesignatureserviceapi(
-          {required int id,
-          required List<PlatformFile> pickedFiles,
-          required Uint8List image,
-          required String signatureName,
+      shedulesignatureserviceapi({
+    required int id,
+    required List<PlatformFile> pickedFiles,
+    required Uint8List image,
+    required String signatureName,
     required String purchaseOderNo,
     required String extractedWasteType,
-    required String extractedLitres,});
+    required String extractedLitres,
+  });
 
   Future<Either<Map<MainFailure, dynamic>, SheduleCommentModel>>
       shedulecommentserviceapi({
@@ -114,14 +115,15 @@ class SalesService implements IScheduleService {
 
   @override
   Future<Either<Map<MainFailure, dynamic>, SheduleSignatureModel>>
-      shedulesignatureserviceapi(
-          {required int id,
-          required Uint8List image,
-          required List<PlatformFile> pickedFiles,
-          required String signatureName,
+      shedulesignatureserviceapi({
+    required int id,
+    required Uint8List image,
+    required List<PlatformFile> pickedFiles,
+    required String signatureName,
     required String purchaseOderNo,
     required String extractedWasteType,
-    required String extractedLitres,}) async {
+    required String extractedLitres,
+  }) async {
     customPrint(content: id);
     var response = await getIt<HttpService>().multipartRequest(
       apiUrl: ApiEndPoints.endpointshedulesignature,

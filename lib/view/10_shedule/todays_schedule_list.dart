@@ -24,7 +24,7 @@ class TodaysScheduleList extends StatelessWidget {
           itemBuilder: (BuildContext context, int i) {
             return SizedBox(
               height: 210.w,
-              width: MediaQuery.of(context).size.width - 60.h,
+              width: MediaQuery.of(context).size.width - 55.h,
               child: Card(
                 shape: RoundedRectangleBorder(
                   side: const BorderSide(color: Colors.blue, width: 1),
@@ -197,7 +197,9 @@ class TodaysScheduleList extends StatelessWidget {
                       color: Colors.grey.shade300,
                       borderRadius: BorderRadius.circular(12.h)),
                   child: Text(
-                    "     Primary     ",
+                    schedule.primaryVehicleDriver == true
+                        ? "     Primary     "
+                        : "",
                     style: TextStyle(fontSize: 8.h),
                   ),
                 )

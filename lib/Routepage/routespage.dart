@@ -24,7 +24,6 @@ class RouteNames {
   static const String rnotificationpage = '/notificationpage';
   static const String rschedulemainpage = '/schedulemainpage';
   static const String rcalenderpage = '/calenderpage';
-  static const String wastetabpage = '/wastetabpage';
   static const String rsheduledetailpage = '/sheduledetailpage';
   static const String rupdatevehiclepreinspectionpage =
       '/updatevehiclepreinspectionpage ';
