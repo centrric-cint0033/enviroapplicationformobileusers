@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:enviro_mobile_application/Routepage/approutes.gr.dart';
 import 'package:enviro_mobile_application/Routepage/routespage.dart';
 import 'package:enviro_mobile_application/utilis/Appthemes.dart';
+import 'package:enviro_mobile_application/utilis/constant.dart';
 import 'package:enviro_mobile_application/view/02_sales/sales_widgets.dart/sales_widget.dart';
 import 'package:enviro_mobile_application/view/08_team/team_widgets/dp_image_widget.dart';
 import 'package:enviro_mobile_application/view_model/11_shedule/shedule_page_view_model.dart';
@@ -36,6 +37,7 @@ class SheduledetailPage extends StatelessWidget {
         body: Observer(
           builder: (context) {
             return SingleChildScrollView(
+              padding: screenWidth,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -119,10 +121,13 @@ class SheduledetailPage extends StatelessWidget {
                     color: const Color(0xFF4CAF9E),
                     buttonTextStyle: const TextStyle(color: Colors.white),
                     onPressed: () {
-                      updatevehiclepreinspection(context);
+                      context.router
+                          .push(UpdateVehiclepreinspectionRoute(index: i));
                     },
                     text: "Update Vehicle Pre-inspection",
+                    loading: vmSchedule.sheduleweekResponse.loading,
                   ),
+                  sized0hx20,
                   Text(
                     'Team Members',
                     style: TextStyle(
@@ -130,6 +135,7 @@ class SheduledetailPage extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
+                  sized0hx05,
                   SizedBox(
                     height: 100.h,
                     child: ListView.builder(
@@ -157,7 +163,25 @@ class SheduledetailPage extends StatelessWidget {
                         );
                       },
                     ),
-                  )
+                  ),
+                  //              GestureDetector(
+                  //   onTap: () {
+                  //     vmSchedule.toggleMinimize();
+                  //   },
+                  //   child: Observer(
+                  //     builder: (_) => AnimatedContainer(
+                  //       duration: Duration(milliseconds: 300),
+                  //       width: vmSchedule.isMinimized ? 100 : 300,
+                  //       height: vmSchedule.isMinimized ? 100 : 300,
+                  //       color: Colors.blue,
+                  //       alignment: Alignment.center,
+                  //       child: Text(
+                  //         vmSchedule.isMinimized ? 'Minimized' : 'Maximized',
+                  //         style: TextStyle(color: Colors.white, fontSize: 18),
+                  //       ),
+                  //     ),
+                  //   ),
+                  // ),
                   // const SizedBox(
                   //   height: 50,
                   // ),
@@ -322,11 +346,6 @@ class SheduledetailPage extends StatelessWidget {
             );
           },
         ));
-  }
-
-  void updatevehiclepreinspection(BuildContext context) {
-    print('Updating vehicle preinspection');
-    context.router.pushNamed(RouteNames.rupdatevehiclepreinspectionpage);
   }
 
   void shedulevedeoandphotofunction(BuildContext context) {

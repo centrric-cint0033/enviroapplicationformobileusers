@@ -40,6 +40,9 @@ abstract class ScheduleViewModelBase with Store {
     }
   }
 
+  TextEditingController odometerCntrller = TextEditingController();
+  TextEditingController hoursMeterCntrller = TextEditingController();
+
   @observable
   List<PlatformFile> pickedFiles = [];
   @observable
@@ -301,5 +304,114 @@ abstract class ScheduleViewModelBase with Store {
   dateSelectionFn(DateTime selectedday, DateTime focusedday) {
     selectedDay = selectedday;
     focusedDay = focusedday;
+  }
+
+  @observable
+  bool isMinimized = false;
+
+  @action
+  void toggleMinimize() {
+    isMinimized = !isMinimized;
+  }
+
+
+ @observable
+bool greenChecked = true;
+
+@observable
+bool redChecked = false;
+
+@observable
+bool blueChecked = false;
+
+@action
+void setGreenChecked(bool? value) {
+  greenChecked = value ?? false;
+  if (greenChecked) {
+    redChecked = false;
+    blueChecked = false;
+  }
+}
+
+@action
+void setRedChecked(bool? value) {
+  redChecked = value ?? false;
+  if (redChecked) {
+    greenChecked = false;
+    blueChecked = false;
+  }
+}
+
+@action
+void setBlueChecked(bool? value) {
+  blueChecked = value ?? false;
+  if (blueChecked) {
+    greenChecked = false;
+    redChecked = false;
+  }
+}
+
+  void showPopup(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10.0),
+            side: const BorderSide(color: Colors.black),
+          ),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Row(
+                children: [
+                  const Text(
+                    'No issue',
+                    style: TextStyle(color: Colors.green),
+                  ),
+                  Checkbox(
+                    activeColor: Colors.green,
+                    materialTapTargetSize: MaterialTapTargetSize.padded,
+                    value: greenChecked,
+                    onChanged: setGreenChecked,
+                  ),
+                ],
+              ),
+              Row(
+                children: [
+                  const Text(
+                    'Category A fault',
+                    style: TextStyle(
+                      color: Colors.red,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Checkbox(
+                    activeColor: Colors.red,
+                    materialTapTargetSize: MaterialTapTargetSize.padded,
+                    value: redChecked,
+                    onChanged: setRedChecked,
+                  ),
+                ],
+              ),
+              Row(
+                children: [
+                  const Text(
+                    'Category B fault',
+                    style: TextStyle(color: Colors.blue),
+                  ),
+                  Checkbox(
+                    activeColor: Colors.blue,
+                    materialTapTargetSize: MaterialTapTargetSize.padded,
+                    value: blueChecked,
+                    onChanged: setBlueChecked,
+                  ),
+                ],
+              ),
+            ],
+          ),
+        );
+      },
+    );
   }
 }

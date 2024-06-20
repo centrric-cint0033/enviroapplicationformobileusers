@@ -360,9 +360,13 @@ abstract class $AppRouter extends _i36.RootStackRouter {
       );
     },
     UpdateVehiclepreinspectionRoute.name: (routeData) {
+      final args = routeData.argsAs<UpdateVehiclepreinspectionRouteArgs>();
       return _i36.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i33.UpdateVehiclepreinspectionPage(),
+        child: _i33.UpdateVehiclepreinspectionPage(
+          key: args.key,
+          index: args.index,
+        ),
       );
     },
     VehicleDetailRoute.name: (routeData) {
@@ -1252,16 +1256,41 @@ class UpdateVehicleStatusRoute extends _i36.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i33.UpdateVehiclepreinspectionPage]
-class UpdateVehiclepreinspectionRoute extends _i36.PageRouteInfo<void> {
-  const UpdateVehiclepreinspectionRoute({List<_i36.PageRouteInfo>? children})
-      : super(
+class UpdateVehiclepreinspectionRoute
+    extends _i36.PageRouteInfo<UpdateVehiclepreinspectionRouteArgs> {
+  UpdateVehiclepreinspectionRoute({
+    _i37.Key? key,
+    required int index,
+    List<_i36.PageRouteInfo>? children,
+  }) : super(
           UpdateVehiclepreinspectionRoute.name,
+          args: UpdateVehiclepreinspectionRouteArgs(
+            key: key,
+            index: index,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'UpdateVehiclepreinspectionRoute';
 
-  static const _i36.PageInfo<void> page = _i36.PageInfo<void>(name);
+  static const _i36.PageInfo<UpdateVehiclepreinspectionRouteArgs> page =
+      _i36.PageInfo<UpdateVehiclepreinspectionRouteArgs>(name);
+}
+
+class UpdateVehiclepreinspectionRouteArgs {
+  const UpdateVehiclepreinspectionRouteArgs({
+    this.key,
+    required this.index,
+  });
+
+  final _i37.Key? key;
+
+  final int index;
+
+  @override
+  String toString() {
+    return 'UpdateVehiclepreinspectionRouteArgs{key: $key, index: $index}';
+  }
 }
 
 /// generated route for

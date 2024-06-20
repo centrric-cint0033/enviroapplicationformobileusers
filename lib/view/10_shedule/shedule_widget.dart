@@ -33,9 +33,8 @@ Row expandedRowShowText2(String firsValue, String secondValue) => Row(
         expandedShowText2(":$secondValue", 2),
       ],
     );
-
-Row expandedRowShowTextDate(String firsValue, String secondValue) => Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
+Row expandedRowShowText(String firsValue, String secondValue) => Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         expandedShowText2(firsValue, 2),
         sized0wx05,
@@ -56,14 +55,6 @@ Row expandedRowShowingText2(String firsValue, String secondValue) => Row(
         // showIcon(icon: Icon(Icons.today))
       ],
     );
-
-Row expandedRowShowsText2(String firsValue, String secondValue) => Row(
-      children: [
-        expandedShowText2(firsValue, 2),
-        expandedShowText2(secondValue, 2),
-      ],
-    );
-
 Row expandedRowShowText1(String firsValue, String secondValue) => Row(
       children: [
         Expanded(flex: 3, child: showBlueText(firsValue)),
@@ -123,7 +114,7 @@ Widget showData({VehicleModel? data, VehicleActionType? status}) {
         ],
       ),
       if (data?.editedDateTime != null)
-        expandedRowShowTextDate(
+        expandedRowShowText(
             '', DateFormat.yMEd().add_jms().format(DateTime.now())),
       if (data?.registration != null)
         expandedRowShowText2('Registration no', data!.registration!),

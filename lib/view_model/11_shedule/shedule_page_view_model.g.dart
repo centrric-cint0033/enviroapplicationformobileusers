@@ -299,6 +299,70 @@ mixin _$ScheduleViewModel on ScheduleViewModelBase, Store {
     });
   }
 
+  late final _$isMinimizedAtom =
+      Atom(name: 'ScheduleViewModelBase.isMinimized', context: context);
+
+  @override
+  bool get isMinimized {
+    _$isMinimizedAtom.reportRead();
+    return super.isMinimized;
+  }
+
+  @override
+  set isMinimized(bool value) {
+    _$isMinimizedAtom.reportWrite(value, super.isMinimized, () {
+      super.isMinimized = value;
+    });
+  }
+
+  late final _$greenCheckedAtom =
+      Atom(name: 'ScheduleViewModelBase.greenChecked', context: context);
+
+  @override
+  bool get greenChecked {
+    _$greenCheckedAtom.reportRead();
+    return super.greenChecked;
+  }
+
+  @override
+  set greenChecked(bool value) {
+    _$greenCheckedAtom.reportWrite(value, super.greenChecked, () {
+      super.greenChecked = value;
+    });
+  }
+
+  late final _$redCheckedAtom =
+      Atom(name: 'ScheduleViewModelBase.redChecked', context: context);
+
+  @override
+  bool get redChecked {
+    _$redCheckedAtom.reportRead();
+    return super.redChecked;
+  }
+
+  @override
+  set redChecked(bool value) {
+    _$redCheckedAtom.reportWrite(value, super.redChecked, () {
+      super.redChecked = value;
+    });
+  }
+
+  late final _$blueCheckedAtom =
+      Atom(name: 'ScheduleViewModelBase.blueChecked', context: context);
+
+  @override
+  bool get blueChecked {
+    _$blueCheckedAtom.reportRead();
+    return super.blueChecked;
+  }
+
+  @override
+  set blueChecked(bool value) {
+    _$blueCheckedAtom.reportWrite(value, super.blueChecked, () {
+      super.blueChecked = value;
+    });
+  }
+
   late final _$updateSignatureButtonColorAsyncAction = AsyncAction(
       'ScheduleViewModelBase.updateSignatureButtonColor',
       context: context);
@@ -471,6 +535,50 @@ mixin _$ScheduleViewModel on ScheduleViewModelBase, Store {
   }
 
   @override
+  void toggleMinimize() {
+    final _$actionInfo = _$ScheduleViewModelBaseActionController.startAction(
+        name: 'ScheduleViewModelBase.toggleMinimize');
+    try {
+      return super.toggleMinimize();
+    } finally {
+      _$ScheduleViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setGreenChecked(bool? value) {
+    final _$actionInfo = _$ScheduleViewModelBaseActionController.startAction(
+        name: 'ScheduleViewModelBase.setGreenChecked');
+    try {
+      return super.setGreenChecked(value);
+    } finally {
+      _$ScheduleViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setRedChecked(bool? value) {
+    final _$actionInfo = _$ScheduleViewModelBaseActionController.startAction(
+        name: 'ScheduleViewModelBase.setRedChecked');
+    try {
+      return super.setRedChecked(value);
+    } finally {
+      _$ScheduleViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setBlueChecked(bool? value) {
+    final _$actionInfo = _$ScheduleViewModelBaseActionController.startAction(
+        name: 'ScheduleViewModelBase.setBlueChecked');
+    try {
+      return super.setBlueChecked(value);
+    } finally {
+      _$ScheduleViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 signColor: ${signColor},
@@ -490,7 +598,11 @@ jobcardResponse: ${jobcardResponse},
 shedulecardResponse: ${shedulecardResponse},
 sheduleweekResponse: ${sheduleweekResponse},
 signatureResponse: ${signatureResponse},
-commentResponse: ${commentResponse}
+commentResponse: ${commentResponse},
+isMinimized: ${isMinimized},
+greenChecked: ${greenChecked},
+redChecked: ${redChecked},
+blueChecked: ${blueChecked}
     ''';
   }
 }
