@@ -315,51 +315,636 @@ mixin _$ScheduleViewModel on ScheduleViewModelBase, Store {
     });
   }
 
-  late final _$greenCheckedAtom =
-      Atom(name: 'ScheduleViewModelBase.greenChecked', context: context);
+  late final _$selectedEngineOilValueAtom = Atom(
+      name: 'ScheduleViewModelBase.selectedEngineOilValue', context: context);
 
   @override
-  bool get greenChecked {
-    _$greenCheckedAtom.reportRead();
-    return super.greenChecked;
+  String? get selectedEngineOilValue {
+    _$selectedEngineOilValueAtom.reportRead();
+    return super.selectedEngineOilValue;
   }
 
   @override
-  set greenChecked(bool value) {
-    _$greenCheckedAtom.reportWrite(value, super.greenChecked, () {
-      super.greenChecked = value;
+  set selectedEngineOilValue(String? value) {
+    _$selectedEngineOilValueAtom
+        .reportWrite(value, super.selectedEngineOilValue, () {
+      super.selectedEngineOilValue = value;
     });
   }
 
-  late final _$redCheckedAtom =
-      Atom(name: 'ScheduleViewModelBase.redChecked', context: context);
+  late final _$selectedWarningSystemValueAtom = Atom(
+      name: 'ScheduleViewModelBase.selectedWarningSystemValue',
+      context: context);
 
   @override
-  bool get redChecked {
-    _$redCheckedAtom.reportRead();
-    return super.redChecked;
+  String? get selectedWarningSystemValue {
+    _$selectedWarningSystemValueAtom.reportRead();
+    return super.selectedWarningSystemValue;
   }
 
   @override
-  set redChecked(bool value) {
-    _$redCheckedAtom.reportWrite(value, super.redChecked, () {
-      super.redChecked = value;
+  set selectedWarningSystemValue(String? value) {
+    _$selectedWarningSystemValueAtom
+        .reportWrite(value, super.selectedWarningSystemValue, () {
+      super.selectedWarningSystemValue = value;
     });
   }
 
-  late final _$blueCheckedAtom =
-      Atom(name: 'ScheduleViewModelBase.blueChecked', context: context);
+  late final _$selectedSteeringValueAtom = Atom(
+      name: 'ScheduleViewModelBase.selectedSteeringValue', context: context);
 
   @override
-  bool get blueChecked {
-    _$blueCheckedAtom.reportRead();
-    return super.blueChecked;
+  String? get selectedSteeringValue {
+    _$selectedSteeringValueAtom.reportRead();
+    return super.selectedSteeringValue;
   }
 
   @override
-  set blueChecked(bool value) {
-    _$blueCheckedAtom.reportWrite(value, super.blueChecked, () {
-      super.blueChecked = value;
+  set selectedSteeringValue(String? value) {
+    _$selectedSteeringValueAtom.reportWrite(value, super.selectedSteeringValue,
+        () {
+      super.selectedSteeringValue = value;
+    });
+  }
+
+  late final _$selectedSafetyEmergValueAtom = Atom(
+      name: 'ScheduleViewModelBase.selectedSafetyEmergValue', context: context);
+
+  @override
+  String? get selectedSafetyEmergValue {
+    _$selectedSafetyEmergValueAtom.reportRead();
+    return super.selectedSafetyEmergValue;
+  }
+
+  @override
+  set selectedSafetyEmergValue(String? value) {
+    _$selectedSafetyEmergValueAtom
+        .reportWrite(value, super.selectedSafetyEmergValue, () {
+      super.selectedSafetyEmergValue = value;
+    });
+  }
+
+  late final _$selectedHandBreakAlarmValueAtom = Atom(
+      name: 'ScheduleViewModelBase.selectedHandBreakAlarmValue',
+      context: context);
+
+  @override
+  String? get selectedHandBreakAlarmValue {
+    _$selectedHandBreakAlarmValueAtom.reportRead();
+    return super.selectedHandBreakAlarmValue;
+  }
+
+  @override
+  set selectedHandBreakAlarmValue(String? value) {
+    _$selectedHandBreakAlarmValueAtom
+        .reportWrite(value, super.selectedHandBreakAlarmValue, () {
+      super.selectedHandBreakAlarmValue = value;
+    });
+  }
+
+  late final _$selectedPTOVacValueAtom =
+      Atom(name: 'ScheduleViewModelBase.selectedPTOVacValue', context: context);
+
+  @override
+  String? get selectedPTOVacValue {
+    _$selectedPTOVacValueAtom.reportRead();
+    return super.selectedPTOVacValue;
+  }
+
+  @override
+  set selectedPTOVacValue(String? value) {
+    _$selectedPTOVacValueAtom.reportWrite(value, super.selectedPTOVacValue, () {
+      super.selectedPTOVacValue = value;
+    });
+  }
+
+  late final _$selectedHornValueAtom =
+      Atom(name: 'ScheduleViewModelBase.selectedHornValue', context: context);
+
+  @override
+  String? get selectedHornValue {
+    _$selectedHornValueAtom.reportRead();
+    return super.selectedHornValue;
+  }
+
+  @override
+  set selectedHornValue(String? value) {
+    _$selectedHornValueAtom.reportWrite(value, super.selectedHornValue, () {
+      super.selectedHornValue = value;
+    });
+  }
+
+  late final _$selectedRevAlarmCameraValueAtom = Atom(
+      name: 'ScheduleViewModelBase.selectedRevAlarmCameraValue',
+      context: context);
+
+  @override
+  String? get selectedRevAlarmCameraValue {
+    _$selectedRevAlarmCameraValueAtom.reportRead();
+    return super.selectedRevAlarmCameraValue;
+  }
+
+  @override
+  set selectedRevAlarmCameraValue(String? value) {
+    _$selectedRevAlarmCameraValueAtom
+        .reportWrite(value, super.selectedRevAlarmCameraValue, () {
+      super.selectedRevAlarmCameraValue = value;
+    });
+  }
+
+  late final _$selectedLightsHeadValueAtom = Atom(
+      name: 'ScheduleViewModelBase.selectedLightsHeadValue', context: context);
+
+  @override
+  String? get selectedLightsHeadValue {
+    _$selectedLightsHeadValueAtom.reportRead();
+    return super.selectedLightsHeadValue;
+  }
+
+  @override
+  set selectedLightsHeadValue(String? value) {
+    _$selectedLightsHeadValueAtom
+        .reportWrite(value, super.selectedLightsHeadValue, () {
+      super.selectedLightsHeadValue = value;
+    });
+  }
+
+  late final _$selectedLightsTailValueAtom = Atom(
+      name: 'ScheduleViewModelBase.selectedLightsTailValue', context: context);
+
+  @override
+  String? get selectedLightsTailValue {
+    _$selectedLightsTailValueAtom.reportRead();
+    return super.selectedLightsTailValue;
+  }
+
+  @override
+  set selectedLightsTailValue(String? value) {
+    _$selectedLightsTailValueAtom
+        .reportWrite(value, super.selectedLightsTailValue, () {
+      super.selectedLightsTailValue = value;
+    });
+  }
+
+  late final _$selectedLightBeaconsValueAtom = Atom(
+      name: 'ScheduleViewModelBase.selectedLightBeaconsValue',
+      context: context);
+
+  @override
+  String? get selectedLightBeaconsValue {
+    _$selectedLightBeaconsValueAtom.reportRead();
+    return super.selectedLightBeaconsValue;
+  }
+
+  @override
+  set selectedLightBeaconsValue(String? value) {
+    _$selectedLightBeaconsValueAtom
+        .reportWrite(value, super.selectedLightBeaconsValue, () {
+      super.selectedLightBeaconsValue = value;
+    });
+  }
+
+  late final _$selectedHazardsLightsValueAtom = Atom(
+      name: 'ScheduleViewModelBase.selectedHazardsLightsValue',
+      context: context);
+
+  @override
+  String? get selectedHazardsLightsValue {
+    _$selectedHazardsLightsValueAtom.reportRead();
+    return super.selectedHazardsLightsValue;
+  }
+
+  @override
+  set selectedHazardsLightsValue(String? value) {
+    _$selectedHazardsLightsValueAtom
+        .reportWrite(value, super.selectedHazardsLightsValue, () {
+      super.selectedHazardsLightsValue = value;
+    });
+  }
+
+  late final _$selectedRimsWheelNutsValueAtom = Atom(
+      name: 'ScheduleViewModelBase.selectedRimsWheelNutsValue',
+      context: context);
+
+  @override
+  String? get selectedRimsWheelNutsValue {
+    _$selectedRimsWheelNutsValueAtom.reportRead();
+    return super.selectedRimsWheelNutsValue;
+  }
+
+  @override
+  set selectedRimsWheelNutsValue(String? value) {
+    _$selectedRimsWheelNutsValueAtom
+        .reportWrite(value, super.selectedRimsWheelNutsValue, () {
+      super.selectedRimsWheelNutsValue = value;
+    });
+  }
+
+  late final _$selectedCoolantValueAtom = Atom(
+      name: 'ScheduleViewModelBase.selectedCoolantValue', context: context);
+
+  @override
+  String? get selectedCoolantValue {
+    _$selectedCoolantValueAtom.reportRead();
+    return super.selectedCoolantValue;
+  }
+
+  @override
+  set selectedCoolantValue(String? value) {
+    _$selectedCoolantValueAtom.reportWrite(value, super.selectedCoolantValue,
+        () {
+      super.selectedCoolantValue = value;
+    });
+  }
+
+  late final _$selectedWheelsTyresValueAtom = Atom(
+      name: 'ScheduleViewModelBase.selectedWheelsTyresValue', context: context);
+
+  @override
+  String? get selectedWheelsTyresValue {
+    _$selectedWheelsTyresValueAtom.reportRead();
+    return super.selectedWheelsTyresValue;
+  }
+
+  @override
+  set selectedWheelsTyresValue(String? value) {
+    _$selectedWheelsTyresValueAtom
+        .reportWrite(value, super.selectedWheelsTyresValue, () {
+      super.selectedWheelsTyresValue = value;
+    });
+  }
+
+  late final _$selectedMirrorsWindscreenValueAtom = Atom(
+      name: 'ScheduleViewModelBase.selectedMirrorsWindscreenValue',
+      context: context);
+
+  @override
+  String? get selectedMirrorsWindscreenValue {
+    _$selectedMirrorsWindscreenValueAtom.reportRead();
+    return super.selectedMirrorsWindscreenValue;
+  }
+
+  @override
+  set selectedMirrorsWindscreenValue(String? value) {
+    _$selectedMirrorsWindscreenValueAtom
+        .reportWrite(value, super.selectedMirrorsWindscreenValue, () {
+      super.selectedMirrorsWindscreenValue = value;
+    });
+  }
+
+  late final _$selectedStructureBodywrkValueAtom = Atom(
+      name: 'ScheduleViewModelBase.selectedStructureBodywrkValue',
+      context: context);
+
+  @override
+  String? get selectedStructureBodywrkValue {
+    _$selectedStructureBodywrkValueAtom.reportRead();
+    return super.selectedStructureBodywrkValue;
+  }
+
+  @override
+  set selectedStructureBodywrkValue(String? value) {
+    _$selectedStructureBodywrkValueAtom
+        .reportWrite(value, super.selectedStructureBodywrkValue, () {
+      super.selectedStructureBodywrkValue = value;
+    });
+  }
+
+  late final _$selectedWipersValueAtom =
+      Atom(name: 'ScheduleViewModelBase.selectedWipersValue', context: context);
+
+  @override
+  String? get selectedWipersValue {
+    _$selectedWipersValueAtom.reportRead();
+    return super.selectedWipersValue;
+  }
+
+  @override
+  set selectedWipersValue(String? value) {
+    _$selectedWipersValueAtom.reportWrite(value, super.selectedWipersValue, () {
+      super.selectedWipersValue = value;
+    });
+  }
+
+  late final _$selectedFuelLevelPumbValueAtom = Atom(
+      name: 'ScheduleViewModelBase.selectedFuelLevelPumbValue',
+      context: context);
+
+  @override
+  String? get selectedFuelLevelPumbValue {
+    _$selectedFuelLevelPumbValueAtom.reportRead();
+    return super.selectedFuelLevelPumbValue;
+  }
+
+  @override
+  set selectedFuelLevelPumbValue(String? value) {
+    _$selectedFuelLevelPumbValueAtom
+        .reportWrite(value, super.selectedFuelLevelPumbValue, () {
+      super.selectedFuelLevelPumbValue = value;
+    });
+  }
+
+  late final _$selectedFuelLevelTruckValueAtom = Atom(
+      name: 'ScheduleViewModelBase.selectedFuelLevelTruckValue',
+      context: context);
+
+  @override
+  String? get selectedFuelLevelTruckValue {
+    _$selectedFuelLevelTruckValueAtom.reportRead();
+    return super.selectedFuelLevelTruckValue;
+  }
+
+  @override
+  set selectedFuelLevelTruckValue(String? value) {
+    _$selectedFuelLevelTruckValueAtom
+        .reportWrite(value, super.selectedFuelLevelTruckValue, () {
+      super.selectedFuelLevelTruckValue = value;
+    });
+  }
+
+  late final _$selectedSeatSeatBeltValueAtom = Atom(
+      name: 'ScheduleViewModelBase.selectedSeatSeatBeltValue',
+      context: context);
+
+  @override
+  String? get selectedSeatSeatBeltValue {
+    _$selectedSeatSeatBeltValueAtom.reportRead();
+    return super.selectedSeatSeatBeltValue;
+  }
+
+  @override
+  set selectedSeatSeatBeltValue(String? value) {
+    _$selectedSeatSeatBeltValueAtom
+        .reportWrite(value, super.selectedSeatSeatBeltValue, () {
+      super.selectedSeatSeatBeltValue = value;
+    });
+  }
+
+  late final _$selectedParkBarkeValueAtom = Atom(
+      name: 'ScheduleViewModelBase.selectedParkBarkeValue', context: context);
+
+  @override
+  String? get selectedParkBarkeValue {
+    _$selectedParkBarkeValueAtom.reportRead();
+    return super.selectedParkBarkeValue;
+  }
+
+  @override
+  set selectedParkBarkeValue(String? value) {
+    _$selectedParkBarkeValueAtom
+        .reportWrite(value, super.selectedParkBarkeValue, () {
+      super.selectedParkBarkeValue = value;
+    });
+  }
+
+  late final _$selectedFootBrakeValueAtom = Atom(
+      name: 'ScheduleViewModelBase.selectedFootBrakeValue', context: context);
+
+  @override
+  String? get selectedFootBrakeValue {
+    _$selectedFootBrakeValueAtom.reportRead();
+    return super.selectedFootBrakeValue;
+  }
+
+  @override
+  set selectedFootBrakeValue(String? value) {
+    _$selectedFootBrakeValueAtom
+        .reportWrite(value, super.selectedFootBrakeValue, () {
+      super.selectedFootBrakeValue = value;
+    });
+  }
+
+  late final _$selectedElectricalValueAtom = Atom(
+      name: 'ScheduleViewModelBase.selectedElectricalValue', context: context);
+
+  @override
+  String? get selectedElectricalValue {
+    _$selectedElectricalValueAtom.reportRead();
+    return super.selectedElectricalValue;
+  }
+
+  @override
+  set selectedElectricalValue(String? value) {
+    _$selectedElectricalValueAtom
+        .reportWrite(value, super.selectedElectricalValue, () {
+      super.selectedElectricalValue = value;
+    });
+  }
+
+  late final _$selectHosesCheckboxAtom =
+      Atom(name: 'ScheduleViewModelBase.selectHosesCheckbox', context: context);
+
+  @override
+  bool get selectHosesCheckbox {
+    _$selectHosesCheckboxAtom.reportRead();
+    return super.selectHosesCheckbox;
+  }
+
+  @override
+  set selectHosesCheckbox(bool value) {
+    _$selectHosesCheckboxAtom.reportWrite(value, super.selectHosesCheckbox, () {
+      super.selectHosesCheckbox = value;
+    });
+  }
+
+  late final _$selectFittingsCheckboxAtom = Atom(
+      name: 'ScheduleViewModelBase.selectFittingsCheckbox', context: context);
+
+  @override
+  bool get selectFittingsCheckbox {
+    _$selectFittingsCheckboxAtom.reportRead();
+    return super.selectFittingsCheckbox;
+  }
+
+  @override
+  set selectFittingsCheckbox(bool value) {
+    _$selectFittingsCheckboxAtom
+        .reportWrite(value, super.selectFittingsCheckbox, () {
+      super.selectFittingsCheckbox = value;
+    });
+  }
+
+  late final _$selectFirstAidKitCheckboxAtom = Atom(
+      name: 'ScheduleViewModelBase.selectFirstAidKitCheckbox',
+      context: context);
+
+  @override
+  bool get selectFirstAidKitCheckbox {
+    _$selectFirstAidKitCheckboxAtom.reportRead();
+    return super.selectFirstAidKitCheckbox;
+  }
+
+  @override
+  set selectFirstAidKitCheckbox(bool value) {
+    _$selectFirstAidKitCheckboxAtom
+        .reportWrite(value, super.selectFirstAidKitCheckbox, () {
+      super.selectFirstAidKitCheckbox = value;
+    });
+  }
+
+  late final _$selectPPECheckboxAtom =
+      Atom(name: 'ScheduleViewModelBase.selectPPECheckbox', context: context);
+
+  @override
+  bool get selectPPECheckbox {
+    _$selectPPECheckboxAtom.reportRead();
+    return super.selectPPECheckbox;
+  }
+
+  @override
+  set selectPPECheckbox(bool value) {
+    _$selectPPECheckboxAtom.reportWrite(value, super.selectPPECheckbox, () {
+      super.selectPPECheckbox = value;
+    });
+  }
+
+  late final _$selectGardenHoseCheckboxAtom = Atom(
+      name: 'ScheduleViewModelBase.selectGardenHoseCheckbox', context: context);
+
+  @override
+  bool get selectGardenHoseCheckbox {
+    _$selectGardenHoseCheckboxAtom.reportRead();
+    return super.selectGardenHoseCheckbox;
+  }
+
+  @override
+  set selectGardenHoseCheckbox(bool value) {
+    _$selectGardenHoseCheckboxAtom
+        .reportWrite(value, super.selectGardenHoseCheckbox, () {
+      super.selectGardenHoseCheckbox = value;
+    });
+  }
+
+  late final _$selectGatticCheckboxAtom = Atom(
+      name: 'ScheduleViewModelBase.selectGatticCheckbox', context: context);
+
+  @override
+  bool get selectGatticCheckbox {
+    _$selectGatticCheckboxAtom.reportRead();
+    return super.selectGatticCheckbox;
+  }
+
+  @override
+  set selectGatticCheckbox(bool value) {
+    _$selectGatticCheckboxAtom.reportWrite(value, super.selectGatticCheckbox,
+        () {
+      super.selectGatticCheckbox = value;
+    });
+  }
+
+  late final _$selectBucketRagsCheckboxAtom = Atom(
+      name: 'ScheduleViewModelBase.selectBucketRagsCheckbox', context: context);
+
+  @override
+  bool get selectBucketRagsCheckbox {
+    _$selectBucketRagsCheckboxAtom.reportRead();
+    return super.selectBucketRagsCheckbox;
+  }
+
+  @override
+  set selectBucketRagsCheckbox(bool value) {
+    _$selectBucketRagsCheckboxAtom
+        .reportWrite(value, super.selectBucketRagsCheckbox, () {
+      super.selectBucketRagsCheckbox = value;
+    });
+  }
+
+  late final _$selectSpillKitCheckboxAtom = Atom(
+      name: 'ScheduleViewModelBase.selectSpillKitCheckbox', context: context);
+
+  @override
+  bool get selectSpillKitCheckbox {
+    _$selectSpillKitCheckboxAtom.reportRead();
+    return super.selectSpillKitCheckbox;
+  }
+
+  @override
+  set selectSpillKitCheckbox(bool value) {
+    _$selectSpillKitCheckboxAtom
+        .reportWrite(value, super.selectSpillKitCheckbox, () {
+      super.selectSpillKitCheckbox = value;
+    });
+  }
+
+  late final _$selectverifyCheckbox1Atom = Atom(
+      name: 'ScheduleViewModelBase.selectverifyCheckbox1', context: context);
+
+  @override
+  bool get selectverifyCheckbox1 {
+    _$selectverifyCheckbox1Atom.reportRead();
+    return super.selectverifyCheckbox1;
+  }
+
+  @override
+  set selectverifyCheckbox1(bool value) {
+    _$selectverifyCheckbox1Atom.reportWrite(value, super.selectverifyCheckbox1,
+        () {
+      super.selectverifyCheckbox1 = value;
+    });
+  }
+
+  late final _$selectverifyCheckbox2Atom = Atom(
+      name: 'ScheduleViewModelBase.selectverifyCheckbox2', context: context);
+
+  @override
+  bool get selectverifyCheckbox2 {
+    _$selectverifyCheckbox2Atom.reportRead();
+    return super.selectverifyCheckbox2;
+  }
+
+  @override
+  set selectverifyCheckbox2(bool value) {
+    _$selectverifyCheckbox2Atom.reportWrite(value, super.selectverifyCheckbox2,
+        () {
+      super.selectverifyCheckbox2 = value;
+    });
+  }
+
+  late final _$noIssueAtom =
+      Atom(name: 'ScheduleViewModelBase.noIssue', context: context);
+
+  @override
+  String? get noIssue {
+    _$noIssueAtom.reportRead();
+    return super.noIssue;
+  }
+
+  @override
+  set noIssue(String? value) {
+    _$noIssueAtom.reportWrite(value, super.noIssue, () {
+      super.noIssue = value;
+    });
+  }
+
+  late final _$categoryAAtom =
+      Atom(name: 'ScheduleViewModelBase.categoryA', context: context);
+
+  @override
+  String? get categoryA {
+    _$categoryAAtom.reportRead();
+    return super.categoryA;
+  }
+
+  @override
+  set categoryA(String? value) {
+    _$categoryAAtom.reportWrite(value, super.categoryA, () {
+      super.categoryA = value;
+    });
+  }
+
+  late final _$categoryBAtom =
+      Atom(name: 'ScheduleViewModelBase.categoryB', context: context);
+
+  @override
+  String? get categoryB {
+    _$categoryBAtom.reportRead();
+    return super.categoryB;
+  }
+
+  @override
+  set categoryB(String? value) {
+    _$categoryBAtom.reportWrite(value, super.categoryB, () {
+      super.categoryB = value;
     });
   }
 
@@ -546,33 +1131,110 @@ mixin _$ScheduleViewModel on ScheduleViewModelBase, Store {
   }
 
   @override
-  void setGreenChecked(bool? value) {
+  dynamic noIssueOnTap(String? value, int i) {
     final _$actionInfo = _$ScheduleViewModelBaseActionController.startAction(
-        name: 'ScheduleViewModelBase.setGreenChecked');
+        name: 'ScheduleViewModelBase.noIssueOnTap');
     try {
-      return super.setGreenChecked(value);
+      return super.noIssueOnTap(value, i);
     } finally {
       _$ScheduleViewModelBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
-  void setRedChecked(bool? value) {
+  dynamic categoryAOnTap(String? value, int i) {
     final _$actionInfo = _$ScheduleViewModelBaseActionController.startAction(
-        name: 'ScheduleViewModelBase.setRedChecked');
+        name: 'ScheduleViewModelBase.categoryAOnTap');
     try {
-      return super.setRedChecked(value);
+      return super.categoryAOnTap(value, i);
     } finally {
       _$ScheduleViewModelBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
-  void setBlueChecked(bool? value) {
+  dynamic categoryBOnTap(String? value, int i) {
     final _$actionInfo = _$ScheduleViewModelBaseActionController.startAction(
-        name: 'ScheduleViewModelBase.setBlueChecked');
+        name: 'ScheduleViewModelBase.categoryBOnTap');
     try {
-      return super.setBlueChecked(value);
+      return super.categoryBOnTap(value, i);
+    } finally {
+      _$ScheduleViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void updateCheckboxValueFn1(bool newValue) {
+    final _$actionInfo = _$ScheduleViewModelBaseActionController.startAction(
+        name: 'ScheduleViewModelBase.updateCheckboxValueFn1');
+    try {
+      return super.updateCheckboxValueFn1(newValue);
+    } finally {
+      _$ScheduleViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void updateCheckboxValueFn2(bool newValue) {
+    final _$actionInfo = _$ScheduleViewModelBaseActionController.startAction(
+        name: 'ScheduleViewModelBase.updateCheckboxValueFn2');
+    try {
+      return super.updateCheckboxValueFn2(newValue);
+    } finally {
+      _$ScheduleViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void updateCheckboxValueFn3(bool newValue) {
+    final _$actionInfo = _$ScheduleViewModelBaseActionController.startAction(
+        name: 'ScheduleViewModelBase.updateCheckboxValueFn3');
+    try {
+      return super.updateCheckboxValueFn3(newValue);
+    } finally {
+      _$ScheduleViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void updateCheckboxValueFn4(bool newValue) {
+    final _$actionInfo = _$ScheduleViewModelBaseActionController.startAction(
+        name: 'ScheduleViewModelBase.updateCheckboxValueFn4');
+    try {
+      return super.updateCheckboxValueFn4(newValue);
+    } finally {
+      _$ScheduleViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void updateCheckboxValueFn5(bool newValue) {
+    final _$actionInfo = _$ScheduleViewModelBaseActionController.startAction(
+        name: 'ScheduleViewModelBase.updateCheckboxValueFn5');
+    try {
+      return super.updateCheckboxValueFn5(newValue);
+    } finally {
+      _$ScheduleViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void updateCheckboxValueFn6(bool newValue) {
+    final _$actionInfo = _$ScheduleViewModelBaseActionController.startAction(
+        name: 'ScheduleViewModelBase.updateCheckboxValueFn6');
+    try {
+      return super.updateCheckboxValueFn6(newValue);
+    } finally {
+      _$ScheduleViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic cmFunction(int i, String value) {
+    final _$actionInfo = _$ScheduleViewModelBaseActionController.startAction(
+        name: 'ScheduleViewModelBase.cmFunction');
+    try {
+      return super.cmFunction(i, value);
     } finally {
       _$ScheduleViewModelBaseActionController.endAction(_$actionInfo);
     }
@@ -600,9 +1262,43 @@ sheduleweekResponse: ${sheduleweekResponse},
 signatureResponse: ${signatureResponse},
 commentResponse: ${commentResponse},
 isMinimized: ${isMinimized},
-greenChecked: ${greenChecked},
-redChecked: ${redChecked},
-blueChecked: ${blueChecked}
+selectedEngineOilValue: ${selectedEngineOilValue},
+selectedWarningSystemValue: ${selectedWarningSystemValue},
+selectedSteeringValue: ${selectedSteeringValue},
+selectedSafetyEmergValue: ${selectedSafetyEmergValue},
+selectedHandBreakAlarmValue: ${selectedHandBreakAlarmValue},
+selectedPTOVacValue: ${selectedPTOVacValue},
+selectedHornValue: ${selectedHornValue},
+selectedRevAlarmCameraValue: ${selectedRevAlarmCameraValue},
+selectedLightsHeadValue: ${selectedLightsHeadValue},
+selectedLightsTailValue: ${selectedLightsTailValue},
+selectedLightBeaconsValue: ${selectedLightBeaconsValue},
+selectedHazardsLightsValue: ${selectedHazardsLightsValue},
+selectedRimsWheelNutsValue: ${selectedRimsWheelNutsValue},
+selectedCoolantValue: ${selectedCoolantValue},
+selectedWheelsTyresValue: ${selectedWheelsTyresValue},
+selectedMirrorsWindscreenValue: ${selectedMirrorsWindscreenValue},
+selectedStructureBodywrkValue: ${selectedStructureBodywrkValue},
+selectedWipersValue: ${selectedWipersValue},
+selectedFuelLevelPumbValue: ${selectedFuelLevelPumbValue},
+selectedFuelLevelTruckValue: ${selectedFuelLevelTruckValue},
+selectedSeatSeatBeltValue: ${selectedSeatSeatBeltValue},
+selectedParkBarkeValue: ${selectedParkBarkeValue},
+selectedFootBrakeValue: ${selectedFootBrakeValue},
+selectedElectricalValue: ${selectedElectricalValue},
+selectHosesCheckbox: ${selectHosesCheckbox},
+selectFittingsCheckbox: ${selectFittingsCheckbox},
+selectFirstAidKitCheckbox: ${selectFirstAidKitCheckbox},
+selectPPECheckbox: ${selectPPECheckbox},
+selectGardenHoseCheckbox: ${selectGardenHoseCheckbox},
+selectGatticCheckbox: ${selectGatticCheckbox},
+selectBucketRagsCheckbox: ${selectBucketRagsCheckbox},
+selectSpillKitCheckbox: ${selectSpillKitCheckbox},
+selectverifyCheckbox1: ${selectverifyCheckbox1},
+selectverifyCheckbox2: ${selectverifyCheckbox2},
+noIssue: ${noIssue},
+categoryA: ${categoryA},
+categoryB: ${categoryB}
     ''';
   }
 }

@@ -1,6 +1,5 @@
 import 'dart:io';
 import 'dart:typed_data';
-
 import 'package:enviro_mobile_application/api_response/api_response.dart';
 import 'package:enviro_mobile_application/model/07_Jobcard/job_card_model.dart';
 import 'package:enviro_mobile_application/model/12_shedulecard/shedule_card_comnt_resp_model.dart';
@@ -314,104 +313,203 @@ abstract class ScheduleViewModelBase with Store {
     isMinimized = !isMinimized;
   }
 
+  @observable
+  String? selectedEngineOilValue = "No issue";
+  @observable
+  String? selectedWarningSystemValue = "No issue";
+  @observable
+  String? selectedSteeringValue = "No issue";
+  @observable
+  String? selectedSafetyEmergValue = "No issue";
+  @observable
+  String? selectedHandBreakAlarmValue = "No issue";
+  @observable
+  String? selectedPTOVacValue = "No issue";
+  @observable
+  String? selectedHornValue = "No issue";
+  @observable
+  String? selectedRevAlarmCameraValue = "No issue";
+  @observable
+  String? selectedLightsHeadValue = "No issue";
+  @observable
+  String? selectedLightsTailValue = "No issue";
+  @observable
+  String? selectedLightBeaconsValue = "No issue";
+  @observable
+  String? selectedHazardsLightsValue = "No issue";
+  @observable
+  String? selectedRimsWheelNutsValue = "No issue";
+  @observable
+  String? selectedCoolantValue = "No issue";
+  @observable
+  String? selectedWheelsTyresValue = "No issue";
+  @observable
+  String? selectedMirrorsWindscreenValue = "No issue";
+  @observable
+  String? selectedStructureBodywrkValue = "No issue";
+  @observable
+  String? selectedWipersValue = "No issue";
+  @observable
+  String? selectedFuelLevelPumbValue = "No issue";
+  @observable
+  String? selectedFuelLevelTruckValue = "No issue";
+  @observable
+  String? selectedSeatSeatBeltValue = "No issue";
+  @observable
+  String? selectedParkBarkeValue = "No issue";
+  @observable
+  String? selectedFootBrakeValue = "No issue";
+  @observable
+  String? selectedElectricalValue = "No issue";
+  @observable
+  bool selectHosesCheckbox = false;
+  @observable
+  bool selectFittingsCheckbox = false;
+  @observable
+  bool selectFirstAidKitCheckbox = false;
+  @observable
+  bool selectPPECheckbox = false;
+  @observable
+  bool selectGardenHoseCheckbox = false;
+  @observable
+  bool selectGatticCheckbox = false;
+  @observable
+  bool selectBucketRagsCheckbox = false;
+  @observable
+  bool selectSpillKitCheckbox = false;
+  @observable
+  bool selectverifyCheckbox1 = false;
+  @observable
+  bool selectverifyCheckbox2 = false;
+  @observable
+  String? noIssue = "No issue";
 
- @observable
-bool greenChecked = true;
+  @observable
+  String? categoryA = "categoryA";
 
-@observable
-bool redChecked = false;
-
-@observable
-bool blueChecked = false;
-
-@action
-void setGreenChecked(bool? value) {
-  greenChecked = value ?? false;
-  if (greenChecked) {
-    redChecked = false;
-    blueChecked = false;
+  @observable
+  String? categoryB = "categoryB";
+  @action
+  noIssueOnTap(String? value, int i) {
+    value = noIssue;
+    cmFunction(i, value ?? "");
   }
-}
 
-@action
-void setRedChecked(bool? value) {
-  redChecked = value ?? false;
-  if (redChecked) {
-    greenChecked = false;
-    blueChecked = false;
+  @action
+  categoryAOnTap(String? value, int i) {
+    value = categoryA;
+    cmFunction(i, value ?? "");
   }
-}
 
-@action
-void setBlueChecked(bool? value) {
-  blueChecked = value ?? false;
-  if (blueChecked) {
-    greenChecked = false;
-    redChecked = false;
+  @action
+  categoryBOnTap(String? value, int i) {
+    value = categoryB;
+    cmFunction(i, value ?? "");
   }
-}
 
-  void showPopup(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10.0),
-            side: const BorderSide(color: Colors.black),
-          ),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Row(
-                children: [
-                  const Text(
-                    'No issue',
-                    style: TextStyle(color: Colors.green),
-                  ),
-                  Checkbox(
-                    activeColor: Colors.green,
-                    materialTapTargetSize: MaterialTapTargetSize.padded,
-                    value: greenChecked,
-                    onChanged: setGreenChecked,
-                  ),
-                ],
-              ),
-              Row(
-                children: [
-                  const Text(
-                    'Category A fault',
-                    style: TextStyle(
-                      color: Colors.red,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  Checkbox(
-                    activeColor: Colors.red,
-                    materialTapTargetSize: MaterialTapTargetSize.padded,
-                    value: redChecked,
-                    onChanged: setRedChecked,
-                  ),
-                ],
-              ),
-              Row(
-                children: [
-                  const Text(
-                    'Category B fault',
-                    style: TextStyle(color: Colors.blue),
-                  ),
-                  Checkbox(
-                    activeColor: Colors.blue,
-                    materialTapTargetSize: MaterialTapTargetSize.padded,
-                    value: blueChecked,
-                    onChanged: setBlueChecked,
-                  ),
-                ],
-              ),
-            ],
-          ),
-        );
-      },
-    );
+  @action
+  void updateCheckboxValueFn1(bool newValue) {
+    selectHosesCheckbox = newValue;
+  }
+
+  @action
+  void updateCheckboxValueFn2(bool newValue) {
+    selectFittingsCheckbox = newValue;
+  }
+
+  @action
+  void updateCheckboxValueFn3(bool newValue) {
+    selectFirstAidKitCheckbox = newValue;
+  }
+
+  @action
+  void updateCheckboxValueFn4(bool newValue) {
+    selectPPECheckbox = newValue;
+  }
+
+  @action
+  void updateCheckboxValueFn5(bool newValue) {
+    selectGardenHoseCheckbox = newValue;
+  }
+
+  @action
+  void updateCheckboxValueFn6(bool newValue) {
+    selectGatticCheckbox = newValue;
+  }
+
+  void updateCheckboxValueFn7(bool newValue) {
+    selectBucketRagsCheckbox = newValue;
+  }
+
+  void updateCheckboxValueFn8(bool newValue) {
+    selectSpillKitCheckbox = newValue;
+  }
+
+  void updateCheckboxValueFn9(bool newValue) {
+    selectverifyCheckbox1 = newValue;
+  }
+
+  void updateCheckboxValueFn10(bool newValue) {
+    selectverifyCheckbox2 = newValue;
+  }
+
+  @action
+  cmFunction(int i, String value) {
+    i == 1
+        ? selectedEngineOilValue = value
+        : i == 2
+            ? selectedWarningSystemValue = value
+            : i == 3
+                ? selectedSteeringValue = value
+                : i == 4
+                    ? selectedSafetyEmergValue = value
+                    : i == 5
+                        ? selectedHandBreakAlarmValue = value
+                        : i == 6
+                            ? selectedPTOVacValue = value
+                            : i == 7
+                                ? selectedHornValue = value
+                                : i == 8
+                                    ? selectedRevAlarmCameraValue = value
+                                    : i == 9
+                                        ? selectedLightsHeadValue = value
+                                        : i == 10
+                                            ? selectedLightsTailValue = value
+                                            : i == 11
+                                                ? selectedLightBeaconsValue =
+                                                    value
+                                                : i == 12
+                                                    ? selectedHazardsLightsValue =
+                                                        value
+                                                    : i == 13
+                                                        ? selectedRimsWheelNutsValue =
+                                                            value
+                                                        : i == 14
+                                                            ? selectedCoolantValue =
+                                                                value
+                                                            : i == 15
+                                                                ? selectedWheelsTyresValue =
+                                                                    value
+                                                                : i == 16
+                                                                    ? selectedMirrorsWindscreenValue =
+                                                                        value
+                                                                    : i == 17
+                                                                        ? selectedStructureBodywrkValue =
+                                                                            value
+                                                                        : i == 18
+                                                                            ? selectedWipersValue = value
+                                                                            : i == 19
+                                                                                ? selectedFuelLevelPumbValue = value
+                                                                                : i == 20
+                                                                                    ? selectedFuelLevelTruckValue = value
+                                                                                    : i == 21
+                                                                                        ? selectedSeatSeatBeltValue = value
+                                                                                        : i == 22
+                                                                                            ? selectedParkBarkeValue = value
+                                                                                            : i == 23
+                                                                                                ? selectedFootBrakeValue = value
+                                                                                                : i == 24
+                                                                                                    ? selectedElectricalValue = value
+                                                                                                    : value;
   }
 }

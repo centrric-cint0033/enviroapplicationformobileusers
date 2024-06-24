@@ -98,7 +98,7 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                   borderRadius: BorderRadius.circular(5.0),
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: EdgeInsets.all(8.h),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
@@ -107,15 +107,18 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                           children: [
                             TextSpan(
                               text: 'Category "A" Fault: Vehicle ',
-                              style: TextStyle(color: Colors.grey.shade700),
+                              style: TextStyle(
+                                  color: Colors.grey.shade700, fontSize: 10.w),
                             ),
-                            const TextSpan(
+                            TextSpan(
                               text: ' MUST NOT be operated  ',
-                              style: TextStyle(color: Colors.red),
+                              style:
+                                  TextStyle(color: Colors.red, fontSize: 10.w),
                             ),
-                            const TextSpan(
+                            TextSpan(
                               text: 'until fault is rectified',
-                              style: TextStyle(color: Colors.black),
+                              style: TextStyle(
+                                  color: Colors.black, fontSize: 10.w),
                             ),
                           ],
                         ),
@@ -125,15 +128,18 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                           children: [
                             TextSpan(
                               text: 'Category "B" Fault: Vehicle ',
-                              style: TextStyle(color: Colors.grey.shade700),
+                              style: TextStyle(
+                                  color: Colors.grey.shade700, fontSize: 10.w),
                             ),
-                            const TextSpan(
+                            TextSpan(
                               text: ' May be operated ',
-                              style: TextStyle(color: Colors.blue),
+                              style:
+                                  TextStyle(color: Colors.blue, fontSize: 10.w),
                             ),
-                            const TextSpan(
+                            TextSpan(
                               text: ' corrective action is required',
-                              style: TextStyle(color: Colors.black),
+                              style: TextStyle(
+                                  color: Colors.black, fontSize: 10.w),
                             ),
                           ],
                         ),
@@ -145,307 +151,269 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
               cmCheckBoxRow2(
                 context,
                 "Engine Oil steel",
-                vmSchedule.greenChecked,
-                onChanged: (bool? value) {
-                  if (value != null && value) {
-                    vmSchedule.showPopup(context);
-                  }
+                vmSchedule.selectedEngineOilValue ?? "",
+                onTap: () {
+                  showPopup(
+                      context, vmSchedule.selectedEngineOilValue ?? "", 1);
                 },
               ),
-              cmCheckBoxRow2(context, "Warning System", false,
-                  onChanged: (bool? value) {
-                if (value != null && value) {
-                  vmSchedule.showPopup(context);
-                }
+              cmCheckBoxRow2(
+                context,
+                "Warning System",
+                vmSchedule.selectedWarningSystemValue ?? "",
+                onTap: () {
+                  showPopup(
+                      context, vmSchedule.selectedWarningSystemValue ?? "", 2);
+                },
+              ),
+              cmCheckBoxRow2(
+                context,
+                "Steering",
+                vmSchedule.selectedSteeringValue ?? "",
+                onTap: () {
+                  showPopup(context, vmSchedule.selectedSteeringValue ?? "", 3);
+                },
+              ),
+              cmCheckBoxRow2(
+                context,
+                "Safety/Emerg Stops",
+                vmSchedule.selectedSafetyEmergValue ?? "",
+                onTap: () {
+                  showPopup(
+                      context, vmSchedule.selectedSafetyEmergValue ?? "", 4);
+                },
+              ),
+              cmCheckBoxRow2(
+                context,
+                "Hand Break Alarm",
+                vmSchedule.selectedHandBreakAlarmValue ?? "",
+                onTap: () {
+                  showPopup(
+                      context, vmSchedule.selectedHandBreakAlarmValue ?? "", 5);
+                },
+              ),
+              cmCheckBoxRow2(
+                context,
+                "PTO/Vac.Pumb",
+                vmSchedule.selectedPTOVacValue ?? "",
+                onTap: () {
+                  showPopup(context, vmSchedule.selectedPTOVacValue ?? "", 6);
+                },
+              ),
+              cmCheckBoxRow2(
+                context,
+                "Horn",
+                vmSchedule.selectedHornValue ?? "",
+                onTap: () {
+                  showPopup(context, vmSchedule.selectedHornValue ?? "", 7);
+                },
+              ),
+              cmCheckBoxRow2(
+                context,
+                "Rev alarm/Camera",
+                vmSchedule.selectedRevAlarmCameraValue ?? "",
+                onTap: () {
+                  showPopup(
+                      context, vmSchedule.selectedRevAlarmCameraValue ?? "", 8);
+                },
+              ),
+              cmCheckBoxRow2(
+                context,
+                "Lights-Head",
+                vmSchedule.selectedLightsHeadValue ?? "",
+                onTap: () {
+                  showPopup(
+                      context, vmSchedule.selectedLightsHeadValue ?? "", 9);
+                },
+              ),
+              cmCheckBoxRow2(
+                context,
+                "Lights-Tail",
+                vmSchedule.selectedLightsTailValue ?? "",
+                onTap: () {
+                  showPopup(
+                      context, vmSchedule.selectedLightsTailValue ?? "", 10);
+                },
+              ),
+              cmCheckBoxRow2(
+                context,
+                "Light-beacons",
+                vmSchedule.selectedLightBeaconsValue ?? "",
+                onTap: () {
+                  showPopup(
+                      context, vmSchedule.selectedLightBeaconsValue ?? "", 11);
+                },
+              ),
+              cmCheckBoxRow2(
+                context,
+                "Hazards Lights",
+                vmSchedule.selectedHazardsLightsValue ?? "",
+                onTap: () {
+                  showPopup(
+                      context, vmSchedule.selectedHazardsLightsValue ?? "", 12);
+                },
+              ),
+              cmCheckBoxRow2(
+                context,
+                "Rims & Wheel Nuts",
+                vmSchedule.selectedRimsWheelNutsValue ?? "",
+                onTap: () {
+                  showPopup(
+                      context, vmSchedule.selectedRimsWheelNutsValue ?? "", 13);
+                },
+              ),
+              cmCheckBoxRow2(
+                context,
+                "Coolant",
+                vmSchedule.selectedCoolantValue ?? "",
+                onTap: () {
+                  showPopup(context, vmSchedule.selectedCoolantValue ?? "", 14);
+                },
+              ),
+              cmCheckBoxRow2(
+                context,
+                "Wheels & Tyres",
+                vmSchedule.selectedWheelsTyresValue ?? "",
+                onTap: () {
+                  showPopup(
+                      context, vmSchedule.selectedWheelsTyresValue ?? "", 15);
+                },
+              ),
+              Observer(builder: (context) {
+                return cmCheckBoxRow2(
+                  context,
+                  "Mirrors & Windscreen",
+                  vmSchedule.selectedMirrorsWindscreenValue ?? "",
+                  onTap: () {
+                    showPopup(context,
+                        vmSchedule.selectedMirrorsWindscreenValue ?? "", 16);
+                  },
+                );
               }),
-              cmCheckBoxRow2(context, "Steering", false,
-                  onChanged: (bool? value) {
-                if (value != null && value) {
-                  vmSchedule.showPopup(context);
-                }
-              }),
-              cmCheckBoxRow2(context, "SafEty/Emerg Stops", false,
-                  onChanged: (bool? value) {
-                if (value != null && value) {
-                  vmSchedule.showPopup(context);
-                }
-              }),
-              cmCheckBoxRow2(context, "Hand Break Alarm", false,
-                  onChanged: (bool? value) {
-                if (value != null && value) {
-                  vmSchedule.showPopup(context);
-                }
-              }),
-              cmCheckBoxRow2(context, "PTO/Vac.Pumb", false,
-                  onChanged: (bool? value) {
-                if (value != null && value) {
-                  vmSchedule.showPopup(context);
-                }
-              }),
-              cmCheckBoxRow2(context, "Horn", false, onChanged: (bool? value) {
-                if (value != null && value) {
-                  vmSchedule.showPopup(context);
-                }
-              }),
-              cmCheckBoxRow2(context, "Rev alarm/Camera", false,
-                  onChanged: (bool? value) {
-                if (value != null && value) {
-                  vmSchedule.showPopup(context);
-                }
-              }),
-              cmCheckBoxRow2(context, "Lights-Head", false,
-                  onChanged: (bool? value) {
-                if (value != null && value) {
-                  vmSchedule.showPopup(context);
-                }
-              }),
-              cmCheckBoxRow2(context, "Lights-Tail", false,
-                  onChanged: (bool? value) {
-                if (value != null && value) {
-                  vmSchedule.showPopup(context);
-                }
-              }),
-              cmCheckBoxRow2(context, "Light-beacons", false,
-                  onChanged: (bool? value) {
-                if (value != null && value) {
-                  vmSchedule.showPopup(context);
-                }
-              }),
-              cmCheckBoxRow2(context, "Hazards Lights", false,
-                  onChanged: (bool? value) {
-                if (value != null && value) {
-                  vmSchedule.showPopup(context);
-                }
-              }),
-              cmCheckBoxRow2(context, "Rims & Wheel Nuts", false,
-                  onChanged: (bool? value) {
-                if (value != null && value) {
-                  vmSchedule.showPopup(context);
-                }
-              }),
-              cmCheckBoxRow2(context, "Coolant", false,
-                  onChanged: (bool? value) {
-                if (value != null && value) {
-                  vmSchedule.showPopup(context);
-                }
-              }),
-              cmCheckBoxRow2(context, "Wheels & Tyres", false,
-                  onChanged: (bool? value) {
-                if (value != null && value) {
-                  vmSchedule.showPopup(context);
-                }
-              }),
-              cmCheckBoxRow2(context, "Mirrors & Windscreen", false,
-                  onChanged: (bool? value) {
-                if (value != null && value) {
-                  vmSchedule.showPopup(context);
-                }
-              }),
-              cmCheckBoxRow2(context, "Structure & Bodywork", false,
-                  onChanged: (bool? value) {
-                if (value != null && value) {
-                  vmSchedule.showPopup(context);
-                }
-              }),
-              cmCheckBoxRow2(context, "Wipers", false,
-                  onChanged: (bool? value) {
-                if (value != null && value) {
-                  vmSchedule.showPopup(context);
-                }
-              }),
-              cmCheckBoxRow2(context, "Fuel Level Pumb", false,
-                  onChanged: (bool? value) {
-                if (value != null && value) {
-                  vmSchedule.showPopup(context);
-                }
-              }),
-              cmCheckBoxRow2(context, "Fuel Level Truck", false,
-                  onChanged: (bool? value) {
-                if (value != null && value) {
-                  vmSchedule.showPopup(context);
-                }
-              }),
-              cmCheckBoxRow2(context, "Seat/Seat Belt", false,
-                  onChanged: (bool? value) {
-                if (value != null && value) {
-                  vmSchedule.showPopup(context);
-                }
-              }),
-              cmCheckBoxRow2(context, "Park Barke/Trailer", false,
-                  onChanged: (bool? value) {
-                if (value != null && value) {
-                  vmSchedule.showPopup(context);
-                }
-              }),
-              cmCheckBoxRow2(context, "Foot Brake", false,
-                  onChanged: (bool? value) {
-                if (value != null && value) {
-                  vmSchedule.showPopup(context);
-                }
-              }),
-              cmCheckBoxRow2(context, "Electrical", false,
-                  onChanged: (bool? value) {
-                if (value != null && value) {
-                  vmSchedule.showPopup(context);
-                }
-              }),
+              cmCheckBoxRow2(
+                context,
+                "Structure & Bodywork",
+                vmSchedule.selectedStructureBodywrkValue ?? "",
+                onTap: () {
+                  showPopup(context,
+                      vmSchedule.selectedStructureBodywrkValue ?? "", 17);
+                },
+              ),
+              cmCheckBoxRow2(
+                context,
+                "Wipers",
+                vmSchedule.selectedWipersValue ?? "",
+                onTap: () {
+                  showPopup(context, vmSchedule.selectedWipersValue ?? "", 18);
+                },
+              ),
+              cmCheckBoxRow2(
+                context,
+                "Fuel Level Pumb",
+                vmSchedule.selectedFuelLevelPumbValue ?? "",
+                onTap: () {
+                  showPopup(
+                      context, vmSchedule.selectedFuelLevelPumbValue ?? "", 19);
+                },
+              ),
+              cmCheckBoxRow2(
+                context,
+                "Fuel Level Truck",
+                vmSchedule.selectedFuelLevelTruckValue ?? "",
+                onTap: () {
+                  showPopup(context,
+                      vmSchedule.selectedFuelLevelTruckValue ?? "", 20);
+                },
+              ),
+              cmCheckBoxRow2(
+                context,
+                "Seat/Seat Belt",
+                vmSchedule.selectedSeatSeatBeltValue ?? "",
+                onTap: () {
+                  showPopup(
+                      context, vmSchedule.selectedSeatSeatBeltValue ?? "", 21);
+                },
+              ),
+              cmCheckBoxRow2(
+                context,
+                "Park Barke/Trailer",
+                vmSchedule.selectedParkBarkeValue ?? "",
+                onTap: () {
+                  showPopup(
+                      context, vmSchedule.selectedParkBarkeValue ?? "", 22);
+                },
+              ),
+              cmCheckBoxRow2(
+                context,
+                "Foot Brake",
+                vmSchedule.selectedFootBrakeValue ?? "",
+                onTap: () {
+                  showPopup(
+                      context, vmSchedule.selectedFootBrakeValue ?? "", 23);
+                },
+              ),
+              cmCheckBoxRow2(
+                context,
+                "Electrical",
+                vmSchedule.selectedElectricalValue ?? "",
+                onTap: () {
+                  showPopup(
+                      context, vmSchedule.selectedElectricalValue ?? "", 24);
+                },
+              ),
               const Text('Accessories &Fittings'),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Text(
-                    'Hoses',
-                  ),
-                  Checkbox(
-                    side: const BorderSide(color: Colors.red),
-                    value: false,
-                    onChanged: (bool? value) {
-                      if (value != null && value) {
-                        vmSchedule.showPopup(context);
-                      }
-                      print('Checkbox state changed to: $value');
-                    },
-                    checkColor: Colors.red,
-                  ),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Text(
-                    'Fittings',
-                  ),
-                  Checkbox(
-                    side: const BorderSide(color: Colors.red),
-                    value: false,
-                    onChanged: (bool? value) {
-                      if (value != null && value) {
-                        vmSchedule.showPopup(context);
-                      }
-                      print('Checkbox state changed to: $value');
-                    },
-                    checkColor: Colors.red,
-                  ),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Text(
-                    'First Aid Kit',
-                  ),
-                  Checkbox(
-                    side: const BorderSide(color: Colors.red),
-                    value: false,
-                    onChanged: (bool? value) {
-                      if (value != null && value) {
-                        vmSchedule.showPopup(context);
-                      }
-                      print('Checkbox state changed to: $value');
-                    },
-                    checkColor: Colors.red,
-                  ),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Text(
-                    'PPE',
-                  ),
-                  Checkbox(
-                    side: const BorderSide(color: Colors.red),
-                    value: false,
-                    onChanged: (bool? value) {
-                      if (value != null && value) {
-                        vmSchedule.showPopup(context);
-                      }
-                      print('Checkbox state changed to: $value');
-                    },
-                    checkColor: Colors.red,
-                  ),
-                ],
-              ),
+              cmCheckBoxRow3("Hoses", vmSchedule.selectHosesCheckbox,
+                  onChanged: (bool? value) {
+                if (value != null) {
+                  vmSchedule.updateCheckboxValueFn1(value);
+                }
+              }),
+              cmCheckBoxRow3("Fittings", vmSchedule.selectFittingsCheckbox,
+                  onChanged: (bool? value) {
+                if (value != null) {
+                  vmSchedule.updateCheckboxValueFn2(value);
+                }
+              }),
+              cmCheckBoxRow3(
+                  "First Aid Kit", vmSchedule.selectFirstAidKitCheckbox,
+                  onChanged: (bool? value) {
+                if (value != null) {
+                  vmSchedule.updateCheckboxValueFn3(value);
+                }
+              }),
+              cmCheckBoxRow3("PPE", vmSchedule.selectPPECheckbox,
+                  onChanged: (bool? value) {
+                if (value != null) {
+                  vmSchedule.updateCheckboxValueFn4(value);
+                }
+              }),
               const Text(
-                'Fire Estingusher(Date Collabrated)',
+                'Fire Estinguisher(Date Calibrated):',
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Text(
-                    'GoldenHose',
-                  ),
-                  Checkbox(
-                    side: const BorderSide(color: Colors.red),
-                    value: false,
-                    onChanged: (bool? value) {
-                      if (value != null && value) {
-                        vmSchedule.showPopup(context);
-                      }
-                      print('Checkbox state changed to: $value');
-                    },
-                    checkColor: Colors.red,
-                  ),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Text(
-                    'Gattic LItters',
-                  ),
-                  Checkbox(
-                    side: const BorderSide(color: Colors.red),
-                    value: false,
-                    onChanged: (bool? value) {
-                      if (value != null && value) {
-                        vmSchedule.showPopup(context);
-                      }
-                      print('Checkbox state changed to: $value');
-                    },
-                    checkColor: Colors.red,
-                  ),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Text(
-                    'Bucket/Rags',
-                  ),
-                  Observer(builder: (_) {
-                    return Checkbox(
-                      side: const BorderSide(color: Colors.red),
-                      value: vmSchedule.greenchecked,
-                      onChanged: (bool? value) {
-                        if (value != null && value) {
-                          vmSchedule.showPopup(context);
-                        }
-                        print('Checkbox state changed to: $value');
-                      },
-                      checkColor: Colors.red,
-                    );
-                  }),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Text(
-                    'Split Kit',
-                  ),
-                  Checkbox(
-                    side: const BorderSide(color: Colors.red),
-                    value: false,
-                    onChanged: (bool? value) {
-                      if (value != null && value) {
-                        vmSchedule.showPopup(context);
-                      }
-                    },
-                    checkColor: Colors.red,
-                  ),
-                ],
-              ),
+              cmCheckBoxRow3("Garden Hose", vmSchedule.selectGardenHoseCheckbox,
+                  onChanged: (bool? value) {
+                if (value != null) {
+                  vmSchedule.updateCheckboxValueFn5(value);
+                }
+              }),
+              cmCheckBoxRow3("Gattic Lifters", vmSchedule.selectGatticCheckbox,
+                  onChanged: (bool? value) {
+                if (value != null) {
+                  vmSchedule.updateCheckboxValueFn6(value);
+                }
+              }),
+              cmCheckBoxRow3("Bucket/Rags", vmSchedule.selectBucketRagsCheckbox,
+                  onChanged: (bool? value) {
+                if (value != null) {
+                  vmSchedule.updateCheckboxValueFn7(value);
+                }
+              }),
+              cmCheckBoxRow3("Spill Kit", vmSchedule.selectSpillKitCheckbox,
+                  onChanged: (bool? value) {
+                if (value != null) {
+                  vmSchedule.updateCheckboxValueFn8(value);
+                }
+              }),
               sized0hx10,
               Container(
                 decoration: BoxDecoration(
@@ -490,14 +458,30 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                 children: [
                   Checkbox(
                     side: const BorderSide(color: Colors.red),
-                    value: false,
-                    onChanged: (bool? value) {},
+                    activeColor: Colors.white,
+                    value: vmSchedule.selectverifyCheckbox1,
+                    onChanged: (bool? value) {
+                      if (value != null) {
+                        vmSchedule.updateCheckboxValueFn9(value);
+                      }
+                    },
                     checkColor: Colors.red,
                   ),
-                  const Expanded(
-                    child: Text(
-                      'I have conducted the abouve pre_start  checklist and satisfied that the vehiclke is safe and readyb to operatate.',
-                      style: TextStyle(fontSize: 13),
+                  Expanded(
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: Text(
+                            'I have conducted the abouve pre_start  checklist and satisfied that the vehiclke is safe and ready to operatate.',
+                            style: TextStyle(fontSize: 10.w),
+                          ),
+                        ),
+                        Icon(
+                          Icons.star,
+                          size: 9.w,
+                          color: Colors.red,
+                        ),
+                      ],
                     ),
                   ),
                 ],
@@ -508,14 +492,30 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                 children: [
                   Checkbox(
                     side: const BorderSide(color: Colors.red),
-                    value: false,
-                    onChanged: (bool? value) {},
+                    activeColor: Colors.white,
+                    value: vmSchedule.selectverifyCheckbox2,
+                    onChanged: (bool? value) {
+                      if (value != null) {
+                        vmSchedule.updateCheckboxValueFn10(value);
+                      }
+                    },
                     checkColor: Colors.red,
                   ),
-                  const Expanded(
-                    child: Text(
-                      'I have conducted the abouve pre_start  checklist and satisfied that the vehiclke is safe and readyb to operatate.',
-                      style: TextStyle(fontSize: 13),
+                  Expanded(
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: Text(
+                            'I have reported all faults in the appropriate section and notified the authorised personnel',
+                            style: TextStyle(fontSize: 10.w),
+                          ),
+                        ),
+                        Icon(
+                          Icons.star,
+                          size: 9.w,
+                          color: Colors.red,
+                        ),
+                      ],
                     ),
                   ),
                 ],
@@ -552,7 +552,6 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
 }
 
 void shedulecommentfunction(BuildContext context) {
-  print('calenderclicked');
   context.router.pushNamed(RouteNames.rshedulecommandstatus);
 }
 
@@ -630,7 +629,10 @@ Widget cmCheckBoxRow(String text, bool value,
         activeColor: Colors.white,
         materialTapTargetSize: MaterialTapTargetSize.padded,
       ),
-      Text(text),
+      Text(
+        text,
+        style: TextStyle(fontSize: 10.w),
+      ),
       Icon(
         Icons.star,
         size: 9.w,
@@ -640,21 +642,158 @@ Widget cmCheckBoxRow(String text, bool value,
   );
 }
 
-Widget cmCheckBoxRow2(BuildContext context, String text, bool value,
+Widget cmCheckBoxRow2(
+  BuildContext context,
+  String title,
+  String value, {
+  required void Function()? onTap,
+}) {
+  return Padding(
+    padding: const EdgeInsets.all(8.0),
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(
+          title,
+          style: const TextStyle(
+              color: Colors.black), // Use the color parameter for text color
+        ),
+        InkWell(
+          onTap: onTap,
+          child: Container(
+            height: 13.h,
+            width: 13.h,
+            decoration: BoxDecoration(
+                border: Border.all(),
+                color: value == "No issue"
+                    ? Colors.green.shade900
+                    : value == "categoryA"
+                        ? Colors.red
+                        : Colors.blue),
+            child: Center(
+                child: Icon(
+              Icons.check,
+              color: Colors.white,
+              size: 10.h,
+            )),
+          ),
+        ),
+      ],
+    ),
+  );
+}
+
+Widget cmCheckBoxRow3(String text, bool value,
     {required void Function(bool?)? onChanged}) {
   return Row(
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
     children: [
-      Text(text),
-      Observer(builder: (_) {
-        return Checkbox(
-          activeColor: Colors.white,
-          side: const BorderSide(color: Colors.black),
-          value: value,
-          onChanged: onChanged,
-          checkColor: Colors.green,
-        );
-      }),
+      Text(
+        text,
+        style: TextStyle(fontSize: 10.w),
+      ),
+      Checkbox(
+        side: const BorderSide(color: Colors.red),
+        value: value,
+        onChanged: onChanged,
+        checkColor: Colors.red,
+        activeColor: Colors.white,
+        materialTapTargetSize: MaterialTapTargetSize.padded,
+      ),
     ],
+  );
+}
+
+showPopup(BuildContext context, String value, int i) {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10.0),
+          side: const BorderSide(color: Colors.black),
+        ),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            InkWell(
+              onTap: () {
+                vmSchedule.noIssueOnTap(value, i);
+                Navigator.pop(context);
+              },
+              child: Row(
+                children: [
+                  Text(
+                    'No issue',
+                    style: TextStyle(
+                        color: Colors.green.shade900,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  Checkbox(
+                    activeColor: Colors.green,
+                    materialTapTargetSize: MaterialTapTargetSize.padded,
+                    value: true,
+                    onChanged: (values) {
+                      vmSchedule.noIssueOnTap(value, i);
+                      Navigator.pop(context);
+                    },
+                  ),
+                ],
+              ),
+            ),
+            InkWell(
+              onTap: () {
+                vmSchedule.categoryAOnTap(value, i);
+                Navigator.pop(context);
+              },
+              child: Row(
+                children: [
+                  const Text(
+                    'Category A fault',
+                    style: TextStyle(
+                      color: Colors.red,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Checkbox(
+                    activeColor: Colors.red,
+                    materialTapTargetSize: MaterialTapTargetSize.padded,
+                    value: true,
+                    onChanged: (valus) {
+                      vmSchedule.categoryAOnTap(value, i);
+                      Navigator.pop(context);
+                    },
+                  ),
+                ],
+              ),
+            ),
+            InkWell(
+              onTap: () {
+                vmSchedule.categoryBOnTap(value, i);
+                Navigator.pop(context);
+              },
+              child: Row(
+                children: [
+                  const Text(
+                    'Category B fault',
+                    style: TextStyle(
+                        color: Colors.blue, fontWeight: FontWeight.bold),
+                  ),
+                  Checkbox(
+                    activeColor: Colors.blue,
+                    materialTapTargetSize: MaterialTapTargetSize.padded,
+                    value: true,
+                    onChanged: (values) {
+                      vmSchedule.categoryBOnTap(value, i);
+                      Navigator.pop(context);
+                    },
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      );
+    },
   );
 }
