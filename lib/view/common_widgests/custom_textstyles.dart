@@ -2,7 +2,12 @@
 // import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+cmTextSyle(){
+  TextStyle(fontSize: 10.w,color: Colors.black);
+}
 // // import '../core/app_export.dart';
 
 // /// A collection of pre-defined text styles for customizing text appearance,

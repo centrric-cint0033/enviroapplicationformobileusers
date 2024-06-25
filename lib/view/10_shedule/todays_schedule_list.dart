@@ -16,7 +16,7 @@ class TodaysScheduleList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Observer(builder: (context) {
       return SizedBox(
-        height: 210.w,
+        height: 230.w,
         child: ListView.builder(
           shrinkWrap: true,
           scrollDirection: Axis.horizontal,
@@ -140,7 +140,7 @@ class TodaysScheduleList extends StatelessWidget {
 
   Widget cmCard(BuildContext context, SheduleCardRespModel schedule) {
     return Container(
-      height: 64.w,
+      height: 72.w,
       width: MediaQuery.of(context).size.width - 60.h,
       decoration: BoxDecoration(
           color: Appthemes.cPrimary, borderRadius: BorderRadius.circular(10.h)),
@@ -155,58 +155,72 @@ class TodaysScheduleList extends StatelessWidget {
           ),
         ),
         sized0hx05,
-        Padding(
-          padding: EdgeInsets.only(left: 4.h),
-          child: Container(
-            height: 40.w,
-            width: MediaQuery.of(context).size.width / 3,
-            decoration: BoxDecoration(
-                color: Colors.white, borderRadius: BorderRadius.circular(5.h)),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Row(children: [
-                  SizedBox(
-                    height: 20.w,
-                    width: 20.w,
-                    child: DecoratedBox(
-                      decoration: BoxDecoration(
-                          color: Colors.grey.shade700, shape: BoxShape.circle),
-                      child: dpImage("${schedule.drivers?[0].dp}"),
-                    ),
-                  ),
-                  Expanded(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "${schedule.drivers?[0].name}",
-                          style: TextStyle(fontSize: 8.h),
-                        ),
-                        Text(
-                          "${schedule.drivers?[0].registration}",
-                          style: TextStyle(fontSize: 8.h),
-                        )
-                      ],
-                    ),
-                  )
-                ]),
-                Container(
+        Expanded(
+          child: ListView.builder(
+            itemCount: schedule.drivers?.length,
+            scrollDirection: Axis.horizontal,
+            itemBuilder: (context, index) {
+              return Padding(
+                padding: EdgeInsets.only(left: 4.h),
+                child: Container(
+                  height: 40.w,
+                  width: MediaQuery.of(context).size.width / 3,
                   decoration: BoxDecoration(
-                      color: Colors.grey.shade300,
-                      borderRadius: BorderRadius.circular(12.h)),
-                  child: Text(
-                    schedule.primaryVehicleDriver == true
-                        ? "     Primary     "
-                        : "",
-                    style: TextStyle(fontSize: 8.h),
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(5.h)),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Row(children: [
+                        SizedBox(
+                          height: 20.w,
+                          width: 20.w,
+                          child: DecoratedBox(
+                            decoration: BoxDecoration(
+                                color: Colors.grey.shade700,
+                                shape: BoxShape.circle),
+                            child: dpImage("${schedule.drivers?[index].dp}"),
+                          ),
+                        ),
+                        SizedBox(
+                          width: 5.h,
+                        ),
+                        Expanded(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "${schedule.drivers?[index].name}",
+                                style: TextStyle(fontSize: 8.h),
+                              ),
+                              Text(
+                                "${schedule.drivers?[index].registration}",
+                                style: TextStyle(fontSize: 8.h),
+                              )
+                            ],
+                          ),
+                        )
+                      ]),
+                      schedule.primaryVehicleDriver == true
+                          ? Container(
+                              decoration: BoxDecoration(
+                                  color: Colors.grey.shade300,
+                                  borderRadius: BorderRadius.circular(12.h)),
+                              child: Text(
+                                "     Primary     ",
+                                style: TextStyle(fontSize: 8.h),
+                              ),
+                            )
+                          : const SizedBox.shrink()
+                    ],
                   ),
-                )
-              ],
-            ),
+                ),
+              );
+            },
           ),
-        )
+        ),
+        sized0hx05,
       ]),
     );
   }

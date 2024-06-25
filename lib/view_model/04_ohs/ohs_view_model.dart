@@ -204,11 +204,6 @@ abstract class OHSViewModelBase with Store {
   Future<void> ohsFolerRenameApi(
       BuildContext context, String folderName, int id) async {
     renameResponse = renameResponse.copyWith(errors: null, loading: true);
-
-    print(id);
-    print(
-      folderName,
-    );
     final result = await ohsService.ohsFolderRenameServiceApi(folderName, id);
     return result.fold(
       (l) {

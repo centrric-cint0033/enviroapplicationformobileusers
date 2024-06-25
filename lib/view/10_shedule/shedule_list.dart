@@ -1,8 +1,8 @@
+import 'package:auto_route/auto_route.dart';
+import 'package:enviro_mobile_application/Routepage/approutes.gr.dart';
 import 'package:enviro_mobile_application/utilis/Appthemes.dart';
 import 'package:enviro_mobile_application/utilis/constant.dart';
-import 'package:enviro_mobile_application/view/10_shedule/schedule_main_page.dart';
 import 'package:enviro_mobile_application/view_model/11_shedule/shedule_page_view_model.dart';
-import 'package:enviro_mobile_application/widgets/ww_response_handler.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -15,137 +15,133 @@ class ScheduleList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        sheduledetailfunction4(
-          context,
-        );
-      },
-      child: Observer(builder: (_) {
-        return WWResponseHandler(
-          data: vmSchedule.sheduleweekResponse,
-          isEmpty: vmSchedule.sheduleweekResponse.data?.isEmpty ?? true,
-          onTap: () => vmSchedule.shedulecardviewmodelweekfunction(),
-          child: Container(
-            child: ListView.separated(
-                padding: const EdgeInsets.symmetric(
-                  vertical: 2,
-                  horizontal: 2,
-                ),
-                separatorBuilder: (context, index) => sized0hx10,
-                shrinkWrap: true,
-                itemCount: vmSchedule.sheduleweekResponse.data?.length ?? 0,
-                itemBuilder: (BuildContext context, int i) {
-                  return SingleChildScrollView(
-                    child: GestureDetector(
-                      onTap: () {
-                        sheduledetailfunction(
-                            context,
-                            vmSchedule.sheduleweekResponse.data?[i].id ?? '',
-                            i);
-                      },
-                      child: Container(
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10.h),
-                            border: Border.all(color: Colors.grey)),
-                        child: Padding(
-                          padding: EdgeInsets.only(left: 10.w, right: 10.w),
-                          child: Column(
+    return SizedBox(
+      child: ListView.separated(
+          padding: const EdgeInsets.symmetric(
+            vertical: 2,
+            horizontal: 2,
+          ),
+          physics: const NeverScrollableScrollPhysics(),
+          separatorBuilder: (context, index) => sized0hx10,
+          shrinkWrap: true,
+          itemCount: vmSchedule.sheduleweekResponse.data?.length ?? 0,
+          itemBuilder: (BuildContext context, int i) {
+            return GestureDetector(
+              onTap: () {
+                context.router.push(SheduledetailRoute(
+                    id: vmSchedule.sheduleweekResponse.data?[i].id ?? 0,
+                    i: i,
+                    driversIndex: vmSchedule.driversIndex));
+              },
+              child: Container(
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10.h),
+                    border: Border.all(color: Colors.grey)),
+                child: Padding(
+                  padding: EdgeInsets.only(left: 10.w, right: 10.w),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            vmSchedule.sheduleweekResponse.data?[i].client
+                                    ?.clientName ??
+                                '',
+                            style: TextStyle(fontSize: 11.w),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(right: 8.w),
+                            child: Text(
+                                'job ${vmSchedule.sheduleweekResponse.data?[i].job ?? ''}',
+                                style: TextStyle(fontSize: 9.w)),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
+                              Text(
+                                  "${convertTimeTo12HourFormat(vmSchedule.sheduleweekResponse.data?[i].startTime ?? "")}-${convertTimeTo12HourFormat(vmSchedule.sheduleweekResponse.data?[i].endTime ?? "")}",
+                                  style: TextStyle(fontSize: 9.w)),
+                              Text(
+                                  "${DateFormat('dd-MM-yyyy').format(
+                                    vmSchedule.shedulecardResponse.data![i]
+                                        .startDate!,
+                                  )}-${DateFormat('dd-MM-yyyy').format(vmSchedule.shedulecardResponse.data![i].endDate!)}",
+                                  style: TextStyle(fontSize: 9.w))
+                            ],
+                          ),
+                          Container(
+                            height: 25.w,
+                            width: 60.w,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(15.w),
+                                border: Border.all(color: Colors.grey)),
+                            child: Center(
+                              child: Text(
+                                  "${vmSchedule.sheduleweekResponse.data?[i].status}",
+                                  style: TextStyle(fontSize: 9.w)),
+                            ),
+                          )
+                          // ElevatedButton(
+                          //   onPressed: () {
+                          //     sheduledetailfunction(
+                          //         context,
+                          //         vmSchedule.sheduleweekResponse
+                          //                 .data?[i].id ??
+                          //             '',
+                          //         i);
+                          //   },
+                          //   style: ElevatedButton.styleFrom(
+                          //     foregroundColor: Colors.black,
+                          //     backgroundColor: Colors.white,
+                          //   ),
+                          //   child: const Text('pending'),
+                          // ),
+                        ],
+                      ),
+                      Container(
+                        decoration: BoxDecoration(
+                            color: Appthemes.cPrimary,
+                            borderRadius: BorderRadius.circular(10.h)),
+                        child: Padding(
+                          padding: EdgeInsets.only(left: 8.w, right: 8.w),
+                          child: Column(
+                            children: [
+                              sized0hx03,
                               Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
-                                    vmSchedule.sheduleweekResponse.data?[i]
-                                            .client?.clientName ??
-                                        '',
-                                    style: TextStyle(fontSize: 11.w),
+                                    'Drivers',
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 11.h,
+                                        fontWeight: FontWeight.bold),
                                   ),
-                                  Padding(
-                                    padding: EdgeInsets.only(right: 8.w),
-                                    child: Text(
-                                      'job ${vmSchedule.sheduleweekResponse.data?[i].job ?? ''}',
-                                    ),
+                                  Text(
+                                    'Vehicle assigned',
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 11.h,
+                                        fontWeight: FontWeight.bold),
                                   ),
                                 ],
                               ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                              ListView.builder(
+                                shrinkWrap: true,
+                                itemCount: vmSchedule.shedulecardResponse
+                                    .data?[i].drivers?.length,
+                                itemBuilder: (context, index) {
+                                  vmSchedule.driversIndex = index;
+                                  return Column(
                                     children: [
-                                      Text(
-                                        "${convertTimeTo12HourFormat(vmSchedule.sheduleweekResponse.data?[i].startTime ?? "")}-${convertTimeTo12HourFormat(vmSchedule.sheduleweekResponse.data?[i].endTime ?? "")}",
-                                      ),
-                                      Text(
-                                        "${DateFormat('dd-MM-yyyy').format(
-                                          vmSchedule.shedulecardResponse
-                                              .data![i].startDate!,
-                                        )}-${DateFormat('dd-MM-yyyy').format(vmSchedule.shedulecardResponse.data![i].endDate!)}",
-                                      )
-                                    ],
-                                  ),
-                                  Container(
-                                    height: 25.w,
-                                    width: 60.w,
-                                    decoration: BoxDecoration(
-                                        borderRadius:
-                                            BorderRadius.circular(15.w),
-                                        border: Border.all(color: Colors.grey)),
-                                    child: Center(
-                                      child: Text(
-                                          "${vmSchedule.sheduleweekResponse.data?[i].status}"),
-                                    ),
-                                  )
-                                  // ElevatedButton(
-                                  //   onPressed: () {
-                                  //     sheduledetailfunction(
-                                  //         context,
-                                  //         vmSchedule.sheduleweekResponse
-                                  //                 .data?[i].id ??
-                                  //             '',
-                                  //         i);
-                                  //   },
-                                  //   style: ElevatedButton.styleFrom(
-                                  //     foregroundColor: Colors.black,
-                                  //     backgroundColor: Colors.white,
-                                  //   ),
-                                  //   child: const Text('pending'),
-                                  // ),
-                                ],
-                              ),
-                              Container(
-                                decoration: BoxDecoration(
-                                    color: Appthemes.cPrimary,
-                                    borderRadius: BorderRadius.circular(10.h)),
-                                child: Padding(
-                                  padding:
-                                      EdgeInsets.only(left: 8.w, right: 8.w),
-                                  child: Column(
-                                    children: [
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text(
-                                            'Drivers',
-                                            style: TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 13.h),
-                                          ),
-                                          Text(
-                                            'Vehicle assigned',
-                                            style: TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 13.h),
-                                          ),
-                                        ],
-                                      ),
                                       const Divider(
                                         color: Colors.white,
                                         thickness: 1,
@@ -159,12 +155,12 @@ class ScheduleList extends StatelessWidget {
                                               vmSchedule
                                                       .shedulecardResponse
                                                       .data?[i]
-                                                      .drivers?[0]
+                                                      .drivers?[index]
                                                       .name ??
                                                   '',
-                                              style: const TextStyle(
-                                                color: Colors.white,
-                                              ),
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 9.w),
                                             );
                                           }),
                                           const Divider(
@@ -174,30 +170,31 @@ class ScheduleList extends StatelessWidget {
                                             vmSchedule
                                                     .shedulecardResponse
                                                     .data?[i]
-                                                    .drivers?[0]
+                                                    .drivers?[index]
                                                     .registration ??
                                                 '',
-                                            style: const TextStyle(
-                                              color: Colors.white,
-                                            ),
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 9.w),
                                           ),
                                         ],
                                       ),
                                     ],
-                                  ),
-                                ),
+                                  );
+                                },
                               ),
-                              sized0hx05,
+                              sized0hx03,
                             ],
                           ),
                         ),
                       ),
-                    ),
-                  );
-                }),
-          ),
-        );
-      }),
+                      sized0hx05,
+                    ],
+                  ),
+                ),
+              ),
+            );
+          }),
     );
   }
 }

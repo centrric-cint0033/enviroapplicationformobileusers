@@ -121,7 +121,7 @@ _$VehicleModelImpl _$$VehicleModelImplFromJson(Map<String, dynamic> json) =>
       signature: json['signature'],
       dateNow: json['date_now'],
       reportedFaultString: json['reported_fault_string'],
-      driverName: (json['driver_name'] as num?)?.toInt(),
+      driverName: json['driver_name'] as String?,
       folders: (json['folders'] as List<dynamic>?)
           ?.map((e) => Folder.fromJson(e as Map<String, dynamic>))
           .toList(),

@@ -25,6 +25,38 @@ mixin _$ScheduleViewModel on ScheduleViewModelBase, Store {
     });
   }
 
+  late final _$containerHeightAtom =
+      Atom(name: 'ScheduleViewModelBase.containerHeight', context: context);
+
+  @override
+  bool get containerHeight {
+    _$containerHeightAtom.reportRead();
+    return super.containerHeight;
+  }
+
+  @override
+  set containerHeight(bool value) {
+    _$containerHeightAtom.reportWrite(value, super.containerHeight, () {
+      super.containerHeight = value;
+    });
+  }
+
+  late final _$driversIndexAtom =
+      Atom(name: 'ScheduleViewModelBase.driversIndex', context: context);
+
+  @override
+  int get driversIndex {
+    _$driversIndexAtom.reportRead();
+    return super.driversIndex;
+  }
+
+  @override
+  set driversIndex(int value) {
+    _$driversIndexAtom.reportWrite(value, super.driversIndex, () {
+      super.driversIndex = value;
+    });
+  }
+
   late final _$pickedFilesAtom =
       Atom(name: 'ScheduleViewModelBase.pickedFiles', context: context);
 
@@ -70,6 +102,24 @@ mixin _$ScheduleViewModel on ScheduleViewModelBase, Store {
   set selectedDay(DateTime? value) {
     _$selectedDayAtom.reportWrite(value, super.selectedDay, () {
       super.selectedDay = value;
+    });
+  }
+
+  late final _$selectedFireExtinguisherDateAtom = Atom(
+      name: 'ScheduleViewModelBase.selectedFireExtinguisherDate',
+      context: context);
+
+  @override
+  DateTime? get selectedFireExtinguisherDate {
+    _$selectedFireExtinguisherDateAtom.reportRead();
+    return super.selectedFireExtinguisherDate;
+  }
+
+  @override
+  set selectedFireExtinguisherDate(DateTime? value) {
+    _$selectedFireExtinguisherDateAtom
+        .reportWrite(value, super.selectedFireExtinguisherDate, () {
+      super.selectedFireExtinguisherDate = value;
     });
   }
 
@@ -296,6 +346,24 @@ mixin _$ScheduleViewModel on ScheduleViewModelBase, Store {
   set commentResponse(ApiResponse<SheduleCommentModel> value) {
     _$commentResponseAtom.reportWrite(value, super.commentResponse, () {
       super.commentResponse = value;
+    });
+  }
+
+  late final _$addPreInspectionScheduleResponseAtom = Atom(
+      name: 'ScheduleViewModelBase.addPreInspectionScheduleResponse',
+      context: context);
+
+  @override
+  ApiResponse<dynamic> get addPreInspectionScheduleResponse {
+    _$addPreInspectionScheduleResponseAtom.reportRead();
+    return super.addPreInspectionScheduleResponse;
+  }
+
+  @override
+  set addPreInspectionScheduleResponse(ApiResponse<dynamic> value) {
+    _$addPreInspectionScheduleResponseAtom
+        .reportWrite(value, super.addPreInspectionScheduleResponse, () {
+      super.addPreInspectionScheduleResponse = value;
     });
   }
 
@@ -1061,8 +1129,30 @@ mixin _$ScheduleViewModel on ScheduleViewModelBase, Store {
         () => super.shedulecommentviewmodelfunction(id: id, comment: comment));
   }
 
+  late final _$addPreInspectionScheduleAsyncAction = AsyncAction(
+      'ScheduleViewModelBase.addPreInspectionSchedule',
+      context: context);
+
+  @override
+  Future<void> addPreInspectionSchedule(
+      {required BuildContext context, required VehicleModel data}) {
+    return _$addPreInspectionScheduleAsyncAction.run(
+        () => super.addPreInspectionSchedule(context: context, data: data));
+  }
+
   late final _$ScheduleViewModelBaseActionController =
       ActionController(name: 'ScheduleViewModelBase', context: context);
+
+  @override
+  dynamic datePickerFn(dynamic date) {
+    final _$actionInfo = _$ScheduleViewModelBaseActionController.startAction(
+        name: 'ScheduleViewModelBase.datePickerFn');
+    try {
+      return super.datePickerFn(date);
+    } finally {
+      _$ScheduleViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
 
   @override
   void updategreencheckedValue(dynamic newValue) {
@@ -1244,9 +1334,12 @@ mixin _$ScheduleViewModel on ScheduleViewModelBase, Store {
   String toString() {
     return '''
 signColor: ${signColor},
+containerHeight: ${containerHeight},
+driversIndex: ${driversIndex},
 pickedFiles: ${pickedFiles},
 focusedDay: ${focusedDay},
 selectedDay: ${selectedDay},
+selectedFireExtinguisherDate: ${selectedFireExtinguisherDate},
 selectedsignaturecameraImage: ${selectedsignaturecameraImage},
 isImageSelected: ${isImageSelected},
 selectedcameraImage: ${selectedcameraImage},
@@ -1261,6 +1354,7 @@ shedulecardResponse: ${shedulecardResponse},
 sheduleweekResponse: ${sheduleweekResponse},
 signatureResponse: ${signatureResponse},
 commentResponse: ${commentResponse},
+addPreInspectionScheduleResponse: ${addPreInspectionScheduleResponse},
 isMinimized: ${isMinimized},
 selectedEngineOilValue: ${selectedEngineOilValue},
 selectedWarningSystemValue: ${selectedWarningSystemValue},

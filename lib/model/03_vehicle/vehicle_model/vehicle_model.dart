@@ -42,7 +42,7 @@ class VehicleModel with _$VehicleModel {
     @JsonKey(name: 'created_date_time') DateTime? createdDateTime,
     @JsonKey(name: 'edited_date_time') DateTime? editedDateTime,
     String? date,
-    dynamic? time,
+    dynamic time,
     @JsonKey(name: 'truck_rego') String? truckRego,
     @JsonKey(name: 'current_reading_before') String? currentReadingBefore,
     @JsonKey(name: 'reading_after_filling') String? readingAfterFilling,
@@ -118,7 +118,7 @@ class VehicleModel with _$VehicleModel {
     dynamic signature,
     @JsonKey(name: 'date_now') dynamic dateNow,
     @JsonKey(name: 'reported_fault_string') dynamic reportedFaultString,
-    @JsonKey(name: 'driver_name') int? driverName,
+    @JsonKey(name: 'driver_name') String? driverName,
     List<Folder>? folders,
     @JsonKey(name: 'parent_folder') int? parentFolder,
   }) = _VehicleModel;

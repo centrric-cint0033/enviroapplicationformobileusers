@@ -66,7 +66,7 @@ mixin _$VehicleModel {
   @JsonKey(name: 'edited_date_time')
   DateTime? get editedDateTime => throw _privateConstructorUsedError;
   String? get date => throw _privateConstructorUsedError;
-  dynamic? get time => throw _privateConstructorUsedError;
+  dynamic get time => throw _privateConstructorUsedError;
   @JsonKey(name: 'truck_rego')
   String? get truckRego => throw _privateConstructorUsedError;
   @JsonKey(name: 'current_reading_before')
@@ -197,7 +197,7 @@ mixin _$VehicleModel {
   @JsonKey(name: 'reported_fault_string')
   dynamic get reportedFaultString => throw _privateConstructorUsedError;
   @JsonKey(name: 'driver_name')
-  int? get driverName => throw _privateConstructorUsedError;
+  String? get driverName => throw _privateConstructorUsedError;
   List<Folder>? get folders => throw _privateConstructorUsedError;
   @JsonKey(name: 'parent_folder')
   int? get parentFolder => throw _privateConstructorUsedError;
@@ -247,7 +247,7 @@ abstract class $VehicleModelCopyWith<$Res> {
       @JsonKey(name: 'created_date_time') DateTime? createdDateTime,
       @JsonKey(name: 'edited_date_time') DateTime? editedDateTime,
       String? date,
-      dynamic? time,
+      dynamic time,
       @JsonKey(name: 'truck_rego') String? truckRego,
       @JsonKey(name: 'current_reading_before') String? currentReadingBefore,
       @JsonKey(name: 'reading_after_filling') String? readingAfterFilling,
@@ -323,7 +323,7 @@ abstract class $VehicleModelCopyWith<$Res> {
       dynamic signature,
       @JsonKey(name: 'date_now') dynamic dateNow,
       @JsonKey(name: 'reported_fault_string') dynamic reportedFaultString,
-      @JsonKey(name: 'driver_name') int? driverName,
+      @JsonKey(name: 'driver_name') String? driverName,
       List<Folder>? folders,
       @JsonKey(name: 'parent_folder') int? parentFolder});
 }
@@ -584,7 +584,7 @@ class _$VehicleModelCopyWithImpl<$Res, $Val extends VehicleModel>
       time: freezed == time
           ? _value.time
           : time // ignore: cast_nullable_to_non_nullable
-              as dynamic?,
+              as dynamic,
       truckRego: freezed == truckRego
           ? _value.truckRego
           : truckRego // ignore: cast_nullable_to_non_nullable
@@ -884,7 +884,7 @@ class _$VehicleModelCopyWithImpl<$Res, $Val extends VehicleModel>
       driverName: freezed == driverName
           ? _value.driverName
           : driverName // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as String?,
       folders: freezed == folders
           ? _value.folders
           : folders // ignore: cast_nullable_to_non_nullable
@@ -938,7 +938,7 @@ abstract class _$$VehicleModelImplCopyWith<$Res>
       @JsonKey(name: 'created_date_time') DateTime? createdDateTime,
       @JsonKey(name: 'edited_date_time') DateTime? editedDateTime,
       String? date,
-      dynamic? time,
+      dynamic time,
       @JsonKey(name: 'truck_rego') String? truckRego,
       @JsonKey(name: 'current_reading_before') String? currentReadingBefore,
       @JsonKey(name: 'reading_after_filling') String? readingAfterFilling,
@@ -1014,7 +1014,7 @@ abstract class _$$VehicleModelImplCopyWith<$Res>
       dynamic signature,
       @JsonKey(name: 'date_now') dynamic dateNow,
       @JsonKey(name: 'reported_fault_string') dynamic reportedFaultString,
-      @JsonKey(name: 'driver_name') int? driverName,
+      @JsonKey(name: 'driver_name') String? driverName,
       List<Folder>? folders,
       @JsonKey(name: 'parent_folder') int? parentFolder});
 }
@@ -1273,7 +1273,7 @@ class __$$VehicleModelImplCopyWithImpl<$Res>
       time: freezed == time
           ? _value.time
           : time // ignore: cast_nullable_to_non_nullable
-              as dynamic?,
+              as dynamic,
       truckRego: freezed == truckRego
           ? _value.truckRego
           : truckRego // ignore: cast_nullable_to_non_nullable
@@ -1573,7 +1573,7 @@ class __$$VehicleModelImplCopyWithImpl<$Res>
       driverName: freezed == driverName
           ? _value.driverName
           : driverName // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as String?,
       folders: freezed == folders
           ? _value._folders
           : folders // ignore: cast_nullable_to_non_nullable
@@ -1794,7 +1794,7 @@ class _$VehicleModelImpl implements _VehicleModel {
   @override
   final String? date;
   @override
-  final dynamic? time;
+  final dynamic time;
   @override
   @JsonKey(name: 'truck_rego')
   final String? truckRego;
@@ -2000,7 +2000,7 @@ class _$VehicleModelImpl implements _VehicleModel {
   final dynamic reportedFaultString;
   @override
   @JsonKey(name: 'driver_name')
-  final int? driverName;
+  final String? driverName;
   final List<Folder>? _folders;
   @override
   List<Folder>? get folders {
@@ -2345,7 +2345,7 @@ abstract class _VehicleModel implements VehicleModel {
       @JsonKey(name: 'created_date_time') final DateTime? createdDateTime,
       @JsonKey(name: 'edited_date_time') final DateTime? editedDateTime,
       final String? date,
-      final dynamic? time,
+      final dynamic time,
       @JsonKey(name: 'truck_rego') final String? truckRego,
       @JsonKey(name: 'current_reading_before')
       final String? currentReadingBefore,
@@ -2424,7 +2424,7 @@ abstract class _VehicleModel implements VehicleModel {
       final dynamic signature,
       @JsonKey(name: 'date_now') final dynamic dateNow,
       @JsonKey(name: 'reported_fault_string') final dynamic reportedFaultString,
-      @JsonKey(name: 'driver_name') final int? driverName,
+      @JsonKey(name: 'driver_name') final String? driverName,
       final List<Folder>? folders,
       @JsonKey(name: 'parent_folder')
       final int? parentFolder}) = _$VehicleModelImpl;
@@ -2511,7 +2511,7 @@ abstract class _VehicleModel implements VehicleModel {
   @override
   String? get date;
   @override
-  dynamic? get time;
+  dynamic get time;
   @override
   @JsonKey(name: 'truck_rego')
   String? get truckRego;
@@ -2717,7 +2717,7 @@ abstract class _VehicleModel implements VehicleModel {
   dynamic get reportedFaultString;
   @override
   @JsonKey(name: 'driver_name')
-  int? get driverName;
+  String? get driverName;
   @override
   List<Folder>? get folders;
   @override

@@ -1,21 +1,17 @@
 import 'dart:convert';
 import 'dart:typed_data';
-
 import 'package:dartz/dartz.dart';
-
+import 'package:enviro_mobile_application/model/03_vehicle/vehicle_model/vehicle_model.dart';
 import 'package:enviro_mobile_application/model/07_Jobcard/job_card_model.dart';
 import 'package:enviro_mobile_application/model/12_shedulecard/shedule_card_comnt_resp_model.dart';
-
 import 'package:enviro_mobile_application/model/12_shedulecard/shedule_card_resp_model.dart';
 import 'package:enviro_mobile_application/model/12_shedulecard/shedule_sign_res_model.dart';
 import 'package:enviro_mobile_application/utilis/api_endpoints/api_endpoints.dart';
 import 'package:enviro_mobile_application/utilis/api_endpoints/customprint.dart';
-
 import 'package:enviro_mobile_application/utilis/httpservice.dart';
 import 'package:enviro_mobile_application/utilis/injection.dart';
 import 'package:enviro_mobile_application/utilis/main_failure.dart';
 import 'package:file_picker/file_picker.dart';
-
 import 'package:injectable/injectable.dart';
 
 abstract class IScheduleService {
@@ -41,6 +37,8 @@ abstract class IScheduleService {
     required String comment,
     required int id,
   });
+  Future<Either<Map<MainFailure, dynamic>, dynamic>> addPreInspectionSchedule(
+      {required VehicleModel data});
 }
 
 @LazySingleton(as: IScheduleService)
@@ -137,8 +135,6 @@ class SalesService implements IScheduleService {
       },
       method: "POST",
     );
-    print('azeem$id');
-    ;
     return response.fold(
       (l) => Left(l),
       (res) async {
@@ -154,14 +150,11 @@ class SalesService implements IScheduleService {
   Future<Either<Map<MainFailure, dynamic>, SheduleCommentModel>>
       shedulecommentserviceapi(
           {required int id, required String comment}) async {
-    customPrint(content: id);
     var response = await getIt<HttpService>().multipartRequest(
       apiUrl: ApiEndPoints.endpointcommentsignature,
       data: {"schedule_id": id, "comment": comment},
       method: "POST",
     );
-    print('azeem$id');
-    ;
     return response.fold(
       (l) => Left(l),
       (res) async {
@@ -169,6 +162,19 @@ class SalesService implements IScheduleService {
         SheduleCommentModel signingdata = SheduleCommentModel.fromJson(data);
         return Right(signingdata);
       },
+    );
+  }
+
+  @override
+  Future<Either<Map<MainFailure, dynamic>, dynamic>> addPreInspectionSchedule(
+      {required VehicleModel data}) async {
+    var response = await getIt<HttpService>().multipartRequest(
+        data: data.toJson(),
+        method: "POST",
+        apiUrl: ApiEndPoints.endpointaddpresinspection);
+    return response.fold(
+      (l) => Left(l),
+      (res) async => const Right('success'),
     );
   }
 }

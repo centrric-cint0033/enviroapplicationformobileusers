@@ -28,7 +28,7 @@ class ScheduleMainPage extends StatelessWidget {
         actions: [notificationButton(context)],
       ),
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 8.w),
+        padding: EdgeInsets.symmetric(horizontal: 15.w),
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -37,18 +37,15 @@ class ScheduleMainPage extends StatelessWidget {
               cmRowText("Today's Schedule", "Calender", () {
                 calenderfunction(context);
               }, Colors.black, FontWeight.bold),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Observer(
-                  builder: (_) {
-                    return WWResponseHandler(
-                        data: vmSchedule.shedulecardResponse,
-                        isEmpty: vmSchedule.shedulecardResponse.data?.isEmpty ??
-                            true,
-                        onTap: () => vmSchedule.shedulecardviewmodelfunction(),
-                        child: const TodaysScheduleList());
-                  },
-                ),
+              Observer(
+                builder: (_) {
+                  return WWResponseHandler(
+                      data: vmSchedule.shedulecardResponse,
+                      isEmpty:
+                          vmSchedule.shedulecardResponse.data?.isEmpty ?? true,
+                      onTap: () => vmSchedule.shedulecardviewmodelfunction(),
+                      child: const TodaysScheduleList());
+                },
               ),
               sized0hx10,
               cmRowText("Schedule List", "week", () {
@@ -57,7 +54,17 @@ class ScheduleMainPage extends StatelessWidget {
                 //     );
               }, Appthemes.cPrimary, FontWeight.normal),
               sized0hx20,
-              const ScheduleList(),
+              Observer(
+                builder: (_) {
+                  return WWResponseHandler(
+                      data: vmSchedule.sheduleweekResponse,
+                      isEmpty:
+                          vmSchedule.sheduleweekResponse.data?.isEmpty ?? true,
+                      onTap: () =>
+                          vmSchedule.shedulecardviewmodelweekfunction(),
+                      child: const ScheduleList());
+                },
+              ),
               sized0hx20,
               GestureDetector(
                 onTap: () => sheduledetailsfunction2(context),
@@ -136,9 +143,6 @@ void calenderfunction(BuildContext context) {
   context.router.pushNamed(RouteNames.rcalenderpage);
 }
 
-void sheduledetailfunction(BuildContext context, id, i) {
-  context.router.push(SheduledetailRoute(id: id, i: i));
-}
 
 void sheduledetailsfunction2(BuildContext context) {
   context.router.pushNamed(RouteNames.rsheduledetail2page);

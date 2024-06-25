@@ -1,7 +1,8 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:enviro_mobile_application/Routepage/routespage.dart';
+import 'package:enviro_mobile_application/model/03_vehicle/vehicle_model/vehicle_model.dart';
 import 'package:enviro_mobile_application/utilis/Appthemes.dart';
 import 'package:enviro_mobile_application/utilis/constant.dart';
+import 'package:enviro_mobile_application/view/08_team/team_widgets/date_picker.dart';
 import 'package:enviro_mobile_application/view/10_shedule/shedule_widget.dart';
 import 'package:enviro_mobile_application/view_model/11_shedule/shedule_page_view_model.dart';
 import 'package:enviro_mobile_application/widgets/cmn_title_textwidget.dart';
@@ -14,9 +15,10 @@ import 'package:intl/intl.dart';
 
 @RoutePage()
 class UpdateVehiclepreinspectionPage extends StatelessWidget {
-  const UpdateVehiclepreinspectionPage({Key? key, required this.index})
+  const UpdateVehiclepreinspectionPage({Key? key, required this.index, required this.driversIndex})
       : super(key: key);
   final int index;
+    final int driversIndex;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -61,7 +63,7 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                   fromType: true, controller: vmSchedule.odometerCntrller),
               requiredRowWidget(
                 "Driver's name",
-                "${vmSchedule.sheduleweekResponse.data?[index].drivers?[0].name}",
+                "${vmSchedule.sheduleweekResponse.data?[index].drivers?[driversIndex].name}",
                 fromType: false,
               ),
               requiredRowWidget("Hour Meter Start", "",
@@ -80,7 +82,7 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                 }
               }),
               cmCheckBoxRow(
-                  "I have approruiate  licence", vmSchedule.checkboxValue3,
+                  "I have appropriate  licence", vmSchedule.checkboxValue3,
                   onChanged: (bool? value) {
                 if (value != null) {
                   vmSchedule.updateCheckboxValue3(value);
@@ -361,7 +363,10 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                       context, vmSchedule.selectedElectricalValue ?? "", 24);
                 },
               ),
-              const Text('Accessories &Fittings'),
+              Padding(
+                padding: EdgeInsets.only(left: 8.h),
+                child: const Text('Accessories &Fittings'),
+              ),
               cmCheckBoxRow3("Hoses", vmSchedule.selectHosesCheckbox,
                   onChanged: (bool? value) {
                 if (value != null) {
@@ -387,8 +392,25 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                   vmSchedule.updateCheckboxValueFn4(value);
                 }
               }),
-              const Text(
-                'Fire Estinguisher(Date Calibrated):',
+              Padding(
+                padding: EdgeInsets.only(left: 8.h),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Fire Estinguisher(Date Calibrated):',
+                      style: TextStyle(fontSize: 10.w),
+                    ),
+                    if (vmSchedule.selectedFireExtinguisherDate != null)
+                      Text(
+                        DateFormat('dd-MM-yyyy')
+                            .format(vmSchedule.selectedFireExtinguisherDate!),
+                        style: TextStyle(fontSize: 10.w),
+                      ),
+                    datePicker(context, vmSchedule.selectedFireExtinguisherDate,
+                        (date) => vmSchedule.datePickerFn(date))
+                  ],
+                ),
               ),
               cmCheckBoxRow3("Garden Hose", vmSchedule.selectGardenHoseCheckbox,
                   onChanged: (bool? value) {
@@ -421,30 +443,29 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                   border: Border.all(color: Colors.yellow),
                   borderRadius: BorderRadius.circular(5.0),
                 ),
-                child: const Padding(
-                  padding: EdgeInsets.all(8.0),
+                child: Padding(
+                  padding: EdgeInsets.all(8.h),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        'Any Faults to report( of any category)& Any additional information',
+                      const Text(
+                        'Any Faults to report(of any category) & any additional information',
                         style: TextStyle(),
                       ),
-                      SizedBox(height: 8),
+                      const SizedBox(height: 8),
                       TextField(
-                        decoration: InputDecoration(
+                        controller: vmSchedule.faultsReportCntrller,
+                        decoration: const InputDecoration(
                           hintText: 'Type Here...',
                           border: InputBorder.none,
                         ),
-                        style: TextStyle(),
+                        style: const TextStyle(),
                       ),
                     ],
                   ),
                 ),
               ),
-              const SizedBox(
-                height: 16,
-              ),
+              sized0hx15,
               const Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -472,7 +493,7 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                       children: [
                         Expanded(
                           child: Text(
-                            'I have conducted the abouve pre_start  checklist and satisfied that the vehiclke is safe and ready to operatate.',
+                            'I have conducted the above pre_start  checklist and satisfied that the vehicle is safe and ready to operate.',
                             style: TextStyle(fontSize: 10.w),
                           ),
                         ),
@@ -525,16 +546,16 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                 alignment: Alignment.bottomRight,
                 child: ElevatedButton(
                   onPressed: () {
-                    shedulecommentfunction(context);
+                    cmSubmitFn(context);
                   },
                   style: ElevatedButton.styleFrom(
                     foregroundColor: Colors.blue,
                     backgroundColor: Colors.blue,
                     side: const BorderSide(color: Colors.blue),
                   ),
-                  child: const Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: Text(
+                  child: Padding(
+                    padding: EdgeInsets.all(8.h),
+                    child: const Text(
                       'Submit',
                       style: TextStyle(
                         color: Colors.white,
@@ -549,10 +570,157 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
       ),
     );
   }
-}
 
-void shedulecommentfunction(BuildContext context) {
-  context.router.pushNamed(RouteNames.rshedulecommandstatus);
+  cmSubmitFn(BuildContext context) {
+    vmSchedule.addPreInspectionSchedule(
+        context: context,
+        data: VehicleModel(
+            vehicle: vmSchedule
+                .sheduleweekResponse.data?[index].drivers?[driversIndex].vehicleId,
+            registration:
+                vmSchedule.sheduleweekResponse.data?[index].vehicle?.toString(),
+            odometer: int.parse(vmSchedule.odometerCntrller.text),
+            driverName:
+                vmSchedule.sheduleweekResponse.data?[index].drivers?[driversIndex].name,
+            hourMeterStart: vmSchedule.hoursMeterCntrller.text,
+            fitForWork: vmSchedule.checkboxValue,
+            validDrivingLicense: vmSchedule.checkboxValue2,
+            appropriatePpe: vmSchedule.checkboxValue3,
+            engineOilLevel: vmSchedule.selectedEngineOilValue == "No issue"
+                ? null
+                : vmSchedule.selectedEngineOilValue == "categoryA"
+                    ? true
+                    : false,
+            warningSystem: vmSchedule.selectedWarningSystemValue == "No issue"
+                ? null
+                : vmSchedule.selectedWarningSystemValue == "categoryA"
+                    ? true
+                    : false,
+            steering: vmSchedule.selectedSteeringValue == "No issue"
+                ? null
+                : vmSchedule.selectedSteeringValue == "categoryA"
+                    ? true
+                    : false,
+            safetyEmergStop: vmSchedule.selectedSafetyEmergValue == "No issue"
+                ? null
+                : vmSchedule.selectedSafetyEmergValue == "categoryA"
+                    ? true
+                    : false,
+            handbreakAlarm: vmSchedule.selectedHandBreakAlarmValue == "No issue"
+                ? null
+                : vmSchedule.selectedHandBreakAlarmValue == "categoryA"
+                    ? true
+                    : false,
+            ptoVacpump: vmSchedule.selectedPTOVacValue == "No issue"
+                ? null
+                : vmSchedule.selectedPTOVacValue == "categoryA"
+                    ? true
+                    : false,
+            horn: vmSchedule.selectedHornValue == "No issue"
+                ? null
+                : vmSchedule.selectedHornValue == "categoryA"
+                    ? true
+                    : false,
+            revAlarmCamera: vmSchedule.selectedRevAlarmCameraValue == "No issue"
+                ? null
+                : vmSchedule.selectedRevAlarmCameraValue == "categoryA"
+                    ? true
+                    : false,
+            lightsHead: vmSchedule.selectedLightsHeadValue == "No issue"
+                ? null
+                : vmSchedule.selectedLightsHeadValue == "categoryA"
+                    ? true
+                    : false,
+            lightsTail: vmSchedule.selectedLightsTailValue == "No issue"
+                ? null
+                : vmSchedule.selectedLightsTailValue == "categoryA"
+                    ? true
+                    : false,
+            lightBeacons: vmSchedule.selectedLightBeaconsValue == "No issue"
+                ? null
+                : vmSchedule.selectedLightBeaconsValue == "categoryA"
+                    ? true
+                    : false,
+            hazardLight: vmSchedule.selectedHazardsLightsValue == "No issue"
+                ? null
+                : vmSchedule.selectedHazardsLightsValue == "categoryA"
+                    ? true
+                    : false,
+            rimsWheelnut: vmSchedule.selectedRimsWheelNutsValue == "No issue"
+                ? null
+                : vmSchedule.selectedRimsWheelNutsValue == "categoryA"
+                    ? true
+                    : false,
+            coolant: vmSchedule.selectedCoolantValue == "No issue"
+                ? null
+                : vmSchedule.selectedCoolantValue == "categoryA"
+                    ? true
+                    : false,
+            wheels: vmSchedule.selectedWheelsTyresValue == "No issue"
+                ? null
+                : vmSchedule.selectedWheelsTyresValue == "categoryA"
+                    ? true
+                    : false,
+            mirrorWindowscreen:
+                vmSchedule.selectedMirrorsWindscreenValue == "No issue"
+                    ? null
+                    : vmSchedule.selectedMirrorsWindscreenValue == "categoryA"
+                        ? true
+                        : false,
+            structureBodywork:
+                vmSchedule.selectedStructureBodywrkValue == "No issue"
+                    ? null
+                    : vmSchedule.selectedStructureBodywrkValue == "categoryA"
+                        ? true
+                        : false,
+            wipers: vmSchedule.selectedWipersValue == "No issue"
+                ? null
+                : vmSchedule.selectedWipersValue == "categoryA"
+                    ? true
+                    : false,
+            fuelLevelpump: vmSchedule.selectedFuelLevelPumbValue == "No issue"
+                ? null
+                : vmSchedule.selectedFuelLevelPumbValue == "categoryA"
+                    ? true
+                    : false,
+            fuelLeveltruck: vmSchedule.selectedFuelLevelTruckValue == "No issue"
+                ? null
+                : vmSchedule.selectedFuelLevelTruckValue == "categoryA"
+                    ? true
+                    : false,
+            seatSeatbelt: vmSchedule.selectedSeatSeatBeltValue == "No issue"
+                ? null
+                : vmSchedule.selectedSeatSeatBeltValue == "categoryA"
+                    ? true
+                    : false,
+            parkbrakeTrailer: vmSchedule.selectedParkBarkeValue == "No issue"
+                ? null
+                : vmSchedule.selectedParkBarkeValue == "categoryA"
+                    ? true
+                    : false,
+            footBrake: vmSchedule.selectedFootBrakeValue == "No issue"
+                ? null
+                : vmSchedule.selectedFootBrakeValue == "categoryA"
+                    ? true
+                    : false,
+            electrical: vmSchedule.selectedElectricalValue == "No issue"
+                ? null
+                : vmSchedule.selectedElectricalValue == "categoryA"
+                    ? true
+                    : false,
+            hoses: vmSchedule.selectHosesCheckbox,
+            fittings: vmSchedule.selectFittingsCheckbox,
+            firstAidKit: vmSchedule.selectFirstAidKitCheckbox,
+            ppe: vmSchedule.selectPPECheckbox,
+            fireExtinguisherDate: DateFormat('yyyy-MM-dd')
+                .format(vmSchedule.selectedFireExtinguisherDate!),
+            gardenHose: vmSchedule.selectGardenHoseCheckbox,
+            gaticLifters: vmSchedule.selectGatticCheckbox,
+            bucketRags: vmSchedule.selectBucketRagsCheckbox,
+            spillKit: vmSchedule.selectSpillKitCheckbox,
+            reportedFaultString: vmSchedule.faultsReportCntrller,
+            reportedFaults: vmSchedule.selectverifyCheckbox2));
+  }
 }
 
 Widget requiredRowWidget(String? text1, String? text2,
@@ -592,6 +760,7 @@ Widget requiredRowWidget(String? text1, String? text2,
                           const InputDecoration(border: InputBorder.none),
                       inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                       keyboardType: TextInputType.number,
+                      style: TextStyle(fontSize: 10.w),
                     ),
                   ),
                 ],
@@ -649,14 +818,15 @@ Widget cmCheckBoxRow2(
   required void Function()? onTap,
 }) {
   return Padding(
-    padding: const EdgeInsets.all(8.0),
+    padding: EdgeInsets.all(8.h),
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
           title,
-          style: const TextStyle(
-              color: Colors.black), // Use the color parameter for text color
+          style: TextStyle(
+              color: Colors.black,
+              fontSize: 10.w), // Use the color parameter for text color
         ),
         InkWell(
           onTap: onTap,
@@ -685,22 +855,25 @@ Widget cmCheckBoxRow2(
 
 Widget cmCheckBoxRow3(String text, bool value,
     {required void Function(bool?)? onChanged}) {
-  return Row(
-    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    children: [
-      Text(
-        text,
-        style: TextStyle(fontSize: 10.w),
-      ),
-      Checkbox(
-        side: const BorderSide(color: Colors.red),
-        value: value,
-        onChanged: onChanged,
-        checkColor: Colors.red,
-        activeColor: Colors.white,
-        materialTapTargetSize: MaterialTapTargetSize.padded,
-      ),
-    ],
+  return Padding(
+    padding: EdgeInsets.only(left: 8.h),
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(
+          text,
+          style: TextStyle(fontSize: 10.w),
+        ),
+        Checkbox(
+          side: const BorderSide(color: Colors.red),
+          value: value,
+          onChanged: onChanged,
+          checkColor: Colors.red,
+          activeColor: Colors.white,
+          materialTapTargetSize: MaterialTapTargetSize.padded,
+        ),
+      ],
+    ),
   );
 }
 

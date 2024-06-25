@@ -1,12 +1,14 @@
 import 'dart:io';
 import 'dart:typed_data';
 import 'package:enviro_mobile_application/api_response/api_response.dart';
+import 'package:enviro_mobile_application/model/03_vehicle/vehicle_model/vehicle_model.dart';
 import 'package:enviro_mobile_application/model/07_Jobcard/job_card_model.dart';
 import 'package:enviro_mobile_application/model/12_shedulecard/shedule_card_comnt_resp_model.dart';
 import 'package:enviro_mobile_application/model/12_shedulecard/shedule_card_resp_model.dart';
 import 'package:enviro_mobile_application/model/12_shedulecard/shedule_sign_res_model.dart';
 import 'package:enviro_mobile_application/service/07_shedule/job_card/shedule_page_service.dart';
 import 'package:enviro_mobile_application/utilis/injection.dart';
+import 'package:enviro_mobile_application/widgets/ww_popup_error.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 
@@ -41,13 +43,20 @@ abstract class ScheduleViewModelBase with Store {
 
   TextEditingController odometerCntrller = TextEditingController();
   TextEditingController hoursMeterCntrller = TextEditingController();
+  TextEditingController faultsReportCntrller = TextEditingController();
 
+  @observable
+  bool containerHeight = false;
+    @observable
+  int driversIndex = 0;
   @observable
   List<PlatformFile> pickedFiles = [];
   @observable
   DateTime focusedDay = DateTime.now();
   @observable
   DateTime? selectedDay;
+  @observable
+  DateTime? selectedFireExtinguisherDate;
   @action
   Future<void> pickFilefromphone() async {
     var pic = await FilePicker.platform.pickFiles(
@@ -70,10 +79,10 @@ abstract class ScheduleViewModelBase with Store {
     // _openFile(file!);
   }
 
-  // void _openFile(PlatformFile file) {
-  //   OpenFile.open(file.path);
-  //   _openFile(file);
-  // }
+  @action
+  datePickerFn(date) {
+    selectedFireExtinguisherDate = date;
+  }
 
   @observable
   File? selectedsignaturecameraImage;
@@ -293,6 +302,36 @@ abstract class ScheduleViewModelBase with Store {
         commentResponse = commentResponse.copyWith(
           data: r,
           errors: null,
+          loading: false,
+        );
+      },
+    );
+  }
+
+  @observable
+  ApiResponse<dynamic> addPreInspectionScheduleResponse =
+      ApiResponse<dynamic>();
+  @action
+  Future<void> addPreInspectionSchedule(
+      {required BuildContext context, required VehicleModel data}) async {
+    addPreInspectionScheduleResponse =
+        addPreInspectionScheduleResponse.copyWith(error: null, loading: true);
+
+    final result = await scheduleService.addPreInspectionSchedule(data: data);
+    return result.fold(
+      (l) {
+        popupErrorData(context, mainFailure: l);
+        addPreInspectionScheduleResponse =
+            addPreInspectionScheduleResponse.copyWith(
+          error: l.keys.first,
+          loading: false,
+        );
+      },
+      (r) {
+        addPreInspectionScheduleResponse =
+            addPreInspectionScheduleResponse.copyWith(
+          data: r,
+          error: null,
           loading: false,
         );
       },
