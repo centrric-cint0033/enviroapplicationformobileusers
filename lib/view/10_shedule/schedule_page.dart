@@ -349,7 +349,7 @@
 //                           return SingleChildScrollView(
 //                             child: GestureDetector(
 //                               onTap: () {
-                                
+
 //                                 sheduledetailfunction(
 //                                     context,
 //                                     vmSchedule.sheduleweekResponse.data?[i].id ??
@@ -413,7 +413,7 @@
 //                                           onPressed: () {
 //                                             context.router.push(SheduledetailRoute(id: vmSchedule.sheduleweekResponse
 //                                                         .data?[i].id ?? 1, i: i,vehicleIndex: ));
-                                           
+
 //                                           },
 //                                           style: ElevatedButton.styleFrom(
 //                                             foregroundColor: Colors.black,
@@ -688,8 +688,6 @@
 //   print('calenderclicked');
 //   context.router.pushNamed(RouteNames.rcalenderpage);
 // }
-
-
 
 // void sheduledetailsfunction2(BuildContext context) {
 //   print('ssssspendingclicked');

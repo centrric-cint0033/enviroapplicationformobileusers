@@ -1,13 +1,10 @@
 import 'dart:convert';
-
 import 'package:dartz/dartz.dart';
-import 'package:enviro_mobile_application/constant/base_url.dart';
 import 'package:enviro_mobile_application/model/03_vehicle/vehicle_model/vehicle_model.dart';
 import 'package:enviro_mobile_application/utilis/api_endpoints/api_endpoints.dart';
 import 'package:enviro_mobile_application/utilis/httpservice.dart';
 import 'package:enviro_mobile_application/utilis/injection.dart';
 import 'package:enviro_mobile_application/utilis/main_failure.dart';
-import 'package:http/http.dart';
 import 'package:injectable/injectable.dart';
 
 enum VehicleActionType {

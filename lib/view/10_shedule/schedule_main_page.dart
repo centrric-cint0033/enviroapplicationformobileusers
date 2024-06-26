@@ -66,20 +66,6 @@ class ScheduleMainPage extends StatelessWidget {
                 },
               ),
               sized0hx20,
-              GestureDetector(
-                onTap: () => sheduledetailsfunction2(context),
-                child: const Card(
-                  margin: EdgeInsets.symmetric(horizontal: 20),
-                  child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [],
-                        ),
-                      ]),
-                ),
-              ),
             ],
           ),
         ),
@@ -142,7 +128,6 @@ void sheduledetailfunction4(
 void calenderfunction(BuildContext context) {
   context.router.pushNamed(RouteNames.rcalenderpage);
 }
-
 
 void sheduledetailsfunction2(BuildContext context) {
   context.router.pushNamed(RouteNames.rsheduledetail2page);

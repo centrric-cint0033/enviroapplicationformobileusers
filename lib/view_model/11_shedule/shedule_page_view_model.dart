@@ -1,19 +1,24 @@
 import 'dart:io';
 import 'dart:typed_data';
+import 'package:auto_route/auto_route.dart';
+import 'package:enviro_mobile_application/Routepage/approutes.gr.dart';
 import 'package:enviro_mobile_application/api_response/api_response.dart';
 import 'package:enviro_mobile_application/model/03_vehicle/vehicle_model/vehicle_model.dart';
 import 'package:enviro_mobile_application/model/07_Jobcard/job_card_model.dart';
+import 'package:enviro_mobile_application/model/12_shedulecard/schedule_status_res_model/schedule_status_res_model.dart';
 import 'package:enviro_mobile_application/model/12_shedulecard/shedule_card_comnt_resp_model.dart';
 import 'package:enviro_mobile_application/model/12_shedulecard/shedule_card_resp_model.dart';
 import 'package:enviro_mobile_application/model/12_shedulecard/shedule_sign_res_model.dart';
 import 'package:enviro_mobile_application/service/07_shedule/job_card/shedule_page_service.dart';
 import 'package:enviro_mobile_application/utilis/injection.dart';
+import 'package:enviro_mobile_application/widgets/cm_show_toast.dart';
 import 'package:enviro_mobile_application/widgets/ww_popup_error.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 
 import 'package:image_picker/image_picker.dart';
 import 'package:injectable/injectable.dart';
+import 'package:intl/intl.dart';
 import 'package:mobx/mobx.dart';
 part 'shedule_page_view_model.g.dart';
 
@@ -47,7 +52,9 @@ abstract class ScheduleViewModelBase with Store {
 
   @observable
   bool containerHeight = false;
-    @observable
+  @observable
+  bool showSubmitButton = false;
+  @observable
   int driversIndex = 0;
   @observable
   List<PlatformFile> pickedFiles = [];
@@ -57,26 +64,24 @@ abstract class ScheduleViewModelBase with Store {
   DateTime? selectedDay;
   @observable
   DateTime? selectedFireExtinguisherDate;
+  @observable
+  DateTime? selectedDepartedEnviroDate;
+  @observable
+  DateTime? selectedStartingJobDate;
+  @observable
+  DateTime? selectedFinishedJobDate;
+    @observable
+  String? pickedCameraImage = "";
+    @observable
+  String? pickedGalleryImage = "";
   @action
   Future<void> pickFilefromphone() async {
     var pic = await FilePicker.platform.pickFiles(
         allowMultiple: true,
         type: FileType.custom,
         allowedExtensions: ['jpg', 'pdf', 'doc']);
-
-    // pickedFiles = pic?.files ?? [];
-
     pickedFiles.addAll(pic?.files ?? []);
-
     pickedFiles = [...pickedFiles];
-
-    // picked?.files.addAll(pic?.files ?? []);
-
-    // if (picked == null) return;
-
-    // final file = pic?.files.first;
-
-    // _openFile(file!);
   }
 
   @action
@@ -312,12 +317,13 @@ abstract class ScheduleViewModelBase with Store {
   ApiResponse<dynamic> addPreInspectionScheduleResponse =
       ApiResponse<dynamic>();
   @action
-  Future<void> addPreInspectionSchedule(
+  Future<void> updatePreInspectionSchedule(
       {required BuildContext context, required VehicleModel data}) async {
     addPreInspectionScheduleResponse =
         addPreInspectionScheduleResponse.copyWith(error: null, loading: true);
 
-    final result = await scheduleService.addPreInspectionSchedule(data: data);
+    final result =
+        await scheduleService.updatePreInspectionSchedule(data: data);
     return result.fold(
       (l) {
         popupErrorData(context, mainFailure: l);
@@ -334,6 +340,44 @@ abstract class ScheduleViewModelBase with Store {
           error: null,
           loading: false,
         );
+        shedulecardviewmodelfunction();
+        context.router.pop();
+        showToast(context, msg: "Successfully updated", color: Colors.green);
+      },
+    );
+  }
+
+  @observable
+  ApiResponse<ScheduleStatusResModel> editScheduleStatusResponse =
+      ApiResponse<ScheduleStatusResModel>();
+  @action
+  Future<void> editScheduleStatusApi(
+      {required BuildContext context,
+      required dynamic statusType,
+      required String date,
+      required String status,
+      required int id}) async {
+    editScheduleStatusResponse =
+        editScheduleStatusResponse.copyWith(error: null, loading: true);
+
+    final result = await scheduleService.editScheduleStatusApi(
+        statusType: statusType, date: date, status: status, id: id);
+    return result.fold(
+      (l) {
+        editScheduleStatusResponse = editScheduleStatusResponse.copyWith(
+          error: l,
+          loading: false,
+        );
+      },
+      (r) {
+        editScheduleStatusResponse = editScheduleStatusResponse.copyWith(
+          data: r,
+          error: null,
+          loading: false,
+        );
+        shedulecardviewmodelfunction();
+        context.router.pop();
+        showToast(context, msg: "Successfully updated", color: Colors.green);
       },
     );
   }
@@ -550,5 +594,62 @@ abstract class ScheduleViewModelBase with Store {
                                                                                                 : i == 24
                                                                                                     ? selectedElectricalValue = value
                                                                                                     : value;
+  }
+
+  @action
+  preInspectionSubmitButtonValidation() {
+    if (odometerCntrller.text.isNotEmpty &&
+        hoursMeterCntrller.text.isNotEmpty &&
+        checkboxValue != false &&
+        checkboxValue2 != false &&
+        checkboxValue3 != false &&
+        selectverifyCheckbox1 != false &&
+        selectverifyCheckbox2 != false) {
+      showSubmitButton = true;
+    } else {
+      showSubmitButton = false;
+    }
+  }
+
+  @action
+  departedEnviroDatePickerFn(
+      BuildContext context, date, String status, int id) {
+    selectedDepartedEnviroDate = date;
+    String dateString =
+        DateFormat('yyyy-MM-dd HH:mm:ss').format(selectedDepartedEnviroDate!);
+    editScheduleStatusApi(
+        context: context,
+        statusType: ScheduleStatusType.departedEnviroFacility,
+        date: dateString,
+        status: status,
+        id: id);
+  }
+
+  @action
+  startingJobDatePickerFn(BuildContext context, date, String status, int id) {
+    selectedStartingJobDate = date;
+    String dateString =
+        DateFormat('yyyy-MM-dd HH:mm:ss').format(selectedStartingJobDate!);
+    editScheduleStatusApi(
+        context: context,
+        statusType: ScheduleStatusType.jobStarted,
+        date: dateString,
+        status: status,
+        id: id);
+  }
+
+  @action
+  finishedJobDatePickerFn(BuildContext context, date, String status, int id) {
+    selectedFinishedJobDate = date;
+    String dateString =
+        DateFormat('yyyy-MM-dd HH:mm:ss').format(selectedFinishedJobDate!);
+    context.router.push(
+        CameraGalleryRoute(onCameraSelected: () {}, onGallerySelected: () {}));
+    editScheduleStatusApi(
+        context: context,
+        statusType: ScheduleStatusType.finishedJob,
+        date: dateString,
+        status: status,
+        id: id);
   }
 }

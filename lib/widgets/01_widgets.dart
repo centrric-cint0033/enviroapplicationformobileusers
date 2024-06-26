@@ -1,5 +1,6 @@
 import 'package:enviro_mobile_application/utilis/Appthemes.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 Text showBlueText(String value,
         {FontWeight? fontWeight,
@@ -13,7 +14,7 @@ Text showBlueText(String value,
       style: TextStyle(
           color: Appthemes.cPrimary,
           fontWeight: fontWeight,
-          fontSize: fontSize),
+          fontSize: fontSize ?? 10.w),
     );
 
 Text showBlackText(String value,
@@ -27,5 +28,8 @@ Text showBlackText(String value,
       textAlign: align,
       maxLines: maxLines,
       overflow: overflow,
-      style: TextStyle(color: Colors.black, fontWeight: fontWeight,fontSize: fontSize),
+      style: TextStyle(
+          color: Colors.black,
+          fontWeight: fontWeight,
+          fontSize: fontSize ?? 10.w),
     );

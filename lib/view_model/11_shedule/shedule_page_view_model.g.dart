@@ -41,6 +41,22 @@ mixin _$ScheduleViewModel on ScheduleViewModelBase, Store {
     });
   }
 
+  late final _$showSubmitButtonAtom =
+      Atom(name: 'ScheduleViewModelBase.showSubmitButton', context: context);
+
+  @override
+  bool get showSubmitButton {
+    _$showSubmitButtonAtom.reportRead();
+    return super.showSubmitButton;
+  }
+
+  @override
+  set showSubmitButton(bool value) {
+    _$showSubmitButtonAtom.reportWrite(value, super.showSubmitButton, () {
+      super.showSubmitButton = value;
+    });
+  }
+
   late final _$driversIndexAtom =
       Atom(name: 'ScheduleViewModelBase.driversIndex', context: context);
 
@@ -120,6 +136,90 @@ mixin _$ScheduleViewModel on ScheduleViewModelBase, Store {
     _$selectedFireExtinguisherDateAtom
         .reportWrite(value, super.selectedFireExtinguisherDate, () {
       super.selectedFireExtinguisherDate = value;
+    });
+  }
+
+  late final _$selectedDepartedEnviroDateAtom = Atom(
+      name: 'ScheduleViewModelBase.selectedDepartedEnviroDate',
+      context: context);
+
+  @override
+  DateTime? get selectedDepartedEnviroDate {
+    _$selectedDepartedEnviroDateAtom.reportRead();
+    return super.selectedDepartedEnviroDate;
+  }
+
+  @override
+  set selectedDepartedEnviroDate(DateTime? value) {
+    _$selectedDepartedEnviroDateAtom
+        .reportWrite(value, super.selectedDepartedEnviroDate, () {
+      super.selectedDepartedEnviroDate = value;
+    });
+  }
+
+  late final _$selectedStartingJobDateAtom = Atom(
+      name: 'ScheduleViewModelBase.selectedStartingJobDate', context: context);
+
+  @override
+  DateTime? get selectedStartingJobDate {
+    _$selectedStartingJobDateAtom.reportRead();
+    return super.selectedStartingJobDate;
+  }
+
+  @override
+  set selectedStartingJobDate(DateTime? value) {
+    _$selectedStartingJobDateAtom
+        .reportWrite(value, super.selectedStartingJobDate, () {
+      super.selectedStartingJobDate = value;
+    });
+  }
+
+  late final _$selectedFinishedJobDateAtom = Atom(
+      name: 'ScheduleViewModelBase.selectedFinishedJobDate', context: context);
+
+  @override
+  DateTime? get selectedFinishedJobDate {
+    _$selectedFinishedJobDateAtom.reportRead();
+    return super.selectedFinishedJobDate;
+  }
+
+  @override
+  set selectedFinishedJobDate(DateTime? value) {
+    _$selectedFinishedJobDateAtom
+        .reportWrite(value, super.selectedFinishedJobDate, () {
+      super.selectedFinishedJobDate = value;
+    });
+  }
+
+  late final _$pickedCameraImageAtom =
+      Atom(name: 'ScheduleViewModelBase.pickedCameraImage', context: context);
+
+  @override
+  String? get pickedCameraImage {
+    _$pickedCameraImageAtom.reportRead();
+    return super.pickedCameraImage;
+  }
+
+  @override
+  set pickedCameraImage(String? value) {
+    _$pickedCameraImageAtom.reportWrite(value, super.pickedCameraImage, () {
+      super.pickedCameraImage = value;
+    });
+  }
+
+  late final _$pickedGalleryImageAtom =
+      Atom(name: 'ScheduleViewModelBase.pickedGalleryImage', context: context);
+
+  @override
+  String? get pickedGalleryImage {
+    _$pickedGalleryImageAtom.reportRead();
+    return super.pickedGalleryImage;
+  }
+
+  @override
+  set pickedGalleryImage(String? value) {
+    _$pickedGalleryImageAtom.reportWrite(value, super.pickedGalleryImage, () {
+      super.pickedGalleryImage = value;
     });
   }
 
@@ -364,6 +464,24 @@ mixin _$ScheduleViewModel on ScheduleViewModelBase, Store {
     _$addPreInspectionScheduleResponseAtom
         .reportWrite(value, super.addPreInspectionScheduleResponse, () {
       super.addPreInspectionScheduleResponse = value;
+    });
+  }
+
+  late final _$editScheduleStatusResponseAtom = Atom(
+      name: 'ScheduleViewModelBase.editScheduleStatusResponse',
+      context: context);
+
+  @override
+  ApiResponse<ScheduleStatusResModel> get editScheduleStatusResponse {
+    _$editScheduleStatusResponseAtom.reportRead();
+    return super.editScheduleStatusResponse;
+  }
+
+  @override
+  set editScheduleStatusResponse(ApiResponse<ScheduleStatusResModel> value) {
+    _$editScheduleStatusResponseAtom
+        .reportWrite(value, super.editScheduleStatusResponse, () {
+      super.editScheduleStatusResponse = value;
     });
   }
 
@@ -1129,15 +1247,35 @@ mixin _$ScheduleViewModel on ScheduleViewModelBase, Store {
         () => super.shedulecommentviewmodelfunction(id: id, comment: comment));
   }
 
-  late final _$addPreInspectionScheduleAsyncAction = AsyncAction(
-      'ScheduleViewModelBase.addPreInspectionSchedule',
+  late final _$updatePreInspectionScheduleAsyncAction = AsyncAction(
+      'ScheduleViewModelBase.updatePreInspectionSchedule',
       context: context);
 
   @override
-  Future<void> addPreInspectionSchedule(
+  Future<void> updatePreInspectionSchedule(
       {required BuildContext context, required VehicleModel data}) {
-    return _$addPreInspectionScheduleAsyncAction.run(
-        () => super.addPreInspectionSchedule(context: context, data: data));
+    return _$updatePreInspectionScheduleAsyncAction.run(
+        () => super.updatePreInspectionSchedule(context: context, data: data));
+  }
+
+  late final _$editScheduleStatusApiAsyncAction = AsyncAction(
+      'ScheduleViewModelBase.editScheduleStatusApi',
+      context: context);
+
+  @override
+  Future<void> editScheduleStatusApi(
+      {required BuildContext context,
+      required dynamic statusType,
+      required String date,
+      required String status,
+      required int id}) {
+    return _$editScheduleStatusApiAsyncAction.run(() => super
+        .editScheduleStatusApi(
+            context: context,
+            statusType: statusType,
+            date: date,
+            status: status,
+            id: id));
   }
 
   late final _$ScheduleViewModelBaseActionController =
@@ -1331,15 +1469,68 @@ mixin _$ScheduleViewModel on ScheduleViewModelBase, Store {
   }
 
   @override
+  dynamic preInspectionSubmitButtonValidation() {
+    final _$actionInfo = _$ScheduleViewModelBaseActionController.startAction(
+        name: 'ScheduleViewModelBase.preInspectionSubmitButtonValidation');
+    try {
+      return super.preInspectionSubmitButtonValidation();
+    } finally {
+      _$ScheduleViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic departedEnviroDatePickerFn(
+      BuildContext context, dynamic date, String status, int id) {
+    final _$actionInfo = _$ScheduleViewModelBaseActionController.startAction(
+        name: 'ScheduleViewModelBase.departedEnviroDatePickerFn');
+    try {
+      return super.departedEnviroDatePickerFn(context, date, status, id);
+    } finally {
+      _$ScheduleViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic startingJobDatePickerFn(
+      BuildContext context, dynamic date, String status, int id) {
+    final _$actionInfo = _$ScheduleViewModelBaseActionController.startAction(
+        name: 'ScheduleViewModelBase.startingJobDatePickerFn');
+    try {
+      return super.startingJobDatePickerFn(context, date, status, id);
+    } finally {
+      _$ScheduleViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic finishedJobDatePickerFn(
+      BuildContext context, dynamic date, String status, int id) {
+    final _$actionInfo = _$ScheduleViewModelBaseActionController.startAction(
+        name: 'ScheduleViewModelBase.finishedJobDatePickerFn');
+    try {
+      return super.finishedJobDatePickerFn(context, date, status, id);
+    } finally {
+      _$ScheduleViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 signColor: ${signColor},
 containerHeight: ${containerHeight},
+showSubmitButton: ${showSubmitButton},
 driversIndex: ${driversIndex},
 pickedFiles: ${pickedFiles},
 focusedDay: ${focusedDay},
 selectedDay: ${selectedDay},
 selectedFireExtinguisherDate: ${selectedFireExtinguisherDate},
+selectedDepartedEnviroDate: ${selectedDepartedEnviroDate},
+selectedStartingJobDate: ${selectedStartingJobDate},
+selectedFinishedJobDate: ${selectedFinishedJobDate},
+pickedCameraImage: ${pickedCameraImage},
+pickedGalleryImage: ${pickedGalleryImage},
 selectedsignaturecameraImage: ${selectedsignaturecameraImage},
 isImageSelected: ${isImageSelected},
 selectedcameraImage: ${selectedcameraImage},
@@ -1355,6 +1546,7 @@ sheduleweekResponse: ${sheduleweekResponse},
 signatureResponse: ${signatureResponse},
 commentResponse: ${commentResponse},
 addPreInspectionScheduleResponse: ${addPreInspectionScheduleResponse},
+editScheduleStatusResponse: ${editScheduleStatusResponse},
 isMinimized: ${isMinimized},
 selectedEngineOilValue: ${selectedEngineOilValue},
 selectedWarningSystemValue: ${selectedWarningSystemValue},

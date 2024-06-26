@@ -61,8 +61,10 @@ class JobCardPage extends StatelessWidget {
                       ),
                       Padding(
                         padding: const EdgeInsets.only(left: 14.0),
-                        child: expandedRowShowsText("Site postcode",
-                            vmSchedule.jobcardResponse.data?.sitePostCode ?? ''),
+                        child: expandedRowShowsText(
+                            "Site postcode",
+                            vmSchedule.jobcardResponse.data?.sitePostCode ??
+                                ''),
                       ),
                       const SizedBox(
                         height: 30,
@@ -71,7 +73,8 @@ class JobCardPage extends StatelessWidget {
                         padding: const EdgeInsets.only(left: 14.0),
                         child: expandedRowShowsText(
                             "Site Contact name",
-                            vmSchedule.jobcardResponse.data?.siteContactPerson ??
+                            vmSchedule
+                                    .jobcardResponse.data?.siteContactPerson ??
                                 ''),
                       ),
                       const SizedBox(
@@ -140,8 +143,8 @@ class JobCardPage extends StatelessWidget {
                       ),
                       Padding(
                         padding: const EdgeInsets.only(left: 14.0),
-                        child: expandedRowShowsText(
-                            "Date", vmSchedule.jobcardResponse.data?.date ?? ''),
+                        child: expandedRowShowsText("Date",
+                            vmSchedule.jobcardResponse.data?.date ?? ''),
                       ),
                       const SizedBox(
                         height: 30,
@@ -326,7 +329,8 @@ class JobCardPage extends StatelessWidget {
                         padding: const EdgeInsets.only(left: 17.0),
                         child: expandedRowShowsText(
                             "Estimated job duration",
-                            vmSchedule.jobcardResponse.data?.estimatedJobDuration
+                            vmSchedule
+                                    .jobcardResponse.data?.estimatedJobDuration
                                     ?.toString() ??
                                 ''),
                       ),

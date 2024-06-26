@@ -202,7 +202,7 @@ class TodaysScheduleList extends StatelessWidget {
                           ),
                         )
                       ]),
-                      schedule.primaryVehicleDriver == true
+                      schedule.drivers?[index].type == "Primary Driver"
                           ? Container(
                               decoration: BoxDecoration(
                                   color: Colors.grey.shade300,

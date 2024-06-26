@@ -51,7 +51,7 @@ class WWFolderCard extends StatelessWidget {
           trailing: SizedBox(
             width: 80.w,
             child: Row(
-              children: [   
+              children: [
                 CommonIconBtnWidget(
                   icon: Icons.edit,
                   onTap: () => showCreateEditDialog(context,

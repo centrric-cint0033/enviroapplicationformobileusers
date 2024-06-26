@@ -13,19 +13,18 @@ String OhsRespModelToJson(List<OhsRespModel> data) =>
 
 @freezed
 class OhsRespModel with _$OhsRespModel {
-  const factory OhsRespModel({
-     bool? userReadStatus,
-     bool? editStatus,
-     String? dp,
-     String? created_by,
-     String? title,
-     String? description,
-     String? fileAttachment,
-     String? edited_date_time,
-     String? createdDateTime,
-     String? file_attachment,
-     num? members
-  }) = _OhsRespModel;
+  const factory OhsRespModel(
+      {bool? userReadStatus,
+      bool? editStatus,
+      String? dp,
+      String? created_by,
+      String? title,
+      String? description,
+      String? fileAttachment,
+      String? edited_date_time,
+      String? createdDateTime,
+      String? file_attachment,
+      num? members}) = _OhsRespModel;
 
   factory OhsRespModel.fromJson(Map<String, dynamic> json) =>
       _$OhsRespModelFromJson(json);

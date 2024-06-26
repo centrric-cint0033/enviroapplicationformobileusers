@@ -92,13 +92,15 @@ class UpdateVehicleStatusPage extends StatelessWidget {
                           const SizedBox(height: 20),
                           expandedRowShowText(
                             "Status",
-                            vmSchedule.sheduleweekResponse.data?[index].status ??
+                            vmSchedule
+                                    .sheduleweekResponse.data?[index].status ??
                                 '',
                           ),
                           const SizedBox(height: 20),
                           expandedRowShowText(
                             "Amount",
-                            vmSchedule.sheduleweekResponse.data?[index].amount ??
+                            vmSchedule
+                                    .sheduleweekResponse.data?[index].amount ??
                                 '',
                           ),
                           const SizedBox(height: 20),

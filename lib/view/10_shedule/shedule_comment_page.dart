@@ -156,57 +156,55 @@ class SheduleCommentPage extends StatelessWidget {
   }
 }
 
-
-
-      // SizedBox(
-      //         height: 55,
-      //         child: Card(
-      //           color: Colors.white70,
-      //           child: Stack(
-      //             children: [
-      //               Positioned(
-      //                 top: 0,
-      //                 right: 0,
-      //                 child: IconButton(
-      //                   icon: const Icon(Icons.delete),
-      //                   onPressed: () {
-      //                     showDialog(
-      //                       context: context,
-      //                       builder: (BuildContext context) {
-      //                         return AlertDialog(
-      //                           content: const Text(
-      //                               "Are you sure you want to delete?"),
-      //                           actions: [
-      //                             ElevatedButton(
-      //                               onPressed: () {
-      //                                 Navigator.pop(context);
-      //                               },
-      //                               child: const Text("Delete"),
-      //                             ),
-      //                             ElevatedButton(
-      //                               onPressed: () {
-      //                                 Navigator.pop(context);
-      //                               },
-      //                               child: const Text("Back"),
-      //                             ),
-      //                           ],
-      //                         );
-      //                       },
-      //                     );
-      //                   },
-      //                 ),
-      //               ),
-      //               const Positioned(
-      //                 top: 10,
-      //                 left: 10,
-      //                 child: Text(
-      //                   "Yxaikcsd[vpdf]",
-      //                   style: TextStyle(
-      //                     fontSize: 18,
-      //                   ),
-      //                 ),
-      //               ),
-      //             ],
-      //           ),
-      //         ),
-      //       )
+// SizedBox(
+//         height: 55,
+//         child: Card(
+//           color: Colors.white70,
+//           child: Stack(
+//             children: [
+//               Positioned(
+//                 top: 0,
+//                 right: 0,
+//                 child: IconButton(
+//                   icon: const Icon(Icons.delete),
+//                   onPressed: () {
+//                     showDialog(
+//                       context: context,
+//                       builder: (BuildContext context) {
+//                         return AlertDialog(
+//                           content: const Text(
+//                               "Are you sure you want to delete?"),
+//                           actions: [
+//                             ElevatedButton(
+//                               onPressed: () {
+//                                 Navigator.pop(context);
+//                               },
+//                               child: const Text("Delete"),
+//                             ),
+//                             ElevatedButton(
+//                               onPressed: () {
+//                                 Navigator.pop(context);
+//                               },
+//                               child: const Text("Back"),
+//                             ),
+//                           ],
+//                         );
+//                       },
+//                     );
+//                   },
+//                 ),
+//               ),
+//               const Positioned(
+//                 top: 10,
+//                 left: 10,
+//                 child: Text(
+//                   "Yxaikcsd[vpdf]",
+//                   style: TextStyle(
+//                     fontSize: 18,
+//                   ),
+//                 ),
+//               ),
+//             ],
+//           ),
+//         ),
+//       )

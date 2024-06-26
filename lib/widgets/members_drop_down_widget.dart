@@ -7,7 +7,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 // ignore: must_be_immutable
 class MembersDownWidget extends StatelessWidget {
   MembersDownWidget({super.key});
-  final TeamResModel addMemberPlaceholder = TeamResModel(name: "Add Member",);
+  final TeamResModel addMemberPlaceholder = TeamResModel(
+    name: "Add Member",
+  );
   @override
   Widget build(BuildContext context) {
     return Observer(

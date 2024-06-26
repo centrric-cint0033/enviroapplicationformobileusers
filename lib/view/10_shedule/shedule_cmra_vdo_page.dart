@@ -7,7 +7,6 @@ import 'package:enviro_mobile_application/widgets/drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
-
 @RoutePage()
 class ScheduleVideoAndPhotoPage extends StatelessWidget {
   ScheduleVideoAndPhotoPage({Key? key}) : super(key: key);

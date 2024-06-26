@@ -28,7 +28,8 @@ class SheduledetailPage2 extends StatelessWidget {
                   onPressed: () {},
                   child: const Text('Job Card'),
                   style: ElevatedButton.styleFrom(
-                    foregroundColor: Colors.black, backgroundColor: Colors.white,
+                    foregroundColor: Colors.black,
+                    backgroundColor: Colors.white,
                   ),
                 ),
               );

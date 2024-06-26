@@ -3,16 +3,23 @@ import 'dart:typed_data';
 import 'package:dartz/dartz.dart';
 import 'package:enviro_mobile_application/model/03_vehicle/vehicle_model/vehicle_model.dart';
 import 'package:enviro_mobile_application/model/07_Jobcard/job_card_model.dart';
+import 'package:enviro_mobile_application/model/12_shedulecard/schedule_status_res_model/schedule_status_res_model.dart';
 import 'package:enviro_mobile_application/model/12_shedulecard/shedule_card_comnt_resp_model.dart';
 import 'package:enviro_mobile_application/model/12_shedulecard/shedule_card_resp_model.dart';
 import 'package:enviro_mobile_application/model/12_shedulecard/shedule_sign_res_model.dart';
 import 'package:enviro_mobile_application/utilis/api_endpoints/api_endpoints.dart';
-import 'package:enviro_mobile_application/utilis/api_endpoints/customprint.dart';
 import 'package:enviro_mobile_application/utilis/httpservice.dart';
 import 'package:enviro_mobile_application/utilis/injection.dart';
 import 'package:enviro_mobile_application/utilis/main_failure.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:injectable/injectable.dart';
+
+enum ScheduleStatusType {
+  departedEnviroFacility,
+  jobStarted,
+  finishedJob,
+  fuelExpence,
+}
 
 abstract class IScheduleService {
   Future<Either<MainFailure, JobCardRespModel>> jobcardservicefunction();
@@ -37,8 +44,13 @@ abstract class IScheduleService {
     required String comment,
     required int id,
   });
-  Future<Either<Map<MainFailure, dynamic>, dynamic>> addPreInspectionSchedule(
-      {required VehicleModel data});
+  Future<Either<Map<MainFailure, dynamic>, dynamic>>
+      updatePreInspectionSchedule({required VehicleModel data});
+  Future<Either<MainFailure, ScheduleStatusResModel>> editScheduleStatusApi(
+      {required dynamic statusType,
+      required String date,
+      required String status,
+      required int id});
 }
 
 @LazySingleton(as: IScheduleService)
@@ -122,7 +134,6 @@ class SalesService implements IScheduleService {
     required String extractedWasteType,
     required String extractedLitres,
   }) async {
-    customPrint(content: id);
     var response = await getIt<HttpService>().multipartRequest(
       apiUrl: ApiEndPoints.endpointshedulesignature,
       data: {
@@ -166,8 +177,8 @@ class SalesService implements IScheduleService {
   }
 
   @override
-  Future<Either<Map<MainFailure, dynamic>, dynamic>> addPreInspectionSchedule(
-      {required VehicleModel data}) async {
+  Future<Either<Map<MainFailure, dynamic>, dynamic>>
+      updatePreInspectionSchedule({required VehicleModel data}) async {
     var response = await getIt<HttpService>().multipartRequest(
         data: data.toJson(),
         method: "POST",
@@ -175,6 +186,67 @@ class SalesService implements IScheduleService {
     return response.fold(
       (l) => Left(l),
       (res) async => const Right('success'),
+    );
+  }
+
+  @override
+  Future<Either<MainFailure, ScheduleStatusResModel>> editScheduleStatusApi(
+      {required dynamic statusType,
+      required String date,
+      required String status,
+      required int id}) async {
+    var response;
+    switch (statusType) {
+      case ScheduleStatusType.departedEnviroFacility:
+        response = await getIt<HttpService>().multipartRequest(
+          apiUrl: ApiEndPoints.endpointSheduleStatusEdit,
+          data: {
+            "id": id,
+            "depart_enviro_facility": date,
+            "status": status,
+          },
+          method: "PUT",
+        );
+        break;
+      case ScheduleStatusType.jobStarted:
+        response = await getIt<HttpService>().multipartRequest(
+          apiUrl: ApiEndPoints.endpointSheduleStatusEdit,
+          data: {
+            "id": id,
+            "start_job": date,
+            "status": status,
+          },
+          method: "PUT",
+        );
+        break;
+      case ScheduleStatusType.jobStarted:
+        response = await getIt<HttpService>().multipartRequest(
+          apiUrl: ApiEndPoints.endpointSheduleStatusEdit,
+          data: {
+            "id": id,
+            "finish_job": date,
+            "status": status,
+          },
+          method: "PUT",
+        );
+        break;
+    }
+
+    return response.fold(
+      (l) {
+        (l.values.first);
+        return Left(l.keys.first);
+      },
+      (res) async {
+        try {
+          var data = jsonDecode(res.body);
+          ScheduleStatusResModel scheduleStatus =
+              ScheduleStatusResModel.fromJson(data);
+          return Right(scheduleStatus);
+        } catch (e) {
+          // Handle JSON parsing error
+        }
+      },
     );
   }
 }

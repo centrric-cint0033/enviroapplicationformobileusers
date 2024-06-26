@@ -7,6 +7,7 @@ import 'package:enviro_mobile_application/view/10_shedule/shedule_widget.dart';
 import 'package:enviro_mobile_application/view_model/11_shedule/shedule_page_view_model.dart';
 import 'package:enviro_mobile_application/widgets/cmn_title_textwidget.dart';
 import 'package:enviro_mobile_application/widgets/drawer.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -15,10 +16,11 @@ import 'package:intl/intl.dart';
 
 @RoutePage()
 class UpdateVehiclepreinspectionPage extends StatelessWidget {
-  const UpdateVehiclepreinspectionPage({Key? key, required this.index, required this.driversIndex})
+  const UpdateVehiclepreinspectionPage(
+      {Key? key, required this.index, required this.driversIndex})
       : super(key: key);
   final int index;
-    final int driversIndex;
+  final int driversIndex;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,6 +31,8 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
       body: SingleChildScrollView(
         padding: screenWidth,
         child: Observer(builder: (context) {
+          vmSchedule.preInspectionSubmitButtonValidation();
+          final res = vmSchedule.addPreInspectionScheduleResponse;
           return Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -546,21 +550,32 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                 alignment: Alignment.bottomRight,
                 child: ElevatedButton(
                   onPressed: () {
-                    cmSubmitFn(context);
+                    if (vmSchedule.showSubmitButton == true) {
+                      cmSubmitFn(context);
+                    }
                   },
                   style: ElevatedButton.styleFrom(
-                    foregroundColor: Colors.blue,
-                    backgroundColor: Colors.blue,
-                    side: const BorderSide(color: Colors.blue),
+                    foregroundColor: vmSchedule.showSubmitButton
+                        ? Colors.blue
+                        : Colors.blue.shade100,
+                    backgroundColor: vmSchedule.showSubmitButton
+                        ? Colors.blue
+                        : Colors.blue.shade100,
+                    side: BorderSide(
+                        color: vmSchedule.showSubmitButton
+                            ? Colors.blue
+                            : Colors.blue.shade100),
                   ),
                   child: Padding(
                     padding: EdgeInsets.all(8.h),
-                    child: const Text(
-                      'Submit',
-                      style: TextStyle(
-                        color: Colors.white,
-                      ),
-                    ),
+                    child: res.loading
+                        ? const CupertinoActivityIndicator()
+                        : const Text(
+                            'Submit',
+                            style: TextStyle(
+                              color: Colors.white,
+                            ),
+                          ),
                   ),
                 ),
               ),
@@ -572,16 +587,18 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
   }
 
   cmSubmitFn(BuildContext context) {
-    vmSchedule.addPreInspectionSchedule(
+    vmSchedule.updatePreInspectionSchedule(
         context: context,
         data: VehicleModel(
-            vehicle: vmSchedule
-                .sheduleweekResponse.data?[index].drivers?[driversIndex].vehicleId,
+            vehicle: vmSchedule.sheduleweekResponse.data?[index]
+                .drivers?[driversIndex].vehicleId,
             registration:
                 vmSchedule.sheduleweekResponse.data?[index].vehicle?.toString(),
-            odometer: int.parse(vmSchedule.odometerCntrller.text),
-            driverName:
-                vmSchedule.sheduleweekResponse.data?[index].drivers?[driversIndex].name,
+            odometer: vmSchedule.odometerCntrller.text != ""
+                ? int.parse(vmSchedule.odometerCntrller.text)
+                : null,
+            driverName: vmSchedule
+                .sheduleweekResponse.data?[index].drivers?[driversIndex].name,
             hourMeterStart: vmSchedule.hoursMeterCntrller.text,
             fitForWork: vmSchedule.checkboxValue,
             validDrivingLicense: vmSchedule.checkboxValue2,
@@ -712,8 +729,11 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
             fittings: vmSchedule.selectFittingsCheckbox,
             firstAidKit: vmSchedule.selectFirstAidKitCheckbox,
             ppe: vmSchedule.selectPPECheckbox,
-            fireExtinguisherDate: DateFormat('yyyy-MM-dd')
-                .format(vmSchedule.selectedFireExtinguisherDate!),
+            fireExtinguisherDate:
+                vmSchedule.selectedFireExtinguisherDate != null
+                    ? DateFormat('yyyy-MM-dd')
+                        .format(vmSchedule.selectedFireExtinguisherDate!)
+                    : null,
             gardenHose: vmSchedule.selectGardenHoseCheckbox,
             gaticLifters: vmSchedule.selectGatticCheckbox,
             bucketRags: vmSchedule.selectBucketRagsCheckbox,
@@ -756,6 +776,9 @@ Widget requiredRowWidget(String? text1, String? text2,
                   Expanded(
                     child: TextField(
                       controller: controller,
+                      onChanged: (value) {
+                        vmSchedule.preInspectionSubmitButtonValidation();
+                      },
                       decoration:
                           const InputDecoration(border: InputBorder.none),
                       inputFormatters: [FilteringTextInputFormatter.digitsOnly],

@@ -47,7 +47,8 @@ class ApiEndPoints
       "/api/v1/schedule/jobschedule/signature/add/";
   static const endpointcommentsignature =
       "/api/v1/schedule/jobschedule/comments/";
-
   static const endpointaddpresinspection =
-      "/api/v1/vehicles/waste/car/pre-inspection/"; // SITE APIS
+      "/api/v1/vehicles/waste/truck/pre-inspection/";
+  static const endpointSheduleStatusEdit =
+      "/api/v1/schedule/jobschedule/mobile/edit/";
 }
