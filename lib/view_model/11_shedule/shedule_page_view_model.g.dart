@@ -207,6 +207,22 @@ mixin _$ScheduleViewModel on ScheduleViewModelBase, Store {
     });
   }
 
+  late final _$pickedCameraImage2Atom =
+      Atom(name: 'ScheduleViewModelBase.pickedCameraImage2', context: context);
+
+  @override
+  ImageFilePickerModel? get pickedCameraImage2 {
+    _$pickedCameraImage2Atom.reportRead();
+    return super.pickedCameraImage2;
+  }
+
+  @override
+  set pickedCameraImage2(ImageFilePickerModel? value) {
+    _$pickedCameraImage2Atom.reportWrite(value, super.pickedCameraImage2, () {
+      super.pickedCameraImage2 = value;
+    });
+  }
+
   late final _$pickedGalleryImageAtom =
       Atom(name: 'ScheduleViewModelBase.pickedGalleryImage', context: context);
 
@@ -220,24 +236,6 @@ mixin _$ScheduleViewModel on ScheduleViewModelBase, Store {
   set pickedGalleryImage(String? value) {
     _$pickedGalleryImageAtom.reportWrite(value, super.pickedGalleryImage, () {
       super.pickedGalleryImage = value;
-    });
-  }
-
-  late final _$selectedsignaturecameraImageAtom = Atom(
-      name: 'ScheduleViewModelBase.selectedsignaturecameraImage',
-      context: context);
-
-  @override
-  File? get selectedsignaturecameraImage {
-    _$selectedsignaturecameraImageAtom.reportRead();
-    return super.selectedsignaturecameraImage;
-  }
-
-  @override
-  set selectedsignaturecameraImage(File? value) {
-    _$selectedsignaturecameraImageAtom
-        .reportWrite(value, super.selectedsignaturecameraImage, () {
-      super.selectedsignaturecameraImage = value;
     });
   }
 
@@ -273,6 +271,24 @@ mixin _$ScheduleViewModel on ScheduleViewModelBase, Store {
     });
   }
 
+  late final _$selectedsignaturecameraImageAtom = Atom(
+      name: 'ScheduleViewModelBase.selectedsignaturecameraImage',
+      context: context);
+
+  @override
+  File? get selectedsignaturecameraImage {
+    _$selectedsignaturecameraImageAtom.reportRead();
+    return super.selectedsignaturecameraImage;
+  }
+
+  @override
+  set selectedsignaturecameraImage(File? value) {
+    _$selectedsignaturecameraImageAtom
+        .reportWrite(value, super.selectedsignaturecameraImage, () {
+      super.selectedsignaturecameraImage = value;
+    });
+  }
+
   late final _$selectedImageAtom =
       Atom(name: 'ScheduleViewModelBase.selectedImage', context: context);
 
@@ -286,38 +302,6 @@ mixin _$ScheduleViewModel on ScheduleViewModelBase, Store {
   set selectedImage(File? value) {
     _$selectedImageAtom.reportWrite(value, super.selectedImage, () {
       super.selectedImage = value;
-    });
-  }
-
-  late final _$greencheckedAtom =
-      Atom(name: 'ScheduleViewModelBase.greenchecked', context: context);
-
-  @override
-  bool get greenchecked {
-    _$greencheckedAtom.reportRead();
-    return super.greenchecked;
-  }
-
-  @override
-  set greenchecked(bool value) {
-    _$greencheckedAtom.reportWrite(value, super.greenchecked, () {
-      super.greenchecked = value;
-    });
-  }
-
-  late final _$bluecheckedAtom =
-      Atom(name: 'ScheduleViewModelBase.bluechecked', context: context);
-
-  @override
-  bool get bluechecked {
-    _$bluecheckedAtom.reportRead();
-    return super.bluechecked;
-  }
-
-  @override
-  set bluechecked(bool value) {
-    _$bluecheckedAtom.reportWrite(value, super.bluechecked, () {
-      super.bluechecked = value;
     });
   }
 
@@ -366,6 +350,22 @@ mixin _$ScheduleViewModel on ScheduleViewModelBase, Store {
   set checkboxValue3(bool value) {
     _$checkboxValue3Atom.reportWrite(value, super.checkboxValue3, () {
       super.checkboxValue3 = value;
+    });
+  }
+
+  late final _$pickedImagesAtom =
+      Atom(name: 'ScheduleViewModelBase.pickedImages', context: context);
+
+  @override
+  List<String> get pickedImages {
+    _$pickedImagesAtom.reportRead();
+    return super.pickedImages;
+  }
+
+  @override
+  set pickedImages(List<String> value) {
+    _$pickedImagesAtom.reportWrite(value, super.pickedImages, () {
+      super.pickedImages = value;
     });
   }
 
@@ -482,6 +482,23 @@ mixin _$ScheduleViewModel on ScheduleViewModelBase, Store {
     _$editScheduleStatusResponseAtom
         .reportWrite(value, super.editScheduleStatusResponse, () {
       super.editScheduleStatusResponse = value;
+    });
+  }
+
+  late final _$addImageScheduleResponseAtom = Atom(
+      name: 'ScheduleViewModelBase.addImageScheduleResponse', context: context);
+
+  @override
+  ApiResponse<ScheduleImageResModel> get addImageScheduleResponse {
+    _$addImageScheduleResponseAtom.reportRead();
+    return super.addImageScheduleResponse;
+  }
+
+  @override
+  set addImageScheduleResponse(ApiResponse<ScheduleImageResModel> value) {
+    _$addImageScheduleResponseAtom
+        .reportWrite(value, super.addImageScheduleResponse, () {
+      super.addImageScheduleResponse = value;
     });
   }
 
@@ -1144,44 +1161,6 @@ mixin _$ScheduleViewModel on ScheduleViewModelBase, Store {
         .run(() => super.updateSignatureButtonColor(state: state));
   }
 
-  late final _$pickFilefromphoneAsyncAction =
-      AsyncAction('ScheduleViewModelBase.pickFilefromphone', context: context);
-
-  @override
-  Future<void> pickFilefromphone() {
-    return _$pickFilefromphoneAsyncAction.run(() => super.pickFilefromphone());
-  }
-
-  late final _$pickImageFromsignatureCameraAsyncAction = AsyncAction(
-      'ScheduleViewModelBase.pickImageFromsignatureCamera',
-      context: context);
-
-  @override
-  Future<void> pickImageFromsignatureCamera() {
-    return _$pickImageFromsignatureCameraAsyncAction
-        .run(() => super.pickImageFromsignatureCamera());
-  }
-
-  late final _$pickImageFromCameraAsyncAction = AsyncAction(
-      'ScheduleViewModelBase.pickImageFromCamera',
-      context: context);
-
-  @override
-  Future<void> pickImageFromCamera() {
-    return _$pickImageFromCameraAsyncAction
-        .run(() => super.pickImageFromCamera());
-  }
-
-  late final _$pickImageFromGalleryAsyncAction = AsyncAction(
-      'ScheduleViewModelBase.pickImageFromGallery',
-      context: context);
-
-  @override
-  Future<void> pickImageFromGallery() {
-    return _$pickImageFromGalleryAsyncAction
-        .run(() => super.pickImageFromGallery());
-  }
-
   late final _$jobcardviewmodelfunctionAsyncAction = AsyncAction(
       'ScheduleViewModelBase.jobcardviewmodelfunction',
       context: context);
@@ -1278,59 +1257,72 @@ mixin _$ScheduleViewModel on ScheduleViewModelBase, Store {
             id: id));
   }
 
+  late final _$addImageScheduleApiAsyncAction = AsyncAction(
+      'ScheduleViewModelBase.addImageScheduleApi',
+      context: context);
+
+  @override
+  Future<void> addImageScheduleApi(
+      {required BuildContext context,
+      required int id,
+      required String pickedFiles,
+      required bool beforeOrAfterPic,
+      required dynamic picType}) {
+    return _$addImageScheduleApiAsyncAction.run(() => super.addImageScheduleApi(
+        context: context,
+        id: id,
+        pickedFiles: pickedFiles,
+        beforeOrAfterPic: beforeOrAfterPic,
+        picType: picType));
+  }
+
+  late final _$pickFilefromphoneAsyncAction =
+      AsyncAction('ScheduleViewModelBase.pickFilefromphone', context: context);
+
+  @override
+  Future<void> pickFilefromphone() {
+    return _$pickFilefromphoneAsyncAction.run(() => super.pickFilefromphone());
+  }
+
+  late final _$pickImageFromsignatureCameraAsyncAction = AsyncAction(
+      'ScheduleViewModelBase.pickImageFromsignatureCamera',
+      context: context);
+
+  @override
+  Future<void> pickImageFromsignatureCamera() {
+    return _$pickImageFromsignatureCameraAsyncAction
+        .run(() => super.pickImageFromsignatureCamera());
+  }
+
+  late final _$pickImageFromCameraAsyncAction = AsyncAction(
+      'ScheduleViewModelBase.pickImageFromCamera',
+      context: context);
+
+  @override
+  Future<void> pickImageFromCamera() {
+    return _$pickImageFromCameraAsyncAction
+        .run(() => super.pickImageFromCamera());
+  }
+
+  late final _$pickImageFromGalleryAsyncAction = AsyncAction(
+      'ScheduleViewModelBase.pickImageFromGallery',
+      context: context);
+
+  @override
+  Future<void> pickImageFromGallery() {
+    return _$pickImageFromGalleryAsyncAction
+        .run(() => super.pickImageFromGallery());
+  }
+
   late final _$ScheduleViewModelBaseActionController =
       ActionController(name: 'ScheduleViewModelBase', context: context);
 
   @override
-  dynamic datePickerFn(dynamic date) {
+  void updateProductImageData({ImageFilePickerModel? image}) {
     final _$actionInfo = _$ScheduleViewModelBaseActionController.startAction(
-        name: 'ScheduleViewModelBase.datePickerFn');
+        name: 'ScheduleViewModelBase.updateProductImageData');
     try {
-      return super.datePickerFn(date);
-    } finally {
-      _$ScheduleViewModelBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  void updategreencheckedValue(dynamic newValue) {
-    final _$actionInfo = _$ScheduleViewModelBaseActionController.startAction(
-        name: 'ScheduleViewModelBase.updategreencheckedValue');
-    try {
-      return super.updategreencheckedValue(newValue);
-    } finally {
-      _$ScheduleViewModelBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  void updateCheckboxValue(bool newValue) {
-    final _$actionInfo = _$ScheduleViewModelBaseActionController.startAction(
-        name: 'ScheduleViewModelBase.updateCheckboxValue');
-    try {
-      return super.updateCheckboxValue(newValue);
-    } finally {
-      _$ScheduleViewModelBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  void updateCheckboxValue2(bool newValue2) {
-    final _$actionInfo = _$ScheduleViewModelBaseActionController.startAction(
-        name: 'ScheduleViewModelBase.updateCheckboxValue2');
-    try {
-      return super.updateCheckboxValue2(newValue2);
-    } finally {
-      _$ScheduleViewModelBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  void updateCheckboxValue3(bool newValue3) {
-    final _$actionInfo = _$ScheduleViewModelBaseActionController.startAction(
-        name: 'ScheduleViewModelBase.updateCheckboxValue3');
-    try {
-      return super.updateCheckboxValue3(newValue3);
+      return super.updateProductImageData(image: image);
     } finally {
       _$ScheduleViewModelBaseActionController.endAction(_$actionInfo);
     }
@@ -1469,11 +1461,44 @@ mixin _$ScheduleViewModel on ScheduleViewModelBase, Store {
   }
 
   @override
-  dynamic preInspectionSubmitButtonValidation() {
+  void updateCheckboxValue(bool newValue) {
     final _$actionInfo = _$ScheduleViewModelBaseActionController.startAction(
-        name: 'ScheduleViewModelBase.preInspectionSubmitButtonValidation');
+        name: 'ScheduleViewModelBase.updateCheckboxValue');
     try {
-      return super.preInspectionSubmitButtonValidation();
+      return super.updateCheckboxValue(newValue);
+    } finally {
+      _$ScheduleViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void updateCheckboxValue2(bool newValue2) {
+    final _$actionInfo = _$ScheduleViewModelBaseActionController.startAction(
+        name: 'ScheduleViewModelBase.updateCheckboxValue2');
+    try {
+      return super.updateCheckboxValue2(newValue2);
+    } finally {
+      _$ScheduleViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void updateCheckboxValue3(bool newValue3) {
+    final _$actionInfo = _$ScheduleViewModelBaseActionController.startAction(
+        name: 'ScheduleViewModelBase.updateCheckboxValue3');
+    try {
+      return super.updateCheckboxValue3(newValue3);
+    } finally {
+      _$ScheduleViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic datePickerFn(dynamic date) {
+    final _$actionInfo = _$ScheduleViewModelBaseActionController.startAction(
+        name: 'ScheduleViewModelBase.datePickerFn');
+    try {
+      return super.datePickerFn(date);
     } finally {
       _$ScheduleViewModelBaseActionController.endAction(_$actionInfo);
     }
@@ -1516,6 +1541,17 @@ mixin _$ScheduleViewModel on ScheduleViewModelBase, Store {
   }
 
   @override
+  dynamic preInspectionSubmitButtonValidation() {
+    final _$actionInfo = _$ScheduleViewModelBaseActionController.startAction(
+        name: 'ScheduleViewModelBase.preInspectionSubmitButtonValidation');
+    try {
+      return super.preInspectionSubmitButtonValidation();
+    } finally {
+      _$ScheduleViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 signColor: ${signColor},
@@ -1530,16 +1566,16 @@ selectedDepartedEnviroDate: ${selectedDepartedEnviroDate},
 selectedStartingJobDate: ${selectedStartingJobDate},
 selectedFinishedJobDate: ${selectedFinishedJobDate},
 pickedCameraImage: ${pickedCameraImage},
+pickedCameraImage2: ${pickedCameraImage2},
 pickedGalleryImage: ${pickedGalleryImage},
-selectedsignaturecameraImage: ${selectedsignaturecameraImage},
 isImageSelected: ${isImageSelected},
 selectedcameraImage: ${selectedcameraImage},
+selectedsignaturecameraImage: ${selectedsignaturecameraImage},
 selectedImage: ${selectedImage},
-greenchecked: ${greenchecked},
-bluechecked: ${bluechecked},
 checkboxValue: ${checkboxValue},
 checkboxValue2: ${checkboxValue2},
 checkboxValue3: ${checkboxValue3},
+pickedImages: ${pickedImages},
 jobcardResponse: ${jobcardResponse},
 shedulecardResponse: ${shedulecardResponse},
 sheduleweekResponse: ${sheduleweekResponse},
@@ -1547,6 +1583,7 @@ signatureResponse: ${signatureResponse},
 commentResponse: ${commentResponse},
 addPreInspectionScheduleResponse: ${addPreInspectionScheduleResponse},
 editScheduleStatusResponse: ${editScheduleStatusResponse},
+addImageScheduleResponse: ${addImageScheduleResponse},
 isMinimized: ${isMinimized},
 selectedEngineOilValue: ${selectedEngineOilValue},
 selectedWarningSystemValue: ${selectedWarningSystemValue},

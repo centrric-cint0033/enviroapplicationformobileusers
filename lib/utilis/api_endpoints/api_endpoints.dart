@@ -51,4 +51,5 @@ class ApiEndPoints
       "/api/v1/vehicles/waste/truck/pre-inspection/";
   static const endpointSheduleStatusEdit =
       "/api/v1/schedule/jobschedule/mobile/edit/";
+  static const endpointsheduleaddimage = "/api/v1/schedule/jobschedule/images/";
 }

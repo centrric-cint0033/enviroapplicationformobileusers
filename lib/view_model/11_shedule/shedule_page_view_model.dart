@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 import 'dart:typed_data';
 import 'package:auto_route/auto_route.dart';
@@ -5,6 +6,7 @@ import 'package:enviro_mobile_application/Routepage/approutes.gr.dart';
 import 'package:enviro_mobile_application/api_response/api_response.dart';
 import 'package:enviro_mobile_application/model/03_vehicle/vehicle_model/vehicle_model.dart';
 import 'package:enviro_mobile_application/model/07_Jobcard/job_card_model.dart';
+import 'package:enviro_mobile_application/model/12_shedulecard/schedule_image_res_model/schedule_image_res_model.dart';
 import 'package:enviro_mobile_application/model/12_shedulecard/schedule_status_res_model/schedule_status_res_model.dart';
 import 'package:enviro_mobile_application/model/12_shedulecard/shedule_card_comnt_resp_model.dart';
 import 'package:enviro_mobile_application/model/12_shedulecard/shedule_card_resp_model.dart';
@@ -20,6 +22,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:injectable/injectable.dart';
 import 'package:intl/intl.dart';
 import 'package:mobx/mobx.dart';
+
+import '../../utilis/image_picker_service/image_file_picker.dart';
 part 'shedule_page_view_model.g.dart';
 
 final vmSchedule = getIt<ScheduleViewModel>();
@@ -70,99 +74,32 @@ abstract class ScheduleViewModelBase with Store {
   DateTime? selectedStartingJobDate;
   @observable
   DateTime? selectedFinishedJobDate;
-    @observable
-  String? pickedCameraImage = "";
-    @observable
-  String? pickedGalleryImage = "";
-  @action
-  Future<void> pickFilefromphone() async {
-    var pic = await FilePicker.platform.pickFiles(
-        allowMultiple: true,
-        type: FileType.custom,
-        allowedExtensions: ['jpg', 'pdf', 'doc']);
-    pickedFiles.addAll(pic?.files ?? []);
-    pickedFiles = [...pickedFiles];
-  }
-
-  @action
-  datePickerFn(date) {
-    selectedFireExtinguisherDate = date;
-  }
-
   @observable
-  File? selectedsignaturecameraImage;
-
-  @action
-  Future<void> pickImageFromsignatureCamera() async {
-    final pickedsignaturecameraImage =
-        await ImagePicker().pickImage(source: ImageSource.camera);
-
-    if (pickedsignaturecameraImage != null) {
-      selectedsignaturecameraImage = File(pickedsignaturecameraImage.path);
-    }
-  }
-
+  String? pickedCameraImage = "";
+  @observable
+  ImageFilePickerModel? pickedCameraImage2;
+  @observable
+  String? pickedGalleryImage = "";
   @observable
   bool isImageSelected = true;
 
   @observable
   File? selectedcameraImage;
-
-  @action
-  Future<void> pickImageFromCamera() async {
-    final pickedImage =
-        await ImagePicker().pickImage(source: ImageSource.camera);
-    if (pickedImage != null) {
-      selectedcameraImage = File(pickedImage.path);
-      isImageSelected = true;
-    }
-  }
-
+  @observable
+  File? selectedsignaturecameraImage;
   @observable
   File? selectedImage;
-
-  @action
-  Future<void> pickImageFromGallery() async {
-    final pickedImage =
-        await ImagePicker().pickImage(source: ImageSource.gallery);
-    if (pickedImage != null) {
-      selectedImage = File(pickedImage.path);
-    }
-  }
-
-  @observable
-  bool greenchecked = true;
-
-  @action
-  void updategreencheckedValue(newValue) {
-    greenchecked = newValue;
-  }
-
-  @observable
-  bool bluechecked = true;
-
   @observable
   bool checkboxValue = false;
-
-  @action
-  void updateCheckboxValue(bool newValue) {
-    checkboxValue = newValue;
-  }
-
   @observable
   bool checkboxValue2 = false;
-
-  @action
-  void updateCheckboxValue2(bool newValue2) {
-    checkboxValue2 = newValue2;
-  }
-
   @observable
   bool checkboxValue3 = false;
-
+  @observable
+  List<String> pickedImages = [];
   @action
-  void updateCheckboxValue3(bool newValue3) {
-    checkboxValue3 = newValue3;
+  void updateProductImageData({ImageFilePickerModel? image}) {
+    pickedCameraImage2 = image!;
   }
 
   @observable
@@ -340,7 +277,7 @@ abstract class ScheduleViewModelBase with Store {
           error: null,
           loading: false,
         );
-        shedulecardviewmodelfunction();
+        shedulecardviewmodelweekfunction();
         context.router.pop();
         showToast(context, msg: "Successfully updated", color: Colors.green);
       },
@@ -362,6 +299,7 @@ abstract class ScheduleViewModelBase with Store {
 
     final result = await scheduleService.editScheduleStatusApi(
         statusType: statusType, date: date, status: status, id: id);
+    log("$result.rree");
     return result.fold(
       (l) {
         editScheduleStatusResponse = editScheduleStatusResponse.copyWith(
@@ -370,14 +308,54 @@ abstract class ScheduleViewModelBase with Store {
         );
       },
       (r) {
+        log("rr");
         editScheduleStatusResponse = editScheduleStatusResponse.copyWith(
           data: r,
           error: null,
           loading: false,
         );
-        shedulecardviewmodelfunction();
+        log("ee");
+        shedulecardviewmodelweekfunction();
         context.router.pop();
         showToast(context, msg: "Successfully updated", color: Colors.green);
+      },
+    );
+  }
+
+  @observable
+  ApiResponse<ScheduleImageResModel> addImageScheduleResponse =
+      ApiResponse<ScheduleImageResModel>();
+  @action
+  Future<void> addImageScheduleApi(
+      {required BuildContext context,
+      required int id,
+      required String pickedFiles,
+      required bool beforeOrAfterPic,
+      required picType}) async {
+    addImageScheduleResponse =
+        addImageScheduleResponse.copyWith(error: null, loading: true);
+
+    final result = await scheduleService.addImagesScheduleAPi(
+        id: id,
+        pickedFiles: pickedFiles,
+        beforeOrAfterPic: beforeOrAfterPic,
+        picType: picType);
+    return result.fold(
+      (l) {
+        addImageScheduleResponse = addImageScheduleResponse.copyWith(
+          error: l.keys.first,
+          loading: false,
+        );
+      },
+      (r) {
+        addImageScheduleResponse = addImageScheduleResponse.copyWith(
+          data: r,
+          error: null,
+          loading: false,
+        );
+        shedulecardviewmodelweekfunction();
+        context.router.pop();
+        showToast(context, msg: "Successfully added", color: Colors.green);
       },
     );
   }
@@ -597,17 +575,61 @@ abstract class ScheduleViewModelBase with Store {
   }
 
   @action
-  preInspectionSubmitButtonValidation() {
-    if (odometerCntrller.text.isNotEmpty &&
-        hoursMeterCntrller.text.isNotEmpty &&
-        checkboxValue != false &&
-        checkboxValue2 != false &&
-        checkboxValue3 != false &&
-        selectverifyCheckbox1 != false &&
-        selectverifyCheckbox2 != false) {
-      showSubmitButton = true;
-    } else {
-      showSubmitButton = false;
+  void updateCheckboxValue(bool newValue) {
+    checkboxValue = newValue;
+  }
+
+  @action
+  void updateCheckboxValue2(bool newValue2) {
+    checkboxValue2 = newValue2;
+  }
+
+  @action
+  void updateCheckboxValue3(bool newValue3) {
+    checkboxValue3 = newValue3;
+  }
+
+  @action
+  Future<void> pickFilefromphone() async {
+    var pic = await FilePicker.platform.pickFiles(
+        allowMultiple: true,
+        type: FileType.custom,
+        allowedExtensions: ['jpg', 'pdf', 'doc']);
+    pickedFiles.addAll(pic?.files ?? []);
+    pickedFiles = [...pickedFiles];
+  }
+
+  @action
+  datePickerFn(date) {
+    selectedFireExtinguisherDate = date;
+  }
+
+  @action
+  Future<void> pickImageFromsignatureCamera() async {
+    final pickedsignaturecameraImage =
+        await ImagePicker().pickImage(source: ImageSource.camera);
+
+    if (pickedsignaturecameraImage != null) {
+      selectedsignaturecameraImage = File(pickedsignaturecameraImage.path);
+    }
+  }
+
+  @action
+  Future<void> pickImageFromCamera() async {
+    final pickedImage =
+        await ImagePicker().pickImage(source: ImageSource.camera);
+    if (pickedImage != null) {
+      selectedcameraImage = File(pickedImage.path);
+      isImageSelected = true;
+    }
+  }
+
+  @action
+  Future<void> pickImageFromGallery() async {
+    final pickedImage =
+        await ImagePicker().pickImage(source: ImageSource.gallery);
+    if (pickedImage != null) {
+      selectedImage = File(pickedImage.path);
     }
   }
 
@@ -643,13 +665,29 @@ abstract class ScheduleViewModelBase with Store {
     selectedFinishedJobDate = date;
     String dateString =
         DateFormat('yyyy-MM-dd HH:mm:ss').format(selectedFinishedJobDate!);
-    context.router.push(
-        CameraGalleryRoute(onCameraSelected: () {}, onGallerySelected: () {}));
+    pickedCameraImage = null;
+    pickedGalleryImage = null;
+    context.router.push(CameraGalleryRoute(fromJobFinished: true, id: id));
     editScheduleStatusApi(
         context: context,
         statusType: ScheduleStatusType.finishedJob,
         date: dateString,
         status: status,
         id: id);
+  }
+
+  @action
+  preInspectionSubmitButtonValidation() {
+    if (odometerCntrller.text.isNotEmpty &&
+        hoursMeterCntrller.text.isNotEmpty &&
+        checkboxValue != false &&
+        checkboxValue2 != false &&
+        checkboxValue3 != false &&
+        selectverifyCheckbox1 != false &&
+        selectverifyCheckbox2 != false) {
+      showSubmitButton = true;
+    } else {
+      showSubmitButton = false;
+    }
   }
 }

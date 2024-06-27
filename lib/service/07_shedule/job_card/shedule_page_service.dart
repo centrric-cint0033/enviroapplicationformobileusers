@@ -3,6 +3,7 @@ import 'dart:typed_data';
 import 'package:dartz/dartz.dart';
 import 'package:enviro_mobile_application/model/03_vehicle/vehicle_model/vehicle_model.dart';
 import 'package:enviro_mobile_application/model/07_Jobcard/job_card_model.dart';
+import 'package:enviro_mobile_application/model/12_shedulecard/schedule_image_res_model/schedule_image_res_model.dart';
 import 'package:enviro_mobile_application/model/12_shedulecard/schedule_status_res_model/schedule_status_res_model.dart';
 import 'package:enviro_mobile_application/model/12_shedulecard/shedule_card_comnt_resp_model.dart';
 import 'package:enviro_mobile_application/model/12_shedulecard/shedule_card_resp_model.dart';
@@ -19,6 +20,11 @@ enum ScheduleStatusType {
   jobStarted,
   finishedJob,
   fuelExpence,
+}
+
+enum BeforeOrAfterPic {
+  beforePic,
+  afterPic,
 }
 
 abstract class IScheduleService {
@@ -51,6 +57,12 @@ abstract class IScheduleService {
       required String date,
       required String status,
       required int id});
+  Future<Either<Map<MainFailure, dynamic>, ScheduleImageResModel>>
+      addImagesScheduleAPi(
+          {required int id,
+          required String pickedFiles,
+          required bool beforeOrAfterPic,
+          required picType});
 }
 
 @LazySingleton(as: IScheduleService)
@@ -219,7 +231,7 @@ class SalesService implements IScheduleService {
           method: "PUT",
         );
         break;
-      case ScheduleStatusType.jobStarted:
+      case ScheduleStatusType.finishedJob:
         response = await getIt<HttpService>().multipartRequest(
           apiUrl: ApiEndPoints.endpointSheduleStatusEdit,
           data: {
@@ -246,6 +258,51 @@ class SalesService implements IScheduleService {
         } catch (e) {
           // Handle JSON parsing error
         }
+      },
+    );
+  }
+
+  @override
+  Future<Either<Map<MainFailure, dynamic>, ScheduleImageResModel>>
+      addImagesScheduleAPi(
+          {required int id,
+          required String pickedFiles,
+          required bool beforeOrAfterPic,
+          required picType}) async {
+    var response;
+    switch (picType) {
+      case BeforeOrAfterPic.beforePic:
+        response = await getIt<HttpService>().multipartRequest(
+          apiUrl: ApiEndPoints.endpointsheduleaddimage,
+          data: {
+            "id": id,
+            "pickedfile": pickedFiles,
+            "before_pic": beforeOrAfterPic,
+          },
+          method: "POST",
+        );
+        break;
+      case BeforeOrAfterPic.afterPic:
+        response = await getIt<HttpService>().multipartRequest(
+          apiUrl: ApiEndPoints.endpointsheduleaddimage,
+          data: {
+            "id": id,
+            "pickedfile": pickedFiles,
+            "after_pic": beforeOrAfterPic,
+          },
+          method: "POST",
+        );
+        break;
+    }
+
+    return response.fold(
+      (l) => Left(l),
+      (res) async {
+        var data = jsonDecode(res.body);
+
+        ScheduleImageResModel signingdata =
+            ScheduleImageResModel.fromJson(data);
+        return Right(signingdata);
       },
     );
   }

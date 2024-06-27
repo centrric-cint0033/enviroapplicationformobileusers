@@ -9,7 +9,6 @@ import 'package:enviro_mobile_application/view/08_team/team_widgets/date_time_pi
 import 'package:enviro_mobile_application/view/08_team/team_widgets/dp_image_widget.dart';
 import 'package:enviro_mobile_application/view_model/11_shedule/shedule_page_view_model.dart';
 import 'package:enviro_mobile_application/widgets/cmbutton.dart';
-import 'package:enviro_mobile_application/widgets/cmn_action_icon.dart';
 import 'package:enviro_mobile_application/widgets/cmn_title_textwidget.dart';
 import 'package:enviro_mobile_application/widgets/drawer.dart';
 import 'package:flutter/material.dart';
@@ -37,7 +36,6 @@ class SheduledetailPage extends StatelessWidget {
         drawer: cmnDrawer(context),
         appBar: AppBar(
           title: cmnTitleWidget('Scheduling'),
-          actions: [notificationButton(context)],
         ),
         body: Observer(
           builder: (context) {
@@ -210,9 +208,7 @@ class SheduledetailPage extends StatelessWidget {
                                                   vmSchedule.sheduleweekResponse
                                                       .data![i].id!)))
                                   : const SizedBox(),
-                              vmSchedule.sheduleweekResponse.data?[i]
-                                          .startJob !=
-                                      null
+                              vmSchedule.sheduleweekResponse.data?[i].startJob != null
                                   ? cmRowTextWithDatePicker(
                                       context,
                                       "Job Started",
@@ -225,9 +221,13 @@ class SheduledetailPage extends StatelessWidget {
                                       i,
                                       dateTimePicker(
                                           context,
-                                          vmSchedule.selectedDepartedEnviroDate,
-                                          (date) => vmSchedule
-                                              .departedEnviroDatePickerFn(
+                                          DateTime.parse(vmSchedule
+                                                  .sheduleweekResponse
+                                                  .data?[i]
+                                                  .startJob ??
+                                              ""),
+                                          (date) =>
+                                              vmSchedule.departedEnviroDatePickerFn(
                                                   context,
                                                   date,
                                                   "departed_enviro_facility",
@@ -249,7 +249,11 @@ class SheduledetailPage extends StatelessWidget {
                                       i,
                                       dateTimePicker(
                                           context,
-                                          vmSchedule.selectedDepartedEnviroDate,
+                                          DateTime.parse(vmSchedule
+                                                  .sheduleweekResponse
+                                                  .data?[i]
+                                                  .finishJob ??
+                                              ""),
                                           (date) => vmSchedule
                                               .departedEnviroDatePickerFn(
                                                   context,

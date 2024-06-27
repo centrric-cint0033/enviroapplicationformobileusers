@@ -116,8 +116,10 @@ abstract class $AppRouter extends _i36.RootStackRouter {
       return _i36.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: _i3.CameraGalleryScreen(
-          onCameraSelected: args.onCameraSelected,
-          onGallerySelected: args.onGallerySelected,
+          key: args.key,
+          fromJobStarted: args.fromJobStarted,
+          fromJobFinished: args.fromJobFinished,
+          id: args.id,
         ),
       );
     },
@@ -439,14 +441,18 @@ class CalenderRoute extends _i36.PageRouteInfo<void> {
 /// [_i3.CameraGalleryScreen]
 class CameraGalleryRoute extends _i36.PageRouteInfo<CameraGalleryRouteArgs> {
   CameraGalleryRoute({
-    required Function onCameraSelected,
-    required Function onGallerySelected,
+    _i37.Key? key,
+    bool fromJobStarted = false,
+    bool fromJobFinished = false,
+    required int id,
     List<_i36.PageRouteInfo>? children,
   }) : super(
           CameraGalleryRoute.name,
           args: CameraGalleryRouteArgs(
-            onCameraSelected: onCameraSelected,
-            onGallerySelected: onGallerySelected,
+            key: key,
+            fromJobStarted: fromJobStarted,
+            fromJobFinished: fromJobFinished,
+            id: id,
           ),
           initialChildren: children,
         );
@@ -459,17 +465,23 @@ class CameraGalleryRoute extends _i36.PageRouteInfo<CameraGalleryRouteArgs> {
 
 class CameraGalleryRouteArgs {
   const CameraGalleryRouteArgs({
-    required this.onCameraSelected,
-    required this.onGallerySelected,
+    this.key,
+    this.fromJobStarted = false,
+    this.fromJobFinished = false,
+    required this.id,
   });
 
-  final Function onCameraSelected;
+  final _i37.Key? key;
 
-  final Function onGallerySelected;
+  final bool fromJobStarted;
+
+  final bool fromJobFinished;
+
+  final int id;
 
   @override
   String toString() {
-    return 'CameraGalleryRouteArgs{onCameraSelected: $onCameraSelected, onGallerySelected: $onGallerySelected}';
+    return 'CameraGalleryRouteArgs{key: $key, fromJobStarted: $fromJobStarted, fromJobFinished: $fromJobFinished, id: $id}';
   }
 }
 
