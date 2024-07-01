@@ -69,9 +69,10 @@ class ScheduleList extends StatelessWidget {
                                 style: TextStyle(fontSize: 9.w)),
                             Text(
                                 "${DateFormat('dd-MM-yyyy').format(
-                                  vmSchedule
-                                      .shedulecardResponse.data![i].startDate!,
-                                )}-${DateFormat('dd-MM-yyyy').format(vmSchedule.shedulecardResponse.data![i].endDate!)}",
+                                  vmSchedule.shedulecardResponse.data?[i]
+                                          .startDate ??
+                                      DateTime.now(),
+                                )}-${DateFormat('dd-MM-yyyy').format(vmSchedule.shedulecardResponse.data?[i].endDate ?? DateTime.now())}",
                                 style: TextStyle(fontSize: 9.w))
                           ],
                         ),

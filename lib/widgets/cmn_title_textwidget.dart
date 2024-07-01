@@ -7,7 +7,7 @@ Row cmnTitleWidget(String? text) {
       Text(
         text ?? 'Default Text',
         style: TextStyle(
-          fontSize: 17.w,
+          fontSize: 14.w,
           fontWeight: FontWeight.w400,
         ),
       ),

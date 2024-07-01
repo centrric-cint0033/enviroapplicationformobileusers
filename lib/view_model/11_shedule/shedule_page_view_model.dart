@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:io';
 import 'dart:typed_data';
 import 'package:auto_route/auto_route.dart';
@@ -12,6 +11,7 @@ import 'package:enviro_mobile_application/model/12_shedulecard/shedule_card_comn
 import 'package:enviro_mobile_application/model/12_shedulecard/shedule_card_resp_model.dart';
 import 'package:enviro_mobile_application/model/12_shedulecard/shedule_sign_res_model.dart';
 import 'package:enviro_mobile_application/service/07_shedule/job_card/shedule_page_service.dart';
+import 'package:enviro_mobile_application/utilis/Appthemes.dart';
 import 'package:enviro_mobile_application/utilis/injection.dart';
 import 'package:enviro_mobile_application/widgets/cm_show_toast.dart';
 import 'package:enviro_mobile_application/widgets/ww_popup_error.dart';
@@ -41,19 +41,23 @@ abstract class ScheduleViewModelBase with Store {
 
   @observable
   Color? signColor = Colors.white;
+  @observable
+  Color? textColor = Colors.white;
   @action
   Future<void> updateSignatureButtonColor({bool state = false}) async {
     if (state == true) {
-      signColor = Colors.blue;
+      signColor = Appthemes.cPrimary;
+      textColor = Colors.white;
     } else if (state == false) {
       signColor = Colors.white;
+      textColor = Colors.grey.shade400;
     }
   }
 
   TextEditingController odometerCntrller = TextEditingController();
   TextEditingController hoursMeterCntrller = TextEditingController();
   TextEditingController faultsReportCntrller = TextEditingController();
-
+  final TextEditingController commentController = TextEditingController();
   @observable
   bool containerHeight = false;
   @observable
@@ -75,11 +79,23 @@ abstract class ScheduleViewModelBase with Store {
   @observable
   DateTime? selectedFinishedJobDate;
   @observable
+  DateTime? selectedCompletedDate;
+  @observable
+  DateTime? selectedArrivedWasteDepotDate;
+  @observable
+  DateTime? selectedDepartedWasteDepotDate;
+  @observable
+  DateTime? selectedArrivedEnviroDate;
+  @observable
   String? pickedCameraImage = "";
+  @observable
+  List<String>? pickedCameraImageList = [];
   @observable
   ImageFilePickerModel? pickedCameraImage2;
   @observable
   String? pickedGalleryImage = "";
+  @observable
+  List<String>? pickedGalleryImageList = [];
   @observable
   bool isImageSelected = true;
 
@@ -246,6 +262,40 @@ abstract class ScheduleViewModelBase with Store {
           errors: null,
           loading: false,
         );
+        shedulecardviewmodelfunction();
+        commentController.clear();
+      },
+    );
+  }
+
+  @observable
+  ApiResponse<dynamic> deleteCommentResponse = ApiResponse<dynamic>();
+
+  @action
+  Future<void> deleteScheduleCommentServiceApi({required int id}) async {
+    deleteCommentResponse =
+        deleteCommentResponse.copyWith(errors: null, loading: true);
+    commentResponse = commentResponse.copyWith(errors: null, loading: true);
+    final result =
+        await scheduleService.deleteScheduleCommentServiceApi(id: id);
+    return result.fold(
+      (l) {
+        deleteCommentResponse = deleteCommentResponse.copyWith(
+          error: l.keys.first,
+          loading: false,
+        );
+        commentResponse =
+            commentResponse.copyWith(errors: null, loading: false);
+      },
+      (r) {
+        deleteCommentResponse = deleteCommentResponse.copyWith(
+          data: r,
+          error: null,
+          loading: false,
+        );
+        commentResponse =
+            commentResponse.copyWith(errors: null, loading: false);
+        shedulecardviewmodelfunction();
       },
     );
   }
@@ -299,7 +349,6 @@ abstract class ScheduleViewModelBase with Store {
 
     final result = await scheduleService.editScheduleStatusApi(
         statusType: statusType, date: date, status: status, id: id);
-    log("$result.rree");
     return result.fold(
       (l) {
         editScheduleStatusResponse = editScheduleStatusResponse.copyWith(
@@ -308,16 +357,12 @@ abstract class ScheduleViewModelBase with Store {
         );
       },
       (r) {
-        log("rr");
         editScheduleStatusResponse = editScheduleStatusResponse.copyWith(
           data: r,
           error: null,
           loading: false,
         );
-        log("ee");
         shedulecardviewmodelweekfunction();
-        context.router.pop();
-        showToast(context, msg: "Successfully updated", color: Colors.green);
       },
     );
   }
@@ -634,46 +679,24 @@ abstract class ScheduleViewModelBase with Store {
   }
 
   @action
-  departedEnviroDatePickerFn(
-      BuildContext context, date, String status, int id) {
-    selectedDepartedEnviroDate = date;
-    String dateString =
-        DateFormat('yyyy-MM-dd HH:mm:ss').format(selectedDepartedEnviroDate!);
+  enviroDatePickerFn(BuildContext context, DateTime selectedDate, date,
+      String status, int id, dynamic statusdType,
+      {bool? fromButton = false}) async {
+    selectedDate = date;
+    String dateString = DateFormat('yyyy-MM-dd HH:mm:ss').format(selectedDate);
     editScheduleStatusApi(
         context: context,
-        statusType: ScheduleStatusType.departedEnviroFacility,
+        statusType: statusdType,
         date: dateString,
         status: status,
         id: id);
-  }
-
-  @action
-  startingJobDatePickerFn(BuildContext context, date, String status, int id) {
-    selectedStartingJobDate = date;
-    String dateString =
-        DateFormat('yyyy-MM-dd HH:mm:ss').format(selectedStartingJobDate!);
-    editScheduleStatusApi(
-        context: context,
-        statusType: ScheduleStatusType.jobStarted,
-        date: dateString,
-        status: status,
-        id: id);
-  }
-
-  @action
-  finishedJobDatePickerFn(BuildContext context, date, String status, int id) {
-    selectedFinishedJobDate = date;
-    String dateString =
-        DateFormat('yyyy-MM-dd HH:mm:ss').format(selectedFinishedJobDate!);
     pickedCameraImage = null;
     pickedGalleryImage = null;
-    context.router.push(CameraGalleryRoute(fromJobFinished: true, id: id));
-    editScheduleStatusApi(
-        context: context,
-        statusType: ScheduleStatusType.finishedJob,
-        date: dateString,
-        status: status,
-        id: id);
+    pickedCameraImageList = [];
+    pickedGalleryImageList = [];
+    if (fromButton == true) {
+      context.router.push(CameraGalleryRoute(fromJobFinished: true, id: id));
+    }
   }
 
   @action

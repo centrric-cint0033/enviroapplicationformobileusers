@@ -2,13 +2,15 @@
 import 'dart:io';
 import 'dart:typed_data';
 import 'package:auto_route/auto_route.dart';
+import 'package:enviro_mobile_application/utilis/constant.dart';
+import 'package:enviro_mobile_application/view/10_shedule/widgets/schedule_comment_section.dart';
 import 'package:enviro_mobile_application/view_model/11_shedule/shedule_page_view_model.dart';
 import 'package:enviro_mobile_application/widgets/cmbutton.dart';
 import 'package:enviro_mobile_application/widgets/cmn_action_icon.dart';
 import 'package:enviro_mobile_application/widgets/cmn_title_textwidget.dart';
-import 'package:enviro_mobile_application/widgets/drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:open_file/open_file.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:signature/signature.dart';
@@ -23,7 +25,7 @@ class SheduleSignaturePage extends StatelessWidget {
     super.key,
   });
   Uint8List? picker;
-  final TextEditingController _commentController = TextEditingController();
+
   final TextEditingController _controllerTypeofwaste = TextEditingController();
   final TextEditingController _signNameController = TextEditingController();
   final TextEditingController _controllerPonumber = TextEditingController();
@@ -45,618 +47,382 @@ class SheduleSignaturePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: cmnDrawer(context),
       appBar: AppBar(
         title: cmnTitleWidget('Scheduling'),
         actions: [notificationButton(context)],
       ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(18.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  border: Border.all(color: Colors.black12),
-                  borderRadius: BorderRadius.circular(5.0),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
+      body: Observer(builder: (context) {
+        return SingleChildScrollView(
+            child: Padding(
+                padding: screenWidth,
+                child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
-                        'Weigh bridge Required:',
-                        style: TextStyle(
-                            fontSize: 16, fontWeight: FontWeight.bold),
-                      ),
-                      const SizedBox(height: 8),
-                      Observer(builder: (_) {
-                        return Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                CmButton(
-                                  width: 108,
-                                  color: Colors.blue,
-                                  onPressed: () async {
-                                    vmSchedule.pickFilefromphone();
-                                  },
-                                  text: 'AddFile ',
-                                ),
-                                const SizedBox(width: 18),
-                                CmButton(
-                                  width: 118,
-                                  color: Colors.blue,
-                                  onPressed: () async {
-                                    vmSchedule.pickImageFromsignatureCamera();
-                                  },
-                                  text: 'Camera ',
-                                ),
-                              ],
-                            ),
-                            Observer(builder: (_) {
-                              return SingleChildScrollView(
+                      Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          border: Border.all(color: Colors.black12),
+                          borderRadius: BorderRadius.circular(5.0),
+                        ),
+                        child: Padding(
+                          padding: EdgeInsets.only(left: 8.h, right: 8.h),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Weigh bridge Required:',
+                                style: TextStyle(
+                                    fontSize: 12.w,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  CmButton(
+                                    width: 108.w,
+                                    color: Colors.blue,
+                                    onPressed: () async {
+                                      vmSchedule.pickFilefromphone();
+                                    },
+                                    text: 'AddFile ',
+                                  ),
+                                  const SizedBox(width: 18),
+                                  CmButton(
+                                    width: 118.w,
+                                    color: Colors.blue,
+                                    onPressed: () async {
+                                      vmSchedule.pickImageFromsignatureCamera();
+                                    },
+                                    text: 'Camera ',
+                                  ),
+                                ],
+                              ),
+                              SingleChildScrollView(
                                 scrollDirection: Axis
                                     .horizontal, // Set scroll direction to horizontal
-                                child: Padding(
-                                  padding: const EdgeInsets.only(right: 57.0),
-                                  child: Observer(builder: (_) {
-                                    if (vmSchedule.pickedFiles.isNotEmpty) {
-                                      return Row(
+                                child: vmSchedule.pickedFiles.isNotEmpty
+                                    ? Row(
                                         children:
                                             vmSchedule.pickedFiles.map((file) {
                                           final icon = returnLogo(
                                               file.name, file.path, file.size);
-                                          return Padding(
-                                            padding: const EdgeInsets.only(
-                                                top: 8, right: 2),
-                                            child: SizedBox(
-                                              height: 70,
-                                              width: 140,
-                                              child: Card(
-                                                shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          0.0),
-                                                ),
-                                                child: ListTile(
-                                                  onLongPress: () {
-                                                    showDialog(
-                                                      context: context,
-                                                      builder: (BuildContext
-                                                          context) {
-                                                        return AlertDialog(
-                                                          title: const Text(
-                                                              "Delete File"),
-                                                          content: Text(
-                                                              "Are you sure you want to delete ${file.name}?"),
-                                                          actions: <Widget>[
-                                                            TextButton(
-                                                              onPressed: () {
-                                                                Navigator.of(
-                                                                        context)
-                                                                    .pop();
-                                                              },
-                                                              child: const Text(
-                                                                  "Cancel"),
-                                                            ),
-                                                            TextButton(
-                                                              onPressed: () {
-                                                                vmSchedule
-                                                                    .pickedFiles
-                                                                    .remove(
-                                                                        file);
-                                                                Navigator.of(
-                                                                        context)
-                                                                    .pop();
-                                                              },
-                                                              child: const Text(
-                                                                  "Delete"),
-                                                            ),
-                                                          ],
-                                                        );
-                                                      },
-                                                    );
-                                                  },
-                                                  title: Text(
-                                                    file.name,
-                                                    style: const TextStyle(
-                                                      overflow:
-                                                          TextOverflow.ellipsis,
-                                                      fontSize: 13,
-                                                    ),
+                                          return SizedBox(
+                                            height: 70.h,
+                                            width: 140.h,
+                                            child: Card(
+                                              shape:
+                                                  const RoundedRectangleBorder(),
+                                              child: ListTile(
+                                                onLongPress: () {
+                                                  showDialog(
+                                                    context: context,
+                                                    builder:
+                                                        (BuildContext context) {
+                                                      return AlertDialog(
+                                                        title: const Text(
+                                                            "Delete File"),
+                                                        content: Text(
+                                                            "Are you sure you want to delete ${file.name}?"),
+                                                        actions: <Widget>[
+                                                          TextButton(
+                                                            onPressed: () {
+                                                              Navigator.of(
+                                                                      context)
+                                                                  .pop();
+                                                            },
+                                                            child: const Text(
+                                                                "Cancel"),
+                                                          ),
+                                                          TextButton(
+                                                            onPressed: () {
+                                                              vmSchedule
+                                                                  .pickedFiles
+                                                                  .remove(file);
+                                                              Navigator.of(
+                                                                      context)
+                                                                  .pop();
+                                                            },
+                                                            child: const Text(
+                                                                "Delete"),
+                                                          ),
+                                                        ],
+                                                      );
+                                                    },
+                                                  );
+                                                },
+                                                title: Text(
+                                                  file.name,
+                                                  style: TextStyle(
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+                                                    fontSize: 9.w,
                                                   ),
-                                                  leading: icon,
-                                                  subtitle: Text(
-                                                    file.extension!,
-                                                    style: const TextStyle(
-                                                      overflow:
-                                                          TextOverflow.ellipsis,
-                                                      fontSize: 13,
-                                                    ),
-                                                  ),
-                                                  onTap: () {
-                                                    OpenFile.open(
-                                                      file.path,
-                                                    );
-                                                  },
                                                 ),
+                                                leading: icon,
+                                                subtitle: Text(
+                                                  file.extension!,
+                                                  style: TextStyle(
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+                                                    fontSize: 9.w,
+                                                  ),
+                                                ),
+                                                onTap: () {
+                                                  OpenFile.open(
+                                                    file.path,
+                                                  );
+                                                },
                                               ),
                                             ),
                                           );
                                         }).toList(),
-                                      );
-                                    } else {
-                                      return const Text(
+                                      )
+                                    : Text(
                                         'No files selected',
-                                        style: TextStyle(fontSize: 16),
-                                      );
-                                    }
-                                  }),
-                                ),
-                              );
-                            }),
-                          ],
-                        );
-                      }),
-                    ],
-                  ),
-                ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              ExpansionTile(
-                title: const Text(
-                  'Job Details',
-                  style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                children: [
-                  ListTile(
-                    title: Container(
-                      height: 83,
-                      decoration: BoxDecoration(
-                        color: const Color.fromARGB(255, 208, 247, 209),
-                        border: Border.all(color: Colors.black12),
-                        borderRadius: BorderRadius.circular(5.0),
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Text(
-                            'Type of waste:',
-                            style: TextStyle(
-                                fontSize: 16, fontWeight: FontWeight.bold),
+                                        style: TextStyle(fontSize: 10.w),
+                                      ),
+                              ),
+                            ],
                           ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 8.0),
-                            child: TextField(
+                        ),
+                      ),
+                      sized0hx10,
+                      ExpansionTile(
+                        title: Text(
+                          'Job Details',
+                          style: TextStyle(
+                            fontSize: 12.w,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        tilePadding: EdgeInsets.only(left: 2.w, right: 2.w),
+                        childrenPadding: EdgeInsets.only(left: 3.w, right: 2.w),
+                        children: [
+                          cmContainer(
+                              title: "Type of waste:",
+                              subtitle:
+                                  "Any change in waste is mentioned here...",
                               onChanged: (value) {
                                 _controllerTypeofwaste.text = value;
-                                print('pooo$_controllerTypeofwaste');
-                              },
-                              decoration: const InputDecoration(
-                                hintText:
-                                    'Any change in waste is mentioned here...',
-                                border: InputBorder.none,
-                              ),
-                              style: const TextStyle(),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  ListTile(
-                    title: Container(
-                      height: 83,
-                      decoration: BoxDecoration(
-                        color: const Color.fromARGB(255, 208, 247, 209),
-                        border: Border.all(color: Colors.black12),
-                        borderRadius: BorderRadius.circular(5.0),
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Text(
-                            'waste Liters:',
-                            style: TextStyle(
-                                fontSize: 16, fontWeight: FontWeight.bold),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 8.0),
-                            child: TextField(
+                              }),
+                          sized0hx05,
+                          cmContainer(
+                              title: "waste Liters:",
+                              subtitle:
+                                  "Any change in amount of litres collected,mention here...",
                               onChanged: (value) {
                                 _controllerWateliters.text = value;
-                                print('pooo$_controllerWateliters');
-                              },
-                              controller: _controllerWateliters,
-                              decoration: const InputDecoration(
-                                hintText:
-                                    'Any change in waste is mentioned here...',
-                                border: InputBorder.none,
-                              ),
-                              style: const TextStyle(),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  ListTile(
-                    title: Container(
-                      height: 83,
-                      decoration: BoxDecoration(
-                        color: const Color.fromARGB(255, 208, 247, 209),
-                        border: Border.all(color: Colors.black12),
-                        borderRadius: BorderRadius.circular(5.0),
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Text(
-                            'Po Number:',
-                            style: TextStyle(
-                                fontSize: 16, fontWeight: FontWeight.bold),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 8.0),
-                            child: TextField(
+                              }),
+                          sized0hx05,
+                          cmContainer(
+                              title: "Po Number:",
+                              subtitle: "Purchase order number...",
                               onChanged: (value) {
                                 _controllerPonumber.text = value;
-                                print('pooo$_controllerPonumber');
-                              },
-                              controller: _controllerPonumber,
-                              decoration: const InputDecoration(
-                                hintText: 'Purchase order Number...',
-                                border: InputBorder.none,
-                              ),
-                              style: const TextStyle(),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  ListTile(
-                    title: Container(
-                      height: 83,
-                      decoration: BoxDecoration(
-                        color: const Color.fromARGB(255, 208, 247, 209),
-                        border: Border.all(color: Colors.black12),
-                        borderRadius: BorderRadius.circular(5.0),
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Text(
-                            'SignName:',
-                            style: TextStyle(
-                                fontSize: 16, fontWeight: FontWeight.bold),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 8.0),
-                            child: TextField(
+                              }),
+                          sized0hx05,
+                          cmContainer(
+                              title: "SignName:",
+                              subtitle: "Sign name...",
                               onChanged: (value) {
                                 _signNameController.text = value;
-
-                                print(
-                                    'azzzzzzzzzzzzzzzzzzzzzzzzz$_signNameController');
-                              },
-                              decoration: const InputDecoration(
-                                hintText: 'Sign name...',
-                                border: InputBorder.none,
-                              ),
-                              style: const TextStyle(),
-                            ),
-                          ),
+                              }),
+                          sized0hx10,
                         ],
                       ),
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              Container(
-                height: 68,
-                decoration: BoxDecoration(
-                  color: Colors.yellow,
-                  border: Border.all(color: Colors.yellow),
-                  borderRadius: BorderRadius.circular(5.0),
-                ),
-                child: const Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Change in waste type and its liters will be uploaded with client\'s signature',
-                        style: TextStyle(
-                            fontSize: 12, fontWeight: FontWeight.bold),
+                      Container(
+                        decoration: BoxDecoration(
+                          color: Colors.yellow.shade700,
+                          border: Border.all(color: Colors.yellow),
+                          borderRadius: BorderRadius.circular(5.0),
+                        ),
+                        child: Padding(
+                          padding: EdgeInsets.all(8.w),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Changes in waste type and its litres will be uploaded with client\'s signature.',
+                                style: TextStyle(
+                                    fontSize: 9.w, fontWeight: FontWeight.bold),
+                              ),
+                            ],
+                          ),
+                        ),
                       ),
-                    ],
-                  ),
-                ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              Container(
-                width: 430,
-                height: 288,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  border: Border.all(color: Colors.black12),
-                  borderRadius: BorderRadius.circular(5.0),
-                ),
-                child: Stack(
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child: Text(
-                            'Please provide your signature:',
-                            style: TextStyle(
-                                fontSize: 20, fontWeight: FontWeight.bold),
-                          ),
+                      sized0hx10,
+                      Container(
+                        width: double.infinity - 30.h,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          border: Border.all(color: Colors.black12),
+                          borderRadius: BorderRadius.circular(5.0),
                         ),
-                        Container(
-                          width: 200,
-                          height: 200,
-                          child: Signature(
-                            controller: _signaturecontroller,
-                            backgroundColor: Colors.white,
-                          ),
-                        ),
-                        const SizedBox(height: 20),
-                      ],
-                    ),
-                    Positioned(
-                      bottom: 20,
-                      right: 40,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          Observer(builder: (_) {
-                            return CmButton(
-                              color: vmSchedule.signColor,
-                              onPressed: () async {
-                                Uint8List? pickedTypes =
-                                    await _signaturecontroller.toPngBytes();
-
-                                if (pickedTypes != null) {
-                                  final tempDir = await getTemporaryDirectory();
-
-                                  File file = await File(
-                                          '${tempDir.path}/${DateTime.now()}.png')
-                                      .create();
-
-                                  await file.writeAsBytes(pickedTypes);
-
-                                  print('Signature saved to: ${file.path}');
-                                  print('Reset ID: $id');
-
-                                  // vmSchedule.updateSignatureButtonColor(
-                                  //     state: false);
-
-                                  // _signaturecontroller.clear();
-                                  picker = pickedTypes;
-                                  print('shamon$picker');
-                                } else {
-                                  print('No signature to save.');
-                                }
-                                showDialog(
-                                  context: context,
-                                  builder: (BuildContext context) {
-                                    return AlertDialog(
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(10.0),
-                                        side: const BorderSide(
-                                            color: Colors.black),
-                                      ),
-                                      content: const Text(
-                                        'Uploading your signature',
+                        child: Stack(
+                          children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                  width: double.infinity - 30.h,
+                                  height: 25.h,
+                                  decoration: BoxDecoration(
+                                      color: Colors.grey.shade200),
+                                  child: Align(
+                                    alignment: Alignment.centerLeft,
+                                    child: Padding(
+                                      padding: EdgeInsets.only(left: 5.w),
+                                      child: Text(
+                                        'Please provide your signature:',
                                         style: TextStyle(
-                                            fontSize: 22,
+                                            fontSize: 9.w,
                                             fontWeight: FontWeight.bold),
                                       ),
-                                      actions: <Widget>[
-                                        Observer(builder: (_) {
-                                          return TextButton(
-                                            onPressed: () {
-                                              Navigator.of(context).pop();
-                                            },
-                                            child: const Text('OK'),
-                                          );
-                                        }),
-                                      ],
-                                    );
-                                  },
-                                );
-                              },
-                              text: 'save',
-                            );
-                          }),
-                          const SizedBox(width: 10),
-                          Observer(builder: (_) {
-                            return CmButton(
-                              color: vmSchedule.signColor,
-                              onPressed: () async {
-                                _signaturecontroller.clear();
-                                vmSchedule.updateSignatureButtonColor(
-                                    state: false);
-                              },
-                              text: 'Reset',
-                            );
-                          }),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(
-                height: 40,
-              ),
-              const Text(
-                'Comments',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              // if (pickedtypes != null) Image.memory(pickedtypes!),
-              const SizedBox(height: 10),
-              SizedBox(
-                child: TextField(
-                  onChanged: (value) {
-                    _commentController.text = value;
-                  },
-                  controller: _commentController,
-                  decoration: InputDecoration(
-                    focusColor: Colors.black12,
-                    fillColor: Colors.grey[200],
-                    filled: true,
-                    enabledBorder: const OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.grey)),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10.0),
-                      borderSide: const BorderSide(
-                        color: Colors.grey,
-                      ),
-                    ),
-                    hintText: 'Enter your comments',
-                    suffixIcon: Observer(builder: (_) {
-                      return IconButton(
-                        icon: const Icon(Icons.send),
-                        onPressed: () {
-                          vmSchedule.shedulecommentviewmodelfunction(
-                              id: id, comment: _commentController.text);
-                          vmSchedule.shedulecardviewmodelfunction();
-
-                          _commentController.clear();
-                        },
-                      );
-                    }),
-                  ),
-                  style: const TextStyle(color: Colors.black),
-                  maxLines: null,
-                ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              Observer(builder: (_) {
-                return Padding(
-                  padding: const EdgeInsets.only(left: 128.0),
-                  child: CmButton(
-                    width: 105,
-                    color: vmSchedule.signColor,
-                    onPressed: () {
-                      vmSchedule.shedulesignatureviewmodelfunction(
-                          image: picker!,
-                          extractedWasteType: _controllerTypeofwaste.text,
-                          extractedLitres: _controllerWateliters.text,
-                          purchaseOderNo: _controllerPonumber.text,
-                          signatureName: _signNameController.text,
-                          id: id,
-                          pickedFiles: vmSchedule.pickedFiles);
-                      vmSchedule.shedulecommentviewmodelfunction(
-                          id: id, comment: _commentController.text);
-                      vmSchedule.updateSignatureButtonColor(state: true);
-                      _signaturecontroller.clear();
-                    },
-                    text: 'Submit',
-                  ),
-                );
-              }),
-              Observer(
-                builder: (_) {
-                  final comments =
-                      vmSchedule.shedulecardResponse.data?[i].comments ?? [];
-                  return SizedBox(
-                    height: double.maxFinite,
-                    child: ListView.separated(
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemCount: comments.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        return SizedBox(
-                          height: 55,
-                          child: Card(
-                            color: Colors.white70,
-                            child: Stack(
-                              children: [
-                                Positioned(
-                                  top: 0,
-                                  right: 0,
-                                  child: IconButton(
-                                    icon: const Icon(Icons.delete),
-                                    onPressed: () {
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 175.w,
+                                  child: Signature(
+                                    controller: _signaturecontroller,
+                                    backgroundColor: Colors.white,
+                                  ),
+                                ),
+                                sized0hx10
+                              ],
+                            ),
+                            Positioned(
+                              bottom: 5.w,
+                              right: 28.w,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  CmButton(
+                                    color: vmSchedule.signColor,
+                                    onPressed: () async {
+                                      Uint8List? pickedTypes =
+                                          await _signaturecontroller
+                                              .toPngBytes();
+                                      if (pickedTypes != null) {
+                                        final tempDir =
+                                            await getTemporaryDirectory();
+                                        File file = await File(
+                                                '${tempDir.path}/${DateTime.now()}.png')
+                                            .create();
+                                        await file.writeAsBytes(pickedTypes);
+                                        picker = pickedTypes;
+                                      } else {
+                                        print('No signature to save.');
+                                      }
+                                      // ignore: use_build_context_synchronously
                                       showDialog(
                                         context: context,
                                         builder: (BuildContext context) {
                                           return AlertDialog(
-                                            content: const Text(
-                                                "Are you sure you want to delete?"),
-                                            actions: [
-                                              ElevatedButton(
-                                                onPressed: () {
-                                                  Navigator.pop(context);
-                                                },
-                                                child: const Text("Delete"),
-                                              ),
-                                              ElevatedButton(
-                                                onPressed: () {
-                                                  Navigator.pop(context);
-                                                },
-                                                child: const Text("Back"),
-                                              ),
+                                            shape: BeveledRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(3.w),
+                                              side: const BorderSide(
+                                                  color: Colors.black),
+                                            ),
+                                            content: Text(
+                                              'Uploading your signature',
+                                              style: TextStyle(
+                                                  fontSize: 12.w,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                            actions: <Widget>[
+                                              Observer(builder: (_) {
+                                                return TextButton(
+                                                  onPressed: () {
+                                                    Navigator.of(context).pop();
+                                                  },
+                                                  child: const Text('OK'),
+                                                );
+                                              }),
                                             ],
                                           );
                                         },
                                       );
                                     },
+                                    borderRadius: 3.w,
+                                    textcolor: vmSchedule.textColor,
+                                    text: 'Save',
                                   ),
-                                ),
-                                Positioned(
-                                  top: 10,
-                                  left: 10,
-                                  child: Text(
-                                    vmSchedule.shedulecardResponse.data?[i]
-                                            .comments?[index].comment ??
-                                        'nocomments',
-                                    style: const TextStyle(
-                                      fontSize: 18,
-                                    ),
+                                  sized0wx10,
+                                  CmButton(
+                                    color: vmSchedule.signColor,
+                                    onPressed: () async {
+                                      _signaturecontroller.clear();
+                                      vmSchedule.updateSignatureButtonColor(
+                                          state: false);
+                                    },
+                                    borderRadius: 3.w,
+                                    textcolor: vmSchedule.textColor,
+                                    text: 'Reset',
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
-                          ),
-                        );
-                      },
-                      separatorBuilder: (BuildContext context, int index) {
-                        return const SizedBox();
-                      },
-                    ),
-                  );
-                },
+                          ],
+                        ),
+                      ),
+                      sized0hx20,
+                      ScheduleCommentSection(id: id, i: i),
+                      Center(
+                        child: CmButton(
+                          width: 150.w,
+                          color: vmSchedule.signColor,
+                          onPressed: () {
+                            vmSchedule.shedulesignatureviewmodelfunction(
+                                image: picker!,
+                                extractedWasteType: _controllerTypeofwaste.text,
+                                extractedLitres: _controllerWateliters.text,
+                                purchaseOderNo: _controllerPonumber.text,
+                                signatureName: _signNameController.text,
+                                id: id,
+                                pickedFiles: vmSchedule.pickedFiles);
+                            vmSchedule.shedulecommentviewmodelfunction(
+                                id: id,
+                                comment: vmSchedule.commentController.text);
+                            vmSchedule.updateSignatureButtonColor(state: true);
+                            _signaturecontroller.clear();
+                          },
+                          text: 'Submit',
+                        ),
+                      ),
+                    ])));
+      }),
+    );
+  }
+
+  Widget cmContainer(
+      {String? title, String? subtitle, void Function(String)? onChanged}) {
+    return Container(
+      decoration: BoxDecoration(
+        color: const Color.fromARGB(255, 189, 245, 191),
+        border: Border.all(color: Colors.black12),
+        borderRadius: BorderRadius.circular(5.w),
+      ),
+      child: Padding(
+        padding: EdgeInsets.all(5.w),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              title ?? "",
+              style: TextStyle(fontSize: 9.w, fontWeight: FontWeight.bold),
+            ),
+            TextField(
+              onChanged: onChanged,
+              decoration: InputDecoration(
+                hintText: subtitle,
+                border: InputBorder.none,
               ),
-            ],
-          ),
+              style: TextStyle(fontSize: 9.w),
+            ),
+          ],
         ),
       ),
     );

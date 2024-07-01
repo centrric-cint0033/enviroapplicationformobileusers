@@ -25,6 +25,22 @@ mixin _$ScheduleViewModel on ScheduleViewModelBase, Store {
     });
   }
 
+  late final _$textColorAtom =
+      Atom(name: 'ScheduleViewModelBase.textColor', context: context);
+
+  @override
+  Color? get textColor {
+    _$textColorAtom.reportRead();
+    return super.textColor;
+  }
+
+  @override
+  set textColor(Color? value) {
+    _$textColorAtom.reportWrite(value, super.textColor, () {
+      super.textColor = value;
+    });
+  }
+
   late final _$containerHeightAtom =
       Atom(name: 'ScheduleViewModelBase.containerHeight', context: context);
 
@@ -191,6 +207,77 @@ mixin _$ScheduleViewModel on ScheduleViewModelBase, Store {
     });
   }
 
+  late final _$selectedCompletedDateAtom = Atom(
+      name: 'ScheduleViewModelBase.selectedCompletedDate', context: context);
+
+  @override
+  DateTime? get selectedCompletedDate {
+    _$selectedCompletedDateAtom.reportRead();
+    return super.selectedCompletedDate;
+  }
+
+  @override
+  set selectedCompletedDate(DateTime? value) {
+    _$selectedCompletedDateAtom.reportWrite(value, super.selectedCompletedDate,
+        () {
+      super.selectedCompletedDate = value;
+    });
+  }
+
+  late final _$selectedArrivedWasteDepotDateAtom = Atom(
+      name: 'ScheduleViewModelBase.selectedArrivedWasteDepotDate',
+      context: context);
+
+  @override
+  DateTime? get selectedArrivedWasteDepotDate {
+    _$selectedArrivedWasteDepotDateAtom.reportRead();
+    return super.selectedArrivedWasteDepotDate;
+  }
+
+  @override
+  set selectedArrivedWasteDepotDate(DateTime? value) {
+    _$selectedArrivedWasteDepotDateAtom
+        .reportWrite(value, super.selectedArrivedWasteDepotDate, () {
+      super.selectedArrivedWasteDepotDate = value;
+    });
+  }
+
+  late final _$selectedDepartedWasteDepotDateAtom = Atom(
+      name: 'ScheduleViewModelBase.selectedDepartedWasteDepotDate',
+      context: context);
+
+  @override
+  DateTime? get selectedDepartedWasteDepotDate {
+    _$selectedDepartedWasteDepotDateAtom.reportRead();
+    return super.selectedDepartedWasteDepotDate;
+  }
+
+  @override
+  set selectedDepartedWasteDepotDate(DateTime? value) {
+    _$selectedDepartedWasteDepotDateAtom
+        .reportWrite(value, super.selectedDepartedWasteDepotDate, () {
+      super.selectedDepartedWasteDepotDate = value;
+    });
+  }
+
+  late final _$selectedArrivedEnviroDateAtom = Atom(
+      name: 'ScheduleViewModelBase.selectedArrivedEnviroDate',
+      context: context);
+
+  @override
+  DateTime? get selectedArrivedEnviroDate {
+    _$selectedArrivedEnviroDateAtom.reportRead();
+    return super.selectedArrivedEnviroDate;
+  }
+
+  @override
+  set selectedArrivedEnviroDate(DateTime? value) {
+    _$selectedArrivedEnviroDateAtom
+        .reportWrite(value, super.selectedArrivedEnviroDate, () {
+      super.selectedArrivedEnviroDate = value;
+    });
+  }
+
   late final _$pickedCameraImageAtom =
       Atom(name: 'ScheduleViewModelBase.pickedCameraImage', context: context);
 
@@ -204,6 +291,23 @@ mixin _$ScheduleViewModel on ScheduleViewModelBase, Store {
   set pickedCameraImage(String? value) {
     _$pickedCameraImageAtom.reportWrite(value, super.pickedCameraImage, () {
       super.pickedCameraImage = value;
+    });
+  }
+
+  late final _$pickedCameraImageListAtom = Atom(
+      name: 'ScheduleViewModelBase.pickedCameraImageList', context: context);
+
+  @override
+  List<String>? get pickedCameraImageList {
+    _$pickedCameraImageListAtom.reportRead();
+    return super.pickedCameraImageList;
+  }
+
+  @override
+  set pickedCameraImageList(List<String>? value) {
+    _$pickedCameraImageListAtom.reportWrite(value, super.pickedCameraImageList,
+        () {
+      super.pickedCameraImageList = value;
     });
   }
 
@@ -236,6 +340,23 @@ mixin _$ScheduleViewModel on ScheduleViewModelBase, Store {
   set pickedGalleryImage(String? value) {
     _$pickedGalleryImageAtom.reportWrite(value, super.pickedGalleryImage, () {
       super.pickedGalleryImage = value;
+    });
+  }
+
+  late final _$pickedGalleryImageListAtom = Atom(
+      name: 'ScheduleViewModelBase.pickedGalleryImageList', context: context);
+
+  @override
+  List<String>? get pickedGalleryImageList {
+    _$pickedGalleryImageListAtom.reportRead();
+    return super.pickedGalleryImageList;
+  }
+
+  @override
+  set pickedGalleryImageList(List<String>? value) {
+    _$pickedGalleryImageListAtom
+        .reportWrite(value, super.pickedGalleryImageList, () {
+      super.pickedGalleryImageList = value;
     });
   }
 
@@ -446,6 +567,23 @@ mixin _$ScheduleViewModel on ScheduleViewModelBase, Store {
   set commentResponse(ApiResponse<SheduleCommentModel> value) {
     _$commentResponseAtom.reportWrite(value, super.commentResponse, () {
       super.commentResponse = value;
+    });
+  }
+
+  late final _$deleteCommentResponseAtom = Atom(
+      name: 'ScheduleViewModelBase.deleteCommentResponse', context: context);
+
+  @override
+  ApiResponse<dynamic> get deleteCommentResponse {
+    _$deleteCommentResponseAtom.reportRead();
+    return super.deleteCommentResponse;
+  }
+
+  @override
+  set deleteCommentResponse(ApiResponse<dynamic> value) {
+    _$deleteCommentResponseAtom.reportWrite(value, super.deleteCommentResponse,
+        () {
+      super.deleteCommentResponse = value;
     });
   }
 
@@ -1226,6 +1364,16 @@ mixin _$ScheduleViewModel on ScheduleViewModelBase, Store {
         () => super.shedulecommentviewmodelfunction(id: id, comment: comment));
   }
 
+  late final _$deleteScheduleCommentServiceApiAsyncAction = AsyncAction(
+      'ScheduleViewModelBase.deleteScheduleCommentServiceApi',
+      context: context);
+
+  @override
+  Future<void> deleteScheduleCommentServiceApi({required int id}) {
+    return _$deleteScheduleCommentServiceApiAsyncAction
+        .run(() => super.deleteScheduleCommentServiceApi(id: id));
+  }
+
   late final _$updatePreInspectionScheduleAsyncAction = AsyncAction(
       'ScheduleViewModelBase.updatePreInspectionSchedule',
       context: context);
@@ -1312,6 +1460,18 @@ mixin _$ScheduleViewModel on ScheduleViewModelBase, Store {
   Future<void> pickImageFromGallery() {
     return _$pickImageFromGalleryAsyncAction
         .run(() => super.pickImageFromGallery());
+  }
+
+  late final _$enviroDatePickerFnAsyncAction =
+      AsyncAction('ScheduleViewModelBase.enviroDatePickerFn', context: context);
+
+  @override
+  Future enviroDatePickerFn(BuildContext context, DateTime selectedDate,
+      dynamic date, String status, int id, dynamic statusdType,
+      {bool? fromButton = false}) {
+    return _$enviroDatePickerFnAsyncAction.run(() => super.enviroDatePickerFn(
+        context, selectedDate, date, status, id, statusdType,
+        fromButton: fromButton));
   }
 
   late final _$ScheduleViewModelBaseActionController =
@@ -1505,42 +1665,6 @@ mixin _$ScheduleViewModel on ScheduleViewModelBase, Store {
   }
 
   @override
-  dynamic departedEnviroDatePickerFn(
-      BuildContext context, dynamic date, String status, int id) {
-    final _$actionInfo = _$ScheduleViewModelBaseActionController.startAction(
-        name: 'ScheduleViewModelBase.departedEnviroDatePickerFn');
-    try {
-      return super.departedEnviroDatePickerFn(context, date, status, id);
-    } finally {
-      _$ScheduleViewModelBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  dynamic startingJobDatePickerFn(
-      BuildContext context, dynamic date, String status, int id) {
-    final _$actionInfo = _$ScheduleViewModelBaseActionController.startAction(
-        name: 'ScheduleViewModelBase.startingJobDatePickerFn');
-    try {
-      return super.startingJobDatePickerFn(context, date, status, id);
-    } finally {
-      _$ScheduleViewModelBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  dynamic finishedJobDatePickerFn(
-      BuildContext context, dynamic date, String status, int id) {
-    final _$actionInfo = _$ScheduleViewModelBaseActionController.startAction(
-        name: 'ScheduleViewModelBase.finishedJobDatePickerFn');
-    try {
-      return super.finishedJobDatePickerFn(context, date, status, id);
-    } finally {
-      _$ScheduleViewModelBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
   dynamic preInspectionSubmitButtonValidation() {
     final _$actionInfo = _$ScheduleViewModelBaseActionController.startAction(
         name: 'ScheduleViewModelBase.preInspectionSubmitButtonValidation');
@@ -1555,6 +1679,7 @@ mixin _$ScheduleViewModel on ScheduleViewModelBase, Store {
   String toString() {
     return '''
 signColor: ${signColor},
+textColor: ${textColor},
 containerHeight: ${containerHeight},
 showSubmitButton: ${showSubmitButton},
 driversIndex: ${driversIndex},
@@ -1565,9 +1690,15 @@ selectedFireExtinguisherDate: ${selectedFireExtinguisherDate},
 selectedDepartedEnviroDate: ${selectedDepartedEnviroDate},
 selectedStartingJobDate: ${selectedStartingJobDate},
 selectedFinishedJobDate: ${selectedFinishedJobDate},
+selectedCompletedDate: ${selectedCompletedDate},
+selectedArrivedWasteDepotDate: ${selectedArrivedWasteDepotDate},
+selectedDepartedWasteDepotDate: ${selectedDepartedWasteDepotDate},
+selectedArrivedEnviroDate: ${selectedArrivedEnviroDate},
 pickedCameraImage: ${pickedCameraImage},
+pickedCameraImageList: ${pickedCameraImageList},
 pickedCameraImage2: ${pickedCameraImage2},
 pickedGalleryImage: ${pickedGalleryImage},
+pickedGalleryImageList: ${pickedGalleryImageList},
 isImageSelected: ${isImageSelected},
 selectedcameraImage: ${selectedcameraImage},
 selectedsignaturecameraImage: ${selectedsignaturecameraImage},
@@ -1581,6 +1712,7 @@ shedulecardResponse: ${shedulecardResponse},
 sheduleweekResponse: ${sheduleweekResponse},
 signatureResponse: ${signatureResponse},
 commentResponse: ${commentResponse},
+deleteCommentResponse: ${deleteCommentResponse},
 addPreInspectionScheduleResponse: ${addPreInspectionScheduleResponse},
 editScheduleStatusResponse: ${editScheduleStatusResponse},
 addImageScheduleResponse: ${addImageScheduleResponse},

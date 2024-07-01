@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:typed_data';
 import 'package:dartz/dartz.dart';
+import 'package:enviro_mobile_application/constant/base_url.dart';
 import 'package:enviro_mobile_application/model/03_vehicle/vehicle_model/vehicle_model.dart';
 import 'package:enviro_mobile_application/model/07_Jobcard/job_card_model.dart';
 import 'package:enviro_mobile_application/model/12_shedulecard/schedule_image_res_model/schedule_image_res_model.dart';
@@ -13,13 +14,17 @@ import 'package:enviro_mobile_application/utilis/httpservice.dart';
 import 'package:enviro_mobile_application/utilis/injection.dart';
 import 'package:enviro_mobile_application/utilis/main_failure.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:http/http.dart';
 import 'package:injectable/injectable.dart';
 
 enum ScheduleStatusType {
   departedEnviroFacility,
   jobStarted,
   finishedJob,
-  fuelExpence,
+  completed,
+  arrivedAtDepot,
+  departedWasteDepot,
+  arrivedEnviroFacility
 }
 
 enum BeforeOrAfterPic {
@@ -48,6 +53,10 @@ abstract class IScheduleService {
   Future<Either<Map<MainFailure, dynamic>, SheduleCommentModel>>
       shedulecommentserviceapi({
     required String comment,
+    required int id,
+  });
+  Future<Either<Map<MainFailure, dynamic>, dynamic>>
+      deleteScheduleCommentServiceApi({
     required int id,
   });
   Future<Either<Map<MainFailure, dynamic>, dynamic>>
@@ -207,59 +216,43 @@ class SalesService implements IScheduleService {
       required String date,
       required String status,
       required int id}) async {
-    var response;
+    MultipartRequest request = MultipartRequest(
+      "PUT",
+      Uri.parse("$baseUrl${ApiEndPoints.endpointSheduleStatusEdit}"),
+    );
+    request.fields["id"] = "$id";
     switch (statusType) {
       case ScheduleStatusType.departedEnviroFacility:
-        response = await getIt<HttpService>().multipartRequest(
-          apiUrl: ApiEndPoints.endpointSheduleStatusEdit,
-          data: {
-            "id": id,
-            "depart_enviro_facility": date,
-            "status": status,
-          },
-          method: "PUT",
-        );
+        request.fields["depart_enviro_facility"] = date;
         break;
       case ScheduleStatusType.jobStarted:
-        response = await getIt<HttpService>().multipartRequest(
-          apiUrl: ApiEndPoints.endpointSheduleStatusEdit,
-          data: {
-            "id": id,
-            "start_job": date,
-            "status": status,
-          },
-          method: "PUT",
-        );
+        request.fields["start_job"] = date;
         break;
       case ScheduleStatusType.finishedJob:
-        response = await getIt<HttpService>().multipartRequest(
-          apiUrl: ApiEndPoints.endpointSheduleStatusEdit,
-          data: {
-            "id": id,
-            "finish_job": date,
-            "status": status,
-          },
-          method: "PUT",
-        );
+        request.fields["finish_job"] = date;
+        break;
+      case ScheduleStatusType.completed:
+        request.fields["completed"] = date;
+        break;
+      case ScheduleStatusType.arrivedAtDepot:
+        request.fields["arrive_at_waste_depot"] = date;
+        break;
+      case ScheduleStatusType.departedWasteDepot:
+        request.fields["depart_waste_depot"] = date;
+        break;
+      case ScheduleStatusType.arrivedEnviroFacility:
+        request.fields["arrive_enviro_facility"] = date;
         break;
     }
-
-    return response.fold(
-      (l) {
-        (l.values.first);
-        return Left(l.keys.first);
-      },
-      (res) async {
-        try {
-          var data = jsonDecode(res.body);
-          ScheduleStatusResModel scheduleStatus =
-              ScheduleStatusResModel.fromJson(data);
-          return Right(scheduleStatus);
-        } catch (e) {
-          // Handle JSON parsing error
-        }
-      },
-    );
+    request.fields["status"] = status;
+    var response =
+        await getIt<HttpService>().multipartRequests(request: request);
+    return response.fold((l) {
+      // Show Error
+      return Left(l.keys.first);
+    }, (res) async {
+      return Right(ScheduleStatusResModel.fromJson(jsonDecode(res.body)));
+    });
   }
 
   @override
@@ -269,40 +262,49 @@ class SalesService implements IScheduleService {
           required String pickedFiles,
           required bool beforeOrAfterPic,
           required picType}) async {
-    var response;
+    MultipartRequest request = MultipartRequest(
+      "POST",
+      Uri.parse("$baseUrl${ApiEndPoints.endpointsheduleaddimage}"),
+    );
+    request.fields["id"] = "$id";
+    request.files.add(
+      await MultipartFile.fromPath("image", pickedFiles),
+    );
     switch (picType) {
       case BeforeOrAfterPic.beforePic:
-        response = await getIt<HttpService>().multipartRequest(
-          apiUrl: ApiEndPoints.endpointsheduleaddimage,
-          data: {
-            "id": id,
-            "pickedfile": pickedFiles,
-            "before_pic": beforeOrAfterPic,
-          },
-          method: "POST",
-        );
+        request.fields["before_pic"] = beforeOrAfterPic ? 'True' : 'False';
         break;
       case BeforeOrAfterPic.afterPic:
-        response = await getIt<HttpService>().multipartRequest(
-          apiUrl: ApiEndPoints.endpointsheduleaddimage,
-          data: {
-            "id": id,
-            "pickedfile": pickedFiles,
-            "after_pic": beforeOrAfterPic,
-          },
-          method: "POST",
-        );
+        request.fields["after_pic"] = beforeOrAfterPic ? 'True' : 'False';
         break;
     }
-
+    var response =
+        await getIt<HttpService>().multipartRequests(request: request);
     return response.fold(
       (l) => Left(l),
       (res) async {
         var data = jsonDecode(res.body);
 
-        ScheduleImageResModel signingdata =
-            ScheduleImageResModel.fromJson(data);
-        return Right(signingdata);
+        ScheduleImageResModel addImage = ScheduleImageResModel.fromJson(data);
+        return Right(addImage);
+      },
+    );
+  }
+
+  @override
+  Future<Either<Map<MainFailure, dynamic>, dynamic>>
+      deleteScheduleCommentServiceApi({required int id}) async {
+    var response = await getIt<HttpService>().request(
+        method: HttpMethod.delete,
+        apiUrl: "${ApiEndPoints.endpointdeletecommentsignature}$id/");
+
+    return response.fold(
+      (l) {
+        (l.values.first);
+        return Left(l);
+      },
+      (res) async {
+        return const Right("Success");
       },
     );
   }

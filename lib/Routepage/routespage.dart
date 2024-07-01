@@ -28,6 +28,7 @@ class RouteNames {
   static const String rupdatevehiclepreinspectionpage =
       '/updatevehiclepreinspectionpage ';
   static const String cameragallerypage = '/camera_gallery_page ';
+    static const String schedulesignaturepage = '/schedule_signature_page ';
   static const String rsheduledetail2page = '/sheduledetail2page ';
   static const String rjobcardpage = '/jobcardpage ';
   static const String rcurrentjobstatus = '/currentjobstatus ';

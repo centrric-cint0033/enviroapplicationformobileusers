@@ -1,4 +1,5 @@
 import 'package:enviro_mobile_application/utilis/Appthemes.dart';
+import 'package:enviro_mobile_application/utilis/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -18,7 +19,7 @@ class CmButton extends StatelessWidget {
     this.icon,
     this.loading = false,
     this.loadingColor,
-    this.fontSize,
+    this.fontSize, this.textcolor,
   }) : super(key: key);
 
   final IconData? icon;
@@ -35,6 +36,7 @@ class CmButton extends StatelessWidget {
   final VoidCallback? onPressed;
   final bool loading;
   final Color? loadingColor;
+    final Color? textcolor;
 
   @override
   Widget build(BuildContext context) {
@@ -55,35 +57,35 @@ class CmButton extends StatelessWidget {
               ),
             ),
           ),
-          child: loading
-              ? CircularProgressIndicator(
-                  valueColor: AlwaysStoppedAnimation<Color>(
-                    loadingColor ?? Colors.white,
-                  ),
-                )
-              : widget ??
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      if (icon != null)
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Icon(icon,
-                              size: 22,
-                              color: buttonTextStyle?.color ?? Colors.white),
+          child: widget ??
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  if (icon != null)
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Icon(icon,
+                          size: 18.w,
+                          color: buttonTextStyle?.color ?? Colors.white),
+                    ),
+                  if (icon != null) sized0wx05,
+                  loading
+                      ? CircularProgressIndicator(
+                          valueColor: AlwaysStoppedAnimation<Color>(
+                            loadingColor ?? Colors.white,
+                          ),
+                        )
+                      : Text(
+                          text ?? "",
+                          textAlign: TextAlign.center,
+                          style: buttonTextStyle ??
+                              TextStyle(
+                                color: textcolor ??Colors.white,
+                                fontSize: fontSize ?? 9.w,
+                              ),
                         ),
-                      if (icon != null) const SizedBox(width: 5),
-                      Text(
-                        text ?? "",
-                        textAlign: TextAlign.center,
-                        style: buttonTextStyle ??
-                            TextStyle(
-                              color: Colors.white,
-                              fontSize: fontSize ?? 12.sp,
-                            ),
-                      ),
-                    ],
-                  ),
+                ],
+              ),
         ),
       ),
     );

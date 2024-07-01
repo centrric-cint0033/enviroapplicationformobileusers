@@ -58,6 +58,8 @@ class AppRouter extends $AppRouter {
             path: RouteNames.rupdatevehiclepreinspectionpage),
         AutoRoute(
             page: CameraGalleryRoute.page, path: RouteNames.cameragallerypage),
+                    AutoRoute(
+            page: SheduleSignatureRoute.page, path: RouteNames.schedulesignaturepage),
         AutoRoute(page: JobCardRoute.page, path: RouteNames.rjobcardpage),
         AutoRoute(
           page: SiteMainRoute.page,

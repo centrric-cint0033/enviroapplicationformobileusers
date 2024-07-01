@@ -1,5 +1,4 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:enviro_mobile_application/Routepage/approutes.gr.dart';
 import 'package:enviro_mobile_application/Routepage/routespage.dart';
 import 'package:enviro_mobile_application/utilis/Appthemes.dart';
 import 'package:enviro_mobile_application/utilis/constant.dart';
@@ -117,12 +116,6 @@ Future<void> openMap(String latitude, String longitude) async {
 
 void nextjobfnction(BuildContext context) {
   vmSchedule.shedulecardviewmodelfunction();
-}
-
-void sheduledetailfunction4(
-  BuildContext context,
-) {
-  context.router.push(const SheduledetailRoute2());
 }
 
 void calenderfunction(BuildContext context) {
