@@ -116,7 +116,6 @@ abstract class $AppRouter extends _i35.RootStackRouter {
         child: _i3.CameraGalleryScreen(
           key: args.key,
           fromJobStarted: args.fromJobStarted,
-          fromJobFinished: args.fromJobFinished,
           id: args.id,
         ),
       );
@@ -287,7 +286,6 @@ abstract class $AppRouter extends _i35.RootStackRouter {
         routeData: routeData,
         child: _i24.SheduleSignaturePage(
           i: args.i,
-          picker: args.picker,
           pickedtypes: args.pickedtypes,
           id: args.id,
           key: args.key,
@@ -435,7 +433,6 @@ class CameraGalleryRoute extends _i35.PageRouteInfo<CameraGalleryRouteArgs> {
   CameraGalleryRoute({
     _i36.Key? key,
     bool fromJobStarted = false,
-    bool fromJobFinished = false,
     required int id,
     List<_i35.PageRouteInfo>? children,
   }) : super(
@@ -443,7 +440,6 @@ class CameraGalleryRoute extends _i35.PageRouteInfo<CameraGalleryRouteArgs> {
           args: CameraGalleryRouteArgs(
             key: key,
             fromJobStarted: fromJobStarted,
-            fromJobFinished: fromJobFinished,
             id: id,
           ),
           initialChildren: children,
@@ -459,7 +455,6 @@ class CameraGalleryRouteArgs {
   const CameraGalleryRouteArgs({
     this.key,
     this.fromJobStarted = false,
-    this.fromJobFinished = false,
     required this.id,
   });
 
@@ -467,13 +462,11 @@ class CameraGalleryRouteArgs {
 
   final bool fromJobStarted;
 
-  final bool fromJobFinished;
-
   final int id;
 
   @override
   String toString() {
-    return 'CameraGalleryRouteArgs{key: $key, fromJobStarted: $fromJobStarted, fromJobFinished: $fromJobFinished, id: $id}';
+    return 'CameraGalleryRouteArgs{key: $key, fromJobStarted: $fromJobStarted, id: $id}';
   }
 }
 
@@ -1005,7 +998,6 @@ class SheduleSignatureRoute
     extends _i35.PageRouteInfo<SheduleSignatureRouteArgs> {
   SheduleSignatureRoute({
     required int i,
-    _i40.Uint8List? picker,
     _i40.Uint8List? pickedtypes,
     required int id,
     _i36.Key? key,
@@ -1014,7 +1006,6 @@ class SheduleSignatureRoute
           SheduleSignatureRoute.name,
           args: SheduleSignatureRouteArgs(
             i: i,
-            picker: picker,
             pickedtypes: pickedtypes,
             id: id,
             key: key,
@@ -1031,15 +1022,12 @@ class SheduleSignatureRoute
 class SheduleSignatureRouteArgs {
   const SheduleSignatureRouteArgs({
     required this.i,
-    this.picker,
     this.pickedtypes,
     required this.id,
     this.key,
   });
 
   final int i;
-
-  final _i40.Uint8List? picker;
 
   final _i40.Uint8List? pickedtypes;
 
@@ -1049,7 +1037,7 @@ class SheduleSignatureRouteArgs {
 
   @override
   String toString() {
-    return 'SheduleSignatureRouteArgs{i: $i, picker: $picker, pickedtypes: $pickedtypes, id: $id, key: $key}';
+    return 'SheduleSignatureRouteArgs{i: $i, pickedtypes: $pickedtypes, id: $id, key: $key}';
   }
 }
 

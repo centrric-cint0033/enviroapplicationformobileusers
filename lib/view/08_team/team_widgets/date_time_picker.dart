@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 Widget dateTimePicker(
-    BuildContext context, selectedDate, Function(DateTime date) pickerDate) {
+    BuildContext context,DateTime selectedDate, Function(DateTime date) pickerDate) {
   return IconButton(
       onPressed: () async {
         final DateTime? picked = await showDatePicker(

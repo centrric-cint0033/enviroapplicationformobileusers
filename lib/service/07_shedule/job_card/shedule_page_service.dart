@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:typed_data';
 import 'package:dartz/dartz.dart';
 import 'package:enviro_mobile_application/constant/base_url.dart';
 import 'package:enviro_mobile_application/model/03_vehicle/vehicle_model/vehicle_model.dart';
@@ -33,7 +32,7 @@ enum BeforeOrAfterPic {
 }
 
 abstract class IScheduleService {
-  Future<Either<MainFailure, JobCardRespModel>> jobcardservicefunction();
+  Future<Either<MainFailure, JobCardRespModel>> jobcardservicefunction({required int quoteId});
   Future<Either<MainFailure, List<SheduleCardRespModel>>>
       shedulecardservicefunction();
 
@@ -43,7 +42,7 @@ abstract class IScheduleService {
       shedulesignatureserviceapi({
     required int id,
     required List<PlatformFile> pickedFiles,
-    required Uint8List image,
+    required String image,
     required String signatureName,
     required String purchaseOderNo,
     required String extractedWasteType,
@@ -69,7 +68,7 @@ abstract class IScheduleService {
   Future<Either<Map<MainFailure, dynamic>, ScheduleImageResModel>>
       addImagesScheduleAPi(
           {required int id,
-          required String pickedFiles,
+          required List<String> pickedFiles,
           required bool beforeOrAfterPic,
           required picType});
 }
@@ -79,11 +78,11 @@ class SalesService implements IScheduleService {
   final HttpService httpService;
   SalesService(this.httpService);
   @override
-  Future<Either<MainFailure, JobCardRespModel>> jobcardservicefunction() async {
+  Future<Either<MainFailure, JobCardRespModel>> jobcardservicefunction({required int quoteId}) async {
     var response = await getIt<HttpService>().request(
         authenticated: true,
         method: HttpMethod.get,
-        apiUrl: ApiEndPoints.endpointjobcard);
+        apiUrl: "${ApiEndPoints.endpointjobcard}$quoteId");
 
     return response.fold(
       (l) {
@@ -148,32 +147,32 @@ class SalesService implements IScheduleService {
   Future<Either<Map<MainFailure, dynamic>, SheduleSignatureModel>>
       shedulesignatureserviceapi({
     required int id,
-    required Uint8List image,
+    required String image,
     required List<PlatformFile> pickedFiles,
     required String signatureName,
     required String purchaseOderNo,
     required String extractedWasteType,
     required String extractedLitres,
   }) async {
-    var response = await getIt<HttpService>().multipartRequest(
-      apiUrl: ApiEndPoints.endpointshedulesignature,
-      data: {
-        "id": id,
-        for (var file in pickedFiles) "pickedfile": file,
-        "signature_name": signatureName,
-        "purchase_order_number": purchaseOderNo,
-        "extracted_litres_of_waste": extractedWasteType,
-        "extracted_waste_type": extractedLitres,
-      },
-      method: "POST",
+    MultipartRequest request = MultipartRequest(
+      "POST",
+      Uri.parse("$baseUrl${ApiEndPoints.endpointshedulesignature}"),
     );
+    request.fields["id"] = "$id";
+    request.files.add(
+      await MultipartFile.fromPath("image", image),
+    );
+    request.fields["signature_name"] = signatureName;
+    request.fields["purchase_order_number"] = purchaseOderNo;
+    request.fields["extracted_litres_of_waste"] = extractedWasteType;
+    request.fields["extracted_waste_type"] = extractedLitres;
+    var response =
+        await getIt<HttpService>().multipartRequests(request: request);
+
     return response.fold(
       (l) => Left(l),
       (res) async {
-        var data = jsonDecode(res.body);
-        SheduleSignatureModel signingdata =
-            SheduleSignatureModel.fromJson(data);
-        return Right(signingdata);
+        return Right(SheduleSignatureModel.fromJson(jsonDecode(res.body)));
       },
     );
   }
@@ -259,7 +258,7 @@ class SalesService implements IScheduleService {
   Future<Either<Map<MainFailure, dynamic>, ScheduleImageResModel>>
       addImagesScheduleAPi(
           {required int id,
-          required String pickedFiles,
+          required List<String> pickedFiles,
           required bool beforeOrAfterPic,
           required picType}) async {
     MultipartRequest request = MultipartRequest(
@@ -267,9 +266,15 @@ class SalesService implements IScheduleService {
       Uri.parse("$baseUrl${ApiEndPoints.endpointsheduleaddimage}"),
     );
     request.fields["id"] = "$id";
-    request.files.add(
-      await MultipartFile.fromPath("image", pickedFiles),
-    );
+    for (String filePath in pickedFiles) {
+      request.files.add(
+        await MultipartFile.fromPath("image", filePath),
+      );
+    }
+
+    // request.files.add(
+    //   await MultipartFile.fromPath("image", pickedFiles),
+    // );
     switch (picType) {
       case BeforeOrAfterPic.beforePic:
         request.fields["before_pic"] = beforeOrAfterPic ? 'True' : 'False';

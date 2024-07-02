@@ -61,31 +61,40 @@ class ScheduleList extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                                "${convertTimeTo12HourFormat(vmSchedule.sheduleweekResponse.data?[i].startTime ?? "")}-${convertTimeTo12HourFormat(vmSchedule.sheduleweekResponse.data?[i].endTime ?? "")}",
-                                style: TextStyle(fontSize: 9.w)),
-                            Text(
-                                "${DateFormat('dd-MM-yyyy').format(
-                                  vmSchedule.shedulecardResponse.data?[i]
-                                          .startDate ??
-                                      DateTime.now(),
-                                )}-${DateFormat('dd-MM-yyyy').format(vmSchedule.shedulecardResponse.data?[i].endDate ?? DateTime.now())}",
-                                style: TextStyle(fontSize: 9.w))
-                          ],
-                        ),
+                        // if (vmSchedule.shedulecardResponse.data?[i].startDate ==
+                        //         null &&
+                        //     vmSchedule.shedulecardResponse.data?[i].endDate ==
+                        //         null)
+                        //   SizedBox()
+                        // else
+                        //   Column(
+                        //     crossAxisAlignment: CrossAxisAlignment.start,
+                        //     children: [
+                        //       Text(
+                        //           "${convertTimeTo12HourFormat(vmSchedule.sheduleweekResponse.data?[i].startTime ?? "")}-${convertTimeTo12HourFormat(vmSchedule.sheduleweekResponse.data?[i].endTime ?? "")}",
+                        //           style: TextStyle(fontSize: 9.w)),
+                        //       Text(
+                        //           "${DateFormat('dd-MM-yyyy').format(
+                        //             vmSchedule.shedulecardResponse.data![i]
+                        //                 .startDate!,
+                        //           )}-${DateFormat('dd-MM-yyyy').format(vmSchedule.shedulecardResponse.data![i].endDate!)}",
+                        //           style: TextStyle(fontSize: 9.w))
+                        //     ],
+                        //   ),
                         Container(
-                          height: 25.w,
-                          width: 60.w,
+                          width: 70.w,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(15.w),
                               border: Border.all(color: Colors.grey)),
-                          child: Center(
-                            child: Text(
-                                "${vmSchedule.sheduleweekResponse.data?[i].status}",
-                                style: TextStyle(fontSize: 9.w)),
+                          child: Padding(
+                            padding: EdgeInsets.all(4.w),
+                            child: Align(
+                              alignment: Alignment.center,
+                              child: Text(
+                                  jobStatus(
+                                      "${vmSchedule.sheduleweekResponse.data?[i].status}"),
+                                  style: TextStyle(fontSize: 8.w)),
+                            ),
                           ),
                         )
                         // ElevatedButton(
@@ -105,6 +114,7 @@ class ScheduleList extends StatelessWidget {
                         // ),
                       ],
                     ),
+                    sized0hx05,
                     Container(
                       decoration: BoxDecoration(
                           color: Appthemes.cPrimary,
@@ -205,4 +215,25 @@ String convertTimeTo12HourFormat(String time) {
   String formattedTime = outputFormat.format(parsedTime);
 
   return formattedTime;
+}
+
+String jobStatus(String status) {
+  switch (status) {
+    case "departed_enviro_facility":
+      return "Departed Enviro Facility";
+    case "job_started":
+      return "Job Started";
+    case "job_finished":
+      return "Finished Job";
+    case "completed":
+      return "Completed";
+    case "arrived_at_waste_depot":
+      return "Arrived At Waste Depot";
+    case "departed_waste_depot":
+      return "Departed from Waste Depot";
+    case "arrived_at_enviro_facility":
+      return "Arrived At Enviro Facility";
+    default:
+      return "Pending";
+  }
 }

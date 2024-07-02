@@ -13,13 +13,11 @@ import 'package:image_picker/image_picker.dart';
 @RoutePage()
 class CameraGalleryScreen extends StatelessWidget {
   final bool fromJobStarted;
-  final bool fromJobFinished;
   final int id;
 
   const CameraGalleryScreen({
     super.key,
     this.fromJobStarted = false,
-    this.fromJobFinished = false,
     required this.id,
   });
 
@@ -122,15 +120,16 @@ class CameraGalleryScreen extends StatelessWidget {
                         text: "Submit",
                         color: Colors.black,
                         width: 140.w,
+                        loading: vmSchedule.addImageScheduleResponse.loading,
                         fontSize: 10.w,
                         onPressed: () {
                           vmSchedule.addImageScheduleApi(
                               context: context,
                               id: id,
                               beforeOrAfterPic: true,
-                              pickedFiles: vmSchedule.pickedCameraImage ??
-                                  vmSchedule.pickedGalleryImage ??
-                                  "",
+                              pickedFiles: vmSchedule.pickedCameraImageList ??
+                                  vmSchedule.pickedGalleryImageList ??
+                                  [],
                               picType: fromJobStarted == true
                                   ? BeforeOrAfterPic.beforePic
                                   : BeforeOrAfterPic.afterPic);

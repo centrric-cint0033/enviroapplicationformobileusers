@@ -18,8 +18,10 @@ class BeforeImagesList extends StatelessWidget {
         itemBuilder: (context, index) {
           return Padding(
             padding: EdgeInsets.all(8.0.h),
-            child: SizedBox(
+            child: Container(
               width: 75.h,
+              decoration:
+                  BoxDecoration(border: Border.all(color: Colors.white)),
               child: Image(
                   fit: BoxFit.cover,
                   image: CachedNetworkImageProvider(

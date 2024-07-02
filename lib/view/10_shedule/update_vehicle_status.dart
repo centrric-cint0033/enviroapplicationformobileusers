@@ -55,7 +55,10 @@ class UpdateVehicleStatusPage extends StatelessWidget {
                               buttonTextStyle:
                                   const TextStyle(color: Colors.black),
                               onPressed: () {
-                                jobCardFunction(context);
+                                jobCardFunction(
+                                    context,
+                                    vmSchedule.sheduleweekResponse.data?[index]
+                                        .quoteId);
                               },
                               loadingColor: Colors.blue,
                             ),
@@ -154,8 +157,8 @@ class UpdateVehicleStatusPage extends StatelessWidget {
   }
 }
 
-void jobCardFunction(BuildContext context) async {
-  await vmSchedule.jobcardviewmodelfunction();
+void jobCardFunction(BuildContext context, int? quoteId) async {
+  await vmSchedule.jobcardviewmodelfunction(quoteId: quoteId ?? 0);
   print('Job card clicked');
   context.router.pushNamed(RouteNames.rjobcardpage);
 }

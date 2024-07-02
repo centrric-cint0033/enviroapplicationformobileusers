@@ -19,7 +19,8 @@ class CmButton extends StatelessWidget {
     this.icon,
     this.loading = false,
     this.loadingColor,
-    this.fontSize, this.textcolor,
+    this.fontSize,
+    this.textcolor,
   }) : super(key: key);
 
   final IconData? icon;
@@ -36,7 +37,7 @@ class CmButton extends StatelessWidget {
   final VoidCallback? onPressed;
   final bool loading;
   final Color? loadingColor;
-    final Color? textcolor;
+  final Color? textcolor;
 
   @override
   Widget build(BuildContext context) {
@@ -80,7 +81,7 @@ class CmButton extends StatelessWidget {
                           textAlign: TextAlign.center,
                           style: buttonTextStyle ??
                               TextStyle(
-                                color: textcolor ??Colors.white,
+                                color: textcolor ?? Colors.white,
                                 fontSize: fontSize ?? 9.w,
                               ),
                         ),

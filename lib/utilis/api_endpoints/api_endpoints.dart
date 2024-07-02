@@ -40,14 +40,14 @@ class ApiEndPoints
   static const endpointnewsfldrdlte = '/api/v1/drive/folder/delete';
   static const endpointprofilelstng = '/api/v1/accounts/profile/view/';
   static const endpointprofileedit = '/api/v1/accounts/profile/view/';
-  static const endpointjobcard = '/api/v1/jobs/card/info/view/2054865';
+  static const endpointjobcard = '/api/v1/jobs/card/info/view/';
   static const endpointshedulecard = '/api/v1/schedule/view/mobile/waste/';
   static const endpointsheduleweekcard = '/api/v1/schedule/view/mobile/waste/';
   static const endpointshedulesignature =
       "/api/v1/schedule/jobschedule/signature/add/";
   static const endpointcommentsignature =
       "/api/v1/schedule/jobschedule/comments/";
-        static const endpointdeletecommentsignature =
+  static const endpointdeletecommentsignature =
       "/api/v1/schedule/jobschedule/comments/";
   static const endpointaddpresinspection =
       "/api/v1/vehicles/waste/truck/pre-inspection/";

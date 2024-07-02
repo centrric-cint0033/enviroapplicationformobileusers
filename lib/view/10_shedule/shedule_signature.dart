@@ -1,16 +1,19 @@
-// ignore_for_file: must_be_immutable
+// ignore_for_file: must_be_immutable, use_build_context_synchronously
 import 'dart:io';
 import 'dart:typed_data';
 import 'package:auto_route/auto_route.dart';
+import 'package:enviro_mobile_application/service/07_shedule/job_card/shedule_page_service.dart';
 import 'package:enviro_mobile_application/utilis/constant.dart';
 import 'package:enviro_mobile_application/view/10_shedule/widgets/schedule_comment_section.dart';
 import 'package:enviro_mobile_application/view_model/11_shedule/shedule_page_view_model.dart';
+import 'package:enviro_mobile_application/widgets/cm_show_toast.dart';
 import 'package:enviro_mobile_application/widgets/cmbutton.dart';
 import 'package:enviro_mobile_application/widgets/cmn_action_icon.dart';
 import 'package:enviro_mobile_application/widgets/cmn_title_textwidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/intl.dart';
 import 'package:open_file/open_file.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:signature/signature.dart';
@@ -19,25 +22,11 @@ import 'package:signature/signature.dart';
 class SheduleSignaturePage extends StatelessWidget {
   SheduleSignaturePage({
     required this.i,
-    this.picker,
     this.pickedtypes,
     required this.id,
     super.key,
   });
-  Uint8List? picker;
 
-  final TextEditingController _controllerTypeofwaste = TextEditingController();
-  final TextEditingController _signNameController = TextEditingController();
-  final TextEditingController _controllerPonumber = TextEditingController();
-  final TextEditingController _controllerWateliters = TextEditingController();
-  final SignatureController _signaturecontroller = SignatureController(
-    penStrokeWidth: 5,
-    penColor: Colors.black,
-    exportBackgroundColor: Colors.white,
-    onDrawEnd: () {
-      vmSchedule.updateSignatureButtonColor(state: true);
-    },
-  );
   final int i;
 
   Uint8List? pickedtypes;
@@ -58,135 +47,140 @@ class SheduleSignaturePage extends StatelessWidget {
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Container(
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          border: Border.all(color: Colors.black12),
-                          borderRadius: BorderRadius.circular(5.0),
-                        ),
-                        child: Padding(
-                          padding: EdgeInsets.only(left: 8.h, right: 8.h),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Weigh bridge Required:',
-                                style: TextStyle(
-                                    fontSize: 12.w,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  CmButton(
-                                    width: 108.w,
-                                    color: Colors.blue,
-                                    onPressed: () async {
-                                      vmSchedule.pickFilefromphone();
-                                    },
-                                    text: 'AddFile ',
-                                  ),
-                                  const SizedBox(width: 18),
-                                  CmButton(
-                                    width: 118.w,
-                                    color: Colors.blue,
-                                    onPressed: () async {
-                                      vmSchedule.pickImageFromsignatureCamera();
-                                    },
-                                    text: 'Camera ',
-                                  ),
-                                ],
-                              ),
-                              SingleChildScrollView(
-                                scrollDirection: Axis
-                                    .horizontal, // Set scroll direction to horizontal
-                                child: vmSchedule.pickedFiles.isNotEmpty
-                                    ? Row(
-                                        children:
-                                            vmSchedule.pickedFiles.map((file) {
-                                          final icon = returnLogo(
-                                              file.name, file.path, file.size);
-                                          return SizedBox(
-                                            height: 70.h,
-                                            width: 140.h,
-                                            child: Card(
-                                              shape:
-                                                  const RoundedRectangleBorder(),
-                                              child: ListTile(
-                                                onLongPress: () {
-                                                  showDialog(
-                                                    context: context,
-                                                    builder:
-                                                        (BuildContext context) {
-                                                      return AlertDialog(
-                                                        title: const Text(
-                                                            "Delete File"),
-                                                        content: Text(
-                                                            "Are you sure you want to delete ${file.name}?"),
-                                                        actions: <Widget>[
-                                                          TextButton(
-                                                            onPressed: () {
-                                                              Navigator.of(
-                                                                      context)
-                                                                  .pop();
-                                                            },
-                                                            child: const Text(
-                                                                "Cancel"),
-                                                          ),
-                                                          TextButton(
-                                                            onPressed: () {
-                                                              vmSchedule
-                                                                  .pickedFiles
-                                                                  .remove(file);
-                                                              Navigator.of(
-                                                                      context)
-                                                                  .pop();
-                                                            },
-                                                            child: const Text(
-                                                                "Delete"),
-                                                          ),
-                                                        ],
-                                                      );
-                                                    },
-                                                  );
-                                                },
-                                                title: Text(
-                                                  file.name,
-                                                  style: TextStyle(
-                                                    overflow:
-                                                        TextOverflow.ellipsis,
-                                                    fontSize: 9.w,
+                      if (vmSchedule.sheduleweekResponse.data?[i].jobCardKeys
+                              ?.weighBridgeRequired ==
+                          "true")
+                        Container(
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            border: Border.all(color: Colors.black12),
+                            borderRadius: BorderRadius.circular(5.0),
+                          ),
+                          child: Padding(
+                            padding: EdgeInsets.only(left: 8.h, right: 8.h),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Weigh bridge Required:',
+                                  style: TextStyle(
+                                      fontSize: 12.w,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    CmButton(
+                                      width: 108.w,
+                                      color: Colors.blue,
+                                      onPressed: () async {
+                                        vmSchedule.pickFilefromphone();
+                                      },
+                                      text: 'AddFile ',
+                                    ),
+                                    const SizedBox(width: 18),
+                                    CmButton(
+                                      width: 118.w,
+                                      color: Colors.blue,
+                                      onPressed: () async {
+                                        vmSchedule
+                                            .pickImageFromsignatureCamera();
+                                      },
+                                      text: 'Camera ',
+                                    ),
+                                  ],
+                                ),
+                                SingleChildScrollView(
+                                  scrollDirection: Axis
+                                      .horizontal, // Set scroll direction to horizontal
+                                  child: vmSchedule.pickedFiles.isNotEmpty
+                                      ? Row(
+                                          children: vmSchedule.pickedFiles
+                                              .map((file) {
+                                            final icon = returnLogo(file.name,
+                                                file.path, file.size);
+                                            return SizedBox(
+                                              height: 70.h,
+                                              width: 140.h,
+                                              child: Card(
+                                                shape:
+                                                    const RoundedRectangleBorder(),
+                                                child: ListTile(
+                                                  onLongPress: () {
+                                                    showDialog(
+                                                      context: context,
+                                                      builder: (BuildContext
+                                                          context) {
+                                                        return AlertDialog(
+                                                          title: const Text(
+                                                              "Delete File"),
+                                                          content: Text(
+                                                              "Are you sure you want to delete ${file.name}?"),
+                                                          actions: <Widget>[
+                                                            TextButton(
+                                                              onPressed: () {
+                                                                Navigator.of(
+                                                                        context)
+                                                                    .pop();
+                                                              },
+                                                              child: const Text(
+                                                                  "Cancel"),
+                                                            ),
+                                                            TextButton(
+                                                              onPressed: () {
+                                                                vmSchedule
+                                                                    .pickedFiles
+                                                                    .remove(
+                                                                        file);
+                                                                Navigator.of(
+                                                                        context)
+                                                                    .pop();
+                                                              },
+                                                              child: const Text(
+                                                                  "Delete"),
+                                                            ),
+                                                          ],
+                                                        );
+                                                      },
+                                                    );
+                                                  },
+                                                  title: Text(
+                                                    file.name,
+                                                    style: TextStyle(
+                                                      overflow:
+                                                          TextOverflow.ellipsis,
+                                                      fontSize: 9.w,
+                                                    ),
                                                   ),
-                                                ),
-                                                leading: icon,
-                                                subtitle: Text(
-                                                  file.extension!,
-                                                  style: TextStyle(
-                                                    overflow:
-                                                        TextOverflow.ellipsis,
-                                                    fontSize: 9.w,
+                                                  leading: icon,
+                                                  subtitle: Text(
+                                                    file.extension!,
+                                                    style: TextStyle(
+                                                      overflow:
+                                                          TextOverflow.ellipsis,
+                                                      fontSize: 9.w,
+                                                    ),
                                                   ),
+                                                  onTap: () {
+                                                    OpenFile.open(
+                                                      file.path,
+                                                    );
+                                                  },
                                                 ),
-                                                onTap: () {
-                                                  OpenFile.open(
-                                                    file.path,
-                                                  );
-                                                },
                                               ),
-                                            ),
-                                          );
-                                        }).toList(),
-                                      )
-                                    : Text(
-                                        'No files selected',
-                                        style: TextStyle(fontSize: 10.w),
-                                      ),
-                              ),
-                            ],
+                                            );
+                                          }).toList(),
+                                        )
+                                      : Text(
+                                          'No files selected',
+                                          style: TextStyle(fontSize: 10.w),
+                                        ),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
-                      ),
                       sized0hx10,
                       ExpansionTile(
                         title: Text(
@@ -204,7 +198,7 @@ class SheduleSignaturePage extends StatelessWidget {
                               subtitle:
                                   "Any change in waste is mentioned here...",
                               onChanged: (value) {
-                                _controllerTypeofwaste.text = value;
+                                vmSchedule.controllerTypeofwaste.text = value;
                               }),
                           sized0hx05,
                           cmContainer(
@@ -212,21 +206,21 @@ class SheduleSignaturePage extends StatelessWidget {
                               subtitle:
                                   "Any change in amount of litres collected,mention here...",
                               onChanged: (value) {
-                                _controllerWateliters.text = value;
+                                vmSchedule.controllerWateliters.text = value;
                               }),
                           sized0hx05,
                           cmContainer(
                               title: "Po Number:",
                               subtitle: "Purchase order number...",
                               onChanged: (value) {
-                                _controllerPonumber.text = value;
+                                vmSchedule.controllerPonumber.text = value;
                               }),
                           sized0hx05,
                           cmContainer(
                               title: "SignName:",
                               subtitle: "Sign name...",
                               onChanged: (value) {
-                                _signNameController.text = value;
+                                vmSchedule.signNameController.text = value;
                               }),
                           sized0hx10,
                         ],
@@ -285,7 +279,7 @@ class SheduleSignaturePage extends StatelessWidget {
                                 SizedBox(
                                   height: 175.w,
                                   child: Signature(
-                                    controller: _signaturecontroller,
+                                    controller: vmSchedule.signaturecontroller,
                                     backgroundColor: Colors.white,
                                   ),
                                 ),
@@ -301,50 +295,30 @@ class SheduleSignaturePage extends StatelessWidget {
                                   CmButton(
                                     color: vmSchedule.signColor,
                                     onPressed: () async {
-                                      Uint8List? pickedTypes =
-                                          await _signaturecontroller
-                                              .toPngBytes();
+                                      Uint8List? pickedTypes = await vmSchedule
+                                          .signaturecontroller
+                                          .toPngBytes();
                                       if (pickedTypes != null) {
                                         final tempDir =
                                             await getTemporaryDirectory();
-                                        File file = await File(
-                                                '${tempDir.path}/${DateTime.now()}.png')
-                                            .create();
+                                        final filePath =
+                                            '${tempDir.path}/${DateTime.now()}.png';
+                                        File file =
+                                            await File(filePath).create();
                                         await file.writeAsBytes(pickedTypes);
-                                        picker = pickedTypes;
+                                        vmSchedule.setSignaturePicker(
+                                            pickedTypes, filePath);
+                                      } else {}
+
+                                      if (vmSchedule.signaturePath != null) {
+                                        showToast(context,
+                                            msg: "Saved your signature",
+                                            color: Colors.green);
                                       } else {
-                                        print('No signature to save.');
+                                        showToast(context,
+                                            msg: "No signature to save",
+                                            color: Colors.red);
                                       }
-                                      // ignore: use_build_context_synchronously
-                                      showDialog(
-                                        context: context,
-                                        builder: (BuildContext context) {
-                                          return AlertDialog(
-                                            shape: BeveledRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(3.w),
-                                              side: const BorderSide(
-                                                  color: Colors.black),
-                                            ),
-                                            content: Text(
-                                              'Uploading your signature',
-                                              style: TextStyle(
-                                                  fontSize: 12.w,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                            actions: <Widget>[
-                                              Observer(builder: (_) {
-                                                return TextButton(
-                                                  onPressed: () {
-                                                    Navigator.of(context).pop();
-                                                  },
-                                                  child: const Text('OK'),
-                                                );
-                                              }),
-                                            ],
-                                          );
-                                        },
-                                      );
                                     },
                                     borderRadius: 3.w,
                                     textcolor: vmSchedule.textColor,
@@ -354,7 +328,8 @@ class SheduleSignaturePage extends StatelessWidget {
                                   CmButton(
                                     color: vmSchedule.signColor,
                                     onPressed: () async {
-                                      _signaturecontroller.clear();
+                                      vmSchedule.signaturePath = null;
+                                      vmSchedule.signaturecontroller.clear();
                                       vmSchedule.updateSignatureButtonColor(
                                           state: false);
                                     },
@@ -374,20 +349,33 @@ class SheduleSignaturePage extends StatelessWidget {
                         child: CmButton(
                           width: 150.w,
                           color: vmSchedule.signColor,
-                          onPressed: () {
+                          onPressed: () async {
                             vmSchedule.shedulesignatureviewmodelfunction(
-                                image: picker!,
-                                extractedWasteType: _controllerTypeofwaste.text,
-                                extractedLitres: _controllerWateliters.text,
-                                purchaseOderNo: _controllerPonumber.text,
-                                signatureName: _signNameController.text,
+                                context: context,
+                                image: vmSchedule.signaturePath ?? "",
+                                extractedWasteType:
+                                    vmSchedule.controllerTypeofwaste.text,
+                                extractedLitres:
+                                    vmSchedule.controllerWateliters.text,
+                                purchaseOderNo:
+                                    vmSchedule.controllerPonumber.text,
+                                signatureName:
+                                    vmSchedule.signNameController.text,
                                 id: id,
                                 pickedFiles: vmSchedule.pickedFiles);
-                            vmSchedule.shedulecommentviewmodelfunction(
-                                id: id,
-                                comment: vmSchedule.commentController.text);
+                            if (vmSchedule.commentController.text != "") {
+                              vmSchedule.shedulecommentviewmodelfunction(
+                                  id: id,
+                                  comment: vmSchedule.commentController.text);
+                            }
+                            vmSchedule.editScheduleStatusApi(
+                                context: context,
+                                statusType: ScheduleStatusType.completed,
+                                date: DateFormat('yyyy-MM-dd HH:mm:ss')
+                                    .format(DateTime.now()),
+                                status: "completed",
+                                id: id);
                             vmSchedule.updateSignatureButtonColor(state: true);
-                            _signaturecontroller.clear();
                           },
                           text: 'Submit',
                         ),

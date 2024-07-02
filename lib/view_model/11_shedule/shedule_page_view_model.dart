@@ -22,6 +22,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:injectable/injectable.dart';
 import 'package:intl/intl.dart';
 import 'package:mobx/mobx.dart';
+import 'package:signature/signature.dart';
 
 import '../../utilis/image_picker_service/image_file_picker.dart';
 part 'shedule_page_view_model.g.dart';
@@ -58,6 +59,18 @@ abstract class ScheduleViewModelBase with Store {
   TextEditingController hoursMeterCntrller = TextEditingController();
   TextEditingController faultsReportCntrller = TextEditingController();
   final TextEditingController commentController = TextEditingController();
+  final TextEditingController controllerTypeofwaste = TextEditingController();
+  final TextEditingController signNameController = TextEditingController();
+  final TextEditingController controllerPonumber = TextEditingController();
+  final TextEditingController controllerWateliters = TextEditingController();
+  final SignatureController signaturecontroller = SignatureController(
+    penStrokeWidth: 5,
+    penColor: Colors.black,
+    exportBackgroundColor: Colors.white,
+    onDrawEnd: () {
+      vmSchedule.updateSignatureButtonColor(state: true);
+    },
+  );
   @observable
   bool containerHeight = false;
   @observable
@@ -98,7 +111,8 @@ abstract class ScheduleViewModelBase with Store {
   List<String>? pickedGalleryImageList = [];
   @observable
   bool isImageSelected = true;
-
+  @observable
+  Uint8List? signaturePicker;
   @observable
   File? selectedcameraImage;
   @observable
@@ -113,6 +127,8 @@ abstract class ScheduleViewModelBase with Store {
   bool checkboxValue3 = false;
   @observable
   List<String> pickedImages = [];
+  @observable
+  String? signaturePath;
   @action
   void updateProductImageData({ImageFilePickerModel? image}) {
     pickedCameraImage2 = image!;
@@ -123,10 +139,16 @@ abstract class ScheduleViewModelBase with Store {
       ApiResponse<JobCardRespModel>();
 
   @action
-  Future<void> jobcardviewmodelfunction() async {
+  void setSignaturePicker(Uint8List signature, String path) {
+    signaturePicker = signature;
+    signaturePath = path;
+  }
+
+  @action
+  Future<void> jobcardviewmodelfunction({required int quoteId}) async {
     jobcardResponse = jobcardResponse.copyWith(error: null, loading: true);
 
-    final result = await scheduleService.jobcardservicefunction();
+    final result = await scheduleService.jobcardservicefunction(quoteId: quoteId);
     return result.fold(
       (l) {
         jobcardResponse = jobcardResponse.copyWith(
@@ -204,9 +226,10 @@ abstract class ScheduleViewModelBase with Store {
 
   @action
   Future<void> shedulesignatureviewmodelfunction({
+    required BuildContext context,
     required int id,
     required List<PlatformFile> pickedFiles,
-    required Uint8List image,
+    required String image,
     required String signatureName,
     required String purchaseOderNo,
     required String extractedWasteType,
@@ -235,6 +258,8 @@ abstract class ScheduleViewModelBase with Store {
           errors: null,
           loading: false,
         );
+        signaturecontroller.clear();
+        context.router.pop();
       },
     );
   }
@@ -374,7 +399,7 @@ abstract class ScheduleViewModelBase with Store {
   Future<void> addImageScheduleApi(
       {required BuildContext context,
       required int id,
-      required String pickedFiles,
+      required List<String> pickedFiles,
       required bool beforeOrAfterPic,
       required picType}) async {
     addImageScheduleResponse =
@@ -681,21 +706,21 @@ abstract class ScheduleViewModelBase with Store {
   @action
   enviroDatePickerFn(BuildContext context, DateTime selectedDate, date,
       String status, int id, dynamic statusdType,
-      {bool? fromButton = false}) async {
+      {bool? fromButton = false,bool? fromJobStarted}) async {
     selectedDate = date;
     String dateString = DateFormat('yyyy-MM-dd HH:mm:ss').format(selectedDate);
     editScheduleStatusApi(
         context: context,
         statusType: statusdType,
         date: dateString,
-        status: status,
+        status: status, 
         id: id);
     pickedCameraImage = null;
     pickedGalleryImage = null;
     pickedCameraImageList = [];
     pickedGalleryImageList = [];
     if (fromButton == true) {
-      context.router.push(CameraGalleryRoute(fromJobFinished: true, id: id));
+      context.router.push(CameraGalleryRoute(fromJobStarted: fromJobStarted ?? false, id: id));
     }
   }
 

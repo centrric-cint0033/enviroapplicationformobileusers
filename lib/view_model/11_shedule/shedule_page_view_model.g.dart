@@ -376,6 +376,22 @@ mixin _$ScheduleViewModel on ScheduleViewModelBase, Store {
     });
   }
 
+  late final _$signaturePickerAtom =
+      Atom(name: 'ScheduleViewModelBase.signaturePicker', context: context);
+
+  @override
+  Uint8List? get signaturePicker {
+    _$signaturePickerAtom.reportRead();
+    return super.signaturePicker;
+  }
+
+  @override
+  set signaturePicker(Uint8List? value) {
+    _$signaturePickerAtom.reportWrite(value, super.signaturePicker, () {
+      super.signaturePicker = value;
+    });
+  }
+
   late final _$selectedcameraImageAtom =
       Atom(name: 'ScheduleViewModelBase.selectedcameraImage', context: context);
 
@@ -487,6 +503,22 @@ mixin _$ScheduleViewModel on ScheduleViewModelBase, Store {
   set pickedImages(List<String> value) {
     _$pickedImagesAtom.reportWrite(value, super.pickedImages, () {
       super.pickedImages = value;
+    });
+  }
+
+  late final _$signaturePathAtom =
+      Atom(name: 'ScheduleViewModelBase.signaturePath', context: context);
+
+  @override
+  String? get signaturePath {
+    _$signaturePathAtom.reportRead();
+    return super.signaturePath;
+  }
+
+  @override
+  set signaturePath(String? value) {
+    _$signaturePathAtom.reportWrite(value, super.signaturePath, () {
+      super.signaturePath = value;
     });
   }
 
@@ -1304,9 +1336,9 @@ mixin _$ScheduleViewModel on ScheduleViewModelBase, Store {
       context: context);
 
   @override
-  Future<void> jobcardviewmodelfunction() {
+  Future<void> jobcardviewmodelfunction({required int quoteId}) {
     return _$jobcardviewmodelfunctionAsyncAction
-        .run(() => super.jobcardviewmodelfunction());
+        .run(() => super.jobcardviewmodelfunction(quoteId: quoteId));
   }
 
   late final _$shedulecardviewmodelfunctionAsyncAction = AsyncAction(
@@ -1335,15 +1367,17 @@ mixin _$ScheduleViewModel on ScheduleViewModelBase, Store {
 
   @override
   Future<void> shedulesignatureviewmodelfunction(
-      {required int id,
+      {required BuildContext context,
+      required int id,
       required List<PlatformFile> pickedFiles,
-      required Uint8List image,
+      required String image,
       required String signatureName,
       required String purchaseOderNo,
       required String extractedWasteType,
       required String extractedLitres}) {
     return _$shedulesignatureviewmodelfunctionAsyncAction.run(() => super
         .shedulesignatureviewmodelfunction(
+            context: context,
             id: id,
             pickedFiles: pickedFiles,
             image: image,
@@ -1413,7 +1447,7 @@ mixin _$ScheduleViewModel on ScheduleViewModelBase, Store {
   Future<void> addImageScheduleApi(
       {required BuildContext context,
       required int id,
-      required String pickedFiles,
+      required List<String> pickedFiles,
       required bool beforeOrAfterPic,
       required dynamic picType}) {
     return _$addImageScheduleApiAsyncAction.run(() => super.addImageScheduleApi(
@@ -1468,10 +1502,10 @@ mixin _$ScheduleViewModel on ScheduleViewModelBase, Store {
   @override
   Future enviroDatePickerFn(BuildContext context, DateTime selectedDate,
       dynamic date, String status, int id, dynamic statusdType,
-      {bool? fromButton = false}) {
+      {bool? fromButton = false, bool? fromJobStarted}) {
     return _$enviroDatePickerFnAsyncAction.run(() => super.enviroDatePickerFn(
         context, selectedDate, date, status, id, statusdType,
-        fromButton: fromButton));
+        fromButton: fromButton, fromJobStarted: fromJobStarted));
   }
 
   late final _$ScheduleViewModelBaseActionController =
@@ -1483,6 +1517,17 @@ mixin _$ScheduleViewModel on ScheduleViewModelBase, Store {
         name: 'ScheduleViewModelBase.updateProductImageData');
     try {
       return super.updateProductImageData(image: image);
+    } finally {
+      _$ScheduleViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setSignaturePicker(Uint8List signature, String path) {
+    final _$actionInfo = _$ScheduleViewModelBaseActionController.startAction(
+        name: 'ScheduleViewModelBase.setSignaturePicker');
+    try {
+      return super.setSignaturePicker(signature, path);
     } finally {
       _$ScheduleViewModelBaseActionController.endAction(_$actionInfo);
     }
@@ -1700,6 +1745,7 @@ pickedCameraImage2: ${pickedCameraImage2},
 pickedGalleryImage: ${pickedGalleryImage},
 pickedGalleryImageList: ${pickedGalleryImageList},
 isImageSelected: ${isImageSelected},
+signaturePicker: ${signaturePicker},
 selectedcameraImage: ${selectedcameraImage},
 selectedsignaturecameraImage: ${selectedsignaturecameraImage},
 selectedImage: ${selectedImage},
@@ -1707,6 +1753,7 @@ checkboxValue: ${checkboxValue},
 checkboxValue2: ${checkboxValue2},
 checkboxValue3: ${checkboxValue3},
 pickedImages: ${pickedImages},
+signaturePath: ${signaturePath},
 jobcardResponse: ${jobcardResponse},
 shedulecardResponse: ${shedulecardResponse},
 sheduleweekResponse: ${sheduleweekResponse},
