@@ -20,13 +20,16 @@ class ScheduleList extends StatelessWidget {
           vertical: 2,
           horizontal: 2,
         ),
-        physics: const NeverScrollableScrollPhysics(),
+        physics: NeverScrollableScrollPhysics(),
         separatorBuilder: (context, index) => sized0hx10,
         shrinkWrap: true,
         itemCount: vmSchedule.sheduleweekResponse.data?.length ?? 0,
         itemBuilder: (BuildContext context, int i) {
           return GestureDetector(
             onTap: () {
+              vmSchedule.showDeleteClearButtonsBeforePic = false;
+              vmSchedule.showDeleteClearButtonsAfterPic = false;
+              vmSchedule.imageIds = [];
               context.router.push(SheduledetailRoute(
                   id: vmSchedule.sheduleweekResponse.data?[i].id ?? 0,
                   i: i,
@@ -229,11 +232,11 @@ String jobStatus(String status) {
       return "Completed";
     case "arrived_at_waste_depot":
       return "Arrived At Waste Depot";
-    case "departed_waste_depot":
+    case "Departed from Waste Depot":
       return "Departed from Waste Depot";
     case "arrived_at_enviro_facility":
       return "Arrived At Enviro Facility";
     default:
-      return "Pending";
+      return "pending";
   }
 }

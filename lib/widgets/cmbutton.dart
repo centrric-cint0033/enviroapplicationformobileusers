@@ -21,6 +21,7 @@ class CmButton extends StatelessWidget {
     this.loadingColor,
     this.fontSize,
     this.textcolor,
+    this.iconSize,
   }) : super(key: key);
 
   final IconData? icon;
@@ -33,6 +34,7 @@ class CmButton extends StatelessWidget {
   final double? height;
   final double? width;
   final double? fontSize;
+  final double? iconSize;
   final double? borderRadius;
   final VoidCallback? onPressed;
   final bool loading;
@@ -63,15 +65,13 @@ class CmButton extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   if (icon != null)
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Icon(icon,
-                          size: 18.w,
-                          color: buttonTextStyle?.color ?? Colors.white),
-                    ),
+                    Icon(icon,
+                        size: iconSize ?? 18.w,
+                        color: buttonTextStyle?.color ?? Colors.white),
                   if (icon != null) sized0wx05,
                   loading
                       ? CircularProgressIndicator(
+                          strokeWidth: 2,
                           valueColor: AlwaysStoppedAnimation<Color>(
                             loadingColor ?? Colors.white,
                           ),

@@ -128,7 +128,123 @@ abstract class ScheduleViewModelBase with Store {
   @observable
   List<String> pickedImages = [];
   @observable
+  List<int> imageIds = [];
+  @observable
+  List<int> imageIdsAfterPic = [];
+  @observable
   String? signaturePath;
+  @observable
+  bool showDeleteClearButtonsBeforePic = false;
+  @observable
+  bool showDeleteClearButtonsAfterPic = false;
+  @observable
+  ObservableList<bool> selectedStatesBeforePic = ObservableList<bool>();
+
+  // Flag to indicate if selection mode is active
+  @observable
+  bool isSelectionModeBeforePic = false;
+
+  // Action to toggle selection state for a specific index
+  @action
+  void toggleSelectionBeforePic(int index, int imageId) {
+    if (index >= 0 && index < selectedStatesBeforePic.length) {
+      selectedStatesBeforePic[index] = !selectedStatesBeforePic[index];
+      if (selectedStatesBeforePic[index]) {
+        imageIds.add(imageId);
+      } else {
+        imageIds.remove(imageId);
+      }
+    }
+    updateSelectionModeBeforePic();
+  }
+
+  // Action to activate selection mode and select the first item
+  @action
+  void startSelectionBeforePic(int index, int imageId) {
+    if (index >= 0 && index < selectedStatesBeforePic.length) {
+      selectedStatesBeforePic[index] = !selectedStatesBeforePic[index];
+      if (selectedStatesBeforePic[index]) {
+        imageIds.add(imageId);
+      } else {
+        imageIds.remove(imageId);
+      }
+    }
+    updateSelectionModeBeforePic();
+  }
+
+  // Action to deactivate selection mode
+  @action
+  void clearSelectionModeBeforePic() {
+    isSelectionModeBeforePic = false;
+    selectedStatesBeforePic.fillRange(0, selectedStatesBeforePic.length, false);
+    imageIds.clear();
+    updateSelectionModeBeforePic();
+  }
+
+  // Initialize the selected states list based on the number of images
+  void initializeSelectionStatesBeforePic(int length) {
+    selectedStatesBeforePic =
+        ObservableList<bool>.of(List.filled(length, false));
+  }
+
+  // Update selection mode based on any selected items
+  void updateSelectionModeBeforePic() {
+    bool anySelected = selectedStatesBeforePic.any((isSelected) => isSelected);
+    isSelectionModeBeforePic = anySelected;
+    showDeleteClearButtonsBeforePic = anySelected;
+  }
+
+  @observable
+  ObservableList<bool> selectedStatesAfterPic = ObservableList<bool>();
+
+  @observable
+  bool isSelectionModeAfterPic = false;
+
+  @action
+  void toggleSelectionAfterPic(int index, int imageId) {
+    if (index >= 0 && index < selectedStatesAfterPic.length) {
+      selectedStatesAfterPic[index] = !selectedStatesAfterPic[index];
+      if (selectedStatesBeforePic[index]) {
+        imageIdsAfterPic.add(imageId);
+      } else {
+        imageIdsAfterPic.remove(imageId);
+      }
+    }
+    updateSelectionModeBeforePic();
+  }
+
+  @action
+  void startSelectionAfterPic(int index, int imageId) {
+    if (index >= 0 && index < selectedStatesAfterPic.length) {
+      selectedStatesAfterPic[index] = !selectedStatesAfterPic[index];
+      if (selectedStatesBeforePic[index]) {
+        imageIdsAfterPic.add(imageId);
+      } else {
+        imageIdsAfterPic.remove(imageId);
+      }
+    }
+    updateSelectionModeAfterPic();
+  }
+
+  @action
+  void clearSelectionModeAfterPic() {
+    isSelectionModeAfterPic = false;
+    imageIdsAfterPic.clear();
+    selectedStatesAfterPic.fillRange(0, selectedStatesAfterPic.length, false);
+    updateSelectionModeAfterPic();
+  }
+
+  void initializeSelectionStatesAfterPic(int length) {
+    selectedStatesAfterPic =
+        ObservableList<bool>.of(List.filled(length, false));
+  }
+
+  void updateSelectionModeAfterPic() {
+    bool anySelected = selectedStatesAfterPic.any((isSelected) => isSelected);
+    isSelectionModeAfterPic = anySelected;
+    showDeleteClearButtonsAfterPic = anySelected;
+  }
+
   @action
   void updateProductImageData({ImageFilePickerModel? image}) {
     pickedCameraImage2 = image!;
@@ -148,7 +264,8 @@ abstract class ScheduleViewModelBase with Store {
   Future<void> jobcardviewmodelfunction({required int quoteId}) async {
     jobcardResponse = jobcardResponse.copyWith(error: null, loading: true);
 
-    final result = await scheduleService.jobcardservicefunction(quoteId: quoteId);
+    final result =
+        await scheduleService.jobcardservicefunction(quoteId: quoteId);
     return result.fold(
       (l) {
         jobcardResponse = jobcardResponse.copyWith(
@@ -430,6 +547,62 @@ abstract class ScheduleViewModelBase with Store {
     );
   }
 
+  @observable
+  ApiResponse<ScheduleImageResModel> deleteImageScheduleResponse =
+      ApiResponse<ScheduleImageResModel>();
+  @observable
+  ApiResponse<ScheduleImageResModel> deleteAfterImageScheduleResponse =
+      ApiResponse<ScheduleImageResModel>();
+  @action
+  Future<void> deleteImageScheduleApi(
+      {required BuildContext context,
+      required int id,
+      required List<int> imageId,
+      bool fromAfterPic = false}) async {
+    fromAfterPic == false
+        ? deleteImageScheduleResponse =
+            deleteImageScheduleResponse.copyWith(error: null, loading: true)
+        : deleteAfterImageScheduleResponse = deleteAfterImageScheduleResponse
+            .copyWith(error: null, loading: true);
+
+    final result =
+        await scheduleService.deleteImagesScheduleAPi(id: id, imageId: imageId);
+    return result.fold(
+      (l) {
+        fromAfterPic == false
+            ? deleteImageScheduleResponse =
+                deleteImageScheduleResponse.copyWith(
+                error: l.keys.first,
+                loading: false,
+              )
+            : deleteAfterImageScheduleResponse =
+                deleteAfterImageScheduleResponse.copyWith(
+                error: l.keys.first,
+                loading: false,
+              );
+      },
+      (r) {
+        fromAfterPic == false
+            ? deleteImageScheduleResponse =
+                deleteImageScheduleResponse.copyWith(
+                data: r,
+                error: null,
+                loading: false,
+              )
+            : deleteAfterImageScheduleResponse =
+                deleteAfterImageScheduleResponse.copyWith(
+                data: r,
+                error: null,
+                loading: false,
+              );
+        vmSchedule.showDeleteClearButtonsBeforePic = false;
+        vmSchedule.showDeleteClearButtonsAfterPic = false;
+        vmSchedule.imageIds = [];
+        shedulecardviewmodelweekfunction();
+      },
+    );
+  }
+
   @action
   dateSelectionFn(DateTime selectedday, DateTime focusedday) {
     selectedDay = selectedday;
@@ -706,21 +879,22 @@ abstract class ScheduleViewModelBase with Store {
   @action
   enviroDatePickerFn(BuildContext context, DateTime selectedDate, date,
       String status, int id, dynamic statusdType,
-      {bool? fromButton = false,bool? fromJobStarted}) async {
+      {bool? fromButton = false, bool? fromJobStarted}) async {
     selectedDate = date;
     String dateString = DateFormat('yyyy-MM-dd HH:mm:ss').format(selectedDate);
     editScheduleStatusApi(
         context: context,
         statusType: statusdType,
         date: dateString,
-        status: status, 
+        status: status,
         id: id);
     pickedCameraImage = null;
     pickedGalleryImage = null;
     pickedCameraImageList = [];
     pickedGalleryImageList = [];
     if (fromButton == true) {
-      context.router.push(CameraGalleryRoute(fromJobStarted: fromJobStarted ?? false, id: id));
+      context.router.push(
+          CameraGalleryRoute(fromJobStarted: fromJobStarted ?? false, id: id));
     }
   }
 

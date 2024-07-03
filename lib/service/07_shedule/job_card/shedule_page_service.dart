@@ -32,7 +32,8 @@ enum BeforeOrAfterPic {
 }
 
 abstract class IScheduleService {
-  Future<Either<MainFailure, JobCardRespModel>> jobcardservicefunction({required int quoteId});
+  Future<Either<MainFailure, JobCardRespModel>> jobcardservicefunction(
+      {required int quoteId});
   Future<Either<MainFailure, List<SheduleCardRespModel>>>
       shedulecardservicefunction();
 
@@ -71,6 +72,8 @@ abstract class IScheduleService {
           required List<String> pickedFiles,
           required bool beforeOrAfterPic,
           required picType});
+  Future<Either<Map<MainFailure, dynamic>, ScheduleImageResModel>>
+      deleteImagesScheduleAPi({required int id, required List<int> imageId});
 }
 
 @LazySingleton(as: IScheduleService)
@@ -78,7 +81,8 @@ class SalesService implements IScheduleService {
   final HttpService httpService;
   SalesService(this.httpService);
   @override
-  Future<Either<MainFailure, JobCardRespModel>> jobcardservicefunction({required int quoteId}) async {
+  Future<Either<MainFailure, JobCardRespModel>> jobcardservicefunction(
+      {required int quoteId}) async {
     var response = await getIt<HttpService>().request(
         authenticated: true,
         method: HttpMethod.get,
@@ -310,6 +314,26 @@ class SalesService implements IScheduleService {
       },
       (res) async {
         return const Right("Success");
+      },
+    );
+  }
+
+  @override
+  Future<Either<Map<MainFailure, dynamic>, ScheduleImageResModel>>
+      deleteImagesScheduleAPi(
+          {required int id, required List<int> imageId}) async {
+    var response = await getIt<HttpService>().multipartRequest(
+      apiUrl: ApiEndPoints.endpointsheduleaddimage,
+      data: {"id": id, "image_to_delete": imageId},
+      method: "POST",
+    );
+    return response.fold(
+      (l) => Left(l),
+      (res) async {
+        var data = jsonDecode(res.body);
+        ScheduleImageResModel deleteImage =
+            ScheduleImageResModel.fromJson(data);
+        return Right(deleteImage);
       },
     );
   }

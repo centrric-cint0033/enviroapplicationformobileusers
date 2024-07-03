@@ -506,6 +506,38 @@ mixin _$ScheduleViewModel on ScheduleViewModelBase, Store {
     });
   }
 
+  late final _$imageIdsAtom =
+      Atom(name: 'ScheduleViewModelBase.imageIds', context: context);
+
+  @override
+  List<int> get imageIds {
+    _$imageIdsAtom.reportRead();
+    return super.imageIds;
+  }
+
+  @override
+  set imageIds(List<int> value) {
+    _$imageIdsAtom.reportWrite(value, super.imageIds, () {
+      super.imageIds = value;
+    });
+  }
+
+  late final _$imageIdsAfterPicAtom =
+      Atom(name: 'ScheduleViewModelBase.imageIdsAfterPic', context: context);
+
+  @override
+  List<int> get imageIdsAfterPic {
+    _$imageIdsAfterPicAtom.reportRead();
+    return super.imageIdsAfterPic;
+  }
+
+  @override
+  set imageIdsAfterPic(List<int> value) {
+    _$imageIdsAfterPicAtom.reportWrite(value, super.imageIdsAfterPic, () {
+      super.imageIdsAfterPic = value;
+    });
+  }
+
   late final _$signaturePathAtom =
       Atom(name: 'ScheduleViewModelBase.signaturePath', context: context);
 
@@ -519,6 +551,110 @@ mixin _$ScheduleViewModel on ScheduleViewModelBase, Store {
   set signaturePath(String? value) {
     _$signaturePathAtom.reportWrite(value, super.signaturePath, () {
       super.signaturePath = value;
+    });
+  }
+
+  late final _$showDeleteClearButtonsBeforePicAtom = Atom(
+      name: 'ScheduleViewModelBase.showDeleteClearButtonsBeforePic',
+      context: context);
+
+  @override
+  bool get showDeleteClearButtonsBeforePic {
+    _$showDeleteClearButtonsBeforePicAtom.reportRead();
+    return super.showDeleteClearButtonsBeforePic;
+  }
+
+  @override
+  set showDeleteClearButtonsBeforePic(bool value) {
+    _$showDeleteClearButtonsBeforePicAtom
+        .reportWrite(value, super.showDeleteClearButtonsBeforePic, () {
+      super.showDeleteClearButtonsBeforePic = value;
+    });
+  }
+
+  late final _$showDeleteClearButtonsAfterPicAtom = Atom(
+      name: 'ScheduleViewModelBase.showDeleteClearButtonsAfterPic',
+      context: context);
+
+  @override
+  bool get showDeleteClearButtonsAfterPic {
+    _$showDeleteClearButtonsAfterPicAtom.reportRead();
+    return super.showDeleteClearButtonsAfterPic;
+  }
+
+  @override
+  set showDeleteClearButtonsAfterPic(bool value) {
+    _$showDeleteClearButtonsAfterPicAtom
+        .reportWrite(value, super.showDeleteClearButtonsAfterPic, () {
+      super.showDeleteClearButtonsAfterPic = value;
+    });
+  }
+
+  late final _$selectedStatesBeforePicAtom = Atom(
+      name: 'ScheduleViewModelBase.selectedStatesBeforePic', context: context);
+
+  @override
+  ObservableList<bool> get selectedStatesBeforePic {
+    _$selectedStatesBeforePicAtom.reportRead();
+    return super.selectedStatesBeforePic;
+  }
+
+  @override
+  set selectedStatesBeforePic(ObservableList<bool> value) {
+    _$selectedStatesBeforePicAtom
+        .reportWrite(value, super.selectedStatesBeforePic, () {
+      super.selectedStatesBeforePic = value;
+    });
+  }
+
+  late final _$isSelectionModeBeforePicAtom = Atom(
+      name: 'ScheduleViewModelBase.isSelectionModeBeforePic', context: context);
+
+  @override
+  bool get isSelectionModeBeforePic {
+    _$isSelectionModeBeforePicAtom.reportRead();
+    return super.isSelectionModeBeforePic;
+  }
+
+  @override
+  set isSelectionModeBeforePic(bool value) {
+    _$isSelectionModeBeforePicAtom
+        .reportWrite(value, super.isSelectionModeBeforePic, () {
+      super.isSelectionModeBeforePic = value;
+    });
+  }
+
+  late final _$selectedStatesAfterPicAtom = Atom(
+      name: 'ScheduleViewModelBase.selectedStatesAfterPic', context: context);
+
+  @override
+  ObservableList<bool> get selectedStatesAfterPic {
+    _$selectedStatesAfterPicAtom.reportRead();
+    return super.selectedStatesAfterPic;
+  }
+
+  @override
+  set selectedStatesAfterPic(ObservableList<bool> value) {
+    _$selectedStatesAfterPicAtom
+        .reportWrite(value, super.selectedStatesAfterPic, () {
+      super.selectedStatesAfterPic = value;
+    });
+  }
+
+  late final _$isSelectionModeAfterPicAtom = Atom(
+      name: 'ScheduleViewModelBase.isSelectionModeAfterPic', context: context);
+
+  @override
+  bool get isSelectionModeAfterPic {
+    _$isSelectionModeAfterPicAtom.reportRead();
+    return super.isSelectionModeAfterPic;
+  }
+
+  @override
+  set isSelectionModeAfterPic(bool value) {
+    _$isSelectionModeAfterPicAtom
+        .reportWrite(value, super.isSelectionModeAfterPic, () {
+      super.isSelectionModeAfterPic = value;
     });
   }
 
@@ -669,6 +805,43 @@ mixin _$ScheduleViewModel on ScheduleViewModelBase, Store {
     _$addImageScheduleResponseAtom
         .reportWrite(value, super.addImageScheduleResponse, () {
       super.addImageScheduleResponse = value;
+    });
+  }
+
+  late final _$deleteImageScheduleResponseAtom = Atom(
+      name: 'ScheduleViewModelBase.deleteImageScheduleResponse',
+      context: context);
+
+  @override
+  ApiResponse<ScheduleImageResModel> get deleteImageScheduleResponse {
+    _$deleteImageScheduleResponseAtom.reportRead();
+    return super.deleteImageScheduleResponse;
+  }
+
+  @override
+  set deleteImageScheduleResponse(ApiResponse<ScheduleImageResModel> value) {
+    _$deleteImageScheduleResponseAtom
+        .reportWrite(value, super.deleteImageScheduleResponse, () {
+      super.deleteImageScheduleResponse = value;
+    });
+  }
+
+  late final _$deleteAfterImageScheduleResponseAtom = Atom(
+      name: 'ScheduleViewModelBase.deleteAfterImageScheduleResponse',
+      context: context);
+
+  @override
+  ApiResponse<ScheduleImageResModel> get deleteAfterImageScheduleResponse {
+    _$deleteAfterImageScheduleResponseAtom.reportRead();
+    return super.deleteAfterImageScheduleResponse;
+  }
+
+  @override
+  set deleteAfterImageScheduleResponse(
+      ApiResponse<ScheduleImageResModel> value) {
+    _$deleteAfterImageScheduleResponseAtom
+        .reportWrite(value, super.deleteAfterImageScheduleResponse, () {
+      super.deleteAfterImageScheduleResponse = value;
     });
   }
 
@@ -1458,6 +1631,24 @@ mixin _$ScheduleViewModel on ScheduleViewModelBase, Store {
         picType: picType));
   }
 
+  late final _$deleteImageScheduleApiAsyncAction = AsyncAction(
+      'ScheduleViewModelBase.deleteImageScheduleApi',
+      context: context);
+
+  @override
+  Future<void> deleteImageScheduleApi(
+      {required BuildContext context,
+      required int id,
+      required List<int> imageId,
+      bool fromAfterPic = false}) {
+    return _$deleteImageScheduleApiAsyncAction.run(() => super
+        .deleteImageScheduleApi(
+            context: context,
+            id: id,
+            imageId: imageId,
+            fromAfterPic: fromAfterPic));
+  }
+
   late final _$pickFilefromphoneAsyncAction =
       AsyncAction('ScheduleViewModelBase.pickFilefromphone', context: context);
 
@@ -1510,6 +1701,72 @@ mixin _$ScheduleViewModel on ScheduleViewModelBase, Store {
 
   late final _$ScheduleViewModelBaseActionController =
       ActionController(name: 'ScheduleViewModelBase', context: context);
+
+  @override
+  void toggleSelectionBeforePic(int index, int imageId) {
+    final _$actionInfo = _$ScheduleViewModelBaseActionController.startAction(
+        name: 'ScheduleViewModelBase.toggleSelectionBeforePic');
+    try {
+      return super.toggleSelectionBeforePic(index, imageId);
+    } finally {
+      _$ScheduleViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void startSelectionBeforePic(int index, int imageId) {
+    final _$actionInfo = _$ScheduleViewModelBaseActionController.startAction(
+        name: 'ScheduleViewModelBase.startSelectionBeforePic');
+    try {
+      return super.startSelectionBeforePic(index, imageId);
+    } finally {
+      _$ScheduleViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void clearSelectionModeBeforePic() {
+    final _$actionInfo = _$ScheduleViewModelBaseActionController.startAction(
+        name: 'ScheduleViewModelBase.clearSelectionModeBeforePic');
+    try {
+      return super.clearSelectionModeBeforePic();
+    } finally {
+      _$ScheduleViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void toggleSelectionAfterPic(int index, int imageId) {
+    final _$actionInfo = _$ScheduleViewModelBaseActionController.startAction(
+        name: 'ScheduleViewModelBase.toggleSelectionAfterPic');
+    try {
+      return super.toggleSelectionAfterPic(index, imageId);
+    } finally {
+      _$ScheduleViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void startSelectionAfterPic(int index, int imageId) {
+    final _$actionInfo = _$ScheduleViewModelBaseActionController.startAction(
+        name: 'ScheduleViewModelBase.startSelectionAfterPic');
+    try {
+      return super.startSelectionAfterPic(index, imageId);
+    } finally {
+      _$ScheduleViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void clearSelectionModeAfterPic() {
+    final _$actionInfo = _$ScheduleViewModelBaseActionController.startAction(
+        name: 'ScheduleViewModelBase.clearSelectionModeAfterPic');
+    try {
+      return super.clearSelectionModeAfterPic();
+    } finally {
+      _$ScheduleViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
 
   @override
   void updateProductImageData({ImageFilePickerModel? image}) {
@@ -1753,7 +2010,15 @@ checkboxValue: ${checkboxValue},
 checkboxValue2: ${checkboxValue2},
 checkboxValue3: ${checkboxValue3},
 pickedImages: ${pickedImages},
+imageIds: ${imageIds},
+imageIdsAfterPic: ${imageIdsAfterPic},
 signaturePath: ${signaturePath},
+showDeleteClearButtonsBeforePic: ${showDeleteClearButtonsBeforePic},
+showDeleteClearButtonsAfterPic: ${showDeleteClearButtonsAfterPic},
+selectedStatesBeforePic: ${selectedStatesBeforePic},
+isSelectionModeBeforePic: ${isSelectionModeBeforePic},
+selectedStatesAfterPic: ${selectedStatesAfterPic},
+isSelectionModeAfterPic: ${isSelectionModeAfterPic},
 jobcardResponse: ${jobcardResponse},
 shedulecardResponse: ${shedulecardResponse},
 sheduleweekResponse: ${sheduleweekResponse},
@@ -1763,6 +2028,8 @@ deleteCommentResponse: ${deleteCommentResponse},
 addPreInspectionScheduleResponse: ${addPreInspectionScheduleResponse},
 editScheduleStatusResponse: ${editScheduleStatusResponse},
 addImageScheduleResponse: ${addImageScheduleResponse},
+deleteImageScheduleResponse: ${deleteImageScheduleResponse},
+deleteAfterImageScheduleResponse: ${deleteAfterImageScheduleResponse},
 isMinimized: ${isMinimized},
 selectedEngineOilValue: ${selectedEngineOilValue},
 selectedWarningSystemValue: ${selectedWarningSystemValue},

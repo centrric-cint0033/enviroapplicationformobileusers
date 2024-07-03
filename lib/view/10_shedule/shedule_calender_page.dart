@@ -30,21 +30,14 @@ class CalenderPage extends StatelessWidget {
                 children: [
                   calenderWidget(),
                   sized0hx10,
-                  SizedBox(
-                    height: 400,
-                    child: Column(
-                      children: [
-                        Align(
-                            alignment: Alignment.topLeft,
-                            child: Text(
-                              'Schedule List',
-                              style: TextStyle(fontSize: 14.h),
-                            )),
-                        sized0hx05,
-                        const ScheduleList()
-                      ],
-                    ),
-                  ),
+                  Align(
+                      alignment: Alignment.topLeft,
+                      child: Text(
+                        'Schedule List',
+                        style: TextStyle(fontSize: 14.h),
+                      )),
+                  sized0hx05,
+                  const ScheduleList(),
                   sized0hx20,
                 ],
               ),
