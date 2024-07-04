@@ -110,6 +110,12 @@ abstract class ScheduleViewModelBase with Store {
   @observable
   List<String>? pickedGalleryImageList = [];
   @observable
+  String? pickedWeighCameraImage = "";
+  @observable
+  ObservableList<String>? pickedWeighImageList = ObservableList<String>();
+  @observable
+  String? pickedWeighGalleryImage = "";
+  @observable
   bool isImageSelected = true;
   @observable
   Uint8List? signaturePicker;
@@ -204,20 +210,20 @@ abstract class ScheduleViewModelBase with Store {
   void toggleSelectionAfterPic(int index, int imageId) {
     if (index >= 0 && index < selectedStatesAfterPic.length) {
       selectedStatesAfterPic[index] = !selectedStatesAfterPic[index];
-      if (selectedStatesBeforePic[index]) {
+      if (selectedStatesAfterPic[index]) {
         imageIdsAfterPic.add(imageId);
       } else {
         imageIdsAfterPic.remove(imageId);
       }
     }
-    updateSelectionModeBeforePic();
+    updateSelectionModeAfterPic();
   }
 
   @action
   void startSelectionAfterPic(int index, int imageId) {
     if (index >= 0 && index < selectedStatesAfterPic.length) {
       selectedStatesAfterPic[index] = !selectedStatesAfterPic[index];
-      if (selectedStatesBeforePic[index]) {
+      if (selectedStatesAfterPic[index]) {
         imageIdsAfterPic.add(imageId);
       } else {
         imageIdsAfterPic.remove(imageId);
@@ -345,7 +351,7 @@ abstract class ScheduleViewModelBase with Store {
   Future<void> shedulesignatureviewmodelfunction({
     required BuildContext context,
     required int id,
-    required List<PlatformFile> pickedFiles,
+    required List<String> pickedFiles,
     required String image,
     required String signatureName,
     required String purchaseOderNo,
@@ -838,8 +844,13 @@ abstract class ScheduleViewModelBase with Store {
         allowMultiple: true,
         type: FileType.custom,
         allowedExtensions: ['jpg', 'pdf', 'doc']);
-    pickedFiles.addAll(pic?.files ?? []);
-    pickedFiles = [...pickedFiles];
+    if (pic != null) {
+      var filePaths =
+          pic.files.map((file) => file.path).whereType<String>().toList();
+      pickedWeighImageList?.addAll(filePaths);
+    }
+    // pickedFiles.addAll(pic?.files ?? []);
+    // pickedFiles = [...pickedFiles];
   }
 
   @action

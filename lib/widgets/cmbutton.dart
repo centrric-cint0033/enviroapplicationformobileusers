@@ -70,8 +70,7 @@ class CmButton extends StatelessWidget {
                         color: buttonTextStyle?.color ?? Colors.white),
                   if (icon != null) sized0wx05,
                   loading
-                      ? CircularProgressIndicator(
-                          strokeWidth: 2,
+                      ? CircularProgressIndicator( 
                           valueColor: AlwaysStoppedAnimation<Color>(
                             loadingColor ?? Colors.white,
                           ),

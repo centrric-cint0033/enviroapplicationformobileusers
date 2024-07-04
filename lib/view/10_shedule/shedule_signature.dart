@@ -2,6 +2,8 @@
 import 'dart:io';
 import 'dart:typed_data';
 import 'package:auto_route/auto_route.dart';
+import 'package:enviro_mobile_application/widgets/show_confirmation_alert.dart';
+import 'package:open_file/open_file.dart';
 import 'package:enviro_mobile_application/service/07_shedule/job_card/shedule_page_service.dart';
 import 'package:enviro_mobile_application/utilis/constant.dart';
 import 'package:enviro_mobile_application/view/10_shedule/widgets/schedule_comment_section.dart';
@@ -13,10 +15,11 @@ import 'package:enviro_mobile_application/widgets/cmn_title_textwidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
-import 'package:open_file/open_file.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:signature/signature.dart';
+import 'package:path/path.dart' as p;
 
 @RoutePage()
 class SheduleSignaturePage extends StatelessWidget {
@@ -47,184 +50,149 @@ class SheduleSignaturePage extends StatelessWidget {
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      if (vmSchedule.sheduleweekResponse.data?[i].jobCardKeys
-                              ?.weighBridgeRequired ==
-                          "true")
-                        Container(
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            border: Border.all(color: Colors.black12),
-                            borderRadius: BorderRadius.circular(5.0),
-                          ),
-                          child: Padding(
-                            padding: EdgeInsets.only(left: 8.h, right: 8.h),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Weigh bridge Required:',
-                                  style: TextStyle(
-                                      fontSize: 12.w,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    CmButton(
-                                      width: 108.w,
-                                      color: Colors.blue,
-                                      onPressed: () async {
-                                        vmSchedule.pickFilefromphone();
-                                      },
-                                      text: 'AddFile ',
-                                    ),
-                                    const SizedBox(width: 18),
-                                    CmButton(
-                                      width: 118.w,
-                                      color: Colors.blue,
-                                      onPressed: () async {
-                                        vmSchedule
-                                            .pickImageFromsignatureCamera();
-                                      },
-                                      text: 'Camera ',
-                                    ),
-                                  ],
-                                ),
-                                SingleChildScrollView(
-                                  scrollDirection: Axis
-                                      .horizontal, // Set scroll direction to horizontal
-                                  child: vmSchedule.pickedFiles.isNotEmpty
-                                      ? Row(
-                                          children: vmSchedule.pickedFiles
-                                              .map((file) {
-                                            final icon = returnLogo(file.name,
-                                                file.path, file.size);
-                                            return SizedBox(
-                                              height: 70.h,
-                                              width: 140.h,
-                                              child: Card(
-                                                shape:
-                                                    const RoundedRectangleBorder(),
-                                                child: ListTile(
-                                                  onLongPress: () {
-                                                    showDialog(
-                                                      context: context,
-                                                      builder: (BuildContext
-                                                          context) {
-                                                        return AlertDialog(
-                                                          title: const Text(
-                                                              "Delete File"),
-                                                          content: Text(
-                                                              "Are you sure you want to delete ${file.name}?"),
-                                                          actions: <Widget>[
-                                                            TextButton(
-                                                              onPressed: () {
-                                                                Navigator.of(
-                                                                        context)
-                                                                    .pop();
-                                                              },
-                                                              child: const Text(
-                                                                  "Cancel"),
-                                                            ),
-                                                            TextButton(
-                                                              onPressed: () {
-                                                                vmSchedule
-                                                                    .pickedFiles
-                                                                    .remove(
-                                                                        file);
-                                                                Navigator.of(
-                                                                        context)
-                                                                    .pop();
-                                                              },
-                                                              child: const Text(
-                                                                  "Delete"),
-                                                            ),
-                                                          ],
-                                                        );
-                                                      },
-                                                    );
-                                                  },
-                                                  title: Text(
-                                                    file.name,
-                                                    style: TextStyle(
-                                                      overflow:
-                                                          TextOverflow.ellipsis,
-                                                      fontSize: 9.w,
-                                                    ),
-                                                  ),
-                                                  leading: icon,
-                                                  subtitle: Text(
-                                                    file.extension!,
-                                                    style: TextStyle(
-                                                      overflow:
-                                                          TextOverflow.ellipsis,
-                                                      fontSize: 9.w,
-                                                    ),
-                                                  ),
-                                                  onTap: () {
-                                                    OpenFile.open(
-                                                      file.path,
-                                                    );
-                                                  },
-                                                ),
+                      // if (vmSchedule.sheduleweekResponse.data?[i].jobCardKeys
+                      //         ?.weighBridgeRequired ==
+                      //     "true")
+                      Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          border: Border.all(color: Colors.black12),
+                          borderRadius: BorderRadius.circular(5.0),
+                        ),
+                        child: Padding(
+                          padding: EdgeInsets.only(left: 8.h, right: 8.h),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Weigh bridge Required:',
+                                style: TextStyle(
+                                    fontSize: 10.w,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              sized0hx05,
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  CmButton(
+                                    height: 25.h,
+                                    width: 95.w,
+                                    color: Colors.black,
+                                    onPressed: () async {
+                                      showShowMediaDialog(context: context);
+                                      // context.router
+                                      //     .push(WeighBridgeMediaRoute(id: id));
+                                    },
+                                    text: 'Add Media',
+                                  ),
+                                ],
+                              ),
+                              sized0hx05,
+                              if (vmSchedule
+                                  .pickedWeighImageList!.isNotEmpty) ...[
+                                SizedBox(
+                                  height: 70.h,
+                                  width: double.infinity,
+                                  child: ListView.builder(
+                                    scrollDirection: Axis.horizontal,
+                                    itemCount:
+                                        vmSchedule.pickedWeighImageList?.length,
+                                    itemBuilder: (context, index) {
+                                      String imagePath = vmSchedule
+                                          .pickedWeighImageList![index];
+                                      String fileName = p.basename(imagePath);
+                                      bool isImage =
+                                          imagePath.endsWith('.jpg') ||
+                                              imagePath.endsWith('.jpeg') ||
+                                              imagePath.endsWith('.png');
+                                      return InkWell(
+                                        onTap: () async {
+                                          OpenFile.open(
+                                            imagePath,
+                                          );
+                                        },
+                                        onLongPress: () {
+                                          showConfirmationAlert(
+                                              context: context,
+                                              onSubmit: () {
+                                                vmSchedule.pickedWeighImageList
+                                                    ?.removeAt(index);
+                                              },
+                                              content:
+                                                  "Are you sure you want to delete?",
+                                              submitText: "Yes",
+                                              submitText2: "No");
+                                        },
+                                        child: Container(
+                                          width: 80.h, // Width of each item
+                                          foregroundDecoration: BoxDecoration(
+                                              border: Border.all()),
+                                          child: Column(
+                                            children: [
+                                              sized0hx05,
+                                              Expanded(
+                                                child: isImage
+                                                    ? Image.file(
+                                                        File(imagePath),
+                                                        fit: BoxFit.cover,
+                                                      )
+                                                    : Icon(
+                                                        Icons.file_copy,
+                                                        size: 20.w,
+                                                        color: Colors.red,
+                                                      ),
                                               ),
-                                            );
-                                          }).toList(),
-                                        )
-                                      : Text(
-                                          'No files selected',
-                                          style: TextStyle(fontSize: 10.w),
+                                              Expanded(
+                                                  child: Text(
+                                                fileName,
+                                                style: TextStyle(
+                                                    fontSize: 9.w,
+                                                    overflow:
+                                                        TextOverflow.ellipsis),
+                                              ))
+                                            ],
+                                          ),
                                         ),
-                                ),
+                                      );
+                                    },
+                                  ),
+                                )
                               ],
-                            ),
+                            ],
                           ),
                         ),
-                      sized0hx10,
-                      ExpansionTile(
-                        title: Text(
-                          'Job Details',
-                          style: TextStyle(
-                            fontSize: 12.w,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        tilePadding: EdgeInsets.only(left: 2.w, right: 2.w),
-                        childrenPadding: EdgeInsets.only(left: 3.w, right: 2.w),
-                        children: [
-                          cmContainer(
-                              title: "Type of waste:",
-                              subtitle:
-                                  "Any change in waste is mentioned here...",
-                              onChanged: (value) {
-                                vmSchedule.controllerTypeofwaste.text = value;
-                              }),
-                          sized0hx05,
-                          cmContainer(
-                              title: "waste Liters:",
-                              subtitle:
-                                  "Any change in amount of litres collected,mention here...",
-                              onChanged: (value) {
-                                vmSchedule.controllerWateliters.text = value;
-                              }),
-                          sized0hx05,
-                          cmContainer(
-                              title: "Po Number:",
-                              subtitle: "Purchase order number...",
-                              onChanged: (value) {
-                                vmSchedule.controllerPonumber.text = value;
-                              }),
-                          sized0hx05,
-                          cmContainer(
-                              title: "SignName:",
-                              subtitle: "Sign name...",
-                              onChanged: (value) {
-                                vmSchedule.signNameController.text = value;
-                              }),
-                          sized0hx10,
-                        ],
                       ),
+                      sized0hx10,
+                      cmContainer(
+                          title: "Type of waste:",
+                          subtitle: "Any change in waste is mentioned here...",
+                          onChanged: (value) {
+                            vmSchedule.controllerTypeofwaste.text = value;
+                          }),
+                      sized0hx05,
+                      cmContainer(
+                          title: "waste Liters:",
+                          subtitle:
+                              "Any change in amount of litres collected,mention here...",
+                          onChanged: (value) {
+                            vmSchedule.controllerWateliters.text = value;
+                          }),
+                      sized0hx05,
+                      cmContainer(
+                          title: "Po Number:",
+                          subtitle: "Purchase order number...",
+                          onChanged: (value) {
+                            vmSchedule.controllerPonumber.text = value;
+                          }),
+                      sized0hx05,
+                      cmContainer(
+                          title: "SignName:",
+                          subtitle: "Sign name...",
+                          required: true,
+                          onChanged: (value) {
+                            vmSchedule.signNameController.text = value;
+                          }),
+                      sized0hx10,
                       Container(
                         decoration: BoxDecoration(
                           color: Colors.yellow.shade700,
@@ -349,33 +317,51 @@ class SheduleSignaturePage extends StatelessWidget {
                         child: CmButton(
                           width: 150.w,
                           color: vmSchedule.signColor,
+                          loading: vmSchedule.signatureResponse.loading,
                           onPressed: () async {
-                            vmSchedule.shedulesignatureviewmodelfunction(
-                                context: context,
-                                image: vmSchedule.signaturePath ?? "",
-                                extractedWasteType:
-                                    vmSchedule.controllerTypeofwaste.text,
-                                extractedLitres:
-                                    vmSchedule.controllerWateliters.text,
-                                purchaseOderNo:
-                                    vmSchedule.controllerPonumber.text,
-                                signatureName:
-                                    vmSchedule.signNameController.text,
-                                id: id,
-                                pickedFiles: vmSchedule.pickedFiles);
-                            if (vmSchedule.commentController.text != "") {
-                              vmSchedule.shedulecommentviewmodelfunction(
+                            if (vmSchedule.signaturePath == null &&
+                                vmSchedule.signaturecontroller.isNotEmpty) {
+                              showToast(context,
+                                  msg: "Please save signature before submit",
+                                  color: Colors.red);
+                            } else if (vmSchedule.signNameController.text ==
+                                "") {
+                              showToast(context,
+                                  msg: "Signname is required",
+                                  color: Colors.red);
+                            } else {
+                              vmSchedule.shedulesignatureviewmodelfunction(
+                                  context: context,
+                                  image: vmSchedule.signaturePath ?? "",
+                                  extractedWasteType:
+                                      vmSchedule.controllerTypeofwaste.text,
+                                  extractedLitres:
+                                      vmSchedule.controllerWateliters.text,
+                                  purchaseOderNo:
+                                      vmSchedule.controllerPonumber.text,
+                                  signatureName:
+                                      vmSchedule.signNameController.text,
                                   id: id,
-                                  comment: vmSchedule.commentController.text);
+                                  pickedFiles: vmSchedule.pickedWeighImageList
+                                          ?.toList() ??
+                                      []);
+                              if (vmSchedule.commentController.text != "") {
+                                vmSchedule.shedulecommentviewmodelfunction(
+                                    id: id,
+                                    comment: vmSchedule.commentController.text);
+                              }
+                              vmSchedule.editScheduleStatusApi(
+                                  context: context,
+                                  statusType: ScheduleStatusType.completed,
+                                  date: DateFormat('yyyy-MM-dd HH:mm:ss')
+                                      .format(DateTime.now()),
+                                  status: "completed",
+                                  id: id);
+                              if (vmSchedule.signaturecontroller.isNotEmpty) {
+                                vmSchedule.updateSignatureButtonColor(
+                                    state: true);
+                              }
                             }
-                            vmSchedule.editScheduleStatusApi(
-                                context: context,
-                                statusType: ScheduleStatusType.completed,
-                                date: DateFormat('yyyy-MM-dd HH:mm:ss')
-                                    .format(DateTime.now()),
-                                status: "completed",
-                                id: id);
-                            vmSchedule.updateSignatureButtonColor(state: true);
                           },
                           text: 'Submit',
                         ),
@@ -385,8 +371,29 @@ class SheduleSignaturePage extends StatelessWidget {
     );
   }
 
+  Future<void> openCamera(BuildContext context) async {
+    final pickedFile =
+        await ImagePicker().pickImage(source: ImageSource.camera);
+    if (pickedFile != null) {
+      vmSchedule.pickedWeighCameraImage = pickedFile.path;
+      vmSchedule.pickedWeighImageList?.add(vmSchedule.pickedWeighCameraImage!);
+    }
+  }
+
+  Future<void> openGallery(BuildContext context) async {
+    final pickedFile =
+        await ImagePicker().pickImage(source: ImageSource.gallery);
+    if (pickedFile != null) {
+      vmSchedule.pickedWeighGalleryImage = pickedFile.path;
+      vmSchedule.pickedWeighImageList?.add(vmSchedule.pickedWeighGalleryImage!);
+    }
+  }
+
   Widget cmContainer(
-      {String? title, String? subtitle, void Function(String)? onChanged}) {
+      {String? title,
+      String? subtitle,
+      void Function(String)? onChanged,
+      bool? required = false}) {
     return Container(
       decoration: BoxDecoration(
         color: const Color.fromARGB(255, 189, 245, 191),
@@ -398,16 +405,26 @@ class SheduleSignaturePage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              title ?? "",
-              style: TextStyle(fontSize: 9.w, fontWeight: FontWeight.bold),
+            Row(
+              children: [
+                Text(
+                  title ?? "",
+                  style: TextStyle(fontSize: 9.w, fontWeight: FontWeight.bold),
+                ),
+                if (required == true)
+                  Text(
+                    "*",
+                    style: TextStyle(color: Colors.red, fontSize: 11.w),
+                  )
+              ],
             ),
             TextField(
               onChanged: onChanged,
               decoration: InputDecoration(
-                hintText: subtitle,
-                border: InputBorder.none,
-              ),
+                  hintText: subtitle,
+                  border: InputBorder.none,
+                  hintStyle:
+                      TextStyle(color: Colors.grey.shade500, fontSize: 8.w)),
               style: TextStyle(fontSize: 9.w),
             ),
           ],
@@ -426,7 +443,6 @@ class SheduleSignaturePage extends StatelessWidget {
     // }
 
     String? fileExtension = parts.last.toLowerCase();
-    print("File extension: $fileExtension");
 
     switch (fileExtension) {
       case 'jpg':
@@ -511,5 +527,51 @@ class SheduleSignaturePage extends StatelessWidget {
           color: Colors.red,
         );
     }
+  }
+
+  void showShowMediaDialog({
+    required BuildContext context,
+  }) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.r)),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              CmButton(
+                text: "Camera",
+                width: 120.w,
+                color: Colors.black,
+                onPressed: () {
+                  openCamera(context);
+                  context.router.pop();
+                },
+              ),
+              CmButton(
+                text: "Gallery",
+                width: 120.w,
+                color: Colors.black,
+                onPressed: () {
+                  openGallery(context);
+                  context.router.pop();
+                },
+              ),
+              CmButton(
+                text: "Files",
+                width: 120.w,
+                color: Colors.black,
+                onPressed: () {
+                  vmSchedule.pickFilefromphone();
+                  context.router.pop();
+                },
+              ),
+            ],
+          ),
+        );
+      },
+    );
   }
 }

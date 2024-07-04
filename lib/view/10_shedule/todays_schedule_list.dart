@@ -3,6 +3,7 @@ import 'package:enviro_mobile_application/utilis/Appthemes.dart';
 import 'package:enviro_mobile_application/utilis/constant.dart';
 import 'package:enviro_mobile_application/view/08_team/team_widgets/dp_image_widget.dart';
 import 'package:enviro_mobile_application/view/10_shedule/shedule_widget.dart';
+import 'package:enviro_mobile_application/view/10_shedule/widgets/gmap_widget.dart';
 import 'package:enviro_mobile_application/view_model/11_shedule/shedule_page_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -26,6 +27,7 @@ class TodaysScheduleList extends StatelessWidget {
               height: 210.w,
               width: MediaQuery.of(context).size.width - 55.h,
               child: Card(
+                color: Colors.grey.shade300,
                 shape: RoundedRectangleBorder(
                   side: const BorderSide(color: Colors.blue, width: 1),
                   borderRadius: BorderRadius.circular(10.h),
@@ -62,8 +64,8 @@ class TodaysScheduleList extends StatelessWidget {
                         ),
                         sized0wx20,
                         SizedBox(
-                          height: 18.w,
-                          width: 85.w,
+                          height: 24.w,
+                          width: 76.w,
                           child: ElevatedButton(
                               style: ButtonStyle(
                                 backgroundColor:
@@ -81,53 +83,75 @@ class TodaysScheduleList extends StatelessWidget {
                               child: Text(
                                 "Next Job",
                                 style: TextStyle(
-                                    color: Colors.white, fontSize: 9.h),
+                                    color: Colors.white, fontSize: 8.w),
                               )),
-                        )
+                        ),
+                        sized0wx05,
                       ],
                     ),
                     sized0hx10,
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 22),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                      padding: EdgeInsets.only(left: 12.w),
+                      child: Row(
                         children: [
-                          expandedRowShowText2(
-                            "Day",
-                            DateFormat('dd-MM-yyyy').format(
-                              vmSchedule
-                                  .shedulecardResponse.data![i].startDate!,
+                          Expanded(
+                            child: Column(
+                              children: [
+                                expandedRowShowText2(
+                                  "Day",
+                                  DateFormat('dd-MM-yyyy').format(
+                                    vmSchedule.shedulecardResponse.data![i]
+                                        .startDate!,
+                                  ),
+                                ),
+                                expandedRowShowText2(
+                                  "Time",
+                                  vmSchedule.shedulecardResponse.data?[i]
+                                          .startTime ??
+                                      '',
+                                ),
+                                expandedRowShowText2(
+                                  "Type",
+                                  vmSchedule.shedulecardResponse.data?[i]
+                                          .wasteTypeStr ??
+                                      '',
+                                ),
+                                expandedRowShowText2(
+                                  "Company",
+                                  vmSchedule.shedulecardResponse.data?[i].client
+                                          ?.clientName ??
+                                      '',
+                                ),
+                                (vmSchedule.shedulecardResponse.data != null &&
+                                        vmSchedule.shedulecardResponse.data?[i]
+                                                .status !=
+                                            null)
+                                    ? expandedRowShowText2("Status",
+                                        "${vmSchedule.shedulecardResponse.data?[i].status}")
+                                    : Container(),
+                              ],
                             ),
                           ),
-                          expandedRowShowText2(
-                            "Time",
-                            vmSchedule.shedulecardResponse.data?[i].startTime ??
-                                '',
+                          Expanded(
+                            child: MapWidget(
+                                latitude: double.parse(vmSchedule
+                                        .shedulecardResponse
+                                        .data?[i]
+                                        .client
+                                        ?.locationLatitude ??
+                                    ""),
+                                longitude: double.parse(vmSchedule
+                                        .shedulecardResponse
+                                        .data?[i]
+                                        .client
+                                        ?.locationLogitude ??
+                                    "")),
                           ),
-                          expandedRowShowText2(
-                            "Type",
-                            vmSchedule.shedulecardResponse.data?[i]
-                                    .wasteTypeStr ??
-                                '',
-                          ),
-                          expandedRowShowText2(
-                            "Company",
-                            vmSchedule.shedulecardResponse.data?[i].client
-                                    ?.clientName ??
-                                '',
-                          ),
-                          (vmSchedule.shedulecardResponse.data != null &&
-                                  vmSchedule.shedulecardResponse.data?[i]
-                                          .status !=
-                                      null)
-                              ? expandedRowShowText2("Status",
-                                  "${vmSchedule.shedulecardResponse.data?[i].status}")
-                              : Container(),
                         ],
                       ),
                     ),
                     sized0hx10,
-                    cmCard(context, vmSchedule.shedulecardResponse.data![i])
+                    cmCard(context, vmSchedule.shedulecardResponse.data![i]),
                   ],
                 ),
               ),

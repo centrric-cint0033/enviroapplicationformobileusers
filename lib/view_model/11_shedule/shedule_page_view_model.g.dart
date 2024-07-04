@@ -360,6 +360,57 @@ mixin _$ScheduleViewModel on ScheduleViewModelBase, Store {
     });
   }
 
+  late final _$pickedWeighCameraImageAtom = Atom(
+      name: 'ScheduleViewModelBase.pickedWeighCameraImage', context: context);
+
+  @override
+  String? get pickedWeighCameraImage {
+    _$pickedWeighCameraImageAtom.reportRead();
+    return super.pickedWeighCameraImage;
+  }
+
+  @override
+  set pickedWeighCameraImage(String? value) {
+    _$pickedWeighCameraImageAtom
+        .reportWrite(value, super.pickedWeighCameraImage, () {
+      super.pickedWeighCameraImage = value;
+    });
+  }
+
+  late final _$pickedWeighImageListAtom = Atom(
+      name: 'ScheduleViewModelBase.pickedWeighImageList', context: context);
+
+  @override
+  ObservableList<String>? get pickedWeighImageList {
+    _$pickedWeighImageListAtom.reportRead();
+    return super.pickedWeighImageList;
+  }
+
+  @override
+  set pickedWeighImageList(ObservableList<String>? value) {
+    _$pickedWeighImageListAtom.reportWrite(value, super.pickedWeighImageList,
+        () {
+      super.pickedWeighImageList = value;
+    });
+  }
+
+  late final _$pickedWeighGalleryImageAtom = Atom(
+      name: 'ScheduleViewModelBase.pickedWeighGalleryImage', context: context);
+
+  @override
+  String? get pickedWeighGalleryImage {
+    _$pickedWeighGalleryImageAtom.reportRead();
+    return super.pickedWeighGalleryImage;
+  }
+
+  @override
+  set pickedWeighGalleryImage(String? value) {
+    _$pickedWeighGalleryImageAtom
+        .reportWrite(value, super.pickedWeighGalleryImage, () {
+      super.pickedWeighGalleryImage = value;
+    });
+  }
+
   late final _$isImageSelectedAtom =
       Atom(name: 'ScheduleViewModelBase.isImageSelected', context: context);
 
@@ -1542,7 +1593,7 @@ mixin _$ScheduleViewModel on ScheduleViewModelBase, Store {
   Future<void> shedulesignatureviewmodelfunction(
       {required BuildContext context,
       required int id,
-      required List<PlatformFile> pickedFiles,
+      required List<String> pickedFiles,
       required String image,
       required String signatureName,
       required String purchaseOderNo,
@@ -2001,6 +2052,9 @@ pickedCameraImageList: ${pickedCameraImageList},
 pickedCameraImage2: ${pickedCameraImage2},
 pickedGalleryImage: ${pickedGalleryImage},
 pickedGalleryImageList: ${pickedGalleryImageList},
+pickedWeighCameraImage: ${pickedWeighCameraImage},
+pickedWeighImageList: ${pickedWeighImageList},
+pickedWeighGalleryImage: ${pickedWeighGalleryImage},
 isImageSelected: ${isImageSelected},
 signaturePicker: ${signaturePicker},
 selectedcameraImage: ${selectedcameraImage},

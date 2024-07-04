@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:enviro_mobile_application/model/03_vehicle/vehicle_model/vehicle_model.dart';
 import 'package:enviro_mobile_application/service/03_vehicles/vehicle_service.dart';
 import 'package:enviro_mobile_application/utilis/Appthemes.dart';
+import 'package:enviro_mobile_application/utilis/constant.dart';
 import 'package:enviro_mobile_application/view/03_vehicles/vehicle_widget/vehicle_widget.dart';
 import 'package:enviro_mobile_application/widgets/01_widgets.dart';
 import 'package:flutter/material.dart';
@@ -11,9 +12,6 @@ import 'package:intl/intl.dart';
 import '../../widgets/cmbutton.dart';
 
 const gapField = SizedBox(height: 0.3);
-const sized0wx05 = SizedBox(width: 0.3);
-const sized0wx10 = SizedBox(width: 2.0);
-
 Card customCard({required Widget child}) => Card(
       shape: RoundedRectangleBorder(
         side: BorderSide(color: Appthemes.cLightGrey),

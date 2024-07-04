@@ -54,5 +54,11 @@
 		</array>
 		<key>UIStatusBarHidden</key>
 		<false/>
+		<key>LSApplicationQueriesSchemes</key>
+        <array>
+            <string>googlechromes</string>
+            <string>comgooglemaps</string>
+            <string>waze</string>
+        </array>
 	</dict>
 </plist>

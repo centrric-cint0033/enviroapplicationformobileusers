@@ -12,7 +12,6 @@ import 'package:enviro_mobile_application/utilis/api_endpoints/api_endpoints.dar
 import 'package:enviro_mobile_application/utilis/httpservice.dart';
 import 'package:enviro_mobile_application/utilis/injection.dart';
 import 'package:enviro_mobile_application/utilis/main_failure.dart';
-import 'package:file_picker/file_picker.dart';
 import 'package:http/http.dart';
 import 'package:injectable/injectable.dart';
 
@@ -42,7 +41,7 @@ abstract class IScheduleService {
   Future<Either<Map<MainFailure, dynamic>, SheduleSignatureModel>>
       shedulesignatureserviceapi({
     required int id,
-    required List<PlatformFile> pickedFiles,
+    required List<String> pickedFiles,
     required String image,
     required String signatureName,
     required String purchaseOderNo,
@@ -152,7 +151,7 @@ class SalesService implements IScheduleService {
       shedulesignatureserviceapi({
     required int id,
     required String image,
-    required List<PlatformFile> pickedFiles,
+    required List<String> pickedFiles,
     required String signatureName,
     required String purchaseOderNo,
     required String extractedWasteType,
@@ -166,6 +165,12 @@ class SalesService implements IScheduleService {
     request.files.add(
       await MultipartFile.fromPath("image", image),
     );
+    for (String filePath in pickedFiles) {
+      request.files.add(
+        await MultipartFile.fromPath(
+            "weigh_bridge_required_multiple_file", filePath),
+      );
+    }
     request.fields["signature_name"] = signatureName;
     request.fields["purchase_order_number"] = purchaseOderNo;
     request.fields["extracted_litres_of_waste"] = extractedWasteType;

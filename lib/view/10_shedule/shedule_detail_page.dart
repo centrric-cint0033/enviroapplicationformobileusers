@@ -564,7 +564,7 @@ class SheduledetailPage extends StatelessWidget {
                         ],
                         if (vmSchedule.sheduleweekResponse.data?[i].afterPics
                                 ?.isNotEmpty ??
-                            false) ...[AfterImagesList(i: i,id:id)],
+                            false) ...[AfterImagesList(i: i, id: id)],
 
                         sized0hx10,
                         Text(
