@@ -149,51 +149,119 @@ abstract class ScheduleViewModelBase with Store {
   // Flag to indicate if selection mode is active
   @observable
   bool isSelectionModeBeforePic = false;
+// @observable
+// int? selectedIndexBeforePic;
 
   // Action to toggle selection state for a specific index
+  // @action
+  // void toggleSelectionBeforePic(int index, int imageId) {
+  //   if (index >= 0 && index < selectedStatesBeforePic.length) {
+  //     selectedStatesBeforePic[index] = !selectedStatesBeforePic[index];
+  //     if (selectedStatesBeforePic[index]) {
+  //       imageIds.add(imageId);
+  //     } else {
+  //       imageIds.remove(imageId);
+  //     }
+  //   }
+  //   updateSelectionModeBeforePic();
+  // }
+
+  // // Action to activate selection mode and select the first item
+  // @action
+  // void startSelectionBeforePic(int index, int imageId) {
+  //   if (index >= 0 && index < selectedStatesBeforePic.length) {
+  //     selectedStatesBeforePic[index] = !selectedStatesBeforePic[index];
+  //     if (selectedStatesBeforePic[index]) {
+  //       imageIds.add(imageId);
+  //     } else {
+  //       imageIds.remove(imageId);
+  //     }
+  //   }
+  //   updateSelectionModeBeforePic();
+  // }
+
+  // // Action to deactivate selection mode
+  // @action
+  // void clearSelectionModeBeforePic() {
+  //   isSelectionModeBeforePic = false;
+  //   selectedStatesBeforePic.fillRange(0, selectedStatesBeforePic.length, false);
+  //   imageIds.clear();
+  //   updateSelectionModeBeforePic();
+  // }
+
+  // // Initialize the selected states list based on the number of images
+  // void initializeSelectionStatesBeforePic(int length) {
+  //   selectedStatesBeforePic =
+  //       ObservableList<bool>.of(List.filled(length, false));
+  // }
+
+  // // Update selection mode based on any selected items
+  // void updateSelectionModeBeforePic() {
+  //   bool anySelected = selectedStatesBeforePic.any((isSelected) => isSelected);
+  //   isSelectionModeBeforePic = anySelected;
+  //   showDeleteClearButtonsBeforePic = anySelected;
+  // }
+  @observable
+  int? selectedIndexBeforePic;
+
+// Action to toggle selection state for a specific index
   @action
   void toggleSelectionBeforePic(int index, int imageId) {
-    if (index >= 0 && index < selectedStatesBeforePic.length) {
-      selectedStatesBeforePic[index] = !selectedStatesBeforePic[index];
-      if (selectedStatesBeforePic[index]) {
-        imageIds.add(imageId);
-      } else {
-        imageIds.remove(imageId);
+    if (selectedIndexBeforePic == index) {
+      // Deselect if the same item is clicked again
+      selectedStatesBeforePic[index] = false;
+      selectedIndexBeforePic = null;
+      imageIds.remove(imageId);
+    } else {
+      // Clear previous selection
+      if (selectedIndexBeforePic != null) {
+        selectedStatesBeforePic[selectedIndexBeforePic!] = false;
+        imageIds.clear();
       }
+
+      // Select the new item
+      selectedStatesBeforePic[index] = true;
+      selectedIndexBeforePic = index;
+      imageIds.add(imageId);
     }
     updateSelectionModeBeforePic();
   }
 
-  // Action to activate selection mode and select the first item
+// Action to activate selection mode and select the first item
   @action
   void startSelectionBeforePic(int index, int imageId) {
-    if (index >= 0 && index < selectedStatesBeforePic.length) {
-      selectedStatesBeforePic[index] = !selectedStatesBeforePic[index];
-      if (selectedStatesBeforePic[index]) {
-        imageIds.add(imageId);
-      } else {
-        imageIds.remove(imageId);
-      }
+    // Clear previous selection
+    if (selectedIndexBeforePic != null) {
+      selectedStatesBeforePic[selectedIndexBeforePic!] = false;
+      imageIds.clear();
     }
+
+    // Select the new item
+    selectedStatesBeforePic[index] = true;
+    selectedIndexBeforePic = index;
+    imageIds.add(imageId);
+
     updateSelectionModeBeforePic();
   }
 
-  // Action to deactivate selection mode
+// Action to deactivate selection mode
   @action
   void clearSelectionModeBeforePic() {
     isSelectionModeBeforePic = false;
     selectedStatesBeforePic.fillRange(0, selectedStatesBeforePic.length, false);
+    selectedIndexBeforePic = null;
     imageIds.clear();
     updateSelectionModeBeforePic();
   }
 
-  // Initialize the selected states list based on the number of images
+// Initialize the selected states list based on the number of images
   void initializeSelectionStatesBeforePic(int length) {
     selectedStatesBeforePic =
         ObservableList<bool>.of(List.filled(length, false));
+    selectedIndexBeforePic = null;
   }
 
-  // Update selection mode based on any selected items
+// Update selection mode based on any selected items
   void updateSelectionModeBeforePic() {
     bool anySelected = selectedStatesBeforePic.any((isSelected) => isSelected);
     isSelectionModeBeforePic = anySelected;
@@ -510,6 +578,15 @@ abstract class ScheduleViewModelBase with Store {
           error: null,
           loading: false,
         );
+        if (statusType == ScheduleStatusType.jobStarted ||
+            statusType == ScheduleStatusType.finishedJob) {
+          showToast(context,
+              msg: "Job status updated successfully.Kindly add the images",
+              color: Colors.green);
+        } else {
+          showToast(context,
+              msg: "Job status updated successfully", color: Colors.green);
+        }
         shedulecardviewmodelweekfunction();
       },
     );
@@ -890,7 +967,8 @@ abstract class ScheduleViewModelBase with Store {
   @action
   enviroDatePickerFn(BuildContext context, DateTime selectedDate, date,
       String status, int id, dynamic statusdType,
-      {bool? fromButton = false, bool? fromJobStarted}) async {
+      {bool? fromJobStarted = false,
+      bool toCameraGalleryScreen = false}) async {
     selectedDate = date;
     String dateString = DateFormat('yyyy-MM-dd HH:mm:ss').format(selectedDate);
     editScheduleStatusApi(
@@ -903,9 +981,9 @@ abstract class ScheduleViewModelBase with Store {
     pickedGalleryImage = null;
     pickedCameraImageList = [];
     pickedGalleryImageList = [];
-    if (fromButton == true) {
-      context.router.push(
-          CameraGalleryRoute(fromJobStarted: fromJobStarted ?? false, id: id));
+    if (toCameraGalleryScreen == true) {
+      context.router
+          .push(CameraGalleryRoute(fromJobStarted: fromJobStarted!, id: id));
     }
   }
 

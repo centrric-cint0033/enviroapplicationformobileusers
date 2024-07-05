@@ -20,7 +20,7 @@ class ScheduleList extends StatelessWidget {
           vertical: 2,
           horizontal: 2,
         ),
-        physics: NeverScrollableScrollPhysics(),
+        physics: const NeverScrollableScrollPhysics(),
         separatorBuilder: (context, index) => sized0hx10,
         shrinkWrap: true,
         itemCount: vmSchedule.sheduleweekResponse.data?.length ?? 0,
@@ -64,26 +64,28 @@ class ScheduleList extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        // if (vmSchedule.shedulecardResponse.data?[i].startDate ==
-                        //         null &&
-                        //     vmSchedule.shedulecardResponse.data?[i].endDate ==
-                        //         null)
-                        //   SizedBox()
-                        // else
-                        //   Column(
-                        //     crossAxisAlignment: CrossAxisAlignment.start,
-                        //     children: [
-                        //       Text(
-                        //           "${convertTimeTo12HourFormat(vmSchedule.sheduleweekResponse.data?[i].startTime ?? "")}-${convertTimeTo12HourFormat(vmSchedule.sheduleweekResponse.data?[i].endTime ?? "")}",
-                        //           style: TextStyle(fontSize: 9.w)),
-                        //       Text(
-                        //           "${DateFormat('dd-MM-yyyy').format(
-                        //             vmSchedule.shedulecardResponse.data![i]
-                        //                 .startDate!,
-                        //           )}-${DateFormat('dd-MM-yyyy').format(vmSchedule.shedulecardResponse.data![i].endDate!)}",
-                        //           style: TextStyle(fontSize: 9.w))
-                        //     ],
-                        //   ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                                "${convertTimeTo12HourFormat(vmSchedule.sheduleweekResponse.data?[i].startTime ?? "")}-${convertTimeTo12HourFormat(vmSchedule.sheduleweekResponse.data?[i].endTime ?? "")}",
+                                style: TextStyle(fontSize: 9.w)),
+                            if (vmSchedule.shedulecardResponse.data?[i]
+                                        .startDate ==
+                                    null &&
+                                vmSchedule
+                                        .shedulecardResponse.data?[i].endDate ==
+                                    null)
+                              const SizedBox()
+                            else
+                              Text(
+                                  "${DateFormat('dd-MM-yyyy').format(
+                                    vmSchedule.shedulecardResponse.data![i]
+                                        .startDate!,
+                                  )}-${DateFormat('dd-MM-yyyy').format(vmSchedule.shedulecardResponse.data![i].endDate!)}",
+                                  style: TextStyle(fontSize: 9.w))
+                          ],
+                        ),
                         Container(
                           width: 70.w,
                           decoration: BoxDecoration(
@@ -213,10 +215,8 @@ class ScheduleList extends StatelessWidget {
 String convertTimeTo12HourFormat(String time) {
   DateFormat inputFormat = DateFormat("HH:mm:ss");
   DateFormat outputFormat = DateFormat("hh:mm a");
-
   DateTime parsedTime = inputFormat.parse(time);
   String formattedTime = outputFormat.format(parsedTime);
-
   return formattedTime;
 }
 
@@ -225,7 +225,7 @@ String jobStatus(String status) {
     case "departed_enviro_facility":
       return "Departed Enviro Facility";
     case "job_started":
-      return "Job Started";
+      return "Started Job";
     case "job_finished":
       return "Finished Job";
     case "completed":

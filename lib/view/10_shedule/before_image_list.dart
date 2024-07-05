@@ -94,22 +94,41 @@ class BeforeImagesList extends StatelessWidget {
                     padding: EdgeInsets.all(8.0.h),
                     child: InkWell(
                       onTap: () async {
-                        if (vmSchedule.selectedStatesBeforePic[index]) {
+                        if (vmSchedule.selectedIndexBeforePic == index) {
                           vmSchedule.toggleSelectionBeforePic(
                               index, images[index].id!);
-                        } else {
+                        } else if (!vmSchedule.selectedStatesBeforePic
+                            .any((isSelected) => isSelected)) {
                           await _launchImageUrl(imageUrl);
+                        } else {
+                          vmSchedule.toggleSelectionBeforePic(
+                              index, images[index].id!);
                         }
                       },
                       onLongPress: () {
-                        if (vmSchedule.selectedStatesBeforePic[index]) {
-                          vmSchedule.toggleSelectionBeforePic(
-                              index, images[index].id!);
-                        } else {
+                        if (!vmSchedule.selectedStatesBeforePic
+                            .any((isSelected) => isSelected)) {
                           vmSchedule.startSelectionBeforePic(
                               index, images[index].id!);
                         }
                       },
+                      // onTap: () async {
+                      //   if (vmSchedule.selectedStatesBeforePic[index]) {
+                      //     vmSchedule.toggleSelectionBeforePic(
+                      //         index, images[index].id!);
+                      //   } else {
+                      //     await _launchImageUrl(imageUrl);
+                      //   }
+                      // },
+                      // onLongPress: () {
+                      //   if (vmSchedule.selectedStatesBeforePic[index]) {
+                      //     vmSchedule.toggleSelectionBeforePic(
+                      //         index, images[index].id!);
+                      //   } else {
+                      //     vmSchedule.startSelectionBeforePic(
+                      //         index, images[index].id!);
+                      //   }
+                      // },
                       child: Observer(builder: (context) {
                         final isSelected =
                             vmSchedule.selectedStatesBeforePic[index];

@@ -280,7 +280,6 @@ class SalesService implements IScheduleService {
         await MultipartFile.fromPath("image", filePath),
       );
     }
-
     // request.files.add(
     //   await MultipartFile.fromPath("image", pickedFiles),
     // );

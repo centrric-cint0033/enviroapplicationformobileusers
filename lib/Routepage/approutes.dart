@@ -3,7 +3,6 @@ import 'package:enviro_mobile_application/Routepage/approutes.gr.dart';
 import 'package:enviro_mobile_application/Routepage/guards.dart';
 import 'package:enviro_mobile_application/Routepage/routespage.dart';
 
-
 @AutoRouterConfig()
 class AppRouter extends $AppRouter {
   @override
@@ -57,8 +56,9 @@ class AppRouter extends $AppRouter {
             path: RouteNames.rupdatevehiclepreinspectionpage),
         AutoRoute(
             page: CameraGalleryRoute.page, path: RouteNames.cameragallerypage),
-                    AutoRoute(
-            page: SheduleSignatureRoute.page, path: RouteNames.schedulesignaturepage),
+        AutoRoute(
+            page: SheduleSignatureRoute.page,
+            path: RouteNames.schedulesignaturepage),
         AutoRoute(page: JobCardRoute.page, path: RouteNames.rjobcardpage),
         AutoRoute(
           page: SiteMainRoute.page,
@@ -78,10 +78,6 @@ class AppRouter extends $AppRouter {
           page: SalesQuoteDetailListRoute.page,
           path: RouteNames.salesQuoteDetailListPage,
         ),
-        //         AutoRoute(
-        //   page: WeighBridgeMediaRoute.page,
-        //   path: RouteNames.weighbridgemediapage,
-        // ),
         AutoRoute(
           page: VehicleDetailRoute.page,
           path: RouteNames.vehicleDetailPage,

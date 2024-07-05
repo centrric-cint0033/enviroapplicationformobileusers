@@ -34,7 +34,7 @@ class ScheduleMainPage extends StatelessWidget {
             children: [
               sized0hx15,
               cmRowText("Today's Schedule", "Calender", () {
-                calenderfunction(context);
+                context.router.pushNamed(RouteNames.rcalenderpage);
               }, Colors.black, FontWeight.bold),
               Observer(
                 builder: (_) {
@@ -85,19 +85,24 @@ Widget cmRowText(String text, String buttonText, Function()? onPressed,
           fontWeight: fontWeight,
         ),
       ),
-      ElevatedButton(
-        onPressed: onPressed,
-        style: ElevatedButton.styleFrom(
-          foregroundColor: Colors.black,
-          backgroundColor: Colors.white,
-          minimumSize: Size(90.h, 25.h),
-        ),
-        child: Text(
-          buttonText,
-          style: TextStyle(
-              color: buttonTextColor,
-              fontSize: 12.h,
-              fontWeight: FontWeight.normal),
+      InkWell(
+        onTap: onPressed,
+        child: Container(
+          height: 26.h,
+          width: 68.w,
+          decoration: BoxDecoration(
+              shape: BoxShape.rectangle,
+              border: Border.all(color: Colors.grey.shade400),
+              borderRadius: BorderRadius.circular(15.w)),
+          child: Center(
+            child: Text(
+              buttonText,
+              style: TextStyle(
+                  color: buttonTextColor,
+                  fontSize: 10.w,
+                  fontWeight: FontWeight.normal),
+            ),
+          ),
         ),
       ),
     ],
@@ -116,10 +121,6 @@ Future<void> openMap(String latitude, String longitude) async {
 
 void nextjobfnction(BuildContext context) {
   vmSchedule.shedulecardviewmodelfunction();
-}
-
-void calenderfunction(BuildContext context) {
-  context.router.pushNamed(RouteNames.rcalenderpage);
 }
 
 void sheduledetailsfunction2(BuildContext context) {

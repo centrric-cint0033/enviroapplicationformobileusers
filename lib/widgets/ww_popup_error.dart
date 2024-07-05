@@ -37,7 +37,7 @@ Widget wwErrorData(
     mainAxisSize: MainAxisSize.min,
     mainAxisAlignment: MainAxisAlignment.center,
     children: [
-      SvgPicture.asset(ImageConstant.svgError),
+      SizedBox(child: SvgPicture.asset(ImageConstant.svgError)),
       sized0hx10,
       Text(
           content ??

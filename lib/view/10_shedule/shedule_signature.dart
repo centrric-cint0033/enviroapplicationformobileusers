@@ -50,118 +50,119 @@ class SheduleSignaturePage extends StatelessWidget {
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      // if (vmSchedule.sheduleweekResponse.data?[i].jobCardKeys
-                      //         ?.weighBridgeRequired ==
-                      //     "true")
-                      Container(
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          border: Border.all(color: Colors.black12),
-                          borderRadius: BorderRadius.circular(5.0),
-                        ),
-                        child: Padding(
-                          padding: EdgeInsets.only(left: 8.h, right: 8.h),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Weigh bridge Required:',
-                                style: TextStyle(
-                                    fontSize: 10.w,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                              sized0hx05,
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  CmButton(
-                                    height: 25.h,
-                                    width: 95.w,
-                                    color: Colors.black,
-                                    onPressed: () async {
-                                      showShowMediaDialog(context: context);
-                                      // context.router
-                                      //     .push(WeighBridgeMediaRoute(id: id));
-                                    },
-                                    text: 'Add Media',
-                                  ),
-                                ],
-                              ),
-                              sized0hx05,
-                              if (vmSchedule
-                                  .pickedWeighImageList!.isNotEmpty) ...[
-                                SizedBox(
-                                  height: 70.h,
-                                  width: double.infinity,
-                                  child: ListView.builder(
-                                    scrollDirection: Axis.horizontal,
-                                    itemCount:
-                                        vmSchedule.pickedWeighImageList?.length,
-                                    itemBuilder: (context, index) {
-                                      String imagePath = vmSchedule
-                                          .pickedWeighImageList![index];
-                                      String fileName = p.basename(imagePath);
-                                      bool isImage =
-                                          imagePath.endsWith('.jpg') ||
-                                              imagePath.endsWith('.jpeg') ||
-                                              imagePath.endsWith('.png');
-                                      return InkWell(
-                                        onTap: () async {
-                                          OpenFile.open(
-                                            imagePath,
-                                          );
-                                        },
-                                        onLongPress: () {
-                                          showConfirmationAlert(
-                                              context: context,
-                                              onSubmit: () {
-                                                vmSchedule.pickedWeighImageList
-                                                    ?.removeAt(index);
-                                              },
-                                              content:
-                                                  "Are you sure you want to delete?",
-                                              submitText: "Yes",
-                                              submitText2: "No");
-                                        },
-                                        child: Container(
-                                          width: 80.h, // Width of each item
-                                          foregroundDecoration: BoxDecoration(
-                                              border: Border.all()),
-                                          child: Column(
-                                            children: [
-                                              sized0hx05,
-                                              Expanded(
-                                                child: isImage
-                                                    ? Image.file(
-                                                        File(imagePath),
-                                                        fit: BoxFit.cover,
-                                                      )
-                                                    : Icon(
-                                                        Icons.file_copy,
-                                                        size: 20.w,
-                                                        color: Colors.red,
-                                                      ),
-                                              ),
-                                              Expanded(
-                                                  child: Text(
-                                                fileName,
-                                                style: TextStyle(
-                                                    fontSize: 9.w,
-                                                    overflow:
-                                                        TextOverflow.ellipsis),
-                                              ))
-                                            ],
+                      if (vmSchedule.sheduleweekResponse.data?[i].jobCardKeys
+                              ?.weighBridgeRequired ==
+                          "true")
+                        Container(
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            border: Border.all(color: Colors.black12),
+                            borderRadius: BorderRadius.circular(5.0),
+                          ),
+                          child: Padding(
+                            padding: EdgeInsets.only(left: 8.h, right: 8.h),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Weigh bridge Required:',
+                                  style: TextStyle(
+                                      fontSize: 10.w,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                sized0hx05,
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    CmButton(
+                                      height: 25.h,
+                                      width: 95.w,
+                                      color: Colors.black,
+                                      onPressed: () async {
+                                        showShowMediaDialog(context: context);
+                                        // context.router
+                                        //     .push(WeighBridgeMediaRoute(id: id));
+                                      },
+                                      text: 'Add Media',
+                                    ),
+                                  ],
+                                ),
+                                sized0hx05,
+                                if (vmSchedule
+                                    .pickedWeighImageList!.isNotEmpty) ...[
+                                  SizedBox(
+                                    height: 70.h,
+                                    width: double.infinity,
+                                    child: ListView.builder(
+                                      scrollDirection: Axis.horizontal,
+                                      itemCount: vmSchedule
+                                          .pickedWeighImageList?.length,
+                                      itemBuilder: (context, index) {
+                                        String imagePath = vmSchedule
+                                            .pickedWeighImageList![index];
+                                        String fileName = p.basename(imagePath);
+                                        bool isImage =
+                                            imagePath.endsWith('.jpg') ||
+                                                imagePath.endsWith('.jpeg') ||
+                                                imagePath.endsWith('.png');
+                                        return InkWell(
+                                          onTap: () async {
+                                            OpenFile.open(
+                                              imagePath,
+                                            );
+                                          },
+                                          onLongPress: () {
+                                            showConfirmationAlert(
+                                                context: context,
+                                                onSubmit: () {
+                                                  vmSchedule
+                                                      .pickedWeighImageList
+                                                      ?.removeAt(index);
+                                                },
+                                                content:
+                                                    "Are you sure you want to delete?",
+                                                submitText: "Yes",
+                                                submitText2: "No");
+                                          },
+                                          child: Container(
+                                            width: 80.h, // Width of each item
+                                            foregroundDecoration: BoxDecoration(
+                                                border: Border.all()),
+                                            child: Column(
+                                              children: [
+                                                sized0hx05,
+                                                Expanded(
+                                                  child: isImage
+                                                      ? Image.file(
+                                                          File(imagePath),
+                                                          fit: BoxFit.cover,
+                                                        )
+                                                      : Icon(
+                                                          Icons.file_copy,
+                                                          size: 20.w,
+                                                          color: Colors.red,
+                                                        ),
+                                                ),
+                                                Expanded(
+                                                    child: Text(
+                                                  fileName,
+                                                  style: TextStyle(
+                                                      fontSize: 9.w,
+                                                      overflow: TextOverflow
+                                                          .ellipsis),
+                                                ))
+                                              ],
+                                            ),
                                           ),
-                                        ),
-                                      );
-                                    },
-                                  ),
-                                )
+                                        );
+                                      },
+                                    ),
+                                  )
+                                ],
                               ],
-                            ],
+                            ),
                           ),
                         ),
-                      ),
                       sized0hx10,
                       cmContainer(
                           title: "Type of waste:",

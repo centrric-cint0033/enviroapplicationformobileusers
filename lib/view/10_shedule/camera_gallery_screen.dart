@@ -122,14 +122,16 @@ class CameraGalleryScreen extends StatelessWidget {
                         width: 140.w,
                         loading: vmSchedule.addImageScheduleResponse.loading,
                         fontSize: 10.w,
-                        onPressed: () {
+                        onPressed: () {       
                           vmSchedule.addImageScheduleApi(
                               context: context,
                               id: id,
                               beforeOrAfterPic: true,
-                              pickedFiles: vmSchedule.pickedCameraImageList ??
-                                  vmSchedule.pickedGalleryImageList ??
-                                  [],
+                              pickedFiles: (vmSchedule
+                                          .pickedCameraImageList?.isNotEmpty ??
+                                      false)
+                                  ? vmSchedule.pickedCameraImageList ?? []
+                                  : vmSchedule.pickedGalleryImageList ?? [],
                               picType: fromJobStarted == true
                                   ? BeforeOrAfterPic.beforePic
                                   : BeforeOrAfterPic.afterPic);

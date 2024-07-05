@@ -675,6 +675,23 @@ mixin _$ScheduleViewModel on ScheduleViewModelBase, Store {
     });
   }
 
+  late final _$selectedIndexBeforePicAtom = Atom(
+      name: 'ScheduleViewModelBase.selectedIndexBeforePic', context: context);
+
+  @override
+  int? get selectedIndexBeforePic {
+    _$selectedIndexBeforePicAtom.reportRead();
+    return super.selectedIndexBeforePic;
+  }
+
+  @override
+  set selectedIndexBeforePic(int? value) {
+    _$selectedIndexBeforePicAtom
+        .reportWrite(value, super.selectedIndexBeforePic, () {
+      super.selectedIndexBeforePic = value;
+    });
+  }
+
   late final _$selectedStatesAfterPicAtom = Atom(
       name: 'ScheduleViewModelBase.selectedStatesAfterPic', context: context);
 
@@ -1744,10 +1761,11 @@ mixin _$ScheduleViewModel on ScheduleViewModelBase, Store {
   @override
   Future enviroDatePickerFn(BuildContext context, DateTime selectedDate,
       dynamic date, String status, int id, dynamic statusdType,
-      {bool? fromButton = false, bool? fromJobStarted}) {
+      {bool? fromJobStarted = false, bool toCameraGalleryScreen = false}) {
     return _$enviroDatePickerFnAsyncAction.run(() => super.enviroDatePickerFn(
         context, selectedDate, date, status, id, statusdType,
-        fromButton: fromButton, fromJobStarted: fromJobStarted));
+        fromJobStarted: fromJobStarted,
+        toCameraGalleryScreen: toCameraGalleryScreen));
   }
 
   late final _$ScheduleViewModelBaseActionController =
@@ -2071,6 +2089,7 @@ showDeleteClearButtonsBeforePic: ${showDeleteClearButtonsBeforePic},
 showDeleteClearButtonsAfterPic: ${showDeleteClearButtonsAfterPic},
 selectedStatesBeforePic: ${selectedStatesBeforePic},
 isSelectionModeBeforePic: ${isSelectionModeBeforePic},
+selectedIndexBeforePic: ${selectedIndexBeforePic},
 selectedStatesAfterPic: ${selectedStatesAfterPic},
 isSelectionModeAfterPic: ${isSelectionModeAfterPic},
 jobcardResponse: ${jobcardResponse},

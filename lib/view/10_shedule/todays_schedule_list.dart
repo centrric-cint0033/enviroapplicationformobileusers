@@ -1,10 +1,14 @@
+import 'package:auto_route/auto_route.dart';
+import 'package:enviro_mobile_application/Routepage/approutes.gr.dart';
 import 'package:enviro_mobile_application/model/12_shedulecard/shedule_card_resp_model.dart';
 import 'package:enviro_mobile_application/utilis/Appthemes.dart';
 import 'package:enviro_mobile_application/utilis/constant.dart';
 import 'package:enviro_mobile_application/view/08_team/team_widgets/dp_image_widget.dart';
+import 'package:enviro_mobile_application/view/10_shedule/shedule_list.dart';
 import 'package:enviro_mobile_application/view/10_shedule/shedule_widget.dart';
 import 'package:enviro_mobile_application/view/10_shedule/widgets/gmap_widget.dart';
 import 'package:enviro_mobile_application/view_model/11_shedule/shedule_page_view_model.dart';
+import 'package:enviro_mobile_application/widgets/show_confirmation_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -92,62 +96,86 @@ class TodaysScheduleList extends StatelessWidget {
                     sized0hx10,
                     Padding(
                       padding: EdgeInsets.only(left: 12.w),
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: Column(
-                              children: [
-                                expandedRowShowText2(
-                                  "Day",
-                                  DateFormat('dd-MM-yyyy').format(
-                                    vmSchedule.shedulecardResponse.data![i]
-                                        .startDate!,
+                      child: InkWell(
+                        onTap: () {
+                          showConfirmationAlert(
+                              context: context,
+                              content: "Have you Finished the Job",
+                              onSubmit: () {},
+                              onSubmit2: () {
+                                context.router.push(SheduledetailRoute(
+                                    id: vmSchedule
+                                            .shedulecardResponse.data?[i].id ??
+                                        0,
+                                    i: i,
+                                    driversIndex: vmSchedule.driversIndex));
+                              },
+                              submitText: "YES,UPDATE TIME",
+                              submitText2: "SKIP FOR NOW");
+                        },
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: Column(
+                                children: [
+                                  expandedRowShowText2(
+                                    "Day",
+                                    DateFormat('dd-MM-yyyy').format(
+                                      vmSchedule.shedulecardResponse.data![i]
+                                          .startDate!,
+                                    ),
                                   ),
-                                ),
-                                expandedRowShowText2(
-                                  "Time",
-                                  vmSchedule.shedulecardResponse.data?[i]
-                                          .startTime ??
-                                      '',
-                                ),
-                                expandedRowShowText2(
-                                  "Type",
-                                  vmSchedule.shedulecardResponse.data?[i]
-                                          .wasteTypeStr ??
-                                      '',
-                                ),
-                                expandedRowShowText2(
-                                  "Company",
-                                  vmSchedule.shedulecardResponse.data?[i].client
-                                          ?.clientName ??
-                                      '',
-                                ),
-                                (vmSchedule.shedulecardResponse.data != null &&
-                                        vmSchedule.shedulecardResponse.data?[i]
-                                                .status !=
-                                            null)
-                                    ? expandedRowShowText2("Status",
-                                        "${vmSchedule.shedulecardResponse.data?[i].status}")
-                                    : Container(),
-                              ],
+                                  expandedRowShowText2(
+                                    "Time",
+                                    vmSchedule.shedulecardResponse.data?[i]
+                                            .startTime ??
+                                        '',
+                                  ),
+                                  expandedRowShowText2(
+                                    "Type",
+                                    vmSchedule.shedulecardResponse.data?[i]
+                                            .wasteTypeStr ??
+                                        '',
+                                  ),
+                                  expandedRowShowText2(
+                                    "Company",
+                                    vmSchedule.shedulecardResponse.data?[i]
+                                            .client?.clientName ??
+                                        '',
+                                  ),
+                                  (vmSchedule.shedulecardResponse.data !=
+                                              null &&
+                                          vmSchedule.shedulecardResponse
+                                                  .data?[i].status !=
+                                              null)
+                                      ? expandedRowShowText2(
+                                          "Status",
+                                          jobStatus(vmSchedule
+                                                  .shedulecardResponse
+                                                  .data?[i]
+                                                  .status ??
+                                              ""))
+                                      : Container(),
+                                ],
+                              ),
                             ),
-                          ),
-                          Expanded(
-                            child: MapWidget(
-                                latitude: double.parse(vmSchedule
-                                        .shedulecardResponse
-                                        .data?[i]
-                                        .client
-                                        ?.locationLatitude ??
-                                    ""),
-                                longitude: double.parse(vmSchedule
-                                        .shedulecardResponse
-                                        .data?[i]
-                                        .client
-                                        ?.locationLogitude ??
-                                    "")),
-                          ),
-                        ],
+                            Expanded(
+                              child: MapWidget(
+                                  latitude: double.parse(vmSchedule
+                                          .shedulecardResponse
+                                          .data?[i]
+                                          .client
+                                          ?.locationLatitude ??
+                                      ""),
+                                  longitude: double.parse(vmSchedule
+                                          .shedulecardResponse
+                                          .data?[i]
+                                          .client
+                                          ?.locationLogitude ??
+                                      "")),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                     sized0hx10,
@@ -184,6 +212,7 @@ class TodaysScheduleList extends StatelessWidget {
             itemCount: schedule.drivers?.length,
             scrollDirection: Axis.horizontal,
             itemBuilder: (context, index) {
+              vmSchedule.driversIndex = index;
               return Padding(
                 padding: EdgeInsets.only(left: 4.h),
                 child: Container(
