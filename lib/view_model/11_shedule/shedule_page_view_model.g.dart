@@ -427,6 +427,72 @@ mixin _$ScheduleViewModel on ScheduleViewModelBase, Store {
     });
   }
 
+  late final _$pickedCameraVideoAtom =
+      Atom(name: 'ScheduleViewModelBase.pickedCameraVideo', context: context);
+
+  @override
+  String? get pickedCameraVideo {
+    _$pickedCameraVideoAtom.reportRead();
+    return super.pickedCameraVideo;
+  }
+
+  @override
+  set pickedCameraVideo(String? value) {
+    _$pickedCameraVideoAtom.reportWrite(value, super.pickedCameraVideo, () {
+      super.pickedCameraVideo = value;
+    });
+  }
+
+  late final _$pickedGalleryVideoAtom =
+      Atom(name: 'ScheduleViewModelBase.pickedGalleryVideo', context: context);
+
+  @override
+  String? get pickedGalleryVideo {
+    _$pickedGalleryVideoAtom.reportRead();
+    return super.pickedGalleryVideo;
+  }
+
+  @override
+  set pickedGalleryVideo(String? value) {
+    _$pickedGalleryVideoAtom.reportWrite(value, super.pickedGalleryVideo, () {
+      super.pickedGalleryVideo = value;
+    });
+  }
+
+  late final _$pickedCameraVideoListAtom = Atom(
+      name: 'ScheduleViewModelBase.pickedCameraVideoList', context: context);
+
+  @override
+  List<String> get pickedCameraVideoList {
+    _$pickedCameraVideoListAtom.reportRead();
+    return super.pickedCameraVideoList;
+  }
+
+  @override
+  set pickedCameraVideoList(List<String> value) {
+    _$pickedCameraVideoListAtom.reportWrite(value, super.pickedCameraVideoList,
+        () {
+      super.pickedCameraVideoList = value;
+    });
+  }
+
+  late final _$pickedGalleryVideoListAtom = Atom(
+      name: 'ScheduleViewModelBase.pickedGalleryVideoList', context: context);
+
+  @override
+  List<String>? get pickedGalleryVideoList {
+    _$pickedGalleryVideoListAtom.reportRead();
+    return super.pickedGalleryVideoList;
+  }
+
+  @override
+  set pickedGalleryVideoList(List<String>? value) {
+    _$pickedGalleryVideoListAtom
+        .reportWrite(value, super.pickedGalleryVideoList, () {
+      super.pickedGalleryVideoList = value;
+    });
+  }
+
   late final _$signaturePickerAtom =
       Atom(name: 'ScheduleViewModelBase.signaturePicker', context: context);
 
@@ -440,22 +506,6 @@ mixin _$ScheduleViewModel on ScheduleViewModelBase, Store {
   set signaturePicker(Uint8List? value) {
     _$signaturePickerAtom.reportWrite(value, super.signaturePicker, () {
       super.signaturePicker = value;
-    });
-  }
-
-  late final _$selectedcameraImageAtom =
-      Atom(name: 'ScheduleViewModelBase.selectedcameraImage', context: context);
-
-  @override
-  File? get selectedcameraImage {
-    _$selectedcameraImageAtom.reportRead();
-    return super.selectedcameraImage;
-  }
-
-  @override
-  set selectedcameraImage(File? value) {
-    _$selectedcameraImageAtom.reportWrite(value, super.selectedcameraImage, () {
-      super.selectedcameraImage = value;
     });
   }
 
@@ -573,6 +623,22 @@ mixin _$ScheduleViewModel on ScheduleViewModelBase, Store {
     });
   }
 
+  late final _$videoIdsAtom =
+      Atom(name: 'ScheduleViewModelBase.videoIds', context: context);
+
+  @override
+  List<int> get videoIds {
+    _$videoIdsAtom.reportRead();
+    return super.videoIds;
+  }
+
+  @override
+  set videoIds(List<int> value) {
+    _$videoIdsAtom.reportWrite(value, super.videoIds, () {
+      super.videoIds = value;
+    });
+  }
+
   late final _$imageIdsAfterPicAtom =
       Atom(name: 'ScheduleViewModelBase.imageIdsAfterPic', context: context);
 
@@ -586,6 +652,22 @@ mixin _$ScheduleViewModel on ScheduleViewModelBase, Store {
   set imageIdsAfterPic(List<int> value) {
     _$imageIdsAfterPicAtom.reportWrite(value, super.imageIdsAfterPic, () {
       super.imageIdsAfterPic = value;
+    });
+  }
+
+  late final _$imageIdsGalleryPicAtom =
+      Atom(name: 'ScheduleViewModelBase.imageIdsGalleryPic', context: context);
+
+  @override
+  List<int> get imageIdsGalleryPic {
+    _$imageIdsGalleryPicAtom.reportRead();
+    return super.imageIdsGalleryPic;
+  }
+
+  @override
+  set imageIdsGalleryPic(List<int> value) {
+    _$imageIdsGalleryPicAtom.reportWrite(value, super.imageIdsGalleryPic, () {
+      super.imageIdsGalleryPic = value;
     });
   }
 
@@ -641,6 +723,42 @@ mixin _$ScheduleViewModel on ScheduleViewModelBase, Store {
     });
   }
 
+  late final _$showDeleteClearButtonsGalleryPicAtom = Atom(
+      name: 'ScheduleViewModelBase.showDeleteClearButtonsGalleryPic',
+      context: context);
+
+  @override
+  bool get showDeleteClearButtonsGalleryPic {
+    _$showDeleteClearButtonsGalleryPicAtom.reportRead();
+    return super.showDeleteClearButtonsGalleryPic;
+  }
+
+  @override
+  set showDeleteClearButtonsGalleryPic(bool value) {
+    _$showDeleteClearButtonsGalleryPicAtom
+        .reportWrite(value, super.showDeleteClearButtonsGalleryPic, () {
+      super.showDeleteClearButtonsGalleryPic = value;
+    });
+  }
+
+  late final _$showDeleteClearButtonsVideoAtom = Atom(
+      name: 'ScheduleViewModelBase.showDeleteClearButtonsVideo',
+      context: context);
+
+  @override
+  bool get showDeleteClearButtonsVideo {
+    _$showDeleteClearButtonsVideoAtom.reportRead();
+    return super.showDeleteClearButtonsVideo;
+  }
+
+  @override
+  set showDeleteClearButtonsVideo(bool value) {
+    _$showDeleteClearButtonsVideoAtom
+        .reportWrite(value, super.showDeleteClearButtonsVideo, () {
+      super.showDeleteClearButtonsVideo = value;
+    });
+  }
+
   late final _$selectedStatesBeforePicAtom = Atom(
       name: 'ScheduleViewModelBase.selectedStatesBeforePic', context: context);
 
@@ -692,6 +810,23 @@ mixin _$ScheduleViewModel on ScheduleViewModelBase, Store {
     });
   }
 
+  late final _$selectedIndexAfterPicAtom = Atom(
+      name: 'ScheduleViewModelBase.selectedIndexAfterPic', context: context);
+
+  @override
+  int? get selectedIndexAfterPic {
+    _$selectedIndexAfterPicAtom.reportRead();
+    return super.selectedIndexAfterPic;
+  }
+
+  @override
+  set selectedIndexAfterPic(int? value) {
+    _$selectedIndexAfterPicAtom.reportWrite(value, super.selectedIndexAfterPic,
+        () {
+      super.selectedIndexAfterPic = value;
+    });
+  }
+
   late final _$selectedStatesAfterPicAtom = Atom(
       name: 'ScheduleViewModelBase.selectedStatesAfterPic', context: context);
 
@@ -723,6 +858,107 @@ mixin _$ScheduleViewModel on ScheduleViewModelBase, Store {
     _$isSelectionModeAfterPicAtom
         .reportWrite(value, super.isSelectionModeAfterPic, () {
       super.isSelectionModeAfterPic = value;
+    });
+  }
+
+  late final _$selectedIndexGalleryPicAtom = Atom(
+      name: 'ScheduleViewModelBase.selectedIndexGalleryPic', context: context);
+
+  @override
+  int? get selectedIndexGalleryPic {
+    _$selectedIndexGalleryPicAtom.reportRead();
+    return super.selectedIndexGalleryPic;
+  }
+
+  @override
+  set selectedIndexGalleryPic(int? value) {
+    _$selectedIndexGalleryPicAtom
+        .reportWrite(value, super.selectedIndexGalleryPic, () {
+      super.selectedIndexGalleryPic = value;
+    });
+  }
+
+  late final _$selectedStatesGalleryPicAtom = Atom(
+      name: 'ScheduleViewModelBase.selectedStatesGalleryPic', context: context);
+
+  @override
+  ObservableList<bool> get selectedStatesGalleryPic {
+    _$selectedStatesGalleryPicAtom.reportRead();
+    return super.selectedStatesGalleryPic;
+  }
+
+  @override
+  set selectedStatesGalleryPic(ObservableList<bool> value) {
+    _$selectedStatesGalleryPicAtom
+        .reportWrite(value, super.selectedStatesGalleryPic, () {
+      super.selectedStatesGalleryPic = value;
+    });
+  }
+
+  late final _$isSelectionModeGalleryPicAtom = Atom(
+      name: 'ScheduleViewModelBase.isSelectionModeGalleryPic',
+      context: context);
+
+  @override
+  bool get isSelectionModeGalleryPic {
+    _$isSelectionModeGalleryPicAtom.reportRead();
+    return super.isSelectionModeGalleryPic;
+  }
+
+  @override
+  set isSelectionModeGalleryPic(bool value) {
+    _$isSelectionModeGalleryPicAtom
+        .reportWrite(value, super.isSelectionModeGalleryPic, () {
+      super.isSelectionModeGalleryPic = value;
+    });
+  }
+
+  late final _$selectedIndexVideoAtom =
+      Atom(name: 'ScheduleViewModelBase.selectedIndexVideo', context: context);
+
+  @override
+  int? get selectedIndexVideo {
+    _$selectedIndexVideoAtom.reportRead();
+    return super.selectedIndexVideo;
+  }
+
+  @override
+  set selectedIndexVideo(int? value) {
+    _$selectedIndexVideoAtom.reportWrite(value, super.selectedIndexVideo, () {
+      super.selectedIndexVideo = value;
+    });
+  }
+
+  late final _$isSelectionModeVideoAtom = Atom(
+      name: 'ScheduleViewModelBase.isSelectionModeVideo', context: context);
+
+  @override
+  bool get isSelectionModeVideo {
+    _$isSelectionModeVideoAtom.reportRead();
+    return super.isSelectionModeVideo;
+  }
+
+  @override
+  set isSelectionModeVideo(bool value) {
+    _$isSelectionModeVideoAtom.reportWrite(value, super.isSelectionModeVideo,
+        () {
+      super.isSelectionModeVideo = value;
+    });
+  }
+
+  late final _$selectedStatesVideoAtom =
+      Atom(name: 'ScheduleViewModelBase.selectedStatesVideo', context: context);
+
+  @override
+  ObservableList<bool> get selectedStatesVideo {
+    _$selectedStatesVideoAtom.reportRead();
+    return super.selectedStatesVideo;
+  }
+
+  @override
+  set selectedStatesVideo(ObservableList<bool> value) {
+    _$selectedStatesVideoAtom.reportWrite(value, super.selectedStatesVideo, () {
+      super.selectedStatesVideo = value;
     });
   }
 
@@ -910,6 +1146,23 @@ mixin _$ScheduleViewModel on ScheduleViewModelBase, Store {
     _$deleteAfterImageScheduleResponseAtom
         .reportWrite(value, super.deleteAfterImageScheduleResponse, () {
       super.deleteAfterImageScheduleResponse = value;
+    });
+  }
+
+  late final _$addVideoScheduleResponseAtom = Atom(
+      name: 'ScheduleViewModelBase.addVideoScheduleResponse', context: context);
+
+  @override
+  ApiResponse<ScheduleImageResModel> get addVideoScheduleResponse {
+    _$addVideoScheduleResponseAtom.reportRead();
+    return super.addVideoScheduleResponse;
+  }
+
+  @override
+  set addVideoScheduleResponse(ApiResponse<ScheduleImageResModel> value) {
+    _$addVideoScheduleResponseAtom
+        .reportWrite(value, super.addVideoScheduleResponse, () {
+      super.addVideoScheduleResponse = value;
     });
   }
 
@@ -1717,6 +1970,19 @@ mixin _$ScheduleViewModel on ScheduleViewModelBase, Store {
             fromAfterPic: fromAfterPic));
   }
 
+  late final _$addVideoScheduleApiAsyncAction = AsyncAction(
+      'ScheduleViewModelBase.addVideoScheduleApi',
+      context: context);
+
+  @override
+  Future<void> addVideoScheduleApi(
+      {required BuildContext context,
+      required int id,
+      required List<String> pickedFiles}) {
+    return _$addVideoScheduleApiAsyncAction.run(() => super.addVideoScheduleApi(
+        context: context, id: id, pickedFiles: pickedFiles));
+  }
+
   late final _$pickFilefromphoneAsyncAction =
       AsyncAction('ScheduleViewModelBase.pickFilefromphone', context: context);
 
@@ -1733,26 +1999,6 @@ mixin _$ScheduleViewModel on ScheduleViewModelBase, Store {
   Future<void> pickImageFromsignatureCamera() {
     return _$pickImageFromsignatureCameraAsyncAction
         .run(() => super.pickImageFromsignatureCamera());
-  }
-
-  late final _$pickImageFromCameraAsyncAction = AsyncAction(
-      'ScheduleViewModelBase.pickImageFromCamera',
-      context: context);
-
-  @override
-  Future<void> pickImageFromCamera() {
-    return _$pickImageFromCameraAsyncAction
-        .run(() => super.pickImageFromCamera());
-  }
-
-  late final _$pickImageFromGalleryAsyncAction = AsyncAction(
-      'ScheduleViewModelBase.pickImageFromGallery',
-      context: context);
-
-  @override
-  Future<void> pickImageFromGallery() {
-    return _$pickImageFromGalleryAsyncAction
-        .run(() => super.pickImageFromGallery());
   }
 
   late final _$enviroDatePickerFnAsyncAction =
@@ -1832,6 +2078,72 @@ mixin _$ScheduleViewModel on ScheduleViewModelBase, Store {
         name: 'ScheduleViewModelBase.clearSelectionModeAfterPic');
     try {
       return super.clearSelectionModeAfterPic();
+    } finally {
+      _$ScheduleViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void toggleSelectionGalleryPic(int index, int imageId) {
+    final _$actionInfo = _$ScheduleViewModelBaseActionController.startAction(
+        name: 'ScheduleViewModelBase.toggleSelectionGalleryPic');
+    try {
+      return super.toggleSelectionGalleryPic(index, imageId);
+    } finally {
+      _$ScheduleViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void startSelectionGalleryPic(int index, int imageId) {
+    final _$actionInfo = _$ScheduleViewModelBaseActionController.startAction(
+        name: 'ScheduleViewModelBase.startSelectionGalleryPic');
+    try {
+      return super.startSelectionGalleryPic(index, imageId);
+    } finally {
+      _$ScheduleViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void clearSelectionModeGalleryPic() {
+    final _$actionInfo = _$ScheduleViewModelBaseActionController.startAction(
+        name: 'ScheduleViewModelBase.clearSelectionModeGalleryPic');
+    try {
+      return super.clearSelectionModeGalleryPic();
+    } finally {
+      _$ScheduleViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void toggleSelectionVideo(int index, int videoId) {
+    final _$actionInfo = _$ScheduleViewModelBaseActionController.startAction(
+        name: 'ScheduleViewModelBase.toggleSelectionVideo');
+    try {
+      return super.toggleSelectionVideo(index, videoId);
+    } finally {
+      _$ScheduleViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void startSelectionVideo(int index, int videoId) {
+    final _$actionInfo = _$ScheduleViewModelBaseActionController.startAction(
+        name: 'ScheduleViewModelBase.startSelectionVideo');
+    try {
+      return super.startSelectionVideo(index, videoId);
+    } finally {
+      _$ScheduleViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void clearSelectionModeVideo() {
+    final _$actionInfo = _$ScheduleViewModelBaseActionController.startAction(
+        name: 'ScheduleViewModelBase.clearSelectionModeVideo');
+    try {
+      return super.clearSelectionModeVideo();
     } finally {
       _$ScheduleViewModelBaseActionController.endAction(_$actionInfo);
     }
@@ -2047,6 +2359,28 @@ mixin _$ScheduleViewModel on ScheduleViewModelBase, Store {
   }
 
   @override
+  dynamic clearLists() {
+    final _$actionInfo = _$ScheduleViewModelBaseActionController.startAction(
+        name: 'ScheduleViewModelBase.clearLists');
+    try {
+      return super.clearLists();
+    } finally {
+      _$ScheduleViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic clearFn() {
+    final _$actionInfo = _$ScheduleViewModelBaseActionController.startAction(
+        name: 'ScheduleViewModelBase.clearFn');
+    try {
+      return super.clearFn();
+    } finally {
+      _$ScheduleViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 signColor: ${signColor},
@@ -2074,8 +2408,11 @@ pickedWeighCameraImage: ${pickedWeighCameraImage},
 pickedWeighImageList: ${pickedWeighImageList},
 pickedWeighGalleryImage: ${pickedWeighGalleryImage},
 isImageSelected: ${isImageSelected},
+pickedCameraVideo: ${pickedCameraVideo},
+pickedGalleryVideo: ${pickedGalleryVideo},
+pickedCameraVideoList: ${pickedCameraVideoList},
+pickedGalleryVideoList: ${pickedGalleryVideoList},
 signaturePicker: ${signaturePicker},
-selectedcameraImage: ${selectedcameraImage},
 selectedsignaturecameraImage: ${selectedsignaturecameraImage},
 selectedImage: ${selectedImage},
 checkboxValue: ${checkboxValue},
@@ -2083,15 +2420,26 @@ checkboxValue2: ${checkboxValue2},
 checkboxValue3: ${checkboxValue3},
 pickedImages: ${pickedImages},
 imageIds: ${imageIds},
+videoIds: ${videoIds},
 imageIdsAfterPic: ${imageIdsAfterPic},
+imageIdsGalleryPic: ${imageIdsGalleryPic},
 signaturePath: ${signaturePath},
 showDeleteClearButtonsBeforePic: ${showDeleteClearButtonsBeforePic},
 showDeleteClearButtonsAfterPic: ${showDeleteClearButtonsAfterPic},
+showDeleteClearButtonsGalleryPic: ${showDeleteClearButtonsGalleryPic},
+showDeleteClearButtonsVideo: ${showDeleteClearButtonsVideo},
 selectedStatesBeforePic: ${selectedStatesBeforePic},
 isSelectionModeBeforePic: ${isSelectionModeBeforePic},
 selectedIndexBeforePic: ${selectedIndexBeforePic},
+selectedIndexAfterPic: ${selectedIndexAfterPic},
 selectedStatesAfterPic: ${selectedStatesAfterPic},
 isSelectionModeAfterPic: ${isSelectionModeAfterPic},
+selectedIndexGalleryPic: ${selectedIndexGalleryPic},
+selectedStatesGalleryPic: ${selectedStatesGalleryPic},
+isSelectionModeGalleryPic: ${isSelectionModeGalleryPic},
+selectedIndexVideo: ${selectedIndexVideo},
+isSelectionModeVideo: ${isSelectionModeVideo},
+selectedStatesVideo: ${selectedStatesVideo},
 jobcardResponse: ${jobcardResponse},
 shedulecardResponse: ${shedulecardResponse},
 sheduleweekResponse: ${sheduleweekResponse},
@@ -2103,6 +2451,7 @@ editScheduleStatusResponse: ${editScheduleStatusResponse},
 addImageScheduleResponse: ${addImageScheduleResponse},
 deleteImageScheduleResponse: ${deleteImageScheduleResponse},
 deleteAfterImageScheduleResponse: ${deleteAfterImageScheduleResponse},
+addVideoScheduleResponse: ${addVideoScheduleResponse},
 isMinimized: ${isMinimized},
 selectedEngineOilValue: ${selectedEngineOilValue},
 selectedWarningSystemValue: ${selectedWarningSystemValue},

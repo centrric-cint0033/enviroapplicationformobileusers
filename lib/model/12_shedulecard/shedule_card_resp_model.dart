@@ -19,7 +19,7 @@ String sheduleCardRespModelToJson(List<SheduleCardRespModel> data) =>
 class SheduleCardRespModel with _$SheduleCardRespModel {
   const factory SheduleCardRespModel({
     @JsonKey(name: "id") int? id,
-    @JsonKey(name: "job_video") List<dynamic>? jobVideo,
+    @JsonKey(name: "job_video") List<Job>? jobVideo,
     @JsonKey(name: "client") Client? client,
     @JsonKey(name: "quote_id") int? quoteId,
     @JsonKey(name: "created_by") String? createdBy,
@@ -34,7 +34,7 @@ class SheduleCardRespModel with _$SheduleCardRespModel {
     @JsonKey(name: "shift") String? shift,
     @JsonKey(name: "before_pics") List<Pic>? beforePics,
     @JsonKey(name: "after_pics") List<Pic>? afterPics,
-    @JsonKey(name: "gallery") List<dynamic>? gallery,
+    @JsonKey(name: "gallery") List<Pic>? gallery,
     @JsonKey(name: "comments") List<Comment>? comments,
     @JsonKey(name: "status") String? status,
     @JsonKey(name: "frequency") String? frequency,
@@ -179,4 +179,17 @@ class TeamEmployee with _$TeamEmployee {
 
   factory TeamEmployee.fromJson(Map<String, dynamic> json) =>
       _$TeamEmployeeFromJson(json);
+}
+@freezed
+class Job with _$Job {
+  const factory Job({
+    @JsonKey(name: "id") int? id,
+    @JsonKey(name: "video") String? video,
+    @JsonKey(name: "name") String? name,
+     @JsonKey(name: "created_date_time") String? createdAt,
+    @JsonKey(name: "edited_date_time") String? editedAt,
+  }) = _Job;
+
+  factory Job.fromJson(Map<String, dynamic> json) =>
+      _$JobFromJson(json);
 }

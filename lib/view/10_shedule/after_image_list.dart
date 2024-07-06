@@ -78,7 +78,7 @@ class AfterImagesList extends StatelessWidget {
         }),
         sized0hx03,
         Container(
-            height: 100.h,
+            height: 90.h,
             width: double.infinity - 20.w,
             decoration: BoxDecoration(color: Colors.grey.shade300),
             child: Observer(builder: (context) {
@@ -95,18 +95,20 @@ class AfterImagesList extends StatelessWidget {
                     padding: EdgeInsets.all(8.0.h),
                     child: InkWell(
                       onTap: () async {
-                        if (vmSchedule.selectedStatesAfterPic[index]) {
+                        if (vmSchedule.selectedIndexAfterPic == index) {
                           vmSchedule.toggleSelectionAfterPic(
                               index, images[index].id!);
-                        } else {
+                        } else if (!vmSchedule.selectedStatesAfterPic
+                            .any((isSelected) => isSelected)) {
                           await _launchImageUrl(imageUrl);
+                        } else {
+                          vmSchedule.toggleSelectionAfterPic(
+                              index, images[index].id!);
                         }
                       },
                       onLongPress: () {
-                        if (vmSchedule.selectedStatesAfterPic[index]) {
-                          vmSchedule.toggleSelectionAfterPic(
-                              index, images[index].id!);
-                        } else {
+                        if (!vmSchedule.selectedStatesAfterPic
+                            .any((isSelected) => isSelected)) {
                           vmSchedule.startSelectionAfterPic(
                               index, images[index].id!);
                         }
@@ -118,7 +120,7 @@ class AfterImagesList extends StatelessWidget {
                           width: 75.h,
                           decoration: BoxDecoration(
                               border: Border.all(
-                                  width: isSelected ? 3 : 1,
+                                  width: isSelected ? 4 : 1,
                                   color: isSelected
                                       ? Appthemes.cPrimary
                                       : Colors.white)),

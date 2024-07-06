@@ -118,9 +118,15 @@ abstract class ScheduleViewModelBase with Store {
   @observable
   bool isImageSelected = true;
   @observable
-  Uint8List? signaturePicker;
+  String? pickedCameraVideo = "";
   @observable
-  File? selectedcameraImage;
+  String? pickedGalleryVideo = "";
+  @observable
+  List<String> pickedCameraVideoList = [];
+  @observable
+  List<String>? pickedGalleryVideoList = [];
+  @observable
+  Uint8List? signaturePicker;
   @observable
   File? selectedsignaturecameraImage;
   @observable
@@ -136,7 +142,11 @@ abstract class ScheduleViewModelBase with Store {
   @observable
   List<int> imageIds = [];
   @observable
+  List<int> videoIds = [];
+  @observable
   List<int> imageIdsAfterPic = [];
+  @observable
+  List<int> imageIdsGalleryPic = [];
   @observable
   String? signaturePath;
   @observable
@@ -144,8 +154,11 @@ abstract class ScheduleViewModelBase with Store {
   @observable
   bool showDeleteClearButtonsAfterPic = false;
   @observable
+  bool showDeleteClearButtonsGalleryPic = false;
+  @observable
+  bool showDeleteClearButtonsVideo = false;
+  @observable
   ObservableList<bool> selectedStatesBeforePic = ObservableList<bool>();
-
   // Flag to indicate if selection mode is active
   @observable
   bool isSelectionModeBeforePic = false;
@@ -268,49 +281,57 @@ abstract class ScheduleViewModelBase with Store {
     showDeleteClearButtonsBeforePic = anySelected;
   }
 
+//
+  @observable
+  int? selectedIndexAfterPic;
   @observable
   ObservableList<bool> selectedStatesAfterPic = ObservableList<bool>();
 
   @observable
   bool isSelectionModeAfterPic = false;
-
   @action
   void toggleSelectionAfterPic(int index, int imageId) {
-    if (index >= 0 && index < selectedStatesAfterPic.length) {
-      selectedStatesAfterPic[index] = !selectedStatesAfterPic[index];
-      if (selectedStatesAfterPic[index]) {
-        imageIdsAfterPic.add(imageId);
-      } else {
-        imageIdsAfterPic.remove(imageId);
+    if (selectedIndexAfterPic == index) {
+      selectedStatesAfterPic[index] = false;
+      selectedIndexAfterPic = null;
+      imageIdsAfterPic.remove(imageId);
+    } else {
+      if (selectedIndexAfterPic != null) {
+        selectedStatesAfterPic[selectedIndexAfterPic!] = false;
+        imageIdsAfterPic.clear();
       }
+      selectedStatesAfterPic[index] = true;
+      selectedIndexAfterPic = index;
+      imageIdsAfterPic.add(imageId);
     }
     updateSelectionModeAfterPic();
   }
 
   @action
   void startSelectionAfterPic(int index, int imageId) {
-    if (index >= 0 && index < selectedStatesAfterPic.length) {
-      selectedStatesAfterPic[index] = !selectedStatesAfterPic[index];
-      if (selectedStatesAfterPic[index]) {
-        imageIdsAfterPic.add(imageId);
-      } else {
-        imageIdsAfterPic.remove(imageId);
-      }
+    if (selectedIndexAfterPic != null) {
+      selectedStatesAfterPic[selectedIndexAfterPic!] = false;
+      imageIdsAfterPic.clear();
     }
+    selectedStatesAfterPic[index] = true;
+    selectedIndexAfterPic = index;
+    imageIdsAfterPic.add(imageId);
     updateSelectionModeAfterPic();
   }
 
   @action
   void clearSelectionModeAfterPic() {
     isSelectionModeAfterPic = false;
-    imageIdsAfterPic.clear();
     selectedStatesAfterPic.fillRange(0, selectedStatesAfterPic.length, false);
+    selectedIndexAfterPic = null;
+    imageIds.clear();
     updateSelectionModeAfterPic();
   }
 
   void initializeSelectionStatesAfterPic(int length) {
     selectedStatesAfterPic =
         ObservableList<bool>.of(List.filled(length, false));
+    selectedIndexAfterPic = null;
   }
 
   void updateSelectionModeAfterPic() {
@@ -319,6 +340,124 @@ abstract class ScheduleViewModelBase with Store {
     showDeleteClearButtonsAfterPic = anySelected;
   }
 
+//
+  @observable
+  int? selectedIndexGalleryPic;
+  @observable
+  ObservableList<bool> selectedStatesGalleryPic = ObservableList<bool>();
+
+  @observable
+  bool isSelectionModeGalleryPic = false;
+  @action
+  void toggleSelectionGalleryPic(int index, int imageId) {
+    if (selectedIndexGalleryPic == index) {
+      selectedStatesGalleryPic[index] = false;
+      selectedIndexGalleryPic = null;
+      imageIdsGalleryPic.remove(imageId);
+    } else {
+      if (selectedIndexGalleryPic != null) {
+        selectedStatesGalleryPic[selectedIndexGalleryPic!] = false;
+        imageIdsGalleryPic.clear();
+      }
+      selectedStatesGalleryPic[index] = true;
+      selectedIndexGalleryPic = index;
+      imageIdsGalleryPic.add(imageId);
+    }
+    updateSelectionModeGalleryPic();
+  }
+
+  @action
+  void startSelectionGalleryPic(int index, int imageId) {
+    if (selectedIndexGalleryPic != null) {
+      selectedStatesGalleryPic[selectedIndexGalleryPic!] = false;
+      imageIdsGalleryPic.clear();
+    }
+    selectedStatesGalleryPic[index] = true;
+    selectedIndexGalleryPic = index;
+    imageIdsGalleryPic.add(imageId);
+    updateSelectionModeGalleryPic();
+  }
+
+  @action
+  void clearSelectionModeGalleryPic() {
+    isSelectionModeGalleryPic = false;
+    selectedStatesGalleryPic.fillRange(
+        0, selectedStatesGalleryPic.length, false);
+    selectedIndexGalleryPic = null;
+    imageIdsGalleryPic.clear();
+    updateSelectionModeGalleryPic();
+  }
+
+  void initializeSelectionStatesGalleryPic(int length) {
+    selectedStatesGalleryPic =
+        ObservableList<bool>.of(List.filled(length, false));
+    selectedIndexGalleryPic = null;
+  }
+
+  void updateSelectionModeGalleryPic() {
+    bool anySelected = selectedStatesGalleryPic.any((isSelected) => isSelected);
+    isSelectionModeGalleryPic = anySelected;
+    showDeleteClearButtonsGalleryPic = anySelected;
+  }
+
+//
+  @observable
+  int? selectedIndexVideo;
+  @observable
+  bool isSelectionModeVideo = false;
+  @observable
+  ObservableList<bool> selectedStatesVideo = ObservableList<bool>();
+  @action
+  void toggleSelectionVideo(int index, int videoId) {
+    if (selectedIndexVideo == index) {
+      selectedStatesVideo[index] = false;
+      selectedIndexVideo = null;
+      videoIds.remove(videoId);
+    } else {
+      if (selectedIndexVideo != null) {
+        selectedStatesVideo[selectedIndexVideo!] = false;
+        videoIds.clear();
+      }
+      selectedStatesVideo[index] = true;
+      selectedIndexVideo = index;
+      videoIds.add(videoId);
+    }
+    updateSelectionModeVideo();
+  }
+
+  @action
+  void startSelectionVideo(int index, int videoId) {
+    if (selectedIndexVideo != null) {
+      selectedStatesVideo[selectedIndexVideo!] = false;
+      imageIds.clear();
+    }
+    selectedStatesVideo[index] = true;
+    selectedIndexVideo = index;
+    videoIds.add(videoId);
+    updateSelectionModeVideo();
+  }
+
+  @action
+  void clearSelectionModeVideo() {
+    isSelectionModeVideo = false;
+    selectedStatesVideo.fillRange(0, selectedStatesVideo.length, false);
+    selectedIndexVideo = null;
+    videoIds.clear();
+    updateSelectionModeVideo();
+  }
+
+  void initializeSelectionStatesVideo(int length) {
+    selectedStatesVideo = ObservableList<bool>.of(List.filled(length, false));
+    selectedIndexVideo = null;
+  }
+
+  void updateSelectionModeVideo() {
+    bool anySelected = selectedStatesVideo.any((isSelected) => isSelected);
+    isSelectionModeVideo = anySelected;
+    showDeleteClearButtonsVideo = anySelected;
+  }
+
+//
   @action
   void updateProductImageData({ImageFilePickerModel? image}) {
     pickedCameraImage2 = image!;
@@ -624,6 +763,9 @@ abstract class ScheduleViewModelBase with Store {
           loading: false,
         );
         shedulecardviewmodelweekfunction();
+        pickedCameraImageList = [];
+        pickedGalleryImageList = [];
+        pickedWeighImageList = null;
         context.router.pop();
         showToast(context, msg: "Successfully added", color: Colors.green);
       },
@@ -682,6 +824,44 @@ abstract class ScheduleViewModelBase with Store {
         vmSchedule.showDeleteClearButtonsAfterPic = false;
         vmSchedule.imageIds = [];
         shedulecardviewmodelweekfunction();
+      },
+    );
+  }
+
+  @observable
+  ApiResponse<ScheduleImageResModel> addVideoScheduleResponse =
+      ApiResponse<ScheduleImageResModel>();
+  @action
+  Future<void> addVideoScheduleApi({
+    required BuildContext context,
+    required int id,
+    required List<String> pickedFiles,
+  }) async {
+    addImageScheduleResponse =
+        addImageScheduleResponse.copyWith(error: null, loading: true);
+
+    final result = await scheduleService.addVideosScheduleAPi(
+      id: id,
+      pickedFiles: pickedFiles,
+    );
+    return result.fold(
+      (l) {
+        addVideoScheduleResponse = addVideoScheduleResponse.copyWith(
+          error: l.keys.first,
+          loading: false,
+        );
+      },
+      (r) {
+        addVideoScheduleResponse = addVideoScheduleResponse.copyWith(
+          data: r,
+          error: null,
+          loading: false,
+        );
+        shedulecardviewmodelweekfunction();
+        pickedCameraVideoList = [];
+        pickedGalleryVideoList = [];
+        context.router.pop();
+        showToast(context, msg: "Successfully added", color: Colors.green);
       },
     );
   }
@@ -946,25 +1126,6 @@ abstract class ScheduleViewModelBase with Store {
   }
 
   @action
-  Future<void> pickImageFromCamera() async {
-    final pickedImage =
-        await ImagePicker().pickImage(source: ImageSource.camera);
-    if (pickedImage != null) {
-      selectedcameraImage = File(pickedImage.path);
-      isImageSelected = true;
-    }
-  }
-
-  @action
-  Future<void> pickImageFromGallery() async {
-    final pickedImage =
-        await ImagePicker().pickImage(source: ImageSource.gallery);
-    if (pickedImage != null) {
-      selectedImage = File(pickedImage.path);
-    }
-  }
-
-  @action
   enviroDatePickerFn(BuildContext context, DateTime selectedDate, date,
       String status, int id, dynamic statusdType,
       {bool? fromJobStarted = false,
@@ -977,13 +1138,10 @@ abstract class ScheduleViewModelBase with Store {
         date: dateString,
         status: status,
         id: id);
-    pickedCameraImage = null;
-    pickedGalleryImage = null;
-    pickedCameraImageList = [];
-    pickedGalleryImageList = [];
+    clearLists();
     if (toCameraGalleryScreen == true) {
       context.router
-          .push(CameraGalleryRoute(fromJobStarted: fromJobStarted!, id: id));
+          .push(ScheduleImageRoute(fromJobStarted: fromJobStarted!, id: id));
     }
   }
 
@@ -1000,5 +1158,26 @@ abstract class ScheduleViewModelBase with Store {
     } else {
       showSubmitButton = false;
     }
+  }
+
+  @action
+  clearLists() {
+    pickedCameraImage = "";
+    pickedGalleryImage = "";
+    pickedCameraImageList = [];
+    pickedGalleryImageList = [];
+    pickedWeighImageList = null;
+  }
+
+  @action
+  clearFn() {
+    showDeleteClearButtonsBeforePic = false;
+    showDeleteClearButtonsAfterPic = false;
+    showDeleteClearButtonsGalleryPic = false;
+    showDeleteClearButtonsVideo = false;
+    imageIds = [];
+    imageIdsAfterPic = [];
+    imageIdsGalleryPic = [];
+    videoIds = [];
   }
 }

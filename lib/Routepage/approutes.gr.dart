@@ -19,35 +19,35 @@ import 'package:enviro_mobile_application/model/04_ohs/oh&s_resp_model.dart'
     as _i38;
 import 'package:enviro_mobile_application/model/10_team/team_profile_employee_details_res_model/team_profile_employee_details_res_model.dart'
     as _i42;
-import 'package:enviro_mobile_application/view/01_auth/login_page.dart' as _i11;
+import 'package:enviro_mobile_application/view/01_auth/login_page.dart' as _i10;
 import 'package:enviro_mobile_application/view/02_sales/sales_detail_page.dart'
-    as _i18;
+    as _i17;
 import 'package:enviro_mobile_application/view/02_sales/sales_page.dart'
-    as _i19;
+    as _i18;
 import 'package:enviro_mobile_application/view/02_sales/sales_quote_detail_list_page.dart'
-    as _i20;
+    as _i19;
 import 'package:enviro_mobile_application/view/03_vehicles/vehicle_detail_page.dart'
     as _i33;
 import 'package:enviro_mobile_application/view/03_vehicles/vehicle_main_page.dart'
     as _i34;
 import 'package:enviro_mobile_application/view/04_ohs/news_foldr_inside_page.dart'
-    as _i12;
+    as _i11;
 import 'package:enviro_mobile_application/view/04_ohs/notifcation_detail_page.dart'
-    as _i13;
+    as _i12;
 import 'package:enviro_mobile_application/view/04_ohs/oh&s_detail_page.dart'
-    as _i15;
-import 'package:enviro_mobile_application/view/04_ohs/ohs_main_page.dart'
-    as _i16;
-import 'package:enviro_mobile_application/view/07_intranet/intranet_inside_page.dart'
-    as _i7;
-import 'package:enviro_mobile_application/view/07_intranet/intranet_main_page.dart'
-    as _i8;
-import 'package:enviro_mobile_application/view/08_notification_page/notification_page.dart'
     as _i14;
+import 'package:enviro_mobile_application/view/04_ohs/ohs_main_page.dart'
+    as _i15;
+import 'package:enviro_mobile_application/view/07_intranet/intranet_inside_page.dart'
+    as _i6;
+import 'package:enviro_mobile_application/view/07_intranet/intranet_main_page.dart'
+    as _i7;
+import 'package:enviro_mobile_application/view/08_notification_page/notification_page.dart'
+    as _i13;
 import 'package:enviro_mobile_application/view/08_team/add_team_page.dart'
     as _i1;
 import 'package:enviro_mobile_application/view/08_team/employee_files_page.dart'
-    as _i5;
+    as _i4;
 import 'package:enviro_mobile_application/view/08_team/team_edit_page.dart'
     as _i28;
 import 'package:enviro_mobile_application/view/08_team/team_main_page.dart'
@@ -55,19 +55,19 @@ import 'package:enviro_mobile_application/view/08_team/team_main_page.dart'
 import 'package:enviro_mobile_application/view/08_team/team_profile_screen.dart'
     as _i30;
 import 'package:enviro_mobile_application/view/09_prfle_creation_page/prfle_crtion.dart'
-    as _i17;
-import 'package:enviro_mobile_application/view/10_shedule/camera_gallery_screen.dart'
-    as _i3;
+    as _i16;
 import 'package:enviro_mobile_application/view/10_shedule/current_job_status.dart'
-    as _i4;
+    as _i3;
 import 'package:enviro_mobile_application/view/10_shedule/jobcard_page.dart'
-    as _i10;
+    as _i9;
+import 'package:enviro_mobile_application/view/10_shedule/schedule_image_page.dart'
+    as _i20;
 import 'package:enviro_mobile_application/view/10_shedule/schedule_main_page.dart'
     as _i21;
+import 'package:enviro_mobile_application/view/10_shedule/schedule_video_page.dart'
+    as _i22;
 import 'package:enviro_mobile_application/view/10_shedule/shedule_calender_page.dart'
     as _i2;
-import 'package:enviro_mobile_application/view/10_shedule/shedule_cmra_vdo_page.dart'
-    as _i22;
 import 'package:enviro_mobile_application/view/10_shedule/shedule_comment_page.dart'
     as _i23;
 import 'package:enviro_mobile_application/view/10_shedule/shedule_detail_page.dart'
@@ -82,9 +82,9 @@ import 'package:enviro_mobile_application/view/10_site/site_detail_screen.dart'
     as _i26;
 import 'package:enviro_mobile_application/view/10_site/site_main_screen.dart'
     as _i27;
-import 'package:enviro_mobile_application/view/home_page.dart' as _i6;
+import 'package:enviro_mobile_application/view/home_page.dart' as _i5;
 import 'package:enviro_mobile_application/view/intranet_page/intranet_page.dart'
-    as _i9;
+    as _i8;
 import 'package:enviro_mobile_application/view_model/10_site/site_view_model.dart'
     as _i41;
 import 'package:flutter/cupertino.dart' as _i37;
@@ -109,21 +109,10 @@ abstract class $AppRouter extends _i35.RootStackRouter {
         child: const _i2.CalenderPage(),
       );
     },
-    CameraGalleryRoute.name: (routeData) {
-      final args = routeData.argsAs<CameraGalleryRouteArgs>();
-      return _i35.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: _i3.CameraGalleryScreen(
-          key: args.key,
-          fromJobStarted: args.fromJobStarted,
-          id: args.id,
-        ),
-      );
-    },
     CurrentJobStatusRoute.name: (routeData) {
       return _i35.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i4.CurrentJobStatusPage(),
+        child: const _i3.CurrentJobStatusPage(),
       );
     },
     EmployeeFilesRoute.name: (routeData) {
@@ -131,7 +120,7 @@ abstract class $AppRouter extends _i35.RootStackRouter {
           orElse: () => const EmployeeFilesRouteArgs());
       return _i35.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i5.EmployeeFilesPage(
+        child: _i4.EmployeeFilesPage(
           key: args.key,
           employeeId: args.employeeId,
           folderName: args.folderName,
@@ -143,14 +132,14 @@ abstract class $AppRouter extends _i35.RootStackRouter {
     HomeRoute.name: (routeData) {
       return _i35.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i6.HomePage(),
+        child: const _i5.HomePage(),
       );
     },
     IntranetInsideRoute.name: (routeData) {
       final args = routeData.argsAs<IntranetInsideRouteArgs>();
       return _i35.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i7.IntranetInsidePage(
+        child: _i6.IntranetInsidePage(
           key: args.key,
           parentId: args.parentId,
           folderName: args.folderName,
@@ -160,19 +149,19 @@ abstract class $AppRouter extends _i35.RootStackRouter {
     IntranetMainRoute.name: (routeData) {
       return _i35.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i8.IntranetMainPage(),
+        child: const _i7.IntranetMainPage(),
       );
     },
     IntranetRoute.name: (routeData) {
       return _i35.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i9.IntranetPage(),
+        child: const _i8.IntranetPage(),
       );
     },
     JobCardRoute.name: (routeData) {
       return _i35.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i10.JobCardPage(),
+        child: const _i9.JobCardPage(),
       );
     },
     LoginRoute.name: (routeData) {
@@ -180,14 +169,14 @@ abstract class $AppRouter extends _i35.RootStackRouter {
           orElse: () => const LoginRouteArgs());
       return _i35.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i11.LoginPage(key: args.key),
+        child: _i10.LoginPage(key: args.key),
       );
     },
     NewsOhsFolderInsideRoute.name: (routeData) {
       final args = routeData.argsAs<NewsOhsFolderInsideRouteArgs>();
       return _i35.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i12.NewsOhsFolderInsidePage(
+        child: _i11.NewsOhsFolderInsidePage(
           key: args.key,
           parentId: args.parentId,
         ),
@@ -197,7 +186,7 @@ abstract class $AppRouter extends _i35.RootStackRouter {
       final args = routeData.argsAs<NotificationDetailRouteArgs>();
       return _i35.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i13.NotificationDetailPage(
+        child: _i12.NotificationDetailPage(
           key: args.key,
           data: args.data,
         ),
@@ -206,14 +195,14 @@ abstract class $AppRouter extends _i35.RootStackRouter {
     NotificationRoute.name: (routeData) {
       return _i35.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i14.NotificationPage(),
+        child: const _i13.NotificationPage(),
       );
     },
     OhsDetailRoute.name: (routeData) {
       final args = routeData.argsAs<OhsDetailRouteArgs>();
       return _i35.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i15.OhsDetailPage(
+        child: _i14.OhsDetailPage(
           key: args.key,
           data: args.data,
         ),
@@ -222,7 +211,7 @@ abstract class $AppRouter extends _i35.RootStackRouter {
     OhsMainRoute.name: (routeData) {
       return _i35.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i16.OhsMainPage(),
+        child: const _i15.OhsMainPage(),
       );
     },
     ProfileCreationRoute.name: (routeData) {
@@ -230,14 +219,14 @@ abstract class $AppRouter extends _i35.RootStackRouter {
           orElse: () => const ProfileCreationRouteArgs());
       return _i35.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i17.ProfileCreationPage(key: args.key),
+        child: _i16.ProfileCreationPage(key: args.key),
       );
     },
     SalesDetailRoute.name: (routeData) {
       final args = routeData.argsAs<SalesDetailRouteArgs>();
       return _i35.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i18.SalesDetailPage(
+        child: _i17.SalesDetailPage(
           key: args.key,
           data: args.data,
         ),
@@ -246,13 +235,25 @@ abstract class $AppRouter extends _i35.RootStackRouter {
     SalesRoute.name: (routeData) {
       return _i35.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i19.SalesPage(),
+        child: const _i18.SalesPage(),
       );
     },
     SalesQuoteDetailListRoute.name: (routeData) {
       return _i35.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i20.SalesQuoteDetailListPage(),
+        child: const _i19.SalesQuoteDetailListPage(),
+      );
+    },
+    ScheduleImageRoute.name: (routeData) {
+      final args = routeData.argsAs<ScheduleImageRouteArgs>();
+      return _i35.AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: _i20.ScheduleImageScreen(
+          key: args.key,
+          fromJobStarted: args.fromJobStarted,
+          id: args.id,
+          fromAddMedia: args.fromAddMedia,
+        ),
       );
     },
     ScheduleMainRoute.name: (routeData) {
@@ -261,12 +262,14 @@ abstract class $AppRouter extends _i35.RootStackRouter {
         child: const _i21.ScheduleMainPage(),
       );
     },
-    ScheduleVideoAndPhotoRoute.name: (routeData) {
-      final args = routeData.argsAs<ScheduleVideoAndPhotoRouteArgs>(
-          orElse: () => const ScheduleVideoAndPhotoRouteArgs());
+    ScheduleVideoRoute.name: (routeData) {
+      final args = routeData.argsAs<ScheduleVideoRouteArgs>();
       return _i35.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i22.ScheduleVideoAndPhotoPage(key: args.key),
+        child: _i22.ScheduleVideoScreen(
+          key: args.key,
+          id: args.id,
+        ),
       );
     },
     SheduleCommentRoute.name: (routeData) {
@@ -428,50 +431,7 @@ class CalenderRoute extends _i35.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i3.CameraGalleryScreen]
-class CameraGalleryRoute extends _i35.PageRouteInfo<CameraGalleryRouteArgs> {
-  CameraGalleryRoute({
-    _i36.Key? key,
-    bool fromJobStarted = false,
-    required int id,
-    List<_i35.PageRouteInfo>? children,
-  }) : super(
-          CameraGalleryRoute.name,
-          args: CameraGalleryRouteArgs(
-            key: key,
-            fromJobStarted: fromJobStarted,
-            id: id,
-          ),
-          initialChildren: children,
-        );
-
-  static const String name = 'CameraGalleryRoute';
-
-  static const _i35.PageInfo<CameraGalleryRouteArgs> page =
-      _i35.PageInfo<CameraGalleryRouteArgs>(name);
-}
-
-class CameraGalleryRouteArgs {
-  const CameraGalleryRouteArgs({
-    this.key,
-    this.fromJobStarted = false,
-    required this.id,
-  });
-
-  final _i36.Key? key;
-
-  final bool fromJobStarted;
-
-  final int id;
-
-  @override
-  String toString() {
-    return 'CameraGalleryRouteArgs{key: $key, fromJobStarted: $fromJobStarted, id: $id}';
-  }
-}
-
-/// generated route for
-/// [_i4.CurrentJobStatusPage]
+/// [_i3.CurrentJobStatusPage]
 class CurrentJobStatusRoute extends _i35.PageRouteInfo<void> {
   const CurrentJobStatusRoute({List<_i35.PageRouteInfo>? children})
       : super(
@@ -485,7 +445,7 @@ class CurrentJobStatusRoute extends _i35.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i5.EmployeeFilesPage]
+/// [_i4.EmployeeFilesPage]
 class EmployeeFilesRoute extends _i35.PageRouteInfo<EmployeeFilesRouteArgs> {
   EmployeeFilesRoute({
     _i37.Key? key,
@@ -538,7 +498,7 @@ class EmployeeFilesRouteArgs {
 }
 
 /// generated route for
-/// [_i6.HomePage]
+/// [_i5.HomePage]
 class HomeRoute extends _i35.PageRouteInfo<void> {
   const HomeRoute({List<_i35.PageRouteInfo>? children})
       : super(
@@ -552,7 +512,7 @@ class HomeRoute extends _i35.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i7.IntranetInsidePage]
+/// [_i6.IntranetInsidePage]
 class IntranetInsideRoute extends _i35.PageRouteInfo<IntranetInsideRouteArgs> {
   IntranetInsideRoute({
     _i36.Key? key,
@@ -595,7 +555,7 @@ class IntranetInsideRouteArgs {
 }
 
 /// generated route for
-/// [_i8.IntranetMainPage]
+/// [_i7.IntranetMainPage]
 class IntranetMainRoute extends _i35.PageRouteInfo<void> {
   const IntranetMainRoute({List<_i35.PageRouteInfo>? children})
       : super(
@@ -609,7 +569,7 @@ class IntranetMainRoute extends _i35.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i9.IntranetPage]
+/// [_i8.IntranetPage]
 class IntranetRoute extends _i35.PageRouteInfo<void> {
   const IntranetRoute({List<_i35.PageRouteInfo>? children})
       : super(
@@ -623,7 +583,7 @@ class IntranetRoute extends _i35.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i10.JobCardPage]
+/// [_i9.JobCardPage]
 class JobCardRoute extends _i35.PageRouteInfo<void> {
   const JobCardRoute({List<_i35.PageRouteInfo>? children})
       : super(
@@ -637,7 +597,7 @@ class JobCardRoute extends _i35.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i11.LoginPage]
+/// [_i10.LoginPage]
 class LoginRoute extends _i35.PageRouteInfo<LoginRouteArgs> {
   LoginRoute({
     _i36.Key? key,
@@ -666,7 +626,7 @@ class LoginRouteArgs {
 }
 
 /// generated route for
-/// [_i12.NewsOhsFolderInsidePage]
+/// [_i11.NewsOhsFolderInsidePage]
 class NewsOhsFolderInsideRoute
     extends _i35.PageRouteInfo<NewsOhsFolderInsideRouteArgs> {
   NewsOhsFolderInsideRoute({
@@ -705,7 +665,7 @@ class NewsOhsFolderInsideRouteArgs {
 }
 
 /// generated route for
-/// [_i13.NotificationDetailPage]
+/// [_i12.NotificationDetailPage]
 class NotificationDetailRoute
     extends _i35.PageRouteInfo<NotificationDetailRouteArgs> {
   NotificationDetailRoute({
@@ -744,7 +704,7 @@ class NotificationDetailRouteArgs {
 }
 
 /// generated route for
-/// [_i14.NotificationPage]
+/// [_i13.NotificationPage]
 class NotificationRoute extends _i35.PageRouteInfo<void> {
   const NotificationRoute({List<_i35.PageRouteInfo>? children})
       : super(
@@ -758,7 +718,7 @@ class NotificationRoute extends _i35.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i15.OhsDetailPage]
+/// [_i14.OhsDetailPage]
 class OhsDetailRoute extends _i35.PageRouteInfo<OhsDetailRouteArgs> {
   OhsDetailRoute({
     _i36.Key? key,
@@ -796,7 +756,7 @@ class OhsDetailRouteArgs {
 }
 
 /// generated route for
-/// [_i16.OhsMainPage]
+/// [_i15.OhsMainPage]
 class OhsMainRoute extends _i35.PageRouteInfo<void> {
   const OhsMainRoute({List<_i35.PageRouteInfo>? children})
       : super(
@@ -810,7 +770,7 @@ class OhsMainRoute extends _i35.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i17.ProfileCreationPage]
+/// [_i16.ProfileCreationPage]
 class ProfileCreationRoute
     extends _i35.PageRouteInfo<ProfileCreationRouteArgs> {
   ProfileCreationRoute({
@@ -840,7 +800,7 @@ class ProfileCreationRouteArgs {
 }
 
 /// generated route for
-/// [_i18.SalesDetailPage]
+/// [_i17.SalesDetailPage]
 class SalesDetailRoute extends _i35.PageRouteInfo<SalesDetailRouteArgs> {
   SalesDetailRoute({
     _i37.Key? key,
@@ -878,7 +838,7 @@ class SalesDetailRouteArgs {
 }
 
 /// generated route for
-/// [_i19.SalesPage]
+/// [_i18.SalesPage]
 class SalesRoute extends _i35.PageRouteInfo<void> {
   const SalesRoute({List<_i35.PageRouteInfo>? children})
       : super(
@@ -892,7 +852,7 @@ class SalesRoute extends _i35.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i20.SalesQuoteDetailListPage]
+/// [_i19.SalesQuoteDetailListPage]
 class SalesQuoteDetailListRoute extends _i35.PageRouteInfo<void> {
   const SalesQuoteDetailListRoute({List<_i35.PageRouteInfo>? children})
       : super(
@@ -903,6 +863,54 @@ class SalesQuoteDetailListRoute extends _i35.PageRouteInfo<void> {
   static const String name = 'SalesQuoteDetailListRoute';
 
   static const _i35.PageInfo<void> page = _i35.PageInfo<void>(name);
+}
+
+/// generated route for
+/// [_i20.ScheduleImageScreen]
+class ScheduleImageRoute extends _i35.PageRouteInfo<ScheduleImageRouteArgs> {
+  ScheduleImageRoute({
+    _i36.Key? key,
+    bool fromJobStarted = false,
+    required int id,
+    bool fromAddMedia = false,
+    List<_i35.PageRouteInfo>? children,
+  }) : super(
+          ScheduleImageRoute.name,
+          args: ScheduleImageRouteArgs(
+            key: key,
+            fromJobStarted: fromJobStarted,
+            id: id,
+            fromAddMedia: fromAddMedia,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'ScheduleImageRoute';
+
+  static const _i35.PageInfo<ScheduleImageRouteArgs> page =
+      _i35.PageInfo<ScheduleImageRouteArgs>(name);
+}
+
+class ScheduleImageRouteArgs {
+  const ScheduleImageRouteArgs({
+    this.key,
+    this.fromJobStarted = false,
+    required this.id,
+    this.fromAddMedia = false,
+  });
+
+  final _i36.Key? key;
+
+  final bool fromJobStarted;
+
+  final int id;
+
+  final bool fromAddMedia;
+
+  @override
+  String toString() {
+    return 'ScheduleImageRouteArgs{key: $key, fromJobStarted: $fromJobStarted, id: $id, fromAddMedia: $fromAddMedia}';
+  }
 }
 
 /// generated route for
@@ -920,32 +928,40 @@ class ScheduleMainRoute extends _i35.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i22.ScheduleVideoAndPhotoPage]
-class ScheduleVideoAndPhotoRoute
-    extends _i35.PageRouteInfo<ScheduleVideoAndPhotoRouteArgs> {
-  ScheduleVideoAndPhotoRoute({
+/// [_i22.ScheduleVideoScreen]
+class ScheduleVideoRoute extends _i35.PageRouteInfo<ScheduleVideoRouteArgs> {
+  ScheduleVideoRoute({
     _i36.Key? key,
+    required int id,
     List<_i35.PageRouteInfo>? children,
   }) : super(
-          ScheduleVideoAndPhotoRoute.name,
-          args: ScheduleVideoAndPhotoRouteArgs(key: key),
+          ScheduleVideoRoute.name,
+          args: ScheduleVideoRouteArgs(
+            key: key,
+            id: id,
+          ),
           initialChildren: children,
         );
 
-  static const String name = 'ScheduleVideoAndPhotoRoute';
+  static const String name = 'ScheduleVideoRoute';
 
-  static const _i35.PageInfo<ScheduleVideoAndPhotoRouteArgs> page =
-      _i35.PageInfo<ScheduleVideoAndPhotoRouteArgs>(name);
+  static const _i35.PageInfo<ScheduleVideoRouteArgs> page =
+      _i35.PageInfo<ScheduleVideoRouteArgs>(name);
 }
 
-class ScheduleVideoAndPhotoRouteArgs {
-  const ScheduleVideoAndPhotoRouteArgs({this.key});
+class ScheduleVideoRouteArgs {
+  const ScheduleVideoRouteArgs({
+    this.key,
+    required this.id,
+  });
 
   final _i36.Key? key;
 
+  final int id;
+
   @override
   String toString() {
-    return 'ScheduleVideoAndPhotoRouteArgs{key: $key}';
+    return 'ScheduleVideoRouteArgs{key: $key, id: $id}';
   }
 }
 
@@ -1045,7 +1061,7 @@ class SheduleSignatureRouteArgs {
 /// [_i25.SheduledetailPage]
 class SheduledetailRoute extends _i35.PageRouteInfo<SheduledetailRouteArgs> {
   SheduledetailRoute({
-    _i36.Key? key,
+    _i37.Key? key,
     required int id,
     required int i,
     required int driversIndex,
@@ -1075,7 +1091,7 @@ class SheduledetailRouteArgs {
     required this.driversIndex,
   });
 
-  final _i36.Key? key;
+  final _i37.Key? key;
 
   final int id;
 

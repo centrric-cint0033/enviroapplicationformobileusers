@@ -27,9 +27,7 @@ class ScheduleList extends StatelessWidget {
         itemBuilder: (BuildContext context, int i) {
           return GestureDetector(
             onTap: () {
-              vmSchedule.showDeleteClearButtonsBeforePic = false;
-              vmSchedule.showDeleteClearButtonsAfterPic = false;
-              vmSchedule.imageIds = [];
+              vmSchedule.clearFn();
               context.router.push(SheduledetailRoute(
                   id: vmSchedule.sheduleweekResponse.data?[i].id ?? 0,
                   i: i,

@@ -27,7 +27,8 @@ class RouteNames {
   static const String rsheduledetailpage = '/sheduledetailpage';
   static const String rupdatevehiclepreinspectionpage =
       '/updatevehiclepreinspectionpage ';
-  static const String cameragallerypage = '/camera_gallery_page ';
+  static const String scheduleimagepage = '/scheduele_video_page ';
+    static const String schedulevideopage = '/scheduele_image_page ';
     static const String weighbridgemediapage = '/weigh_bridge_media_page ';
     static const String schedulesignaturepage = '/schedule_signature_page ';
   static const String rsheduledetail2page = '/sheduledetail2page ';

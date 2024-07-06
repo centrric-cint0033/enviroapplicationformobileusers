@@ -9,8 +9,8 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class BeforeImagesList extends StatelessWidget {
-  const BeforeImagesList({super.key, required this.i, required this.id});
+class GalleryImagesList extends StatelessWidget {
+  const GalleryImagesList({super.key, required this.i, required this.id});
   final int i;
   final int id;
   @override
@@ -24,12 +24,12 @@ class BeforeImagesList extends StatelessWidget {
             decoration: BoxDecoration(color: Colors.grey.shade300),
             child: Align(
               alignment: Alignment.centerLeft,
-              child: vmSchedule.showDeleteClearButtonsBeforePic
+              child: vmSchedule.showDeleteClearButtonsGalleryPic
                   ? Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Text(
-                          "Before Job Images",
+                          "Gallery",
                           style: TextStyle(fontSize: 9.w),
                         ),
                         cmTextButton(
@@ -49,13 +49,13 @@ class BeforeImagesList extends StatelessWidget {
                                   vmSchedule.deleteImageScheduleApi(
                                       context: context,
                                       id: id,
-                                      imageId: vmSchedule.imageIds);
+                                      imageId: vmSchedule.imageIdsGalleryPic);
                                 });
                           },
                         ),
                         cmTextButton(
                             onPressed: () {
-                              vmSchedule.clearSelectionModeBeforePic();
+                              vmSchedule.clearSelectionModeGalleryPic();
                             },
                             buttonText: " Clear Selection  ",
                             bgColor: Appthemes.cPrimary),
@@ -66,7 +66,7 @@ class BeforeImagesList extends StatelessWidget {
                       child: Row(
                         children: [
                           Text(
-                            "Before Job Images",
+                            "Gallery",
                             style: TextStyle(fontSize: 9.w),
                           ),
                         ],
@@ -82,10 +82,10 @@ class BeforeImagesList extends StatelessWidget {
             decoration: BoxDecoration(color: Colors.grey.shade300),
             child: Observer(builder: (context) {
               final res = vmSchedule.sheduleweekResponse;
-              final images = res.data?[i].beforePics ?? [];
-              vmSchedule.initializeSelectionStatesBeforePic(images.length);
+              final images = res.data?[i].gallery ?? [];
+              vmSchedule.initializeSelectionStatesGalleryPic(images.length);
               return ListView.builder(
-                itemCount: res.data?[i].beforePics?.length,
+                itemCount: res.data?[i].gallery?.length,
                 shrinkWrap: true,
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (context, index) {
@@ -94,44 +94,27 @@ class BeforeImagesList extends StatelessWidget {
                     padding: EdgeInsets.all(8.0.h),
                     child: InkWell(
                       onTap: () async {
-                        if (vmSchedule.selectedIndexBeforePic == index) {
-                          vmSchedule.toggleSelectionBeforePic(
+                        if (vmSchedule.selectedIndexGalleryPic == index) {
+                          vmSchedule.toggleSelectionGalleryPic(
                               index, images[index].id!);
-                        } else if (!vmSchedule.selectedStatesBeforePic
+                        } else if (!vmSchedule.selectedStatesGalleryPic
                             .any((isSelected) => isSelected)) {
                           await _launchImageUrl(imageUrl);
                         } else {
-                          vmSchedule.toggleSelectionBeforePic(
+                          vmSchedule.toggleSelectionGalleryPic(
                               index, images[index].id!);
                         }
                       },
                       onLongPress: () {
-                        if (!vmSchedule.selectedStatesBeforePic
+                        if (!vmSchedule.selectedStatesGalleryPic
                             .any((isSelected) => isSelected)) {
-                          vmSchedule.startSelectionBeforePic(
+                          vmSchedule.startSelectionGalleryPic(
                               index, images[index].id!);
                         }
                       },
-                      // onTap: () async {
-                      //   if (vmSchedule.selectedStatesBeforePic[index]) {
-                      //     vmSchedule.toggleSelectionBeforePic(
-                      //         index, images[index].id!);
-                      //   } else {
-                      //     await _launchImageUrl(imageUrl);
-                      //   }
-                      // },
-                      // onLongPress: () {
-                      //   if (vmSchedule.selectedStatesBeforePic[index]) {
-                      //     vmSchedule.toggleSelectionBeforePic(
-                      //         index, images[index].id!);
-                      //   } else {
-                      //     vmSchedule.startSelectionBeforePic(
-                      //         index, images[index].id!);
-                      //   }
-                      // },
                       child: Observer(builder: (context) {
                         final isSelected =
-                            vmSchedule.selectedStatesBeforePic[index];
+                            vmSchedule.selectedStatesGalleryPic[index];
                         return Container(
                           width: 78.h,
                           decoration: BoxDecoration(
@@ -143,7 +126,7 @@ class BeforeImagesList extends StatelessWidget {
                           child: Image(
                               fit: BoxFit.cover,
                               image: CachedNetworkImageProvider(
-                                  res.data?[i].beforePics?[index].file ?? "")),
+                                  res.data?[i].gallery?[index].file ?? "")),
                         );
                       }),
                     ),

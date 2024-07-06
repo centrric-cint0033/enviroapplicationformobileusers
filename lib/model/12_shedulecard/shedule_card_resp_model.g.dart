@@ -10,7 +10,9 @@ _$SheduleCardRespModelImpl _$$SheduleCardRespModelImplFromJson(
         Map<String, dynamic> json) =>
     _$SheduleCardRespModelImpl(
       id: (json['id'] as num?)?.toInt(),
-      jobVideo: json['job_video'] as List<dynamic>?,
+      jobVideo: (json['job_video'] as List<dynamic>?)
+          ?.map((e) => Job.fromJson(e as Map<String, dynamic>))
+          .toList(),
       client: json['client'] == null
           ? null
           : Client.fromJson(json['client'] as Map<String, dynamic>),
@@ -33,7 +35,9 @@ _$SheduleCardRespModelImpl _$$SheduleCardRespModelImplFromJson(
       afterPics: (json['after_pics'] as List<dynamic>?)
           ?.map((e) => Pic.fromJson(e as Map<String, dynamic>))
           .toList(),
-      gallery: json['gallery'] as List<dynamic>?,
+      gallery: (json['gallery'] as List<dynamic>?)
+          ?.map((e) => Pic.fromJson(e as Map<String, dynamic>))
+          .toList(),
       comments: (json['comments'] as List<dynamic>?)
           ?.map((e) => Comment.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -285,4 +289,20 @@ Map<String, dynamic> _$$TeamEmployeeImplToJson(_$TeamEmployeeImpl instance) =>
       'id': instance.id,
       'name': instance.name,
       'dp': instance.dp,
+    };
+
+_$JobImpl _$$JobImplFromJson(Map<String, dynamic> json) => _$JobImpl(
+      id: (json['id'] as num?)?.toInt(),
+      video: json['video'] as String?,
+      name: json['name'] as String?,
+      createdAt: json['created_date_time'] as String?,
+      editedAt: json['edited_date_time'] as String?,
+    );
+
+Map<String, dynamic> _$$JobImplToJson(_$JobImpl instance) => <String, dynamic>{
+      'id': instance.id,
+      'video': instance.video,
+      'name': instance.name,
+      'created_date_time': instance.createdAt,
+      'edited_date_time': instance.editedAt,
     };

@@ -54,4 +54,5 @@ class ApiEndPoints
   static const endpointSheduleStatusEdit =
       "/api/v1/schedule/jobschedule/mobile/edit/";
   static const endpointsheduleaddimage = "/api/v1/schedule/jobschedule/images/";
+  static const endpointsheduleaddvideo = "/api/v1/schedule/video/";
 }

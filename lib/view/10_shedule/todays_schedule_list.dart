@@ -103,6 +103,7 @@ class TodaysScheduleList extends StatelessWidget {
                               content: "Have you Finished the Job",
                               onSubmit: () {},
                               onSubmit2: () {
+                                vmSchedule.clearFn();
                                 context.router.push(SheduledetailRoute(
                                     id: vmSchedule
                                             .shedulecardResponse.data?[i].id ??

@@ -23,7 +23,7 @@ mixin _$SheduleCardRespModel {
   @JsonKey(name: "id")
   int? get id => throw _privateConstructorUsedError;
   @JsonKey(name: "job_video")
-  List<dynamic>? get jobVideo => throw _privateConstructorUsedError;
+  List<Job>? get jobVideo => throw _privateConstructorUsedError;
   @JsonKey(name: "client")
   Client? get client => throw _privateConstructorUsedError;
   @JsonKey(name: "quote_id")
@@ -53,7 +53,7 @@ mixin _$SheduleCardRespModel {
   @JsonKey(name: "after_pics")
   List<Pic>? get afterPics => throw _privateConstructorUsedError;
   @JsonKey(name: "gallery")
-  List<dynamic>? get gallery => throw _privateConstructorUsedError;
+  List<Pic>? get gallery => throw _privateConstructorUsedError;
   @JsonKey(name: "comments")
   List<Comment>? get comments => throw _privateConstructorUsedError;
   @JsonKey(name: "status")
@@ -137,7 +137,7 @@ abstract class $SheduleCardRespModelCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(name: "id") int? id,
-      @JsonKey(name: "job_video") List<dynamic>? jobVideo,
+      @JsonKey(name: "job_video") List<Job>? jobVideo,
       @JsonKey(name: "client") Client? client,
       @JsonKey(name: "quote_id") int? quoteId,
       @JsonKey(name: "created_by") String? createdBy,
@@ -152,7 +152,7 @@ abstract class $SheduleCardRespModelCopyWith<$Res> {
       @JsonKey(name: "shift") String? shift,
       @JsonKey(name: "before_pics") List<Pic>? beforePics,
       @JsonKey(name: "after_pics") List<Pic>? afterPics,
-      @JsonKey(name: "gallery") List<dynamic>? gallery,
+      @JsonKey(name: "gallery") List<Pic>? gallery,
       @JsonKey(name: "comments") List<Comment>? comments,
       @JsonKey(name: "status") String? status,
       @JsonKey(name: "frequency") String? frequency,
@@ -269,7 +269,7 @@ class _$SheduleCardRespModelCopyWithImpl<$Res,
       jobVideo: freezed == jobVideo
           ? _value.jobVideo
           : jobVideo // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>?,
+              as List<Job>?,
       client: freezed == client
           ? _value.client
           : client // ignore: cast_nullable_to_non_nullable
@@ -329,7 +329,7 @@ class _$SheduleCardRespModelCopyWithImpl<$Res,
       gallery: freezed == gallery
           ? _value.gallery
           : gallery // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>?,
+              as List<Pic>?,
       comments: freezed == comments
           ? _value.comments
           : comments // ignore: cast_nullable_to_non_nullable
@@ -504,7 +504,7 @@ abstract class _$$SheduleCardRespModelImplCopyWith<$Res>
   @useResult
   $Res call(
       {@JsonKey(name: "id") int? id,
-      @JsonKey(name: "job_video") List<dynamic>? jobVideo,
+      @JsonKey(name: "job_video") List<Job>? jobVideo,
       @JsonKey(name: "client") Client? client,
       @JsonKey(name: "quote_id") int? quoteId,
       @JsonKey(name: "created_by") String? createdBy,
@@ -519,7 +519,7 @@ abstract class _$$SheduleCardRespModelImplCopyWith<$Res>
       @JsonKey(name: "shift") String? shift,
       @JsonKey(name: "before_pics") List<Pic>? beforePics,
       @JsonKey(name: "after_pics") List<Pic>? afterPics,
-      @JsonKey(name: "gallery") List<dynamic>? gallery,
+      @JsonKey(name: "gallery") List<Pic>? gallery,
       @JsonKey(name: "comments") List<Comment>? comments,
       @JsonKey(name: "status") String? status,
       @JsonKey(name: "frequency") String? frequency,
@@ -635,7 +635,7 @@ class __$$SheduleCardRespModelImplCopyWithImpl<$Res>
       jobVideo: freezed == jobVideo
           ? _value._jobVideo
           : jobVideo // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>?,
+              as List<Job>?,
       client: freezed == client
           ? _value.client
           : client // ignore: cast_nullable_to_non_nullable
@@ -695,7 +695,7 @@ class __$$SheduleCardRespModelImplCopyWithImpl<$Res>
       gallery: freezed == gallery
           ? _value._gallery
           : gallery // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>?,
+              as List<Pic>?,
       comments: freezed == comments
           ? _value._comments
           : comments // ignore: cast_nullable_to_non_nullable
@@ -841,7 +841,7 @@ class __$$SheduleCardRespModelImplCopyWithImpl<$Res>
 class _$SheduleCardRespModelImpl implements _SheduleCardRespModel {
   const _$SheduleCardRespModelImpl(
       {@JsonKey(name: "id") this.id,
-      @JsonKey(name: "job_video") final List<dynamic>? jobVideo,
+      @JsonKey(name: "job_video") final List<Job>? jobVideo,
       @JsonKey(name: "client") this.client,
       @JsonKey(name: "quote_id") this.quoteId,
       @JsonKey(name: "created_by") this.createdBy,
@@ -856,7 +856,7 @@ class _$SheduleCardRespModelImpl implements _SheduleCardRespModel {
       @JsonKey(name: "shift") this.shift,
       @JsonKey(name: "before_pics") final List<Pic>? beforePics,
       @JsonKey(name: "after_pics") final List<Pic>? afterPics,
-      @JsonKey(name: "gallery") final List<dynamic>? gallery,
+      @JsonKey(name: "gallery") final List<Pic>? gallery,
       @JsonKey(name: "comments") final List<Comment>? comments,
       @JsonKey(name: "status") this.status,
       @JsonKey(name: "frequency") this.frequency,
@@ -908,10 +908,10 @@ class _$SheduleCardRespModelImpl implements _SheduleCardRespModel {
   @override
   @JsonKey(name: "id")
   final int? id;
-  final List<dynamic>? _jobVideo;
+  final List<Job>? _jobVideo;
   @override
   @JsonKey(name: "job_video")
-  List<dynamic>? get jobVideo {
+  List<Job>? get jobVideo {
     final value = _jobVideo;
     if (value == null) return null;
     if (_jobVideo is EqualUnmodifiableListView) return _jobVideo;
@@ -985,10 +985,10 @@ class _$SheduleCardRespModelImpl implements _SheduleCardRespModel {
     return EqualUnmodifiableListView(value);
   }
 
-  final List<dynamic>? _gallery;
+  final List<Pic>? _gallery;
   @override
   @JsonKey(name: "gallery")
-  List<dynamic>? get gallery {
+  List<Pic>? get gallery {
     final value = _gallery;
     if (value == null) return null;
     if (_gallery is EqualUnmodifiableListView) return _gallery;
@@ -1296,7 +1296,7 @@ class _$SheduleCardRespModelImpl implements _SheduleCardRespModel {
 abstract class _SheduleCardRespModel implements SheduleCardRespModel {
   const factory _SheduleCardRespModel(
       {@JsonKey(name: "id") final int? id,
-      @JsonKey(name: "job_video") final List<dynamic>? jobVideo,
+      @JsonKey(name: "job_video") final List<Job>? jobVideo,
       @JsonKey(name: "client") final Client? client,
       @JsonKey(name: "quote_id") final int? quoteId,
       @JsonKey(name: "created_by") final String? createdBy,
@@ -1312,7 +1312,7 @@ abstract class _SheduleCardRespModel implements SheduleCardRespModel {
       @JsonKey(name: "shift") final String? shift,
       @JsonKey(name: "before_pics") final List<Pic>? beforePics,
       @JsonKey(name: "after_pics") final List<Pic>? afterPics,
-      @JsonKey(name: "gallery") final List<dynamic>? gallery,
+      @JsonKey(name: "gallery") final List<Pic>? gallery,
       @JsonKey(name: "comments") final List<Comment>? comments,
       @JsonKey(name: "status") final String? status,
       @JsonKey(name: "frequency") final String? frequency,
@@ -1363,7 +1363,7 @@ abstract class _SheduleCardRespModel implements SheduleCardRespModel {
   int? get id;
   @override
   @JsonKey(name: "job_video")
-  List<dynamic>? get jobVideo;
+  List<Job>? get jobVideo;
   @override
   @JsonKey(name: "client")
   Client? get client;
@@ -1408,7 +1408,7 @@ abstract class _SheduleCardRespModel implements SheduleCardRespModel {
   List<Pic>? get afterPics;
   @override
   @JsonKey(name: "gallery")
-  List<dynamic>? get gallery;
+  List<Pic>? get gallery;
   @override
   @JsonKey(name: "comments")
   List<Comment>? get comments;
@@ -3485,5 +3485,235 @@ abstract class _TeamEmployee implements TeamEmployee {
   @override
   @JsonKey(ignore: true)
   _$$TeamEmployeeImplCopyWith<_$TeamEmployeeImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+Job _$JobFromJson(Map<String, dynamic> json) {
+  return _Job.fromJson(json);
+}
+
+/// @nodoc
+mixin _$Job {
+  @JsonKey(name: "id")
+  int? get id => throw _privateConstructorUsedError;
+  @JsonKey(name: "video")
+  String? get video => throw _privateConstructorUsedError;
+  @JsonKey(name: "name")
+  String? get name => throw _privateConstructorUsedError;
+  @JsonKey(name: "created_date_time")
+  String? get createdAt => throw _privateConstructorUsedError;
+  @JsonKey(name: "edited_date_time")
+  String? get editedAt => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $JobCopyWith<Job> get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $JobCopyWith<$Res> {
+  factory $JobCopyWith(Job value, $Res Function(Job) then) =
+      _$JobCopyWithImpl<$Res, Job>;
+  @useResult
+  $Res call(
+      {@JsonKey(name: "id") int? id,
+      @JsonKey(name: "video") String? video,
+      @JsonKey(name: "name") String? name,
+      @JsonKey(name: "created_date_time") String? createdAt,
+      @JsonKey(name: "edited_date_time") String? editedAt});
+}
+
+/// @nodoc
+class _$JobCopyWithImpl<$Res, $Val extends Job> implements $JobCopyWith<$Res> {
+  _$JobCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? video = freezed,
+    Object? name = freezed,
+    Object? createdAt = freezed,
+    Object? editedAt = freezed,
+  }) {
+    return _then(_value.copyWith(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
+      video: freezed == video
+          ? _value.video
+          : video // ignore: cast_nullable_to_non_nullable
+              as String?,
+      name: freezed == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
+      createdAt: freezed == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as String?,
+      editedAt: freezed == editedAt
+          ? _value.editedAt
+          : editedAt // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$JobImplCopyWith<$Res> implements $JobCopyWith<$Res> {
+  factory _$$JobImplCopyWith(_$JobImpl value, $Res Function(_$JobImpl) then) =
+      __$$JobImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {@JsonKey(name: "id") int? id,
+      @JsonKey(name: "video") String? video,
+      @JsonKey(name: "name") String? name,
+      @JsonKey(name: "created_date_time") String? createdAt,
+      @JsonKey(name: "edited_date_time") String? editedAt});
+}
+
+/// @nodoc
+class __$$JobImplCopyWithImpl<$Res> extends _$JobCopyWithImpl<$Res, _$JobImpl>
+    implements _$$JobImplCopyWith<$Res> {
+  __$$JobImplCopyWithImpl(_$JobImpl _value, $Res Function(_$JobImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? video = freezed,
+    Object? name = freezed,
+    Object? createdAt = freezed,
+    Object? editedAt = freezed,
+  }) {
+    return _then(_$JobImpl(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
+      video: freezed == video
+          ? _value.video
+          : video // ignore: cast_nullable_to_non_nullable
+              as String?,
+      name: freezed == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
+      createdAt: freezed == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as String?,
+      editedAt: freezed == editedAt
+          ? _value.editedAt
+          : editedAt // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$JobImpl implements _Job {
+  const _$JobImpl(
+      {@JsonKey(name: "id") this.id,
+      @JsonKey(name: "video") this.video,
+      @JsonKey(name: "name") this.name,
+      @JsonKey(name: "created_date_time") this.createdAt,
+      @JsonKey(name: "edited_date_time") this.editedAt});
+
+  factory _$JobImpl.fromJson(Map<String, dynamic> json) =>
+      _$$JobImplFromJson(json);
+
+  @override
+  @JsonKey(name: "id")
+  final int? id;
+  @override
+  @JsonKey(name: "video")
+  final String? video;
+  @override
+  @JsonKey(name: "name")
+  final String? name;
+  @override
+  @JsonKey(name: "created_date_time")
+  final String? createdAt;
+  @override
+  @JsonKey(name: "edited_date_time")
+  final String? editedAt;
+
+  @override
+  String toString() {
+    return 'Job(id: $id, video: $video, name: $name, createdAt: $createdAt, editedAt: $editedAt)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$JobImpl &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.video, video) || other.video == video) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.createdAt, createdAt) ||
+                other.createdAt == createdAt) &&
+            (identical(other.editedAt, editedAt) ||
+                other.editedAt == editedAt));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, id, video, name, createdAt, editedAt);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$JobImplCopyWith<_$JobImpl> get copyWith =>
+      __$$JobImplCopyWithImpl<_$JobImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$JobImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _Job implements Job {
+  const factory _Job(
+      {@JsonKey(name: "id") final int? id,
+      @JsonKey(name: "video") final String? video,
+      @JsonKey(name: "name") final String? name,
+      @JsonKey(name: "created_date_time") final String? createdAt,
+      @JsonKey(name: "edited_date_time") final String? editedAt}) = _$JobImpl;
+
+  factory _Job.fromJson(Map<String, dynamic> json) = _$JobImpl.fromJson;
+
+  @override
+  @JsonKey(name: "id")
+  int? get id;
+  @override
+  @JsonKey(name: "video")
+  String? get video;
+  @override
+  @JsonKey(name: "name")
+  String? get name;
+  @override
+  @JsonKey(name: "created_date_time")
+  String? get createdAt;
+  @override
+  @JsonKey(name: "edited_date_time")
+  String? get editedAt;
+  @override
+  @JsonKey(ignore: true)
+  _$$JobImplCopyWith<_$JobImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
