@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:io';
 import 'package:auto_route/auto_route.dart';
 import 'package:enviro_mobile_application/model/10_team/leave_res_model/leave_res_model/leave_res_model.dart';
@@ -245,12 +244,9 @@ class LeaveApplicationPage extends StatelessWidget {
                     border: TableBorder.all(), // Adds a border to the table
                     defaultVerticalAlignment: TableCellVerticalAlignment.middle,
                     columnWidths: {
-                      0: FlexColumnWidth(
-                          160.w), // FlexColumnWidth allows flexible sizing
-                      1: FixedColumnWidth(
-                          80.w), // FixedColumnWidth for a fixed size
-                      2: FlexColumnWidth(
-                          80.w), // Another example of FlexColumnWidth
+                      0: FlexColumnWidth(160.w),
+                      1: FixedColumnWidth(80.w),
+                      2: FlexColumnWidth(80.w),
                     },
                     children: [
                       TableRow(
@@ -264,27 +260,24 @@ class LeaveApplicationPage extends StatelessWidget {
                               ),
                             ),
                           ),
-                          Observer(builder: (context) {
-                            log(vmTeam.totalDayController.text);
-                            return TableCell(
-                              child: Center(
-                                  child: TextField(
-                                controller: vmTeam.dayController1,
-                                style: TextStyle(fontSize: 9.w),
-                                keyboardType: TextInputType.number,
-                                onChanged: (value) {
-                                  vmTeam.totalDayFn();
-                                },
-                                decoration: InputDecoration(
-                                  hintText: 'Day',
-                                  hintStyle: TextStyle(fontSize: 9.w),
-                                  border: InputBorder.none,
-                                  contentPadding: const EdgeInsets.symmetric(
-                                      horizontal: 8.0),
-                                ),
-                              )),
-                            );
-                          }),
+                          TableCell(
+                            child: Center(
+                                child: TextField(
+                              controller: vmTeam.dayController1,
+                              style: TextStyle(fontSize: 9.w),
+                              keyboardType: TextInputType.number,
+                              onChanged: (value) {
+                                vmTeam.totalDayFn();
+                              },
+                              decoration: InputDecoration(
+                                hintText: 'Day',
+                                hintStyle: TextStyle(fontSize: 9.w),
+                                border: InputBorder.none,
+                                contentPadding:
+                                    const EdgeInsets.symmetric(horizontal: 8.0),
+                              ),
+                            )),
+                          ),
                           TableCell(
                             child: Center(
                                 child: TextField(

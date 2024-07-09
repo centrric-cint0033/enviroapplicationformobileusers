@@ -58,7 +58,10 @@ class TeamProfileScreen extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               cmOutlineButton(
-                                  text: "TimeSheet", onPressed: () {}),
+                                  text: "TimeSheet",
+                                  onPressed: () {
+                                    context.router.push(TimeSheetRoute());
+                                  }),
                               cmOutlineButton(
                                   text: "Leave Application",
                                   onPressed: () {

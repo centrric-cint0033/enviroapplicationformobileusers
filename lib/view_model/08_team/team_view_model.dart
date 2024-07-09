@@ -902,6 +902,8 @@ abstract class TeamViewModelBase with Store {
   @observable
   bool? leaveSubmitButtonEnable = false;
   @observable
+  DateTime? selectedChooseWeekTimesheet;
+  @observable
   TextEditingController dayController1 = TextEditingController();
   TextEditingController dayController2 = TextEditingController();
   TextEditingController dayController3 = TextEditingController();
@@ -911,8 +913,22 @@ abstract class TeamViewModelBase with Store {
   TextEditingController hrsController3 = TextEditingController();
   TextEditingController totalHrsController = TextEditingController();
   TextEditingController commentsControllerr = TextEditingController();
+  ScrollController timesheetScrCntrller = ScrollController();
   @observable
-  String day1Value = '';
+  Timer? fridayStartTime;
+  @observable
+  Timer? saturdayStartTime;
+  @observable
+  Timer? sundayStartTime;
+  @observable
+  Timer? mondayStartTime;
+  @observable
+  Timer? tuesdayStartTime;
+  @observable
+  Timer? wednesdayStartTime;
+  @observable
+  Timer? thursdayStartTime;
+
   @action
   void selectCheckbox(int? index) {
     selectedCheckboxIndex = index;
@@ -939,11 +955,15 @@ abstract class TeamViewModelBase with Store {
   }
 
   @action
+  datePickerFn12(date) {
+    selectedChooseWeekTimesheet = date;
+  }
+
+  @action
   totalDayFn() {
     int day1 = int.tryParse(dayController1.text) ?? 0;
     int day2 = int.tryParse(dayController2.text) ?? 0;
     int day3 = int.tryParse(dayController3.text) ?? 0;
-    vmTeam.day1Value = (day1 + day2 + day3).toString();
     totalDayController.text = (day1 + day2 + day3).toString();
   }
 

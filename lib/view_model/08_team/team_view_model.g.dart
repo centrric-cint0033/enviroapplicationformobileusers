@@ -869,6 +869,23 @@ mixin _$TeamViewModel on TeamViewModelBase, Store {
     });
   }
 
+  late final _$selectedChooseWeekTimesheetAtom = Atom(
+      name: 'TeamViewModelBase.selectedChooseWeekTimesheet', context: context);
+
+  @override
+  DateTime? get selectedChooseWeekTimesheet {
+    _$selectedChooseWeekTimesheetAtom.reportRead();
+    return super.selectedChooseWeekTimesheet;
+  }
+
+  @override
+  set selectedChooseWeekTimesheet(DateTime? value) {
+    _$selectedChooseWeekTimesheetAtom
+        .reportWrite(value, super.selectedChooseWeekTimesheet, () {
+      super.selectedChooseWeekTimesheet = value;
+    });
+  }
+
   late final _$dayController1Atom =
       Atom(name: 'TeamViewModelBase.dayController1', context: context);
 
@@ -885,19 +902,115 @@ mixin _$TeamViewModel on TeamViewModelBase, Store {
     });
   }
 
-  late final _$day1ValueAtom =
-      Atom(name: 'TeamViewModelBase.day1Value', context: context);
+  late final _$fridayStartTimeAtom =
+      Atom(name: 'TeamViewModelBase.fridayStartTime', context: context);
 
   @override
-  String get day1Value {
-    _$day1ValueAtom.reportRead();
-    return super.day1Value;
+  Timer? get fridayStartTime {
+    _$fridayStartTimeAtom.reportRead();
+    return super.fridayStartTime;
   }
 
   @override
-  set day1Value(String value) {
-    _$day1ValueAtom.reportWrite(value, super.day1Value, () {
-      super.day1Value = value;
+  set fridayStartTime(Timer? value) {
+    _$fridayStartTimeAtom.reportWrite(value, super.fridayStartTime, () {
+      super.fridayStartTime = value;
+    });
+  }
+
+  late final _$saturdayStartTimeAtom =
+      Atom(name: 'TeamViewModelBase.saturdayStartTime', context: context);
+
+  @override
+  Timer? get saturdayStartTime {
+    _$saturdayStartTimeAtom.reportRead();
+    return super.saturdayStartTime;
+  }
+
+  @override
+  set saturdayStartTime(Timer? value) {
+    _$saturdayStartTimeAtom.reportWrite(value, super.saturdayStartTime, () {
+      super.saturdayStartTime = value;
+    });
+  }
+
+  late final _$sundayStartTimeAtom =
+      Atom(name: 'TeamViewModelBase.sundayStartTime', context: context);
+
+  @override
+  Timer? get sundayStartTime {
+    _$sundayStartTimeAtom.reportRead();
+    return super.sundayStartTime;
+  }
+
+  @override
+  set sundayStartTime(Timer? value) {
+    _$sundayStartTimeAtom.reportWrite(value, super.sundayStartTime, () {
+      super.sundayStartTime = value;
+    });
+  }
+
+  late final _$mondayStartTimeAtom =
+      Atom(name: 'TeamViewModelBase.mondayStartTime', context: context);
+
+  @override
+  Timer? get mondayStartTime {
+    _$mondayStartTimeAtom.reportRead();
+    return super.mondayStartTime;
+  }
+
+  @override
+  set mondayStartTime(Timer? value) {
+    _$mondayStartTimeAtom.reportWrite(value, super.mondayStartTime, () {
+      super.mondayStartTime = value;
+    });
+  }
+
+  late final _$tuesdayStartTimeAtom =
+      Atom(name: 'TeamViewModelBase.tuesdayStartTime', context: context);
+
+  @override
+  Timer? get tuesdayStartTime {
+    _$tuesdayStartTimeAtom.reportRead();
+    return super.tuesdayStartTime;
+  }
+
+  @override
+  set tuesdayStartTime(Timer? value) {
+    _$tuesdayStartTimeAtom.reportWrite(value, super.tuesdayStartTime, () {
+      super.tuesdayStartTime = value;
+    });
+  }
+
+  late final _$wednesdayStartTimeAtom =
+      Atom(name: 'TeamViewModelBase.wednesdayStartTime', context: context);
+
+  @override
+  Timer? get wednesdayStartTime {
+    _$wednesdayStartTimeAtom.reportRead();
+    return super.wednesdayStartTime;
+  }
+
+  @override
+  set wednesdayStartTime(Timer? value) {
+    _$wednesdayStartTimeAtom.reportWrite(value, super.wednesdayStartTime, () {
+      super.wednesdayStartTime = value;
+    });
+  }
+
+  late final _$thursdayStartTimeAtom =
+      Atom(name: 'TeamViewModelBase.thursdayStartTime', context: context);
+
+  @override
+  Timer? get thursdayStartTime {
+    _$thursdayStartTimeAtom.reportRead();
+    return super.thursdayStartTime;
+  }
+
+  @override
+  set thursdayStartTime(Timer? value) {
+    _$thursdayStartTimeAtom.reportWrite(value, super.thursdayStartTime, () {
+      super.thursdayStartTime = value;
     });
   }
 
@@ -1390,6 +1503,17 @@ mixin _$TeamViewModel on TeamViewModelBase, Store {
   }
 
   @override
+  dynamic datePickerFn12(dynamic date) {
+    final _$actionInfo = _$TeamViewModelBaseActionController.startAction(
+        name: 'TeamViewModelBase.datePickerFn12');
+    try {
+      return super.datePickerFn12(date);
+    } finally {
+      _$TeamViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   dynamic totalDayFn() {
     final _$actionInfo = _$TeamViewModelBaseActionController.startAction(
         name: 'TeamViewModelBase.totalDayFn');
@@ -1488,8 +1612,15 @@ selectedLeaveTodate: ${selectedLeaveTodate},
 selectedLastDayofWork: ${selectedLastDayofWork},
 selectedReturnToWorkDate: ${selectedReturnToWorkDate},
 leaveSubmitButtonEnable: ${leaveSubmitButtonEnable},
+selectedChooseWeekTimesheet: ${selectedChooseWeekTimesheet},
 dayController1: ${dayController1},
-day1Value: ${day1Value},
+fridayStartTime: ${fridayStartTime},
+saturdayStartTime: ${saturdayStartTime},
+sundayStartTime: ${sundayStartTime},
+mondayStartTime: ${mondayStartTime},
+tuesdayStartTime: ${tuesdayStartTime},
+wednesdayStartTime: ${wednesdayStartTime},
+thursdayStartTime: ${thursdayStartTime},
 addLeaveResponse: ${addLeaveResponse},
 addFileLeave: ${addFileLeave}
     ''';
