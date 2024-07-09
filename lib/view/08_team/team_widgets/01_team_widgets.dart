@@ -38,7 +38,7 @@ Widget customContainerWidget(Color color, String text) {
     child: Center(
       child: Text(
         text,
-        style: TextStyle(color: color, fontSize: 10.h),
+        style: TextStyle(color: color, fontSize: 10.w),
       ),
     ),
   );
@@ -64,7 +64,10 @@ Widget listTile(
                           topRight: Radius.circular(32),
                           bottomRight: Radius.circular(32))),
                   leading: dpImage(data?.dpThumbnail ?? data?.dp ?? ""),
-                  title: Text(data?.name ?? ""),
+                  title: Text(
+                    data?.name ?? "",
+                    style: TextStyle(fontSize: 11.w),
+                  ),
                   trailing: customContainerWidget(Colors.blue, "View")),
             ),
           ),

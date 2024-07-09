@@ -8,6 +8,7 @@ import 'package:enviro_mobile_application/widgets/cmn_title_textwidget.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
+// import 'package:path/path.dart' as p;
 
 @RoutePage()
 class JobCardPage extends StatelessWidget {
@@ -161,6 +162,84 @@ class JobCardPage extends StatelessWidget {
                             _buildSectioncontainer(vmSchedule
                                     .jobcardResponse.data?.additionalImages ??
                                 ''),
+                            // sized0hx05,
+                            // CmButton(
+                            //   text: "Add File",
+                            //   width: 80.w,
+                            //   color: Appthemes.cPrimary,
+                            //   onPressed: () {
+                            //     vmSchedule.addFileJobcardFn();
+                            //   },
+                            // ),
+                            // if (vmSchedule.addFileJobcardList!.isNotEmpty) ...[
+                            //   sized0hx05,
+                            //   SizedBox(
+                            //     height: 70.h,
+                            //     width: double.infinity,
+                            //     child: ListView.builder(
+                            //       scrollDirection: Axis.horizontal,
+                            //       itemCount:
+                            //           vmSchedule.addFileJobcardList?.length,
+                            //       itemBuilder: (context, index) {
+                            //         String imagePath =
+                            //             vmSchedule.addFileJobcardList![index];
+                            //         String fileName = p.basename(imagePath);
+                            //         bool isImage = imagePath.endsWith('.jpg') ||
+                            //             imagePath.endsWith('.jpeg') ||
+                            //             imagePath.endsWith('.png');
+                            //         return InkWell(
+                            //           onTap: () async {
+                            //             OpenFile.open(
+                            //               imagePath,
+                            //             );
+                            //           },
+                            //           onLongPress: () {
+                            //             showConfirmationAlert(
+                            //                 context: context,
+                            //                 onSubmit: () {
+                            //                   vmSchedule.addFileJobcardList
+                            //                       ?.removeAt(index);
+                            //                 },
+                            //                 content:
+                            //                     "Are you sure you want to delete?",
+                            //                 submitText: "Yes",
+                            //                 submitText2: "No");
+                            //           },
+                            //           child: Container(
+                            //             width: 80.h, // Width of each item
+                            //             foregroundDecoration:
+                            //                 BoxDecoration(border: Border.all()),
+                            //             child: Column(
+                            //               children: [
+                            //                 sized0hx05,
+                            //                 Expanded(
+                            //                   child: isImage
+                            //                       ? Image.file(
+                            //                           File(imagePath),
+                            //                           fit: BoxFit.cover,
+                            //                         )
+                            //                       : Icon(
+                            //                           Icons.file_copy,
+                            //                           size: 20.w,
+                            //                           color: Colors.red,
+                            //                         ),
+                            //                 ),
+                            //                 Expanded(
+                            //                     child: Text(
+                            //                   fileName,
+                            //                   style: TextStyle(
+                            //                       fontSize: 9.w,
+                            //                       overflow:
+                            //                           TextOverflow.ellipsis),
+                            //                 ))
+                            //               ],
+                            //             ),
+                            //           ),
+                            //         );
+                            //       },
+                            //     ),
+                            //   )
+                            // ],
                             sized0hx10,
                             expandedRowShowsText(
                                 "Data form Required",

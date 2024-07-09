@@ -114,6 +114,8 @@ abstract class ScheduleViewModelBase with Store {
   @observable
   ObservableList<String>? pickedWeighImageList = ObservableList<String>();
   @observable
+  ObservableList<String>? addFileJobcardList = ObservableList<String>();
+  @observable
   String? pickedWeighGalleryImage = "";
   @observable
   bool isImageSelected = true;
@@ -1108,6 +1110,19 @@ abstract class ScheduleViewModelBase with Store {
     }
     // pickedFiles.addAll(pic?.files ?? []);
     // pickedFiles = [...pickedFiles];
+  }
+
+  @action
+  Future<void> addFileJobcardFn() async {
+    var pic = await FilePicker.platform.pickFiles(
+        allowMultiple: true,
+        type: FileType.custom,
+        allowedExtensions: ['jpg', 'pdf', 'doc']);
+    if (pic != null) {
+      var filePaths =
+          pic.files.map((file) => file.path).whereType<String>().toList();
+      addFileJobcardList?.addAll(filePaths);
+    }
   }
 
   @action

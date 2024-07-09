@@ -180,16 +180,16 @@ class TeamEmployee with _$TeamEmployee {
   factory TeamEmployee.fromJson(Map<String, dynamic> json) =>
       _$TeamEmployeeFromJson(json);
 }
+
 @freezed
 class Job with _$Job {
   const factory Job({
     @JsonKey(name: "id") int? id,
     @JsonKey(name: "video") String? video,
     @JsonKey(name: "name") String? name,
-     @JsonKey(name: "created_date_time") String? createdAt,
+    @JsonKey(name: "created_date_time") String? createdAt,
     @JsonKey(name: "edited_date_time") String? editedAt,
   }) = _Job;
 
-  factory Job.fromJson(Map<String, dynamic> json) =>
-      _$JobFromJson(json);
+  factory Job.fromJson(Map<String, dynamic> json) => _$JobFromJson(json);
 }

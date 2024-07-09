@@ -204,7 +204,10 @@ class _VideoPlayerFromNetworkState extends State<VideoPlayerFromNetwork> {
             child: VideoPlayer(_controller),
           );
         } else {
-          return const Center(child: CircularProgressIndicator(color: Appthemes.cPrimary,));
+          return const Center(
+              child: CircularProgressIndicator(
+            color: Appthemes.cPrimary,
+          ));
         }
       },
     );

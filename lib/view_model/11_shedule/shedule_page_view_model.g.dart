@@ -394,6 +394,22 @@ mixin _$ScheduleViewModel on ScheduleViewModelBase, Store {
     });
   }
 
+  late final _$addFileJobcardListAtom =
+      Atom(name: 'ScheduleViewModelBase.addFileJobcardList', context: context);
+
+  @override
+  ObservableList<String>? get addFileJobcardList {
+    _$addFileJobcardListAtom.reportRead();
+    return super.addFileJobcardList;
+  }
+
+  @override
+  set addFileJobcardList(ObservableList<String>? value) {
+    _$addFileJobcardListAtom.reportWrite(value, super.addFileJobcardList, () {
+      super.addFileJobcardList = value;
+    });
+  }
+
   late final _$pickedWeighGalleryImageAtom = Atom(
       name: 'ScheduleViewModelBase.pickedWeighGalleryImage', context: context);
 
@@ -1991,6 +2007,14 @@ mixin _$ScheduleViewModel on ScheduleViewModelBase, Store {
     return _$pickFilefromphoneAsyncAction.run(() => super.pickFilefromphone());
   }
 
+  late final _$addFileJobcardFnAsyncAction =
+      AsyncAction('ScheduleViewModelBase.addFileJobcardFn', context: context);
+
+  @override
+  Future<void> addFileJobcardFn() {
+    return _$addFileJobcardFnAsyncAction.run(() => super.addFileJobcardFn());
+  }
+
   late final _$pickImageFromsignatureCameraAsyncAction = AsyncAction(
       'ScheduleViewModelBase.pickImageFromsignatureCamera',
       context: context);
@@ -2406,6 +2430,7 @@ pickedGalleryImage: ${pickedGalleryImage},
 pickedGalleryImageList: ${pickedGalleryImageList},
 pickedWeighCameraImage: ${pickedWeighCameraImage},
 pickedWeighImageList: ${pickedWeighImageList},
+addFileJobcardList: ${addFileJobcardList},
 pickedWeighGalleryImage: ${pickedWeighGalleryImage},
 isImageSelected: ${isImageSelected},
 pickedCameraVideo: ${pickedCameraVideo},

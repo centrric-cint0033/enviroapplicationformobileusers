@@ -768,6 +768,171 @@ mixin _$TeamViewModel on TeamViewModelBase, Store {
     });
   }
 
+  late final _$selectedCheckboxIndexAtom =
+      Atom(name: 'TeamViewModelBase.selectedCheckboxIndex', context: context);
+
+  @override
+  int? get selectedCheckboxIndex {
+    _$selectedCheckboxIndexAtom.reportRead();
+    return super.selectedCheckboxIndex;
+  }
+
+  @override
+  set selectedCheckboxIndex(int? value) {
+    _$selectedCheckboxIndexAtom.reportWrite(value, super.selectedCheckboxIndex,
+        () {
+      super.selectedCheckboxIndex = value;
+    });
+  }
+
+  late final _$selectedLeaveFromdateAtom =
+      Atom(name: 'TeamViewModelBase.selectedLeaveFromdate', context: context);
+
+  @override
+  DateTime? get selectedLeaveFromdate {
+    _$selectedLeaveFromdateAtom.reportRead();
+    return super.selectedLeaveFromdate;
+  }
+
+  @override
+  set selectedLeaveFromdate(DateTime? value) {
+    _$selectedLeaveFromdateAtom.reportWrite(value, super.selectedLeaveFromdate,
+        () {
+      super.selectedLeaveFromdate = value;
+    });
+  }
+
+  late final _$selectedLeaveTodateAtom =
+      Atom(name: 'TeamViewModelBase.selectedLeaveTodate', context: context);
+
+  @override
+  DateTime? get selectedLeaveTodate {
+    _$selectedLeaveTodateAtom.reportRead();
+    return super.selectedLeaveTodate;
+  }
+
+  @override
+  set selectedLeaveTodate(DateTime? value) {
+    _$selectedLeaveTodateAtom.reportWrite(value, super.selectedLeaveTodate, () {
+      super.selectedLeaveTodate = value;
+    });
+  }
+
+  late final _$selectedLastDayofWorkAtom =
+      Atom(name: 'TeamViewModelBase.selectedLastDayofWork', context: context);
+
+  @override
+  DateTime? get selectedLastDayofWork {
+    _$selectedLastDayofWorkAtom.reportRead();
+    return super.selectedLastDayofWork;
+  }
+
+  @override
+  set selectedLastDayofWork(DateTime? value) {
+    _$selectedLastDayofWorkAtom.reportWrite(value, super.selectedLastDayofWork,
+        () {
+      super.selectedLastDayofWork = value;
+    });
+  }
+
+  late final _$selectedReturnToWorkDateAtom = Atom(
+      name: 'TeamViewModelBase.selectedReturnToWorkDate', context: context);
+
+  @override
+  DateTime? get selectedReturnToWorkDate {
+    _$selectedReturnToWorkDateAtom.reportRead();
+    return super.selectedReturnToWorkDate;
+  }
+
+  @override
+  set selectedReturnToWorkDate(DateTime? value) {
+    _$selectedReturnToWorkDateAtom
+        .reportWrite(value, super.selectedReturnToWorkDate, () {
+      super.selectedReturnToWorkDate = value;
+    });
+  }
+
+  late final _$leaveSubmitButtonEnableAtom =
+      Atom(name: 'TeamViewModelBase.leaveSubmitButtonEnable', context: context);
+
+  @override
+  bool? get leaveSubmitButtonEnable {
+    _$leaveSubmitButtonEnableAtom.reportRead();
+    return super.leaveSubmitButtonEnable;
+  }
+
+  @override
+  set leaveSubmitButtonEnable(bool? value) {
+    _$leaveSubmitButtonEnableAtom
+        .reportWrite(value, super.leaveSubmitButtonEnable, () {
+      super.leaveSubmitButtonEnable = value;
+    });
+  }
+
+  late final _$dayController1Atom =
+      Atom(name: 'TeamViewModelBase.dayController1', context: context);
+
+  @override
+  TextEditingController get dayController1 {
+    _$dayController1Atom.reportRead();
+    return super.dayController1;
+  }
+
+  @override
+  set dayController1(TextEditingController value) {
+    _$dayController1Atom.reportWrite(value, super.dayController1, () {
+      super.dayController1 = value;
+    });
+  }
+
+  late final _$day1ValueAtom =
+      Atom(name: 'TeamViewModelBase.day1Value', context: context);
+
+  @override
+  String get day1Value {
+    _$day1ValueAtom.reportRead();
+    return super.day1Value;
+  }
+
+  @override
+  set day1Value(String value) {
+    _$day1ValueAtom.reportWrite(value, super.day1Value, () {
+      super.day1Value = value;
+    });
+  }
+
+  late final _$addLeaveResponseAtom =
+      Atom(name: 'TeamViewModelBase.addLeaveResponse', context: context);
+
+  @override
+  ApiResponse<LeaveResModel> get addLeaveResponse {
+    _$addLeaveResponseAtom.reportRead();
+    return super.addLeaveResponse;
+  }
+
+  @override
+  set addLeaveResponse(ApiResponse<LeaveResModel> value) {
+    _$addLeaveResponseAtom.reportWrite(value, super.addLeaveResponse, () {
+      super.addLeaveResponse = value;
+    });
+  }
+
+  late final _$addFileLeaveAtom =
+      Atom(name: 'TeamViewModelBase.addFileLeave', context: context);
+
+  @override
+  String? get addFileLeave {
+    _$addFileLeaveAtom.reportRead();
+    return super.addFileLeave;
+  }
+
+  @override
+  set addFileLeave(String? value) {
+    _$addFileLeaveAtom.reportWrite(value, super.addFileLeave, () {
+      super.addFileLeave = value;
+    });
+  }
+
   late final _$getCurrentEmployeeAsyncAction =
       AsyncAction('TeamViewModelBase.getCurrentEmployee', context: context);
 
@@ -1025,6 +1190,24 @@ mixin _$TeamViewModel on TeamViewModelBase, Store {
         super.folderSearchApi(searchData, folderId, searchType, employeeId));
   }
 
+  late final _$addLeaveApiAsyncAction =
+      AsyncAction('TeamViewModelBase.addLeaveApi', context: context);
+
+  @override
+  Future<void> addLeaveApi(
+      {required LeaveResModel data, required BuildContext context}) {
+    return _$addLeaveApiAsyncAction
+        .run(() => super.addLeaveApi(data: data, context: context));
+  }
+
+  late final _$addFileLeavedFnAsyncAction =
+      AsyncAction('TeamViewModelBase.addFileLeavedFn', context: context);
+
+  @override
+  Future<void> addFileLeavedFn() {
+    return _$addFileLeavedFnAsyncAction.run(() => super.addFileLeavedFn());
+  }
+
   late final _$TeamViewModelBaseActionController =
       ActionController(name: 'TeamViewModelBase', context: context);
 
@@ -1152,6 +1335,105 @@ mixin _$TeamViewModel on TeamViewModelBase, Store {
   }
 
   @override
+  void selectCheckbox(int? index) {
+    final _$actionInfo = _$TeamViewModelBaseActionController.startAction(
+        name: 'TeamViewModelBase.selectCheckbox');
+    try {
+      return super.selectCheckbox(index);
+    } finally {
+      _$TeamViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic datePickerFn8(dynamic date) {
+    final _$actionInfo = _$TeamViewModelBaseActionController.startAction(
+        name: 'TeamViewModelBase.datePickerFn8');
+    try {
+      return super.datePickerFn8(date);
+    } finally {
+      _$TeamViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic datePickerFn9(dynamic date) {
+    final _$actionInfo = _$TeamViewModelBaseActionController.startAction(
+        name: 'TeamViewModelBase.datePickerFn9');
+    try {
+      return super.datePickerFn9(date);
+    } finally {
+      _$TeamViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic datePickerFn10(dynamic date) {
+    final _$actionInfo = _$TeamViewModelBaseActionController.startAction(
+        name: 'TeamViewModelBase.datePickerFn10');
+    try {
+      return super.datePickerFn10(date);
+    } finally {
+      _$TeamViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic datePickerFn11(dynamic date) {
+    final _$actionInfo = _$TeamViewModelBaseActionController.startAction(
+        name: 'TeamViewModelBase.datePickerFn11');
+    try {
+      return super.datePickerFn11(date);
+    } finally {
+      _$TeamViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic totalDayFn() {
+    final _$actionInfo = _$TeamViewModelBaseActionController.startAction(
+        name: 'TeamViewModelBase.totalDayFn');
+    try {
+      return super.totalDayFn();
+    } finally {
+      _$TeamViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic totalHrsFn() {
+    final _$actionInfo = _$TeamViewModelBaseActionController.startAction(
+        name: 'TeamViewModelBase.totalHrsFn');
+    try {
+      return super.totalHrsFn();
+    } finally {
+      _$TeamViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void submitButtonValidation() {
+    final _$actionInfo = _$TeamViewModelBaseActionController.startAction(
+        name: 'TeamViewModelBase.submitButtonValidation');
+    try {
+      return super.submitButtonValidation();
+    } finally {
+      _$TeamViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic clearLeaveDatas() {
+    final _$actionInfo = _$TeamViewModelBaseActionController.startAction(
+        name: 'TeamViewModelBase.clearLeaveDatas');
+    try {
+      return super.clearLeaveDatas();
+    } finally {
+      _$TeamViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 allEmployeeResponse: ${allEmployeeResponse},
@@ -1199,7 +1481,17 @@ loadinIndexFolder: ${loadinIndexFolder},
 loadinIndexFile: ${loadinIndexFile},
 selectedMember: ${selectedMember},
 searchType: ${searchType},
-folderNames: ${folderNames}
+folderNames: ${folderNames},
+selectedCheckboxIndex: ${selectedCheckboxIndex},
+selectedLeaveFromdate: ${selectedLeaveFromdate},
+selectedLeaveTodate: ${selectedLeaveTodate},
+selectedLastDayofWork: ${selectedLastDayofWork},
+selectedReturnToWorkDate: ${selectedReturnToWorkDate},
+leaveSubmitButtonEnable: ${leaveSubmitButtonEnable},
+dayController1: ${dayController1},
+day1Value: ${day1Value},
+addLeaveResponse: ${addLeaveResponse},
+addFileLeave: ${addFileLeave}
     ''';
   }
 }

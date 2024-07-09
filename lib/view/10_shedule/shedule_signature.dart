@@ -324,7 +324,7 @@ class SheduleSignaturePage extends StatelessWidget {
                                 vmSchedule.signaturecontroller.isNotEmpty) {
                               showToast(context,
                                   msg: "Please save signature before submit",
-                                  color: Colors.red);
+                                  color: Color.fromARGB(255, 133, 121, 120));
                             } else if (vmSchedule.signNameController.text ==
                                 "") {
                               showToast(context,

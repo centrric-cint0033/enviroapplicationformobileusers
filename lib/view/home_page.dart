@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:enviro_mobile_application/Routepage/approutes.gr.dart';
 import 'package:enviro_mobile_application/Routepage/routespage.dart';
 import 'package:enviro_mobile_application/utilis/Appthemes.dart';
 import 'package:enviro_mobile_application/view_model/02_sales/sales_view_model.dart';
@@ -6,6 +7,7 @@ import 'package:enviro_mobile_application/view_model/03_vehicles/vehicle_view_mo
 import 'package:enviro_mobile_application/view_model/04_ohs/ohs_view_model.dart';
 import 'package:enviro_mobile_application/view_model/07_intranet/intranet_view_model.dart';
 import 'package:enviro_mobile_application/view_model/08_team/team_view_model.dart';
+import 'package:enviro_mobile_application/view_model/10_profile/profile_view_model.dart';
 import 'package:enviro_mobile_application/view_model/11_shedule/shedule_page_view_model.dart';
 import 'package:enviro_mobile_application/view_model/home_page/home_page_viewmodel.dart';
 import 'package:enviro_mobile_application/widgets/drawer.dart';
@@ -156,9 +158,7 @@ void intranetfuntion(BuildContext context) {
 void shedulefunction(BuildContext context) {
   vmSchedule.shedulecardviewmodelfunction();
   vmSchedule.shedulecardviewmodelweekfunction();
-  print('cccc');
   context.router.pushNamed(RouteNames.rschedulemainpage);
-  print('Notification button tapped!');
 }
 
 void vehiclefunction(BuildContext context) async {
@@ -169,9 +169,19 @@ void vehiclefunction(BuildContext context) async {
 }
 
 void teamfuntion(BuildContext context) {
-  vmTeam.getCurrentEmployee();
-  vmTeam.getTerminatedEmployee();
-  context.router.pushNamed(RouteNames.teamPage);
+  if (vmProfile.profilepageResponse.data?.permissionType?.contains('driver') ??
+      false) {
+    vmTeam.getTeamProfileEmployeeDetails(
+        employeeID: vmProfile.profilepageResponse.data?.id ?? 0);
+    vmTeam.getTeamFolders(
+        id: vmProfile.profilepageResponse.data?.id ?? 0, parentFolderId: 1);
+    context.router
+        .push(TeamProfileRoute(id: vmProfile.profilepageResponse.data?.id));
+  } else {
+    vmTeam.getCurrentEmployee();
+    vmTeam.getTerminatedEmployee();
+    context.router.pushNamed(RouteNames.teamPage);
+  }
 }
 
 void navigateToSitesPage({required BuildContext context}) {

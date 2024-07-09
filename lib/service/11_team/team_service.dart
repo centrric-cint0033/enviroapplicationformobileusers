@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:dartz/dartz.dart';
 import 'package:enviro_mobile_application/model/00_common_model/folder_model/folder_model.dart';
 import 'package:enviro_mobile_application/model/10_team/create_team_req_model/create_team_req_model.dart';
+import 'package:enviro_mobile_application/model/10_team/leave_res_model/leave_res_model/leave_res_model.dart';
 import 'package:enviro_mobile_application/model/10_team/team_designtion_res_model/team_designtion_res_model.dart';
 import 'package:enviro_mobile_application/model/10_team/team_profile_employee_details_res_model/team_profile_employee_details_res_model.dart';
 import 'package:enviro_mobile_application/model/10_team/team_res_model/team_res_model.dart';
@@ -50,6 +51,8 @@ abstract class IteamService {
       getAllEmployeesApi();
   Future<Either<Map<MainFailure, dynamic>, FolderListModel>> folderSearchApi(
       {required Map<String, String> data});
+  Future<Either<Map<MainFailure, dynamic>, LeaveResModel>> addLeave(
+      {required LeaveResModel data});
 }
 
 @LazySingleton(as: IteamService)
@@ -372,6 +375,21 @@ class TeamService implements IteamService {
         FolderListModel searchedFolderListtt =
             FolderListModel(folders: searchedFolderListt);
         return Right(searchedFolderListtt);
+      },
+    );
+  }
+
+  @override
+  Future<Either<Map<MainFailure, dynamic>, LeaveResModel>> addLeave(
+      {required LeaveResModel data}) async {
+    var response = await getIt<HttpService>().multipartRequest(
+        data: data.toJson(), method: 'POST', apiUrl: ApiEndPoints().addLeave);
+    return response.fold(
+      (l) => Left(l),
+      (res) async {
+        var data = jsonDecode(res.body);
+        LeaveResModel addLeave = LeaveResModel.fromJson(data);
+        return Right(addLeave);
       },
     );
   }

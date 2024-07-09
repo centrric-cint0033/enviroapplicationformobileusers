@@ -3,6 +3,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:enviro_mobile_application/api_response/api_response.dart';
 import 'package:enviro_mobile_application/model/00_common_model/folder_model/folder_model.dart';
 import 'package:enviro_mobile_application/model/10_team/create_team_req_model/create_team_req_model.dart';
+import 'package:enviro_mobile_application/model/10_team/leave_res_model/leave_res_model/leave_res_model.dart';
 import 'package:enviro_mobile_application/model/10_team/team_designtion_res_model/designation.dart';
 import 'package:enviro_mobile_application/model/10_team/team_designtion_res_model/team_designtion_res_model.dart';
 import 'package:enviro_mobile_application/model/10_team/team_profile_employee_details_res_model/team_profile_employee_details_res_model.dart';
@@ -13,6 +14,7 @@ import 'package:enviro_mobile_application/utilis/image_picker_service/image_file
 import 'package:enviro_mobile_application/utilis/injection.dart';
 import 'package:enviro_mobile_application/widgets/cm_show_toast.dart';
 import 'package:enviro_mobile_application/widgets/ww_popup_error.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 import 'package:intl/intl.dart';
@@ -884,5 +886,145 @@ abstract class TeamViewModelBase with Store {
     selectedLicenceAlertDate = null;
     textAddTeamPasswordController.clear();
     vmTeam.profileImage = null;
+  }
+
+  @observable
+  int? selectedCheckboxIndex;
+  final TextEditingController reasonController = TextEditingController();
+  @observable
+  DateTime? selectedLeaveFromdate;
+  @observable
+  DateTime? selectedLeaveTodate;
+  @observable
+  DateTime? selectedLastDayofWork;
+  @observable
+  DateTime? selectedReturnToWorkDate;
+  @observable
+  bool? leaveSubmitButtonEnable = false;
+  @observable
+  TextEditingController dayController1 = TextEditingController();
+  TextEditingController dayController2 = TextEditingController();
+  TextEditingController dayController3 = TextEditingController();
+  TextEditingController totalDayController = TextEditingController();
+  TextEditingController hrsController1 = TextEditingController();
+  TextEditingController hrsController2 = TextEditingController();
+  TextEditingController hrsController3 = TextEditingController();
+  TextEditingController totalHrsController = TextEditingController();
+  TextEditingController commentsControllerr = TextEditingController();
+  @observable
+  String day1Value = '';
+  @action
+  void selectCheckbox(int? index) {
+    selectedCheckboxIndex = index;
+  }
+
+  @action
+  datePickerFn8(date) {
+    selectedLeaveFromdate = date;
+  }
+
+  @action
+  datePickerFn9(date) {
+    selectedLeaveTodate = date;
+  }
+
+  @action
+  datePickerFn10(date) {
+    selectedLastDayofWork = date;
+  }
+
+  @action
+  datePickerFn11(date) {
+    selectedReturnToWorkDate = date;
+  }
+
+  @action
+  totalDayFn() {
+    int day1 = int.tryParse(dayController1.text) ?? 0;
+    int day2 = int.tryParse(dayController2.text) ?? 0;
+    int day3 = int.tryParse(dayController3.text) ?? 0;
+    vmTeam.day1Value = (day1 + day2 + day3).toString();
+    totalDayController.text = (day1 + day2 + day3).toString();
+  }
+
+  @action
+  totalHrsFn() {
+    int hrs1 = int.tryParse(vmTeam.hrsController1.text) ?? 0;
+    int hrs2 = int.tryParse(vmTeam.hrsController2.text) ?? 0;
+    int hrs3 = int.tryParse(vmTeam.hrsController3.text) ?? 0;
+    vmTeam.totalHrsController.text = (hrs1 + hrs2 + hrs3).toString();
+  }
+
+  @observable
+  ApiResponse<LeaveResModel> addLeaveResponse = ApiResponse<LeaveResModel>();
+  @action
+  Future<void> addLeaveApi(
+      {required LeaveResModel data, required BuildContext context}) async {
+    addLeaveResponse = addLeaveResponse.copyWith(error: null, loading: true);
+    final result = await teamService.addLeave(data: data);
+    return result.fold(
+      (l) {
+        addLeaveResponse = addLeaveResponse.copyWith(errors: l, loading: false);
+        popupErrorData(context, mainFailure: l);
+      },
+      (r) {
+        addLeaveResponse =
+            addLeaveResponse.copyWith(data: r, error: null, loading: false);
+        clearLeaveDatas();
+        getTeamProfileEmployeeDetails(employeeID: r.employee!);
+        showToast(context, msg: "Successfully applied", color: Colors.green);
+        context.router.pop();
+      },
+    );
+  }
+
+  @action
+  void submitButtonValidation() {
+    if (selectedCheckboxIndex != null &&
+        selectedLeaveFromdate != null &&
+        selectedLeaveTodate != null &&
+        selectedLastDayofWork != null &&
+        selectedReturnToWorkDate != null) {
+      leaveSubmitButtonEnable = true;
+    } else {
+      leaveSubmitButtonEnable = false;
+    }
+  }
+
+  @action
+  clearLeaveDatas() {
+    dayController1.clear();
+    dayController2.clear();
+    dayController3.clear();
+    totalDayController.clear();
+    hrsController1.clear();
+    hrsController2.clear();
+    hrsController3.clear();
+    totalHrsController.clear();
+    commentsControllerr.clear();
+    selectedLeaveFromdate = null;
+    selectedLeaveTodate = null;
+    selectedLastDayofWork = null;
+    selectedReturnToWorkDate = null;
+    commentsControllerr.clear();
+    reasonController.clear();
+    selectedCheckboxIndex = null;
+    vmTeam.addFileLeave = "";
+  }
+
+  @observable
+  String? addFileLeave = "";
+  @action
+  Future<void> addFileLeavedFn() async {
+    var result = await FilePicker.platform.pickFiles(
+      allowMultiple: false, // Allow only one file to be picked
+      type: FileType.custom,
+      allowedExtensions: ['jpg', 'pdf', 'doc'],
+    );
+
+    if (result != null && result.files.isNotEmpty) {
+      addFileLeave =
+          result.files.single.path; // Store the path of the selected file
+    }
   }
 }

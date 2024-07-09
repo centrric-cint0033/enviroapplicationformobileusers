@@ -15,6 +15,7 @@ class RouteNames {
   static const String teamProfileScreen = '/teamprofilescreen';
   static const String teamEditScreen = '/teameditscreen';
   static const String addTeamScreen = '/addteamscreen';
+  static const String leaveApplicationScreen = '/leaveapplicationscreen';
   static const String employeeFilesScreen = '/employeefilesscreen';
   static const String siteListPage = '/site_list_page';
   static const String siteDetailPage = '/site_detail_page';
@@ -28,9 +29,9 @@ class RouteNames {
   static const String rupdatevehiclepreinspectionpage =
       '/updatevehiclepreinspectionpage ';
   static const String scheduleimagepage = '/scheduele_video_page ';
-    static const String schedulevideopage = '/scheduele_image_page ';
-    static const String weighbridgemediapage = '/weigh_bridge_media_page ';
-    static const String schedulesignaturepage = '/schedule_signature_page ';
+  static const String schedulevideopage = '/scheduele_image_page ';
+  static const String weighbridgemediapage = '/weigh_bridge_media_page ';
+  static const String schedulesignaturepage = '/schedule_signature_page ';
   static const String rsheduledetail2page = '/sheduledetail2page ';
   static const String rjobcardpage = '/jobcardpage ';
   static const String rcurrentjobstatus = '/currentjobstatus ';

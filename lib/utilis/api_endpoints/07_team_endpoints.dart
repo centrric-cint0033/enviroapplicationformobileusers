@@ -37,4 +37,6 @@ mixin class TeamEndpoints {
   final String searchFileFolder = '/api/v1/drive/search/file/';
 
   final String searchFolder = '/api/v1/drive/search/folder/';
+
+  final String addLeave = '/api/v1/team/leave/crud/';
 }

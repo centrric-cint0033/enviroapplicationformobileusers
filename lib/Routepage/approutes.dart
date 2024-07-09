@@ -35,6 +35,9 @@ class AppRouter extends $AppRouter {
         AutoRoute(page: TeamEditRoute.page, path: RouteNames.teamEditScreen),
         AutoRoute(page: AddTeamRoute.page, path: RouteNames.addTeamScreen),
         AutoRoute(
+            page: LeaveApplicationRoute.page,
+            path: RouteNames.leaveApplicationScreen),
+        AutoRoute(
             page: EmployeeFilesRoute.page,
             path: RouteNames.employeeFilesScreen),
         AutoRoute(
