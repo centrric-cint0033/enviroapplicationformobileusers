@@ -39,4 +39,8 @@ mixin class TeamEndpoints {
   final String searchFolder = '/api/v1/drive/search/folder/';
 
   final String addLeave = '/api/v1/team/leave/crud/';
+
+  final String timeSheet = '/api/v1/team/times-sheet/crud/';
+
+   final String editTimeSheet = '/api/v1/team/times-sheet/crud/';
 }

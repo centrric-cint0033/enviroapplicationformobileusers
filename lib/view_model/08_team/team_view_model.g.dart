@@ -886,6 +886,38 @@ mixin _$TeamViewModel on TeamViewModelBase, Store {
     });
   }
 
+  late final _$selectedStartTimeAtom =
+      Atom(name: 'TeamViewModelBase.selectedStartTime', context: context);
+
+  @override
+  TimeOfDay? get selectedStartTime {
+    _$selectedStartTimeAtom.reportRead();
+    return super.selectedStartTime;
+  }
+
+  @override
+  set selectedStartTime(TimeOfDay? value) {
+    _$selectedStartTimeAtom.reportWrite(value, super.selectedStartTime, () {
+      super.selectedStartTime = value;
+    });
+  }
+
+  late final _$selectedEndTimeAtom =
+      Atom(name: 'TeamViewModelBase.selectedEndTime', context: context);
+
+  @override
+  TimeOfDay? get selectedEndTime {
+    _$selectedEndTimeAtom.reportRead();
+    return super.selectedEndTime;
+  }
+
+  @override
+  set selectedEndTime(TimeOfDay? value) {
+    _$selectedEndTimeAtom.reportWrite(value, super.selectedEndTime, () {
+      super.selectedEndTime = value;
+    });
+  }
+
   late final _$dayController1Atom =
       Atom(name: 'TeamViewModelBase.dayController1', context: context);
 
@@ -899,118 +931,6 @@ mixin _$TeamViewModel on TeamViewModelBase, Store {
   set dayController1(TextEditingController value) {
     _$dayController1Atom.reportWrite(value, super.dayController1, () {
       super.dayController1 = value;
-    });
-  }
-
-  late final _$fridayStartTimeAtom =
-      Atom(name: 'TeamViewModelBase.fridayStartTime', context: context);
-
-  @override
-  Timer? get fridayStartTime {
-    _$fridayStartTimeAtom.reportRead();
-    return super.fridayStartTime;
-  }
-
-  @override
-  set fridayStartTime(Timer? value) {
-    _$fridayStartTimeAtom.reportWrite(value, super.fridayStartTime, () {
-      super.fridayStartTime = value;
-    });
-  }
-
-  late final _$saturdayStartTimeAtom =
-      Atom(name: 'TeamViewModelBase.saturdayStartTime', context: context);
-
-  @override
-  Timer? get saturdayStartTime {
-    _$saturdayStartTimeAtom.reportRead();
-    return super.saturdayStartTime;
-  }
-
-  @override
-  set saturdayStartTime(Timer? value) {
-    _$saturdayStartTimeAtom.reportWrite(value, super.saturdayStartTime, () {
-      super.saturdayStartTime = value;
-    });
-  }
-
-  late final _$sundayStartTimeAtom =
-      Atom(name: 'TeamViewModelBase.sundayStartTime', context: context);
-
-  @override
-  Timer? get sundayStartTime {
-    _$sundayStartTimeAtom.reportRead();
-    return super.sundayStartTime;
-  }
-
-  @override
-  set sundayStartTime(Timer? value) {
-    _$sundayStartTimeAtom.reportWrite(value, super.sundayStartTime, () {
-      super.sundayStartTime = value;
-    });
-  }
-
-  late final _$mondayStartTimeAtom =
-      Atom(name: 'TeamViewModelBase.mondayStartTime', context: context);
-
-  @override
-  Timer? get mondayStartTime {
-    _$mondayStartTimeAtom.reportRead();
-    return super.mondayStartTime;
-  }
-
-  @override
-  set mondayStartTime(Timer? value) {
-    _$mondayStartTimeAtom.reportWrite(value, super.mondayStartTime, () {
-      super.mondayStartTime = value;
-    });
-  }
-
-  late final _$tuesdayStartTimeAtom =
-      Atom(name: 'TeamViewModelBase.tuesdayStartTime', context: context);
-
-  @override
-  Timer? get tuesdayStartTime {
-    _$tuesdayStartTimeAtom.reportRead();
-    return super.tuesdayStartTime;
-  }
-
-  @override
-  set tuesdayStartTime(Timer? value) {
-    _$tuesdayStartTimeAtom.reportWrite(value, super.tuesdayStartTime, () {
-      super.tuesdayStartTime = value;
-    });
-  }
-
-  late final _$wednesdayStartTimeAtom =
-      Atom(name: 'TeamViewModelBase.wednesdayStartTime', context: context);
-
-  @override
-  Timer? get wednesdayStartTime {
-    _$wednesdayStartTimeAtom.reportRead();
-    return super.wednesdayStartTime;
-  }
-
-  @override
-  set wednesdayStartTime(Timer? value) {
-    _$wednesdayStartTimeAtom.reportWrite(value, super.wednesdayStartTime, () {
-      super.wednesdayStartTime = value;
-    });
-  }
-
-  late final _$thursdayStartTimeAtom =
-      Atom(name: 'TeamViewModelBase.thursdayStartTime', context: context);
-
-  @override
-  Timer? get thursdayStartTime {
-    _$thursdayStartTimeAtom.reportRead();
-    return super.thursdayStartTime;
-  }
-
-  @override
-  set thursdayStartTime(Timer? value) {
-    _$thursdayStartTimeAtom.reportWrite(value, super.thursdayStartTime, () {
-      super.thursdayStartTime = value;
     });
   }
 
@@ -1043,6 +963,39 @@ mixin _$TeamViewModel on TeamViewModelBase, Store {
   set addFileLeave(String? value) {
     _$addFileLeaveAtom.reportWrite(value, super.addFileLeave, () {
       super.addFileLeave = value;
+    });
+  }
+
+  late final _$timeSheetResponseAtom =
+      Atom(name: 'TeamViewModelBase.timeSheetResponse', context: context);
+
+  @override
+  ApiResponse<TimeSheetResModel> get timeSheetResponse {
+    _$timeSheetResponseAtom.reportRead();
+    return super.timeSheetResponse;
+  }
+
+  @override
+  set timeSheetResponse(ApiResponse<TimeSheetResModel> value) {
+    _$timeSheetResponseAtom.reportWrite(value, super.timeSheetResponse, () {
+      super.timeSheetResponse = value;
+    });
+  }
+
+  late final _$editTimeSheetResponseAtom =
+      Atom(name: 'TeamViewModelBase.editTimeSheetResponse', context: context);
+
+  @override
+  ApiResponse<TimeSheetResModel> get editTimeSheetResponse {
+    _$editTimeSheetResponseAtom.reportRead();
+    return super.editTimeSheetResponse;
+  }
+
+  @override
+  set editTimeSheetResponse(ApiResponse<TimeSheetResModel> value) {
+    _$editTimeSheetResponseAtom.reportWrite(value, super.editTimeSheetResponse,
+        () {
+      super.editTimeSheetResponse = value;
     });
   }
 
@@ -1321,6 +1274,52 @@ mixin _$TeamViewModel on TeamViewModelBase, Store {
     return _$addFileLeavedFnAsyncAction.run(() => super.addFileLeavedFn());
   }
 
+  late final _$getTimeSheetApiAsyncAction =
+      AsyncAction('TeamViewModelBase.getTimeSheetApi', context: context);
+
+  @override
+  Future<void> getTimeSheetApi(
+      {required String date, required BuildContext context}) {
+    return _$getTimeSheetApiAsyncAction
+        .run(() => super.getTimeSheetApi(date: date, context: context));
+  }
+
+  late final _$editTimeSheetApiAsyncAction =
+      AsyncAction('TeamViewModelBase.editTimeSheetApi', context: context);
+
+  @override
+  Future<void> editTimeSheetApi(
+      {required int id,
+      required String date,
+      required String day,
+      required String start,
+      required String finish,
+      required String totalHoursWorked,
+      required String normalHours,
+      required String fullTime,
+      required String halfTime,
+      required String publicHolidays,
+      required String annual,
+      required String sick,
+      required String otherDays,
+      required BuildContext context}) {
+    return _$editTimeSheetApiAsyncAction.run(() => super.editTimeSheetApi(
+        id: id,
+        date: date,
+        day: day,
+        start: start,
+        finish: finish,
+        totalHoursWorked: totalHoursWorked,
+        normalHours: normalHours,
+        fullTime: fullTime,
+        halfTime: halfTime,
+        publicHolidays: publicHolidays,
+        annual: annual,
+        sick: sick,
+        otherDays: otherDays,
+        context: context));
+  }
+
   late final _$TeamViewModelBaseActionController =
       ActionController(name: 'TeamViewModelBase', context: context);
 
@@ -1503,11 +1502,33 @@ mixin _$TeamViewModel on TeamViewModelBase, Store {
   }
 
   @override
-  dynamic datePickerFn12(dynamic date) {
+  dynamic datePickerFn12(dynamic date, BuildContext context) {
     final _$actionInfo = _$TeamViewModelBaseActionController.startAction(
         name: 'TeamViewModelBase.datePickerFn12');
     try {
-      return super.datePickerFn12(date);
+      return super.datePickerFn12(date, context);
+    } finally {
+      _$TeamViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic timePickerFn1(dynamic time) {
+    final _$actionInfo = _$TeamViewModelBaseActionController.startAction(
+        name: 'TeamViewModelBase.timePickerFn1');
+    try {
+      return super.timePickerFn1(time);
+    } finally {
+      _$TeamViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic timePickerFn2(dynamic time) {
+    final _$actionInfo = _$TeamViewModelBaseActionController.startAction(
+        name: 'TeamViewModelBase.timePickerFn2');
+    try {
+      return super.timePickerFn2(time);
     } finally {
       _$TeamViewModelBaseActionController.endAction(_$actionInfo);
     }
@@ -1613,16 +1634,13 @@ selectedLastDayofWork: ${selectedLastDayofWork},
 selectedReturnToWorkDate: ${selectedReturnToWorkDate},
 leaveSubmitButtonEnable: ${leaveSubmitButtonEnable},
 selectedChooseWeekTimesheet: ${selectedChooseWeekTimesheet},
+selectedStartTime: ${selectedStartTime},
+selectedEndTime: ${selectedEndTime},
 dayController1: ${dayController1},
-fridayStartTime: ${fridayStartTime},
-saturdayStartTime: ${saturdayStartTime},
-sundayStartTime: ${sundayStartTime},
-mondayStartTime: ${mondayStartTime},
-tuesdayStartTime: ${tuesdayStartTime},
-wednesdayStartTime: ${wednesdayStartTime},
-thursdayStartTime: ${thursdayStartTime},
 addLeaveResponse: ${addLeaveResponse},
-addFileLeave: ${addFileLeave}
+addFileLeave: ${addFileLeave},
+timeSheetResponse: ${timeSheetResponse},
+editTimeSheetResponse: ${editTimeSheetResponse}
     ''';
   }
 }

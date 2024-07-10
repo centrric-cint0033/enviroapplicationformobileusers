@@ -39,6 +39,9 @@ class AppRouter extends $AppRouter {
             path: RouteNames.leaveApplicationScreen),
         AutoRoute(page: TimeSheetRoute.page, path: RouteNames.timesheetScreen),
         AutoRoute(
+            page: EditTimeSheetRoute.page,
+            path: RouteNames.edittimesheetScreen),
+        AutoRoute(
             page: EmployeeFilesRoute.page,
             path: RouteNames.employeeFilesScreen),
         AutoRoute(

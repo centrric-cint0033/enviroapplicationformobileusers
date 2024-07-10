@@ -8,6 +8,7 @@ import 'package:enviro_mobile_application/model/10_team/team_designtion_res_mode
 import 'package:enviro_mobile_application/model/10_team/team_designtion_res_model/team_designtion_res_model.dart';
 import 'package:enviro_mobile_application/model/10_team/team_profile_employee_details_res_model/team_profile_employee_details_res_model.dart';
 import 'package:enviro_mobile_application/model/10_team/team_res_model/team_res_model.dart';
+import 'package:enviro_mobile_application/model/10_team/time_sheet_res_model/time_sheet_res_model.dart';
 import 'package:enviro_mobile_application/service/11_team/team_service.dart';
 import 'package:enviro_mobile_application/utilis/api_endpoints/customprint.dart';
 import 'package:enviro_mobile_application/utilis/image_picker_service/image_file_picker.dart';
@@ -904,6 +905,10 @@ abstract class TeamViewModelBase with Store {
   @observable
   DateTime? selectedChooseWeekTimesheet;
   @observable
+  TimeOfDay? selectedStartTime;
+  @observable
+  TimeOfDay? selectedEndTime;
+  @observable
   TextEditingController dayController1 = TextEditingController();
   TextEditingController dayController2 = TextEditingController();
   TextEditingController dayController3 = TextEditingController();
@@ -913,21 +918,16 @@ abstract class TeamViewModelBase with Store {
   TextEditingController hrsController3 = TextEditingController();
   TextEditingController totalHrsController = TextEditingController();
   TextEditingController commentsControllerr = TextEditingController();
+  TextEditingController timesheetCommentController = TextEditingController();
+  TextEditingController normalHourController = TextEditingController();
+  TextEditingController timehalfController = TextEditingController();
+  TextEditingController doubleTimeController = TextEditingController();
+  TextEditingController publicHolidayController = TextEditingController();
+  TextEditingController annualController = TextEditingController();
+  TextEditingController sickController = TextEditingController();
+  TextEditingController otherController = TextEditingController();
+
   ScrollController timesheetScrCntrller = ScrollController();
-  @observable
-  Timer? fridayStartTime;
-  @observable
-  Timer? saturdayStartTime;
-  @observable
-  Timer? sundayStartTime;
-  @observable
-  Timer? mondayStartTime;
-  @observable
-  Timer? tuesdayStartTime;
-  @observable
-  Timer? wednesdayStartTime;
-  @observable
-  Timer? thursdayStartTime;
 
   @action
   void selectCheckbox(int? index) {
@@ -955,8 +955,21 @@ abstract class TeamViewModelBase with Store {
   }
 
   @action
-  datePickerFn12(date) {
+  datePickerFn12(date, BuildContext context) {
     selectedChooseWeekTimesheet = date;
+    vmTeam.getTimeSheetApi(
+        date: DateFormat('yyyy-MM-dd').format(selectedChooseWeekTimesheet!),
+        context: context);
+  }
+
+  @action
+  timePickerFn1(time) {
+    selectedStartTime = time;
+  }
+
+  @action
+  timePickerFn2(time) {
+    selectedEndTime = time;
   }
 
   @action
@@ -1046,5 +1059,78 @@ abstract class TeamViewModelBase with Store {
       addFileLeave =
           result.files.single.path; // Store the path of the selected file
     }
+  }
+
+  @observable
+  ApiResponse<TimeSheetResModel> timeSheetResponse =
+      ApiResponse<TimeSheetResModel>();
+  @action
+  Future<void> getTimeSheetApi(
+      {required String date, required BuildContext context}) async {
+    timeSheetResponse = timeSheetResponse.copyWith(error: null, loading: true);
+    final result = await teamService.getTimeSheetApi(date: date);
+    return result.fold(
+      (l) {
+        timeSheetResponse =
+            timeSheetResponse.copyWith(errors: l, loading: false);
+        popupErrorData(context, mainFailure: l);
+      },
+      (r) {
+        timeSheetResponse =
+            timeSheetResponse.copyWith(data: r, error: null, loading: false);
+        // showToast(context, msg: "Successfully applied", color: Colors.green);
+        // context.router.pop();
+      },
+    );
+  }
+
+  @observable
+  ApiResponse<TimeSheetResModel> editTimeSheetResponse =
+      ApiResponse<TimeSheetResModel>();
+  @action
+  Future<void> editTimeSheetApi(
+      {required int id,
+      required String date,
+      required String day,
+      required String start,
+      required String finish,
+      required String totalHoursWorked,
+      required String normalHours,
+      required String fullTime,
+      required String halfTime,
+      required String publicHolidays,
+      required String annual,
+      required String sick,
+      required String otherDays,
+      required BuildContext context}) async {
+    editTimeSheetResponse =
+        editTimeSheetResponse.copyWith(error: null, loading: true);
+    final result = await teamService.editTimeSheetApi(
+        date: date,
+        id: id,
+        day: day,
+        start: start,
+        finish: finish,
+        totalHoursWorked: totalHoursWorked,
+        normalHours: normalHours,
+        fullTime: fullTime,
+        halfTime: halfTime,
+        publicHolidays: publicHolidays,
+        annual: annual,
+        sick: sick,
+        otherDays: otherDays);
+    return result.fold(
+      (l) {
+        editTimeSheetResponse =
+            editTimeSheetResponse.copyWith(errors: l, loading: false);
+        popupErrorData(context, mainFailure: l);
+      },
+      (r) {
+        editTimeSheetResponse = editTimeSheetResponse.copyWith(
+            data: r, error: null, loading: false);
+        // showToast(context, msg: "Successfully applied", color: Colors.green);
+        // context.router.pop();
+      },
+    );
   }
 }

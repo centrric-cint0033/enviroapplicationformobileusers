@@ -16,7 +16,8 @@ class RouteNames {
   static const String teamEditScreen = '/teameditscreen';
   static const String addTeamScreen = '/addteamscreen';
   static const String leaveApplicationScreen = '/leaveapplicationscreen';
-    static const String timesheetScreen = '/timesheetscreen';
+  static const String timesheetScreen = '/timesheetscreen';
+  static const String edittimesheetScreen = '/edittimesheetscreen';
   static const String employeeFilesScreen = '/employeefilesscreen';
   static const String siteListPage = '/site_list_page';
   static const String siteDetailPage = '/site_detail_page';

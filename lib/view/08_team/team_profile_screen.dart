@@ -20,6 +20,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:intl/intl.dart';
 
 @RoutePage()
 class TeamProfileScreen extends StatelessWidget {
@@ -60,6 +61,13 @@ class TeamProfileScreen extends StatelessWidget {
                               cmOutlineButton(
                                   text: "TimeSheet",
                                   onPressed: () {
+                                    vmTeam.selectedChooseWeekTimesheet =
+                                        getLastFriday(DateTime.now());
+                                    vmTeam.getTimeSheetApi(
+                                        date: DateFormat('yyyy-MM-dd').format(
+                                            vmTeam
+                                                .selectedChooseWeekTimesheet!),
+                                        context: context);
                                     context.router.push(TimeSheetRoute());
                                   }),
                               cmOutlineButton(
@@ -144,9 +152,7 @@ class TeamProfileScreen extends StatelessWidget {
                                                     }, Appthemes.cPrimary,
                                                         "Delete"),
                                                   ),
-                                                  const SizedBox(
-                                                    width: 16,
-                                                  ),
+                                                  sized0hx10,
                                                   SizedBox(
                                                     height: 26.h,
                                                     width: 57.h,
@@ -313,6 +319,16 @@ class TeamProfileScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  DateTime getLastFriday(DateTime date) {
+    int daysToSubtract = (date.weekday + 1) % 7 + 1;
+    if (date.weekday >= DateTime.friday) {
+      daysToSubtract = date.weekday - DateTime.friday;
+    } else {
+      daysToSubtract = date.weekday + 2;
+    }
+    return date.subtract(Duration(days: daysToSubtract));
   }
 
   Widget listData(TeamProfileEmployeeDetailsResModel? data) {
