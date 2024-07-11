@@ -7,32 +7,32 @@ part of 'week.dart';
 // **************************************************************************
 
 _$WeekImpl _$$WeekImplFromJson(Map<String, dynamic> json) => _$WeekImpl(
-      day: json['day'] as String?,
-      date: json['date'] as String?,
-      sick: json['sick'],
-      start: json['start'],
       annual: json['annual'],
+      date: json['date'] as String?,
+      day: json['day'] as String?,
       finish: json['finish'],
       fullTime: json['full_time'],
       halfTime: json['half_time'],
-      otherDays: json['other_days'],
       normalHours: json['normal_hours'],
+      otherDays: json['other_days'],
       publicHolidays: json['public_holidays'],
+      sick: json['sick'],
+      start: json['start'],
       totalHoursWorked: json['total_hours_worked'],
     );
 
 Map<String, dynamic> _$$WeekImplToJson(_$WeekImpl instance) =>
     <String, dynamic>{
-      'day': instance.day,
-      'date': instance.date,
-      'sick': instance.sick,
-      'start': instance.start,
       'annual': instance.annual,
+      'date': instance.date,
+      'day': instance.day,
       'finish': instance.finish,
       'full_time': instance.fullTime,
       'half_time': instance.halfTime,
-      'other_days': instance.otherDays,
       'normal_hours': instance.normalHours,
+      'other_days': instance.otherDays,
       'public_holidays': instance.publicHolidays,
+      'sick': instance.sick,
+      'start': instance.start,
       'total_hours_worked': instance.totalHoursWorked,
     };

@@ -11,17 +11,16 @@ part 'weekly_report.g.dart';
 @freezed
 class WeeklyReport with _$WeeklyReport {
   factory WeeklyReport({
-    dynamic id,
-    List<Week>? week,
-    dynamic comments,
-    dynamic attachment,
     @JsonKey(name: 'employee_id') dynamic employeeId,
-    @JsonKey(name: 'whole_paid_hours') WholePaidHours? wholePaidHours,
-    @JsonKey(name: 'whole_week_minus') WholeWeekMinus? wholeWeekMinus,
-    @JsonKey(name: 'manager_signature') dynamic managerSignature,
+    dynamic comments,
     @JsonKey(name: 'employee_signature') dynamic employeeSignature,
+    @JsonKey(name: 'manager_signature') dynamic managerSignature,
+    String? attachment,
     @JsonKey(name: 'whole_hours_total_worked')
     WholeHoursTotalWorked? wholeHoursTotalWorked,
+    @JsonKey(name: 'whole_week_minus') WholeWeekMinus? wholeWeekMinus,
+    @JsonKey(name: 'whole_paid_hours') WholePaidHours? wholePaidHours,
+    List<Week>? week,
   }) = _WeeklyReport;
 
   factory WeeklyReport.fromJson(Map<String, dynamic> json) =>

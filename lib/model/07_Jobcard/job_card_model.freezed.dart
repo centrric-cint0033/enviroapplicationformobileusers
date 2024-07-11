@@ -3110,22 +3110,24 @@ JobcardinfoFiles _$JobcardinfoFilesFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$JobcardinfoFiles {
   @JsonKey(name: "tc_required_multiple_file")
-  List<dynamic>? get tcRequiredMultipleFile =>
+  List<WeighBridge>? get tcRequiredMultipleFile =>
       throw _privateConstructorUsedError;
   @JsonKey(name: "data_form_required_multiple_file")
-  List<dynamic>? get dataFormRequiredMultipleFile =>
+  List<WeighBridge>? get dataFormRequiredMultipleFile =>
       throw _privateConstructorUsedError;
   @JsonKey(name: "weigh_bridge_required_multiple_file")
-  List<dynamic>? get weighBridgeRequiredMultipleFile =>
+  List<WeighBridge>? get weighBridgeRequiredMultipleFile =>
       throw _privateConstructorUsedError;
   @JsonKey(name: "safety_data_sheet_files")
-  List<dynamic>? get safetyDataSheetFiles => throw _privateConstructorUsedError;
+  List<WeighBridge>? get safetyDataSheetFiles =>
+      throw _privateConstructorUsedError;
   @JsonKey(name: "manifest_multiple_file")
-  List<dynamic>? get manifestMultipleFile => throw _privateConstructorUsedError;
+  List<WeighBridge>? get manifestMultipleFile =>
+      throw _privateConstructorUsedError;
   @JsonKey(name: "purchase_order")
-  List<dynamic>? get purchaseOrder => throw _privateConstructorUsedError;
+  List<WeighBridge>? get purchaseOrder => throw _privateConstructorUsedError;
   @JsonKey(name: "chemist_approval_multiple_file")
-  List<dynamic>? get chemistApprovalMultipleFile =>
+  List<WeighBridge>? get chemistApprovalMultipleFile =>
       throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -3142,18 +3144,18 @@ abstract class $JobcardinfoFilesCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(name: "tc_required_multiple_file")
-      List<dynamic>? tcRequiredMultipleFile,
+      List<WeighBridge>? tcRequiredMultipleFile,
       @JsonKey(name: "data_form_required_multiple_file")
-      List<dynamic>? dataFormRequiredMultipleFile,
+      List<WeighBridge>? dataFormRequiredMultipleFile,
       @JsonKey(name: "weigh_bridge_required_multiple_file")
-      List<dynamic>? weighBridgeRequiredMultipleFile,
+      List<WeighBridge>? weighBridgeRequiredMultipleFile,
       @JsonKey(name: "safety_data_sheet_files")
-      List<dynamic>? safetyDataSheetFiles,
+      List<WeighBridge>? safetyDataSheetFiles,
       @JsonKey(name: "manifest_multiple_file")
-      List<dynamic>? manifestMultipleFile,
-      @JsonKey(name: "purchase_order") List<dynamic>? purchaseOrder,
+      List<WeighBridge>? manifestMultipleFile,
+      @JsonKey(name: "purchase_order") List<WeighBridge>? purchaseOrder,
       @JsonKey(name: "chemist_approval_multiple_file")
-      List<dynamic>? chemistApprovalMultipleFile});
+      List<WeighBridge>? chemistApprovalMultipleFile});
 }
 
 /// @nodoc
@@ -3181,32 +3183,32 @@ class _$JobcardinfoFilesCopyWithImpl<$Res, $Val extends JobcardinfoFiles>
       tcRequiredMultipleFile: freezed == tcRequiredMultipleFile
           ? _value.tcRequiredMultipleFile
           : tcRequiredMultipleFile // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>?,
+              as List<WeighBridge>?,
       dataFormRequiredMultipleFile: freezed == dataFormRequiredMultipleFile
           ? _value.dataFormRequiredMultipleFile
           : dataFormRequiredMultipleFile // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>?,
+              as List<WeighBridge>?,
       weighBridgeRequiredMultipleFile: freezed ==
               weighBridgeRequiredMultipleFile
           ? _value.weighBridgeRequiredMultipleFile
           : weighBridgeRequiredMultipleFile // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>?,
+              as List<WeighBridge>?,
       safetyDataSheetFiles: freezed == safetyDataSheetFiles
           ? _value.safetyDataSheetFiles
           : safetyDataSheetFiles // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>?,
+              as List<WeighBridge>?,
       manifestMultipleFile: freezed == manifestMultipleFile
           ? _value.manifestMultipleFile
           : manifestMultipleFile // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>?,
+              as List<WeighBridge>?,
       purchaseOrder: freezed == purchaseOrder
           ? _value.purchaseOrder
           : purchaseOrder // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>?,
+              as List<WeighBridge>?,
       chemistApprovalMultipleFile: freezed == chemistApprovalMultipleFile
           ? _value.chemistApprovalMultipleFile
           : chemistApprovalMultipleFile // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>?,
+              as List<WeighBridge>?,
     ) as $Val);
   }
 }
@@ -3221,18 +3223,18 @@ abstract class _$$JobcardinfoFilesImplCopyWith<$Res>
   @useResult
   $Res call(
       {@JsonKey(name: "tc_required_multiple_file")
-      List<dynamic>? tcRequiredMultipleFile,
+      List<WeighBridge>? tcRequiredMultipleFile,
       @JsonKey(name: "data_form_required_multiple_file")
-      List<dynamic>? dataFormRequiredMultipleFile,
+      List<WeighBridge>? dataFormRequiredMultipleFile,
       @JsonKey(name: "weigh_bridge_required_multiple_file")
-      List<dynamic>? weighBridgeRequiredMultipleFile,
+      List<WeighBridge>? weighBridgeRequiredMultipleFile,
       @JsonKey(name: "safety_data_sheet_files")
-      List<dynamic>? safetyDataSheetFiles,
+      List<WeighBridge>? safetyDataSheetFiles,
       @JsonKey(name: "manifest_multiple_file")
-      List<dynamic>? manifestMultipleFile,
-      @JsonKey(name: "purchase_order") List<dynamic>? purchaseOrder,
+      List<WeighBridge>? manifestMultipleFile,
+      @JsonKey(name: "purchase_order") List<WeighBridge>? purchaseOrder,
       @JsonKey(name: "chemist_approval_multiple_file")
-      List<dynamic>? chemistApprovalMultipleFile});
+      List<WeighBridge>? chemistApprovalMultipleFile});
 }
 
 /// @nodoc
@@ -3258,32 +3260,32 @@ class __$$JobcardinfoFilesImplCopyWithImpl<$Res>
       tcRequiredMultipleFile: freezed == tcRequiredMultipleFile
           ? _value._tcRequiredMultipleFile
           : tcRequiredMultipleFile // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>?,
+              as List<WeighBridge>?,
       dataFormRequiredMultipleFile: freezed == dataFormRequiredMultipleFile
           ? _value._dataFormRequiredMultipleFile
           : dataFormRequiredMultipleFile // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>?,
+              as List<WeighBridge>?,
       weighBridgeRequiredMultipleFile: freezed ==
               weighBridgeRequiredMultipleFile
           ? _value._weighBridgeRequiredMultipleFile
           : weighBridgeRequiredMultipleFile // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>?,
+              as List<WeighBridge>?,
       safetyDataSheetFiles: freezed == safetyDataSheetFiles
           ? _value._safetyDataSheetFiles
           : safetyDataSheetFiles // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>?,
+              as List<WeighBridge>?,
       manifestMultipleFile: freezed == manifestMultipleFile
           ? _value._manifestMultipleFile
           : manifestMultipleFile // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>?,
+              as List<WeighBridge>?,
       purchaseOrder: freezed == purchaseOrder
           ? _value._purchaseOrder
           : purchaseOrder // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>?,
+              as List<WeighBridge>?,
       chemistApprovalMultipleFile: freezed == chemistApprovalMultipleFile
           ? _value._chemistApprovalMultipleFile
           : chemistApprovalMultipleFile // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>?,
+              as List<WeighBridge>?,
     ));
   }
 }
@@ -3293,18 +3295,18 @@ class __$$JobcardinfoFilesImplCopyWithImpl<$Res>
 class _$JobcardinfoFilesImpl implements _JobcardinfoFiles {
   const _$JobcardinfoFilesImpl(
       {@JsonKey(name: "tc_required_multiple_file")
-      final List<dynamic>? tcRequiredMultipleFile,
+      final List<WeighBridge>? tcRequiredMultipleFile,
       @JsonKey(name: "data_form_required_multiple_file")
-      final List<dynamic>? dataFormRequiredMultipleFile,
+      final List<WeighBridge>? dataFormRequiredMultipleFile,
       @JsonKey(name: "weigh_bridge_required_multiple_file")
-      final List<dynamic>? weighBridgeRequiredMultipleFile,
+      final List<WeighBridge>? weighBridgeRequiredMultipleFile,
       @JsonKey(name: "safety_data_sheet_files")
-      final List<dynamic>? safetyDataSheetFiles,
+      final List<WeighBridge>? safetyDataSheetFiles,
       @JsonKey(name: "manifest_multiple_file")
-      final List<dynamic>? manifestMultipleFile,
-      @JsonKey(name: "purchase_order") final List<dynamic>? purchaseOrder,
+      final List<WeighBridge>? manifestMultipleFile,
+      @JsonKey(name: "purchase_order") final List<WeighBridge>? purchaseOrder,
       @JsonKey(name: "chemist_approval_multiple_file")
-      final List<dynamic>? chemistApprovalMultipleFile})
+      final List<WeighBridge>? chemistApprovalMultipleFile})
       : _tcRequiredMultipleFile = tcRequiredMultipleFile,
         _dataFormRequiredMultipleFile = dataFormRequiredMultipleFile,
         _weighBridgeRequiredMultipleFile = weighBridgeRequiredMultipleFile,
@@ -3316,10 +3318,10 @@ class _$JobcardinfoFilesImpl implements _JobcardinfoFiles {
   factory _$JobcardinfoFilesImpl.fromJson(Map<String, dynamic> json) =>
       _$$JobcardinfoFilesImplFromJson(json);
 
-  final List<dynamic>? _tcRequiredMultipleFile;
+  final List<WeighBridge>? _tcRequiredMultipleFile;
   @override
   @JsonKey(name: "tc_required_multiple_file")
-  List<dynamic>? get tcRequiredMultipleFile {
+  List<WeighBridge>? get tcRequiredMultipleFile {
     final value = _tcRequiredMultipleFile;
     if (value == null) return null;
     if (_tcRequiredMultipleFile is EqualUnmodifiableListView)
@@ -3328,10 +3330,10 @@ class _$JobcardinfoFilesImpl implements _JobcardinfoFiles {
     return EqualUnmodifiableListView(value);
   }
 
-  final List<dynamic>? _dataFormRequiredMultipleFile;
+  final List<WeighBridge>? _dataFormRequiredMultipleFile;
   @override
   @JsonKey(name: "data_form_required_multiple_file")
-  List<dynamic>? get dataFormRequiredMultipleFile {
+  List<WeighBridge>? get dataFormRequiredMultipleFile {
     final value = _dataFormRequiredMultipleFile;
     if (value == null) return null;
     if (_dataFormRequiredMultipleFile is EqualUnmodifiableListView)
@@ -3340,10 +3342,10 @@ class _$JobcardinfoFilesImpl implements _JobcardinfoFiles {
     return EqualUnmodifiableListView(value);
   }
 
-  final List<dynamic>? _weighBridgeRequiredMultipleFile;
+  final List<WeighBridge>? _weighBridgeRequiredMultipleFile;
   @override
   @JsonKey(name: "weigh_bridge_required_multiple_file")
-  List<dynamic>? get weighBridgeRequiredMultipleFile {
+  List<WeighBridge>? get weighBridgeRequiredMultipleFile {
     final value = _weighBridgeRequiredMultipleFile;
     if (value == null) return null;
     if (_weighBridgeRequiredMultipleFile is EqualUnmodifiableListView)
@@ -3352,10 +3354,10 @@ class _$JobcardinfoFilesImpl implements _JobcardinfoFiles {
     return EqualUnmodifiableListView(value);
   }
 
-  final List<dynamic>? _safetyDataSheetFiles;
+  final List<WeighBridge>? _safetyDataSheetFiles;
   @override
   @JsonKey(name: "safety_data_sheet_files")
-  List<dynamic>? get safetyDataSheetFiles {
+  List<WeighBridge>? get safetyDataSheetFiles {
     final value = _safetyDataSheetFiles;
     if (value == null) return null;
     if (_safetyDataSheetFiles is EqualUnmodifiableListView)
@@ -3364,10 +3366,10 @@ class _$JobcardinfoFilesImpl implements _JobcardinfoFiles {
     return EqualUnmodifiableListView(value);
   }
 
-  final List<dynamic>? _manifestMultipleFile;
+  final List<WeighBridge>? _manifestMultipleFile;
   @override
   @JsonKey(name: "manifest_multiple_file")
-  List<dynamic>? get manifestMultipleFile {
+  List<WeighBridge>? get manifestMultipleFile {
     final value = _manifestMultipleFile;
     if (value == null) return null;
     if (_manifestMultipleFile is EqualUnmodifiableListView)
@@ -3376,10 +3378,10 @@ class _$JobcardinfoFilesImpl implements _JobcardinfoFiles {
     return EqualUnmodifiableListView(value);
   }
 
-  final List<dynamic>? _purchaseOrder;
+  final List<WeighBridge>? _purchaseOrder;
   @override
   @JsonKey(name: "purchase_order")
-  List<dynamic>? get purchaseOrder {
+  List<WeighBridge>? get purchaseOrder {
     final value = _purchaseOrder;
     if (value == null) return null;
     if (_purchaseOrder is EqualUnmodifiableListView) return _purchaseOrder;
@@ -3387,10 +3389,10 @@ class _$JobcardinfoFilesImpl implements _JobcardinfoFiles {
     return EqualUnmodifiableListView(value);
   }
 
-  final List<dynamic>? _chemistApprovalMultipleFile;
+  final List<WeighBridge>? _chemistApprovalMultipleFile;
   @override
   @JsonKey(name: "chemist_approval_multiple_file")
-  List<dynamic>? get chemistApprovalMultipleFile {
+  List<WeighBridge>? get chemistApprovalMultipleFile {
     final value = _chemistApprovalMultipleFile;
     if (value == null) return null;
     if (_chemistApprovalMultipleFile is EqualUnmodifiableListView)
@@ -3457,45 +3459,45 @@ class _$JobcardinfoFilesImpl implements _JobcardinfoFiles {
 
 abstract class _JobcardinfoFiles implements JobcardinfoFiles {
   const factory _JobcardinfoFiles(
-          {@JsonKey(name: "tc_required_multiple_file")
-          final List<dynamic>? tcRequiredMultipleFile,
-          @JsonKey(name: "data_form_required_multiple_file")
-          final List<dynamic>? dataFormRequiredMultipleFile,
-          @JsonKey(name: "weigh_bridge_required_multiple_file")
-          final List<dynamic>? weighBridgeRequiredMultipleFile,
-          @JsonKey(name: "safety_data_sheet_files")
-          final List<dynamic>? safetyDataSheetFiles,
-          @JsonKey(name: "manifest_multiple_file")
-          final List<dynamic>? manifestMultipleFile,
-          @JsonKey(name: "purchase_order") final List<dynamic>? purchaseOrder,
-          @JsonKey(name: "chemist_approval_multiple_file")
-          final List<dynamic>? chemistApprovalMultipleFile}) =
-      _$JobcardinfoFilesImpl;
+      {@JsonKey(name: "tc_required_multiple_file")
+      final List<WeighBridge>? tcRequiredMultipleFile,
+      @JsonKey(name: "data_form_required_multiple_file")
+      final List<WeighBridge>? dataFormRequiredMultipleFile,
+      @JsonKey(name: "weigh_bridge_required_multiple_file")
+      final List<WeighBridge>? weighBridgeRequiredMultipleFile,
+      @JsonKey(name: "safety_data_sheet_files")
+      final List<WeighBridge>? safetyDataSheetFiles,
+      @JsonKey(name: "manifest_multiple_file")
+      final List<WeighBridge>? manifestMultipleFile,
+      @JsonKey(name: "purchase_order") final List<WeighBridge>? purchaseOrder,
+      @JsonKey(name: "chemist_approval_multiple_file")
+      final List<WeighBridge>?
+          chemistApprovalMultipleFile}) = _$JobcardinfoFilesImpl;
 
   factory _JobcardinfoFiles.fromJson(Map<String, dynamic> json) =
       _$JobcardinfoFilesImpl.fromJson;
 
   @override
   @JsonKey(name: "tc_required_multiple_file")
-  List<dynamic>? get tcRequiredMultipleFile;
+  List<WeighBridge>? get tcRequiredMultipleFile;
   @override
   @JsonKey(name: "data_form_required_multiple_file")
-  List<dynamic>? get dataFormRequiredMultipleFile;
+  List<WeighBridge>? get dataFormRequiredMultipleFile;
   @override
   @JsonKey(name: "weigh_bridge_required_multiple_file")
-  List<dynamic>? get weighBridgeRequiredMultipleFile;
+  List<WeighBridge>? get weighBridgeRequiredMultipleFile;
   @override
   @JsonKey(name: "safety_data_sheet_files")
-  List<dynamic>? get safetyDataSheetFiles;
+  List<WeighBridge>? get safetyDataSheetFiles;
   @override
   @JsonKey(name: "manifest_multiple_file")
-  List<dynamic>? get manifestMultipleFile;
+  List<WeighBridge>? get manifestMultipleFile;
   @override
   @JsonKey(name: "purchase_order")
-  List<dynamic>? get purchaseOrder;
+  List<WeighBridge>? get purchaseOrder;
   @override
   @JsonKey(name: "chemist_approval_multiple_file")
-  List<dynamic>? get chemistApprovalMultipleFile;
+  List<WeighBridge>? get chemistApprovalMultipleFile;
   @override
   @JsonKey(ignore: true)
   _$$JobcardinfoFilesImplCopyWith<_$JobcardinfoFilesImpl> get copyWith =>
@@ -3740,5 +3742,219 @@ abstract class _ServiceList implements ServiceList {
   @override
   @JsonKey(ignore: true)
   _$$ServiceListImplCopyWith<_$ServiceListImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+WeighBridge _$WeighBridgeFromJson(Map<String, dynamic> json) {
+  return _WeighBridge.fromJson(json);
+}
+
+/// @nodoc
+mixin _$WeighBridge {
+  @JsonKey(name: "id")
+  int? get id => throw _privateConstructorUsedError;
+  @JsonKey(name: "name")
+  String? get name => throw _privateConstructorUsedError;
+  @JsonKey(name: "file")
+  String? get file => throw _privateConstructorUsedError;
+  @JsonKey(name: "created_at")
+  String? get createdAt => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $WeighBridgeCopyWith<WeighBridge> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $WeighBridgeCopyWith<$Res> {
+  factory $WeighBridgeCopyWith(
+          WeighBridge value, $Res Function(WeighBridge) then) =
+      _$WeighBridgeCopyWithImpl<$Res, WeighBridge>;
+  @useResult
+  $Res call(
+      {@JsonKey(name: "id") int? id,
+      @JsonKey(name: "name") String? name,
+      @JsonKey(name: "file") String? file,
+      @JsonKey(name: "created_at") String? createdAt});
+}
+
+/// @nodoc
+class _$WeighBridgeCopyWithImpl<$Res, $Val extends WeighBridge>
+    implements $WeighBridgeCopyWith<$Res> {
+  _$WeighBridgeCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? name = freezed,
+    Object? file = freezed,
+    Object? createdAt = freezed,
+  }) {
+    return _then(_value.copyWith(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
+      name: freezed == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
+      file: freezed == file
+          ? _value.file
+          : file // ignore: cast_nullable_to_non_nullable
+              as String?,
+      createdAt: freezed == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$WeighBridgeImplCopyWith<$Res>
+    implements $WeighBridgeCopyWith<$Res> {
+  factory _$$WeighBridgeImplCopyWith(
+          _$WeighBridgeImpl value, $Res Function(_$WeighBridgeImpl) then) =
+      __$$WeighBridgeImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {@JsonKey(name: "id") int? id,
+      @JsonKey(name: "name") String? name,
+      @JsonKey(name: "file") String? file,
+      @JsonKey(name: "created_at") String? createdAt});
+}
+
+/// @nodoc
+class __$$WeighBridgeImplCopyWithImpl<$Res>
+    extends _$WeighBridgeCopyWithImpl<$Res, _$WeighBridgeImpl>
+    implements _$$WeighBridgeImplCopyWith<$Res> {
+  __$$WeighBridgeImplCopyWithImpl(
+      _$WeighBridgeImpl _value, $Res Function(_$WeighBridgeImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? name = freezed,
+    Object? file = freezed,
+    Object? createdAt = freezed,
+  }) {
+    return _then(_$WeighBridgeImpl(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
+      name: freezed == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
+      file: freezed == file
+          ? _value.file
+          : file // ignore: cast_nullable_to_non_nullable
+              as String?,
+      createdAt: freezed == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$WeighBridgeImpl implements _WeighBridge {
+  const _$WeighBridgeImpl(
+      {@JsonKey(name: "id") this.id,
+      @JsonKey(name: "name") this.name,
+      @JsonKey(name: "file") this.file,
+      @JsonKey(name: "created_at") this.createdAt});
+
+  factory _$WeighBridgeImpl.fromJson(Map<String, dynamic> json) =>
+      _$$WeighBridgeImplFromJson(json);
+
+  @override
+  @JsonKey(name: "id")
+  final int? id;
+  @override
+  @JsonKey(name: "name")
+  final String? name;
+  @override
+  @JsonKey(name: "file")
+  final String? file;
+  @override
+  @JsonKey(name: "created_at")
+  final String? createdAt;
+
+  @override
+  String toString() {
+    return 'WeighBridge(id: $id, name: $name, file: $file, createdAt: $createdAt)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$WeighBridgeImpl &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.file, file) || other.file == file) &&
+            (identical(other.createdAt, createdAt) ||
+                other.createdAt == createdAt));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, id, name, file, createdAt);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$WeighBridgeImplCopyWith<_$WeighBridgeImpl> get copyWith =>
+      __$$WeighBridgeImplCopyWithImpl<_$WeighBridgeImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$WeighBridgeImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _WeighBridge implements WeighBridge {
+  const factory _WeighBridge(
+          {@JsonKey(name: "id") final int? id,
+          @JsonKey(name: "name") final String? name,
+          @JsonKey(name: "file") final String? file,
+          @JsonKey(name: "created_at") final String? createdAt}) =
+      _$WeighBridgeImpl;
+
+  factory _WeighBridge.fromJson(Map<String, dynamic> json) =
+      _$WeighBridgeImpl.fromJson;
+
+  @override
+  @JsonKey(name: "id")
+  int? get id;
+  @override
+  @JsonKey(name: "name")
+  String? get name;
+  @override
+  @JsonKey(name: "file")
+  String? get file;
+  @override
+  @JsonKey(name: "created_at")
+  String? get createdAt;
+  @override
+  @JsonKey(ignore: true)
+  _$$WeighBridgeImplCopyWith<_$WeighBridgeImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

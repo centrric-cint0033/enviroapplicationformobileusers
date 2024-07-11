@@ -76,7 +76,12 @@ class SheduledetailPage extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(15.w)),
                               child: Center(
                                 child: vmSchedule.jobcardResponse.loading
-                                    ? const CupertinoActivityIndicator()
+                                    ? SizedBox(
+                                        height: 12.w,
+                                        width: 12.w,
+                                        child: const CircularProgressIndicator(
+                                          strokeWidth: 2,
+                                        ))
                                     : Text(
                                         "Job Card",
                                         style: TextStyle(

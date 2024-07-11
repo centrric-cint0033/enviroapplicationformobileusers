@@ -133,6 +133,7 @@ abstract class $AppRouter extends _i38.RootStackRouter {
           timesheetWeek: args.timesheetWeek,
           date: args.date,
           day: args.day,
+          weekStartDate: args.weekStartDate,
         ),
       );
     },
@@ -485,6 +486,7 @@ class EditTimeSheetRoute extends _i38.PageRouteInfo<EditTimeSheetRouteArgs> {
     _i40.Week? timesheetWeek,
     String? date,
     String? day,
+    String? weekStartDate,
     List<_i38.PageRouteInfo>? children,
   }) : super(
           EditTimeSheetRoute.name,
@@ -493,6 +495,7 @@ class EditTimeSheetRoute extends _i38.PageRouteInfo<EditTimeSheetRouteArgs> {
             timesheetWeek: timesheetWeek,
             date: date,
             day: day,
+            weekStartDate: weekStartDate,
           ),
           initialChildren: children,
         );
@@ -509,6 +512,7 @@ class EditTimeSheetRouteArgs {
     this.timesheetWeek,
     this.date,
     this.day,
+    this.weekStartDate,
   });
 
   final _i39.Key? key;
@@ -519,9 +523,11 @@ class EditTimeSheetRouteArgs {
 
   final String? day;
 
+  final String? weekStartDate;
+
   @override
   String toString() {
-    return 'EditTimeSheetRouteArgs{key: $key, timesheetWeek: $timesheetWeek, date: $date, day: $day}';
+    return 'EditTimeSheetRouteArgs{key: $key, timesheetWeek: $timesheetWeek, date: $date, day: $day, weekStartDate: $weekStartDate}';
   }
 }
 

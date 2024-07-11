@@ -42,5 +42,5 @@ mixin class TeamEndpoints {
 
   final String timeSheet = '/api/v1/team/times-sheet/crud/';
 
-   final String editTimeSheet = '/api/v1/team/times-sheet/crud/';
+  final String editTimeSheet = '/api/v1/team/times-sheet/crud/';
 }

@@ -1,14 +1,13 @@
 import 'dart:convert';
-import 'dart:developer';
 import 'package:dartz/dartz.dart';
 import 'package:enviro_mobile_application/model/00_common_model/folder_model/folder_model.dart';
 import 'package:enviro_mobile_application/model/10_team/create_team_req_model/create_team_req_model.dart';
+import 'package:enviro_mobile_application/model/10_team/edit_time_sheet_res_model/edit_time_sheet_res_model.dart';
 import 'package:enviro_mobile_application/model/10_team/leave_res_model/leave_res_model/leave_res_model.dart';
 import 'package:enviro_mobile_application/model/10_team/team_designtion_res_model/team_designtion_res_model.dart';
 import 'package:enviro_mobile_application/model/10_team/team_profile_employee_details_res_model/team_profile_employee_details_res_model.dart';
 import 'package:enviro_mobile_application/model/10_team/team_res_model/team_res_model.dart';
 import 'package:enviro_mobile_application/model/10_team/time_sheet_res_model/time_sheet_res_model.dart';
-import 'package:enviro_mobile_application/model/10_team/time_sheet_res_model/week.dart';
 import 'package:enviro_mobile_application/model/10_team/time_sheet_res_model/weekly_report.dart';
 import 'package:enviro_mobile_application/utilis/api_endpoints/api_endpoints.dart';
 import 'package:enviro_mobile_application/utilis/httpservice.dart';
@@ -59,20 +58,10 @@ abstract class IteamService {
       {required LeaveResModel data});
   Future<Either<Map<MainFailure, dynamic>, TimeSheetResModel>> getTimeSheetApi(
       {required String date});
-  Future<Either<Map<MainFailure, dynamic>, TimeSheetResModel>> editTimeSheetApi(
-      {required int id,
-      required String date,
-      required String day,
-      required String start,
-      required String finish,
-      required String totalHoursWorked,
-      required String normalHours,
-      required String fullTime,
-      required String halfTime,
-      required String publicHolidays,
-      required String annual,
-      required String sick,
-      required String otherDays});
+  Future<Either<Map<MainFailure, dynamic>, EditTimeSheetResModel>>
+      editTimeSheetApi(
+          {required String date,
+          required WeeklyReport weeklyReport});
 }
 
 @LazySingleton(as: IteamService)
@@ -438,46 +427,26 @@ class TeamService implements IteamService {
   }
 
   @override
-  Future<Either<Map<MainFailure, dynamic>, TimeSheetResModel>> editTimeSheetApi(
-      {required int id,
-      required String date,
-      required String day,
-      required String start,
-      required String finish,
-      required String totalHoursWorked,
-      required String normalHours,
-      required String fullTime,
-      required String halfTime,
-      required String publicHolidays,
-      required String annual,
-      required String sick,
-      required String otherDays}) async {
-    var response = await getIt<HttpService>().multipartRequest(data: {
-      "id": id,
-      "week_startdate": date,
-      "weekly_report": {
-        "week": Week(
-          date: date,
-          day: day,
-            start: start,
-            finish: finish,
-            totalHoursWorked: totalHoursWorked,
-            normalHours: normalHours,
-            fullTime: fullTime,
-            halfTime: halfTime,
-            publicHolidays: publicHolidays,
-            annual: annual,
-            sick: sick,
-            otherDays: otherDays)
-      }
-    }, method: 'POST', apiUrl: ApiEndPoints().editTimeSheet);
+  Future<Either<Map<MainFailure, dynamic>, EditTimeSheetResModel>>
+      editTimeSheetApi(
+          {required String date,
+          required WeeklyReport weeklyReport}) async {
+    String weeklyReportJson = jsonEncode(weeklyReport.toJson());
+    var response = await getIt<HttpService>().multipartRequest(
+      data: {
+        "week_startdate": date,
+        "weekly_report": weeklyReportJson, // Use the JSON string
+      },
+      method: 'POST',
+      apiUrl: ApiEndPoints().editTimeSheet,
+    );
+
     return response.fold(
       (l) => Left(l),
       (res) async {
-        log(response.toString());
         var data = jsonDecode(res.body);
-        log(data);
-        TimeSheetResModel editTimeSheet = TimeSheetResModel.fromJson(data);
+        EditTimeSheetResModel editTimeSheet =
+            EditTimeSheetResModel.fromJson(data);
         return Right(editTimeSheet);
       },
     );

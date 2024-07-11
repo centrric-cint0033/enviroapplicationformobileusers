@@ -14,7 +14,7 @@ Text showBlueText(String value,
       style: TextStyle(
           color: Appthemes.cPrimary,
           fontWeight: fontWeight,
-          fontSize: fontSize ?? 9.w),
+          fontSize: fontSize ?? 10.w),
     );
 
 Text showBlackText(String value,

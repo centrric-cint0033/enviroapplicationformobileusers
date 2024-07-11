@@ -1,3 +1,5 @@
+import 'dart:io';
+import 'package:enviro_mobile_application/model/07_Jobcard/job_card_model.dart';
 import 'package:enviro_mobile_application/utilis/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
@@ -8,7 +10,7 @@ import 'package:enviro_mobile_application/widgets/cmn_title_textwidget.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
-// import 'package:path/path.dart' as p;
+import 'package:url_launcher/url_launcher.dart';
 
 @RoutePage()
 class JobCardPage extends StatelessWidget {
@@ -127,267 +129,296 @@ class JobCardPage extends StatelessWidget {
                       sized0hx10,
                       _buildSectionHeader('Additional Information'),
                       Padding(
-                        padding: screenWidth,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            sized0hx10,
-                            _buildInfoText("Access Restrictions"),
-                            sized0hx10,
-                            _buildSectioncontainer(vmSchedule
-                                    .jobcardResponse.data?.accessRestriction ??
-                                ''),
-                            sized0hx10,
-                            _buildInfoText("TC required | comments"),
-                            sized0hx10,
-                            _buildSectioncontainer((vmSchedule.jobcardResponse
-                                        .data?.tcRequiredComment ??
-                                    '')
-                                .toString()),
-                            sized0hx10,
-                            _buildInfoText("Purchaseorder | Comments"),
-                            sized0hx10,
-                            _buildSectioncontainer(vmSchedule
-                                    .jobcardResponse.data?.purchaseComment ??
-                                ''),
-                            sized0hx10,
-                            _buildInfoText("Manifest | Comments"),
-                            sized0hx10,
-                            _buildSectioncontainer(
-                                vmSchedule.jobcardResponse.data?.manifest ??
-                                    ''),
-                            sized0hx10,
-                            _buildInfoText("Additional images"),
-                            sized0hx10,
-                            _buildSectioncontainer(vmSchedule
-                                    .jobcardResponse.data?.additionalImages ??
-                                ''),
-                            // sized0hx05,
-                            // CmButton(
-                            //   text: "Add File",
-                            //   width: 80.w,
-                            //   color: Appthemes.cPrimary,
-                            //   onPressed: () {
-                            //     vmSchedule.addFileJobcardFn();
-                            //   },
-                            // ),
-                            // if (vmSchedule.addFileJobcardList!.isNotEmpty) ...[
-                            //   sized0hx05,
-                            //   SizedBox(
-                            //     height: 70.h,
-                            //     width: double.infinity,
-                            //     child: ListView.builder(
-                            //       scrollDirection: Axis.horizontal,
-                            //       itemCount:
-                            //           vmSchedule.addFileJobcardList?.length,
-                            //       itemBuilder: (context, index) {
-                            //         String imagePath =
-                            //             vmSchedule.addFileJobcardList![index];
-                            //         String fileName = p.basename(imagePath);
-                            //         bool isImage = imagePath.endsWith('.jpg') ||
-                            //             imagePath.endsWith('.jpeg') ||
-                            //             imagePath.endsWith('.png');
-                            //         return InkWell(
-                            //           onTap: () async {
-                            //             OpenFile.open(
-                            //               imagePath,
-                            //             );
-                            //           },
-                            //           onLongPress: () {
-                            //             showConfirmationAlert(
-                            //                 context: context,
-                            //                 onSubmit: () {
-                            //                   vmSchedule.addFileJobcardList
-                            //                       ?.removeAt(index);
-                            //                 },
-                            //                 content:
-                            //                     "Are you sure you want to delete?",
-                            //                 submitText: "Yes",
-                            //                 submitText2: "No");
-                            //           },
-                            //           child: Container(
-                            //             width: 80.h, // Width of each item
-                            //             foregroundDecoration:
-                            //                 BoxDecoration(border: Border.all()),
-                            //             child: Column(
-                            //               children: [
-                            //                 sized0hx05,
-                            //                 Expanded(
-                            //                   child: isImage
-                            //                       ? Image.file(
-                            //                           File(imagePath),
-                            //                           fit: BoxFit.cover,
-                            //                         )
-                            //                       : Icon(
-                            //                           Icons.file_copy,
-                            //                           size: 20.w,
-                            //                           color: Colors.red,
-                            //                         ),
-                            //                 ),
-                            //                 Expanded(
-                            //                     child: Text(
-                            //                   fileName,
-                            //                   style: TextStyle(
-                            //                       fontSize: 9.w,
-                            //                       overflow:
-                            //                           TextOverflow.ellipsis),
-                            //                 ))
-                            //               ],
-                            //             ),
-                            //           ),
-                            //         );
-                            //       },
-                            //     ),
-                            //   )
-                            // ],
-                            sized0hx10,
-                            expandedRowShowsText(
-                                "Data form Required",
-                                vmSchedule.jobcardResponse.data?.wasteDataForm
-                                        ?.toString() ??
-                                    ''),
-                            sized0hx10,
-                            expandedRowShowsText(
-                                "AccessHeight",
-                                vmSchedule.jobcardResponse.data?.accessHeight ??
-                                    ''),
-                            sized0hx10,
-                            expandedRowShowsText(
-                                "Key Required",
-                                vmSchedule.jobcardResponse.data?.keyRequired
-                                        ?.toString() ??
-                                    ''),
-                            sized0hx10,
-                            expandedRowShowsText(
-                                "Pitt Distance from Truck",
-                                vmSchedule.jobcardResponse.data
-                                        ?.pitDistanceFromTruckLocation
-                                        ?.toString() ??
-                                    ''),
-                            sized0hx10,
-                            expandedRowShowsText(
-                                "Water Tap Location",
-                                vmSchedule
-                                        .jobcardResponse.data?.waterTapLocation
-                                        ?.toString() ??
-                                    ''),
-                            sized0hx10,
-                            expandedRowShowsText(
-                                "Gurney Required",
-                                vmSchedule.jobcardResponse.data?.gurneyRequired
-                                        ?.toString() ??
-                                    ''),
-                            sized0hx10,
-                            expandedRowShowsText(
-                                "Confined Space \n Required",
-                                vmSchedule.jobcardResponse.data?.confinedSpace
-                                        ?.toString() ??
-                                    ''),
-                            sized0hx10,
-                            expandedRowShowsText(
-                                "Number of trucks",
-                                vmSchedule.jobcardResponse.data
-                                        ?.numberOfTrucksRequired
-                                        ?.toString() ??
-                                    ''),
-                            sized0hx10,
-                            expandedRowShowsText(
-                                "Estimated Job Duration",
-                                vmSchedule.jobcardResponse.data
-                                        ?.estimatedJobDuration
-                                        ?.toString() ??
-                                    ''),
-                            sized0hx10,
-                            expandedRowShowsText(
-                                "Best time for service",
-                                vmSchedule.jobcardResponse.data?.timeForService
-                                        ?.toString() ??
-                                    ''),
-                            sized0hx10,
-                            expandedRowShowsText(
-                                "Specific PPE",
-                                vmSchedule.jobcardResponse.data
-                                        ?.specificPpeReqired
-                                        ?.toString() ??
-                                    ''),
-                            sized0hx10,
-                            expandedRowShowsText(
-                                "Weigh Bridge Required",
-                                vmSchedule.jobcardResponse.data
-                                        ?.weighBridgeRequired
-                                        ?.toString() ??
-                                    ''),
-                            sized0hx10,
-                            expandedRowShowsText(
-                                "Number and type of \n pallets to be exchanged",
-                                vmSchedule.jobcardResponse.data
-                                        ?.noAndTypePalletToBeExchanged
-                                        ?.toString() ??
-                                    ''),
-                            sized0hx10,
-                            expandedRowShowsText(
-                                "Safer Data Sheet \n Required",
-                                vmSchedule.jobcardResponse.data
-                                        ?.safetyDataSheetRequired
-                                        ?.toString() ??
-                                    ''),
-                            sized0hx10,
-                            expandedRowShowsText(
-                                "Chemist Approval",
-                                vmSchedule.jobcardResponse.data?.chemistApproval
-                                        ?.toString() ??
-                                    ''),
-                            sized0hx10,
-                            expandedRowShowsText(
-                                "Additional information",
-                                vmSchedule.jobcardResponse.data
-                                        ?.additionalInformation
-                                        ?.toString() ??
-                                    ''),
-                            sized0hx10,
-                            _buildSectioncontainer(vmSchedule
-                                    .jobcardResponse.data?.additionalInformation
-                                    ?.toString() ??
-                                ''),
-                            sized0hx10,
-                            expandedRowShowsText(
-                                "Capacity",
-                                vmSchedule.jobcardResponse.data?.capacity
-                                        ?.toString() ??
-                                    ''),
-                            sized0hx10,
-                            expandedRowShowsText(
-                                "Barcode",
-                                vmSchedule.jobcardResponse.data?.barcode
-                                        ?.toString() ??
-                                    ''),
-                            sized0hx10,
-                            expandedRowShowsText(
-                                "Job status",
-                                vmSchedule.jobcardResponse.data?.jobStatus
-                                        ?.toString() ??
-                                    ''),
-                            sized0hx10,
-                            expandedRowShowsText(
-                                "Pit Location",
-                                vmSchedule.jobcardResponse.data?.pitLocation
-                                        ?.toString() ??
-                                    ''),
-                            sized0hx10,
-                            _buildSectioncontainer(vmSchedule
-                                    .jobcardResponse.data?.pitLocation
-                                    ?.toString() ??
-                                ''),
-                            sized0hx10,
-                            expandedRowShowsText(
-                                "Smoke alarm",
-                                vmSchedule.jobcardResponse.data?.smokeAlarms
-                                        ?.toString() ??
-                                    ''),
-                            sized0hx10,
-                          ],
-                        ),
-                      )
+                          padding: screenWidth,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              sized0hx10,
+                              _buildInfoText("Access Restrictions"),
+                              sized0hx10,
+                              _buildSectioncontainer(vmSchedule.jobcardResponse
+                                      .data?.accessRestriction ??
+                                  ''),
+                              sized0hx10,
+                              _buildInfoText("TC required | comments"),
+                              sized0hx10,
+                              _buildSectioncontainer((vmSchedule.jobcardResponse
+                                          .data?.tcRequiredComment ??
+                                      '')
+                                  .toString()),
+                              sized0hx05,
+                              if (vmSchedule
+                                  .jobcardResponse
+                                  .data!
+                                  .jobcardinfoFiles!
+                                  .tcRequiredMultipleFile!
+                                  .isNotEmpty) ...[
+                                cmFileBuilder(vmSchedule
+                                        .jobcardResponse
+                                        .data!
+                                        .jobcardinfoFiles!
+                                        .tcRequiredMultipleFile ??
+                                    []),
+                              ],
+                              sized0hx10,
+                              _buildInfoText("Purchaseorder | Comments"),
+                              sized0hx05,
+                              if (vmSchedule
+                                  .jobcardResponse
+                                  .data!
+                                  .jobcardinfoFiles!
+                                  .purchaseOrder!
+                                  .isNotEmpty) ...[
+                                cmFileBuilder(vmSchedule.jobcardResponse.data!
+                                        .jobcardinfoFiles!.purchaseOrder ??
+                                    []),
+                              ],
+                              sized0hx10,
+                              _buildSectioncontainer(vmSchedule
+                                      .jobcardResponse.data?.purchaseComment ??
+                                  ''),
+                              sized0hx10,
+                              _buildInfoText("Manifest | Comments"),
+                              sized0hx10,
+                              _buildSectioncontainer(
+                                  vmSchedule.jobcardResponse.data?.manifest ??
+                                      ''),
+                              sized0hx05,
+                              if (vmSchedule
+                                  .jobcardResponse
+                                  .data!
+                                  .jobcardinfoFiles!
+                                  .manifestMultipleFile!
+                                  .isNotEmpty) ...[
+                                cmFileBuilder(vmSchedule
+                                        .jobcardResponse
+                                        .data!
+                                        .jobcardinfoFiles!
+                                        .manifestMultipleFile ??
+                                    []),
+                              ],
+                              sized0hx10,
+                              _buildInfoText("Additional images"),
+                              sized0hx10,
+                              _buildSectioncontainer(vmSchedule
+                                      .jobcardResponse.data?.additionalImages ??
+                                  ''),
+                              sized0hx05,
+                              if (vmSchedule
+                                  .jobcardResponse.data!.files!.isNotEmpty) ...[
+                                cmFileBuilder(
+                                    vmSchedule.jobcardResponse.data!.files ??
+                                        []),
+                              ],
+                              sized0hx10,
+                              expandedRowShowsText(
+                                  "Data form Required",
+                                  boolToString(vmSchedule
+                                          .jobcardResponse.data?.wasteDataForm
+                                          .toString() ??
+                                      "")),
+                              sized0hx05,
+                              if (vmSchedule
+                                  .jobcardResponse
+                                  .data!
+                                  .jobcardinfoFiles!
+                                  .dataFormRequiredMultipleFile!
+                                  .isNotEmpty) ...[
+                                cmFileBuilder(vmSchedule
+                                        .jobcardResponse
+                                        .data!
+                                        .jobcardinfoFiles!
+                                        .dataFormRequiredMultipleFile ??
+                                    []),
+                              ],
+                              sized0hx10,
+                              expandedRowShowsText(
+                                  "AccessHeight",
+                                  vmSchedule
+                                          .jobcardResponse.data?.accessHeight ??
+                                      ''),
+                              sized0hx10,
+                              expandedRowShowsText(
+                                  "Key Required",
+                                  boolToString(vmSchedule
+                                          .jobcardResponse.data?.keyRequired
+                                          .toString() ??
+                                      "")),
+                              sized0hx10,
+                              expandedRowShowsText(
+                                  "Pitt Distance from Truck",
+                                  vmSchedule.jobcardResponse.data
+                                          ?.pitDistanceFromTruckLocation
+                                          ?.toString() ??
+                                      ''),
+                              sized0hx10,
+                              expandedRowShowsText(
+                                  "Water Tap Location",
+                                  vmSchedule.jobcardResponse.data
+                                          ?.waterTapLocation
+                                          ?.toString() ??
+                                      ''),
+                              sized0hx10,
+                              expandedRowShowsText(
+                                  "Gurney Required",
+                                  boolToString(vmSchedule
+                                          .jobcardResponse.data?.gurneyRequired
+                                          .toString() ??
+                                      "")),
+                              sized0hx10,
+                              expandedRowShowsText(
+                                  "Confined Space \n Required",
+                                  boolToString(vmSchedule
+                                          .jobcardResponse.data?.confinedSpace
+                                          .toString() ??
+                                      "")),
+                              sized0hx10,
+                              expandedRowShowsText(
+                                  "Number of trucks",
+                                  vmSchedule.jobcardResponse.data
+                                          ?.numberOfTrucksRequired
+                                          ?.toString() ??
+                                      ''),
+                              sized0hx10,
+                              expandedRowShowsText(
+                                  "Estimated Job Duration",
+                                  vmSchedule.jobcardResponse.data
+                                          ?.estimatedJobDuration
+                                          ?.toString() ??
+                                      ''),
+                              sized0hx10,
+                              expandedRowShowsText(
+                                  "Best time for service",
+                                  vmSchedule
+                                          .jobcardResponse.data?.timeForService
+                                          ?.toString() ??
+                                      ''),
+                              sized0hx10,
+                              expandedRowShowsText(
+                                  "Specific PPE",
+                                  boolToString(vmSchedule.jobcardResponse.data
+                                          ?.specificPpeReqired
+                                          .toString() ??
+                                      "")),
+                              sized0hx10,
+                              expandedRowShowsText(
+                                  "Weigh Bridge Required",
+                                  boolToString(vmSchedule.jobcardResponse.data
+                                          ?.weighBridgeRequired
+                                          .toString() ??
+                                      "")),
+                              sized0hx10,
+                              expandedRowShowsText(
+                                  "Number and type of \n pallets to be exchanged",
+                                  vmSchedule.jobcardResponse.data
+                                          ?.noAndTypePalletToBeExchanged
+                                          ?.toString() ??
+                                      ''),
+                              sized0hx10,
+                              expandedRowShowsText(
+                                  "Safer Data Sheet \n Required",
+                                  boolToString(vmSchedule.jobcardResponse.data
+                                          ?.safetyDataSheetRequired
+                                          .toString() ??
+                                      "")),
+                              sized0hx05,
+                              if (vmSchedule
+                                  .jobcardResponse
+                                  .data!
+                                  .jobcardinfoFiles!
+                                  .safetyDataSheetFiles!
+                                  .isNotEmpty) ...[
+                                cmFileBuilder(vmSchedule
+                                        .jobcardResponse
+                                        .data!
+                                        .jobcardinfoFiles!
+                                        .safetyDataSheetFiles ??
+                                    []),
+                              ],
+                              sized0hx10,
+                              expandedRowShowsText(
+                                  "Chemist Approval",
+                                  boolToString(vmSchedule
+                                          .jobcardResponse.data?.chemistApproval
+                                          .toString() ??
+                                      "")),
+                              sized0hx05,
+                              if (vmSchedule
+                                  .jobcardResponse
+                                  .data!
+                                  .jobcardinfoFiles!
+                                  .chemistApprovalMultipleFile!
+                                  .isNotEmpty) ...[
+                                cmFileBuilder(vmSchedule
+                                        .jobcardResponse
+                                        .data!
+                                        .jobcardinfoFiles!
+                                        .chemistApprovalMultipleFile ??
+                                    []),
+                              ],
+                              sized0hx10,
+                              expandedRowShowsText(
+                                  "Additional information",
+                                  vmSchedule.jobcardResponse.data
+                                          ?.additionalInformation
+                                          ?.toString() ??
+                                      ''),
+                              sized0hx10,
+                              _buildSectioncontainer(vmSchedule.jobcardResponse
+                                      .data?.additionalInformation
+                                      ?.toString() ??
+                                  ''),
+                              sized0hx10,
+                              expandedRowShowsText(
+                                  "Capacity",
+                                  vmSchedule.jobcardResponse.data?.capacity
+                                          ?.toString() ??
+                                      ''),
+                              sized0hx10,
+                              expandedRowShowsText(
+                                  "Barcode",
+                                  vmSchedule.jobcardResponse.data?.barcode
+                                          ?.toString() ??
+                                      ''),
+                              sized0hx10,
+                              expandedRowShowsText(
+                                  "Job status",
+                                  vmSchedule.jobcardResponse.data?.jobStatus
+                                          ?.toString() ??
+                                      ''),
+                              sized0hx10,
+                              expandedRowShowsText(
+                                  "Pit Location",
+                                  vmSchedule.jobcardResponse.data?.pitLocation
+                                          ?.toString() ??
+                                      ''),
+                              sized0hx10,
+                              _buildSectioncontainer(vmSchedule
+                                      .jobcardResponse.data?.pitLocation
+                                      ?.toString() ??
+                                  ''),
+                              sized0hx10,
+                              expandedRowShowsText(
+                                  "Smoke alarm",
+                                  vmSchedule.jobcardResponse.data?.smokeAlarms
+                                          ?.toString() ??
+                                      ''),
+                              sized0hx10,
+                              if (vmSchedule
+                                  .jobcardResponse
+                                  .data!
+                                  .jobcardinfoFiles!
+                                  .weighBridgeRequiredMultipleFile!
+                                  .isNotEmpty) ...[
+                                cmFileBuilder(vmSchedule
+                                        .jobcardResponse
+                                        .data!
+                                        .jobcardinfoFiles!
+                                        .weighBridgeRequiredMultipleFile ??
+                                    []),
+                              ]
+                            ],
+                          ))
                     ],
                   ),
                 );
@@ -433,5 +464,67 @@ class JobCardPage extends StatelessWidget {
       text,
       style: TextStyle(fontSize: 9.w),
     );
+  }
+
+  Widget cmFileBuilder(List fileList) {
+    return SizedBox(
+      height: 70.h,
+      width: double.infinity,
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        itemCount: fileList.length,
+        itemBuilder: (context, index) {
+          String path = fileList[index].file ?? "";
+
+          bool isImage = path.endsWith('.jpg') ||
+              path.endsWith('.jpeg') ||
+              path.endsWith('.png');
+          return InkWell(
+            onTap: () async {
+              _launchImageUrl(path);
+            },
+            child: Container(
+              width: 80.h, // Width of each item
+              foregroundDecoration: BoxDecoration(border: Border.all()),
+              child: Column(
+                children: [
+                  sized0hx05,
+                  Expanded(
+                    child: isImage
+                        ? Image.file(
+                            File(path),
+                            fit: BoxFit.cover,
+                          )
+                        : Icon(
+                            Icons.file_copy,
+                            size: 20.w,
+                            color: Colors.red,
+                          ),
+                  ),
+                  Expanded(
+                      child: Text(
+                    fileList[index].name ?? "",
+                    style: TextStyle(
+                        fontSize: 9.w, overflow: TextOverflow.ellipsis),
+                  ))
+                ],
+              ),
+            ),
+          );
+        },
+      ),
+    );
+  }
+
+  Future<void> _launchImageUrl(String url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
+  String boolToString(String value) {
+    return value == "True" ? "Yes" : "No";
   }
 }

@@ -3,12 +3,14 @@ import 'package:auto_route/auto_route.dart';
 import 'package:enviro_mobile_application/api_response/api_response.dart';
 import 'package:enviro_mobile_application/model/00_common_model/folder_model/folder_model.dart';
 import 'package:enviro_mobile_application/model/10_team/create_team_req_model/create_team_req_model.dart';
+import 'package:enviro_mobile_application/model/10_team/edit_time_sheet_res_model/edit_time_sheet_res_model.dart';
 import 'package:enviro_mobile_application/model/10_team/leave_res_model/leave_res_model/leave_res_model.dart';
 import 'package:enviro_mobile_application/model/10_team/team_designtion_res_model/designation.dart';
 import 'package:enviro_mobile_application/model/10_team/team_designtion_res_model/team_designtion_res_model.dart';
 import 'package:enviro_mobile_application/model/10_team/team_profile_employee_details_res_model/team_profile_employee_details_res_model.dart';
 import 'package:enviro_mobile_application/model/10_team/team_res_model/team_res_model.dart';
 import 'package:enviro_mobile_application/model/10_team/time_sheet_res_model/time_sheet_res_model.dart';
+import 'package:enviro_mobile_application/model/10_team/time_sheet_res_model/weekly_report.dart';
 import 'package:enviro_mobile_application/service/11_team/team_service.dart';
 import 'package:enviro_mobile_application/utilis/api_endpoints/customprint.dart';
 import 'package:enviro_mobile_application/utilis/image_picker_service/image_file_picker.dart';
@@ -909,6 +911,10 @@ abstract class TeamViewModelBase with Store {
   @observable
   TimeOfDay? selectedEndTime;
   @observable
+  String? weekStartDate;
+  @observable
+  bool? showSubmitEditTimesheet = false;
+  @observable
   TextEditingController dayController1 = TextEditingController();
   TextEditingController dayController2 = TextEditingController();
   TextEditingController dayController3 = TextEditingController();
@@ -970,6 +976,17 @@ abstract class TeamViewModelBase with Store {
   @action
   timePickerFn2(time) {
     selectedEndTime = time;
+  }
+
+  @action
+  void showSubmitEditTimesheetFn() {
+    if (selectedStartTime != null &&
+        selectedEndTime != null &&
+        normalHourController.text != "") {
+      showSubmitEditTimesheet = true;
+    } else {
+      showSubmitEditTimesheet = false;
+    }
   }
 
   @action
@@ -1085,40 +1102,17 @@ abstract class TeamViewModelBase with Store {
   }
 
   @observable
-  ApiResponse<TimeSheetResModel> editTimeSheetResponse =
-      ApiResponse<TimeSheetResModel>();
+  ApiResponse<EditTimeSheetResModel> editTimeSheetResponse =
+      ApiResponse<EditTimeSheetResModel>();
   @action
   Future<void> editTimeSheetApi(
-      {required int id,
-      required String date,
-      required String day,
-      required String start,
-      required String finish,
-      required String totalHoursWorked,
-      required String normalHours,
-      required String fullTime,
-      required String halfTime,
-      required String publicHolidays,
-      required String annual,
-      required String sick,
-      required String otherDays,
+      {required String date,
+      required WeeklyReport weeklyReport,
       required BuildContext context}) async {
     editTimeSheetResponse =
         editTimeSheetResponse.copyWith(error: null, loading: true);
     final result = await teamService.editTimeSheetApi(
-        date: date,
-        id: id,
-        day: day,
-        start: start,
-        finish: finish,
-        totalHoursWorked: totalHoursWorked,
-        normalHours: normalHours,
-        fullTime: fullTime,
-        halfTime: halfTime,
-        publicHolidays: publicHolidays,
-        annual: annual,
-        sick: sick,
-        otherDays: otherDays);
+        date: date, weeklyReport: weeklyReport);
     return result.fold(
       (l) {
         editTimeSheetResponse =
@@ -1128,9 +1122,24 @@ abstract class TeamViewModelBase with Store {
       (r) {
         editTimeSheetResponse = editTimeSheetResponse.copyWith(
             data: r, error: null, loading: false);
+        getTimeSheetApi(date: date, context: context);
+        clearFn();
         // showToast(context, msg: "Successfully applied", color: Colors.green);
-        // context.router.pop();
+        context.router.pop();
       },
     );
+  }
+
+  clearFn() {
+    selectedStartTime = null;
+    selectedEndTime = null;
+    totalHrsController.clear();
+    normalHourController.clear();
+    timehalfController.clear();
+    doubleTimeController.clear();
+    publicHolidayController.clear();
+    annualController.clear();
+    sickController.clear();
+    otherController.clear();
   }
 }

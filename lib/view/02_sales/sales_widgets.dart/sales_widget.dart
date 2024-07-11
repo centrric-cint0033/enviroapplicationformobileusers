@@ -16,14 +16,14 @@ Card customCard({required Widget child}) => Card(
     child: child);
 
 Expanded expandedShowText(String value) =>
-    Expanded(flex: 3, child: showBlueText(value));
+    Expanded(flex: 3, child: showBlackText(value));
 
 Row expandedRowShowText(String firsValue, String secondValue) => Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         expandedShowText(firsValue),
         sized0wx05,
-        showBlueText(':'),
+        showBlackText(':'),
         sized0wx05,
         expandedShowText(secondValue)
       ],
@@ -45,6 +45,7 @@ Row expandedRowsShowingText(
       ],
     );
 Row expandedRowShowsText(String firsValue, String secondValue) => Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [expandedShowText(firsValue), expandedShowText(secondValue)],
     );
 

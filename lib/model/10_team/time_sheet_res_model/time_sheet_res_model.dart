@@ -8,11 +8,12 @@ part 'time_sheet_res_model.g.dart';
 
 @freezed
 class TimeSheetResModel with _$TimeSheetResModel {
-   static TimeSheetResModel empty() {
+  static TimeSheetResModel empty() {
     return TimeSheetResModel(
-      // Initialize properties with default or empty values
-    );
+        // Initialize properties with default or empty values
+        );
   }
+
   factory TimeSheetResModel({
     num? id,
     Employee? employee,

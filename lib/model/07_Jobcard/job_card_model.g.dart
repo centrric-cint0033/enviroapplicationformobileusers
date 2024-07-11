@@ -275,16 +275,30 @@ _$JobcardinfoFilesImpl _$$JobcardinfoFilesImplFromJson(
         Map<String, dynamic> json) =>
     _$JobcardinfoFilesImpl(
       tcRequiredMultipleFile:
-          json['tc_required_multiple_file'] as List<dynamic>?,
+          (json['tc_required_multiple_file'] as List<dynamic>?)
+              ?.map((e) => WeighBridge.fromJson(e as Map<String, dynamic>))
+              .toList(),
       dataFormRequiredMultipleFile:
-          json['data_form_required_multiple_file'] as List<dynamic>?,
+          (json['data_form_required_multiple_file'] as List<dynamic>?)
+              ?.map((e) => WeighBridge.fromJson(e as Map<String, dynamic>))
+              .toList(),
       weighBridgeRequiredMultipleFile:
-          json['weigh_bridge_required_multiple_file'] as List<dynamic>?,
-      safetyDataSheetFiles: json['safety_data_sheet_files'] as List<dynamic>?,
-      manifestMultipleFile: json['manifest_multiple_file'] as List<dynamic>?,
-      purchaseOrder: json['purchase_order'] as List<dynamic>?,
+          (json['weigh_bridge_required_multiple_file'] as List<dynamic>?)
+              ?.map((e) => WeighBridge.fromJson(e as Map<String, dynamic>))
+              .toList(),
+      safetyDataSheetFiles: (json['safety_data_sheet_files'] as List<dynamic>?)
+          ?.map((e) => WeighBridge.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      manifestMultipleFile: (json['manifest_multiple_file'] as List<dynamic>?)
+          ?.map((e) => WeighBridge.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      purchaseOrder: (json['purchase_order'] as List<dynamic>?)
+          ?.map((e) => WeighBridge.fromJson(e as Map<String, dynamic>))
+          .toList(),
       chemistApprovalMultipleFile:
-          json['chemist_approval_multiple_file'] as List<dynamic>?,
+          (json['chemist_approval_multiple_file'] as List<dynamic>?)
+              ?.map((e) => WeighBridge.fromJson(e as Map<String, dynamic>))
+              .toList(),
     );
 
 Map<String, dynamic> _$$JobcardinfoFilesImplToJson(
@@ -316,4 +330,20 @@ Map<String, dynamic> _$$ServiceListImplToJson(_$ServiceListImpl instance) =>
       'frequency': instance.frequency,
       'waste_type': instance.wasteType,
       'pit_location': instance.pitLocation,
+    };
+
+_$WeighBridgeImpl _$$WeighBridgeImplFromJson(Map<String, dynamic> json) =>
+    _$WeighBridgeImpl(
+      id: (json['id'] as num?)?.toInt(),
+      name: json['name'] as String?,
+      file: json['file'] as String?,
+      createdAt: json['created_at'] as String?,
+    );
+
+Map<String, dynamic> _$$WeighBridgeImplToJson(_$WeighBridgeImpl instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'name': instance.name,
+      'file': instance.file,
+      'created_at': instance.createdAt,
     };

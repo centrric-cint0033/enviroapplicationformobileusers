@@ -918,6 +918,39 @@ mixin _$TeamViewModel on TeamViewModelBase, Store {
     });
   }
 
+  late final _$weekStartDateAtom =
+      Atom(name: 'TeamViewModelBase.weekStartDate', context: context);
+
+  @override
+  String? get weekStartDate {
+    _$weekStartDateAtom.reportRead();
+    return super.weekStartDate;
+  }
+
+  @override
+  set weekStartDate(String? value) {
+    _$weekStartDateAtom.reportWrite(value, super.weekStartDate, () {
+      super.weekStartDate = value;
+    });
+  }
+
+  late final _$showSubmitEditTimesheetAtom =
+      Atom(name: 'TeamViewModelBase.showSubmitEditTimesheet', context: context);
+
+  @override
+  bool? get showSubmitEditTimesheet {
+    _$showSubmitEditTimesheetAtom.reportRead();
+    return super.showSubmitEditTimesheet;
+  }
+
+  @override
+  set showSubmitEditTimesheet(bool? value) {
+    _$showSubmitEditTimesheetAtom
+        .reportWrite(value, super.showSubmitEditTimesheet, () {
+      super.showSubmitEditTimesheet = value;
+    });
+  }
+
   late final _$dayController1Atom =
       Atom(name: 'TeamViewModelBase.dayController1', context: context);
 
@@ -986,13 +1019,13 @@ mixin _$TeamViewModel on TeamViewModelBase, Store {
       Atom(name: 'TeamViewModelBase.editTimeSheetResponse', context: context);
 
   @override
-  ApiResponse<TimeSheetResModel> get editTimeSheetResponse {
+  ApiResponse<EditTimeSheetResModel> get editTimeSheetResponse {
     _$editTimeSheetResponseAtom.reportRead();
     return super.editTimeSheetResponse;
   }
 
   @override
-  set editTimeSheetResponse(ApiResponse<TimeSheetResModel> value) {
+  set editTimeSheetResponse(ApiResponse<EditTimeSheetResModel> value) {
     _$editTimeSheetResponseAtom.reportWrite(value, super.editTimeSheetResponse,
         () {
       super.editTimeSheetResponse = value;
@@ -1289,35 +1322,11 @@ mixin _$TeamViewModel on TeamViewModelBase, Store {
 
   @override
   Future<void> editTimeSheetApi(
-      {required int id,
-      required String date,
-      required String day,
-      required String start,
-      required String finish,
-      required String totalHoursWorked,
-      required String normalHours,
-      required String fullTime,
-      required String halfTime,
-      required String publicHolidays,
-      required String annual,
-      required String sick,
-      required String otherDays,
+      {required String date,
+      required WeeklyReport weeklyReport,
       required BuildContext context}) {
     return _$editTimeSheetApiAsyncAction.run(() => super.editTimeSheetApi(
-        id: id,
-        date: date,
-        day: day,
-        start: start,
-        finish: finish,
-        totalHoursWorked: totalHoursWorked,
-        normalHours: normalHours,
-        fullTime: fullTime,
-        halfTime: halfTime,
-        publicHolidays: publicHolidays,
-        annual: annual,
-        sick: sick,
-        otherDays: otherDays,
-        context: context));
+        date: date, weeklyReport: weeklyReport, context: context));
   }
 
   late final _$TeamViewModelBaseActionController =
@@ -1535,6 +1544,17 @@ mixin _$TeamViewModel on TeamViewModelBase, Store {
   }
 
   @override
+  void showSubmitEditTimesheetFn() {
+    final _$actionInfo = _$TeamViewModelBaseActionController.startAction(
+        name: 'TeamViewModelBase.showSubmitEditTimesheetFn');
+    try {
+      return super.showSubmitEditTimesheetFn();
+    } finally {
+      _$TeamViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   dynamic totalDayFn() {
     final _$actionInfo = _$TeamViewModelBaseActionController.startAction(
         name: 'TeamViewModelBase.totalDayFn');
@@ -1636,6 +1656,8 @@ leaveSubmitButtonEnable: ${leaveSubmitButtonEnable},
 selectedChooseWeekTimesheet: ${selectedChooseWeekTimesheet},
 selectedStartTime: ${selectedStartTime},
 selectedEndTime: ${selectedEndTime},
+weekStartDate: ${weekStartDate},
+showSubmitEditTimesheet: ${showSubmitEditTimesheet},
 dayController1: ${dayController1},
 addLeaveResponse: ${addLeaveResponse},
 addFileLeave: ${addFileLeave},

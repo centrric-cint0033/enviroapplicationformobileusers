@@ -20,22 +20,22 @@ Week _$WeekFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Week {
-  String? get day => throw _privateConstructorUsedError;
-  String? get date => throw _privateConstructorUsedError;
-  dynamic get sick => throw _privateConstructorUsedError;
-  dynamic get start => throw _privateConstructorUsedError;
   dynamic get annual => throw _privateConstructorUsedError;
+  String? get date => throw _privateConstructorUsedError;
+  String? get day => throw _privateConstructorUsedError;
   dynamic get finish => throw _privateConstructorUsedError;
   @JsonKey(name: 'full_time')
   dynamic get fullTime => throw _privateConstructorUsedError;
   @JsonKey(name: 'half_time')
   dynamic get halfTime => throw _privateConstructorUsedError;
-  @JsonKey(name: 'other_days')
-  dynamic get otherDays => throw _privateConstructorUsedError;
   @JsonKey(name: 'normal_hours')
   dynamic get normalHours => throw _privateConstructorUsedError;
+  @JsonKey(name: 'other_days')
+  dynamic get otherDays => throw _privateConstructorUsedError;
   @JsonKey(name: 'public_holidays')
   dynamic get publicHolidays => throw _privateConstructorUsedError;
+  dynamic get sick => throw _privateConstructorUsedError;
+  dynamic get start => throw _privateConstructorUsedError;
   @JsonKey(name: 'total_hours_worked')
   dynamic get totalHoursWorked => throw _privateConstructorUsedError;
 
@@ -50,17 +50,17 @@ abstract class $WeekCopyWith<$Res> {
       _$WeekCopyWithImpl<$Res, Week>;
   @useResult
   $Res call(
-      {String? day,
+      {dynamic annual,
       String? date,
-      dynamic sick,
-      dynamic start,
-      dynamic annual,
+      String? day,
       dynamic finish,
       @JsonKey(name: 'full_time') dynamic fullTime,
       @JsonKey(name: 'half_time') dynamic halfTime,
-      @JsonKey(name: 'other_days') dynamic otherDays,
       @JsonKey(name: 'normal_hours') dynamic normalHours,
+      @JsonKey(name: 'other_days') dynamic otherDays,
       @JsonKey(name: 'public_holidays') dynamic publicHolidays,
+      dynamic sick,
+      dynamic start,
       @JsonKey(name: 'total_hours_worked') dynamic totalHoursWorked});
 }
 
@@ -77,40 +77,32 @@ class _$WeekCopyWithImpl<$Res, $Val extends Week>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? day = freezed,
-    Object? date = freezed,
-    Object? sick = freezed,
-    Object? start = freezed,
     Object? annual = freezed,
+    Object? date = freezed,
+    Object? day = freezed,
     Object? finish = freezed,
     Object? fullTime = freezed,
     Object? halfTime = freezed,
-    Object? otherDays = freezed,
     Object? normalHours = freezed,
+    Object? otherDays = freezed,
     Object? publicHolidays = freezed,
+    Object? sick = freezed,
+    Object? start = freezed,
     Object? totalHoursWorked = freezed,
   }) {
     return _then(_value.copyWith(
-      day: freezed == day
-          ? _value.day
-          : day // ignore: cast_nullable_to_non_nullable
-              as String?,
-      date: freezed == date
-          ? _value.date
-          : date // ignore: cast_nullable_to_non_nullable
-              as String?,
-      sick: freezed == sick
-          ? _value.sick
-          : sick // ignore: cast_nullable_to_non_nullable
-              as dynamic,
-      start: freezed == start
-          ? _value.start
-          : start // ignore: cast_nullable_to_non_nullable
-              as dynamic,
       annual: freezed == annual
           ? _value.annual
           : annual // ignore: cast_nullable_to_non_nullable
               as dynamic,
+      date: freezed == date
+          ? _value.date
+          : date // ignore: cast_nullable_to_non_nullable
+              as String?,
+      day: freezed == day
+          ? _value.day
+          : day // ignore: cast_nullable_to_non_nullable
+              as String?,
       finish: freezed == finish
           ? _value.finish
           : finish // ignore: cast_nullable_to_non_nullable
@@ -123,17 +115,25 @@ class _$WeekCopyWithImpl<$Res, $Val extends Week>
           ? _value.halfTime
           : halfTime // ignore: cast_nullable_to_non_nullable
               as dynamic,
-      otherDays: freezed == otherDays
-          ? _value.otherDays
-          : otherDays // ignore: cast_nullable_to_non_nullable
-              as dynamic,
       normalHours: freezed == normalHours
           ? _value.normalHours
           : normalHours // ignore: cast_nullable_to_non_nullable
               as dynamic,
+      otherDays: freezed == otherDays
+          ? _value.otherDays
+          : otherDays // ignore: cast_nullable_to_non_nullable
+              as dynamic,
       publicHolidays: freezed == publicHolidays
           ? _value.publicHolidays
           : publicHolidays // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      sick: freezed == sick
+          ? _value.sick
+          : sick // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      start: freezed == start
+          ? _value.start
+          : start // ignore: cast_nullable_to_non_nullable
               as dynamic,
       totalHoursWorked: freezed == totalHoursWorked
           ? _value.totalHoursWorked
@@ -151,17 +151,17 @@ abstract class _$$WeekImplCopyWith<$Res> implements $WeekCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {String? day,
+      {dynamic annual,
       String? date,
-      dynamic sick,
-      dynamic start,
-      dynamic annual,
+      String? day,
       dynamic finish,
       @JsonKey(name: 'full_time') dynamic fullTime,
       @JsonKey(name: 'half_time') dynamic halfTime,
-      @JsonKey(name: 'other_days') dynamic otherDays,
       @JsonKey(name: 'normal_hours') dynamic normalHours,
+      @JsonKey(name: 'other_days') dynamic otherDays,
       @JsonKey(name: 'public_holidays') dynamic publicHolidays,
+      dynamic sick,
+      dynamic start,
       @JsonKey(name: 'total_hours_worked') dynamic totalHoursWorked});
 }
 
@@ -175,40 +175,32 @@ class __$$WeekImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? day = freezed,
-    Object? date = freezed,
-    Object? sick = freezed,
-    Object? start = freezed,
     Object? annual = freezed,
+    Object? date = freezed,
+    Object? day = freezed,
     Object? finish = freezed,
     Object? fullTime = freezed,
     Object? halfTime = freezed,
-    Object? otherDays = freezed,
     Object? normalHours = freezed,
+    Object? otherDays = freezed,
     Object? publicHolidays = freezed,
+    Object? sick = freezed,
+    Object? start = freezed,
     Object? totalHoursWorked = freezed,
   }) {
     return _then(_$WeekImpl(
-      day: freezed == day
-          ? _value.day
-          : day // ignore: cast_nullable_to_non_nullable
-              as String?,
-      date: freezed == date
-          ? _value.date
-          : date // ignore: cast_nullable_to_non_nullable
-              as String?,
-      sick: freezed == sick
-          ? _value.sick
-          : sick // ignore: cast_nullable_to_non_nullable
-              as dynamic,
-      start: freezed == start
-          ? _value.start
-          : start // ignore: cast_nullable_to_non_nullable
-              as dynamic,
       annual: freezed == annual
           ? _value.annual
           : annual // ignore: cast_nullable_to_non_nullable
               as dynamic,
+      date: freezed == date
+          ? _value.date
+          : date // ignore: cast_nullable_to_non_nullable
+              as String?,
+      day: freezed == day
+          ? _value.day
+          : day // ignore: cast_nullable_to_non_nullable
+              as String?,
       finish: freezed == finish
           ? _value.finish
           : finish // ignore: cast_nullable_to_non_nullable
@@ -221,17 +213,25 @@ class __$$WeekImplCopyWithImpl<$Res>
           ? _value.halfTime
           : halfTime // ignore: cast_nullable_to_non_nullable
               as dynamic,
-      otherDays: freezed == otherDays
-          ? _value.otherDays
-          : otherDays // ignore: cast_nullable_to_non_nullable
-              as dynamic,
       normalHours: freezed == normalHours
           ? _value.normalHours
           : normalHours // ignore: cast_nullable_to_non_nullable
               as dynamic,
+      otherDays: freezed == otherDays
+          ? _value.otherDays
+          : otherDays // ignore: cast_nullable_to_non_nullable
+              as dynamic,
       publicHolidays: freezed == publicHolidays
           ? _value.publicHolidays
           : publicHolidays // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      sick: freezed == sick
+          ? _value.sick
+          : sick // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      start: freezed == start
+          ? _value.start
+          : start // ignore: cast_nullable_to_non_nullable
               as dynamic,
       totalHoursWorked: freezed == totalHoursWorked
           ? _value.totalHoursWorked
@@ -245,32 +245,28 @@ class __$$WeekImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$WeekImpl implements _Week {
   _$WeekImpl(
-      {this.day,
+      {this.annual,
       this.date,
-      this.sick,
-      this.start,
-      this.annual,
+      this.day,
       this.finish,
       @JsonKey(name: 'full_time') this.fullTime,
       @JsonKey(name: 'half_time') this.halfTime,
-      @JsonKey(name: 'other_days') this.otherDays,
       @JsonKey(name: 'normal_hours') this.normalHours,
+      @JsonKey(name: 'other_days') this.otherDays,
       @JsonKey(name: 'public_holidays') this.publicHolidays,
+      this.sick,
+      this.start,
       @JsonKey(name: 'total_hours_worked') this.totalHoursWorked});
 
   factory _$WeekImpl.fromJson(Map<String, dynamic> json) =>
       _$$WeekImplFromJson(json);
 
   @override
-  final String? day;
+  final dynamic annual;
   @override
   final String? date;
   @override
-  final dynamic sick;
-  @override
-  final dynamic start;
-  @override
-  final dynamic annual;
+  final String? day;
   @override
   final dynamic finish;
   @override
@@ -280,21 +276,25 @@ class _$WeekImpl implements _Week {
   @JsonKey(name: 'half_time')
   final dynamic halfTime;
   @override
-  @JsonKey(name: 'other_days')
-  final dynamic otherDays;
-  @override
   @JsonKey(name: 'normal_hours')
   final dynamic normalHours;
   @override
+  @JsonKey(name: 'other_days')
+  final dynamic otherDays;
+  @override
   @JsonKey(name: 'public_holidays')
   final dynamic publicHolidays;
+  @override
+  final dynamic sick;
+  @override
+  final dynamic start;
   @override
   @JsonKey(name: 'total_hours_worked')
   final dynamic totalHoursWorked;
 
   @override
   String toString() {
-    return 'Week(day: $day, date: $date, sick: $sick, start: $start, annual: $annual, finish: $finish, fullTime: $fullTime, halfTime: $halfTime, otherDays: $otherDays, normalHours: $normalHours, publicHolidays: $publicHolidays, totalHoursWorked: $totalHoursWorked)';
+    return 'Week(annual: $annual, date: $date, day: $day, finish: $finish, fullTime: $fullTime, halfTime: $halfTime, normalHours: $normalHours, otherDays: $otherDays, publicHolidays: $publicHolidays, sick: $sick, start: $start, totalHoursWorked: $totalHoursWorked)';
   }
 
   @override
@@ -302,19 +302,19 @@ class _$WeekImpl implements _Week {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$WeekImpl &&
-            (identical(other.day, day) || other.day == day) &&
-            (identical(other.date, date) || other.date == date) &&
-            const DeepCollectionEquality().equals(other.sick, sick) &&
-            const DeepCollectionEquality().equals(other.start, start) &&
             const DeepCollectionEquality().equals(other.annual, annual) &&
+            (identical(other.date, date) || other.date == date) &&
+            (identical(other.day, day) || other.day == day) &&
             const DeepCollectionEquality().equals(other.finish, finish) &&
             const DeepCollectionEquality().equals(other.fullTime, fullTime) &&
             const DeepCollectionEquality().equals(other.halfTime, halfTime) &&
-            const DeepCollectionEquality().equals(other.otherDays, otherDays) &&
             const DeepCollectionEquality()
                 .equals(other.normalHours, normalHours) &&
+            const DeepCollectionEquality().equals(other.otherDays, otherDays) &&
             const DeepCollectionEquality()
                 .equals(other.publicHolidays, publicHolidays) &&
+            const DeepCollectionEquality().equals(other.sick, sick) &&
+            const DeepCollectionEquality().equals(other.start, start) &&
             const DeepCollectionEquality()
                 .equals(other.totalHoursWorked, totalHoursWorked));
   }
@@ -323,17 +323,17 @@ class _$WeekImpl implements _Week {
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      day,
-      date,
-      const DeepCollectionEquality().hash(sick),
-      const DeepCollectionEquality().hash(start),
       const DeepCollectionEquality().hash(annual),
+      date,
+      day,
       const DeepCollectionEquality().hash(finish),
       const DeepCollectionEquality().hash(fullTime),
       const DeepCollectionEquality().hash(halfTime),
-      const DeepCollectionEquality().hash(otherDays),
       const DeepCollectionEquality().hash(normalHours),
+      const DeepCollectionEquality().hash(otherDays),
       const DeepCollectionEquality().hash(publicHolidays),
+      const DeepCollectionEquality().hash(sick),
+      const DeepCollectionEquality().hash(start),
       const DeepCollectionEquality().hash(totalHoursWorked));
 
   @JsonKey(ignore: true)
@@ -352,32 +352,28 @@ class _$WeekImpl implements _Week {
 
 abstract class _Week implements Week {
   factory _Week(
-      {final String? day,
+      {final dynamic annual,
       final String? date,
-      final dynamic sick,
-      final dynamic start,
-      final dynamic annual,
+      final String? day,
       final dynamic finish,
       @JsonKey(name: 'full_time') final dynamic fullTime,
       @JsonKey(name: 'half_time') final dynamic halfTime,
-      @JsonKey(name: 'other_days') final dynamic otherDays,
       @JsonKey(name: 'normal_hours') final dynamic normalHours,
+      @JsonKey(name: 'other_days') final dynamic otherDays,
       @JsonKey(name: 'public_holidays') final dynamic publicHolidays,
+      final dynamic sick,
+      final dynamic start,
       @JsonKey(name: 'total_hours_worked')
       final dynamic totalHoursWorked}) = _$WeekImpl;
 
   factory _Week.fromJson(Map<String, dynamic> json) = _$WeekImpl.fromJson;
 
   @override
-  String? get day;
+  dynamic get annual;
   @override
   String? get date;
   @override
-  dynamic get sick;
-  @override
-  dynamic get start;
-  @override
-  dynamic get annual;
+  String? get day;
   @override
   dynamic get finish;
   @override
@@ -387,14 +383,18 @@ abstract class _Week implements Week {
   @JsonKey(name: 'half_time')
   dynamic get halfTime;
   @override
-  @JsonKey(name: 'other_days')
-  dynamic get otherDays;
-  @override
   @JsonKey(name: 'normal_hours')
   dynamic get normalHours;
   @override
+  @JsonKey(name: 'other_days')
+  dynamic get otherDays;
+  @override
   @JsonKey(name: 'public_holidays')
   dynamic get publicHolidays;
+  @override
+  dynamic get sick;
+  @override
+  dynamic get start;
   @override
   @JsonKey(name: 'total_hours_worked')
   dynamic get totalHoursWorked;

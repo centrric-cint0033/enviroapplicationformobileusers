@@ -20,20 +20,20 @@ WeeklyReport _$WeeklyReportFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$WeeklyReport {
-  String? get id => throw _privateConstructorUsedError;
+  dynamic get id => throw _privateConstructorUsedError;
   List<Week>? get week => throw _privateConstructorUsedError;
-  String? get comments => throw _privateConstructorUsedError;
-  String? get attachment => throw _privateConstructorUsedError;
+  dynamic get comments => throw _privateConstructorUsedError;
+  dynamic get attachment => throw _privateConstructorUsedError;
   @JsonKey(name: 'employee_id')
-  String? get employeeId => throw _privateConstructorUsedError;
+  dynamic get employeeId => throw _privateConstructorUsedError;
   @JsonKey(name: 'whole_paid_hours')
   WholePaidHours? get wholePaidHours => throw _privateConstructorUsedError;
   @JsonKey(name: 'whole_week_minus')
   WholeWeekMinus? get wholeWeekMinus => throw _privateConstructorUsedError;
   @JsonKey(name: 'manager_signature')
-  String? get managerSignature => throw _privateConstructorUsedError;
+  dynamic get managerSignature => throw _privateConstructorUsedError;
   @JsonKey(name: 'employee_signature')
-  String? get employeeSignature => throw _privateConstructorUsedError;
+  dynamic get employeeSignature => throw _privateConstructorUsedError;
   @JsonKey(name: 'whole_hours_total_worked')
   WholeHoursTotalWorked? get wholeHoursTotalWorked =>
       throw _privateConstructorUsedError;
@@ -51,15 +51,15 @@ abstract class $WeeklyReportCopyWith<$Res> {
       _$WeeklyReportCopyWithImpl<$Res, WeeklyReport>;
   @useResult
   $Res call(
-      {String? id,
+      {dynamic id,
       List<Week>? week,
-      String? comments,
-      String? attachment,
-      @JsonKey(name: 'employee_id') String? employeeId,
+      dynamic comments,
+      dynamic attachment,
+      @JsonKey(name: 'employee_id') dynamic employeeId,
       @JsonKey(name: 'whole_paid_hours') WholePaidHours? wholePaidHours,
       @JsonKey(name: 'whole_week_minus') WholeWeekMinus? wholeWeekMinus,
-      @JsonKey(name: 'manager_signature') String? managerSignature,
-      @JsonKey(name: 'employee_signature') String? employeeSignature,
+      @JsonKey(name: 'manager_signature') dynamic managerSignature,
+      @JsonKey(name: 'employee_signature') dynamic employeeSignature,
       @JsonKey(name: 'whole_hours_total_worked')
       WholeHoursTotalWorked? wholeHoursTotalWorked});
 
@@ -96,7 +96,7 @@ class _$WeeklyReportCopyWithImpl<$Res, $Val extends WeeklyReport>
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       week: freezed == week
           ? _value.week
           : week // ignore: cast_nullable_to_non_nullable
@@ -104,15 +104,15 @@ class _$WeeklyReportCopyWithImpl<$Res, $Val extends WeeklyReport>
       comments: freezed == comments
           ? _value.comments
           : comments // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       attachment: freezed == attachment
           ? _value.attachment
           : attachment // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       employeeId: freezed == employeeId
           ? _value.employeeId
           : employeeId // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       wholePaidHours: freezed == wholePaidHours
           ? _value.wholePaidHours
           : wholePaidHours // ignore: cast_nullable_to_non_nullable
@@ -124,11 +124,11 @@ class _$WeeklyReportCopyWithImpl<$Res, $Val extends WeeklyReport>
       managerSignature: freezed == managerSignature
           ? _value.managerSignature
           : managerSignature // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       employeeSignature: freezed == employeeSignature
           ? _value.employeeSignature
           : employeeSignature // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       wholeHoursTotalWorked: freezed == wholeHoursTotalWorked
           ? _value.wholeHoursTotalWorked
           : wholeHoursTotalWorked // ignore: cast_nullable_to_non_nullable
@@ -183,15 +183,15 @@ abstract class _$$WeeklyReportImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String? id,
+      {dynamic id,
       List<Week>? week,
-      String? comments,
-      String? attachment,
-      @JsonKey(name: 'employee_id') String? employeeId,
+      dynamic comments,
+      dynamic attachment,
+      @JsonKey(name: 'employee_id') dynamic employeeId,
       @JsonKey(name: 'whole_paid_hours') WholePaidHours? wholePaidHours,
       @JsonKey(name: 'whole_week_minus') WholeWeekMinus? wholeWeekMinus,
-      @JsonKey(name: 'manager_signature') String? managerSignature,
-      @JsonKey(name: 'employee_signature') String? employeeSignature,
+      @JsonKey(name: 'manager_signature') dynamic managerSignature,
+      @JsonKey(name: 'employee_signature') dynamic employeeSignature,
       @JsonKey(name: 'whole_hours_total_worked')
       WholeHoursTotalWorked? wholeHoursTotalWorked});
 
@@ -229,7 +229,7 @@ class __$$WeeklyReportImplCopyWithImpl<$Res>
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       week: freezed == week
           ? _value._week
           : week // ignore: cast_nullable_to_non_nullable
@@ -237,15 +237,15 @@ class __$$WeeklyReportImplCopyWithImpl<$Res>
       comments: freezed == comments
           ? _value.comments
           : comments // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       attachment: freezed == attachment
           ? _value.attachment
           : attachment // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       employeeId: freezed == employeeId
           ? _value.employeeId
           : employeeId // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       wholePaidHours: freezed == wholePaidHours
           ? _value.wholePaidHours
           : wholePaidHours // ignore: cast_nullable_to_non_nullable
@@ -257,11 +257,11 @@ class __$$WeeklyReportImplCopyWithImpl<$Res>
       managerSignature: freezed == managerSignature
           ? _value.managerSignature
           : managerSignature // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       employeeSignature: freezed == employeeSignature
           ? _value.employeeSignature
           : employeeSignature // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       wholeHoursTotalWorked: freezed == wholeHoursTotalWorked
           ? _value.wholeHoursTotalWorked
           : wholeHoursTotalWorked // ignore: cast_nullable_to_non_nullable
@@ -290,7 +290,7 @@ class _$WeeklyReportImpl implements _WeeklyReport {
       _$$WeeklyReportImplFromJson(json);
 
   @override
-  final String? id;
+  final dynamic id;
   final List<Week>? _week;
   @override
   List<Week>? get week {
@@ -302,12 +302,12 @@ class _$WeeklyReportImpl implements _WeeklyReport {
   }
 
   @override
-  final String? comments;
+  final dynamic comments;
   @override
-  final String? attachment;
+  final dynamic attachment;
   @override
   @JsonKey(name: 'employee_id')
-  final String? employeeId;
+  final dynamic employeeId;
   @override
   @JsonKey(name: 'whole_paid_hours')
   final WholePaidHours? wholePaidHours;
@@ -316,10 +316,10 @@ class _$WeeklyReportImpl implements _WeeklyReport {
   final WholeWeekMinus? wholeWeekMinus;
   @override
   @JsonKey(name: 'manager_signature')
-  final String? managerSignature;
+  final dynamic managerSignature;
   @override
   @JsonKey(name: 'employee_signature')
-  final String? employeeSignature;
+  final dynamic employeeSignature;
   @override
   @JsonKey(name: 'whole_hours_total_worked')
   final WholeHoursTotalWorked? wholeHoursTotalWorked;
@@ -334,22 +334,21 @@ class _$WeeklyReportImpl implements _WeeklyReport {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$WeeklyReportImpl &&
-            (identical(other.id, id) || other.id == id) &&
+            const DeepCollectionEquality().equals(other.id, id) &&
             const DeepCollectionEquality().equals(other._week, _week) &&
-            (identical(other.comments, comments) ||
-                other.comments == comments) &&
-            (identical(other.attachment, attachment) ||
-                other.attachment == attachment) &&
-            (identical(other.employeeId, employeeId) ||
-                other.employeeId == employeeId) &&
+            const DeepCollectionEquality().equals(other.comments, comments) &&
+            const DeepCollectionEquality()
+                .equals(other.attachment, attachment) &&
+            const DeepCollectionEquality()
+                .equals(other.employeeId, employeeId) &&
             (identical(other.wholePaidHours, wholePaidHours) ||
                 other.wholePaidHours == wholePaidHours) &&
             (identical(other.wholeWeekMinus, wholeWeekMinus) ||
                 other.wholeWeekMinus == wholeWeekMinus) &&
-            (identical(other.managerSignature, managerSignature) ||
-                other.managerSignature == managerSignature) &&
-            (identical(other.employeeSignature, employeeSignature) ||
-                other.employeeSignature == employeeSignature) &&
+            const DeepCollectionEquality()
+                .equals(other.managerSignature, managerSignature) &&
+            const DeepCollectionEquality()
+                .equals(other.employeeSignature, employeeSignature) &&
             (identical(other.wholeHoursTotalWorked, wholeHoursTotalWorked) ||
                 other.wholeHoursTotalWorked == wholeHoursTotalWorked));
   }
@@ -358,15 +357,15 @@ class _$WeeklyReportImpl implements _WeeklyReport {
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      id,
+      const DeepCollectionEquality().hash(id),
       const DeepCollectionEquality().hash(_week),
-      comments,
-      attachment,
-      employeeId,
+      const DeepCollectionEquality().hash(comments),
+      const DeepCollectionEquality().hash(attachment),
+      const DeepCollectionEquality().hash(employeeId),
       wholePaidHours,
       wholeWeekMinus,
-      managerSignature,
-      employeeSignature,
+      const DeepCollectionEquality().hash(managerSignature),
+      const DeepCollectionEquality().hash(employeeSignature),
       wholeHoursTotalWorked);
 
   @JsonKey(ignore: true)
@@ -385,15 +384,15 @@ class _$WeeklyReportImpl implements _WeeklyReport {
 
 abstract class _WeeklyReport implements WeeklyReport {
   factory _WeeklyReport(
-      {final String? id,
+      {final dynamic id,
       final List<Week>? week,
-      final String? comments,
-      final String? attachment,
-      @JsonKey(name: 'employee_id') final String? employeeId,
+      final dynamic comments,
+      final dynamic attachment,
+      @JsonKey(name: 'employee_id') final dynamic employeeId,
       @JsonKey(name: 'whole_paid_hours') final WholePaidHours? wholePaidHours,
       @JsonKey(name: 'whole_week_minus') final WholeWeekMinus? wholeWeekMinus,
-      @JsonKey(name: 'manager_signature') final String? managerSignature,
-      @JsonKey(name: 'employee_signature') final String? employeeSignature,
+      @JsonKey(name: 'manager_signature') final dynamic managerSignature,
+      @JsonKey(name: 'employee_signature') final dynamic employeeSignature,
       @JsonKey(name: 'whole_hours_total_worked')
       final WholeHoursTotalWorked? wholeHoursTotalWorked}) = _$WeeklyReportImpl;
 
@@ -401,16 +400,16 @@ abstract class _WeeklyReport implements WeeklyReport {
       _$WeeklyReportImpl.fromJson;
 
   @override
-  String? get id;
+  dynamic get id;
   @override
   List<Week>? get week;
   @override
-  String? get comments;
+  dynamic get comments;
   @override
-  String? get attachment;
+  dynamic get attachment;
   @override
   @JsonKey(name: 'employee_id')
-  String? get employeeId;
+  dynamic get employeeId;
   @override
   @JsonKey(name: 'whole_paid_hours')
   WholePaidHours? get wholePaidHours;
@@ -419,10 +418,10 @@ abstract class _WeeklyReport implements WeeklyReport {
   WholeWeekMinus? get wholeWeekMinus;
   @override
   @JsonKey(name: 'manager_signature')
-  String? get managerSignature;
+  dynamic get managerSignature;
   @override
   @JsonKey(name: 'employee_signature')
-  String? get employeeSignature;
+  dynamic get employeeSignature;
   @override
   @JsonKey(name: 'whole_hours_total_worked')
   WholeHoursTotalWorked? get wholeHoursTotalWorked;

@@ -1,9 +1,11 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:enviro_mobile_application/model/10_team/time_sheet_res_model/week.dart';
+import 'package:enviro_mobile_application/model/10_team/time_sheet_res_model/weekly_report.dart';
 import 'package:enviro_mobile_application/utilis/Appthemes.dart';
 import 'package:enviro_mobile_application/utilis/constant.dart';
 import 'package:enviro_mobile_application/view/08_team/team_widgets/time_picker.dart';
 import 'package:enviro_mobile_application/view_model/08_team/team_view_model.dart';
+import 'package:enviro_mobile_application/view_model/10_profile/profile_view_model.dart';
 import 'package:enviro_mobile_application/widgets/cmbutton.dart';
 import 'package:enviro_mobile_application/widgets/cmn_title_textwidget.dart';
 import 'package:flutter/material.dart';
@@ -13,10 +15,12 @@ import 'package:intl/intl.dart';
 
 @RoutePage()
 class EditTimeSheetPage extends StatelessWidget {
-  const EditTimeSheetPage({super.key, this.timesheetWeek, this.date, this.day});
+  const EditTimeSheetPage(
+      {super.key, this.timesheetWeek, this.date, this.day, this.weekStartDate});
   final Week? timesheetWeek;
   final String? date;
   final String? day;
+  final String? weekStartDate;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,16 +28,7 @@ class EditTimeSheetPage extends StatelessWidget {
         title: cmnTitleWidget('Edit New'),
       ),
       body: Observer(builder: (context) {
-        vmTeam.totalHrsController.text =
-            "${timesheetWeek?.totalHoursWorked ?? "0"}";
-        vmTeam.normalHourController.text = timesheetWeek?.normalHours ?? "0";
-        vmTeam.timehalfController.text = timesheetWeek?.halfTime ?? "0";
-        vmTeam.doubleTimeController.text = timesheetWeek?.fullTime ?? "0";
-        vmTeam.publicHolidayController.text =
-            timesheetWeek?.publicHolidays ?? "0";
-        vmTeam.annualController.text = timesheetWeek?.annual ?? "0";
-        vmTeam.sickController.text = timesheetWeek?.sick ?? "0";
-        vmTeam.otherController.text = timesheetWeek?.otherDays ?? "0";
+        vmTeam.showSubmitEditTimesheetFn();
         return SingleChildScrollView(
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -84,35 +79,47 @@ class EditTimeSheetPage extends StatelessWidget {
           Center(
             child: CmButton(
               text: "Save",
-              color: Appthemes.cPrimary,
+              color: vmTeam.showSubmitEditTimesheet == true
+                  ? Appthemes.cPrimary
+                  : const Color.fromARGB(255, 153, 197, 214),
               width: 140.w,
               loading: vmTeam.editTimeSheetResponse.loading,
               onPressed: () {
-                String inputDate = timesheetWeek?.date ?? "$date";
-                DateTime parsedDate = DateFormat('dd-MM-yyyy').parse(inputDate);
-                String formattedDate =
-                    DateFormat('yyyy-MM-dd').format(parsedDate);
-                List<Week> weeksToEdit = [
-                  Week(
-                    date: formattedDate,
-                    start: formatTimeOfDay(vmTeam.selectedStartTime!),
-                    finish: formatTimeOfDay(vmTeam.selectedStartTime!),
-                    totalHoursWorked: vmTeam.totalHrsController.text,
-                    normalHours: vmTeam.normalHourController.text,
-                    halfTime: vmTeam.timehalfController.text,
-                    fullTime: vmTeam.doubleTimeController.text,
-                    publicHolidays: vmTeam.publicHolidayController.text,
-                    annual: vmTeam.annualController.text,
-                    sick: vmTeam.sickController.text,
-                    otherDays: vmTeam.otherController.text,
-                  ),
-                ];
+                if (vmTeam.showSubmitEditTimesheet == true) {
+                  String inputDate = timesheetWeek?.date ?? "$date";
+                  DateTime parsedDate =
+                      DateFormat('dd-MM-yyyy').parse(inputDate);
+                  String formattedDate =
+                      DateFormat('yyyy-MM-dd').format(parsedDate);
 
-                // vmTeam.editTimeSheetApi(
-                //     id: int.parse("${vmTeam.timeSheetResponse.data?.id}"),
-                //     date: formattedDate,
-                //     weeklyReport: weeksToEdit,
-                //     context: context);
+                  List<Week> weeksToEdit = [
+                    Week(
+                      date: timesheetWeek?.date != null
+                          ? inputDate
+                          : formattedDate,
+                      day: timesheetWeek?.day ?? "$day",
+                      start: formatTimeOfDay(vmTeam.selectedStartTime!),
+                      finish: formatTimeOfDay(vmTeam.selectedEndTime!),
+                      totalHoursWorked: vmTeam.totalHrsController.text,
+                      normalHours: vmTeam.normalHourController.text,
+                      halfTime: vmTeam.timehalfController.text,
+                      fullTime: vmTeam.doubleTimeController.text,
+                      publicHolidays: vmTeam.publicHolidayController.text,
+                      annual: vmTeam.annualController.text,
+                      sick: vmTeam.sickController.text,
+                      otherDays: vmTeam.otherController.text,
+                    ),
+                  ];
+
+                  vmTeam.editTimeSheetApi(
+                      date: vmTeam.weekStartDate ?? "",
+                      weeklyReport: WeeklyReport(
+                          employeeId:
+                              "${vmProfile.profilepageResponse.data?.employeeId}",
+                          comments: vmTeam.commentsControllerr.text,
+                          week: weeksToEdit),
+                      context: context);
+                }
               },
             ),
           ),
@@ -208,7 +215,11 @@ Widget cmRowTextfield(
                 child: TextField(
                   style: TextStyle(fontSize: 10.w, color: Colors.grey.shade700),
                   controller: controller,
+                  onChanged: (value) {
+                    vmTeam.showSubmitEditTimesheetFn();
+                  },
                   enabled: enable,
+                  keyboardType: TextInputType.numberWithOptions(),
                   decoration: InputDecoration(
                       border: InputBorder.none,
                       hintText: "  $hintText",

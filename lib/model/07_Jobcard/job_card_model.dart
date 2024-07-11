@@ -159,18 +159,18 @@ class IndustryTypeInfo with _$IndustryTypeInfo {
 class JobcardinfoFiles with _$JobcardinfoFiles {
   const factory JobcardinfoFiles({
     @JsonKey(name: "tc_required_multiple_file")
-    List<dynamic>? tcRequiredMultipleFile,
+    List<WeighBridge>? tcRequiredMultipleFile,
     @JsonKey(name: "data_form_required_multiple_file")
-    List<dynamic>? dataFormRequiredMultipleFile,
+    List<WeighBridge>? dataFormRequiredMultipleFile,
     @JsonKey(name: "weigh_bridge_required_multiple_file")
-    List<dynamic>? weighBridgeRequiredMultipleFile,
+    List<WeighBridge>? weighBridgeRequiredMultipleFile,
     @JsonKey(name: "safety_data_sheet_files")
-    List<dynamic>? safetyDataSheetFiles,
+    List<WeighBridge>? safetyDataSheetFiles,
     @JsonKey(name: "manifest_multiple_file")
-    List<dynamic>? manifestMultipleFile,
-    @JsonKey(name: "purchase_order") List<dynamic>? purchaseOrder,
+    List<WeighBridge>? manifestMultipleFile,
+    @JsonKey(name: "purchase_order") List<WeighBridge>? purchaseOrder,
     @JsonKey(name: "chemist_approval_multiple_file")
-    List<dynamic>? chemistApprovalMultipleFile,
+    List<WeighBridge>? chemistApprovalMultipleFile,
   }) = _JobcardinfoFiles;
 
   factory JobcardinfoFiles.fromJson(Map<String, dynamic> json) =>
@@ -189,4 +189,16 @@ class ServiceList with _$ServiceList {
 
   factory ServiceList.fromJson(Map<String, dynamic> json) =>
       _$ServiceListFromJson(json);
+}
+@freezed
+class WeighBridge with _$WeighBridge {
+  const factory WeighBridge({
+    @JsonKey(name: "id") int? id,
+    @JsonKey(name: "name") String? name,
+    @JsonKey(name: "file") String? file,
+    @JsonKey(name: "created_at") String? createdAt,
+  }) = _WeighBridge;
+
+  factory WeighBridge.fromJson(Map<String, dynamic> json) =>
+      _$WeighBridgeFromJson(json);
 }

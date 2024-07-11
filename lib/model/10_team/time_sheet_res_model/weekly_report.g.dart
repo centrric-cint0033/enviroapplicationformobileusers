@@ -8,13 +8,13 @@ part of 'weekly_report.dart';
 
 _$WeeklyReportImpl _$$WeeklyReportImplFromJson(Map<String, dynamic> json) =>
     _$WeeklyReportImpl(
-      id: json['id'] as String?,
+      id: json['id'],
       week: (json['week'] as List<dynamic>?)
           ?.map((e) => Week.fromJson(e as Map<String, dynamic>))
           .toList(),
-      comments: json['comments'] as String?,
-      attachment: json['attachment'] as String?,
-      employeeId: json['employee_id'] as String?,
+      comments: json['comments'],
+      attachment: json['attachment'],
+      employeeId: json['employee_id'],
       wholePaidHours: json['whole_paid_hours'] == null
           ? null
           : WholePaidHours.fromJson(
@@ -23,8 +23,8 @@ _$WeeklyReportImpl _$$WeeklyReportImplFromJson(Map<String, dynamic> json) =>
           ? null
           : WholeWeekMinus.fromJson(
               json['whole_week_minus'] as Map<String, dynamic>),
-      managerSignature: json['manager_signature'] as String?,
-      employeeSignature: json['employee_signature'] as String?,
+      managerSignature: json['manager_signature'],
+      employeeSignature: json['employee_signature'],
       wholeHoursTotalWorked: json['whole_hours_total_worked'] == null
           ? null
           : WholeHoursTotalWorked.fromJson(
