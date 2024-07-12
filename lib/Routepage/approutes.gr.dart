@@ -1162,7 +1162,7 @@ class SheduleSignatureRouteArgs {
 /// [_i27.SheduledetailPage]
 class SheduledetailRoute extends _i38.PageRouteInfo<SheduledetailRouteArgs> {
   SheduledetailRoute({
-    _i41.Key? key,
+    _i39.Key? key,
     required int id,
     required int i,
     required int driversIndex,
@@ -1192,7 +1192,7 @@ class SheduledetailRouteArgs {
     required this.driversIndex,
   });
 
-  final _i41.Key? key;
+  final _i39.Key? key;
 
   final int id;
 

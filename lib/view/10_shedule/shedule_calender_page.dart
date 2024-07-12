@@ -40,11 +40,11 @@ class CalenderPage extends StatelessWidget {
                       )),
                   sized0hx05,
                   WWResponseHandler(
-                      data: vmSchedule.sheduleweekResponse,
+                      data: vmSchedule.shedulecardResponse,
                       isEmpty:
-                          vmSchedule.sheduleweekResponse.data?.isEmpty ?? true,
+                          vmSchedule.shedulecardResponse.data?.isEmpty ?? true,
                       onTap: () =>
-                          vmSchedule.shedulecardviewmodelweekfunction(),
+                          vmSchedule.shedulecardviewmodelfunction(),
                       child: const ScheduleList()),
                   sized0hx20,
                 ],

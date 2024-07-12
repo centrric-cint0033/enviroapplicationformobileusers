@@ -89,7 +89,7 @@ class VideoList extends StatelessWidget {
           width: double.infinity - 20.w,
           decoration: BoxDecoration(color: Colors.grey.shade300),
           child: Observer(builder: (context) {
-            final res = vmSchedule.sheduleweekResponse;
+            final res = vmSchedule.shedulecardResponse;
             final videos = res.data?[i].jobVideo ?? [];
             vmSchedule.initializeSelectionStatesVideo(videos.length);
             return ListView.builder(

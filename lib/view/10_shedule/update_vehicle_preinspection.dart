@@ -59,7 +59,7 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
               sized0hx10,
               expandedRowShowText(
                 "Vehicle Registration",
-                vmSchedule.sheduleweekResponse.data?[index].vehicle
+                vmSchedule.shedulecardResponse.data?[index].vehicle
                         ?.toString() ??
                     '',
               ),
@@ -67,7 +67,7 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                   fromType: true, controller: vmSchedule.odometerCntrller),
               requiredRowWidget(
                 "Driver's name",
-                "${vmSchedule.sheduleweekResponse.data?[index].drivers?[driversIndex].name}",
+                "${vmSchedule.shedulecardResponse.data?[index].drivers?[driversIndex].name}",
                 fromType: false,
               ),
               requiredRowWidget("Hour Meter Start", "",
@@ -569,12 +569,18 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                   child: Padding(
                     padding: EdgeInsets.all(8.h),
                     child: res.loading
-                        ? const CupertinoActivityIndicator()
-                        : const Text(
-                            'Submit',
-                            style: TextStyle(
+                        ? SizedBox(
+                            height: 12.w,
+                            width: 12.w,
+                            child: const CircularProgressIndicator(
+                              strokeWidth: 2,
                               color: Colors.white,
                             ),
+                          )
+                        : Text(
+                            'Submit',
+                            style:
+                                TextStyle(color: Colors.white, fontSize: 10.w),
                           ),
                   ),
                 ),
@@ -590,15 +596,15 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
     vmSchedule.updatePreInspectionSchedule(
         context: context,
         data: VehicleModel(
-            vehicle: vmSchedule.sheduleweekResponse.data?[index]
+            vehicle: vmSchedule.shedulecardResponse.data?[index]
                 .drivers?[driversIndex].vehicleId,
             registration:
-                vmSchedule.sheduleweekResponse.data?[index].vehicle?.toString(),
+                vmSchedule.shedulecardResponse.data?[index].vehicle?.toString(),
             odometer: vmSchedule.odometerCntrller.text != ""
                 ? int.parse(vmSchedule.odometerCntrller.text)
                 : null,
             driverName: vmSchedule
-                .sheduleweekResponse.data?[index].drivers?[driversIndex].name,
+                .shedulecardResponse.data?[index].drivers?[driversIndex].name,
             hourMeterStart: vmSchedule.hoursMeterCntrller.text,
             fitForWork: vmSchedule.checkboxValue,
             validDrivingLicense: vmSchedule.checkboxValue2,

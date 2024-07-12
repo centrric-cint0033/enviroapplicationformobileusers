@@ -1010,22 +1010,6 @@ mixin _$ScheduleViewModel on ScheduleViewModelBase, Store {
     });
   }
 
-  late final _$sheduleweekResponseAtom =
-      Atom(name: 'ScheduleViewModelBase.sheduleweekResponse', context: context);
-
-  @override
-  ApiResponse<List<SheduleCardRespModel>> get sheduleweekResponse {
-    _$sheduleweekResponseAtom.reportRead();
-    return super.sheduleweekResponse;
-  }
-
-  @override
-  set sheduleweekResponse(ApiResponse<List<SheduleCardRespModel>> value) {
-    _$sheduleweekResponseAtom.reportWrite(value, super.sheduleweekResponse, () {
-      super.sheduleweekResponse = value;
-    });
-  }
-
   late final _$signatureResponseAtom =
       Atom(name: 'ScheduleViewModelBase.signatureResponse', context: context);
 
@@ -1861,16 +1845,6 @@ mixin _$ScheduleViewModel on ScheduleViewModelBase, Store {
         .run(() => super.shedulecardviewmodelfunction());
   }
 
-  late final _$shedulecardviewmodelweekfunctionAsyncAction = AsyncAction(
-      'ScheduleViewModelBase.shedulecardviewmodelweekfunction',
-      context: context);
-
-  @override
-  Future<void> shedulecardviewmodelweekfunction() {
-    return _$shedulecardviewmodelweekfunctionAsyncAction
-        .run(() => super.shedulecardviewmodelweekfunction());
-  }
-
   late final _$shedulesignatureviewmodelfunctionAsyncAction = AsyncAction(
       'ScheduleViewModelBase.shedulesignatureviewmodelfunction',
       context: context);
@@ -2467,7 +2441,6 @@ isSelectionModeVideo: ${isSelectionModeVideo},
 selectedStatesVideo: ${selectedStatesVideo},
 jobcardResponse: ${jobcardResponse},
 shedulecardResponse: ${shedulecardResponse},
-sheduleweekResponse: ${sheduleweekResponse},
 signatureResponse: ${signatureResponse},
 commentResponse: ${commentResponse},
 deleteCommentResponse: ${deleteCommentResponse},

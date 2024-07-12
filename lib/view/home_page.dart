@@ -157,7 +157,6 @@ void intranetfuntion(BuildContext context) {
 
 void shedulefunction(BuildContext context) {
   vmSchedule.shedulecardviewmodelfunction();
-  vmSchedule.shedulecardviewmodelweekfunction();
   context.router.pushNamed(RouteNames.rschedulemainpage);
 }
 
@@ -194,7 +193,5 @@ void navigateToSitesPage({required BuildContext context}) {
 
 void shedulepagefunction(BuildContext context) async {
   vmSchedule.shedulecardviewmodelfunction();
-  vmSchedule.shedulecardviewmodelweekfunction();
-
   context.router.pushNamed(RouteNames.rschedulemainpage);
 }

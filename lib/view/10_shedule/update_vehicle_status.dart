@@ -57,7 +57,7 @@ class UpdateVehicleStatusPage extends StatelessWidget {
                               onPressed: () {
                                 jobCardFunction(
                                     context,
-                                    vmSchedule.sheduleweekResponse.data?[index]
+                                    vmSchedule.shedulecardResponse.data?[index]
                                         .quoteId);
                               },
                               loadingColor: Colors.blue,
@@ -74,21 +74,21 @@ class UpdateVehicleStatusPage extends StatelessWidget {
                         children: [
                           expandedRowShowText(
                             "Client Name",
-                            vmSchedule.sheduleweekResponse.data?[index].client
+                            vmSchedule.shedulecardResponse.data?[index].client
                                     ?.clientName ??
                                 '',
                           ),
                           const SizedBox(height: 20),
                           expandedRowShowText(
                             "Client Type",
-                            vmSchedule.sheduleweekResponse.data?[index].client
+                            vmSchedule.shedulecardResponse.data?[index].client
                                     ?.clientType ??
                                 '',
                           ),
                           const SizedBox(height: 20),
                           expandedRowShowText(
                             "Client email",
-                            vmSchedule.sheduleweekResponse.data?[index].client
+                            vmSchedule.shedulecardResponse.data?[index].client
                                     ?.clientEmail ??
                                 '',
                           ),
@@ -96,33 +96,33 @@ class UpdateVehicleStatusPage extends StatelessWidget {
                           expandedRowShowText(
                             "Status",
                             vmSchedule
-                                    .sheduleweekResponse.data?[index].status ??
+                                    .shedulecardResponse.data?[index].status ??
                                 '',
                           ),
                           const SizedBox(height: 20),
                           expandedRowShowText(
                             "Amount",
                             vmSchedule
-                                    .sheduleweekResponse.data?[index].amount ??
+                                    .shedulecardResponse.data?[index].amount ??
                                 '',
                           ),
                           const SizedBox(height: 20),
                           expandedRowShowText(
                               "CreatedBy",
-                              vmSchedule.sheduleweekResponse.data?[index]
+                              vmSchedule.shedulecardResponse.data?[index]
                                       .createdBy ??
                                   ''),
                           const SizedBox(height: 20),
                           expandedRowShowText(
                             "Waste Type",
-                            vmSchedule.sheduleweekResponse.data?[index].client
+                            vmSchedule.shedulecardResponse.data?[index].client
                                     ?.deviceWaste ??
                                 '',
                           ),
                           const SizedBox(height: 20),
                           expandedRowShowText(
                             "Frequency",
-                            vmSchedule.sheduleweekResponse.data?[index]
+                            vmSchedule.shedulecardResponse.data?[index]
                                     .frequency ??
                                 '',
                           ),

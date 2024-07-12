@@ -525,32 +525,7 @@ abstract class ScheduleViewModelBase with Store {
     );
   }
 
-  @observable
-  ApiResponse<List<SheduleCardRespModel>> sheduleweekResponse =
-      ApiResponse<List<SheduleCardRespModel>>();
 
-  @action
-  Future<void> shedulecardviewmodelweekfunction() async {
-    sheduleweekResponse =
-        sheduleweekResponse.copyWith(error: null, loading: true);
-
-    final result = await scheduleService.shedulecardserviceweekfunction();
-    return result.fold(
-      (l) {
-        sheduleweekResponse = sheduleweekResponse.copyWith(
-          error: l,
-          loading: false,
-        );
-      },
-      (r) {
-        sheduleweekResponse = sheduleweekResponse.copyWith(
-          data: r,
-          error: null,
-          loading: false,
-        );
-      },
-    );
-  }
 
   @observable
   ApiResponse<SheduleSignatureModel> signatureResponse =
@@ -684,7 +659,7 @@ abstract class ScheduleViewModelBase with Store {
           error: null,
           loading: false,
         );
-        shedulecardviewmodelweekfunction();
+        shedulecardviewmodelfunction();
         context.router.pop();
         showToast(context, msg: "Successfully updated", color: Colors.green);
       },
@@ -728,7 +703,7 @@ abstract class ScheduleViewModelBase with Store {
           showToast(context,
               msg: "Job status updated successfully", color: Colors.green);
         }
-        shedulecardviewmodelweekfunction();
+        shedulecardviewmodelfunction();
       },
     );
   }
@@ -764,7 +739,7 @@ abstract class ScheduleViewModelBase with Store {
           error: null,
           loading: false,
         );
-        shedulecardviewmodelweekfunction();
+ shedulecardviewmodelfunction();
         pickedCameraImageList = [];
         pickedGalleryImageList = [];
         pickedWeighImageList = null;
@@ -825,7 +800,7 @@ abstract class ScheduleViewModelBase with Store {
         vmSchedule.showDeleteClearButtonsBeforePic = false;
         vmSchedule.showDeleteClearButtonsAfterPic = false;
         vmSchedule.imageIds = [];
-        shedulecardviewmodelweekfunction();
+        shedulecardviewmodelfunction();
       },
     );
   }
@@ -859,7 +834,7 @@ abstract class ScheduleViewModelBase with Store {
           error: null,
           loading: false,
         );
-        shedulecardviewmodelweekfunction();
+        shedulecardviewmodelfunction();
         pickedCameraVideoList = [];
         pickedGalleryVideoList = [];
         context.router.pop();

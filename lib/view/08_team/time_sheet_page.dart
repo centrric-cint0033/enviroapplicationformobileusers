@@ -104,12 +104,30 @@ class TimeSheetPage extends StatelessWidget {
                         cmTableCell("Finish", fromHeading: true),
                         cmTableCell("Total Hours Worked", fromHeading: true),
                         cmTableCell("Normal Hours", fromHeading: true),
-                        cmTableCell("Time & Half", fromHeading: true),
-                        cmTableCell("Double Time", fromHeading: true),
-                        cmTableCell("Leave", fromHeading: true),
-                        cmTableCell("Leave", fromHeading: true),
-                        cmTableCell("Leave", fromHeading: true),
-                        cmTableCell("Leave", fromHeading: true),
+                        cmTableCell("Time & Half",
+                            fromHeading: true,
+                            showDivider: true,
+                            cellValue2: "X 1.5"),
+                        cmTableCell("Double Time",
+                            fromHeading: true,
+                            showDivider: true,
+                            cellValue2: "X 2"),
+                        cmTableCell("Leave",
+                            fromHeading: true,
+                            showDivider: true,
+                            cellValue2: "Public Holiday"),
+                        cmTableCell("Leave",
+                            fromHeading: true,
+                            showDivider: true,
+                            cellValue2: "Annual"),
+                        cmTableCell("Leave",
+                            fromHeading: true,
+                            showDivider: true,
+                            cellValue2: "Sick"),
+                        cmTableCell("Leave",
+                            fromHeading: true,
+                            showDivider: true,
+                            cellValue2: "Other"),
                       ],
                     ),
                   ],
@@ -370,23 +388,48 @@ class TimeSheetPage extends StatelessWidget {
   }
 
   TableCell cmTableCell(String cellValue,
-      {bool fromHeading = false, VoidCallback? onTap}) {
+      {bool showDivider = false,
+      bool fromHeading = false,
+      VoidCallback? onTap,
+      String? cellValue2}) {
     return TableCell(
       child: GestureDetector(
         onTap: onTap,
         child: Container(
-          color: fromHeading ? Appthemes.cPrimary : Colors.white,
-          height: 42.w,
-          child: Center(
-            child: Text(
-              cellValue,
-              style: TextStyle(
-                fontSize: 10.w,
-                color: fromHeading ? Colors.white : Colors.black,
-              ),
-            ),
-          ),
-        ),
+            color: fromHeading ? Appthemes.cPrimary : Colors.white,
+            height: 46.w,
+            child: showDivider == false
+                ? Center(
+                    child: Text(
+                      cellValue,
+                      style: TextStyle(
+                        fontSize: 10.w,
+                        color: fromHeading ? Colors.white : Colors.black,
+                      ),
+                    ),
+                  )
+                : Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        cellValue,
+                        style: TextStyle(
+                          fontSize: 10.w,
+                          color: fromHeading ? Colors.white : Colors.black,
+                        ),
+                      ),
+                      const Divider(
+                        color: Colors.white,
+                      ),
+                      Text(
+                        cellValue2 ?? "",
+                        style: TextStyle(
+                          fontSize: 9.w,
+                          color: fromHeading ? Colors.white : Colors.black,
+                        ),
+                      )
+                    ],
+                  )),
       ),
     );
   }
@@ -394,15 +437,13 @@ class TimeSheetPage extends StatelessWidget {
 
 TimeOfDay timeOfDayFromString(String time) {
   try {
-    // Split the time string into hours and minutes
     List<String> parts = time.split(':');
     int hour = int.parse(parts[0]);
     int minute = int.parse(parts[1]);
 
     return TimeOfDay(hour: hour, minute: minute);
   } catch (e) {
-    print('Error parsing time string: $e');
-    return TimeOfDay.now(); // Fallback to current time on error
+    return TimeOfDay.now();
   }
 }
 
@@ -410,4 +451,11 @@ String formatTimeOfDay(TimeOfDay time) {
   final hour = time.hour.toString().padLeft(2, '0');
   final minute = time.minute.toString().padLeft(2, '0');
   return '$hour:$minute';
+}
+
+String convertToRailwayTime(String timestamp) {
+  DateTime dateTime = DateTime.parse(timestamp);
+  DateFormat formatter =
+      DateFormat.Hm(); // Hm stands for hours and minutes in 24-hour format
+  return formatter.format(dateTime);
 }

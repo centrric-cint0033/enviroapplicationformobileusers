@@ -50,7 +50,7 @@ class SheduleSignaturePage extends StatelessWidget {
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      if (vmSchedule.sheduleweekResponse.data?[i].jobCardKeys
+                      if (vmSchedule.shedulecardResponse.data?[i].jobCardKeys
                               ?.weighBridgeRequired ==
                           "true")
                         Container(

@@ -23,13 +23,13 @@ class ScheduleList extends StatelessWidget {
         physics: const NeverScrollableScrollPhysics(),
         separatorBuilder: (context, index) => sized0hx10,
         shrinkWrap: true,
-        itemCount: vmSchedule.sheduleweekResponse.data?.length ?? 0,
+        itemCount: vmSchedule.shedulecardResponse.data?.length ?? 0,
         itemBuilder: (BuildContext context, int i) {
           return GestureDetector(
             onTap: () {
               vmSchedule.clearFn();
               context.router.push(SheduledetailRoute(
-                  id: vmSchedule.sheduleweekResponse.data?[i].id ?? 0,
+                  id: vmSchedule.shedulecardResponse.data?[i].id ?? 0,
                   i: i,
                   driversIndex: vmSchedule.driversIndex));
             },
@@ -46,7 +46,7 @@ class ScheduleList extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          vmSchedule.sheduleweekResponse.data?[i].client
+                          vmSchedule.shedulecardResponse.data?[i].client
                                   ?.clientName ??
                               '',
                           style: TextStyle(fontSize: 11.w),
@@ -54,7 +54,7 @@ class ScheduleList extends StatelessWidget {
                         Padding(
                           padding: EdgeInsets.only(right: 8.w),
                           child: Text(
-                              'job ${vmSchedule.sheduleweekResponse.data?[i].job ?? ''}',
+                              'job ${vmSchedule.shedulecardResponse.data?[i].job ?? ''}',
                               style: TextStyle(fontSize: 9.w)),
                         ),
                       ],
@@ -66,7 +66,7 @@ class ScheduleList extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                                "${convertTimeTo12HourFormat(vmSchedule.sheduleweekResponse.data?[i].startTime ?? "")}-${convertTimeTo12HourFormat(vmSchedule.sheduleweekResponse.data?[i].endTime ?? "")}",
+                                "${convertTimeTo12HourFormat(vmSchedule.shedulecardResponse.data?[i].startTime ?? "")}-${convertTimeTo12HourFormat(vmSchedule.shedulecardResponse.data?[i].endTime ?? "")}",
                                 style: TextStyle(fontSize: 9.w)),
                             if (vmSchedule.shedulecardResponse.data?[i]
                                         .startDate ==
@@ -95,7 +95,7 @@ class ScheduleList extends StatelessWidget {
                               alignment: Alignment.center,
                               child: Text(
                                   jobStatus(
-                                      "${vmSchedule.sheduleweekResponse.data?[i].status}"),
+                                      "${vmSchedule.shedulecardResponse.data?[i].status}"),
                                   style: TextStyle(fontSize: 8.w)),
                             ),
                           ),
@@ -104,7 +104,7 @@ class ScheduleList extends StatelessWidget {
                         //   onPressed: () {
                         //     sheduledetailfunction(
                         //         context,
-                        //         vmSchedule.sheduleweekResponse
+                        //         vmSchedule.shedulecardResponse
                         //                 .data?[i].id ??
                         //             '',
                         //         i);

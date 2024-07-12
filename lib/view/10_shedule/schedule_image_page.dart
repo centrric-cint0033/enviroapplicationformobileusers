@@ -63,7 +63,7 @@ class ScheduleImageScreen extends StatelessWidget {
                   : Column(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        vmSchedule.pickedCameraImage != null
+                        vmSchedule.pickedCameraImage != ""
                             ? SizedBox(
                                 width: 260.w,
                                 child: ListView.builder(

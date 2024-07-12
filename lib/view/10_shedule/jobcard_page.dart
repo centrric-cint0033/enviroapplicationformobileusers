@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'package:enviro_mobile_application/model/07_Jobcard/job_card_model.dart';
 import 'package:enviro_mobile_application/utilis/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';

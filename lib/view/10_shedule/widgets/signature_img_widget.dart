@@ -9,6 +9,6 @@ Widget signatureImageWidget({required int i}) {
     child: Image(
         fit: BoxFit.cover,
         image: CachedNetworkImageProvider(
-            vmSchedule.sheduleweekResponse.data?[i].image ?? "")),
+            vmSchedule.shedulecardResponse.data?[i].image ?? "")),
   );
 }

@@ -56,11 +56,11 @@ class ScheduleMainPage extends StatelessWidget {
               Observer(
                 builder: (_) {
                   return WWResponseHandler(
-                      data: vmSchedule.sheduleweekResponse,
+                      data: vmSchedule.shedulecardResponse,
                       isEmpty:
-                          vmSchedule.sheduleweekResponse.data?.isEmpty ?? true,
+                          vmSchedule.shedulecardResponse.data?.isEmpty ?? true,
                       onTap: () =>
-                          vmSchedule.shedulecardviewmodelweekfunction(),
+                          vmSchedule.shedulecardviewmodelfunction(),
                       child: const ScheduleList());
                 },
               ),

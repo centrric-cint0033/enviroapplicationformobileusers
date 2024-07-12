@@ -82,7 +82,7 @@ class AfterImagesList extends StatelessWidget {
             width: double.infinity - 20.w,
             decoration: BoxDecoration(color: Colors.grey.shade300),
             child: Observer(builder: (context) {
-              final res = vmSchedule.sheduleweekResponse;
+              final res = vmSchedule.shedulecardResponse;
               final images = res.data?[i].afterPics ?? [];
               vmSchedule.initializeSelectionStatesAfterPic(images.length);
               return ListView.builder(

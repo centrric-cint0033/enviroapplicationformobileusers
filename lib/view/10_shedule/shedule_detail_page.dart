@@ -17,7 +17,6 @@ import 'package:enviro_mobile_application/view_model/11_shedule/shedule_page_vie
 import 'package:enviro_mobile_application/widgets/cmbutton.dart';
 import 'package:enviro_mobile_application/widgets/cmn_title_textwidget.dart';
 import 'package:enviro_mobile_application/widgets/drawer.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -44,7 +43,7 @@ class SheduledetailPage extends StatelessWidget {
         ),
         body: Observer(
           builder: (context) {
-            final res = vmSchedule.sheduleweekResponse;
+            final res = vmSchedule.shedulecardResponse;
             return SingleChildScrollView(
               padding: screenWidth,
               child: res.loading
@@ -184,14 +183,14 @@ class SheduledetailPage extends StatelessWidget {
                                             DateFormat('dd-MM-yyyy hh:mm a')
                                                 .format(DateTime.parse(
                                                     vmSchedule
-                                                        .sheduleweekResponse
+                                                        .shedulecardResponse
                                                         .data?[i]
                                                         .departEnviroFacility)),
                                             i,
                                             dateTimePicker(
                                                 context,
                                                 DateTime.parse(vmSchedule
-                                                    .sheduleweekResponse
+                                                    .shedulecardResponse
                                                     .data?[i]
                                                     .departEnviroFacility),
                                                 (date) => vmSchedule.enviroDatePickerFn(
@@ -202,7 +201,7 @@ class SheduledetailPage extends StatelessWidget {
                                                     date,
                                                     "departed_enviro_facility",
                                                     vmSchedule
-                                                        .sheduleweekResponse
+                                                        .shedulecardResponse
                                                         .data![i]
                                                         .id!,
                                                     ScheduleStatusType
@@ -214,7 +213,7 @@ class SheduledetailPage extends StatelessWidget {
                                             "Job Started",
                                             DateFormat('dd-MM-yyyy hh:mm a')
                                                 .format(DateTime.parse(vmSchedule
-                                                        .sheduleweekResponse
+                                                        .shedulecardResponse
                                                         .data?[i]
                                                         .startJob ??
                                                     "")),
@@ -222,7 +221,7 @@ class SheduledetailPage extends StatelessWidget {
                                             dateTimePicker(
                                                 context,
                                                 DateTime.parse(vmSchedule
-                                                        .sheduleweekResponse
+                                                        .shedulecardResponse
                                                         .data?[i]
                                                         .startJob ??
                                                     ""),
@@ -250,7 +249,7 @@ class SheduledetailPage extends StatelessWidget {
                                                 context,
                                                 DateTime
                                                     .parse(vmSchedule
-                                                            .sheduleweekResponse
+                                                            .shedulecardResponse
                                                             .data?[i]
                                                             .finishJob ??
                                                         ""),
@@ -263,7 +262,7 @@ class SheduledetailPage extends StatelessWidget {
                                                         date,
                                                         "job_finished",
                                                         vmSchedule
-                                                            .sheduleweekResponse
+                                                            .shedulecardResponse
                                                             .data![i]
                                                             .id!,
                                                         ScheduleStatusType
@@ -284,7 +283,7 @@ class SheduledetailPage extends StatelessWidget {
                                               context,
                                               res.data?[i].completed != null
                                                   ? DateTime.parse(vmSchedule
-                                                          .sheduleweekResponse
+                                                          .shedulecardResponse
                                                           .data?[i]
                                                           .completed ??
                                                       "")
@@ -297,7 +296,7 @@ class SheduledetailPage extends StatelessWidget {
                                                       date,
                                                       "completed",
                                                       vmSchedule
-                                                          .sheduleweekResponse
+                                                          .shedulecardResponse
                                                           .data![i]
                                                           .id!,
                                                       ScheduleStatusType
@@ -306,14 +305,14 @@ class SheduledetailPage extends StatelessWidget {
                                           context,
                                           "Arrived at Waste Depot",
                                           vmSchedule
-                                                      .sheduleweekResponse
+                                                      .shedulecardResponse
                                                       .data?[i]
                                                       .arriveAtWasteDepot !=
                                                   null
                                               ? DateFormat('dd-MM-yyyy hh:mm a')
                                                   .format(DateTime.parse(
                                                   vmSchedule
-                                                          .sheduleweekResponse
+                                                          .shedulecardResponse
                                                           .data?[i]
                                                           .arriveAtWasteDepot ??
                                                       "",
@@ -323,12 +322,12 @@ class SheduledetailPage extends StatelessWidget {
                                           dateTimePicker(
                                               context,
                                               vmSchedule
-                                                          .sheduleweekResponse
+                                                          .shedulecardResponse
                                                           .data?[i]
                                                           .arriveAtWasteDepot !=
                                                       null
                                                   ? DateTime.parse(vmSchedule
-                                                      .sheduleweekResponse
+                                                      .shedulecardResponse
                                                       .data?[i]
                                                       .arriveAtWasteDepot!)
                                                   : DateTime.now(),
@@ -341,7 +340,7 @@ class SheduledetailPage extends StatelessWidget {
                                                       date,
                                                       "arrived_at_waste_depot",
                                                       vmSchedule
-                                                          .sheduleweekResponse
+                                                          .shedulecardResponse
                                                           .data![i]
                                                           .id!,
                                                       ScheduleStatusType
@@ -350,14 +349,14 @@ class SheduledetailPage extends StatelessWidget {
                                           context,
                                           "Departed from Waste Depot",
                                           vmSchedule
-                                                      .sheduleweekResponse
+                                                      .shedulecardResponse
                                                       .data?[i]
                                                       .departWasteDepot !=
                                                   null
                                               ? DateFormat('dd-MM-yyyy hh:mm a')
                                                   .format(DateTime.parse(
                                                   vmSchedule
-                                                          .sheduleweekResponse
+                                                          .shedulecardResponse
                                                           .data?[i]
                                                           .departWasteDepot ??
                                                       vmSchedule
@@ -368,12 +367,12 @@ class SheduledetailPage extends StatelessWidget {
                                           dateTimePicker(
                                               context,
                                               vmSchedule
-                                                          .sheduleweekResponse
+                                                          .shedulecardResponse
                                                           .data?[i]
                                                           .departWasteDepot !=
                                                       null
                                                   ? DateTime.parse(vmSchedule
-                                                      .sheduleweekResponse
+                                                      .shedulecardResponse
                                                       .data?[i]
                                                       .departWasteDepot!)
                                                   : DateTime.now(),
@@ -386,7 +385,7 @@ class SheduledetailPage extends StatelessWidget {
                                                       date,
                                                       "departed_waste_depot",
                                                       vmSchedule
-                                                          .sheduleweekResponse
+                                                          .shedulecardResponse
                                                           .data![i]
                                                           .id!,
                                                       ScheduleStatusType
@@ -398,14 +397,14 @@ class SheduledetailPage extends StatelessWidget {
                                             context,
                                             "Arrived at Enviro Facility",
                                             vmSchedule
-                                                        .sheduleweekResponse
+                                                        .shedulecardResponse
                                                         .data?[i]
                                                         .arriveEnviroFacility !=
                                                     null
                                                 ? DateFormat('dd-MM-yyyy hh:mm a')
                                                     .format(DateTime.parse(
                                                     vmSchedule
-                                                            .sheduleweekResponse
+                                                            .shedulecardResponse
                                                             .data?[i]
                                                             .arriveEnviroFacility ??
                                                         vmSchedule
@@ -416,12 +415,12 @@ class SheduledetailPage extends StatelessWidget {
                                             dateTimePicker(
                                                 context,
                                                 vmSchedule
-                                                            .sheduleweekResponse
+                                                            .shedulecardResponse
                                                             .data?[i]
                                                             .arriveEnviroFacility !=
                                                         null
                                                     ? DateTime.parse(vmSchedule
-                                                        .sheduleweekResponse
+                                                        .shedulecardResponse
                                                         .data?[i]
                                                         .arriveEnviroFacility!)
                                                     : DateTime.now(),
@@ -432,7 +431,7 @@ class SheduledetailPage extends StatelessWidget {
                                                     date,
                                                     "arrived_at_enviro_facility",
                                                     vmSchedule
-                                                        .sheduleweekResponse
+                                                        .shedulecardResponse
                                                         .data![i]
                                                         .id!,
                                                     ScheduleStatusType
@@ -468,7 +467,7 @@ class SheduledetailPage extends StatelessWidget {
                         ],
                         if (res.data![i].departEnviroFacility == null &&
                             vmSchedule
-                                    .sheduleweekResponse
+                                    .shedulecardResponse
                                     .data?[i]
                                     .drivers?[driversIndex]
                                     .preinspectioncheck ==
@@ -488,7 +487,7 @@ class SheduledetailPage extends StatelessWidget {
                                       date,
                                       "departed_enviro_facility",
                                       vmSchedule
-                                          .sheduleweekResponse.data![i].id!,
+                                          .shedulecardResponse.data![i].id!,
                                       ScheduleStatusType
                                           .departedEnviroFacility));
                             },
@@ -501,7 +500,7 @@ class SheduledetailPage extends StatelessWidget {
                         ],
                         if (res.data![i].startJob == null &&
                             vmSchedule
-                                    .sheduleweekResponse
+                                    .shedulecardResponse
                                     .data?[i]
                                     .drivers?[driversIndex]
                                     .preinspectioncheck ==
@@ -521,7 +520,7 @@ class SheduledetailPage extends StatelessWidget {
                                       date,
                                       "job_started",
                                       vmSchedule
-                                          .sheduleweekResponse.data![i].id!,
+                                          .shedulecardResponse.data![i].id!,
                                       ScheduleStatusType.jobStarted,
                                       fromJobStarted: true,
                                       toCameraGalleryScreen: true));
@@ -551,7 +550,7 @@ class SheduledetailPage extends StatelessWidget {
                                       date,
                                       "job_finished",
                                       vmSchedule
-                                          .sheduleweekResponse.data![i].id!,
+                                          .shedulecardResponse.data![i].id!,
                                       ScheduleStatusType.finishedJob,
                                       toCameraGalleryScreen: true));
                             },
@@ -562,7 +561,7 @@ class SheduledetailPage extends StatelessWidget {
                           ),
                           sized0hx05
                         ],
-                        if (res.data![i].departWasteDepot == null) ...[
+                        if (res.data![i].departWasteDepot != null) ...[
                           CmButton(
                             color: const Color(0xFF4CAF9E),
                             buttonTextStyle:
@@ -579,7 +578,7 @@ class SheduledetailPage extends StatelessWidget {
                                         date,
                                         "departed_waste_depot",
                                         vmSchedule
-                                            .sheduleweekResponse.data![i].id!,
+                                            .shedulecardResponse.data![i].id!,
                                         ScheduleStatusType.departedWasteDepot,
                                       ));
                             },
@@ -623,7 +622,7 @@ class SheduledetailPage extends StatelessWidget {
                                         date,
                                         "arrived_at_enviro_facility",
                                         vmSchedule
-                                            .sheduleweekResponse.data![i].id!,
+                                            .shedulecardResponse.data![i].id!,
                                         ScheduleStatusType
                                             .arrivedEnviroFacility,
                                       ));
