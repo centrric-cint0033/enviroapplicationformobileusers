@@ -80,7 +80,6 @@ class TimeSheetPage extends StatelessWidget {
       child: Observer(builder: (context) {
         final res = vmTeam.timeSheetResponse;
         TimeSheetResModel? timeSheet = res.data;
-
         return SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: SizedBox(
@@ -134,23 +133,23 @@ class TimeSheetPage extends StatelessWidget {
                 ),
                 ListView.builder(
                   shrinkWrap: true,
-                  itemCount:
-                      timeSheet?.weeklyReport?.week?.length ?? weekDates.length,
+                  itemCount: 7, // Always 7 items
                   itemBuilder: (context, index) {
-                    final data = timeSheet?.weeklyReport?.week?[index];
+                    final week = timeSheet?.weeklyReport?.week;
+                    final data = (week != null && index < week.length)
+                        ? week[index]
+                        : null;
 
-                    String inputweekStartDate =
-                        timeSheet?.weeklyReport?.week?[0].date ??
-                            DateFormat('dd-MM-yyyy').format(weekDates[0]);
+                    String inputweekStartDate = data?.date ??
+                        DateFormat('dd-MM-yyyy').format(weekDates[0]);
                     DateTime parsedDate =
                         DateFormat('dd-MM-yyyy').parse(inputweekStartDate);
                     String formattedDate =
                         DateFormat('yyyy-MM-dd').format(parsedDate);
-                    if (timeSheet?.weeklyReport?.week?[0].date != null) {
-                      vmTeam.weekStartDate = inputweekStartDate;
-                    } else {
-                      vmTeam.weekStartDate = formattedDate;
-                    }
+
+                    vmTeam.weekStartDate =
+                        data?.date != null ? inputweekStartDate : formattedDate;
+
                     return InkWell(
                       onTap: () {
                         vmTeam.totalHrsController.text =
@@ -183,6 +182,8 @@ class TimeSheetPage extends StatelessWidget {
                               timesheetWeek: data,
                               weekStartDate: vmTeam.weekStartDate));
                         } else {
+                          vmTeam.selectedStartTime = null;
+                          vmTeam.selectedEndTime = null;
                           context.router.push(EditTimeSheetRoute(
                               date: DateFormat('dd-MM-yyyy')
                                   .format(weekDates[index]),
@@ -199,28 +200,25 @@ class TimeSheetPage extends StatelessWidget {
                           TableRow(
                             children: [
                               cmTableCell(
-                                data != null
-                                    ? data.date ?? ""
-                                    : DateFormat('dd-MM-yyyy')
+                                data?.date ??
+                                    DateFormat('dd-MM-yyyy')
                                         .format(weekDates[index]),
                                 onTap: () {},
                               ),
                               cmTableCell(
-                                data != null
-                                    ? data.day ?? ""
-                                    : DateFormat('EEEE')
-                                        .format(weekDates[index]),
+                                data?.day ??
+                                    DateFormat('EEEE').format(weekDates[index]),
                               ),
-                              cmTableCell(data?.start ?? ""),
-                              cmTableCell(data?.finish ?? ""),
-                              cmTableCell("${data?.totalHoursWorked ?? ""}"),
-                              cmTableCell("${data?.normalHours ?? ""}"),
-                              cmTableCell("${data?.fullTime ?? ""}"),
-                              cmTableCell("${data?.halfTime ?? ""}"),
-                              cmTableCell("${data?.publicHolidays ?? ""}"),
-                              cmTableCell("${data?.annual ?? ""}"),
-                              cmTableCell("${data?.sick ?? ""}"),
-                              cmTableCell("${data?.otherDays ?? ""}"),
+                              cmTableCell(data?.start ?? "0"),
+                              cmTableCell(data?.finish ?? "0"),
+                              cmTableCell("${data?.totalHoursWorked ?? "0"}"),
+                              cmTableCell("${data?.normalHours ?? "0"}"),
+                              cmTableCell("${data?.fullTime ?? "0"}"),
+                              cmTableCell("${data?.halfTime ?? "0"}"),
+                              cmTableCell("${data?.publicHolidays ?? "0"}"),
+                              cmTableCell("${data?.annual ?? "0"}"),
+                              cmTableCell("${data?.sick ?? "0"}"),
+                              cmTableCell("${data?.otherDays ?? "0"}"),
                             ],
                           ),
                         ],
@@ -250,21 +248,21 @@ class TimeSheetPage extends StatelessWidget {
                         cmTableCell(""),
                         cmTableCell("Total Worked Hours"),
                         cmTableCell(
-                            "${timeSheet?.weeklyReport?.wholeHoursTotalWorked?.totalHoursWorked ?? ""}"),
+                            "${timeSheet?.weeklyReport?.wholeHoursTotalWorked?.totalHoursWorked ?? "0"}"),
                         cmTableCell(
-                            "${timeSheet?.weeklyReport?.wholeHoursTotalWorked?.normalHours ?? ""}"),
+                            "${timeSheet?.weeklyReport?.wholeHoursTotalWorked?.normalHours ?? "0"}"),
                         cmTableCell(
-                            "${timeSheet?.weeklyReport?.wholeHoursTotalWorked?.halfTime ?? ""}"),
+                            "${timeSheet?.weeklyReport?.wholeHoursTotalWorked?.halfTime ?? "0"}"),
                         cmTableCell(
-                            "${timeSheet?.weeklyReport?.wholeHoursTotalWorked?.fullTime ?? ""}"),
+                            "${timeSheet?.weeklyReport?.wholeHoursTotalWorked?.fullTime ?? "0"}"),
                         cmTableCell(
-                            "${timeSheet?.weeklyReport?.wholeHoursTotalWorked?.publicHolidays ?? ""}"),
+                            "${timeSheet?.weeklyReport?.wholeHoursTotalWorked?.publicHolidays ?? "0"}"),
                         cmTableCell(
-                            "${timeSheet?.weeklyReport?.wholeHoursTotalWorked?.annual ?? ""}"),
+                            "${timeSheet?.weeklyReport?.wholeHoursTotalWorked?.annual ?? "0"}"),
                         cmTableCell(
-                            "${timeSheet?.weeklyReport?.wholeHoursTotalWorked?.sick ?? ""}"),
+                            "${timeSheet?.weeklyReport?.wholeHoursTotalWorked?.sick ?? "0"}"),
                         cmTableCell(
-                            "${timeSheet?.weeklyReport?.wholeHoursTotalWorked?.otherDays ?? ""}"),
+                            "${timeSheet?.weeklyReport?.wholeHoursTotalWorked?.otherDays ?? "0"}"),
                       ],
                     ),
                     TableRow(
@@ -272,21 +270,21 @@ class TimeSheetPage extends StatelessWidget {
                         cmTableCell(""),
                         cmTableCell("Minus Breaks"),
                         cmTableCell(
-                            "${timeSheet?.weeklyReport?.wholeWeekMinus?.totalHoursWorked ?? ""}"),
+                            "${timeSheet?.weeklyReport?.wholeWeekMinus?.totalHoursWorked ?? "0"}"),
                         cmTableCell(
-                            "${timeSheet?.weeklyReport?.wholeWeekMinus?.normalHours ?? ""}"),
+                            "${timeSheet?.weeklyReport?.wholeWeekMinus?.normalHours ?? "0"}"),
                         cmTableCell(
-                            "${timeSheet?.weeklyReport?.wholeWeekMinus?.halfTime ?? ""}"),
+                            "${timeSheet?.weeklyReport?.wholeWeekMinus?.halfTime ?? "0"}"),
                         cmTableCell(
-                            "${timeSheet?.weeklyReport?.wholeWeekMinus?.fullTime ?? ""}"),
+                            "${timeSheet?.weeklyReport?.wholeWeekMinus?.fullTime ?? "0"}"),
                         cmTableCell(
-                            "${timeSheet?.weeklyReport?.wholeWeekMinus?.publicHolidays ?? ""}"),
+                            "${timeSheet?.weeklyReport?.wholeWeekMinus?.publicHolidays ?? "0"}"),
                         cmTableCell(
-                            "${timeSheet?.weeklyReport?.wholeWeekMinus?.annual ?? ""}"),
+                            "${timeSheet?.weeklyReport?.wholeWeekMinus?.annual ?? "0"}"),
                         cmTableCell(
-                            "${timeSheet?.weeklyReport?.wholeWeekMinus?.sick ?? ""}"),
+                            "${timeSheet?.weeklyReport?.wholeWeekMinus?.sick ?? "0"}"),
                         cmTableCell(
-                            "${timeSheet?.weeklyReport?.wholeWeekMinus?.otherDays ?? ""}"),
+                            "${timeSheet?.weeklyReport?.wholeWeekMinus?.otherDays ?? "0"}"),
                       ],
                     ),
                     TableRow(
@@ -294,21 +292,21 @@ class TimeSheetPage extends StatelessWidget {
                         cmTableCell(""),
                         cmTableCell("Paid Hours"),
                         cmTableCell(
-                            "${timeSheet?.weeklyReport?.wholePaidHours?.totalHoursWorked ?? ""}"),
+                            "${timeSheet?.weeklyReport?.wholePaidHours?.totalHoursWorked ?? "0"}"),
                         cmTableCell(
-                            "${timeSheet?.weeklyReport?.wholePaidHours?.normalHours ?? ""}"),
+                            "${timeSheet?.weeklyReport?.wholePaidHours?.normalHours ?? "0"}"),
                         cmTableCell(
-                            "${timeSheet?.weeklyReport?.wholePaidHours?.halfTime ?? ""}"),
+                            "${timeSheet?.weeklyReport?.wholePaidHours?.halfTime ?? "0"}"),
                         cmTableCell(
-                            "${timeSheet?.weeklyReport?.wholePaidHours?.fullTime ?? ""}"),
+                            "${timeSheet?.weeklyReport?.wholePaidHours?.fullTime ?? "0"}"),
                         cmTableCell(
-                            "${timeSheet?.weeklyReport?.wholePaidHours?.publicHolidays ?? ""}"),
+                            "${timeSheet?.weeklyReport?.wholePaidHours?.publicHolidays ?? "0"}"),
                         cmTableCell(
-                            "${timeSheet?.weeklyReport?.wholePaidHours?.annual ?? ""}"),
+                            "${timeSheet?.weeklyReport?.wholePaidHours?.annual ?? "0"}"),
                         cmTableCell(
-                            "${timeSheet?.weeklyReport?.wholePaidHours?.sick ?? ""}"),
+                            "${timeSheet?.weeklyReport?.wholePaidHours?.sick ?? "0"}"),
                         cmTableCell(
-                            "${timeSheet?.weeklyReport?.wholePaidHours?.otherDays ?? ""}"),
+                            "${timeSheet?.weeklyReport?.wholePaidHours?.otherDays ?? "0"}"),
                       ],
                     ),
                   ],

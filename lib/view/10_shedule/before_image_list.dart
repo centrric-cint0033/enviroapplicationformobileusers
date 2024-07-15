@@ -7,7 +7,6 @@ import 'package:enviro_mobile_application/widgets/show_confirmation_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class BeforeImagesList extends StatelessWidget {
   const BeforeImagesList({super.key, required this.i, required this.id});
@@ -99,7 +98,7 @@ class BeforeImagesList extends StatelessWidget {
                               index, images[index].id!);
                         } else if (!vmSchedule.selectedStatesBeforePic
                             .any((isSelected) => isSelected)) {
-                          await _launchImageUrl(imageUrl);
+                            await vmSchedule.launchURL(imageUrl);
                         } else {
                           vmSchedule.toggleSelectionBeforePic(
                               index, images[index].id!);
@@ -153,13 +152,5 @@ class BeforeImagesList extends StatelessWidget {
             }))
       ],
     );
-  }
-
-  Future<void> _launchImageUrl(String url) async {
-    if (await canLaunch(url)) {
-      await launch(url);
-    } else {
-      throw 'Could not launch $url';
-    }
   }
 }

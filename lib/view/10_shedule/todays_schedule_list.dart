@@ -32,7 +32,9 @@ class TodaysScheduleList extends StatelessWidget {
             final res = vmSchedule.shedulecardResponse.data?[i];
             return SizedBox(
               height: 210.w,
-              width: MediaQuery.of(context).size.width - 55.h,
+              width: vmSchedule.shedulecardResponse.data?.length == 1
+                  ? MediaQuery.of(context).size.width - 34.h
+                  : MediaQuery.of(context).size.width - 55.h,
               child: Card(
                 color: Colors.grey.shade300,
                 shape: RoundedRectangleBorder(

@@ -143,6 +143,15 @@ class ScheduleImageScreen extends StatelessWidget {
                                 picType: fromJobStarted == true
                                     ? BeforeOrAfterPic.beforePic
                                     : BeforeOrAfterPic.afterPic);
+                            // if (vmSchedule.addImageScheduleResponse.data !=
+                            //     null) {
+                            //   vmSchedule.editScheduleStatusApi(
+                            //       context: context,
+                            //       statusType: statusdType,
+                            //       date: dateString,
+                            //       status: status,
+                            //       id: id);
+                            // }
                           },
                         ),
                         sized0hx50,

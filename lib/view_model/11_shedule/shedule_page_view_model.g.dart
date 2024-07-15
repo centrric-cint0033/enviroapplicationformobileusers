@@ -2012,6 +2012,14 @@ mixin _$ScheduleViewModel on ScheduleViewModelBase, Store {
         toCameraGalleryScreen: toCameraGalleryScreen));
   }
 
+  late final _$launchURLAsyncAction =
+      AsyncAction('ScheduleViewModelBase.launchURL', context: context);
+
+  @override
+  Future launchURL(String urls) {
+    return _$launchURLAsyncAction.run(() => super.launchURL(urls));
+  }
+
   late final _$ScheduleViewModelBaseActionController =
       ActionController(name: 'ScheduleViewModelBase', context: context);
 

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:enviro_mobile_application/model/10_team/time_sheet_res_model/week.dart';
 import 'package:enviro_mobile_application/model/10_team/time_sheet_res_model/weekly_report.dart';
@@ -23,6 +25,7 @@ class EditTimeSheetPage extends StatelessWidget {
   final String? weekStartDate;
   @override
   Widget build(BuildContext context) {
+    log(vmTeam.weekStartDate.toString());
     return Scaffold(
       appBar: AppBar(
         title: cmnTitleWidget('Edit New'),

@@ -23,6 +23,7 @@ import 'package:injectable/injectable.dart';
 import 'package:intl/intl.dart';
 import 'package:mobx/mobx.dart';
 import 'package:signature/signature.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../utilis/image_picker_service/image_file_picker.dart';
 part 'shedule_page_view_model.g.dart';
@@ -525,8 +526,6 @@ abstract class ScheduleViewModelBase with Store {
     );
   }
 
-
-
   @observable
   ApiResponse<SheduleSignatureModel> signatureResponse =
       ApiResponse<SheduleSignatureModel>();
@@ -739,7 +738,7 @@ abstract class ScheduleViewModelBase with Store {
           error: null,
           loading: false,
         );
- shedulecardviewmodelfunction();
+        shedulecardviewmodelfunction();
         pickedCameraImageList = [];
         pickedGalleryImageList = [];
         pickedWeighImageList = null;
@@ -1169,5 +1168,13 @@ abstract class ScheduleViewModelBase with Store {
     imageIdsAfterPic = [];
     imageIdsGalleryPic = [];
     videoIds = [];
+  }
+
+  @action
+  launchURL(String urls) async {
+    final Uri url = Uri.parse(urls.toString());
+    if (!await launchUrl(url)) {
+      throw Exception('Could not launch $urls');
+    }
   }
 }

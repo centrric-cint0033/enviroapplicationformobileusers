@@ -7,7 +7,6 @@ import 'package:enviro_mobile_application/widgets/show_confirmation_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class GalleryImagesList extends StatelessWidget {
   const GalleryImagesList({super.key, required this.i, required this.id});
@@ -99,7 +98,7 @@ class GalleryImagesList extends StatelessWidget {
                               index, images[index].id!);
                         } else if (!vmSchedule.selectedStatesGalleryPic
                             .any((isSelected) => isSelected)) {
-                          await _launchImageUrl(imageUrl);
+                          await vmSchedule.launchURL(imageUrl);
                         } else {
                           vmSchedule.toggleSelectionGalleryPic(
                               index, images[index].id!);
@@ -136,13 +135,5 @@ class GalleryImagesList extends StatelessWidget {
             }))
       ],
     );
-  }
-
-  Future<void> _launchImageUrl(String url) async {
-    if (await canLaunch(url)) {
-      await launch(url);
-    } else {
-      throw 'Could not launch $url';
-    }
   }
 }

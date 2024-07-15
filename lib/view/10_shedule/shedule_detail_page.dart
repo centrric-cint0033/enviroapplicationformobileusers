@@ -212,11 +212,12 @@ class SheduledetailPage extends StatelessWidget {
                                             context,
                                             "Job Started",
                                             DateFormat('dd-MM-yyyy hh:mm a')
-                                                .format(DateTime.parse(vmSchedule
-                                                        .shedulecardResponse
-                                                        .data?[i]
-                                                        .startJob ??
-                                                    "")),
+                                                .format(DateTime.parse(
+                                                    vmSchedule
+                                                            .shedulecardResponse
+                                                            .data?[i]
+                                                            .startJob ??
+                                                        "")),
                                             i,
                                             dateTimePicker(
                                                 context,
@@ -225,15 +226,19 @@ class SheduledetailPage extends StatelessWidget {
                                                         .data?[i]
                                                         .startJob ??
                                                     ""),
-                                                (date) => vmSchedule.enviroDatePickerFn(
-                                                    context,
-                                                    vmSchedule.selectedStartingJobDate ?? DateTime.now(),
-                                                    date,
-                                                    "job_started",
-                                                    res.data![i].id!,
-                                                    ScheduleStatusType.jobStarted,
-                                                    fromJobStarted: true,
-                                                    toCameraGalleryScreen: true)))
+                                                (date) => vmSchedule
+                                                        .enviroDatePickerFn(
+                                                      context,
+                                                      vmSchedule
+                                                              .selectedStartingJobDate ??
+                                                          DateTime.now(),
+                                                      date,
+                                                      "job_started",
+                                                      res.data![i].id!,
+                                                      ScheduleStatusType
+                                                          .jobStarted,
+                                                      fromJobStarted: true,
+                                                    )))
                                         : const SizedBox(),
                                     res.data?[i].finishJob != null
                                         ? cmRowTextWithDatePicker(
@@ -266,9 +271,7 @@ class SheduledetailPage extends StatelessWidget {
                                                             .data![i]
                                                             .id!,
                                                         ScheduleStatusType
-                                                            .finishedJob,
-                                                        toCameraGalleryScreen:
-                                                            true)))
+                                                            .finishedJob)))
                                         : const SizedBox(),
                                     if (res.data?[i].completed != null) ...[
                                       cmRowTextWithDatePicker(
@@ -498,32 +501,14 @@ class SheduledetailPage extends StatelessWidget {
                           ),
                           sized0hx05
                         ],
-                        if (res.data![i].startJob == null &&
-                            vmSchedule
-                                    .shedulecardResponse
-                                    .data?[i]
-                                    .drivers?[driversIndex]
-                                    .preinspectioncheck ==
-                                true) ...[
+                        if (res.data![i].startJob != null) ...[
                           CmButton(
                             color: const Color(0xFF4CAF9E),
                             buttonTextStyle:
                                 TextStyle(color: Colors.white, fontSize: 10.w),
                             onPressed: () {
-                              dateTimePickerWithouIcon(
-                                  context,
-                                  DateTime.now(),
-                                  (date) => vmSchedule.enviroDatePickerFn(
-                                      context,
-                                      vmSchedule.selectedStartingJobDate ??
-                                          DateTime.now(),
-                                      date,
-                                      "job_started",
-                                      vmSchedule
-                                          .shedulecardResponse.data![i].id!,
-                                      ScheduleStatusType.jobStarted,
-                                      fromJobStarted: true,
-                                      toCameraGalleryScreen: true));
+                              context.router.push(ScheduleImageRoute(
+                                  fromJobStarted: true, id: id));
                             },
                             borderRadius: 0,
                             fontSize: 10.w,
