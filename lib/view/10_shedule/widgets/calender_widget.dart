@@ -2,6 +2,7 @@ import 'package:enviro_mobile_application/utilis/Appthemes.dart';
 import 'package:enviro_mobile_application/view_model/11_shedule/shedule_page_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/intl.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 Widget calenderWidget() {
@@ -17,6 +18,9 @@ Widget calenderWidget() {
       },
       onDaySelected: (selectedDay, focusedDay) {
         vmSchedule.dateSelectionFn(selectedDay, focusedDay);
+        vmSchedule.shedulecardviewmodelfunctionByDate(
+          fromDate: DateFormat('yyyy-MM-dd').format(selectedDay),
+        );
       },
       calendarStyle: CalendarStyle(
           cellMargin: const EdgeInsets.all(8.0),

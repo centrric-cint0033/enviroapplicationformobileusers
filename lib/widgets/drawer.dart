@@ -38,15 +38,18 @@ Drawer cmnDrawer(BuildContext context) {
                           : Container(),
                     );
                   }),
-                  Observer(builder: (_) {
-                    return Padding(
-                      padding: const EdgeInsets.only(left: 23.0),
-                      child: Text(
-                        vmProfile.profilepageResponse.data?.username ?? '',
-                        style: const TextStyle(overflow: TextOverflow.clip),
-                      ),
-                    );
-                  }),
+                  Expanded(
+                    child: Observer(builder: (_) {
+                      return Padding(
+                        padding: const EdgeInsets.only(left: 23.0),
+                        child: Text(
+                          vmProfile.profilepageResponse.data?.username ?? '',
+                          style:
+                              const TextStyle(overflow: TextOverflow.ellipsis),
+                        ),
+                      );
+                    }),
+                  ),
                 ],
               ),
               SizedBox(

@@ -98,7 +98,7 @@ class BeforeImagesList extends StatelessWidget {
                               index, images[index].id!);
                         } else if (!vmSchedule.selectedStatesBeforePic
                             .any((isSelected) => isSelected)) {
-                            await vmSchedule.launchURL(imageUrl);
+                          await vmSchedule.launchURL(imageUrl);
                         } else {
                           vmSchedule.toggleSelectionBeforePic(
                               index, images[index].id!);

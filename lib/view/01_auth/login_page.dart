@@ -121,6 +121,7 @@ class LoginPage extends StatelessWidget {
 
       if (statusCode != null) {
         vmProfile.profileviewmodelfunction();
+        vmProfile.getPermissionStatus();
         router.replaceNamed(RouteNames.rHomePage);
       }
     }

@@ -190,6 +190,7 @@ class ServiceList with _$ServiceList {
   factory ServiceList.fromJson(Map<String, dynamic> json) =>
       _$ServiceListFromJson(json);
 }
+
 @freezed
 class WeighBridge with _$WeighBridge {
   const factory WeighBridge({

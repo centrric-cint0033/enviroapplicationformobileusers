@@ -60,8 +60,7 @@ abstract class IteamService {
       {required String date});
   Future<Either<Map<MainFailure, dynamic>, EditTimeSheetResModel>>
       editTimeSheetApi(
-          {required String date,
-          required WeeklyReport weeklyReport});
+          {required String date, required WeeklyReport weeklyReport});
 }
 
 @LazySingleton(as: IteamService)
@@ -429,8 +428,7 @@ class TeamService implements IteamService {
   @override
   Future<Either<Map<MainFailure, dynamic>, EditTimeSheetResModel>>
       editTimeSheetApi(
-          {required String date,
-          required WeeklyReport weeklyReport}) async {
+          {required String date, required WeeklyReport weeklyReport}) async {
     String weeklyReportJson = jsonEncode(weeklyReport.toJson());
     var response = await getIt<HttpService>().multipartRequest(
       data: {

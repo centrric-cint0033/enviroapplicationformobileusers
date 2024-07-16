@@ -12,6 +12,7 @@ import 'package:enviro_mobile_application/widgets/ww_response_handler.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 @RoutePage()
@@ -23,7 +24,7 @@ class ScheduleMainPage extends StatelessWidget {
     return Scaffold(
       drawer: cmnDrawer(context),
       appBar: AppBar(
-        title: cmnTitleWidget('Sheduling'),
+        title: cmnTitleWidget('Scheduling'),
         actions: [notificationButton(context)],
       ),
       body: Padding(
@@ -34,6 +35,10 @@ class ScheduleMainPage extends StatelessWidget {
             children: [
               sized0hx15,
               cmRowText("Today's Schedule", "Calender", () {
+                vmSchedule.selectedDay = null;
+                vmSchedule.shedulecardviewmodelfunctionByDate(
+                  fromDate: DateFormat('yyyy-MM-dd').format(DateTime.now()),
+                );
                 context.router.pushNamed(RouteNames.rcalenderpage);
               }, Colors.black, FontWeight.bold),
               Observer(
@@ -59,8 +64,7 @@ class ScheduleMainPage extends StatelessWidget {
                       data: vmSchedule.shedulecardResponse,
                       isEmpty:
                           vmSchedule.shedulecardResponse.data?.isEmpty ?? true,
-                      onTap: () =>
-                          vmSchedule.shedulecardviewmodelfunction(),
+                      onTap: () => vmSchedule.shedulecardviewmodelfunction(),
                       child: const ScheduleList());
                 },
               ),

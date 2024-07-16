@@ -89,6 +89,22 @@ mixin _$ScheduleViewModel on ScheduleViewModelBase, Store {
     });
   }
 
+  late final _$driversIndexByDateAtom =
+      Atom(name: 'ScheduleViewModelBase.driversIndexByDate', context: context);
+
+  @override
+  int get driversIndexByDate {
+    _$driversIndexByDateAtom.reportRead();
+    return super.driversIndexByDate;
+  }
+
+  @override
+  set driversIndexByDate(int value) {
+    _$driversIndexByDateAtom.reportWrite(value, super.driversIndexByDate, () {
+      super.driversIndexByDate = value;
+    });
+  }
+
   late final _$pickedFilesAtom =
       Atom(name: 'ScheduleViewModelBase.pickedFiles', context: context);
 
@@ -1010,6 +1026,25 @@ mixin _$ScheduleViewModel on ScheduleViewModelBase, Store {
     });
   }
 
+  late final _$shedulecardByDateResponseAtom = Atom(
+      name: 'ScheduleViewModelBase.shedulecardByDateResponse',
+      context: context);
+
+  @override
+  ApiResponse<List<ScheduleCardByDateResModel>> get shedulecardByDateResponse {
+    _$shedulecardByDateResponseAtom.reportRead();
+    return super.shedulecardByDateResponse;
+  }
+
+  @override
+  set shedulecardByDateResponse(
+      ApiResponse<List<ScheduleCardByDateResModel>> value) {
+    _$shedulecardByDateResponseAtom
+        .reportWrite(value, super.shedulecardByDateResponse, () {
+      super.shedulecardByDateResponse = value;
+    });
+  }
+
   late final _$signatureResponseAtom =
       Atom(name: 'ScheduleViewModelBase.signatureResponse', context: context);
 
@@ -1879,6 +1914,16 @@ mixin _$ScheduleViewModel on ScheduleViewModelBase, Store {
         .run(() => super.shedulecardviewmodelfunction());
   }
 
+  late final _$shedulecardviewmodelfunctionByDateAsyncAction = AsyncAction(
+      'ScheduleViewModelBase.shedulecardviewmodelfunctionByDate',
+      context: context);
+
+  @override
+  Future<void> shedulecardviewmodelfunctionByDate({String? fromDate}) {
+    return _$shedulecardviewmodelfunctionByDateAsyncAction.run(
+        () => super.shedulecardviewmodelfunctionByDate(fromDate: fromDate));
+  }
+
   late final _$shedulesignatureviewmodelfunctionAsyncAction = AsyncAction(
       'ScheduleViewModelBase.shedulesignatureviewmodelfunction',
       context: context);
@@ -2438,6 +2483,7 @@ textColor: ${textColor},
 containerHeight: ${containerHeight},
 showSubmitButton: ${showSubmitButton},
 driversIndex: ${driversIndex},
+driversIndexByDate: ${driversIndexByDate},
 pickedFiles: ${pickedFiles},
 focusedDay: ${focusedDay},
 selectedDay: ${selectedDay},
@@ -2493,6 +2539,7 @@ isSelectionModeVideo: ${isSelectionModeVideo},
 selectedStatesVideo: ${selectedStatesVideo},
 jobcardResponse: ${jobcardResponse},
 shedulecardResponse: ${shedulecardResponse},
+shedulecardByDateResponse: ${shedulecardByDateResponse},
 signatureResponse: ${signatureResponse},
 commentResponse: ${commentResponse},
 deleteCommentResponse: ${deleteCommentResponse},

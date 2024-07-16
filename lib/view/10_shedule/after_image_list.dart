@@ -137,6 +137,4 @@ class AfterImagesList extends StatelessWidget {
       ],
     );
   }
-
-
 }

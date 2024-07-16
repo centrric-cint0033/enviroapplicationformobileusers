@@ -44,27 +44,29 @@ class TodaysScheduleList extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Container(
-                      height: 18.h,
-                      width: 78.h,
-                      decoration: BoxDecoration(
-                        color: Appthemes.cPrimary,
-                        borderRadius: BorderRadius.only(
-                          bottomLeft: Radius.circular(4.w),
-                          bottomRight: Radius.circular(4.w),
-                        ),
-                      ),
-                      child: Center(
-                        child: Text(
-                          "Assigned Primary",
-                          style: TextStyle(
-                            fontSize: 8.h,
-                            color: Colors.white,
-                            fontWeight: FontWeight.w400,
-                          ),
-                        ),
-                      ),
-                    ),
+                    res?.primaryVehicleDriver == true
+                        ? Container(
+                            height: 18.h,
+                            width: 78.h,
+                            decoration: BoxDecoration(
+                              color: Appthemes.cPrimary,
+                              borderRadius: BorderRadius.only(
+                                bottomLeft: Radius.circular(4.w),
+                                bottomRight: Radius.circular(4.w),
+                              ),
+                            ),
+                            child: Center(
+                              child: Text(
+                                "Assigned Primary",
+                                style: TextStyle(
+                                  fontSize: 8.h,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
+                            ),
+                          )
+                        : sized0hx10,
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
@@ -103,111 +105,156 @@ class TodaysScheduleList extends StatelessWidget {
                       padding: EdgeInsets.only(left: 12.w),
                       child: InkWell(
                         onTap: () {
-                          showConfirmationAlert(
-                              context: context,
-                              content: (res?.drivers?[vmSchedule.driversIndex]
-                                              .preinspectioncheck ==
-                                          false &&
-                                      res?.drivers?[vmSchedule.driversIndex]
-                                              .preinspectionRequired ==
-                                          true &&
-                                      res?.completed == null)
-                                  ? "Update your Vehicle's Pre-inspection Check"
-                                  : res?.departEnviroFacility == null
-                                      ? "Have you Departed the Enviro Facility"
-                                      : res!.beforePics!.isEmpty
-                                          ? "Are you ready to add Before Job Images"
-                                          : res.startJob == null
-                                              ? "Have you Started the Job"
-                                              : res.finishJob == null
-                                                  ? "Have you Finished the Job"
-                                                  : res.afterPics!.isEmpty
-                                                      ? "Are you ready to add After Job Images"
-                                                      : "",
-                              onSubmit: () {
-                                (res?.drivers?[vmSchedule.driversIndex].preinspectioncheck == false &&
+                          if (res?.primaryVehicleDriver == true &&
+                              res?.arriveEnviroFacility == null) {
+                            showConfirmationAlert(
+                                context: context,
+                                content: (res?.drivers?[vmSchedule.driversIndex]
+                                                .preinspectioncheck ==
+                                            false &&
                                         res?.drivers?[vmSchedule.driversIndex]
                                                 .preinspectionRequired ==
                                             true &&
                                         res?.completed == null)
-                                    ? context.router.push(UpdateVehiclepreinspectionRoute(
-                                        index: i,
-                                        driversIndex: vmSchedule.driversIndex))
+                                    ? "Update your Vehicle's Pre-inspection Check"
                                     : res?.departEnviroFacility == null
-                                        ? dateTimePickerWithouIcon(
-                                            context,
-                                            DateTime.now(),
-                                            (date) => vmSchedule.enviroDatePickerFn(
-                                                context,
-                                                vmSchedule.selectedDepartedEnviroDate ??
-                                                    DateTime.now(),
-                                                date,
-                                                "departed_enviro_facility",
-                                                vmSchedule.shedulecardResponse
-                                                    .data![i].id!,
-                                                ScheduleStatusType
-                                                    .departedEnviroFacility))
-                                        : res!.beforePics!.isEmpty
-                                            ? context.router.push(
-                                                ScheduleImageRoute(
-                                                    fromJobStarted: true,
-                                                    id: vmSchedule
-                                                        .shedulecardResponse
-                                                        .data![i]
-                                                        .id!))
-                                            : res.startJob == null
-                                                ? dateTimePickerWithouIcon(context, DateTime.now(), (date) => vmSchedule.enviroDatePickerFn(context, vmSchedule.selectedStartingJobDate ?? DateTime.now(), date, "job_started", vmSchedule.shedulecardResponse.data![i].id!, ScheduleStatusType.jobStarted, fromJobStarted: true))
-                                                : res.finishJob == null
-                                                    ? dateTimePickerWithouIcon(
-                                                        context,
-                                                        DateTime.now(),
-                                                        (date) => vmSchedule.enviroDatePickerFn(
-                                                              context,
-                                                              vmSchedule
-                                                                      .selectedFinishedJobDate ??
-                                                                  DateTime
-                                                                      .now(),
-                                                              date,
-                                                              "job_finished",
-                                                              vmSchedule
-                                                                  .shedulecardResponse
-                                                                  .data![i]
-                                                                  .id!,
-                                                              ScheduleStatusType
-                                                                  .finishedJob,
-                                                            ))
-                                                    : res.afterPics!.isEmpty
-                                                        ? context.router.push(ScheduleImageRoute(id: vmSchedule.shedulecardResponse.data![i].id!))
-                                                        : "";
-                              },
-                              onSubmit2: () {
-                                vmSchedule.clearFn();
-                                context.router.push(SheduledetailRoute(
-                                    id: res?.id ?? 0,
-                                    i: i,
-                                    driversIndex: vmSchedule.driversIndex));
-                              },
-                              submitText:
-                                  (res?.drivers?[vmSchedule.driversIndex]
-                                                  .preinspectioncheck ==
-                                              false &&
+                                        ? "Have you Departed the Enviro Facility"
+                                        : res?.startJob == null
+                                            ? "Have you Started the Job"
+                                            : res?.finishJob == null
+                                                ? "Have you Finished the Job"
+                                                : res?.completed == null
+                                                    ? "Have you Completed the Job"
+                                                    : res?.arriveAtWasteDepot ==
+                                                            null
+                                                        ? "Have you Arrived at Waste Depot"
+                                                        : res?.departWasteDepot ==
+                                                                null
+                                                            ? "Have you Departed Waste Depot"
+                                                            : res?.arriveEnviroFacility ==
+                                                                    null
+                                                                ? "Have you Arrived at Enviro Facility"
+                                                                : "",
+                                onSubmit: () {
+                                  (res?.drivers?[vmSchedule.driversIndex].preinspectioncheck == false &&
                                           res?.drivers?[vmSchedule.driversIndex]
                                                   .preinspectionRequired ==
                                               true &&
                                           res?.completed == null)
-                                      ? "YES ADD NOW"
+                                      ? context.router.push(
+                                          UpdateVehiclepreinspectionRoute(
+                                              index: i,
+                                              driversIndex:
+                                                  vmSchedule.driversIndex))
                                       : res?.departEnviroFacility == null
-                                          ? "YES,UPDATE TIME"
-                                          : res!.beforePics!.isEmpty
-                                              ? "YES,ADD IMAGES"
-                                              : res.startJob == null
-                                                  ? "YES,UPDATE TIME"
-                                                  : res.finishJob == null
-                                                      ? "YES,UPDATE TIME"
-                                                      : res.afterPics!.isEmpty
-                                                          ? "YES,ADD IMAGES"
-                                                          : "",
-                              submitText2: "SKIP FOR NOW");
+                                          ? dateTimePickerWithouIcon(
+                                              context,
+                                              DateTime.now(),
+                                              (date) => vmSchedule.enviroDatePickerFn(
+                                                  context,
+                                                  vmSchedule.selectedDepartedEnviroDate ??
+                                                      DateTime.now(),
+                                                  date,
+                                                  "departed_enviro_facility",
+                                                  vmSchedule.shedulecardResponse
+                                                      .data![i].id!,
+                                                  ScheduleStatusType
+                                                      .departedEnviroFacility))
+                                          : res?.startJob == null
+                                              ? context.router.push(ScheduleImageRoute(
+                                                  fromJobStarted: true,
+                                                  id: vmSchedule.shedulecardResponse.data![i].id!))
+                                              : res?.finishJob == null
+                                                  ? context.router.push(ScheduleImageRoute(fromJobStarted: false, id: vmSchedule.shedulecardResponse.data![i].id!))
+                                                  : res?.completed == null
+                                                      ? context.router.push(SheduleSignatureRoute(id: vmSchedule.shedulecardResponse.data![i].id!, i: i))
+                                                      : res?.arriveAtWasteDepot == null
+                                                          ? dateTimePickerWithouIcon(
+                                                              context,
+                                                              DateTime.now(),
+                                                              (date) => vmSchedule.enviroDatePickerFn(
+                                                                    context,
+                                                                    vmSchedule
+                                                                            .selectedArrivedEnviroDate ??
+                                                                        DateTime
+                                                                            .now(),
+                                                                    date,
+                                                                    "arrived_at_waste_depot",
+                                                                    vmSchedule
+                                                                        .shedulecardResponse
+                                                                        .data![
+                                                                            i]
+                                                                        .id!,
+                                                                    ScheduleStatusType
+                                                                        .arrivedAtDepot,
+                                                                  ))
+                                                          : res?.departWasteDepot == null
+                                                              ? dateTimePickerWithouIcon(
+                                                                  context,
+                                                                  DateTime.now(),
+                                                                  (date) => vmSchedule.enviroDatePickerFn(
+                                                                        context,
+                                                                        vmSchedule.selectedDepartedWasteDepotDate ??
+                                                                            DateTime.now(),
+                                                                        date,
+                                                                        "departed_waste_depot",
+                                                                        vmSchedule
+                                                                            .shedulecardResponse
+                                                                            .data![i]
+                                                                            .id!,
+                                                                        ScheduleStatusType
+                                                                            .departedWasteDepot,
+                                                                      ))
+                                                              : res?.arriveEnviroFacility == null
+                                                                  ? dateTimePickerWithouIcon(
+                                                                      context,
+                                                                      DateTime.now(),
+                                                                      (date) => vmSchedule.enviroDatePickerFn(
+                                                                            context,
+                                                                            vmSchedule.selectedArrivedEnviroDate ??
+                                                                                DateTime.now(),
+                                                                            date,
+                                                                            "arrived_at_enviro_facility",
+                                                                            vmSchedule.shedulecardResponse.data![i].id!,
+                                                                            ScheduleStatusType.arrivedEnviroFacility,
+                                                                          ))
+                                                                  : "";
+                                },
+                                onSubmit2: () {
+                                  vmSchedule.clearFn();
+                                  context.router.push(SheduledetailRoute(
+                                      id: res?.id ?? 0,
+                                      i: i,
+                                      driversIndex: vmSchedule.driversIndex));
+                                },
+                                submitText: (res
+                                                ?.drivers?[
+                                                    vmSchedule.driversIndex]
+                                                .preinspectioncheck ==
+                                            false &&
+                                        res?.drivers?[vmSchedule.driversIndex]
+                                                .preinspectionRequired ==
+                                            true &&
+                                        res?.completed == null)
+                                    ? "YES ADD NOW"
+                                    : res?.departEnviroFacility == null
+                                        ? "YES,UPDATE TIME"
+                                        : res?.startJob == null
+                                            ? "YES,UPDATE TIME"
+                                            : res?.finishJob == null
+                                                ? "YES,UPDATE TIME"
+                                                : res?.completed == null
+                                                    ? "YES,UPDATE TIME"
+                                                    : res?.arriveAtWasteDepot ==
+                                                            null
+                                                        ? "YES,UPDATE TIME"
+                                                        : res?.departWasteDepot == null
+                                                            ? "YES,UPDATE TIME"
+                                                            : res?.arriveEnviroFacility == null
+                                                                ? "YES,UPDATE TIME"
+                                                                : "",
+                                submitText2: "SKIP FOR NOW");
+                          }
                         },
                         child: Row(
                           children: [

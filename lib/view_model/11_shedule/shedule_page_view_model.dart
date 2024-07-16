@@ -4,6 +4,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:enviro_mobile_application/api_response/api_response.dart';
 import 'package:enviro_mobile_application/model/03_vehicle/vehicle_model/vehicle_model.dart';
 import 'package:enviro_mobile_application/model/07_Jobcard/job_card_model.dart';
+import 'package:enviro_mobile_application/model/12_shedulecard/schedule_card_by_date_res_model/schedule_card_by_date_res_model.dart';
 import 'package:enviro_mobile_application/model/12_shedulecard/schedule_image_res_model/schedule_image_res_model.dart';
 import 'package:enviro_mobile_application/model/12_shedulecard/schedule_status_res_model/schedule_status_res_model.dart';
 import 'package:enviro_mobile_application/model/12_shedulecard/shedule_card_comnt_resp_model.dart';
@@ -77,6 +78,8 @@ abstract class ScheduleViewModelBase with Store {
   bool showSubmitButton = false;
   @observable
   int driversIndex = 0;
+    @observable
+  int driversIndexByDate = 0;
   @observable
   List<PlatformFile> pickedFiles = [];
   @observable
@@ -526,6 +529,34 @@ abstract class ScheduleViewModelBase with Store {
   }
 
   @observable
+  ApiResponse<List<ScheduleCardByDateResModel>> shedulecardByDateResponse =
+      ApiResponse<List<ScheduleCardByDateResModel>>();
+
+  @action
+  Future<void> shedulecardviewmodelfunctionByDate({String? fromDate}) async {
+    shedulecardByDateResponse =
+        shedulecardByDateResponse.copyWith(error: null, loading: true);
+
+    final result = await scheduleService.shedulecardservicefunctionByDate(
+        fromDate: fromDate);
+    return result.fold(
+      (l) {
+        shedulecardByDateResponse = shedulecardByDateResponse.copyWith(
+          error: l,
+          loading: false,
+        );
+      },
+      (r) {
+        shedulecardByDateResponse = shedulecardByDateResponse.copyWith(
+          data: r,
+          error: null,
+          loading: false,
+        );
+      },
+    );
+  }
+
+  @observable
   ApiResponse<SheduleSignatureModel> signatureResponse =
       ApiResponse<SheduleSignatureModel>();
 
@@ -832,6 +863,7 @@ abstract class ScheduleViewModelBase with Store {
       },
     );
   }
+
   @observable
   int? vdoId;
   @observable
@@ -865,7 +897,6 @@ abstract class ScheduleViewModelBase with Store {
         );
         showToast(context, msg: "Successfully deleted", color: Colors.green);
         shedulecardviewmodelfunction();
-        context.router.pop();
       },
     );
   }

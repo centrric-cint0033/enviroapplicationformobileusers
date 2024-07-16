@@ -41,6 +41,23 @@ mixin _$ProfileViewModel on ProfileViewModelBase, Store {
     });
   }
 
+  late final _$permissionStatusResponseAtom = Atom(
+      name: 'ProfileViewModelBase.permissionStatusResponse', context: context);
+
+  @override
+  ApiResponse<PersmissionStatusResModel> get permissionStatusResponse {
+    _$permissionStatusResponseAtom.reportRead();
+    return super.permissionStatusResponse;
+  }
+
+  @override
+  set permissionStatusResponse(ApiResponse<PersmissionStatusResModel> value) {
+    _$permissionStatusResponseAtom
+        .reportWrite(value, super.permissionStatusResponse, () {
+      super.permissionStatusResponse = value;
+    });
+  }
+
   late final _$profileviewmodelfunctionAsyncAction = AsyncAction(
       'ProfileViewModelBase.profileviewmodelfunction',
       context: context);
@@ -61,11 +78,21 @@ mixin _$ProfileViewModel on ProfileViewModelBase, Store {
         .run(() => super.profileeditviewmodel(username, password));
   }
 
+  late final _$getPermissionStatusAsyncAction =
+      AsyncAction('ProfileViewModelBase.getPermissionStatus', context: context);
+
+  @override
+  Future<void> getPermissionStatus() {
+    return _$getPermissionStatusAsyncAction
+        .run(() => super.getPermissionStatus());
+  }
+
   @override
   String toString() {
     return '''
 profilepageResponse: ${profilepageResponse},
-profileeditResponse: ${profileeditResponse}
+profileeditResponse: ${profileeditResponse},
+permissionStatusResponse: ${permissionStatusResponse}
     ''';
   }
 }

@@ -3,6 +3,7 @@ import 'package:dartz/dartz.dart';
 import 'package:enviro_mobile_application/constant/base_url.dart';
 import 'package:enviro_mobile_application/model/03_vehicle/vehicle_model/vehicle_model.dart';
 import 'package:enviro_mobile_application/model/07_Jobcard/job_card_model.dart';
+import 'package:enviro_mobile_application/model/12_shedulecard/schedule_card_by_date_res_model/schedule_card_by_date_res_model.dart';
 import 'package:enviro_mobile_application/model/12_shedulecard/schedule_image_res_model/schedule_image_res_model.dart';
 import 'package:enviro_mobile_application/model/12_shedulecard/schedule_status_res_model/schedule_status_res_model.dart';
 import 'package:enviro_mobile_application/model/12_shedulecard/shedule_card_comnt_resp_model.dart';
@@ -35,7 +36,8 @@ abstract class IScheduleService {
       {required int quoteId});
   Future<Either<MainFailure, List<SheduleCardRespModel>>>
       shedulecardservicefunction();
-
+  Future<Either<MainFailure, List<ScheduleCardByDateResModel>>>
+      shedulecardservicefunctionByDate({String? fromDate});
   Future<Either<Map<MainFailure, dynamic>, SheduleSignatureModel>>
       shedulesignatureserviceapi({
     required int id,
@@ -351,8 +353,7 @@ class SalesService implements IScheduleService {
 
   @override
   Future<Either<Map<MainFailure, dynamic>, ScheduleImageResModel>>
-      deleteVideosScheduleAPi(
-          {required int id, required int jobVdoId}) async {
+      deleteVideosScheduleAPi({required int id, required int jobVdoId}) async {
     var response = await getIt<HttpService>().multipartRequest(
       apiUrl: ApiEndPoints.endpointsheduledeletevideo,
       data: {"schedule_id": id, "job_video_id": jobVdoId},
@@ -365,6 +366,30 @@ class SalesService implements IScheduleService {
         ScheduleImageResModel deleteVideo =
             ScheduleImageResModel.fromJson(data);
         return Right(deleteVideo);
+      },
+    );
+  }
+
+  @override
+  Future<Either<MainFailure, List<ScheduleCardByDateResModel>>>
+      shedulecardservicefunctionByDate({String? fromDate}) async {
+    var response = await getIt<HttpService>().request(
+        authenticated: true,
+        method: HttpMethod.get,
+        apiUrl:
+            "${ApiEndPoints.endpointshedulecardByDate}?&from=$fromDate&&to=$fromDate");
+
+    return response.fold(
+      (l) {
+        (l.values.first);
+        return Left(l.keys.first);
+      },
+      (res) async {
+        var data = jsonDecode(res.body) as List;
+        List<ScheduleCardByDateResModel> shedulecardlist =
+            List<ScheduleCardByDateResModel>.from(
+                data.map((e) => ScheduleCardByDateResModel.fromJson(e)));
+        return Right(shedulecardlist);
       },
     );
   }

@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:dartz/dartz.dart';
 
 import 'package:enviro_mobile_application/model/06_profile/profile_model/profile_res_model.dart';
+import 'package:enviro_mobile_application/model/persmission_status_res_model/persmission_status_res_model.dart';
 import 'package:enviro_mobile_application/utilis/api_endpoints/api_endpoints.dart';
 import 'package:enviro_mobile_application/utilis/httpservice.dart';
 import 'package:enviro_mobile_application/utilis/injection.dart';
@@ -14,6 +15,7 @@ abstract class IprofileService {
   Future<Either<MainFailure, ProfileRespModel>> profileservicefunction();
   Future<Either<Map<MainFailure, dynamic>, ProfileRespModel>> profileEditApi(
       {required Map<String, String> data});
+  Future<Either<MainFailure, PersmissionStatusResModel>> getPermissionStatus();
 }
 
 @LazySingleton(as: IprofileService)
@@ -50,6 +52,28 @@ class ProfileService implements IprofileService {
         ProfileRespModel profileedit =
             data.map((e) => ProfileRespModel.fromJson(e));
         return Right(profileedit);
+      },
+    );
+  }
+
+  @override
+  Future<Either<MainFailure, PersmissionStatusResModel>>
+      getPermissionStatus() async {
+    var response = await getIt<HttpService>().request(
+        authenticated: true,
+        method: HttpMethod.get,
+        apiUrl: ApiEndPoints.permissionStatusEndpoint);
+
+    return response.fold(
+      (l) {
+        (l.values.first);
+        return Left(l.keys.first);
+      },
+      (res) async {
+        var data = jsonDecode(res.body);
+        PersmissionStatusResModel permissionStatus =
+            PersmissionStatusResModel.fromJson(data);
+        return Right(permissionStatus);
       },
     );
   }

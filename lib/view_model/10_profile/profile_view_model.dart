@@ -1,5 +1,6 @@
 import 'package:enviro_mobile_application/api_response/api_response.dart';
 import 'package:enviro_mobile_application/model/06_profile/profile_model/profile_res_model.dart';
+import 'package:enviro_mobile_application/model/persmission_status_res_model/persmission_status_res_model.dart';
 import 'package:enviro_mobile_application/service/06_profile/profile_service.dart';
 import 'package:enviro_mobile_application/utilis/api_endpoints/customprint.dart';
 import 'package:enviro_mobile_application/utilis/injection.dart';
@@ -27,9 +28,6 @@ abstract class ProfileViewModelBase with Store {
 
   @action
   Future<void> profileviewmodelfunction() async {
-    print('aaaaa$profilepageResponse');
-    print('aaaaa$profilepageResponse');
-
     profilepageResponse =
         profilepageResponse.copyWith(error: null, loading: true);
 
@@ -78,5 +76,32 @@ abstract class ProfileViewModelBase with Store {
     } finally {
       profileeditResponse = profileeditResponse.copyWith(loading: false);
     }
+  }
+
+  @observable
+  ApiResponse<PersmissionStatusResModel> permissionStatusResponse =
+      ApiResponse<PersmissionStatusResModel>();
+
+  @action
+  Future<void> getPermissionStatus() async {
+    permissionStatusResponse =
+        permissionStatusResponse.copyWith(error: null, loading: true);
+
+    final result = await profileService.getPermissionStatus();
+    return result.fold(
+      (l) {
+        permissionStatusResponse = permissionStatusResponse.copyWith(
+          error: l,
+          loading: false,
+        );
+      },
+      (r) {
+        permissionStatusResponse = permissionStatusResponse.copyWith(
+          data: r,
+          error: null,
+          loading: false,
+        );
+      },
+    );
   }
 }

@@ -53,288 +53,291 @@ class SheduledetailPage extends StatelessWidget {
                 : SingleChildScrollView(
                     padding: screenWidth,
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        sized0hx10,
-                        Align(
-                          alignment: Alignment.topRight,
-                          child: InkWell(
-                            onTap: () async {
-                              await vmSchedule.jobcardviewmodelfunction(
-                                  quoteId: res.data?[i].quoteId ?? 0);
-                              context.router.pushNamed(RouteNames.rjobcardpage);
-                            },
-                            child: Container(
-                              height: 26.h,
-                              width: 68.w,
-                              decoration: BoxDecoration(
-                                  shape: BoxShape.rectangle,
-                                  border:
-                                      Border.all(color: Colors.grey.shade400),
-                                  borderRadius: BorderRadius.circular(15.w)),
-                              child: Center(
-                                child: vmSchedule.jobcardResponse.loading
-                                    ? SizedBox(
-                                        height: 12.w,
-                                        width: 12.w,
-                                        child: const CircularProgressIndicator(
-                                          strokeWidth: 2,
-                                        ))
-                                    : Text(
-                                        "Job Card",
-                                        style: TextStyle(
-                                            color: Colors.grey.shade600,
-                                            fontSize: 10.w,
-                                            fontWeight: FontWeight.normal),
-                                      ),
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          sized0hx10,
+                          Align(
+                            alignment: Alignment.topRight,
+                            child: InkWell(
+                              onTap: () async {
+                                await vmSchedule.jobcardviewmodelfunction(
+                                    quoteId: res.data?[i].quoteId ?? 0);
+                                context.router
+                                    .pushNamed(RouteNames.rjobcardpage);
+                              },
+                              child: Container(
+                                height: 26.h,
+                                width: 68.w,
+                                decoration: BoxDecoration(
+                                    shape: BoxShape.rectangle,
+                                    border:
+                                        Border.all(color: Colors.grey.shade400),
+                                    borderRadius: BorderRadius.circular(15.w)),
+                                child: Center(
+                                  child: vmSchedule.jobcardResponse.loading
+                                      ? SizedBox(
+                                          height: 12.w,
+                                          width: 12.w,
+                                          child:
+                                              const CircularProgressIndicator(
+                                            strokeWidth: 2,
+                                          ))
+                                      : Text(
+                                          "Job Card",
+                                          style: TextStyle(
+                                              color: Colors.grey.shade600,
+                                              fontSize: 10.w,
+                                              fontWeight: FontWeight.normal),
+                                        ),
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                        Theme(
-                          data: Theme.of(context).copyWith(
-                            dividerColor: Colors.transparent,
+                          Theme(
+                            data: Theme.of(context).copyWith(
+                              dividerColor: Colors.transparent,
+                            ),
+                            child: ExpansionTile(
+                                initiallyExpanded: true,
+                                title: Text(
+                                  'Schedule Details',
+                                  style: TextStyle(
+                                    fontSize: 12.w,
+                                    fontWeight: FontWeight.bold,
+                                    color: Appthemes.cPrimary,
+                                  ),
+                                ),
+                                tilePadding:
+                                    EdgeInsets.only(left: 2.w, right: 2.w),
+                                childrenPadding:
+                                    EdgeInsets.only(left: 3.w, right: 2.w),
+                                children: [
+                                  sized0hx10,
+                                  expandedRowShowText(
+                                    "Client Name",
+                                    res.data?[i].client?.clientName ?? '',
+                                  ),
+                                  sized0hx10,
+                                  expandedRowShowText(
+                                    "Client Type",
+                                    res.data?[i].client?.clientType ?? '',
+                                  ),
+                                  sized0hx10,
+                                  expandedRowShowText(
+                                    "Client email",
+                                    res.data?[i].client?.clientEmail ?? '',
+                                  ),
+                                  sized0hx10,
+                                  expandedRowShowText(
+                                    "Status",
+                                    res.data?[i].status ?? '',
+                                  ),
+                                  sized0hx10,
+                                  expandedRowShowText(
+                                    "Amount",
+                                    res.data?[i].amount ?? '',
+                                  ),
+                                  sized0hx10,
+                                  expandedRowShowText("CreatedBy",
+                                      res.data?[i].createdBy ?? ''),
+                                  sized0hx10,
+                                  expandedRowShowText(
+                                    "Waste Type",
+                                    res.data?[i].wasteTypeStr ?? '',
+                                  ),
+                                  sized0hx10,
+                                  expandedRowShowText(
+                                    "Frequency",
+                                    res.data?[i].frequency ?? '',
+                                  ),
+                                ]),
                           ),
-                          child: ExpansionTile(
-                              initiallyExpanded: true,
-                              title: Text(
-                                'Schedule Details',
-                                style: TextStyle(
-                                  fontSize: 12.w,
-                                  fontWeight: FontWeight.bold,
-                                  color: Appthemes.cPrimary,
-                                ),
-                              ),
-                              tilePadding:
-                                  EdgeInsets.only(left: 2.w, right: 2.w),
-                              childrenPadding:
-                                  EdgeInsets.only(left: 3.w, right: 2.w),
-                              children: [
-                                sized0hx10,
-                                expandedRowShowText(
-                                  "Client Name",
-                                  res.data?[i].client?.clientName ?? '',
-                                ),
-                                sized0hx10,
-                                expandedRowShowText(
-                                  "Client Type",
-                                  res.data?[i].client?.clientType ?? '',
-                                ),
-                                sized0hx10,
-                                expandedRowShowText(
-                                  "Client email",
-                                  res.data?[i].client?.clientEmail ?? '',
-                                ),
-                                sized0hx10,
-                                expandedRowShowText(
-                                  "Status",
-                                  res.data?[i].status ?? '',
-                                ),
-                                sized0hx10,
-                                expandedRowShowText(
-                                  "Amount",
-                                  res.data?[i].amount ?? '',
-                                ),
-                                sized0hx10,
-                                expandedRowShowText(
-                                    "CreatedBy", res.data?[i].createdBy ?? ''),
-                                sized0hx10,
-                                expandedRowShowText(
-                                  "Waste Type",
-                                  res.data?[i].wasteTypeStr ?? '',
-                                ),
-                                sized0hx10,
-                                expandedRowShowText(
-                                  "Frequency",
-                                  res.data?[i].frequency ?? '',
-                                ),
-                              ]),
-                        ),
-                        sized0hx10,
-                        if (res.data![i].departEnviroFacility != null)
-                          Container(
-                            color: const Color.fromARGB(255, 240, 235, 235),
-                            child: Padding(
-                              padding: EdgeInsets.all(5.h),
-                              child: Card(
-                                shape: RoundedRectangleBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(3.w))),
-                                color: Colors.white,
+                          sized0hx10,
+                          if (res.data![i].primaryVehicleDriver == true) ...[
+                            if (res.data![i].departEnviroFacility != null)
+                              Container(
+                                color: const Color.fromARGB(255, 240, 235, 235),
                                 child: Padding(
                                   padding: EdgeInsets.all(5.h),
-                                  child: Column(children: [
-                                    Align(
-                                      alignment: Alignment.topLeft,
-                                      child: Text(
-                                        'Current Job Status',
-                                        style: TextStyle(
-                                          fontSize: 12.h,
-                                          fontWeight: FontWeight.bold,
-                                          color: Appthemes.cPrimary,
+                                  child: Card(
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(3.w))),
+                                    color: Colors.white,
+                                    child: Padding(
+                                      padding: EdgeInsets.all(5.h),
+                                      child: Column(children: [
+                                        Align(
+                                          alignment: Alignment.topLeft,
+                                          child: Text(
+                                            'Current Job Status',
+                                            style: TextStyle(
+                                              fontSize: 12.h,
+                                              fontWeight: FontWeight.bold,
+                                              color: Appthemes.cPrimary,
+                                            ),
+                                          ),
                                         ),
-                                      ),
-                                    ),
-                                    res.data?[i].departEnviroFacility != null
-                                        ? cmRowTextWithDatePicker(
-                                            context,
-                                            "Departed Enviro Facility",
-                                            DateFormat('dd-MM-yyyy hh:mm a')
-                                                .format(DateTime.parse(
-                                                    vmSchedule
-                                                        .shedulecardResponse
-                                                        .data?[i]
-                                                        .departEnviroFacility)),
-                                            i,
-                                            dateTimePicker(
+                                        res.data?[i].departEnviroFacility !=
+                                                null
+                                            ? cmRowTextWithDatePicker(
                                                 context,
-                                                DateTime.parse(vmSchedule
-                                                    .shedulecardResponse
-                                                    .data?[i]
-                                                    .departEnviroFacility),
-                                                (date) => vmSchedule.enviroDatePickerFn(
+                                                "Departed Enviro Facility",
+                                                DateFormat('dd-MM-yyyy hh:mm a')
+                                                    .format(DateTime.parse(
+                                                        vmSchedule
+                                                            .shedulecardResponse
+                                                            .data?[i]
+                                                            .departEnviroFacility)),
+                                                i,
+                                                dateTimePicker(
                                                     context,
-                                                    vmSchedule
-                                                            .selectedDepartedEnviroDate ??
-                                                        DateTime.now(),
-                                                    date,
-                                                    "departed_enviro_facility",
-                                                    vmSchedule
-                                                        .shedulecardResponse
-                                                        .data![i]
-                                                        .id!,
-                                                    ScheduleStatusType
-                                                        .departedEnviroFacility)))
-                                        : const SizedBox(),
-                                    res.data?[i].startJob != null
-                                        ? cmRowTextWithDatePicker(
-                                            context,
-                                            "Job Started",
-                                            DateFormat('dd-MM-yyyy hh:mm a')
-                                                .format(DateTime.parse(
-                                                    vmSchedule
-                                                            .shedulecardResponse
-                                                            .data?[i]
-                                                            .startJob ??
-                                                        "")),
-                                            i,
-                                            dateTimePicker(
-                                                context,
-                                                DateTime.parse(vmSchedule
+                                                    DateTime.parse(vmSchedule
                                                         .shedulecardResponse
                                                         .data?[i]
-                                                        .startJob ??
-                                                    ""),
-                                                (date) => vmSchedule
-                                                        .enviroDatePickerFn(
-                                                      context,
-                                                      vmSchedule
-                                                              .selectedStartingJobDate ??
-                                                          DateTime.now(),
-                                                      date,
-                                                      "job_started",
-                                                      res.data![i].id!,
-                                                      ScheduleStatusType
-                                                          .jobStarted,
-                                                      fromJobStarted: true,
-                                                    )))
-                                        : const SizedBox(),
-                                    res.data?[i].finishJob != null
-                                        ? cmRowTextWithDatePicker(
-                                            context,
-                                            "Job Finished",
-                                            DateFormat(
-                                                    'dd-MM-yyyy hh:mm a')
-                                                .format(DateTime.parse(
-                                              res.data?[i].finishJob ?? "",
-                                            )),
-                                            i,
-                                            dateTimePicker(
-                                                context,
-                                                DateTime
-                                                    .parse(vmSchedule
-                                                            .shedulecardResponse
-                                                            .data?[i]
-                                                            .finishJob ??
-                                                        ""),
-                                                (date) => vmSchedule
-                                                    .enviroDatePickerFn(
+                                                        .departEnviroFacility),
+                                                    (date) => vmSchedule.enviroDatePickerFn(
                                                         context,
                                                         vmSchedule
-                                                                .selectedFinishedJobDate ??
+                                                                .selectedDepartedEnviroDate ??
                                                             DateTime.now(),
                                                         date,
-                                                        "job_finished",
+                                                        "departed_enviro_facility",
                                                         vmSchedule
                                                             .shedulecardResponse
                                                             .data![i]
                                                             .id!,
                                                         ScheduleStatusType
-                                                            .finishedJob)))
-                                        : const SizedBox(),
-                                    if (res.data?[i].completed != null) ...[
-                                      cmRowTextWithDatePicker(
-                                          context,
-                                          "Job Completed",
-                                          DateFormat('dd-MM-yyyy hh:mm a')
-                                              .format(DateTime.parse(
-                                            res.data?[i].completed ?? "",
-                                          )),
-                                          i,
-                                          dateTimePicker(
+                                                            .departedEnviroFacility)))
+                                            : const SizedBox(),
+                                        res.data?[i].startJob != null
+                                            ? cmRowTextWithDatePicker(
+                                                context,
+                                                "Job Started",
+                                                DateFormat('dd-MM-yyyy hh:mm a')
+                                                    .format(DateTime.parse(
+                                                        vmSchedule
+                                                                .shedulecardResponse
+                                                                .data?[i]
+                                                                .startJob ??
+                                                            "")),
+                                                i,
+                                                dateTimePicker(
+                                                    context,
+                                                    DateTime.parse(vmSchedule
+                                                            .shedulecardResponse
+                                                            .data?[i]
+                                                            .startJob ??
+                                                        ""),
+                                                    (date) => vmSchedule
+                                                            .enviroDatePickerFn(
+                                                          context,
+                                                          vmSchedule
+                                                                  .selectedStartingJobDate ??
+                                                              DateTime.now(),
+                                                          date,
+                                                          "job_started",
+                                                          res.data![i].id!,
+                                                          ScheduleStatusType
+                                                              .jobStarted,
+                                                          fromJobStarted: true,
+                                                        )))
+                                            : const SizedBox(),
+                                        res.data?[i].finishJob != null
+                                            ? cmRowTextWithDatePicker(
+                                                context,
+                                                "Job Finished",
+                                                DateFormat('dd-MM-yyyy hh:mm a')
+                                                    .format(DateTime.parse(
+                                                  res.data?[i].finishJob ?? "",
+                                                )),
+                                                i,
+                                                dateTimePicker(
+                                                    context,
+                                                    DateTime.parse(vmSchedule
+                                                            .shedulecardResponse
+                                                            .data?[i]
+                                                            .finishJob ??
+                                                        ""),
+                                                    (date) => vmSchedule
+                                                        .enviroDatePickerFn(
+                                                            context,
+                                                            vmSchedule
+                                                                    .selectedFinishedJobDate ??
+                                                                DateTime.now(),
+                                                            date,
+                                                            "job_finished",
+                                                            vmSchedule
+                                                                .shedulecardResponse
+                                                                .data![i]
+                                                                .id!,
+                                                            ScheduleStatusType
+                                                                .finishedJob)))
+                                            : const SizedBox(),
+                                        if (res.data?[i].completed != null) ...[
+                                          cmRowTextWithDatePicker(
                                               context,
-                                              res.data?[i].completed != null
-                                                  ? DateTime.parse(vmSchedule
-                                                          .shedulecardResponse
-                                                          .data?[i]
-                                                          .completed ??
-                                                      "")
-                                                  : DateTime.now(),
-                                              (date) =>
-                                                  vmSchedule.enviroDatePickerFn(
-                                                      context,
-                                                      vmSchedule.selectedCompletedDate ??
-                                                          DateTime.now(),
-                                                      date,
-                                                      "completed",
-                                                      vmSchedule
-                                                          .shedulecardResponse
-                                                          .data![i]
-                                                          .id!,
-                                                      ScheduleStatusType
-                                                          .completed))),
-                                      cmRowTextWithDatePicker(
-                                          context,
-                                          "Arrived at Waste Depot",
-                                          vmSchedule
-                                                      .shedulecardResponse
-                                                      .data?[i]
-                                                      .arriveAtWasteDepot !=
-                                                  null
-                                              ? DateFormat('dd-MM-yyyy hh:mm a')
+                                              "Job Completed",
+                                              DateFormat('dd-MM-yyyy hh:mm a')
                                                   .format(DateTime.parse(
-                                                  vmSchedule
-                                                          .shedulecardResponse
-                                                          .data?[i]
-                                                          .arriveAtWasteDepot ??
-                                                      "",
-                                                ))
-                                              : "",
-                                          i,
-                                          dateTimePicker(
+                                                res.data?[i].completed ?? "",
+                                              )),
+                                              i,
+                                              dateTimePicker(
+                                                  context,
+                                                  res.data?[i].completed != null
+                                                      ? DateTime.parse(vmSchedule
+                                                              .shedulecardResponse
+                                                              .data?[i]
+                                                              .completed ??
+                                                          "")
+                                                      : DateTime.now(),
+                                                  (date) => vmSchedule
+                                                      .enviroDatePickerFn(
+                                                          context,
+                                                          vmSchedule
+                                                                  .selectedCompletedDate ??
+                                                              DateTime.now(),
+                                                          date,
+                                                          "completed",
+                                                          vmSchedule
+                                                              .shedulecardResponse
+                                                              .data![i]
+                                                              .id!,
+                                                          ScheduleStatusType
+                                                              .completed))),
+                                          cmRowTextWithDatePicker(
                                               context,
+                                              "Arrived at Waste Depot",
                                               vmSchedule
                                                           .shedulecardResponse
                                                           .data?[i]
                                                           .arriveAtWasteDepot !=
                                                       null
-                                                  ? DateTime.parse(vmSchedule
-                                                      .shedulecardResponse
-                                                      .data?[i]
-                                                      .arriveAtWasteDepot!)
-                                                  : DateTime.now(),
-                                              (date) =>
-                                                  vmSchedule.enviroDatePickerFn(
+                                                  ? DateFormat(
+                                                          'dd-MM-yyyy hh:mm a')
+                                                      .format(DateTime.parse(
+                                                      vmSchedule
+                                                              .shedulecardResponse
+                                                              .data?[i]
+                                                              .arriveAtWasteDepot ??
+                                                          "",
+                                                    ))
+                                                  : "",
+                                              i,
+                                              dateTimePicker(
+                                                  context,
+                                                  vmSchedule
+                                                              .shedulecardResponse
+                                                              .data?[i]
+                                                              .arriveAtWasteDepot !=
+                                                          null
+                                                      ? DateTime.parse(vmSchedule
+                                                          .shedulecardResponse
+                                                          .data?[i]
+                                                          .arriveAtWasteDepot!)
+                                                      : DateTime.now(),
+                                                  (date) => vmSchedule.enviroDatePickerFn(
                                                       context,
                                                       vmSchedule
                                                               .selectedArrivedWasteDepotDate ??
@@ -347,39 +350,39 @@ class SheduledetailPage extends StatelessWidget {
                                                           .id!,
                                                       ScheduleStatusType
                                                           .arrivedAtDepot))),
-                                      cmRowTextWithDatePicker(
-                                          context,
-                                          "Departed from Waste Depot",
-                                          vmSchedule
-                                                      .shedulecardResponse
-                                                      .data?[i]
-                                                      .departWasteDepot !=
-                                                  null
-                                              ? DateFormat('dd-MM-yyyy hh:mm a')
-                                                  .format(DateTime.parse(
-                                                  vmSchedule
-                                                          .shedulecardResponse
-                                                          .data?[i]
-                                                          .departWasteDepot ??
-                                                      vmSchedule
-                                                          .selectedDepartedWasteDepotDate,
-                                                ))
-                                              : "",
-                                          i,
-                                          dateTimePicker(
+                                          cmRowTextWithDatePicker(
                                               context,
+                                              "Departed from Waste Depot",
                                               vmSchedule
                                                           .shedulecardResponse
                                                           .data?[i]
                                                           .departWasteDepot !=
                                                       null
-                                                  ? DateTime.parse(vmSchedule
-                                                      .shedulecardResponse
-                                                      .data?[i]
-                                                      .departWasteDepot!)
-                                                  : DateTime.now(),
-                                              (date) =>
-                                                  vmSchedule.enviroDatePickerFn(
+                                                  ? DateFormat(
+                                                          'dd-MM-yyyy hh:mm a')
+                                                      .format(DateTime.parse(
+                                                      vmSchedule
+                                                              .shedulecardResponse
+                                                              .data?[i]
+                                                              .departWasteDepot ??
+                                                          vmSchedule
+                                                              .selectedDepartedWasteDepotDate,
+                                                    ))
+                                                  : "",
+                                              i,
+                                              dateTimePicker(
+                                                  context,
+                                                  vmSchedule
+                                                              .shedulecardResponse
+                                                              .data?[i]
+                                                              .departWasteDepot !=
+                                                          null
+                                                      ? DateTime.parse(vmSchedule
+                                                          .shedulecardResponse
+                                                          .data?[i]
+                                                          .departWasteDepot!)
+                                                      : DateTime.now(),
+                                                  (date) => vmSchedule.enviroDatePickerFn(
                                                       context,
                                                       vmSchedule
                                                               .selectedDepartedWasteDepotDate ??
@@ -393,410 +396,438 @@ class SheduledetailPage extends StatelessWidget {
                                                       ScheduleStatusType
                                                           .departedWasteDepot))),
 //
-                                      if (res.data?[i].arriveEnviroFacility !=
-                                          null)
-                                        cmRowTextWithDatePicker(
-                                            context,
-                                            "Arrived at Enviro Facility",
-                                            vmSchedule
-                                                        .shedulecardResponse
-                                                        .data?[i]
-                                                        .arriveEnviroFacility !=
-                                                    null
-                                                ? DateFormat('dd-MM-yyyy hh:mm a')
-                                                    .format(DateTime.parse(
-                                                    vmSchedule
-                                                            .shedulecardResponse
-                                                            .data?[i]
-                                                            .arriveEnviroFacility ??
-                                                        vmSchedule
-                                                            .selectedArrivedEnviroDate,
-                                                  ))
-                                                : "",
-                                            i,
-                                            dateTimePicker(
+                                          if (res.data?[i].arriveEnviroFacility !=
+                                              null)
+                                            cmRowTextWithDatePicker(
                                                 context,
+                                                "Arrived at Enviro Facility",
                                                 vmSchedule
                                                             .shedulecardResponse
                                                             .data?[i]
                                                             .arriveEnviroFacility !=
                                                         null
-                                                    ? DateTime.parse(vmSchedule
-                                                        .shedulecardResponse
-                                                        .data?[i]
-                                                        .arriveEnviroFacility!)
-                                                    : DateTime.now(),
-                                                (date) => vmSchedule.enviroDatePickerFn(
+                                                    ? DateFormat('dd-MM-yyyy hh:mm a')
+                                                        .format(DateTime.parse(
+                                                        vmSchedule
+                                                                .shedulecardResponse
+                                                                .data?[i]
+                                                                .arriveEnviroFacility ??
+                                                            vmSchedule
+                                                                .selectedArrivedEnviroDate,
+                                                      ))
+                                                    : "",
+                                                i,
+                                                dateTimePicker(
                                                     context,
-                                                    vmSchedule.selectedArrivedEnviroDate ??
-                                                        DateTime.now(),
-                                                    date,
-                                                    "arrived_at_enviro_facility",
                                                     vmSchedule
-                                                        .shedulecardResponse
-                                                        .data![i]
-                                                        .id!,
-                                                    ScheduleStatusType
-                                                        .departedWasteDepot))),
-                                    ]
-                                  ]),
+                                                                .shedulecardResponse
+                                                                .data?[i]
+                                                                .arriveEnviroFacility !=
+                                                            null
+                                                        ? DateTime.parse(vmSchedule
+                                                            .shedulecardResponse
+                                                            .data?[i]
+                                                            .arriveEnviroFacility!)
+                                                        : DateTime.now(),
+                                                    (date) => vmSchedule.enviroDatePickerFn(
+                                                        context,
+                                                        vmSchedule.selectedArrivedEnviroDate ??
+                                                            DateTime.now(),
+                                                        date,
+                                                        "arrived_at_enviro_facility",
+                                                        vmSchedule
+                                                            .shedulecardResponse
+                                                            .data![i]
+                                                            .id!,
+                                                        ScheduleStatusType
+                                                            .departedWasteDepot))),
+                                        ]
+                                      ]),
+                                    ),
+                                  ),
                                 ),
                               ),
-                            ),
-                          ),
-                        sized0hx05,
-                        if (res.data?[i].drivers?[driversIndex]
-                                    .preinspectioncheck ==
-                                false &&
-                            res.data?[i].drivers?[driversIndex]
-                                    .preinspectionRequired ==
-                                true &&
-                            res.data?[i].completed == null) ...[
-                          CmButton(
-                            text: "Update Vehicle Pre-inspection",
-                            color: const Color.fromARGB(255, 51, 188, 165),
-                            buttonTextStyle:
-                                TextStyle(color: Colors.white, fontSize: 9.w),
-                            onPressed: () {
-                              context.router.push(
-                                  UpdateVehiclepreinspectionRoute(
-                                      index: i, driversIndex: driversIndex));
-                            },
-                            borderRadius: 3.w,
-                            loading: res.loading,
-                          ),
-                          sized0hx05
-                        ],
-                        if (res.data![i].departEnviroFacility == null &&
-                            vmSchedule
-                                    .shedulecardResponse
-                                    .data?[i]
-                                    .drivers?[driversIndex]
-                                    .preinspectioncheck ==
-                                true &&
-                            res.data?[i].drivers?[driversIndex]
-                                    .preinspectioncheck !=
-                                false &&
-                            res.data?[i].drivers?[driversIndex]
-                                    .preinspectionRequired !=
-                                true) ...[
-                          CmButton(
-                            color: const Color(0xFF4CAF9E),
-                            buttonTextStyle:
-                                TextStyle(color: Colors.white, fontSize: 10.w),
-                            onPressed: () {
-                              dateTimePickerWithouIcon(
-                                  context,
-                                  DateTime.now(),
-                                  (date) => vmSchedule.enviroDatePickerFn(
+                            sized0hx05,
+                            if (res.data?[i].drivers?[driversIndex]
+                                        .preinspectioncheck ==
+                                    false &&
+                                res.data?[i].drivers?[driversIndex]
+                                        .preinspectionRequired ==
+                                    true &&
+                                res.data?[i].completed == null) ...[
+                              CmButton(
+                                text: "Update Vehicle Pre-inspection",
+                                color: const Color.fromARGB(255, 51, 188, 165),
+                                buttonTextStyle: TextStyle(
+                                    color: Colors.white, fontSize: 9.w),
+                                onPressed: () {
+                                  context.router.push(
+                                      UpdateVehiclepreinspectionRoute(
+                                          index: i,
+                                          driversIndex: driversIndex));
+                                },
+                                borderRadius: 3.w,
+                                loading: res.loading,
+                              ),
+                              sized0hx05
+                            ],
+                            if (res.data![i].departEnviroFacility == null &&
+                                res.data?[i].drivers?[driversIndex]
+                                        .preinspectioncheck !=
+                                    false &&
+                                res.data?[i].drivers?[driversIndex]
+                                        .preinspectionRequired !=
+                                    true) ...[
+                              CmButton(
+                                color: const Color(0xFF4CAF9E),
+                                buttonTextStyle: TextStyle(
+                                    color: Colors.white, fontSize: 10.w),
+                                onPressed: () {
+                                  dateTimePickerWithouIcon(
                                       context,
-                                      vmSchedule.selectedDepartedEnviroDate ??
-                                          DateTime.now(),
-                                      date,
-                                      "departed_enviro_facility",
-                                      vmSchedule
-                                          .shedulecardResponse.data![i].id!,
-                                      ScheduleStatusType
-                                          .departedEnviroFacility));
-                            },
-                            borderRadius: 0,
-                            fontSize: 10.w,
-                            text: "Departed Enviro  Facility",
-                            loading: res.loading,
-                          ),
-                          sized0hx05
-                        ],
-                        if (res.data![i].startJob != null &&
-                            vmSchedule
-                                    .shedulecardResponse
-                                    .data?[i]
-                                    .drivers?[driversIndex]
-                                    .preinspectioncheck ==
-                                true &&
-                            res.data?[i].drivers?[driversIndex]
-                                    .preinspectioncheck !=
-                                false &&
-                            res.data?[i].drivers?[driversIndex]
-                                    .preinspectionRequired !=
-                                true) ...[
-                          CmButton(
-                            color: const Color(0xFF4CAF9E),
-                            buttonTextStyle:
-                                TextStyle(color: Colors.white, fontSize: 10.w),
-                            onPressed: () {
-                              context.router.push(ScheduleImageRoute(
-                                  fromJobStarted: true, id: id));
-                            },
-                            borderRadius: 0,
-                            fontSize: 10.w,
-                            text: "Starting Job",
-                            loading: res.loading,
-                          ),
-                          sized0hx05
-                        ],
-                        if (res.data![i].finishJob == null &&
-                            res.data![i].startJob != null &&
-                            res.data![i].departEnviroFacility != null &&
-                            res.data?[i].drivers?[driversIndex]
-                                    .preinspectioncheck !=
-                                false &&
-                            res.data?[i].drivers?[driversIndex]
-                                    .preinspectionRequired !=
-                                true) ...[
-                          CmButton(
-                            color: const Color(0xFF4CAF9E),
-                            buttonTextStyle:
-                                TextStyle(color: Colors.white, fontSize: 10.w),
-                            onPressed: () {
-                              context.router.push(ScheduleImageRoute(
-                                  fromJobStarted: false, id: id));
-                            },
-                            borderRadius: 0,
-                            fontSize: 10.w,
-                            text: "Finished Job",
-                            loading: res.loading,
-                          ),
-                          sized0hx05
-                        ],
-                        if (res.data![i].departWasteDepot != null &&
-                            res.data?[i].drivers?[driversIndex]
-                                    .preinspectioncheck !=
-                                false &&
-                            res.data?[i].drivers?[driversIndex]
-                                    .preinspectionRequired !=
-                                true) ...[
-                          CmButton(
-                            color: const Color(0xFF4CAF9E),
-                            buttonTextStyle:
-                                TextStyle(color: Colors.white, fontSize: 10.w),
-                            onPressed: () {
-                              dateTimePickerWithouIcon(
-                                  context,
-                                  DateTime.now(),
-                                  (date) => vmSchedule.enviroDatePickerFn(
+                                      DateTime.now(),
+                                      (date) => vmSchedule.enviroDatePickerFn(
+                                          context,
+                                          vmSchedule
+                                                  .selectedDepartedEnviroDate ??
+                                              DateTime.now(),
+                                          date,
+                                          "departed_enviro_facility",
+                                          vmSchedule
+                                              .shedulecardResponse.data![i].id!,
+                                          ScheduleStatusType
+                                              .departedEnviroFacility));
+                                },
+                                borderRadius: 0,
+                                fontSize: 10.w,
+                                text: "Departed Enviro  Facility",
+                                loading: res.loading,
+                              ),
+                              sized0hx05
+                            ],
+                            if (res.data![i].startJob == null &&
+                                res.data?[i].drivers?[driversIndex]
+                                        .preinspectioncheck !=
+                                    false &&
+                                res.data?[i].drivers?[driversIndex]
+                                        .preinspectionRequired !=
+                                    true) ...[
+                              CmButton(
+                                color: const Color(0xFF4CAF9E),
+                                buttonTextStyle: TextStyle(
+                                    color: Colors.white, fontSize: 10.w),
+                                onPressed: () {
+                                  context.router.push(ScheduleImageRoute(
+                                      fromJobStarted: true, id: id));
+                                },
+                                borderRadius: 0,
+                                fontSize: 10.w,
+                                text: "Starting Job",
+                                loading: res.loading,
+                              ),
+                              sized0hx05
+                            ],
+                            if (res.data![i].finishJob == null &&
+                                res.data![i].startJob != null &&
+                                res.data![i].departEnviroFacility != null &&
+                                res.data?[i].drivers?[driversIndex]
+                                        .preinspectioncheck !=
+                                    false &&
+                                res.data?[i].drivers?[driversIndex]
+                                        .preinspectionRequired !=
+                                    true) ...[
+                              CmButton(
+                                color: const Color(0xFF4CAF9E),
+                                buttonTextStyle: TextStyle(
+                                    color: Colors.white, fontSize: 10.w),
+                                onPressed: () {
+                                  context.router.push(ScheduleImageRoute(
+                                      fromJobStarted: false, id: id));
+                                },
+                                borderRadius: 0,
+                                fontSize: 10.w,
+                                text: "Finished Job",
+                                loading: res.loading,
+                              ),
+                              sized0hx05
+                            ],
+                            if (res.data![i].image == null &&
+                                res.data![i].finishJob != null &&
+                                res.data?[i].drivers?[driversIndex]
+                                        .preinspectioncheck !=
+                                    false &&
+                                res.data?[i].drivers?[driversIndex]
+                                        .preinspectionRequired !=
+                                    true) ...[
+                              CmButton(
+                                text: "Take Signature",
+                                onPressed: () {
+                                  vmSchedule.signaturePath = null;
+                                  context.router.push(
+                                      SheduleSignatureRoute(id: id, i: i));
+                                },
+                                color: const Color.fromARGB(255, 51, 188, 165),
+                                borderRadius: 3.w,
+                                buttonTextStyle: TextStyle(
+                                    color: Colors.white, fontSize: 9.w),
+                              ),
+                              if (res.data![i].arriveAtWasteDepot == null) ...[
+                                CmButton(
+                                  color: const Color(0xFF4CAF9E),
+                                  buttonTextStyle: TextStyle(
+                                      color: Colors.white, fontSize: 10.w),
+                                  onPressed: () {
+                                    dateTimePickerWithouIcon(
                                         context,
-                                        vmSchedule
-                                                .selectedDepartedWasteDepotDate ??
-                                            DateTime.now(),
-                                        date,
-                                        "departed_waste_depot",
-                                        vmSchedule
-                                            .shedulecardResponse.data![i].id!,
-                                        ScheduleStatusType.departedWasteDepot,
-                                      ));
-                            },
-                            borderRadius: 0,
-                            fontSize: 10.w,
-                            text: "Departed Waste Depot",
-                            loading: res.loading,
-                          ),
-                          sized0hx05
-                        ],
-                        // if (res.data![i].image == null &&
-                        //     res.data![i].finishJob != null &&
-                        //     res.data?[i].drivers?[driversIndex]
-                        //             .preinspectioncheck !=
-                        //         false &&
-                        //     res.data?[i].drivers?[driversIndex]
-                        //             .preinspectionRequired !=
-                        //         true) ...[
-                        CmButton(
-                          text: "Take Signature",
-                          onPressed: () {
-                            vmSchedule.signaturePath = null;
-                            context.router
-                                .push(SheduleSignatureRoute(id: id, i: i));
-                          },
-                          color: const Color.fromARGB(255, 51, 188, 165),
-                          borderRadius: 3.w,
-                          buttonTextStyle:
-                              TextStyle(color: Colors.white, fontSize: 9.w),
-                        ),
-                        sized0hx05,
-                        // ],
-                        if (res.data![i].arriveEnviroFacility == null &&
-                            res.data![i].departWasteDepot != null) ...[
-                          CmButton(
-                            color: const Color(0xFF4CAF9E),
-                            buttonTextStyle:
-                                TextStyle(color: Colors.white, fontSize: 10.w),
-                            onPressed: () {
-                              dateTimePickerWithouIcon(
-                                  context,
-                                  DateTime.now(),
-                                  (date) => vmSchedule.enviroDatePickerFn(
+                                        DateTime.now(),
+                                        (date) => vmSchedule.enviroDatePickerFn(
+                                              context,
+                                              vmSchedule
+                                                      .selectedArrivedEnviroDate ??
+                                                  DateTime.now(),
+                                              date,
+                                              "arrived_at_waste_depot",
+                                              vmSchedule.shedulecardResponse
+                                                  .data![i].id!,
+                                              ScheduleStatusType.arrivedAtDepot,
+                                            ));
+                                  },
+                                  borderRadius: 0,
+                                  fontSize: 10.w,
+                                  text: "Departed Waste Depot",
+                                  loading: res.loading,
+                                ),
+                                sized0hx05
+                              ],
+                              if (res.data![i].departWasteDepot == null) ...[
+                                CmButton(
+                                  color: const Color(0xFF4CAF9E),
+                                  buttonTextStyle: TextStyle(
+                                      color: Colors.white, fontSize: 10.w),
+                                  onPressed: () {
+                                    dateTimePickerWithouIcon(
                                         context,
-                                        vmSchedule.selectedArrivedEnviroDate ??
-                                            DateTime.now(),
-                                        date,
-                                        "arrived_at_enviro_facility",
-                                        vmSchedule
-                                            .shedulecardResponse.data![i].id!,
-                                        ScheduleStatusType
-                                            .arrivedEnviroFacility,
-                                      ));
-                            },
-                            borderRadius: 0,
-                            fontSize: 10.w,
-                            text: "Arrived at Enviro Facility",
-                            loading: res.loading,
-                          ),
-                          sized0hx05,
-                        ],
-                        if (res.data![i].completed != null) ...[
-                          SizedBox(
-                            width: 150.w,
-                            child: Row(
-                              children: [
-                                Expanded(
-                                  child: CmButton(
-                                    borderRadius: 3.w,
-                                    color:
-                                        const Color.fromARGB(255, 51, 188, 165),
-                                    buttonTextStyle: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 9.w,
-                                    ),
-                                    onPressed: () {
-                                      context.router.push(
-                                          SheduleCommentRoute(id: id, i: i));
-                                    },
-                                    text: "Comment",
-                                  ),
+                                        DateTime.now(),
+                                        (date) => vmSchedule.enviroDatePickerFn(
+                                              context,
+                                              vmSchedule
+                                                      .selectedDepartedWasteDepotDate ??
+                                                  DateTime.now(),
+                                              date,
+                                              "departed_waste_depot",
+                                              vmSchedule.shedulecardResponse
+                                                  .data![i].id!,
+                                              ScheduleStatusType
+                                                  .departedWasteDepot,
+                                            ));
+                                  },
+                                  borderRadius: 0,
+                                  fontSize: 10.w,
+                                  text: "Departed Waste Depot",
+                                  loading: res.loading,
                                 ),
+                                sized0hx05
                               ],
-                            ),
-                          ),
-                          sized0hx05,
-                          SizedBox(
-                            width: 150.w,
-                            child: Row(
-                              children: [
-                                Expanded(
-                                  child: CmButton(
-                                    icon: Icons.camera_alt,
-                                    iconSize: 14.w,
-                                    borderRadius: 3.w,
-                                    color: Colors.black,
-                                    buttonTextStyle: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 9.w,
-                                    ),
-                                    onPressed: () {
-                                      vmSchedule.clearLists();
-                                      context.router.push(ScheduleImageRoute(
-                                          id: id, fromAddMedia: true));
-                                    },
-                                    text: "Add Media",
-                                  ),
+
+                              sized0hx05,
+                              // ],
+                              if (res.data![i].arriveEnviroFacility == null &&
+                                  res.data![i].departWasteDepot != null) ...[
+                                CmButton(
+                                  color: const Color(0xFF4CAF9E),
+                                  buttonTextStyle: TextStyle(
+                                      color: Colors.white, fontSize: 10.w),
+                                  onPressed: () {
+                                    dateTimePickerWithouIcon(
+                                        context,
+                                        DateTime.now(),
+                                        (date) => vmSchedule.enviroDatePickerFn(
+                                              context,
+                                              vmSchedule
+                                                      .selectedArrivedEnviroDate ??
+                                                  DateTime.now(),
+                                              date,
+                                              "arrived_at_enviro_facility",
+                                              vmSchedule.shedulecardResponse
+                                                  .data![i].id!,
+                                              ScheduleStatusType
+                                                  .arrivedEnviroFacility,
+                                            ));
+                                  },
+                                  borderRadius: 0,
+                                  fontSize: 10.w,
+                                  text: "Arrived at Enviro Facility",
+                                  loading: res.loading,
                                 ),
+                                sized0hx05,
                               ],
-                            ),
-                          ),
-                          sized0hx05,
-                          SizedBox(
-                            width: 150.w,
-                            child: Row(
-                              children: [
-                                Expanded(
-                                  child: CmButton(
-                                    icon: Icons.video_camera_back,
-                                    iconSize: 14.w,
-                                    borderRadius: 3.w,
-                                    color: Colors.black,
-                                    buttonTextStyle: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 9.w,
-                                    ),
-                                    onPressed: () {
-                                      vmSchedule.pickedCameraVideo = "";
-                                      vmSchedule.pickedGalleryVideo = "";
-                                      vmSchedule.pickedCameraVideoList = [];
-                                      vmSchedule.pickedGalleryVideoList = [];
-                                      context.router
-                                          .push(ScheduleVideoRoute(id: id));
-                                    },
-                                    text: "Add Video",
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          sized0hx05
-                        ],
-                        if (res.data?[i].beforePics?.isNotEmpty ?? false) ...[
-                          BeforeImagesList(
-                            i: i,
-                            id: id,
-                          ),
-                          sized0hx05,
-                        ],
-                        if (res.data?[i].afterPics?.isNotEmpty ?? false) ...[
-                          AfterImagesList(i: i, id: id),
-                          sized0hx05,
-                        ],
-                        if (res.data?[i].gallery?.isNotEmpty ?? false) ...[
-                          GalleryImagesList(i: i, id: id),
-                          sized0hx05,
-                        ],
-                        if (res.data?[i].jobVideo?.isNotEmpty ?? false) ...[
-                          VideoList(i: i, id: id),
-                          sized0hx05,
-                        ],
-                        sized0hx05,
-                        Text(
-                          'Team Members',
-                          style: TextStyle(
-                            fontSize: 10.h,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        sized0hx05,
-                        Padding(
-                          padding: EdgeInsets.only(left: 8.w),
-                          child: SizedBox(
-                            height: 80.h,
-                            child: ListView.builder(
-                              shrinkWrap: true,
-                              scrollDirection: Axis.horizontal,
-                              itemCount: res.data?[i].teamEmployees?.length,
-                              itemBuilder: (context, index) {
-                                final data = res.data?[i].teamEmployees?[index];
-                                return Column(
-                                  children: [
-                                    SizedBox(
-                                      height: 40.w,
-                                      width: 40.w,
-                                      child: DecoratedBox(
-                                        decoration: BoxDecoration(
-                                            color: Colors.grey.shade700,
-                                            shape: BoxShape.circle),
-                                        child: dpImage("${data?.dp}"),
+                              if (res.data![i].completed != null) ...[
+                                SizedBox(
+                                  width: 150.w,
+                                  child: Row(
+                                    children: [
+                                      Expanded(
+                                        child: CmButton(
+                                          borderRadius: 3.w,
+                                          color: const Color.fromARGB(
+                                              255, 51, 188, 165),
+                                          buttonTextStyle: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 9.w,
+                                          ),
+                                          onPressed: () {
+                                            context.router.push(
+                                                SheduleCommentRoute(
+                                                    id: id, i: i));
+                                          },
+                                          text: "Comment",
+                                        ),
                                       ),
-                                    ),
-                                    sized0hx05,
-                                    Text(
-                                      "${data?.name}",
-                                      style: TextStyle(fontSize: 9.w),
-                                    )
-                                  ],
-                                );
-                              },
-                            ),
-                          ),
-                        ),
-                        if (res.data?[i].image != null) ...[
-                          Text(
-                            'Signature',
-                            style: TextStyle(
-                                fontSize: 9.w, fontWeight: FontWeight.bold),
-                          ),
-                          sized0hx10,
-                          signatureImageWidget(i: i),
-                        ],
-                        sized0hx20
-                      ],
-                    ),
+                                    ],
+                                  ),
+                                ),
+                                sized0hx05,
+                                SizedBox(
+                                  width: 150.w,
+                                  child: Row(
+                                    children: [
+                                      Expanded(
+                                        child: CmButton(
+                                          icon: Icons.camera_alt,
+                                          iconSize: 14.w,
+                                          borderRadius: 3.w,
+                                          color: Colors.black,
+                                          buttonTextStyle: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 9.w,
+                                          ),
+                                          onPressed: () {
+                                            vmSchedule.clearLists();
+                                            context.router.push(
+                                                ScheduleImageRoute(
+                                                    id: id,
+                                                    fromAddMedia: true));
+                                          },
+                                          text: "Add Media",
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                sized0hx05,
+                                SizedBox(
+                                  width: 150.w,
+                                  child: Row(
+                                    children: [
+                                      Expanded(
+                                        child: CmButton(
+                                          icon: Icons.video_camera_back,
+                                          iconSize: 14.w,
+                                          borderRadius: 3.w,
+                                          color: Colors.black,
+                                          buttonTextStyle: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 9.w,
+                                          ),
+                                          onPressed: () {
+                                            vmSchedule.pickedCameraVideo = "";
+                                            vmSchedule.pickedGalleryVideo = "";
+                                            vmSchedule.pickedCameraVideoList =
+                                                [];
+                                            vmSchedule.pickedGalleryVideoList =
+                                                [];
+                                            context.router.push(
+                                                ScheduleVideoRoute(id: id));
+                                          },
+                                          text: "Add Video",
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                sized0hx05
+                              ],
+                              if (res.data?[i].beforePics?.isNotEmpty ??
+                                  false) ...[
+                                BeforeImagesList(
+                                  i: i,
+                                  id: id,
+                                ),
+                                sized0hx05,
+                              ],
+                              if (res.data?[i].afterPics?.isNotEmpty ??
+                                  false) ...[
+                                AfterImagesList(i: i, id: id),
+                                sized0hx05,
+                              ],
+                              if (res.data?[i].gallery?.isNotEmpty ??
+                                  false) ...[
+                                GalleryImagesList(i: i, id: id),
+                                sized0hx05,
+                              ],
+                              if (res.data?[i].jobVideo?.isNotEmpty ??
+                                  false) ...[
+                                VideoList(i: i, id: id),
+                                sized0hx05,
+                              ],
+                              sized0hx05,
+                              Text(
+                                'Team Members',
+                                style: TextStyle(
+                                  fontSize: 10.h,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              sized0hx05,
+                              Padding(
+                                padding: EdgeInsets.only(left: 8.w),
+                                child: SizedBox(
+                                  height: 80.h,
+                                  child: ListView.builder(
+                                    shrinkWrap: true,
+                                    scrollDirection: Axis.horizontal,
+                                    itemCount:
+                                        res.data?[i].teamEmployees?.length,
+                                    itemBuilder: (context, index) {
+                                      final data =
+                                          res.data?[i].teamEmployees?[index];
+                                      return Column(
+                                        children: [
+                                          SizedBox(
+                                            height: 40.w,
+                                            width: 40.w,
+                                            child: DecoratedBox(
+                                              decoration: BoxDecoration(
+                                                  color: Colors.grey.shade700,
+                                                  shape: BoxShape.circle),
+                                              child: dpImage("${data?.dp}"),
+                                            ),
+                                          ),
+                                          sized0hx05,
+                                          Text(
+                                            "${data?.name}",
+                                            style: TextStyle(fontSize: 9.w),
+                                          )
+                                        ],
+                                      );
+                                    },
+                                  ),
+                                ),
+                              ),
+                              if (res.data?[i].image != null) ...[
+                                Text(
+                                  'Signature',
+                                  style: TextStyle(
+                                      fontSize: 9.w,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                sized0hx10,
+                                signatureImageWidget(i: i),
+                              ],
+                              sized0hx20
+                            ]
+                          ],
+                        ]),
                   );
           },
         ));

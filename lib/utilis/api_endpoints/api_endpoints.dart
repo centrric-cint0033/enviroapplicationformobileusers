@@ -42,6 +42,7 @@ class ApiEndPoints
   static const endpointprofileedit = '/api/v1/accounts/profile/view/';
   static const endpointjobcard = '/api/v1/jobs/card/info/view/';
   static const endpointshedulecard = '/api/v1/schedule/view/mobile/waste/';
+  static const endpointshedulecardByDate = '/api/v4/schedule/view/';
   static const endpointshedulesignature =
       "/api/v1/schedule/jobschedule/signature/add/";
   static const endpointcommentsignature =
@@ -55,4 +56,6 @@ class ApiEndPoints
   static const endpointsheduleaddimage = "/api/v1/schedule/jobschedule/images/";
   static const endpointsheduleaddvideo = "/api/v1/schedule/video/";
   static const endpointsheduledeletevideo = "/api/v1/schedule/video/delete/";
+  static const permissionStatusEndpoint =
+      '/api/v1/permissions/all/?platform=mobile';
 }
