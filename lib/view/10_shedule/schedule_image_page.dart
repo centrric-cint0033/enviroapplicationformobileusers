@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:io';
 import 'package:auto_route/auto_route.dart';
 import 'package:enviro_mobile_application/service/07_shedule/job_card/shedule_page_service.dart';
@@ -9,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:intl/intl.dart';
 
 @RoutePage()
 class ScheduleImageScreen extends StatelessWidget {
@@ -129,8 +132,8 @@ class ScheduleImageScreen extends StatelessWidget {
                           width: 140.w,
                           loading: vmSchedule.addImageScheduleResponse.loading,
                           fontSize: 10.w,
-                          onPressed: () {
-                            vmSchedule.addImageScheduleApi(
+                          onPressed: () async {
+                            await vmSchedule.addImageScheduleApi(
                                 context: context,
                                 id: id,
                                 beforeOrAfterPic:
@@ -143,15 +146,25 @@ class ScheduleImageScreen extends StatelessWidget {
                                 picType: fromJobStarted == true
                                     ? BeforeOrAfterPic.beforePic
                                     : BeforeOrAfterPic.afterPic);
-                            // if (vmSchedule.addImageScheduleResponse.data !=
-                            //     null) {
-                            //   vmSchedule.editScheduleStatusApi(
-                            //       context: context,
-                            //       statusType: statusdType,
-                            //       date: dateString,
-                            //       status: status,
-                            //       id: id);
-                            // }
+                            if (vmSchedule.addImageScheduleResponse.data !=
+                                null) {
+                              fromJobStarted == true
+                                  ? vmSchedule.editScheduleStatusApi(
+                                      context: context,
+                                      statusType: ScheduleStatusType.jobStarted,
+                                      date: DateFormat('yyyy-MM-dd HH:mm:ss')
+                                          .format(DateTime.now()),
+                                      status: "job_started",
+                                      id: id)
+                                  : vmSchedule.editScheduleStatusApi(
+                                      context: context,
+                                      statusType:
+                                          ScheduleStatusType.finishedJob,
+                                      date: DateFormat('yyyy-MM-dd HH:mm:ss')
+                                          .format(DateTime.now()),
+                                      status: "job_finished",
+                                      id: id);
+                            }
                           },
                         ),
                         sized0hx50,

@@ -74,6 +74,8 @@ abstract class IScheduleService {
   Future<Either<Map<MainFailure, dynamic>, ScheduleImageResModel>>
       addVideosScheduleAPi(
           {required int id, required List<String> pickedFiles});
+  Future<Either<Map<MainFailure, dynamic>, ScheduleImageResModel>>
+      deleteVideosScheduleAPi({required int id, required int jobVdoId});
 }
 
 @LazySingleton(as: IScheduleService)
@@ -343,6 +345,26 @@ class SalesService implements IScheduleService {
 
         ScheduleImageResModel addVideo = ScheduleImageResModel.fromJson(data);
         return Right(addVideo);
+      },
+    );
+  }
+
+  @override
+  Future<Either<Map<MainFailure, dynamic>, ScheduleImageResModel>>
+      deleteVideosScheduleAPi(
+          {required int id, required int jobVdoId}) async {
+    var response = await getIt<HttpService>().multipartRequest(
+      apiUrl: ApiEndPoints.endpointsheduledeletevideo,
+      data: {"schedule_id": id, "job_video_id": jobVdoId},
+      method: "POST",
+    );
+    return response.fold(
+      (l) => Left(l),
+      (res) async {
+        var data = jsonDecode(res.body);
+        ScheduleImageResModel deleteVideo =
+            ScheduleImageResModel.fromJson(data);
+        return Right(deleteVideo);
       },
     );
   }

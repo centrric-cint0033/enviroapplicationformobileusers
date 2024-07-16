@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'dart:typed_data';
 import 'package:auto_route/auto_route.dart';
-import 'package:enviro_mobile_application/Routepage/approutes.gr.dart';
 import 'package:enviro_mobile_application/api_response/api_response.dart';
 import 'package:enviro_mobile_application/model/03_vehicle/vehicle_model/vehicle_model.dart';
 import 'package:enviro_mobile_application/model/07_Jobcard/job_card_model.dart';
@@ -693,16 +692,9 @@ abstract class ScheduleViewModelBase with Store {
           error: null,
           loading: false,
         );
-        if (statusType == ScheduleStatusType.jobStarted ||
-            statusType == ScheduleStatusType.finishedJob) {
-          showToast(context,
-              msg: "Job status updated successfully.Kindly add the images",
-              color: Colors.green);
-        } else {
-          showToast(context,
-              msg: "Job status updated successfully", color: Colors.green);
-        }
         shedulecardviewmodelfunction();
+        showToast(context,
+            msg: "Job status updated successfully", color: Colors.green);
       },
     );
   }
@@ -743,7 +735,6 @@ abstract class ScheduleViewModelBase with Store {
         pickedGalleryImageList = [];
         pickedWeighImageList = null;
         context.router.pop();
-        showToast(context, msg: "Successfully added", color: Colors.green);
       },
     );
   }
@@ -813,8 +804,8 @@ abstract class ScheduleViewModelBase with Store {
     required int id,
     required List<String> pickedFiles,
   }) async {
-    addImageScheduleResponse =
-        addImageScheduleResponse.copyWith(error: null, loading: true);
+    addVideoScheduleResponse =
+        addVideoScheduleResponse.copyWith(error: null, loading: true);
 
     final result = await scheduleService.addVideosScheduleAPi(
       id: id,
@@ -833,11 +824,48 @@ abstract class ScheduleViewModelBase with Store {
           error: null,
           loading: false,
         );
-        shedulecardviewmodelfunction();
         pickedCameraVideoList = [];
         pickedGalleryVideoList = [];
-        context.router.pop();
         showToast(context, msg: "Successfully added", color: Colors.green);
+        shedulecardviewmodelfunction();
+        context.router.pop();
+      },
+    );
+  }
+  @observable
+  int? vdoId;
+  @observable
+  ApiResponse<ScheduleImageResModel> deleteVideoScheduleResponse =
+      ApiResponse<ScheduleImageResModel>();
+  @action
+  Future<void> deleteVideoScheduleApi({
+    required BuildContext context,
+    required int id,
+    required int JobVdoId,
+  }) async {
+    deleteVideoScheduleResponse =
+        deleteVideoScheduleResponse.copyWith(error: null, loading: true);
+
+    final result = await scheduleService.deleteVideosScheduleAPi(
+      id: id,
+      jobVdoId: JobVdoId,
+    );
+    return result.fold(
+      (l) {
+        deleteVideoScheduleResponse = deleteVideoScheduleResponse.copyWith(
+          error: l.keys.first,
+          loading: false,
+        );
+      },
+      (r) {
+        deleteVideoScheduleResponse = deleteVideoScheduleResponse.copyWith(
+          data: r,
+          error: null,
+          loading: false,
+        );
+        showToast(context, msg: "Successfully deleted", color: Colors.green);
+        shedulecardviewmodelfunction();
+        context.router.pop();
       },
     );
   }
@@ -1117,8 +1145,7 @@ abstract class ScheduleViewModelBase with Store {
   @action
   enviroDatePickerFn(BuildContext context, DateTime selectedDate, date,
       String status, int id, dynamic statusdType,
-      {bool? fromJobStarted = false,
-      bool toCameraGalleryScreen = false}) async {
+      {bool? fromJobStarted = false}) async {
     selectedDate = date;
     String dateString = DateFormat('yyyy-MM-dd HH:mm:ss').format(selectedDate);
     editScheduleStatusApi(
@@ -1128,10 +1155,10 @@ abstract class ScheduleViewModelBase with Store {
         status: status,
         id: id);
     clearLists();
-    if (toCameraGalleryScreen == true) {
-      context.router
-          .push(ScheduleImageRoute(fromJobStarted: fromJobStarted!, id: id));
-    }
+    // if (toCameraGalleryScreen == true) {
+    //   context.router
+    //       .push(ScheduleImageRoute(fromJobStarted: fromJobStarted!, id: id));
+    // }
   }
 
   @action
@@ -1171,10 +1198,11 @@ abstract class ScheduleViewModelBase with Store {
   }
 
   @action
-  launchURL(String urls) async {
-    final Uri url = Uri.parse(urls.toString());
-    if (!await launchUrl(url)) {
-      throw Exception('Could not launch $urls');
+  launchURL(String url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
     }
   }
 }

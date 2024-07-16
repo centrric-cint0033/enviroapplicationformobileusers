@@ -38,7 +38,7 @@ class VideoList extends StatelessWidget {
                           ),
                         ),
                         cmTextButton(
-                          buttonText: "Delete Media",
+                          buttonText: "Delete Video",
                           icon: Icons.delete,
                           bgColor: Colors.red,
                           loading:
@@ -51,10 +51,10 @@ class VideoList extends StatelessWidget {
                               submitText: "Yes",
                               submitText2: "No",
                               onSubmit: () {
-                                vmSchedule.deleteImageScheduleApi(
+                                vmSchedule.deleteVideoScheduleApi(
                                   context: context,
                                   id: id,
-                                  imageId: vmSchedule.imageIdsGalleryPic,
+                                  JobVdoId: vmSchedule.vdoId ?? 0,
                                 );
                               },
                             );
@@ -62,7 +62,7 @@ class VideoList extends StatelessWidget {
                         ),
                         cmTextButton(
                           onPressed: () {
-                            vmSchedule.clearSelectionModeGalleryPic();
+                            vmSchedule.clearSelectionModeVideo();
                           },
                           buttonText: " Clear Selection  ",
                           bgColor: Colors.blue,
@@ -103,6 +103,7 @@ class VideoList extends StatelessWidget {
                   padding: EdgeInsets.all(8.0.h),
                   child: InkWell(
                     onTap: () async {
+                      vmSchedule.vdoId = videos[index].id;
                       if (vmSchedule.selectedIndexVideo == index) {
                         vmSchedule.toggleSelectionVideo(
                             index, videos[index].id!);
@@ -115,6 +116,7 @@ class VideoList extends StatelessWidget {
                       }
                     },
                     onLongPress: () {
+                      vmSchedule.vdoId = videos[index].id;
                       if (!vmSchedule.selectedStatesVideo
                           .any((isSelected) => isSelected)) {
                         vmSchedule.startSelectionVideo(

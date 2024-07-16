@@ -1166,6 +1166,40 @@ mixin _$ScheduleViewModel on ScheduleViewModelBase, Store {
     });
   }
 
+  late final _$vdoIdAtom =
+      Atom(name: 'ScheduleViewModelBase.vdoId', context: context);
+
+  @override
+  int? get vdoId {
+    _$vdoIdAtom.reportRead();
+    return super.vdoId;
+  }
+
+  @override
+  set vdoId(int? value) {
+    _$vdoIdAtom.reportWrite(value, super.vdoId, () {
+      super.vdoId = value;
+    });
+  }
+
+  late final _$deleteVideoScheduleResponseAtom = Atom(
+      name: 'ScheduleViewModelBase.deleteVideoScheduleResponse',
+      context: context);
+
+  @override
+  ApiResponse<ScheduleImageResModel> get deleteVideoScheduleResponse {
+    _$deleteVideoScheduleResponseAtom.reportRead();
+    return super.deleteVideoScheduleResponse;
+  }
+
+  @override
+  set deleteVideoScheduleResponse(ApiResponse<ScheduleImageResModel> value) {
+    _$deleteVideoScheduleResponseAtom
+        .reportWrite(value, super.deleteVideoScheduleResponse, () {
+      super.deleteVideoScheduleResponse = value;
+    });
+  }
+
   late final _$isMinimizedAtom =
       Atom(name: 'ScheduleViewModelBase.isMinimized', context: context);
 
@@ -1973,6 +2007,17 @@ mixin _$ScheduleViewModel on ScheduleViewModelBase, Store {
         context: context, id: id, pickedFiles: pickedFiles));
   }
 
+  late final _$deleteVideoScheduleApiAsyncAction = AsyncAction(
+      'ScheduleViewModelBase.deleteVideoScheduleApi',
+      context: context);
+
+  @override
+  Future<void> deleteVideoScheduleApi(
+      {required BuildContext context, required int id, required int JobVdoId}) {
+    return _$deleteVideoScheduleApiAsyncAction.run(() => super
+        .deleteVideoScheduleApi(context: context, id: id, JobVdoId: JobVdoId));
+  }
+
   late final _$pickFilefromphoneAsyncAction =
       AsyncAction('ScheduleViewModelBase.pickFilefromphone', context: context);
 
@@ -2005,19 +2050,18 @@ mixin _$ScheduleViewModel on ScheduleViewModelBase, Store {
   @override
   Future enviroDatePickerFn(BuildContext context, DateTime selectedDate,
       dynamic date, String status, int id, dynamic statusdType,
-      {bool? fromJobStarted = false, bool toCameraGalleryScreen = false}) {
+      {bool? fromJobStarted = false}) {
     return _$enviroDatePickerFnAsyncAction.run(() => super.enviroDatePickerFn(
         context, selectedDate, date, status, id, statusdType,
-        fromJobStarted: fromJobStarted,
-        toCameraGalleryScreen: toCameraGalleryScreen));
+        fromJobStarted: fromJobStarted));
   }
 
   late final _$launchURLAsyncAction =
       AsyncAction('ScheduleViewModelBase.launchURL', context: context);
 
   @override
-  Future launchURL(String urls) {
-    return _$launchURLAsyncAction.run(() => super.launchURL(urls));
+  Future launchURL(String url) {
+    return _$launchURLAsyncAction.run(() => super.launchURL(url));
   }
 
   late final _$ScheduleViewModelBaseActionController =
@@ -2458,6 +2502,8 @@ addImageScheduleResponse: ${addImageScheduleResponse},
 deleteImageScheduleResponse: ${deleteImageScheduleResponse},
 deleteAfterImageScheduleResponse: ${deleteAfterImageScheduleResponse},
 addVideoScheduleResponse: ${addVideoScheduleResponse},
+vdoId: ${vdoId},
+deleteVideoScheduleResponse: ${deleteVideoScheduleResponse},
 isMinimized: ${isMinimized},
 selectedEngineOilValue: ${selectedEngineOilValue},
 selectedWarningSystemValue: ${selectedWarningSystemValue},

@@ -44,16 +44,15 @@ class SheduledetailPage extends StatelessWidget {
         body: Observer(
           builder: (context) {
             final res = vmSchedule.shedulecardResponse;
-            return SingleChildScrollView(
-              padding: screenWidth,
-              child: res.loading
-                  ? const Align(
-                      alignment: Alignment.center,
-                      child: CircularProgressIndicator(
-                        color: Appthemes.cPrimary,
-                      ),
-                    )
-                  : Column(
+            return res.loading
+                ? const Center(
+                    child: CircularProgressIndicator(
+                      color: Appthemes.cPrimary,
+                    ),
+                  )
+                : SingleChildScrollView(
+                    padding: screenWidth,
+                    child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         sized0hx10,
@@ -474,6 +473,12 @@ class SheduledetailPage extends StatelessWidget {
                                     .data?[i]
                                     .drivers?[driversIndex]
                                     .preinspectioncheck ==
+                                true &&
+                            res.data?[i].drivers?[driversIndex]
+                                    .preinspectioncheck !=
+                                false &&
+                            res.data?[i].drivers?[driversIndex]
+                                    .preinspectionRequired !=
                                 true) ...[
                           CmButton(
                             color: const Color(0xFF4CAF9E),
@@ -501,7 +506,19 @@ class SheduledetailPage extends StatelessWidget {
                           ),
                           sized0hx05
                         ],
-                        if (res.data![i].startJob != null) ...[
+                        if (res.data![i].startJob != null &&
+                            vmSchedule
+                                    .shedulecardResponse
+                                    .data?[i]
+                                    .drivers?[driversIndex]
+                                    .preinspectioncheck ==
+                                true &&
+                            res.data?[i].drivers?[driversIndex]
+                                    .preinspectioncheck !=
+                                false &&
+                            res.data?[i].drivers?[driversIndex]
+                                    .preinspectionRequired !=
+                                true) ...[
                           CmButton(
                             color: const Color(0xFF4CAF9E),
                             buttonTextStyle:
@@ -519,25 +536,20 @@ class SheduledetailPage extends StatelessWidget {
                         ],
                         if (res.data![i].finishJob == null &&
                             res.data![i].startJob != null &&
-                            res.data![i].departEnviroFacility != null) ...[
+                            res.data![i].departEnviroFacility != null &&
+                            res.data?[i].drivers?[driversIndex]
+                                    .preinspectioncheck !=
+                                false &&
+                            res.data?[i].drivers?[driversIndex]
+                                    .preinspectionRequired !=
+                                true) ...[
                           CmButton(
                             color: const Color(0xFF4CAF9E),
                             buttonTextStyle:
                                 TextStyle(color: Colors.white, fontSize: 10.w),
                             onPressed: () {
-                              dateTimePickerWithouIcon(
-                                  context,
-                                  DateTime.now(),
-                                  (date) => vmSchedule.enviroDatePickerFn(
-                                      context,
-                                      vmSchedule.selectedFinishedJobDate ??
-                                          DateTime.now(),
-                                      date,
-                                      "job_finished",
-                                      vmSchedule
-                                          .shedulecardResponse.data![i].id!,
-                                      ScheduleStatusType.finishedJob,
-                                      toCameraGalleryScreen: true));
+                              context.router.push(ScheduleImageRoute(
+                                  fromJobStarted: false, id: id));
                             },
                             borderRadius: 0,
                             fontSize: 10.w,
@@ -546,7 +558,13 @@ class SheduledetailPage extends StatelessWidget {
                           ),
                           sized0hx05
                         ],
-                        if (res.data![i].departWasteDepot != null) ...[
+                        if (res.data![i].departWasteDepot != null &&
+                            res.data?[i].drivers?[driversIndex]
+                                    .preinspectioncheck !=
+                                false &&
+                            res.data?[i].drivers?[driversIndex]
+                                    .preinspectionRequired !=
+                                true) ...[
                           CmButton(
                             color: const Color(0xFF4CAF9E),
                             buttonTextStyle:
@@ -574,22 +592,28 @@ class SheduledetailPage extends StatelessWidget {
                           ),
                           sized0hx05
                         ],
-                        if (res.data![i].image == null &&
-                            res.data![i].finishJob != null) ...[
-                          CmButton(
-                            text: "Take Signature",
-                            onPressed: () {
-                              vmSchedule.signaturePath = null;
-                              context.router
-                                  .push(SheduleSignatureRoute(id: id, i: i));
-                            },
-                            color: const Color.fromARGB(255, 51, 188, 165),
-                            borderRadius: 3.w,
-                            buttonTextStyle:
-                                TextStyle(color: Colors.white, fontSize: 9.w),
-                          ),
-                          sized0hx05
-                        ],
+                        // if (res.data![i].image == null &&
+                        //     res.data![i].finishJob != null &&
+                        //     res.data?[i].drivers?[driversIndex]
+                        //             .preinspectioncheck !=
+                        //         false &&
+                        //     res.data?[i].drivers?[driversIndex]
+                        //             .preinspectionRequired !=
+                        //         true) ...[
+                        CmButton(
+                          text: "Take Signature",
+                          onPressed: () {
+                            vmSchedule.signaturePath = null;
+                            context.router
+                                .push(SheduleSignatureRoute(id: id, i: i));
+                          },
+                          color: const Color.fromARGB(255, 51, 188, 165),
+                          borderRadius: 3.w,
+                          buttonTextStyle:
+                              TextStyle(color: Colors.white, fontSize: 9.w),
+                        ),
+                        sized0hx05,
+                        // ],
                         if (res.data![i].arriveEnviroFacility == null &&
                             res.data![i].departWasteDepot != null) ...[
                           CmButton(
@@ -773,7 +797,7 @@ class SheduledetailPage extends StatelessWidget {
                         sized0hx20
                       ],
                     ),
-            );
+                  );
           },
         ));
   }

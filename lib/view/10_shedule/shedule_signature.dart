@@ -261,38 +261,40 @@ class SheduleSignaturePage extends StatelessWidget {
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
-                                  CmButton(
-                                    color: vmSchedule.signColor,
-                                    onPressed: () async {
-                                      Uint8List? pickedTypes = await vmSchedule
-                                          .signaturecontroller
-                                          .toPngBytes();
-                                      if (pickedTypes != null) {
-                                        final tempDir =
-                                            await getTemporaryDirectory();
-                                        final filePath =
-                                            '${tempDir.path}/${DateTime.now()}.png';
-                                        File file =
-                                            await File(filePath).create();
-                                        await file.writeAsBytes(pickedTypes);
-                                        vmSchedule.setSignaturePicker(
-                                            pickedTypes, filePath);
-                                      } else {}
+                                  if (vmSchedule.signaturePath == null &&
+                                      vmSchedule.signaturecontroller.isNotEmpty)
+                                    CmButton(
+                                      color: vmSchedule.signColor,
+                                      onPressed: () async {
+                                        Uint8List? pickedTypes =
+                                            await vmSchedule.signaturecontroller
+                                                .toPngBytes();
+                                        if (pickedTypes != null) {
+                                          final tempDir =
+                                              await getTemporaryDirectory();
+                                          final filePath =
+                                              '${tempDir.path}/${DateTime.now()}.png';
+                                          File file =
+                                              await File(filePath).create();
+                                          await file.writeAsBytes(pickedTypes);
+                                          vmSchedule.setSignaturePicker(
+                                              pickedTypes, filePath);
+                                        } else {}
 
-                                      if (vmSchedule.signaturePath != null) {
-                                        showToast(context,
-                                            msg: "Saved your signature",
-                                            color: Colors.green);
-                                      } else {
-                                        showToast(context,
-                                            msg: "No signature to save",
-                                            color: Colors.red);
-                                      }
-                                    },
-                                    borderRadius: 3.w,
-                                    textcolor: vmSchedule.textColor,
-                                    text: 'Save',
-                                  ),
+                                        if (vmSchedule.signaturePath != null) {
+                                          showToast(context,
+                                              msg: "Saved your signature",
+                                              color: Colors.green);
+                                        } else {
+                                          showToast(context,
+                                              msg: "No signature to save",
+                                              color: Colors.red);
+                                        }
+                                      },
+                                      borderRadius: 3.w,
+                                      textcolor: vmSchedule.textColor,
+                                      text: 'Save',
+                                    ),
                                   sized0wx10,
                                   CmButton(
                                     color: vmSchedule.signColor,
