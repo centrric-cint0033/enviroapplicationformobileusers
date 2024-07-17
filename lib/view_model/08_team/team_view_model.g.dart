@@ -1599,6 +1599,28 @@ mixin _$TeamViewModel on TeamViewModelBase, Store {
   }
 
   @override
+  void addSelectedMember(TeamResModel member) {
+    final _$actionInfo = _$TeamViewModelBaseActionController.startAction(
+        name: 'TeamViewModelBase.addSelectedMember');
+    try {
+      return super.addSelectedMember(member);
+    } finally {
+      _$TeamViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void removeSelectedMember(TeamResModel member) {
+    final _$actionInfo = _$TeamViewModelBaseActionController.startAction(
+        name: 'TeamViewModelBase.removeSelectedMember');
+    try {
+      return super.removeSelectedMember(member);
+    } finally {
+      _$TeamViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 allEmployeeResponse: ${allEmployeeResponse},

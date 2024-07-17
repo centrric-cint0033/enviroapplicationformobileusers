@@ -1,15 +1,22 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:enviro_mobile_application/model/04_ohs/oh&s_resp_model.dart';
+import 'package:enviro_mobile_application/utilis/constant.dart';
+import 'package:enviro_mobile_application/view/04_ohs/ohs_widget/notification_comment_list.dart';
+import 'package:enviro_mobile_application/view_model/04_ohs/ohs_view_model.dart';
+import 'package:enviro_mobile_application/view_model/11_shedule/shedule_page_view_model.dart';
 import 'package:enviro_mobile_application/widgets/cmn_title_textwidget.dart';
 import 'package:enviro_mobile_application/widgets/drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/intl.dart';
 
 @RoutePage()
 class NotificationDetailPage extends StatelessWidget {
   final OhsRespModel data;
-  const NotificationDetailPage({Key? key, required this.data})
+  final int index;
+  const NotificationDetailPage(
+      {Key? key, required this.data, required this.index})
       : super(key: key);
 
   @override
@@ -20,106 +27,227 @@ class NotificationDetailPage extends StatelessWidget {
         title: cmnTitleWidget('Notification Detail'),
       ),
       body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(18.0),
-              child: Container(
-                width: 390,
-                height: 262.h,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8.0),
-                ),
-                child: Card(
-                  color: const Color.fromARGB(255, 188, 209, 228),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Observer(builder: (_) {
-                        return const Text('');
-                      }),
-                      const SizedBox(
-                        height: 8,
-                      ),
-                      Column(
-                        children: [
-                          Text(
-                            data.created_by ?? '',
-                          ),
-                          Text(
-                            data.description ?? '',
-                          ),
-                          Text(
-                            data.edited_date_time ?? '',
-                          )
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 8,
-                      ),
-                      const SizedBox(
-                        height: 8,
-                      ),
-                      TextButton(
-                        onPressed: () {},
-                        style: ButtonStyle(
-                          side: MaterialStateProperty.all<BorderSide>(
-                            const BorderSide(color: Colors.black),
-                          ),
-                          backgroundColor: MaterialStateProperty.all<Color>(
-                            const Color.fromARGB(255, 188, 209, 228),
-                          ),
-                          shape: MaterialStateProperty.all<OutlinedBorder>(
-                            RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20.0),
+        child: Observer(builder: (context) {
+          final res = vmOhs.notificationpageResponse;
+          return Column(
+            children: [
+              res.loading
+                  ? const Center(child: CircularProgressIndicator())
+                  : Column(
+                      children: [
+                        Padding(
+                          padding: screenWidth,
+                          child: SizedBox(
+                            width: double.infinity,
+                            child: Card(
+                              color: Colors.grey.shade200,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  sized0hx10,
+                                  Column(
+                                    children: [
+                                      Text(
+                                        data.title ?? '',
+                                        style: TextStyle(fontSize: 10.w),
+                                      ),
+                                      Text(
+                                        data.created_by ?? '',
+                                        style: TextStyle(fontSize: 10.w),
+                                      ),
+                                      Text(
+                                        data.description ?? '',
+                                        style: TextStyle(fontSize: 10.w),
+                                      ),
+                                      Text(
+                                        DateFormat('yyyy-MM-dd').format(
+                                          DateTime.parse(
+                                              data.edited_date_time ?? ''),
+                                        ),
+                                        style: TextStyle(fontSize: 10.w),
+                                      )
+                                    ],
+                                  ),
+                                  sized0hx10,
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      if (data.file_attachment?.isNotEmpty ??
+                                          false)
+                                        InkWell(
+                                          onTap: () {
+                                            vmSchedule.launchURL(
+                                                data.file_attachment ?? "");
+                                          },
+                                          child: Container(
+                                            width: 80.h,
+                                            decoration: BoxDecoration(
+                                                border: Border.all(),
+                                                borderRadius:
+                                                    BorderRadius.circular(7)),
+                                            child: Column(
+                                              children: [
+                                                Column(children: [
+                                                  const Icon(
+                                                      Icons.file_copy_outlined),
+                                                  Text(
+                                                    data.file_attachment ?? "",
+                                                    style: TextStyle(
+                                                        fontSize: 10.w),
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+                                                  )
+                                                ])
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      Container(
+                                          height: 30.h,
+                                          width: 80.h,
+                                          decoration: BoxDecoration(
+                                              border: Border.all(),
+                                              borderRadius:
+                                                  BorderRadius.circular(7)),
+                                          child: TextButton(
+                                              onPressed: () {
+                                                vmOhs.ohsDeleteNotificationApi(
+                                                    context: context,
+                                                    notificationId:
+                                                        data.id ?? 0);
+                                              },
+                                              child: vmOhs
+                                                      .deleteNotificationResponse
+                                                      .loading
+                                                  ? SizedBox(
+                                                      height: 12.w,
+                                                      width: 12.w,
+                                                      child:
+                                                          const CircularProgressIndicator(
+                                                        strokeWidth: 2,
+                                                      ))
+                                                  : Text(
+                                                      "Delete",
+                                                      style: TextStyle(
+                                                          color: Colors
+                                                              .grey.shade800,
+                                                          fontSize: 10.w),
+                                                    ))),
+                                      if (vmOhs.notificationpageResponse
+                                              .data?[index].userReadStatus ==
+                                          false)
+                                        Container(
+                                            height: 30.h,
+                                            width: 80.h,
+                                            decoration: BoxDecoration(
+                                                border: Border.all(),
+                                                borderRadius:
+                                                    BorderRadius.circular(7)),
+                                            child: TextButton(
+                                                onPressed: () {
+                                                  vmOhs
+                                                      .ohsStatusNotificationApi(
+                                                          context: context,
+                                                          notificationId:
+                                                              data.id ?? 0);
+                                                },
+                                                child: vmOhs
+                                                        .statusNotificationResponse
+                                                        .loading
+                                                    ? SizedBox(
+                                                        height: 12.w,
+                                                        width: 12.w,
+                                                        child:
+                                                            const CircularProgressIndicator(
+                                                          strokeWidth: 2,
+                                                        ))
+                                                    : Text(
+                                                        "Read",
+                                                        style: TextStyle(
+                                                            color: Colors
+                                                                .grey.shade800,
+                                                            fontSize: 10.w),
+                                                      )))
+                                    ],
+                                  ),
+                                  sized0hx20,
+                                ],
+                              ),
                             ),
                           ),
                         ),
-                        child: const Text(
-                          ' Read',
-                          style: TextStyle(color: Colors.black),
-                        ),
-                      ),
-                    ],
-                  ),
+                        sized0hx20,
+                        Padding(
+                          padding: screenWidth,
+                          child: NotificationCommentList(
+                              data: data, indexx: index),
+                        )
+                      ],
+                    ),
+            ],
+          );
+        }),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: Padding(
+        padding: EdgeInsets.only(left: 15.w, right: 15.w, bottom: 20.w),
+        child: SizedBox(
+          child: TextField(
+            controller: vmOhs.addCommentController,
+            cursorColor: Colors.grey,
+            autofocus: false,
+            decoration: InputDecoration(
+              focusColor: Colors.black12,
+              fillColor: Colors.grey.shade200,
+              filled: true,
+              enabledBorder: const OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.grey)),
+              border: OutlineInputBorder(
+                borderSide: BorderSide(
+                  color: Colors.grey.shade300,
                 ),
               ),
-            ),
-            const SizedBox(height: 38),
-            Padding(
-              padding: const EdgeInsets.all(26.0),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: TextField(
-                      decoration: InputDecoration(
-                        hintText: 'Reply',
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(20),
-                        ),
+              focusedBorder: const OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.grey)),
+              hintText: 'Add Comment',
+              hintStyle: TextStyle(fontSize: 9.w),
+              suffixIcon: Observer(builder: (context) {
+                final res = vmOhs.addCommentNotifyResponse;
+                return Padding(
+                  padding: const EdgeInsets.only(right: 8.0),
+                  child: CircleAvatar(
+                    backgroundColor: Colors.blue.shade100,
+                    child: Center(
+                      child: IconButton(
+                        icon: res.loading
+                            ? SizedBox(
+                                height: 12.w,
+                                width: 12.w,
+                                child: const CircularProgressIndicator(
+                                  strokeWidth: 2,
+                                ))
+                            : Icon(
+                                Icons.send,
+                                size: 13.w,
+                              ),
+                        onPressed: () {
+                          if (vmOhs.addCommentController.text.isNotEmpty) {
+                            vmOhs.ohsAddCommentNotificationApi(
+                                context: context,
+                                notificationId: data.id ?? 0,
+                                comment: vmOhs.addCommentController.text);
+                          }
+                        },
                       ),
                     ),
                   ),
-                  const SizedBox(width: 16),
-                  ElevatedButton(
-                    onPressed: () {
-                      // Add send button functionality here
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.blue,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                    ),
-                    child: const Text(
-                      'Send',
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ),
-                ],
-              ),
+                );
+              }),
             ),
-          ],
+            style: TextStyle(fontSize: 9.w),
+            maxLines: null,
+          ),
         ),
       ),
     );

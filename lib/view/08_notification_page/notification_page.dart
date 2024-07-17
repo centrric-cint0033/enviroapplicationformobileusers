@@ -43,7 +43,7 @@ class NotificationPage extends StatelessWidget {
                 onPressed: () {
                   vmTeam.selectedMember = null;
                   vmOhs.selectedFileNameNotification = null;
-                  showMyDialognotification(context);
+                  showMyDialogNotification(context);
                 },
                 text: 'Add New +',
                 color: Appthemes.cPrimary,

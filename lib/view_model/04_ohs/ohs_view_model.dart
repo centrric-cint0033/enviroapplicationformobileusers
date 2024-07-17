@@ -1,8 +1,10 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:enviro_mobile_application/api_response/api_response.dart';
 import 'package:enviro_mobile_application/model/00_common_model/folder_model/folder_model.dart';
 import 'package:enviro_mobile_application/model/04_ohs/oh&s_resp_model.dart';
 import 'package:enviro_mobile_application/service/04_ohs/ohs_service.dart';
 import 'package:enviro_mobile_application/utilis/injection.dart';
+import 'package:enviro_mobile_application/view_model/08_team/team_view_model.dart';
 import 'package:enviro_mobile_application/widgets/ww_popup_error.dart';
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
@@ -23,11 +25,8 @@ abstract class OHSViewModelBase with Store {
 
   OHSViewModelBase(this.ohsService);
 
-//      _      ____    ___      ____      _      _       _       ____
-//     / \    |  _ \  |_ _|    / ___|    / \    | |     | |     / ___|
-//    / _ \   | |_) |  | |    | |       / _ \   | |     | |     \___ \
-//   / ___ \  |  __/   | |    | |___   / ___ \  | |___  | |___   ___) |
-//  /_/   \_\ |_|     |___|    \____| /_/   \_\ |_____| |_____| |____/
+  @observable
+  TextEditingController addCommentController = TextEditingController();
 
   @observable
   ApiResponse<List<OhsRespModel>> newspageResponse =
@@ -274,8 +273,174 @@ abstract class OHSViewModelBase with Store {
         addNotificationResponse = addNotificationResponse.copyWith(
             data: r, errors: null, loading: false);
         ohsNotificationApi();
+        vmTeam.selectedFilePath = "";
         selectedFileNameNotification = null;
-        Navigator.of(context).pop();
+        vmTeam.selectedMember = null;
+        context.router.pop();
+      },
+    );
+  }
+
+  @observable
+  ApiResponse<OhsRespModel> addNewsResponse = ApiResponse<OhsRespModel>();
+  @action
+  Future<void> ohsAddNewsApi(
+      {required BuildContext context, required OhsRespModel data}) async {
+    addNewsResponse = addNewsResponse.copyWith(errors: null, loading: true);
+
+    final result = await ohsService.ohsAddNewsServiceApi(data: {
+      "title": data.title ?? "",
+      "description": data.description ?? "",
+      "members": "${data.members}",
+      "file_attachment": data.file_attachment ?? ""
+    });
+    return result.fold(
+      (l) {
+        addNewsResponse = addNewsResponse.copyWith(errors: l, loading: false);
+        popupErrorData(context, mainFailure: l);
+      },
+      (r) {
+        addNewsResponse =
+            addNewsResponse.copyWith(data: r, errors: null, loading: false);
+        ohsNewsApi();
+        vmTeam.selectedFilePath = "";
+        selectedFileNameNotification = null;
+        vmTeam.selectedMember = null;
+        context.router.pop();
+      },
+    );
+  }
+
+  @observable
+  ApiResponse<String> addCommentNotifyResponse = ApiResponse<String>();
+  @action
+  Future<void> ohsAddCommentNotificationApi({
+    required BuildContext context,
+    required int notificationId,
+    required String comment,
+  }) async {
+    addCommentNotifyResponse =
+        addCommentNotifyResponse.copyWith(errors: null, loading: true);
+
+    final result = await ohsService.ohsAddCommentNotificationApi(
+        notificationId: notificationId, comment: comment);
+    return result.fold(
+      (l) {
+        addCommentNotifyResponse =
+            addCommentNotifyResponse.copyWith(errors: l, loading: false);
+        popupErrorData(context, mainFailure: l);
+      },
+      (r) {
+        addCommentNotifyResponse = addCommentNotifyResponse.copyWith(
+            data: r, errors: null, loading: false);
+        addCommentController.clear();
+        ohsNotificationApi();
+      },
+    );
+  }
+
+  @observable
+  ApiResponse<String> deleteNotificationResponse = ApiResponse<String>();
+  @action
+  Future<void> ohsDeleteNotificationApi({
+    required BuildContext context,
+    required int notificationId,
+  }) async {
+    deleteNotificationResponse =
+        deleteNotificationResponse.copyWith(errors: null, loading: true);
+
+    final result = await ohsService.ohsDeleteNotificationApi(
+        notificationId: notificationId);
+    return result.fold(
+      (l) {
+        deleteNotificationResponse =
+            deleteNotificationResponse.copyWith(errors: l, loading: false);
+        popupErrorData(context, mainFailure: l);
+      },
+      (r) {
+        deleteNotificationResponse = deleteNotificationResponse.copyWith(
+            data: r, errors: null, loading: false);
+        ohsNotificationApi();
+        context.router.pop();
+      },
+    );
+  }
+
+  @observable
+  ApiResponse<String> statusNotificationResponse = ApiResponse<String>();
+  @action
+  Future<void> ohsStatusNotificationApi({
+    required BuildContext context,
+    required int notificationId,
+  }) async {
+    statusNotificationResponse =
+        statusNotificationResponse.copyWith(errors: null, loading: true);
+
+    final result = await ohsService.ohsStatusNotificationApi(
+        notificationId: notificationId);
+    return result.fold(
+      (l) {
+        statusNotificationResponse =
+            statusNotificationResponse.copyWith(errors: l, loading: false);
+        popupErrorData(context, mainFailure: l);
+      },
+      (r) {
+        statusNotificationResponse = statusNotificationResponse.copyWith(
+            data: r, errors: null, loading: false);
+        ohsNotificationApi();
+        context.router.pop();
+      },
+    );
+  }
+
+  @observable
+  ApiResponse<String> deleteNewsResponse = ApiResponse<String>();
+  @action
+  Future<void> ohsDeleteNewsApi({
+    required BuildContext context,
+    required int newsId,
+  }) async {
+    deleteNewsResponse =
+        deleteNewsResponse.copyWith(errors: null, loading: true);
+
+    final result = await ohsService.ohsDeleteNewsApi(newsId: newsId);
+    return result.fold(
+      (l) {
+        deleteNewsResponse =
+            deleteNewsResponse.copyWith(errors: l, loading: false);
+        popupErrorData(context, mainFailure: l);
+      },
+      (r) {
+        deleteNewsResponse =
+            deleteNewsResponse.copyWith(data: r, errors: null, loading: false);
+        ohsNewsApi();
+        context.router.pop();
+      },
+    );
+  }
+
+  @observable
+  ApiResponse<String> statusNewsResponse = ApiResponse<String>();
+  @action
+  Future<void> ohsStatusNewsApi({
+    required BuildContext context,
+    required int newsId,
+  }) async {
+    statusNewsResponse =
+        statusNewsResponse.copyWith(errors: null, loading: true);
+
+    final result = await ohsService.ohsStatusNewsApi(newsId: newsId);
+    return result.fold(
+      (l) {
+        statusNewsResponse =
+            statusNewsResponse.copyWith(errors: l, loading: false);
+        popupErrorData(context, mainFailure: l);
+      },
+      (r) {
+        statusNewsResponse =
+            statusNewsResponse.copyWith(data: r, errors: null, loading: false);
+        ohsNewsApi();
+        // context.router.pop();
       },
     );
   }

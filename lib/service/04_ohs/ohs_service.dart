@@ -20,6 +20,8 @@ abstract class IohsService {
       ohsNotificationServiceApi({int? page});
   Future<Either<Map<MainFailure, dynamic>, OhsRespModel>>
       ohsAddNotificationServiceApi({required Map<String, String> data});
+  Future<Either<Map<MainFailure, dynamic>, OhsRespModel>> ohsAddNewsServiceApi(
+      {required Map<String, String> data});
   Future<Either<MainFailure, FolderListModel>> ohsnewsfolderservicefunction(
       int id);
 
@@ -33,6 +35,17 @@ abstract class IohsService {
       folderName, id);
   Future<Either<MainFailure, String>> ohsnewsfolderdeletefunction(
       folders, int id);
+  Future<Either<Map<MainFailure, dynamic>, String>>
+      ohsAddCommentNotificationApi(
+          {required int notificationId, required String comment});
+  Future<Either<Map<MainFailure, dynamic>, String>> ohsDeleteNotificationApi(
+      {required int notificationId});
+  Future<Either<Map<MainFailure, dynamic>, String>> ohsDeleteNewsApi(
+      {required int newsId});
+  Future<Either<Map<MainFailure, dynamic>, String>> ohsStatusNotificationApi(
+      {required int notificationId});
+  Future<Either<Map<MainFailure, dynamic>, String>> ohsStatusNewsApi(
+      {required int newsId});
 }
 
 @LazySingleton(as: IohsService)
@@ -220,7 +233,10 @@ class OhsService implements IohsService {
       ohsAddNotificationServiceApi({required Map<String, String> data}) async {
     var response = await getIt<HttpService>().multipartRequest(
         apiUrl: ApiEndPoints().ohsAddNotification, method: 'POST', data: data);
-
+    // for (var i = 0; i < ids.length; i++) {
+    //   request.fields["members[$i]"] = "${ids[i]}";
+    //   log(request.fields["members[$i]"].toString());
+    // }
     return response.fold(
       (l) => Left(l),
       (res) async {
@@ -228,6 +244,118 @@ class OhsService implements IohsService {
         OhsRespModel ohsAddNotification = OhsRespModel.fromJson(data);
 
         return Right(ohsAddNotification);
+      },
+    );
+  }
+
+  @override
+  Future<Either<Map<MainFailure, dynamic>, String>>
+      ohsAddCommentNotificationApi(
+          {required int notificationId, required String comment}) async {
+    var response = await getIt<HttpService>().multipartRequest(
+        apiUrl:
+            '${ApiEndPoints.endpointCommentAddNotification}$notificationId/',
+        method: 'POST',
+        data: {"comment": comment});
+
+    return response.fold(
+      (l) => Left(l),
+      (res) async => const Right('success'),
+    );
+  }
+
+  @override
+  Future<Either<Map<MainFailure, dynamic>, String>> ohsDeleteNotificationApi(
+      {required int notificationId}) async {
+    var response = await getIt<HttpService>().request(
+        authenticated: true,
+        method: HttpMethod.delete,
+        apiUrl: '${ApiEndPoints.endpointDeleteNotification}$notificationId/');
+
+    return response.fold(
+      (l) {
+        (l.values.first);
+        return Left(l);
+      },
+      (res) async {
+        return const Right('success');
+      },
+    );
+  }
+
+  @override
+  Future<Either<Map<MainFailure, dynamic>, String>> ohsStatusNotificationApi(
+      {required int notificationId}) async {
+    var response = await getIt<HttpService>().request(
+        authenticated: true,
+        method: HttpMethod.get,
+        apiUrl: '${ApiEndPoints.endpointStatusNotification}$notificationId/');
+
+    return response.fold(
+      (l) {
+        (l.values.first);
+        return Left(l);
+      },
+      (res) async {
+        return const Right('success');
+      },
+    );
+  }
+
+  @override
+  Future<Either<Map<MainFailure, dynamic>, OhsRespModel>> ohsAddNewsServiceApi(
+      {required Map<String, String> data}) async {
+    var response = await getIt<HttpService>().multipartRequest(
+        apiUrl: ApiEndPoints().ohsAddNews, method: 'POST', data: data);
+    // for (var i = 0; i < ids.length; i++) {
+    //   request.fields["members[$i]"] = "${ids[i]}";
+    //   log(request.fields["members[$i]"].toString());
+    // }
+    return response.fold(
+      (l) => Left(l),
+      (res) async {
+        var data = jsonDecode(res.body);
+        OhsRespModel ohsAddNews = OhsRespModel.fromJson(data);
+
+        return Right(ohsAddNews);
+      },
+    );
+  }
+
+  @override
+  Future<Either<Map<MainFailure, dynamic>, String>> ohsDeleteNewsApi(
+      {required int newsId}) async {
+    var response = await getIt<HttpService>().request(
+        authenticated: true,
+        method: HttpMethod.delete,
+        apiUrl: '${ApiEndPoints.endpointDeleteNews}$newsId/');
+
+    return response.fold(
+      (l) {
+        (l.values.first);
+        return Left(l);
+      },
+      (res) async {
+        return const Right('success');
+      },
+    );
+  }
+
+  @override
+  Future<Either<Map<MainFailure, dynamic>, String>> ohsStatusNewsApi(
+      {required int newsId}) async {
+    var response = await getIt<HttpService>().request(
+        authenticated: true,
+        method: HttpMethod.get,
+        apiUrl: '${ApiEndPoints.endpointStatusNews}$newsId/');
+
+    return response.fold(
+      (l) {
+        (l.values.first);
+        return Left(l);
+      },
+      (res) async {
+        return const Right('success');
       },
     );
   }

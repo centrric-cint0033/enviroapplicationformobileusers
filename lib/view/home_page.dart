@@ -143,10 +143,11 @@ void onsalesfunction(BuildContext context) async {
 
 void ohsfunction(BuildContext context) {
   // vmProfile.profileviewmodelfunction();
-  context.router.pushNamed(RouteNames.ohsPage);
+  vmTeam.getAllEmployee();
   vmOhs.ohsNotificationApi();
   vmOhs.ohsNewsApi();
   vmOhs.ohsnewsfolderviewmodelfunction(1);
+  context.router.pushNamed(RouteNames.ohsPage);
 }
 
 void intranetfuntion(BuildContext context) {

@@ -217,6 +217,7 @@ abstract class $AppRouter extends _i38.RootStackRouter {
         child: _i14.NotificationDetailPage(
           key: args.key,
           data: args.data,
+          index: args.index,
         ),
       );
     },
@@ -233,6 +234,7 @@ abstract class $AppRouter extends _i38.RootStackRouter {
         child: _i16.OhsDetailPage(
           key: args.key,
           data: args.data,
+          index: args.index,
         ),
       );
     },
@@ -772,12 +774,14 @@ class NotificationDetailRoute
   NotificationDetailRoute({
     _i39.Key? key,
     required _i42.OhsRespModel data,
+    required int index,
     List<_i38.PageRouteInfo>? children,
   }) : super(
           NotificationDetailRoute.name,
           args: NotificationDetailRouteArgs(
             key: key,
             data: data,
+            index: index,
           ),
           initialChildren: children,
         );
@@ -792,15 +796,18 @@ class NotificationDetailRouteArgs {
   const NotificationDetailRouteArgs({
     this.key,
     required this.data,
+    required this.index,
   });
 
   final _i39.Key? key;
 
   final _i42.OhsRespModel data;
 
+  final int index;
+
   @override
   String toString() {
-    return 'NotificationDetailRouteArgs{key: $key, data: $data}';
+    return 'NotificationDetailRouteArgs{key: $key, data: $data, index: $index}';
   }
 }
 
@@ -824,12 +831,14 @@ class OhsDetailRoute extends _i38.PageRouteInfo<OhsDetailRouteArgs> {
   OhsDetailRoute({
     _i39.Key? key,
     required _i42.OhsRespModel data,
+    required int index,
     List<_i38.PageRouteInfo>? children,
   }) : super(
           OhsDetailRoute.name,
           args: OhsDetailRouteArgs(
             key: key,
             data: data,
+            index: index,
           ),
           initialChildren: children,
         );
@@ -844,15 +853,18 @@ class OhsDetailRouteArgs {
   const OhsDetailRouteArgs({
     this.key,
     required this.data,
+    required this.index,
   });
 
   final _i39.Key? key;
 
   final _i42.OhsRespModel data;
 
+  final int index;
+
   @override
   String toString() {
-    return 'OhsDetailRouteArgs{key: $key, data: $data}';
+    return 'OhsDetailRouteArgs{key: $key, data: $data, index: $index}';
   }
 }
 

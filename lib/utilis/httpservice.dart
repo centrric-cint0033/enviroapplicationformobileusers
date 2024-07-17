@@ -84,6 +84,30 @@ class HttpService {
     }
   }
 
+  Future<Either<Map<MainFailure, dynamic>, Response>> multipartRequestss({
+    required MultipartRequest request,
+  }) async {
+    final token = await SecureStorage().readData(key: "token");
+    request.headers.addAll({
+      'Accept': 'application/json',
+      'Content-Type': 'multipart/form-data',
+    });
+    if (token != null) {
+      request.headers.addAll({'Authorization': 'Bearer $token'});
+    }
+
+    StreamedResponse streamedResponse = await request.send();
+    final response = await Response.fromStream(streamedResponse);
+    customPrint(content: response.body, name: "StreamedResponse");
+
+    if (response.statusCode == HttpStatus.ok ||
+        response.statusCode == HttpStatus.created) {
+      return Right(response); // Return the Response object directly
+    } else {
+      return Left({const MainFailure.clientFailure(): response});
+    }
+  }
+
   bool isFilePath(String path) => File(path).existsSync();
   Future<Either<Map<MainFailure, dynamic>, Response>> multipartRequest({
     MultipartRequest? mRequest,

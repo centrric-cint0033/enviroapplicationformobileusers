@@ -44,17 +44,17 @@ class SheduledetailPage extends StatelessWidget {
         body: Observer(
           builder: (context) {
             final res = vmSchedule.shedulecardResponse;
-            return res.loading
-                ? const Center(
-                    child: CircularProgressIndicator(
-                      color: Appthemes.cPrimary,
-                    ),
-                  )
-                : SingleChildScrollView(
-                    padding: screenWidth,
-                    child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
+            return SingleChildScrollView(
+              padding: screenWidth,
+              child: res.loading
+                  ? const Center(
+                      child: CircularProgressIndicator(
+                        color: Appthemes.cPrimary,
+                      ),
+                    )
+                  : Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
                           sized0hx10,
                           Align(
                             alignment: Alignment.topRight,
@@ -570,265 +570,259 @@ class SheduledetailPage extends StatelessWidget {
                                 borderRadius: 3.w,
                                 buttonTextStyle: TextStyle(
                                     color: Colors.white, fontSize: 9.w),
+                              )
+                            ],
+                            if (res.data![i].arriveAtWasteDepot == null) ...[
+                              CmButton(
+                                color: const Color(0xFF4CAF9E),
+                                buttonTextStyle: TextStyle(
+                                    color: Colors.white, fontSize: 10.w),
+                                onPressed: () {
+                                  dateTimePickerWithouIcon(
+                                      context,
+                                      DateTime.now(),
+                                      (date) => vmSchedule.enviroDatePickerFn(
+                                            context,
+                                            vmSchedule
+                                                    .selectedArrivedEnviroDate ??
+                                                DateTime.now(),
+                                            date,
+                                            "arrived_at_waste_depot",
+                                            vmSchedule.shedulecardResponse
+                                                .data![i].id!,
+                                            ScheduleStatusType.arrivedAtDepot,
+                                          ));
+                                },
+                                borderRadius: 0,
+                                fontSize: 10.w,
+                                text: "Arrived at Waste Depot",
+                                loading: res.loading,
                               ),
-                              if (res.data![i].arriveAtWasteDepot == null) ...[
-                                CmButton(
-                                  color: const Color(0xFF4CAF9E),
-                                  buttonTextStyle: TextStyle(
-                                      color: Colors.white, fontSize: 10.w),
-                                  onPressed: () {
-                                    dateTimePickerWithouIcon(
-                                        context,
-                                        DateTime.now(),
-                                        (date) => vmSchedule.enviroDatePickerFn(
-                                              context,
-                                              vmSchedule
-                                                      .selectedArrivedEnviroDate ??
-                                                  DateTime.now(),
-                                              date,
-                                              "arrived_at_waste_depot",
-                                              vmSchedule.shedulecardResponse
-                                                  .data![i].id!,
-                                              ScheduleStatusType.arrivedAtDepot,
-                                            ));
-                                  },
-                                  borderRadius: 0,
-                                  fontSize: 10.w,
-                                  text: "Departed Waste Depot",
-                                  loading: res.loading,
-                                ),
-                                sized0hx05
-                              ],
-                              if (res.data![i].departWasteDepot == null) ...[
-                                CmButton(
-                                  color: const Color(0xFF4CAF9E),
-                                  buttonTextStyle: TextStyle(
-                                      color: Colors.white, fontSize: 10.w),
-                                  onPressed: () {
-                                    dateTimePickerWithouIcon(
-                                        context,
-                                        DateTime.now(),
-                                        (date) => vmSchedule.enviroDatePickerFn(
-                                              context,
-                                              vmSchedule
-                                                      .selectedDepartedWasteDepotDate ??
-                                                  DateTime.now(),
-                                              date,
-                                              "departed_waste_depot",
-                                              vmSchedule.shedulecardResponse
-                                                  .data![i].id!,
-                                              ScheduleStatusType
-                                                  .departedWasteDepot,
-                                            ));
-                                  },
-                                  borderRadius: 0,
-                                  fontSize: 10.w,
-                                  text: "Departed Waste Depot",
-                                  loading: res.loading,
-                                ),
-                                sized0hx05
-                              ],
+                              sized0hx05
+                            ],
+                            if (res.data![i].departWasteDepot == null) ...[
+                              CmButton(
+                                color: const Color(0xFF4CAF9E),
+                                buttonTextStyle: TextStyle(
+                                    color: Colors.white, fontSize: 10.w),
+                                onPressed: () {
+                                  dateTimePickerWithouIcon(
+                                      context,
+                                      DateTime.now(),
+                                      (date) => vmSchedule.enviroDatePickerFn(
+                                            context,
+                                            vmSchedule
+                                                    .selectedDepartedWasteDepotDate ??
+                                                DateTime.now(),
+                                            date,
+                                            "departed_waste_depot",
+                                            vmSchedule.shedulecardResponse
+                                                .data![i].id!,
+                                            ScheduleStatusType
+                                                .departedWasteDepot,
+                                          ));
+                                },
+                                borderRadius: 0,
+                                fontSize: 10.w,
+                                text: "Departed Waste Depot",
+                                loading: res.loading,
+                              ),
+                              sized0hx05
+                            ],
 
+                            sized0hx05,
+                            // ],
+                            if (res.data![i].arriveEnviroFacility == null &&
+                                res.data![i].departWasteDepot != null) ...[
+                              CmButton(
+                                color: const Color(0xFF4CAF9E),
+                                buttonTextStyle: TextStyle(
+                                    color: Colors.white, fontSize: 10.w),
+                                onPressed: () {
+                                  dateTimePickerWithouIcon(
+                                      context,
+                                      DateTime.now(),
+                                      (date) => vmSchedule.enviroDatePickerFn(
+                                            context,
+                                            vmSchedule
+                                                    .selectedArrivedEnviroDate ??
+                                                DateTime.now(),
+                                            date,
+                                            "arrived_at_enviro_facility",
+                                            vmSchedule.shedulecardResponse
+                                                .data![i].id!,
+                                            ScheduleStatusType
+                                                .arrivedEnviroFacility,
+                                          ));
+                                },
+                                borderRadius: 0,
+                                fontSize: 10.w,
+                                text: "Arrived at Enviro Facility",
+                                loading: res.loading,
+                              ),
                               sized0hx05,
-                              // ],
-                              if (res.data![i].arriveEnviroFacility == null &&
-                                  res.data![i].departWasteDepot != null) ...[
-                                CmButton(
-                                  color: const Color(0xFF4CAF9E),
-                                  buttonTextStyle: TextStyle(
-                                      color: Colors.white, fontSize: 10.w),
-                                  onPressed: () {
-                                    dateTimePickerWithouIcon(
-                                        context,
-                                        DateTime.now(),
-                                        (date) => vmSchedule.enviroDatePickerFn(
-                                              context,
-                                              vmSchedule
-                                                      .selectedArrivedEnviroDate ??
-                                                  DateTime.now(),
-                                              date,
-                                              "arrived_at_enviro_facility",
-                                              vmSchedule.shedulecardResponse
-                                                  .data![i].id!,
-                                              ScheduleStatusType
-                                                  .arrivedEnviroFacility,
-                                            ));
+                            ],
+                            if (res.data![i].completed != null) ...[
+                              SizedBox(
+                                width: 150.w,
+                                child: Row(
+                                  children: [
+                                    Expanded(
+                                      child: CmButton(
+                                        borderRadius: 3.w,
+                                        color: const Color.fromARGB(
+                                            255, 51, 188, 165),
+                                        buttonTextStyle: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 9.w,
+                                        ),
+                                        onPressed: () {
+                                          context.router.push(
+                                              SheduleCommentRoute(
+                                                  id: id, i: i));
+                                        },
+                                        text: "Comment",
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              sized0hx05,
+                              SizedBox(
+                                width: 150.w,
+                                child: Row(
+                                  children: [
+                                    Expanded(
+                                      child: CmButton(
+                                        icon: Icons.camera_alt,
+                                        iconSize: 14.w,
+                                        borderRadius: 3.w,
+                                        color: Colors.black,
+                                        buttonTextStyle: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 9.w,
+                                        ),
+                                        onPressed: () {
+                                          vmSchedule.clearLists();
+                                          context.router.push(
+                                              ScheduleImageRoute(
+                                                  id: id, fromAddMedia: true));
+                                        },
+                                        text: "Add Media",
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              sized0hx05,
+                              SizedBox(
+                                width: 150.w,
+                                child: Row(
+                                  children: [
+                                    Expanded(
+                                      child: CmButton(
+                                        icon: Icons.video_camera_back,
+                                        iconSize: 14.w,
+                                        borderRadius: 3.w,
+                                        color: Colors.black,
+                                        buttonTextStyle: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 9.w,
+                                        ),
+                                        onPressed: () {
+                                          vmSchedule.pickedCameraVideo = "";
+                                          vmSchedule.pickedGalleryVideo = "";
+                                          vmSchedule.pickedCameraVideoList = [];
+                                          vmSchedule.pickedGalleryVideoList =
+                                              [];
+                                          context.router
+                                              .push(ScheduleVideoRoute(id: id));
+                                        },
+                                        text: "Add Video",
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              sized0hx05
+                            ],
+                            if (res.data?[i].beforePics?.isNotEmpty ??
+                                false) ...[
+                              BeforeImagesList(
+                                i: i,
+                                id: id,
+                              ),
+                              sized0hx05,
+                            ],
+                            if (res.data?[i].afterPics?.isNotEmpty ??
+                                false) ...[
+                              AfterImagesList(i: i, id: id),
+                              sized0hx05,
+                            ],
+                            if (res.data?[i].gallery?.isNotEmpty ?? false) ...[
+                              GalleryImagesList(i: i, id: id),
+                              sized0hx05,
+                            ],
+                            if (res.data?[i].jobVideo?.isNotEmpty ?? false) ...[
+                              VideoList(i: i, id: id),
+                              sized0hx05,
+                            ],
+                            sized0hx05,
+                            Text(
+                              'Team Members',
+                              style: TextStyle(
+                                fontSize: 10.h,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            sized0hx05,
+                            Padding(
+                              padding: EdgeInsets.only(left: 8.w),
+                              child: SizedBox(
+                                height: 80.h,
+                                child: ListView.builder(
+                                  shrinkWrap: true,
+                                  scrollDirection: Axis.horizontal,
+                                  itemCount: res.data?[i].teamEmployees?.length,
+                                  itemBuilder: (context, index) {
+                                    final data =
+                                        res.data?[i].teamEmployees?[index];
+                                    return Column(
+                                      children: [
+                                        SizedBox(
+                                          height: 40.w,
+                                          width: 40.w,
+                                          child: DecoratedBox(
+                                            decoration: BoxDecoration(
+                                                color: Colors.grey.shade700,
+                                                shape: BoxShape.circle),
+                                            child: dpImage("${data?.dp}"),
+                                          ),
+                                        ),
+                                        sized0hx05,
+                                        Text(
+                                          "${data?.name}",
+                                          style: TextStyle(fontSize: 9.w),
+                                        )
+                                      ],
+                                    );
                                   },
-                                  borderRadius: 0,
-                                  fontSize: 10.w,
-                                  text: "Arrived at Enviro Facility",
-                                  loading: res.loading,
                                 ),
-                                sized0hx05,
-                              ],
-                              if (res.data![i].completed != null) ...[
-                                SizedBox(
-                                  width: 150.w,
-                                  child: Row(
-                                    children: [
-                                      Expanded(
-                                        child: CmButton(
-                                          borderRadius: 3.w,
-                                          color: const Color.fromARGB(
-                                              255, 51, 188, 165),
-                                          buttonTextStyle: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 9.w,
-                                          ),
-                                          onPressed: () {
-                                            context.router.push(
-                                                SheduleCommentRoute(
-                                                    id: id, i: i));
-                                          },
-                                          text: "Comment",
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                sized0hx05,
-                                SizedBox(
-                                  width: 150.w,
-                                  child: Row(
-                                    children: [
-                                      Expanded(
-                                        child: CmButton(
-                                          icon: Icons.camera_alt,
-                                          iconSize: 14.w,
-                                          borderRadius: 3.w,
-                                          color: Colors.black,
-                                          buttonTextStyle: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 9.w,
-                                          ),
-                                          onPressed: () {
-                                            vmSchedule.clearLists();
-                                            context.router.push(
-                                                ScheduleImageRoute(
-                                                    id: id,
-                                                    fromAddMedia: true));
-                                          },
-                                          text: "Add Media",
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                sized0hx05,
-                                SizedBox(
-                                  width: 150.w,
-                                  child: Row(
-                                    children: [
-                                      Expanded(
-                                        child: CmButton(
-                                          icon: Icons.video_camera_back,
-                                          iconSize: 14.w,
-                                          borderRadius: 3.w,
-                                          color: Colors.black,
-                                          buttonTextStyle: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 9.w,
-                                          ),
-                                          onPressed: () {
-                                            vmSchedule.pickedCameraVideo = "";
-                                            vmSchedule.pickedGalleryVideo = "";
-                                            vmSchedule.pickedCameraVideoList =
-                                                [];
-                                            vmSchedule.pickedGalleryVideoList =
-                                                [];
-                                            context.router.push(
-                                                ScheduleVideoRoute(id: id));
-                                          },
-                                          text: "Add Video",
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                sized0hx05
-                              ],
-                              if (res.data?[i].beforePics?.isNotEmpty ??
-                                  false) ...[
-                                BeforeImagesList(
-                                  i: i,
-                                  id: id,
-                                ),
-                                sized0hx05,
-                              ],
-                              if (res.data?[i].afterPics?.isNotEmpty ??
-                                  false) ...[
-                                AfterImagesList(i: i, id: id),
-                                sized0hx05,
-                              ],
-                              if (res.data?[i].gallery?.isNotEmpty ??
-                                  false) ...[
-                                GalleryImagesList(i: i, id: id),
-                                sized0hx05,
-                              ],
-                              if (res.data?[i].jobVideo?.isNotEmpty ??
-                                  false) ...[
-                                VideoList(i: i, id: id),
-                                sized0hx05,
-                              ],
-                              sized0hx05,
+                              ),
+                            ),
+                            if (res.data?[i].image != null) ...[
                               Text(
-                                'Team Members',
+                                'Signature',
                                 style: TextStyle(
-                                  fontSize: 10.h,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                                    fontSize: 9.w, fontWeight: FontWeight.bold),
                               ),
-                              sized0hx05,
-                              Padding(
-                                padding: EdgeInsets.only(left: 8.w),
-                                child: SizedBox(
-                                  height: 80.h,
-                                  child: ListView.builder(
-                                    shrinkWrap: true,
-                                    scrollDirection: Axis.horizontal,
-                                    itemCount:
-                                        res.data?[i].teamEmployees?.length,
-                                    itemBuilder: (context, index) {
-                                      final data =
-                                          res.data?[i].teamEmployees?[index];
-                                      return Column(
-                                        children: [
-                                          SizedBox(
-                                            height: 40.w,
-                                            width: 40.w,
-                                            child: DecoratedBox(
-                                              decoration: BoxDecoration(
-                                                  color: Colors.grey.shade700,
-                                                  shape: BoxShape.circle),
-                                              child: dpImage("${data?.dp}"),
-                                            ),
-                                          ),
-                                          sized0hx05,
-                                          Text(
-                                            "${data?.name}",
-                                            style: TextStyle(fontSize: 9.w),
-                                          )
-                                        ],
-                                      );
-                                    },
-                                  ),
-                                ),
-                              ),
-                              if (res.data?[i].image != null) ...[
-                                Text(
-                                  'Signature',
-                                  style: TextStyle(
-                                      fontSize: 9.w,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                sized0hx10,
-                                signatureImageWidget(i: i),
-                              ],
-                              sized0hx20
-                            ]
+                              sized0hx10,
+                              signatureImageWidget(i: i),
+                            ],
+                            sized0hx20
                           ],
                         ]),
-                  );
+            );
           },
         ));
   }

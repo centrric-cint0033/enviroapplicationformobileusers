@@ -14,7 +14,8 @@ String OhsRespModelToJson(List<OhsRespModel> data) =>
 @freezed
 class OhsRespModel with _$OhsRespModel {
   const factory OhsRespModel(
-      {bool? userReadStatus,
+      {int? id,
+      @JsonKey(name: "user_read_status") bool? userReadStatus,
       bool? editStatus,
       String? dp,
       String? created_by,
@@ -24,8 +25,21 @@ class OhsRespModel with _$OhsRespModel {
       String? edited_date_time,
       String? createdDateTime,
       String? file_attachment,
+      List<Comments>? comments_list,
       num? members}) = _OhsRespModel;
 
   factory OhsRespModel.fromJson(Map<String, dynamic> json) =>
       _$OhsRespModelFromJson(json);
+}
+
+@freezed
+class Comments with _$Comments {
+  const factory Comments({
+    @JsonKey(name: "id") int? id,
+    @JsonKey(name: "comment") String? comment,
+    @JsonKey(name: "comment_by") String? commentBy,
+  }) = _Comments;
+
+  factory Comments.fromJson(Map<String, dynamic> json) =>
+      _$CommentsFromJson(json);
 }

@@ -1,168 +1,214 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:enviro_mobile_application/Routepage/routespage.dart';
 import 'package:enviro_mobile_application/model/04_ohs/oh&s_resp_model.dart';
+import 'package:enviro_mobile_application/utilis/constant.dart';
 import 'package:enviro_mobile_application/view_model/04_ohs/ohs_view_model.dart';
-import 'package:enviro_mobile_application/widgets/cmn_action_icon.dart';
+import 'package:enviro_mobile_application/view_model/11_shedule/shedule_page_view_model.dart';
 import 'package:enviro_mobile_application/widgets/cmn_title_textwidget.dart';
 import 'package:enviro_mobile_application/widgets/drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/intl.dart';
 
 @RoutePage()
 class OhsDetailPage extends StatelessWidget {
   final OhsRespModel data;
+  final int index;
+  const OhsDetailPage({Key? key, required this.data, required this.index})
+      : super(key: key);
 
-  const OhsDetailPage({Key? key, required this.data}) : super(key: key);
-
+  @override
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: cmnDrawer(context),
       appBar: AppBar(
-          // leading: const cmn_leading_icon(),
-          title: cmnTitleWidget('OH&S'),
-          actions: [notificationButton(context)]),
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(18.0),
-            child: Container(
-              width: 390,
-              height: 262.h,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8.0),
-              ),
-              child: Card(
-                color: const Color.fromARGB(255, 188, 209, 228),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Observer(builder: (_) {
-                      return Text(
-                        data.title ?? '',
-                      );
-                    }),
-                    const SizedBox(
-                      height: 8,
-                    ),
-                    Column(
+        title: cmnTitleWidget('Notification Detail'),
+      ),
+      body: SingleChildScrollView(
+        child: Observer(builder: (context) {
+          final res = vmOhs.notificationpageResponse;
+          return Column(
+            children: [
+              res.loading
+                  ? const Center(child: CircularProgressIndicator())
+                  : Column(
                       children: [
-                        Text(
-                          data.created_by ?? '',
-                        ),
-                        Text(
-                          data.description ?? '',
-                        ),
-                        Text(
-                          data.edited_date_time ?? '',
-                        )
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 8,
-                    ),
-
-                    const SizedBox(
-                      height: 8,
-                    ),
-                    // Text(
-                    //   data?.edited_date_time ?? '',
-                    // ),
-                    const SizedBox(
-                      height: 8,
-                    ),
-                    TextButton(
-                      onPressed: () {},
-                      style: ButtonStyle(
-                        side: MaterialStateProperty.all<BorderSide>(
-                          const BorderSide(color: Colors.black),
-                        ),
-                        backgroundColor: MaterialStateProperty.all<Color>(
-                          const Color.fromARGB(255, 188, 209, 228),
-                        ),
-                        shape: MaterialStateProperty.all<OutlinedBorder>(
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20.0),
+                        Padding(
+                          padding: screenWidth,
+                          child: SizedBox(
+                            width: double.infinity,
+                            child: Card(
+                              color: Colors.grey.shade200,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  sized0hx10,
+                                  Column(
+                                    children: [
+                                      Text(
+                                        data.title ?? '',
+                                        style: TextStyle(fontSize: 10.w),
+                                      ),
+                                      Text(
+                                        data.created_by ?? '',
+                                        style: TextStyle(fontSize: 10.w),
+                                      ),
+                                      Text(
+                                        data.description ?? '',
+                                        style: TextStyle(fontSize: 10.w),
+                                      ),
+                                      Text(
+                                        DateFormat('yyyy-MM-dd').format(
+                                          DateTime.parse(
+                                              data.edited_date_time ?? ''),
+                                        ),
+                                        style: TextStyle(fontSize: 10.w),
+                                      )
+                                    ],
+                                  ),
+                                  sized0hx10,
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      if (data.file_attachment?.isNotEmpty ??
+                                          false)
+                                        InkWell(
+                                          onTap: () {
+                                            vmSchedule.launchURL(
+                                                data.file_attachment ?? "");
+                                          },
+                                          child: Container(
+                                            width: 80.h,
+                                            decoration: BoxDecoration(
+                                                border: Border.all()),
+                                            child: Column(
+                                              children: [
+                                                Column(children: [
+                                                  const Icon(
+                                                      Icons.file_copy_outlined),
+                                                  Text(
+                                                    data.file_attachment ?? "",
+                                                    style: TextStyle(
+                                                        fontSize: 10.w),
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+                                                  )
+                                                ])
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                    ],
+                                  ),
+                                  sized0hx20,
+                                ],
+                              ),
+                            ),
                           ),
                         ),
-                      ),
-                      child: const Text(
-                        ' Open file ',
-                        style: TextStyle(color: Colors.black),
-                      ),
+                        sized0hx20,
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Container(
+                                height: 30.h,
+                                width: 80.h,
+                                decoration: BoxDecoration(
+                                    border: Border.all(
+                                      color: data.editStatus == false
+                                          ? Colors.black
+                                          : Colors.grey.shade400,
+                                    ),
+                                    borderRadius: BorderRadius.circular(7)),
+                                child: TextButton(
+                                    onPressed: () {
+                                      // vmOhs.ohsDeleteNotificationApi(
+                                      //     context: context,
+                                      //     notificationId: data.id ?? 0);
+                                    },
+                                    child: vmOhs
+                                            .deleteNotificationResponse.loading
+                                        ? SizedBox(
+                                            height: 12.w,
+                                            width: 12.w,
+                                            child:
+                                                const CircularProgressIndicator(
+                                              strokeWidth: 2,
+                                            ))
+                                        : Text(
+                                            "Edit",
+                                            style: TextStyle(
+                                                color: data.editStatus == false
+                                                    ? Colors.black
+                                                    : Colors.grey.shade400,
+                                                fontSize: 10.w),
+                                          ))),
+                            Container(
+                                height: 30.h,
+                                width: 80.h,
+                                decoration: BoxDecoration(
+                                    border: Border.all(),
+                                    borderRadius: BorderRadius.circular(7)),
+                                child: TextButton(
+                                    onPressed: () {
+                                      vmOhs.ohsDeleteNewsApi(
+                                          context: context,
+                                          newsId: data.id ?? 0);
+                                    },
+                                    child: vmOhs.deleteNewsResponse.loading
+                                        ? SizedBox(
+                                            height: 12.w,
+                                            width: 12.w,
+                                            child:
+                                                const CircularProgressIndicator(
+                                              strokeWidth: 2,
+                                            ))
+                                        : Text(
+                                            "Delete",
+                                            style: TextStyle(
+                                                color: Colors.grey.shade800,
+                                                fontSize: 10.w),
+                                          ))),
+                            if (vmOhs.newspageResponse.data?[index]
+                                    .userReadStatus ==
+                                false)
+                              Container(
+                                  height: 30.h,
+                                  width: 80.h,
+                                  decoration: BoxDecoration(
+                                      border: Border.all(),
+                                      borderRadius: BorderRadius.circular(7)),
+                                  child: TextButton(
+                                      onPressed: () {
+                                        vmOhs.ohsStatusNewsApi(
+                                            context: context,
+                                            newsId: data.id ?? 0);
+                                      },
+                                      child: vmOhs.statusNewsResponse.loading
+                                          ? SizedBox(
+                                              height: 12.w,
+                                              width: 12.w,
+                                              child:
+                                                  const CircularProgressIndicator(
+                                                strokeWidth: 2,
+                                              ))
+                                          : Text(
+                                              "Read",
+                                              style: TextStyle(
+                                                  color: Colors.grey.shade800,
+                                                  fontSize: 10.w),
+                                            )))
+                          ],
+                        ),
+                        sized0hx20
+                      ],
                     ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-          const SizedBox(
-            height: 38,
-          ),
-          Center(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                TextButton(
-                  onPressed: () {},
-                  style: ButtonStyle(
-                    side: MaterialStateProperty.all<BorderSide>(
-                      const BorderSide(color: Colors.black),
-                    ),
-                    backgroundColor: MaterialStateProperty.all<Color>(
-                      const Color(0xFFEBE8E8),
-                    ),
-                    shape: MaterialStateProperty.all<OutlinedBorder>(
-                      RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20.0),
-                      ),
-                    ),
-                  ),
-                  child: const Text(
-                    ' Edit ',
-                    style: TextStyle(color: Colors.black),
-                  ),
-                ),
-                const SizedBox(
-                  width: 13,
-                ),
-                TextButton(
-                  onPressed: () {},
-                  style: ButtonStyle(
-                    side: MaterialStateProperty.all<BorderSide>(
-                      const BorderSide(color: Colors.black),
-                    ),
-                    backgroundColor: MaterialStateProperty.all<Color>(
-                      const Color(0xFFEBE8E8),
-                    ),
-                    shape: MaterialStateProperty.all<OutlinedBorder>(
-                      RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20.0),
-                      ),
-                    ),
-                  ),
-                  child: const Text(
-                    ' Delete ',
-                    style: TextStyle(color: Colors.black),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          SizedBox(height: 48.h),
-        ],
+            ],
+          );
+        }),
       ),
     );
-  }
-
-  void ohsfunction(BuildContext context) {
-    vmOhs
-      ..ohsNotificationApi()
-      ..ohsNewsApi();
-    context.router.pushNamed(RouteNames.ohsPage);
-
-    vmOhs.ohsnewsfolderviewmodelfunction(1);
-    context.router.pushNamed(RouteNames.ohsPage);
   }
 }

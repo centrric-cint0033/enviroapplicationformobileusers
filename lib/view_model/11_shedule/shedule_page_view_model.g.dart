@@ -2109,6 +2109,14 @@ mixin _$ScheduleViewModel on ScheduleViewModelBase, Store {
     return _$launchURLAsyncAction.run(() => super.launchURL(url));
   }
 
+  late final _$launchURLsAsyncAction =
+      AsyncAction('ScheduleViewModelBase.launchURLs', context: context);
+
+  @override
+  Future launchURLs(String url) {
+    return _$launchURLsAsyncAction.run(() => super.launchURLs(url));
+  }
+
   late final _$ScheduleViewModelBaseActionController =
       ActionController(name: 'ScheduleViewModelBase', context: context);
 

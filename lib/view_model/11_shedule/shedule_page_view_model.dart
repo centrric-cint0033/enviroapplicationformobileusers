@@ -17,6 +17,7 @@ import 'package:enviro_mobile_application/widgets/cm_show_toast.dart';
 import 'package:enviro_mobile_application/widgets/ww_popup_error.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'package:image_picker/image_picker.dart';
 import 'package:injectable/injectable.dart';
@@ -78,7 +79,7 @@ abstract class ScheduleViewModelBase with Store {
   bool showSubmitButton = false;
   @observable
   int driversIndex = 0;
-    @observable
+  @observable
   int driversIndexByDate = 0;
   @observable
   List<PlatformFile> pickedFiles = [];
@@ -1230,10 +1231,34 @@ abstract class ScheduleViewModelBase with Store {
 
   @action
   launchURL(String url) async {
-    if (await canLaunch(url)) {
-      await launch(url);
-    } else {
-      throw 'Could not launch $url';
+    try {
+      if (await canLaunch(url)) {
+        await launch(url);
+      } else {
+        throw 'Could not launch $url';
+      }
+    } catch (e) {
+      print('Error launching URL: $e');
+      // Handle or log the error appropriately
+    }
+  }
+
+  @action
+  launchURLs(String url) async {
+    try {
+      // Uri requestedUri = Uri.dataFromString(url); //.dataFromString [wrong method]
+
+      Uri requestedUri = Uri.parse(url); // .parse is the correct method
+
+      if (await canLaunchUrl(requestedUri)) {
+        await launchUrl(requestedUri);
+      } else {
+        throw Exception('Could not launch $url');
+      }
+    } on PlatformException catch (e) {
+      debugPrint("PlatformException launchInBrowser : $e");
+    } on Exception catch (e) {
+      debugPrint("Exception launchInBrowser : $e");
     }
   }
 }

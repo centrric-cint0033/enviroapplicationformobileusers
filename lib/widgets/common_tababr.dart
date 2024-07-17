@@ -31,10 +31,8 @@ class WWcommonTabBar extends StatelessWidget {
             borderRadius: BorderRadius.circular(8.0),
           ),
           child: TabBar(
-            tabAlignment: TabAlignment.start,
             controller: controller,
             indicatorSize: TabBarIndicatorSize.tab,
-            isScrollable: true,
             indicator: BoxDecoration(
               borderRadius: BorderRadius.circular(8),
               color: Colors.white,

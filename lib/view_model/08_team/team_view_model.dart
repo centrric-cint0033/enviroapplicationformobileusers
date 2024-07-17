@@ -1142,4 +1142,27 @@ abstract class TeamViewModelBase with Store {
     sickController.clear();
     otherController.clear();
   }
+
+  ObservableList<TeamResModel> selectedMembers = ObservableList<TeamResModel>();
+ ObservableList<num> selectedMemberIds = ObservableList<int>();
+
+  @action
+  void addSelectedMember(TeamResModel member) {
+    if (!selectedMembers.contains(member)) {
+      selectedMembers.add(member);
+      if (member.id != null) {
+        selectedMemberIds.add(member.id!);
+      }
+    }
+  }
+
+  @action
+  void removeSelectedMember(TeamResModel member) {
+    if (selectedMembers.contains(member)) {
+      selectedMembers.remove(member);
+      if (member.id != null) {
+        selectedMemberIds.remove(member.id!);
+      }
+    }
+  }
 }

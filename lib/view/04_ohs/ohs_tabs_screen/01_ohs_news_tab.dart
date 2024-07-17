@@ -1,10 +1,10 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:enviro_mobile_application/Routepage/approutes.gr.dart';
 import 'package:enviro_mobile_application/model/00_common_model/folder_model/folder_model.dart';
-import 'package:enviro_mobile_application/utilis/api_endpoints/customprint.dart';
 import 'package:enviro_mobile_application/utilis/constant.dart';
 import 'package:enviro_mobile_application/view/04_ohs/ohs_widget/01_ohs_widgets.dart';
 import 'package:enviro_mobile_application/view_model/04_ohs/ohs_view_model.dart';
+import 'package:enviro_mobile_application/widgets/cm_add_notification_dialog.dart';
 import 'package:enviro_mobile_application/widgets/cmbutton.dart';
 import 'package:enviro_mobile_application/widgets/ww_folder_card.dart';
 import 'package:enviro_mobile_application/widgets/ww_response_handler.dart';
@@ -23,7 +23,10 @@ class NewsOhsTab extends StatelessWidget {
           Align(
               alignment: Alignment.topLeft,
               child: CmButton(
-                  text: 'Add New+', onPressed: () => _showMyDialog(context))),
+                  text: 'Add New+',
+                  onPressed: () {
+                    showMyDialogNotification(context, fromOhsNews: true);
+                  })),
           gapFieldOhs,
           Observer(builder: (_) {
             return SizedBox(
@@ -40,7 +43,11 @@ class NewsOhsTab extends StatelessWidget {
                         itemBuilder: (context, index) {
                           var data = vmOhs.newspageResponse.data?[index];
                           return InkWell(
-                              onTap: () => _handleViewButtonTap(context),
+                              onTap: () {
+                                context.router.push(OhsDetailRoute(
+                                    data: vmOhs.newspageResponse.data![index],
+                                    index: index));
+                              },
                               child: WWcard(data: data));
                         })));
           }),
@@ -76,7 +83,7 @@ class NewsOhsTab extends StatelessWidget {
                 FolderModel? data = vmOhs
                     .newspagefolderResponse.data?.folders![0].folders![index];
                 return WWFolderCard(
-                    onTap: () => customPrint(content: 'on Tap'),
+                    onTap: () {},
                     folder: data!,
                     editTap: (s) {
                       vmOhs.ohsFolerRenameApi(context, s, data.id!);
@@ -202,10 +209,6 @@ class NewsOhsTab extends StatelessWidget {
     print('Add New button tapped!');
   }
 
-  void _handleViewButtonTap(BuildContext context) {
-    print('View button tapped!');
-  }
-
   void _handleButtonTap() {
     print('Add Folder button tapped!');
   }
@@ -216,7 +219,7 @@ class NewsOhsTab extends StatelessWidget {
     context.router.push(NewsOhsFolderInsideRoute(parentId: id));
   }
 
-  void ohsdetailpagefunction(BuildContext context, data) {
-    context.router.push(OhsDetailRoute(data: data));
+  void ohsdetailpagefunction(BuildContext context, data, int index) {
+    context.router.push(OhsDetailRoute(data: data, index: index));
   }
 }

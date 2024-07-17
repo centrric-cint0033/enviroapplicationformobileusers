@@ -47,10 +47,15 @@ class WWcard extends StatelessWidget {
               ),
             ),
             sized0wx05,
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-              child: showBlueText('View', fontWeight: FontWeight.bold),
-            ),
+            Container(
+                decoration: BoxDecoration(
+                    border: Border.all(color: Appthemes.cPrimary),
+                    borderRadius: BorderRadius.circular(12.w)),
+                child: Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                  child: showBlueText('View', fontWeight: FontWeight.bold),
+                )),
           ],
         ),
       ),

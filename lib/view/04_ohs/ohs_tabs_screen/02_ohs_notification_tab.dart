@@ -1,6 +1,5 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:enviro_mobile_application/Routepage/approutes.gr.dart';
-import 'package:enviro_mobile_application/Routepage/routespage.dart';
 import 'package:enviro_mobile_application/utilis/api_endpoints/customprint.dart';
 import 'package:enviro_mobile_application/view/04_ohs/ohs_widget/01_ohs_widgets.dart';
 import 'package:enviro_mobile_application/view_model/04_ohs/ohs_view_model.dart';
@@ -28,7 +27,9 @@ class NotificationTab extends StatelessWidget {
           children: [
             CmButton(
                 text: 'Add New+',
-                onPressed: () => showMyDialognotification(context)),
+                onPressed: () {
+                  showMyDialogNotification(context);
+                }),
             const CmButton(text: 'Archive', onPressed: _handleRightButtonTap),
           ],
         ),
@@ -64,8 +65,8 @@ class NotificationTabList extends StatelessWidget {
                 ? const CupertinoActivityIndicator()
                 : const SizedBox.shrink()
             : InkWell(
-                onTap: () => notificationdetailpagefunction(
-                    context, vmOhs.notificationpageResponse.data?[index]),
+                onTap: () => notificationdetailpagefunction(context,
+                    vmOhs.notificationpageResponse.data?[index], index),
                 child:
                     WWcard(data: vmOhs.notificationpageResponse.data?[index]),
               );
@@ -74,7 +75,6 @@ class NotificationTabList extends StatelessWidget {
   }
 }
 
-void notificationdetailpagefunction(BuildContext context, data) {
-  context.router.pushNamed(RouteNames.rNotificationdetailpage);
-  context.router.push(NotificationDetailRoute(data: data));
+void notificationdetailpagefunction(BuildContext context, data, int index) {
+  context.router.push(NotificationDetailRoute(data: data, index: index));
 }

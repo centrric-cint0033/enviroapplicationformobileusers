@@ -8,7 +8,8 @@ part of 'oh&s_resp_model.dart';
 
 _$OhsRespModelImpl _$$OhsRespModelImplFromJson(Map<String, dynamic> json) =>
     _$OhsRespModelImpl(
-      userReadStatus: json['userReadStatus'] as bool?,
+      id: (json['id'] as num?)?.toInt(),
+      userReadStatus: json['user_read_status'] as bool?,
       editStatus: json['editStatus'] as bool?,
       dp: json['dp'] as String?,
       created_by: json['created_by'] as String?,
@@ -18,12 +19,16 @@ _$OhsRespModelImpl _$$OhsRespModelImplFromJson(Map<String, dynamic> json) =>
       edited_date_time: json['edited_date_time'] as String?,
       createdDateTime: json['createdDateTime'] as String?,
       file_attachment: json['file_attachment'] as String?,
+      comments_list: (json['comments_list'] as List<dynamic>?)
+          ?.map((e) => Comments.fromJson(e as Map<String, dynamic>))
+          .toList(),
       members: json['members'] as num?,
     );
 
 Map<String, dynamic> _$$OhsRespModelImplToJson(_$OhsRespModelImpl instance) =>
     <String, dynamic>{
-      'userReadStatus': instance.userReadStatus,
+      'id': instance.id,
+      'user_read_status': instance.userReadStatus,
       'editStatus': instance.editStatus,
       'dp': instance.dp,
       'created_by': instance.created_by,
@@ -33,5 +38,20 @@ Map<String, dynamic> _$$OhsRespModelImplToJson(_$OhsRespModelImpl instance) =>
       'edited_date_time': instance.edited_date_time,
       'createdDateTime': instance.createdDateTime,
       'file_attachment': instance.file_attachment,
+      'comments_list': instance.comments_list,
       'members': instance.members,
+    };
+
+_$CommentsImpl _$$CommentsImplFromJson(Map<String, dynamic> json) =>
+    _$CommentsImpl(
+      id: (json['id'] as num?)?.toInt(),
+      comment: json['comment'] as String?,
+      commentBy: json['comment_by'] as String?,
+    );
+
+Map<String, dynamic> _$$CommentsImplToJson(_$CommentsImpl instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'comment': instance.comment,
+      'comment_by': instance.commentBy,
     };

@@ -35,7 +35,14 @@ class ApiEndPoints
 
   static const endpointnewsfolder = '/api/v1/oh_and_s/folder/segment/list';
   static const endpointnewsfldrrename = '/api/v1/drive/folder/rename/3260/';
-
+  static const endpointCommentAddNotification =
+      '/api/v1/oh_and_s/notification/comment/';
+  static const endpointDeleteNotification =
+      '/api/v1/oh_and_s/notification/delete/';
+  static const endpointDeleteNews = '/api/v1/oh_and_s/news/delete/';
+  static const endpointStatusNotification =
+      '/api/v1/oh_and_s/notification/status/';
+  static const endpointStatusNews = '/api/v1/oh_and_s/news/status/';
   static const endpointPreviousSale = '/api/v1/jobs/previous/sale/';
   static const endpointnewsfldrdlte = '/api/v1/drive/folder/delete';
   static const endpointprofilelstng = '/api/v1/accounts/profile/view/';
