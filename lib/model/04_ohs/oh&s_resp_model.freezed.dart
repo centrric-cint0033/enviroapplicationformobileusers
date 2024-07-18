@@ -32,6 +32,7 @@ mixin _$OhsRespModel {
   String? get edited_date_time => throw _privateConstructorUsedError;
   String? get createdDateTime => throw _privateConstructorUsedError;
   String? get file_attachment => throw _privateConstructorUsedError;
+  List<Members>? get members_list => throw _privateConstructorUsedError;
   List<Comments>? get comments_list => throw _privateConstructorUsedError;
   num? get members => throw _privateConstructorUsedError;
 
@@ -59,6 +60,7 @@ abstract class $OhsRespModelCopyWith<$Res> {
       String? edited_date_time,
       String? createdDateTime,
       String? file_attachment,
+      List<Members>? members_list,
       List<Comments>? comments_list,
       num? members});
 }
@@ -87,6 +89,7 @@ class _$OhsRespModelCopyWithImpl<$Res, $Val extends OhsRespModel>
     Object? edited_date_time = freezed,
     Object? createdDateTime = freezed,
     Object? file_attachment = freezed,
+    Object? members_list = freezed,
     Object? comments_list = freezed,
     Object? members = freezed,
   }) {
@@ -135,6 +138,10 @@ class _$OhsRespModelCopyWithImpl<$Res, $Val extends OhsRespModel>
           ? _value.file_attachment
           : file_attachment // ignore: cast_nullable_to_non_nullable
               as String?,
+      members_list: freezed == members_list
+          ? _value.members_list
+          : members_list // ignore: cast_nullable_to_non_nullable
+              as List<Members>?,
       comments_list: freezed == comments_list
           ? _value.comments_list
           : comments_list // ignore: cast_nullable_to_non_nullable
@@ -167,6 +174,7 @@ abstract class _$$OhsRespModelImplCopyWith<$Res>
       String? edited_date_time,
       String? createdDateTime,
       String? file_attachment,
+      List<Members>? members_list,
       List<Comments>? comments_list,
       num? members});
 }
@@ -193,6 +201,7 @@ class __$$OhsRespModelImplCopyWithImpl<$Res>
     Object? edited_date_time = freezed,
     Object? createdDateTime = freezed,
     Object? file_attachment = freezed,
+    Object? members_list = freezed,
     Object? comments_list = freezed,
     Object? members = freezed,
   }) {
@@ -241,6 +250,10 @@ class __$$OhsRespModelImplCopyWithImpl<$Res>
           ? _value.file_attachment
           : file_attachment // ignore: cast_nullable_to_non_nullable
               as String?,
+      members_list: freezed == members_list
+          ? _value._members_list
+          : members_list // ignore: cast_nullable_to_non_nullable
+              as List<Members>?,
       comments_list: freezed == comments_list
           ? _value._comments_list
           : comments_list // ignore: cast_nullable_to_non_nullable
@@ -268,9 +281,11 @@ class _$OhsRespModelImpl implements _OhsRespModel {
       this.edited_date_time,
       this.createdDateTime,
       this.file_attachment,
+      final List<Members>? members_list,
       final List<Comments>? comments_list,
       this.members})
-      : _comments_list = comments_list;
+      : _members_list = members_list,
+        _comments_list = comments_list;
 
   factory _$OhsRespModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$OhsRespModelImplFromJson(json);
@@ -298,6 +313,16 @@ class _$OhsRespModelImpl implements _OhsRespModel {
   final String? createdDateTime;
   @override
   final String? file_attachment;
+  final List<Members>? _members_list;
+  @override
+  List<Members>? get members_list {
+    final value = _members_list;
+    if (value == null) return null;
+    if (_members_list is EqualUnmodifiableListView) return _members_list;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
   final List<Comments>? _comments_list;
   @override
   List<Comments>? get comments_list {
@@ -313,7 +338,7 @@ class _$OhsRespModelImpl implements _OhsRespModel {
 
   @override
   String toString() {
-    return 'OhsRespModel(id: $id, userReadStatus: $userReadStatus, editStatus: $editStatus, dp: $dp, created_by: $created_by, title: $title, description: $description, fileAttachment: $fileAttachment, edited_date_time: $edited_date_time, createdDateTime: $createdDateTime, file_attachment: $file_attachment, comments_list: $comments_list, members: $members)';
+    return 'OhsRespModel(id: $id, userReadStatus: $userReadStatus, editStatus: $editStatus, dp: $dp, created_by: $created_by, title: $title, description: $description, fileAttachment: $fileAttachment, edited_date_time: $edited_date_time, createdDateTime: $createdDateTime, file_attachment: $file_attachment, members_list: $members_list, comments_list: $comments_list, members: $members)';
   }
 
   @override
@@ -341,6 +366,8 @@ class _$OhsRespModelImpl implements _OhsRespModel {
             (identical(other.file_attachment, file_attachment) ||
                 other.file_attachment == file_attachment) &&
             const DeepCollectionEquality()
+                .equals(other._members_list, _members_list) &&
+            const DeepCollectionEquality()
                 .equals(other._comments_list, _comments_list) &&
             (identical(other.members, members) || other.members == members));
   }
@@ -360,6 +387,7 @@ class _$OhsRespModelImpl implements _OhsRespModel {
       edited_date_time,
       createdDateTime,
       file_attachment,
+      const DeepCollectionEquality().hash(_members_list),
       const DeepCollectionEquality().hash(_comments_list),
       members);
 
@@ -390,6 +418,7 @@ abstract class _OhsRespModel implements OhsRespModel {
       final String? edited_date_time,
       final String? createdDateTime,
       final String? file_attachment,
+      final List<Members>? members_list,
       final List<Comments>? comments_list,
       final num? members}) = _$OhsRespModelImpl;
 
@@ -419,6 +448,8 @@ abstract class _OhsRespModel implements OhsRespModel {
   String? get createdDateTime;
   @override
   String? get file_attachment;
+  @override
+  List<Members>? get members_list;
   @override
   List<Comments>? get comments_list;
   @override
@@ -615,5 +646,164 @@ abstract class _Comments implements Comments {
   @override
   @JsonKey(ignore: true)
   _$$CommentsImplCopyWith<_$CommentsImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+Members _$MembersFromJson(Map<String, dynamic> json) {
+  return _Members.fromJson(json);
+}
+
+/// @nodoc
+mixin _$Members {
+  @JsonKey(name: "id")
+  int? get id => throw _privateConstructorUsedError;
+  @JsonKey(name: "name")
+  String? get name => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $MembersCopyWith<Members> get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $MembersCopyWith<$Res> {
+  factory $MembersCopyWith(Members value, $Res Function(Members) then) =
+      _$MembersCopyWithImpl<$Res, Members>;
+  @useResult
+  $Res call(
+      {@JsonKey(name: "id") int? id, @JsonKey(name: "name") String? name});
+}
+
+/// @nodoc
+class _$MembersCopyWithImpl<$Res, $Val extends Members>
+    implements $MembersCopyWith<$Res> {
+  _$MembersCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? name = freezed,
+  }) {
+    return _then(_value.copyWith(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
+      name: freezed == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$MembersImplCopyWith<$Res> implements $MembersCopyWith<$Res> {
+  factory _$$MembersImplCopyWith(
+          _$MembersImpl value, $Res Function(_$MembersImpl) then) =
+      __$$MembersImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {@JsonKey(name: "id") int? id, @JsonKey(name: "name") String? name});
+}
+
+/// @nodoc
+class __$$MembersImplCopyWithImpl<$Res>
+    extends _$MembersCopyWithImpl<$Res, _$MembersImpl>
+    implements _$$MembersImplCopyWith<$Res> {
+  __$$MembersImplCopyWithImpl(
+      _$MembersImpl _value, $Res Function(_$MembersImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? name = freezed,
+  }) {
+    return _then(_$MembersImpl(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
+      name: freezed == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$MembersImpl implements _Members {
+  const _$MembersImpl(
+      {@JsonKey(name: "id") this.id, @JsonKey(name: "name") this.name});
+
+  factory _$MembersImpl.fromJson(Map<String, dynamic> json) =>
+      _$$MembersImplFromJson(json);
+
+  @override
+  @JsonKey(name: "id")
+  final int? id;
+  @override
+  @JsonKey(name: "name")
+  final String? name;
+
+  @override
+  String toString() {
+    return 'Members(id: $id, name: $name)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$MembersImpl &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.name, name) || other.name == name));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, id, name);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$MembersImplCopyWith<_$MembersImpl> get copyWith =>
+      __$$MembersImplCopyWithImpl<_$MembersImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$MembersImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _Members implements Members {
+  const factory _Members(
+      {@JsonKey(name: "id") final int? id,
+      @JsonKey(name: "name") final String? name}) = _$MembersImpl;
+
+  factory _Members.fromJson(Map<String, dynamic> json) = _$MembersImpl.fromJson;
+
+  @override
+  @JsonKey(name: "id")
+  int? get id;
+  @override
+  @JsonKey(name: "name")
+  String? get name;
+  @override
+  @JsonKey(ignore: true)
+  _$$MembersImplCopyWith<_$MembersImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

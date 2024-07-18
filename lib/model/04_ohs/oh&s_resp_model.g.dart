@@ -19,6 +19,9 @@ _$OhsRespModelImpl _$$OhsRespModelImplFromJson(Map<String, dynamic> json) =>
       edited_date_time: json['edited_date_time'] as String?,
       createdDateTime: json['createdDateTime'] as String?,
       file_attachment: json['file_attachment'] as String?,
+      members_list: (json['members_list'] as List<dynamic>?)
+          ?.map((e) => Members.fromJson(e as Map<String, dynamic>))
+          .toList(),
       comments_list: (json['comments_list'] as List<dynamic>?)
           ?.map((e) => Comments.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -38,6 +41,7 @@ Map<String, dynamic> _$$OhsRespModelImplToJson(_$OhsRespModelImpl instance) =>
       'edited_date_time': instance.edited_date_time,
       'createdDateTime': instance.createdDateTime,
       'file_attachment': instance.file_attachment,
+      'members_list': instance.members_list,
       'comments_list': instance.comments_list,
       'members': instance.members,
     };
@@ -54,4 +58,16 @@ Map<String, dynamic> _$$CommentsImplToJson(_$CommentsImpl instance) =>
       'id': instance.id,
       'comment': instance.comment,
       'comment_by': instance.commentBy,
+    };
+
+_$MembersImpl _$$MembersImplFromJson(Map<String, dynamic> json) =>
+    _$MembersImpl(
+      id: (json['id'] as num?)?.toInt(),
+      name: json['name'] as String?,
+    );
+
+Map<String, dynamic> _$$MembersImplToJson(_$MembersImpl instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'name': instance.name,
     };

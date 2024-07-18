@@ -28,7 +28,7 @@ class NotificationTab extends StatelessWidget {
             CmButton(
                 text: 'Add New+',
                 onPressed: () {
-                  showMyDialogNotification(context);
+                  showMyDialogNotification(context, fromOhsEditNews: false);
                 }),
             const CmButton(text: 'Archive', onPressed: _handleRightButtonTap),
           ],

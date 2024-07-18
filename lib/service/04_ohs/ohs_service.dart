@@ -42,6 +42,8 @@ abstract class IohsService {
       {required int notificationId});
   Future<Either<Map<MainFailure, dynamic>, String>> ohsDeleteNewsApi(
       {required int newsId});
+  Future<Either<Map<MainFailure, dynamic>, OhsRespModel>> ohsEditNewsServiceApi(
+      {required Map<String, String> data,required int newsId});
   Future<Either<Map<MainFailure, dynamic>, String>> ohsStatusNotificationApi(
       {required int notificationId});
   Future<Either<Map<MainFailure, dynamic>, String>> ohsStatusNewsApi(
@@ -356,6 +358,22 @@ class OhsService implements IohsService {
       },
       (res) async {
         return const Right('success');
+      },
+    );
+  }
+
+  @override
+  Future<Either<Map<MainFailure, dynamic>, OhsRespModel>> ohsEditNewsServiceApi(
+      {required Map<String, String> data,required int newsId}) async {
+    var response = await getIt<HttpService>().multipartRequest(
+        apiUrl: "${ApiEndPoints().ohsEditNews}$newsId/", method: 'PATCH', data: data);
+    return response.fold(
+      (l) => Left(l),
+      (res) async {
+        var data = jsonDecode(res.body);
+        OhsRespModel ohsEditNews = OhsRespModel.fromJson(data);
+
+        return Right(ohsEditNews);
       },
     );
   }

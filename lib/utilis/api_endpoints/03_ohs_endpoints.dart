@@ -3,5 +3,6 @@ mixin class OhsEndpoints {
   final String ohsNotificationList = '/api/v1/oh_and_s/notification/';
   final String ohsFolderRename = '/api/v1/drive/folder/create/';
   final String ohsAddNotification = '/api/v1/oh_and_s/notification/create/';
-    final String ohsAddNews = '/api/v1/oh_and_s/news/create/';
+  final String ohsAddNews = '/api/v1/oh_and_s/news/create/';
+  final String ohsEditNews = '/api/v1/oh_and_s/news/edit/';
 }

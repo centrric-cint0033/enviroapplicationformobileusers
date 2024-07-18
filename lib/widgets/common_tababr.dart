@@ -27,7 +27,8 @@ class WWcommonTabBar extends StatelessWidget {
         height: 32.w,
         child: DecoratedBox(
           decoration: BoxDecoration(
-            color: Appthemes.cPrimary,
+            color: Colors.white,
+            border: Border.all(),
             borderRadius: BorderRadius.circular(8.0),
           ),
           child: TabBar(
@@ -35,11 +36,11 @@ class WWcommonTabBar extends StatelessWidget {
             indicatorSize: TabBarIndicatorSize.tab,
             indicator: BoxDecoration(
               borderRadius: BorderRadius.circular(8),
-              color: Colors.white,
+              color: Appthemes.cPrimary,
               border: Border.all(color: Appthemes.cPrimary),
             ),
-            labelColor: Colors.black,
-            unselectedLabelColor: Colors.white,
+            labelColor: Colors.white,
+            unselectedLabelColor: Colors.black,
             indicatorColor: Colors.black,
             onTap: onTap,
             tabs: [

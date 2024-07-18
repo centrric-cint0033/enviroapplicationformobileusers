@@ -259,6 +259,22 @@ mixin _$OHSViewModel on OHSViewModelBase, Store {
     });
   }
 
+  late final _$editNewsResponseAtom =
+      Atom(name: 'OHSViewModelBase.editNewsResponse', context: context);
+
+  @override
+  ApiResponse<OhsRespModel> get editNewsResponse {
+    _$editNewsResponseAtom.reportRead();
+    return super.editNewsResponse;
+  }
+
+  @override
+  set editNewsResponse(ApiResponse<OhsRespModel> value) {
+    _$editNewsResponseAtom.reportWrite(value, super.editNewsResponse, () {
+      super.editNewsResponse = value;
+    });
+  }
+
   late final _$statusNewsResponseAtom =
       Atom(name: 'OHSViewModelBase.statusNewsResponse', context: context);
 
@@ -413,6 +429,18 @@ mixin _$OHSViewModel on OHSViewModelBase, Store {
         .run(() => super.ohsDeleteNewsApi(context: context, newsId: newsId));
   }
 
+  late final _$ohsEditNewsApiAsyncAction =
+      AsyncAction('OHSViewModelBase.ohsEditNewsApi', context: context);
+
+  @override
+  Future<void> ohsEditNewsApi(
+      {required BuildContext context,
+      required OhsRespModel data,
+      required int newsId}) {
+    return _$ohsEditNewsApiAsyncAction.run(() =>
+        super.ohsEditNewsApi(context: context, data: data, newsId: newsId));
+  }
+
   late final _$ohsStatusNewsApiAsyncAction =
       AsyncAction('OHSViewModelBase.ohsStatusNewsApi', context: context);
 
@@ -441,6 +469,7 @@ addCommentNotifyResponse: ${addCommentNotifyResponse},
 deleteNotificationResponse: ${deleteNotificationResponse},
 statusNotificationResponse: ${statusNotificationResponse},
 deleteNewsResponse: ${deleteNewsResponse},
+editNewsResponse: ${editNewsResponse},
 statusNewsResponse: ${statusNewsResponse}
     ''';
   }

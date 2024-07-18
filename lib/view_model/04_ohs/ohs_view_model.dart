@@ -420,6 +420,39 @@ abstract class OHSViewModelBase with Store {
   }
 
   @observable
+  ApiResponse<OhsRespModel> editNewsResponse = ApiResponse<OhsRespModel>();
+  @action
+  Future<void> ohsEditNewsApi(
+      {required BuildContext context,
+      required OhsRespModel data,
+      required int newsId}) async {
+    editNewsResponse = editNewsResponse.copyWith(errors: null, loading: true);
+
+    final result = await ohsService.ohsEditNewsServiceApi(data: {
+      "title": data.title ?? "",
+      "description": data.description ?? "",
+      if (data.members != null) "members": "${data.members}",
+      if (data.file_attachment != null)
+        "file_attachment": data.file_attachment ?? ""
+    }, newsId: newsId);
+    return result.fold(
+      (l) {
+        editNewsResponse = editNewsResponse.copyWith(errors: l, loading: false);
+        popupErrorData(context, mainFailure: l);
+      },
+      (r) {
+        editNewsResponse =
+            editNewsResponse.copyWith(data: r, errors: null, loading: false);
+        ohsNewsApi();
+        vmTeam.selectedFilePath = "";
+        selectedFileNameNotification = null;
+        vmTeam.selectedMember = null;
+        context.router.pop();
+      },
+    );
+  }
+
+  @observable
   ApiResponse<String> statusNewsResponse = ApiResponse<String>();
   @action
   Future<void> ohsStatusNewsApi({

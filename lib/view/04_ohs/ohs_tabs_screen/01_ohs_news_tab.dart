@@ -22,11 +22,14 @@ class NewsOhsTab extends StatelessWidget {
           gapFieldOhs,
           Align(
               alignment: Alignment.topLeft,
-              child: CmButton(
-                  text: 'Add New+',
-                  onPressed: () {
-                    showMyDialogNotification(context, fromOhsNews: true);
-                  })),
+              child: Observer(builder: (context) {
+                return CmButton(
+                    text: 'Add New+',
+                    onPressed: () {
+                      showMyDialogNotification(context,
+                          fromOhsNews: true, fromOhsEditNews: false);
+                    });
+              })),
           gapFieldOhs,
           Observer(builder: (_) {
             return SizedBox(

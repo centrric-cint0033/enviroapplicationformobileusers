@@ -3,6 +3,7 @@ import 'package:enviro_mobile_application/model/04_ohs/oh&s_resp_model.dart';
 import 'package:enviro_mobile_application/utilis/constant.dart';
 import 'package:enviro_mobile_application/view_model/04_ohs/ohs_view_model.dart';
 import 'package:enviro_mobile_application/view_model/11_shedule/shedule_page_view_model.dart';
+import 'package:enviro_mobile_application/widgets/cm_add_notification_dialog.dart';
 import 'package:enviro_mobile_application/widgets/cmn_title_textwidget.dart';
 import 'package:enviro_mobile_application/widgets/drawer.dart';
 import 'package:flutter/material.dart';
@@ -27,7 +28,7 @@ class OhsDetailPage extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Observer(builder: (context) {
-          final res = vmOhs.notificationpageResponse;
+          final res = vmOhs.newspageResponse;
           return Column(
             children: [
               res.loading
@@ -47,21 +48,25 @@ class OhsDetailPage extends StatelessWidget {
                                   Column(
                                     children: [
                                       Text(
-                                        data.title ?? '',
+                                        res.data?[index].title ?? '',
                                         style: TextStyle(fontSize: 10.w),
                                       ),
                                       Text(
-                                        data.created_by ?? '',
+                                        res.data?[index].members_list!
+                                                .map((member) => member.name)
+                                                .join(', ') ??
+                                            "",
                                         style: TextStyle(fontSize: 10.w),
                                       ),
                                       Text(
-                                        data.description ?? '',
+                                        res.data?[index].description ?? '',
                                         style: TextStyle(fontSize: 10.w),
                                       ),
                                       Text(
                                         DateFormat('yyyy-MM-dd').format(
-                                          DateTime.parse(
-                                              data.edited_date_time ?? ''),
+                                          DateTime.parse(res.data?[index]
+                                                  .edited_date_time ??
+                                              ''),
                                         ),
                                         style: TextStyle(fontSize: 10.w),
                                       )
@@ -72,12 +77,15 @@ class OhsDetailPage extends StatelessWidget {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceEvenly,
                                     children: [
-                                      if (data.file_attachment?.isNotEmpty ??
+                                      if (res.data?[index].file_attachment
+                                              ?.isNotEmpty ??
                                           false)
                                         InkWell(
                                           onTap: () {
-                                            vmSchedule.launchURL(
-                                                data.file_attachment ?? "");
+                                            vmSchedule.launchURL(res
+                                                    .data?[index]
+                                                    .file_attachment ??
+                                                "");
                                           },
                                           child: Container(
                                             width: 80.h,
@@ -89,7 +97,9 @@ class OhsDetailPage extends StatelessWidget {
                                                   const Icon(
                                                       Icons.file_copy_outlined),
                                                   Text(
-                                                    data.file_attachment ?? "",
+                                                    res.data?[index]
+                                                            .file_attachment ??
+                                                        "",
                                                     style: TextStyle(
                                                         fontSize: 10.w),
                                                     overflow:
@@ -117,17 +127,30 @@ class OhsDetailPage extends StatelessWidget {
                                 width: 80.h,
                                 decoration: BoxDecoration(
                                     border: Border.all(
-                                      color: data.editStatus == false
-                                          ? Colors.black
-                                          : Colors.grey.shade400,
+                                      color:
+                                          res.data?[index].editStatus == false
+                                              ? Colors.black
+                                              : Colors.grey.shade400,
                                     ),
                                     borderRadius: BorderRadius.circular(7)),
                                 child: TextButton(
-                                    onPressed: () {
-                                      // vmOhs.ohsDeleteNotificationApi(
-                                      //     context: context,
-                                      //     notificationId: data.id ?? 0);
-                                    },
+                                    onPressed: res.data?[index].editStatus ==
+                                            true
+                                        ? () {
+                                            showMyDialogNotification(context,
+                                                fromOhsNews: true,
+                                                fromOhsEditNews: true,
+                                                title: data.title,
+                                                description: data.description,
+                                                file: getFileNameFromUrl(
+                                                    data.file_attachment ?? ""),
+                                                member: data.members_list!
+                                                    .map(
+                                                        (member) => member.name)
+                                                    .join(', '),
+                                                newsId: data.id);
+                                          }
+                                        : null,
                                     child: vmOhs
                                             .deleteNotificationResponse.loading
                                         ? SizedBox(
@@ -140,7 +163,9 @@ class OhsDetailPage extends StatelessWidget {
                                         : Text(
                                             "Edit",
                                             style: TextStyle(
-                                                color: data.editStatus == false
+                                                color: res.data?[index]
+                                                            .editStatus ==
+                                                        false
                                                     ? Colors.black
                                                     : Colors.grey.shade400,
                                                 fontSize: 10.w),
@@ -210,5 +235,9 @@ class OhsDetailPage extends StatelessWidget {
         }),
       ),
     );
+  }
+
+  String getFileNameFromUrl(String url) {
+    return url.split('/').last;
   }
 }
