@@ -1,10 +1,8 @@
 import 'dart:io';
-import 'dart:typed_data';
 import 'package:auto_route/auto_route.dart';
 import 'package:enviro_mobile_application/api_response/api_response.dart';
 import 'package:enviro_mobile_application/model/03_vehicle/vehicle_model/vehicle_model.dart';
 import 'package:enviro_mobile_application/model/07_Jobcard/job_card_model.dart';
-import 'package:enviro_mobile_application/model/12_shedulecard/schedule_card_by_date_res_model/schedule_card_by_date_res_model.dart';
 import 'package:enviro_mobile_application/model/12_shedulecard/schedule_image_res_model/schedule_image_res_model.dart';
 import 'package:enviro_mobile_application/model/12_shedulecard/schedule_status_res_model/schedule_status_res_model.dart';
 import 'package:enviro_mobile_application/model/12_shedulecard/shedule_card_comnt_resp_model.dart';
@@ -530,8 +528,8 @@ abstract class ScheduleViewModelBase with Store {
   }
 
   @observable
-  ApiResponse<List<ScheduleCardByDateResModel>> shedulecardByDateResponse =
-      ApiResponse<List<ScheduleCardByDateResModel>>();
+  ApiResponse<List<SheduleCardRespModel>> shedulecardByDateResponse =
+      ApiResponse<List<SheduleCardRespModel>>();
 
   @action
   Future<void> shedulecardviewmodelfunctionByDate({String? fromDate}) async {

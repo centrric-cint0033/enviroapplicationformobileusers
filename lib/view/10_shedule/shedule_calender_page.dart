@@ -2,7 +2,7 @@
 
 import 'package:auto_route/auto_route.dart';
 import 'package:enviro_mobile_application/utilis/constant.dart';
-import 'package:enviro_mobile_application/view/10_shedule/Schedule_list_by_date.dart';
+import 'package:enviro_mobile_application/view/10_shedule/shedule_list.dart';
 import 'package:enviro_mobile_application/view/10_shedule/widgets/calender_widget.dart';
 import 'package:enviro_mobile_application/view_model/11_shedule/shedule_page_view_model.dart';
 import 'package:enviro_mobile_application/widgets/cmn_action_icon.dart';
@@ -50,7 +50,7 @@ class CalenderPage extends StatelessWidget {
                             fromDate:
                                 DateFormat('dd-MM-yyyy').format(DateTime.now()),
                           ),
-                      child: const ScheduleListByDate()),
+                      child: const ScheduleList()),
                   sized0hx20,
                 ],
               ),

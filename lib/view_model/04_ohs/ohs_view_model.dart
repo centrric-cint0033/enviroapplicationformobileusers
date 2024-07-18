@@ -8,6 +8,7 @@ import 'package:enviro_mobile_application/view_model/08_team/team_view_model.dar
 import 'package:enviro_mobile_application/widgets/ww_popup_error.dart';
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
+import 'package:intl/intl.dart';
 import 'package:mobx/mobx.dart';
 
 part 'ohs_view_model.g.dart';
@@ -36,6 +37,25 @@ abstract class OHSViewModelBase with Store {
       ApiResponse<OhsRespModel>();
   @observable
   String? selectedFileNameNotification;
+  @observable
+  String? searchType;
+  @observable
+  String? selectedFileName;
+  @observable
+  String? selectedFilePath;
+  @observable
+  int? parentFolderId;
+  @observable
+  int? loadinIndexFile;
+  @observable
+  int? loadinIndexFolder;
+  @observable
+  DateTime? selectedExpiryDate;
+  TextEditingController folderSearchCntrlr = TextEditingController();
+  TextEditingController ohsfolderSearchCntrlr = TextEditingController();
+  @observable
+  List<String> folderNames = [];
+
   @action
   Future<void> ohsNewsApi() async {
     newspageResponse = newspageResponse.copyWith(errors: null, loading: true);
@@ -476,5 +496,329 @@ abstract class OHSViewModelBase with Store {
         // context.router.pop();
       },
     );
+  }
+
+  @observable
+  ApiResponse<FolderListModel> ohsFoldersResponse =
+      ApiResponse<FolderListModel>();
+  @observable
+  ApiResponse<FolderListModel> ohsFoldersResponse2 =
+      ApiResponse<FolderListModel>();
+  @action
+  Future<void> getFoldersOhs({
+    required num parentFolderId,
+  }) async {
+    if (parentFolderId == 1) {
+      ohsFoldersResponse =
+          ohsFoldersResponse.copyWith(error: null, loading: true);
+
+      final result =
+          await ohsService.getFolders(parentFolderId: parentFolderId);
+      return result.fold(
+        (l) {
+          ohsFoldersResponse = ohsFoldersResponse.copyWith(
+            errors: l,
+            loading: false,
+          );
+        },
+        (r) {
+          ohsFoldersResponse = ohsFoldersResponse.copyWith(
+            data: r,
+            error: null,
+            loading: false,
+          );
+          searchType = ohsFoldersResponse.data?.folders?[0].type;
+        },
+      );
+    } else {
+      ohsFoldersResponse2 =
+          ohsFoldersResponse2.copyWith(error: null, loading: true);
+
+      final result =
+          await ohsService.getFolders(parentFolderId: parentFolderId);
+      return result.fold(
+        (l) {
+          ohsFoldersResponse2 = ohsFoldersResponse2.copyWith(
+            errors: l,
+            loading: false,
+          );
+        },
+        (r) {
+          ohsFoldersResponse2 = ohsFoldersResponse2.copyWith(
+            data: r,
+            error: null,
+            loading: false,
+          );
+        },
+      );
+    }
+  }
+
+  @observable
+  ApiResponse<String> addFolderResponse = ApiResponse<String>();
+  @action
+  Future<void> addFolderOhs(
+      {required String name,
+      required num parentfolder,
+      required BuildContext context}) async {
+    addFolderResponse = addFolderResponse.copyWith(error: null, loading: true);
+
+    final result = await ohsService.addFolders(data: {
+      "name": name,
+      "parent_folder": parentfolder.toString(),
+    });
+
+    return result.fold(
+      (l) {
+        addFolderResponse =
+            addFolderResponse.copyWith(errors: l, loading: false);
+        popupErrorData(context, mainFailure: l);
+      },
+      (r) async {
+        await getFoldersOhs(parentFolderId: parentfolder);
+        addFolderResponse =
+            addFolderResponse.copyWith(error: null, loading: false);
+        vmTeam.textFolderAddController.clear();
+      },
+    );
+  }
+
+  @action
+  Future<void> folderSearchOhsApi(
+      String searchData, num folderId, String searchType) async {
+    ohsFoldersResponse =
+        ohsFoldersResponse.copyWith(errors: null, loading: true);
+
+    final result = await ohsService.folderSearchApi(data: {
+      "key": searchData,
+      "folder_id": "$folderId",
+      "search_type": searchType,
+    });
+    return result.fold(
+      (l) {
+        ohsFoldersResponse =
+            ohsFoldersResponse.copyWith(errors: l, loading: false);
+      },
+      (r) {
+        ohsFoldersResponse =
+            ohsFoldersResponse.copyWith(data: r, errors: null, loading: false);
+      },
+    );
+  }
+
+  @action
+  Future<void> ohsfileFolderSearchApi(
+      String searchData, num folderId, String searchType) async {
+    ohsFoldersResponse2 =
+        ohsFoldersResponse2.copyWith(errors: null, loading: true);
+
+    final result = await ohsService.ohsFileFolderSearchApi(data: {
+      "key": searchData,
+      "folder_id": "$folderId",
+      "search_type": searchType,
+    });
+    return result.fold(
+      (l) {
+        ohsFoldersResponse2 =
+            ohsFoldersResponse2.copyWith(errors: l, loading: false);
+      },
+      (r) {
+        ohsFoldersResponse2 =
+            ohsFoldersResponse2.copyWith(data: r, errors: null, loading: false);
+      },
+    );
+  }
+
+  @observable
+  ApiResponse<dynamic> ohsAddFileResponse = ApiResponse<dynamic>();
+  @action
+  Future<void> ohsAddFile(
+      {required String name,
+      required num parentfolder,
+      String? files,
+      required BuildContext context}) async {
+    ohsAddFileResponse =
+        ohsAddFileResponse.copyWith(error: null, loading: true);
+
+    final result = await ohsService.ohsAddFiles(data: {
+      "name": name,
+      "folder": parentfolder.toString(),
+      "file": files ?? ""
+    });
+    return result.fold(
+      (l) {
+        ohsAddFileResponse =
+            ohsAddFileResponse.copyWith(errors: l, loading: false);
+        popupErrorData(context, mainFailure: l);
+      },
+      (r) async {
+        await getFoldersOhs(parentFolderId: parentfolder);
+        ohsAddFileResponse =
+            ohsAddFileResponse.copyWith(data: r, error: null, loading: false);
+        // vmTeam.textFolderAddController.clear();
+        // context.router.pop();
+      },
+    );
+  }
+
+  @observable
+  ApiResponse<String> ohsEditFolderResponse = ApiResponse<String>();
+  @action
+  Future<void> editFolderOhsApi({
+    required int folderId,
+    required int parentFolderId,
+    required String name,
+    required BuildContext context,
+  }) async {
+    ohsEditFolderResponse =
+        ohsEditFolderResponse.copyWith(error: null, loading: true);
+
+    final result = await ohsService
+        .editFoldersOhs(data: {"name": name}, folderId: folderId);
+    return result.fold(
+      (l) {
+        ohsEditFolderResponse = ohsEditFolderResponse.copyWith(
+          errors: l,
+          loading: false,
+        );
+        popupErrorData(context, mainFailure: l);
+      },
+      (r) async {
+        await getFoldersOhs(parentFolderId: parentFolderId);
+        ohsEditFolderResponse = ohsEditFolderResponse.copyWith(
+          data: r,
+          error: null,
+          loading: false,
+        );
+      },
+    );
+  }
+
+  @action
+  Future<void> ohsDeleteFolderApi(
+      {required int folderId,
+      required BuildContext context,
+      required num parentFolderId}) async {
+    addFolderResponse = addFolderResponse.copyWith(error: null, loading: true);
+
+    final result = await ohsService.ohsDeleteFolders(folderId: folderId);
+    return result.fold(
+      (l) {
+        addFolderResponse = addFolderResponse.copyWith(
+          errors: l,
+          loading: false,
+        );
+        popupErrorData(context, mainFailure: l);
+      },
+      (r) async {
+        await getFoldersOhs(parentFolderId: parentFolderId);
+        addFolderResponse = addFolderResponse.copyWith(
+          data: r,
+          error: null,
+          loading: false,
+        );
+      },
+    );
+  }
+
+  @observable
+  ApiResponse<String> ohsEditFileResponse = ApiResponse<String>();
+  @action
+  Future<void> editFileOhsApi({
+    required int fileId,
+    required int parentFolderId,
+    required String name,
+    required BuildContext context,
+  }) async {
+    ohsEditFileResponse =
+        ohsEditFileResponse.copyWith(error: null, loading: true);
+
+    final result =
+        await ohsService.editFilesOhs(data: {"name": name}, fileId: fileId);
+    return result.fold(
+      (l) {
+        ohsEditFileResponse = ohsEditFileResponse.copyWith(
+          errors: l,
+          loading: false,
+        );
+        popupErrorData(context, mainFailure: l);
+      },
+      (r) async {
+        await getFoldersOhs(parentFolderId: parentFolderId);
+        ohsEditFileResponse = ohsEditFileResponse.copyWith(
+          data: r,
+          error: null,
+          loading: false,
+        );
+      },
+    );
+  }
+
+  @action
+  Future<void> deleteFilesOhsApi(
+      {required int fileId,
+      required BuildContext context,
+      required num parentFolderId}) async {
+    ohsAddFileResponse =
+        ohsAddFileResponse.copyWith(error: null, loading: true);
+
+    final result = await ohsService.ohsDeleteFiles(
+        fileId: fileId, parentFolderId: int.parse("$parentFolderId"));
+    return result.fold(
+      (l) {
+        ohsAddFileResponse = ohsAddFileResponse.copyWith(
+          errors: l,
+          loading: false,
+        );
+      },
+      (r) async {
+        await getFoldersOhs(parentFolderId: parentFolderId);
+        ohsAddFileResponse = ohsAddFileResponse.copyWith(
+          data: r,
+          error: null,
+          loading: false,
+        );
+      },
+    );
+  }
+
+  @observable
+  ApiResponse<FolderListModel> expiryFileOhsResponse =
+      ApiResponse<FolderListModel>();
+  @action
+  Future<void> exipryDateFileApi(
+      {required int fileId,
+      required String expiry,
+      required BuildContext context,
+      required num parentFolderId}) async {
+    expiryFileOhsResponse = expiryFileOhsResponse.copyWith(
+        error: null, loading: expiryFileOhsResponse.data == null);
+    final result =
+        await ohsService.expiryDateFiles(fileId: fileId, expiry: expiry);
+
+    return result.fold(
+      (l) {
+        expiryFileOhsResponse =
+            expiryFileOhsResponse.copyWith(errors: l, loading: false);
+        popupErrorData(context, mainFailure: l);
+      },
+      (r) async {
+        await getFoldersOhs(parentFolderId: parentFolderId);
+        expiryFileOhsResponse =
+            expiryFileOhsResponse.copyWith(error: null, loading: false);
+      },
+    );
+  }
+
+  @action
+  expiryDatePickerFn(
+      BuildContext context, date, int fileId, num parentFolderId) {
+    selectedExpiryDate = date;
+    String dateString = DateFormat('yyyy-MM-dd').format(selectedExpiryDate!);
+    exipryDateFileApi(
+        fileId: fileId,
+        expiry: dateString,
+        context: context,
+        parentFolderId: parentFolderId);
   }
 }

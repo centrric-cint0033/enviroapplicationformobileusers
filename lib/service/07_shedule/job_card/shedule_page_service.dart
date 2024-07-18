@@ -3,7 +3,6 @@ import 'package:dartz/dartz.dart';
 import 'package:enviro_mobile_application/constant/base_url.dart';
 import 'package:enviro_mobile_application/model/03_vehicle/vehicle_model/vehicle_model.dart';
 import 'package:enviro_mobile_application/model/07_Jobcard/job_card_model.dart';
-import 'package:enviro_mobile_application/model/12_shedulecard/schedule_card_by_date_res_model/schedule_card_by_date_res_model.dart';
 import 'package:enviro_mobile_application/model/12_shedulecard/schedule_image_res_model/schedule_image_res_model.dart';
 import 'package:enviro_mobile_application/model/12_shedulecard/schedule_status_res_model/schedule_status_res_model.dart';
 import 'package:enviro_mobile_application/model/12_shedulecard/shedule_card_comnt_resp_model.dart';
@@ -36,7 +35,7 @@ abstract class IScheduleService {
       {required int quoteId});
   Future<Either<MainFailure, List<SheduleCardRespModel>>>
       shedulecardservicefunction();
-  Future<Either<MainFailure, List<ScheduleCardByDateResModel>>>
+  Future<Either<MainFailure, List<SheduleCardRespModel>>>
       shedulecardservicefunctionByDate({String? fromDate});
   Future<Either<Map<MainFailure, dynamic>, SheduleSignatureModel>>
       shedulesignatureserviceapi({
@@ -371,13 +370,13 @@ class SalesService implements IScheduleService {
   }
 
   @override
-  Future<Either<MainFailure, List<ScheduleCardByDateResModel>>>
+  Future<Either<MainFailure, List<SheduleCardRespModel>>>
       shedulecardservicefunctionByDate({String? fromDate}) async {
     var response = await getIt<HttpService>().request(
         authenticated: true,
         method: HttpMethod.get,
         apiUrl:
-            "${ApiEndPoints.endpointshedulecardByDate}?&from=$fromDate&&to=$fromDate");
+            "${ApiEndPoints.endpointshedulecardByDate}?&from=$fromDate&to=$fromDate");
 
     return response.fold(
       (l) {
@@ -386,9 +385,9 @@ class SalesService implements IScheduleService {
       },
       (res) async {
         var data = jsonDecode(res.body) as List;
-        List<ScheduleCardByDateResModel> shedulecardlist =
-            List<ScheduleCardByDateResModel>.from(
-                data.map((e) => ScheduleCardByDateResModel.fromJson(e)));
+        List<SheduleCardRespModel> shedulecardlist =
+            List<SheduleCardRespModel>.from(
+                data.map((e) => SheduleCardRespModel.fromJson(e)));
         return Right(shedulecardlist);
       },
     );

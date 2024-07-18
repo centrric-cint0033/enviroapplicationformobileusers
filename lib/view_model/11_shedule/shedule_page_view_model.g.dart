@@ -1031,14 +1031,13 @@ mixin _$ScheduleViewModel on ScheduleViewModelBase, Store {
       context: context);
 
   @override
-  ApiResponse<List<ScheduleCardByDateResModel>> get shedulecardByDateResponse {
+  ApiResponse<List<SheduleCardRespModel>> get shedulecardByDateResponse {
     _$shedulecardByDateResponseAtom.reportRead();
     return super.shedulecardByDateResponse;
   }
 
   @override
-  set shedulecardByDateResponse(
-      ApiResponse<List<ScheduleCardByDateResModel>> value) {
+  set shedulecardByDateResponse(ApiResponse<List<SheduleCardRespModel>> value) {
     _$shedulecardByDateResponseAtom
         .reportWrite(value, super.shedulecardByDateResponse, () {
       super.shedulecardByDateResponse = value;

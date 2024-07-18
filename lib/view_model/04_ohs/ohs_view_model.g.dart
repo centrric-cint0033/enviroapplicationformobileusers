@@ -76,6 +76,134 @@ mixin _$OHSViewModel on OHSViewModelBase, Store {
     });
   }
 
+  late final _$searchTypeAtom =
+      Atom(name: 'OHSViewModelBase.searchType', context: context);
+
+  @override
+  String? get searchType {
+    _$searchTypeAtom.reportRead();
+    return super.searchType;
+  }
+
+  @override
+  set searchType(String? value) {
+    _$searchTypeAtom.reportWrite(value, super.searchType, () {
+      super.searchType = value;
+    });
+  }
+
+  late final _$selectedFileNameAtom =
+      Atom(name: 'OHSViewModelBase.selectedFileName', context: context);
+
+  @override
+  String? get selectedFileName {
+    _$selectedFileNameAtom.reportRead();
+    return super.selectedFileName;
+  }
+
+  @override
+  set selectedFileName(String? value) {
+    _$selectedFileNameAtom.reportWrite(value, super.selectedFileName, () {
+      super.selectedFileName = value;
+    });
+  }
+
+  late final _$selectedFilePathAtom =
+      Atom(name: 'OHSViewModelBase.selectedFilePath', context: context);
+
+  @override
+  String? get selectedFilePath {
+    _$selectedFilePathAtom.reportRead();
+    return super.selectedFilePath;
+  }
+
+  @override
+  set selectedFilePath(String? value) {
+    _$selectedFilePathAtom.reportWrite(value, super.selectedFilePath, () {
+      super.selectedFilePath = value;
+    });
+  }
+
+  late final _$parentFolderIdAtom =
+      Atom(name: 'OHSViewModelBase.parentFolderId', context: context);
+
+  @override
+  int? get parentFolderId {
+    _$parentFolderIdAtom.reportRead();
+    return super.parentFolderId;
+  }
+
+  @override
+  set parentFolderId(int? value) {
+    _$parentFolderIdAtom.reportWrite(value, super.parentFolderId, () {
+      super.parentFolderId = value;
+    });
+  }
+
+  late final _$loadinIndexFileAtom =
+      Atom(name: 'OHSViewModelBase.loadinIndexFile', context: context);
+
+  @override
+  int? get loadinIndexFile {
+    _$loadinIndexFileAtom.reportRead();
+    return super.loadinIndexFile;
+  }
+
+  @override
+  set loadinIndexFile(int? value) {
+    _$loadinIndexFileAtom.reportWrite(value, super.loadinIndexFile, () {
+      super.loadinIndexFile = value;
+    });
+  }
+
+  late final _$loadinIndexFolderAtom =
+      Atom(name: 'OHSViewModelBase.loadinIndexFolder', context: context);
+
+  @override
+  int? get loadinIndexFolder {
+    _$loadinIndexFolderAtom.reportRead();
+    return super.loadinIndexFolder;
+  }
+
+  @override
+  set loadinIndexFolder(int? value) {
+    _$loadinIndexFolderAtom.reportWrite(value, super.loadinIndexFolder, () {
+      super.loadinIndexFolder = value;
+    });
+  }
+
+  late final _$selectedExpiryDateAtom =
+      Atom(name: 'OHSViewModelBase.selectedExpiryDate', context: context);
+
+  @override
+  DateTime? get selectedExpiryDate {
+    _$selectedExpiryDateAtom.reportRead();
+    return super.selectedExpiryDate;
+  }
+
+  @override
+  set selectedExpiryDate(DateTime? value) {
+    _$selectedExpiryDateAtom.reportWrite(value, super.selectedExpiryDate, () {
+      super.selectedExpiryDate = value;
+    });
+  }
+
+  late final _$folderNamesAtom =
+      Atom(name: 'OHSViewModelBase.folderNames', context: context);
+
+  @override
+  List<String> get folderNames {
+    _$folderNamesAtom.reportRead();
+    return super.folderNames;
+  }
+
+  @override
+  set folderNames(List<String> value) {
+    _$folderNamesAtom.reportWrite(value, super.folderNames, () {
+      super.folderNames = value;
+    });
+  }
+
   late final _$FoldercreationResponseAtom =
       Atom(name: 'OHSViewModelBase.FoldercreationResponse', context: context);
 
@@ -291,6 +419,120 @@ mixin _$OHSViewModel on OHSViewModelBase, Store {
     });
   }
 
+  late final _$ohsFoldersResponseAtom =
+      Atom(name: 'OHSViewModelBase.ohsFoldersResponse', context: context);
+
+  @override
+  ApiResponse<FolderListModel> get ohsFoldersResponse {
+    _$ohsFoldersResponseAtom.reportRead();
+    return super.ohsFoldersResponse;
+  }
+
+  @override
+  set ohsFoldersResponse(ApiResponse<FolderListModel> value) {
+    _$ohsFoldersResponseAtom.reportWrite(value, super.ohsFoldersResponse, () {
+      super.ohsFoldersResponse = value;
+    });
+  }
+
+  late final _$ohsFoldersResponse2Atom =
+      Atom(name: 'OHSViewModelBase.ohsFoldersResponse2', context: context);
+
+  @override
+  ApiResponse<FolderListModel> get ohsFoldersResponse2 {
+    _$ohsFoldersResponse2Atom.reportRead();
+    return super.ohsFoldersResponse2;
+  }
+
+  @override
+  set ohsFoldersResponse2(ApiResponse<FolderListModel> value) {
+    _$ohsFoldersResponse2Atom.reportWrite(value, super.ohsFoldersResponse2, () {
+      super.ohsFoldersResponse2 = value;
+    });
+  }
+
+  late final _$addFolderResponseAtom =
+      Atom(name: 'OHSViewModelBase.addFolderResponse', context: context);
+
+  @override
+  ApiResponse<String> get addFolderResponse {
+    _$addFolderResponseAtom.reportRead();
+    return super.addFolderResponse;
+  }
+
+  @override
+  set addFolderResponse(ApiResponse<String> value) {
+    _$addFolderResponseAtom.reportWrite(value, super.addFolderResponse, () {
+      super.addFolderResponse = value;
+    });
+  }
+
+  late final _$ohsAddFileResponseAtom =
+      Atom(name: 'OHSViewModelBase.ohsAddFileResponse', context: context);
+
+  @override
+  ApiResponse<dynamic> get ohsAddFileResponse {
+    _$ohsAddFileResponseAtom.reportRead();
+    return super.ohsAddFileResponse;
+  }
+
+  @override
+  set ohsAddFileResponse(ApiResponse<dynamic> value) {
+    _$ohsAddFileResponseAtom.reportWrite(value, super.ohsAddFileResponse, () {
+      super.ohsAddFileResponse = value;
+    });
+  }
+
+  late final _$ohsEditFolderResponseAtom =
+      Atom(name: 'OHSViewModelBase.ohsEditFolderResponse', context: context);
+
+  @override
+  ApiResponse<String> get ohsEditFolderResponse {
+    _$ohsEditFolderResponseAtom.reportRead();
+    return super.ohsEditFolderResponse;
+  }
+
+  @override
+  set ohsEditFolderResponse(ApiResponse<String> value) {
+    _$ohsEditFolderResponseAtom.reportWrite(value, super.ohsEditFolderResponse,
+        () {
+      super.ohsEditFolderResponse = value;
+    });
+  }
+
+  late final _$ohsEditFileResponseAtom =
+      Atom(name: 'OHSViewModelBase.ohsEditFileResponse', context: context);
+
+  @override
+  ApiResponse<String> get ohsEditFileResponse {
+    _$ohsEditFileResponseAtom.reportRead();
+    return super.ohsEditFileResponse;
+  }
+
+  @override
+  set ohsEditFileResponse(ApiResponse<String> value) {
+    _$ohsEditFileResponseAtom.reportWrite(value, super.ohsEditFileResponse, () {
+      super.ohsEditFileResponse = value;
+    });
+  }
+
+  late final _$expiryFileOhsResponseAtom =
+      Atom(name: 'OHSViewModelBase.expiryFileOhsResponse', context: context);
+
+  @override
+  ApiResponse<FolderListModel> get expiryFileOhsResponse {
+    _$expiryFileOhsResponseAtom.reportRead();
+    return super.expiryFileOhsResponse;
+  }
+
+  @override
+  set expiryFileOhsResponse(ApiResponse<FolderListModel> value) {
+    _$expiryFileOhsResponseAtom.reportWrite(value, super.expiryFileOhsResponse,
+        () {
+      super.expiryFileOhsResponse = value;
+    });
+  }
+
   late final _$ohsNewsApiAsyncAction =
       AsyncAction('OHSViewModelBase.ohsNewsApi', context: context);
 
@@ -451,6 +693,150 @@ mixin _$OHSViewModel on OHSViewModelBase, Store {
         .run(() => super.ohsStatusNewsApi(context: context, newsId: newsId));
   }
 
+  late final _$getFoldersOhsAsyncAction =
+      AsyncAction('OHSViewModelBase.getFoldersOhs', context: context);
+
+  @override
+  Future<void> getFoldersOhs({required num parentFolderId}) {
+    return _$getFoldersOhsAsyncAction
+        .run(() => super.getFoldersOhs(parentFolderId: parentFolderId));
+  }
+
+  late final _$addFolderOhsAsyncAction =
+      AsyncAction('OHSViewModelBase.addFolderOhs', context: context);
+
+  @override
+  Future<void> addFolderOhs(
+      {required String name,
+      required num parentfolder,
+      required BuildContext context}) {
+    return _$addFolderOhsAsyncAction.run(() => super.addFolderOhs(
+        name: name, parentfolder: parentfolder, context: context));
+  }
+
+  late final _$folderSearchOhsApiAsyncAction =
+      AsyncAction('OHSViewModelBase.folderSearchOhsApi', context: context);
+
+  @override
+  Future<void> folderSearchOhsApi(
+      String searchData, num folderId, String searchType) {
+    return _$folderSearchOhsApiAsyncAction
+        .run(() => super.folderSearchOhsApi(searchData, folderId, searchType));
+  }
+
+  late final _$ohsfileFolderSearchApiAsyncAction =
+      AsyncAction('OHSViewModelBase.ohsfileFolderSearchApi', context: context);
+
+  @override
+  Future<void> ohsfileFolderSearchApi(
+      String searchData, num folderId, String searchType) {
+    return _$ohsfileFolderSearchApiAsyncAction.run(
+        () => super.ohsfileFolderSearchApi(searchData, folderId, searchType));
+  }
+
+  late final _$ohsAddFileAsyncAction =
+      AsyncAction('OHSViewModelBase.ohsAddFile', context: context);
+
+  @override
+  Future<void> ohsAddFile(
+      {required String name,
+      required num parentfolder,
+      String? files,
+      required BuildContext context}) {
+    return _$ohsAddFileAsyncAction.run(() => super.ohsAddFile(
+        name: name,
+        parentfolder: parentfolder,
+        files: files,
+        context: context));
+  }
+
+  late final _$editFolderOhsApiAsyncAction =
+      AsyncAction('OHSViewModelBase.editFolderOhsApi', context: context);
+
+  @override
+  Future<void> editFolderOhsApi(
+      {required int folderId,
+      required int parentFolderId,
+      required String name,
+      required BuildContext context}) {
+    return _$editFolderOhsApiAsyncAction.run(() => super.editFolderOhsApi(
+        folderId: folderId,
+        parentFolderId: parentFolderId,
+        name: name,
+        context: context));
+  }
+
+  late final _$ohsDeleteFolderApiAsyncAction =
+      AsyncAction('OHSViewModelBase.ohsDeleteFolderApi', context: context);
+
+  @override
+  Future<void> ohsDeleteFolderApi(
+      {required int folderId,
+      required BuildContext context,
+      required num parentFolderId}) {
+    return _$ohsDeleteFolderApiAsyncAction.run(() => super.ohsDeleteFolderApi(
+        folderId: folderId, context: context, parentFolderId: parentFolderId));
+  }
+
+  late final _$editFileOhsApiAsyncAction =
+      AsyncAction('OHSViewModelBase.editFileOhsApi', context: context);
+
+  @override
+  Future<void> editFileOhsApi(
+      {required int fileId,
+      required int parentFolderId,
+      required String name,
+      required BuildContext context}) {
+    return _$editFileOhsApiAsyncAction.run(() => super.editFileOhsApi(
+        fileId: fileId,
+        parentFolderId: parentFolderId,
+        name: name,
+        context: context));
+  }
+
+  late final _$deleteFilesOhsApiAsyncAction =
+      AsyncAction('OHSViewModelBase.deleteFilesOhsApi', context: context);
+
+  @override
+  Future<void> deleteFilesOhsApi(
+      {required int fileId,
+      required BuildContext context,
+      required num parentFolderId}) {
+    return _$deleteFilesOhsApiAsyncAction.run(() => super.deleteFilesOhsApi(
+        fileId: fileId, context: context, parentFolderId: parentFolderId));
+  }
+
+  late final _$exipryDateFileApiAsyncAction =
+      AsyncAction('OHSViewModelBase.exipryDateFileApi', context: context);
+
+  @override
+  Future<void> exipryDateFileApi(
+      {required int fileId,
+      required String expiry,
+      required BuildContext context,
+      required num parentFolderId}) {
+    return _$exipryDateFileApiAsyncAction.run(() => super.exipryDateFileApi(
+        fileId: fileId,
+        expiry: expiry,
+        context: context,
+        parentFolderId: parentFolderId));
+  }
+
+  late final _$OHSViewModelBaseActionController =
+      ActionController(name: 'OHSViewModelBase', context: context);
+
+  @override
+  dynamic expiryDatePickerFn(
+      BuildContext context, dynamic date, int fileId, num parentFolderId) {
+    final _$actionInfo = _$OHSViewModelBaseActionController.startAction(
+        name: 'OHSViewModelBase.expiryDatePickerFn');
+    try {
+      return super.expiryDatePickerFn(context, date, fileId, parentFolderId);
+    } finally {
+      _$OHSViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
   @override
   String toString() {
     return '''
@@ -458,6 +844,14 @@ addCommentController: ${addCommentController},
 newspageResponse: ${newspageResponse},
 addNotificationResponse: ${addNotificationResponse},
 selectedFileNameNotification: ${selectedFileNameNotification},
+searchType: ${searchType},
+selectedFileName: ${selectedFileName},
+selectedFilePath: ${selectedFilePath},
+parentFolderId: ${parentFolderId},
+loadinIndexFile: ${loadinIndexFile},
+loadinIndexFolder: ${loadinIndexFolder},
+selectedExpiryDate: ${selectedExpiryDate},
+folderNames: ${folderNames},
 FoldercreationResponse: ${FoldercreationResponse},
 newspagefolderinsideResponse: ${newspagefolderinsideResponse},
 newspagefolderResponse: ${newspagefolderResponse},
@@ -470,7 +864,14 @@ deleteNotificationResponse: ${deleteNotificationResponse},
 statusNotificationResponse: ${statusNotificationResponse},
 deleteNewsResponse: ${deleteNewsResponse},
 editNewsResponse: ${editNewsResponse},
-statusNewsResponse: ${statusNewsResponse}
+statusNewsResponse: ${statusNewsResponse},
+ohsFoldersResponse: ${ohsFoldersResponse},
+ohsFoldersResponse2: ${ohsFoldersResponse2},
+addFolderResponse: ${addFolderResponse},
+ohsAddFileResponse: ${ohsAddFileResponse},
+ohsEditFolderResponse: ${ohsEditFolderResponse},
+ohsEditFileResponse: ${ohsEditFileResponse},
+expiryFileOhsResponse: ${expiryFileOhsResponse}
     ''';
   }
 }

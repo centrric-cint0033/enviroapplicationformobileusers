@@ -146,6 +146,7 @@ void ohsfunction(BuildContext context) {
   vmTeam.getAllEmployee();
   vmOhs.ohsNotificationApi();
   vmOhs.ohsNewsApi();
+  vmOhs.getFoldersOhs(parentFolderId: 1);
   vmOhs.ohsnewsfolderviewmodelfunction(1);
   context.router.pushNamed(RouteNames.ohsPage);
 }

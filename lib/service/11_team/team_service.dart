@@ -320,7 +320,7 @@ class TeamService implements IteamService {
     var response = await getIt<HttpService>().multipartRequest(
         data: {"date": expiry},
         method: 'PUT',
-        apiUrl: "${ApiEndPoints().teamFilesExpiry}$fileId/");
+        apiUrl: "${ApiEndPoints().filesExpiry}$fileId/");
     return response.fold(
       (l) => Left(l),
       (res) async {

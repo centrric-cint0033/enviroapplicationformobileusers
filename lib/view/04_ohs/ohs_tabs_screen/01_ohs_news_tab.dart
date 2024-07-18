@@ -4,13 +4,16 @@ import 'package:enviro_mobile_application/model/00_common_model/folder_model/fol
 import 'package:enviro_mobile_application/utilis/constant.dart';
 import 'package:enviro_mobile_application/view/04_ohs/ohs_widget/01_ohs_widgets.dart';
 import 'package:enviro_mobile_application/view_model/04_ohs/ohs_view_model.dart';
+import 'package:enviro_mobile_application/view_model/08_team/team_view_model.dart';
 import 'package:enviro_mobile_application/widgets/cm_add_notification_dialog.dart';
 import 'package:enviro_mobile_application/widgets/cmbutton.dart';
+import 'package:enviro_mobile_application/widgets/ww_customLoading.dart';
 import 'package:enviro_mobile_application/widgets/ww_folder_card.dart';
 import 'package:enviro_mobile_application/widgets/ww_response_handler.dart';
 import 'package:enviro_mobile_application/widgets/ww_search_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_svg/svg.dart';
 
 class NewsOhsTab extends StatelessWidget {
   const NewsOhsTab({super.key});
@@ -55,49 +58,94 @@ class NewsOhsTab extends StatelessWidget {
                         })));
           }),
           gapFieldOhs,
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const Padding(
-                  padding: EdgeInsets.all(8.0), child: Text('Folders')),
-              CmButton(
-                  text: 'Add folders+',
-                  onPressed: () => _showMyDialog(context)),
-            ],
-          ),
-          gapFieldOhs,
+          Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+            const Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Text('Folders'),
+            ),
+            CmButton(
+                text: 'Add folders+',
+                onPressed: () {
+                  showCreateEditDialog(context, createEditTap: (v) {
+                    vmOhs.addFolderOhs(
+                        context: context, name: v, parentfolder: 1);
+                  });
+                }),
+          ]),
+          sized0hx10,
+          sized0hx10,
           WWTextField(
-            controller: TextEditingController(),
-            hintText: 'Search by folder name',
+            controller: vmOhs.folderSearchCntrlr,
+            onChanged: (v) => vmTeam.onTextChanged(() {
+              v.isEmpty
+                  ? vmOhs.getFoldersOhs(parentFolderId: 1)
+                  : vmOhs.folderSearchOhsApi(
+                      v,
+                      1,
+                      vmOhs.searchType ?? "general",
+                    );
+            }),
+            suffixTap: () {},
+            hintText: 'Search by Folder Name',
           ),
-          const SizedBox(height: 16),
-          Observer(builder: (_) {
-            return ListView.separated(
-              shrinkWrap: true,
-              itemCount:
-                  vmOhs.newspagefolderResponse.data?.folders?.isEmpty ?? true
-                      ? 0
-                      : vmOhs.newspagefolderResponse.data?.folders![0].folders
-                              ?.length ??
-                          0,
-              physics: const NeverScrollableScrollPhysics(),
-              separatorBuilder: (BuildContext context, int index) => sized0hx05,
-              itemBuilder: (BuildContext context, int index) {
-                FolderModel? data = vmOhs
-                    .newspagefolderResponse.data?.folders![0].folders![index];
-                return WWFolderCard(
-                    onTap: () {},
-                    folder: data!,
-                    editTap: (s) {
-                      vmOhs.ohsFolerRenameApi(context, s, data.id!);
-                    },
-                    deleteTap: () {
-                      vmOhs.folderdeleteviewmodelfunction(
-                          'folders', data.id!, 1);
-                    });
-              },
-            );
+          sized0hx10,
+          Observer(builder: (context) {
+            final res = vmOhs.ohsFoldersResponse;
+            FolderListModel? folderList = res.data;
+            return folderList?.folders != null &&
+                    folderList!.folders!.isNotEmpty
+                ? res.loading
+                    ? wwCustomLoader()
+                    : ListView.separated(
+                        physics: const NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        separatorBuilder: (BuildContext context, int index) =>
+                            sized0hx10,
+                        itemCount: folderList.folders?[0].folders?.length ?? 0,
+                        itemBuilder: (context, index) {
+                          var data = folderList.folders?[0].folders?[index];
+                          if (data != null) {
+                            return WWFolderCard(
+                                folder: data,
+                                onTap: () {
+                                  vmOhs.folderNames.clear();
+                                  vmOhs.getFoldersOhs(
+                                    parentFolderId: data.id ?? 0,
+                                  );
+                                  vmOhs.parentFolderId = data.id;
+                                  vmOhs.folderNames.add("${data.name}");
+                                  context.router.push(OhsFolderDetailRoute(
+                                      folderName: data.name,
+                                      searchType: data.type));
+                                },
+                                folderName: data.name,
+                                editTap: (s) {
+                                  vmOhs.editFolderOhsApi(
+                                    name: s,
+                                    folderId: data.id ?? 0,
+                                    parentFolderId: vmOhs.parentFolderId ?? 1,
+                                    context: context,
+                                  );
+                                },
+                                deleteTap: () {
+                                  vmOhs.ohsDeleteFolderApi(
+                                      folderId: data.id ?? 0,
+                                      context: context,
+                                      parentFolderId:
+                                          vmOhs.parentFolderId ?? 1);
+                                });
+                          } else {
+                            return Container();
+                          }
+                        },
+                      )
+                : Center(
+                    child: SvgPicture.asset(
+                      "assets/images/empty1.svg",
+                    ),
+                  );
           }),
+          sized0hx30
         ],
       ),
     );

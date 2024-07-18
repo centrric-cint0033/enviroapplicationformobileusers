@@ -26,8 +26,8 @@ class WWcard extends StatelessWidget {
           children: [
             data?.dp != null
                 ? CachedNetworkImage(
-                    height: 60.w,
-                    width: 60.w,
+                    height: 50.w,
+                    width: 50.w,
                     imageUrl: data!.dp!,
                     fit: BoxFit.cover)
                 : const Placeholder(),

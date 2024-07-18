@@ -43,11 +43,31 @@ abstract class IohsService {
   Future<Either<Map<MainFailure, dynamic>, String>> ohsDeleteNewsApi(
       {required int newsId});
   Future<Either<Map<MainFailure, dynamic>, OhsRespModel>> ohsEditNewsServiceApi(
-      {required Map<String, String> data,required int newsId});
+      {required Map<String, String> data, required int newsId});
   Future<Either<Map<MainFailure, dynamic>, String>> ohsStatusNotificationApi(
       {required int notificationId});
   Future<Either<Map<MainFailure, dynamic>, String>> ohsStatusNewsApi(
       {required int newsId});
+  Future<Either<Map<MainFailure, dynamic>, FolderListModel>> getFolders(
+      {required num parentFolderId});
+  Future<Either<Map<MainFailure, dynamic>, dynamic>> addFolders(
+      {required Map<String, String> data});
+  Future<Either<Map<MainFailure, dynamic>, String>> editFoldersOhs(
+      {required Map<String, String> data, required int folderId});
+  Future<Either<Map<MainFailure, dynamic>, FolderListModel>> folderSearchApi(
+      {required Map<String, String> data});
+  Future<Either<Map<MainFailure, dynamic>, FolderListModel>>
+      ohsFileFolderSearchApi({required Map<String, String> data});
+  Future<Either<Map<MainFailure, dynamic>, dynamic>> ohsAddFiles(
+      {required Map<String, String> data});
+  Future<Either<Map<MainFailure, dynamic>, String>> ohsDeleteFolders(
+      {required int folderId});
+  Future<Either<Map<MainFailure, dynamic>, String>> editFilesOhs(
+      {required Map<String, String> data, required int fileId});
+  Future<Either<Map<MainFailure, dynamic>, String>> ohsDeleteFiles(
+      {required int fileId, required int parentFolderId});
+  Future<Either<Map<MainFailure, dynamic>, FolderListModel>> expiryDateFiles(
+      {required num fileId, required String expiry});
 }
 
 @LazySingleton(as: IohsService)
@@ -364,9 +384,11 @@ class OhsService implements IohsService {
 
   @override
   Future<Either<Map<MainFailure, dynamic>, OhsRespModel>> ohsEditNewsServiceApi(
-      {required Map<String, String> data,required int newsId}) async {
+      {required Map<String, String> data, required int newsId}) async {
     var response = await getIt<HttpService>().multipartRequest(
-        apiUrl: "${ApiEndPoints().ohsEditNews}$newsId/", method: 'PATCH', data: data);
+        apiUrl: "${ApiEndPoints().ohsEditNews}$newsId/",
+        method: 'PATCH',
+        data: data);
     return response.fold(
       (l) => Left(l),
       (res) async {
@@ -374,6 +396,166 @@ class OhsService implements IohsService {
         OhsRespModel ohsEditNews = OhsRespModel.fromJson(data);
 
         return Right(ohsEditNews);
+      },
+    );
+  }
+
+  @override
+  Future<Either<Map<MainFailure, dynamic>, FolderListModel>> getFolders(
+      {required num parentFolderId}) async {
+    var response = await getIt<HttpService>().request(
+        authenticated: true,
+        method: HttpMethod.get,
+        apiUrl: '${ApiEndPoints().getFolders}$parentFolderId');
+
+    return response.fold(
+      (l) => Left(l),
+      (res) async {
+        FolderListModel folderList =
+            FolderListModel.fromJson(jsonDecode(res.body));
+
+        return Right(folderList);
+      },
+    );
+  }
+
+  @override
+  Future<Either<Map<MainFailure, dynamic>, dynamic>> addFolders(
+      {required Map<String, String> data}) async {
+    var response = await getIt<HttpService>().multipartRequest(
+        data: data, method: 'POST', apiUrl: ApiEndPoints().addFolders);
+    return response.fold(
+      (l) => Left(l),
+      (res) async {
+        return const Right("Successfully added");
+      },
+    );
+  }
+
+  @override
+  Future<Either<Map<MainFailure, dynamic>, FolderListModel>> folderSearchApi(
+      {required Map<String, String> data}) async {
+    var response = await getIt<HttpService>().multipartRequest(
+        data: data, method: 'POST', apiUrl: ApiEndPoints().searchFolders);
+    return response.fold(
+      (l) => Left(l),
+      (res) async {
+        var data = jsonDecode(res.body);
+        List<FolderModel> searchedFolderList =
+            List<FolderModel>.from(data.map((e) => FolderModel.fromJson(e)));
+        List<FolderModel> searchedFolderListt = List<FolderModel>.from(
+            data.map((e) => FolderModel(folders: searchedFolderList)));
+
+        FolderListModel searchedFolderListtt =
+            FolderListModel(folders: searchedFolderListt);
+        return Right(searchedFolderListtt);
+      },
+    );
+  }
+
+  @override
+  Future<Either<Map<MainFailure, dynamic>, FolderListModel>>
+      ohsFileFolderSearchApi({required Map<String, String> data}) async {
+    var response = await getIt<HttpService>().multipartRequest(
+        data: data, method: 'POST', apiUrl: ApiEndPoints().searchFileFolders);
+    return response.fold(
+      (l) => Left(l),
+      (res) async {
+        var data = jsonDecode(res.body);
+        FolderListModel searchedfileFolderList = FolderListModel.fromJson(data);
+
+        return Right(searchedfileFolderList);
+      },
+    );
+  }
+
+  @override
+  Future<Either<Map<MainFailure, dynamic>, dynamic>> ohsAddFiles(
+      {required Map<String, String> data}) async {
+    var response = await getIt<HttpService>().multipartRequest(
+        data: data, method: 'POST', apiUrl: ApiEndPoints().addFile);
+    return response.fold(
+      (l) => Left(l),
+      (res) async {
+        return Right("Success");
+      },
+    );
+  }
+
+  @override
+  Future<Either<Map<MainFailure, dynamic>, String>> editFoldersOhs(
+      {required Map<String, String> data, required int folderId}) async {
+    var response = await getIt<HttpService>().multipartRequest(
+        data: data,
+        method: 'PUT',
+        apiUrl: '${ApiEndPoints().editFolders}$folderId/');
+    return response.fold(
+      (l) => Left(l),
+      (res) async {
+        return const Right('success');
+      },
+    );
+  }
+
+  @override
+  Future<Either<Map<MainFailure, dynamic>, String>> ohsDeleteFolders(
+      {required int folderId}) async {
+    var response = await getIt<HttpService>().request(
+        authenticated: true,
+        method: HttpMethod.delete,
+        apiUrl: '${ApiEndPoints().deleteFolders}$folderId/');
+
+    return response.fold(
+      (l) => Left(l),
+      (res) async {
+        return const Right('success');
+      },
+    );
+  }
+
+  @override
+  Future<Either<Map<MainFailure, dynamic>, String>> editFilesOhs(
+      {required Map<String, String> data, required int fileId}) async {
+    var response = await getIt<HttpService>().multipartRequest(
+        data: data,
+        method: 'PUT',
+        apiUrl: '${ApiEndPoints().editFile}$fileId/');
+    return response.fold(
+      (l) => Left(l),
+      (res) async {
+        return const Right('success');
+      },
+    );
+  }
+
+  @override
+  Future<Either<Map<MainFailure, dynamic>, String>> ohsDeleteFiles(
+      {required int fileId, required int parentFolderId}) async {
+    var response = await getIt<HttpService>().request(
+        authenticated: true,
+        method: HttpMethod.delete,
+        apiUrl: '${ApiEndPoints().deleteFile}$fileId/$parentFolderId/');
+
+    return response.fold(
+      (l) => Left(l),
+      (res) async {
+        return const Right('success');
+      },
+    );
+  }
+  
+  @override
+  Future<Either<Map<MainFailure, dynamic>, FolderListModel>> expiryDateFiles({required num fileId, required String expiry}) async {
+    var response = await getIt<HttpService>().multipartRequest(
+        data: {"date": expiry},
+        method: 'PUT',
+        apiUrl: "${ApiEndPoints().teamFilesExpiry}$fileId/");
+    return response.fold(
+      (l) => Left(l),
+      (res) async {
+        var data = jsonDecode(res.body);
+        FolderListModel expiry = FolderListModel.fromJson(data);
+        return Right(expiry);
       },
     );
   }

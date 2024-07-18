@@ -43,9 +43,7 @@ class ScheduleListByDate extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          vmSchedule
-                                  .shedulecardByDateResponse.data?[i].client ??
-                              '',
+                          "${vmSchedule.shedulecardByDateResponse.data?[i].client ?? ''}",
                           style: TextStyle(fontSize: 11.w),
                         ),
                         Padding(

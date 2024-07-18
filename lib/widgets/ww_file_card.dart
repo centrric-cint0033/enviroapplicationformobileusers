@@ -1,5 +1,6 @@
 import 'package:enviro_mobile_application/model/00_common_model/folder_model/folder_model.dart';
 import 'package:enviro_mobile_application/view/08_team/team_widgets/date_picker.dart';
+import 'package:enviro_mobile_application/view_model/04_ohs/ohs_view_model.dart';
 import 'package:enviro_mobile_application/view_model/08_team/team_view_model.dart';
 import 'package:enviro_mobile_application/widgets/common_icon_btn_widget.dart';
 import 'package:enviro_mobile_application/widgets/ww_folder_card.dart';
@@ -16,6 +17,7 @@ class WWFileCard extends StatelessWidget {
   final bool? loading;
   final num employeeID;
   final num parentFolderId;
+  final bool? fromOhs;
 
   const WWFileCard({
     super.key,
@@ -27,6 +29,7 @@ class WWFileCard extends StatelessWidget {
     this.loading,
     required this.employeeID,
     required this.parentFolderId,
+    this.fromOhs = false,
   });
 
   @override
@@ -92,11 +95,17 @@ class WWFileCard extends StatelessWidget {
               icon: Icons.delete_forever,
               onTap: () => showDeleteDialog(context, deleteTap: deleteTap),
             ),
-            datePicker(
-                context,
-                vmTeam.selectedExpiryDate,
-                (date) => vmTeam.expiryDatePickerFn(
-                    context, date, file.id ?? 1, employeeID, parentFolderId))
+            fromOhs == true
+                ? datePicker(
+                    context,
+                    vmOhs.selectedExpiryDate,
+                    (date) => vmOhs.expiryDatePickerFn(
+                        context, date, file.id ?? 1, parentFolderId))
+                : datePicker(
+                    context,
+                    vmTeam.selectedExpiryDate,
+                    (date) => vmTeam.expiryDatePickerFn(context, date,
+                        file.id ?? 1, employeeID, parentFolderId))
           ],
         ),
       ),
