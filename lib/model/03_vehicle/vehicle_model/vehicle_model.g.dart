@@ -56,7 +56,7 @@ _$VehicleModelImpl _$$VehicleModelImplFromJson(Map<String, dynamic> json) =>
       invoiceDate: json['invoice_date'] as String?,
       serviceDate: json['service_date'] as String?,
       ometer: json['ometer'] as String?,
-      invoiceNumber: json['invoice_number'] as String?,
+      invoiceNumber: json['invoice_number'],
       serviceProvided: json['service_provided'] as String?,
       hours: json['hours'] as String?,
       lCost: json['l_cost'] as String?,
@@ -121,7 +121,7 @@ _$VehicleModelImpl _$$VehicleModelImplFromJson(Map<String, dynamic> json) =>
       signature: json['signature'],
       dateNow: json['date_now'],
       reportedFaultString: json['reported_fault_string'],
-      driverName: json['driver_name'] as String?,
+      driverName: json['driver_name'],
       folders: (json['folders'] as List<dynamic>?)
           ?.map((e) => Folder.fromJson(e as Map<String, dynamic>))
           .toList(),

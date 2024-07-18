@@ -1,15 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:enviro_mobile_application/model/03_vehicle/vehicle_model/vehicle_model.dart';
-import 'package:enviro_mobile_application/service/03_vehicles/vehicle_service.dart';
 import 'package:enviro_mobile_application/utilis/Appthemes.dart';
 import 'package:enviro_mobile_application/utilis/constant.dart';
-import 'package:enviro_mobile_application/view/03_vehicles/vehicle_widget/vehicle_widget.dart';
 import 'package:enviro_mobile_application/widgets/01_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:intl/intl.dart';
-
-import '../../widgets/cmbutton.dart';
 
 const gapField = SizedBox(height: 0.3);
 Card customCard({required Widget child}) => Card(
@@ -104,51 +98,4 @@ Widget buildCardDataOrder(List<Widget> widget, {String? image}) => customCard(
       ),
     );
 
-Widget showData({VehicleModel? data, VehicleActionType? status}) {
-  return buildCardDataOrder(
-    [
-      Row(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          CmButton(height: 25.w, text: 'Folders'),
-        ],
-      ),
-      if (data?.editedDateTime != null)
-        expandedRowShowText(
-            '', DateFormat.yMEd().add_jms().format(DateTime.now())),
-      if (data?.registration != null)
-        expandedRowShowText2('Registration no', data!.registration!),
-      if (data?.editedDateTime != null)
-        expandedRowShowText2(
-            'RegoDue', DateFormat.yMMMMd().format(data!.editedDateTime!)),
 
-      if (data?.types != null) expandedRowShowText2('Type', data!.types!),
-      if (data?.year != null) expandedRowShowText2('Year', '${data?.year!}'),
-      if (data?.odometer != null)
-        expandedRowShowText2('odometer', '${data?.odometer}'),
-      if (data?.driverName != null)
-        expandedRowShowText2('Driver name', '${data?.driverName}'),
-      if (data?.sPart != null)
-        expandedRowShowText2('spareparts', '${data?.sPart}'),
-      if (data?.dateTime != null)
-        expandedRowShowText2('date', '${data?.dateTime}'),
-      if (data?.serviceDate != null)
-        expandedRowShowText2('servicedate', '${data?.serviceDate}'),
-      if (data?.lCost != null)
-        expandedRowShowText2('labourcost', '${data?.lCost}'),
-      // if (data?.totalCost != null)
-      //   expandedRowShowText2('totalcost', '${data.totalCost}'),
-      // if (data?.time != null) expandedRowShowText2('Time', '${data.time}'),
-      // if (data?.filledBy != null)
-      //   expandedRowShowText2('Filled By', '${data.filledBy}'),
-      // if (data?.currentReadingBefore != null)
-      //   expandedRowShowText2('Current Reading', '${data.currentReadingBefore}'),
-      // if (data?.readingAfterFilling != null)
-      //   expandedRowShowText2('Reading After', '${data.readingAfterFilling}'),
-      // if (data?.volumeUsedInLiter != null)
-      //   expandedRowShowText2('Reading After', '${data.volumeUsedInLiter}'),
-      if (status == VehicleActionType.fuelExpence) rowButton(),
-    ],
-    // image: data?.image, // Add image here if available
-  );
-}

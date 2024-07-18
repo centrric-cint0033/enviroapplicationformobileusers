@@ -143,6 +143,8 @@ void onsalesfunction(BuildContext context) async {
 
 void ohsfunction(BuildContext context) {
   // vmProfile.profileviewmodelfunction();
+  vmOhs.folderSearchCntrlr.text = "";
+  vmOhs.filefolderSearchCntrlr.text = "";
   vmTeam.getAllEmployee();
   vmOhs.ohsNotificationApi();
   vmOhs.ohsNewsApi();

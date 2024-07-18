@@ -11,60 +11,122 @@ import 'package:intl/intl.dart';
 
 final gapFieldVeh = sized0hx05;
 
-Row rowButton() => Row(
+Row rowButton(
+        {required Function() editOntap, required Function() deleteOntap}) =>
+    Row(
       children: [
         const Expanded(child: SizedBox()),
-        expandedButton('Edit', () {}),
+        expandedButton('Edit', editOntap),
         sized0wx10,
-        expandedButton('Delete', () {}),
+        expandedButton('Delete', deleteOntap),
       ],
     );
 
 Expanded expandedButton(String text, Function() ontap) => Expanded(
-      child: CmButton(text: text, height: 25.w, onPressed: ontap),
+      child: CmButton(
+        text: text,
+        height: 25.w,
+        onPressed: ontap,
+        borderColor: Colors.grey,
+        color: Colors.white,
+        textcolor: Colors.black,
+      ),
     );
 
-Widget showData({VehicleModel? data, VehicleActionType? status}) {
-  return buildCardDataOrder(
-    [
-      Row(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          CmButton(height: 25.w, text: 'Folders'),
+Widget showData(
+    {VehicleModel? data,
+    VehicleActionType? status,
+    bool fromPreInspection = false}) {
+  return Container(
+    decoration: BoxDecoration(
+        border: Border.all(color: Appthemes.cPrimary),
+        borderRadius: BorderRadius.circular(6)),
+    child: Padding(
+      padding: EdgeInsets.only(left: 8.w, right: 8.w),
+      child: Column(children: [
+        sized0hx10,
+        if (vmVehicle.vehicleStatusType == VehicleActionType.vehicleList ||
+            vmVehicle.vehicleStatusType == VehicleActionType.maintenanceCheck)
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              CmButton(height: 25.w, text: 'Folders'),
+            ],
+          ),
+        if (data?.registration != null) ...[
+          sized0hx05,
+          expandedRowShowText('Registration no', data!.registration!),
         ],
-      ),
-      if (data?.registration != null)
-        expandedRowShowText('Registration no', data!.registration!),
-      if (data?.editedDateTime != null)
-        expandedRowShowText(
-            'RegoDue', DateFormat.yMMMMd().format(data!.editedDateTime!)),
-      if (data?.types != null) expandedRowShowText('Type', data!.types!),
-      if (data?.year != null) expandedRowShowText('Year', '${data!.year!}'),
-      if (data?.odometer != null)
-        expandedRowShowText('odometer', '${data?.odometer}'),
-      if (data?.driverName != null)
-        expandedRowShowText('Driver name', '${data?.driverName}'),
-      if (data?.sPart != null)
-        expandedRowShowText('spareparts', '${data?.sPart}'),
-      if (data?.dateTime != null)
-        expandedRowShowText('date', '${data?.dateTime}'),
-      if (data?.serviceDate != null)
-        expandedRowShowText('servicedate', '${data?.serviceDate}'),
-      if (data?.lCost != null)
-        expandedRowShowText('labourcost', '${data?.lCost}'),
-      if (data?.totalCost != null)
-        expandedRowShowText('totalcost', '${data?.totalCost}'),
-      if (data?.time != null) expandedRowShowText('Time', '${data?.time}'),
-      if (data?.filledBy != null)
-        expandedRowShowText('Filled By', '${data?.filledBy}'),
-      if (data?.currentReadingBefore != null)
-        expandedRowShowText('Current Reading', '${data?.currentReadingBefore}'),
-      if (data?.readingAfterFilling != null)
-        expandedRowShowText('Reading After', '${data?.readingAfterFilling}'),
-      if (data?.volumeUsedInLiter != null)
-        expandedRowShowText('Reading After', '${data?.volumeUsedInLiter}'),
-      if (status == VehicleActionType.fuelExpence) rowButton()
-    ],
+        if (data?.editedDateTime != null) ...[
+          sized0hx05,
+          expandedRowShowText(
+              'RegoDue', DateFormat.yMMMMd().format(data!.editedDateTime!))
+        ],
+        if (data?.types != null) ...[
+          sized0hx05,
+          expandedRowShowText('Type', data!.types!)
+        ],
+        if (data?.year != null) ...[
+          sized0hx05,
+          expandedRowShowText('Year', '${data!.year!}')
+        ],
+        if (data?.odometer != null) ...[
+          sized0hx05,
+          expandedRowShowText('Odometer', '${data?.odometer}')
+        ],
+        if (data?.driverName != null) ...[
+          sized0hx05,
+          expandedRowShowText('Driver name', '${data?.driverName}')
+        ],
+        if (data?.sPart != null) ...[
+          sized0hx05,
+          expandedRowShowText('Spareparts', '${data?.sPart}')
+        ],
+        if (data?.dateTime != null) ...[
+          sized0hx05,
+          expandedRowShowText('Date', '${data?.dateTime}')
+        ],
+        if (data?.serviceDate != null) ...[
+          sized0hx05,
+          expandedRowShowText('Servicedate', '${data?.serviceDate}')
+        ],
+        if (data?.lCost != null) ...[
+          sized0hx05,
+          expandedRowShowText('Labourcost', '${data?.lCost}')
+        ],
+        if (data?.totalCost != null) ...[
+          sized0hx05,
+          expandedRowShowText('Totalcost', '${data?.totalCost}')
+        ],
+        if (data?.time != null) ...[
+          sized0hx05,
+          expandedRowShowText('Time', '${data?.time}')
+        ],
+        if (data?.filledBy != null) ...[
+          sized0hx05,
+          expandedRowShowText('Filled By', '${data?.filledBy}')
+        ],
+        if (data?.currentReadingBefore != null) ...[
+          sized0hx05,
+          expandedRowShowText(
+              'Current Reading', '${data?.currentReadingBefore}')
+        ],
+        if (data?.readingAfterFilling != null) ...[
+          sized0hx05,
+          expandedRowShowText('Reading After', '${data?.readingAfterFilling}')
+        ],
+        if (data?.volumeUsedInLiter != null) ...[
+          sized0hx05,
+          expandedRowShowText('Reading After', '${data?.volumeUsedInLiter}')
+        ],
+        if (vmVehicle.vehicleStatusType == VehicleActionType.maintenanceCheck ||
+            vmVehicle.vehicleStatusType == VehicleActionType.fuelExpence) ...[
+          sized0hx05,
+          rowButton(editOntap: () {}, deleteOntap: () {})
+        ],
+        sized0hx10,
+      ]),
+    ),
   );
 }
 

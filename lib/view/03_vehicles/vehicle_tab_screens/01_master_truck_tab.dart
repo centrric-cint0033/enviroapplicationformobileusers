@@ -73,10 +73,25 @@ class MasterTruckList extends StatelessWidget {
                     );
                     break;
                   case "Pre Inspection check":
+                    context.router.push(
+                      VehicleDetailRoute(
+                        data: vmVehicle.masterTruckApiResponse.data![index],
+                      ),
+                    );
                     break;
                   case "Maintenance Report":
+                    context.router.push(
+                      VehicleDetailRoute(
+                        data: vmVehicle.masterTruckApiResponse.data![index],
+                      ),
+                    );
                     break;
                   case "Fuel Expense":
+                    context.router.push(
+                      VehicleDetailRoute(
+                        data: vmVehicle.masterTruckApiResponse.data![index],
+                      ),
+                    );
                     break;
                   default:
                 }

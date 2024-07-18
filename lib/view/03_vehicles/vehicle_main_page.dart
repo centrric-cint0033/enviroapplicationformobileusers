@@ -55,9 +55,9 @@ class VehiclePage extends StatelessWidget {
           child: Column(
             children: [
               WWcommonTabBar(
-                value1: 'Master truck',
-                value2: 'Master Car',
-                value3: 'Semi Trailers',
+                value1: 'Master-Trucks',
+                value2: 'Master-Cars',
+                value3: 'Semi Trailers/Others',
                 onTap: tabsApis,
               ),
               gapFieldVeh,
@@ -84,7 +84,7 @@ class VehiclePage extends StatelessWidget {
       return SizedBox(
         width: double.infinity,
         child: WWdropDown(
-            newValue: vmVehicle.selectedVehicle ?? 'Vehicle list',
+            newValue: vmVehicle.selectedVehicle,
             dropDownTap: () {
               switch (vmVehicle.vehicleTabIndex) {
                 case 0:

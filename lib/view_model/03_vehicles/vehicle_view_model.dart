@@ -40,7 +40,7 @@ abstract class VehicleViewModelBase with Store {
   }
 
   @observable
-  String? selectedVehicle;
+  String? selectedVehicle = "Vehicle list";
 
   @observable
   VehicleActionType? vehicleStatusType;

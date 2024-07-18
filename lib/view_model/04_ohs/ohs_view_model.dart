@@ -52,7 +52,7 @@ abstract class OHSViewModelBase with Store {
   @observable
   DateTime? selectedExpiryDate;
   TextEditingController folderSearchCntrlr = TextEditingController();
-  TextEditingController ohsfolderSearchCntrlr = TextEditingController();
+  TextEditingController filefolderSearchCntrlr = TextEditingController();
   @observable
   List<String> folderNames = [];
 

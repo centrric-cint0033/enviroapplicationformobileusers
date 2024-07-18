@@ -1,3 +1,5 @@
+import 'package:auto_route/auto_route.dart';
+import 'package:enviro_mobile_application/Routepage/approutes.gr.dart';
 import 'package:enviro_mobile_application/model/03_vehicle/vehicle_model/vehicle_model.dart';
 import 'package:enviro_mobile_application/view/03_vehicles/vehicle_widget/vehicle_widget.dart';
 import 'package:enviro_mobile_application/view_model/03_vehicles/vehicle_view_model.dart';
@@ -66,9 +68,50 @@ class SemiTrailersList extends StatelessWidget {
               ? vmVehicle.semiTrailorApiResponse.paginationLoading
                   ? const CupertinoActivityIndicator()
                   : const SizedBox.shrink()
-              : showData(
-                  data: vmVehicle.semiTrailorApiResponse.data?[index],
-                  status: vmVehicle.vehicleStatusType),
+              : InkWell(
+                  onTap: () {
+                    if (vmVehicle.semiTrailorApiResponse.data?[index] != null) {
+                      switch (vmVehicle.selectedVehicle) {
+                        case "Vehicle list":
+                          context.router.push(
+                            VehicleDetailRoute(
+                              data:
+                                  vmVehicle.semiTrailorApiResponse.data![index],
+                            ),
+                          );
+                          break;
+                        case "Pre Inspection check":
+                          context.router.push(
+                            VehicleDetailRoute(
+                              data:
+                                  vmVehicle.semiTrailorApiResponse.data![index],
+                            ),
+                          );
+                          break;
+                        case "Maintenance Report":
+                          context.router.push(
+                            VehicleDetailRoute(
+                              data:
+                                  vmVehicle.semiTrailorApiResponse.data![index],
+                            ),
+                          );
+                          break;
+                        case "Fuel Expense":
+                          context.router.push(
+                            VehicleDetailRoute(
+                              data:
+                                  vmVehicle.semiTrailorApiResponse.data![index],
+                            ),
+                          );
+                          break;
+                        default:
+                      }
+                    }
+                  },
+                  child: showData(
+                      data: vmVehicle.semiTrailorApiResponse.data?[index],
+                      status: vmVehicle.vehicleStatusType),
+                ),
         );
       },
     );

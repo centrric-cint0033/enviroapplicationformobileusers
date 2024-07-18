@@ -86,7 +86,7 @@ mixin _$VehicleModel {
   String? get serviceDate => throw _privateConstructorUsedError;
   String? get ometer => throw _privateConstructorUsedError;
   @JsonKey(name: 'invoice_number')
-  String? get invoiceNumber => throw _privateConstructorUsedError;
+  dynamic get invoiceNumber => throw _privateConstructorUsedError;
   @JsonKey(name: 'service_provided')
   String? get serviceProvided => throw _privateConstructorUsedError;
   String? get hours => throw _privateConstructorUsedError;
@@ -197,7 +197,7 @@ mixin _$VehicleModel {
   @JsonKey(name: 'reported_fault_string')
   dynamic get reportedFaultString => throw _privateConstructorUsedError;
   @JsonKey(name: 'driver_name')
-  String? get driverName => throw _privateConstructorUsedError;
+  dynamic get driverName => throw _privateConstructorUsedError;
   List<Folder>? get folders => throw _privateConstructorUsedError;
   @JsonKey(name: 'parent_folder')
   int? get parentFolder => throw _privateConstructorUsedError;
@@ -259,7 +259,7 @@ abstract class $VehicleModelCopyWith<$Res> {
       @JsonKey(name: 'invoice_date') String? invoiceDate,
       @JsonKey(name: 'service_date') String? serviceDate,
       String? ometer,
-      @JsonKey(name: 'invoice_number') String? invoiceNumber,
+      @JsonKey(name: 'invoice_number') dynamic invoiceNumber,
       @JsonKey(name: 'service_provided') String? serviceProvided,
       String? hours,
       @JsonKey(name: 'l_cost') String? lCost,
@@ -323,7 +323,7 @@ abstract class $VehicleModelCopyWith<$Res> {
       dynamic signature,
       @JsonKey(name: 'date_now') dynamic dateNow,
       @JsonKey(name: 'reported_fault_string') dynamic reportedFaultString,
-      @JsonKey(name: 'driver_name') String? driverName,
+      @JsonKey(name: 'driver_name') dynamic driverName,
       List<Folder>? folders,
       @JsonKey(name: 'parent_folder') int? parentFolder});
 }
@@ -632,7 +632,7 @@ class _$VehicleModelCopyWithImpl<$Res, $Val extends VehicleModel>
       invoiceNumber: freezed == invoiceNumber
           ? _value.invoiceNumber
           : invoiceNumber // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       serviceProvided: freezed == serviceProvided
           ? _value.serviceProvided
           : serviceProvided // ignore: cast_nullable_to_non_nullable
@@ -884,7 +884,7 @@ class _$VehicleModelCopyWithImpl<$Res, $Val extends VehicleModel>
       driverName: freezed == driverName
           ? _value.driverName
           : driverName // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       folders: freezed == folders
           ? _value.folders
           : folders // ignore: cast_nullable_to_non_nullable
@@ -950,7 +950,7 @@ abstract class _$$VehicleModelImplCopyWith<$Res>
       @JsonKey(name: 'invoice_date') String? invoiceDate,
       @JsonKey(name: 'service_date') String? serviceDate,
       String? ometer,
-      @JsonKey(name: 'invoice_number') String? invoiceNumber,
+      @JsonKey(name: 'invoice_number') dynamic invoiceNumber,
       @JsonKey(name: 'service_provided') String? serviceProvided,
       String? hours,
       @JsonKey(name: 'l_cost') String? lCost,
@@ -1014,7 +1014,7 @@ abstract class _$$VehicleModelImplCopyWith<$Res>
       dynamic signature,
       @JsonKey(name: 'date_now') dynamic dateNow,
       @JsonKey(name: 'reported_fault_string') dynamic reportedFaultString,
-      @JsonKey(name: 'driver_name') String? driverName,
+      @JsonKey(name: 'driver_name') dynamic driverName,
       List<Folder>? folders,
       @JsonKey(name: 'parent_folder') int? parentFolder});
 }
@@ -1321,7 +1321,7 @@ class __$$VehicleModelImplCopyWithImpl<$Res>
       invoiceNumber: freezed == invoiceNumber
           ? _value.invoiceNumber
           : invoiceNumber // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       serviceProvided: freezed == serviceProvided
           ? _value.serviceProvided
           : serviceProvided // ignore: cast_nullable_to_non_nullable
@@ -1573,7 +1573,7 @@ class __$$VehicleModelImplCopyWithImpl<$Res>
       driverName: freezed == driverName
           ? _value.driverName
           : driverName // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       folders: freezed == folders
           ? _value._folders
           : folders // ignore: cast_nullable_to_non_nullable
@@ -1826,7 +1826,7 @@ class _$VehicleModelImpl implements _VehicleModel {
   final String? ometer;
   @override
   @JsonKey(name: 'invoice_number')
-  final String? invoiceNumber;
+  final dynamic invoiceNumber;
   @override
   @JsonKey(name: 'service_provided')
   final String? serviceProvided;
@@ -2000,7 +2000,7 @@ class _$VehicleModelImpl implements _VehicleModel {
   final dynamic reportedFaultString;
   @override
   @JsonKey(name: 'driver_name')
-  final String? driverName;
+  final dynamic driverName;
   final List<Folder>? _folders;
   @override
   List<Folder>? get folders {
@@ -2091,8 +2091,8 @@ class _$VehicleModelImpl implements _VehicleModel {
             (identical(other.serviceDate, serviceDate) ||
                 other.serviceDate == serviceDate) &&
             (identical(other.ometer, ometer) || other.ometer == ometer) &&
-            (identical(other.invoiceNumber, invoiceNumber) ||
-                other.invoiceNumber == invoiceNumber) &&
+            const DeepCollectionEquality()
+                .equals(other.invoiceNumber, invoiceNumber) &&
             (identical(other.serviceProvided, serviceProvided) ||
                 other.serviceProvided == serviceProvided) &&
             (identical(other.hours, hours) || other.hours == hours) &&
@@ -2175,7 +2175,7 @@ class _$VehicleModelImpl implements _VehicleModel {
             const DeepCollectionEquality().equals(other.signature, signature) &&
             const DeepCollectionEquality().equals(other.dateNow, dateNow) &&
             const DeepCollectionEquality().equals(other.reportedFaultString, reportedFaultString) &&
-            (identical(other.driverName, driverName) || other.driverName == driverName) &&
+            const DeepCollectionEquality().equals(other.driverName, driverName) &&
             const DeepCollectionEquality().equals(other._folders, _folders) &&
             (identical(other.parentFolder, parentFolder) || other.parentFolder == parentFolder));
   }
@@ -2228,7 +2228,7 @@ class _$VehicleModelImpl implements _VehicleModel {
         invoiceDate,
         serviceDate,
         ometer,
-        invoiceNumber,
+        const DeepCollectionEquality().hash(invoiceNumber),
         serviceProvided,
         hours,
         lCost,
@@ -2291,7 +2291,7 @@ class _$VehicleModelImpl implements _VehicleModel {
         const DeepCollectionEquality().hash(signature),
         const DeepCollectionEquality().hash(dateNow),
         const DeepCollectionEquality().hash(reportedFaultString),
-        driverName,
+        const DeepCollectionEquality().hash(driverName),
         const DeepCollectionEquality().hash(_folders),
         parentFolder
       ]);
@@ -2358,7 +2358,7 @@ abstract class _VehicleModel implements VehicleModel {
       @JsonKey(name: 'invoice_date') final String? invoiceDate,
       @JsonKey(name: 'service_date') final String? serviceDate,
       final String? ometer,
-      @JsonKey(name: 'invoice_number') final String? invoiceNumber,
+      @JsonKey(name: 'invoice_number') final dynamic invoiceNumber,
       @JsonKey(name: 'service_provided') final String? serviceProvided,
       final String? hours,
       @JsonKey(name: 'l_cost') final String? lCost,
@@ -2424,7 +2424,7 @@ abstract class _VehicleModel implements VehicleModel {
       final dynamic signature,
       @JsonKey(name: 'date_now') final dynamic dateNow,
       @JsonKey(name: 'reported_fault_string') final dynamic reportedFaultString,
-      @JsonKey(name: 'driver_name') final String? driverName,
+      @JsonKey(name: 'driver_name') final dynamic driverName,
       final List<Folder>? folders,
       @JsonKey(name: 'parent_folder')
       final int? parentFolder}) = _$VehicleModelImpl;
@@ -2543,7 +2543,7 @@ abstract class _VehicleModel implements VehicleModel {
   String? get ometer;
   @override
   @JsonKey(name: 'invoice_number')
-  String? get invoiceNumber;
+  dynamic get invoiceNumber;
   @override
   @JsonKey(name: 'service_provided')
   String? get serviceProvided;
@@ -2717,7 +2717,7 @@ abstract class _VehicleModel implements VehicleModel {
   dynamic get reportedFaultString;
   @override
   @JsonKey(name: 'driver_name')
-  String? get driverName;
+  dynamic get driverName;
   @override
   List<Folder>? get folders;
   @override

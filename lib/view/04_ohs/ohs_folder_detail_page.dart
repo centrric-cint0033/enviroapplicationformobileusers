@@ -65,7 +65,7 @@ class OhsFolderDetailPage extends StatelessWidget {
                                 children: [
                                   Expanded(
                                     child: WWTextField(
-                                      controller: vmOhs.ohsfolderSearchCntrlr,
+                                      controller: vmOhs.filefolderSearchCntrlr,
                                       onChanged: (v) =>
                                           vmTeam.onTextChanged(() {
                                         v.isEmpty

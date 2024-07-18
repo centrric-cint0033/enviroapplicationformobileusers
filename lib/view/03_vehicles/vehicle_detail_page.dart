@@ -1,3 +1,4 @@
+import 'package:enviro_mobile_application/utilis/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -19,23 +20,42 @@ class VehicleDetailPage extends StatelessWidget {
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 20.w),
-        child: buildCardDataOrder(
-          [
-            expandedRowShowText("Vehicle", data.vehicle?.toString() ?? ""),
-            expandedRowShowText("Vehicle Type", data.vehicleType ?? ""),
-            expandedRowShowText("Types", data.types ?? ""),
-            expandedRowShowText("Year", data.year?.toString() ?? ""),
-            expandedRowShowText("Transmission", data.transmission ?? ""),
-            expandedRowShowText("Fuel", data.fuel ?? ""),
-            expandedRowShowText("Height", data.height ?? ""),
-            expandedRowShowText("Width", data.width ?? ""),
-            expandedRowShowText("Length", data.length ?? ""),
-            expandedRowShowText("Litres", data.litres ?? ""),
-            expandedRowShowText("Vin number", data.vinNumber ?? ""),
-            expandedRowShowText("Axies", data.axies ?? ""),
-            expandedRowShowText("Due Rego", data.dueRego ?? ""),
-            expandedRowShowText("Engine numbers", data.engineNumbers ?? ""),
-          ],
+        child: Container(
+          decoration: BoxDecoration(border: Border.all(color: Colors.grey)),
+          child: buildCardDataOrder(
+            [
+              sized0hx10,
+              expandedRowShowText(
+                  "Vehicle", data.registration?.toString() ?? ""),
+              sized0hx10,
+              expandedRowShowText("Vehicle Type", data.vehicleType ?? ""),
+              sized0hx10,
+              expandedRowShowText("Types", data.types ?? ""),
+              sized0hx10,
+              expandedRowShowText("Year", data.year?.toString() ?? ""),
+              sized0hx10,
+              expandedRowShowText("Transmission", data.transmission ?? ""),
+              sized0hx10,
+              expandedRowShowText("Fuel", data.fuel ?? ""),
+              sized0hx10,
+              expandedRowShowText("Height", data.height ?? ""),
+              sized0hx10,
+              expandedRowShowText("Width", data.width ?? ""),
+              sized0hx10,
+              expandedRowShowText("Length", data.length ?? ""),
+              sized0hx10,
+              expandedRowShowText("Litres", data.litres ?? ""),
+              sized0hx10,
+              expandedRowShowText("Vin number", data.vinNumber ?? ""),
+              sized0hx10,
+              expandedRowShowText("Axies", data.axies ?? ""),
+              sized0hx10,
+              expandedRowShowText("Due Rego", data.dueRego ?? ""),
+              sized0hx10,
+              expandedRowShowText("Engine numbers", data.engineNumbers ?? ""),
+              sized0hx10,
+            ],
+          ),
         ),
       ),
     );

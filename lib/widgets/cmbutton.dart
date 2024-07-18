@@ -21,7 +21,7 @@ class CmButton extends StatelessWidget {
     this.loadingColor,
     this.fontSize,
     this.textcolor,
-    this.iconSize,
+    this.iconSize, this.borderColor,
   }) : super(key: key);
 
   final IconData? icon;
@@ -40,6 +40,7 @@ class CmButton extends StatelessWidget {
   final bool loading;
   final Color? loadingColor;
   final Color? textcolor;
+  final Color? borderColor;
 
   @override
   Widget build(BuildContext context) {
@@ -57,6 +58,9 @@ class CmButton extends StatelessWidget {
             shape: MaterialStateProperty.all<OutlinedBorder>(
               RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(borderRadius ?? 10.0),
+                side: BorderSide(
+                  color: borderColor ?? Colors.white,
+                ),
               ),
             ),
           ),

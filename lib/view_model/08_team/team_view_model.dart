@@ -396,9 +396,10 @@ abstract class TeamViewModelBase with Store {
     } else {
       teamFoldersResponse2 = teamFoldersResponse2.copyWith(
           error: null,
-          loading: fromTeamProfileScreen == true
-              ? true
-              : teamFoldersResponse2.data == null);
+          // loading: fromTeamProfileScreen == true
+          //     ? true
+          //     : teamFoldersResponse2.data == null,
+          loading: true);
 
       final result = await teamService.getTeamFolders(
           id: id, parentFolderId: parentFolderId);
@@ -1144,7 +1145,7 @@ abstract class TeamViewModelBase with Store {
   }
 
   ObservableList<TeamResModel> selectedMembers = ObservableList<TeamResModel>();
- ObservableList<num> selectedMemberIds = ObservableList<int>();
+  ObservableList<num> selectedMemberIds = ObservableList<int>();
 
   @action
   void addSelectedMember(TeamResModel member) {

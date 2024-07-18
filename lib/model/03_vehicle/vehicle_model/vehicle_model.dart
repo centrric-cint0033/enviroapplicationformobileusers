@@ -54,7 +54,7 @@ class VehicleModel with _$VehicleModel {
     @JsonKey(name: 'invoice_date') String? invoiceDate,
     @JsonKey(name: 'service_date') String? serviceDate,
     String? ometer,
-    @JsonKey(name: 'invoice_number') String? invoiceNumber,
+    @JsonKey(name: 'invoice_number') dynamic invoiceNumber,
     @JsonKey(name: 'service_provided') String? serviceProvided,
     String? hours,
     @JsonKey(name: 'l_cost') String? lCost,
@@ -118,7 +118,7 @@ class VehicleModel with _$VehicleModel {
     dynamic signature,
     @JsonKey(name: 'date_now') dynamic dateNow,
     @JsonKey(name: 'reported_fault_string') dynamic reportedFaultString,
-    @JsonKey(name: 'driver_name') String? driverName,
+    @JsonKey(name: 'driver_name') dynamic driverName,
     List<Folder>? folders,
     @JsonKey(name: 'parent_folder') int? parentFolder,
   }) = _VehicleModel;
