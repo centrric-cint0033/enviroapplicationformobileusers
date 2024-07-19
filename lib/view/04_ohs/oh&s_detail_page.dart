@@ -49,18 +49,18 @@ class OhsDetailPage extends StatelessWidget {
                                     children: [
                                       Text(
                                         res.data?[index].title ?? '',
-                                        style: TextStyle(fontSize: 10.w),
+                                        style: TextStyle(fontSize: 10.sp),
                                       ),
                                       Text(
                                         res.data?[index].members_list!
                                                 .map((member) => member.name)
                                                 .join(', ') ??
                                             "",
-                                        style: TextStyle(fontSize: 10.w),
+                                        style: TextStyle(fontSize: 10.sp),
                                       ),
                                       Text(
                                         res.data?[index].description ?? '',
-                                        style: TextStyle(fontSize: 10.w),
+                                        style: TextStyle(fontSize: 10.sp),
                                       ),
                                       Text(
                                         DateFormat('yyyy-MM-dd').format(
@@ -68,7 +68,7 @@ class OhsDetailPage extends StatelessWidget {
                                                   .edited_date_time ??
                                               ''),
                                         ),
-                                        style: TextStyle(fontSize: 10.w),
+                                        style: TextStyle(fontSize: 10.sp),
                                       )
                                     ],
                                   ),
@@ -101,7 +101,7 @@ class OhsDetailPage extends StatelessWidget {
                                                             .file_attachment ??
                                                         "",
                                                     style: TextStyle(
-                                                        fontSize: 10.w),
+                                                        fontSize: 10.sp),
                                                     overflow:
                                                         TextOverflow.ellipsis,
                                                   )
@@ -168,7 +168,7 @@ class OhsDetailPage extends StatelessWidget {
                                                         false
                                                     ? Colors.black
                                                     : Colors.grey.shade400,
-                                                fontSize: 10.w),
+                                                fontSize: 10.sp),
                                           ))),
                             Container(
                                 height: 30.h,
@@ -194,7 +194,7 @@ class OhsDetailPage extends StatelessWidget {
                                             "Delete",
                                             style: TextStyle(
                                                 color: Colors.grey.shade800,
-                                                fontSize: 10.w),
+                                                fontSize: 10.sp),
                                           ))),
                             if (vmOhs.newspageResponse.data?[index]
                                     .userReadStatus ==
@@ -223,7 +223,7 @@ class OhsDetailPage extends StatelessWidget {
                                               "Read",
                                               style: TextStyle(
                                                   color: Colors.grey.shade800,
-                                                  fontSize: 10.w),
+                                                  fontSize: 10.sp),
                                             )))
                           ],
                         ),

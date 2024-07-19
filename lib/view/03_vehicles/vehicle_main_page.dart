@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:enviro_mobile_application/service/03_vehicles/vehicle_service.dart';
 import 'package:enviro_mobile_application/view/03_vehicles/vehicle_tab_screens/02_master_car_tab.dart';
 import 'package:enviro_mobile_application/view/03_vehicles/vehicle_tab_screens/01_master_truck_tab.dart';
 import 'package:enviro_mobile_application/view/03_vehicles/vehicle_tab_screens/03_semi_Trailor_tab.dart';
@@ -32,12 +33,15 @@ class VehiclePage extends StatelessWidget {
       vmVehicle.vehicleTabIndex = i;
       switch (i) {
         case 0:
+          VehicleType.truck;
           vmVehicle.masterTruckApi();
           break;
         case 1:
+          VehicleType.car;
           vmVehicle.masterCarApi();
           break;
         case 2:
+          VehicleType.semiTrailer;
           vmVehicle.semiTrailorApi();
         default:
       }

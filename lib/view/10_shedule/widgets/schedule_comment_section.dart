@@ -17,7 +17,7 @@ class ScheduleCommentSection extends StatelessWidget {
       children: [
         Text(
           'Comments',
-          style: TextStyle(fontSize: 9.w, fontWeight: FontWeight.bold),
+          style: TextStyle(fontSize: 9.sp, fontWeight: FontWeight.bold),
         ),
         sized0hx10,
         SizedBox(
@@ -42,7 +42,7 @@ class ScheduleCommentSection extends StatelessWidget {
               focusedBorder: const OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.grey)),
               hintText: 'Add a comment',
-              hintStyle: TextStyle(fontSize: 9.w),
+              hintStyle: TextStyle(fontSize: 9.sp),
               suffixIcon: Observer(builder: (context) {
                 return IconButton(
                   icon: const Icon(Icons.send),
@@ -53,7 +53,7 @@ class ScheduleCommentSection extends StatelessWidget {
                 );
               }),
             ),
-            style: TextStyle(fontSize: 9.w),
+            style: TextStyle(fontSize: 9.sp),
             maxLines: null,
           ),
         ),
@@ -85,7 +85,7 @@ class ScheduleCommentSection extends StatelessWidget {
                                           .comments?[index].comment ??
                                       'No Comments',
                                   style: TextStyle(
-                                      fontSize: 10.w,
+                                      fontSize: 10.sp,
                                       color: Colors.grey.shade700),
                                 ),
                                 trailing: IconButton(

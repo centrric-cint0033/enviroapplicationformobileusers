@@ -83,7 +83,7 @@ class AddTeamPage extends StatelessWidget {
                                                   Text(
                                                     "Add Image",
                                                     style: TextStyle(
-                                                        fontSize: 10.w,
+                                                        fontSize: 10.sp,
                                                         color: Colors.white),
                                                   )
                                                 ],
@@ -332,7 +332,7 @@ class AddTeamPage extends StatelessWidget {
           selectedDate != null
               ? DateFormat('dd-MM-yyyy').format(selectedDate)
               : "",
-          style: TextStyle(fontSize: 10.w),
+          style: TextStyle(fontSize: 10.sp),
         ),
         datePicker(context, selectedDate, pickedDate),
       ],

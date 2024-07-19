@@ -393,7 +393,7 @@ class TeamProfileScreen extends StatelessWidget {
         ),
         child: Text(
           text,
-          style: TextStyle(fontSize: 9.w, color: Colors.black),
+          style: TextStyle(fontSize: 9.sp, color: Colors.black),
         ),
       ),
     );

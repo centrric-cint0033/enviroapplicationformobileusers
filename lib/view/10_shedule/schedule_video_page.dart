@@ -113,7 +113,7 @@ class ScheduleVideoScreen extends StatelessWidget {
                             color: Colors.black,
                             width: 140.w,
                             loading: vmSchedule.shedulecardResponse.loading,
-                            fontSize: 10.w,
+                            fontSize: 10.sp,
                             onPressed: () {
                               vmSchedule.addVideoScheduleApi(
                                 context: context,

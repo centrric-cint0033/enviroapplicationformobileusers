@@ -8,6 +8,8 @@ class RouteNames {
   static const String rOhsdetailpage = '/ohs_detail_page';
   static const String rOhsFolderdetailpage = '/ohs_folder_detail_page';
   static const String intranetpage = '/intranetpage';
+  static const String intranetFolderDetailpage =
+      '/intranet_folder_detail_page ';
 
   static const String vehiclemainpage = '/vehicle_main_page';
   static const String rNewsfolderinsidepage = '/newsfolderinsidepage';
@@ -42,4 +44,6 @@ class RouteNames {
   static const String rshedulevedeoandphoto = '/shedulevedeoandphoto ';
   static const String salesQuoteDetailListPage = '/sales_quote_detail_list ';
   static const String vehicleDetailPage = '/vehicle_detail_page ';
+  static const String vehicleFolderPage = '/vehicle_folder_page ';
+  static const String vehicleFolderDetailPage = '/vehicle_folder_detail_page ';
 }

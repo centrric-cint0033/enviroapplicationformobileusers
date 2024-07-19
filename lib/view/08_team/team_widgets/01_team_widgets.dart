@@ -38,7 +38,7 @@ Widget customContainerWidget(Color color, String text) {
     child: Center(
       child: Text(
         text,
-        style: TextStyle(color: color, fontSize: 10.w),
+        style: TextStyle(color: color, fontSize: 10.sp),
       ),
     ),
   );

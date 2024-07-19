@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 cmTextSyle() {
-  TextStyle(fontSize: 10.w, color: Colors.black);
+  TextStyle(fontSize: 10.sp, color: Colors.black);
 }
 // // import '../core/app_export.dart';
 

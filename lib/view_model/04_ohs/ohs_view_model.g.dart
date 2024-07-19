@@ -204,57 +204,6 @@ mixin _$OHSViewModel on OHSViewModelBase, Store {
     });
   }
 
-  late final _$FoldercreationResponseAtom =
-      Atom(name: 'OHSViewModelBase.FoldercreationResponse', context: context);
-
-  @override
-  ApiResponse<String> get FoldercreationResponse {
-    _$FoldercreationResponseAtom.reportRead();
-    return super.FoldercreationResponse;
-  }
-
-  @override
-  set FoldercreationResponse(ApiResponse<String> value) {
-    _$FoldercreationResponseAtom
-        .reportWrite(value, super.FoldercreationResponse, () {
-      super.FoldercreationResponse = value;
-    });
-  }
-
-  late final _$newspagefolderinsideResponseAtom = Atom(
-      name: 'OHSViewModelBase.newspagefolderinsideResponse', context: context);
-
-  @override
-  ApiResponse<FolderListModel> get newspagefolderinsideResponse {
-    _$newspagefolderinsideResponseAtom.reportRead();
-    return super.newspagefolderinsideResponse;
-  }
-
-  @override
-  set newspagefolderinsideResponse(ApiResponse<FolderListModel> value) {
-    _$newspagefolderinsideResponseAtom
-        .reportWrite(value, super.newspagefolderinsideResponse, () {
-      super.newspagefolderinsideResponse = value;
-    });
-  }
-
-  late final _$newspagefolderResponseAtom =
-      Atom(name: 'OHSViewModelBase.newspagefolderResponse', context: context);
-
-  @override
-  ApiResponse<FolderListModel> get newspagefolderResponse {
-    _$newspagefolderResponseAtom.reportRead();
-    return super.newspagefolderResponse;
-  }
-
-  @override
-  set newspagefolderResponse(ApiResponse<FolderListModel> value) {
-    _$newspagefolderResponseAtom
-        .reportWrite(value, super.newspagefolderResponse, () {
-      super.newspagefolderResponse = value;
-    });
-  }
-
   late final _$notificationpageResponseAtom =
       Atom(name: 'OHSViewModelBase.notificationpageResponse', context: context);
 
@@ -269,38 +218,6 @@ mixin _$OHSViewModel on OHSViewModelBase, Store {
     _$notificationpageResponseAtom
         .reportWrite(value, super.notificationpageResponse, () {
       super.notificationpageResponse = value;
-    });
-  }
-
-  late final _$renameResponseAtom =
-      Atom(name: 'OHSViewModelBase.renameResponse', context: context);
-
-  @override
-  ApiResponse<String> get renameResponse {
-    _$renameResponseAtom.reportRead();
-    return super.renameResponse;
-  }
-
-  @override
-  set renameResponse(ApiResponse<String> value) {
-    _$renameResponseAtom.reportWrite(value, super.renameResponse, () {
-      super.renameResponse = value;
-    });
-  }
-
-  late final _$deleteResponseAtom =
-      Atom(name: 'OHSViewModelBase.deleteResponse', context: context);
-
-  @override
-  ApiResponse<String> get deleteResponse {
-    _$deleteResponseAtom.reportRead();
-    return super.deleteResponse;
-  }
-
-  @override
-  set deleteResponse(ApiResponse<String> value) {
-    _$deleteResponseAtom.reportWrite(value, super.deleteResponse, () {
-      super.deleteResponse = value;
     });
   }
 
@@ -533,42 +450,29 @@ mixin _$OHSViewModel on OHSViewModelBase, Store {
     });
   }
 
+  late final _$archiveNotificationResponseAtom = Atom(
+      name: 'OHSViewModelBase.archiveNotificationResponse', context: context);
+
+  @override
+  ApiResponse<List<OhsRespModel>> get archiveNotificationResponse {
+    _$archiveNotificationResponseAtom.reportRead();
+    return super.archiveNotificationResponse;
+  }
+
+  @override
+  set archiveNotificationResponse(ApiResponse<List<OhsRespModel>> value) {
+    _$archiveNotificationResponseAtom
+        .reportWrite(value, super.archiveNotificationResponse, () {
+      super.archiveNotificationResponse = value;
+    });
+  }
+
   late final _$ohsNewsApiAsyncAction =
       AsyncAction('OHSViewModelBase.ohsNewsApi', context: context);
 
   @override
   Future<void> ohsNewsApi() {
     return _$ohsNewsApiAsyncAction.run(() => super.ohsNewsApi());
-  }
-
-  late final _$ohsfoldercreationviewmodelfunctionAsyncAction = AsyncAction(
-      'OHSViewModelBase.ohsfoldercreationviewmodelfunction',
-      context: context);
-
-  @override
-  Future<void> ohsfoldercreationviewmodelfunction(String folderName, int id) {
-    return _$ohsfoldercreationviewmodelfunctionAsyncAction
-        .run(() => super.ohsfoldercreationviewmodelfunction(folderName, id));
-  }
-
-  late final _$newspagefolderinsidefunctionAsyncAction = AsyncAction(
-      'OHSViewModelBase.newspagefolderinsidefunction',
-      context: context);
-
-  @override
-  Future<void> newspagefolderinsidefunction(int id) {
-    return _$newspagefolderinsidefunctionAsyncAction
-        .run(() => super.newspagefolderinsidefunction(id));
-  }
-
-  late final _$ohsnewsfolderviewmodelfunctionAsyncAction = AsyncAction(
-      'OHSViewModelBase.ohsnewsfolderviewmodelfunction',
-      context: context);
-
-  @override
-  Future<void> ohsnewsfolderviewmodelfunction(int id) {
-    return _$ohsnewsfolderviewmodelfunctionAsyncAction
-        .run(() => super.ohsnewsfolderviewmodelfunction(id));
   }
 
   late final _$ohsNotificationApiAsyncAction =
@@ -578,27 +482,6 @@ mixin _$OHSViewModel on OHSViewModelBase, Store {
   Future<void> ohsNotificationApi({int? page}) {
     return _$ohsNotificationApiAsyncAction
         .run(() => super.ohsNotificationApi(page: page));
-  }
-
-  late final _$ohsFolerRenameApiAsyncAction =
-      AsyncAction('OHSViewModelBase.ohsFolerRenameApi', context: context);
-
-  @override
-  Future<void> ohsFolerRenameApi(
-      BuildContext context, String folderName, int id) {
-    return _$ohsFolerRenameApiAsyncAction
-        .run(() => super.ohsFolerRenameApi(context, folderName, id));
-  }
-
-  late final _$folderdeleteviewmodelfunctionAsyncAction = AsyncAction(
-      'OHSViewModelBase.folderdeleteviewmodelfunction',
-      context: context);
-
-  @override
-  Future<void> folderdeleteviewmodelfunction(
-      String folders, int id, int parentId) {
-    return _$folderdeleteviewmodelfunctionAsyncAction
-        .run(() => super.folderdeleteviewmodelfunction(folders, id, parentId));
   }
 
   late final _$ohsAddNotificationApiAsyncAction =
@@ -822,6 +705,16 @@ mixin _$OHSViewModel on OHSViewModelBase, Store {
         parentFolderId: parentFolderId));
   }
 
+  late final _$ohsArchiveNotificationApiAsyncAction = AsyncAction(
+      'OHSViewModelBase.ohsArchiveNotificationApi',
+      context: context);
+
+  @override
+  Future<void> ohsArchiveNotificationApi({int? page}) {
+    return _$ohsArchiveNotificationApiAsyncAction
+        .run(() => super.ohsArchiveNotificationApi(page: page));
+  }
+
   late final _$OHSViewModelBaseActionController =
       ActionController(name: 'OHSViewModelBase', context: context);
 
@@ -852,12 +745,7 @@ loadinIndexFile: ${loadinIndexFile},
 loadinIndexFolder: ${loadinIndexFolder},
 selectedExpiryDate: ${selectedExpiryDate},
 folderNames: ${folderNames},
-FoldercreationResponse: ${FoldercreationResponse},
-newspagefolderinsideResponse: ${newspagefolderinsideResponse},
-newspagefolderResponse: ${newspagefolderResponse},
 notificationpageResponse: ${notificationpageResponse},
-renameResponse: ${renameResponse},
-deleteResponse: ${deleteResponse},
 addNewsResponse: ${addNewsResponse},
 addCommentNotifyResponse: ${addCommentNotifyResponse},
 deleteNotificationResponse: ${deleteNotificationResponse},
@@ -871,7 +759,8 @@ addFolderResponse: ${addFolderResponse},
 ohsAddFileResponse: ${ohsAddFileResponse},
 ohsEditFolderResponse: ${ohsEditFolderResponse},
 ohsEditFileResponse: ${ohsEditFileResponse},
-expiryFileOhsResponse: ${expiryFileOhsResponse}
+expiryFileOhsResponse: ${expiryFileOhsResponse},
+archiveNotificationResponse: ${archiveNotificationResponse}
     ''';
   }
 }

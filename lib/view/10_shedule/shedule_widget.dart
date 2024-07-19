@@ -18,7 +18,7 @@ Card customCard({required Widget child}) => Card(
 expandedShowText2(String value, int flex) => Expanded(
     flex: flex,
     child:
-        showBlackText(value, fontSize: 10.w, overflow: TextOverflow.ellipsis));
+        showBlackText(value, fontSize: 10.sp, overflow: TextOverflow.ellipsis));
 
 Row expandedRowShowText2(String firsValue, String secondValue) => Row(
       crossAxisAlignment: CrossAxisAlignment.start,

@@ -131,7 +131,7 @@ class ScheduleImageScreen extends StatelessWidget {
                           color: Colors.black,
                           width: 140.w,
                           loading: vmSchedule.addImageScheduleResponse.loading,
-                          fontSize: 10.w,
+                          fontSize: 10.sp,
                           onPressed: () async {
                             await vmSchedule.addImageScheduleApi(
                                 context: context,

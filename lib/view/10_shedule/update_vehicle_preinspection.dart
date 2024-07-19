@@ -114,17 +114,17 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                             TextSpan(
                               text: 'Category "A" Fault: Vehicle ',
                               style: TextStyle(
-                                  color: Colors.grey.shade700, fontSize: 10.w),
+                                  color: Colors.grey.shade700, fontSize: 10.sp),
                             ),
                             TextSpan(
                               text: ' MUST NOT be operated  ',
                               style:
-                                  TextStyle(color: Colors.red, fontSize: 10.w),
+                                  TextStyle(color: Colors.red, fontSize: 10.sp),
                             ),
                             TextSpan(
                               text: 'until fault is rectified',
                               style: TextStyle(
-                                  color: Colors.black, fontSize: 10.w),
+                                  color: Colors.black, fontSize: 10.sp),
                             ),
                           ],
                         ),
@@ -135,17 +135,17 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                             TextSpan(
                               text: 'Category "B" Fault: Vehicle ',
                               style: TextStyle(
-                                  color: Colors.grey.shade700, fontSize: 10.w),
+                                  color: Colors.grey.shade700, fontSize: 10.sp),
                             ),
                             TextSpan(
                               text: ' May be operated ',
                               style:
-                                  TextStyle(color: Colors.blue, fontSize: 10.w),
+                                  TextStyle(color: Colors.blue, fontSize: 10.sp),
                             ),
                             TextSpan(
                               text: ' corrective action is required',
                               style: TextStyle(
-                                  color: Colors.black, fontSize: 10.w),
+                                  color: Colors.black, fontSize: 10.sp),
                             ),
                           ],
                         ),
@@ -403,13 +403,13 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                   children: [
                     Text(
                       'Fire Estinguisher(Date Calibrated):',
-                      style: TextStyle(fontSize: 10.w),
+                      style: TextStyle(fontSize: 10.sp),
                     ),
                     if (vmSchedule.selectedFireExtinguisherDate != null)
                       Text(
                         DateFormat('dd-MM-yyyy')
                             .format(vmSchedule.selectedFireExtinguisherDate!),
-                        style: TextStyle(fontSize: 10.w),
+                        style: TextStyle(fontSize: 10.sp),
                       ),
                     datePicker(context, vmSchedule.selectedFireExtinguisherDate,
                         (date) => vmSchedule.datePickerFn(date))
@@ -498,7 +498,7 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                         Expanded(
                           child: Text(
                             'I have conducted the above pre_start  checklist and satisfied that the vehicle is safe and ready to operate.',
-                            style: TextStyle(fontSize: 10.w),
+                            style: TextStyle(fontSize: 10.sp),
                           ),
                         ),
                         Icon(
@@ -532,7 +532,7 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                         Expanded(
                           child: Text(
                             'I have reported all faults in the appropriate section and notified the authorised personnel',
-                            style: TextStyle(fontSize: 10.w),
+                            style: TextStyle(fontSize: 10.sp),
                           ),
                         ),
                         Icon(
@@ -580,7 +580,7 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                         : Text(
                             'Submit',
                             style:
-                                TextStyle(color: Colors.white, fontSize: 10.w),
+                                TextStyle(color: Colors.white, fontSize: 10.sp),
                           ),
                   ),
                 ),
@@ -760,7 +760,7 @@ Widget requiredRowWidget(String? text1, String? text2,
           children: [
             Text(
               text1 ?? "",
-              style: TextStyle(fontSize: 10.w),
+              style: TextStyle(fontSize: 10.sp),
             ),
             Icon(
               Icons.star,
@@ -777,7 +777,7 @@ Widget requiredRowWidget(String? text1, String? text2,
                 children: [
                   Text(
                     ":",
-                    style: TextStyle(fontSize: 10.w),
+                    style: TextStyle(fontSize: 10.sp),
                   ),
                   Expanded(
                     child: TextField(
@@ -789,7 +789,7 @@ Widget requiredRowWidget(String? text1, String? text2,
                           const InputDecoration(border: InputBorder.none),
                       inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                       keyboardType: TextInputType.number,
-                      style: TextStyle(fontSize: 10.w),
+                      style: TextStyle(fontSize: 10.sp),
                     ),
                   ),
                 ],
@@ -801,11 +801,11 @@ Widget requiredRowWidget(String? text1, String? text2,
                 children: [
                   Text(
                     ":",
-                    style: TextStyle(fontSize: 10.w),
+                    style: TextStyle(fontSize: 10.sp),
                   ),
                   Text(
                     text2 ?? "",
-                    style: TextStyle(fontSize: 10.w),
+                    style: TextStyle(fontSize: 10.sp),
                   ),
                 ],
               ),
@@ -829,7 +829,7 @@ Widget cmCheckBoxRow(String text, bool value,
       ),
       Text(
         text,
-        style: TextStyle(fontSize: 10.w),
+        style: TextStyle(fontSize: 10.sp),
       ),
       Icon(
         Icons.star,
@@ -855,7 +855,7 @@ Widget cmCheckBoxRow2(
           title,
           style: TextStyle(
               color: Colors.black,
-              fontSize: 10.w), // Use the color parameter for text color
+              fontSize: 10.sp), // Use the color parameter for text color
         ),
         InkWell(
           onTap: onTap,
@@ -891,7 +891,7 @@ Widget cmCheckBoxRow3(String text, bool value,
       children: [
         Text(
           text,
-          style: TextStyle(fontSize: 10.w),
+          style: TextStyle(fontSize: 10.sp),
         ),
         Checkbox(
           side: const BorderSide(color: Colors.red),

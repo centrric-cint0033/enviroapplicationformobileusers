@@ -4,7 +4,9 @@ import 'package:enviro_mobile_application/model/00_common_model/folder_model/fol
 import 'package:enviro_mobile_application/utilis/Appthemes.dart';
 import 'package:enviro_mobile_application/utilis/constant.dart';
 import 'package:enviro_mobile_application/view/08_team/team_widgets/cm_button.dart';
+import 'package:enviro_mobile_application/view_model/03_vehicles/vehicle_view_model.dart';
 import 'package:enviro_mobile_application/view_model/04_ohs/ohs_view_model.dart';
+import 'package:enviro_mobile_application/view_model/07_intranet/intranet_view_model.dart';
 import 'package:enviro_mobile_application/view_model/08_team/team_view_model.dart';
 import 'package:enviro_mobile_application/widgets/cm_title.dart';
 import 'package:enviro_mobile_application/widgets/cmn_title_textwidget.dart';
@@ -21,14 +23,16 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 @RoutePage()
-class OhsFolderDetailPage extends StatelessWidget {
-  const OhsFolderDetailPage({
+class IntranetFolderDetailPage extends StatelessWidget {
+  const IntranetFolderDetailPage({
     super.key,
     this.folderName,
     this.searchType,
   });
+
   final String? folderName;
   final String? searchType;
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -39,19 +43,20 @@ class OhsFolderDetailPage extends StatelessWidget {
       child: SafeArea(
         child: Scaffold(
           appBar: AppBar(
-            title: cmnTitleWidget('OH&S Folder'),
+            title: cmnTitleWidget('Intranet Folder'),
           ),
           body: Padding(
             padding: EdgeInsets.symmetric(horizontal: 15.w),
             child: Observer(
               builder: (context) {
-                final res = vmOhs.ohsFoldersResponse2;
+                final res = vmIntranet.intranetFoldersResponse2;
                 FolderListModel? folderList = res.data;
                 FolderListModel? fileList = res.data;
-                final editResponse = vmOhs.ohsEditFileResponse;
-                final addFolderResponse = vmOhs.addFolderResponse;
-                final addFileResponse = vmOhs.ohsAddFileResponse;
-                final editFolderResponse = vmOhs.ohsEditFolderResponse;
+                final editResponse = vmIntranet.editIntranetFileResponse;
+                final addFolderResponse = vmIntranet.addFolderResponse;
+                final addFileResponse = vmIntranet.addIntranetFileResponse;
+                final editFolderResponse =
+                    vmIntranet.editIntranetFolderResponse;
                 return res.loading
                     ? Center(child: wwCustomLoader())
                     : SingleChildScrollView(
@@ -59,23 +64,25 @@ class OhsFolderDetailPage extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               sized0hx10,
-                              Text(vmOhs.folderNames.join(' > ')),
+                              Text(vmIntranet.folderNames.join(' > ')),
                               sized0hx10,
                               Row(
                                 children: [
                                   Expanded(
                                     child: WWTextField(
-                                      controller: vmOhs.filefolderSearchCntrlr,
+                                      controller:
+                                          vmIntranet.fileFolderSearchCntrlr,
                                       onChanged: (v) =>
                                           vmTeam.onTextChanged(() {
                                         v.isEmpty
-                                            ? vmOhs.getFoldersOhs(
+                                            ? vmIntranet.getIntranetFoldersApi(
                                                 parentFolderId:
-                                                    vmOhs.parentFolderId ?? 1)
-                                            : vmOhs.ohsfileFolderSearchApi(
+                                                    vmIntranet.parentFolderId ??
+                                                        1)
+                                            : vmIntranet.fileFolderSearchApi(
                                                 v,
-                                                vmOhs.parentFolderId ?? 1,
-                                                vmOhs.searchType ?? "general",
+                                                vmIntranet.parentFolderId ?? 1,
+                                                vmIntranet.searchType ?? "",
                                               );
                                       }),
                                       suffixTap: () {},
@@ -86,11 +93,11 @@ class OhsFolderDetailPage extends StatelessWidget {
                                   customButton(() {
                                     showCreateEditDialog(context,
                                         createEditTap: (v) {
-                                      vmOhs.addFolderOhs(
+                                      vmIntranet.addIntranetFolder(
                                           context: context,
                                           name: v,
                                           parentfolder:
-                                              vmOhs.parentFolderId ?? 1);
+                                              vmIntranet.parentFolderId ?? 1);
                                     });
                                   }, Appthemes.cPrimary, "Folder +"),
                                   sized0wx10,
@@ -100,16 +107,15 @@ class OhsFolderDetailPage extends StatelessWidget {
                                     if (result != null) {
                                       String fileName =
                                           result.files.single.name;
-                                      vmOhs.selectedFileName = fileName;
+                                      vmIntranet.selectedFileName = fileName;
                                       PlatformFile file = result.files.single;
-                                      vmOhs.selectedFilePath = file.path!;
+                                      vmIntranet.selectedFilePath = file.path!;
                                       // ignore: use_build_context_synchronously
-                                      vmOhs.ohsAddFile(
+                                      vmIntranet.addIntranetFileApi(
                                           context: context,
-                                          name: vmOhs.selectedFileName ?? "",
-                                          files: vmOhs.selectedFilePath,
+                                          files: vmIntranet.selectedFilePath,
                                           parentfolder:
-                                              vmOhs.parentFolderId ?? 1);
+                                              vmIntranet.parentFolderId ?? 1);
                                     }
                                   }, Appthemes.cPrimary, "Files +")
                                 ],
@@ -133,8 +139,8 @@ class OhsFolderDetailPage extends StatelessWidget {
                                                   .folders?.length ??
                                               0,
                                           itemBuilder: (context, index) {
-                                            var data = vmOhs
-                                                .ohsFoldersResponse2
+                                            var data = vmIntranet
+                                                .intranetFoldersResponse2
                                                 .data
                                                 ?.folders?[0]
                                                 .folders?[index];
@@ -144,31 +150,35 @@ class OhsFolderDetailPage extends StatelessWidget {
                                                   : WWFolderCard(
                                                       folder: data,
                                                       onTap: () async {
-                                                        await vmOhs
-                                                            .getFoldersOhs(
+                                                        await vmIntranet
+                                                            .getIntranetFoldersApi(
                                                           parentFolderId:
                                                               data.id ?? 0,
                                                         );
-                                                        vmOhs.parentFolderId =
+                                                        vmIntranet
+                                                                .parentFolderId =
                                                             data.id;
-                                                        vmOhs.folderNames.add(
-                                                            "${data.name}");
+                                                        vmIntranet.folderNames
+                                                            .add(
+                                                                "${data.name}");
                                                         context.router.push(
-                                                            OhsFolderDetailRoute(
-                                                                folderName:
-                                                                    data.name,
-                                                                searchType:
-                                                                    data.type));
+                                                            IntranetFolderDetailRoute(
+                                                          folderName: data.name,
+                                                          searchType: data.type,
+                                                        ));
                                                       },
                                                       folderName: data.name,
                                                       loading: editFolderResponse
                                                               .loading &&
-                                                          vmOhs.loadinIndexFolder ==
+                                                          vmIntranet
+                                                                  .loadinIndexFolder ==
                                                               index,
                                                       editTap: (s) {
-                                                        vmOhs.loadinIndexFolder =
+                                                        vmIntranet
+                                                                .loadinIndexFolder =
                                                             index;
-                                                        vmOhs.editFolderOhsApi(
+                                                        vmIntranet
+                                                            .editIntranetFolderApi(
                                                           name: s,
                                                           folderId:
                                                               data.id ?? 0,
@@ -179,13 +189,17 @@ class OhsFolderDetailPage extends StatelessWidget {
                                                         );
                                                       },
                                                       deleteTap: () {
-                                                        vmOhs.ohsDeleteFolderApi(
-                                                            folderId:
-                                                                data.id ?? 0,
-                                                            context: context,
-                                                            parentFolderId:
-                                                                vmOhs.parentFolderId ??
-                                                                    1);
+                                                        vmIntranet
+                                                            .deleteIntranetFolderApi(
+                                                                folderId:
+                                                                    data.id ??
+                                                                        0,
+                                                                context:
+                                                                    context,
+                                                                parentFolderId:
+                                                                    vmIntranet
+                                                                            .parentFolderId ??
+                                                                        1);
                                                       });
                                             } else {
                                               return Container();
@@ -218,17 +232,17 @@ class OhsFolderDetailPage extends StatelessWidget {
                                                   ?.folders?[0].files?.length ??
                                               0,
                                           itemBuilder: (context, index) {
-                                            var data = vmOhs
-                                                .ohsFoldersResponse2
+                                            var data = vmIntranet
+                                                .intranetFoldersResponse2
                                                 .data
                                                 ?.folders?[0]
                                                 .files?[index];
                                             if (data != null) {
                                               return WWFileCard(
-                                                  fromOhs: true,
-                                               
-                                                  parentFolderId:
-                                                      vmOhs.parentFolderId ?? 1,
+                                                  fromIntranet: true,
+                                                  parentFolderId: vmIntranet
+                                                          .parentFolderId ??
+                                                      1,
                                                   file: data,
                                                   onTap: () async {
                                                     if (await canLaunch(
@@ -242,27 +256,31 @@ class OhsFolderDetailPage extends StatelessWidget {
                                                   fileName: data.name,
                                                   loading: editResponse
                                                           .loading &&
-                                                      vmOhs.loadinIndexFile ==
+                                                      vmIntranet
+                                                              .loadinIndexFile ==
                                                           index,
                                                   editTap: (s) {
-                                                    vmOhs.loadinIndexFile =
+                                                    vmIntranet.loadinIndexFile =
                                                         index;
-                                                    vmOhs.editFileOhsApi(
+                                                    vmIntranet
+                                                        .editIntranetFilesApi(
                                                       name: s,
-                                                      fileId: data.id ?? 0,
-                                                      parentFolderId: vmOhs
+                                                      filesId: data.id ?? 0,
+                                                      parentFolderId: vmVehicle
                                                               .parentFolderId ??
                                                           1,
                                                       context: context,
                                                     );
                                                   },
                                                   deleteTap: () {
-                                                    vmOhs.deleteFilesOhsApi(
-                                                        fileId: data.id ?? 0,
-                                                        context: context,
-                                                        parentFolderId: vmOhs
-                                                                .parentFolderId ??
-                                                            1);
+                                                    vmIntranet
+                                                        .deleteIntranetFilesApi(
+                                                      fileId: data.id ?? 0,
+                                                      context: context,
+                                                      parentFolderId: vmVehicle
+                                                              .parentFolderId ??
+                                                          1,
+                                                    );
                                                   });
                                             } else {
                                               return Container();

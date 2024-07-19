@@ -67,7 +67,7 @@ class SheduleSignaturePage extends StatelessWidget {
                                 Text(
                                   'Weigh bridge Required:',
                                   style: TextStyle(
-                                      fontSize: 10.w,
+                                      fontSize: 10.sp,
                                       fontWeight: FontWeight.bold),
                                 ),
                                 sized0hx05,
@@ -147,7 +147,7 @@ class SheduleSignaturePage extends StatelessWidget {
                                                     child: Text(
                                                   fileName,
                                                   style: TextStyle(
-                                                      fontSize: 9.w,
+                                                      fontSize: 9.sp,
                                                       overflow: TextOverflow
                                                           .ellipsis),
                                                 ))
@@ -208,7 +208,7 @@ class SheduleSignaturePage extends StatelessWidget {
                               Text(
                                 'Changes in waste type and its litres will be uploaded with client\'s signature.',
                                 style: TextStyle(
-                                    fontSize: 9.w, fontWeight: FontWeight.bold),
+                                    fontSize: 9.sp, fontWeight: FontWeight.bold),
                               ),
                             ],
                           ),
@@ -239,7 +239,7 @@ class SheduleSignaturePage extends StatelessWidget {
                                       child: Text(
                                         'Please provide your signature:',
                                         style: TextStyle(
-                                            fontSize: 9.w,
+                                            fontSize: 9.sp,
                                             fontWeight: FontWeight.bold),
                                       ),
                                     ),
@@ -412,7 +412,7 @@ class SheduleSignaturePage extends StatelessWidget {
               children: [
                 Text(
                   title ?? "",
-                  style: TextStyle(fontSize: 9.w, fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 9.sp, fontWeight: FontWeight.bold),
                 ),
                 if (required == true)
                   Text(
@@ -428,7 +428,7 @@ class SheduleSignaturePage extends StatelessWidget {
                   border: InputBorder.none,
                   hintStyle:
                       TextStyle(color: Colors.grey.shade500, fontSize: 8.w)),
-              style: TextStyle(fontSize: 9.w),
+              style: TextStyle(fontSize: 9.sp),
             ),
           ],
         ),

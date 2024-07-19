@@ -6,7 +6,7 @@ void showToast(BuildContext context, {required String msg, Color? color}) {
     duration: const Duration(milliseconds: 1000),
     content: Text(
       msg,
-      style: TextStyle(fontSize: 10.w),
+      style: TextStyle(fontSize: 10.sp),
     ),
     backgroundColor: color,
   ));

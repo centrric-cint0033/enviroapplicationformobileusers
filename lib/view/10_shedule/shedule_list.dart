@@ -55,7 +55,7 @@ class ScheduleList extends StatelessWidget {
                           padding: EdgeInsets.only(right: 8.w),
                           child: Text(
                               'job ${vmSchedule.shedulecardResponse.data?[i].job ?? ''}',
-                              style: TextStyle(fontSize: 9.w)),
+                              style: TextStyle(fontSize: 9.sp)),
                         ),
                       ],
                     ),
@@ -67,7 +67,7 @@ class ScheduleList extends StatelessWidget {
                           children: [
                             Text(
                                 "${convertTimeTo12HourFormat(vmSchedule.shedulecardResponse.data?[i].startTime ?? "")}-${convertTimeTo12HourFormat(vmSchedule.shedulecardResponse.data?[i].endTime ?? "")}",
-                                style: TextStyle(fontSize: 9.w)),
+                                style: TextStyle(fontSize: 9.sp)),
                             if (vmSchedule.shedulecardResponse.data?[i]
                                         .startDate ==
                                     null &&
@@ -81,7 +81,7 @@ class ScheduleList extends StatelessWidget {
                                     vmSchedule.shedulecardResponse.data![i]
                                         .startDate!,
                                   )}-${DateFormat('dd-MM-yyyy').format(vmSchedule.shedulecardResponse.data![i].endDate!)}",
-                                  style: TextStyle(fontSize: 9.w))
+                                  style: TextStyle(fontSize: 9.sp))
                           ],
                         ),
                         Container(
@@ -172,7 +172,7 @@ class ScheduleList extends StatelessWidget {
                                                 '',
                                             style: TextStyle(
                                                 color: Colors.white,
-                                                fontSize: 9.w),
+                                                fontSize: 9.sp),
                                           );
                                         }),
                                         const Divider(
@@ -187,7 +187,7 @@ class ScheduleList extends StatelessWidget {
                                               '',
                                           style: TextStyle(
                                               color: Colors.white,
-                                              fontSize: 9.w),
+                                              fontSize: 9.sp),
                                         ),
                                       ],
                                     ),

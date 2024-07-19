@@ -32,27 +32,38 @@ abstract class OHSViewModelBase with Store {
   @observable
   ApiResponse<List<OhsRespModel>> newspageResponse =
       ApiResponse<List<OhsRespModel>>();
+
   @observable
   ApiResponse<OhsRespModel> addNotificationResponse =
       ApiResponse<OhsRespModel>();
+
   @observable
   String? selectedFileNameNotification;
+
   @observable
   String? searchType;
+
   @observable
   String? selectedFileName;
+
   @observable
   String? selectedFilePath;
+
   @observable
   int? parentFolderId;
+
   @observable
   int? loadinIndexFile;
+
   @observable
   int? loadinIndexFolder;
+
   @observable
   DateTime? selectedExpiryDate;
+
   TextEditingController folderSearchCntrlr = TextEditingController();
   TextEditingController filefolderSearchCntrlr = TextEditingController();
+
   @observable
   List<String> folderNames = [];
 
@@ -77,93 +88,6 @@ abstract class OHSViewModelBase with Store {
 //  |_  ..  _| |_  ..  _| |_  ..  _| |_  ..  _| |_  ..  _| |_  ..  _| |_  ..  _| |_  ..  _|
 //  |_      _| |_      _| |_      _| |_      _| |_      _| |_      _| |_      _| |_      _|
 //    |_||_|     |_||_|     |_||_|     |_||_|     |_||_|     |_||_|     |_||_|     |_||_|
-
-  @observable
-  ApiResponse<String> FoldercreationResponse = ApiResponse<String>();
-
-  @action
-  Future<void> ohsfoldercreationviewmodelfunction(
-      String folderName, int id) async {
-    FoldercreationResponse =
-        FoldercreationResponse.copyWith(error: null, loading: true);
-
-    final result =
-        await ohsService.ohsnewsfoldercreationfunction(folderName, id);
-    return result.fold(
-      (l) {
-        FoldercreationResponse = FoldercreationResponse.copyWith(
-          error: l,
-          loading: false,
-        );
-      },
-      (r) {
-        FoldercreationResponse = FoldercreationResponse.copyWith(
-          error: null,
-          loading: false,
-        );
-        // ohsService.ohsnewsfolderservicefunction(id);
-        vmOhs.ohsnewsfolderviewmodelfunction(1);
-      },
-    );
-  }
-
-  @observable
-  ApiResponse<FolderListModel> newspagefolderinsideResponse =
-      ApiResponse<FolderListModel>();
-
-  @action
-  Future<void> newspagefolderinsidefunction(
-    int id,
-  ) async {
-    newspagefolderinsideResponse =
-        newspagefolderinsideResponse.copyWith(error: null, loading: true);
-
-    final result = await ohsService.ohsnewsfolderservicefunction(
-      id,
-    );
-    return result.fold(
-      (l) {
-        newspagefolderinsideResponse = newspagefolderinsideResponse.copyWith(
-          error: l,
-          loading: false,
-        );
-      },
-      (r) {
-        newspagefolderinsideResponse = newspagefolderinsideResponse.copyWith(
-          data: r,
-          error: null,
-          loading: false,
-        );
-      },
-    );
-  }
-
-  @observable
-  ApiResponse<FolderListModel> newspagefolderResponse =
-      ApiResponse<FolderListModel>();
-
-  @action
-  Future<void> ohsnewsfolderviewmodelfunction(int id) async {
-    newspagefolderResponse =
-        newspagefolderResponse.copyWith(error: null, loading: true);
-
-    final result = await ohsService.ohsnewsfolderservicefunction(id);
-    return result.fold(
-      (l) {
-        newspagefolderResponse = newspagefolderResponse.copyWith(
-          error: l,
-          loading: false,
-        );
-      },
-      (r) {
-        newspagefolderResponse = newspagefolderResponse.copyWith(
-          data: r,
-          error: null,
-          loading: false,
-        );
-      },
-    );
-  }
 
   @observable
   ApiResponse<List<OhsRespModel>> notificationpageResponse =
@@ -214,61 +138,6 @@ abstract class OHSViewModelBase with Store {
         ohsNotificationApi(page: pageNo);
       }
     });
-  }
-
-  @observable
-  ApiResponse<String> renameResponse = ApiResponse<String>();
-
-  @action
-  Future<void> ohsFolerRenameApi(
-      BuildContext context, String folderName, int id) async {
-    renameResponse = renameResponse.copyWith(errors: null, loading: true);
-    final result = await ohsService.ohsFolderRenameServiceApi(folderName, id);
-    return result.fold(
-      (l) {
-        popupErrorData(context, mainFailure: l);
-        renameResponse = renameResponse.copyWith(errors: l, loading: false);
-      },
-      (r) {
-        renameResponse =
-            renameResponse.copyWith(data: r, errors: null, loading: false);
-        vmOhs.ohsnewsfolderviewmodelfunction(1);
-      },
-    );
-  }
-
-  @observable
-  ApiResponse<String> deleteResponse = ApiResponse<String>();
-
-  @action
-  Future<void> folderdeleteviewmodelfunction(
-      String folders, int id, int parentId) async {
-    deleteResponse = deleteResponse.copyWith(error: null, loading: true);
-
-    print(id);
-
-    final result = await ohsService.ohsnewsfolderdeletefunction(folders, id);
-    return result.fold(
-      (l) {
-        deleteResponse = deleteResponse.copyWith(
-          error: l,
-          loading: false,
-        );
-      },
-      (r) {
-        deleteResponse = deleteResponse.copyWith(
-          data: r,
-          error: null,
-          loading: false,
-        );
-
-        if (parentId == 1) {
-          ohsnewsfolderviewmodelfunction(parentId);
-        } else {
-          newspagefolderinsidefunction(parentId);
-        }
-      },
-    );
   }
 
   @action
@@ -808,6 +677,56 @@ abstract class OHSViewModelBase with Store {
             expiryFileOhsResponse.copyWith(error: null, loading: false);
       },
     );
+  }
+
+  @observable
+  ApiResponse<List<OhsRespModel>> archiveNotificationResponse =
+      ApiResponse<List<OhsRespModel>>();
+
+  @action
+  Future<void> ohsArchiveNotificationApi({int? page}) async {
+    if (page == null) archiveNotificationPagination();
+    archiveNotificationResponse = archiveNotificationResponse.copyWith(
+        errors: null, loading: page == null, paginationLoading: page != null);
+    final result = await ohsService.ohsNotificationServiceApi(page: page);
+    return result.fold(
+      (l) {
+        archiveNotificationResponse = archiveNotificationResponse.copyWith(
+            errors: l, loading: false, paginationLoading: false);
+      },
+      (r) {
+        List<OhsRespModel> archiveNotification =
+            archiveNotificationResponse.data?.toList() ?? [];
+        if (page != null) {
+          archiveNotification.addAll(r);
+        } else {
+          archiveNotification = r;
+        }
+        archiveNotificationResponse = archiveNotificationResponse.copyWith(
+          data: archiveNotification,
+          errors: null,
+          loading: false,
+          pageNo: page ?? 1,
+          paginationLoading: false,
+          pagination: r.length == 8,
+        );
+      },
+    );
+  }
+
+  ScrollController archiveNotificationController = ScrollController();
+
+  void archiveNotificationPagination() {
+    archiveNotificationController.addListener(() {
+      if (archiveNotificationController.position.pixels ==
+              archiveNotificationController.position.maxScrollExtent &&
+          !archiveNotificationController.position.outOfRange &&
+          archiveNotificationResponse.pagination &&
+          !archiveNotificationResponse.paginationLoading) {
+        int pageNo = archiveNotificationResponse.pageNo + 1;
+        ohsArchiveNotificationApi(page: pageNo);
+      }
+    });
   }
 
   @action

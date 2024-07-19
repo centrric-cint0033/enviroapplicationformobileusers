@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:dartz/dartz.dart';
+import 'package:enviro_mobile_application/model/00_common_model/folder_model/folder_model.dart';
 import 'package:enviro_mobile_application/model/03_vehicle/vehicle_model/vehicle_model.dart';
 import 'package:enviro_mobile_application/utilis/api_endpoints/api_endpoints.dart';
 import 'package:enviro_mobile_application/utilis/httpservice.dart';
@@ -12,6 +13,12 @@ enum VehicleActionType {
   maintenanceCheck,
   vehicleList,
   fuelExpence,
+}
+
+enum VehicleType {
+  truck,
+  car,
+  semiTrailer,
 }
 
 abstract class IVehicleService {
@@ -40,6 +47,28 @@ abstract class IVehicleService {
     String value, {
     int? page,
   });
+  Future<Either<Map<MainFailure, dynamic>, FolderListModel>> getVehicleFolders(
+      {required int vehicleId,
+      required num parentFolderId,
+      VehicleType? vehicleType});
+  Future<Either<Map<MainFailure, dynamic>, dynamic>> addVehicleFolders(
+      {required Map<String, String> data});
+  Future<Either<Map<MainFailure, dynamic>, String>> deleteVehicleFolders(
+      {required int folderId});
+  Future<Either<Map<MainFailure, dynamic>, String>> editVehicleFolders(
+      {required Map<String, String> data, required int folderId});
+  Future<Either<Map<MainFailure, dynamic>, dynamic>> addVehicleFiles(
+      {required Map<String, String> data});
+  Future<Either<Map<MainFailure, dynamic>, String>> editVehicleFiles(
+      {required Map<String, String> data, required int fileId});
+  Future<Either<Map<MainFailure, dynamic>, String>> deleteVehicleFiles(
+      {required int fileId, required num folderId});
+  Future<Either<Map<MainFailure, dynamic>, FolderListModel>> expiryDateFiles(
+      {required int fileId, required String expiry});
+  Future<Either<Map<MainFailure, dynamic>, FolderListModel>>
+      folderSearchVehicle({required Map<String, String> data});
+  Future<Either<Map<MainFailure, dynamic>, FolderListModel>>
+      fileFolderSearchVehicle({required Map<String, String> data});
 }
 
 @LazySingleton(as: IVehicleService)
@@ -308,6 +337,183 @@ class VehicleService implements IVehicleService {
         List<VehicleModel> vehicles =
             data.map((e) => VehicleModel.fromJson(e)).toList();
         return Right(vehicles);
+      },
+    );
+  }
+
+  @override
+  Future<Either<Map<MainFailure, dynamic>, FolderListModel>> getVehicleFolders(
+      {required int vehicleId,
+      required num parentFolderId,
+      VehicleType? vehicleType}) async {
+    String apiUrl;
+    switch (vehicleType) {
+      case VehicleType.truck:
+        apiUrl =
+            "${ApiEndPoints().vehGetFolderTruck}$vehicleId/$parentFolderId";
+        break;
+      case VehicleType.car:
+        apiUrl = "${ApiEndPoints().vehGetFolderCar}$vehicleId/$parentFolderId";
+        break;
+      case VehicleType.semiTrailer:
+        apiUrl =
+            "${ApiEndPoints().vehGetFolderSemiTraile}$vehicleId/$parentFolderId";
+        break;
+      default:
+        apiUrl =
+            "${ApiEndPoints().vehGetFolderTruck}$vehicleId/$parentFolderId";
+        break;
+    }
+
+    var response = await getIt<HttpService>()
+        .request(authenticated: true, method: HttpMethod.get, apiUrl: apiUrl);
+
+    return response.fold(
+      (l) => Left(l),
+      (res) async {
+        FolderListModel vehicleFolderList =
+            FolderListModel.fromJson(jsonDecode(res.body));
+        return Right(vehicleFolderList);
+      },
+    );
+  }
+
+  @override
+  Future<Either<Map<MainFailure, dynamic>, dynamic>> addVehicleFolders(
+      {required Map<String, String> data}) async {
+    var response = await getIt<HttpService>().multipartRequest(
+        data: data, method: 'POST', apiUrl: ApiEndPoints().vehAddFolder);
+    return response.fold(
+      (l) => Left(l),
+      (res) async {
+        return const Right("Successfully added");
+      },
+    );
+  }
+
+  @override
+  Future<Either<Map<MainFailure, dynamic>, String>> deleteVehicleFolders(
+      {required int folderId}) async {
+    var response = await getIt<HttpService>().request(
+        authenticated: true,
+        method: HttpMethod.delete,
+        apiUrl: '${ApiEndPoints().vehDeleteFolder}$folderId/');
+
+    return response.fold(
+      (l) => Left(l),
+      (res) async {
+        return const Right('success');
+      },
+    );
+  }
+
+  @override
+  Future<Either<Map<MainFailure, dynamic>, String>> editVehicleFolders(
+      {required Map<String, String> data, required int folderId}) async {
+    var response = await getIt<HttpService>().multipartRequest(
+        data: data,
+        method: 'PUT',
+        apiUrl: '${ApiEndPoints().vehEditFolder}/$folderId/');
+    return response.fold(
+      (l) => Left(l),
+      (res) async {
+        return const Right('success');
+      },
+    );
+  }
+
+  @override
+  Future<Either<Map<MainFailure, dynamic>, dynamic>> addVehicleFiles(
+      {required Map<String, String> data}) async {
+    var response = await getIt<HttpService>().multipartRequest(
+        data: data, method: 'POST', apiUrl: ApiEndPoints().vehAddFile);
+    return response.fold(
+      (l) => Left(l),
+      (res) async {
+        return Right("Success");
+      },
+    );
+  }
+
+  @override
+  Future<Either<Map<MainFailure, dynamic>, String>> editVehicleFiles(
+      {required Map<String, String> data, required int fileId}) async {
+    var response = await getIt<HttpService>().multipartRequest(
+        data: data,
+        method: 'PUT',
+        apiUrl: '${ApiEndPoints().vehEditFile}$fileId/');
+    return response.fold(
+      (l) => Left(l),
+      (res) async {
+        return const Right('success');
+      },
+    );
+  }
+
+  @override
+  Future<Either<Map<MainFailure, dynamic>, String>> deleteVehicleFiles(
+      {required int fileId, required num folderId}) async {
+    var response = await getIt<HttpService>().request(
+        authenticated: true,
+        method: HttpMethod.delete,
+        apiUrl: '${ApiEndPoints().vehDeleteFile}$fileId/$folderId/');
+
+    return response.fold(
+      (l) => Left(l),
+      (res) async {
+        return const Right('success');
+      },
+    );
+  }
+
+  @override
+  Future<Either<Map<MainFailure, dynamic>, FolderListModel>> expiryDateFiles(
+      {required int fileId, required String expiry}) async {
+    var response = await getIt<HttpService>().multipartRequest(
+        method: 'PUT',
+        apiUrl: "${ApiEndPoints().vehFileExpiry}$fileId/?date=$expiry");
+    return response.fold(
+      (l) => Left(l),
+      (res) async {
+        var data = jsonDecode(res.body);
+        FolderListModel expiry = FolderListModel.fromJson(data);
+        return Right(expiry);
+      },
+    );
+  }
+
+  @override
+  Future<Either<Map<MainFailure, dynamic>, FolderListModel>>
+      folderSearchVehicle({required Map<String, String> data}) async {
+    var response = await getIt<HttpService>().multipartRequest(
+        data: data, method: 'POST', apiUrl: ApiEndPoints().vehSearchFolder);
+    return response.fold(
+      (l) => Left(l),
+      (res) async {
+        var data = jsonDecode(res.body);
+        List<FolderModel> searchedFolderList =
+            List<FolderModel>.from(data.map((e) => FolderModel.fromJson(e)));
+        List<FolderModel> searchedFolderListt = List<FolderModel>.from(
+            data.map((e) => FolderModel(folders: searchedFolderList)));
+
+        FolderListModel searchedFolderListtt =
+            FolderListModel(folders: searchedFolderListt);
+        return Right(searchedFolderListtt);
+      },
+    );
+  }
+
+  @override
+  Future<Either<Map<MainFailure, dynamic>, FolderListModel>>
+      fileFolderSearchVehicle({required Map<String, String> data}) async {
+    var response = await getIt<HttpService>().multipartRequest(
+        data: data, method: 'POST', apiUrl: ApiEndPoints().vehSearchFileFolder);
+    return response.fold(
+      (l) => Left(l),
+      (res) async {
+        var data = jsonDecode(res.body);
+        FolderListModel searchedfileFolderList = FolderListModel.fromJson(data);
+        return Right(searchedfileFolderList);
       },
     );
   }

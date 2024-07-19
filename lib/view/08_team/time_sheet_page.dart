@@ -36,7 +36,7 @@ class TimeSheetPage extends StatelessWidget {
                           Text(
                             "Choose Week :",
                             style: TextStyle(
-                                color: Appthemes.cPrimary, fontSize: 10.w),
+                                color: Appthemes.cPrimary, fontSize: 10.sp),
                           ),
                           cmDatePicker(
                               context,
@@ -49,7 +49,7 @@ class TimeSheetPage extends StatelessWidget {
                           Text(
                             "Week Beginning :",
                             style: TextStyle(
-                                color: Appthemes.cPrimary, fontSize: 10.w),
+                                color: Appthemes.cPrimary, fontSize: 10.sp),
                           ),
                           Text(
                             vmTeam.selectedChooseWeekTimesheet != null
@@ -57,7 +57,7 @@ class TimeSheetPage extends StatelessWidget {
                                     .format(vmTeam.selectedChooseWeekTimesheet!)
                                 : "",
                             style: TextStyle(
-                                color: Appthemes.cPrimary, fontSize: 10.w),
+                                color: Appthemes.cPrimary, fontSize: 10.sp),
                           ),
                         ],
                       ),
@@ -314,7 +314,7 @@ class TimeSheetPage extends StatelessWidget {
                 sized0hx10,
                 Text(
                   "Comment",
-                  style: TextStyle(fontSize: 9.w, fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 9.sp, fontWeight: FontWeight.bold),
                 ),
                 sized0hx05,
                 Container(
@@ -323,11 +323,11 @@ class TimeSheetPage extends StatelessWidget {
                   child: TextField(
                     controller: vmTeam.timesheetCommentController,
                     textAlign: TextAlign.left,
-                    style: TextStyle(fontSize: 9.w),
+                    style: TextStyle(fontSize: 9.sp),
                     decoration: InputDecoration(
                       hintText: 'Type Here...',
                       hintStyle: TextStyle(
-                          fontSize: 9.w, fontWeight: FontWeight.normal),
+                          fontSize: 9.sp, fontWeight: FontWeight.normal),
                       border: InputBorder.none,
                     ),
                   ),
@@ -374,7 +374,7 @@ class TimeSheetPage extends StatelessWidget {
           displayDate != null
               ? DateFormat('dd-MM-yyyy').format(displayDate)
               : "",
-          style: TextStyle(fontSize: 10.w, color: Colors.grey.shade700),
+          style: TextStyle(fontSize: 10.sp, color: Colors.grey.shade700),
         ),
         sized0wx10,
         datePicker(context, selectedDate ?? DateTime.now(), (pickedDate) {
@@ -401,7 +401,7 @@ class TimeSheetPage extends StatelessWidget {
                     child: Text(
                       cellValue,
                       style: TextStyle(
-                        fontSize: 10.w,
+                        fontSize: 10.sp,
                         color: fromHeading ? Colors.white : Colors.black,
                       ),
                     ),
@@ -412,7 +412,7 @@ class TimeSheetPage extends StatelessWidget {
                       Text(
                         cellValue,
                         style: TextStyle(
-                          fontSize: 10.w,
+                          fontSize: 10.sp,
                           color: fromHeading ? Colors.white : Colors.black,
                         ),
                       ),
@@ -422,7 +422,7 @@ class TimeSheetPage extends StatelessWidget {
                       Text(
                         cellValue2 ?? "",
                         style: TextStyle(
-                          fontSize: 9.w,
+                          fontSize: 9.sp,
                           color: fromHeading ? Colors.white : Colors.black,
                         ),
                       )

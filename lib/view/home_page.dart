@@ -13,6 +13,7 @@ import 'package:enviro_mobile_application/view_model/home_page/home_page_viewmod
 import 'package:enviro_mobile_application/widgets/drawer.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:enviro_mobile_application/widgets/cmn_action_icon.dart';
@@ -46,37 +47,25 @@ class HomePage extends StatelessWidget {
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
                   children: [
-                    InkWell(
-                      onTap: () => onsalesfunction(context),
-                      child: _buildBox('assets/images/star.svg', 'Sales'),
-                    ),
-                    InkWell(
-                      onTap: () => vehiclefunction(context),
-                      child: _buildBox('assets/images/truck.svg', 'Vehicle'),
-                    ),
-                    InkWell(
-                      onTap: () => ohsfunction(context),
-                      child: _buildBox('assets/images/move(1).svg', 'OH&S'),
-                    ),
-                    InkWell(
-                      onTap: () => navigateToSitesPage(context: context),
-                      child: _buildBox('assets/images/user.svg', 'Site'),
-                    ),
-                    InkWell(
-                      onTap: () => shedulefunction(context),
-                      child:
-                          _buildBox('assets/images/calendar.svg', 'Scheduling'),
-                    ),
-                    InkWell(
-                      onTap: () => intranetfuntion(context),
-                      child: _buildBox('assets/images/globe.svg', 'Intranet'),
-                    ),
-                    const SizedBox(),
-                    InkWell(
-                      onTap: () => teamfuntion(context),
-                      child: _buildBox('assets/images/users.svg', 'Team'),
-                    ),
-                    const SizedBox(),
+                    _buildBox('assets/images/star.svg', 'Sales',
+                        onTap: () => onsalesfunction(context),
+                        permission: true),
+                    _buildBox('assets/images/truck.svg', 'Vehicle',
+                        onTap: () => vehiclefunction(context),
+                        permission: true),
+                    _buildBox('assets/images/move(1).svg', 'OH&S',
+                        onTap: () => ohsfunction(context), permission: true),
+                    _buildBox('assets/images/user.svg', 'Site',
+                        onTap: () => navigateToSitesPage(context: context),
+                        permission: true),
+                    _buildBox('assets/images/calendar.svg', 'Scheduling',
+                        onTap: () => shedulefunction(context),
+                        permission: true),
+                    _buildBox('assets/images/globe.svg', 'Intranet',
+                        onTap: () => intranetfuntion(context),
+                        permission: true),
+                    _buildBox('assets/images/users.svg', 'Team',
+                        onTap: () => teamfuntion(context), permission: true),
                   ],
                 );
         }),
@@ -85,34 +74,48 @@ class HomePage extends StatelessWidget {
   }
 
   Widget _buildBox(String svgPath, String text,
-      {Color iconColor = Appthemes.cPrimary,
+      {void Function()? onTap,
       double width = 30.0,
-      double height = 30.0}) {
-    return Container(
-      padding: const EdgeInsets.all(8.0),
-      decoration: BoxDecoration(
-          color: Appthemes.cWhite,
-          // border: Border.all(color: Appthemes.cLightGrey),
-          borderRadius: BorderRadius.circular(18.0),
-          boxShadow: [
-            BoxShadow(
-              offset: const Offset(0, 0),
-              blurRadius: 10,
-              color: Colors.black.withOpacity(0.1),
-            )
-          ]),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          SvgPicture.asset(
-            svgPath,
-            width: width,
-            height: height,
-            color: iconColor,
-          ),
-          const SizedBox(height: 8.0),
-          Text(text),
-        ],
+      double height = 30.0,
+      bool? permission}) {
+    return InkWell(
+      onTap: (permission == true) ? onTap : () {},
+      child: Container(
+        padding: const EdgeInsets.all(8.0),
+        decoration: BoxDecoration(
+            color: Appthemes.cWhite,
+            // border: Border.all(color: Appthemes.cLightGrey),
+            borderRadius: BorderRadius.circular(18.0),
+            boxShadow: [
+              (permission == true)
+                  ? BoxShadow(
+                      offset: const Offset(0, 0),
+                      blurRadius: 10,
+                      color: Colors.black.withOpacity(0.1),
+                    )
+                  : BoxShadow()
+            ]),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SvgPicture.asset(
+              svgPath,
+              width: width,
+              height: height,
+              color: permission == true
+                  ? Appthemes.cPrimary
+                  : Colors.grey.shade400,
+            ),
+            const SizedBox(height: 8.0),
+            Text(
+              text,
+              style: TextStyle(
+                fontSize: 13.sp,
+                color: permission == true ? Colors.black : Colors.grey.shade400,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -149,7 +152,6 @@ void ohsfunction(BuildContext context) {
   vmOhs.ohsNotificationApi();
   vmOhs.ohsNewsApi();
   vmOhs.getFoldersOhs(parentFolderId: 1);
-  vmOhs.ohsnewsfolderviewmodelfunction(1);
   context.router.pushNamed(RouteNames.ohsPage);
 }
 

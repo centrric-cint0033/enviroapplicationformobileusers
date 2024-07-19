@@ -46,7 +46,7 @@ class LeaveApplicationPage extends StatelessWidget {
               children: [
                 Text(
                   "I wish to apply for the following leave:(Tick the appropriate leave)",
-                  style: TextStyle(fontSize: 9.w, color: Colors.grey.shade600),
+                  style: TextStyle(fontSize: 9.sp, color: Colors.grey.shade600),
                 ),
                 ListView.builder(
                   itemCount: 4,
@@ -77,7 +77,7 @@ class LeaveApplicationPage extends StatelessWidget {
                                 ),
                                 Text(
                                   checkboxTexts[index],
-                                  style: TextStyle(fontSize: 9.w),
+                                  style: TextStyle(fontSize: 9.sp),
                                 ),
                               ],
                             ),
@@ -89,11 +89,11 @@ class LeaveApplicationPage extends StatelessWidget {
                             child: TextField(
                               controller: vmTeam.reasonController,
                               textAlign: TextAlign.left,
-                              style: TextStyle(fontSize: 9.w),
+                              style: TextStyle(fontSize: 9.sp),
                               decoration: InputDecoration(
                                 hintText: 'Type your Reason...',
                                 hintStyle: TextStyle(
-                                    fontSize: 9.w,
+                                    fontSize: 9.sp,
                                     fontWeight: FontWeight.normal),
                                 border: InputBorder.none,
                               ),
@@ -119,7 +119,7 @@ class LeaveApplicationPage extends StatelessWidget {
                             ),
                             Text(
                               checkboxTexts[index],
-                              style: TextStyle(fontSize: 9.w),
+                              style: TextStyle(fontSize: 9.sp),
                             ),
                           ],
                         ),
@@ -177,7 +177,7 @@ class LeaveApplicationPage extends StatelessWidget {
                               child: Text(
                             fileName,
                             style: TextStyle(
-                                fontSize: 9.w, overflow: TextOverflow.ellipsis),
+                                fontSize: 9.sp, overflow: TextOverflow.ellipsis),
                           ))
                         ],
                       ),
@@ -191,7 +191,7 @@ class LeaveApplicationPage extends StatelessWidget {
                     Text(
                       "Leave From:",
                       style:
-                          TextStyle(fontSize: 9.w, color: Colors.grey.shade700),
+                          TextStyle(fontSize: 9.sp, color: Colors.grey.shade700),
                     ),
                     cmDatePicker(context, vmTeam.selectedLeaveFromdate,
                         (date) => vmTeam.datePickerFn8(date))
@@ -203,7 +203,7 @@ class LeaveApplicationPage extends StatelessWidget {
                     Text(
                       "Leave To:",
                       style:
-                          TextStyle(fontSize: 9.w, color: Colors.grey.shade700),
+                          TextStyle(fontSize: 9.sp, color: Colors.grey.shade700),
                     ),
                     cmDatePicker(context, vmTeam.selectedLeaveTodate,
                         (date) => vmTeam.datePickerFn9(date))
@@ -215,7 +215,7 @@ class LeaveApplicationPage extends StatelessWidget {
                     Text(
                       "Last Day of Work:",
                       style:
-                          TextStyle(fontSize: 9.w, color: Colors.grey.shade700),
+                          TextStyle(fontSize: 9.sp, color: Colors.grey.shade700),
                     ),
                     cmDatePicker(context, vmTeam.selectedLastDayofWork,
                         (date) => vmTeam.datePickerFn10(date))
@@ -227,7 +227,7 @@ class LeaveApplicationPage extends StatelessWidget {
                     Text(
                       "Return to Work on",
                       style:
-                          TextStyle(fontSize: 9.w, color: Colors.grey.shade700),
+                          TextStyle(fontSize: 9.sp, color: Colors.grey.shade700),
                     ),
                     cmDatePicker(context, vmTeam.selectedReturnToWorkDate,
                         (date) => vmTeam.datePickerFn11(date))
@@ -235,7 +235,7 @@ class LeaveApplicationPage extends StatelessWidget {
                 ),
                 Text(
                   "Number of Days and Hours:",
-                  style: TextStyle(fontSize: 9.w, fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 9.sp, fontWeight: FontWeight.bold),
                 ),
                 Observer(builder: (context) {
                   vmTeam.totalDayFn();
@@ -256,7 +256,7 @@ class LeaveApplicationPage extends StatelessWidget {
                               alignment: Alignment.centerLeft,
                               child: Text(
                                 'Normal Working Days',
-                                style: TextStyle(fontSize: 9.w),
+                                style: TextStyle(fontSize: 9.sp),
                               ),
                             ),
                           ),
@@ -264,14 +264,14 @@ class LeaveApplicationPage extends StatelessWidget {
                             child: Center(
                                 child: TextField(
                               controller: vmTeam.dayController1,
-                              style: TextStyle(fontSize: 9.w),
+                              style: TextStyle(fontSize: 9.sp),
                               keyboardType: TextInputType.number,
                               onChanged: (value) {
                                 vmTeam.totalDayFn();
                               },
                               decoration: InputDecoration(
                                 hintText: 'Day',
-                                hintStyle: TextStyle(fontSize: 9.w),
+                                hintStyle: TextStyle(fontSize: 9.sp),
                                 border: InputBorder.none,
                                 contentPadding:
                                     const EdgeInsets.symmetric(horizontal: 8.0),
@@ -283,13 +283,13 @@ class LeaveApplicationPage extends StatelessWidget {
                                 child: TextField(
                               keyboardType: TextInputType.number,
                               controller: vmTeam.hrsController1,
-                              style: TextStyle(fontSize: 9.w),
+                              style: TextStyle(fontSize: 9.sp),
                               onChanged: (value) {
                                 vmTeam.totalHrsFn();
                               },
                               decoration: InputDecoration(
                                 hintText: 'Hrs',
-                                hintStyle: TextStyle(fontSize: 9.w),
+                                hintStyle: TextStyle(fontSize: 9.sp),
                                 border: InputBorder.none,
                                 contentPadding:
                                     const EdgeInsets.symmetric(horizontal: 8.0),
@@ -304,20 +304,20 @@ class LeaveApplicationPage extends StatelessWidget {
                             child: Align(
                                 alignment: Alignment.centerLeft,
                                 child: Text('Public Holidays',
-                                    style: TextStyle(fontSize: 9.w))),
+                                    style: TextStyle(fontSize: 9.sp))),
                           ),
                           TableCell(
                             child: Center(
                                 child: TextField(
                               controller: vmTeam.dayController2,
-                              style: TextStyle(fontSize: 9.w),
+                              style: TextStyle(fontSize: 9.sp),
                               keyboardType: TextInputType.number,
                               onChanged: (value) {
                                 vmTeam.totalDayFn();
                               },
                               decoration: InputDecoration(
                                 hintText: 'Day',
-                                hintStyle: TextStyle(fontSize: 9.w),
+                                hintStyle: TextStyle(fontSize: 9.sp),
                                 border: InputBorder.none,
                                 contentPadding:
                                     const EdgeInsets.symmetric(horizontal: 8.0),
@@ -329,13 +329,13 @@ class LeaveApplicationPage extends StatelessWidget {
                                 child: TextField(
                               controller: vmTeam.hrsController2,
                               keyboardType: TextInputType.number,
-                              style: TextStyle(fontSize: 9.w),
+                              style: TextStyle(fontSize: 9.sp),
                               onChanged: (value) {
                                 vmTeam.totalHrsFn();
                               },
                               decoration: InputDecoration(
                                 hintText: 'Hrs',
-                                hintStyle: TextStyle(fontSize: 9.w),
+                                hintStyle: TextStyle(fontSize: 9.sp),
                                 border: InputBorder.none,
                                 contentPadding:
                                     const EdgeInsets.symmetric(horizontal: 8.0),
@@ -350,20 +350,20 @@ class LeaveApplicationPage extends StatelessWidget {
                             child: Align(
                                 alignment: Alignment.centerLeft,
                                 child: Text('Other',
-                                    style: TextStyle(fontSize: 9.w))),
+                                    style: TextStyle(fontSize: 9.sp))),
                           ),
                           TableCell(
                             child: Center(
                                 child: TextField(
                               controller: vmTeam.dayController3,
                               keyboardType: TextInputType.number,
-                              style: TextStyle(fontSize: 9.w),
+                              style: TextStyle(fontSize: 9.sp),
                               onChanged: (value) {
                                 vmTeam.totalDayFn();
                               },
                               decoration: InputDecoration(
                                 hintText: 'Day',
-                                hintStyle: TextStyle(fontSize: 9.w),
+                                hintStyle: TextStyle(fontSize: 9.sp),
                                 border: InputBorder.none,
                                 contentPadding:
                                     const EdgeInsets.symmetric(horizontal: 8.0),
@@ -375,13 +375,13 @@ class LeaveApplicationPage extends StatelessWidget {
                                 child: TextField(
                               controller: vmTeam.hrsController3,
                               keyboardType: TextInputType.number,
-                              style: TextStyle(fontSize: 9.w),
+                              style: TextStyle(fontSize: 9.sp),
                               onChanged: (value) {
                                 vmTeam.totalHrsFn();
                               },
                               decoration: InputDecoration(
                                 hintText: 'Hrs',
-                                hintStyle: TextStyle(fontSize: 9.w),
+                                hintStyle: TextStyle(fontSize: 9.sp),
                                 border: InputBorder.none,
                                 contentPadding:
                                     const EdgeInsets.symmetric(horizontal: 8.0),
@@ -397,7 +397,7 @@ class LeaveApplicationPage extends StatelessWidget {
                                 alignment: Alignment.centerLeft,
                                 child: Text('Total',
                                     style: TextStyle(
-                                        fontSize: 9.w,
+                                        fontSize: 9.sp,
                                         color: Appthemes.cPrimary))),
                           ),
                           TableCell(
@@ -405,12 +405,12 @@ class LeaveApplicationPage extends StatelessWidget {
                                 child: TextField(
                               controller: vmTeam.totalDayController,
                               style: TextStyle(
-                                  fontSize: 9.w, color: Appthemes.cPrimary),
+                                  fontSize: 9.sp, color: Appthemes.cPrimary),
                               keyboardType: TextInputType.number,
                               enabled: false,
                               decoration: InputDecoration(
                                 hintText: 'Day',
-                                hintStyle: TextStyle(fontSize: 9.w),
+                                hintStyle: TextStyle(fontSize: 9.sp),
                                 border: InputBorder.none,
                                 contentPadding:
                                     const EdgeInsets.symmetric(horizontal: 8.0),
@@ -422,12 +422,12 @@ class LeaveApplicationPage extends StatelessWidget {
                                 child: TextField(
                               controller: vmTeam.totalHrsController,
                               style: TextStyle(
-                                  fontSize: 9.w, color: Appthemes.cPrimary),
+                                  fontSize: 9.sp, color: Appthemes.cPrimary),
                               keyboardType: TextInputType.number,
                               enabled: false,
                               decoration: InputDecoration(
                                 hintText: 'Hrs',
-                                hintStyle: TextStyle(fontSize: 9.w),
+                                hintStyle: TextStyle(fontSize: 9.sp),
                                 border: InputBorder.none,
                                 contentPadding:
                                     const EdgeInsets.symmetric(horizontal: 8.0),
@@ -442,7 +442,7 @@ class LeaveApplicationPage extends StatelessWidget {
                 sized0hx05,
                 Text(
                   "Comments:",
-                  style: TextStyle(fontSize: 9.w, fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 9.sp, fontWeight: FontWeight.bold),
                 ),
                 sized0hx05,
                 Container(
@@ -451,11 +451,11 @@ class LeaveApplicationPage extends StatelessWidget {
                   child: TextField(
                     controller: vmTeam.commentsControllerr,
                     textAlign: TextAlign.left,
-                    style: TextStyle(fontSize: 9.w),
+                    style: TextStyle(fontSize: 9.sp),
                     decoration: InputDecoration(
                       hintText: 'Type Here...',
                       hintStyle: TextStyle(
-                          fontSize: 9.w, fontWeight: FontWeight.normal),
+                          fontSize: 9.sp, fontWeight: FontWeight.normal),
                       border: InputBorder.none,
                     ),
                   ),
@@ -466,7 +466,7 @@ class LeaveApplicationPage extends StatelessWidget {
                   child: Text(
                     "Date : ${DateFormat('dd-MM-yyyy').format(DateTime.now())}",
                     style:
-                        TextStyle(fontSize: 9.w, color: Colors.grey.shade700),
+                        TextStyle(fontSize: 9.sp, color: Colors.grey.shade700),
                   ),
                 ),
                 sized0hx05,
@@ -502,7 +502,7 @@ class LeaveApplicationPage extends StatelessWidget {
         children: [
           Text(
             text,
-            style: TextStyle(fontSize: 10.w),
+            style: TextStyle(fontSize: 10.sp),
           ),
           Checkbox(
             side: const BorderSide(color: Colors.red),
@@ -526,7 +526,7 @@ class LeaveApplicationPage extends StatelessWidget {
           selectedDate != null
               ? DateFormat('dd-MM-yyyy').format(selectedDate)
               : "",
-          style: TextStyle(fontSize: 9.w, color: Colors.grey.shade700),
+          style: TextStyle(fontSize: 9.sp, color: Colors.grey.shade700),
         ),
         sized0wx10,
         datePicker(context, selectedDate, pickedDate),

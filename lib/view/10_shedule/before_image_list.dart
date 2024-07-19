@@ -29,7 +29,7 @@ class BeforeImagesList extends StatelessWidget {
                       children: [
                         Text(
                           "Before Job Images",
-                          style: TextStyle(fontSize: 9.w),
+                          style: TextStyle(fontSize: 9.sp),
                         ),
                         cmTextButton(
                           buttonText: "Delete Media",
@@ -66,7 +66,7 @@ class BeforeImagesList extends StatelessWidget {
                         children: [
                           Text(
                             "Before Job Images",
-                            style: TextStyle(fontSize: 9.w),
+                            style: TextStyle(fontSize: 9.sp),
                           ),
                         ],
                       ),

@@ -80,4 +80,29 @@ mixin class VehicleEndpoint {
 
   final String vehSemiTrailerFuelExpenseSearch =
       '/api/v1/vehicles/waste/fork-lift/fuelExpense/search/vehicle/';
+
+  final String vehGetFolderTruck = '/api/v1/drive/view/vehicle/folder/truck/';
+
+  final String vehGetFolderCar = '/api/v1/drive/view/vehicle/folder/car/';
+
+  final String vehGetFolderSemiTraile =
+      '/api/v1/drive/view/vehicle/folder/semi-trailer/';
+
+  final String vehAddFolder = '/api/v1/drive/create/vehicle/folder/';
+
+  final String vehDeleteFolder = '/api/v1/drive/folder/delete/';
+
+  final String vehEditFolder = '/api/v1/drive/folder/rename/';
+
+  final String vehAddFile = '/api/v1/drive/file/create/';
+
+  final String vehEditFile = '/api/v1/drive/file/rename/';
+
+  final String vehDeleteFile = '/api/v1/drive/file/delete/';
+
+  final String vehFileExpiry = '/api/v1/drive/file/expiry-date/';
+
+  final String vehSearchFolder = '/api/v1/drive/search/folder/';
+
+  final String vehSearchFileFolder = '/api/v1/drive/search/file/';
 }

@@ -575,7 +575,7 @@ class JobCardPage extends StatelessWidget {
       alignment: Alignment.centerLeft,
       child: Text(
         title,
-        style: TextStyle(fontSize: 10.w, fontWeight: FontWeight.bold),
+        style: TextStyle(fontSize: 10.sp, fontWeight: FontWeight.bold),
       ),
     );
   }
@@ -591,7 +591,7 @@ class JobCardPage extends StatelessWidget {
         child: Text(
           title,
           style: TextStyle(
-            fontSize: 10.w,
+            fontSize: 10.sp,
           ),
         ),
       ),
@@ -601,7 +601,7 @@ class JobCardPage extends StatelessWidget {
   Widget _buildInfoText(String text) {
     return Text(
       text,
-      style: TextStyle(fontSize: 9.w),
+      style: TextStyle(fontSize: 9.sp),
     );
   }
 
@@ -644,7 +644,7 @@ class JobCardPage extends StatelessWidget {
                       child: Text(
                     fileList[index].name ?? "",
                     style: TextStyle(
-                        fontSize: 9.w, overflow: TextOverflow.ellipsis),
+                        fontSize: 9.sp, overflow: TextOverflow.ellipsis),
                   ))
                 ],
               ),

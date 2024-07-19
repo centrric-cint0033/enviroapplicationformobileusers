@@ -29,7 +29,7 @@ void showConfirmationAlert({
               alignment: Alignment.centerLeft,
               child: Text(content ?? "Are you sure",
                   style:
-                      TextStyle(color: Colors.grey.shade700, fontSize: 10.w)),
+                      TextStyle(color: Colors.grey.shade700, fontSize: 10.sp)),
             ),
             sized0hx15,
             Row(
@@ -42,7 +42,7 @@ void showConfirmationAlert({
                   },
                   child: Text(submitText ?? "Okay",
                       style: TextStyle(
-                          color: Colors.grey.shade700, fontSize: 10.w)),
+                          color: Colors.grey.shade700, fontSize: 10.sp)),
                 ),
                 TextButton(
                   onPressed: () {
@@ -52,7 +52,7 @@ void showConfirmationAlert({
                   child: Text(
                     submitText2 ?? "Cancel",
                     style:
-                        TextStyle(color: Colors.grey.shade700, fontSize: 10.w),
+                        TextStyle(color: Colors.grey.shade700, fontSize: 10.sp),
                   ),
                 ),
               ],

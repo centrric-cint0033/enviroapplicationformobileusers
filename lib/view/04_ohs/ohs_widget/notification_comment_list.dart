@@ -32,11 +32,11 @@ class NotificationCommentList extends StatelessWidget {
                       children: [
                         Text(
                           datas[indexx].created_by ?? "",
-                          style: TextStyle(fontSize: 10.w),
+                          style: TextStyle(fontSize: 10.sp),
                         ),
                         Text(
                           datas[indexx].comments_list?[index].comment ?? "",
-                          style: TextStyle(fontSize: 10.w),
+                          style: TextStyle(fontSize: 10.sp),
                         ),
                       ],
                     ),
@@ -48,7 +48,7 @@ class NotificationCommentList extends StatelessWidget {
               alignment: Alignment.center,
               child: Text(
                 "No Comments",
-                style: TextStyle(fontSize: 10.w),
+                style: TextStyle(fontSize: 10.sp),
               ));
     });
   }

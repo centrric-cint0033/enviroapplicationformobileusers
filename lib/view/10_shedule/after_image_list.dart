@@ -29,7 +29,7 @@ class AfterImagesList extends StatelessWidget {
                       children: [
                         Text(
                           "After Job Images",
-                          style: TextStyle(fontSize: 9.w),
+                          style: TextStyle(fontSize: 9.sp),
                         ),
                         cmTextButton(
                           onPressed: () {
@@ -67,7 +67,7 @@ class AfterImagesList extends StatelessWidget {
                         children: [
                           Text(
                             "After Job Images",
-                            style: TextStyle(fontSize: 9.w),
+                            style: TextStyle(fontSize: 9.sp),
                           ),
                         ],
                       ),

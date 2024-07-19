@@ -103,7 +103,7 @@ Widget cmRowText(String text, String buttonText, Function()? onPressed,
               buttonText,
               style: TextStyle(
                   color: buttonTextColor,
-                  fontSize: 10.w,
+                  fontSize: 10.sp,
                   fontWeight: FontWeight.normal),
             ),
           ),

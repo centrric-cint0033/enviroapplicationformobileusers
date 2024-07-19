@@ -86,7 +86,7 @@ class SheduledetailPage extends StatelessWidget {
                                           "Job Card",
                                           style: TextStyle(
                                               color: Colors.grey.shade600,
-                                              fontSize: 10.w,
+                                              fontSize: 10.sp,
                                               fontWeight: FontWeight.normal),
                                         ),
                                 ),
@@ -459,7 +459,7 @@ class SheduledetailPage extends StatelessWidget {
                                 text: "Update Vehicle Pre-inspection",
                                 color: const Color.fromARGB(255, 51, 188, 165),
                                 buttonTextStyle: TextStyle(
-                                    color: Colors.white, fontSize: 9.w),
+                                    color: Colors.white, fontSize: 9.sp),
                                 onPressed: () {
                                   context.router.push(
                                       UpdateVehiclepreinspectionRoute(
@@ -481,7 +481,7 @@ class SheduledetailPage extends StatelessWidget {
                               CmButton(
                                 color: const Color(0xFF4CAF9E),
                                 buttonTextStyle: TextStyle(
-                                    color: Colors.white, fontSize: 10.w),
+                                    color: Colors.white, fontSize: 10.sp),
                                 onPressed: () {
                                   dateTimePickerWithouIcon(
                                       context,
@@ -499,7 +499,7 @@ class SheduledetailPage extends StatelessWidget {
                                               .departedEnviroFacility));
                                 },
                                 borderRadius: 0,
-                                fontSize: 10.w,
+                                fontSize: 10.sp,
                                 text: "Departed Enviro  Facility",
                                 loading: res.loading,
                               ),
@@ -515,13 +515,13 @@ class SheduledetailPage extends StatelessWidget {
                               CmButton(
                                 color: const Color(0xFF4CAF9E),
                                 buttonTextStyle: TextStyle(
-                                    color: Colors.white, fontSize: 10.w),
+                                    color: Colors.white, fontSize: 10.sp),
                                 onPressed: () {
                                   context.router.push(ScheduleImageRoute(
                                       fromJobStarted: true, id: id));
                                 },
                                 borderRadius: 0,
-                                fontSize: 10.w,
+                                fontSize: 10.sp,
                                 text: "Starting Job",
                                 loading: res.loading,
                               ),
@@ -539,13 +539,13 @@ class SheduledetailPage extends StatelessWidget {
                               CmButton(
                                 color: const Color(0xFF4CAF9E),
                                 buttonTextStyle: TextStyle(
-                                    color: Colors.white, fontSize: 10.w),
+                                    color: Colors.white, fontSize: 10.sp),
                                 onPressed: () {
                                   context.router.push(ScheduleImageRoute(
                                       fromJobStarted: false, id: id));
                                 },
                                 borderRadius: 0,
-                                fontSize: 10.w,
+                                fontSize: 10.sp,
                                 text: "Finished Job",
                                 loading: res.loading,
                               ),
@@ -569,14 +569,14 @@ class SheduledetailPage extends StatelessWidget {
                                 color: const Color.fromARGB(255, 51, 188, 165),
                                 borderRadius: 3.w,
                                 buttonTextStyle: TextStyle(
-                                    color: Colors.white, fontSize: 9.w),
+                                    color: Colors.white, fontSize: 9.sp),
                               )
                             ],
                             if (res.data![i].arriveAtWasteDepot == null) ...[
                               CmButton(
                                 color: const Color(0xFF4CAF9E),
                                 buttonTextStyle: TextStyle(
-                                    color: Colors.white, fontSize: 10.w),
+                                    color: Colors.white, fontSize: 10.sp),
                                 onPressed: () {
                                   dateTimePickerWithouIcon(
                                       context,
@@ -594,7 +594,7 @@ class SheduledetailPage extends StatelessWidget {
                                           ));
                                 },
                                 borderRadius: 0,
-                                fontSize: 10.w,
+                                fontSize: 10.sp,
                                 text: "Arrived at Waste Depot",
                                 loading: res.loading,
                               ),
@@ -604,7 +604,7 @@ class SheduledetailPage extends StatelessWidget {
                               CmButton(
                                 color: const Color(0xFF4CAF9E),
                                 buttonTextStyle: TextStyle(
-                                    color: Colors.white, fontSize: 10.w),
+                                    color: Colors.white, fontSize: 10.sp),
                                 onPressed: () {
                                   dateTimePickerWithouIcon(
                                       context,
@@ -623,7 +623,7 @@ class SheduledetailPage extends StatelessWidget {
                                           ));
                                 },
                                 borderRadius: 0,
-                                fontSize: 10.w,
+                                fontSize: 10.sp,
                                 text: "Departed Waste Depot",
                                 loading: res.loading,
                               ),
@@ -637,7 +637,7 @@ class SheduledetailPage extends StatelessWidget {
                               CmButton(
                                 color: const Color(0xFF4CAF9E),
                                 buttonTextStyle: TextStyle(
-                                    color: Colors.white, fontSize: 10.w),
+                                    color: Colors.white, fontSize: 10.sp),
                                 onPressed: () {
                                   dateTimePickerWithouIcon(
                                       context,
@@ -656,7 +656,7 @@ class SheduledetailPage extends StatelessWidget {
                                           ));
                                 },
                                 borderRadius: 0,
-                                fontSize: 10.w,
+                                fontSize: 10.sp,
                                 text: "Arrived at Enviro Facility",
                                 loading: res.loading,
                               ),
@@ -674,7 +674,7 @@ class SheduledetailPage extends StatelessWidget {
                                             255, 51, 188, 165),
                                         buttonTextStyle: TextStyle(
                                           color: Colors.white,
-                                          fontSize: 9.w,
+                                          fontSize: 9.sp,
                                         ),
                                         onPressed: () {
                                           context.router.push(
@@ -700,7 +700,7 @@ class SheduledetailPage extends StatelessWidget {
                                         color: Colors.black,
                                         buttonTextStyle: TextStyle(
                                           color: Colors.white,
-                                          fontSize: 9.w,
+                                          fontSize: 9.sp,
                                         ),
                                         onPressed: () {
                                           vmSchedule.clearLists();
@@ -727,7 +727,7 @@ class SheduledetailPage extends StatelessWidget {
                                         color: Colors.black,
                                         buttonTextStyle: TextStyle(
                                           color: Colors.white,
-                                          fontSize: 9.w,
+                                          fontSize: 9.sp,
                                         ),
                                         onPressed: () {
                                           vmSchedule.pickedCameraVideo = "";
@@ -802,7 +802,7 @@ class SheduledetailPage extends StatelessWidget {
                                         sized0hx05,
                                         Text(
                                           "${data?.name}",
-                                          style: TextStyle(fontSize: 9.w),
+                                          style: TextStyle(fontSize: 9.sp),
                                         )
                                       ],
                                     );
@@ -814,7 +814,8 @@ class SheduledetailPage extends StatelessWidget {
                               Text(
                                 'Signature',
                                 style: TextStyle(
-                                    fontSize: 9.w, fontWeight: FontWeight.bold),
+                                    fontSize: 9.sp,
+                                    fontWeight: FontWeight.bold),
                               ),
                               sized0hx10,
                               signatureImageWidget(i: i),
@@ -848,11 +849,11 @@ Widget cmRowTextWithDatePicker(BuildContext context, String statusName,
       Expanded(
         child: Text(
           statusName,
-          style: TextStyle(fontSize: 9.w),
+          style: TextStyle(fontSize: 9.sp),
         ),
       ),
       Expanded(
-          child: Text(": $statusDateTime", style: TextStyle(fontSize: 9.w))),
+          child: Text(": $statusDateTime", style: TextStyle(fontSize: 9.sp))),
       datePicker
     ],
   );

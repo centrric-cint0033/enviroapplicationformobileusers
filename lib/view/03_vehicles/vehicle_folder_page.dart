@@ -1,8 +1,9 @@
 import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:enviro_mobile_application/Routepage/approutes.gr.dart';
 import 'package:enviro_mobile_application/model/00_common_model/folder_model/folder_model.dart';
 import 'package:enviro_mobile_application/utilis/constant.dart';
-import 'package:enviro_mobile_application/view_model/07_intranet/intranet_view_model.dart';
+import 'package:enviro_mobile_application/view_model/03_vehicles/vehicle_view_model.dart';
 import 'package:enviro_mobile_application/view_model/08_team/team_view_model.dart';
 import 'package:enviro_mobile_application/widgets/cm_title.dart';
 import 'package:enviro_mobile_application/widgets/cmbutton.dart';
@@ -15,23 +16,23 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_svg/svg.dart';
 
 @RoutePage()
-class IntranetMainPage extends StatelessWidget {
-  const IntranetMainPage({super.key, this.vehicleId, this.vehicleType});
+class VehicleFolderPage extends StatelessWidget {
+  const VehicleFolderPage({super.key, this.vehicleId, this.vehicleType});
   final int? vehicleId;
   final String? vehicleType;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: cmnTitleWidget('Inranet'),
+        title: cmnTitleWidget('Vehicle Folder'),
       ),
       body: SingleChildScrollView(child: Observer(builder: (context) {
-        final res = vmIntranet.intranetFoldersResponse;
+        final res = vmVehicle.vehicleFoldersResponse;
         FolderListModel? folderList = res.data;
         return Column(
           children: [
             sized0hx10,
-            cmTitle('Intranet Folder', fontWeight: FontWeight.bold),
+            cmTitle('Folder', fontWeight: FontWeight.bold),
             sized0hx10,
             Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
               const Padding(
@@ -42,25 +43,28 @@ class IntranetMainPage extends StatelessWidget {
                   text: 'Add folders+',
                   onPressed: () {
                     showCreateEditDialog(context, createEditTap: (v) {
-                      vmIntranet.addIntranetFolder(
-                        context: context,
-                        name: v,
-                        parentfolder: 1,
-                      );
+                      vmVehicle.addVehicleFolder(
+                          context: context,
+                          vehicleId: vehicleId ?? 0,
+                          name: v,
+                          parentfolder: 1,
+                          vehicleType: vehicleType ?? "");
                     });
                   }),
             ]),
             sized0hx10,
             WWTextField(
-              controller: vmIntranet.folderSearchCntrlr,
+              controller: vmVehicle.folderSearchCntrlr,
               onChanged: (v) => vmTeam.onTextChanged(() {
                 v.isEmpty
-                    ? vmIntranet.getIntranetFoldersApi(parentFolderId: 1)
-                    : vmIntranet.folderSearchIntranetApi(
+                    ? vmVehicle.getVehicleFoldersApi(
+                        vehicleId: vehicleId ?? 0, parentFolderId: 1)
+                    : vmVehicle.folderSearchVehicleApi(
                         v,
                         1,
-                        vmIntranet.searchType ?? "",
-                      );
+                        vmVehicle.searchType ?? "",
+                        vehicleId ?? 0,
+                        vehicleType ?? "");
               }),
               suffixTap: () {},
               hintText: 'Search by Folder Name',
@@ -81,28 +85,28 @@ class IntranetMainPage extends StatelessWidget {
                             return WWFolderCard(
                                 folder: data,
                                 onTap: () {
-                                  vmIntranet.folderNames.clear();
-                                  vmIntranet.getIntranetFoldersApi(
-                                      parentFolderId: 1);
-                                  vmIntranet.folderNames.add("${data.name}");
-                                  // context.router.push(EmployeeFilesRoute(
-                                  //     employeeId: employeeDetails?.id,
-                                  //     folderName: data.name,
-                                  //     folderId: data.id,
-                                  //     searchType: data.type));
+                                  vmVehicle.folderNames.clear();
+                                  vmVehicle.getVehicleFoldersApi(
+                                    vehicleId: vehicleId ?? 0,
+                                    parentFolderId: data.id ?? 0,
+                                  );
+                                  vmVehicle.folderNames.add("${data.name}");
+                                  context.router.push(VehicleFolderDetailRoute(
+                                      folderName: data.name,
+                                      searchType: data.type));
                                 },
                                 folderName: data.name,
-                                editTap: (s) =>
-                                    vmIntranet.editIntranetFolderApi(
-                                      name: s,
-                                      folderId: data.id ?? 0,
-                                      parentFolderId: 1,
-                                      context: context,
-                                    ),
+                                editTap: (s) => vmVehicle.editVehicleFolderApi(
+                                    name: s,
+                                    folderId: data.id ?? 0,
+                                    parentFolderId: 1,
+                                    context: context,
+                                    vehicleId: vehicleId ?? 0),
                                 deleteTap: () {
-                                  vmIntranet.deleteIntranetFolderApi(
+                                  vmVehicle.deleteVehicleFolderApi(
                                       folderId: data.id ?? 0,
                                       context: context,
+                                      vehicleId: vehicleId ?? 0,
                                       parentFolderId: 1);
                                 });
                           } else {

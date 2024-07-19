@@ -256,20 +256,6 @@ class NewsOhsTab extends StatelessWidget {
     );
   }
 
-  void _handlegeneralButtonTap(BuildContext context) {
-    print('Add New button tapped!');
-  }
-
-  void _handleButtonTap() {
-    print('Add Folder button tapped!');
-  }
-
-  void newsfolderclickfunction(BuildContext context, id) async {
-    vmOhs.newspagefolderinsidefunction(id);
-
-    context.router.push(NewsOhsFolderInsideRoute(parentId: id));
-  }
-
   void ohsdetailpagefunction(BuildContext context, data, int index) {
     context.router.push(OhsDetailRoute(data: data, index: index));
   }

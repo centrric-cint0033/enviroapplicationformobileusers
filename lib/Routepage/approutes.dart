@@ -21,9 +21,6 @@ class AppRouter extends $AppRouter {
             path: RouteNames.rOhsFolderdetailpage),
         AutoRoute(page: IntranetMainRoute.page, path: RouteNames.intranetpage),
         AutoRoute(page: VehicleRoute.page, path: RouteNames.vehiclemainpage),
-        AutoRoute(
-            page: NewsOhsFolderInsideRoute.page,
-            path: RouteNames.rNewsfolderinsidepage),
         AutoRoute(page: OhsDetailRoute.page, path: RouteNames.rOhsdetailpage),
         AutoRoute(
           page: NotificationDetailRoute.page,
@@ -48,8 +45,9 @@ class AppRouter extends $AppRouter {
             page: EmployeeFilesRoute.page,
             path: RouteNames.employeeFilesScreen),
         AutoRoute(
-            page: IntranetInsideRoute.page,
-            path: RouteNames.rintranetinsidepage),
+          page: IntranetFolderDetailRoute.page,
+          path: RouteNames.intranetFolderDetailpage,
+        ),
         AutoRoute(
             page: ProfileCreationRoute.page, path: RouteNames.rprofilepage),
         AutoRoute(
@@ -90,6 +88,14 @@ class AppRouter extends $AppRouter {
         AutoRoute(
           page: VehicleDetailRoute.page,
           path: RouteNames.vehicleDetailPage,
+        ),
+        AutoRoute(
+          page: VehicleFolderRoute.page,
+          path: RouteNames.vehicleFolderPage,
+        ),
+        AutoRoute(
+          page: VehicleFolderDetailRoute.page,
+          path: RouteNames.vehicleFolderDetailPage,
         ),
       ];
 }

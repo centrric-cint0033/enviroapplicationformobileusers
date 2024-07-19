@@ -49,22 +49,22 @@ class NotificationDetailPage extends StatelessWidget {
                                     children: [
                                       Text(
                                         data.title ?? '',
-                                        style: TextStyle(fontSize: 10.w),
+                                        style: TextStyle(fontSize: 10.sp),
                                       ),
                                       Text(
                                         data.created_by ?? '',
-                                        style: TextStyle(fontSize: 10.w),
+                                        style: TextStyle(fontSize: 10.sp),
                                       ),
                                       Text(
                                         data.description ?? '',
-                                        style: TextStyle(fontSize: 10.w),
+                                        style: TextStyle(fontSize: 10.sp),
                                       ),
                                       Text(
                                         DateFormat('yyyy-MM-dd').format(
                                           DateTime.parse(
                                               data.edited_date_time ?? ''),
                                         ),
-                                        style: TextStyle(fontSize: 10.w),
+                                        style: TextStyle(fontSize: 10.sp),
                                       )
                                     ],
                                   ),
@@ -94,7 +94,7 @@ class NotificationDetailPage extends StatelessWidget {
                                                   Text(
                                                     data.file_attachment ?? "",
                                                     style: TextStyle(
-                                                        fontSize: 10.w),
+                                                        fontSize: 10.sp),
                                                     overflow:
                                                         TextOverflow.ellipsis,
                                                   )
@@ -132,7 +132,7 @@ class NotificationDetailPage extends StatelessWidget {
                                                       style: TextStyle(
                                                           color: Colors
                                                               .grey.shade800,
-                                                          fontSize: 10.w),
+                                                          fontSize: 10.sp),
                                                     ))),
                                       if (vmOhs.notificationpageResponse
                                               .data?[index].userReadStatus ==
@@ -167,7 +167,7 @@ class NotificationDetailPage extends StatelessWidget {
                                                         style: TextStyle(
                                                             color: Colors
                                                                 .grey.shade800,
-                                                            fontSize: 10.w),
+                                                            fontSize: 10.sp),
                                                       )))
                                     ],
                                   ),
@@ -211,7 +211,7 @@ class NotificationDetailPage extends StatelessWidget {
               focusedBorder: const OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.grey)),
               hintText: 'Add Comment',
-              hintStyle: TextStyle(fontSize: 9.w),
+              hintStyle: TextStyle(fontSize: 9.sp),
               suffixIcon: Observer(builder: (context) {
                 final res = vmOhs.addCommentNotifyResponse;
                 return Padding(
@@ -245,7 +245,7 @@ class NotificationDetailPage extends StatelessWidget {
                 );
               }),
             ),
-            style: TextStyle(fontSize: 9.w),
+            style: TextStyle(fontSize: 9.sp),
             maxLines: null,
           ),
         ),

@@ -143,7 +143,7 @@ Widget cmGreyContainer(String text) {
       child: Text(
         "     $text",
         style: TextStyle(
-            fontSize: 10.w,
+            fontSize: 10.sp,
             fontWeight: FontWeight.w800,
             color: Colors.grey.shade700),
       ),
@@ -181,7 +181,7 @@ Widget cmTimerRow(
           flex: 1,
           child: Text(
             ":   ${selectedTime != null ? formatTimeOfDay(selectedTime) : ""}",
-            style: TextStyle(fontSize: 10.w, color: Colors.grey.shade700),
+            style: TextStyle(fontSize: 10.sp, color: Colors.grey.shade700),
           ),
         ),
         widget
@@ -212,11 +212,11 @@ Widget cmRowTextfield(
             children: [
               Text(
                 ":  ",
-                style: TextStyle(fontSize: 10.w, color: Colors.grey.shade700),
+                style: TextStyle(fontSize: 10.sp, color: Colors.grey.shade700),
               ),
               Expanded(
                 child: TextField(
-                  style: TextStyle(fontSize: 10.w, color: Colors.grey.shade700),
+                  style: TextStyle(fontSize: 10.sp, color: Colors.grey.shade700),
                   controller: controller,
                   onChanged: (value) {
                     vmTeam.showSubmitEditTimesheetFn();
@@ -227,7 +227,7 @@ Widget cmRowTextfield(
                       border: InputBorder.none,
                       hintText: "  $hintText",
                       hintStyle: TextStyle(
-                          fontSize: 10.w, color: Colors.grey.shade400)),
+                          fontSize: 10.sp, color: Colors.grey.shade400)),
                 ),
               ),
             ],

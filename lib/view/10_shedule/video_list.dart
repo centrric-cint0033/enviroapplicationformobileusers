@@ -34,7 +34,7 @@ class VideoList extends StatelessWidget {
                         Text(
                           "Video",
                           style: TextStyle(
-                            fontSize: 9.w,
+                            fontSize: 9.sp,
                           ),
                         ),
                         cmTextButton(
@@ -75,7 +75,7 @@ class VideoList extends StatelessWidget {
                         children: [
                           Text(
                             "Video",
-                            style: TextStyle(fontSize: 9.w),
+                            style: TextStyle(fontSize: 9.sp),
                           ),
                         ],
                       ),

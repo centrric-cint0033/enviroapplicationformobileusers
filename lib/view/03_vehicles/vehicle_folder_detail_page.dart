@@ -4,6 +4,7 @@ import 'package:enviro_mobile_application/model/00_common_model/folder_model/fol
 import 'package:enviro_mobile_application/utilis/Appthemes.dart';
 import 'package:enviro_mobile_application/utilis/constant.dart';
 import 'package:enviro_mobile_application/view/08_team/team_widgets/cm_button.dart';
+import 'package:enviro_mobile_application/view_model/03_vehicles/vehicle_view_model.dart';
 import 'package:enviro_mobile_application/view_model/04_ohs/ohs_view_model.dart';
 import 'package:enviro_mobile_application/view_model/08_team/team_view_model.dart';
 import 'package:enviro_mobile_application/widgets/cm_title.dart';
@@ -21,14 +22,18 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 @RoutePage()
-class OhsFolderDetailPage extends StatelessWidget {
-  const OhsFolderDetailPage({
+class VehicleFolderDetailPage extends StatelessWidget {
+  const VehicleFolderDetailPage({
     super.key,
     this.folderName,
     this.searchType,
+    this.vehicleId,
+    this.vehicleType,
   });
+  final int? vehicleId;
   final String? folderName;
   final String? searchType;
+  final String? vehicleType;
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -39,19 +44,19 @@ class OhsFolderDetailPage extends StatelessWidget {
       child: SafeArea(
         child: Scaffold(
           appBar: AppBar(
-            title: cmnTitleWidget('OH&S Folder'),
+            title: cmnTitleWidget('Vehicle Folder Detail'),
           ),
           body: Padding(
             padding: EdgeInsets.symmetric(horizontal: 15.w),
             child: Observer(
               builder: (context) {
-                final res = vmOhs.ohsFoldersResponse2;
+                final res = vmVehicle.vehicleFoldersResponse2;
                 FolderListModel? folderList = res.data;
                 FolderListModel? fileList = res.data;
-                final editResponse = vmOhs.ohsEditFileResponse;
-                final addFolderResponse = vmOhs.addFolderResponse;
-                final addFileResponse = vmOhs.ohsAddFileResponse;
-                final editFolderResponse = vmOhs.ohsEditFolderResponse;
+                final editResponse = vmVehicle.editVehicleFileResponse;
+                final addFolderResponse = vmVehicle.addFolderResponse;
+                final addFileResponse = vmVehicle.addVehicleFileResponse;
+                final editFolderResponse = vmVehicle.editVehicleFolderResponse;
                 return res.loading
                     ? Center(child: wwCustomLoader())
                     : SingleChildScrollView(
@@ -59,24 +64,28 @@ class OhsFolderDetailPage extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               sized0hx10,
-                              Text(vmOhs.folderNames.join(' > ')),
+                              Text(vmVehicle.folderNames.join(' > ')),
                               sized0hx10,
                               Row(
                                 children: [
                                   Expanded(
                                     child: WWTextField(
-                                      controller: vmOhs.filefolderSearchCntrlr,
+                                      controller:
+                                          vmVehicle.fileFolderSearchCntrlr,
                                       onChanged: (v) =>
                                           vmTeam.onTextChanged(() {
                                         v.isEmpty
-                                            ? vmOhs.getFoldersOhs(
+                                            ? vmVehicle.getVehicleFoldersApi(
+                                                vehicleId: vehicleId ?? 0,
                                                 parentFolderId:
-                                                    vmOhs.parentFolderId ?? 1)
-                                            : vmOhs.ohsfileFolderSearchApi(
+                                                    vmVehicle.parentFolderId ??
+                                                        1)
+                                            : vmVehicle.fileFolderSearchApi(
                                                 v,
-                                                vmOhs.parentFolderId ?? 1,
-                                                vmOhs.searchType ?? "general",
-                                              );
+                                                vmVehicle.parentFolderId ?? 1,
+                                                vmVehicle.searchType ?? "",
+                                                vehicleId ?? 0,
+                                                vehicleType ?? "");
                                       }),
                                       suffixTap: () {},
                                       hintText: 'Search',
@@ -86,9 +95,11 @@ class OhsFolderDetailPage extends StatelessWidget {
                                   customButton(() {
                                     showCreateEditDialog(context,
                                         createEditTap: (v) {
-                                      vmOhs.addFolderOhs(
+                                      vmVehicle.addVehicleFolder(
                                           context: context,
                                           name: v,
+                                          vehicleId: vehicleId ?? 0,
+                                          vehicleType: vehicleType ?? "",
                                           parentfolder:
                                               vmOhs.parentFolderId ?? 1);
                                     });
@@ -100,16 +111,16 @@ class OhsFolderDetailPage extends StatelessWidget {
                                     if (result != null) {
                                       String fileName =
                                           result.files.single.name;
-                                      vmOhs.selectedFileName = fileName;
+                                      vmVehicle.selectedFileName = fileName;
                                       PlatformFile file = result.files.single;
-                                      vmOhs.selectedFilePath = file.path!;
+                                      vmVehicle.selectedFilePath = file.path!;
                                       // ignore: use_build_context_synchronously
-                                      vmOhs.ohsAddFile(
+                                      vmVehicle.addVehicleFileApi(
                                           context: context,
-                                          name: vmOhs.selectedFileName ?? "",
-                                          files: vmOhs.selectedFilePath,
+                                          vehicleId: vehicleId ?? 0,
+                                          files: vmVehicle.selectedFilePath,
                                           parentfolder:
-                                              vmOhs.parentFolderId ?? 1);
+                                              vmVehicle.parentFolderId ?? 1);
                                     }
                                   }, Appthemes.cPrimary, "Files +")
                                 ],
@@ -133,8 +144,8 @@ class OhsFolderDetailPage extends StatelessWidget {
                                                   .folders?.length ??
                                               0,
                                           itemBuilder: (context, index) {
-                                            var data = vmOhs
-                                                .ohsFoldersResponse2
+                                            var data = vmVehicle
+                                                .vehicleFoldersResponse2
                                                 .data
                                                 ?.folders?[0]
                                                 .folders?[index];
@@ -144,48 +155,70 @@ class OhsFolderDetailPage extends StatelessWidget {
                                                   : WWFolderCard(
                                                       folder: data,
                                                       onTap: () async {
-                                                        await vmOhs
-                                                            .getFoldersOhs(
+                                                        await vmVehicle
+                                                            .getVehicleFoldersApi(
+                                                          vehicleId:
+                                                              vehicleId ?? 0,
                                                           parentFolderId:
                                                               data.id ?? 0,
                                                         );
-                                                        vmOhs.parentFolderId =
+                                                        vmVehicle
+                                                                .parentFolderId =
                                                             data.id;
-                                                        vmOhs.folderNames.add(
-                                                            "${data.name}");
+                                                        vmVehicle.folderNames
+                                                            .add(
+                                                                "${data.name}");
                                                         context.router.push(
-                                                            OhsFolderDetailRoute(
+                                                            VehicleFolderDetailRoute(
                                                                 folderName:
                                                                     data.name,
                                                                 searchType:
-                                                                    data.type));
+                                                                    data.type,
+                                                                vehicleId:
+                                                                    vehicleId,
+                                                                vehicleType:
+                                                                    vehicleType));
                                                       },
                                                       folderName: data.name,
                                                       loading: editFolderResponse
                                                               .loading &&
-                                                          vmOhs.loadinIndexFolder ==
+                                                          vmVehicle
+                                                                  .loadinIndexFolder ==
                                                               index,
                                                       editTap: (s) {
-                                                        vmOhs.loadinIndexFolder =
+                                                        vmVehicle
+                                                                .loadinIndexFolder =
                                                             index;
-                                                        vmOhs.editFolderOhsApi(
-                                                          name: s,
-                                                          folderId:
-                                                              data.id ?? 0,
-                                                          parentFolderId: vmOhs
-                                                                  .parentFolderId ??
-                                                              1,
-                                                          context: context,
-                                                        );
+                                                        vmVehicle
+                                                            .editVehicleFolderApi(
+                                                                name: s,
+                                                                folderId:
+                                                                    data.id ??
+                                                                        0,
+                                                                parentFolderId:
+                                                                    vmOhs.parentFolderId ??
+                                                                        1,
+                                                                context:
+                                                                    context,
+                                                                vehicleId:
+                                                                    vehicleId ??
+                                                                        0);
                                                       },
                                                       deleteTap: () {
-                                                        vmOhs.ohsDeleteFolderApi(
-                                                            folderId:
-                                                                data.id ?? 0,
-                                                            context: context,
-                                                            parentFolderId:
-                                                                vmOhs.parentFolderId ??
-                                                                    1);
+                                                        vmVehicle
+                                                            .deleteVehicleFolderApi(
+                                                                folderId:
+                                                                    data.id ??
+                                                                        0,
+                                                                context:
+                                                                    context,
+                                                                vehicleId:
+                                                                    vehicleId ??
+                                                                        0,
+                                                                parentFolderId:
+                                                                    vmVehicle
+                                                                            .parentFolderId ??
+                                                                        1);
                                                       });
                                             } else {
                                               return Container();
@@ -218,17 +251,18 @@ class OhsFolderDetailPage extends StatelessWidget {
                                                   ?.folders?[0].files?.length ??
                                               0,
                                           itemBuilder: (context, index) {
-                                            var data = vmOhs
-                                                .ohsFoldersResponse2
+                                            var data = vmVehicle
+                                                .vehicleFoldersResponse2
                                                 .data
                                                 ?.folders?[0]
                                                 .files?[index];
                                             if (data != null) {
                                               return WWFileCard(
-                                                  fromOhs: true,
-                                               
-                                                  parentFolderId:
-                                                      vmOhs.parentFolderId ?? 1,
+                                                  fromVehicle: true,
+                                                  employeeID: 0,
+                                                  parentFolderId: vmVehicle
+                                                          .parentFolderId ??
+                                                      1,
                                                   file: data,
                                                   onTap: () async {
                                                     if (await canLaunch(
@@ -242,27 +276,31 @@ class OhsFolderDetailPage extends StatelessWidget {
                                                   fileName: data.name,
                                                   loading: editResponse
                                                           .loading &&
-                                                      vmOhs.loadinIndexFile ==
+                                                      vmVehicle
+                                                              .loadinIndexFile ==
                                                           index,
                                                   editTap: (s) {
-                                                    vmOhs.loadinIndexFile =
+                                                    vmVehicle.loadinIndexFile =
                                                         index;
-                                                    vmOhs.editFileOhsApi(
-                                                      name: s,
-                                                      fileId: data.id ?? 0,
-                                                      parentFolderId: vmOhs
-                                                              .parentFolderId ??
-                                                          1,
-                                                      context: context,
-                                                    );
+                                                    vmVehicle.editVehicleFilesApi(
+                                                        name: s,
+                                                        filesId: data.id ?? 0,
+                                                        parentFolderId: vmVehicle
+                                                                .parentFolderId ??
+                                                            1,
+                                                        context: context,
+                                                        vehicleId:
+                                                            vehicleId ?? 0);
                                                   },
                                                   deleteTap: () {
-                                                    vmOhs.deleteFilesOhsApi(
+                                                    vmVehicle.deleteVehicleFilesApi(
                                                         fileId: data.id ?? 0,
                                                         context: context,
-                                                        parentFolderId: vmOhs
+                                                        parentFolderId: vmVehicle
                                                                 .parentFolderId ??
-                                                            1);
+                                                            1,
+                                                        vehicleId:
+                                                            vehicleId ?? 0);
                                                   });
                                             } else {
                                               return Container();
