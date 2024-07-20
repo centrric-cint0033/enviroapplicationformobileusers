@@ -53,6 +53,9 @@ class AppRouter extends $AppRouter {
         AutoRoute(
             page: NotificationRoute.page, path: RouteNames.rnotificationpage),
         AutoRoute(
+            page: ArchiveNotificationRoute.page,
+            path: RouteNames.archiveNotificationpage),
+        AutoRoute(
             page: SalesDetailRoute.page, path: RouteNames.rSalesDetailPage),
         AutoRoute(
             page: ScheduleMainRoute.page, path: RouteNames.rschedulemainpage),

@@ -1,5 +1,5 @@
-import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:enviro_mobile_application/Routepage/approutes.gr.dart';
 import 'package:enviro_mobile_application/model/00_common_model/folder_model/folder_model.dart';
 import 'package:enviro_mobile_application/utilis/constant.dart';
 import 'package:enviro_mobile_application/view_model/07_intranet/intranet_view_model.dart';
@@ -85,11 +85,9 @@ class IntranetMainPage extends StatelessWidget {
                                   vmIntranet.getIntranetFoldersApi(
                                       parentFolderId: 1);
                                   vmIntranet.folderNames.add("${data.name}");
-                                  // context.router.push(EmployeeFilesRoute(
-                                  //     employeeId: employeeDetails?.id,
-                                  //     folderName: data.name,
-                                  //     folderId: data.id,
-                                  //     searchType: data.type));
+                                  context.router.push(IntranetFolderDetailRoute(
+                                      folderName: data.name,
+                                      searchType: data.type));
                                 },
                                 folderName: data.name,
                                 editTap: (s) =>
@@ -99,12 +97,12 @@ class IntranetMainPage extends StatelessWidget {
                                       parentFolderId: 1,
                                       context: context,
                                     ),
-                                deleteTap: () {
+                                deleteTap: () =>
                                   vmIntranet.deleteIntranetFolderApi(
                                       folderId: data.id ?? 0,
                                       context: context,
-                                      parentFolderId: 1);
-                                });
+                                      parentFolderId: 1)
+                                );
                           } else {
                             return Container();
                           }

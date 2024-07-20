@@ -7,6 +7,7 @@ class RouteNames {
   static const String ohsPage = '/ohspage';
   static const String rOhsdetailpage = '/ohs_detail_page';
   static const String rOhsFolderdetailpage = '/ohs_folder_detail_page';
+  static const String archiveNotificationpage = '/archive_notification_page';
   static const String intranetpage = '/intranetpage';
   static const String intranetFolderDetailpage =
       '/intranet_folder_detail_page ';

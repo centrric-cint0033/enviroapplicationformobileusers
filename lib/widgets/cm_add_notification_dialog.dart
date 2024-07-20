@@ -1,6 +1,6 @@
 import 'package:enviro_mobile_application/model/04_ohs/oh&s_resp_model.dart';
 import 'package:enviro_mobile_application/model/10_team/team_res_model/team_res_model.dart';
-import 'package:enviro_mobile_application/view/04_ohs/ohs_widget/01_ohs_widgets.dart';
+import 'package:enviro_mobile_application/utilis/constant.dart';
 import 'package:enviro_mobile_application/view_model/04_ohs/ohs_view_model.dart';
 import 'package:enviro_mobile_application/view_model/08_team/team_view_model.dart';
 import 'package:enviro_mobile_application/widgets/members_drop_down_widget.dart';
@@ -82,7 +82,7 @@ class _MyDialogNotificationState extends State<MyDialogNotification> {
                 controller: textFieldController1,
                 hintText: 'Title',
               ),
-              gapFieldOhs,
+              sized0hx05,
               SizedBox(
                 height: 100,
                 child: WWTextField(
@@ -92,7 +92,7 @@ class _MyDialogNotificationState extends State<MyDialogNotification> {
                   maxLines: null,
                 ),
               ),
-              gapFieldOhs,
+              sized0hx05,
               Container(
                 height: 36.w,
                 decoration: BoxDecoration(
@@ -101,7 +101,7 @@ class _MyDialogNotificationState extends State<MyDialogNotification> {
                 ),
                 child: Center(child: MembersDownWidget()),
               ),
-              gapFieldOhs,
+              sized0hx05,
               Observer(builder: (context) {
                 return InkWell(
                   onTap: () async {

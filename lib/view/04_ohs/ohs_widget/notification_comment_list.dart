@@ -1,5 +1,5 @@
 import 'package:enviro_mobile_application/model/04_ohs/oh&s_resp_model.dart';
-import 'package:enviro_mobile_application/view/04_ohs/ohs_widget/01_ohs_widgets.dart';
+import 'package:enviro_mobile_application/utilis/constant.dart';
 import 'package:enviro_mobile_application/view_model/04_ohs/ohs_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -20,7 +20,7 @@ class NotificationCommentList extends StatelessWidget {
               shrinkWrap: true,
               itemCount: datas[indexx].comments_list?.length ?? 0,
               separatorBuilder: (BuildContext context, int index) =>
-                  gapFieldOhs,
+                         sized0hx05,
               itemBuilder: (context, index) {
                 return Container(
                   decoration:

@@ -6,8 +6,6 @@ import 'package:enviro_mobile_application/widgets/01_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-final gapFieldOhs = sized0hx05;
-
 class WWcard extends StatelessWidget {
   const WWcard({
     super.key,
@@ -41,7 +39,7 @@ class WWcard extends StatelessWidget {
                       maxLines: 2,
                       fontWeight: FontWeight.bold,
                       overflow: TextOverflow.ellipsis),
-                  gapFieldOhs,
+                  sized0hx05,
                   showBlackText(data?.created_by ?? '')
                 ],
               ),

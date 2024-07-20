@@ -3,7 +3,7 @@ import 'package:enviro_mobile_application/model/03_vehicle/vehicle_model/vehicle
 import 'package:enviro_mobile_application/utilis/Appthemes.dart';
 import 'package:enviro_mobile_application/utilis/constant.dart';
 import 'package:enviro_mobile_application/view/08_team/team_widgets/date_picker.dart';
-import 'package:enviro_mobile_application/view/10_shedule/shedule_widget.dart';
+import 'package:enviro_mobile_application/view/10_shedule/schedule_widget.dart';
 import 'package:enviro_mobile_application/view_model/11_shedule/shedule_page_view_model.dart';
 import 'package:enviro_mobile_application/widgets/cmn_title_textwidget.dart';
 import 'package:enviro_mobile_application/widgets/drawer.dart';

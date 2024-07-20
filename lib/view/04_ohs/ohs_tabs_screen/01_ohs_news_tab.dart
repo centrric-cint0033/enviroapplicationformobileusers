@@ -22,7 +22,7 @@ class NewsOhsTab extends StatelessWidget {
     return SingleChildScrollView(
       child: Column(
         children: [
-          gapFieldOhs,
+          sized0hx05,
           Align(
               alignment: Alignment.topLeft,
               child: Observer(builder: (context) {
@@ -33,7 +33,7 @@ class NewsOhsTab extends StatelessWidget {
                           fromOhsNews: true, fromOhsEditNews: false);
                     });
               })),
-          gapFieldOhs,
+          sized0hx05,
           Observer(builder: (_) {
             return SizedBox(
                 child: WWResponseHandler(
@@ -45,7 +45,7 @@ class NewsOhsTab extends StatelessWidget {
                         shrinkWrap: true,
                         itemCount: vmOhs.newspageResponse.data?.length ?? 0,
                         separatorBuilder: (BuildContext context, int index) =>
-                            gapFieldOhs,
+                            sized0hx05,
                         itemBuilder: (context, index) {
                           var data = vmOhs.newspageResponse.data?[index];
                           return InkWell(
@@ -57,7 +57,7 @@ class NewsOhsTab extends StatelessWidget {
                               child: WWcard(data: data));
                         })));
           }),
-          gapFieldOhs,
+          sized0hx05,
           Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
             const Padding(
               padding: EdgeInsets.all(8.0),
