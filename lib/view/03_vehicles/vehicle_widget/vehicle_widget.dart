@@ -34,9 +34,11 @@ Expanded expandedButton(String text, Function() ontap) => Expanded(
     );
 
 Widget showData(
-    {VehicleModel? data,
+    {required BuildContext context,
+    VehicleModel? data,
     VehicleActionType? status,
-    bool fromPreInspection = false}) {
+    bool fromPreInspection = false,
+    void Function()? folderOnPressed}) {
   return Container(
     decoration: BoxDecoration(
         border: Border.all(color: Appthemes.cPrimary),
@@ -50,77 +52,157 @@ Widget showData(
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              CmButton(height: 25.w, text: 'Folders'),
+              CmButton(
+                height: 25.w,
+                text: 'Folders',
+                onPressed: folderOnPressed,
+              ),
             ],
           ),
-        if (data?.registration != null) ...[
+        if (vmVehicle.vehicleStatusType == VehicleActionType.vehicleList) ...[
           sized0hx05,
-          expandedRowShowText('Registration no', data!.registration!),
-        ],
-        if (data?.editedDateTime != null) ...[
+          expandedRowShowText('Registration no', data!.registration ?? ""),
           sized0hx05,
           expandedRowShowText(
-              'RegoDue', DateFormat.yMMMMd().format(data!.editedDateTime!))
-        ],
-        if (data?.types != null) ...[
+              'RegoDue', DateFormat.yMMMMd().format(data.editedDateTime!)),
           sized0hx05,
-          expandedRowShowText('Type', data!.types!)
-        ],
-        if (data?.year != null) ...[
+          expandedRowShowText('Type', data.types ?? ""),
           sized0hx05,
-          expandedRowShowText('Year', '${data!.year!}')
-        ],
-        if (data?.odometer != null) ...[
+          expandedRowShowText('Year', '${data.year}')
+        ] else if (vmVehicle.vehicleStatusType ==
+            VehicleActionType.preInspectionCheck) ...[
+          expandedRowShowText('Registration no', data!.registration ?? ""),
           sized0hx05,
-          expandedRowShowText('Odometer', '${data?.odometer}')
-        ],
-        if (data?.driverName != null) ...[
+          expandedRowShowText('Driver name', '${data.driverName}'),
           sized0hx05,
-          expandedRowShowText('Driver name', '${data?.driverName}')
-        ],
-        if (data?.sPart != null) ...[
+          if (data.dateTime != null)
+            expandedRowShowText(
+                'Date', DateFormat('dd-MM-yyyy').format(data.dateTime!)),
           sized0hx05,
-          expandedRowShowText('Spareparts', '${data?.sPart}')
-        ],
-        if (data?.dateTime != null) ...[
+          expandedRowShowText('Odometer', '${data.odometer}'),
+        ] else if (vmVehicle.vehicleStatusType ==
+            VehicleActionType.maintenanceCheck) ...[
           sized0hx05,
-          expandedRowShowText('Date', '${data?.dateTime}')
-        ],
-        if (data?.serviceDate != null) ...[
+          expandedRowShowText('Registration no', data!.registration ?? ""),
           sized0hx05,
-          expandedRowShowText('Servicedate', '${data?.serviceDate}')
-        ],
-        if (data?.lCost != null) ...[
+          expandedRowShowText('Description', data.description ?? ""),
           sized0hx05,
-          expandedRowShowText('Labourcost', '${data?.lCost}')
-        ],
-        if (data?.totalCost != null) ...[
+          expandedRowShowText('Service Provided', data.serviceProvided ?? ""),
           sized0hx05,
-          expandedRowShowText('Totalcost', '${data?.totalCost}')
-        ],
-        if (data?.time != null) ...[
+          expandedRowShowText('Invoice Date', data.invoiceDate ?? ""),
           sized0hx05,
-          expandedRowShowText('Time', '${data?.time}')
-        ],
-        if (data?.filledBy != null) ...[
+          expandedRowShowText('Service Date', '${data.serviceDate}'),
           sized0hx05,
-          expandedRowShowText('Filled By', '${data?.filledBy}')
-        ],
-        if (data?.currentReadingBefore != null) ...[
+          expandedRowShowText('Ometer', '${data.ometer}'),
+          sized0hx05,
+          expandedRowShowText('Invoice No', '${data.invoiceNumber}'),
+          sized0hx05,
+          expandedRowShowText('Hours', '${data.hours}'),
+          sized0hx05,
+          expandedRowShowText('Labour Cost', '${data.lCost}'),
+          sized0hx05,
+          expandedRowShowText('Spare Parts', '${data.sPart}'),
+          sized0hx05,
+          expandedRowShowText('GST', '${data.gst}'),
+          sized0hx05,
+          expandedRowShowText('Total Cost', '${data.totalCost}'),
+          sized0hx05,
+          rowButton(
+              editOntap: () {},
+              deleteOntap: () {
+                vmVehicle.deleteMaintenanceReportApi(
+                  context: context,
+                  vehicleId: data.id ?? 0,
+                );
+              })
+        ] else if (vmVehicle.vehicleStatusType ==
+            VehicleActionType.fuelExpence) ...[
+          sized0hx05,
+          expandedRowShowText('Registration no', data!.registration ?? ""),
+          sized0hx05,
+          expandedRowShowText('Date', data.date ?? ""),
+          sized0hx05,
+          expandedRowShowText('Time', data.time ?? ""),
+          sized0hx05,
+          expandedRowShowText('Truck Rego', data.truckRego ?? ""),
+          sized0hx05,
+          expandedRowShowText('Filled By', data.filledBy ?? " "),
           sized0hx05,
           expandedRowShowText(
-              'Current Reading', '${data?.currentReadingBefore}')
-        ],
-        if (data?.readingAfterFilling != null) ...[
+              'Current Reading', data.currentReadingBefore ?? ""),
           sized0hx05,
-          expandedRowShowText('Reading After', '${data?.readingAfterFilling}')
-        ],
-        if (data?.volumeUsedInLiter != null) ...[
+          expandedRowShowText('Reading After', data.readingAfterFilling ?? ""),
           sized0hx05,
-          expandedRowShowText('Reading After', '${data?.volumeUsedInLiter}')
+          expandedRowShowText(
+              'Volume used in Litres', data.volumeUsedInLiter ?? ""),
         ],
-        if (vmVehicle.vehicleStatusType == VehicleActionType.maintenanceCheck ||
-            vmVehicle.vehicleStatusType == VehicleActionType.fuelExpence) ...[
+        // if (data?.registration != null) ...[
+        //   sized0hx05,
+        //   expandedRowShowText('Registration no', data!.registration!),
+        // ],
+        // if (data?.editedDateTime != null) ...[
+        //   sized0hx05,
+        //   expandedRowShowText(
+        //       'RegoDue', DateFormat.yMMMMd().format(data!.editedDateTime!))
+        // ],
+        // if (data?.types != null) ...[
+        //   sized0hx05,
+        //   expandedRowShowText('Type', data!.types!)
+        // ],
+        // if (data?.year != null) ...[
+        //   sized0hx05,
+        //   expandedRowShowText('Year', '${data!.year!}')
+        // ],
+        // if (data?.odometer != null) ...[
+        //   sized0hx05,
+        //   expandedRowShowText('Odometer', '${data?.odometer}')
+        // ],
+        // if (data?.driverName != null) ...[
+        //   sized0hx05,
+        //   expandedRowShowText('Driver name', '${data?.driverName}')
+        // ],
+        // if (data?.sPart != null) ...[
+        //   sized0hx05,
+        //   expandedRowShowText('Spareparts', '${data?.sPart}')
+        // ],
+        // if (data?.dateTime != null) ...[
+        //   sized0hx05,
+        //   expandedRowShowText('Date', '${data?.dateTime}')
+        // ],
+        // if (data?.serviceDate != null) ...[
+        //   sized0hx05,
+        //   expandedRowShowText('Servicedate', '${data?.serviceDate}')
+        // ],
+        // if (data?.lCost != null) ...[
+        //   sized0hx05,
+        //   expandedRowShowText('Labourcost', '${data?.lCost}')
+        // ],
+        // if (data?.totalCost != null) ...[
+        //   sized0hx05,
+        //   expandedRowShowText('Totalcost', '${data?.totalCost}')
+        // ],
+        // if (data?.time != null) ...[
+        //   sized0hx05,
+        //   expandedRowShowText('Time', '${data?.time}')
+        // ],
+        // if (data?.filledBy != null) ...[
+        //   sized0hx05,
+        //   expandedRowShowText('Filled By', '${data?.filledBy}')
+        // ],
+        // if (data?.currentReadingBefore != null) ...[
+        //   sized0hx05,
+        //   expandedRowShowText(
+        //       'Current Reading', '${data?.currentReadingBefore}')
+        // ],
+        // if (data?.readingAfterFilling != null) ...[
+        //   sized0hx05,
+        //   expandedRowShowText('Reading After', '${data?.readingAfterFilling}')
+        // ],
+        // if (data?.volumeUsedInLiter != null) ...[
+        //   sized0hx05,
+        //   expandedRowShowText('Reading After', '${data?.volumeUsedInLiter}')
+        // ],
+        if (vmVehicle.vehicleStatusType == VehicleActionType.fuelExpence) ...[
           sized0hx05,
           rowButton(editOntap: () {}, deleteOntap: () {})
         ],

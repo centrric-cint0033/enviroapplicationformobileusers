@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 Widget cmTextFormField(
     {TextEditingController? controller,
@@ -13,6 +14,7 @@ Widget cmTextFormField(
     keyboardType: keyboardType,
     readOnly: readOnly!,
     controller: controller,
+    style: TextStyle(fontSize: 10.sp),
     decoration: showDecoration == true
         ? InputDecoration(
             hintText: hintText,

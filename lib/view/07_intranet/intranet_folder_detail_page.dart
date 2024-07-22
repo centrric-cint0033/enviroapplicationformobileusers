@@ -4,8 +4,6 @@ import 'package:enviro_mobile_application/model/00_common_model/folder_model/fol
 import 'package:enviro_mobile_application/utilis/Appthemes.dart';
 import 'package:enviro_mobile_application/utilis/constant.dart';
 import 'package:enviro_mobile_application/view/08_team/team_widgets/cm_button.dart';
-import 'package:enviro_mobile_application/view_model/03_vehicles/vehicle_view_model.dart';
-import 'package:enviro_mobile_application/view_model/04_ohs/ohs_view_model.dart';
 import 'package:enviro_mobile_application/view_model/07_intranet/intranet_view_model.dart';
 import 'package:enviro_mobile_application/view_model/08_team/team_view_model.dart';
 import 'package:enviro_mobile_application/widgets/cm_title.dart';
@@ -82,7 +80,8 @@ class IntranetFolderDetailPage extends StatelessWidget {
                                             : vmIntranet.fileFolderSearchApi(
                                                 v,
                                                 vmIntranet.parentFolderId ?? 1,
-                                                vmIntranet.searchType ?? "",
+                                                vmIntranet.searchType ??
+                                                    "intranet",
                                               );
                                       }),
                                       suffixTap: () {},
@@ -158,9 +157,17 @@ class IntranetFolderDetailPage extends StatelessWidget {
                                                         vmIntranet
                                                                 .parentFolderId =
                                                             data.id;
+                                                        vmIntranet.searchType =
+                                                            data.type;
                                                         vmIntranet.folderNames
                                                             .add(
                                                                 "${data.name}");
+                                                        vmIntranet
+                                                            .folderSearchCntrlr
+                                                            .text = "";
+                                                        vmIntranet
+                                                            .fileFolderSearchCntrlr
+                                                            .text = "";
                                                         context.router.push(
                                                             IntranetFolderDetailRoute(
                                                           folderName: data.name,
@@ -182,7 +189,7 @@ class IntranetFolderDetailPage extends StatelessWidget {
                                                           name: s,
                                                           folderId:
                                                               data.id ?? 0,
-                                                          parentFolderId: vmOhs
+                                                          parentFolderId: vmIntranet
                                                                   .parentFolderId ??
                                                               1,
                                                           context: context,
@@ -266,7 +273,7 @@ class IntranetFolderDetailPage extends StatelessWidget {
                                                         .editIntranetFilesApi(
                                                       name: s,
                                                       filesId: data.id ?? 0,
-                                                      parentFolderId: vmVehicle
+                                                      parentFolderId: vmIntranet
                                                               .parentFolderId ??
                                                           1,
                                                       context: context,
@@ -277,7 +284,7 @@ class IntranetFolderDetailPage extends StatelessWidget {
                                                         .deleteIntranetFilesApi(
                                                       fileId: data.id ?? 0,
                                                       context: context,
-                                                      parentFolderId: vmVehicle
+                                                      parentFolderId: vmIntranet
                                                               .parentFolderId ??
                                                           1,
                                                     );

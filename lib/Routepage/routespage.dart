@@ -47,4 +47,6 @@ class RouteNames {
   static const String vehicleDetailPage = '/vehicle_detail_page ';
   static const String vehicleFolderPage = '/vehicle_folder_page ';
   static const String vehicleFolderDetailPage = '/vehicle_folder_detail_page ';
+  static const String editMaintenanceReportPage =
+      '/edit_maintenance_report_page ';
 }

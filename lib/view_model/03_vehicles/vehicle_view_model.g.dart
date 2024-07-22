@@ -121,6 +121,22 @@ mixin _$VehicleViewModel on VehicleViewModelBase, Store {
     });
   }
 
+  late final _$folderAtom =
+      Atom(name: 'VehicleViewModelBase.folder', context: context);
+
+  @override
+  int? get folder {
+    _$folderAtom.reportRead();
+    return super.folder;
+  }
+
+  @override
+  set folder(int? value) {
+    _$folderAtom.reportWrite(value, super.folder, () {
+      super.folder = value;
+    });
+  }
+
   late final _$selectedFileNameAtom =
       Atom(name: 'VehicleViewModelBase.selectedFileName', context: context);
 
@@ -198,6 +214,71 @@ mixin _$VehicleViewModel on VehicleViewModelBase, Store {
   set selectedExpiryDate(DateTime? value) {
     _$selectedExpiryDateAtom.reportWrite(value, super.selectedExpiryDate, () {
       super.selectedExpiryDate = value;
+    });
+  }
+
+  late final _$selectedVehicleDrodownAtom = Atom(
+      name: 'VehicleViewModelBase.selectedVehicleDrodown', context: context);
+
+  @override
+  String get selectedVehicleDrodown {
+    _$selectedVehicleDrodownAtom.reportRead();
+    return super.selectedVehicleDrodown;
+  }
+
+  @override
+  set selectedVehicleDrodown(String value) {
+    _$selectedVehicleDrodownAtom
+        .reportWrite(value, super.selectedVehicleDrodown, () {
+      super.selectedVehicleDrodown = value;
+    });
+  }
+
+  late final _$selectedVehicleeAtom =
+      Atom(name: 'VehicleViewModelBase.selectedVehiclee', context: context);
+
+  @override
+  VehicleModel? get selectedVehiclee {
+    _$selectedVehicleeAtom.reportRead();
+    return super.selectedVehiclee;
+  }
+
+  @override
+  set selectedVehiclee(VehicleModel? value) {
+    _$selectedVehicleeAtom.reportWrite(value, super.selectedVehiclee, () {
+      super.selectedVehiclee = value;
+    });
+  }
+
+  late final _$selectedInvoiceDateAtom =
+      Atom(name: 'VehicleViewModelBase.selectedInvoiceDate', context: context);
+
+  @override
+  DateTime? get selectedInvoiceDate {
+    _$selectedInvoiceDateAtom.reportRead();
+    return super.selectedInvoiceDate;
+  }
+
+  @override
+  set selectedInvoiceDate(DateTime? value) {
+    _$selectedInvoiceDateAtom.reportWrite(value, super.selectedInvoiceDate, () {
+      super.selectedInvoiceDate = value;
+    });
+  }
+
+  late final _$selectedServiceDateAtom =
+      Atom(name: 'VehicleViewModelBase.selectedServiceDate', context: context);
+
+  @override
+  DateTime? get selectedServiceDate {
+    _$selectedServiceDateAtom.reportRead();
+    return super.selectedServiceDate;
+  }
+
+  @override
+  set selectedServiceDate(DateTime? value) {
+    _$selectedServiceDateAtom.reportWrite(value, super.selectedServiceDate, () {
+      super.selectedServiceDate = value;
     });
   }
 
@@ -369,6 +450,74 @@ mixin _$VehicleViewModel on VehicleViewModelBase, Store {
     });
   }
 
+  late final _$maintenanceFoldersResponseAtom = Atom(
+      name: 'VehicleViewModelBase.maintenanceFoldersResponse',
+      context: context);
+
+  @override
+  ApiResponse<FolderListModel> get maintenanceFoldersResponse {
+    _$maintenanceFoldersResponseAtom.reportRead();
+    return super.maintenanceFoldersResponse;
+  }
+
+  @override
+  set maintenanceFoldersResponse(ApiResponse<FolderListModel> value) {
+    _$maintenanceFoldersResponseAtom
+        .reportWrite(value, super.maintenanceFoldersResponse, () {
+      super.maintenanceFoldersResponse = value;
+    });
+  }
+
+  late final _$vehicleListResponseAtom =
+      Atom(name: 'VehicleViewModelBase.vehicleListResponse', context: context);
+
+  @override
+  ApiResponse<List<VehicleModel>> get vehicleListResponse {
+    _$vehicleListResponseAtom.reportRead();
+    return super.vehicleListResponse;
+  }
+
+  @override
+  set vehicleListResponse(ApiResponse<List<VehicleModel>> value) {
+    _$vehicleListResponseAtom.reportWrite(value, super.vehicleListResponse, () {
+      super.vehicleListResponse = value;
+    });
+  }
+
+  late final _$editedMaintenanceResponseAtom = Atom(
+      name: 'VehicleViewModelBase.editedMaintenanceResponse', context: context);
+
+  @override
+  ApiResponse<VehicleModel> get editedMaintenanceResponse {
+    _$editedMaintenanceResponseAtom.reportRead();
+    return super.editedMaintenanceResponse;
+  }
+
+  @override
+  set editedMaintenanceResponse(ApiResponse<VehicleModel> value) {
+    _$editedMaintenanceResponseAtom
+        .reportWrite(value, super.editedMaintenanceResponse, () {
+      super.editedMaintenanceResponse = value;
+    });
+  }
+
+  late final _$deleteMaintenanceResponseAtom = Atom(
+      name: 'VehicleViewModelBase.deleteMaintenanceResponse', context: context);
+
+  @override
+  ApiResponse<String> get deleteMaintenanceResponse {
+    _$deleteMaintenanceResponseAtom.reportRead();
+    return super.deleteMaintenanceResponse;
+  }
+
+  @override
+  set deleteMaintenanceResponse(ApiResponse<String> value) {
+    _$deleteMaintenanceResponseAtom
+        .reportWrite(value, super.deleteMaintenanceResponse, () {
+      super.deleteMaintenanceResponse = value;
+    });
+  }
+
   late final _$sstatusAtom =
       Atom(name: 'VehicleViewModelBase.sstatus', context: context);
 
@@ -533,12 +682,14 @@ mixin _$VehicleViewModel on VehicleViewModelBase, Store {
       {required BuildContext context,
       required int vehicleId,
       required num parentfolder,
-      String? files}) {
+      String? files,
+      bool fromMaintenance = false}) {
     return _$addVehicleFileApiAsyncAction.run(() => super.addVehicleFileApi(
         context: context,
         vehicleId: vehicleId,
         parentfolder: parentfolder,
-        files: files));
+        files: files,
+        fromMaintenance: fromMaintenance));
   }
 
   late final _$editVehicleFilesApiAsyncAction =
@@ -550,13 +701,17 @@ mixin _$VehicleViewModel on VehicleViewModelBase, Store {
       required int filesId,
       required int parentFolderId,
       required String name,
-      required int vehicleId}) {
+      required int vehicleId,
+      int? folder,
+      bool fromMaintenance = false}) {
     return _$editVehicleFilesApiAsyncAction.run(() => super.editVehicleFilesApi(
         context: context,
         filesId: filesId,
         parentFolderId: parentFolderId,
         name: name,
-        vehicleId: vehicleId));
+        vehicleId: vehicleId,
+        folder: folder,
+        fromMaintenance: fromMaintenance));
   }
 
   late final _$deleteVehicleFilesApiAsyncAction = AsyncAction(
@@ -568,13 +723,17 @@ mixin _$VehicleViewModel on VehicleViewModelBase, Store {
       {required BuildContext context,
       required int fileId,
       required int vehicleId,
-      required num parentFolderId}) {
+      required num parentFolderId,
+      int? folder,
+      bool fromMaintenance = false}) {
     return _$deleteVehicleFilesApiAsyncAction.run(() => super
         .deleteVehicleFilesApi(
             context: context,
             fileId: fileId,
             vehicleId: vehicleId,
-            parentFolderId: parentFolderId));
+            parentFolderId: parentFolderId,
+            folder: folder,
+            fromMaintenance: fromMaintenance));
   }
 
   late final _$exipryDateFileApiAsyncAction =
@@ -586,13 +745,17 @@ mixin _$VehicleViewModel on VehicleViewModelBase, Store {
       required int fileId,
       required String expiry,
       required int vehicleId,
-      required num parentFolderId}) {
+      required num parentFolderId,
+      int? folder,
+      bool fromMaintenance = false}) {
     return _$exipryDateFileApiAsyncAction.run(() => super.exipryDateFileApi(
         context: context,
         fileId: fileId,
         expiry: expiry,
         vehicleId: vehicleId,
-        parentFolderId: parentFolderId));
+        parentFolderId: parentFolderId,
+        folder: folder,
+        fromMaintenance: fromMaintenance));
   }
 
   late final _$folderSearchVehicleApiAsyncAction = AsyncAction(
@@ -600,21 +763,66 @@ mixin _$VehicleViewModel on VehicleViewModelBase, Store {
       context: context);
 
   @override
-  Future<void> folderSearchVehicleApi(String searchData, int folderId,
-      String searchType, int vehicleId, String vehicleType) {
+  Future<void> folderSearchVehicleApi(BuildContext context, String searchData,
+      int folderId, String searchType, int vehicleId, String vehicleType) {
     return _$folderSearchVehicleApiAsyncAction.run(() => super
         .folderSearchVehicleApi(
-            searchData, folderId, searchType, vehicleId, vehicleType));
+            context, searchData, folderId, searchType, vehicleId, vehicleType));
   }
 
   late final _$fileFolderSearchApiAsyncAction =
       AsyncAction('VehicleViewModelBase.fileFolderSearchApi', context: context);
 
   @override
-  Future<void> fileFolderSearchApi(String searchData, int folderId,
-      String searchType, int vehicleId, String vehicleType) {
+  Future<void> fileFolderSearchApi(BuildContext context, String searchData,
+      int folderId, String searchType, int vehicleId, String vehicleType) {
     return _$fileFolderSearchApiAsyncAction.run(() => super.fileFolderSearchApi(
-        searchData, folderId, searchType, vehicleId, vehicleType));
+        context, searchData, folderId, searchType, vehicleId, vehicleType));
+  }
+
+  late final _$getMaintenanceFoldersApiAsyncAction = AsyncAction(
+      'VehicleViewModelBase.getMaintenanceFoldersApi',
+      context: context);
+
+  @override
+  Future<void> getMaintenanceFoldersApi(
+      {required int vehicleId, required int parentFolderId}) {
+    return _$getMaintenanceFoldersApiAsyncAction.run(() => super
+        .getMaintenanceFoldersApi(
+            vehicleId: vehicleId, parentFolderId: parentFolderId));
+  }
+
+  late final _$getVehicleListApiAsyncAction =
+      AsyncAction('VehicleViewModelBase.getVehicleListApi', context: context);
+
+  @override
+  Future<void> getVehicleListApi() {
+    return _$getVehicleListApiAsyncAction.run(() => super.getVehicleListApi());
+  }
+
+  late final _$editMaintenanceReportApiAsyncAction = AsyncAction(
+      'VehicleViewModelBase.editMaintenanceReportApi',
+      context: context);
+
+  @override
+  Future<void> editMaintenanceReportApi(
+      {required BuildContext context,
+      required int vehicleId,
+      required VehicleModel data}) {
+    return _$editMaintenanceReportApiAsyncAction.run(() => super
+        .editMaintenanceReportApi(
+            context: context, vehicleId: vehicleId, data: data));
+  }
+
+  late final _$deleteMaintenanceReportApiAsyncAction = AsyncAction(
+      'VehicleViewModelBase.deleteMaintenanceReportApi',
+      context: context);
+
+  @override
+  Future<void> deleteMaintenanceReportApi(
+      {required BuildContext context, required int vehicleId}) {
+    return _$deleteMaintenanceReportApiAsyncAction.run(() => super
+        .deleteMaintenanceReportApi(context: context, vehicleId: vehicleId));
   }
 
   late final _$VehicleViewModelBaseActionController =
@@ -644,12 +852,14 @@ mixin _$VehicleViewModel on VehicleViewModelBase, Store {
 
   @override
   dynamic expiryDatePickerFn(BuildContext context, dynamic date, int fileId,
-      num parentFolderId, int vehicleId) {
+      num parentFolderId, int vehicleId,
+      {bool fromMaintenance = false}) {
     final _$actionInfo = _$VehicleViewModelBaseActionController.startAction(
         name: 'VehicleViewModelBase.expiryDatePickerFn');
     try {
-      return super
-          .expiryDatePickerFn(context, date, fileId, parentFolderId, vehicleId);
+      return super.expiryDatePickerFn(
+          context, date, fileId, parentFolderId, vehicleId,
+          fromMaintenance: fromMaintenance);
     } finally {
       _$VehicleViewModelBaseActionController.endAction(_$actionInfo);
     }
@@ -667,6 +877,39 @@ mixin _$VehicleViewModel on VehicleViewModelBase, Store {
   }
 
   @override
+  dynamic cmAddFunction(VehicleModel? data) {
+    final _$actionInfo = _$VehicleViewModelBaseActionController.startAction(
+        name: 'VehicleViewModelBase.cmAddFunction');
+    try {
+      return super.cmAddFunction(data);
+    } finally {
+      _$VehicleViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic datePickerFn(dynamic date) {
+    final _$actionInfo = _$VehicleViewModelBaseActionController.startAction(
+        name: 'VehicleViewModelBase.datePickerFn');
+    try {
+      return super.datePickerFn(date);
+    } finally {
+      _$VehicleViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic datePickerFn2(dynamic date) {
+    final _$actionInfo = _$VehicleViewModelBaseActionController.startAction(
+        name: 'VehicleViewModelBase.datePickerFn2');
+    try {
+      return super.datePickerFn2(date);
+    } finally {
+      _$VehicleViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 debouce: ${debouce},
@@ -676,11 +919,16 @@ vehicleType: ${vehicleType},
 searchType: ${searchType},
 folderNames: ${folderNames},
 parentFolderId: ${parentFolderId},
+folder: ${folder},
 selectedFileName: ${selectedFileName},
 selectedFilePath: ${selectedFilePath},
 loadinIndexFile: ${loadinIndexFile},
 loadinIndexFolder: ${loadinIndexFolder},
 selectedExpiryDate: ${selectedExpiryDate},
+selectedVehicleDrodown: ${selectedVehicleDrodown},
+selectedVehiclee: ${selectedVehiclee},
+selectedInvoiceDate: ${selectedInvoiceDate},
+selectedServiceDate: ${selectedServiceDate},
 masterTruckApiResponse: ${masterTruckApiResponse},
 masterCarApiResponse: ${masterCarApiResponse},
 semiTrailorApiResponse: ${semiTrailorApiResponse},
@@ -691,6 +939,10 @@ editVehicleFolderResponse: ${editVehicleFolderResponse},
 addVehicleFileResponse: ${addVehicleFileResponse},
 editVehicleFileResponse: ${editVehicleFileResponse},
 expiryFileResponse: ${expiryFileResponse},
+maintenanceFoldersResponse: ${maintenanceFoldersResponse},
+vehicleListResponse: ${vehicleListResponse},
+editedMaintenanceResponse: ${editedMaintenanceResponse},
+deleteMaintenanceResponse: ${deleteMaintenanceResponse},
 sstatus: ${sstatus},
 selectedTruckresponse: ${selectedTruckresponse}
     ''';

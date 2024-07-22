@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:enviro_mobile_application/Routepage/approutes.gr.dart';
 import 'package:enviro_mobile_application/model/03_vehicle/vehicle_model/vehicle_model.dart';
+import 'package:enviro_mobile_application/service/03_vehicles/vehicle_service.dart';
 import 'package:enviro_mobile_application/view/03_vehicles/vehicle_widget/vehicle_widget.dart';
 import 'package:enviro_mobile_application/view_model/03_vehicles/vehicle_view_model.dart';
 import 'package:enviro_mobile_application/widgets/ww_response_handler.dart';
@@ -89,12 +90,25 @@ class SemiTrailersList extends StatelessWidget {
                           );
                           break;
                         case "Maintenance Report":
-                          context.router.push(
-                            VehicleDetailRoute(
-                              data:
-                                  vmVehicle.semiTrailorApiResponse.data![index],
-                            ),
-                          );
+                          vmVehicle.vehicleType = VehicleType.semiTrailer;
+                          vmVehicle.getVehicleListApi();
+                          try {
+                            vmVehicle.selectedInvoiceDate = DateTime.parse(
+                                vmVehicle.semiTrailorApiResponse.data![index]
+                                        .invoiceDate ??
+                                    "");
+                          } catch (e) {}
+                          try {
+                            vmVehicle.selectedServiceDate = DateTime.parse(
+                                vmVehicle.semiTrailorApiResponse.data![index]
+                                        .serviceDate ??
+                                    "");
+                          } catch (e) {}
+                          vmVehicle.cmAddFunction(
+                              vmVehicle.semiTrailorApiResponse.data![index]);
+                          context.router.push(EditMaintenanceReportRoute(
+                              data: vmVehicle
+                                  .semiTrailorApiResponse.data![index]));
                           break;
                         case "Fuel Expense":
                           context.router.push(
@@ -109,8 +123,48 @@ class SemiTrailersList extends StatelessWidget {
                     }
                   },
                   child: showData(
+                     context: context,
                       data: vmVehicle.semiTrailorApiResponse.data?[index],
-                      status: vmVehicle.vehicleStatusType),
+                      status: vmVehicle.vehicleStatusType,
+                      folderOnPressed: () {
+                        vmVehicle.vehicleType = VehicleType.semiTrailer;
+                        if (vmVehicle.vehicleStatusType ==
+                            VehicleActionType.vehicleList) {
+                          vmVehicle.folder = vmVehicle
+                                  .semiTrailorApiResponse.data![index].folder ??
+                              1;
+                          vmVehicle.getVehicleFoldersApi(
+                              vehicleId: vmVehicle
+                                      .semiTrailorApiResponse.data![index].id ??
+                                  0,
+                              parentFolderId: vmVehicle.semiTrailorApiResponse
+                                      .data![index].folder ??
+                                  1);
+                          vmVehicle.folderSearchCntrlr.text = "";
+                          vmVehicle.fileFolderSearchCntrlr.text = "";
+                          context.router.push(VehicleFolderRoute(
+                              vehicleId: vmVehicle
+                                  .semiTrailorApiResponse.data![index].id,
+                              vehicleType: "forklift"));
+                        } else {
+                          vmVehicle.folder = vmVehicle
+                                  .semiTrailorApiResponse.data![index].folder ??
+                              1;
+                          vmVehicle.getMaintenanceFoldersApi(
+                              vehicleId: vmVehicle
+                                      .semiTrailorApiResponse.data![index].id ??
+                                  0,
+                              parentFolderId: vmVehicle.semiTrailorApiResponse
+                                      .data![index].folder ??
+                                  1);
+                          vmVehicle.folderSearchCntrlr.text = "";
+                          vmVehicle.fileFolderSearchCntrlr.text = "";
+                          context.router.push(VehicleFolderDetailRoute(
+                              vehicleId: vmVehicle
+                                  .semiTrailorApiResponse.data![index].id,
+                              vehicleType: "forklift"));
+                        }
+                      }),
                 ),
         );
       },

@@ -24,18 +24,21 @@ class ArchiveNotificationPage extends StatelessWidget {
         appBar: AppBar(
           title: cmnTitleWidget('Archive'),
         ),
-        body: Column(children: [
-          sized0hx10,
-          Observer(builder: (_) {
-            final res = vmOhs.archiveNotificationResponse;
-            return Expanded(
-                child: WWResponseHandler(
-                    data: res,
-                    isEmpty: res.data?.isEmpty ?? true,
-                    onTap: () => vmOhs.ohsArchiveNotificationApi(),
-                    child: ArchiveNotificationList(loading: res.loading)));
-          }),
-        ]));
+        body: Padding(
+          padding: screenWidth,
+          child: Column(children: [
+            sized0hx10,
+            Observer(builder: (_) {
+              final res = vmOhs.archiveNotificationResponse;
+              return Expanded(
+                  child: WWResponseHandler(
+                      data: res,
+                      isEmpty: res.data?.isEmpty ?? true,
+                      onTap: () => vmOhs.ohsArchiveNotificationApi(),
+                      child: ArchiveNotificationList(loading: res.loading)));
+            }),
+          ]),
+        ));
   }
 }
 

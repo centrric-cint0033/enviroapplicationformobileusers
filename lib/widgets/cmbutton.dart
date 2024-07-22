@@ -21,7 +21,9 @@ class CmButton extends StatelessWidget {
     this.loadingColor,
     this.fontSize,
     this.textcolor,
-    this.iconSize, this.borderColor,
+    this.iconSize,
+    this.borderColor,
+    this.indicatorColor,
   }) : super(key: key);
 
   final IconData? icon;
@@ -41,6 +43,7 @@ class CmButton extends StatelessWidget {
   final Color? loadingColor;
   final Color? textcolor;
   final Color? borderColor;
+  final Color? indicatorColor;
 
   @override
   Widget build(BuildContext context) {
@@ -74,11 +77,13 @@ class CmButton extends StatelessWidget {
                         color: buttonTextStyle?.color ?? Colors.white),
                   if (icon != null) sized0wx05,
                   loading
-                      ? CircularProgressIndicator(
-                          valueColor: AlwaysStoppedAnimation<Color>(
-                            loadingColor ?? Colors.white,
-                          ),
-                        )
+                      ? SizedBox(
+                          height: 12.w,
+                          width: 12.w,
+                          child: CircularProgressIndicator(
+                            strokeWidth: 2,
+                            color: indicatorColor ?? Appthemes.cPrimary,
+                          ))
                       : Text(
                           text ?? "",
                           textAlign: TextAlign.center,

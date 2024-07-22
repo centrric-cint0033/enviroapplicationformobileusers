@@ -56,7 +56,7 @@ mixin class VehicleEndpoint {
 
   // Semi Trailers Apis
 
-  final String vehSemiTrailer = '/api/v1/vehicles/waste/forklift/all/1/';
+  final String vehSemiTrailer = '/api/v1/vehicles/waste/fork-lift/all/1/';
 
   final String vehSemiTrailerPreInspection =
       '/api/v1/vehicles/waste/fork-lift/pre-inspection/1/';
@@ -83,10 +83,10 @@ mixin class VehicleEndpoint {
 
   final String vehGetFolderTruck = '/api/v1/drive/view/vehicle/folder/truck/';
 
-  final String vehGetFolderCar = '/api/v1/drive/view/vehicle/folder/car/';
+  final String vehGetFolderCar = '/api/v1/drive/view/vehicle/folder/cars/';
 
   final String vehGetFolderSemiTraile =
-      '/api/v1/drive/view/vehicle/folder/semi-trailer/';
+      '/api/v1/drive/view/vehicle/folder/forklift/';
 
   final String vehAddFolder = '/api/v1/drive/create/vehicle/folder/';
 
@@ -105,4 +105,18 @@ mixin class VehicleEndpoint {
   final String vehSearchFolder = '/api/v1/drive/search/folder/';
 
   final String vehSearchFileFolder = '/api/v1/drive/search/file/';
+
+  final String getFolderMaintenance = '/api/v1/drive/view/maintanance/folder/';
+
+  final String getVehicleListTruck = '/api/v1/vehicles/waste/truck/';
+
+  final String getVehicleListCar = '/api/v1/vehicles/waste/car/';
+
+  final String getVehicleListSemitrailor = '/api/v1/vehicles/waste/fork-lift/';
+
+  final String editMaintenanceReport =
+      '/api/v1/vehicles/waste/truck/maintenance/report/edit/';
+
+        final String deleteMaintenanceReport =
+      '/api/v1/vehicles/waste/';
 }

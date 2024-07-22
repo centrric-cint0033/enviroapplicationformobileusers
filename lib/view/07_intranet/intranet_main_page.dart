@@ -28,92 +28,101 @@ class IntranetMainPage extends StatelessWidget {
       body: SingleChildScrollView(child: Observer(builder: (context) {
         final res = vmIntranet.intranetFoldersResponse;
         FolderListModel? folderList = res.data;
-        return Column(
-          children: [
-            sized0hx10,
-            cmTitle('Intranet Folder', fontWeight: FontWeight.bold),
-            sized0hx10,
-            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-              const Padding(
-                padding: EdgeInsets.all(8.0),
-                child: Text('Folders'),
+        return Padding(
+          padding: screenWidth,
+          child: Column(
+            children: [
+              sized0hx10,
+              cmTitle('Intranet Folder', fontWeight: FontWeight.bold),
+              sized0hx10,
+              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+                const Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Text('Folders'),
+                ),
+                CmButton(
+                    text: 'Add folders+',
+                    onPressed: () {
+                      showCreateEditDialog(context, createEditTap: (v) {
+                        vmIntranet.addIntranetFolder(
+                          context: context,
+                          name: v,
+                          parentfolder: 1,
+                        );
+                      });
+                    }),
+              ]),
+              sized0hx10,
+              WWTextField(
+                controller: vmIntranet.folderSearchCntrlr,
+                onChanged: (v) => vmTeam.onTextChanged(() {
+                  v.isEmpty
+                      ? vmIntranet.getIntranetFoldersApi(parentFolderId: 1)
+                      : vmIntranet.folderSearchIntranetApi(
+                          v,
+                          1,
+                          vmIntranet.searchType ?? "general",
+                        );
+                }),
+                suffixTap: () {},
+                hintText: 'Search by Folder Name',
               ),
-              CmButton(
-                  text: 'Add folders+',
-                  onPressed: () {
-                    showCreateEditDialog(context, createEditTap: (v) {
-                      vmIntranet.addIntranetFolder(
-                        context: context,
-                        name: v,
-                        parentfolder: 1,
-                      );
-                    });
-                  }),
-            ]),
-            sized0hx10,
-            WWTextField(
-              controller: vmIntranet.folderSearchCntrlr,
-              onChanged: (v) => vmTeam.onTextChanged(() {
-                v.isEmpty
-                    ? vmIntranet.getIntranetFoldersApi(parentFolderId: 1)
-                    : vmIntranet.folderSearchIntranetApi(
-                        v,
-                        1,
-                        vmIntranet.searchType ?? "",
-                      );
-              }),
-              suffixTap: () {},
-              hintText: 'Search by Folder Name',
-            ),
-            sized0hx10,
-            folderList?.folders != null && folderList!.folders!.isNotEmpty
-                ? res.loading
-                    ? wwCustomLoader()
-                    : ListView.separated(
-                        physics: const NeverScrollableScrollPhysics(),
-                        shrinkWrap: true,
-                        separatorBuilder: (BuildContext context, int index) =>
-                            sized0hx10,
-                        itemCount: folderList.folders?[0].folders?.length ?? 0,
-                        itemBuilder: (context, index) {
-                          var data = folderList.folders?[0].folders?[index];
-                          if (data != null) {
-                            return WWFolderCard(
-                                folder: data,
-                                onTap: () {
-                                  vmIntranet.folderNames.clear();
-                                  vmIntranet.getIntranetFoldersApi(
-                                      parentFolderId: 1);
-                                  vmIntranet.folderNames.add("${data.name}");
-                                  context.router.push(IntranetFolderDetailRoute(
-                                      folderName: data.name,
-                                      searchType: data.type));
-                                },
-                                folderName: data.name,
-                                editTap: (s) =>
-                                    vmIntranet.editIntranetFolderApi(
-                                      name: s,
-                                      folderId: data.id ?? 0,
-                                      parentFolderId: 1,
-                                      context: context,
-                                    ),
-                                deleteTap: () =>
-                                  vmIntranet.deleteIntranetFolderApi(
-                                      folderId: data.id ?? 0,
-                                      context: context,
-                                      parentFolderId: 1)
-                                );
-                          } else {
-                            return Container();
-                          }
-                        },
-                      )
-                : Center(
-                    child: SvgPicture.asset(
-                      "assets/images/empty1.svg",
+              sized0hx10,
+              folderList?.folders != null && folderList!.folders!.isNotEmpty
+                  ? res.loading
+                      ? wwCustomLoader()
+                      : ListView.separated(
+                          physics: const NeverScrollableScrollPhysics(),
+                          shrinkWrap: true,
+                          separatorBuilder: (BuildContext context, int index) =>
+                              sized0hx10,
+                          itemCount:
+                              folderList.folders?[0].folders?.length ?? 0,
+                          itemBuilder: (context, index) {
+                            var data = folderList.folders?[0].folders?[index];
+                            if (data != null) {
+                              return WWFolderCard(
+                                  folder: data,
+                                  onTap: () async {
+                                    vmIntranet.folderNames.clear();
+                                    vmIntranet.getIntranetFoldersApi(
+                                        parentFolderId: data.id ?? 1);
+                                    vmIntranet.folderNames.add("${data.name}");
+                                    vmIntranet.parentFolderId = data.id ?? 1;
+                                    vmIntranet.searchType =
+                                        folderList.folders?[0].type;
+                                    vmIntranet.folderSearchCntrlr.text = "";
+                                    vmIntranet.fileFolderSearchCntrlr.text = "";
+                                    context.router.push(
+                                        IntranetFolderDetailRoute(
+                                            folderName: data.name,
+                                            searchType: data.type));
+                                  },
+                                  folderName: data.name,
+                                  editTap: (s) =>
+                                      vmIntranet.editIntranetFolderApi(
+                                        name: s,
+                                        folderId: data.id ?? 0,
+                                        parentFolderId: 1,
+                                        context: context,
+                                      ),
+                                  deleteTap: () =>
+                                      vmIntranet.deleteIntranetFolderApi(
+                                          folderId: data.id ?? 0,
+                                          context: context,
+                                          parentFolderId: 1));
+                            } else {
+                              return Container();
+                            }
+                          },
+                        )
+                  : Center(
+                      child: SvgPicture.asset(
+                        "assets/images/empty1.svg",
+                      ),
                     ),
-                  ),
-          ],
+            ],
+          ),
         );
       })),
     );

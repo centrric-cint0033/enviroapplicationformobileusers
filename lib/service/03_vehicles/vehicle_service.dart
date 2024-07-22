@@ -64,11 +64,24 @@ abstract class IVehicleService {
   Future<Either<Map<MainFailure, dynamic>, String>> deleteVehicleFiles(
       {required int fileId, required num folderId});
   Future<Either<Map<MainFailure, dynamic>, FolderListModel>> expiryDateFiles(
-      {required int fileId, required String expiry});
+      {required int fileId,
+      required String expiry,
+      bool fromMaintenance = false});
   Future<Either<Map<MainFailure, dynamic>, FolderListModel>>
       folderSearchVehicle({required Map<String, String> data});
   Future<Either<Map<MainFailure, dynamic>, FolderListModel>>
       fileFolderSearchVehicle({required Map<String, String> data});
+  Future<Either<Map<MainFailure, dynamic>, FolderListModel>>
+      getMaintenanceFolders(
+          {required int vehicleId,
+          required int parentFolderId,
+          VehicleType? vehicleType});
+  Future<Either<Map<MainFailure, dynamic>, List<VehicleModel>>> getVehicleList(
+      {VehicleType? vehicleType});
+  Future<Either<Map<MainFailure, dynamic>, VehicleModel>> editMaintenanceReport(
+      {required int? vehicleId, required Map<String, String> data});
+  Future<Either<Map<MainFailure, dynamic>, String>> deleteMaintenanceReport(
+      {required int? vehicleId, VehicleType? vehicleType});
 }
 
 @LazySingleton(as: IVehicleService)
@@ -468,10 +481,17 @@ class VehicleService implements IVehicleService {
 
   @override
   Future<Either<Map<MainFailure, dynamic>, FolderListModel>> expiryDateFiles(
-      {required int fileId, required String expiry}) async {
-    var response = await getIt<HttpService>().multipartRequest(
-        method: 'PUT',
-        apiUrl: "${ApiEndPoints().vehFileExpiry}$fileId/?date=$expiry");
+      {required int fileId,
+      required String expiry,
+      bool fromMaintenance = false}) async {
+    var response = fromMaintenance == true
+        ? await getIt<HttpService>().multipartRequest(
+            data: {"date": expiry},
+            method: 'PUT',
+            apiUrl: "${ApiEndPoints().vehFileExpiry}$fileId/")
+        : await getIt<HttpService>().multipartRequest(
+            method: 'PUT',
+            apiUrl: "${ApiEndPoints().vehFileExpiry}$fileId/?date=$expiry");
     return response.fold(
       (l) => Left(l),
       (res) async {
@@ -514,6 +534,127 @@ class VehicleService implements IVehicleService {
         var data = jsonDecode(res.body);
         FolderListModel searchedfileFolderList = FolderListModel.fromJson(data);
         return Right(searchedfileFolderList);
+      },
+    );
+  }
+
+  @override
+  Future<Either<Map<MainFailure, dynamic>, FolderListModel>>
+      getMaintenanceFolders(
+          {required int vehicleId,
+          required int parentFolderId,
+          VehicleType? vehicleType}) async {
+    String apiUrl;
+    switch (vehicleType) {
+      case VehicleType.truck:
+        apiUrl =
+            "${ApiEndPoints().getFolderMaintenance}truck/$vehicleId/$parentFolderId/";
+        break;
+      case VehicleType.car:
+        apiUrl =
+            "${ApiEndPoints().getFolderMaintenance}car/$vehicleId/$parentFolderId/";
+        break;
+      case VehicleType.semiTrailer:
+        apiUrl =
+            "${ApiEndPoints().getFolderMaintenance}forklift/$vehicleId/$parentFolderId/";
+        break;
+      default:
+        apiUrl =
+            "${ApiEndPoints().getFolderMaintenance}truck/$vehicleId/$parentFolderId/";
+        break;
+    }
+
+    var response = await getIt<HttpService>()
+        .request(authenticated: true, method: HttpMethod.get, apiUrl: apiUrl);
+
+    return response.fold(
+      (l) => Left(l),
+      (res) async {
+        FolderListModel maintenanceFolderList =
+            FolderListModel.fromJson(jsonDecode(res.body));
+        return Right(maintenanceFolderList);
+      },
+    );
+  }
+
+  @override
+  Future<Either<Map<MainFailure, dynamic>, List<VehicleModel>>> getVehicleList(
+      {VehicleType? vehicleType}) async {
+    String apiUrl;
+    switch (vehicleType) {
+      case VehicleType.truck:
+        apiUrl = "${ApiEndPoints().getVehicleListTruck}list/";
+        break;
+      case VehicleType.car:
+        apiUrl = "${ApiEndPoints().getVehicleListCar}list/";
+        break;
+      case VehicleType.semiTrailer:
+        apiUrl = "${ApiEndPoints().getVehicleListSemitrailor}list/";
+        break;
+      default:
+        apiUrl = "${ApiEndPoints().getVehicleListTruck}list/";
+        break;
+    }
+
+    var response = await getIt<HttpService>()
+        .multipartRequest(method: 'GET', apiUrl: apiUrl);
+
+    return response.fold(
+      (l) => Left(l),
+      (res) async {
+        var data = jsonDecode(res.body) as List;
+        List<VehicleModel> vehicleList =
+            data.map((e) => VehicleModel.fromJson(e)).toList();
+        return Right(vehicleList);
+      },
+    );
+  }
+
+  @override
+  Future<Either<Map<MainFailure, dynamic>, VehicleModel>> editMaintenanceReport(
+      {required int? vehicleId, required Map<String, String> data}) async {
+    var response = await getIt<HttpService>().multipartRequest(
+        data: data,
+        method: 'PATCH',
+        apiUrl: "${ApiEndPoints().editMaintenanceReport}$vehicleId/");
+    return response.fold(
+      (l) => Left(l),
+      (res) async {
+        var data = jsonDecode(res.body);
+        VehicleModel editMaintenanceReport = VehicleModel.fromJson(data);
+        return Right(editMaintenanceReport);
+      },
+    );
+  }
+
+  @override
+  Future<Either<Map<MainFailure, dynamic>, String>> deleteMaintenanceReport(
+      {required int? vehicleId, VehicleType? vehicleType}) async {
+    String apiUrl;
+    switch (vehicleType) {
+      case VehicleType.truck:
+        apiUrl = "${ApiEndPoints().deleteMaintenanceReport}truck/";
+        break;
+      case VehicleType.car:
+        apiUrl = "${ApiEndPoints().deleteMaintenanceReport}car/";
+        break;
+      case VehicleType.semiTrailer:
+        apiUrl = "${ApiEndPoints().deleteMaintenanceReport}fork-lift/";
+        break;
+      default:
+        apiUrl = "${ApiEndPoints().deleteMaintenanceReport}truck/";
+        break;
+    }
+
+    var response = await getIt<HttpService>().request(
+        authenticated: true,
+        method: HttpMethod.delete,
+        apiUrl: "${apiUrl}maintenance/report/delete/$vehicleId/");
+
+    return response.fold(
+      (l) => Left(l),
+      (res) async {
+        return const Right('success');
       },
     );
   }

@@ -108,7 +108,7 @@ class OhsService implements IohsService {
   @override
   Future<Either<Map<MainFailure, dynamic>, List<OhsRespModel>>>
       ohsNotificationServiceApi({int? page}) async {
-    String pagination = 'view/${page ?? 1}/?limit=8';
+    String pagination = 'view/${page ?? 1}/?limit=8&archive=read';
     var response = await getIt<HttpService>().request(
         authenticated: true,
         method: HttpMethod.get,

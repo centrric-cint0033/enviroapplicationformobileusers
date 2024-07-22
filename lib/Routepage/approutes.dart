@@ -100,5 +100,9 @@ class AppRouter extends $AppRouter {
           page: VehicleFolderDetailRoute.page,
           path: RouteNames.vehicleFolderDetailPage,
         ),
+        AutoRoute(
+          page: EditMaintenanceReportRoute.page,
+          path: RouteNames.editMaintenanceReportPage,
+        ),
       ];
 }

@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:auto_route/auto_route.dart';
 import 'package:dartz/dartz.dart';
 import 'package:enviro_mobile_application/api_response/api_response.dart';
 import 'package:enviro_mobile_application/model/00_common_model/folder_model/folder_model.dart';
@@ -30,6 +31,15 @@ abstract class VehicleViewModelBase with Store {
   TextEditingController vehicleTextCtr = TextEditingController();
   TextEditingController fileFolderSearchCntrlr = TextEditingController();
   TextEditingController folderSearchCntrlr = TextEditingController();
+  TextEditingController descriptionCntrlr = TextEditingController();
+  TextEditingController serviceProvidedCntrlr = TextEditingController();
+  TextEditingController ometerCntrlr = TextEditingController();
+  TextEditingController invoiceNoCntrlr = TextEditingController();
+  TextEditingController hoursCntrlr = TextEditingController();
+  TextEditingController labourCostCntrlr = TextEditingController();
+  TextEditingController sparePartsCntrlr = TextEditingController();
+  TextEditingController gstCntrlr = TextEditingController();
+  TextEditingController totalCostCntrlr = TextEditingController();
 
   int vehicleTabIndex = 0;
 
@@ -40,7 +50,7 @@ abstract class VehicleViewModelBase with Store {
   String? selectedVehicle = "Vehicle list";
 
   @observable
-  VehicleActionType? vehicleStatusType;
+  VehicleActionType? vehicleStatusType = VehicleActionType.vehicleList;
   @observable
   VehicleType? vehicleType;
 
@@ -52,6 +62,8 @@ abstract class VehicleViewModelBase with Store {
 
   @observable
   int? parentFolderId;
+  @observable
+  int? folder;
 
   @observable
   String? selectedFileName;
@@ -67,6 +79,18 @@ abstract class VehicleViewModelBase with Store {
 
   @observable
   DateTime? selectedExpiryDate;
+
+  @observable
+  String selectedVehicleDrodown = "";
+
+  @observable
+  VehicleModel? selectedVehiclee;
+
+  @observable
+  DateTime? selectedInvoiceDate;
+
+  @observable
+  DateTime? selectedServiceDate;
 
   @action
   void onTextChanged(Function() function) {
@@ -372,7 +396,6 @@ abstract class VehicleViewModelBase with Store {
     if (parentFolderId == 1) {
       vehicleFoldersResponse =
           vehicleFoldersResponse.copyWith(error: null, loading: true);
-
       final result = await vehicleService.getVehicleFolders(
           vehicleId: vehicleId,
           parentFolderId: parentFolderId,
@@ -526,12 +549,12 @@ abstract class VehicleViewModelBase with Store {
   @observable
   ApiResponse<String> addVehicleFileResponse = ApiResponse<String>();
   @action
-  Future<void> addVehicleFileApi({
-    required BuildContext context,
-    required int vehicleId,
-    required num parentfolder,
-    String? files,
-  }) async {
+  Future<void> addVehicleFileApi(
+      {required BuildContext context,
+      required int vehicleId,
+      required num parentfolder,
+      String? files,
+      bool fromMaintenance = false}) async {
     addVehicleFileResponse =
         addVehicleFileResponse.copyWith(error: null, loading: true);
 
@@ -544,10 +567,14 @@ abstract class VehicleViewModelBase with Store {
         popupErrorData(context, mainFailure: l);
       },
       (r) async {
-        await getVehicleFoldersApi(
-            vehicleId: vehicleId, parentFolderId: parentfolder);
+        fromMaintenance == false
+            ? await getVehicleFoldersApi(
+                vehicleId: vehicleId, parentFolderId: parentfolder)
+            : getMaintenanceFoldersApi(
+                vehicleId: vehicleId, parentFolderId: folder ?? 0);
         addVehicleFileResponse = addVehicleFileResponse.copyWith(
             data: r, error: null, loading: false);
+
         // vmTeam.textFolderAddController.clear();
         // context.router.pop();
       },
@@ -557,13 +584,14 @@ abstract class VehicleViewModelBase with Store {
   @observable
   ApiResponse<String> editVehicleFileResponse = ApiResponse<String>();
   @action
-  Future<void> editVehicleFilesApi({
-    required BuildContext context,
-    required int filesId,
-    required int parentFolderId,
-    required String name,
-    required int vehicleId,
-  }) async {
+  Future<void> editVehicleFilesApi(
+      {required BuildContext context,
+      required int filesId,
+      required int parentFolderId,
+      required String name,
+      required int vehicleId,
+      int? folder,
+      bool fromMaintenance = false}) async {
     editVehicleFileResponse =
         editVehicleFileResponse.copyWith(error: null, loading: true);
 
@@ -578,8 +606,11 @@ abstract class VehicleViewModelBase with Store {
         popupErrorData(context, mainFailure: l);
       },
       (r) async {
-        await getVehicleFoldersApi(
-            vehicleId: vehicleId, parentFolderId: parentFolderId);
+        fromMaintenance == false
+            ? await getVehicleFoldersApi(
+                vehicleId: vehicleId, parentFolderId: parentFolderId)
+            : await getMaintenanceFoldersApi(
+                vehicleId: vehicleId, parentFolderId: folder ?? 0);
         editVehicleFileResponse = editVehicleFileResponse.copyWith(
           data: r,
           error: null,
@@ -594,12 +625,17 @@ abstract class VehicleViewModelBase with Store {
       {required BuildContext context,
       required int fileId,
       required int vehicleId,
-      required num parentFolderId}) async {
+      required num parentFolderId,
+      int? folder,
+      bool fromMaintenance = false}) async {
     addVehicleFileResponse =
         addVehicleFileResponse.copyWith(error: null, loading: true);
 
-    final result = await vehicleService.deleteVehicleFiles(
-        fileId: fileId, folderId: parentFolderId);
+    final result = fromMaintenance == false
+        ? await vehicleService.deleteVehicleFiles(
+            fileId: fileId, folderId: parentFolderId)
+        : await vehicleService.deleteVehicleFiles(
+            fileId: fileId, folderId: folder ?? 0);
     return result.fold(
       (l) {
         addVehicleFileResponse = addVehicleFileResponse.copyWith(
@@ -608,8 +644,11 @@ abstract class VehicleViewModelBase with Store {
         );
       },
       (r) async {
-        await getVehicleFoldersApi(
-            vehicleId: vehicleId, parentFolderId: parentFolderId);
+        fromMaintenance == false
+            ? await getVehicleFoldersApi(
+                vehicleId: vehicleId, parentFolderId: parentFolderId)
+            : await getMaintenanceFoldersApi(
+                vehicleId: vehicleId, parentFolderId: folder ?? 0);
         addVehicleFileResponse = addVehicleFileResponse.copyWith(
           data: r,
           error: null,
@@ -628,11 +667,13 @@ abstract class VehicleViewModelBase with Store {
       required int fileId,
       required String expiry,
       required int vehicleId,
-      required num parentFolderId}) async {
+      required num parentFolderId,
+      int? folder,
+      bool fromMaintenance = false}) async {
     expiryFileResponse = expiryFileResponse.copyWith(
         error: null, loading: expiryFileResponse.data == null);
-    final result =
-        await vehicleService.expiryDateFiles(fileId: fileId, expiry: expiry);
+    final result = await vehicleService.expiryDateFiles(
+        fileId: fileId, expiry: expiry, fromMaintenance: fromMaintenance);
 
     return result.fold(
       (l) {
@@ -641,8 +682,11 @@ abstract class VehicleViewModelBase with Store {
         popupErrorData(context, mainFailure: l);
       },
       (r) async {
-        await getVehicleFoldersApi(
-            vehicleId: vehicleId, parentFolderId: parentFolderId);
+        fromMaintenance == false
+            ? await getVehicleFoldersApi(
+                vehicleId: vehicleId, parentFolderId: parentFolderId)
+            : await getMaintenanceFoldersApi(
+                vehicleId: vehicleId, parentFolderId: folder ?? 0);
         expiryFileResponse =
             expiryFileResponse.copyWith(error: null, loading: false);
       },
@@ -650,8 +694,13 @@ abstract class VehicleViewModelBase with Store {
   }
 
   @action
-  Future<void> folderSearchVehicleApi(String searchData, int folderId,
-      String searchType, int vehicleId, String vehicleType) async {
+  Future<void> folderSearchVehicleApi(
+      BuildContext context,
+      String searchData,
+      int folderId,
+      String searchType,
+      int vehicleId,
+      String vehicleType) async {
     vehicleFoldersResponse =
         vehicleFoldersResponse.copyWith(errors: null, loading: true);
 
@@ -666,6 +715,7 @@ abstract class VehicleViewModelBase with Store {
       (l) {
         vehicleFoldersResponse =
             vehicleFoldersResponse.copyWith(errors: l, loading: false);
+        popupErrorData(context, mainFailure: l);
       },
       (r) {
         vehicleFoldersResponse = vehicleFoldersResponse.copyWith(
@@ -675,8 +725,13 @@ abstract class VehicleViewModelBase with Store {
   }
 
   @action
-  Future<void> fileFolderSearchApi(String searchData, int folderId,
-      String searchType, int vehicleId, String vehicleType) async {
+  Future<void> fileFolderSearchApi(
+      BuildContext context,
+      String searchData,
+      int folderId,
+      String searchType,
+      int vehicleId,
+      String vehicleType) async {
     vehicleFoldersResponse2 =
         vehicleFoldersResponse2.copyWith(errors: null, loading: true);
 
@@ -691,10 +746,151 @@ abstract class VehicleViewModelBase with Store {
       (l) {
         vehicleFoldersResponse2 =
             vehicleFoldersResponse2.copyWith(errors: l, loading: false);
+        popupErrorData(context, mainFailure: l);
       },
       (r) {
         vehicleFoldersResponse2 = vehicleFoldersResponse2.copyWith(
             data: r, errors: null, loading: false);
+      },
+    );
+  }
+
+  @observable
+  ApiResponse<FolderListModel> maintenanceFoldersResponse =
+      ApiResponse<FolderListModel>();
+  @action
+  Future<void> getMaintenanceFoldersApi(
+      {required int vehicleId, required int parentFolderId}) async {
+    maintenanceFoldersResponse =
+        maintenanceFoldersResponse.copyWith(error: null, loading: true);
+    final result = await vehicleService.getMaintenanceFolders(
+        vehicleId: vehicleId,
+        parentFolderId: parentFolderId,
+        vehicleType: vehicleType);
+    return result.fold(
+      (l) {
+        maintenanceFoldersResponse = maintenanceFoldersResponse.copyWith(
+          errors: l,
+          loading: false,
+        );
+      },
+      (r) {
+        maintenanceFoldersResponse = maintenanceFoldersResponse.copyWith(
+          data: r,
+          error: null,
+          loading: false,
+        );
+        searchType = maintenanceFoldersResponse.data?.folders?[0].type;
+      },
+    );
+  }
+
+  @observable
+  ApiResponse<List<VehicleModel>> vehicleListResponse =
+      ApiResponse<List<VehicleModel>>();
+  @action
+  Future<void> getVehicleListApi() async {
+    vehicleListResponse =
+        vehicleListResponse.copyWith(error: null, loading: true);
+    final result =
+        await vehicleService.getVehicleList(vehicleType: vehicleType);
+    return result.fold(
+      (l) {
+        vehicleListResponse = vehicleListResponse.copyWith(
+          errors: l,
+          loading: false,
+        );
+      },
+      (r) {
+        vehicleListResponse = vehicleListResponse.copyWith(
+          data: r,
+          error: null,
+          loading: false,
+        );
+      },
+    );
+  }
+
+  @observable
+  ApiResponse<VehicleModel> editedMaintenanceResponse =
+      ApiResponse<VehicleModel>();
+  @action
+  Future<void> editMaintenanceReportApi({
+    required BuildContext context,
+    required int vehicleId,
+    required VehicleModel data,
+  }) async {
+    editedMaintenanceResponse =
+        editedMaintenanceResponse.copyWith(errors: null, loading: true);
+
+    final result =
+        await vehicleService.editMaintenanceReport(vehicleId: vehicleId, data: {
+      "description": data.description ?? "",
+      "invoice_date": data.invoiceDate ?? "",
+      "ometer": data.ometer ?? "",
+      "service_date ": data.serviceDate ?? "",
+      "invoice_number": data.invoiceNumber ?? "",
+      "service_provided ": data.serviceProvided ?? "",
+      "hours": data.hours ?? "",
+      "l_cost": data.lCost ?? "",
+      "gst": data.gst ?? "",
+      "s_part": data.sPart ?? "",
+      "total_cost": data.totalCost ?? "",
+      "tab_type": data.tabType ?? "",
+    });
+    return result.fold(
+      (l) {
+        editedMaintenanceResponse =
+            editedMaintenanceResponse.copyWith(errors: l, loading: false);
+        popupErrorData(context, mainFailure: l);
+      },
+      (r) {
+        editedMaintenanceResponse = editedMaintenanceResponse.copyWith(
+            data: r, errors: null, loading: false);
+        if (vehicleType == VehicleType.truck) {
+          masterTruckApi();
+        } else if (vehicleType == VehicleType.car) {
+          masterCarApi();
+        } else if (vehicleType == VehicleType.semiTrailer) {
+          semiTrailorApi();
+        }
+
+        context.router.pop();
+      },
+    );
+  }
+
+  @observable
+  ApiResponse<String> deleteMaintenanceResponse = ApiResponse<String>();
+  @action
+  Future<void> deleteMaintenanceReportApi({
+    required BuildContext context,
+    required int vehicleId,
+  }) async {
+    deleteMaintenanceResponse =
+        deleteMaintenanceResponse.copyWith(error: null, loading: true);
+    final result = await vehicleService.deleteMaintenanceReport(
+        vehicleId: vehicleId, vehicleType: vehicleType);
+    return result.fold(
+      (l) {
+        deleteMaintenanceResponse = deleteMaintenanceResponse.copyWith(
+          errors: l,
+          loading: false,
+        );
+      },
+      (r) async {
+        if (vehicleType == VehicleType.truck) {
+          masterTruckApi();
+        } else if (vehicleType == VehicleType.car) {
+          masterCarApi();
+        } else if (vehicleType == VehicleType.semiTrailer) {
+          semiTrailorApi();
+        }
+        deleteMaintenanceResponse = addVehicleFileResponse.copyWith(
+          data: r,
+          error: null,
+          loading: false,
+        );
       },
     );
   }
@@ -705,8 +901,9 @@ abstract class VehicleViewModelBase with Store {
 //  |_      _| |_      _| |_      _| |_      _| |_      _| |_      _| |_      _| |_      _|
 //    |_||_|     |_||_|     |_||_|     |_||_|     |_||_|     |_||_|     |_||_|     |_||_|
   @action
-  expiryDatePickerFn(BuildContext context, date, int fileId, num parentFolderId,
-      int vehicleId) {
+  expiryDatePickerFn(
+      BuildContext context, date, int fileId, num parentFolderId, int vehicleId,
+      {bool fromMaintenance = false}) {
     selectedExpiryDate = date;
     String dateString = DateFormat('yyyy-MM-dd').format(selectedExpiryDate!);
     exipryDateFileApi(
@@ -714,7 +911,9 @@ abstract class VehicleViewModelBase with Store {
         expiry: dateString,
         context: context,
         parentFolderId: parentFolderId,
-        vehicleId: vehicleId);
+        vehicleId: vehicleId,
+        folder: vmVehicle.folder,
+        fromMaintenance: fromMaintenance);
   }
 
   @observable
@@ -726,5 +925,30 @@ abstract class VehicleViewModelBase with Store {
   @action
   void setSelectedTruck(String? newValue) {
     selectedTruckresponse = newValue;
+  }
+
+  @action
+  cmAddFunction(
+    VehicleModel? data,
+  ) {
+    descriptionCntrlr.text = data?.description ?? "";
+    serviceProvidedCntrlr.text = data?.serviceProvided ?? "";
+    ometerCntrlr.text = data?.ometer ?? "";
+    invoiceNoCntrlr.text = "${data?.invoiceNumber ?? ""}";
+    hoursCntrlr.text = data?.hours ?? "";
+    labourCostCntrlr.text = data?.lCost ?? "";
+    sparePartsCntrlr.text = data?.sPart ?? "";
+    gstCntrlr.text = data?.gst ?? "";
+    totalCostCntrlr.text = data?.totalCost ?? "";
+  }
+
+  @action
+  datePickerFn(date) {
+    selectedInvoiceDate = date;
+  }
+
+  @action
+  datePickerFn2(date) {
+    selectedServiceDate = date;
   }
 }

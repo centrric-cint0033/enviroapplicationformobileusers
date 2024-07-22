@@ -34,14 +34,17 @@ class VehiclePage extends StatelessWidget {
       switch (i) {
         case 0:
           VehicleType.truck;
+          vmVehicle.vehicleType = VehicleType.truck;
           vmVehicle.masterTruckApi();
           break;
         case 1:
           VehicleType.car;
+          vmVehicle.vehicleType = VehicleType.car;
           vmVehicle.masterCarApi();
           break;
         case 2:
           VehicleType.semiTrailer;
+          vmVehicle.vehicleType = VehicleType.semiTrailer;
           vmVehicle.semiTrailorApi();
         default:
       }
@@ -92,12 +95,15 @@ class VehiclePage extends StatelessWidget {
             dropDownTap: () {
               switch (vmVehicle.vehicleTabIndex) {
                 case 0:
+                  vmVehicle.vehicleType = VehicleType.truck;
                   vmVehicle.masterTruckApi();
                   break;
                 case 1:
+                  vmVehicle.vehicleType = VehicleType.car;
                   vmVehicle.masterCarApi();
                   break;
                 case 2:
+                  vmVehicle.vehicleType = VehicleType.semiTrailer;
                   vmVehicle.semiTrailorApi();
                 default:
               }

@@ -126,33 +126,6 @@ class TeamEditPage extends StatelessWidget {
     );
   }
 
-  Expanded expandedShowWidget(Widget value) => Expanded(flex: 3, child: value);
-
-  Row expandedRowShowWidget(String firsValue, Widget secondValue) => Row(
-        children: [
-          expandedShowText(firsValue),
-          sized0wx05,
-          showBlueText(':'),
-          sized0wx05,
-          expandedShowWidget(secondValue)
-        ],
-      );
-
-  Widget cmDatePicker(BuildContext context, String? date,
-      DateTime? selectedDate, Function(DateTime date) pickedDate) {
-    return Row(
-      children: [
-        Text(
-          selectedDate != null
-              ? DateFormat('dd-MM-yyyy').format(selectedDate)
-              : "",
-          style: TextStyle(fontSize: 10.sp),
-        ),
-        datePicker(context, selectedDate, pickedDate),
-      ],
-    );
-  }
-
   cmOnpressedFnCreateTeam(BuildContext context,
       TeamProfileEmployeeDetailsResModel employeeDetails) {
     vmTeam.editTeamApi(
@@ -174,4 +147,31 @@ class TeamEditPage extends StatelessWidget {
                 vmTeam.textEditTeamEmergencyContactController.text),
         context: context);
   }
+}
+
+Expanded expandedShowWidget(Widget value) => Expanded(flex: 3, child: value);
+
+Row expandedRowShowWidget(String firsValue, Widget secondValue) => Row(
+      children: [
+        expandedShowText(firsValue),
+        sized0wx05,
+        showBlueText(':'),
+        sized0wx05,
+        expandedShowWidget(secondValue)
+      ],
+    );
+
+Widget cmDatePicker(BuildContext context, String? date, DateTime? selectedDate,
+    Function(DateTime date) pickedDate) {
+  return Row(
+    children: [
+      Text(
+        selectedDate != null
+            ? DateFormat('dd-MM-yyyy').format(selectedDate)
+            : "",
+        style: TextStyle(fontSize: 10.sp),
+      ),
+      datePicker(context, selectedDate, pickedDate),
+    ],
+  );
 }

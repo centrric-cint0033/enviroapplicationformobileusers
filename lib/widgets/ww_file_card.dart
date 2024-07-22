@@ -22,6 +22,7 @@ class WWFileCard extends StatelessWidget {
   final int? vehicleId;
   final bool? fromOhs;
   final bool? fromVehicle;
+  final bool fromMaintenance;
 
   final bool? fromIntranet;
 
@@ -39,6 +40,7 @@ class WWFileCard extends StatelessWidget {
     this.fromOhs = false,
     this.fromVehicle = false,
     this.fromIntranet = false,
+    this.fromMaintenance = false,
   });
 
   @override
@@ -115,7 +117,8 @@ class WWFileCard extends StatelessWidget {
                         context,
                         vmVehicle.selectedExpiryDate,
                         (date) => vmVehicle.expiryDatePickerFn(context, date,
-                            file.id ?? 1, parentFolderId, vehicleId ?? 0))
+                            file.id ?? 1, parentFolderId, vehicleId ?? 0,
+                            fromMaintenance: fromMaintenance))
                     : fromIntranet == true
                         ? datePicker(
                             context,

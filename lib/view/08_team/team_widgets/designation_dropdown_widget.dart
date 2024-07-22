@@ -4,6 +4,7 @@ import 'package:enviro_mobile_application/view_model/08_team/team_view_model.dar
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 // ignore: must_be_immutable
 class DesignationDownWidget extends StatelessWidget {
@@ -38,6 +39,7 @@ class DesignationDownWidget extends StatelessWidget {
                         value: designation,
                         child: Text(
                           designation.userType ?? "",
+                          style: TextStyle(fontSize: 10.sp),
                         ),
                       );
                     },

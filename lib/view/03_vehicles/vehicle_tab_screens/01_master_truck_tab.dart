@@ -1,3 +1,6 @@
+import 'dart:developer';
+
+import 'package:enviro_mobile_application/service/03_vehicles/vehicle_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:auto_route/auto_route.dart';
@@ -80,11 +83,27 @@ class MasterTruckList extends StatelessWidget {
                     );
                     break;
                   case "Maintenance Report":
-                    context.router.push(
-                      VehicleDetailRoute(
-                        data: vmVehicle.masterTruckApiResponse.data![index],
-                      ),
-                    );
+                    vmVehicle.vehicleType = VehicleType.truck;
+                    log(vmVehicle.vehicleType.toString() + "ggh");
+                    vmVehicle.getVehicleListApi();
+                    try {
+                      vmVehicle.selectedInvoiceDate = DateTime.parse(vmVehicle
+                              .masterTruckApiResponse
+                              .data![index]
+                              .invoiceDate ??
+                          "");
+                    } catch (e) {}
+                    try {
+                      vmVehicle.selectedServiceDate = DateTime.parse(vmVehicle
+                              .masterTruckApiResponse
+                              .data![index]
+                              .serviceDate ??
+                          "");
+                    } catch (e) {}
+                    vmVehicle.cmAddFunction(
+                        vmVehicle.masterTruckApiResponse.data![index]);
+                    context.router.push(EditMaintenanceReportRoute(
+                        data: vmVehicle.masterTruckApiResponse.data![index]));
                     break;
                   case "Fuel Expense":
                     context.router.push(
@@ -102,9 +121,51 @@ class MasterTruckList extends StatelessWidget {
                     ? const CupertinoActivityIndicator()
                     : const SizedBox.shrink()
                 : showData(
+                    context: context,
                     data: vmVehicle.masterTruckApiResponse.data?[index],
                     status: vmVehicle.vehicleStatusType,
-                  ),
+                    folderOnPressed: () {
+                      vmVehicle.vehicleType = VehicleType.truck;
+                      if (vmVehicle.vehicleStatusType ==
+                          VehicleActionType.vehicleList) {
+                        vmVehicle.folder = vmVehicle
+                                .masterTruckApiResponse.data![index].folder ??
+                            1;
+                        vmVehicle.getVehicleFoldersApi(
+                            vehicleId: vmVehicle
+                                    .masterTruckApiResponse.data![index].id ??
+                                0,
+                            parentFolderId: vmVehicle.masterTruckApiResponse
+                                    .data![index].folder ??
+                                1);
+                        vmVehicle.folderSearchCntrlr.text = "";
+                        vmVehicle.fileFolderSearchCntrlr.text = "";
+                        context.router.push(VehicleFolderRoute(
+                            vehicleId: vmVehicle
+                                .masterTruckApiResponse.data![index].id,
+                            vehicleType: vmVehicle.masterTruckApiResponse
+                                .data![index].vehicleType));
+                      } else if (vmVehicle.vehicleStatusType ==
+                          VehicleActionType.maintenanceCheck) {
+                        vmVehicle.folder = vmVehicle
+                                .masterTruckApiResponse.data![index].folder ??
+                            1;
+                        vmVehicle.getMaintenanceFoldersApi(
+                            vehicleId: vmVehicle
+                                    .masterTruckApiResponse.data![index].id ??
+                                0,
+                            parentFolderId: vmVehicle.masterTruckApiResponse
+                                    .data![index].folder ??
+                                1);
+                        vmVehicle.folderSearchCntrlr.text = "";
+                        vmVehicle.fileFolderSearchCntrlr.text = "";
+                        context.router.push(VehicleFolderDetailRoute(
+                            vehicleId: vmVehicle
+                                .masterTruckApiResponse.data![index].id,
+                            vehicleType: vmVehicle.masterTruckApiResponse
+                                .data![index].vehicleType));
+                      }
+                    }),
           ),
         );
       },

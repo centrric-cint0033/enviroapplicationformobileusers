@@ -163,7 +163,7 @@ class IntranetService implements IintranetService {
       {required int fileId, required String expiry}) async {
     var response = await getIt<HttpService>().multipartRequest(
       method: 'PUT',
-      apiUrl: "${ApiEndPoints().intranetFileExpiry}$fileId",
+      apiUrl: "${ApiEndPoints().intranetFileExpiry}$fileId/",
       data: {"date": expiry},
     );
     return response.fold(
