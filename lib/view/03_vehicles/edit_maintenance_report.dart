@@ -93,7 +93,11 @@ class EditMaintenanceReportPage extends StatelessWidget {
                                 context: context,
                                 vehicleId: data.id ?? 0,
                                 data: VehicleModel(
-                                    vehicle: vmVehicle.selectedVehiclee?.id,
+                                    vehicle: vmVehicle.selectedVehicleeId !=
+                                                0 &&
+                                            vmVehicle.selectedVehicleeId != null
+                                        ? vmVehicle.selectedVehicleeId
+                                        : vmVehicle.selectedVehiclee?.id,
                                     description:
                                         vmVehicle.descriptionCntrlr.text,
                                     serviceProvided:
@@ -109,7 +113,8 @@ class EditMaintenanceReportPage extends StatelessWidget {
                                     lCost: vmVehicle.labourCostCntrlr.text,
                                     sPart: vmVehicle.sparePartsCntrlr.text,
                                     gst: vmVehicle.gstCntrlr.text,
-                                    totalCost: vmVehicle.totalCostCntrlr.text));
+                                    totalCost: vmVehicle.totalCostCntrlr.text,
+                                    tabType: data.tabType));
                           },
                         );
                       })

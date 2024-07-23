@@ -21,8 +21,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 @RoutePage()
-class IntranetFolderDetailPage extends StatelessWidget {
-  const IntranetFolderDetailPage({
+class SiteFolderDetailPage extends StatelessWidget {
+  const SiteFolderDetailPage({
     super.key,
     this.folderName,
     this.searchType,
@@ -41,7 +41,7 @@ class IntranetFolderDetailPage extends StatelessWidget {
       child: SafeArea(
         child: Scaffold(
           appBar: AppBar(
-            title: cmnTitleWidget('Intranet Folder'),
+            title: cmnTitleWidget('Site Folder'),
           ),
           body: Padding(
             padding: EdgeInsets.symmetric(horizontal: 15.w),

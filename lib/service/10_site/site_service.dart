@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:enviro_mobile_application/utilis/api_endpoints/customprint.dart';
 import 'package:dartz/dartz.dart';
@@ -10,8 +11,8 @@ import 'package:enviro_mobile_application/model/10_site/site_res_model/site_res_
 import '../../utilis/injection.dart';
 import '../../utilis/httpservice.dart';
 import '../../utilis/api_endpoints/api_endpoints.dart';
-import '../../model/10_site/folder_res_model/folder_res_model.dart';
 import '../../model/02_sales/waste_type_model/waste_type_model.dart';
+import 'package:enviro_mobile_application/model/00_common_model/folder_model/folder_model.dart';
 
 @LazySingleton(as: ISiteService)
 class SiteService implements ISiteService {
@@ -103,24 +104,24 @@ class SiteService implements ISiteService {
     );
   }
 
-  @override
-  Future<Either<Map<MainFailure, dynamic>, FolderResModel>> getSiteFolders({
-    required int id,
-  }) async {
-    var response = await getIt<HttpService>().request(
-      authenticated: true,
-      method: HttpMethod.get,
-      apiUrl: "${ApiEndPoints().siteFolders}$id/1/",
-    );
+  // @override
+  // Future<Either<Map<MainFailure, dynamic>, FolderResModel>> getSiteFolders({
+  //   required int id,
+  // }) async {
+  //   var response = await getIt<HttpService>().request(
+  //     authenticated: true,
+  //     method: HttpMethod.get,
+  //     apiUrl: "${ApiEndPoints().siteFolders}$id/1/",
+  //   );
 
-    return response.fold(
-      (l) => Left(l),
-      (res) async {
-        var data = jsonDecode(res.body);
-        return Right(FolderResModel.fromJson(data));
-      },
-    );
-  }
+  //   return response.fold(
+  //     (l) => Left(l),
+  //     (res) async {
+  //       var data = jsonDecode(res.body);
+  //       return Right(FolderResModel.fromJson(data));
+  //     },
+  //   );
+  // }
 
   @override
   Future<Either<Map<MainFailure, dynamic>, List<SiteResModel>>>
@@ -145,30 +146,30 @@ class SiteService implements ISiteService {
     );
   }
 
-  @override
-  Future<Either<Map<MainFailure, dynamic>, List<Folder>>> searchSiteFolder({
-    required String key,
-  }) async {
-    customPrint(content: key);
-    var response = await getIt<HttpService>().multipartRequest(
-      method: "POST",
-      apiUrl: ApiEndPoints().searchSiteFolder,
-      data: {
-        "key": key,
-        "site": 1294,
-        "folder_id": 1,
-        "search_type": "site-individual-private",
-      },
-    );
-    return response.fold(
-      (l) => Left(l),
-      (res) async {
-        var data = jsonDecode(res.body) as List;
-        List<Folder> folders = data.map((e) => Folder.fromJson(e)).toList();
-        return Right(folders);
-      },
-    );
-  }
+  // @override
+  // Future<Either<Map<MainFailure, dynamic>, List<Folder>>> searchSiteFolder({
+  //   required String key,
+  // }) async {
+  //   customPrint(content: key);
+  //   var response = await getIt<HttpService>().multipartRequest(
+  //     method: "POST",
+  //     apiUrl: ApiEndPoints().searchSiteFolder,
+  //     data: {
+  //       "key": key,
+  //       "site": 1294,
+  //       "folder_id": 1,
+  //       "search_type": "site-individual-private",
+  //     },
+  //   );
+  //   return response.fold(
+  //     (l) => Left(l),
+  //     (res) async {
+  //       var data = jsonDecode(res.body) as List;
+  //       List<Folder> folders = data.map((e) => Folder.fromJson(e)).toList();
+  //       return Right(folders);
+  //     },
+  //   );
+  // }
 
   @override
   Future<Either<Map<MainFailure, dynamic>, List<WasteTypeModel>>>
@@ -186,6 +187,25 @@ class SiteService implements ISiteService {
         List<WasteTypeModel> wasteTypes =
             data.map((e) => WasteTypeModel.fromJson(e)).toList();
         return Right(wasteTypes);
+      },
+    );
+  }
+
+  @override
+  Future<Either<Map<MainFailure, dynamic>, FolderListModel>> getSiteFolderss(
+      {required num id, required num parentFolderId}) async {
+    var response = await getIt<HttpService>().request(
+        authenticated: true,
+        method: HttpMethod.get,
+        apiUrl: '${ApiEndPoints().siteFolders}$id/$parentFolderId');
+
+    return response.fold(
+      (l) => Left(l),
+      (res) async {
+        FolderListModel siteFolderList =
+            FolderListModel.fromJson(jsonDecode(res.body));
+        log(siteFolderList.toString());
+        return Right(siteFolderList);
       },
     );
   }

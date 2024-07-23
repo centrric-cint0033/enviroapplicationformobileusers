@@ -80,6 +80,10 @@ class AppRouter extends $AppRouter {
           path: RouteNames.siteDetailPage,
         ),
         AutoRoute(
+          page: SiteFolderDetailRoute.page,
+          path: RouteNames.siteFolderDetailPage,
+        ),
+        AutoRoute(
             page: SheduleCommentRoute.page,
             path: RouteNames.rshedulecommandstatus),
         AutoRoute(
@@ -103,6 +107,18 @@ class AppRouter extends $AppRouter {
         AutoRoute(
           page: EditMaintenanceReportRoute.page,
           path: RouteNames.editMaintenanceReportPage,
+        ),
+        AutoRoute(
+          page: AddMaintenanceReportRoute.page,
+          path: RouteNames.addMaintenanceReportPage,
+        ),
+        AutoRoute(
+          page: EditFuelExpenseRoute.page,
+          path: RouteNames.editFuelExpensePage,
+        ),
+        AutoRoute(
+          page: AddFuelExpenseRoute.page,
+          path: RouteNames.addFuelExpensePage,
         ),
       ];
 }

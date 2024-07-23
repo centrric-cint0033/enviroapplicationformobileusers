@@ -7,6 +7,7 @@ import 'package:enviro_mobile_application/model/03_vehicle/vehicle_model/vehicle
 import 'package:enviro_mobile_application/service/03_vehicles/vehicle_service.dart';
 import 'package:enviro_mobile_application/utilis/injection.dart';
 import 'package:enviro_mobile_application/widgets/ww_popup_error.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 import 'package:intl/intl.dart';
@@ -40,6 +41,11 @@ abstract class VehicleViewModelBase with Store {
   TextEditingController sparePartsCntrlr = TextEditingController();
   TextEditingController gstCntrlr = TextEditingController();
   TextEditingController totalCostCntrlr = TextEditingController();
+  TextEditingController regoCntrlr = TextEditingController();
+  TextEditingController filledByCntrlr = TextEditingController();
+  TextEditingController currentReadingCntrlr = TextEditingController();
+  TextEditingController readingAfterCntrlr = TextEditingController();
+  TextEditingController volumeCntrlr = TextEditingController();
 
   int vehicleTabIndex = 0;
 
@@ -62,6 +68,7 @@ abstract class VehicleViewModelBase with Store {
 
   @observable
   int? parentFolderId;
+
   @observable
   int? folder;
 
@@ -87,10 +94,37 @@ abstract class VehicleViewModelBase with Store {
   VehicleModel? selectedVehiclee;
 
   @observable
+  int? selectedVehicleeId;
+
+  @observable
+  VehicleModel? selectedVehicleAddMaintenance;
+
+  @observable
+  int? selectedVehicleAddMaintenanceId;
+
+  @observable
   DateTime? selectedInvoiceDate;
 
   @observable
   DateTime? selectedServiceDate;
+
+  @observable
+  DateTime? selectedInvoiceDateAddMaintenance;
+
+  @observable
+  DateTime? selectedServiceDateAddMaintenance;
+
+  @observable
+  bool? showSubmitBn;
+
+  @observable
+  ObservableList<String>? pickedFileList = ObservableList<String>();
+
+  @observable
+  DateTime? selectedFuelExpenseDate;
+
+  @observable
+  TimeOfDay? selectedFuelExpenseTime;
 
   @action
   void onTextChanged(Function() function) {
@@ -571,7 +605,9 @@ abstract class VehicleViewModelBase with Store {
             ? await getVehicleFoldersApi(
                 vehicleId: vehicleId, parentFolderId: parentfolder)
             : getMaintenanceFoldersApi(
-                vehicleId: vehicleId, parentFolderId: folder ?? 0);
+                context: context,
+                vehicleId: vehicleId,
+                parentFolderId: folder ?? 0);
         addVehicleFileResponse = addVehicleFileResponse.copyWith(
             data: r, error: null, loading: false);
 
@@ -610,7 +646,9 @@ abstract class VehicleViewModelBase with Store {
             ? await getVehicleFoldersApi(
                 vehicleId: vehicleId, parentFolderId: parentFolderId)
             : await getMaintenanceFoldersApi(
-                vehicleId: vehicleId, parentFolderId: folder ?? 0);
+                context: context,
+                vehicleId: vehicleId,
+                parentFolderId: folder ?? 0);
         editVehicleFileResponse = editVehicleFileResponse.copyWith(
           data: r,
           error: null,
@@ -648,7 +686,9 @@ abstract class VehicleViewModelBase with Store {
             ? await getVehicleFoldersApi(
                 vehicleId: vehicleId, parentFolderId: parentFolderId)
             : await getMaintenanceFoldersApi(
-                vehicleId: vehicleId, parentFolderId: folder ?? 0);
+                context: context,
+                vehicleId: vehicleId,
+                parentFolderId: folder ?? 0);
         addVehicleFileResponse = addVehicleFileResponse.copyWith(
           data: r,
           error: null,
@@ -686,7 +726,9 @@ abstract class VehicleViewModelBase with Store {
             ? await getVehicleFoldersApi(
                 vehicleId: vehicleId, parentFolderId: parentFolderId)
             : await getMaintenanceFoldersApi(
-                vehicleId: vehicleId, parentFolderId: folder ?? 0);
+                context: context,
+                vehicleId: vehicleId,
+                parentFolderId: folder ?? 0);
         expiryFileResponse =
             expiryFileResponse.copyWith(error: null, loading: false);
       },
@@ -760,7 +802,9 @@ abstract class VehicleViewModelBase with Store {
       ApiResponse<FolderListModel>();
   @action
   Future<void> getMaintenanceFoldersApi(
-      {required int vehicleId, required int parentFolderId}) async {
+      {required BuildContext context,
+      required int vehicleId,
+      required int parentFolderId}) async {
     maintenanceFoldersResponse =
         maintenanceFoldersResponse.copyWith(error: null, loading: true);
     final result = await vehicleService.getMaintenanceFolders(
@@ -773,6 +817,7 @@ abstract class VehicleViewModelBase with Store {
           errors: l,
           loading: false,
         );
+        popupErrorData(context, mainFailure: l);
       },
       (r) {
         maintenanceFoldersResponse = maintenanceFoldersResponse.copyWith(
@@ -823,21 +868,24 @@ abstract class VehicleViewModelBase with Store {
     editedMaintenanceResponse =
         editedMaintenanceResponse.copyWith(errors: null, loading: true);
 
-    final result =
-        await vehicleService.editMaintenanceReport(vehicleId: vehicleId, data: {
-      "description": data.description ?? "",
-      "invoice_date": data.invoiceDate ?? "",
-      "ometer": data.ometer ?? "",
-      "service_date ": data.serviceDate ?? "",
-      "invoice_number": data.invoiceNumber ?? "",
-      "service_provided ": data.serviceProvided ?? "",
-      "hours": data.hours ?? "",
-      "l_cost": data.lCost ?? "",
-      "gst": data.gst ?? "",
-      "s_part": data.sPart ?? "",
-      "total_cost": data.totalCost ?? "",
-      "tab_type": data.tabType ?? "",
-    });
+    final result = await vehicleService.editMaintenanceReport(
+        vehicleId: vehicleId,
+        vehicleType: vehicleType,
+        data: {
+          "vehicle": "${data.vehicle ?? 0}",
+          "description": data.description ?? "",
+          "invoice_date": data.invoiceDate ?? "",
+          "ometer": data.ometer ?? "",
+          "service_date ": data.serviceDate ?? "",
+          "invoice_number": data.invoiceNumber ?? "",
+          "service_provided ": data.serviceProvided ?? "",
+          "hours": data.hours ?? "",
+          "l_cost": data.lCost ?? "",
+          "gst": data.gst ?? "",
+          "s_part": data.sPart ?? "",
+          "total_cost": data.totalCost ?? "",
+          "tab_type": data.tabType ?? "",
+        });
     return result.fold(
       (l) {
         editedMaintenanceResponse =
@@ -847,6 +895,41 @@ abstract class VehicleViewModelBase with Store {
       (r) {
         editedMaintenanceResponse = editedMaintenanceResponse.copyWith(
             data: r, errors: null, loading: false);
+        if (vehicleType == VehicleType.truck) {
+          masterTruckApi();
+        } else if (vehicleType == VehicleType.car) {
+          masterCarApi();
+        } else if (vehicleType == VehicleType.semiTrailer) {
+          semiTrailorApi();
+        }
+
+        context.router.pop();
+      },
+    );
+  }
+
+  @observable
+  ApiResponse<String> addMaintenanceResponse = ApiResponse<String>();
+  @action
+  Future<void> addMaintenanceReportApi(
+      {required BuildContext context,
+      required VehicleModel data,
+      required List<String> pickedFiles}) async {
+    addMaintenanceResponse =
+        addMaintenanceResponse.copyWith(errors: null, loading: true);
+
+    final result = await vehicleService.addMaintenanceReport(
+        vehicleType: vehicleType, data: data, pickedFiles: pickedFiles);
+    return result.fold(
+      (l) {
+        addMaintenanceResponse =
+            addMaintenanceResponse.copyWith(errors: l, loading: false);
+        popupErrorData(context, mainFailure: l);
+      },
+      (r) {
+        addMaintenanceResponse = addMaintenanceResponse.copyWith(
+            data: r, errors: null, loading: false);
+        clearFn();
         if (vehicleType == VehicleType.truck) {
           masterTruckApi();
         } else if (vehicleType == VehicleType.car) {
@@ -877,6 +960,7 @@ abstract class VehicleViewModelBase with Store {
           errors: l,
           loading: false,
         );
+        popupErrorData(context, mainFailure: l);
       },
       (r) async {
         if (vehicleType == VehicleType.truck) {
@@ -886,7 +970,143 @@ abstract class VehicleViewModelBase with Store {
         } else if (vehicleType == VehicleType.semiTrailer) {
           semiTrailorApi();
         }
-        deleteMaintenanceResponse = addVehicleFileResponse.copyWith(
+        deleteMaintenanceResponse = deleteMaintenanceResponse.copyWith(
+          data: r,
+          error: null,
+          loading: false,
+        );
+      },
+    );
+  }
+
+  @observable
+  ApiResponse<String> addFuelExpenseResponse = ApiResponse<String>();
+  @action
+  Future<void> addFuelExpenseApi({
+    required BuildContext context,
+    required VehicleModel data,
+  }) async {
+    addFuelExpenseResponse =
+        addFuelExpenseResponse.copyWith(errors: null, loading: true);
+
+    final result = await vehicleService.addFuelExpense(data: {
+      "vehicle": "${data.vehicle}",
+      "date": data.date ?? "",
+      "time": data.time ?? "",
+      "truck_rego": data.truckRego ?? "",
+      "current_reading_before": data.currentReadingBefore ?? "",
+      "reading_after_filling": data.readingAfterFilling ?? "",
+      "filled_by": data.filledBy ?? "",
+      "volume_usedIn_liter": data.volumeUsedInLiter ?? "",
+      "tab_type": data.tabType ?? "",
+      "vehicle_type": vehicleType == VehicleType.truck
+          ? "truck"
+          : vehicleType == VehicleType.car
+              ? "car"
+              : "fork-lift",
+    });
+    return result.fold(
+      (l) {
+        addFuelExpenseResponse =
+            addFuelExpenseResponse.copyWith(errors: l, loading: false);
+        popupErrorData(context, mainFailure: l);
+      },
+      (r) {
+        addFuelExpenseResponse = addFuelExpenseResponse.copyWith(
+            data: r, errors: null, loading: false);
+        clearFn2();
+        if (vehicleType == VehicleType.truck) {
+          masterTruckApi();
+        } else if (vehicleType == VehicleType.car) {
+          masterCarApi();
+        } else if (vehicleType == VehicleType.semiTrailer) {
+          semiTrailorApi();
+        }
+
+        context.router.pop();
+      },
+    );
+  }
+
+  @observable
+  ApiResponse<VehicleModel> editeFuelExpenseResponse =
+      ApiResponse<VehicleModel>();
+  @action
+  Future<void> editeFuelExpenseApi({
+    required BuildContext context,
+    required int vehicleId,
+    required VehicleModel data,
+  }) async {
+    editeFuelExpenseResponse =
+        editeFuelExpenseResponse.copyWith(errors: null, loading: true);
+
+    final result = await vehicleService
+        .editFuelExpense(vehicleId: vehicleId, vehicleType: vehicleType, data: {
+      "vehicle": "${data.vehicle}",
+      "date": data.date ?? "",
+      "time": data.time ?? "",
+      "truck_rego": data.truckRego ?? "",
+      "current_reading_before": data.currentReadingBefore ?? "",
+      "reading_after_filling": data.readingAfterFilling ?? "",
+      "filled_by": data.filledBy ?? "",
+      "volume_usedIn_liter": data.volumeUsedInLiter ?? "",
+      "vehicle_type": vehicleType == VehicleType.truck
+          ? "truck"
+          : vehicleType == VehicleType.car
+              ? "car"
+              : "fork-lift",
+    });
+    return result.fold(
+      (l) {
+        editeFuelExpenseResponse =
+            editeFuelExpenseResponse.copyWith(errors: l, loading: false);
+        popupErrorData(context, mainFailure: l);
+      },
+      (r) {
+        editeFuelExpenseResponse = editeFuelExpenseResponse.copyWith(
+            data: r, errors: null, loading: false);
+        if (vehicleType == VehicleType.truck) {
+          masterTruckApi();
+        } else if (vehicleType == VehicleType.car) {
+          masterCarApi();
+        } else if (vehicleType == VehicleType.semiTrailer) {
+          semiTrailorApi();
+        }
+
+        context.router.pop();
+      },
+    );
+  }
+
+  @observable
+  ApiResponse<String> deleteFuelExpenseResponse = ApiResponse<String>();
+  @action
+  Future<void> deleteFuelExpenseApi({
+    required BuildContext context,
+    required int vehicleId,
+  }) async {
+    deleteFuelExpenseResponse =
+        deleteFuelExpenseResponse.copyWith(error: null, loading: true);
+    final result = await vehicleService.deleteFuelExpense(
+        vehicleId: vehicleId, vehicleType: vehicleType);
+
+    return result.fold(
+      (l) {
+        deleteFuelExpenseResponse = deleteFuelExpenseResponse.copyWith(
+          errors: l,
+          loading: false,
+        );
+        popupErrorData(context, mainFailure: l);
+      },
+      (r) async {
+        if (vehicleType == VehicleType.truck) {
+          masterTruckApi();
+        } else if (vehicleType == VehicleType.car) {
+          masterCarApi();
+        } else if (vehicleType == VehicleType.semiTrailer) {
+          semiTrailorApi();
+        }
+        deleteFuelExpenseResponse = deleteFuelExpenseResponse.copyWith(
           data: r,
           error: null,
           loading: false,
@@ -943,6 +1163,17 @@ abstract class VehicleViewModelBase with Store {
   }
 
   @action
+  cmAddFunction2(
+    VehicleModel? data,
+  ) {
+    regoCntrlr.text = data?.truckRego ?? "";
+    filledByCntrlr.text = data?.filledBy ?? "";
+    currentReadingCntrlr.text = data?.currentReadingBefore ?? "";
+    readingAfterCntrlr.text = data?.readingAfterFilling ?? "";
+    volumeCntrlr.text = data?.volumeUsedInLiter ?? "";
+  }
+
+  @action
   datePickerFn(date) {
     selectedInvoiceDate = date;
   }
@@ -950,5 +1181,101 @@ abstract class VehicleViewModelBase with Store {
   @action
   datePickerFn2(date) {
     selectedServiceDate = date;
+  }
+
+  @action
+  datePickerFn3(date) {
+    selectedInvoiceDateAddMaintenance = date;
+  }
+
+  @action
+  datePickerFn4(date) {
+    selectedServiceDateAddMaintenance = date;
+  }
+
+  @action
+  datePickerFn5(date) {
+    selectedFuelExpenseDate = date;
+  }
+
+  @action
+  timePickerFn(time) {
+    selectedFuelExpenseTime = time;
+  }
+
+  @action
+  cmVehicleDropdownFn(newValue) {
+    selectedVehiclee = newValue;
+    selectedVehicleeId = selectedVehiclee?.id;
+  }
+
+  @action
+  cmVehicleDropdownFn2(newValue) {
+    selectedVehicleAddMaintenance = newValue;
+    selectedVehicleAddMaintenanceId = selectedVehicleAddMaintenance?.id;
+  }
+
+  @action
+  Future<void> pickFilefromphone() async {
+    var pic = await FilePicker.platform.pickFiles(
+        allowMultiple: true,
+        type: FileType.custom,
+        allowedExtensions: ['jpg', 'pdf', 'doc']);
+    if (pic != null) {
+      var filePaths =
+          pic.files.map((file) => file.path).whereType<String>().toList();
+      pickedFileList?.addAll(filePaths);
+    }
+  }
+
+  @action
+  showSubmitButtonFn() {
+    if (descriptionCntrlr.text != "" &&
+        serviceProvidedCntrlr.text != "" &&
+        selectedInvoiceDateAddMaintenance != null &&
+        selectedServiceDateAddMaintenance != null &&
+        ometerCntrlr.text != "" &&
+        invoiceNoCntrlr.text != "" &&
+        hoursCntrlr.text != "" &&
+        labourCostCntrlr.text != "" &&
+        sparePartsCntrlr.text != "" &&
+        gstCntrlr.text != "" &&
+        totalCostCntrlr.text != "") {
+      showSubmitBn = true;
+    } else {
+      showSubmitBn = false;
+    }
+  }
+
+  @action
+  clearFn() {
+    selectedVehicleAddMaintenanceId = null;
+    selectedVehicleeId = null;
+    descriptionCntrlr.clear();
+    serviceProvidedCntrlr.clear();
+    ometerCntrlr.clear();
+    invoiceNoCntrlr.clear();
+    hoursCntrlr.clear();
+    labourCostCntrlr.clear();
+    sparePartsCntrlr.clear();
+    gstCntrlr.clear();
+    labourCostCntrlr.clear();
+    totalCostCntrlr.clear();
+    selectedInvoiceDateAddMaintenance = null;
+    selectedServiceDateAddMaintenance = null;
+    pickedFileList = ObservableList<String>();
+  }
+
+  @action
+  clearFn2() {
+    selectedVehicleAddMaintenanceId = null;
+    selectedVehicleeId = null;
+    regoCntrlr.clear();
+    filledByCntrlr.clear();
+    currentReadingCntrlr.clear();
+    readingAfterCntrlr.clear();
+    volumeCntrlr.clear();
+    selectedFuelExpenseDate = null;
+    selectedFuelExpenseTime = null;
   }
 }

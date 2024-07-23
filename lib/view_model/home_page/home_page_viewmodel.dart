@@ -30,7 +30,7 @@ abstract class HomeViewModelBase with Store {
   }
 
   @observable
-  ApiResponse permissionsResponse = ApiResponse<HomeRespModel>();
+  ApiResponse<HomeRespModel> permissionsResponse = ApiResponse<HomeRespModel>();
 
   @action
   Future<void> permissionsApi() async {

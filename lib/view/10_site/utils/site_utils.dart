@@ -21,10 +21,13 @@ SiteType getSiteType(int tab) {
 }
 
 dynamic onChanged(String v) {
-  customPrint(content: v);
-
-  vmSite.onTextChanged(
-      () => vmSite.searchSites(key: v, type: getSiteType(vmSite.selectedTab)));
+  vmSite.onTextChanged(() => (v.isEmpty)
+      ? (vmSite.selectedTab == 0
+          ? vmSite.getPermanentSites()
+          : vmSite.selectedTab == 1
+              ? vmSite.getTemporarySites()
+              : vmSite.getDeletedSites())
+      : vmSite.searchSites(key: v, type: getSiteType(vmSite.selectedTab)));
 }
 
 void navigateToSiteDetailScreen({
@@ -42,7 +45,7 @@ void navigateToSiteDetailScreen({
       )
       ..selectedWasteTypeModel = null
       ..getWasteTypesInSite(id: siteId)
-      ..getSiteFolders(id: siteId);
+      ..getSiteFolderss(id: siteId, parentFolderId: 1);
     vmPreviousSale.getPreviousSales(siteId: siteId);
     context.router.push(
       SiteDetailRoute(index: index, type: siteType ?? SiteType.permananet),

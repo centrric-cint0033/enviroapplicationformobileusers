@@ -45,13 +45,13 @@ mixin _$HomeViewModel on HomeViewModelBase, Store {
       Atom(name: 'HomeViewModelBase.permissionsResponse', context: context);
 
   @override
-  ApiResponse<dynamic> get permissionsResponse {
+  ApiResponse<HomeRespModel> get permissionsResponse {
     _$permissionsResponseAtom.reportRead();
     return super.permissionsResponse;
   }
 
   @override
-  set permissionsResponse(ApiResponse<dynamic> value) {
+  set permissionsResponse(ApiResponse<HomeRespModel> value) {
     _$permissionsResponseAtom.reportWrite(value, super.permissionsResponse, () {
       super.permissionsResponse = value;
     });

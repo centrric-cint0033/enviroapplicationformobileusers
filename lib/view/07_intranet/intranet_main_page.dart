@@ -91,7 +91,6 @@ class IntranetMainPage extends StatelessWidget {
                                     vmIntranet.parentFolderId = data.id ?? 1;
                                     vmIntranet.searchType =
                                         folderList.folders?[0].type;
-                                    vmIntranet.folderSearchCntrlr.text = "";
                                     vmIntranet.fileFolderSearchCntrlr.text = "";
                                     context.router.push(
                                         IntranetFolderDetailRoute(

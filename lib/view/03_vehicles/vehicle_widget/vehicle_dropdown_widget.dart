@@ -8,8 +8,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 // ignore: must_be_immutable
 class VehicleListDropDown extends StatelessWidget {
   final VehicleModel? vehicle;
-
-  const VehicleListDropDown({super.key, required this.vehicle});
+  final bool? fromAddMaintenance;
+  const VehicleListDropDown(
+      {super.key, this.vehicle, this.fromAddMaintenance = false});
 
   @override
   Widget build(BuildContext context) {
@@ -17,12 +18,16 @@ class VehicleListDropDown extends StatelessWidget {
     return Observer(
       builder: (context) {
         final res = vmVehicle.vehicleListResponse;
+
         List<VehicleModel>? vehicles = res.data;
         vmVehicle.selectedVehiclee = vehicles?.firstWhere(
           (vehiclee) => vehiclee.registration == vehicle?.registration,
           orElse: () => VehicleModel(registration: ""),
         );
-
+        vmVehicle.selectedVehicleAddMaintenance = vehicles?.firstWhere(
+          (vehiclee) => vehiclee.registration == vehicles[0].registration,
+          orElse: () => VehicleModel(registration: ""),
+        );
         return res.loading
             ? const CupertinoActivityIndicator()
             : DropdownButtonFormField<VehicleModel>(
@@ -39,9 +44,13 @@ class VehicleListDropDown extends StatelessWidget {
                   },
                 ).toList(),
                 isExpanded: true,
-                value: vmVehicle.selectedVehiclee,
+                value: fromAddMaintenance == true
+                    ? vmVehicle.selectedVehicleAddMaintenance
+                    : vmVehicle.selectedVehiclee,
                 onChanged: (newValue) {
-                  vmVehicle.selectedVehiclee = newValue;
+                  fromAddMaintenance == true
+                      ? vmVehicle.cmVehicleDropdownFn2(newValue)
+                      : vmVehicle.cmVehicleDropdownFn(newValue);
                 },
                 // value: selectedTax,
                 decoration: const InputDecoration.collapsed(hintText: ''),

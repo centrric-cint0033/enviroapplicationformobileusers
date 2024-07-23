@@ -21,7 +21,7 @@ class PreviouseSalesWidget extends StatelessWidget {
             "Previous Sales",
             textAlign: TextAlign.left,
             style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                  fontSize: 12.sp,
+                  fontSize: 11.sp,
                   color: Colors.black,
                   fontWeight: FontWeight.normal,
                 ),
@@ -36,10 +36,10 @@ class PreviouseSalesWidget extends StatelessWidget {
                 menuMaxHeight: 250.h,
                 value: vmSite.selectedWasteTypeModel,
                 hint: Text(
-                  "Select",
+                  "All",
                   style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                        fontSize: 12.sp,
-                        color: Colors.grey,
+                        fontSize: 10.sp,
+                        color: Colors.black,
                         fontWeight: FontWeight.normal,
                       ),
                 ),
@@ -49,7 +49,7 @@ class PreviouseSalesWidget extends StatelessWidget {
                     child: Text(
                       value.originalName ?? "",
                       style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                            fontSize: 12.sp,
+                            fontSize: 10.sp,
                             color: Colors.black,
                             fontWeight: FontWeight.normal,
                           ),

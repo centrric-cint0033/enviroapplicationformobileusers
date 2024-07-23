@@ -1,10 +1,10 @@
+import 'package:enviro_mobile_application/widgets/cm_title.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:enviro_mobile_application/utilis/constant.dart';
-import 'package:enviro_mobile_application/utilis/Appthemes.dart';
 import 'package:enviro_mobile_application/view_model/10_site/site_view_model.dart';
 import 'package:enviro_mobile_application/model/10_site/site_res_model/site_res_model.dart';
 
@@ -43,7 +43,8 @@ class SiteDetailScreen extends StatelessWidget {
               SizedBox(width: 5.w),
             ],
           ),
-          body: SafeArea(
+          body: Padding(
+            padding: screenWidth,
             child: SingleChildScrollView(
               controller: vmPreviousSale.previousSaleController,
               child: Column(
@@ -76,20 +77,8 @@ class SiteDetailScreen extends StatelessWidget {
                     ),
                   },
                   sized0hx10,
-                  Container(
-                    height: 35.h,
-                    width: double.infinity,
-                    alignment: Alignment.centerLeft,
-                    color: Appthemes.themeData.dividerColor,
-                    padding: EdgeInsets.only(left: 10.w),
-                    child: Text(
-                      "Company and Invoicing Details",
-                      style: Theme.of(context)
-                          .textTheme
-                          .titleMedium
-                          ?.copyWith(fontSize: 13.sp),
-                    ),
-                  ),
+                  cmTitle("Company and Invoicing Details",
+                      blackText: true, fontWeight: FontWeight.bold),
                   for (MapEntry<String, String> data in company.entries) ...{
                     Padding(
                       padding: EdgeInsets.symmetric(
@@ -109,7 +98,7 @@ class SiteDetailScreen extends StatelessWidget {
                   },
                   FolderTitleAndSearchWidget(id: site.id),
                   SiteFolderListWidget(
-                      folderData: vmSite.siteFolderResponse, id: site.id),
+                    id: site.id),
                   sized0hx10,
                   const PreviouseSalesWidget(),
                 ],
@@ -140,19 +129,19 @@ Map<String, String> _getSiteMap(SiteResModel site) => {
       "Site Email": site.clientEmail ?? "",
       "Site Address": site.siteAddress ?? "",
       "Site Postcode": site.sitePostCode ?? "",
-      "Site Contact": site.siteContactMob ?? "",
+      "Site Contact": site.siteContactPerson ?? "",
       "Site Phone": site.sitePhoneNo ?? "",
       "Site Mobile No": site.siteContactMob ?? "",
       "Induction Required": site.inductionRequiredStr ?? "",
-      "Induction Type": site.industryType?.toString() ?? "",
-      "ABN Number": site.abn ?? "",
+      "Induction Type": site.inductionType ?? "",
+      "ABN Number": site.abn ?? "ABN Number",
     };
 Map<String, String> _getEntityMap(SiteResModel site) => {
       "Entity Name": site.companyName ?? "",
       "Entity Address": site.companyAddress ?? "",
       "Entity Phone Number": site.companyLandlineNumber ?? "",
       "Entity Email": site.companyEmail ?? "",
-      "Entity Postcode": site.companyPostcode ?? "",
+      "Entity Postcode": site.sitePostCode ?? "",
       "Term of account": site.invoiceTermsOfAccount ?? "",
       "Account Status": site.accountStatus ?? "",
       "Reason For Cancelling": site.reasonForCancelling ?? "",

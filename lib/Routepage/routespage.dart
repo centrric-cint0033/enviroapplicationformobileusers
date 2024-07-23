@@ -25,6 +25,7 @@ class RouteNames {
   static const String employeeFilesScreen = '/employeefilesscreen';
   static const String siteListPage = '/site_list_page';
   static const String siteDetailPage = '/site_detail_page';
+   static const String siteFolderDetailPage = '/site_folder_detail_page';
   static const String rintranetinsidepage = '/intranetinsidepage';
   static const String drawerpage = '/drawerpage';
   static const String rprofilepage = '/profilepage';
@@ -49,4 +50,8 @@ class RouteNames {
   static const String vehicleFolderDetailPage = '/vehicle_folder_detail_page ';
   static const String editMaintenanceReportPage =
       '/edit_maintenance_report_page ';
+  static const String addMaintenanceReportPage =
+      '/add_maintenance_report_page ';
+  static const String editFuelExpensePage = '/edit_fuel_expense_page ';
+    static const String addFuelExpensePage = '/add_fuel_expense_page ';
 }

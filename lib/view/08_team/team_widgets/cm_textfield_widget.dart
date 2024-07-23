@@ -23,7 +23,8 @@ Widget cmTextFormField(
                 borderSide: BorderSide(color: Colors.grey.shade600)))
         : InputDecoration(
             hintText: hintText,
-            hintStyle: hintStyle,
+            hintStyle:
+                hintStyle ?? TextStyle(fontSize: 10.sp, color: Colors.grey),
             border: InputBorder.none,
           ),
     onChanged: (value) {

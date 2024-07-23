@@ -5,6 +5,7 @@ import 'package:enviro_mobile_application/utilis/constant.dart';
 import 'package:enviro_mobile_application/view/02_sales/sales_widgets.dart/sales_widget.dart';
 import 'package:enviro_mobile_application/view_model/03_vehicles/vehicle_view_model.dart';
 import 'package:enviro_mobile_application/widgets/cmbutton.dart';
+import 'package:enviro_mobile_application/widgets/show_confirmation_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
@@ -38,7 +39,9 @@ Widget showData(
     VehicleModel? data,
     VehicleActionType? status,
     bool fromPreInspection = false,
-    void Function()? folderOnPressed}) {
+    void Function()? folderOnPressed,
+    required dynamic Function() editOntapMaintenance,
+    required dynamic Function() editOntapFuelExpense}) {
   return Container(
     decoration: BoxDecoration(
         border: Border.all(color: Appthemes.cPrimary),
@@ -61,25 +64,25 @@ Widget showData(
           ),
         if (vmVehicle.vehicleStatusType == VehicleActionType.vehicleList) ...[
           sized0hx05,
-          expandedRowShowText('Registration no', data!.registration ?? ""),
+          expandedRowShowText('Registration no', data?.registration ?? ""),
           sized0hx05,
           expandedRowShowText(
-              'RegoDue', DateFormat.yMMMMd().format(data.editedDateTime!)),
+              'RegoDue', DateFormat.yMMMMd().format(data!.editedDateTime!)),
           sized0hx05,
           expandedRowShowText('Type', data.types ?? ""),
           sized0hx05,
-          expandedRowShowText('Year', '${data.year}')
+          expandedRowShowText('Year', '${data.year ?? ""}')
         ] else if (vmVehicle.vehicleStatusType ==
             VehicleActionType.preInspectionCheck) ...[
-          expandedRowShowText('Registration no', data!.registration ?? ""),
+          expandedRowShowText('Registration no', data?.registration ?? ""),
           sized0hx05,
-          expandedRowShowText('Driver name', '${data.driverName}'),
+          expandedRowShowText('Driver name', '${data?.driverName}'),
           sized0hx05,
-          if (data.dateTime != null)
+          if (data?.dateTime != null)
             expandedRowShowText(
-                'Date', DateFormat('dd-MM-yyyy').format(data.dateTime!)),
+                'Date', DateFormat('dd-MM-yyyy').format(data!.dateTime!)),
           sized0hx05,
-          expandedRowShowText('Odometer', '${data.odometer}'),
+          expandedRowShowText('Odometer', '${data?.odometer ?? ""}'),
         ] else if (vmVehicle.vehicleStatusType ==
             VehicleActionType.maintenanceCheck) ...[
           sized0hx05,
@@ -91,29 +94,36 @@ Widget showData(
           sized0hx05,
           expandedRowShowText('Invoice Date', data.invoiceDate ?? ""),
           sized0hx05,
-          expandedRowShowText('Service Date', '${data.serviceDate}'),
+          expandedRowShowText('Service Date', data.serviceDate ?? ""),
           sized0hx05,
-          expandedRowShowText('Ometer', '${data.ometer}'),
+          expandedRowShowText('Ometer', data.ometer ?? ""),
           sized0hx05,
-          expandedRowShowText('Invoice No', '${data.invoiceNumber}'),
+          expandedRowShowText('Invoice No', data.invoiceNumber ?? ""),
           sized0hx05,
-          expandedRowShowText('Hours', '${data.hours}'),
+          expandedRowShowText('Hours', data.hours ?? ""),
           sized0hx05,
-          expandedRowShowText('Labour Cost', '${data.lCost}'),
+          expandedRowShowText('Labour Cost', data.lCost ?? ""),
           sized0hx05,
-          expandedRowShowText('Spare Parts', '${data.sPart}'),
+          expandedRowShowText('Spare Parts', data.sPart ?? ""),
           sized0hx05,
-          expandedRowShowText('GST', '${data.gst}'),
+          expandedRowShowText('GST', data.gst ?? ""),
           sized0hx05,
-          expandedRowShowText('Total Cost', '${data.totalCost}'),
+          expandedRowShowText('Total Cost', data.totalCost ?? ""),
           sized0hx05,
           rowButton(
-              editOntap: () {},
+              editOntap: editOntapMaintenance,
               deleteOntap: () {
-                vmVehicle.deleteMaintenanceReportApi(
-                  context: context,
-                  vehicleId: data.id ?? 0,
-                );
+                showConfirmationAlert(
+                    context: context,
+                    content: "Do you really want to delete these data?",
+                    submitText: "Yes",
+                    submitText2: "No",
+                    onSubmit: () {
+                      vmVehicle.deleteMaintenanceReportApi(
+                        context: context,
+                        vehicleId: data.id ?? 0,
+                      );
+                    });
               })
         ] else if (vmVehicle.vehicleStatusType ==
             VehicleActionType.fuelExpence) ...[
@@ -124,7 +134,13 @@ Widget showData(
           sized0hx05,
           expandedRowShowText('Time', data.time ?? ""),
           sized0hx05,
-          expandedRowShowText('Truck Rego', data.truckRego ?? ""),
+          expandedRowShowText(
+              vmVehicle.vehicleType == VehicleType.truck
+                  ? 'Truck Rego'
+                  : vmVehicle.vehicleType == VehicleType.car
+                      ? 'Car Rego'
+                      : 'Forklift Rego',
+              data.truckRego ?? ""),
           sized0hx05,
           expandedRowShowText('Filled By', data.filledBy ?? " "),
           sized0hx05,
@@ -135,6 +151,21 @@ Widget showData(
           sized0hx05,
           expandedRowShowText(
               'Volume used in Litres', data.volumeUsedInLiter ?? ""),
+          rowButton(
+              editOntap: editOntapFuelExpense,
+              deleteOntap: () {
+                showConfirmationAlert(
+                    context: context,
+                    content: "Do you really want to delete these data?",
+                    submitText: "Yes",
+                    submitText2: "No",
+                    onSubmit: () {
+                      vmVehicle.deleteFuelExpenseApi(
+                        context: context,
+                        vehicleId: data.id ?? 0,
+                      );
+                    });
+              })
         ],
         // if (data?.registration != null) ...[
         //   sized0hx05,
@@ -202,10 +233,6 @@ Widget showData(
         //   sized0hx05,
         //   expandedRowShowText('Reading After', '${data?.volumeUsedInLiter}')
         // ],
-        if (vmVehicle.vehicleStatusType == VehicleActionType.fuelExpence) ...[
-          sized0hx05,
-          rowButton(editOntap: () {}, deleteOntap: () {})
-        ],
         sized0hx10,
       ]),
     ),

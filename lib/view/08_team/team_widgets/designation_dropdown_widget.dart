@@ -25,7 +25,7 @@ class DesignationDownWidget extends StatelessWidget {
             orElse: () => Designation(userType: ""),
           );
           vmTeam.selectedDesignationAddTeam = designations.firstWhere(
-            (designation) => designation.userType == "accounts-manager",
+            (designation) => designation.userType == designations[0].userType,
             orElse: () => Designation(userType: ""),
           );
 

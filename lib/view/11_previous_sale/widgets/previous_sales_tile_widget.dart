@@ -13,7 +13,7 @@ class PreviousSalesTileWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final style = Theme.of(context).textTheme.bodyMedium?.copyWith(
-          fontSize: 12.sp,
+          fontSize: 10.sp,
           color: Colors.black45,
           fontWeight: FontWeight.normal,
         );

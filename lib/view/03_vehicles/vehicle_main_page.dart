@@ -35,16 +35,19 @@ class VehiclePage extends StatelessWidget {
         case 0:
           VehicleType.truck;
           vmVehicle.vehicleType = VehicleType.truck;
+          vmVehicle.selectedVehicleAddMaintenanceId = null;
           vmVehicle.masterTruckApi();
           break;
         case 1:
           VehicleType.car;
           vmVehicle.vehicleType = VehicleType.car;
+          vmVehicle.selectedVehicleAddMaintenanceId = null;
           vmVehicle.masterCarApi();
           break;
         case 2:
           VehicleType.semiTrailer;
           vmVehicle.vehicleType = VehicleType.semiTrailer;
+          vmVehicle.selectedVehicleAddMaintenanceId = null;
           vmVehicle.semiTrailorApi();
         default:
       }

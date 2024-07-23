@@ -3,7 +3,6 @@ import 'package:enviro_mobile_application/view/10_site/site_tab_screens/01_peman
 import 'package:enviro_mobile_application/view/10_site/site_tab_screens/02_temporary_sites_tab.dart';
 import 'package:enviro_mobile_application/view/10_site/site_tab_screens/03_deleted_sites_tab.dart';
 import 'package:enviro_mobile_application/view/10_site/utils/site_utils.dart';
-import 'package:enviro_mobile_application/view/10_site/widgets/01_site_widgets.dart';
 import 'package:enviro_mobile_application/widgets/common_tababr.dart';
 import 'package:enviro_mobile_application/widgets/ww_search_widget.dart';
 import 'package:flutter/material.dart';
@@ -47,12 +46,11 @@ class SiteMainScreen extends StatelessWidget {
                   value3: 'Deleted',
                   onTap: (i) => vmSite.selectedTab = i,
                 ),
-                gapFieldSite,
+                sized0hx05,
                 WWTextField(
                   controller: vmSite.searchCtr,
                   hintText: "Search Site by Name",
                   onChanged: onChanged,
-                  suffixTap: () {},
                 ),
                 const Expanded(
                   child: TabBarView(

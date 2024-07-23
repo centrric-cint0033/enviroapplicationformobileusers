@@ -250,6 +250,58 @@ mixin _$VehicleViewModel on VehicleViewModelBase, Store {
     });
   }
 
+  late final _$selectedVehicleeIdAtom =
+      Atom(name: 'VehicleViewModelBase.selectedVehicleeId', context: context);
+
+  @override
+  int? get selectedVehicleeId {
+    _$selectedVehicleeIdAtom.reportRead();
+    return super.selectedVehicleeId;
+  }
+
+  @override
+  set selectedVehicleeId(int? value) {
+    _$selectedVehicleeIdAtom.reportWrite(value, super.selectedVehicleeId, () {
+      super.selectedVehicleeId = value;
+    });
+  }
+
+  late final _$selectedVehicleAddMaintenanceAtom = Atom(
+      name: 'VehicleViewModelBase.selectedVehicleAddMaintenance',
+      context: context);
+
+  @override
+  VehicleModel? get selectedVehicleAddMaintenance {
+    _$selectedVehicleAddMaintenanceAtom.reportRead();
+    return super.selectedVehicleAddMaintenance;
+  }
+
+  @override
+  set selectedVehicleAddMaintenance(VehicleModel? value) {
+    _$selectedVehicleAddMaintenanceAtom
+        .reportWrite(value, super.selectedVehicleAddMaintenance, () {
+      super.selectedVehicleAddMaintenance = value;
+    });
+  }
+
+  late final _$selectedVehicleAddMaintenanceIdAtom = Atom(
+      name: 'VehicleViewModelBase.selectedVehicleAddMaintenanceId',
+      context: context);
+
+  @override
+  int? get selectedVehicleAddMaintenanceId {
+    _$selectedVehicleAddMaintenanceIdAtom.reportRead();
+    return super.selectedVehicleAddMaintenanceId;
+  }
+
+  @override
+  set selectedVehicleAddMaintenanceId(int? value) {
+    _$selectedVehicleAddMaintenanceIdAtom
+        .reportWrite(value, super.selectedVehicleAddMaintenanceId, () {
+      super.selectedVehicleAddMaintenanceId = value;
+    });
+  }
+
   late final _$selectedInvoiceDateAtom =
       Atom(name: 'VehicleViewModelBase.selectedInvoiceDate', context: context);
 
@@ -279,6 +331,108 @@ mixin _$VehicleViewModel on VehicleViewModelBase, Store {
   set selectedServiceDate(DateTime? value) {
     _$selectedServiceDateAtom.reportWrite(value, super.selectedServiceDate, () {
       super.selectedServiceDate = value;
+    });
+  }
+
+  late final _$selectedInvoiceDateAddMaintenanceAtom = Atom(
+      name: 'VehicleViewModelBase.selectedInvoiceDateAddMaintenance',
+      context: context);
+
+  @override
+  DateTime? get selectedInvoiceDateAddMaintenance {
+    _$selectedInvoiceDateAddMaintenanceAtom.reportRead();
+    return super.selectedInvoiceDateAddMaintenance;
+  }
+
+  @override
+  set selectedInvoiceDateAddMaintenance(DateTime? value) {
+    _$selectedInvoiceDateAddMaintenanceAtom
+        .reportWrite(value, super.selectedInvoiceDateAddMaintenance, () {
+      super.selectedInvoiceDateAddMaintenance = value;
+    });
+  }
+
+  late final _$selectedServiceDateAddMaintenanceAtom = Atom(
+      name: 'VehicleViewModelBase.selectedServiceDateAddMaintenance',
+      context: context);
+
+  @override
+  DateTime? get selectedServiceDateAddMaintenance {
+    _$selectedServiceDateAddMaintenanceAtom.reportRead();
+    return super.selectedServiceDateAddMaintenance;
+  }
+
+  @override
+  set selectedServiceDateAddMaintenance(DateTime? value) {
+    _$selectedServiceDateAddMaintenanceAtom
+        .reportWrite(value, super.selectedServiceDateAddMaintenance, () {
+      super.selectedServiceDateAddMaintenance = value;
+    });
+  }
+
+  late final _$showSubmitBnAtom =
+      Atom(name: 'VehicleViewModelBase.showSubmitBn', context: context);
+
+  @override
+  bool? get showSubmitBn {
+    _$showSubmitBnAtom.reportRead();
+    return super.showSubmitBn;
+  }
+
+  @override
+  set showSubmitBn(bool? value) {
+    _$showSubmitBnAtom.reportWrite(value, super.showSubmitBn, () {
+      super.showSubmitBn = value;
+    });
+  }
+
+  late final _$pickedFileListAtom =
+      Atom(name: 'VehicleViewModelBase.pickedFileList', context: context);
+
+  @override
+  ObservableList<String>? get pickedFileList {
+    _$pickedFileListAtom.reportRead();
+    return super.pickedFileList;
+  }
+
+  @override
+  set pickedFileList(ObservableList<String>? value) {
+    _$pickedFileListAtom.reportWrite(value, super.pickedFileList, () {
+      super.pickedFileList = value;
+    });
+  }
+
+  late final _$selectedFuelExpenseDateAtom = Atom(
+      name: 'VehicleViewModelBase.selectedFuelExpenseDate', context: context);
+
+  @override
+  DateTime? get selectedFuelExpenseDate {
+    _$selectedFuelExpenseDateAtom.reportRead();
+    return super.selectedFuelExpenseDate;
+  }
+
+  @override
+  set selectedFuelExpenseDate(DateTime? value) {
+    _$selectedFuelExpenseDateAtom
+        .reportWrite(value, super.selectedFuelExpenseDate, () {
+      super.selectedFuelExpenseDate = value;
+    });
+  }
+
+  late final _$selectedFuelExpenseTimeAtom = Atom(
+      name: 'VehicleViewModelBase.selectedFuelExpenseTime', context: context);
+
+  @override
+  TimeOfDay? get selectedFuelExpenseTime {
+    _$selectedFuelExpenseTimeAtom.reportRead();
+    return super.selectedFuelExpenseTime;
+  }
+
+  @override
+  set selectedFuelExpenseTime(TimeOfDay? value) {
+    _$selectedFuelExpenseTimeAtom
+        .reportWrite(value, super.selectedFuelExpenseTime, () {
+      super.selectedFuelExpenseTime = value;
     });
   }
 
@@ -501,6 +655,23 @@ mixin _$VehicleViewModel on VehicleViewModelBase, Store {
     });
   }
 
+  late final _$addMaintenanceResponseAtom = Atom(
+      name: 'VehicleViewModelBase.addMaintenanceResponse', context: context);
+
+  @override
+  ApiResponse<String> get addMaintenanceResponse {
+    _$addMaintenanceResponseAtom.reportRead();
+    return super.addMaintenanceResponse;
+  }
+
+  @override
+  set addMaintenanceResponse(ApiResponse<String> value) {
+    _$addMaintenanceResponseAtom
+        .reportWrite(value, super.addMaintenanceResponse, () {
+      super.addMaintenanceResponse = value;
+    });
+  }
+
   late final _$deleteMaintenanceResponseAtom = Atom(
       name: 'VehicleViewModelBase.deleteMaintenanceResponse', context: context);
 
@@ -515,6 +686,57 @@ mixin _$VehicleViewModel on VehicleViewModelBase, Store {
     _$deleteMaintenanceResponseAtom
         .reportWrite(value, super.deleteMaintenanceResponse, () {
       super.deleteMaintenanceResponse = value;
+    });
+  }
+
+  late final _$addFuelExpenseResponseAtom = Atom(
+      name: 'VehicleViewModelBase.addFuelExpenseResponse', context: context);
+
+  @override
+  ApiResponse<String> get addFuelExpenseResponse {
+    _$addFuelExpenseResponseAtom.reportRead();
+    return super.addFuelExpenseResponse;
+  }
+
+  @override
+  set addFuelExpenseResponse(ApiResponse<String> value) {
+    _$addFuelExpenseResponseAtom
+        .reportWrite(value, super.addFuelExpenseResponse, () {
+      super.addFuelExpenseResponse = value;
+    });
+  }
+
+  late final _$editeFuelExpenseResponseAtom = Atom(
+      name: 'VehicleViewModelBase.editeFuelExpenseResponse', context: context);
+
+  @override
+  ApiResponse<VehicleModel> get editeFuelExpenseResponse {
+    _$editeFuelExpenseResponseAtom.reportRead();
+    return super.editeFuelExpenseResponse;
+  }
+
+  @override
+  set editeFuelExpenseResponse(ApiResponse<VehicleModel> value) {
+    _$editeFuelExpenseResponseAtom
+        .reportWrite(value, super.editeFuelExpenseResponse, () {
+      super.editeFuelExpenseResponse = value;
+    });
+  }
+
+  late final _$deleteFuelExpenseResponseAtom = Atom(
+      name: 'VehicleViewModelBase.deleteFuelExpenseResponse', context: context);
+
+  @override
+  ApiResponse<String> get deleteFuelExpenseResponse {
+    _$deleteFuelExpenseResponseAtom.reportRead();
+    return super.deleteFuelExpenseResponse;
+  }
+
+  @override
+  set deleteFuelExpenseResponse(ApiResponse<String> value) {
+    _$deleteFuelExpenseResponseAtom
+        .reportWrite(value, super.deleteFuelExpenseResponse, () {
+      super.deleteFuelExpenseResponse = value;
     });
   }
 
@@ -786,10 +1008,14 @@ mixin _$VehicleViewModel on VehicleViewModelBase, Store {
 
   @override
   Future<void> getMaintenanceFoldersApi(
-      {required int vehicleId, required int parentFolderId}) {
+      {required BuildContext context,
+      required int vehicleId,
+      required int parentFolderId}) {
     return _$getMaintenanceFoldersApiAsyncAction.run(() => super
         .getMaintenanceFoldersApi(
-            vehicleId: vehicleId, parentFolderId: parentFolderId));
+            context: context,
+            vehicleId: vehicleId,
+            parentFolderId: parentFolderId));
   }
 
   late final _$getVehicleListApiAsyncAction =
@@ -814,6 +1040,20 @@ mixin _$VehicleViewModel on VehicleViewModelBase, Store {
             context: context, vehicleId: vehicleId, data: data));
   }
 
+  late final _$addMaintenanceReportApiAsyncAction = AsyncAction(
+      'VehicleViewModelBase.addMaintenanceReportApi',
+      context: context);
+
+  @override
+  Future<void> addMaintenanceReportApi(
+      {required BuildContext context,
+      required VehicleModel data,
+      required List<String> pickedFiles}) {
+    return _$addMaintenanceReportApiAsyncAction.run(() => super
+        .addMaintenanceReportApi(
+            context: context, data: data, pickedFiles: pickedFiles));
+  }
+
   late final _$deleteMaintenanceReportApiAsyncAction = AsyncAction(
       'VehicleViewModelBase.deleteMaintenanceReportApi',
       context: context);
@@ -823,6 +1063,47 @@ mixin _$VehicleViewModel on VehicleViewModelBase, Store {
       {required BuildContext context, required int vehicleId}) {
     return _$deleteMaintenanceReportApiAsyncAction.run(() => super
         .deleteMaintenanceReportApi(context: context, vehicleId: vehicleId));
+  }
+
+  late final _$addFuelExpenseApiAsyncAction =
+      AsyncAction('VehicleViewModelBase.addFuelExpenseApi', context: context);
+
+  @override
+  Future<void> addFuelExpenseApi(
+      {required BuildContext context, required VehicleModel data}) {
+    return _$addFuelExpenseApiAsyncAction
+        .run(() => super.addFuelExpenseApi(context: context, data: data));
+  }
+
+  late final _$editeFuelExpenseApiAsyncAction =
+      AsyncAction('VehicleViewModelBase.editeFuelExpenseApi', context: context);
+
+  @override
+  Future<void> editeFuelExpenseApi(
+      {required BuildContext context,
+      required int vehicleId,
+      required VehicleModel data}) {
+    return _$editeFuelExpenseApiAsyncAction.run(() => super.editeFuelExpenseApi(
+        context: context, vehicleId: vehicleId, data: data));
+  }
+
+  late final _$deleteFuelExpenseApiAsyncAction = AsyncAction(
+      'VehicleViewModelBase.deleteFuelExpenseApi',
+      context: context);
+
+  @override
+  Future<void> deleteFuelExpenseApi(
+      {required BuildContext context, required int vehicleId}) {
+    return _$deleteFuelExpenseApiAsyncAction.run(() =>
+        super.deleteFuelExpenseApi(context: context, vehicleId: vehicleId));
+  }
+
+  late final _$pickFilefromphoneAsyncAction =
+      AsyncAction('VehicleViewModelBase.pickFilefromphone', context: context);
+
+  @override
+  Future<void> pickFilefromphone() {
+    return _$pickFilefromphoneAsyncAction.run(() => super.pickFilefromphone());
   }
 
   late final _$VehicleViewModelBaseActionController =
@@ -888,6 +1169,17 @@ mixin _$VehicleViewModel on VehicleViewModelBase, Store {
   }
 
   @override
+  dynamic cmAddFunction2(VehicleModel? data) {
+    final _$actionInfo = _$VehicleViewModelBaseActionController.startAction(
+        name: 'VehicleViewModelBase.cmAddFunction2');
+    try {
+      return super.cmAddFunction2(data);
+    } finally {
+      _$VehicleViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   dynamic datePickerFn(dynamic date) {
     final _$actionInfo = _$VehicleViewModelBaseActionController.startAction(
         name: 'VehicleViewModelBase.datePickerFn');
@@ -904,6 +1196,105 @@ mixin _$VehicleViewModel on VehicleViewModelBase, Store {
         name: 'VehicleViewModelBase.datePickerFn2');
     try {
       return super.datePickerFn2(date);
+    } finally {
+      _$VehicleViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic datePickerFn3(dynamic date) {
+    final _$actionInfo = _$VehicleViewModelBaseActionController.startAction(
+        name: 'VehicleViewModelBase.datePickerFn3');
+    try {
+      return super.datePickerFn3(date);
+    } finally {
+      _$VehicleViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic datePickerFn4(dynamic date) {
+    final _$actionInfo = _$VehicleViewModelBaseActionController.startAction(
+        name: 'VehicleViewModelBase.datePickerFn4');
+    try {
+      return super.datePickerFn4(date);
+    } finally {
+      _$VehicleViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic datePickerFn5(dynamic date) {
+    final _$actionInfo = _$VehicleViewModelBaseActionController.startAction(
+        name: 'VehicleViewModelBase.datePickerFn5');
+    try {
+      return super.datePickerFn5(date);
+    } finally {
+      _$VehicleViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic timePickerFn(dynamic time) {
+    final _$actionInfo = _$VehicleViewModelBaseActionController.startAction(
+        name: 'VehicleViewModelBase.timePickerFn');
+    try {
+      return super.timePickerFn(time);
+    } finally {
+      _$VehicleViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic cmVehicleDropdownFn(dynamic newValue) {
+    final _$actionInfo = _$VehicleViewModelBaseActionController.startAction(
+        name: 'VehicleViewModelBase.cmVehicleDropdownFn');
+    try {
+      return super.cmVehicleDropdownFn(newValue);
+    } finally {
+      _$VehicleViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic cmVehicleDropdownFn2(dynamic newValue) {
+    final _$actionInfo = _$VehicleViewModelBaseActionController.startAction(
+        name: 'VehicleViewModelBase.cmVehicleDropdownFn2');
+    try {
+      return super.cmVehicleDropdownFn2(newValue);
+    } finally {
+      _$VehicleViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic showSubmitButtonFn() {
+    final _$actionInfo = _$VehicleViewModelBaseActionController.startAction(
+        name: 'VehicleViewModelBase.showSubmitButtonFn');
+    try {
+      return super.showSubmitButtonFn();
+    } finally {
+      _$VehicleViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic clearFn() {
+    final _$actionInfo = _$VehicleViewModelBaseActionController.startAction(
+        name: 'VehicleViewModelBase.clearFn');
+    try {
+      return super.clearFn();
+    } finally {
+      _$VehicleViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic clearFn2() {
+    final _$actionInfo = _$VehicleViewModelBaseActionController.startAction(
+        name: 'VehicleViewModelBase.clearFn2');
+    try {
+      return super.clearFn2();
     } finally {
       _$VehicleViewModelBaseActionController.endAction(_$actionInfo);
     }
@@ -927,8 +1318,17 @@ loadinIndexFolder: ${loadinIndexFolder},
 selectedExpiryDate: ${selectedExpiryDate},
 selectedVehicleDrodown: ${selectedVehicleDrodown},
 selectedVehiclee: ${selectedVehiclee},
+selectedVehicleeId: ${selectedVehicleeId},
+selectedVehicleAddMaintenance: ${selectedVehicleAddMaintenance},
+selectedVehicleAddMaintenanceId: ${selectedVehicleAddMaintenanceId},
 selectedInvoiceDate: ${selectedInvoiceDate},
 selectedServiceDate: ${selectedServiceDate},
+selectedInvoiceDateAddMaintenance: ${selectedInvoiceDateAddMaintenance},
+selectedServiceDateAddMaintenance: ${selectedServiceDateAddMaintenance},
+showSubmitBn: ${showSubmitBn},
+pickedFileList: ${pickedFileList},
+selectedFuelExpenseDate: ${selectedFuelExpenseDate},
+selectedFuelExpenseTime: ${selectedFuelExpenseTime},
 masterTruckApiResponse: ${masterTruckApiResponse},
 masterCarApiResponse: ${masterCarApiResponse},
 semiTrailorApiResponse: ${semiTrailorApiResponse},
@@ -942,7 +1342,11 @@ expiryFileResponse: ${expiryFileResponse},
 maintenanceFoldersResponse: ${maintenanceFoldersResponse},
 vehicleListResponse: ${vehicleListResponse},
 editedMaintenanceResponse: ${editedMaintenanceResponse},
+addMaintenanceResponse: ${addMaintenanceResponse},
 deleteMaintenanceResponse: ${deleteMaintenanceResponse},
+addFuelExpenseResponse: ${addFuelExpenseResponse},
+editeFuelExpenseResponse: ${editeFuelExpenseResponse},
+deleteFuelExpenseResponse: ${deleteFuelExpenseResponse},
 sstatus: ${sstatus},
 selectedTruckresponse: ${selectedTruckresponse}
     ''';

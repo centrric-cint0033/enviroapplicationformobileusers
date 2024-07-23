@@ -29,7 +29,7 @@ class ApiEndPoints
 
   //PERMISSIONS APIS
 
-  static const endPointpermissions = '/api/v1/permissions/all/';
+  static const endPointpermissions = '/api/v1/permissions/all/?platform=mobile';
 
   //
 

@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:enviro_mobile_application/utilis/api_endpoints/customprint.dart';
 import 'package:mobx/mobx.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +8,7 @@ import '../../utilis/injection.dart';
 import '../../api_response/api_response.dart';
 import '../../service/10_site/i_site_service.dart';
 import '../../model/10_site/site_res_model/site_res_model.dart';
-import '../../model/10_site/folder_res_model/folder_res_model.dart';
+import 'package:enviro_mobile_application/model/00_common_model/folder_model/folder_model.dart';
 import '../../model/02_sales/waste_type_model/waste_type_model.dart';
 
 part 'site_view_model.g.dart';
@@ -51,9 +50,9 @@ abstract class SiteViewModelBase with Store {
   ApiResponse<List<SiteResModel>> delSiteResponse =
       ApiResponse<List<SiteResModel>>();
 
-  @observable
-  ApiResponse<FolderResModel> siteFolderResponse =
-      ApiResponse<FolderResModel>();
+  // @observable
+  // ApiResponse<FolderResModel> siteFolderResponse =
+  //     ApiResponse<FolderResModel>();
 
   ScrollController delSitesController = ScrollController();
   ScrollController tempSitesController = ScrollController();
@@ -72,6 +71,17 @@ abstract class SiteViewModelBase with Store {
   @observable
   ApiResponse<List<WasteTypeModel>> wasteTypesInSite =
       ApiResponse<List<WasteTypeModel>>();
+
+  @observable
+  String? searchType;
+
+  @observable
+  ApiResponse<FolderListModel> siteFoldersResponse =
+      ApiResponse<FolderListModel>();
+
+  @observable
+  ApiResponse<FolderListModel> siteFoldersResponse2 =
+      ApiResponse<FolderListModel>();
 
   @action
   Future<void> getPermanentSites({int? page}) async {
@@ -116,7 +126,7 @@ abstract class SiteViewModelBase with Store {
       loading: tempSiteResponse.data == null,
     );
 
-    final response = await siteService.getPermanantSites(page: page);
+    final response = await siteService.getTemporarySites(page: page);
 
     response.fold(
       (l) {
@@ -287,22 +297,22 @@ abstract class SiteViewModelBase with Store {
     detailLoading = false;
   }
 
-  @action
-  Future<void> getSiteFolders({required int id}) async {
-    siteFolderResponse =
-        siteFolderResponse.copyWith(errors: null, loading: true);
-    final response = await siteService.getSiteFolders(id: id);
-    response.fold(
-      (l) {
-        siteFolderResponse =
-            siteFolderResponse.copyWith(errors: l, loading: false);
-      },
-      (res) {
-        siteFolderResponse = siteFolderResponse.copyWith(
-            data: res, errors: null, loading: false);
-      },
-    );
-  }
+  // @action
+  // Future<void> getSiteFolders({required int id}) async {
+  //   siteFolderResponse =
+  //       siteFolderResponse.copyWith(errors: null, loading: true);
+  //   final response = await siteService.getSiteFolders(id: id);
+  //   response.fold(
+  //     (l) {
+  //       siteFolderResponse =
+  //           siteFolderResponse.copyWith(errors: l, loading: false);
+  //     },
+  //     (res) {
+  //       siteFolderResponse = siteFolderResponse.copyWith(
+  //           data: res, errors: null, loading: false);
+  //     },
+  //   );
+  // }
 
   @action
   Future<void> searchSites({
@@ -335,29 +345,29 @@ abstract class SiteViewModelBase with Store {
     );
   }
 
-  @action
-  Future<void> searchSiteFolders({required String key}) async {
-    siteFolderResponse =
-        siteFolderResponse.copyWith(errors: null, loading: true);
-    final response = await siteService.searchSiteFolder(key: key);
-    response.fold(
-      (l) {
-        siteFolderResponse =
-            siteFolderResponse.copyWith(errors: l, loading: false);
-      },
-      (res) {
-        FolderResModel? data = siteFolderResponse.data;
-        FolderListModel? model = data?.folders?.first;
-        siteFolderResponse = siteFolderResponse.copyWith(
-          errors: null,
-          loading: false,
-          data: data?.copyWith(
-            folders: [if (model != null) model.copyWith(folders: res)],
-          ),
-        );
-      },
-    );
-  }
+  // @action
+  // Future<void> searchSiteFolders({required String key}) async {
+  //   siteFolderResponse =
+  //       siteFolderResponse.copyWith(errors: null, loading: true);
+  //   final response = await siteService.searchSiteFolder(key: key);
+  //   response.fold(
+  //     (l) {
+  //       siteFolderResponse =
+  //           siteFolderResponse.copyWith(errors: l, loading: false);
+  //     },
+  //     (res) {
+  //       FolderResModel? data = siteFolderResponse.data;
+  //       FolderListModel? model = data?.folders?.first;
+  //       siteFolderResponse = siteFolderResponse.copyWith(
+  //         errors: null,
+  //         loading: false,
+  //         data: data?.copyWith(
+  //           folders: [if (model != null) model.copyWith(folders: res)],
+  //         ),
+  //       );
+  //     },
+  //   );
+  // }
 
   @action
   Future<void> getWasteTypesInSite({required int id}) async {
@@ -378,5 +388,58 @@ abstract class SiteViewModelBase with Store {
         );
       },
     );
+  }
+
+  @action
+  Future<void> getSiteFolderss(
+      {required num id, required num parentFolderId}) async {
+    if (parentFolderId == 1) {
+      siteFoldersResponse =
+          siteFoldersResponse.copyWith(error: null, loading: true);
+
+      final result = await siteService.getSiteFolderss(
+          id: id, parentFolderId: parentFolderId);
+      return result.fold(
+        (l) {
+          siteFoldersResponse = siteFoldersResponse.copyWith(
+            errors: l,
+            loading: false,
+          );
+        },
+        (r) {
+          siteFoldersResponse = siteFoldersResponse.copyWith(
+            data: r,
+            error: null,
+            loading: false,
+          );
+          searchType = siteFoldersResponse.data?.folders?[0].type;
+        },
+      );
+    } else {
+      siteFoldersResponse2 = siteFoldersResponse2.copyWith(
+          error: null,
+          // loading: fromTeamProfileScreen == true
+          //     ? true
+          //     : teamFoldersResponse2.data == null,
+          loading: true);
+
+      final result = await siteService.getSiteFolderss(
+          id: id, parentFolderId: parentFolderId);
+      return result.fold(
+        (l) {
+          siteFoldersResponse2 = siteFoldersResponse2.copyWith(
+            errors: l,
+            loading: false,
+          );
+        },
+        (r) {
+          siteFoldersResponse2 = siteFoldersResponse2.copyWith(
+            data: r,
+            error: null,
+            loading: false,
+          );
+        },
+      );
+    }
   }
 }

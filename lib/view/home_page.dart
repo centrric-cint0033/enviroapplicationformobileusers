@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:enviro_mobile_application/Routepage/approutes.gr.dart';
 import 'package:enviro_mobile_application/Routepage/routespage.dart';
+import 'package:enviro_mobile_application/model/home/res_model/homerespmodel.dart';
 import 'package:enviro_mobile_application/utilis/Appthemes.dart';
 import 'package:enviro_mobile_application/view_model/02_sales/sales_view_model.dart';
 import 'package:enviro_mobile_application/view_model/03_vehicles/vehicle_view_model.dart';
@@ -36,7 +37,9 @@ class HomePage extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.all(25),
         child: Observer(builder: (context) {
-          return vmselection.permissionsResponse.loading
+          final res = vmselection.permissionsResponse;
+          HomeRespModel? permission = res.data;
+          return res.loading
               ? const Center(
                   child: CircularProgressIndicator(),
                 )
@@ -49,23 +52,25 @@ class HomePage extends StatelessWidget {
                   children: [
                     _buildBox('assets/images/star.svg', 'Sales',
                         onTap: () => onsalesfunction(context),
-                        permission: true),
+                        permission: permission?.sales?.view),
                     _buildBox('assets/images/truck.svg', 'Vehicle',
                         onTap: () => vehiclefunction(context),
-                        permission: true),
+                        permission: permission?.vehicle?.view),
                     _buildBox('assets/images/move(1).svg', 'OH&S',
-                        onTap: () => ohsfunction(context), permission: true),
+                        onTap: () => ohsfunction(context),
+                        permission: permission?.ohs?.view),
                     _buildBox('assets/images/user.svg', 'Site',
                         onTap: () => navigateToSitesPage(context: context),
-                        permission: true),
+                        permission: permission?.site?.view),
                     _buildBox('assets/images/calendar.svg', 'Scheduling',
                         onTap: () => shedulefunction(context),
-                        permission: true),
+                        permission: permission?.scheduling?.view),
                     _buildBox('assets/images/globe.svg', 'Intranet',
                         onTap: () => intranetfuntion(context),
-                        permission: true),
+                        permission: permission?.intranet?.view),
                     _buildBox('assets/images/users.svg', 'Team',
-                        onTap: () => teamfuntion(context), permission: true),
+                        onTap: () => teamfuntion(context),
+                        permission: permission?.team?.view),
                   ],
                 );
         }),
@@ -93,7 +98,7 @@ class HomePage extends StatelessWidget {
                       blurRadius: 10,
                       color: Colors.black.withOpacity(0.1),
                     )
-                  : BoxShadow()
+                  : const BoxShadow()
             ]),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

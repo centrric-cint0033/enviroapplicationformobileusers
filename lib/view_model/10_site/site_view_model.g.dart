@@ -58,22 +58,6 @@ mixin _$SiteViewModel on SiteViewModelBase, Store {
     });
   }
 
-  late final _$siteFolderResponseAtom =
-      Atom(name: 'SiteViewModelBase.siteFolderResponse', context: context);
-
-  @override
-  ApiResponse<FolderResModel> get siteFolderResponse {
-    _$siteFolderResponseAtom.reportRead();
-    return super.siteFolderResponse;
-  }
-
-  @override
-  set siteFolderResponse(ApiResponse<FolderResModel> value) {
-    _$siteFolderResponseAtom.reportWrite(value, super.siteFolderResponse, () {
-      super.siteFolderResponse = value;
-    });
-  }
-
   late final _$detailLoadingAtom =
       Atom(name: 'SiteViewModelBase.detailLoading', context: context);
 
@@ -123,6 +107,55 @@ mixin _$SiteViewModel on SiteViewModelBase, Store {
     });
   }
 
+  late final _$searchTypeAtom =
+      Atom(name: 'SiteViewModelBase.searchType', context: context);
+
+  @override
+  String? get searchType {
+    _$searchTypeAtom.reportRead();
+    return super.searchType;
+  }
+
+  @override
+  set searchType(String? value) {
+    _$searchTypeAtom.reportWrite(value, super.searchType, () {
+      super.searchType = value;
+    });
+  }
+
+  late final _$siteFoldersResponseAtom =
+      Atom(name: 'SiteViewModelBase.siteFoldersResponse', context: context);
+
+  @override
+  ApiResponse<FolderListModel> get siteFoldersResponse {
+    _$siteFoldersResponseAtom.reportRead();
+    return super.siteFoldersResponse;
+  }
+
+  @override
+  set siteFoldersResponse(ApiResponse<FolderListModel> value) {
+    _$siteFoldersResponseAtom.reportWrite(value, super.siteFoldersResponse, () {
+      super.siteFoldersResponse = value;
+    });
+  }
+
+  late final _$siteFoldersResponse2Atom =
+      Atom(name: 'SiteViewModelBase.siteFoldersResponse2', context: context);
+
+  @override
+  ApiResponse<FolderListModel> get siteFoldersResponse2 {
+    _$siteFoldersResponse2Atom.reportRead();
+    return super.siteFoldersResponse2;
+  }
+
+  @override
+  set siteFoldersResponse2(ApiResponse<FolderListModel> value) {
+    _$siteFoldersResponse2Atom.reportWrite(value, super.siteFoldersResponse2,
+        () {
+      super.siteFoldersResponse2 = value;
+    });
+  }
+
   late final _$getPermanentSitesAsyncAction =
       AsyncAction('SiteViewModelBase.getPermanentSites', context: context);
 
@@ -162,14 +195,6 @@ mixin _$SiteViewModel on SiteViewModelBase, Store {
         .run(() => super.getDetails(id: id, context: context, type: type));
   }
 
-  late final _$getSiteFoldersAsyncAction =
-      AsyncAction('SiteViewModelBase.getSiteFolders', context: context);
-
-  @override
-  Future<void> getSiteFolders({required int id}) {
-    return _$getSiteFoldersAsyncAction.run(() => super.getSiteFolders(id: id));
-  }
-
   late final _$searchSitesAsyncAction =
       AsyncAction('SiteViewModelBase.searchSites', context: context);
 
@@ -178,15 +203,6 @@ mixin _$SiteViewModel on SiteViewModelBase, Store {
       {required String key, SiteType type = SiteType.permananet}) {
     return _$searchSitesAsyncAction
         .run(() => super.searchSites(key: key, type: type));
-  }
-
-  late final _$searchSiteFoldersAsyncAction =
-      AsyncAction('SiteViewModelBase.searchSiteFolders', context: context);
-
-  @override
-  Future<void> searchSiteFolders({required String key}) {
-    return _$searchSiteFoldersAsyncAction
-        .run(() => super.searchSiteFolders(key: key));
   }
 
   late final _$getWasteTypesInSiteAsyncAction =
@@ -198,16 +214,27 @@ mixin _$SiteViewModel on SiteViewModelBase, Store {
         .run(() => super.getWasteTypesInSite(id: id));
   }
 
+  late final _$getSiteFolderssAsyncAction =
+      AsyncAction('SiteViewModelBase.getSiteFolderss', context: context);
+
+  @override
+  Future<void> getSiteFolderss({required num id, required num parentFolderId}) {
+    return _$getSiteFolderssAsyncAction.run(
+        () => super.getSiteFolderss(id: id, parentFolderId: parentFolderId));
+  }
+
   @override
   String toString() {
     return '''
 permanentSiteResponse: ${permanentSiteResponse},
 tempSiteResponse: ${tempSiteResponse},
 delSiteResponse: ${delSiteResponse},
-siteFolderResponse: ${siteFolderResponse},
 detailLoading: ${detailLoading},
 selectedWasteTypeModel: ${selectedWasteTypeModel},
-wasteTypesInSite: ${wasteTypesInSite}
+wasteTypesInSite: ${wasteTypesInSite},
+searchType: ${searchType},
+siteFoldersResponse: ${siteFoldersResponse},
+siteFoldersResponse2: ${siteFoldersResponse2}
     ''';
   }
 }

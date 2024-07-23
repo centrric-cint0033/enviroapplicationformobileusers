@@ -114,9 +114,15 @@ mixin class VehicleEndpoint {
 
   final String getVehicleListSemitrailor = '/api/v1/vehicles/waste/fork-lift/';
 
-  final String editMaintenanceReport =
-      '/api/v1/vehicles/waste/truck/maintenance/report/edit/';
+  final String editMaintenanceReport = '/api/v1/vehicles/waste/';
 
-        final String deleteMaintenanceReport =
-      '/api/v1/vehicles/waste/';
+  final String deleteMaintenanceReport = '/api/v1/vehicles/waste/';
+
+  final String addMaintenanceReport = '/api/v1/vehicles/';
+
+  final String addFuelExpense = '/api/v1/vehicles/addFuelExpense/';
+
+  final String editFuelExpense = '/api/v1/vehicles/waste/';
+
+  final String deleteFuelExpense = '/api/v1/vehicles/waste/';
 }
