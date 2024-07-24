@@ -71,7 +71,9 @@ class SemiTrailersList extends StatelessWidget {
                 if (vmVehicle.vehicleStatusType ==
                         VehicleActionType.maintenanceCheck ||
                     vmVehicle.vehicleStatusType ==
-                        VehicleActionType.fuelExpence)
+                        VehicleActionType.fuelExpence ||
+                    vmVehicle.vehicleStatusType ==
+                        VehicleActionType.preInspectionCheck)
                   CmButton(
                       text: 'Add New+',
                       onPressed: () {
@@ -87,6 +89,12 @@ class SemiTrailersList extends StatelessWidget {
                           vmVehicle.clearFn2();
                           vmVehicle.getVehicleListApi();
                           context.router.push(const AddFuelExpenseRoute());
+                        } else if (vmVehicle.vehicleStatusType ==
+                            VehicleActionType.preInspectionCheck) {
+                          vmVehicle.clearPreinspectionDatas();
+                          vmVehicle.getVehicleListApi();
+                          context.router
+                              .push(const VehicleAddPreInspectionRoute());
                         }
                       }),
               ],
@@ -168,7 +176,8 @@ class SemiTrailersList extends StatelessWidget {
                                         .data![index]
                                         .folder ??
                                     1;
-                                vmVehicle.getMaintenanceFoldersApi(context: context,
+                                vmVehicle.getMaintenanceFoldersApi(
+                                    context: context,
                                     vehicleId: vmVehicle.semiTrailorApiResponse
                                             .data![index].id ??
                                         0,

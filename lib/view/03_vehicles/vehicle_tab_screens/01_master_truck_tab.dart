@@ -18,7 +18,6 @@ class MasterTruckTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //
     _onChanged(String s) => vmVehicle.onTextChanged(() => (s.isEmpty)
         ? vmVehicle.masterTruckApi()
         : vmVehicle.masterTruckSearchServiceApi(s));
@@ -67,7 +66,9 @@ class MasterTruckList extends StatelessWidget {
                 if (vmVehicle.vehicleStatusType ==
                         VehicleActionType.maintenanceCheck ||
                     vmVehicle.vehicleStatusType ==
-                        VehicleActionType.fuelExpence)
+                        VehicleActionType.fuelExpence ||
+                    vmVehicle.vehicleStatusType ==
+                        VehicleActionType.preInspectionCheck)
                   CmButton(
                       text: 'Add New+',
                       onPressed: () {
@@ -83,6 +84,12 @@ class MasterTruckList extends StatelessWidget {
                           vmVehicle.clearFn2();
                           vmVehicle.getVehicleListApi();
                           context.router.push(const AddFuelExpenseRoute());
+                        } else if (vmVehicle.vehicleStatusType ==
+                            VehicleActionType.preInspectionCheck) {
+                          vmVehicle.clearPreinspectionDatas();
+                          vmVehicle.getVehicleListApi();
+                          context.router
+                              .push(const VehicleAddPreInspectionRoute());
                         }
                       }),
               ],
@@ -109,7 +116,7 @@ class MasterTruckList extends StatelessWidget {
                           break;
                         case "Pre Inspection check":
                           context.router.push(
-                            VehicleDetailRoute(
+                            PreInspectionDetailRoute(
                               data:
                                   vmVehicle.masterTruckApiResponse.data![index],
                             ),
@@ -165,7 +172,8 @@ class MasterTruckList extends StatelessWidget {
                                       .data![index]
                                       .folder ??
                                   1;
-                              vmVehicle.getMaintenanceFoldersApi(context: context,
+                              vmVehicle.getMaintenanceFoldersApi(
+                                  context: context,
                                   vehicleId: vmVehicle.masterTruckApiResponse
                                           .data![index].id ??
                                       0,

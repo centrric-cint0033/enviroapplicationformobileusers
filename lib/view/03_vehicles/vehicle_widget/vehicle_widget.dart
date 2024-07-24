@@ -98,7 +98,7 @@ Widget showData(
           sized0hx05,
           expandedRowShowText('Ometer', data.ometer ?? ""),
           sized0hx05,
-          expandedRowShowText('Invoice No', data.invoiceNumber ?? ""),
+          expandedRowShowText('Invoice No', "${data.invoiceNumber ?? ""}"),
           sized0hx05,
           expandedRowShowText('Hours', data.hours ?? ""),
           sized0hx05,

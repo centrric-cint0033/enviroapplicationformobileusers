@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'package:dartz/dartz.dart';
 import 'package:enviro_mobile_application/constant/base_url.dart';
 import 'package:enviro_mobile_application/model/00_common_model/folder_model/folder_model.dart';
@@ -99,6 +100,9 @@ abstract class IVehicleService {
       required Map<String, String> data});
   Future<Either<Map<MainFailure, dynamic>, String>> deleteFuelExpense(
       {required int? vehicleId, VehicleType? vehicleType});
+
+  Future<Either<Map<MainFailure, dynamic>, dynamic>> addPreInspectionVehicle(
+      {required VehicleModel data, VehicleType? vehicleType});
 }
 
 @LazySingleton(as: IVehicleService)
@@ -829,6 +833,35 @@ class VehicleService implements IVehicleService {
       (res) async {
         return const Right('success');
       },
+    );
+  }
+
+  @override
+  Future<Either<Map<MainFailure, dynamic>, dynamic>> addPreInspectionVehicle(
+      {required VehicleModel data, VehicleType? vehicleType}) async {
+    log(data.toString());
+    String apiUrl;
+    switch (vehicleType) {
+      case VehicleType.truck:
+        apiUrl = "${ApiEndPoints().addPreInspectionVehicle}truck/";
+        break;
+      case VehicleType.car:
+        apiUrl = "${ApiEndPoints().deleteFuelExpense}car/";
+        break;
+      case VehicleType.semiTrailer:
+        apiUrl = "${ApiEndPoints().deleteFuelExpense}fork-lift/";
+        break;
+      default:
+        apiUrl = "${ApiEndPoints().deleteFuelExpense}truck/";
+        break;
+    }
+    var response = await getIt<HttpService>().multipartRequest(
+        data: data.toJson(),
+        method: "POST",
+        apiUrl: "${apiUrl}pre-inspection/");
+    return response.fold(
+      (l) => Left(l),
+      (res) async => const Right('success'),
     );
   }
 }

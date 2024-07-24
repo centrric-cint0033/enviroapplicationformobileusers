@@ -1,12 +1,14 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:enviro_mobile_application/model/03_vehicle/vehicle_model/vehicle_model.dart';
+import 'package:enviro_mobile_application/service/03_vehicles/vehicle_service.dart';
 import 'package:enviro_mobile_application/utilis/Appthemes.dart';
 import 'package:enviro_mobile_application/utilis/constant.dart';
+import 'package:enviro_mobile_application/view/03_vehicles/vehicle_widget/vehicle_dropdown_widget.dart';
+import 'package:enviro_mobile_application/view/08_team/team_edit_page.dart';
 import 'package:enviro_mobile_application/view/08_team/team_widgets/date_picker.dart';
 import 'package:enviro_mobile_application/view/10_shedule/schedule_widget.dart';
-import 'package:enviro_mobile_application/view_model/11_shedule/shedule_page_view_model.dart';
+import 'package:enviro_mobile_application/view_model/03_vehicles/vehicle_view_model.dart';
 import 'package:enviro_mobile_application/widgets/cmn_title_textwidget.dart';
-import 'package:enviro_mobile_application/widgets/drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -14,24 +16,20 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 
 @RoutePage()
-class UpdateVehiclepreinspectionPage extends StatelessWidget {
-  const UpdateVehiclepreinspectionPage(
-      {Key? key, required this.index, required this.driversIndex})
-      : super(key: key);
-  final int index;
-  final int driversIndex;
+class VehicleAddPreInspectionPage extends StatelessWidget {
+  const VehicleAddPreInspectionPage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: cmnDrawer(context),
       appBar: AppBar(
-        title: cmnTitleWidget('Add Pre-Inspection'),
+        title: cmnTitleWidget('Add Pre Inspection'),
       ),
       body: SingleChildScrollView(
         padding: screenWidth,
         child: Observer(builder: (context) {
-          vmSchedule.preInspectionSubmitButtonValidation();
-          final res = vmSchedule.addPreInspectionScheduleResponse;
+          vmVehicle.preInspectionSubmitButtonValidation();
+          final res = vmVehicle.addPreInspectionVehicleResponse;
           return Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -56,39 +54,37 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                 DateFormat('dd-MM-yyyy hh:mm a').format(DateTime.now()),
               ),
               sized0hx10,
-              expandedRowShowText(
-                "Vehicle Registration",
-                vmSchedule.shedulecardResponse.data?[index].vehicle
-                        ?.toString() ??
-                    '',
-              ),
+              expandedRowShowWidget(
+                  "Vehicle Registration",
+                  const VehicleListDropDown(
+                    fromAddMaintenance: true,
+                  )),
               requiredRowWidget("Odometer", "",
-                  fromType: true, controller: vmSchedule.odometerCntrller),
+                  fromType: true, controller: vmVehicle.odometerCntrller),
               requiredRowWidget(
                 "Driver's name",
-                "${vmSchedule.shedulecardResponse.data?[index].drivers?[driversIndex].name}",
+                "Auto Fetch",
                 fromType: false,
               ),
               requiredRowWidget("Hour Meter Start", "",
-                  fromType: true, controller: vmSchedule.hoursMeterCntrller),
-              cmCheckBoxRow("I am Fit for Work", vmSchedule.checkboxValue,
+                  fromType: true, controller: vmVehicle.hoursMeterCntrller),
+              cmCheckBoxRow("I am Fit for Work", vmVehicle.checkboxValue,
                   onChanged: (bool? value) {
                 if (value != null) {
-                  vmSchedule.updateCheckboxValue(value);
+                  vmVehicle.updateCheckboxValue(value);
                 }
               }),
               cmCheckBoxRow(
-                  "I have approriate valid  licence", vmSchedule.checkboxValue2,
+                  "I have approriate valid  licence", vmVehicle.checkboxValue2,
                   onChanged: (bool? value) {
                 if (value != null) {
-                  vmSchedule.updateCheckboxValue2(value);
+                  vmVehicle.updateCheckboxValue2(value);
                 }
               }),
-              cmCheckBoxRow(
-                  "I have appropriate  licence", vmSchedule.checkboxValue3,
-                  onChanged: (bool? value) {
+              cmCheckBoxRow("Appropriate PPE for operation of this vehicle",
+                  vmVehicle.checkboxValue3, onChanged: (bool? value) {
                 if (value != null) {
-                  vmSchedule.updateCheckboxValue3(value);
+                  vmVehicle.updateCheckboxValue3(value);
                 }
               }),
               sized0hx05,
@@ -156,243 +152,242 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
               cmCheckBoxRow2(
                 context,
                 "Engine Oil steel",
-                vmSchedule.selectedEngineOilValue ?? "",
+                vmVehicle.selectedEngineOilValue ?? "",
                 onTap: () {
-                  showPopup(
-                      context, vmSchedule.selectedEngineOilValue ?? "", 1);
+                  showPopup(context, vmVehicle.selectedEngineOilValue ?? "", 1);
                 },
               ),
               cmCheckBoxRow2(
                 context,
                 "Warning System",
-                vmSchedule.selectedWarningSystemValue ?? "",
+                vmVehicle.selectedWarningSystemValue ?? "",
                 onTap: () {
                   showPopup(
-                      context, vmSchedule.selectedWarningSystemValue ?? "", 2);
+                      context, vmVehicle.selectedWarningSystemValue ?? "", 2);
                 },
               ),
               cmCheckBoxRow2(
                 context,
                 "Steering",
-                vmSchedule.selectedSteeringValue ?? "",
+                vmVehicle.selectedSteeringValue ?? "",
                 onTap: () {
-                  showPopup(context, vmSchedule.selectedSteeringValue ?? "", 3);
+                  showPopup(context, vmVehicle.selectedSteeringValue ?? "", 3);
                 },
               ),
               cmCheckBoxRow2(
                 context,
                 "Safety/Emerg Stops",
-                vmSchedule.selectedSafetyEmergValue ?? "",
+                vmVehicle.selectedSafetyEmergValue ?? "",
                 onTap: () {
                   showPopup(
-                      context, vmSchedule.selectedSafetyEmergValue ?? "", 4);
+                      context, vmVehicle.selectedSafetyEmergValue ?? "", 4);
                 },
               ),
               cmCheckBoxRow2(
                 context,
                 "Hand Break Alarm",
-                vmSchedule.selectedHandBreakAlarmValue ?? "",
+                vmVehicle.selectedHandBreakAlarmValue ?? "",
                 onTap: () {
                   showPopup(
-                      context, vmSchedule.selectedHandBreakAlarmValue ?? "", 5);
+                      context, vmVehicle.selectedHandBreakAlarmValue ?? "", 5);
                 },
               ),
               cmCheckBoxRow2(
                 context,
                 "PTO/Vac.Pumb",
-                vmSchedule.selectedPTOVacValue ?? "",
+                vmVehicle.selectedPTOVacValue ?? "",
                 onTap: () {
-                  showPopup(context, vmSchedule.selectedPTOVacValue ?? "", 6);
+                  showPopup(context, vmVehicle.selectedPTOVacValue ?? "", 6);
                 },
               ),
               cmCheckBoxRow2(
                 context,
                 "Horn",
-                vmSchedule.selectedHornValue ?? "",
+                vmVehicle.selectedHornValue ?? "",
                 onTap: () {
-                  showPopup(context, vmSchedule.selectedHornValue ?? "", 7);
+                  showPopup(context, vmVehicle.selectedHornValue ?? "", 7);
                 },
               ),
               cmCheckBoxRow2(
                 context,
                 "Rev alarm/Camera",
-                vmSchedule.selectedRevAlarmCameraValue ?? "",
+                vmVehicle.selectedRevAlarmCameraValue ?? "",
                 onTap: () {
                   showPopup(
-                      context, vmSchedule.selectedRevAlarmCameraValue ?? "", 8);
+                      context, vmVehicle.selectedRevAlarmCameraValue ?? "", 8);
                 },
               ),
               cmCheckBoxRow2(
                 context,
                 "Lights-Head",
-                vmSchedule.selectedLightsHeadValue ?? "",
+                vmVehicle.selectedLightsHeadValue ?? "",
                 onTap: () {
                   showPopup(
-                      context, vmSchedule.selectedLightsHeadValue ?? "", 9);
+                      context, vmVehicle.selectedLightsHeadValue ?? "", 9);
                 },
               ),
               cmCheckBoxRow2(
                 context,
                 "Lights-Tail",
-                vmSchedule.selectedLightsTailValue ?? "",
+                vmVehicle.selectedLightsTailValue ?? "",
                 onTap: () {
                   showPopup(
-                      context, vmSchedule.selectedLightsTailValue ?? "", 10);
+                      context, vmVehicle.selectedLightsTailValue ?? "", 10);
                 },
               ),
               cmCheckBoxRow2(
                 context,
                 "Light-beacons",
-                vmSchedule.selectedLightBeaconsValue ?? "",
+                vmVehicle.selectedLightBeaconsValue ?? "",
                 onTap: () {
                   showPopup(
-                      context, vmSchedule.selectedLightBeaconsValue ?? "", 11);
+                      context, vmVehicle.selectedLightBeaconsValue ?? "", 11);
                 },
               ),
               cmCheckBoxRow2(
                 context,
                 "Hazards Lights",
-                vmSchedule.selectedHazardsLightsValue ?? "",
+                vmVehicle.selectedHazardsLightsValue ?? "",
                 onTap: () {
                   showPopup(
-                      context, vmSchedule.selectedHazardsLightsValue ?? "", 12);
+                      context, vmVehicle.selectedHazardsLightsValue ?? "", 12);
                 },
               ),
               cmCheckBoxRow2(
                 context,
                 "Rims & Wheel Nuts",
-                vmSchedule.selectedRimsWheelNutsValue ?? "",
+                vmVehicle.selectedRimsWheelNutsValue ?? "",
                 onTap: () {
                   showPopup(
-                      context, vmSchedule.selectedRimsWheelNutsValue ?? "", 13);
+                      context, vmVehicle.selectedRimsWheelNutsValue ?? "", 13);
                 },
               ),
               cmCheckBoxRow2(
                 context,
                 "Coolant",
-                vmSchedule.selectedCoolantValue ?? "",
+                vmVehicle.selectedCoolantValue ?? "",
                 onTap: () {
-                  showPopup(context, vmSchedule.selectedCoolantValue ?? "", 14);
+                  showPopup(context, vmVehicle.selectedCoolantValue ?? "", 14);
                 },
               ),
               cmCheckBoxRow2(
                 context,
                 "Wheels & Tyres",
-                vmSchedule.selectedWheelsTyresValue ?? "",
+                vmVehicle.selectedWheelsTyresValue ?? "",
                 onTap: () {
                   showPopup(
-                      context, vmSchedule.selectedWheelsTyresValue ?? "", 15);
+                      context, vmVehicle.selectedWheelsTyresValue ?? "", 15);
                 },
               ),
               Observer(builder: (context) {
                 return cmCheckBoxRow2(
                   context,
                   "Mirrors & Windscreen",
-                  vmSchedule.selectedMirrorsWindscreenValue ?? "",
+                  vmVehicle.selectedMirrorsWindscreenValue ?? "",
                   onTap: () {
                     showPopup(context,
-                        vmSchedule.selectedMirrorsWindscreenValue ?? "", 16);
+                        vmVehicle.selectedMirrorsWindscreenValue ?? "", 16);
                   },
                 );
               }),
               cmCheckBoxRow2(
                 context,
                 "Structure & Bodywork",
-                vmSchedule.selectedStructureBodywrkValue ?? "",
+                vmVehicle.selectedStructureBodywrkValue ?? "",
                 onTap: () {
                   showPopup(context,
-                      vmSchedule.selectedStructureBodywrkValue ?? "", 17);
+                      vmVehicle.selectedStructureBodywrkValue ?? "", 17);
                 },
               ),
               cmCheckBoxRow2(
                 context,
                 "Wipers",
-                vmSchedule.selectedWipersValue ?? "",
+                vmVehicle.selectedWipersValue ?? "",
                 onTap: () {
-                  showPopup(context, vmSchedule.selectedWipersValue ?? "", 18);
+                  showPopup(context, vmVehicle.selectedWipersValue ?? "", 18);
                 },
               ),
               cmCheckBoxRow2(
                 context,
                 "Fuel Level Pumb",
-                vmSchedule.selectedFuelLevelPumbValue ?? "",
+                vmVehicle.selectedFuelLevelPumbValue ?? "",
                 onTap: () {
                   showPopup(
-                      context, vmSchedule.selectedFuelLevelPumbValue ?? "", 19);
+                      context, vmVehicle.selectedFuelLevelPumbValue ?? "", 19);
                 },
               ),
               cmCheckBoxRow2(
                 context,
                 "Fuel Level Truck",
-                vmSchedule.selectedFuelLevelTruckValue ?? "",
+                vmVehicle.selectedFuelLevelTruckValue ?? "",
                 onTap: () {
-                  showPopup(context,
-                      vmSchedule.selectedFuelLevelTruckValue ?? "", 20);
+                  showPopup(
+                      context, vmVehicle.selectedFuelLevelTruckValue ?? "", 20);
                 },
               ),
               cmCheckBoxRow2(
                 context,
                 "Seat/Seat Belt",
-                vmSchedule.selectedSeatSeatBeltValue ?? "",
+                vmVehicle.selectedSeatSeatBeltValue ?? "",
                 onTap: () {
                   showPopup(
-                      context, vmSchedule.selectedSeatSeatBeltValue ?? "", 21);
+                      context, vmVehicle.selectedSeatSeatBeltValue ?? "", 21);
                 },
               ),
               cmCheckBoxRow2(
                 context,
                 "Park Barke/Trailer",
-                vmSchedule.selectedParkBarkeValue ?? "",
+                vmVehicle.selectedParkBarkeValue ?? "",
                 onTap: () {
                   showPopup(
-                      context, vmSchedule.selectedParkBarkeValue ?? "", 22);
+                      context, vmVehicle.selectedParkBarkeValue ?? "", 22);
                 },
               ),
               cmCheckBoxRow2(
                 context,
                 "Foot Brake",
-                vmSchedule.selectedFootBrakeValue ?? "",
+                vmVehicle.selectedFootBrakeValue ?? "",
                 onTap: () {
                   showPopup(
-                      context, vmSchedule.selectedFootBrakeValue ?? "", 23);
+                      context, vmVehicle.selectedFootBrakeValue ?? "", 23);
                 },
               ),
               cmCheckBoxRow2(
                 context,
                 "Electrical",
-                vmSchedule.selectedElectricalValue ?? "",
+                vmVehicle.selectedElectricalValue ?? "",
                 onTap: () {
                   showPopup(
-                      context, vmSchedule.selectedElectricalValue ?? "", 24);
+                      context, vmVehicle.selectedElectricalValue ?? "", 24);
                 },
               ),
               Padding(
                 padding: EdgeInsets.only(left: 8.h),
                 child: const Text('Accessories &Fittings'),
               ),
-              cmCheckBoxRow3("Hoses", vmSchedule.selectHosesCheckbox,
+              cmCheckBoxRow3("Hoses", vmVehicle.selectHosesCheckbox,
                   onChanged: (bool? value) {
                 if (value != null) {
-                  vmSchedule.updateCheckboxValueFn1(value);
+                  vmVehicle.updateCheckboxValueFn1(value);
                 }
               }),
-              cmCheckBoxRow3("Fittings", vmSchedule.selectFittingsCheckbox,
+              cmCheckBoxRow3("Fittings", vmVehicle.selectFittingsCheckbox,
                   onChanged: (bool? value) {
                 if (value != null) {
-                  vmSchedule.updateCheckboxValueFn2(value);
+                  vmVehicle.updateCheckboxValueFn2(value);
                 }
               }),
               cmCheckBoxRow3(
-                  "First Aid Kit", vmSchedule.selectFirstAidKitCheckbox,
+                  "First Aid Kit", vmVehicle.selectFirstAidKitCheckbox,
                   onChanged: (bool? value) {
                 if (value != null) {
-                  vmSchedule.updateCheckboxValueFn3(value);
+                  vmVehicle.updateCheckboxValueFn3(value);
                 }
               }),
-              cmCheckBoxRow3("PPE", vmSchedule.selectPPECheckbox,
+              cmCheckBoxRow3("PPE", vmVehicle.selectPPECheckbox,
                   onChanged: (bool? value) {
                 if (value != null) {
-                  vmSchedule.updateCheckboxValueFn4(value);
+                  vmVehicle.updateCheckboxValueFn4(value);
                 }
               }),
               Padding(
@@ -404,39 +399,39 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                       'Fire Extinguisher(Date Calibrated):',
                       style: TextStyle(fontSize: 10.sp),
                     ),
-                    if (vmSchedule.selectedFireExtinguisherDate != null)
+                    if (vmVehicle.selectedFireExtinguisherDate != null)
                       Text(
                         DateFormat('dd-MM-yyyy')
-                            .format(vmSchedule.selectedFireExtinguisherDate!),
+                            .format(vmVehicle.selectedFireExtinguisherDate!),
                         style: TextStyle(fontSize: 10.sp),
                       ),
-                    datePicker(context, vmSchedule.selectedFireExtinguisherDate,
-                        (date) => vmSchedule.datePickerFn(date))
+                    datePicker(context, vmVehicle.selectedFireExtinguisherDate,
+                        (date) => vmVehicle.fireExtinquisherDatePickerFn(date))
                   ],
                 ),
               ),
-              cmCheckBoxRow3("Garden Hose", vmSchedule.selectGardenHoseCheckbox,
+              cmCheckBoxRow3("Garden Hose", vmVehicle.selectGardenHoseCheckbox,
                   onChanged: (bool? value) {
                 if (value != null) {
-                  vmSchedule.updateCheckboxValueFn5(value);
+                  vmVehicle.updateCheckboxValueFn5(value);
                 }
               }),
-              cmCheckBoxRow3("Gattic Lifters", vmSchedule.selectGatticCheckbox,
+              cmCheckBoxRow3("Gattic Lifters", vmVehicle.selectGatticCheckbox,
                   onChanged: (bool? value) {
                 if (value != null) {
-                  vmSchedule.updateCheckboxValueFn6(value);
+                  vmVehicle.updateCheckboxValueFn6(value);
                 }
               }),
-              cmCheckBoxRow3("Bucket/Rags", vmSchedule.selectBucketRagsCheckbox,
+              cmCheckBoxRow3("Bucket/Rags", vmVehicle.selectBucketRagsCheckbox,
                   onChanged: (bool? value) {
                 if (value != null) {
-                  vmSchedule.updateCheckboxValueFn7(value);
+                  vmVehicle.updateCheckboxValueFn7(value);
                 }
               }),
-              cmCheckBoxRow3("Spill Kit", vmSchedule.selectSpillKitCheckbox,
+              cmCheckBoxRow3("Spill Kit", vmVehicle.selectSpillKitCheckbox,
                   onChanged: (bool? value) {
                 if (value != null) {
-                  vmSchedule.updateCheckboxValueFn8(value);
+                  vmVehicle.updateCheckboxValueFn8(value);
                 }
               }),
               sized0hx10,
@@ -457,7 +452,7 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                       ),
                       const SizedBox(height: 8),
                       TextField(
-                        controller: vmSchedule.faultsReportCntrller,
+                        controller: vmVehicle.faultsReportCntrller,
                         decoration: const InputDecoration(
                           hintText: 'Type Here...',
                           border: InputBorder.none,
@@ -482,10 +477,10 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                 children: [
                   Checkbox(
                     side: const BorderSide(color: Colors.red),
-                    value: vmSchedule.selectverifyCheckbox1,
+                    value: vmVehicle.selectverifyCheckbox1,
                     onChanged: (bool? value) {
                       if (value != null) {
-                        vmSchedule.updateCheckboxValueFn9(value);
+                        vmVehicle.updateCheckboxValueFn9(value);
                       }
                     },
                     checkColor: Colors.white,
@@ -516,10 +511,10 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                 children: [
                   Checkbox(
                     side: const BorderSide(color: Colors.red),
-                    value: vmSchedule.selectverifyCheckbox2,
+                    value: vmVehicle.selectverifyCheckbox2,
                     onChanged: (bool? value) {
                       if (value != null) {
-                        vmSchedule.updateCheckboxValueFn10(value);
+                        vmVehicle.updateCheckboxValueFn10(value);
                       }
                     },
                     checkColor: Colors.white,
@@ -545,23 +540,168 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                 ],
               ),
               sized0hx10,
+              Container(
+                width: double.infinity,
+                color: Color.fromARGB(255, 161, 214, 239),
+                child: Padding(
+                  padding: EdgeInsets.only(left: 6.w, right: 6.w),
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        sized0hx05,
+                        Text(
+                          "Manager Brief and Review",
+                          style: TextStyle(fontSize: 10.sp),
+                        ),
+                        sized0hx10,
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Checkbox(
+                              side: const BorderSide(color: Colors.red),
+                              value: vmVehicle.selectverifyCheckbox3,
+                              onChanged: (bool? value) {
+                                if (value != null) {
+                                  vmVehicle.updateCheckboxValueFn11(value);
+                                }
+                              },
+                              checkColor: Colors.white,
+                              activeColor: Colors.red,
+                            ),
+                            Expanded(
+                              child: Row(
+                                children: [
+                                  Expanded(
+                                    child: Text(
+                                      'I have reviewed this form and satisfied that required maintenance or safety related items have been addressed',
+                                      style: TextStyle(fontSize: 10.sp),
+                                    ),
+                                  ),
+                                  Icon(
+                                    Icons.star,
+                                    size: 9.w,
+                                    color: Colors.red,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                        sized0hx10,
+                        Text(
+                          "I certify that faults reported have been",
+                          style: TextStyle(
+                              fontSize: 10.sp, color: Colors.grey.shade700),
+                        ),
+                        sized0hx10,
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              children: [
+                                Checkbox(
+                                  side: const BorderSide(color: Colors.red),
+                                  value: vmVehicle.selectverifyCheckbox4,
+                                  onChanged: (bool? value) {
+                                    if (value != null) {
+                                      vmVehicle.updateCheckboxValueFn12(value);
+                                    }
+                                  },
+                                  checkColor: Colors.white,
+                                  activeColor: Colors.red,
+                                ),
+                                Text(
+                                  'Corrected',
+                                  style: TextStyle(fontSize: 10.sp),
+                                ),
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                Checkbox(
+                                  side: const BorderSide(color: Colors.red),
+                                  value: vmVehicle.selectverifyCheckbox5,
+                                  onChanged: (bool? value) {
+                                    if (value != null) {
+                                      vmVehicle.updateCheckboxValueFn13(value);
+                                    }
+                                  },
+                                  checkColor: Colors.white,
+                                  activeColor: Colors.red,
+                                ),
+                                Text(
+                                  'No Action',
+                                  style: TextStyle(fontSize: 10.sp),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Checkbox(
+                              side: const BorderSide(color: Colors.red),
+                              value: vmVehicle.selectverifyCheckbox6,
+                              onChanged: (bool? value) {
+                                if (value != null) {
+                                  vmVehicle.updateCheckboxValueFn14(value);
+                                }
+                              },
+                              checkColor: Colors.white,
+                              activeColor: Colors.red,
+                            ),
+                            Text(
+                              'Schedule for repair',
+                              style: TextStyle(fontSize: 10.sp),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Checkbox(
+                              side: const BorderSide(color: Colors.red),
+                              value: vmVehicle.selectverifyCheckbox7,
+                              onChanged: (bool? value) {
+                                if (value != null) {
+                                  vmVehicle.updateCheckboxValueFn15(value);
+                                }
+                              },
+                              checkColor: Colors.white,
+                              activeColor: Colors.red,
+                            ),
+                            Expanded(
+                              child: Text(
+                                'Issues Schedule for maintenance or repair do not affect the safe operation of this vehicle',
+                                style: TextStyle(fontSize: 10.sp),
+                              ),
+                            ),
+                          ],
+                        ),
+                        sized0hx05
+                      ]),
+                ),
+              ),
+              sized0hx10,
               Align(
                 alignment: Alignment.bottomRight,
                 child: ElevatedButton(
                   onPressed: () {
-                    if (vmSchedule.showSubmitButton == true) {
+                    if (vmVehicle.showSubmitButton == true) {
                       cmSubmitFn(context);
                     }
                   },
                   style: ElevatedButton.styleFrom(
-                    foregroundColor: vmSchedule.showSubmitButton
+                    foregroundColor: vmVehicle.showSubmitButton
                         ? Colors.blue
                         : Colors.blue.shade100,
-                    backgroundColor: vmSchedule.showSubmitButton
+                    backgroundColor: vmVehicle.showSubmitButton
                         ? Colors.blue
                         : Colors.blue.shade100,
                     side: BorderSide(
-                        color: vmSchedule.showSubmitButton
+                        color: vmVehicle.showSubmitButton
                             ? Colors.blue
                             : Colors.blue.shade100),
                   ),
@@ -584,6 +724,7 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                   ),
                 ),
               ),
+              sized0hx20
             ],
           );
         }),
@@ -592,160 +733,168 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
   }
 
   cmSubmitFn(BuildContext context) {
-    vmSchedule.updatePreInspectionSchedule(
+    vmVehicle.addPreInspectionVehicleApi(
         context: context,
         data: VehicleModel(
-            vehicle: vmSchedule.shedulecardResponse.data?[index]
-                .drivers?[driversIndex].vehicleId,
-            registration:
-                vmSchedule.shedulecardResponse.data?[index].vehicle?.toString(),
-            odometer: vmSchedule.odometerCntrller.text != ""
-                ? int.parse(vmSchedule.odometerCntrller.text)
+            vehicle: vmVehicle.selectedVehicleAddMaintenanceId != 0 &&
+                    vmVehicle.selectedVehicleAddMaintenanceId != null
+                ? vmVehicle.selectedVehicleAddMaintenanceId
+                : vmVehicle.selectedVehicleAddMaintenance?.id,
+            odometer: vmVehicle.odometerCntrller.text != ""
+                ? int.parse(vmVehicle.odometerCntrller.text)
                 : null,
-            driverName: vmSchedule
-                .shedulecardResponse.data?[index].drivers?[driversIndex].name,
-            hourMeterStart: vmSchedule.hoursMeterCntrller.text,
-            fitForWork: vmSchedule.checkboxValue,
-            validDrivingLicense: vmSchedule.checkboxValue2,
-            appropriatePpe: vmSchedule.checkboxValue3,
-            engineOilLevel: vmSchedule.selectedEngineOilValue == "No issue"
+            hourMeterStart: vmVehicle.hoursMeterCntrller.text,
+            fitForWork: vmVehicle.checkboxValue,
+            validDrivingLicense: vmVehicle.checkboxValue2,
+            appropriatePpe: vmVehicle.checkboxValue3,
+            engineOilLevel: vmVehicle.selectedEngineOilValue == "No issue"
                 ? null
-                : vmSchedule.selectedEngineOilValue == "categoryA"
+                : vmVehicle.selectedEngineOilValue == "categoryA"
                     ? true
                     : false,
-            warningSystem: vmSchedule.selectedWarningSystemValue == "No issue"
+            warningSystem: vmVehicle.selectedWarningSystemValue == "No issue"
                 ? null
-                : vmSchedule.selectedWarningSystemValue == "categoryA"
+                : vmVehicle.selectedWarningSystemValue == "categoryA"
                     ? true
                     : false,
-            steering: vmSchedule.selectedSteeringValue == "No issue"
+            steering: vmVehicle.selectedSteeringValue == "No issue"
                 ? null
-                : vmSchedule.selectedSteeringValue == "categoryA"
+                : vmVehicle.selectedSteeringValue == "categoryA"
                     ? true
                     : false,
-            safetyEmergStop: vmSchedule.selectedSafetyEmergValue == "No issue"
+            safetyEmergStop: vmVehicle.selectedSafetyEmergValue == "No issue"
                 ? null
-                : vmSchedule.selectedSafetyEmergValue == "categoryA"
+                : vmVehicle.selectedSafetyEmergValue == "categoryA"
                     ? true
                     : false,
-            handbreakAlarm: vmSchedule.selectedHandBreakAlarmValue == "No issue"
+            handbreakAlarm: vmVehicle.selectedHandBreakAlarmValue == "No issue"
                 ? null
-                : vmSchedule.selectedHandBreakAlarmValue == "categoryA"
+                : vmVehicle.selectedHandBreakAlarmValue == "categoryA"
                     ? true
                     : false,
-            ptoVacpump: vmSchedule.selectedPTOVacValue == "No issue"
+            ptoVacpump: vmVehicle.selectedPTOVacValue == "No issue"
                 ? null
-                : vmSchedule.selectedPTOVacValue == "categoryA"
+                : vmVehicle.selectedPTOVacValue == "categoryA"
                     ? true
                     : false,
-            horn: vmSchedule.selectedHornValue == "No issue"
+            horn: vmVehicle.selectedHornValue == "No issue"
                 ? null
-                : vmSchedule.selectedHornValue == "categoryA"
+                : vmVehicle.selectedHornValue == "categoryA"
                     ? true
                     : false,
-            revAlarmCamera: vmSchedule.selectedRevAlarmCameraValue == "No issue"
+            revAlarmCamera: vmVehicle.selectedRevAlarmCameraValue == "No issue"
                 ? null
-                : vmSchedule.selectedRevAlarmCameraValue == "categoryA"
+                : vmVehicle.selectedRevAlarmCameraValue == "categoryA"
                     ? true
                     : false,
-            lightsHead: vmSchedule.selectedLightsHeadValue == "No issue"
+            lightsHead: vmVehicle.selectedLightsHeadValue == "No issue"
                 ? null
-                : vmSchedule.selectedLightsHeadValue == "categoryA"
+                : vmVehicle.selectedLightsHeadValue == "categoryA"
                     ? true
                     : false,
-            lightsTail: vmSchedule.selectedLightsTailValue == "No issue"
+            lightsTail: vmVehicle.selectedLightsTailValue == "No issue"
                 ? null
-                : vmSchedule.selectedLightsTailValue == "categoryA"
+                : vmVehicle.selectedLightsTailValue == "categoryA"
                     ? true
                     : false,
-            lightBeacons: vmSchedule.selectedLightBeaconsValue == "No issue"
+            lightBeacons: vmVehicle.selectedLightBeaconsValue == "No issue"
                 ? null
-                : vmSchedule.selectedLightBeaconsValue == "categoryA"
+                : vmVehicle.selectedLightBeaconsValue == "categoryA"
                     ? true
                     : false,
-            hazardLight: vmSchedule.selectedHazardsLightsValue == "No issue"
+            hazardLight: vmVehicle.selectedHazardsLightsValue == "No issue"
                 ? null
-                : vmSchedule.selectedHazardsLightsValue == "categoryA"
+                : vmVehicle.selectedHazardsLightsValue == "categoryA"
                     ? true
                     : false,
-            rimsWheelnut: vmSchedule.selectedRimsWheelNutsValue == "No issue"
+            rimsWheelnut: vmVehicle.selectedRimsWheelNutsValue == "No issue"
                 ? null
-                : vmSchedule.selectedRimsWheelNutsValue == "categoryA"
+                : vmVehicle.selectedRimsWheelNutsValue == "categoryA"
                     ? true
                     : false,
-            coolant: vmSchedule.selectedCoolantValue == "No issue"
+            coolant: vmVehicle.selectedCoolantValue == "No issue"
                 ? null
-                : vmSchedule.selectedCoolantValue == "categoryA"
+                : vmVehicle.selectedCoolantValue == "categoryA"
                     ? true
                     : false,
-            wheels: vmSchedule.selectedWheelsTyresValue == "No issue"
+            wheels: vmVehicle.selectedWheelsTyresValue == "No issue"
                 ? null
-                : vmSchedule.selectedWheelsTyresValue == "categoryA"
+                : vmVehicle.selectedWheelsTyresValue == "categoryA"
                     ? true
                     : false,
             mirrorWindowscreen:
-                vmSchedule.selectedMirrorsWindscreenValue == "No issue"
+                vmVehicle.selectedMirrorsWindscreenValue == "No issue"
                     ? null
-                    : vmSchedule.selectedMirrorsWindscreenValue == "categoryA"
+                    : vmVehicle.selectedMirrorsWindscreenValue == "categoryA"
                         ? true
                         : false,
             structureBodywork:
-                vmSchedule.selectedStructureBodywrkValue == "No issue"
+                vmVehicle.selectedStructureBodywrkValue == "No issue"
                     ? null
-                    : vmSchedule.selectedStructureBodywrkValue == "categoryA"
+                    : vmVehicle.selectedStructureBodywrkValue == "categoryA"
                         ? true
                         : false,
-            wipers: vmSchedule.selectedWipersValue == "No issue"
+            wipers: vmVehicle.selectedWipersValue == "No issue"
                 ? null
-                : vmSchedule.selectedWipersValue == "categoryA"
+                : vmVehicle.selectedWipersValue == "categoryA"
                     ? true
                     : false,
-            fuelLevelpump: vmSchedule.selectedFuelLevelPumbValue == "No issue"
+            fuelLevelpump: vmVehicle.selectedFuelLevelPumbValue == "No issue"
                 ? null
-                : vmSchedule.selectedFuelLevelPumbValue == "categoryA"
+                : vmVehicle.selectedFuelLevelPumbValue == "categoryA"
                     ? true
                     : false,
-            fuelLeveltruck: vmSchedule.selectedFuelLevelTruckValue == "No issue"
+            fuelLeveltruck: vmVehicle.selectedFuelLevelTruckValue == "No issue"
                 ? null
-                : vmSchedule.selectedFuelLevelTruckValue == "categoryA"
+                : vmVehicle.selectedFuelLevelTruckValue == "categoryA"
                     ? true
                     : false,
-            seatSeatbelt: vmSchedule.selectedSeatSeatBeltValue == "No issue"
+            seatSeatbelt: vmVehicle.selectedSeatSeatBeltValue == "No issue"
                 ? null
-                : vmSchedule.selectedSeatSeatBeltValue == "categoryA"
+                : vmVehicle.selectedSeatSeatBeltValue == "categoryA"
                     ? true
                     : false,
-            parkbrakeTrailer: vmSchedule.selectedParkBarkeValue == "No issue"
+            parkbrakeTrailer: vmVehicle.selectedParkBarkeValue == "No issue"
                 ? null
-                : vmSchedule.selectedParkBarkeValue == "categoryA"
+                : vmVehicle.selectedParkBarkeValue == "categoryA"
                     ? true
                     : false,
-            footBrake: vmSchedule.selectedFootBrakeValue == "No issue"
+            footBrake: vmVehicle.selectedFootBrakeValue == "No issue"
                 ? null
-                : vmSchedule.selectedFootBrakeValue == "categoryA"
+                : vmVehicle.selectedFootBrakeValue == "categoryA"
                     ? true
                     : false,
-            electrical: vmSchedule.selectedElectricalValue == "No issue"
+            electrical: vmVehicle.selectedElectricalValue == "No issue"
                 ? null
-                : vmSchedule.selectedElectricalValue == "categoryA"
+                : vmVehicle.selectedElectricalValue == "categoryA"
                     ? true
                     : false,
-            hoses: vmSchedule.selectHosesCheckbox,
-            fittings: vmSchedule.selectFittingsCheckbox,
-            firstAidKit: vmSchedule.selectFirstAidKitCheckbox,
-            ppe: vmSchedule.selectPPECheckbox,
-            fireExtinguisherDate:
-                vmSchedule.selectedFireExtinguisherDate != null
-                    ? DateFormat('yyyy-MM-dd')
-                        .format(vmSchedule.selectedFireExtinguisherDate!)
-                    : null,
-            gardenHose: vmSchedule.selectGardenHoseCheckbox,
-            gaticLifters: vmSchedule.selectGatticCheckbox,
-            bucketRags: vmSchedule.selectBucketRagsCheckbox,
-            spillKit: vmSchedule.selectSpillKitCheckbox,
-            reportedFaultString: vmSchedule.faultsReportCntrller,
-            safeReadyToOperate: vmSchedule.selectverifyCheckbox1,
-            reportedFaults: vmSchedule.selectverifyCheckbox2));
+            hoses: vmVehicle.selectHosesCheckbox,
+            fittings: vmVehicle.selectFittingsCheckbox,
+            firstAidKit: vmVehicle.selectFirstAidKitCheckbox,
+            ppe: vmVehicle.selectPPECheckbox,
+            fireExtinguisherDate: vmVehicle.selectedFireExtinguisherDate != null
+                ? DateFormat('yyyy-MM-dd')
+                    .format(vmVehicle.selectedFireExtinguisherDate!)
+                : null,
+            gardenHose: vmVehicle.selectGardenHoseCheckbox,
+            gaticLifters: vmVehicle.selectGatticCheckbox,
+            bucketRags: vmVehicle.selectBucketRagsCheckbox,
+            spillKit: vmVehicle.selectSpillKitCheckbox,
+            reportedFaultString: vmVehicle.faultsReportCntrller,
+            safeReadyToOperate: vmVehicle.selectverifyCheckbox1,
+            reportedFaults: vmVehicle.selectverifyCheckbox2,
+            reviewedForm: vmVehicle.selectverifyCheckbox3,
+            corrected: vmVehicle.selectverifyCheckbox4,
+            noAction: vmVehicle.selectverifyCheckbox5,
+            scheduledForRepair: vmVehicle.selectverifyCheckbox6,
+            doNotAffectSafeOperation: vmVehicle.selectverifyCheckbox7,
+            vehicleType: vmVehicle.vehicleType == VehicleType.truck
+                ? "truck"
+                : vmVehicle.vehicleType == VehicleType.car
+                    ? "car"
+                    : "fork-lift",
+            tabType: "waste"));
   }
 }
 
@@ -783,7 +932,7 @@ Widget requiredRowWidget(String? text1, String? text2,
                     child: TextField(
                       controller: controller,
                       onChanged: (value) {
-                        vmSchedule.preInspectionSubmitButtonValidation();
+                        vmVehicle.preInspectionSubmitButtonValidation();
                       },
                       decoration:
                           const InputDecoration(border: InputBorder.none),
@@ -920,7 +1069,7 @@ showPopup(BuildContext context, String value, int i) {
           children: [
             InkWell(
               onTap: () {
-                vmSchedule.noIssueOnTap(value, i);
+                vmVehicle.noIssueOnTap(value, i);
                 Navigator.pop(context);
               },
               child: Row(
@@ -936,7 +1085,7 @@ showPopup(BuildContext context, String value, int i) {
                     materialTapTargetSize: MaterialTapTargetSize.padded,
                     value: true,
                     onChanged: (values) {
-                      vmSchedule.noIssueOnTap(value, i);
+                      vmVehicle.noIssueOnTap(value, i);
                       Navigator.pop(context);
                     },
                   ),
@@ -945,7 +1094,7 @@ showPopup(BuildContext context, String value, int i) {
             ),
             InkWell(
               onTap: () {
-                vmSchedule.categoryAOnTap(value, i);
+                vmVehicle.categoryAOnTap(value, i);
                 Navigator.pop(context);
               },
               child: Row(
@@ -962,7 +1111,7 @@ showPopup(BuildContext context, String value, int i) {
                     materialTapTargetSize: MaterialTapTargetSize.padded,
                     value: true,
                     onChanged: (valus) {
-                      vmSchedule.categoryAOnTap(value, i);
+                      vmVehicle.categoryAOnTap(value, i);
                       Navigator.pop(context);
                     },
                   ),
@@ -971,7 +1120,7 @@ showPopup(BuildContext context, String value, int i) {
             ),
             InkWell(
               onTap: () {
-                vmSchedule.categoryBOnTap(value, i);
+                vmVehicle.categoryBOnTap(value, i);
                 Navigator.pop(context);
               },
               child: Row(
@@ -986,7 +1135,7 @@ showPopup(BuildContext context, String value, int i) {
                     materialTapTargetSize: MaterialTapTargetSize.padded,
                     value: true,
                     onChanged: (values) {
-                      vmSchedule.categoryBOnTap(value, i);
+                      vmVehicle.categoryBOnTap(value, i);
                       Navigator.pop(context);
                     },
                   ),

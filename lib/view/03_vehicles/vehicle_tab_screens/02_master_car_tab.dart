@@ -65,7 +65,9 @@ class MasterCarList extends StatelessWidget {
                 if (vmVehicle.vehicleStatusType ==
                         VehicleActionType.maintenanceCheck ||
                     vmVehicle.vehicleStatusType ==
-                        VehicleActionType.fuelExpence)
+                        VehicleActionType.fuelExpence ||
+                    vmVehicle.vehicleStatusType ==
+                        VehicleActionType.preInspectionCheck)
                   CmButton(
                       text: 'Add New+',
                       onPressed: () {
@@ -79,6 +81,12 @@ class MasterCarList extends StatelessWidget {
                           vmVehicle.clearFn2();
                           vmVehicle.getVehicleListApi();
                           context.router.push(const AddFuelExpenseRoute());
+                        } else if (vmVehicle.vehicleStatusType ==
+                            VehicleActionType.preInspectionCheck) {
+                                       vmVehicle.clearPreinspectionDatas();
+                          vmVehicle.getVehicleListApi();
+                          context.router
+                              .push(const VehicleAddPreInspectionRoute());
                         }
                       }),
               ],

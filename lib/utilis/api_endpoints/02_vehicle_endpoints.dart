@@ -125,4 +125,6 @@ mixin class VehicleEndpoint {
   final String editFuelExpense = '/api/v1/vehicles/waste/';
 
   final String deleteFuelExpense = '/api/v1/vehicles/waste/';
+
+    final String addPreInspectionVehicle = '/api/v1/vehicles/waste/';
 }

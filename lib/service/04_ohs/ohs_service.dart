@@ -130,10 +130,6 @@ class OhsService implements IohsService {
       ohsAddNotificationServiceApi({required Map<String, String> data}) async {
     var response = await getIt<HttpService>().multipartRequest(
         apiUrl: ApiEndPoints().ohsAddNotification, method: 'POST', data: data);
-    // for (var i = 0; i < ids.length; i++) {
-    //   request.fields["members[$i]"] = "${ids[i]}";
-    //   log(request.fields["members[$i]"].toString());
-    // }
     return response.fold(
       (l) => Left(l),
       (res) async {
@@ -204,16 +200,11 @@ class OhsService implements IohsService {
       {required Map<String, String> data}) async {
     var response = await getIt<HttpService>().multipartRequest(
         apiUrl: ApiEndPoints().ohsAddNews, method: 'POST', data: data);
-    // for (var i = 0; i < ids.length; i++) {
-    //   request.fields["members[$i]"] = "${ids[i]}";
-    //   log(request.fields["members[$i]"].toString());
-    // }
     return response.fold(
       (l) => Left(l),
       (res) async {
         var data = jsonDecode(res.body);
         OhsRespModel ohsAddNews = OhsRespModel.fromJson(data);
-
         return Right(ohsAddNews);
       },
     );
@@ -299,6 +290,7 @@ class OhsService implements IohsService {
       {required Map<String, String> data}) async {
     var response = await getIt<HttpService>().multipartRequest(
         data: data, method: 'POST', apiUrl: ApiEndPoints().addFolders);
+
     return response.fold(
       (l) => Left(l),
       (res) async {
@@ -312,6 +304,7 @@ class OhsService implements IohsService {
       {required Map<String, String> data}) async {
     var response = await getIt<HttpService>().multipartRequest(
         data: data, method: 'POST', apiUrl: ApiEndPoints().searchFolders);
+
     return response.fold(
       (l) => Left(l),
       (res) async {
@@ -320,7 +313,6 @@ class OhsService implements IohsService {
             List<FolderModel>.from(data.map((e) => FolderModel.fromJson(e)));
         List<FolderModel> searchedFolderListt = List<FolderModel>.from(
             data.map((e) => FolderModel(folders: searchedFolderList)));
-
         FolderListModel searchedFolderListtt =
             FolderListModel(folders: searchedFolderListt);
         return Right(searchedFolderListtt);
@@ -333,12 +325,12 @@ class OhsService implements IohsService {
       ohsFileFolderSearchApi({required Map<String, String> data}) async {
     var response = await getIt<HttpService>().multipartRequest(
         data: data, method: 'POST', apiUrl: ApiEndPoints().searchFileFolders);
+
     return response.fold(
       (l) => Left(l),
       (res) async {
         var data = jsonDecode(res.body);
         FolderListModel searchedfileFolderList = FolderListModel.fromJson(data);
-
         return Right(searchedfileFolderList);
       },
     );
@@ -352,7 +344,7 @@ class OhsService implements IohsService {
     return response.fold(
       (l) => Left(l),
       (res) async {
-        return Right("Success");
+        return const Right("Success");
       },
     );
   }

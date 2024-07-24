@@ -124,5 +124,13 @@ class AppRouter extends $AppRouter {
           page: AddFuelExpenseRoute.page,
           path: RouteNames.addFuelExpensePage,
         ),
+        AutoRoute(
+          page: VehicleAddPreInspectionRoute.page,
+          path: RouteNames.vehicleAddPrenInspectionPage,
+        ),
+        AutoRoute(
+          page: PreInspectionDetailRoute.page,
+          path: RouteNames.preinspectiondetailpage,
+        ),
       ];
 }

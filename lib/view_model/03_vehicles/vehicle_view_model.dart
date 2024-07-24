@@ -6,6 +6,7 @@ import 'package:enviro_mobile_application/model/00_common_model/folder_model/fol
 import 'package:enviro_mobile_application/model/03_vehicle/vehicle_model/vehicle_model.dart';
 import 'package:enviro_mobile_application/service/03_vehicles/vehicle_service.dart';
 import 'package:enviro_mobile_application/utilis/injection.dart';
+import 'package:enviro_mobile_application/widgets/cm_show_toast.dart';
 import 'package:enviro_mobile_application/widgets/ww_popup_error.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
@@ -1277,5 +1278,394 @@ abstract class VehicleViewModelBase with Store {
     volumeCntrlr.clear();
     selectedFuelExpenseDate = null;
     selectedFuelExpenseTime = null;
+  }
+
+  @observable
+  bool checkboxValue = false;
+  @observable
+  bool checkboxValue2 = false;
+  @observable
+  bool checkboxValue3 = false;
+  @observable
+  String? selectedEngineOilValue = "No issue";
+  @observable
+  String? selectedWarningSystemValue = "No issue";
+  @observable
+  String? selectedSteeringValue = "No issue";
+  @observable
+  String? selectedSafetyEmergValue = "No issue";
+  @observable
+  String? selectedHandBreakAlarmValue = "No issue";
+  @observable
+  String? selectedPTOVacValue = "No issue";
+  @observable
+  String? selectedHornValue = "No issue";
+  @observable
+  String? selectedRevAlarmCameraValue = "No issue";
+  @observable
+  String? selectedLightsHeadValue = "No issue";
+  @observable
+  String? selectedLightsTailValue = "No issue";
+  @observable
+  String? selectedLightBeaconsValue = "No issue";
+  @observable
+  String? selectedHazardsLightsValue = "No issue";
+  @observable
+  String? selectedRimsWheelNutsValue = "No issue";
+  @observable
+  String? selectedCoolantValue = "No issue";
+  @observable
+  String? selectedWheelsTyresValue = "No issue";
+  @observable
+  String? selectedMirrorsWindscreenValue = "No issue";
+  @observable
+  String? selectedStructureBodywrkValue = "No issue";
+  @observable
+  String? selectedWipersValue = "No issue";
+  @observable
+  String? selectedFuelLevelPumbValue = "No issue";
+  @observable
+  String? selectedFuelLevelTruckValue = "No issue";
+  @observable
+  String? selectedSeatSeatBeltValue = "No issue";
+  @observable
+  String? selectedParkBarkeValue = "No issue";
+  @observable
+  String? selectedFootBrakeValue = "No issue";
+  @observable
+  String? selectedElectricalValue = "No issue";
+  @observable
+  bool selectHosesCheckbox = false;
+  @observable
+  bool selectFittingsCheckbox = false;
+  @observable
+  bool selectFirstAidKitCheckbox = false;
+  @observable
+  bool selectPPECheckbox = false;
+  @observable
+  bool selectGardenHoseCheckbox = false;
+  @observable
+  bool selectGatticCheckbox = false;
+  @observable
+  bool selectBucketRagsCheckbox = false;
+  @observable
+  bool selectSpillKitCheckbox = false;
+  @observable
+  bool selectverifyCheckbox1 = false;
+  @observable
+  bool selectverifyCheckbox2 = false;
+  @observable
+  bool selectverifyCheckbox3 = false;
+  @observable
+  bool selectverifyCheckbox4 = false;
+  @observable
+  bool selectverifyCheckbox5 = false;
+  @observable
+  bool selectverifyCheckbox6 = false;
+  @observable
+  bool selectverifyCheckbox7 = false;
+  @observable
+  bool selectverifyCheckbox8 = false;
+
+  @observable
+  String? noIssue = "No issue";
+
+  @observable
+  String? categoryA = "categoryA";
+
+  @observable
+  String? categoryB = "categoryB";
+  @action
+  noIssueOnTap(String? value, int i) {
+    value = noIssue;
+    cmFunction(i, value ?? "");
+  }
+
+  @action
+  categoryAOnTap(String? value, int i) {
+    value = categoryA;
+    cmFunction(i, value ?? "");
+  }
+
+  @action
+  categoryBOnTap(String? value, int i) {
+    value = categoryB;
+    cmFunction(i, value ?? "");
+  }
+
+  @action
+  void updateCheckboxValueFn1(bool newValue) {
+    selectHosesCheckbox = newValue;
+  }
+
+  @action
+  void updateCheckboxValueFn2(bool newValue) {
+    selectFittingsCheckbox = newValue;
+  }
+
+  @action
+  void updateCheckboxValueFn3(bool newValue) {
+    selectFirstAidKitCheckbox = newValue;
+  }
+
+  @action
+  void updateCheckboxValueFn4(bool newValue) {
+    selectPPECheckbox = newValue;
+  }
+
+  @action
+  void updateCheckboxValueFn5(bool newValue) {
+    selectGardenHoseCheckbox = newValue;
+  }
+
+  @action
+  void updateCheckboxValueFn6(bool newValue) {
+    selectGatticCheckbox = newValue;
+  }
+
+  void updateCheckboxValueFn7(bool newValue) {
+    selectBucketRagsCheckbox = newValue;
+  }
+
+  void updateCheckboxValueFn8(bool newValue) {
+    selectSpillKitCheckbox = newValue;
+  }
+
+  void updateCheckboxValueFn9(bool newValue) {
+    selectverifyCheckbox1 = newValue;
+  }
+
+  void updateCheckboxValueFn10(bool newValue) {
+    selectverifyCheckbox2 = newValue;
+  }
+
+  void updateCheckboxValueFn11(bool newValue) {
+    selectverifyCheckbox3 = newValue;
+  }
+
+  void updateCheckboxValueFn12(bool newValue) {
+    selectverifyCheckbox4 = newValue;
+  }
+
+  void updateCheckboxValueFn13(bool newValue) {
+    selectverifyCheckbox5 = newValue;
+  }
+
+  void updateCheckboxValueFn14(bool newValue) {
+    selectverifyCheckbox6 = newValue;
+  }
+
+  void updateCheckboxValueFn15(bool newValue) {
+    selectverifyCheckbox7 = newValue;
+  }
+
+  void updateCheckboxValueFn16(bool newValue) {
+    selectverifyCheckbox8 = newValue;
+  }
+
+  @action
+  fireExtinquisherDatePickerFn(date) {
+    selectedFireExtinguisherDate = date;
+  }
+
+  @action
+  cmFunction(int i, String value) {
+    i == 1
+        ? selectedEngineOilValue = value
+        : i == 2
+            ? selectedWarningSystemValue = value
+            : i == 3
+                ? selectedSteeringValue = value
+                : i == 4
+                    ? selectedSafetyEmergValue = value
+                    : i == 5
+                        ? selectedHandBreakAlarmValue = value
+                        : i == 6
+                            ? selectedPTOVacValue = value
+                            : i == 7
+                                ? selectedHornValue = value
+                                : i == 8
+                                    ? selectedRevAlarmCameraValue = value
+                                    : i == 9
+                                        ? selectedLightsHeadValue = value
+                                        : i == 10
+                                            ? selectedLightsTailValue = value
+                                            : i == 11
+                                                ? selectedLightBeaconsValue =
+                                                    value
+                                                : i == 12
+                                                    ? selectedHazardsLightsValue =
+                                                        value
+                                                    : i == 13
+                                                        ? selectedRimsWheelNutsValue =
+                                                            value
+                                                        : i == 14
+                                                            ? selectedCoolantValue =
+                                                                value
+                                                            : i == 15
+                                                                ? selectedWheelsTyresValue =
+                                                                    value
+                                                                : i == 16
+                                                                    ? selectedMirrorsWindscreenValue =
+                                                                        value
+                                                                    : i == 17
+                                                                        ? selectedStructureBodywrkValue =
+                                                                            value
+                                                                        : i == 18
+                                                                            ? selectedWipersValue = value
+                                                                            : i == 19
+                                                                                ? selectedFuelLevelPumbValue = value
+                                                                                : i == 20
+                                                                                    ? selectedFuelLevelTruckValue = value
+                                                                                    : i == 21
+                                                                                        ? selectedSeatSeatBeltValue = value
+                                                                                        : i == 22
+                                                                                            ? selectedParkBarkeValue = value
+                                                                                            : i == 23
+                                                                                                ? selectedFootBrakeValue = value
+                                                                                                : i == 24
+                                                                                                    ? selectedElectricalValue = value
+                                                                                                    : value;
+  }
+
+  @action
+  void updateCheckboxValue(bool newValue) {
+    checkboxValue = newValue;
+  }
+
+  @action
+  void updateCheckboxValue2(bool newValue2) {
+    checkboxValue2 = newValue2;
+  }
+
+  @action
+  void updateCheckboxValue3(bool newValue3) {
+    checkboxValue3 = newValue3;
+  }
+
+  TextEditingController odometerCntrller = TextEditingController();
+  TextEditingController hoursMeterCntrller = TextEditingController();
+  TextEditingController faultsReportCntrller = TextEditingController();
+
+  @observable
+  bool showSubmitButton = false;
+
+  @observable
+  DateTime? selectedFireExtinguisherDate;
+
+  @observable
+  ApiResponse<dynamic> addPreInspectionVehicleResponse = ApiResponse<dynamic>();
+  @action
+  Future<void> addPreInspectionVehicleApi(
+      {required BuildContext context, required VehicleModel data}) async {
+    addPreInspectionVehicleResponse =
+        addPreInspectionVehicleResponse.copyWith(error: null, loading: true);
+
+    final result = await vehicleService.addPreInspectionVehicle(
+        data: data, vehicleType: vehicleType);
+    return result.fold(
+      (l) {
+        popupErrorData(context, mainFailure: l);
+        addPreInspectionVehicleResponse =
+            addPreInspectionVehicleResponse.copyWith(
+          error: l.keys.first,
+          loading: false,
+        );
+      },
+      (r) {
+        addPreInspectionVehicleResponse =
+            addPreInspectionVehicleResponse.copyWith(
+          data: r,
+          error: null,
+          loading: false,
+        );
+        if (vehicleType == VehicleType.truck) {
+          masterTruckApi();
+        } else if (vehicleType == VehicleType.car) {
+          masterCarApi();
+        } else if (vehicleType == VehicleType.semiTrailer) {
+          semiTrailorApi();
+        }
+        clearPreinspectionDatas();
+        context.router.pop();
+        showToast(context, msg: "Successfully updated", color: Colors.green);
+      },
+    );
+  }
+
+  @action
+  preInspectionSubmitButtonValidation() {
+    if (odometerCntrller.text.isNotEmpty &&
+        hoursMeterCntrller.text.isNotEmpty &&
+        checkboxValue != false &&
+        checkboxValue2 != false &&
+        checkboxValue3 != false &&
+        selectverifyCheckbox1 != false &&
+        selectverifyCheckbox2 != false &&
+        selectverifyCheckbox3 != false) {
+      showSubmitButton = true;
+    } else {
+      showSubmitButton = false;
+    }
+  }
+
+  @observable
+  String? dateAndTime;
+  @action
+  cmDataAddFunction({required VehicleModel data}) {
+    dateAndTime = data.dateTime?.toString() ?? "";
+    
+  }
+
+  @action
+  clearPreinspectionDatas() {
+    odometerCntrller.clear();
+    hoursMeterCntrller.clear();
+    faultsReportCntrller.clear();
+    checkboxValue = false;
+    checkboxValue2 = false;
+    checkboxValue3 = false;
+    selectedEngineOilValue = "No issue";
+    selectedWarningSystemValue = "No issue";
+    selectedSteeringValue = "No issue";
+    selectedEngineOilValue = "No issue";
+    selectedSafetyEmergValue = "No issue";
+    selectedHandBreakAlarmValue = "No issue";
+    selectedPTOVacValue = "No issue";
+    selectedHornValue = "No issue";
+    selectedRevAlarmCameraValue = "No issue";
+    selectedLightsHeadValue = "No issue";
+    selectedLightsTailValue = "No issue";
+    selectedLightBeaconsValue = "No issue";
+    selectedHazardsLightsValue = "No issue";
+    selectedRimsWheelNutsValue = "No issue";
+    selectedCoolantValue = "No issue";
+    selectedWheelsTyresValue = "No issue";
+    selectedMirrorsWindscreenValue = "No issue";
+    selectedStructureBodywrkValue = "No issue";
+    selectedWipersValue = "No issue";
+    selectedFuelLevelPumbValue = "No issue";
+    selectedFuelLevelTruckValue = "No issue";
+    selectedSeatSeatBeltValue = "No issue";
+    selectedParkBarkeValue = "No issue";
+    selectedFootBrakeValue = "No issue";
+    selectedElectricalValue = "No issue";
+    selectHosesCheckbox = false;
+    selectFittingsCheckbox = false;
+    selectFirstAidKitCheckbox = false;
+    selectedFireExtinguisherDate = null;
+    selectPPECheckbox = false;
+    selectGardenHoseCheckbox = false;
+    selectGatticCheckbox = false;
+    selectBucketRagsCheckbox = false;
+    selectSpillKitCheckbox = false;
+    selectverifyCheckbox1 = false;
+    selectverifyCheckbox2 = false;
+    selectverifyCheckbox3 = false;
+    selectverifyCheckbox4 = false;
+    selectverifyCheckbox5 = false;
+    selectverifyCheckbox6 = false;
+    selectverifyCheckbox7 = false;
+    selectedVehicleAddMaintenanceId = null;
   }
 }

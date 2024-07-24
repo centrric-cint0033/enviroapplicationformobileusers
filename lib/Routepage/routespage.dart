@@ -25,7 +25,7 @@ class RouteNames {
   static const String employeeFilesScreen = '/employeefilesscreen';
   static const String siteListPage = '/site_list_page';
   static const String siteDetailPage = '/site_detail_page';
-    static const String previousJobDetailPage = '/previous_job_detail_page';
+  static const String previousJobDetailPage = '/previous_job_detail_page';
   static const String siteFolderDetailPage = '/site_folder_detail_page';
   static const String rintranetinsidepage = '/intranetinsidepage';
   static const String drawerpage = '/drawerpage';
@@ -36,6 +36,7 @@ class RouteNames {
   static const String rsheduledetailpage = '/sheduledetailpage';
   static const String rupdatevehiclepreinspectionpage =
       '/updatevehiclepreinspectionpage ';
+  static const String preinspectiondetailpage = '/preinspectiondetailpage ';
   static const String scheduleimagepage = '/scheduele_video_page ';
   static const String schedulevideopage = '/scheduele_image_page ';
   static const String weighbridgemediapage = '/weigh_bridge_media_page ';
@@ -55,4 +56,6 @@ class RouteNames {
       '/add_maintenance_report_page ';
   static const String editFuelExpensePage = '/edit_fuel_expense_page ';
   static const String addFuelExpensePage = '/add_fuel_expense_page ';
+  static const String vehicleAddPrenInspectionPage =
+      '/vehicle_add_preinspection_page ';
 }
