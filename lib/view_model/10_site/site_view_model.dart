@@ -28,18 +28,6 @@ abstract class SiteViewModelBase with Store {
   final ISiteService siteService;
   SiteViewModelBase(this.siteService);
 
-  TextEditingController siteFolderCtr = TextEditingController();
-
-  Timer? debouce;
-
-  void onTextChanged(Function() function) {
-    // Clear the previous debounce timer
-    if (debouce?.isActive ?? false) debouce?.cancel();
-
-    // Set up a new debounce timer
-    debouce = Timer(const Duration(milliseconds: 500), () => function());
-  }
-
   @observable
   ApiResponse<List<SiteResModel>> permanentSiteResponse =
       ApiResponse<List<SiteResModel>>();
@@ -52,34 +40,9 @@ abstract class SiteViewModelBase with Store {
   ApiResponse<List<SiteResModel>> delSiteResponse =
       ApiResponse<List<SiteResModel>>();
 
-  // @observable
-  // ApiResponse<FolderResModel> siteFolderResponse =
-  //     ApiResponse<FolderResModel>();
-
-  ScrollController delSitesController = ScrollController();
-  ScrollController tempSitesController = ScrollController();
-  ScrollController permanentSitesController = ScrollController();
-
-  TextEditingController searchCtr = TextEditingController();
-
-  int selectedTab = 0;
-
-  @observable
-  bool detailLoading = false;
-
-  @observable
-  WasteTypeModel? selectedWasteTypeModel;
-
   @observable
   ApiResponse<List<WasteTypeModel>> wasteTypesInSite =
       ApiResponse<List<WasteTypeModel>>();
-
-  @observable
-  String? searchType;
-
-  TextEditingController textFolderAddController = TextEditingController();
-  TextEditingController textFolderEditController = TextEditingController();
-  TextEditingController fileFolderSearchCntrlr = TextEditingController();
 
   @observable
   ApiResponse<FolderListModel> siteFoldersResponse =
@@ -107,6 +70,34 @@ abstract class SiteViewModelBase with Store {
   @observable
   ApiResponse<FolderListModel> expiryFileResponse =
       ApiResponse<FolderListModel>();
+
+  Timer? debouce;
+
+  void onTextChanged(Function() function) {
+    if (debouce?.isActive ?? false) debouce?.cancel();
+    debouce = Timer(const Duration(milliseconds: 500), () => function());
+  }
+
+  int selectedTab = 0;
+
+  @observable
+  bool detailLoading = false;
+
+  @observable
+  WasteTypeModel? selectedWasteTypeModel;
+
+  @observable
+  String? searchType;
+
+  ScrollController delSitesController = ScrollController();
+  ScrollController tempSitesController = ScrollController();
+  ScrollController permanentSitesController = ScrollController();
+
+  TextEditingController siteFolderCtr = TextEditingController();
+  TextEditingController searchCtr = TextEditingController();
+  TextEditingController textFolderAddController = TextEditingController();
+  TextEditingController textFolderEditController = TextEditingController();
+  TextEditingController fileFolderSearchCntrlr = TextEditingController();
 
   @observable
   List<String> folderNames = [];
@@ -343,23 +334,6 @@ abstract class SiteViewModelBase with Store {
     detailLoading = false;
   }
 
-  // @action
-  // Future<void> getSiteFolders({required int id}) async {
-  //   siteFolderResponse =
-  //       siteFolderResponse.copyWith(errors: null, loading: true);
-  //   final response = await siteService.getSiteFolders(id: id);
-  //   response.fold(
-  //     (l) {
-  //       siteFolderResponse =
-  //           siteFolderResponse.copyWith(errors: l, loading: false);
-  //     },
-  //     (res) {
-  //       siteFolderResponse = siteFolderResponse.copyWith(
-  //           data: res, errors: null, loading: false);
-  //     },
-  //   );
-  // }
-
   @action
   Future<void> searchSites({
     required String key,
@@ -390,30 +364,6 @@ abstract class SiteViewModelBase with Store {
       },
     );
   }
-
-  // @action
-  // Future<void> searchSiteFolders({required String key}) async {
-  //   siteFolderResponse =
-  //       siteFolderResponse.copyWith(errors: null, loading: true);
-  //   final response = await siteService.searchSiteFolder(key: key);
-  //   response.fold(
-  //     (l) {
-  //       siteFolderResponse =
-  //           siteFolderResponse.copyWith(errors: l, loading: false);
-  //     },
-  //     (res) {
-  //       FolderResModel? data = siteFolderResponse.data;
-  //       FolderListModel? model = data?.folders?.first;
-  //       siteFolderResponse = siteFolderResponse.copyWith(
-  //         errors: null,
-  //         loading: false,
-  //         data: data?.copyWith(
-  //           folders: [if (model != null) model.copyWith(folders: res)],
-  //         ),
-  //       );
-  //     },
-  //   );
-  // }
 
   @action
   Future<void> getWasteTypesInSite({required int id}) async {

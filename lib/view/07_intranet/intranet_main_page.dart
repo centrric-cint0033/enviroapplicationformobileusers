@@ -28,32 +28,37 @@ class IntranetMainPage extends StatelessWidget {
       body: SingleChildScrollView(child: Observer(builder: (context) {
         final res = vmIntranet.intranetFoldersResponse;
         FolderListModel? folderList = res.data;
-        return Padding(
-          padding: screenWidth,
-          child: Column(
-            children: [
-              sized0hx10,
-              cmTitle('Intranet Folder', fontWeight: FontWeight.bold),
-              sized0hx10,
-              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-                const Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Text('Folders'),
-                ),
-                CmButton(
-                    text: 'Add folders+',
-                    onPressed: () {
-                      showCreateEditDialog(context, createEditTap: (v) {
-                        vmIntranet.addIntranetFolder(
-                          context: context,
-                          name: v,
-                          parentfolder: 1,
-                        );
-                      });
-                    }),
-              ]),
-              sized0hx10,
-              WWTextField(
+        return Column(
+          children: [
+            sized0hx10,
+            cmTitle('Intranet Folder', fontWeight: FontWeight.bold),
+            sized0hx10,
+            Padding(
+              padding: screenWidth,
+              child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text('Folders'),
+                    ),
+                    CmButton(
+                        text: 'Add folders+',
+                        onPressed: () {
+                          showCreateEditDialog(context, createEditTap: (v) {
+                            vmIntranet.addIntranetFolder(
+                              context: context,
+                              name: v,
+                              parentfolder: 1,
+                            );
+                          });
+                        }),
+                  ]),
+            ),
+            sized0hx10,
+            Padding(
+              padding: screenWidth,
+              child: WWTextField(
                 controller: vmIntranet.folderSearchCntrlr,
                 onChanged: (v) => vmTeam.onTextChanged(() {
                   v.isEmpty
@@ -67,11 +72,14 @@ class IntranetMainPage extends StatelessWidget {
                 suffixTap: () {},
                 hintText: 'Search by Folder Name',
               ),
-              sized0hx10,
-              folderList?.folders != null && folderList!.folders!.isNotEmpty
-                  ? res.loading
-                      ? wwCustomLoader()
-                      : ListView.separated(
+            ),
+            sized0hx10,
+            folderList?.folders != null && folderList!.folders!.isNotEmpty
+                ? res.loading
+                    ? wwCustomLoader()
+                    : Padding(
+                        padding: screenWidth,
+                        child: ListView.separated(
                           physics: const NeverScrollableScrollPhysics(),
                           shrinkWrap: true,
                           separatorBuilder: (BuildContext context, int index) =>
@@ -114,14 +122,14 @@ class IntranetMainPage extends StatelessWidget {
                               return Container();
                             }
                           },
-                        )
-                  : Center(
-                      child: SvgPicture.asset(
-                        "assets/images/empty1.svg",
-                      ),
+                        ),
+                      )
+                : Center(
+                    child: SvgPicture.asset(
+                      "assets/images/empty1.svg",
                     ),
-            ],
-          ),
+                  ),
+          ],
         );
       })),
     );

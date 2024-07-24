@@ -18,7 +18,7 @@ class InvoiceAmountAndCreatedByWidget extends StatelessWidget {
           child: Text(
             data.quoteInvoiceAmount ?? "0",
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  fontSize: 10.sp,
+                  fontSize: 9.sp,
                   fontWeight: FontWeight.normal,
                   color: Theme.of(context).colorScheme.primary,
                 ),
@@ -28,7 +28,7 @@ class InvoiceAmountAndCreatedByWidget extends StatelessWidget {
           title: "Created by",
           child: Text(
             data.createdBy ?? "",
-            style: TextStyle(fontSize: 10.sp),
+            style: TextStyle(fontSize: 9.sp),
           ),
         ),
       ],

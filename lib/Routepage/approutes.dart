@@ -84,6 +84,10 @@ class AppRouter extends $AppRouter {
           path: RouteNames.siteFolderDetailPage,
         ),
         AutoRoute(
+          page: PreviousJobetailRoute.page,
+          path: RouteNames.previousJobDetailPage,
+        ),
+        AutoRoute(
             page: SheduleCommentRoute.page,
             path: RouteNames.rshedulecommandstatus),
         AutoRoute(

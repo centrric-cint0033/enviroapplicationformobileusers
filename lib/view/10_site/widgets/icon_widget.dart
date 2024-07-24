@@ -11,11 +11,10 @@ class IconWidget extends StatelessWidget {
       width: length ?? 40.h,
       height: length ?? 40.h,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(12.r),
         color: Theme.of(context).colorScheme.primary.withOpacity(0.1),
       ),
-      child: const Icon(
-        size: 30,
+      child: Icon(
+        size: 30.w,
         Icons.person,
         color: Colors.grey,
       ),

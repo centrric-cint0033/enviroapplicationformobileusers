@@ -25,7 +25,7 @@ class PreviousSalesTileWidget extends StatelessWidget {
           color: Colors.grey.shade300,
         ),
       ),
-      padding: const EdgeInsets.all(10),
+      padding: EdgeInsets.only(left: 8.w, top: 6.w),
       child: Row(
         children: [
           IconJobCodeWidget(data: data),
@@ -41,7 +41,7 @@ class PreviousSalesTileWidget extends StatelessWidget {
                 ),
                 sized0hx05,
                 Text(
-                  "Job Type: ${data.jobCardType ?? ""}",
+                  "Job Type: ${data.jobType != "null" ? data.jobType ?? "" : ""}",
                   style: style,
                 ),
                 sized0hx10,

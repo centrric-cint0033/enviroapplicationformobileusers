@@ -1,3 +1,4 @@
+import 'package:enviro_mobile_application/view_model/11_previous_sale/previous_sale_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -13,12 +14,12 @@ class PreviouseSalesWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 20.w),
+      padding: EdgeInsets.symmetric(horizontal: 10.w),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "Previous Sales",
+            "Previous Jobs",
             textAlign: TextAlign.left,
             style: Theme.of(context).textTheme.titleSmall?.copyWith(
                   fontSize: 11.sp,
@@ -26,7 +27,7 @@ class PreviouseSalesWidget extends StatelessWidget {
                   fontWeight: FontWeight.normal,
                 ),
           ),
-          sized0hx10,
+          sized0hx05,
           Observer(
             builder: (context) {
               List<WasteTypeModel> list =
@@ -58,6 +59,9 @@ class PreviouseSalesWidget extends StatelessWidget {
                 }).toList(),
                 onChanged: (value) {
                   vmSite.selectedWasteTypeModel = value;
+                  vmPreviousSale.getPreviousSales(
+                      siteId:
+                          int.parse("${vmSite.selectedWasteTypeModel?.id}"));
                 },
               );
             },

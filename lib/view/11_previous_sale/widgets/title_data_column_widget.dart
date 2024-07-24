@@ -19,7 +19,7 @@ class TitleDataColumnWidget extends StatelessWidget {
           Text(
             title,
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  fontSize: 10.sp,
+                  fontSize: 9.sp,
                   color: Colors.black45,
                   fontWeight: FontWeight.normal,
                 ),

@@ -16,7 +16,7 @@ class WWFolderCard extends StatelessWidget {
   final bool? loading;
   const WWFolderCard({
     super.key,
-   required this.folder,
+    required this.folder,
     required this.editTap,
     required this.deleteTap,
     required this.onTap,
@@ -38,7 +38,7 @@ class WWFolderCard extends StatelessWidget {
           title: Row(
             children: [
               Expanded(
-                child: Text(folder?.name ?? "",
+                child: Text(folder.name ?? "",
                     overflow: TextOverflow.ellipsis,
                     style: Theme.of(context).textTheme.bodySmall),
               ),

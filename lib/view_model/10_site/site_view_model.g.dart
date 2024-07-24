@@ -58,39 +58,6 @@ mixin _$SiteViewModel on SiteViewModelBase, Store {
     });
   }
 
-  late final _$detailLoadingAtom =
-      Atom(name: 'SiteViewModelBase.detailLoading', context: context);
-
-  @override
-  bool get detailLoading {
-    _$detailLoadingAtom.reportRead();
-    return super.detailLoading;
-  }
-
-  @override
-  set detailLoading(bool value) {
-    _$detailLoadingAtom.reportWrite(value, super.detailLoading, () {
-      super.detailLoading = value;
-    });
-  }
-
-  late final _$selectedWasteTypeModelAtom =
-      Atom(name: 'SiteViewModelBase.selectedWasteTypeModel', context: context);
-
-  @override
-  WasteTypeModel? get selectedWasteTypeModel {
-    _$selectedWasteTypeModelAtom.reportRead();
-    return super.selectedWasteTypeModel;
-  }
-
-  @override
-  set selectedWasteTypeModel(WasteTypeModel? value) {
-    _$selectedWasteTypeModelAtom
-        .reportWrite(value, super.selectedWasteTypeModel, () {
-      super.selectedWasteTypeModel = value;
-    });
-  }
-
   late final _$wasteTypesInSiteAtom =
       Atom(name: 'SiteViewModelBase.wasteTypesInSite', context: context);
 
@@ -104,22 +71,6 @@ mixin _$SiteViewModel on SiteViewModelBase, Store {
   set wasteTypesInSite(ApiResponse<List<WasteTypeModel>> value) {
     _$wasteTypesInSiteAtom.reportWrite(value, super.wasteTypesInSite, () {
       super.wasteTypesInSite = value;
-    });
-  }
-
-  late final _$searchTypeAtom =
-      Atom(name: 'SiteViewModelBase.searchType', context: context);
-
-  @override
-  String? get searchType {
-    _$searchTypeAtom.reportRead();
-    return super.searchType;
-  }
-
-  @override
-  set searchType(String? value) {
-    _$searchTypeAtom.reportWrite(value, super.searchType, () {
-      super.searchType = value;
     });
   }
 
@@ -253,6 +204,55 @@ mixin _$SiteViewModel on SiteViewModelBase, Store {
   set expiryFileResponse(ApiResponse<FolderListModel> value) {
     _$expiryFileResponseAtom.reportWrite(value, super.expiryFileResponse, () {
       super.expiryFileResponse = value;
+    });
+  }
+
+  late final _$detailLoadingAtom =
+      Atom(name: 'SiteViewModelBase.detailLoading', context: context);
+
+  @override
+  bool get detailLoading {
+    _$detailLoadingAtom.reportRead();
+    return super.detailLoading;
+  }
+
+  @override
+  set detailLoading(bool value) {
+    _$detailLoadingAtom.reportWrite(value, super.detailLoading, () {
+      super.detailLoading = value;
+    });
+  }
+
+  late final _$selectedWasteTypeModelAtom =
+      Atom(name: 'SiteViewModelBase.selectedWasteTypeModel', context: context);
+
+  @override
+  WasteTypeModel? get selectedWasteTypeModel {
+    _$selectedWasteTypeModelAtom.reportRead();
+    return super.selectedWasteTypeModel;
+  }
+
+  @override
+  set selectedWasteTypeModel(WasteTypeModel? value) {
+    _$selectedWasteTypeModelAtom
+        .reportWrite(value, super.selectedWasteTypeModel, () {
+      super.selectedWasteTypeModel = value;
+    });
+  }
+
+  late final _$searchTypeAtom =
+      Atom(name: 'SiteViewModelBase.searchType', context: context);
+
+  @override
+  String? get searchType {
+    _$searchTypeAtom.reportRead();
+    return super.searchType;
+  }
+
+  @override
+  set searchType(String? value) {
+    _$searchTypeAtom.reportWrite(value, super.searchType, () {
+      super.searchType = value;
     });
   }
 
@@ -595,10 +595,7 @@ mixin _$SiteViewModel on SiteViewModelBase, Store {
 permanentSiteResponse: ${permanentSiteResponse},
 tempSiteResponse: ${tempSiteResponse},
 delSiteResponse: ${delSiteResponse},
-detailLoading: ${detailLoading},
-selectedWasteTypeModel: ${selectedWasteTypeModel},
 wasteTypesInSite: ${wasteTypesInSite},
-searchType: ${searchType},
 siteFoldersResponse: ${siteFoldersResponse},
 siteFoldersResponse2: ${siteFoldersResponse2},
 addSiteFolderResponse: ${addSiteFolderResponse},
@@ -607,6 +604,9 @@ deleteSiteFolderResponse: ${deleteSiteFolderResponse},
 addSiteFileResponse: ${addSiteFileResponse},
 editSiteFileResponse: ${editSiteFileResponse},
 expiryFileResponse: ${expiryFileResponse},
+detailLoading: ${detailLoading},
+selectedWasteTypeModel: ${selectedWasteTypeModel},
+searchType: ${searchType},
 folderNames: ${folderNames},
 selectedFileName: ${selectedFileName},
 selectedFilePath: ${selectedFilePath},

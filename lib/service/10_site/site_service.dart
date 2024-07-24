@@ -5,7 +5,6 @@ import 'package:injectable/injectable.dart';
 import 'package:enviro_mobile_application/utilis/main_failure.dart';
 import 'package:enviro_mobile_application/service/10_site/i_site_service.dart';
 import 'package:enviro_mobile_application/model/10_site/site_res_model/site_res_model.dart';
-
 import '../../utilis/injection.dart';
 import '../../utilis/httpservice.dart';
 import '../../utilis/api_endpoints/api_endpoints.dart';
@@ -102,25 +101,6 @@ class SiteService implements ISiteService {
     );
   }
 
-  // @override
-  // Future<Either<Map<MainFailure, dynamic>, FolderResModel>> getSiteFolders({
-  //   required int id,
-  // }) async {
-  //   var response = await getIt<HttpService>().request(
-  //     authenticated: true,
-  //     method: HttpMethod.get,
-  //     apiUrl: "${ApiEndPoints().siteFolders}$id/1/",
-  //   );
-
-  //   return response.fold(
-  //     (l) => Left(l),
-  //     (res) async {
-  //       var data = jsonDecode(res.body);
-  //       return Right(FolderResModel.fromJson(data));
-  //     },
-  //   );
-  // }
-
   @override
   Future<Either<Map<MainFailure, dynamic>, List<SiteResModel>>>
       searchSitesServiceApi({
@@ -143,31 +123,6 @@ class SiteService implements ISiteService {
       },
     );
   }
-
-  // @override
-  // Future<Either<Map<MainFailure, dynamic>, List<Folder>>> searchSiteFolder({
-  //   required String key,
-  // }) async {
-  //   customPrint(content: key);
-  //   var response = await getIt<HttpService>().multipartRequest(
-  //     method: "POST",
-  //     apiUrl: ApiEndPoints().searchSiteFolder,
-  //     data: {
-  //       "key": key,
-  //       "site": 1294,
-  //       "folder_id": 1,
-  //       "search_type": "site-individual-private",
-  //     },
-  //   );
-  //   return response.fold(
-  //     (l) => Left(l),
-  //     (res) async {
-  //       var data = jsonDecode(res.body) as List;
-  //       List<Folder> folders = data.map((e) => Folder.fromJson(e)).toList();
-  //       return Right(folders);
-  //     },
-  //   );
-  // }
 
   @override
   Future<Either<Map<MainFailure, dynamic>, List<WasteTypeModel>>>
@@ -345,7 +300,6 @@ class SiteService implements ISiteService {
       (res) async {
         var data = jsonDecode(res.body);
         FolderListModel searchedfileFolderList = FolderListModel.fromJson(data);
-
         return Right(searchedfileFolderList);
       },
     );

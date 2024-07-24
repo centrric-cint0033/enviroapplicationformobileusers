@@ -43,19 +43,21 @@ class SiteDetailScreen extends StatelessWidget {
               SizedBox(width: 5.w),
             ],
           ),
-          body: Padding(
-            padding: screenWidth,
-            child: SingleChildScrollView(
-              controller: vmPreviousSale.previousSaleController,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // Divider(color: Colors.grey.shade200),
-                  sized0hx10,
-                  Row(
+          body: SingleChildScrollView(
+            controller: vmPreviousSale.previousSaleController,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Divider(
+                  color: Colors.grey.shade300,
+                  thickness: 4,
+                ),
+                sized0hx10,
+                Padding(
+                  padding: screenWidth,
+                  child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      sized0wx20,
                       IconWidget(length: 60.h),
                       const Spacer(),
                       // CommonTextBtn(
@@ -65,44 +67,56 @@ class SiteDetailScreen extends StatelessWidget {
                       // sized0wx20,
                     ],
                   ),
-                  for (MapEntry<String, String> data in map.entries) ...{
-                    sized0hx10,
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 20.w),
-                      child: KeyValueTextWidget(
-                        maxLines: 4,
-                        keyName: data.key,
-                        value: ":${data.value}",
-                      ),
-                    ),
-                  },
+                ),
+                for (MapEntry<String, String> data in map.entries) ...{
                   sized0hx10,
-                  cmTitle("Company and Invoicing Details",
-                      blackText: true, fontWeight: FontWeight.bold),
-                  for (MapEntry<String, String> data in company.entries) ...{
-                    Padding(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: 20.w, vertical: 10.h),
-                      child: KeyValueTextWidget(
-                        maxLines: 4,
-                        keyName: data.key,
-                        value: data.value,
-                        keyStyle:
-                            Theme.of(context).textTheme.titleSmall?.copyWith(
-                                  fontSize: 12.sp,
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.normal,
-                                ),
-                      ),
+                  Padding(
+                    padding: screenWidth,
+                    child: KeyValueTextWidget(
+                      maxLines: 4,
+                      keyName: data.key,
+                      value: ":${data.value}",
                     ),
-                  },
-                  FolderTitleAndSearchWidget(id: site.id),
-                  SiteFolderListWidget(
-                    id: site.id),
+                  ),
+                },
+                sized0hx10,
+                cmTitle("Company and Invoicing Details",
+                    blackText: true, fontWeight: FontWeight.bold),
+                for (MapEntry<String, String> data in company.entries) ...{
                   sized0hx10,
-                  const PreviouseSalesWidget(),
-                ],
-              ),
+                  Padding(
+                    padding: screenWidth,
+                    child: KeyValueTextWidget(
+                      maxLines: 4,
+                      keyName: data.key,
+                      value: data.value,
+                      keyStyle:
+                          Theme.of(context).textTheme.titleSmall?.copyWith(
+                                fontSize: 12.sp,
+                                color: Colors.black,
+                                fontWeight: FontWeight.normal,
+                              ),
+                    ),
+                  ),
+                },
+                sized0hx03,
+                Divider(color: Colors.grey.shade300, thickness: 4),
+                Padding(
+                  padding: screenWidth,
+                  child: FolderTitleAndSearchWidget(id: site.id),
+                ),
+                Padding(
+                  padding: screenWidth,
+                  child: SiteFolderListWidget(id: site.id),
+                ),
+                sized0hx03,
+                Divider(color: Colors.grey.shade300, thickness: 4),
+                sized0hx10,
+                Padding(
+                  padding: screenWidth,
+                  child: const PreviouseSalesWidget(),
+                ),
+              ],
             ),
           ),
         );

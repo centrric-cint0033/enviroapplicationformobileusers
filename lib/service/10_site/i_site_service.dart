@@ -21,17 +21,11 @@ abstract class ISiteService {
   Future<Either<Map<MainFailure, dynamic>, SiteResModel>> getSiteDetails({
     required int id,
   });
-  // Future<Either<Map<MainFailure, dynamic>, FolderResModel>> getSiteFolders({
-  //   required int id,
-  // });
 
   Future<Either<Map<MainFailure, dynamic>, List<SiteResModel>>>
       searchSitesServiceApi({
     required String key,
   });
-  // Future<Either<Map<MainFailure, dynamic>, List<Folder>>> searchSiteFolder({
-  //   required String key,
-  // });
 
   Future<Either<Map<MainFailure, dynamic>, List<WasteTypeModel>>>
       getWasteTypeInSites({
