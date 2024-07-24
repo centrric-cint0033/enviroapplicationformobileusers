@@ -625,7 +625,7 @@ abstract class TeamViewModelBase with Store {
 
   @action
   Future<void> addTeamFile(
-      {required String name,
+      {
       required num employee,
       required num parentfolder,
       String? files,
@@ -633,7 +633,6 @@ abstract class TeamViewModelBase with Store {
     addFileResponse = addFileResponse.copyWith(error: null, loading: true);
 
     final result = await teamService.addTeamFiles(data: {
-      "name": name,
       "employee": employee.toString(),
       "folder": parentfolder.toString(),
       "file": files ?? ""

@@ -1,6 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
-
 import 'package:enviro_mobile_application/utilis/api_endpoints/customprint.dart';
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
@@ -204,8 +202,151 @@ class SiteService implements ISiteService {
       (res) async {
         FolderListModel siteFolderList =
             FolderListModel.fromJson(jsonDecode(res.body));
-        log(siteFolderList.toString());
         return Right(siteFolderList);
+      },
+    );
+  }
+
+  @override
+  Future<Either<Map<MainFailure, dynamic>, dynamic>> addSiteFolders(
+      {required Map<String, String> data}) async {
+    var response = await getIt<HttpService>().multipartRequest(
+        data: data, method: 'POST', apiUrl: ApiEndPoints().addSiteFolders);
+    return response.fold(
+      (l) => Left(l),
+      (res) async {
+        return const Right("Successfully added");
+      },
+    );
+  }
+
+  @override
+  Future<Either<Map<MainFailure, dynamic>, String>> editSiteFolders(
+      {required Map<String, String> data, required int folderId}) async {
+    var response = await getIt<HttpService>().multipartRequest(
+        data: data,
+        method: 'PUT',
+        apiUrl: '${ApiEndPoints().editSiteFolders}$folderId/');
+    return response.fold(
+      (l) => Left(l),
+      (res) async {
+        return const Right('success');
+      },
+    );
+  }
+
+  @override
+  Future<Either<Map<MainFailure, dynamic>, String>> deleteSiteFolders(
+      {required int folderId}) async {
+    var response = await getIt<HttpService>().request(
+        authenticated: true,
+        method: HttpMethod.delete,
+        apiUrl: '${ApiEndPoints().deleteSiteFolders}$folderId/');
+
+    return response.fold(
+      (l) => Left(l),
+      (res) async {
+        return const Right('success');
+      },
+    );
+  }
+
+  @override
+  Future<Either<Map<MainFailure, dynamic>, FolderListModel>>
+      siteFolderSearchApi({required Map<String, String> data}) async {
+    var response = await getIt<HttpService>().multipartRequest(
+        data: data, method: 'POST', apiUrl: ApiEndPoints().searchSiteFolders);
+    return response.fold(
+      (l) => Left(l),
+      (res) async {
+        var data = jsonDecode(res.body);
+        List<FolderModel> searchedFolderList =
+            List<FolderModel>.from(data.map((e) => FolderModel.fromJson(e)));
+        List<FolderModel> searchedFolderListt = List<FolderModel>.from(
+            data.map((e) => FolderModel(folders: searchedFolderList)));
+
+        FolderListModel searchedFolderListtt =
+            FolderListModel(folders: searchedFolderListt);
+        return Right(searchedFolderListtt);
+      },
+    );
+  }
+
+  @override
+  Future<Either<Map<MainFailure, dynamic>, dynamic>> addSiteFiles(
+      {required Map<String, String> data}) async {
+    var response = await getIt<HttpService>().multipartRequest(
+        data: data, method: 'POST', apiUrl: ApiEndPoints().addSiteFiles);
+    return response.fold(
+      (l) => Left(l),
+      (res) async {
+        return Right("Success");
+      },
+    );
+  }
+
+  @override
+  Future<Either<Map<MainFailure, dynamic>, String>> editSiteFiles(
+      {required Map<String, String> data, required int fileId}) async {
+    var response = await getIt<HttpService>().multipartRequest(
+        data: data,
+        method: 'PUT',
+        apiUrl: '${ApiEndPoints().editSiteFiles}$fileId/');
+    return response.fold(
+      (l) => Left(l),
+      (res) async {
+        return const Right('success');
+      },
+    );
+  }
+
+  @override
+  Future<Either<Map<MainFailure, dynamic>, String>> deleteSiteFiles(
+      {required int fileId, required int folderId}) async {
+    var response = await getIt<HttpService>().request(
+        authenticated: true,
+        method: HttpMethod.delete,
+        apiUrl: '${ApiEndPoints().deleteSiteFiles}$fileId/$folderId/');
+
+    return response.fold(
+      (l) => Left(l),
+      (res) async {
+        return const Right('success');
+      },
+    );
+  }
+
+  @override
+  Future<Either<Map<MainFailure, dynamic>, FolderListModel>> expiryDateFiles(
+      {required int fileId, required String expiry}) async {
+    var response = await getIt<HttpService>().multipartRequest(
+        data: {"date": expiry},
+        method: 'PUT',
+        apiUrl: "${ApiEndPoints().filesExpiry}$fileId/");
+    return response.fold(
+      (l) => Left(l),
+      (res) async {
+        var data = jsonDecode(res.body);
+        FolderListModel expiry = FolderListModel.fromJson(data);
+        return Right(expiry);
+      },
+    );
+  }
+
+  @override
+  Future<Either<Map<MainFailure, dynamic>, FolderListModel>>
+      fileFolderSearchApi({required Map<String, String> data}) async {
+    var response = await getIt<HttpService>().multipartRequest(
+        data: data,
+        method: 'POST',
+        apiUrl: ApiEndPoints().searchSiteFileFolders);
+    return response.fold(
+      (l) => Left(l),
+      (res) async {
+        var data = jsonDecode(res.body);
+        FolderListModel searchedfileFolderList = FolderListModel.fromJson(data);
+
+        return Right(searchedfileFolderList);
       },
     );
   }

@@ -23,11 +23,12 @@ class FolderTitleAndSearchWidget extends StatelessWidget {
               text: 'Add folders+',
               onPressed: () {
                 showCreateEditDialog(context, createEditTap: (v) {
-                  // vmIntranet.addIntranetFolder(
-                  //   context: context,
-                  //   name: v,
-                  //   parentfolder: 1,
-                  // );
+                  vmSite.addSiteFolderApi(
+                    siteId: id ?? 0,
+                    context: context,
+                    name: v,
+                    parentfolder: 1,
+                  );
                 });
               }),
         ]),
@@ -37,7 +38,8 @@ class FolderTitleAndSearchWidget extends StatelessWidget {
           onChanged: (v) => vmSite.onTextChanged(() =>
               vmSite.siteFolderCtr.text.isEmpty
                   ? vmSite.getSiteFolderss(id: id ?? 0, parentFolderId: 1)
-                  : vmSite.getSiteFolderss(id: id ?? 0, parentFolderId: 1)),
+                  : vmSite.siteFolderSearchApi(
+                      v, 1, vmSite.searchType ?? "", id ?? 0)),
           suffixTap: () {},
           hintText: 'Search by Folder Name',
         ),

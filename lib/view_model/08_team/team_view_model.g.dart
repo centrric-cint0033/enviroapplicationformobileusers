@@ -1196,13 +1196,11 @@ mixin _$TeamViewModel on TeamViewModelBase, Store {
 
   @override
   Future<void> addTeamFile(
-      {required String name,
-      required num employee,
+      {required num employee,
       required num parentfolder,
       String? files,
       required BuildContext context}) {
     return _$addTeamFileAsyncAction.run(() => super.addTeamFile(
-        name: name,
         employee: employee,
         parentfolder: parentfolder,
         files: files,

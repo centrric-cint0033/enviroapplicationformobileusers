@@ -39,4 +39,31 @@ abstract class ISiteService {
   });
   Future<Either<Map<MainFailure, dynamic>, FolderListModel>> getSiteFolderss(
       {required num id, required num parentFolderId});
+
+  Future<Either<Map<MainFailure, dynamic>, dynamic>> addSiteFolders(
+      {required Map<String, String> data});
+
+  Future<Either<Map<MainFailure, dynamic>, String>> editSiteFolders(
+      {required Map<String, String> data, required int folderId});
+
+  Future<Either<Map<MainFailure, dynamic>, String>> deleteSiteFolders(
+      {required int folderId});
+
+  Future<Either<Map<MainFailure, dynamic>, FolderListModel>>
+      siteFolderSearchApi({required Map<String, String> data});
+
+  Future<Either<Map<MainFailure, dynamic>, dynamic>> addSiteFiles(
+      {required Map<String, String> data});
+
+  Future<Either<Map<MainFailure, dynamic>, String>> editSiteFiles(
+      {required Map<String, String> data, required int fileId});
+
+  Future<Either<Map<MainFailure, dynamic>, String>> deleteSiteFiles(
+      {required int fileId, required int folderId});
+
+  Future<Either<Map<MainFailure, dynamic>, FolderListModel>> expiryDateFiles(
+      {required int fileId, required String expiry});
+
+  Future<Either<Map<MainFailure, dynamic>, FolderListModel>>
+      fileFolderSearchApi({required Map<String, String> data});
 }

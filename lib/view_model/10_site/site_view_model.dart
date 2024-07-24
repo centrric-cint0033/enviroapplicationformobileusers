@@ -1,5 +1,7 @@
 import 'dart:async';
 import 'package:enviro_mobile_application/utilis/api_endpoints/customprint.dart';
+import 'package:enviro_mobile_application/widgets/ww_popup_error.dart';
+import 'package:intl/intl.dart';
 import 'package:mobx/mobx.dart';
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
@@ -75,6 +77,10 @@ abstract class SiteViewModelBase with Store {
   @observable
   String? searchType;
 
+  TextEditingController textFolderAddController = TextEditingController();
+  TextEditingController textFolderEditController = TextEditingController();
+  TextEditingController fileFolderSearchCntrlr = TextEditingController();
+
   @observable
   ApiResponse<FolderListModel> siteFoldersResponse =
       ApiResponse<FolderListModel>();
@@ -82,6 +88,46 @@ abstract class SiteViewModelBase with Store {
   @observable
   ApiResponse<FolderListModel> siteFoldersResponse2 =
       ApiResponse<FolderListModel>();
+
+  @observable
+  ApiResponse addSiteFolderResponse = ApiResponse();
+
+  @observable
+  ApiResponse<String> editSiteFolderResponse = ApiResponse<String>();
+
+  @observable
+  ApiResponse<String> deleteSiteFolderResponse = ApiResponse<String>();
+
+  @observable
+  ApiResponse addSiteFileResponse = ApiResponse();
+
+  @observable
+  ApiResponse<String> editSiteFileResponse = ApiResponse<String>();
+
+  @observable
+  ApiResponse<FolderListModel> expiryFileResponse =
+      ApiResponse<FolderListModel>();
+
+  @observable
+  List<String> folderNames = [];
+
+  @observable
+  String? selectedFileName;
+
+  @observable
+  String? selectedFilePath;
+
+  @observable
+  int? loadinIndexFolder;
+
+  @observable
+  int? loadinIndexFile;
+
+  @observable
+  int? parentFolderId;
+
+  @observable
+  DateTime? selectedExpiryDate;
 
   @action
   Future<void> getPermanentSites({int? page}) async {
@@ -441,5 +487,274 @@ abstract class SiteViewModelBase with Store {
         },
       );
     }
+  }
+
+  @action
+  Future<void> addSiteFolderApi(
+      {required String name,
+      required int siteId,
+      required int parentfolder,
+      required BuildContext context}) async {
+    addSiteFolderResponse =
+        addSiteFolderResponse.copyWith(error: null, loading: true);
+
+    final result = await siteService.addSiteFolders(data: {
+      "name": name,
+      "site": siteId.toString(),
+      "parent_folder": parentfolder.toString(),
+    });
+
+    return result.fold(
+      (l) {
+        addSiteFolderResponse =
+            addSiteFolderResponse.copyWith(errors: l, loading: false);
+        popupErrorData(context, mainFailure: l);
+      },
+      (r) async {
+        await getSiteFolderss(id: siteId, parentFolderId: parentfolder);
+        addSiteFolderResponse =
+            addSiteFolderResponse.copyWith(error: null, loading: false);
+        textFolderAddController.clear();
+      },
+    );
+  }
+
+  @action
+  Future<void> editSiteFolderApi({
+    required int folderId,
+    required int parentFolderId,
+    required String name,
+    required BuildContext context,
+    required int siteId,
+  }) async {
+    editSiteFolderResponse =
+        editSiteFolderResponse.copyWith(error: null, loading: true);
+
+    final result = await siteService
+        .editSiteFolders(data: {"name": name}, folderId: folderId);
+    return result.fold(
+      (l) {
+        editSiteFolderResponse = editSiteFolderResponse.copyWith(
+          errors: l,
+          loading: false,
+        );
+        popupErrorData(context, mainFailure: l);
+      },
+      (r) async {
+        await getSiteFolderss(id: siteId, parentFolderId: parentFolderId);
+        editSiteFolderResponse = editSiteFolderResponse.copyWith(
+          data: r,
+          error: null,
+          loading: false,
+        );
+      },
+    );
+  }
+
+  @action
+  Future<void> deleteSiteFolderApi(
+      {required int folderId,
+      required BuildContext context,
+      required int siteId,
+      required int parentFolderId}) async {
+    addSiteFolderResponse =
+        addSiteFolderResponse.copyWith(error: null, loading: true);
+
+    final result = await siteService.deleteSiteFolders(folderId: folderId);
+    return result.fold(
+      (l) {
+        addSiteFolderResponse = addSiteFolderResponse.copyWith(
+          errors: l,
+          loading: false,
+        );
+        popupErrorData(context, mainFailure: l);
+      },
+      (r) async {
+        await getSiteFolderss(id: siteId, parentFolderId: parentFolderId);
+        addSiteFolderResponse = addSiteFolderResponse.copyWith(
+          data: r,
+          error: null,
+          loading: false,
+        );
+      },
+    );
+  }
+
+  @action
+  Future<void> siteFolderSearchApi(
+      String searchData, int folderId, String searchType, int siteId) async {
+    siteFoldersResponse =
+        siteFoldersResponse.copyWith(errors: null, loading: true);
+
+    final result = await siteService.siteFolderSearchApi(data: {
+      "key": searchData,
+      "folder_id": "$folderId",
+      "search_type": searchType,
+      "site": "$siteId"
+    });
+    return result.fold(
+      (l) {
+        siteFoldersResponse =
+            siteFoldersResponse.copyWith(errors: l, loading: false);
+      },
+      (r) {
+        siteFoldersResponse =
+            siteFoldersResponse.copyWith(data: r, errors: null, loading: false);
+      },
+    );
+  }
+
+  @action
+  Future<void> addSiteFileApi({
+    required BuildContext context,
+    required int siteId,
+    required int parentfolder,
+    String? files,
+  }) async {
+    addSiteFileResponse =
+        addSiteFileResponse.copyWith(error: null, loading: true);
+
+    final result = await siteService.addSiteFiles(data: {
+      "site": siteId.toString(),
+      "folder": parentfolder.toString(),
+      "file": files ?? ""
+    });
+    return result.fold(
+      (l) {
+        addSiteFileResponse =
+            addSiteFileResponse.copyWith(errors: l, loading: false);
+        popupErrorData(context, mainFailure: l);
+      },
+      (r) async {
+        await getSiteFolderss(id: siteId, parentFolderId: parentfolder);
+        addSiteFileResponse =
+            addSiteFileResponse.copyWith(data: r, error: null, loading: false);
+        // context.router.pop();
+      },
+    );
+  }
+
+  @action
+  Future<void> editSiteFilesApi({
+    required BuildContext context,
+    required int filesId,
+    required int parentFolderId,
+    required String name,
+    required int siteId,
+  }) async {
+    editSiteFileResponse =
+        editSiteFileResponse.copyWith(error: null, loading: true);
+
+    final result =
+        await siteService.editSiteFiles(data: {"name": name}, fileId: filesId);
+    return result.fold(
+      (l) {
+        editSiteFileResponse = editSiteFileResponse.copyWith(
+          errors: l,
+          loading: false,
+        );
+        popupErrorData(context, mainFailure: l);
+      },
+      (r) async {
+        await getSiteFolderss(id: siteId, parentFolderId: parentFolderId);
+        editSiteFileResponse = editSiteFileResponse.copyWith(
+          data: r,
+          error: null,
+          loading: false,
+        );
+      },
+    );
+  }
+
+  @action
+  Future<void> deleteSiteFilesApi(
+      {required BuildContext context,
+      required int fileId,
+      required int siteId,
+      required int parentFolderId}) async {
+    addSiteFileResponse =
+        addSiteFileResponse.copyWith(error: null, loading: true);
+
+    final result = await siteService.deleteSiteFiles(
+        fileId: fileId, folderId: parentFolderId);
+    return result.fold(
+      (l) {
+        addSiteFileResponse = addSiteFileResponse.copyWith(
+          errors: l,
+          loading: false,
+        );
+      },
+      (r) async {
+        await getSiteFolderss(id: siteId, parentFolderId: parentFolderId);
+        addSiteFileResponse = addSiteFileResponse.copyWith(
+          data: r,
+          error: null,
+          loading: false,
+        );
+      },
+    );
+  }
+
+  @action
+  Future<void> exipryDateFileApi(
+      {required int fileId,
+      required String expiry,
+      required BuildContext context,
+      required int siteId,
+      required int parentFolderId}) async {
+    expiryFileResponse = expiryFileResponse.copyWith(
+        error: null, loading: expiryFileResponse.data == null);
+    final result =
+        await siteService.expiryDateFiles(fileId: fileId, expiry: expiry);
+
+    return result.fold(
+      (l) {
+        expiryFileResponse =
+            expiryFileResponse.copyWith(errors: l, loading: false);
+        popupErrorData(context, mainFailure: l);
+      },
+      (r) async {
+        await getSiteFolderss(id: siteId, parentFolderId: parentFolderId);
+        expiryFileResponse =
+            expiryFileResponse.copyWith(error: null, loading: false);
+      },
+    );
+  }
+
+  @action
+  Future<void> fileFolderSearchApi(
+      String searchData, num folderId, String searchType, int siteId) async {
+    siteFoldersResponse2 =
+        siteFoldersResponse2.copyWith(errors: null, loading: true);
+
+    final result = await siteService.fileFolderSearchApi(data: {
+      "key": searchData,
+      "folder_id": "$folderId",
+      "search_type": searchType,
+      "site": "$siteId"
+    });
+    return result.fold(
+      (l) {
+        siteFoldersResponse2 =
+            siteFoldersResponse2.copyWith(errors: l, loading: false);
+      },
+      (r) {
+        siteFoldersResponse2 = siteFoldersResponse2.copyWith(
+            data: r, errors: null, loading: false);
+      },
+    );
+  }
+
+  @action
+  expiryDatePickerFn(
+      BuildContext context, date, int fileId, num parentFolderId, int siteId) {
+    selectedExpiryDate = date;
+    String dateString = DateFormat('yyyy-MM-dd').format(selectedExpiryDate!);
+    exipryDateFileApi(
+        fileId: fileId,
+        siteId: siteId,
+        expiry: dateString,
+        context: context,
+        parentFolderId: int.parse("$parentFolderId"));
   }
 }

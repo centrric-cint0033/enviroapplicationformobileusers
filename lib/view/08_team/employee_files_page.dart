@@ -102,7 +102,6 @@ class EmployeeFilesPage extends StatelessWidget {
                                     vmTeam.addTeamFile(
                                         context: context,
                                         employee: employeeId ?? 0,
-                                        name: vmTeam.selectedFileName ?? "",
                                         files: vmTeam.selectedFilePath,
                                         parentfolder: folderId ?? 1);
                                   }

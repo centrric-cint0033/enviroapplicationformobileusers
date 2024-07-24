@@ -4,8 +4,8 @@ import 'package:enviro_mobile_application/model/00_common_model/folder_model/fol
 import 'package:enviro_mobile_application/utilis/Appthemes.dart';
 import 'package:enviro_mobile_application/utilis/constant.dart';
 import 'package:enviro_mobile_application/view/08_team/team_widgets/cm_button.dart';
-import 'package:enviro_mobile_application/view_model/07_intranet/intranet_view_model.dart';
 import 'package:enviro_mobile_application/view_model/08_team/team_view_model.dart';
+import 'package:enviro_mobile_application/view_model/10_site/site_view_model.dart';
 import 'package:enviro_mobile_application/widgets/cm_title.dart';
 import 'package:enviro_mobile_application/widgets/cmn_title_textwidget.dart';
 import 'package:enviro_mobile_application/widgets/ww_customLoading.dart';
@@ -26,10 +26,12 @@ class SiteFolderDetailPage extends StatelessWidget {
     super.key,
     this.folderName,
     this.searchType,
+    this.siteId,
   });
 
   final String? folderName;
   final String? searchType;
+  final int? siteId;
 
   @override
   Widget build(BuildContext context) {
@@ -47,14 +49,13 @@ class SiteFolderDetailPage extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: 15.w),
             child: Observer(
               builder: (context) {
-                final res = vmIntranet.intranetFoldersResponse2;
+                final res = vmSite.siteFoldersResponse2;
                 FolderListModel? folderList = res.data;
                 FolderListModel? fileList = res.data;
-                final editResponse = vmIntranet.editIntranetFileResponse;
-                final addFolderResponse = vmIntranet.addFolderResponse;
-                final addFileResponse = vmIntranet.addIntranetFileResponse;
-                final editFolderResponse =
-                    vmIntranet.editIntranetFolderResponse;
+                final editResponse = vmSite.editSiteFileResponse;
+                final addFolderResponse = vmSite.addSiteFolderResponse;
+                final addFileResponse = vmSite.addSiteFileResponse;
+                final editFolderResponse = vmSite.editSiteFolderResponse;
                 return res.loading
                     ? Center(child: wwCustomLoader())
                     : SingleChildScrollView(
@@ -62,27 +63,25 @@ class SiteFolderDetailPage extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               sized0hx10,
-                              Text(vmIntranet.folderNames.join(' > ')),
+                              Text(vmSite.folderNames.join(' > ')),
                               sized0hx10,
                               Row(
                                 children: [
                                   Expanded(
                                     child: WWTextField(
-                                      controller:
-                                          vmIntranet.fileFolderSearchCntrlr,
+                                      controller: vmSite.fileFolderSearchCntrlr,
                                       onChanged: (v) =>
                                           vmTeam.onTextChanged(() {
                                         v.isEmpty
-                                            ? vmIntranet.getIntranetFoldersApi(
+                                            ? vmSite.getSiteFolderss(
+                                                id: siteId ?? 0,
                                                 parentFolderId:
-                                                    vmIntranet.parentFolderId ??
-                                                        1)
-                                            : vmIntranet.fileFolderSearchApi(
+                                                    vmSite.parentFolderId ?? 1)
+                                            : vmSite.fileFolderSearchApi(
                                                 v,
-                                                vmIntranet.parentFolderId ?? 1,
-                                                vmIntranet.searchType ??
-                                                    "intranet",
-                                              );
+                                                vmSite.parentFolderId ?? 1,
+                                                vmSite.searchType ?? "",
+                                                siteId ?? 0);
                                       }),
                                       suffixTap: () {},
                                       hintText: 'Search',
@@ -92,11 +91,12 @@ class SiteFolderDetailPage extends StatelessWidget {
                                   customButton(() {
                                     showCreateEditDialog(context,
                                         createEditTap: (v) {
-                                      vmIntranet.addIntranetFolder(
+                                      vmSite.addSiteFolderApi(
+                                          siteId: siteId ?? 0,
                                           context: context,
                                           name: v,
                                           parentfolder:
-                                              vmIntranet.parentFolderId ?? 1);
+                                              vmSite.parentFolderId ?? 1);
                                     });
                                   }, Appthemes.cPrimary, "Folder +"),
                                   sized0wx10,
@@ -106,15 +106,16 @@ class SiteFolderDetailPage extends StatelessWidget {
                                     if (result != null) {
                                       String fileName =
                                           result.files.single.name;
-                                      vmIntranet.selectedFileName = fileName;
+                                      vmSite.selectedFileName = fileName;
                                       PlatformFile file = result.files.single;
-                                      vmIntranet.selectedFilePath = file.path!;
+                                      vmSite.selectedFilePath = file.path!;
                                       // ignore: use_build_context_synchronously
-                                      vmIntranet.addIntranetFileApi(
+                                      vmSite.addSiteFileApi(
                                           context: context,
-                                          files: vmIntranet.selectedFilePath,
+                                          siteId: siteId ?? 0,
+                                          files: vmSite.selectedFilePath,
                                           parentfolder:
-                                              vmIntranet.parentFolderId ?? 1);
+                                              vmSite.parentFolderId ?? 1);
                                     }
                                   }, Appthemes.cPrimary, "Files +")
                                 ],
@@ -138,8 +139,8 @@ class SiteFolderDetailPage extends StatelessWidget {
                                                   .folders?.length ??
                                               0,
                                           itemBuilder: (context, index) {
-                                            var data = vmIntranet
-                                                .intranetFoldersResponse2
+                                            var data = vmSite
+                                                .siteFoldersResponse2
                                                 .data
                                                 ?.folders?[0]
                                                 .folders?[index];
@@ -149,62 +150,61 @@ class SiteFolderDetailPage extends StatelessWidget {
                                                   : WWFolderCard(
                                                       folder: data,
                                                       onTap: () async {
-                                                        await vmIntranet
-                                                            .getIntranetFoldersApi(
+                                                        await vmSite
+                                                            .getSiteFolderss(
+                                                          id: siteId ?? 0,
                                                           parentFolderId:
                                                               data.id ?? 0,
                                                         );
-                                                        vmIntranet
-                                                                .parentFolderId =
+                                                        vmSite.parentFolderId =
                                                             data.id;
-                                                        vmIntranet.searchType =
+                                                        vmSite.searchType =
                                                             data.type;
-                                                        vmIntranet.folderNames
-                                                            .add(
-                                                                "${data.name}");
+                                                        vmSite.folderNames.add(
+                                                            "${data.name}");
 
-                                                        vmIntranet
+                                                        vmSite
                                                             .fileFolderSearchCntrlr
                                                             .text = "";
                                                         context.router.push(
-                                                            IntranetFolderDetailRoute(
-                                                          folderName: data.name,
-                                                          searchType: data.type,
-                                                        ));
+                                                            SiteFolderDetailRoute(
+                                                                folderName:
+                                                                    data.name,
+                                                                searchType:
+                                                                    data.type,
+                                                                siteId:
+                                                                    siteId ??
+                                                                        0));
                                                       },
                                                       folderName: data.name,
                                                       loading: editFolderResponse
                                                               .loading &&
-                                                          vmIntranet
-                                                                  .loadinIndexFolder ==
+                                                          vmSite.loadinIndexFolder ==
                                                               index,
                                                       editTap: (s) {
-                                                        vmIntranet
-                                                                .loadinIndexFolder =
+                                                        vmSite.loadinIndexFolder =
                                                             index;
-                                                        vmIntranet
-                                                            .editIntranetFolderApi(
+                                                        vmSite
+                                                            .editSiteFolderApi(
+                                                          siteId: siteId ?? 0,
                                                           name: s,
                                                           folderId:
                                                               data.id ?? 0,
-                                                          parentFolderId: vmIntranet
+                                                          parentFolderId: vmSite
                                                                   .parentFolderId ??
                                                               1,
                                                           context: context,
                                                         );
                                                       },
                                                       deleteTap: () {
-                                                        vmIntranet
-                                                            .deleteIntranetFolderApi(
-                                                                folderId:
-                                                                    data.id ??
-                                                                        0,
-                                                                context:
-                                                                    context,
-                                                                parentFolderId:
-                                                                    vmIntranet
-                                                                            .parentFolderId ??
-                                                                        1);
+                                                        vmSite.deleteSiteFolderApi(
+                                                            siteId: siteId ?? 0,
+                                                            folderId:
+                                                                data.id ?? 0,
+                                                            context: context,
+                                                            parentFolderId:
+                                                                vmSite.parentFolderId ??
+                                                                    1);
                                                       });
                                             } else {
                                               return Container();
@@ -237,17 +237,18 @@ class SiteFolderDetailPage extends StatelessWidget {
                                                   ?.folders?[0].files?.length ??
                                               0,
                                           itemBuilder: (context, index) {
-                                            var data = vmIntranet
-                                                .intranetFoldersResponse2
+                                            var data = vmSite
+                                                .siteFoldersResponse2
                                                 .data
                                                 ?.folders?[0]
                                                 .files?[index];
                                             if (data != null) {
                                               return WWFileCard(
-                                                  fromIntranet: true,
-                                                  parentFolderId: vmIntranet
-                                                          .parentFolderId ??
-                                                      1,
+                                                  fromSite: true,
+                                                  siteId: siteId,
+                                                  parentFolderId:
+                                                      vmSite.parentFolderId ??
+                                                          1,
                                                   file: data,
                                                   onTap: () async {
                                                     if (await canLaunch(
@@ -261,28 +262,27 @@ class SiteFolderDetailPage extends StatelessWidget {
                                                   fileName: data.name,
                                                   loading: editResponse
                                                           .loading &&
-                                                      vmIntranet
-                                                              .loadinIndexFile ==
+                                                      vmSite.loadinIndexFile ==
                                                           index,
                                                   editTap: (s) {
-                                                    vmIntranet.loadinIndexFile =
+                                                    vmSite.loadinIndexFile =
                                                         index;
-                                                    vmIntranet
-                                                        .editIntranetFilesApi(
+                                                    vmSite.editSiteFilesApi(
+                                                      context: context,
                                                       name: s,
+                                                      siteId: siteId ?? 0,
                                                       filesId: data.id ?? 0,
-                                                      parentFolderId: vmIntranet
+                                                      parentFolderId: vmSite
                                                               .parentFolderId ??
                                                           1,
-                                                      context: context,
                                                     );
                                                   },
                                                   deleteTap: () {
-                                                    vmIntranet
-                                                        .deleteIntranetFilesApi(
-                                                      fileId: data.id ?? 0,
+                                                    vmSite.deleteSiteFilesApi(
                                                       context: context,
-                                                      parentFolderId: vmIntranet
+                                                      fileId: data.id ?? 0,
+                                                      siteId: siteId ?? 0,
+                                                      parentFolderId: vmSite
                                                               .parentFolderId ??
                                                           1,
                                                     );

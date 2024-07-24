@@ -4,6 +4,7 @@ import 'package:enviro_mobile_application/view_model/03_vehicles/vehicle_view_mo
 import 'package:enviro_mobile_application/view_model/04_ohs/ohs_view_model.dart';
 import 'package:enviro_mobile_application/view_model/07_intranet/intranet_view_model.dart';
 import 'package:enviro_mobile_application/view_model/08_team/team_view_model.dart';
+import 'package:enviro_mobile_application/view_model/10_site/site_view_model.dart';
 import 'package:enviro_mobile_application/widgets/common_icon_btn_widget.dart';
 import 'package:enviro_mobile_application/widgets/ww_folder_card.dart';
 import 'package:flutter/cupertino.dart';
@@ -20,11 +21,12 @@ class WWFileCard extends StatelessWidget {
   final num? employeeID;
   final num parentFolderId;
   final int? vehicleId;
+  final int? siteId;
   final bool? fromOhs;
   final bool? fromVehicle;
   final bool fromMaintenance;
-
   final bool? fromIntranet;
+  final bool? fromSite;
 
   const WWFileCard({
     super.key,
@@ -41,6 +43,8 @@ class WWFileCard extends StatelessWidget {
     this.fromVehicle = false,
     this.fromIntranet = false,
     this.fromMaintenance = false,
+    this.fromSite = false,
+    this.siteId,
   });
 
   @override
@@ -125,11 +129,18 @@ class WWFileCard extends StatelessWidget {
                             vmIntranet.selectedExpiryDate,
                             (date) => vmIntranet.expiryDatePickerFn(
                                 context, date, file.id ?? 1, parentFolderId))
-                        : datePicker(
-                            context,
-                            vmTeam.selectedExpiryDate,
-                            (date) => vmTeam.expiryDatePickerFn(context, date,
-                                file.id ?? 1, employeeID ?? 0, parentFolderId))
+                        : fromSite == true
+                            ? datePicker(
+                                context,
+                                vmSite.selectedExpiryDate,
+                                (date) => vmSite.expiryDatePickerFn(
+                                    context,
+                                    date,
+                                    file.id ?? 1,
+                                    parentFolderId,
+                                    siteId ?? 0))
+                            : datePicker(context, vmTeam.selectedExpiryDate,
+                                (date) => vmTeam.expiryDatePickerFn(context, date, file.id ?? 1, employeeID ?? 0, parentFolderId))
           ],
         ),
       ),

@@ -420,6 +420,7 @@ abstract class $AppRouter extends _i46.RootStackRouter {
           key: args.key,
           folderName: args.folderName,
           searchType: args.searchType,
+          siteId: args.siteId,
         ),
       );
     },
@@ -1526,6 +1527,7 @@ class SiteFolderDetailRoute
     _i50.Key? key,
     String? folderName,
     String? searchType,
+    int? siteId,
     List<_i46.PageRouteInfo>? children,
   }) : super(
           SiteFolderDetailRoute.name,
@@ -1533,6 +1535,7 @@ class SiteFolderDetailRoute
             key: key,
             folderName: folderName,
             searchType: searchType,
+            siteId: siteId,
           ),
           initialChildren: children,
         );
@@ -1548,6 +1551,7 @@ class SiteFolderDetailRouteArgs {
     this.key,
     this.folderName,
     this.searchType,
+    this.siteId,
   });
 
   final _i50.Key? key;
@@ -1556,9 +1560,11 @@ class SiteFolderDetailRouteArgs {
 
   final String? searchType;
 
+  final int? siteId;
+
   @override
   String toString() {
-    return 'SiteFolderDetailRouteArgs{key: $key, folderName: $folderName, searchType: $searchType}';
+    return 'SiteFolderDetailRouteArgs{key: $key, folderName: $folderName, searchType: $searchType, siteId: $siteId}';
   }
 }
 
