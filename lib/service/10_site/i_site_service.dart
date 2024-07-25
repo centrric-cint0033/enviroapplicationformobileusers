@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:enviro_mobile_application/model/10_site/number_of_clients_res_model/number_of_clients_res_model.dart';
 
 import '../../utilis/main_failure.dart';
 import '../../model/10_site/site_res_model/site_res_model.dart';
@@ -60,4 +61,7 @@ abstract class ISiteService {
 
   Future<Either<Map<MainFailure, dynamic>, FolderListModel>>
       fileFolderSearchApi({required Map<String, String> data});
+
+  Future<Either<Map<MainFailure, dynamic>, NumberOfClientsResModel>>
+      getNumberOfClients();
 }

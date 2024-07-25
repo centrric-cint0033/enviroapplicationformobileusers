@@ -19,8 +19,7 @@ class NotificationCommentList extends StatelessWidget {
           ? ListView.separated(
               shrinkWrap: true,
               itemCount: datas[indexx].comments_list?.length ?? 0,
-              separatorBuilder: (BuildContext context, int index) =>
-                         sized0hx05,
+              separatorBuilder: (BuildContext context, int index) => sized0hx05,
               itemBuilder: (context, index) {
                 return Container(
                   decoration:

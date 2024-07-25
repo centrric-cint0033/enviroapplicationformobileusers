@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:enviro_mobile_application/model/10_site/number_of_clients_res_model/number_of_clients_res_model.dart';
 import 'package:enviro_mobile_application/utilis/api_endpoints/customprint.dart';
 import 'package:enviro_mobile_application/widgets/ww_popup_error.dart';
 import 'package:intl/intl.dart';
@@ -70,6 +71,10 @@ abstract class SiteViewModelBase with Store {
   @observable
   ApiResponse<FolderListModel> expiryFileResponse =
       ApiResponse<FolderListModel>();
+
+  @observable
+  ApiResponse<NumberOfClientsResModel> numberOfClientsResponse =
+      ApiResponse<NumberOfClientsResModel>();
 
   Timer? debouce;
 
@@ -691,6 +696,30 @@ abstract class SiteViewModelBase with Store {
       (r) {
         siteFoldersResponse2 = siteFoldersResponse2.copyWith(
             data: r, errors: null, loading: false);
+      },
+    );
+  }
+
+  @action
+  Future<void> getNumberOfClientsApi({required BuildContext context}) async {
+    numberOfClientsResponse =
+        numberOfClientsResponse.copyWith(error: null, loading: true);
+
+    final result = await siteService.getNumberOfClients();
+    return result.fold(
+      (l) {
+        numberOfClientsResponse = numberOfClientsResponse.copyWith(
+          errors: l,
+          loading: false,
+        );
+        popupErrorData(context, mainFailure: l);
+      },
+      (r) async {
+        numberOfClientsResponse = numberOfClientsResponse.copyWith(
+          data: r,
+          error: null,
+          loading: false,
+        );
       },
     );
   }

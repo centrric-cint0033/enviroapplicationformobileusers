@@ -9,10 +9,10 @@ import 'package:enviro_mobile_application/view/08_team/team_widgets/cm_button.da
 import 'package:enviro_mobile_application/view/08_team/team_widgets/dp_image_widget.dart';
 import 'package:enviro_mobile_application/view_model/08_team/team_view_model.dart';
 import 'package:enviro_mobile_application/view_model/10_profile/profile_view_model.dart';
-import 'package:enviro_mobile_application/widgets/cm_show_delete_dialoque.dart';
 import 'package:enviro_mobile_application/widgets/cm_title.dart';
 import 'package:enviro_mobile_application/widgets/cmbutton.dart';
 import 'package:enviro_mobile_application/widgets/cmn_title_textwidget.dart';
+import 'package:enviro_mobile_application/widgets/show_confirmation_alert.dart';
 import 'package:enviro_mobile_application/widgets/ww_customLoading.dart';
 import 'package:enviro_mobile_application/widgets/ww_folder_card.dart';
 import 'package:enviro_mobile_application/widgets/ww_search_widget.dart';
@@ -55,30 +55,32 @@ class TeamProfileScreen extends StatelessWidget {
                     : SingleChildScrollView(
                         child: Column(children: [
                           sized0hx10,
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              cmOutlineButton(
-                                  text: "TimeSheet",
-                                  onPressed: () {
-                                    vmTeam.selectedChooseWeekTimesheet =
-                                        getLastFriday(DateTime.now());
-                                    vmTeam.getTimeSheetApi(
-                                        date: DateFormat('yyyy-MM-dd').format(
-                                            vmTeam
-                                                .selectedChooseWeekTimesheet!),
-                                        context: context);
-                                    context.router.push(TimeSheetRoute());
-                                  }),
-                              cmOutlineButton(
-                                  text: "Leave Application",
-                                  onPressed: () {
-                                    vmTeam.addFileLeave = "";
-                                    context.router
-                                        .push(LeaveApplicationRoute());
-                                  }),
-                            ],
-                          ),
+                          if (vmProfile.profilepageResponse.data?.employeeId ==
+                              employeeDetails?.employeeId)
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                cmOutlineButton(
+                                    text: "TimeSheet",
+                                    onPressed: () {
+                                      vmTeam.selectedChooseWeekTimesheet =
+                                          getLastFriday(DateTime.now());
+                                      vmTeam.getTimeSheetApi(
+                                          date: DateFormat('yyyy-MM-dd').format(
+                                              vmTeam
+                                                  .selectedChooseWeekTimesheet!),
+                                          context: context);
+                                      context.router.push(TimeSheetRoute());
+                                    }),
+                                cmOutlineButton(
+                                    text: "Leave Application",
+                                    onPressed: () {
+                                      vmTeam.addFileLeave = "";
+                                      context.router
+                                          .push(LeaveApplicationRoute());
+                                    }),
+                              ],
+                            ),
                           sized0hx10,
                           Container(
                             height: 82.h,
@@ -139,20 +141,25 @@ class TeamProfileScreen extends StatelessWidget {
                                                     height: 26.h,
                                                     width: 57.h,
                                                     child: customButton(() {
-                                                      showDeleteDialoq(context,
-                                                          () {
-                                                        vmTeam.deleteEmployeeApi(
-                                                            context: context,
-                                                            employeeID:
-                                                                employeeDetails
-                                                                        ?.id ??
-                                                                    0);
-                                                        context.router.pop();
-                                                      });
+                                                      showConfirmationAlert(
+                                                          context: context,
+                                                          content:
+                                                              "Do you really want to delete?",
+                                                          submitText: "Yes",
+                                                          submitText2: "No",
+                                                          onSubmit: () {
+                                                            vmTeam.deleteEmployeeApi(
+                                                                context:
+                                                                    context,
+                                                                employeeID:
+                                                                    employeeDetails
+                                                                            ?.id ??
+                                                                        0);
+                                                          });
                                                     }, Appthemes.cPrimary,
                                                         "Delete"),
                                                   ),
-                                                  sized0hx10,
+                                                  sized0wx10,
                                                   SizedBox(
                                                     height: 26.h,
                                                     width: 57.h,

@@ -132,7 +132,7 @@ Widget showData(
           sized0hx05,
           expandedRowShowText('Date', data.date ?? ""),
           sized0hx05,
-          expandedRowShowText('Time', data.time ?? ""),
+          expandedRowShowText('Time', convertTo12HourFormat(data.time ?? "")),
           sized0hx05,
           expandedRowShowText(
               vmVehicle.vehicleType == VehicleType.truck
@@ -151,6 +151,7 @@ Widget showData(
           sized0hx05,
           expandedRowShowText(
               'Volume used in Litres', data.volumeUsedInLiter ?? ""),
+          sized0hx05,
           rowButton(
               editOntap: editOntapFuelExpense,
               deleteOntap: () {
@@ -299,4 +300,14 @@ class WWdropDown extends StatelessWidget {
       ),
     );
   }
+}
+
+String convertTo12HourFormat(String time) {
+  // Parse the time string into a DateTime object
+  DateFormat inputFormat = DateFormat("HH:mm");
+  DateTime dateTime = inputFormat.parse(time);
+
+  // Format the DateTime object into a 12-hour format with AM/PM
+  DateFormat outputFormat = DateFormat.jm(); // 'jm' stands for 'h:mm a'
+  return outputFormat.format(dateTime);
 }

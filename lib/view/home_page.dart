@@ -3,6 +3,7 @@ import 'package:enviro_mobile_application/Routepage/approutes.gr.dart';
 import 'package:enviro_mobile_application/Routepage/routespage.dart';
 import 'package:enviro_mobile_application/model/home/res_model/homerespmodel.dart';
 import 'package:enviro_mobile_application/utilis/Appthemes.dart';
+import 'package:enviro_mobile_application/view/intranet_page/ai_door_ui.dart';
 import 'package:enviro_mobile_application/view_model/02_sales/sales_view_model.dart';
 import 'package:enviro_mobile_application/view_model/03_vehicles/vehicle_view_model.dart';
 import 'package:enviro_mobile_application/view_model/04_ohs/ohs_view_model.dart';
@@ -70,6 +71,15 @@ class HomePage extends StatelessWidget {
                         permission: permission?.intranet?.view),
                     _buildBox('assets/images/users.svg', 'Team',
                         onTap: () => teamfuntion(context),
+                        permission: permission?.team?.view),
+                    _buildBox('assets/images/users.svg', 'Team',
+                        onTap: () => {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => MyApp(),
+                                  ))
+                            },
                         permission: permission?.team?.view),
                   ],
                 );
@@ -196,6 +206,7 @@ void teamfuntion(BuildContext context) {
 
 void navigateToSitesPage({required BuildContext context}) {
   vmSite
+    ..getNumberOfClientsApi(context: context)
     ..getPermanentSites()
     ..getTemporarySites()
     ..getDeletedSites();

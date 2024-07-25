@@ -748,127 +748,127 @@ class VehicleAddPreInspectionPage extends StatelessWidget {
             validDrivingLicense: vmVehicle.checkboxValue2,
             appropriatePpe: vmVehicle.checkboxValue3,
             engineOilLevel: vmVehicle.selectedEngineOilValue == "No issue"
-                ? null
+                ? "null"
                 : vmVehicle.selectedEngineOilValue == "categoryA"
-                    ? true
-                    : false,
+                    ? "true"
+                    : "false",
             warningSystem: vmVehicle.selectedWarningSystemValue == "No issue"
-                ? null
+                ? "null"
                 : vmVehicle.selectedWarningSystemValue == "categoryA"
-                    ? true
-                    : false,
+                    ? "true"
+                    : "false",
             steering: vmVehicle.selectedSteeringValue == "No issue"
-                ? null
+                ? "null"
                 : vmVehicle.selectedSteeringValue == "categoryA"
-                    ? true
-                    : false,
+                    ? "true"
+                    : "false",
             safetyEmergStop: vmVehicle.selectedSafetyEmergValue == "No issue"
-                ? null
+                ? "null"
                 : vmVehicle.selectedSafetyEmergValue == "categoryA"
-                    ? true
-                    : false,
+                    ? "true"
+                    : "false",
             handbreakAlarm: vmVehicle.selectedHandBreakAlarmValue == "No issue"
-                ? null
+                ? "null"
                 : vmVehicle.selectedHandBreakAlarmValue == "categoryA"
-                    ? true
-                    : false,
+                    ? "true"
+                    : "false",
             ptoVacpump: vmVehicle.selectedPTOVacValue == "No issue"
-                ? null
+                ? "null"
                 : vmVehicle.selectedPTOVacValue == "categoryA"
-                    ? true
-                    : false,
+                    ? "true"
+                    : "false",
             horn: vmVehicle.selectedHornValue == "No issue"
-                ? null
+                ? "null"
                 : vmVehicle.selectedHornValue == "categoryA"
-                    ? true
-                    : false,
+                    ? "true"
+                    : "false",
             revAlarmCamera: vmVehicle.selectedRevAlarmCameraValue == "No issue"
-                ? null
+                ? "null"
                 : vmVehicle.selectedRevAlarmCameraValue == "categoryA"
-                    ? true
-                    : false,
+                    ? "true"
+                    : "false",
             lightsHead: vmVehicle.selectedLightsHeadValue == "No issue"
-                ? null
+                ? "null"
                 : vmVehicle.selectedLightsHeadValue == "categoryA"
-                    ? true
-                    : false,
+                    ? "true"
+                    : "false",
             lightsTail: vmVehicle.selectedLightsTailValue == "No issue"
-                ? null
+                ? "null"
                 : vmVehicle.selectedLightsTailValue == "categoryA"
-                    ? true
-                    : false,
+                    ? "true"
+                    : "false",
             lightBeacons: vmVehicle.selectedLightBeaconsValue == "No issue"
-                ? null
+                ? "null"
                 : vmVehicle.selectedLightBeaconsValue == "categoryA"
-                    ? true
-                    : false,
+                    ? "true"
+                    : "false",
             hazardLight: vmVehicle.selectedHazardsLightsValue == "No issue"
-                ? null
+                ? "null"
                 : vmVehicle.selectedHazardsLightsValue == "categoryA"
-                    ? true
-                    : false,
+                    ? "true"
+                    : "false",
             rimsWheelnut: vmVehicle.selectedRimsWheelNutsValue == "No issue"
-                ? null
+                ? "null"
                 : vmVehicle.selectedRimsWheelNutsValue == "categoryA"
-                    ? true
-                    : false,
+                    ? "true"
+                    : "false",
             coolant: vmVehicle.selectedCoolantValue == "No issue"
-                ? null
+                ? "null"
                 : vmVehicle.selectedCoolantValue == "categoryA"
-                    ? true
-                    : false,
+                    ? "true"
+                    : "false",
             wheels: vmVehicle.selectedWheelsTyresValue == "No issue"
-                ? null
+                ? "null"
                 : vmVehicle.selectedWheelsTyresValue == "categoryA"
-                    ? true
-                    : false,
+                    ? "true"
+                    : "false",
             mirrorWindowscreen:
                 vmVehicle.selectedMirrorsWindscreenValue == "No issue"
-                    ? null
+                    ? "null"
                     : vmVehicle.selectedMirrorsWindscreenValue == "categoryA"
-                        ? true
-                        : false,
+                        ? "true"
+                        : "false",
             structureBodywork:
                 vmVehicle.selectedStructureBodywrkValue == "No issue"
-                    ? null
+                    ? "null"
                     : vmVehicle.selectedStructureBodywrkValue == "categoryA"
-                        ? true
-                        : false,
+                        ? "true"
+                        : "false",
             wipers: vmVehicle.selectedWipersValue == "No issue"
-                ? null
+                ? "null"
                 : vmVehicle.selectedWipersValue == "categoryA"
-                    ? true
-                    : false,
+                    ? "true"
+                    : "false",
             fuelLevelpump: vmVehicle.selectedFuelLevelPumbValue == "No issue"
-                ? null
+                ? "null"
                 : vmVehicle.selectedFuelLevelPumbValue == "categoryA"
-                    ? true
-                    : false,
+                    ? "true"
+                    : "false",
             fuelLeveltruck: vmVehicle.selectedFuelLevelTruckValue == "No issue"
-                ? null
+                ? "null"
                 : vmVehicle.selectedFuelLevelTruckValue == "categoryA"
-                    ? true
-                    : false,
+                    ? "true"
+                    : "false",
             seatSeatbelt: vmVehicle.selectedSeatSeatBeltValue == "No issue"
-                ? null
+                ? "null"
                 : vmVehicle.selectedSeatSeatBeltValue == "categoryA"
-                    ? true
-                    : false,
+                    ? "true"
+                    : "false",
             parkbrakeTrailer: vmVehicle.selectedParkBarkeValue == "No issue"
-                ? null
+                ? "null"
                 : vmVehicle.selectedParkBarkeValue == "categoryA"
-                    ? true
-                    : false,
+                    ? "true"
+                    : "false",
             footBrake: vmVehicle.selectedFootBrakeValue == "No issue"
-                ? null
+                ? "null"
                 : vmVehicle.selectedFootBrakeValue == "categoryA"
-                    ? true
-                    : false,
+                    ? "true"
+                    : "false",
             electrical: vmVehicle.selectedElectricalValue == "No issue"
-                ? null
+                ? "null"
                 : vmVehicle.selectedElectricalValue == "categoryA"
-                    ? true
-                    : false,
+                    ? "true"
+                    : "false",
             hoses: vmVehicle.selectHosesCheckbox,
             fittings: vmVehicle.selectFittingsCheckbox,
             firstAidKit: vmVehicle.selectFirstAidKitCheckbox,

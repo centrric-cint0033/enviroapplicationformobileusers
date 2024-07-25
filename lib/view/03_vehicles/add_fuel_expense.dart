@@ -80,27 +80,37 @@ class AddFuelExpensePage extends StatelessWidget {
                                     : 'Forklift Rego',
                             cmTextFormField(
                                 controller: vmVehicle.regoCntrlr,
-                                hintText: "rego",keyboardType: const TextInputType.numberWithOptions())),
+                                hintText: "rego",
+                                keyboardType:
+                                    const TextInputType.numberWithOptions())),
                         expandedRowShowWidget(
                             "Filled By",
                             cmTextFormField(
                                 controller: vmVehicle.filledByCntrlr,
-                                hintText: "filled by",keyboardType: const TextInputType.numberWithOptions())),
+                                hintText: "filled by",
+                                keyboardType:
+                                    const TextInputType.numberWithOptions())),
                         expandedRowShowWidget(
                             "Current Reading",
                             cmTextFormField(
                                 controller: vmVehicle.currentReadingCntrlr,
-                                hintText: "current reading",keyboardType: const TextInputType.numberWithOptions())),
+                                hintText: "current reading",
+                                keyboardType:
+                                    const TextInputType.numberWithOptions())),
                         expandedRowShowWidget(
                             "Reading After",
                             cmTextFormField(
                                 controller: vmVehicle.readingAfterCntrlr,
-                                hintText: "reading after",keyboardType: const TextInputType.numberWithOptions())),
+                                hintText: "reading after",
+                                keyboardType:
+                                    const TextInputType.numberWithOptions())),
                         expandedRowShowWidget(
                             "Volume used in Litres",
                             cmTextFormField(
                                 controller: vmVehicle.volumeCntrlr,
-                                hintText: "volume",keyboardType: const TextInputType.numberWithOptions())),
+                                hintText: "volume",
+                                keyboardType:
+                                    const TextInputType.numberWithOptions())),
                         CmButton(
                           text: "Submit",
                           width: 120.w,
@@ -131,7 +141,7 @@ class AddFuelExpensePage extends StatelessWidget {
               : vmVehicle.selectedVehicleAddMaintenance?.id,
           date: DateFormat('yyyy-MM-dd')
               .format(vmVehicle.selectedFuelExpenseDate!),
-          time: formatTimeOfDay(vmVehicle.selectedFuelExpenseTime!),
+          time: formatTimeOfDay24hrFormat(vmVehicle.selectedFuelExpenseTime!),
           truckRego: vmVehicle.regoCntrlr.text,
           filledBy: vmVehicle.filledByCntrlr.text,
           currentReadingBefore: vmVehicle.currentReadingCntrlr.text,

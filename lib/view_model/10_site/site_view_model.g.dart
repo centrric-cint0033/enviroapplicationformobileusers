@@ -207,6 +207,23 @@ mixin _$SiteViewModel on SiteViewModelBase, Store {
     });
   }
 
+  late final _$numberOfClientsResponseAtom =
+      Atom(name: 'SiteViewModelBase.numberOfClientsResponse', context: context);
+
+  @override
+  ApiResponse<NumberOfClientsResModel> get numberOfClientsResponse {
+    _$numberOfClientsResponseAtom.reportRead();
+    return super.numberOfClientsResponse;
+  }
+
+  @override
+  set numberOfClientsResponse(ApiResponse<NumberOfClientsResModel> value) {
+    _$numberOfClientsResponseAtom
+        .reportWrite(value, super.numberOfClientsResponse, () {
+      super.numberOfClientsResponse = value;
+    });
+  }
+
   late final _$detailLoadingAtom =
       Atom(name: 'SiteViewModelBase.detailLoading', context: context);
 
@@ -573,6 +590,15 @@ mixin _$SiteViewModel on SiteViewModelBase, Store {
         super.fileFolderSearchApi(searchData, folderId, searchType, siteId));
   }
 
+  late final _$getNumberOfClientsApiAsyncAction =
+      AsyncAction('SiteViewModelBase.getNumberOfClientsApi', context: context);
+
+  @override
+  Future<void> getNumberOfClientsApi({required BuildContext context}) {
+    return _$getNumberOfClientsApiAsyncAction
+        .run(() => super.getNumberOfClientsApi(context: context));
+  }
+
   late final _$SiteViewModelBaseActionController =
       ActionController(name: 'SiteViewModelBase', context: context);
 
@@ -604,6 +630,7 @@ deleteSiteFolderResponse: ${deleteSiteFolderResponse},
 addSiteFileResponse: ${addSiteFileResponse},
 editSiteFileResponse: ${editSiteFileResponse},
 expiryFileResponse: ${expiryFileResponse},
+numberOfClientsResponse: ${numberOfClientsResponse},
 detailLoading: ${detailLoading},
 selectedWasteTypeModel: ${selectedWasteTypeModel},
 searchType: ${searchType},

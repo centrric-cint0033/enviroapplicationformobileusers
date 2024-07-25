@@ -83,7 +83,7 @@ class MasterCarList extends StatelessWidget {
                           context.router.push(const AddFuelExpenseRoute());
                         } else if (vmVehicle.vehicleStatusType ==
                             VehicleActionType.preInspectionCheck) {
-                                       vmVehicle.clearPreinspectionDatas();
+                          vmVehicle.clearPreinspectionDatas();
                           vmVehicle.getVehicleListApi();
                           context.router
                               .push(const VehicleAddPreInspectionRoute());

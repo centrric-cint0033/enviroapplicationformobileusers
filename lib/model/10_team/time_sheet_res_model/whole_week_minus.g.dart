@@ -8,14 +8,14 @@ part of 'whole_week_minus.dart';
 
 _$WholeWeekMinusImpl _$$WholeWeekMinusImplFromJson(Map<String, dynamic> json) =>
     _$WholeWeekMinusImpl(
-      sick: json['sick'] as num?,
-      annual: json['annual'] as num?,
-      fullTime: json['full_time'] as num?,
-      halfTime: json['half_time'] as num?,
-      otherDays: json['other_days'] as num?,
-      normalHours: json['normal_hours'] as num?,
-      publicHolidays: json['public_holidays'] as num?,
-      totalHoursWorked: json['total_hours_worked'] as num?,
+      sick: json['sick'],
+      annual: json['annual'],
+      fullTime: json['full_time'],
+      halfTime: json['half_time'],
+      otherDays: json['other_days'],
+      normalHours: json['normal_hours'],
+      publicHolidays: json['public_holidays'],
+      totalHoursWorked: json['total_hours_worked'],
     );
 
 Map<String, dynamic> _$$WholeWeekMinusImplToJson(

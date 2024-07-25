@@ -177,7 +177,8 @@ class LeaveApplicationPage extends StatelessWidget {
                               child: Text(
                             fileName,
                             style: TextStyle(
-                                fontSize: 9.sp, overflow: TextOverflow.ellipsis),
+                                fontSize: 9.sp,
+                                overflow: TextOverflow.ellipsis),
                           ))
                         ],
                       ),
@@ -190,8 +191,8 @@ class LeaveApplicationPage extends StatelessWidget {
                   children: [
                     Text(
                       "Leave From:",
-                      style:
-                          TextStyle(fontSize: 9.sp, color: Colors.grey.shade700),
+                      style: TextStyle(
+                          fontSize: 9.sp, color: Colors.grey.shade700),
                     ),
                     cmDatePicker(context, vmTeam.selectedLeaveFromdate,
                         (date) => vmTeam.datePickerFn8(date))
@@ -202,8 +203,8 @@ class LeaveApplicationPage extends StatelessWidget {
                   children: [
                     Text(
                       "Leave To:",
-                      style:
-                          TextStyle(fontSize: 9.sp, color: Colors.grey.shade700),
+                      style: TextStyle(
+                          fontSize: 9.sp, color: Colors.grey.shade700),
                     ),
                     cmDatePicker(context, vmTeam.selectedLeaveTodate,
                         (date) => vmTeam.datePickerFn9(date))
@@ -214,8 +215,8 @@ class LeaveApplicationPage extends StatelessWidget {
                   children: [
                     Text(
                       "Last Day of Work:",
-                      style:
-                          TextStyle(fontSize: 9.sp, color: Colors.grey.shade700),
+                      style: TextStyle(
+                          fontSize: 9.sp, color: Colors.grey.shade700),
                     ),
                     cmDatePicker(context, vmTeam.selectedLastDayofWork,
                         (date) => vmTeam.datePickerFn10(date))
@@ -226,8 +227,8 @@ class LeaveApplicationPage extends StatelessWidget {
                   children: [
                     Text(
                       "Return to Work on",
-                      style:
-                          TextStyle(fontSize: 9.sp, color: Colors.grey.shade700),
+                      style: TextStyle(
+                          fontSize: 9.sp, color: Colors.grey.shade700),
                     ),
                     cmDatePicker(context, vmTeam.selectedReturnToWorkDate,
                         (date) => vmTeam.datePickerFn11(date))

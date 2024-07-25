@@ -84,6 +84,7 @@ class EditTimeSheetPage extends StatelessWidget {
                   : const Color.fromARGB(255, 153, 197, 214),
               width: 140.w,
               loading: vmTeam.editTimeSheetResponse.loading,
+              indicatorColor: Colors.white,
               onPressed: () {
                 if (vmTeam.showSubmitEditTimesheet == true) {
                   String inputDate = timesheetWeek?.date ?? "$date";
@@ -98,8 +99,8 @@ class EditTimeSheetPage extends StatelessWidget {
                           ? inputDate
                           : formattedDate,
                       day: timesheetWeek?.day ?? "$day",
-                      start: formatTimeOfDay(vmTeam.selectedStartTime!),
-                      finish: formatTimeOfDay(vmTeam.selectedEndTime!),
+                      start: vmTeam.selectedStartTime!,
+                      finish: vmTeam.selectedEndTime!,
                       totalHoursWorked: vmTeam.totalHrsController.text,
                       normalHours: vmTeam.normalHourController.text,
                       halfTime: vmTeam.timehalfController.text,
@@ -114,10 +115,21 @@ class EditTimeSheetPage extends StatelessWidget {
                   vmTeam.editTimeSheetApi(
                       date: vmTeam.weekStartDate ?? "",
                       weeklyReport: WeeklyReport(
-                          employeeId:
-                              "${vmProfile.profilepageResponse.data?.employeeId}",
-                          comments: vmTeam.commentsControllerr.text,
-                          week: weeksToEdit),
+                        employeeId:
+                            "${vmProfile.profilepageResponse.data?.employeeId}",
+                        comments: vmTeam.commentsControllerr.text,
+                        week: weeksToEdit,
+                        // wholeHoursTotalWorked: WholeHoursTotalWorked(
+                        //   totalHoursWorked: vmTeam.totalHrsController.text,
+                        //   normalHours: vmTeam.normalHourController.text,
+                        //   halfTime: vmTeam.timehalfController.text,
+                        //   fullTime: vmTeam.doubleTimeController.text,
+                        //   publicHolidays: vmTeam.publicHolidayController.text,
+                        //   annual: vmTeam.annualController.text,
+                        //   sick: vmTeam.sickController.text,
+                        //   otherDays: vmTeam.otherController.text,
+                        // )
+                      ),
                       context: context);
                 }
               },
@@ -213,7 +225,8 @@ Widget cmRowTextfield(
               ),
               Expanded(
                 child: TextField(
-                  style: TextStyle(fontSize: 10.sp, color: Colors.grey.shade700),
+                  style:
+                      TextStyle(fontSize: 10.sp, color: Colors.grey.shade700),
                   controller: controller,
                   onChanged: (value) {
                     vmTeam.showSubmitEditTimesheetFn();
@@ -236,5 +249,12 @@ Widget cmRowTextfield(
 }
 
 String formatTimeOfDay(TimeOfDay time) {
+  final now = DateTime.now();
+  final dt = DateTime(now.year, now.month, now.day, time.hour, time.minute);
+  final format = DateFormat.jm();
+  return format.format(dt);
+}
+
+String formatTimeOfDay24hrFormat(TimeOfDay time) {
   return "${time.hour.toString().padLeft(2, '0')}:${time.minute.toString().padLeft(2, '0')}";
 }

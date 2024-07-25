@@ -97,5 +97,3 @@ Widget buildCardDataOrder(List<Widget> widget, {String? image}) => customCard(
         ),
       ),
     );
-
-

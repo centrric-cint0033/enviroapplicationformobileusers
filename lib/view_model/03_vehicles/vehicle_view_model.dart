@@ -1614,7 +1614,6 @@ abstract class VehicleViewModelBase with Store {
   @action
   cmDataAddFunction({required VehicleModel data}) {
     dateAndTime = data.dateTime?.toString() ?? "";
-    
   }
 
   @action

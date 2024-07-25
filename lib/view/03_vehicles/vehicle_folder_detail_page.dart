@@ -184,7 +184,7 @@ class VehicleFolderDetailPage extends StatelessWidget {
                                                                     data.id ??
                                                                         0,
                                                               );
-                                                    
+
                                                               vmVehicle
                                                                   .fileFolderSearchCntrlr
                                                                   .text = "";

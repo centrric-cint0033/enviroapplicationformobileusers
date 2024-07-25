@@ -87,6 +87,7 @@ class LoginPage extends StatelessWidget {
                     loading: vmAuth.loginResponse.loading,
                     buttonTextStyle:
                         const TextStyle(color: Appthemes.textColor),
+                    indicatorColor: Colors.white,
                     onPressed: () {
                       ontaplogin(context);
                     },

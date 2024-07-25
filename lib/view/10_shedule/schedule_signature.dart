@@ -208,7 +208,8 @@ class SheduleSignaturePage extends StatelessWidget {
                               Text(
                                 'Changes in waste type and its litres will be uploaded with client\'s signature.',
                                 style: TextStyle(
-                                    fontSize: 9.sp, fontWeight: FontWeight.bold),
+                                    fontSize: 9.sp,
+                                    fontWeight: FontWeight.bold),
                               ),
                             ],
                           ),

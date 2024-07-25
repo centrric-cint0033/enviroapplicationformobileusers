@@ -189,6 +189,7 @@ class AddTeamPage extends StatelessWidget {
                   CmButton(
                       width: double.infinity,
                       loading: ress.loading,
+                      indicatorColor: Colors.white,
                       height: 45,
                       text: 'CREATE',
                       onPressed: () => cmOnpressedFnCreateTeam(context)),
@@ -369,8 +370,10 @@ class AddTeamPage extends StatelessWidget {
                 email: vmTeam.textAddTeamEmailController.text,
                 contact_number: vmTeam.textAddTeamContactNumberController.text,
                 driving_license: vmTeam.selectedFilePathLicense ?? "",
-                expiry_date: vmTeam.selectedLicenceExpiryDate,
-                alert_before: vmTeam.selectedLicenceAlertDate,
+                expiry_date: DateFormat('yyyy-MM-dd')
+                    .format(vmTeam.selectedLicenceExpiryDate!),
+                alert_before: DateFormat('yyyy-MM-dd')
+                    .format(vmTeam.selectedLicenceAlertDate!),
                 username: vmTeam.textAddTeamEmailController.text,
                 password: vmTeam.textAddTeamPasswordController.text,
                 employement_status: vmTeam.selectedAddEmploymentStatus,

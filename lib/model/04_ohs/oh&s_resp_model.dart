@@ -25,7 +25,7 @@ class OhsRespModel with _$OhsRespModel {
       String? edited_date_time,
       String? createdDateTime,
       String? file_attachment,
-        List<Members>? members_list,
+      List<Members>? members_list,
       List<Comments>? comments_list,
       num? members}) = _OhsRespModel;
 
@@ -44,6 +44,7 @@ class Comments with _$Comments {
   factory Comments.fromJson(Map<String, dynamic> json) =>
       _$CommentsFromJson(json);
 }
+
 @freezed
 class Members with _$Members {
   const factory Members({

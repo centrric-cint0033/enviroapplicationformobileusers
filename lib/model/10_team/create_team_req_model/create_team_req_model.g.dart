@@ -18,12 +18,8 @@ _$CreateTeamReqModelImpl _$$CreateTeamReqModelImplFromJson(
       password: json['password'] as String?,
       email: json['email'] as String?,
       date_of_birth: json['date_of_birth'] as String?,
-      alert_before: json['alert_before'] == null
-          ? null
-          : DateTime.parse(json['alert_before'] as String),
-      expiry_date: json['expiry_date'] == null
-          ? null
-          : DateTime.parse(json['expiry_date'] as String),
+      alert_before: json['alert_before'] as String?,
+      expiry_date: json['expiry_date'] as String?,
       username: json['username'] as String?,
       dp: json['dp'] as String?,
       cover_image: json['cover_image'] as String?,
@@ -50,8 +46,8 @@ Map<String, dynamic> _$$CreateTeamReqModelImplToJson(
       'password': instance.password,
       'email': instance.email,
       'date_of_birth': instance.date_of_birth,
-      'alert_before': instance.alert_before?.toIso8601String(),
-      'expiry_date': instance.expiry_date?.toIso8601String(),
+      'alert_before': instance.alert_before,
+      'expiry_date': instance.expiry_date,
       'username': instance.username,
       'dp': instance.dp,
       'cover_image': instance.cover_image,

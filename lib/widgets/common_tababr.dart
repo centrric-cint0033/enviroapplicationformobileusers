@@ -9,6 +9,12 @@ class WWcommonTabBar extends StatelessWidget {
   final String? value3;
   final String? value4;
   final String? value5;
+  final Widget? widget;
+  final String? siteValue1;
+  final String? siteValue2;
+  final String? siteValue3;
+
+  final bool? fromSite;
   final Function(int)? onTap;
 
   const WWcommonTabBar(
@@ -19,12 +25,17 @@ class WWcommonTabBar extends StatelessWidget {
       this.value3,
       this.onTap,
       this.value4,
-      this.value5});
+      this.value5,
+      this.widget,
+      this.fromSite = false,
+      this.siteValue1,
+      this.siteValue2,
+      this.siteValue3});
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-        height: 32.w,
+        height: fromSite == true ? 40.w : 32.w,
         child: DecoratedBox(
           decoration: BoxDecoration(
             color: Colors.white,
@@ -33,6 +44,7 @@ class WWcommonTabBar extends StatelessWidget {
           ),
           child: TabBar(
             controller: controller,
+            labelStyle: TextStyle(fontSize: 11.sp, fontWeight: FontWeight.w400),
             indicatorSize: TabBarIndicatorSize.tab,
             indicator: BoxDecoration(
               borderRadius: BorderRadius.circular(8),
@@ -44,11 +56,77 @@ class WWcommonTabBar extends StatelessWidget {
             indicatorColor: Colors.black,
             onTap: onTap,
             tabs: [
-              if (value1 != null) Tab(text: value1),
-              if (value2 != null) Tab(text: value2),
-              if (value3 != null) Tab(text: value3),
-              if (value4 != null) Tab(text: value4),
-              if (value5 != null) Tab(text: value5),
+              if (fromSite == true) ...[
+                if (value1 != null)
+                  Tab(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(value1!),
+                        Container(
+                            height: 20.w,
+                            width: 20.w,
+                            decoration: BoxDecoration(
+                                border: Border.all(color: Colors.white),
+                                shape: BoxShape.circle),
+                            child: Center(
+                              child: Text(
+                                siteValue1 ?? "",
+                                style: TextStyle(fontSize: 9.sp),
+                              ),
+                            )),
+                      ],
+                    ),
+                  ),
+                if (value2 != null)
+                  Tab(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(value2!),
+                        Container(
+                            height: 20.w,
+                            width: 20.w,
+                            decoration: BoxDecoration(
+                                border: Border.all(color: Colors.white),
+                                shape: BoxShape.circle),
+                            child: Center(
+                              child: Text(
+                                siteValue2 ?? "",
+                                style: TextStyle(fontSize: 9.sp),
+                              ),
+                            )),
+                      ],
+                    ),
+                  ),
+                if (value3 != null)
+                  Tab(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(value3!),
+                        Container(
+                            height: 20.w,
+                            width: 20.w,
+                            decoration: BoxDecoration(
+                                border: Border.all(color: Colors.white),
+                                shape: BoxShape.circle),
+                            child: Center(
+                              child: Text(
+                                siteValue3 ?? "",
+                                style: TextStyle(fontSize: 9.sp),
+                              ),
+                            )),
+                      ],
+                    ),
+                  ),
+              ] else ...[
+                if (value1 != null) Tab(text: value1),
+                if (value2 != null) Tab(text: value2),
+                if (value3 != null) Tab(text: value3),
+                if (value4 != null) Tab(text: value4),
+                if (value5 != null) Tab(text: value5),
+              ]
             ],
           ),
         ));

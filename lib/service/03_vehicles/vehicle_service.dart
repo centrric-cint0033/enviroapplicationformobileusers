@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
 import 'package:dartz/dartz.dart';
 import 'package:enviro_mobile_application/constant/base_url.dart';
 import 'package:enviro_mobile_application/model/00_common_model/folder_model/folder_model.dart';
@@ -839,20 +838,19 @@ class VehicleService implements IVehicleService {
   @override
   Future<Either<Map<MainFailure, dynamic>, dynamic>> addPreInspectionVehicle(
       {required VehicleModel data, VehicleType? vehicleType}) async {
-    log(data.toString());
     String apiUrl;
     switch (vehicleType) {
       case VehicleType.truck:
         apiUrl = "${ApiEndPoints().addPreInspectionVehicle}truck/";
         break;
       case VehicleType.car:
-        apiUrl = "${ApiEndPoints().deleteFuelExpense}car/";
+        apiUrl = "${ApiEndPoints().addPreInspectionVehicle}car/";
         break;
       case VehicleType.semiTrailer:
-        apiUrl = "${ApiEndPoints().deleteFuelExpense}fork-lift/";
+        apiUrl = "${ApiEndPoints().addPreInspectionVehicle}fork-lift/";
         break;
       default:
-        apiUrl = "${ApiEndPoints().deleteFuelExpense}truck/";
+        apiUrl = "${ApiEndPoints().addPreInspectionVehicle}truck/";
         break;
     }
     var response = await getIt<HttpService>().multipartRequest(

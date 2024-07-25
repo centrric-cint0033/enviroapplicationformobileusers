@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:enviro_mobile_application/model/10_site/number_of_clients_res_model/number_of_clients_res_model.dart';
 import 'package:enviro_mobile_application/utilis/api_endpoints/customprint.dart';
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
@@ -301,6 +302,24 @@ class SiteService implements ISiteService {
         var data = jsonDecode(res.body);
         FolderListModel searchedfileFolderList = FolderListModel.fromJson(data);
         return Right(searchedfileFolderList);
+      },
+    );
+  }
+
+  @override
+  Future<Either<Map<MainFailure, dynamic>, NumberOfClientsResModel>>
+      getNumberOfClients() async {
+    var response = await getIt<HttpService>().request(
+        authenticated: true,
+        method: HttpMethod.get,
+        apiUrl: ApiEndPoints().numberOfClients);
+
+    return response.fold(
+      (l) => Left(l),
+      (res) async {
+        NumberOfClientsResModel numberOfClients =
+            NumberOfClientsResModel.fromJson(jsonDecode(res.body));
+        return Right(numberOfClients);
       },
     );
   }

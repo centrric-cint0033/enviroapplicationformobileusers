@@ -609,127 +609,127 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
             validDrivingLicense: vmSchedule.checkboxValue2,
             appropriatePpe: vmSchedule.checkboxValue3,
             engineOilLevel: vmSchedule.selectedEngineOilValue == "No issue"
-                ? null
+                ? "null"
                 : vmSchedule.selectedEngineOilValue == "categoryA"
-                    ? true
-                    : false,
+                    ? "true"
+                    : "false",
             warningSystem: vmSchedule.selectedWarningSystemValue == "No issue"
-                ? null
+                ? "null"
                 : vmSchedule.selectedWarningSystemValue == "categoryA"
-                    ? true
-                    : false,
+                    ? "true"
+                    : "false",
             steering: vmSchedule.selectedSteeringValue == "No issue"
-                ? null
+                ? "null"
                 : vmSchedule.selectedSteeringValue == "categoryA"
-                    ? true
-                    : false,
+                    ? "true"
+                    : "false",
             safetyEmergStop: vmSchedule.selectedSafetyEmergValue == "No issue"
-                ? null
+                ? "null"
                 : vmSchedule.selectedSafetyEmergValue == "categoryA"
-                    ? true
-                    : false,
+                    ? "true"
+                    : "false",
             handbreakAlarm: vmSchedule.selectedHandBreakAlarmValue == "No issue"
-                ? null
+                ? "null"
                 : vmSchedule.selectedHandBreakAlarmValue == "categoryA"
-                    ? true
-                    : false,
+                    ? "true"
+                    : "false",
             ptoVacpump: vmSchedule.selectedPTOVacValue == "No issue"
-                ? null
+                ? "null"
                 : vmSchedule.selectedPTOVacValue == "categoryA"
-                    ? true
-                    : false,
+                    ? "true"
+                    : "false",
             horn: vmSchedule.selectedHornValue == "No issue"
-                ? null
+                ? "null"
                 : vmSchedule.selectedHornValue == "categoryA"
-                    ? true
-                    : false,
+                    ? "true"
+                    : "false",
             revAlarmCamera: vmSchedule.selectedRevAlarmCameraValue == "No issue"
-                ? null
+                ? "null"
                 : vmSchedule.selectedRevAlarmCameraValue == "categoryA"
-                    ? true
-                    : false,
+                    ? "true"
+                    : "false",
             lightsHead: vmSchedule.selectedLightsHeadValue == "No issue"
-                ? null
+                ? "null"
                 : vmSchedule.selectedLightsHeadValue == "categoryA"
-                    ? true
-                    : false,
+                    ? "true"
+                    : "false",
             lightsTail: vmSchedule.selectedLightsTailValue == "No issue"
-                ? null
+                ? "null"
                 : vmSchedule.selectedLightsTailValue == "categoryA"
-                    ? true
-                    : false,
+                    ? "true"
+                    : 'false',
             lightBeacons: vmSchedule.selectedLightBeaconsValue == "No issue"
-                ? null
+                ? "null"
                 : vmSchedule.selectedLightBeaconsValue == "categoryA"
-                    ? true
-                    : false,
+                    ? 'true'
+                    : "false",
             hazardLight: vmSchedule.selectedHazardsLightsValue == "No issue"
-                ? null
+                ? "null"
                 : vmSchedule.selectedHazardsLightsValue == "categoryA"
-                    ? true
-                    : false,
+                    ? "true"
+                    : "false",
             rimsWheelnut: vmSchedule.selectedRimsWheelNutsValue == "No issue"
-                ? null
+                ? "null"
                 : vmSchedule.selectedRimsWheelNutsValue == "categoryA"
-                    ? true
-                    : false,
+                    ? "true"
+                    : "false",
             coolant: vmSchedule.selectedCoolantValue == "No issue"
-                ? null
+                ? "null"
                 : vmSchedule.selectedCoolantValue == "categoryA"
-                    ? true
-                    : false,
+                    ? "true"
+                    : "false",
             wheels: vmSchedule.selectedWheelsTyresValue == "No issue"
-                ? null
+                ? "null"
                 : vmSchedule.selectedWheelsTyresValue == "categoryA"
-                    ? true
-                    : false,
+                    ? "true"
+                    : "false",
             mirrorWindowscreen:
                 vmSchedule.selectedMirrorsWindscreenValue == "No issue"
-                    ? null
+                    ? "null"
                     : vmSchedule.selectedMirrorsWindscreenValue == "categoryA"
-                        ? true
-                        : false,
+                        ? "true"
+                        : "false",
             structureBodywork:
                 vmSchedule.selectedStructureBodywrkValue == "No issue"
-                    ? null
+                    ? "null"
                     : vmSchedule.selectedStructureBodywrkValue == "categoryA"
-                        ? true
-                        : false,
+                        ? "true"
+                        : "false",
             wipers: vmSchedule.selectedWipersValue == "No issue"
-                ? null
+                ? "null"
                 : vmSchedule.selectedWipersValue == "categoryA"
-                    ? true
-                    : false,
+                    ? "true"
+                    : "false",
             fuelLevelpump: vmSchedule.selectedFuelLevelPumbValue == "No issue"
-                ? null
+                ? "null"
                 : vmSchedule.selectedFuelLevelPumbValue == "categoryA"
-                    ? true
-                    : false,
+                    ? "true"
+                    : "false",
             fuelLeveltruck: vmSchedule.selectedFuelLevelTruckValue == "No issue"
-                ? null
+                ? "null"
                 : vmSchedule.selectedFuelLevelTruckValue == "categoryA"
-                    ? true
-                    : false,
+                    ? "true"
+                    : "false",
             seatSeatbelt: vmSchedule.selectedSeatSeatBeltValue == "No issue"
-                ? null
+                ? "null"
                 : vmSchedule.selectedSeatSeatBeltValue == "categoryA"
-                    ? true
-                    : false,
+                    ? "true"
+                    : "false",
             parkbrakeTrailer: vmSchedule.selectedParkBarkeValue == "No issue"
-                ? null
+                ? "null"
                 : vmSchedule.selectedParkBarkeValue == "categoryA"
-                    ? true
-                    : false,
+                    ? "true"
+                    : "false",
             footBrake: vmSchedule.selectedFootBrakeValue == "No issue"
-                ? null
+                ? "null"
                 : vmSchedule.selectedFootBrakeValue == "categoryA"
-                    ? true
-                    : false,
+                    ? "true"
+                    : "false",
             electrical: vmSchedule.selectedElectricalValue == "No issue"
-                ? null
+                ? "null"
                 : vmSchedule.selectedElectricalValue == "categoryA"
-                    ? true
-                    : false,
+                    ? "true"
+                    : "false",
             hoses: vmSchedule.selectHosesCheckbox,
             fittings: vmSchedule.selectFittingsCheckbox,
             firstAidKit: vmSchedule.selectFirstAidKitCheckbox,

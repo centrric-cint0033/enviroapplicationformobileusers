@@ -7,6 +7,7 @@ import 'package:enviro_mobile_application/widgets/common_tababr.dart';
 import 'package:enviro_mobile_application/widgets/ww_search_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 
 import '../../widgets/drawer.dart';
 import '../../widgets/cmn_action_icon.dart';
@@ -40,12 +41,19 @@ class SiteMainScreen extends StatelessWidget {
             padding: screenWidth,
             child: Column(
               children: [
-                WWcommonTabBar(
-                  value1: 'Permanent',
-                  value2: 'Temporary',
-                  value3: 'Deleted',
-                  onTap: (i) => vmSite.selectedTab = i,
-                ),
+                Observer(builder: (context) {
+                  final res = vmSite.numberOfClientsResponse;
+                  return WWcommonTabBar(
+                    fromSite: true,
+                    value1: 'Permanent ',
+                    value2: 'Temporary',
+                    value3: 'Deleted',
+                    siteValue1: "${res.data?.totalPermanentClients ?? ""}",
+                    siteValue2: "${res.data?.totalTempClients ?? ""}",
+                    siteValue3: "${res.data?.totalDeletedClients ?? ""}",
+                    onTap: (i) => vmSite.selectedTab = i,
+                  );
+                }),
                 sized0hx05,
                 WWTextField(
                   controller: vmSite.searchCtr,

@@ -29,8 +29,8 @@ mixin _$CreateTeamReqModel {
   String? get password => throw _privateConstructorUsedError;
   String? get email => throw _privateConstructorUsedError;
   String? get date_of_birth => throw _privateConstructorUsedError;
-  DateTime? get alert_before => throw _privateConstructorUsedError;
-  DateTime? get expiry_date => throw _privateConstructorUsedError;
+  String? get alert_before => throw _privateConstructorUsedError;
+  String? get expiry_date => throw _privateConstructorUsedError;
   String? get username => throw _privateConstructorUsedError;
   String? get dp => throw _privateConstructorUsedError;
   String? get cover_image => throw _privateConstructorUsedError;
@@ -66,8 +66,8 @@ abstract class $CreateTeamReqModelCopyWith<$Res> {
       String? password,
       String? email,
       String? date_of_birth,
-      DateTime? alert_before,
-      DateTime? expiry_date,
+      String? alert_before,
+      String? expiry_date,
       String? username,
       String? dp,
       String? cover_image,
@@ -159,11 +159,11 @@ class _$CreateTeamReqModelCopyWithImpl<$Res, $Val extends CreateTeamReqModel>
       alert_before: freezed == alert_before
           ? _value.alert_before
           : alert_before // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
+              as String?,
       expiry_date: freezed == expiry_date
           ? _value.expiry_date
           : expiry_date // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
+              as String?,
       username: freezed == username
           ? _value.username
           : username // ignore: cast_nullable_to_non_nullable
@@ -234,8 +234,8 @@ abstract class _$$CreateTeamReqModelImplCopyWith<$Res>
       String? password,
       String? email,
       String? date_of_birth,
-      DateTime? alert_before,
-      DateTime? expiry_date,
+      String? alert_before,
+      String? expiry_date,
       String? username,
       String? dp,
       String? cover_image,
@@ -325,11 +325,11 @@ class __$$CreateTeamReqModelImplCopyWithImpl<$Res>
       alert_before: freezed == alert_before
           ? _value.alert_before
           : alert_before // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
+              as String?,
       expiry_date: freezed == expiry_date
           ? _value.expiry_date
           : expiry_date // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
+              as String?,
       username: freezed == username
           ? _value.username
           : username // ignore: cast_nullable_to_non_nullable
@@ -432,9 +432,9 @@ class _$CreateTeamReqModelImpl implements _CreateTeamReqModel {
   @override
   final String? date_of_birth;
   @override
-  final DateTime? alert_before;
+  final String? alert_before;
   @override
-  final DateTime? expiry_date;
+  final String? expiry_date;
   @override
   final String? username;
   @override
@@ -567,8 +567,8 @@ abstract class _CreateTeamReqModel implements CreateTeamReqModel {
       final String? password,
       final String? email,
       final String? date_of_birth,
-      final DateTime? alert_before,
-      final DateTime? expiry_date,
+      final String? alert_before,
+      final String? expiry_date,
       final String? username,
       final String? dp,
       final String? cover_image,
@@ -604,9 +604,9 @@ abstract class _CreateTeamReqModel implements CreateTeamReqModel {
   @override
   String? get date_of_birth;
   @override
-  DateTime? get alert_before;
+  String? get alert_before;
   @override
-  DateTime? get expiry_date;
+  String? get expiry_date;
   @override
   String? get username;
   @override

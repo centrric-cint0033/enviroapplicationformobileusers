@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:async';
 import 'package:auto_route/auto_route.dart';
 import 'package:enviro_mobile_application/api_response/api_response.dart';
@@ -618,15 +620,15 @@ abstract class TeamViewModelBase with Store {
         getTerminatedEmployee();
         textControllersClearFn();
         context.router.pop();
-        showToast(context, msg: "Successfully Edited Employee");
+        showToast(context,
+            msg: "Successfully Edited Employee", color: Colors.green);
       },
     );
   }
 
   @action
   Future<void> addTeamFile(
-      {
-      required num employee,
+      {required num employee,
       required num parentfolder,
       String? files,
       required BuildContext context}) async {

@@ -226,7 +226,6 @@ class OhsFolderDetailPage extends StatelessWidget {
                                             if (data != null) {
                                               return WWFileCard(
                                                   fromOhs: true,
-                                               
                                                   parentFolderId:
                                                       vmOhs.parentFolderId ?? 1,
                                                   file: data,

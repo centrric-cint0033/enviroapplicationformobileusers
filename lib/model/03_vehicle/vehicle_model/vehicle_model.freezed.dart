@@ -111,47 +111,47 @@ mixin _$VehicleModel {
   @JsonKey(name: 'appropriate_ppe')
   bool? get appropriatePpe => throw _privateConstructorUsedError;
   @JsonKey(name: 'engine_oil_level')
-  bool? get engineOilLevel => throw _privateConstructorUsedError;
+  dynamic get engineOilLevel => throw _privateConstructorUsedError;
   @JsonKey(name: 'warning_system')
-  bool? get warningSystem => throw _privateConstructorUsedError;
-  bool? get steering => throw _privateConstructorUsedError;
+  dynamic get warningSystem => throw _privateConstructorUsedError;
+  dynamic get steering => throw _privateConstructorUsedError;
   @JsonKey(name: 'safety_emerg_stop')
-  bool? get safetyEmergStop => throw _privateConstructorUsedError;
+  dynamic get safetyEmergStop => throw _privateConstructorUsedError;
   @JsonKey(name: 'handbreak_alarm')
-  bool? get handbreakAlarm => throw _privateConstructorUsedError;
+  dynamic get handbreakAlarm => throw _privateConstructorUsedError;
   @JsonKey(name: 'pto_vacpump')
-  bool? get ptoVacpump => throw _privateConstructorUsedError;
-  bool? get horn => throw _privateConstructorUsedError;
+  dynamic get ptoVacpump => throw _privateConstructorUsedError;
+  dynamic get horn => throw _privateConstructorUsedError;
   @JsonKey(name: 'rev_alarm_camera')
-  bool? get revAlarmCamera => throw _privateConstructorUsedError;
+  dynamic get revAlarmCamera => throw _privateConstructorUsedError;
   @JsonKey(name: 'lights_head')
-  bool? get lightsHead => throw _privateConstructorUsedError;
+  dynamic get lightsHead => throw _privateConstructorUsedError;
   @JsonKey(name: 'lights_tail')
-  bool? get lightsTail => throw _privateConstructorUsedError;
+  dynamic get lightsTail => throw _privateConstructorUsedError;
   @JsonKey(name: 'light_beacons')
-  bool? get lightBeacons => throw _privateConstructorUsedError;
+  dynamic get lightBeacons => throw _privateConstructorUsedError;
   @JsonKey(name: 'hazard_light')
-  bool? get hazardLight => throw _privateConstructorUsedError;
+  dynamic get hazardLight => throw _privateConstructorUsedError;
   @JsonKey(name: 'rims_wheelnut')
-  bool? get rimsWheelnut => throw _privateConstructorUsedError;
-  bool? get coolant => throw _privateConstructorUsedError;
-  bool? get wheels => throw _privateConstructorUsedError;
+  dynamic get rimsWheelnut => throw _privateConstructorUsedError;
+  dynamic get coolant => throw _privateConstructorUsedError;
+  dynamic get wheels => throw _privateConstructorUsedError;
   @JsonKey(name: 'mirror_windowscreen')
-  bool? get mirrorWindowscreen => throw _privateConstructorUsedError;
+  dynamic get mirrorWindowscreen => throw _privateConstructorUsedError;
   @JsonKey(name: 'structure_bodywork')
-  bool? get structureBodywork => throw _privateConstructorUsedError;
-  bool? get wipers => throw _privateConstructorUsedError;
+  dynamic get structureBodywork => throw _privateConstructorUsedError;
+  dynamic get wipers => throw _privateConstructorUsedError;
   @JsonKey(name: 'fuel_levelpump')
-  bool? get fuelLevelpump => throw _privateConstructorUsedError;
+  dynamic get fuelLevelpump => throw _privateConstructorUsedError;
   @JsonKey(name: 'fuel_leveltruck')
-  bool? get fuelLeveltruck => throw _privateConstructorUsedError;
+  dynamic get fuelLeveltruck => throw _privateConstructorUsedError;
   @JsonKey(name: 'seat_seatbelt')
-  bool? get seatSeatbelt => throw _privateConstructorUsedError;
+  dynamic get seatSeatbelt => throw _privateConstructorUsedError;
   @JsonKey(name: 'parkbrake_trailer')
-  bool? get parkbrakeTrailer => throw _privateConstructorUsedError;
+  dynamic get parkbrakeTrailer => throw _privateConstructorUsedError;
   @JsonKey(name: 'foot_brake')
-  bool? get footBrake => throw _privateConstructorUsedError;
-  bool? get electrical => throw _privateConstructorUsedError;
+  dynamic get footBrake => throw _privateConstructorUsedError;
+  dynamic get electrical => throw _privateConstructorUsedError;
   @JsonKey(name: 'pin_retainers')
   bool? get pinRetainers => throw _privateConstructorUsedError;
   bool? get hoses => throw _privateConstructorUsedError;
@@ -273,30 +273,30 @@ abstract class $VehicleModelCopyWith<$Res> {
       @JsonKey(name: 'fit_for_work') bool? fitForWork,
       @JsonKey(name: 'Valid_driving_license') bool? validDrivingLicense,
       @JsonKey(name: 'appropriate_ppe') bool? appropriatePpe,
-      @JsonKey(name: 'engine_oil_level') bool? engineOilLevel,
-      @JsonKey(name: 'warning_system') bool? warningSystem,
-      bool? steering,
-      @JsonKey(name: 'safety_emerg_stop') bool? safetyEmergStop,
-      @JsonKey(name: 'handbreak_alarm') bool? handbreakAlarm,
-      @JsonKey(name: 'pto_vacpump') bool? ptoVacpump,
-      bool? horn,
-      @JsonKey(name: 'rev_alarm_camera') bool? revAlarmCamera,
-      @JsonKey(name: 'lights_head') bool? lightsHead,
-      @JsonKey(name: 'lights_tail') bool? lightsTail,
-      @JsonKey(name: 'light_beacons') bool? lightBeacons,
-      @JsonKey(name: 'hazard_light') bool? hazardLight,
-      @JsonKey(name: 'rims_wheelnut') bool? rimsWheelnut,
-      bool? coolant,
-      bool? wheels,
-      @JsonKey(name: 'mirror_windowscreen') bool? mirrorWindowscreen,
-      @JsonKey(name: 'structure_bodywork') bool? structureBodywork,
-      bool? wipers,
-      @JsonKey(name: 'fuel_levelpump') bool? fuelLevelpump,
-      @JsonKey(name: 'fuel_leveltruck') bool? fuelLeveltruck,
-      @JsonKey(name: 'seat_seatbelt') bool? seatSeatbelt,
-      @JsonKey(name: 'parkbrake_trailer') bool? parkbrakeTrailer,
-      @JsonKey(name: 'foot_brake') bool? footBrake,
-      bool? electrical,
+      @JsonKey(name: 'engine_oil_level') dynamic engineOilLevel,
+      @JsonKey(name: 'warning_system') dynamic warningSystem,
+      dynamic steering,
+      @JsonKey(name: 'safety_emerg_stop') dynamic safetyEmergStop,
+      @JsonKey(name: 'handbreak_alarm') dynamic handbreakAlarm,
+      @JsonKey(name: 'pto_vacpump') dynamic ptoVacpump,
+      dynamic horn,
+      @JsonKey(name: 'rev_alarm_camera') dynamic revAlarmCamera,
+      @JsonKey(name: 'lights_head') dynamic lightsHead,
+      @JsonKey(name: 'lights_tail') dynamic lightsTail,
+      @JsonKey(name: 'light_beacons') dynamic lightBeacons,
+      @JsonKey(name: 'hazard_light') dynamic hazardLight,
+      @JsonKey(name: 'rims_wheelnut') dynamic rimsWheelnut,
+      dynamic coolant,
+      dynamic wheels,
+      @JsonKey(name: 'mirror_windowscreen') dynamic mirrorWindowscreen,
+      @JsonKey(name: 'structure_bodywork') dynamic structureBodywork,
+      dynamic wipers,
+      @JsonKey(name: 'fuel_levelpump') dynamic fuelLevelpump,
+      @JsonKey(name: 'fuel_leveltruck') dynamic fuelLeveltruck,
+      @JsonKey(name: 'seat_seatbelt') dynamic seatSeatbelt,
+      @JsonKey(name: 'parkbrake_trailer') dynamic parkbrakeTrailer,
+      @JsonKey(name: 'foot_brake') dynamic footBrake,
+      dynamic electrical,
       @JsonKey(name: 'pin_retainers') bool? pinRetainers,
       bool? hoses,
       bool? fittings,
@@ -688,99 +688,99 @@ class _$VehicleModelCopyWithImpl<$Res, $Val extends VehicleModel>
       engineOilLevel: freezed == engineOilLevel
           ? _value.engineOilLevel
           : engineOilLevel // ignore: cast_nullable_to_non_nullable
-              as bool?,
+              as dynamic,
       warningSystem: freezed == warningSystem
           ? _value.warningSystem
           : warningSystem // ignore: cast_nullable_to_non_nullable
-              as bool?,
+              as dynamic,
       steering: freezed == steering
           ? _value.steering
           : steering // ignore: cast_nullable_to_non_nullable
-              as bool?,
+              as dynamic,
       safetyEmergStop: freezed == safetyEmergStop
           ? _value.safetyEmergStop
           : safetyEmergStop // ignore: cast_nullable_to_non_nullable
-              as bool?,
+              as dynamic,
       handbreakAlarm: freezed == handbreakAlarm
           ? _value.handbreakAlarm
           : handbreakAlarm // ignore: cast_nullable_to_non_nullable
-              as bool?,
+              as dynamic,
       ptoVacpump: freezed == ptoVacpump
           ? _value.ptoVacpump
           : ptoVacpump // ignore: cast_nullable_to_non_nullable
-              as bool?,
+              as dynamic,
       horn: freezed == horn
           ? _value.horn
           : horn // ignore: cast_nullable_to_non_nullable
-              as bool?,
+              as dynamic,
       revAlarmCamera: freezed == revAlarmCamera
           ? _value.revAlarmCamera
           : revAlarmCamera // ignore: cast_nullable_to_non_nullable
-              as bool?,
+              as dynamic,
       lightsHead: freezed == lightsHead
           ? _value.lightsHead
           : lightsHead // ignore: cast_nullable_to_non_nullable
-              as bool?,
+              as dynamic,
       lightsTail: freezed == lightsTail
           ? _value.lightsTail
           : lightsTail // ignore: cast_nullable_to_non_nullable
-              as bool?,
+              as dynamic,
       lightBeacons: freezed == lightBeacons
           ? _value.lightBeacons
           : lightBeacons // ignore: cast_nullable_to_non_nullable
-              as bool?,
+              as dynamic,
       hazardLight: freezed == hazardLight
           ? _value.hazardLight
           : hazardLight // ignore: cast_nullable_to_non_nullable
-              as bool?,
+              as dynamic,
       rimsWheelnut: freezed == rimsWheelnut
           ? _value.rimsWheelnut
           : rimsWheelnut // ignore: cast_nullable_to_non_nullable
-              as bool?,
+              as dynamic,
       coolant: freezed == coolant
           ? _value.coolant
           : coolant // ignore: cast_nullable_to_non_nullable
-              as bool?,
+              as dynamic,
       wheels: freezed == wheels
           ? _value.wheels
           : wheels // ignore: cast_nullable_to_non_nullable
-              as bool?,
+              as dynamic,
       mirrorWindowscreen: freezed == mirrorWindowscreen
           ? _value.mirrorWindowscreen
           : mirrorWindowscreen // ignore: cast_nullable_to_non_nullable
-              as bool?,
+              as dynamic,
       structureBodywork: freezed == structureBodywork
           ? _value.structureBodywork
           : structureBodywork // ignore: cast_nullable_to_non_nullable
-              as bool?,
+              as dynamic,
       wipers: freezed == wipers
           ? _value.wipers
           : wipers // ignore: cast_nullable_to_non_nullable
-              as bool?,
+              as dynamic,
       fuelLevelpump: freezed == fuelLevelpump
           ? _value.fuelLevelpump
           : fuelLevelpump // ignore: cast_nullable_to_non_nullable
-              as bool?,
+              as dynamic,
       fuelLeveltruck: freezed == fuelLeveltruck
           ? _value.fuelLeveltruck
           : fuelLeveltruck // ignore: cast_nullable_to_non_nullable
-              as bool?,
+              as dynamic,
       seatSeatbelt: freezed == seatSeatbelt
           ? _value.seatSeatbelt
           : seatSeatbelt // ignore: cast_nullable_to_non_nullable
-              as bool?,
+              as dynamic,
       parkbrakeTrailer: freezed == parkbrakeTrailer
           ? _value.parkbrakeTrailer
           : parkbrakeTrailer // ignore: cast_nullable_to_non_nullable
-              as bool?,
+              as dynamic,
       footBrake: freezed == footBrake
           ? _value.footBrake
           : footBrake // ignore: cast_nullable_to_non_nullable
-              as bool?,
+              as dynamic,
       electrical: freezed == electrical
           ? _value.electrical
           : electrical // ignore: cast_nullable_to_non_nullable
-              as bool?,
+              as dynamic,
       pinRetainers: freezed == pinRetainers
           ? _value.pinRetainers
           : pinRetainers // ignore: cast_nullable_to_non_nullable
@@ -964,30 +964,30 @@ abstract class _$$VehicleModelImplCopyWith<$Res>
       @JsonKey(name: 'fit_for_work') bool? fitForWork,
       @JsonKey(name: 'Valid_driving_license') bool? validDrivingLicense,
       @JsonKey(name: 'appropriate_ppe') bool? appropriatePpe,
-      @JsonKey(name: 'engine_oil_level') bool? engineOilLevel,
-      @JsonKey(name: 'warning_system') bool? warningSystem,
-      bool? steering,
-      @JsonKey(name: 'safety_emerg_stop') bool? safetyEmergStop,
-      @JsonKey(name: 'handbreak_alarm') bool? handbreakAlarm,
-      @JsonKey(name: 'pto_vacpump') bool? ptoVacpump,
-      bool? horn,
-      @JsonKey(name: 'rev_alarm_camera') bool? revAlarmCamera,
-      @JsonKey(name: 'lights_head') bool? lightsHead,
-      @JsonKey(name: 'lights_tail') bool? lightsTail,
-      @JsonKey(name: 'light_beacons') bool? lightBeacons,
-      @JsonKey(name: 'hazard_light') bool? hazardLight,
-      @JsonKey(name: 'rims_wheelnut') bool? rimsWheelnut,
-      bool? coolant,
-      bool? wheels,
-      @JsonKey(name: 'mirror_windowscreen') bool? mirrorWindowscreen,
-      @JsonKey(name: 'structure_bodywork') bool? structureBodywork,
-      bool? wipers,
-      @JsonKey(name: 'fuel_levelpump') bool? fuelLevelpump,
-      @JsonKey(name: 'fuel_leveltruck') bool? fuelLeveltruck,
-      @JsonKey(name: 'seat_seatbelt') bool? seatSeatbelt,
-      @JsonKey(name: 'parkbrake_trailer') bool? parkbrakeTrailer,
-      @JsonKey(name: 'foot_brake') bool? footBrake,
-      bool? electrical,
+      @JsonKey(name: 'engine_oil_level') dynamic engineOilLevel,
+      @JsonKey(name: 'warning_system') dynamic warningSystem,
+      dynamic steering,
+      @JsonKey(name: 'safety_emerg_stop') dynamic safetyEmergStop,
+      @JsonKey(name: 'handbreak_alarm') dynamic handbreakAlarm,
+      @JsonKey(name: 'pto_vacpump') dynamic ptoVacpump,
+      dynamic horn,
+      @JsonKey(name: 'rev_alarm_camera') dynamic revAlarmCamera,
+      @JsonKey(name: 'lights_head') dynamic lightsHead,
+      @JsonKey(name: 'lights_tail') dynamic lightsTail,
+      @JsonKey(name: 'light_beacons') dynamic lightBeacons,
+      @JsonKey(name: 'hazard_light') dynamic hazardLight,
+      @JsonKey(name: 'rims_wheelnut') dynamic rimsWheelnut,
+      dynamic coolant,
+      dynamic wheels,
+      @JsonKey(name: 'mirror_windowscreen') dynamic mirrorWindowscreen,
+      @JsonKey(name: 'structure_bodywork') dynamic structureBodywork,
+      dynamic wipers,
+      @JsonKey(name: 'fuel_levelpump') dynamic fuelLevelpump,
+      @JsonKey(name: 'fuel_leveltruck') dynamic fuelLeveltruck,
+      @JsonKey(name: 'seat_seatbelt') dynamic seatSeatbelt,
+      @JsonKey(name: 'parkbrake_trailer') dynamic parkbrakeTrailer,
+      @JsonKey(name: 'foot_brake') dynamic footBrake,
+      dynamic electrical,
       @JsonKey(name: 'pin_retainers') bool? pinRetainers,
       bool? hoses,
       bool? fittings,
@@ -1377,99 +1377,99 @@ class __$$VehicleModelImplCopyWithImpl<$Res>
       engineOilLevel: freezed == engineOilLevel
           ? _value.engineOilLevel
           : engineOilLevel // ignore: cast_nullable_to_non_nullable
-              as bool?,
+              as dynamic,
       warningSystem: freezed == warningSystem
           ? _value.warningSystem
           : warningSystem // ignore: cast_nullable_to_non_nullable
-              as bool?,
+              as dynamic,
       steering: freezed == steering
           ? _value.steering
           : steering // ignore: cast_nullable_to_non_nullable
-              as bool?,
+              as dynamic,
       safetyEmergStop: freezed == safetyEmergStop
           ? _value.safetyEmergStop
           : safetyEmergStop // ignore: cast_nullable_to_non_nullable
-              as bool?,
+              as dynamic,
       handbreakAlarm: freezed == handbreakAlarm
           ? _value.handbreakAlarm
           : handbreakAlarm // ignore: cast_nullable_to_non_nullable
-              as bool?,
+              as dynamic,
       ptoVacpump: freezed == ptoVacpump
           ? _value.ptoVacpump
           : ptoVacpump // ignore: cast_nullable_to_non_nullable
-              as bool?,
+              as dynamic,
       horn: freezed == horn
           ? _value.horn
           : horn // ignore: cast_nullable_to_non_nullable
-              as bool?,
+              as dynamic,
       revAlarmCamera: freezed == revAlarmCamera
           ? _value.revAlarmCamera
           : revAlarmCamera // ignore: cast_nullable_to_non_nullable
-              as bool?,
+              as dynamic,
       lightsHead: freezed == lightsHead
           ? _value.lightsHead
           : lightsHead // ignore: cast_nullable_to_non_nullable
-              as bool?,
+              as dynamic,
       lightsTail: freezed == lightsTail
           ? _value.lightsTail
           : lightsTail // ignore: cast_nullable_to_non_nullable
-              as bool?,
+              as dynamic,
       lightBeacons: freezed == lightBeacons
           ? _value.lightBeacons
           : lightBeacons // ignore: cast_nullable_to_non_nullable
-              as bool?,
+              as dynamic,
       hazardLight: freezed == hazardLight
           ? _value.hazardLight
           : hazardLight // ignore: cast_nullable_to_non_nullable
-              as bool?,
+              as dynamic,
       rimsWheelnut: freezed == rimsWheelnut
           ? _value.rimsWheelnut
           : rimsWheelnut // ignore: cast_nullable_to_non_nullable
-              as bool?,
+              as dynamic,
       coolant: freezed == coolant
           ? _value.coolant
           : coolant // ignore: cast_nullable_to_non_nullable
-              as bool?,
+              as dynamic,
       wheels: freezed == wheels
           ? _value.wheels
           : wheels // ignore: cast_nullable_to_non_nullable
-              as bool?,
+              as dynamic,
       mirrorWindowscreen: freezed == mirrorWindowscreen
           ? _value.mirrorWindowscreen
           : mirrorWindowscreen // ignore: cast_nullable_to_non_nullable
-              as bool?,
+              as dynamic,
       structureBodywork: freezed == structureBodywork
           ? _value.structureBodywork
           : structureBodywork // ignore: cast_nullable_to_non_nullable
-              as bool?,
+              as dynamic,
       wipers: freezed == wipers
           ? _value.wipers
           : wipers // ignore: cast_nullable_to_non_nullable
-              as bool?,
+              as dynamic,
       fuelLevelpump: freezed == fuelLevelpump
           ? _value.fuelLevelpump
           : fuelLevelpump // ignore: cast_nullable_to_non_nullable
-              as bool?,
+              as dynamic,
       fuelLeveltruck: freezed == fuelLeveltruck
           ? _value.fuelLeveltruck
           : fuelLeveltruck // ignore: cast_nullable_to_non_nullable
-              as bool?,
+              as dynamic,
       seatSeatbelt: freezed == seatSeatbelt
           ? _value.seatSeatbelt
           : seatSeatbelt // ignore: cast_nullable_to_non_nullable
-              as bool?,
+              as dynamic,
       parkbrakeTrailer: freezed == parkbrakeTrailer
           ? _value.parkbrakeTrailer
           : parkbrakeTrailer // ignore: cast_nullable_to_non_nullable
-              as bool?,
+              as dynamic,
       footBrake: freezed == footBrake
           ? _value.footBrake
           : footBrake // ignore: cast_nullable_to_non_nullable
-              as bool?,
+              as dynamic,
       electrical: freezed == electrical
           ? _value.electrical
           : electrical // ignore: cast_nullable_to_non_nullable
-              as bool?,
+              as dynamic,
       pinRetainers: freezed == pinRetainers
           ? _value.pinRetainers
           : pinRetainers // ignore: cast_nullable_to_non_nullable
@@ -1865,70 +1865,70 @@ class _$VehicleModelImpl implements _VehicleModel {
   final bool? appropriatePpe;
   @override
   @JsonKey(name: 'engine_oil_level')
-  final bool? engineOilLevel;
+  final dynamic engineOilLevel;
   @override
   @JsonKey(name: 'warning_system')
-  final bool? warningSystem;
+  final dynamic warningSystem;
   @override
-  final bool? steering;
+  final dynamic steering;
   @override
   @JsonKey(name: 'safety_emerg_stop')
-  final bool? safetyEmergStop;
+  final dynamic safetyEmergStop;
   @override
   @JsonKey(name: 'handbreak_alarm')
-  final bool? handbreakAlarm;
+  final dynamic handbreakAlarm;
   @override
   @JsonKey(name: 'pto_vacpump')
-  final bool? ptoVacpump;
+  final dynamic ptoVacpump;
   @override
-  final bool? horn;
+  final dynamic horn;
   @override
   @JsonKey(name: 'rev_alarm_camera')
-  final bool? revAlarmCamera;
+  final dynamic revAlarmCamera;
   @override
   @JsonKey(name: 'lights_head')
-  final bool? lightsHead;
+  final dynamic lightsHead;
   @override
   @JsonKey(name: 'lights_tail')
-  final bool? lightsTail;
+  final dynamic lightsTail;
   @override
   @JsonKey(name: 'light_beacons')
-  final bool? lightBeacons;
+  final dynamic lightBeacons;
   @override
   @JsonKey(name: 'hazard_light')
-  final bool? hazardLight;
+  final dynamic hazardLight;
   @override
   @JsonKey(name: 'rims_wheelnut')
-  final bool? rimsWheelnut;
+  final dynamic rimsWheelnut;
   @override
-  final bool? coolant;
+  final dynamic coolant;
   @override
-  final bool? wheels;
+  final dynamic wheels;
   @override
   @JsonKey(name: 'mirror_windowscreen')
-  final bool? mirrorWindowscreen;
+  final dynamic mirrorWindowscreen;
   @override
   @JsonKey(name: 'structure_bodywork')
-  final bool? structureBodywork;
+  final dynamic structureBodywork;
   @override
-  final bool? wipers;
+  final dynamic wipers;
   @override
   @JsonKey(name: 'fuel_levelpump')
-  final bool? fuelLevelpump;
+  final dynamic fuelLevelpump;
   @override
   @JsonKey(name: 'fuel_leveltruck')
-  final bool? fuelLeveltruck;
+  final dynamic fuelLeveltruck;
   @override
   @JsonKey(name: 'seat_seatbelt')
-  final bool? seatSeatbelt;
+  final dynamic seatSeatbelt;
   @override
   @JsonKey(name: 'parkbrake_trailer')
-  final bool? parkbrakeTrailer;
+  final dynamic parkbrakeTrailer;
   @override
   @JsonKey(name: 'foot_brake')
-  final bool? footBrake;
+  final dynamic footBrake;
   @override
-  final bool? electrical;
+  final dynamic electrical;
   @override
   @JsonKey(name: 'pin_retainers')
   final bool? pinRetainers;
@@ -2115,41 +2115,40 @@ class _$VehicleModelImpl implements _VehicleModel {
                 other.validDrivingLicense == validDrivingLicense) &&
             (identical(other.appropriatePpe, appropriatePpe) ||
                 other.appropriatePpe == appropriatePpe) &&
-            (identical(other.engineOilLevel, engineOilLevel) ||
-                other.engineOilLevel == engineOilLevel) &&
-            (identical(other.warningSystem, warningSystem) ||
-                other.warningSystem == warningSystem) &&
-            (identical(other.steering, steering) ||
-                other.steering == steering) &&
-            (identical(other.safetyEmergStop, safetyEmergStop) ||
-                other.safetyEmergStop == safetyEmergStop) &&
-            (identical(other.handbreakAlarm, handbreakAlarm) ||
-                other.handbreakAlarm == handbreakAlarm) &&
-            (identical(other.ptoVacpump, ptoVacpump) ||
-                other.ptoVacpump == ptoVacpump) &&
-            (identical(other.horn, horn) || other.horn == horn) &&
-            (identical(other.revAlarmCamera, revAlarmCamera) ||
-                other.revAlarmCamera == revAlarmCamera) &&
-            (identical(other.lightsHead, lightsHead) ||
-                other.lightsHead == lightsHead) &&
-            (identical(other.lightsTail, lightsTail) ||
-                other.lightsTail == lightsTail) &&
-            (identical(other.lightBeacons, lightBeacons) ||
-                other.lightBeacons == lightBeacons) &&
-            (identical(other.hazardLight, hazardLight) ||
-                other.hazardLight == hazardLight) &&
-            (identical(other.rimsWheelnut, rimsWheelnut) || other.rimsWheelnut == rimsWheelnut) &&
-            (identical(other.coolant, coolant) || other.coolant == coolant) &&
-            (identical(other.wheels, wheels) || other.wheels == wheels) &&
-            (identical(other.mirrorWindowscreen, mirrorWindowscreen) || other.mirrorWindowscreen == mirrorWindowscreen) &&
-            (identical(other.structureBodywork, structureBodywork) || other.structureBodywork == structureBodywork) &&
-            (identical(other.wipers, wipers) || other.wipers == wipers) &&
-            (identical(other.fuelLevelpump, fuelLevelpump) || other.fuelLevelpump == fuelLevelpump) &&
-            (identical(other.fuelLeveltruck, fuelLeveltruck) || other.fuelLeveltruck == fuelLeveltruck) &&
-            (identical(other.seatSeatbelt, seatSeatbelt) || other.seatSeatbelt == seatSeatbelt) &&
-            (identical(other.parkbrakeTrailer, parkbrakeTrailer) || other.parkbrakeTrailer == parkbrakeTrailer) &&
-            (identical(other.footBrake, footBrake) || other.footBrake == footBrake) &&
-            (identical(other.electrical, electrical) || other.electrical == electrical) &&
+            const DeepCollectionEquality()
+                .equals(other.engineOilLevel, engineOilLevel) &&
+            const DeepCollectionEquality()
+                .equals(other.warningSystem, warningSystem) &&
+            const DeepCollectionEquality().equals(other.steering, steering) &&
+            const DeepCollectionEquality()
+                .equals(other.safetyEmergStop, safetyEmergStop) &&
+            const DeepCollectionEquality()
+                .equals(other.handbreakAlarm, handbreakAlarm) &&
+            const DeepCollectionEquality()
+                .equals(other.ptoVacpump, ptoVacpump) &&
+            const DeepCollectionEquality().equals(other.horn, horn) &&
+            const DeepCollectionEquality()
+                .equals(other.revAlarmCamera, revAlarmCamera) &&
+            const DeepCollectionEquality()
+                .equals(other.lightsHead, lightsHead) &&
+            const DeepCollectionEquality()
+                .equals(other.lightsTail, lightsTail) &&
+            const DeepCollectionEquality()
+                .equals(other.lightBeacons, lightBeacons) &&
+            const DeepCollectionEquality()
+                .equals(other.hazardLight, hazardLight) &&
+            const DeepCollectionEquality().equals(other.rimsWheelnut, rimsWheelnut) &&
+            const DeepCollectionEquality().equals(other.coolant, coolant) &&
+            const DeepCollectionEquality().equals(other.wheels, wheels) &&
+            const DeepCollectionEquality().equals(other.mirrorWindowscreen, mirrorWindowscreen) &&
+            const DeepCollectionEquality().equals(other.structureBodywork, structureBodywork) &&
+            const DeepCollectionEquality().equals(other.wipers, wipers) &&
+            const DeepCollectionEquality().equals(other.fuelLevelpump, fuelLevelpump) &&
+            const DeepCollectionEquality().equals(other.fuelLeveltruck, fuelLeveltruck) &&
+            const DeepCollectionEquality().equals(other.seatSeatbelt, seatSeatbelt) &&
+            const DeepCollectionEquality().equals(other.parkbrakeTrailer, parkbrakeTrailer) &&
+            const DeepCollectionEquality().equals(other.footBrake, footBrake) &&
+            const DeepCollectionEquality().equals(other.electrical, electrical) &&
             (identical(other.pinRetainers, pinRetainers) || other.pinRetainers == pinRetainers) &&
             (identical(other.hoses, hoses) || other.hoses == hoses) &&
             (identical(other.fittings, fittings) || other.fittings == fittings) &&
@@ -2242,30 +2241,30 @@ class _$VehicleModelImpl implements _VehicleModel {
         fitForWork,
         validDrivingLicense,
         appropriatePpe,
-        engineOilLevel,
-        warningSystem,
-        steering,
-        safetyEmergStop,
-        handbreakAlarm,
-        ptoVacpump,
-        horn,
-        revAlarmCamera,
-        lightsHead,
-        lightsTail,
-        lightBeacons,
-        hazardLight,
-        rimsWheelnut,
-        coolant,
-        wheels,
-        mirrorWindowscreen,
-        structureBodywork,
-        wipers,
-        fuelLevelpump,
-        fuelLeveltruck,
-        seatSeatbelt,
-        parkbrakeTrailer,
-        footBrake,
-        electrical,
+        const DeepCollectionEquality().hash(engineOilLevel),
+        const DeepCollectionEquality().hash(warningSystem),
+        const DeepCollectionEquality().hash(steering),
+        const DeepCollectionEquality().hash(safetyEmergStop),
+        const DeepCollectionEquality().hash(handbreakAlarm),
+        const DeepCollectionEquality().hash(ptoVacpump),
+        const DeepCollectionEquality().hash(horn),
+        const DeepCollectionEquality().hash(revAlarmCamera),
+        const DeepCollectionEquality().hash(lightsHead),
+        const DeepCollectionEquality().hash(lightsTail),
+        const DeepCollectionEquality().hash(lightBeacons),
+        const DeepCollectionEquality().hash(hazardLight),
+        const DeepCollectionEquality().hash(rimsWheelnut),
+        const DeepCollectionEquality().hash(coolant),
+        const DeepCollectionEquality().hash(wheels),
+        const DeepCollectionEquality().hash(mirrorWindowscreen),
+        const DeepCollectionEquality().hash(structureBodywork),
+        const DeepCollectionEquality().hash(wipers),
+        const DeepCollectionEquality().hash(fuelLevelpump),
+        const DeepCollectionEquality().hash(fuelLeveltruck),
+        const DeepCollectionEquality().hash(seatSeatbelt),
+        const DeepCollectionEquality().hash(parkbrakeTrailer),
+        const DeepCollectionEquality().hash(footBrake),
+        const DeepCollectionEquality().hash(electrical),
         pinRetainers,
         hoses,
         fittings,
@@ -2373,30 +2372,30 @@ abstract class _VehicleModel implements VehicleModel {
       @JsonKey(name: 'fit_for_work') final bool? fitForWork,
       @JsonKey(name: 'Valid_driving_license') final bool? validDrivingLicense,
       @JsonKey(name: 'appropriate_ppe') final bool? appropriatePpe,
-      @JsonKey(name: 'engine_oil_level') final bool? engineOilLevel,
-      @JsonKey(name: 'warning_system') final bool? warningSystem,
-      final bool? steering,
-      @JsonKey(name: 'safety_emerg_stop') final bool? safetyEmergStop,
-      @JsonKey(name: 'handbreak_alarm') final bool? handbreakAlarm,
-      @JsonKey(name: 'pto_vacpump') final bool? ptoVacpump,
-      final bool? horn,
-      @JsonKey(name: 'rev_alarm_camera') final bool? revAlarmCamera,
-      @JsonKey(name: 'lights_head') final bool? lightsHead,
-      @JsonKey(name: 'lights_tail') final bool? lightsTail,
-      @JsonKey(name: 'light_beacons') final bool? lightBeacons,
-      @JsonKey(name: 'hazard_light') final bool? hazardLight,
-      @JsonKey(name: 'rims_wheelnut') final bool? rimsWheelnut,
-      final bool? coolant,
-      final bool? wheels,
-      @JsonKey(name: 'mirror_windowscreen') final bool? mirrorWindowscreen,
-      @JsonKey(name: 'structure_bodywork') final bool? structureBodywork,
-      final bool? wipers,
-      @JsonKey(name: 'fuel_levelpump') final bool? fuelLevelpump,
-      @JsonKey(name: 'fuel_leveltruck') final bool? fuelLeveltruck,
-      @JsonKey(name: 'seat_seatbelt') final bool? seatSeatbelt,
-      @JsonKey(name: 'parkbrake_trailer') final bool? parkbrakeTrailer,
-      @JsonKey(name: 'foot_brake') final bool? footBrake,
-      final bool? electrical,
+      @JsonKey(name: 'engine_oil_level') final dynamic engineOilLevel,
+      @JsonKey(name: 'warning_system') final dynamic warningSystem,
+      final dynamic steering,
+      @JsonKey(name: 'safety_emerg_stop') final dynamic safetyEmergStop,
+      @JsonKey(name: 'handbreak_alarm') final dynamic handbreakAlarm,
+      @JsonKey(name: 'pto_vacpump') final dynamic ptoVacpump,
+      final dynamic horn,
+      @JsonKey(name: 'rev_alarm_camera') final dynamic revAlarmCamera,
+      @JsonKey(name: 'lights_head') final dynamic lightsHead,
+      @JsonKey(name: 'lights_tail') final dynamic lightsTail,
+      @JsonKey(name: 'light_beacons') final dynamic lightBeacons,
+      @JsonKey(name: 'hazard_light') final dynamic hazardLight,
+      @JsonKey(name: 'rims_wheelnut') final dynamic rimsWheelnut,
+      final dynamic coolant,
+      final dynamic wheels,
+      @JsonKey(name: 'mirror_windowscreen') final dynamic mirrorWindowscreen,
+      @JsonKey(name: 'structure_bodywork') final dynamic structureBodywork,
+      final dynamic wipers,
+      @JsonKey(name: 'fuel_levelpump') final dynamic fuelLevelpump,
+      @JsonKey(name: 'fuel_leveltruck') final dynamic fuelLeveltruck,
+      @JsonKey(name: 'seat_seatbelt') final dynamic seatSeatbelt,
+      @JsonKey(name: 'parkbrake_trailer') final dynamic parkbrakeTrailer,
+      @JsonKey(name: 'foot_brake') final dynamic footBrake,
+      final dynamic electrical,
       @JsonKey(name: 'pin_retainers') final bool? pinRetainers,
       final bool? hoses,
       final bool? fittings,
@@ -2582,70 +2581,70 @@ abstract class _VehicleModel implements VehicleModel {
   bool? get appropriatePpe;
   @override
   @JsonKey(name: 'engine_oil_level')
-  bool? get engineOilLevel;
+  dynamic get engineOilLevel;
   @override
   @JsonKey(name: 'warning_system')
-  bool? get warningSystem;
+  dynamic get warningSystem;
   @override
-  bool? get steering;
+  dynamic get steering;
   @override
   @JsonKey(name: 'safety_emerg_stop')
-  bool? get safetyEmergStop;
+  dynamic get safetyEmergStop;
   @override
   @JsonKey(name: 'handbreak_alarm')
-  bool? get handbreakAlarm;
+  dynamic get handbreakAlarm;
   @override
   @JsonKey(name: 'pto_vacpump')
-  bool? get ptoVacpump;
+  dynamic get ptoVacpump;
   @override
-  bool? get horn;
+  dynamic get horn;
   @override
   @JsonKey(name: 'rev_alarm_camera')
-  bool? get revAlarmCamera;
+  dynamic get revAlarmCamera;
   @override
   @JsonKey(name: 'lights_head')
-  bool? get lightsHead;
+  dynamic get lightsHead;
   @override
   @JsonKey(name: 'lights_tail')
-  bool? get lightsTail;
+  dynamic get lightsTail;
   @override
   @JsonKey(name: 'light_beacons')
-  bool? get lightBeacons;
+  dynamic get lightBeacons;
   @override
   @JsonKey(name: 'hazard_light')
-  bool? get hazardLight;
+  dynamic get hazardLight;
   @override
   @JsonKey(name: 'rims_wheelnut')
-  bool? get rimsWheelnut;
+  dynamic get rimsWheelnut;
   @override
-  bool? get coolant;
+  dynamic get coolant;
   @override
-  bool? get wheels;
+  dynamic get wheels;
   @override
   @JsonKey(name: 'mirror_windowscreen')
-  bool? get mirrorWindowscreen;
+  dynamic get mirrorWindowscreen;
   @override
   @JsonKey(name: 'structure_bodywork')
-  bool? get structureBodywork;
+  dynamic get structureBodywork;
   @override
-  bool? get wipers;
+  dynamic get wipers;
   @override
   @JsonKey(name: 'fuel_levelpump')
-  bool? get fuelLevelpump;
+  dynamic get fuelLevelpump;
   @override
   @JsonKey(name: 'fuel_leveltruck')
-  bool? get fuelLeveltruck;
+  dynamic get fuelLeveltruck;
   @override
   @JsonKey(name: 'seat_seatbelt')
-  bool? get seatSeatbelt;
+  dynamic get seatSeatbelt;
   @override
   @JsonKey(name: 'parkbrake_trailer')
-  bool? get parkbrakeTrailer;
+  dynamic get parkbrakeTrailer;
   @override
   @JsonKey(name: 'foot_brake')
-  bool? get footBrake;
+  dynamic get footBrake;
   @override
-  bool? get electrical;
+  dynamic get electrical;
   @override
   @JsonKey(name: 'pin_retainers')
   bool? get pinRetainers;

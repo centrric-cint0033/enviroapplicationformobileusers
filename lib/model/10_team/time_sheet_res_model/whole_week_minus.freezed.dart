@@ -20,20 +20,20 @@ WholeWeekMinus _$WholeWeekMinusFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$WholeWeekMinus {
-  num? get sick => throw _privateConstructorUsedError;
-  num? get annual => throw _privateConstructorUsedError;
+  dynamic get sick => throw _privateConstructorUsedError;
+  dynamic get annual => throw _privateConstructorUsedError;
   @JsonKey(name: 'full_time')
-  num? get fullTime => throw _privateConstructorUsedError;
+  dynamic get fullTime => throw _privateConstructorUsedError;
   @JsonKey(name: 'half_time')
-  num? get halfTime => throw _privateConstructorUsedError;
+  dynamic get halfTime => throw _privateConstructorUsedError;
   @JsonKey(name: 'other_days')
-  num? get otherDays => throw _privateConstructorUsedError;
+  dynamic get otherDays => throw _privateConstructorUsedError;
   @JsonKey(name: 'normal_hours')
-  num? get normalHours => throw _privateConstructorUsedError;
+  dynamic get normalHours => throw _privateConstructorUsedError;
   @JsonKey(name: 'public_holidays')
-  num? get publicHolidays => throw _privateConstructorUsedError;
+  dynamic get publicHolidays => throw _privateConstructorUsedError;
   @JsonKey(name: 'total_hours_worked')
-  num? get totalHoursWorked => throw _privateConstructorUsedError;
+  dynamic get totalHoursWorked => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -48,14 +48,14 @@ abstract class $WholeWeekMinusCopyWith<$Res> {
       _$WholeWeekMinusCopyWithImpl<$Res, WholeWeekMinus>;
   @useResult
   $Res call(
-      {num? sick,
-      num? annual,
-      @JsonKey(name: 'full_time') num? fullTime,
-      @JsonKey(name: 'half_time') num? halfTime,
-      @JsonKey(name: 'other_days') num? otherDays,
-      @JsonKey(name: 'normal_hours') num? normalHours,
-      @JsonKey(name: 'public_holidays') num? publicHolidays,
-      @JsonKey(name: 'total_hours_worked') num? totalHoursWorked});
+      {dynamic sick,
+      dynamic annual,
+      @JsonKey(name: 'full_time') dynamic fullTime,
+      @JsonKey(name: 'half_time') dynamic halfTime,
+      @JsonKey(name: 'other_days') dynamic otherDays,
+      @JsonKey(name: 'normal_hours') dynamic normalHours,
+      @JsonKey(name: 'public_holidays') dynamic publicHolidays,
+      @JsonKey(name: 'total_hours_worked') dynamic totalHoursWorked});
 }
 
 /// @nodoc
@@ -84,35 +84,35 @@ class _$WholeWeekMinusCopyWithImpl<$Res, $Val extends WholeWeekMinus>
       sick: freezed == sick
           ? _value.sick
           : sick // ignore: cast_nullable_to_non_nullable
-              as num?,
+              as dynamic,
       annual: freezed == annual
           ? _value.annual
           : annual // ignore: cast_nullable_to_non_nullable
-              as num?,
+              as dynamic,
       fullTime: freezed == fullTime
           ? _value.fullTime
           : fullTime // ignore: cast_nullable_to_non_nullable
-              as num?,
+              as dynamic,
       halfTime: freezed == halfTime
           ? _value.halfTime
           : halfTime // ignore: cast_nullable_to_non_nullable
-              as num?,
+              as dynamic,
       otherDays: freezed == otherDays
           ? _value.otherDays
           : otherDays // ignore: cast_nullable_to_non_nullable
-              as num?,
+              as dynamic,
       normalHours: freezed == normalHours
           ? _value.normalHours
           : normalHours // ignore: cast_nullable_to_non_nullable
-              as num?,
+              as dynamic,
       publicHolidays: freezed == publicHolidays
           ? _value.publicHolidays
           : publicHolidays // ignore: cast_nullable_to_non_nullable
-              as num?,
+              as dynamic,
       totalHoursWorked: freezed == totalHoursWorked
           ? _value.totalHoursWorked
           : totalHoursWorked // ignore: cast_nullable_to_non_nullable
-              as num?,
+              as dynamic,
     ) as $Val);
   }
 }
@@ -126,14 +126,14 @@ abstract class _$$WholeWeekMinusImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {num? sick,
-      num? annual,
-      @JsonKey(name: 'full_time') num? fullTime,
-      @JsonKey(name: 'half_time') num? halfTime,
-      @JsonKey(name: 'other_days') num? otherDays,
-      @JsonKey(name: 'normal_hours') num? normalHours,
-      @JsonKey(name: 'public_holidays') num? publicHolidays,
-      @JsonKey(name: 'total_hours_worked') num? totalHoursWorked});
+      {dynamic sick,
+      dynamic annual,
+      @JsonKey(name: 'full_time') dynamic fullTime,
+      @JsonKey(name: 'half_time') dynamic halfTime,
+      @JsonKey(name: 'other_days') dynamic otherDays,
+      @JsonKey(name: 'normal_hours') dynamic normalHours,
+      @JsonKey(name: 'public_holidays') dynamic publicHolidays,
+      @JsonKey(name: 'total_hours_worked') dynamic totalHoursWorked});
 }
 
 /// @nodoc
@@ -160,35 +160,35 @@ class __$$WholeWeekMinusImplCopyWithImpl<$Res>
       sick: freezed == sick
           ? _value.sick
           : sick // ignore: cast_nullable_to_non_nullable
-              as num?,
+              as dynamic,
       annual: freezed == annual
           ? _value.annual
           : annual // ignore: cast_nullable_to_non_nullable
-              as num?,
+              as dynamic,
       fullTime: freezed == fullTime
           ? _value.fullTime
           : fullTime // ignore: cast_nullable_to_non_nullable
-              as num?,
+              as dynamic,
       halfTime: freezed == halfTime
           ? _value.halfTime
           : halfTime // ignore: cast_nullable_to_non_nullable
-              as num?,
+              as dynamic,
       otherDays: freezed == otherDays
           ? _value.otherDays
           : otherDays // ignore: cast_nullable_to_non_nullable
-              as num?,
+              as dynamic,
       normalHours: freezed == normalHours
           ? _value.normalHours
           : normalHours // ignore: cast_nullable_to_non_nullable
-              as num?,
+              as dynamic,
       publicHolidays: freezed == publicHolidays
           ? _value.publicHolidays
           : publicHolidays // ignore: cast_nullable_to_non_nullable
-              as num?,
+              as dynamic,
       totalHoursWorked: freezed == totalHoursWorked
           ? _value.totalHoursWorked
           : totalHoursWorked // ignore: cast_nullable_to_non_nullable
-              as num?,
+              as dynamic,
     ));
   }
 }
@@ -210,27 +210,27 @@ class _$WholeWeekMinusImpl implements _WholeWeekMinus {
       _$$WholeWeekMinusImplFromJson(json);
 
   @override
-  final num? sick;
+  final dynamic sick;
   @override
-  final num? annual;
+  final dynamic annual;
   @override
   @JsonKey(name: 'full_time')
-  final num? fullTime;
+  final dynamic fullTime;
   @override
   @JsonKey(name: 'half_time')
-  final num? halfTime;
+  final dynamic halfTime;
   @override
   @JsonKey(name: 'other_days')
-  final num? otherDays;
+  final dynamic otherDays;
   @override
   @JsonKey(name: 'normal_hours')
-  final num? normalHours;
+  final dynamic normalHours;
   @override
   @JsonKey(name: 'public_holidays')
-  final num? publicHolidays;
+  final dynamic publicHolidays;
   @override
   @JsonKey(name: 'total_hours_worked')
-  final num? totalHoursWorked;
+  final dynamic totalHoursWorked;
 
   @override
   String toString() {
@@ -242,26 +242,31 @@ class _$WholeWeekMinusImpl implements _WholeWeekMinus {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$WholeWeekMinusImpl &&
-            (identical(other.sick, sick) || other.sick == sick) &&
-            (identical(other.annual, annual) || other.annual == annual) &&
-            (identical(other.fullTime, fullTime) ||
-                other.fullTime == fullTime) &&
-            (identical(other.halfTime, halfTime) ||
-                other.halfTime == halfTime) &&
-            (identical(other.otherDays, otherDays) ||
-                other.otherDays == otherDays) &&
-            (identical(other.normalHours, normalHours) ||
-                other.normalHours == normalHours) &&
-            (identical(other.publicHolidays, publicHolidays) ||
-                other.publicHolidays == publicHolidays) &&
-            (identical(other.totalHoursWorked, totalHoursWorked) ||
-                other.totalHoursWorked == totalHoursWorked));
+            const DeepCollectionEquality().equals(other.sick, sick) &&
+            const DeepCollectionEquality().equals(other.annual, annual) &&
+            const DeepCollectionEquality().equals(other.fullTime, fullTime) &&
+            const DeepCollectionEquality().equals(other.halfTime, halfTime) &&
+            const DeepCollectionEquality().equals(other.otherDays, otherDays) &&
+            const DeepCollectionEquality()
+                .equals(other.normalHours, normalHours) &&
+            const DeepCollectionEquality()
+                .equals(other.publicHolidays, publicHolidays) &&
+            const DeepCollectionEquality()
+                .equals(other.totalHoursWorked, totalHoursWorked));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, sick, annual, fullTime, halfTime,
-      otherDays, normalHours, publicHolidays, totalHoursWorked);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(sick),
+      const DeepCollectionEquality().hash(annual),
+      const DeepCollectionEquality().hash(fullTime),
+      const DeepCollectionEquality().hash(halfTime),
+      const DeepCollectionEquality().hash(otherDays),
+      const DeepCollectionEquality().hash(normalHours),
+      const DeepCollectionEquality().hash(publicHolidays),
+      const DeepCollectionEquality().hash(totalHoursWorked));
 
   @JsonKey(ignore: true)
   @override
@@ -280,41 +285,41 @@ class _$WholeWeekMinusImpl implements _WholeWeekMinus {
 
 abstract class _WholeWeekMinus implements WholeWeekMinus {
   factory _WholeWeekMinus(
-          {final num? sick,
-          final num? annual,
-          @JsonKey(name: 'full_time') final num? fullTime,
-          @JsonKey(name: 'half_time') final num? halfTime,
-          @JsonKey(name: 'other_days') final num? otherDays,
-          @JsonKey(name: 'normal_hours') final num? normalHours,
-          @JsonKey(name: 'public_holidays') final num? publicHolidays,
-          @JsonKey(name: 'total_hours_worked') final num? totalHoursWorked}) =
-      _$WholeWeekMinusImpl;
+      {final dynamic sick,
+      final dynamic annual,
+      @JsonKey(name: 'full_time') final dynamic fullTime,
+      @JsonKey(name: 'half_time') final dynamic halfTime,
+      @JsonKey(name: 'other_days') final dynamic otherDays,
+      @JsonKey(name: 'normal_hours') final dynamic normalHours,
+      @JsonKey(name: 'public_holidays') final dynamic publicHolidays,
+      @JsonKey(name: 'total_hours_worked')
+      final dynamic totalHoursWorked}) = _$WholeWeekMinusImpl;
 
   factory _WholeWeekMinus.fromJson(Map<String, dynamic> json) =
       _$WholeWeekMinusImpl.fromJson;
 
   @override
-  num? get sick;
+  dynamic get sick;
   @override
-  num? get annual;
+  dynamic get annual;
   @override
   @JsonKey(name: 'full_time')
-  num? get fullTime;
+  dynamic get fullTime;
   @override
   @JsonKey(name: 'half_time')
-  num? get halfTime;
+  dynamic get halfTime;
   @override
   @JsonKey(name: 'other_days')
-  num? get otherDays;
+  dynamic get otherDays;
   @override
   @JsonKey(name: 'normal_hours')
-  num? get normalHours;
+  dynamic get normalHours;
   @override
   @JsonKey(name: 'public_holidays')
-  num? get publicHolidays;
+  dynamic get publicHolidays;
   @override
   @JsonKey(name: 'total_hours_worked')
-  num? get totalHoursWorked;
+  dynamic get totalHoursWorked;
   @override
   @JsonKey(ignore: true)
   _$$WholeWeekMinusImplCopyWith<_$WholeWeekMinusImpl> get copyWith =>

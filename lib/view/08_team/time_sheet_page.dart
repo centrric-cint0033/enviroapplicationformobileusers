@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:enviro_mobile_application/Routepage/approutes.gr.dart';
 import 'package:enviro_mobile_application/model/10_team/time_sheet_res_model/time_sheet_res_model.dart';
@@ -80,6 +82,7 @@ class TimeSheetPage extends StatelessWidget {
       child: Observer(builder: (context) {
         final res = vmTeam.timeSheetResponse;
         TimeSheetResModel? timeSheet = res.data;
+
         return SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: SizedBox(
@@ -139,7 +142,7 @@ class TimeSheetPage extends StatelessWidget {
                     final data = (week != null && index < week.length)
                         ? week[index]
                         : null;
-
+                    log(data?.totalHoursWorked.toString() ?? "");
                     String inputweekStartDate = data?.date ??
                         DateFormat('dd-MM-yyyy').format(weekDates[0]);
                     DateTime parsedDate =
