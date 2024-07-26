@@ -17,14 +17,16 @@ Drawer cmnDrawer(BuildContext context) {
       physics: const NeverScrollableScrollPhysics(),
       padding: EdgeInsets.zero,
       children: <Widget>[
-        const SizedBox(
-          height: 60,
+        SizedBox(
+          height: 40.w,
         ),
         Padding(
-          padding: const EdgeInsets.only(left: 35.0),
+          padding: EdgeInsets.only(left: 15.w),
           child: Column(
             children: [
               Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Observer(builder: (_) {
                     return SizedBox(
@@ -38,50 +40,58 @@ Drawer cmnDrawer(BuildContext context) {
                           : Container(),
                     );
                   }),
-                  Expanded(
-                    child: Observer(builder: (_) {
-                      return Padding(
-                        padding: const EdgeInsets.only(left: 23.0),
-                        child: Text(
+                  sized0wx15,
+                  Observer(builder: (_) {
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Text(
                           vmProfile.profilepageResponse.data?.username ?? '',
-                          style:
-                              const TextStyle(overflow: TextOverflow.ellipsis),
+                          style: TextStyle(
+                              fontSize: 12.sp, overflow: TextOverflow.ellipsis),
                         ),
-                      );
-                    }),
-                  ),
+                        sized0hx03,
+                        SizedBox(
+                          height: 26.w,
+                          child: ElevatedButton(
+                              onPressed: () {
+                                profileeditfunction(context);
+                              },
+                              style: ButtonStyle(
+                                side: MaterialStateProperty.all(
+                                    const BorderSide(color: Colors.blue)),
+                              ),
+                              child: Observer(builder: (_) {
+                                return Text(
+                                  vmProfile.profilepageResponse.data
+                                          ?.permissionType ??
+                                      '',
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 10.sp,
+                                      fontWeight: FontWeight.w500),
+                                );
+                              })),
+                        ),
+                      ],
+                    );
+                  }),
                 ],
               ),
-              SizedBox(
-                height: 8.w,
-              ),
-              SizedBox(
-                height: 33.w,
-                child: ElevatedButton(
-                    onPressed: () {
-                      profileeditfunction(context);
-                    },
-                    style: ButtonStyle(
-                      side: MaterialStateProperty.all(
-                          const BorderSide(color: Colors.blue)),
-                    ),
-                    child: Observer(builder: (_) {
-                      return Text(
-                        vmProfile.profilepageResponse.data?.permissionType ??
-                            '',
-                        style: const TextStyle(color: Colors.black),
-                      );
-                    })),
-              ),
-              SizedBox(
-                height: 35.w,
-              ),
+              sized0hx50,
               ListTile(
                 leading: const Icon(
                   Icons.home,
                   color: Colors.blue,
                 ),
-                title: const Text('Home'),
+                title: Text(
+                  'Home',
+                  style: TextStyle(
+                      fontSize: 10.sp,
+                      fontWeight: FontWeight.w700,
+                      color: Colors.grey.shade700),
+                ),
                 onTap: () {
                   context.router.pushNamed(RouteNames.rHomePage);
                   Navigator.pop(context);
@@ -93,7 +103,13 @@ Drawer cmnDrawer(BuildContext context) {
                   Icons.monetization_on,
                   color: Colors.blue,
                 ),
-                title: const Text('Sales'),
+                title: Text(
+                  'Sales',
+                  style: TextStyle(
+                      fontSize: 10.sp,
+                      fontWeight: FontWeight.w700,
+                      color: Colors.grey.shade700),
+                ),
                 onTap: () {
                   onsalesfunction(context);
                   Navigator.pop(context);
@@ -105,7 +121,13 @@ Drawer cmnDrawer(BuildContext context) {
                   Icons.directions_car,
                   color: Colors.blue,
                 ),
-                title: const Text('Vehicle'),
+                title: Text(
+                  'Vehicle',
+                  style: TextStyle(
+                      fontSize: 10.sp,
+                      fontWeight: FontWeight.w700,
+                      color: Colors.grey.shade700),
+                ),
                 onTap: () {
                   vehiclefunction(context);
                   Navigator.pop(context);
@@ -117,7 +139,13 @@ Drawer cmnDrawer(BuildContext context) {
                   Icons.location_on,
                   color: Colors.blue,
                 ),
-                title: const Text('Site'),
+                title: Text(
+                  'Site',
+                  style: TextStyle(
+                      fontSize: 10.sp,
+                      fontWeight: FontWeight.w700,
+                      color: Colors.grey.shade700),
+                ),
                 onTap: () {
                   navigateToSitesPage(context: context);
                   Navigator.pop(context);
@@ -129,7 +157,13 @@ Drawer cmnDrawer(BuildContext context) {
                   Icons.local_hospital,
                   color: Colors.blue,
                 ),
-                title: const Text('OH&S'),
+                title: Text(
+                  'OH&S',
+                  style: TextStyle(
+                      fontSize: 10.sp,
+                      fontWeight: FontWeight.w700,
+                      color: Colors.grey.shade700),
+                ),
                 onTap: () {
                   ohsfunction(context);
                   Navigator.pop(context);
@@ -141,7 +175,13 @@ Drawer cmnDrawer(BuildContext context) {
                   Icons.schedule,
                   color: Colors.blue, // Set icon color to blue
                 ),
-                title: const Text('Scheduling'),
+                title: Text(
+                  'Scheduling',
+                  style: TextStyle(
+                      fontSize: 10.sp,
+                      fontWeight: FontWeight.w700,
+                      color: Colors.grey.shade700),
+                ),
                 onTap: () {
                   shedulepagefunction(context);
                   Navigator.pop(context);
@@ -153,7 +193,13 @@ Drawer cmnDrawer(BuildContext context) {
                   Icons.business,
                   color: Colors.blue, // Set icon color to blue
                 ),
-                title: const Text('Intranet'),
+                title: Text(
+                  'Intranet',
+                  style: TextStyle(
+                      fontSize: 10.sp,
+                      fontWeight: FontWeight.w700,
+                      color: Colors.grey.shade700),
+                ),
                 onTap: () {
                   intranetfuntion(context);
                   Navigator.pop(context);
@@ -165,7 +211,13 @@ Drawer cmnDrawer(BuildContext context) {
                   Icons.people,
                   color: Colors.blue, // Set icon color to blue
                 ),
-                title: const Text('Team'),
+                title: Text(
+                  'Team',
+                  style: TextStyle(
+                      fontSize: 10.sp,
+                      fontWeight: FontWeight.w700,
+                      color: Colors.grey.shade700),
+                ),
                 onTap: () {
                   teamfuntion(context);
                   // Add your functionality here
@@ -190,7 +242,13 @@ Drawer cmnDrawer(BuildContext context) {
             context.router.replaceAll([LoginRoute()]);
             await SecureStorage().clearData();
           },
-          title: const Text('Logout Account'),
+          title: Text(
+            'Logout Account',
+            style: TextStyle(
+                fontSize: 10.sp,
+                fontWeight: FontWeight.w700,
+                color: Colors.grey.shade700),
+          ),
         ),
       ],
     ),

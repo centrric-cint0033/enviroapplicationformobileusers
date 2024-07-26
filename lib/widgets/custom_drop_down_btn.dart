@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomDropdownButton extends StatelessWidget {
   final String? value;
@@ -18,11 +19,11 @@ class CustomDropdownButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return DecoratedBox(
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20.0),
-        border: Border.all(color: Colors.grey.shade200),
+        borderRadius: BorderRadius.circular(12.w),
+        border: Border.all(color: Colors.grey.shade500),
       ),
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+        padding: EdgeInsets.symmetric(horizontal: 12.w),
         child: DropdownButtonHideUnderline(
           child: DropdownButton<String>(
             value: value,
@@ -31,7 +32,10 @@ class CustomDropdownButton extends StatelessWidget {
             items: items.map((String item) {
               return DropdownMenuItem<String>(
                 value: item,
-                child: Text(item),
+                child: Text(
+                  item,
+                  style: TextStyle(fontSize: 10.sp),
+                ),
               );
             }).toList(),
           ),

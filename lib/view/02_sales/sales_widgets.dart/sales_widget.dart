@@ -5,8 +5,6 @@ import 'package:enviro_mobile_application/widgets/01_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-final gapField = sized0hx05;
-
 Card customCard({required Widget child}) => Card(
     shape: RoundedRectangleBorder(
       side: BorderSide(color: Appthemes.cLightGrey),
@@ -46,16 +44,22 @@ Row expandedRowsShowingText(
     );
 Row expandedRowShowsText(String firsValue, String secondValue) => Row(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: [expandedShowText(firsValue), expandedShowText(secondValue)],
+      children: [
+        expandedShowText(firsValue),
+        sized0wx05,
+        showBlackText(':'),
+        sized0wx05,
+        expandedShowText(secondValue)
+      ],
     );
 
 Row expandedRowShowText1(String firsValue, String secondValue) => Row(
       children: [
-        Expanded(flex: 3, child: showBlueText(firsValue)),
+        Expanded(flex: 3, child: showBlackText(firsValue)),
         sized0wx05,
         showBlueText(':'),
         sized0wx05,
-        Expanded(flex: 1, child: showBlueText(secondValue))
+        Expanded(flex: 1, child: showBlackText(secondValue))
       ],
     );
 
@@ -67,17 +71,21 @@ Expanded imageAndName(String image, String name) => Expanded(
             imageUrl: image,
             height: 60.w,
             width: 60.w,
+            fit: BoxFit.cover,
           ),
-          gapField,
+          sized0hx05,
           showBlueText(name, maxLines: 2, overflow: TextOverflow.ellipsis)
         ],
       ),
     );
 
 Widget buildCardDataOrder(List<Widget> widget, {String? image, String? name}) =>
-    customCard(
+    Container(
+      decoration: BoxDecoration(
+          border: Border.all(color: Appthemes.cPrimary),
+          borderRadius: BorderRadius.circular(6)),
       child: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: EdgeInsets.only(left: 8.w, right: 8.w),
         child: Row(
           children: [
             if (image != null) ...[
@@ -88,7 +96,7 @@ Widget buildCardDataOrder(List<Widget> widget, {String? image, String? name}) =>
               flex: 7,
               child: ListView.separated(
                 physics: const NeverScrollableScrollPhysics(),
-                separatorBuilder: (context, index) => gapField,
+                separatorBuilder: (context, index) => sized0hx05,
                 itemCount: widget.length,
                 itemBuilder: (context, index) => widget[index],
                 shrinkWrap: true,
@@ -98,3 +106,11 @@ Widget buildCardDataOrder(List<Widget> widget, {String? image, String? name}) =>
         ),
       ),
     );
+Widget showListData(Widget column) {
+  return Container(
+      decoration: BoxDecoration(
+          border: Border.all(color: Appthemes.cPrimary),
+          borderRadius: BorderRadius.circular(6)),
+      child: Padding(
+          padding: EdgeInsets.only(left: 8.w, right: 8.w), child: column));
+}

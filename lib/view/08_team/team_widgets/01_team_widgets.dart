@@ -6,14 +6,12 @@ import 'package:enviro_mobile_application/view/08_team/team_widgets/dp_image_wid
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-final gapFieldSales = sized0hx05;
-
 Widget buildCardDataOrder(List<Widget> widget) => customCard(
     child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: ListView.separated(
           physics: const NeverScrollableScrollPhysics(),
-          separatorBuilder: (context, index) => gapField,
+          separatorBuilder: (context, index) => sized0hx05,
           scrollDirection: Axis.vertical,
           itemCount: widget.length,
           itemBuilder: (context, index) => widget[index],

@@ -63,7 +63,7 @@ class SheduledetailPage extends StatelessWidget {
                                 await vmSchedule.jobcardviewmodelfunction(
                                     quoteId: res.data?[i].quoteId ?? 0);
                                 context.router
-                                    .pushNamed(RouteNames.rjobcardpage);
+                                  .pushNamed(RouteNames.rjobcardpage);
                               },
                               child: Container(
                                 height: 26.h,

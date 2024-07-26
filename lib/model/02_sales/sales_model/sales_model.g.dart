@@ -88,6 +88,9 @@ _$SalesModelImpl _$$SalesModelImplFromJson(Map<String, dynamic> json) =>
       attachedFiles: (json['attached_files'] as List<dynamic>?)
           ?.map((e) => AttachedFile.fromJson(e as Map<String, dynamic>))
           .toList(),
+      team: (json['team'] as List<dynamic>?)
+          ?.map((e) => TeamEmployee.fromJson(e as Map<String, dynamic>))
+          .toList(),
       templateResponse: (json['template_response'] as List<dynamic>?)
           ?.map((e) => TemplateResponse.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -176,6 +179,7 @@ Map<String, dynamic> _$$SalesModelImplToJson(_$SalesModelImpl instance) =>
       'quote_file': instance.quoteFile,
       'received_file': instance.receivedFile,
       'attached_files': instance.attachedFiles,
+      'team': instance.team,
       'template_response': instance.templateResponse,
       'converted_to_recurring_quote_id': instance.convertedToRecurringQuoteId,
       'employee': instance.employee,

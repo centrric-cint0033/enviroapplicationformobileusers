@@ -202,15 +202,16 @@ class SalesService implements ISalesService {
     return response.fold(
       (l) => Left(l),
       (res) async {
-        var data = jsonDecode(res.body)["data"]["quote"];
+        var data = jsonDecode(res.body)["data"];
 
         /// Return the specific data due to type mismatch in the common model
         return Right(
           SalesModel.fromJson({
-            "quote_file": data["quote_file"],
-            "received_file": data["received_file"],
-            "attached_files": data["attached_files"],
-            "template_response": data["template_response"],
+            "quote_file": data["quote"]["quote_file"],
+            "received_file": data["quote"]["received_file"],
+            "attached_files": data["quote"]["attached_files"],
+            "template_response": data["quote"]["template_response"],
+            "team": data["schedule"]["team"]
           }),
         );
       },
@@ -230,15 +231,16 @@ class SalesService implements ISalesService {
     return response.fold(
       (l) => Left(l),
       (res) async {
-        var data = jsonDecode(res.body)["data"]["quote"];
+        var data = jsonDecode(res.body)["data"];
 
         /// Return the specific data due to type mismatch in the common model
         return Right(
           SalesModel.fromJson({
-            "quote_file": data["quote_file"],
-            "received_file": data["received_file"],
-            "attached_files": data["attached_files"],
-            "template_response": data["template_response"],
+            "quote_file": data["quote"]["quote_file"],
+            "received_file": data["quote"]["received_file"],
+            "attached_files": data["quote"]["attached_files"],
+            "template_response": data["quote"]["template_response"],
+            "team": data["schedule"]["team"]
           }),
         );
       },

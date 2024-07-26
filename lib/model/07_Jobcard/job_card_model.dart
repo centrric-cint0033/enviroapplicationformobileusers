@@ -21,7 +21,7 @@ class JobCardRespModel with _$JobCardRespModel {
     @JsonKey(name: "connected") bool? connected,
     @JsonKey(name: "client_name") String? clientName,
     @JsonKey(name: "type_of_waste_str_id") int? typeOfWasteStrId,
-    @JsonKey(name: "files") List<dynamic>? files,
+    @JsonKey(name: "files") List<WeighBridge>? files,
     @JsonKey(name: "folder") dynamic folder,
     @JsonKey(name: "sales_person_name") String? salesPersonName,
     @JsonKey(name: "jobcardinfo_files") JobcardinfoFiles? jobcardinfoFiles,
@@ -197,6 +197,7 @@ class WeighBridge with _$WeighBridge {
     @JsonKey(name: "id") int? id,
     @JsonKey(name: "name") String? name,
     @JsonKey(name: "file") String? file,
+    @JsonKey(name: "url") String? url,
     @JsonKey(name: "created_at") String? createdAt,
   }) = _WeighBridge;
 

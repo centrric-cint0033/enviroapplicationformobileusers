@@ -1,7 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:enviro_mobile_application/Routepage/approutes.gr.dart';
 import 'package:enviro_mobile_application/utilis/constant.dart';
-import 'package:enviro_mobile_application/view/02_sales/sales_widgets.dart/sales_widget.dart';
 import 'package:enviro_mobile_application/view/08_team/team_widgets/01_team_widgets.dart';
 import 'package:enviro_mobile_application/view_model/08_team/team_view_model.dart';
 import 'package:enviro_mobile_application/widgets/ww_search_widget.dart';
@@ -22,7 +21,7 @@ class TerminatedEmployeeTab extends StatelessWidget {
     );
     return Scaffold(
         body: Column(children: [
-      gapField,
+      sized0hx05,
       WWTextField(
         controller: vmTeam.terminatedEmployeeSearchCntrlr,
         onChanged: (v) => vmTeam.onTextChanged(() => v.isEmpty
@@ -31,7 +30,7 @@ class TerminatedEmployeeTab extends StatelessWidget {
         suffixTap: () {},
         hintText: 'Search Employee',
       ),
-      gapField,
+      sized0hx05,
       Observer(builder: (_) {
         final res = vmTeam.terminatedEmployeeResponse;
         return Expanded(

@@ -3,7 +3,7 @@ mixin class SalesEndpoint {
 
   final String saleslist = '/api/v1/sales/performance/waste';
 
-  final String quoteregvehiclelist = '/api/v1/sales/quote/waste/2';
+  final String quoteregvehiclelist = '/api/v1/sales/quote/waste/1';
 
   final String joblist = '/api/v1/sales/jobs/waste';
 

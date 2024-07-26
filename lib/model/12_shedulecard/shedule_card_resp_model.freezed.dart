@@ -46,6 +46,8 @@ mixin _$SheduleCardRespModel {
   String? get vehicle => throw _privateConstructorUsedError;
   @JsonKey(name: "team_employees")
   List<TeamEmployee>? get teamEmployees => throw _privateConstructorUsedError;
+  @JsonKey(name: "team")
+  List<TeamEmployee>? get team => throw _privateConstructorUsedError;
   @JsonKey(name: "shift")
   String? get shift => throw _privateConstructorUsedError;
   @JsonKey(name: "before_pics")
@@ -149,6 +151,7 @@ abstract class $SheduleCardRespModelCopyWith<$Res> {
       @JsonKey(name: "pending_amount") String? pendingAmount,
       @JsonKey(name: "vehicle") String? vehicle,
       @JsonKey(name: "team_employees") List<TeamEmployee>? teamEmployees,
+      @JsonKey(name: "team") List<TeamEmployee>? team,
       @JsonKey(name: "shift") String? shift,
       @JsonKey(name: "before_pics") List<Pic>? beforePics,
       @JsonKey(name: "after_pics") List<Pic>? afterPics,
@@ -222,6 +225,7 @@ class _$SheduleCardRespModelCopyWithImpl<$Res,
     Object? pendingAmount = freezed,
     Object? vehicle = freezed,
     Object? teamEmployees = freezed,
+    Object? team = freezed,
     Object? shift = freezed,
     Object? beforePics = freezed,
     Object? afterPics = freezed,
@@ -313,6 +317,10 @@ class _$SheduleCardRespModelCopyWithImpl<$Res,
       teamEmployees: freezed == teamEmployees
           ? _value.teamEmployees
           : teamEmployees // ignore: cast_nullable_to_non_nullable
+              as List<TeamEmployee>?,
+      team: freezed == team
+          ? _value.team
+          : team // ignore: cast_nullable_to_non_nullable
               as List<TeamEmployee>?,
       shift: freezed == shift
           ? _value.shift
@@ -516,6 +524,7 @@ abstract class _$$SheduleCardRespModelImplCopyWith<$Res>
       @JsonKey(name: "pending_amount") String? pendingAmount,
       @JsonKey(name: "vehicle") String? vehicle,
       @JsonKey(name: "team_employees") List<TeamEmployee>? teamEmployees,
+      @JsonKey(name: "team") List<TeamEmployee>? team,
       @JsonKey(name: "shift") String? shift,
       @JsonKey(name: "before_pics") List<Pic>? beforePics,
       @JsonKey(name: "after_pics") List<Pic>? afterPics,
@@ -588,6 +597,7 @@ class __$$SheduleCardRespModelImplCopyWithImpl<$Res>
     Object? pendingAmount = freezed,
     Object? vehicle = freezed,
     Object? teamEmployees = freezed,
+    Object? team = freezed,
     Object? shift = freezed,
     Object? beforePics = freezed,
     Object? afterPics = freezed,
@@ -679,6 +689,10 @@ class __$$SheduleCardRespModelImplCopyWithImpl<$Res>
       teamEmployees: freezed == teamEmployees
           ? _value._teamEmployees
           : teamEmployees // ignore: cast_nullable_to_non_nullable
+              as List<TeamEmployee>?,
+      team: freezed == team
+          ? _value._team
+          : team // ignore: cast_nullable_to_non_nullable
               as List<TeamEmployee>?,
       shift: freezed == shift
           ? _value.shift
@@ -853,6 +867,7 @@ class _$SheduleCardRespModelImpl implements _SheduleCardRespModel {
       @JsonKey(name: "pending_amount") this.pendingAmount,
       @JsonKey(name: "vehicle") this.vehicle,
       @JsonKey(name: "team_employees") final List<TeamEmployee>? teamEmployees,
+      @JsonKey(name: "team") final List<TeamEmployee>? team,
       @JsonKey(name: "shift") this.shift,
       @JsonKey(name: "before_pics") final List<Pic>? beforePics,
       @JsonKey(name: "after_pics") final List<Pic>? afterPics,
@@ -895,6 +910,7 @@ class _$SheduleCardRespModelImpl implements _SheduleCardRespModel {
       final List<int>? additionalVehicleDrivers})
       : _jobVideo = jobVideo,
         _teamEmployees = teamEmployees,
+        _team = team,
         _beforePics = beforePics,
         _afterPics = afterPics,
         _gallery = gallery,
@@ -956,6 +972,17 @@ class _$SheduleCardRespModelImpl implements _SheduleCardRespModel {
     final value = _teamEmployees;
     if (value == null) return null;
     if (_teamEmployees is EqualUnmodifiableListView) return _teamEmployees;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  final List<TeamEmployee>? _team;
+  @override
+  @JsonKey(name: "team")
+  List<TeamEmployee>? get team {
+    final value = _team;
+    if (value == null) return null;
+    if (_team is EqualUnmodifiableListView) return _team;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
@@ -1125,7 +1152,7 @@ class _$SheduleCardRespModelImpl implements _SheduleCardRespModel {
 
   @override
   String toString() {
-    return 'SheduleCardRespModel(id: $id, jobVideo: $jobVideo, client: $client, quoteId: $quoteId, createdBy: $createdBy, jobType: $jobType, amount: $amount, paidAmount: $paidAmount, amountPaidStatus: $amountPaidStatus, amountTotalPaidStatus: $amountTotalPaidStatus, pendingAmount: $pendingAmount, vehicle: $vehicle, teamEmployees: $teamEmployees, shift: $shift, beforePics: $beforePics, afterPics: $afterPics, gallery: $gallery, comments: $comments, status: $status, frequency: $frequency, wasteTypeStr: $wasteTypeStr, typeOfWasteStrProfileName: $typeOfWasteStrProfileName, primaryVehicleDriver: $primaryVehicleDriver, drivers: $drivers, salesPerson: $salesPerson, jobCardCode: $jobCardCode, jobCardKeys: $jobCardKeys, tabType: $tabType, startDate: $startDate, startTime: $startTime, endTime: $endTime, image: $image, createdDateTime: $createdDateTime, endDate: $endDate, extractedWasteType: $extractedWasteType, extractedLitresOfWaste: $extractedLitresOfWaste, departEnviroFacility: $departEnviroFacility, startJob: $startJob, finishJob: $finishJob, arriveAtWasteDepot: $arriveAtWasteDepot, departWasteDepot: $departWasteDepot, arriveEnviroFacility: $arriveEnviroFacility, scheduleCompletedMail: $scheduleCompletedMail, completed: $completed, outsourcedJob: $outsourcedJob, purchaseOrderNumber: $purchaseOrderNumber, signatureName: $signatureName, outsourcedCompanyName: $outsourcedCompanyName, activeStatus: $activeStatus, job: $job, additionalVehicleDrivers: $additionalVehicleDrivers)';
+    return 'SheduleCardRespModel(id: $id, jobVideo: $jobVideo, client: $client, quoteId: $quoteId, createdBy: $createdBy, jobType: $jobType, amount: $amount, paidAmount: $paidAmount, amountPaidStatus: $amountPaidStatus, amountTotalPaidStatus: $amountTotalPaidStatus, pendingAmount: $pendingAmount, vehicle: $vehicle, teamEmployees: $teamEmployees, team: $team, shift: $shift, beforePics: $beforePics, afterPics: $afterPics, gallery: $gallery, comments: $comments, status: $status, frequency: $frequency, wasteTypeStr: $wasteTypeStr, typeOfWasteStrProfileName: $typeOfWasteStrProfileName, primaryVehicleDriver: $primaryVehicleDriver, drivers: $drivers, salesPerson: $salesPerson, jobCardCode: $jobCardCode, jobCardKeys: $jobCardKeys, tabType: $tabType, startDate: $startDate, startTime: $startTime, endTime: $endTime, image: $image, createdDateTime: $createdDateTime, endDate: $endDate, extractedWasteType: $extractedWasteType, extractedLitresOfWaste: $extractedLitresOfWaste, departEnviroFacility: $departEnviroFacility, startJob: $startJob, finishJob: $finishJob, arriveAtWasteDepot: $arriveAtWasteDepot, departWasteDepot: $departWasteDepot, arriveEnviroFacility: $arriveEnviroFacility, scheduleCompletedMail: $scheduleCompletedMail, completed: $completed, outsourcedJob: $outsourcedJob, purchaseOrderNumber: $purchaseOrderNumber, signatureName: $signatureName, outsourcedCompanyName: $outsourcedCompanyName, activeStatus: $activeStatus, job: $job, additionalVehicleDrivers: $additionalVehicleDrivers)';
   }
 
   @override
@@ -1152,6 +1179,7 @@ class _$SheduleCardRespModelImpl implements _SheduleCardRespModel {
             (identical(other.vehicle, vehicle) || other.vehicle == vehicle) &&
             const DeepCollectionEquality()
                 .equals(other._teamEmployees, _teamEmployees) &&
+            const DeepCollectionEquality().equals(other._team, _team) &&
             (identical(other.shift, shift) || other.shift == shift) &&
             const DeepCollectionEquality()
                 .equals(other._beforePics, _beforePics) &&
@@ -1237,6 +1265,7 @@ class _$SheduleCardRespModelImpl implements _SheduleCardRespModel {
         pendingAmount,
         vehicle,
         const DeepCollectionEquality().hash(_teamEmployees),
+        const DeepCollectionEquality().hash(_team),
         shift,
         const DeepCollectionEquality().hash(_beforePics),
         const DeepCollectionEquality().hash(_afterPics),
@@ -1309,6 +1338,7 @@ abstract class _SheduleCardRespModel implements SheduleCardRespModel {
       @JsonKey(name: "pending_amount") final String? pendingAmount,
       @JsonKey(name: "vehicle") final String? vehicle,
       @JsonKey(name: "team_employees") final List<TeamEmployee>? teamEmployees,
+      @JsonKey(name: "team") final List<TeamEmployee>? team,
       @JsonKey(name: "shift") final String? shift,
       @JsonKey(name: "before_pics") final List<Pic>? beforePics,
       @JsonKey(name: "after_pics") final List<Pic>? afterPics,
@@ -1397,6 +1427,9 @@ abstract class _SheduleCardRespModel implements SheduleCardRespModel {
   @override
   @JsonKey(name: "team_employees")
   List<TeamEmployee>? get teamEmployees;
+  @override
+  @JsonKey(name: "team")
+  List<TeamEmployee>? get team;
   @override
   @JsonKey(name: "shift")
   String? get shift;

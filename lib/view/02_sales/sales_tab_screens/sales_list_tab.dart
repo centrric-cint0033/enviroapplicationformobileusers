@@ -1,9 +1,9 @@
+import 'package:enviro_mobile_application/Routepage/approutes.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:enviro_mobile_application/utilis/constant.dart';
-import 'package:enviro_mobile_application/Routepage/routespage.dart';
 import 'package:enviro_mobile_application/widgets/ww_response_handler.dart';
 import 'package:enviro_mobile_application/view_model/02_sales/sales_view_model.dart';
 import 'package:enviro_mobile_application/model/02_sales/sales_model/sales_model.dart';
@@ -25,6 +25,7 @@ class SalesListTab extends StatelessWidget {
       body: Observer(builder: (_) {
         return Column(
           children: [
+            sized0hx05,
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -53,7 +54,7 @@ class SalesListTab extends StatelessWidget {
                 ),
               ],
             ),
-            sized0hx10,
+            sized0hx05,
             Expanded(
               child: WWResponseHandler(
                 data: vmSales.salespageResponse,
@@ -77,15 +78,16 @@ class SalesListWidget extends StatelessWidget {
     return ListView.separated(
       padding: const EdgeInsets.symmetric(vertical: 10),
       itemCount: vmSales.salespageResponse.data?.length ?? 0,
-      separatorBuilder: (BuildContext context, int index) => gapField,
+      separatorBuilder: (BuildContext context, int index) => sized0hx05,
       itemBuilder: (context, index) {
         return InkWell(
-          onTap: () {
+          onTap: () async {
             SalesModel? sale = vmSales.salespageResponse.data?[index];
-
             if ((sale?.total ?? 0) != 0) {
               vmSales.getSalesQuoteDetails(id: sale?.id?.toString() ?? "");
-              context.router.pushNamed(RouteNames.salesQuoteDetailListPage);
+              context.router.push(SalesDetailRoute(
+                  data: vmSales.salesQuoteDetailsResponse.data?[index],
+                  fromSaleListTab: true));
             } else {
               showToast(context, msg: "There is no quotes");
             }
@@ -101,10 +103,15 @@ class SalesListWidget extends StatelessWidget {
       name: data?.name,
       image: data?.profile,
       [
+        sized0hx05,
         expandedRowShowText1('Total Quote Won', "${data?.won ?? ""}"),
+        sized0hx03,
         expandedRowShowText1('Total Quote Lost:', "${data?.lost ?? ""}"),
+        sized0hx03,
         expandedRowShowText1('Total Quote Pending', "${data?.pending ?? ""}"),
+        sized0hx03,
         expandedRowShowText1('Total Quote Made', "${data?.total ?? ""}"),
+        sized0hx05,
       ],
     );
   }

@@ -4,7 +4,7 @@ import 'package:enviro_mobile_application/model/02_sales/sales_model/attached_fi
 import 'package:enviro_mobile_application/model/02_sales/sales_model/template_response.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import 'job_card_keys.dart';
+import '../../12_shedulecard/shedule_card_resp_model.dart';
 
 part 'sales_model.freezed.dart';
 part 'sales_model.g.dart';
@@ -85,6 +85,7 @@ class SalesModel with _$SalesModel {
     @JsonKey(name: 'quote_file') String? quoteFile,
     @JsonKey(name: 'received_file') String? receivedFile,
     @JsonKey(name: 'attached_files') List<AttachedFile>? attachedFiles,
+    @JsonKey(name: 'team') List<TeamEmployee>? team,
     @JsonKey(name: 'template_response')
     List<TemplateResponse>? templateResponse,
     @JsonKey(name: 'converted_to_recurring_quote_id')

@@ -13,7 +13,9 @@ _$JobCardRespModelImpl _$$JobCardRespModelImplFromJson(
       connected: json['connected'] as bool?,
       clientName: json['client_name'] as String?,
       typeOfWasteStrId: (json['type_of_waste_str_id'] as num?)?.toInt(),
-      files: json['files'] as List<dynamic>?,
+      files: (json['files'] as List<dynamic>?)
+          ?.map((e) => WeighBridge.fromJson(e as Map<String, dynamic>))
+          .toList(),
       folder: json['folder'],
       salesPersonName: json['sales_person_name'] as String?,
       jobcardinfoFiles: json['jobcardinfo_files'] == null
@@ -337,6 +339,7 @@ _$WeighBridgeImpl _$$WeighBridgeImplFromJson(Map<String, dynamic> json) =>
       id: (json['id'] as num?)?.toInt(),
       name: json['name'] as String?,
       file: json['file'] as String?,
+      url: json['url'] as String?,
       createdAt: json['created_at'] as String?,
     );
 
@@ -345,5 +348,6 @@ Map<String, dynamic> _$$WeighBridgeImplToJson(_$WeighBridgeImpl instance) =>
       'id': instance.id,
       'name': instance.name,
       'file': instance.file,
+      'url': instance.url,
       'created_at': instance.createdAt,
     };

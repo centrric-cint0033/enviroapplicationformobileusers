@@ -1,7 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:enviro_mobile_application/utilis/constant.dart';
 import 'package:enviro_mobile_application/view/02_sales/sales_tab_screens/job_list_tab.dart';
-import 'package:enviro_mobile_application/view/02_sales/sales_widgets.dart/sales_widget.dart';
 import 'package:enviro_mobile_application/view_model/02_sales/sales_view_model.dart';
 import 'package:enviro_mobile_application/widgets/cmn_action_icon.dart';
 import 'package:enviro_mobile_application/widgets/cmn_title_textwidget.dart';
@@ -37,7 +36,7 @@ class SalesPage extends StatelessWidget {
                     value1: 'Job List',
                     value2: 'Quote Reg',
                     value3: 'Sales List'),
-                gapField,
+                sized0hx05,
                 const Expanded(
                   child: TabBarView(
                     children: <Widget>[

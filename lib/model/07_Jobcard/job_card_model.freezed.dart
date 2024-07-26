@@ -29,7 +29,7 @@ mixin _$JobCardRespModel {
   @JsonKey(name: "type_of_waste_str_id")
   int? get typeOfWasteStrId => throw _privateConstructorUsedError;
   @JsonKey(name: "files")
-  List<dynamic>? get files => throw _privateConstructorUsedError;
+  List<WeighBridge>? get files => throw _privateConstructorUsedError;
   @JsonKey(name: "folder")
   dynamic get folder => throw _privateConstructorUsedError;
   @JsonKey(name: "sales_person_name")
@@ -263,7 +263,7 @@ abstract class $JobCardRespModelCopyWith<$Res> {
       @JsonKey(name: "connected") bool? connected,
       @JsonKey(name: "client_name") String? clientName,
       @JsonKey(name: "type_of_waste_str_id") int? typeOfWasteStrId,
-      @JsonKey(name: "files") List<dynamic>? files,
+      @JsonKey(name: "files") List<WeighBridge>? files,
       @JsonKey(name: "folder") dynamic folder,
       @JsonKey(name: "sales_person_name") String? salesPersonName,
       @JsonKey(name: "jobcardinfo_files") JobcardinfoFiles? jobcardinfoFiles,
@@ -530,7 +530,7 @@ class _$JobCardRespModelCopyWithImpl<$Res, $Val extends JobCardRespModel>
       files: freezed == files
           ? _value.files
           : files // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>?,
+              as List<WeighBridge>?,
       folder: freezed == folder
           ? _value.folder
           : folder // ignore: cast_nullable_to_non_nullable
@@ -994,7 +994,7 @@ abstract class _$$JobCardRespModelImplCopyWith<$Res>
       @JsonKey(name: "connected") bool? connected,
       @JsonKey(name: "client_name") String? clientName,
       @JsonKey(name: "type_of_waste_str_id") int? typeOfWasteStrId,
-      @JsonKey(name: "files") List<dynamic>? files,
+      @JsonKey(name: "files") List<WeighBridge>? files,
       @JsonKey(name: "folder") dynamic folder,
       @JsonKey(name: "sales_person_name") String? salesPersonName,
       @JsonKey(name: "jobcardinfo_files") JobcardinfoFiles? jobcardinfoFiles,
@@ -1261,7 +1261,7 @@ class __$$JobCardRespModelImplCopyWithImpl<$Res>
       files: freezed == files
           ? _value._files
           : files // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>?,
+              as List<WeighBridge>?,
       folder: freezed == folder
           ? _value.folder
           : folder // ignore: cast_nullable_to_non_nullable
@@ -1696,7 +1696,7 @@ class _$JobCardRespModelImpl implements _JobCardRespModel {
       @JsonKey(name: "connected") this.connected,
       @JsonKey(name: "client_name") this.clientName,
       @JsonKey(name: "type_of_waste_str_id") this.typeOfWasteStrId,
-      @JsonKey(name: "files") final List<dynamic>? files,
+      @JsonKey(name: "files") final List<WeighBridge>? files,
       @JsonKey(name: "folder") this.folder,
       @JsonKey(name: "sales_person_name") this.salesPersonName,
       @JsonKey(name: "jobcardinfo_files") this.jobcardinfoFiles,
@@ -1829,10 +1829,10 @@ class _$JobCardRespModelImpl implements _JobCardRespModel {
   @override
   @JsonKey(name: "type_of_waste_str_id")
   final int? typeOfWasteStrId;
-  final List<dynamic>? _files;
+  final List<WeighBridge>? _files;
   @override
   @JsonKey(name: "files")
-  List<dynamic>? get files {
+  List<WeighBridge>? get files {
     final value = _files;
     if (value == null) return null;
     if (_files is EqualUnmodifiableListView) return _files;
@@ -2465,7 +2465,7 @@ abstract class _JobCardRespModel implements JobCardRespModel {
       @JsonKey(name: "connected") final bool? connected,
       @JsonKey(name: "client_name") final String? clientName,
       @JsonKey(name: "type_of_waste_str_id") final int? typeOfWasteStrId,
-      @JsonKey(name: "files") final List<dynamic>? files,
+      @JsonKey(name: "files") final List<WeighBridge>? files,
       @JsonKey(name: "folder") final dynamic folder,
       @JsonKey(name: "sales_person_name") final String? salesPersonName,
       @JsonKey(name: "jobcardinfo_files")
@@ -2612,7 +2612,7 @@ abstract class _JobCardRespModel implements JobCardRespModel {
   int? get typeOfWasteStrId;
   @override
   @JsonKey(name: "files")
-  List<dynamic>? get files;
+  List<WeighBridge>? get files;
   @override
   @JsonKey(name: "folder")
   dynamic get folder;
@@ -3757,6 +3757,8 @@ mixin _$WeighBridge {
   String? get name => throw _privateConstructorUsedError;
   @JsonKey(name: "file")
   String? get file => throw _privateConstructorUsedError;
+  @JsonKey(name: "url")
+  String? get url => throw _privateConstructorUsedError;
   @JsonKey(name: "created_at")
   String? get createdAt => throw _privateConstructorUsedError;
 
@@ -3776,6 +3778,7 @@ abstract class $WeighBridgeCopyWith<$Res> {
       {@JsonKey(name: "id") int? id,
       @JsonKey(name: "name") String? name,
       @JsonKey(name: "file") String? file,
+      @JsonKey(name: "url") String? url,
       @JsonKey(name: "created_at") String? createdAt});
 }
 
@@ -3795,6 +3798,7 @@ class _$WeighBridgeCopyWithImpl<$Res, $Val extends WeighBridge>
     Object? id = freezed,
     Object? name = freezed,
     Object? file = freezed,
+    Object? url = freezed,
     Object? createdAt = freezed,
   }) {
     return _then(_value.copyWith(
@@ -3809,6 +3813,10 @@ class _$WeighBridgeCopyWithImpl<$Res, $Val extends WeighBridge>
       file: freezed == file
           ? _value.file
           : file // ignore: cast_nullable_to_non_nullable
+              as String?,
+      url: freezed == url
+          ? _value.url
+          : url // ignore: cast_nullable_to_non_nullable
               as String?,
       createdAt: freezed == createdAt
           ? _value.createdAt
@@ -3830,6 +3838,7 @@ abstract class _$$WeighBridgeImplCopyWith<$Res>
       {@JsonKey(name: "id") int? id,
       @JsonKey(name: "name") String? name,
       @JsonKey(name: "file") String? file,
+      @JsonKey(name: "url") String? url,
       @JsonKey(name: "created_at") String? createdAt});
 }
 
@@ -3847,6 +3856,7 @@ class __$$WeighBridgeImplCopyWithImpl<$Res>
     Object? id = freezed,
     Object? name = freezed,
     Object? file = freezed,
+    Object? url = freezed,
     Object? createdAt = freezed,
   }) {
     return _then(_$WeighBridgeImpl(
@@ -3861,6 +3871,10 @@ class __$$WeighBridgeImplCopyWithImpl<$Res>
       file: freezed == file
           ? _value.file
           : file // ignore: cast_nullable_to_non_nullable
+              as String?,
+      url: freezed == url
+          ? _value.url
+          : url // ignore: cast_nullable_to_non_nullable
               as String?,
       createdAt: freezed == createdAt
           ? _value.createdAt
@@ -3877,6 +3891,7 @@ class _$WeighBridgeImpl implements _WeighBridge {
       {@JsonKey(name: "id") this.id,
       @JsonKey(name: "name") this.name,
       @JsonKey(name: "file") this.file,
+      @JsonKey(name: "url") this.url,
       @JsonKey(name: "created_at") this.createdAt});
 
   factory _$WeighBridgeImpl.fromJson(Map<String, dynamic> json) =>
@@ -3892,12 +3907,15 @@ class _$WeighBridgeImpl implements _WeighBridge {
   @JsonKey(name: "file")
   final String? file;
   @override
+  @JsonKey(name: "url")
+  final String? url;
+  @override
   @JsonKey(name: "created_at")
   final String? createdAt;
 
   @override
   String toString() {
-    return 'WeighBridge(id: $id, name: $name, file: $file, createdAt: $createdAt)';
+    return 'WeighBridge(id: $id, name: $name, file: $file, url: $url, createdAt: $createdAt)';
   }
 
   @override
@@ -3908,13 +3926,14 @@ class _$WeighBridgeImpl implements _WeighBridge {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.file, file) || other.file == file) &&
+            (identical(other.url, url) || other.url == url) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, name, file, createdAt);
+  int get hashCode => Object.hash(runtimeType, id, name, file, url, createdAt);
 
   @JsonKey(ignore: true)
   @override
@@ -3935,6 +3954,7 @@ abstract class _WeighBridge implements WeighBridge {
           {@JsonKey(name: "id") final int? id,
           @JsonKey(name: "name") final String? name,
           @JsonKey(name: "file") final String? file,
+          @JsonKey(name: "url") final String? url,
           @JsonKey(name: "created_at") final String? createdAt}) =
       _$WeighBridgeImpl;
 
@@ -3950,6 +3970,9 @@ abstract class _WeighBridge implements WeighBridge {
   @override
   @JsonKey(name: "file")
   String? get file;
+  @override
+  @JsonKey(name: "url")
+  String? get url;
   @override
   @JsonKey(name: "created_at")
   String? get createdAt;

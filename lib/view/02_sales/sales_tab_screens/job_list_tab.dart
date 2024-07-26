@@ -1,6 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:enviro_mobile_application/Routepage/approutes.gr.dart';
-import 'package:enviro_mobile_application/model/02_sales/sales_model/sales_model.dart';
+import 'package:enviro_mobile_application/utilis/constant.dart';
 import 'package:enviro_mobile_application/view/02_sales/sales_widgets.dart/sales_widget.dart';
 import 'package:enviro_mobile_application/view_model/02_sales/sales_view_model.dart';
 import 'package:enviro_mobile_application/widgets/ww_search_widget.dart';
@@ -21,9 +21,10 @@ class JobListTab extends StatelessWidget {
         onChanged: (v) => vmSales.onTextChanged(() => v.isEmpty
             ? vmSales.saleJobListApi()
             : vmSales.salesJobListSearchApi(v)),
+        hintText: "Search by client",
         suffixTap: () {},
       ),
-      gapField,
+      sized0hx05,
       Observer(builder: (_) {
         return Expanded(
             child: WWResponseHandler(
@@ -56,7 +57,7 @@ class SalesJobListWidget extends StatelessWidget {
     return ListView.separated(
       itemCount: length + 1,
       controller: vmSales.joblistController,
-      separatorBuilder: (BuildContext context, int index) => gapField,
+      separatorBuilder: (BuildContext context, int index) => sized0hx05,
       itemBuilder: (context, index) {
         return index == length
             ? paginationLoading
@@ -68,24 +69,35 @@ class SalesJobListWidget extends StatelessWidget {
                       index, vmSales.joblistResponse.data?[index].id);
                   context.router.push(
                     SalesDetailRoute(
-                        data: vmSales.joblistResponse.data?[index]),
+                        data: vmSales.joblistResponse.data?[index],
+                        fromSale: true),
                   );
                 },
-                child: listData(vmSales.joblistResponse.data?[index]),
+                child: showListData(Column(
+                  children: [
+                    sized0hx10,
+                    expandedRowShowText('Date',
+                        vmSales.joblistResponse.data?[index].date ?? ""),
+                    sized0hx03,
+                    expandedRowShowText('Client Id',
+                        "${vmSales.joblistResponse.data?[index].client ?? ""}"),
+                    sized0hx03,
+                    expandedRowShowText('Client Name',
+                        vmSales.joblistResponse.data?[index].clientName ?? ""),
+                    sized0hx03,
+                    expandedRowShowText('Quoted By',
+                        vmSales.joblistResponse.data?[index].quotedBy ?? ""),
+                    sized0hx03,
+                    expandedRowShowText('Amount',
+                        vmSales.joblistResponse.data?[index].amount ?? ""),
+                    sized0hx03,
+                    expandedRowShowText('Status',
+                        vmSales.joblistResponse.data?[index].status ?? ""),
+                    sized0hx10,
+                  ],
+                )),
               );
       },
-    );
-  }
-
-  Widget listData(SalesModel? data) {
-    return buildCardDataOrder(
-      [
-        expandedRowShowText('Date', data?.date ?? ""),
-        expandedRowShowText('clientName', data?.clientName ?? ""),
-        expandedRowShowText('Quoted By', data?.quotedBy ?? ""),
-        expandedRowShowText('Amount', data?.amount ?? ""),
-        expandedRowShowText('Status', data?.status ?? ""),
-      ],
     );
   }
 }

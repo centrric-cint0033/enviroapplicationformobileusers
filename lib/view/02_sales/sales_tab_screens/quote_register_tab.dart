@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:enviro_mobile_application/Routepage/approutes.gr.dart';
 import 'package:enviro_mobile_application/model/02_sales/sales_model/sales_model.dart';
+import 'package:enviro_mobile_application/utilis/constant.dart';
 import 'package:enviro_mobile_application/view/02_sales/sales_widgets.dart/sales_widget.dart';
 import 'package:enviro_mobile_application/view_model/02_sales/sales_view_model.dart';
 import 'package:enviro_mobile_application/widgets/ww_response_handler.dart';
@@ -22,9 +23,10 @@ class QuoteRegisterTab extends StatelessWidget {
           onChanged: (v) => vmSales.onTextChanged(() => v.isEmpty
               ? vmSales.quoteRegisterApi()
               : vmSales.salesQuoteListSearchApi(v)),
+          hintText: "Search by client",
           suffixTap: () {},
         ),
-        gapField,
+        sized0hx05,
         Observer(builder: (_) {
           return Expanded(
             child: WWResponseHandler(
@@ -53,7 +55,7 @@ class QuoteReqisterListWidget extends StatelessWidget {
       // padding: const EdgeInsets.symmetric(vertical: 10),
       itemCount: length + 1,
       controller: vmSales.quoteRegController,
-      separatorBuilder: (BuildContext context, int index) => gapField,
+      separatorBuilder: (BuildContext context, int index) => sized0hx05,
       itemBuilder: (context, index) {
         return index == length
             ? paginationLoading
@@ -61,16 +63,46 @@ class QuoteReqisterListWidget extends StatelessWidget {
                 : const SizedBox.shrink()
             : InkWell(
                 onTap: () {
-                  context.router.push(
-                    SalesDetailRoute(
-                        data: vmSales.quoteRegResponse.data?[index]),
-                  );
                   vmSales.salesQuoteRegDetailApi(
                     index,
                     vmSales.quoteRegResponse.data?[index].id,
                   );
+
+                  context.router.push(
+                    SalesDetailRoute(
+                        data: vmSales.quoteRegResponse.data?[index]),
+                  );
                 },
-                child: listData(vmSales.quoteRegResponse.data?[index]),
+                child: showListData(Column(
+                  children: [
+                    sized0hx10,
+                    expandedRowShowText('Date',
+                        vmSales.quoteRegResponse.data?[index].date ?? ""),
+                    sized0hx03,
+                    expandedRowShowText('Customer',
+                        vmSales.quoteRegResponse.data?[index].customer ?? ""),
+                    sized0hx03,
+                    expandedRowShowText(
+                        'Contact Number',
+                        vmSales.quoteRegResponse.data?[index].contactNumber ??
+                            ""),
+                    sized0hx03,
+                    expandedRowShowText('Status',
+                        vmSales.quoteRegResponse.data?[index].status ?? ""),
+                    sized0hx03,
+                    expandedRowShowText('Amount',
+                        vmSales.quoteRegResponse.data?[index].amount ?? ""),
+                    sized0hx03,
+                    expandedRowShowText('Sales Person',
+                        vmSales.quoteRegResponse.data?[index].salePerson ?? ""),
+                    sized0hx03,
+                    expandedRowShowText(
+                        'Won/Loss Date',
+                        vmSales.quoteRegResponse.data?[index].wonRejectDate ??
+                            ""),
+                    sized0hx10,
+                  ],
+                )),
               );
       },
     );

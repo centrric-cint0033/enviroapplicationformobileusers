@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class WWTextField extends StatelessWidget {
   final Function(String)? onChanged;
@@ -29,7 +30,7 @@ class WWTextField extends StatelessWidget {
             color: Colors.white,
             borderRadius: BorderRadius.circular(8.0),
             border: Border.all(
-              color: Colors.grey[200]!,
+              color: Colors.grey[500]!,
             )),
         child: TextField(
             enabled: enabled,
@@ -41,6 +42,7 @@ class WWTextField extends StatelessWidget {
             style: const TextStyle(color: Colors.black),
             decoration: InputDecoration(
               hintText: hintText ?? 'Search here',
+              hintStyle: TextStyle(fontSize: 10.sp),
               border: InputBorder.none,
               contentPadding: const EdgeInsets.all(10),
               suffixIcon: suffixTap == null

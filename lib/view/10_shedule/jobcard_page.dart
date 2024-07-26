@@ -1,10 +1,10 @@
-import 'dart:io';
+import 'package:enviro_mobile_application/model/07_Jobcard/job_card_model.dart';
 import 'package:enviro_mobile_application/utilis/constant.dart';
+import 'package:enviro_mobile_application/widgets/cm_title.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:enviro_mobile_application/view/02_sales/sales_widgets.dart/sales_widget.dart';
 import 'package:enviro_mobile_application/view_model/11_shedule/shedule_page_view_model.dart';
-import 'package:enviro_mobile_application/widgets/cmn_action_icon.dart';
 import 'package:enviro_mobile_application/widgets/cmn_title_textwidget.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -20,7 +20,6 @@ class JobCardPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: cmnTitleWidget('Scheduling'),
-        actions: [notificationButton(context)],
       ),
       body: Observer(
         builder: (context) {
@@ -91,24 +90,28 @@ class JobCardPage extends StatelessWidget {
                                         .jobcardResponse.data?.accountStatus ??
                                     ''),
                             sized0hx10,
-                            // const Text(
-                            //   "This is NOT a recurring Quote",
-                            //   style: TextStyle(
-                            //     backgroundColor:
-                            //         Color.fromARGB(31, 124, 122, 122),
-                            //   ),
-                            // ),
                             expandedRowShowsText(
                                 "Frequency Week",
                                 vmSchedule.jobcardResponse.data?.frequency ??
                                     ''),
-
                             sized0hx10,
                             expandedRowShowsText(
                                 "Induction Type",
                                 vmSchedule.jobcardResponse.data
                                         ?.typeOfInduction ??
                                     ''),
+                            sized0hx10,
+                            Align(
+                              alignment: Alignment.centerLeft,
+                              child: cmTitle(
+                                  vmSchedule.jobcardResponse.data
+                                              ?.reoccurring ==
+                                          false
+                                      ? "This is NOT a reoccuring Quote"
+                                      : "This is a reoccuring Quote",
+                                  width: 200.w,
+                                  blackText: true),
+                            ),
                             sized0hx10,
                             expandedRowShowsText(
                                 "Sales Person",
@@ -179,6 +182,7 @@ class JobCardPage extends StatelessWidget {
                                         .jobcardinfoFiles!
                                         .tcRequiredMultipleFile ??
                                     []),
+                                cmDivider(),
                               ],
                               if (vmSchedule
                                       .jobcardResponse.data?.purchaseComment !=
@@ -207,6 +211,7 @@ class JobCardPage extends StatelessWidget {
                                 cmFileBuilder(vmSchedule.jobcardResponse.data!
                                         .jobcardinfoFiles!.purchaseOrder ??
                                     []),
+                                cmDivider(),
                               ],
                               if (vmSchedule.jobcardResponse.data?.manifest !=
                                   "") ...[
@@ -216,7 +221,7 @@ class JobCardPage extends StatelessWidget {
                                 _buildSectioncontainer(vmSchedule
                                         .jobcardResponse.data?.manifest
                                         .toString() ??
-                                    '')
+                                    ''),
                               ],
                               if (vmSchedule
                                   .jobcardResponse
@@ -236,6 +241,7 @@ class JobCardPage extends StatelessWidget {
                                         .jobcardinfoFiles!
                                         .manifestMultipleFile ??
                                     []),
+                                cmDivider(),
                               ],
                               if (vmSchedule
                                       .jobcardResponse.data?.additionalImages !=
@@ -246,7 +252,7 @@ class JobCardPage extends StatelessWidget {
                                 _buildSectioncontainer(vmSchedule
                                         .jobcardResponse.data?.additionalImages
                                         .toString() ??
-                                    '')
+                                    ''),
                               ],
                               if (vmSchedule
                                   .jobcardResponse.data!.files!.isNotEmpty) ...[
@@ -259,7 +265,9 @@ class JobCardPage extends StatelessWidget {
                                 sized0hx05,
                                 cmFileBuilder(
                                     vmSchedule.jobcardResponse.data!.files ??
-                                        []),
+                                        [],
+                                    fromImg: true),
+                                cmDivider(),
                               ],
                               sized0hx10,
                               expandedRowShowsText(
@@ -281,13 +289,14 @@ class JobCardPage extends StatelessWidget {
                                         .jobcardinfoFiles!
                                         .dataFormRequiredMultipleFile ??
                                     []),
+                                cmDivider(),
                               ],
                               if (vmSchedule
                                       .jobcardResponse.data?.accessHeight !=
                                   "") ...[
                                 sized0hx10,
                                 expandedRowShowsText(
-                                    "AccessHeight",
+                                    "Access Height",
                                     vmSchedule
                                             .jobcardResponse.data?.accessHeight
                                             .toString() ??
@@ -417,13 +426,19 @@ class JobCardPage extends StatelessWidget {
                               if (vmSchedule.jobcardResponse.data
                                       ?.safetyDataSheetRequired !=
                                   "") ...[
-                                sized0hx10,
+                                if (vmSchedule
+                                    .jobcardResponse
+                                    .data!
+                                    .jobcardinfoFiles!
+                                    .safetyDataSheetFiles!
+                                    .isNotEmpty)
+                                  sized0hx10,
                                 expandedRowShowsText(
                                     "Safer Data Sheet \n Required",
                                     boolToString(vmSchedule.jobcardResponse.data
                                             ?.safetyDataSheetRequired
                                             .toString() ??
-                                        ""))
+                                        "")),
                               ],
                               if (vmSchedule
                                   .jobcardResponse
@@ -438,6 +453,7 @@ class JobCardPage extends StatelessWidget {
                                         .jobcardinfoFiles!
                                         .safetyDataSheetFiles ??
                                     []),
+                                cmDivider()
                               ],
                               if (vmSchedule
                                       .jobcardResponse.data?.chemistApproval !=
@@ -448,7 +464,7 @@ class JobCardPage extends StatelessWidget {
                                     boolToString(vmSchedule.jobcardResponse.data
                                             ?.chemistApproval
                                             .toString() ??
-                                        ""))
+                                        "")),
                               ],
                               sized0hx05,
                               if (vmSchedule
@@ -463,17 +479,13 @@ class JobCardPage extends StatelessWidget {
                                         .jobcardinfoFiles!
                                         .chemistApprovalMultipleFile ??
                                     []),
+                                cmDivider()
                               ],
                               if (vmSchedule.jobcardResponse.data
                                       ?.additionalInformation !=
                                   "") ...[
                                 sized0hx10,
-                                expandedRowShowsText(
-                                    "Additional information",
-                                    vmSchedule.jobcardResponse.data
-                                            ?.additionalInformation
-                                            ?.toString() ??
-                                        ''),
+                                _buildInfoText("Additional Information"),
                                 sized0hx10,
                                 _buildSectioncontainer(vmSchedule
                                         .jobcardResponse
@@ -513,11 +525,7 @@ class JobCardPage extends StatelessWidget {
                                       .jobcardResponse.data?.pitLocation !=
                                   "") ...[
                                 sized0hx10,
-                                expandedRowShowsText(
-                                    "Pit Location",
-                                    vmSchedule.jobcardResponse.data?.pitLocation
-                                            ?.toString() ??
-                                        ''),
+                                _buildInfoText("Pit Location"),
                                 sized0hx10,
                                 _buildSectioncontainer(vmSchedule
                                         .jobcardResponse.data?.pitLocation
@@ -554,6 +562,7 @@ class JobCardPage extends StatelessWidget {
                                         .jobcardinfoFiles!
                                         .weighBridgeRequiredMultipleFile ??
                                     []),
+                                cmDivider()
                               ]
                             ],
                           )),
@@ -582,7 +591,6 @@ class JobCardPage extends StatelessWidget {
 
   Widget _buildSectioncontainer(String title) {
     return Container(
-      height: 60.w,
       width: double.infinity,
       color: const Color.fromARGB(31, 124, 122, 122),
       alignment: Alignment.centerLeft,
@@ -601,20 +609,20 @@ class JobCardPage extends StatelessWidget {
   Widget _buildInfoText(String text) {
     return Text(
       text,
-      style: TextStyle(fontSize: 9.sp),
+      style: TextStyle(fontSize: 10.sp),
     );
   }
 
-  Widget cmFileBuilder(List fileList) {
+  Widget cmFileBuilder(List<WeighBridge> fileList, {bool fromImg = false}) {
     return SizedBox(
-      height: 70.h,
+      height: 100.w,
       width: double.infinity,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         itemCount: fileList.length,
         itemBuilder: (context, index) {
-          String path = fileList[index].file ?? "";
-
+          String path =
+              fromImg ? fileList[index].url ?? "" : fileList[index].file ?? "";
           bool isImage = path.endsWith('.jpg') ||
               path.endsWith('.jpeg') ||
               path.endsWith('.png');
@@ -622,36 +630,51 @@ class JobCardPage extends StatelessWidget {
             onTap: () async {
               _launchImageUrl(path);
             },
-            child: Container(
-              width: 80.h, // Width of each item
-              foregroundDecoration: BoxDecoration(border: Border.all()),
-              child: Column(
-                children: [
-                  sized0hx05,
-                  Expanded(
-                    child: isImage
-                        ? Image.file(
-                            File(path),
-                            fit: BoxFit.cover,
-                          )
-                        : Icon(
-                            Icons.file_copy,
-                            size: 20.w,
-                            color: Colors.red,
-                          ),
-                  ),
-                  Expanded(
-                      child: Text(
-                    fileList[index].name ?? "",
-                    style: TextStyle(
-                        fontSize: 9.sp, overflow: TextOverflow.ellipsis),
-                  ))
-                ],
+            child: Padding(
+              padding: EdgeInsets.all(3.w),
+              child: Container(
+                width: 75.w, // Width of each item
+                decoration: BoxDecoration(color: Colors.grey.shade200),
+                child: Column(
+                  children: [
+                    Expanded(
+                      flex: 2,
+                      child: isImage
+                          ? SizedBox(
+                              height: 75.w,
+                              width: 75.w,
+                              child: Image.network(
+                                path,
+                                fit: BoxFit.cover,
+                              ),
+                            )
+                          : Icon(
+                              Icons.file_copy,
+                              size: 20.w,
+                              color: Colors.red,
+                            ),
+                    ),
+                    sized0hx05,
+                    Expanded(
+                        child: Text(
+                      fileList[index].name ?? "Untitled",
+                      style: TextStyle(
+                          fontSize: 9.sp, overflow: TextOverflow.ellipsis),
+                    ))
+                  ],
+                ),
               ),
             ),
           );
         },
       ),
+    );
+  }
+
+  Widget cmDivider() {
+    return Divider(
+      color: Colors.grey.shade300,
+      thickness: 4,
     );
   }
 
@@ -664,6 +687,6 @@ class JobCardPage extends StatelessWidget {
   }
 
   String boolToString(String value) {
-    return value == "True" ? "Yes" : "No";
+    return value == "true" ? "Yes" : "No";
   }
 }

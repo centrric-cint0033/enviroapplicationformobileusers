@@ -150,6 +150,8 @@ mixin _$SalesModel {
   String? get receivedFile => throw _privateConstructorUsedError;
   @JsonKey(name: 'attached_files')
   List<AttachedFile>? get attachedFiles => throw _privateConstructorUsedError;
+  @JsonKey(name: 'team')
+  List<TeamEmployee>? get team => throw _privateConstructorUsedError;
   @JsonKey(name: 'template_response')
   List<TemplateResponse>? get templateResponse =>
       throw _privateConstructorUsedError;
@@ -252,6 +254,7 @@ abstract class $SalesModelCopyWith<$Res> {
       @JsonKey(name: 'quote_file') String? quoteFile,
       @JsonKey(name: 'received_file') String? receivedFile,
       @JsonKey(name: 'attached_files') List<AttachedFile>? attachedFiles,
+      @JsonKey(name: 'team') List<TeamEmployee>? team,
       @JsonKey(name: 'template_response')
       List<TemplateResponse>? templateResponse,
       @JsonKey(name: 'converted_to_recurring_quote_id')
@@ -353,6 +356,7 @@ class _$SalesModelCopyWithImpl<$Res, $Val extends SalesModel>
     Object? quoteFile = freezed,
     Object? receivedFile = freezed,
     Object? attachedFiles = freezed,
+    Object? team = freezed,
     Object? templateResponse = freezed,
     Object? convertedToRecurringQuoteId = freezed,
     Object? employee = freezed,
@@ -653,6 +657,10 @@ class _$SalesModelCopyWithImpl<$Res, $Val extends SalesModel>
           ? _value.attachedFiles
           : attachedFiles // ignore: cast_nullable_to_non_nullable
               as List<AttachedFile>?,
+      team: freezed == team
+          ? _value.team
+          : team // ignore: cast_nullable_to_non_nullable
+              as List<TeamEmployee>?,
       templateResponse: freezed == templateResponse
           ? _value.templateResponse
           : templateResponse // ignore: cast_nullable_to_non_nullable
@@ -792,6 +800,7 @@ abstract class _$$SalesModelImplCopyWith<$Res>
       @JsonKey(name: 'quote_file') String? quoteFile,
       @JsonKey(name: 'received_file') String? receivedFile,
       @JsonKey(name: 'attached_files') List<AttachedFile>? attachedFiles,
+      @JsonKey(name: 'team') List<TeamEmployee>? team,
       @JsonKey(name: 'template_response')
       List<TemplateResponse>? templateResponse,
       @JsonKey(name: 'converted_to_recurring_quote_id')
@@ -892,6 +901,7 @@ class __$$SalesModelImplCopyWithImpl<$Res>
     Object? quoteFile = freezed,
     Object? receivedFile = freezed,
     Object? attachedFiles = freezed,
+    Object? team = freezed,
     Object? templateResponse = freezed,
     Object? convertedToRecurringQuoteId = freezed,
     Object? employee = freezed,
@@ -1192,6 +1202,10 @@ class __$$SalesModelImplCopyWithImpl<$Res>
           ? _value._attachedFiles
           : attachedFiles // ignore: cast_nullable_to_non_nullable
               as List<AttachedFile>?,
+      team: freezed == team
+          ? _value._team
+          : team // ignore: cast_nullable_to_non_nullable
+              as List<TeamEmployee>?,
       templateResponse: freezed == templateResponse
           ? _value._templateResponse
           : templateResponse // ignore: cast_nullable_to_non_nullable
@@ -1313,6 +1327,7 @@ class _$SalesModelImpl implements _SalesModel {
       @JsonKey(name: 'quote_file') this.quoteFile,
       @JsonKey(name: 'received_file') this.receivedFile,
       @JsonKey(name: 'attached_files') final List<AttachedFile>? attachedFiles,
+      @JsonKey(name: 'team') final List<TeamEmployee>? team,
       @JsonKey(name: 'template_response')
       final List<TemplateResponse>? templateResponse,
       @JsonKey(name: 'converted_to_recurring_quote_id')
@@ -1329,6 +1344,7 @@ class _$SalesModelImpl implements _SalesModel {
         _fileList = fileList,
         _mailCc = mailCc,
         _attachedFiles = attachedFiles,
+        _team = team,
         _templateResponse = templateResponse,
         _mailBcc = mailBcc;
 
@@ -1569,6 +1585,17 @@ class _$SalesModelImpl implements _SalesModel {
     return EqualUnmodifiableListView(value);
   }
 
+  final List<TeamEmployee>? _team;
+  @override
+  @JsonKey(name: 'team')
+  List<TeamEmployee>? get team {
+    final value = _team;
+    if (value == null) return null;
+    if (_team is EqualUnmodifiableListView) return _team;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
   final List<TemplateResponse>? _templateResponse;
   @override
   @JsonKey(name: 'template_response')
@@ -1612,7 +1639,7 @@ class _$SalesModelImpl implements _SalesModel {
 
   @override
   String toString() {
-    return 'SalesModel(id: $id, client: $client, isMockJob: $isMockJob, jobCode: $jobCode, quotedBy: $quotedBy, clientId: $clientId, clientName: $clientName, clientType: $clientType, paidStatus: $paidStatus, date: $date, jobCardId: $jobCardId, nextService2: $nextService2, frequency: $frequency, wasteTypeStr: $wasteTypeStr, typeOfWasteStrProfileName: $typeOfWasteStrProfileName, salesApproveDate: $salesApproveDate, jobCardCode: $jobCardCode, createdDateTime: $createdDateTime, jobCardKeys: $jobCardKeys, deletedStatus: $deletedStatus, tabType: $tabType, uuid: $uuid, amount: $amount, paidAmount: $paidAmount, reoccurring: $reoccurring, status: $status, scheduleStatus: $scheduleStatus, jobType: $jobType, readyForSchedule: $readyForSchedule, isJobThroughReccuuring: $isJobThroughReccuuring, parentJobId: $parentJobId, editedDateTime: $editedDateTime, rescheduled: $rescheduled, activeStatus: $activeStatus, jobCardType: $jobCardType, recurringDate: $recurringDate, createdBy: $createdBy, quote: $quote, jobCard: $jobCard, jobComments: $jobComments, wonLoseStatus: $wonLoseStatus, scheduleId: $scheduleId, fileList: $fileList, clientEmail: $clientEmail, salePerson: $salePerson, contactNumber: $contactNumber, customer: $customer, wonRejectDate: $wonRejectDate, parentQuoteStatus: $parentQuoteStatus, mailCc: $mailCc, company: $company, template: $template, templateName: $templateName, autoCreate: $autoCreate, url: $url, invoiceAmt: $invoiceAmt, companyName: $companyName, mailSubject: $mailSubject, mailBody: $mailBody, safetyData: $safetyData, safetyDataHtmlSend: $safetyDataHtmlSend, salesTeamReview: $salesTeamReview, emailSendingOption: $emailSendingOption, isQuoteThroughRecurring: $isQuoteThroughRecurring, recurringStatus: $recurringStatus, parentQuoteId: $parentQuoteId, scopeOfWorkType: $scopeOfWorkType, salesApproveDateTime: $salesApproveDateTime, quoteType: $quoteType, quoteFile: $quoteFile, receivedFile: $receivedFile, attachedFiles: $attachedFiles, templateResponse: $templateResponse, convertedToRecurringQuoteId: $convertedToRecurringQuoteId, employee: $employee, mailBcc: $mailBcc, name: $name, won: $won, lost: $lost, pending: $pending, total: $total, profile: $profile)';
+    return 'SalesModel(id: $id, client: $client, isMockJob: $isMockJob, jobCode: $jobCode, quotedBy: $quotedBy, clientId: $clientId, clientName: $clientName, clientType: $clientType, paidStatus: $paidStatus, date: $date, jobCardId: $jobCardId, nextService2: $nextService2, frequency: $frequency, wasteTypeStr: $wasteTypeStr, typeOfWasteStrProfileName: $typeOfWasteStrProfileName, salesApproveDate: $salesApproveDate, jobCardCode: $jobCardCode, createdDateTime: $createdDateTime, jobCardKeys: $jobCardKeys, deletedStatus: $deletedStatus, tabType: $tabType, uuid: $uuid, amount: $amount, paidAmount: $paidAmount, reoccurring: $reoccurring, status: $status, scheduleStatus: $scheduleStatus, jobType: $jobType, readyForSchedule: $readyForSchedule, isJobThroughReccuuring: $isJobThroughReccuuring, parentJobId: $parentJobId, editedDateTime: $editedDateTime, rescheduled: $rescheduled, activeStatus: $activeStatus, jobCardType: $jobCardType, recurringDate: $recurringDate, createdBy: $createdBy, quote: $quote, jobCard: $jobCard, jobComments: $jobComments, wonLoseStatus: $wonLoseStatus, scheduleId: $scheduleId, fileList: $fileList, clientEmail: $clientEmail, salePerson: $salePerson, contactNumber: $contactNumber, customer: $customer, wonRejectDate: $wonRejectDate, parentQuoteStatus: $parentQuoteStatus, mailCc: $mailCc, company: $company, template: $template, templateName: $templateName, autoCreate: $autoCreate, url: $url, invoiceAmt: $invoiceAmt, companyName: $companyName, mailSubject: $mailSubject, mailBody: $mailBody, safetyData: $safetyData, safetyDataHtmlSend: $safetyDataHtmlSend, salesTeamReview: $salesTeamReview, emailSendingOption: $emailSendingOption, isQuoteThroughRecurring: $isQuoteThroughRecurring, recurringStatus: $recurringStatus, parentQuoteId: $parentQuoteId, scopeOfWorkType: $scopeOfWorkType, salesApproveDateTime: $salesApproveDateTime, quoteType: $quoteType, quoteFile: $quoteFile, receivedFile: $receivedFile, attachedFiles: $attachedFiles, team: $team, templateResponse: $templateResponse, convertedToRecurringQuoteId: $convertedToRecurringQuoteId, employee: $employee, mailBcc: $mailBcc, name: $name, won: $won, lost: $lost, pending: $pending, total: $total, profile: $profile)';
   }
 
   @override
@@ -1734,6 +1761,7 @@ class _$SalesModelImpl implements _SalesModel {
             (identical(other.quoteFile, quoteFile) || other.quoteFile == quoteFile) &&
             (identical(other.receivedFile, receivedFile) || other.receivedFile == receivedFile) &&
             const DeepCollectionEquality().equals(other._attachedFiles, _attachedFiles) &&
+            const DeepCollectionEquality().equals(other._team, _team) &&
             const DeepCollectionEquality().equals(other._templateResponse, _templateResponse) &&
             const DeepCollectionEquality().equals(other.convertedToRecurringQuoteId, convertedToRecurringQuoteId) &&
             (identical(other.employee, employee) || other.employee == employee) &&
@@ -1822,6 +1850,7 @@ class _$SalesModelImpl implements _SalesModel {
         quoteFile,
         receivedFile,
         const DeepCollectionEquality().hash(_attachedFiles),
+        const DeepCollectionEquality().hash(_team),
         const DeepCollectionEquality().hash(_templateResponse),
         const DeepCollectionEquality().hash(convertedToRecurringQuoteId),
         employee,
@@ -1926,6 +1955,7 @@ abstract class _SalesModel implements SalesModel {
       @JsonKey(name: 'quote_file') final String? quoteFile,
       @JsonKey(name: 'received_file') final String? receivedFile,
       @JsonKey(name: 'attached_files') final List<AttachedFile>? attachedFiles,
+      @JsonKey(name: 'team') final List<TeamEmployee>? team,
       @JsonKey(name: 'template_response')
       final List<TemplateResponse>? templateResponse,
       @JsonKey(name: 'converted_to_recurring_quote_id')
@@ -2144,6 +2174,9 @@ abstract class _SalesModel implements SalesModel {
   @override
   @JsonKey(name: 'attached_files')
   List<AttachedFile>? get attachedFiles;
+  @override
+  @JsonKey(name: 'team')
+  List<TeamEmployee>? get team;
   @override
   @JsonKey(name: 'template_response')
   List<TemplateResponse>? get templateResponse;

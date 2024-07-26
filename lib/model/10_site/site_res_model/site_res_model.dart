@@ -1,5 +1,6 @@
 // ignore_for_file: invalid_annotation_target
 
+import 'package:enviro_mobile_application/model/12_shedulecard/shedule_card_resp_model.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'site_res_model.freezed.dart';

@@ -28,6 +28,9 @@ _$SheduleCardRespModelImpl _$$SheduleCardRespModelImplFromJson(
       teamEmployees: (json['team_employees'] as List<dynamic>?)
           ?.map((e) => TeamEmployee.fromJson(e as Map<String, dynamic>))
           .toList(),
+      team: (json['team'] as List<dynamic>?)
+          ?.map((e) => TeamEmployee.fromJson(e as Map<String, dynamic>))
+          .toList(),
       shift: json['shift'] as String?,
       beforePics: (json['before_pics'] as List<dynamic>?)
           ?.map((e) => Pic.fromJson(e as Map<String, dynamic>))
@@ -103,6 +106,7 @@ Map<String, dynamic> _$$SheduleCardRespModelImplToJson(
       'pending_amount': instance.pendingAmount,
       'vehicle': instance.vehicle,
       'team_employees': instance.teamEmployees,
+      'team': instance.team,
       'shift': instance.shift,
       'before_pics': instance.beforePics,
       'after_pics': instance.afterPics,

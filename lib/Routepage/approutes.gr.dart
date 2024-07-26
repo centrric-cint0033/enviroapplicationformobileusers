@@ -350,6 +350,8 @@ abstract class $AppRouter extends _i49.RootStackRouter {
         child: _i26.SalesDetailPage(
           key: args.key,
           data: args.data,
+          fromSale: args.fromSale,
+          fromSaleListTab: args.fromSaleListTab,
         ),
       );
     },
@@ -1286,14 +1288,18 @@ class ProfileCreationRouteArgs {
 /// [_i26.SalesDetailPage]
 class SalesDetailRoute extends _i49.PageRouteInfo<SalesDetailRouteArgs> {
   SalesDetailRoute({
-    _i53.Key? key,
+    _i50.Key? key,
     required _i56.SalesModel? data,
+    bool? fromSale = false,
+    bool? fromSaleListTab = false,
     List<_i49.PageRouteInfo>? children,
   }) : super(
           SalesDetailRoute.name,
           args: SalesDetailRouteArgs(
             key: key,
             data: data,
+            fromSale: fromSale,
+            fromSaleListTab: fromSaleListTab,
           ),
           initialChildren: children,
         );
@@ -1308,15 +1314,21 @@ class SalesDetailRouteArgs {
   const SalesDetailRouteArgs({
     this.key,
     required this.data,
+    this.fromSale = false,
+    this.fromSaleListTab = false,
   });
 
-  final _i53.Key? key;
+  final _i50.Key? key;
 
   final _i56.SalesModel? data;
 
+  final bool? fromSale;
+
+  final bool? fromSaleListTab;
+
   @override
   String toString() {
-    return 'SalesDetailRouteArgs{key: $key, data: $data}';
+    return 'SalesDetailRouteArgs{key: $key, data: $data, fromSale: $fromSale, fromSaleListTab: $fromSaleListTab}';
   }
 }
 

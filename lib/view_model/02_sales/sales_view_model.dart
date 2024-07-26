@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:enviro_mobile_application/api_response/api_response.dart';
 import 'package:enviro_mobile_application/model/02_sales/sales_model/sales_model.dart';
 import 'package:enviro_mobile_application/service/02_sales/sales_service.dart';
@@ -463,6 +462,7 @@ abstract class SalesViewModelBase with Store {
           receivedFile: r.receivedFile,
           attachedFiles: r.attachedFiles,
           templateResponse: r.templateResponse,
+          team: r.team
         );
         saleDetailResponse = saleDetailResponse.copyWith(
           loading: false,
@@ -492,6 +492,7 @@ abstract class SalesViewModelBase with Store {
           receivedFile: r.receivedFile,
           attachedFiles: r.attachedFiles,
           templateResponse: r.templateResponse,
+               team: r.team
         );
         saleDetailResponse = saleDetailResponse.copyWith(
           loading: false,

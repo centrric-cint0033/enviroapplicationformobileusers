@@ -43,7 +43,7 @@ class AddTeamPage extends StatelessWidget {
               key: formkey,
               child: Column(
                 children: [
-                  gapFieldSales,
+                  sized0hx05,
                   SizedBox(
                     height: 82.h,
                     child: DecoratedBox(

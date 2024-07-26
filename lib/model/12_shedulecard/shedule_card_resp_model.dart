@@ -31,6 +31,7 @@ class SheduleCardRespModel with _$SheduleCardRespModel {
     @JsonKey(name: "pending_amount") String? pendingAmount,
     @JsonKey(name: "vehicle") String? vehicle,
     @JsonKey(name: "team_employees") List<TeamEmployee>? teamEmployees,
+    @JsonKey(name: "team") List<TeamEmployee>? team,
     @JsonKey(name: "shift") String? shift,
     @JsonKey(name: "before_pics") List<Pic>? beforePics,
     @JsonKey(name: "after_pics") List<Pic>? afterPics,
