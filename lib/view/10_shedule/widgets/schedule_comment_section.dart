@@ -58,7 +58,9 @@ class ScheduleCommentSection extends StatelessWidget {
                         : const Icon(Icons.send),
                     onPressed: () {
                       vmSchedule.shedulecommentviewmodelfunction(
-                          id: id, comment: vmSchedule.commentController.text);
+                          context: context,
+                          id: id,
+                          comment: vmSchedule.commentController.text);
                     },
                   );
                 }),

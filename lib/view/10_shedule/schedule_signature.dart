@@ -343,24 +343,27 @@ class SheduleSignaturePage extends StatelessWidget {
                             } else {
                               if (vmSchedule.commentController.text != "") {
                                 vmSchedule.shedulecommentviewmodelfunction(
+                                    context: context,
                                     id: id,
                                     comment: vmSchedule.commentController.text);
                               }
-                             await vmSchedule.shedulesignatureviewmodelfunction(
-                                  context: context,
-                                  image: vmSchedule.signaturePath ?? "",
-                                  extractedWasteType:
-                                      vmSchedule.controllerTypeofwaste.text,
-                                  extractedLitres:
-                                      vmSchedule.controllerWateliters.text,
-                                  purchaseOderNo:
-                                      vmSchedule.controllerPonumber.text,
-                                  signatureName:
-                                      vmSchedule.signNameController.text,
-                                  id: id,
-                                  pickedFiles: vmSchedule.pickedWeighImageList
-                                          ?.toList() ??
-                                      []);
+                              await vmSchedule
+                                  .shedulesignatureviewmodelfunction(
+                                      context: context,
+                                      image: vmSchedule.signaturePath ?? "",
+                                      extractedWasteType:
+                                          vmSchedule.controllerTypeofwaste.text,
+                                      extractedLitres:
+                                          vmSchedule.controllerWateliters.text,
+                                      purchaseOderNo:
+                                          vmSchedule.controllerPonumber.text,
+                                      signatureName:
+                                          vmSchedule.signNameController.text,
+                                      id: id,
+                                      pickedFiles: vmSchedule
+                                              .pickedWeighImageList
+                                              ?.toList() ??
+                                          []);
                               vmSchedule.editScheduleStatusApi(
                                   context: context,
                                   statusType: ScheduleStatusType.completed,

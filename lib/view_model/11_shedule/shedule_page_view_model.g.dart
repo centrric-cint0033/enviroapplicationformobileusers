@@ -1955,9 +1955,12 @@ mixin _$ScheduleViewModel on ScheduleViewModelBase, Store {
 
   @override
   Future<void> shedulecommentviewmodelfunction(
-      {required int id, required String comment}) {
-    return _$shedulecommentviewmodelfunctionAsyncAction.run(
-        () => super.shedulecommentviewmodelfunction(id: id, comment: comment));
+      {required BuildContext context,
+      required int id,
+      required String comment}) {
+    return _$shedulecommentviewmodelfunctionAsyncAction.run(() => super
+        .shedulecommentviewmodelfunction(
+            context: context, id: id, comment: comment));
   }
 
   late final _$deleteScheduleCommentServiceApiAsyncAction = AsyncAction(
