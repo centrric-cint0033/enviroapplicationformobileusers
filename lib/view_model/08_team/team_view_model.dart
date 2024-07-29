@@ -140,6 +140,10 @@ abstract class TeamViewModelBase with Store {
   String? searchType;
   @observable
   List<String> folderNames = [];
+  @observable
+  bool showReason = false;
+  @observable
+  bool showAddFile = false;
 
   TextEditingController textFolderAddController = TextEditingController();
   TextEditingController textFolderEditController = TextEditingController();
@@ -940,26 +944,116 @@ abstract class TeamViewModelBase with Store {
   @action
   void selectCheckbox(int? index) {
     selectedCheckboxIndex = index;
+    if (selectedCheckboxIndex == 2) {
+      showReason = true;
+    } else {
+      showReason = false;
+    }
+    if (selectedCheckboxIndex == 3) {
+      showAddFile = true;
+    } else {
+      showAddFile = false;
+    }
   }
 
   @action
-  datePickerFn8(date) {
-    selectedLeaveFromdate = date;
+  datePickerFn8(date, BuildContext context) {
+    if (vmTeam.selectedLeaveTodate != null &&
+        date.isAfter(vmTeam.selectedLeaveTodate)) {
+      showToast(context,
+          msg: "Leave From Date should be before Leave To date",
+          color: Colors.red);
+      vmTeam.selectedLeaveFromdate = null;
+    } else if (vmTeam.selectedLastDayofWork != null &&
+        date.isBefore(vmTeam.selectedLastDayofWork)) {
+      showToast(context,
+          msg: "Leave From Date should be after Last Day of Work",
+          color: Colors.red);
+      vmTeam.selectedLeaveFromdate = null;
+    } else if (vmTeam.selectedReturnToWorkDate != null &&
+        date.isAfter(vmTeam.selectedReturnToWorkDate)) {
+      showToast(context,
+          msg: "Leave From Date should be before the Return to Work Date",
+          color: Colors.red);
+      vmTeam.selectedLeaveFromdate = null;
+    } else {
+      selectedLeaveFromdate = date;
+    }
   }
 
   @action
-  datePickerFn9(date) {
-    selectedLeaveTodate = date;
+  datePickerFn9(date, BuildContext context) {
+    if (vmTeam.selectedLeaveFromdate != null &&
+        date.isBefore(vmTeam.selectedLeaveFromdate)) {
+      showToast(context,
+          msg: "Leave To Date should be after Leave From date",
+          color: Colors.red);
+      vmTeam.selectedLeaveTodate = null;
+    } else if (vmTeam.selectedReturnToWorkDate != null &&
+        date.isAfter(vmTeam.selectedReturnToWorkDate)) {
+      showToast(context,
+          msg: "Leave To Date should be before Return to Work Date",
+          color: Colors.red);
+      vmTeam.selectedLeaveTodate = null;
+    } else if (vmTeam.selectedLastDayofWork != null &&
+        date.isAfter(vmTeam.selectedLastDayofWork)) {
+      showToast(context,
+          msg: "Leave To Date should be before the Last Day of Work",
+          color: Colors.red);
+      vmTeam.selectedLeaveTodate = null;
+    } else {
+      selectedLeaveTodate = date;
+    }
   }
 
   @action
-  datePickerFn10(date) {
-    selectedLastDayofWork = date;
+  datePickerFn10(date, BuildContext context) {
+    if (vmTeam.selectedLeaveFromdate != null &&
+        date.isAfter(vmTeam.selectedLeaveFromdate)) {
+      showToast(context,
+          msg: "Last Day of Work Date should be before the Leave From date",
+          color: Colors.red);
+      vmTeam.selectedLastDayofWork = null;
+    } else if (vmTeam.selectedLeaveTodate != null &&
+        date.isAfter(vmTeam.selectedLeaveTodate)) {
+      showToast(context,
+          msg: "Last Day of Work Date should be before the Leave To date",
+          color: Colors.red);
+      vmTeam.selectedLastDayofWork = null;
+    } else if (vmTeam.selectedReturnToWorkDate != null &&
+        date.isAfter(vmTeam.selectedReturnToWorkDate)) {
+      showToast(context,
+          msg: "Last Day of Work Date should be before the Return to Work date",
+          color: Colors.red);
+      vmTeam.selectedLastDayofWork = null;
+    } else {
+      vmTeam.selectedLastDayofWork = date;
+    }
   }
 
   @action
-  datePickerFn11(date) {
-    selectedReturnToWorkDate = date;
+  datePickerFn11(date, BuildContext context) {
+    if (vmTeam.selectedLeaveTodate != null &&
+        date.isBefore(vmTeam.selectedLeaveTodate)) {
+      showToast(context,
+          msg: "Return to Work Date should be after the Leave To date",
+          color: Colors.red);
+      vmTeam.selectedReturnToWorkDate = null;
+    } else if (vmTeam.selectedLeaveFromdate != null &&
+        date.isBefore(vmTeam.selectedLeaveFromdate)) {
+      showToast(context,
+          msg: "Return to Work Date should be after the Leave From date",
+          color: Colors.red);
+      vmTeam.selectedReturnToWorkDate = null;
+    } else if (vmTeam.selectedLastDayofWork != null &&
+        date.isBefore(vmTeam.selectedLastDayofWork)) {
+      showToast(context,
+          msg: "Return to Work Date should be after the Last day of Work",
+          color: Colors.red);
+      vmTeam.selectedReturnToWorkDate = null;
+    } else {
+      selectedReturnToWorkDate = date;
+    }
   }
 
   @action

@@ -64,6 +64,7 @@ class SheduleSignaturePage extends StatelessWidget {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
+                                sized0hx10,
                                 Text(
                                   'Weigh bridge Required:',
                                   style: TextStyle(
@@ -87,9 +88,10 @@ class SheduleSignaturePage extends StatelessWidget {
                                     ),
                                   ],
                                 ),
-                                sized0hx05,
+                                sized0hx10,
                                 if (vmSchedule
-                                    .pickedWeighImageList!.isNotEmpty) ...[
+                                        .pickedWeighImageList?.isNotEmpty ??
+                                    true) ...[
                                   SizedBox(
                                     height: 70.h,
                                     width: double.infinity,
@@ -105,53 +107,57 @@ class SheduleSignaturePage extends StatelessWidget {
                                             imagePath.endsWith('.jpg') ||
                                                 imagePath.endsWith('.jpeg') ||
                                                 imagePath.endsWith('.png');
-                                        return InkWell(
-                                          onTap: () async {
-                                            OpenFile.open(
-                                              imagePath,
-                                            );
-                                          },
-                                          onLongPress: () {
-                                            showConfirmationAlert(
-                                                context: context,
-                                                onSubmit: () {
-                                                  vmSchedule
-                                                      .pickedWeighImageList
-                                                      ?.removeAt(index);
-                                                },
-                                                content:
-                                                    "Are you sure you want to delete?",
-                                                submitText: "Yes",
-                                                submitText2: "No");
-                                          },
-                                          child: Container(
-                                            width: 80.h, // Width of each item
-                                            foregroundDecoration: BoxDecoration(
-                                                border: Border.all()),
-                                            child: Column(
-                                              children: [
-                                                sized0hx05,
-                                                Expanded(
-                                                  child: isImage
-                                                      ? Image.file(
-                                                          File(imagePath),
-                                                          fit: BoxFit.cover,
-                                                        )
-                                                      : Icon(
-                                                          Icons.file_copy,
-                                                          size: 20.w,
-                                                          color: Colors.red,
-                                                        ),
-                                                ),
-                                                Expanded(
-                                                    child: Text(
-                                                  fileName,
-                                                  style: TextStyle(
-                                                      fontSize: 9.sp,
-                                                      overflow: TextOverflow
-                                                          .ellipsis),
-                                                ))
-                                              ],
+                                        return Padding(
+                                          padding: EdgeInsets.all(4.w),
+                                          child: InkWell(
+                                            onTap: () async {
+                                              OpenFile.open(
+                                                imagePath,
+                                              );
+                                            },
+                                            onLongPress: () {
+                                              showConfirmationAlert(
+                                                  context: context,
+                                                  onSubmit: () {
+                                                    vmSchedule
+                                                        .pickedWeighImageList
+                                                        ?.removeAt(index);
+                                                  },
+                                                  content:
+                                                      "Are you sure you want to delete?",
+                                                  submitText: "Yes",
+                                                  submitText2: "No");
+                                            },
+                                            child: Container(
+                                              width: 80.h, // Width of each item
+                                              foregroundDecoration:
+                                                  BoxDecoration(
+                                                      border: Border.all()),
+                                              child: Column(
+                                                children: [
+                                                  sized0hx05,
+                                                  Expanded(
+                                                    child: isImage
+                                                        ? Image.file(
+                                                            File(imagePath),
+                                                            fit: BoxFit.cover,
+                                                          )
+                                                        : Icon(
+                                                            Icons.file_copy,
+                                                            size: 20.w,
+                                                            color: Colors.red,
+                                                          ),
+                                                  ),
+                                                  Expanded(
+                                                      child: Text(
+                                                    fileName,
+                                                    style: TextStyle(
+                                                        fontSize: 9.sp,
+                                                        overflow: TextOverflow
+                                                            .ellipsis),
+                                                  ))
+                                                ],
+                                              ),
                                             ),
                                           ),
                                         );
@@ -322,6 +328,7 @@ class SheduleSignaturePage extends StatelessWidget {
                           width: 150.w,
                           color: vmSchedule.signColor,
                           loading: vmSchedule.signatureResponse.loading,
+                          indicatorColor: Colors.white,
                           onPressed: () async {
                             if (vmSchedule.signaturePath == null &&
                                 vmSchedule.signaturecontroller.isNotEmpty) {
@@ -334,7 +341,12 @@ class SheduleSignaturePage extends StatelessWidget {
                                   msg: "Signname is required",
                                   color: Colors.red);
                             } else {
-                              vmSchedule.shedulesignatureviewmodelfunction(
+                              if (vmSchedule.commentController.text != "") {
+                                vmSchedule.shedulecommentviewmodelfunction(
+                                    id: id,
+                                    comment: vmSchedule.commentController.text);
+                              }
+                             await vmSchedule.shedulesignatureviewmodelfunction(
                                   context: context,
                                   image: vmSchedule.signaturePath ?? "",
                                   extractedWasteType:
@@ -349,11 +361,6 @@ class SheduleSignaturePage extends StatelessWidget {
                                   pickedFiles: vmSchedule.pickedWeighImageList
                                           ?.toList() ??
                                       []);
-                              if (vmSchedule.commentController.text != "") {
-                                vmSchedule.shedulecommentviewmodelfunction(
-                                    id: id,
-                                    comment: vmSchedule.commentController.text);
-                              }
                               vmSchedule.editScheduleStatusApi(
                                   context: context,
                                   statusType: ScheduleStatusType.completed,

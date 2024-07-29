@@ -2120,6 +2120,17 @@ mixin _$ScheduleViewModel on ScheduleViewModelBase, Store {
       ActionController(name: 'ScheduleViewModelBase', context: context);
 
   @override
+  void setDriversIndex(int index) {
+    final _$actionInfo = _$ScheduleViewModelBaseActionController.startAction(
+        name: 'ScheduleViewModelBase.setDriversIndex');
+    try {
+      return super.setDriversIndex(index);
+    } finally {
+      _$ScheduleViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   void toggleSelectionBeforePic(int index, int imageId) {
     final _$actionInfo = _$ScheduleViewModelBaseActionController.startAction(
         name: 'ScheduleViewModelBase.toggleSelectionBeforePic');

@@ -59,7 +59,40 @@ class LeaveApplicationPage extends StatelessWidget {
                       'Personal Leave(Give Reason)',
                       'Long Service Leave'
                     ];
-                    if (index == 2) {
+
+                    if (index == 0) {
+                      // Change index to 0 for "Annual Leave"
+                      return Column(
+                        children: [
+                          Row(
+                            children: [
+                              Observer(
+                                builder: (_) => Checkbox(
+                                  value: vmTeam.selectedCheckboxIndex == index,
+                                  onChanged: (bool? value) {
+                                    if (value == true) {
+                                      vmTeam.selectCheckbox(index);
+                                    } else {
+                                      vmTeam.selectCheckbox(null);
+                                    }
+                                  },
+                                ),
+                              ),
+                              Text(
+                                checkboxTexts[index],
+                                style: TextStyle(fontSize: 9.sp),
+                              ),
+                            ],
+                          ),
+                          Text(
+                            "* Annual Leave must be applied for at least 2 weeks before leave is to be taken",
+                            style: TextStyle(
+                                fontSize: 8.w,
+                                color: const Color.fromARGB(255, 240, 94, 84)),
+                          ),
+                        ],
+                      );
+                    } else if (index == 2) {
                       return Column(
                         children: [
                           Observer(
@@ -82,23 +115,27 @@ class LeaveApplicationPage extends StatelessWidget {
                               ],
                             ),
                           ),
-                          Container(
-                            height: 45.h,
-                            decoration:
-                                BoxDecoration(color: Colors.grey.shade200),
-                            child: TextField(
-                              controller: vmTeam.reasonController,
-                              textAlign: TextAlign.left,
-                              style: TextStyle(fontSize: 9.sp),
-                              decoration: InputDecoration(
-                                hintText: 'Type your Reason...',
-                                hintStyle: TextStyle(
-                                    fontSize: 9.sp,
-                                    fontWeight: FontWeight.normal),
-                                border: InputBorder.none,
-                              ),
-                            ),
-                          ),
+                          Observer(builder: (context) {
+                            return vmTeam.showReason
+                                ? Container(
+                                    height: 45.h,
+                                    decoration: BoxDecoration(
+                                        color: Colors.grey.shade200),
+                                    child: TextField(
+                                      controller: vmTeam.reasonController,
+                                      textAlign: TextAlign.left,
+                                      style: TextStyle(fontSize: 9.sp),
+                                      decoration: InputDecoration(
+                                        hintText: 'Type your Reason...',
+                                        hintStyle: TextStyle(
+                                            fontSize: 9.sp,
+                                            fontWeight: FontWeight.normal),
+                                        border: InputBorder.none,
+                                      ),
+                                    ),
+                                  )
+                                : SizedBox();
+                          }),
                         ],
                       );
                     } else {
@@ -131,9 +168,11 @@ class LeaveApplicationPage extends StatelessWidget {
                 CmButton(
                   text: "Add File",
                   width: 80.w,
-                  color: Appthemes.cPrimary,
+                  color: vmTeam.showAddFile
+                      ? Appthemes.cPrimary
+                      : Colors.blue.shade100,
                   onPressed: () {
-                    vmTeam.addFileLeavedFn();
+                    if (vmTeam.showAddFile == true) vmTeam.addFileLeavedFn();
                   },
                 ),
                 if (vmTeam.addFileLeave != "") ...[
@@ -195,7 +234,7 @@ class LeaveApplicationPage extends StatelessWidget {
                           fontSize: 9.sp, color: Colors.grey.shade700),
                     ),
                     cmDatePicker(context, vmTeam.selectedLeaveFromdate,
-                        (date) => vmTeam.datePickerFn8(date))
+                        (date) => vmTeam.datePickerFn8(date, context))
                   ],
                 ),
                 Row(
@@ -207,7 +246,7 @@ class LeaveApplicationPage extends StatelessWidget {
                           fontSize: 9.sp, color: Colors.grey.shade700),
                     ),
                     cmDatePicker(context, vmTeam.selectedLeaveTodate,
-                        (date) => vmTeam.datePickerFn9(date))
+                        (date) => vmTeam.datePickerFn9(date, context))
                   ],
                 ),
                 Row(
@@ -219,7 +258,7 @@ class LeaveApplicationPage extends StatelessWidget {
                           fontSize: 9.sp, color: Colors.grey.shade700),
                     ),
                     cmDatePicker(context, vmTeam.selectedLastDayofWork,
-                        (date) => vmTeam.datePickerFn10(date))
+                        (date) => vmTeam.datePickerFn10(date, context))
                   ],
                 ),
                 Row(
@@ -231,7 +270,7 @@ class LeaveApplicationPage extends StatelessWidget {
                           fontSize: 9.sp, color: Colors.grey.shade700),
                     ),
                     cmDatePicker(context, vmTeam.selectedReturnToWorkDate,
-                        (date) => vmTeam.datePickerFn11(date))
+                        (date) => vmTeam.datePickerFn11(date, context))
                   ],
                 ),
                 Text(
@@ -252,12 +291,15 @@ class LeaveApplicationPage extends StatelessWidget {
                     children: [
                       TableRow(
                         children: [
-                          TableCell(
-                            child: Align(
-                              alignment: Alignment.centerLeft,
-                              child: Text(
-                                'Normal Working Days',
-                                style: TextStyle(fontSize: 9.sp),
+                          Padding(
+                            padding: EdgeInsets.only(left: 5.w),
+                            child: TableCell(
+                              child: Align(
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                  'Normal Working Days',
+                                  style: TextStyle(fontSize: 9.sp),
+                                ),
                               ),
                             ),
                           ),
@@ -272,7 +314,9 @@ class LeaveApplicationPage extends StatelessWidget {
                               },
                               decoration: InputDecoration(
                                 hintText: 'Day',
-                                hintStyle: TextStyle(fontSize: 9.sp),
+                                hintStyle: TextStyle(
+                                    fontSize: 9.sp,
+                                    color: Colors.grey.shade400),
                                 border: InputBorder.none,
                                 contentPadding:
                                     const EdgeInsets.symmetric(horizontal: 8.0),
@@ -290,7 +334,9 @@ class LeaveApplicationPage extends StatelessWidget {
                               },
                               decoration: InputDecoration(
                                 hintText: 'Hrs',
-                                hintStyle: TextStyle(fontSize: 9.sp),
+                                hintStyle: TextStyle(
+                                    fontSize: 9.sp,
+                                    color: Colors.grey.shade400),
                                 border: InputBorder.none,
                                 contentPadding:
                                     const EdgeInsets.symmetric(horizontal: 8.0),
@@ -301,11 +347,14 @@ class LeaveApplicationPage extends StatelessWidget {
                       ),
                       TableRow(
                         children: [
-                          TableCell(
-                            child: Align(
-                                alignment: Alignment.centerLeft,
-                                child: Text('Public Holidays',
-                                    style: TextStyle(fontSize: 9.sp))),
+                          Padding(
+                            padding: EdgeInsets.only(left: 5.w),
+                            child: TableCell(
+                              child: Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: Text('Public Holidays',
+                                      style: TextStyle(fontSize: 9.sp))),
+                            ),
                           ),
                           TableCell(
                             child: Center(
@@ -318,7 +367,9 @@ class LeaveApplicationPage extends StatelessWidget {
                               },
                               decoration: InputDecoration(
                                 hintText: 'Day',
-                                hintStyle: TextStyle(fontSize: 9.sp),
+                                hintStyle: TextStyle(
+                                    fontSize: 9.sp,
+                                    color: Colors.grey.shade400),
                                 border: InputBorder.none,
                                 contentPadding:
                                     const EdgeInsets.symmetric(horizontal: 8.0),
@@ -336,7 +387,9 @@ class LeaveApplicationPage extends StatelessWidget {
                               },
                               decoration: InputDecoration(
                                 hintText: 'Hrs',
-                                hintStyle: TextStyle(fontSize: 9.sp),
+                                hintStyle: TextStyle(
+                                    fontSize: 9.sp,
+                                    color: Colors.grey.shade400),
                                 border: InputBorder.none,
                                 contentPadding:
                                     const EdgeInsets.symmetric(horizontal: 8.0),
@@ -347,29 +400,38 @@ class LeaveApplicationPage extends StatelessWidget {
                       ),
                       TableRow(
                         children: [
-                          TableCell(
-                            child: Align(
-                                alignment: Alignment.centerLeft,
-                                child: Text('Other',
-                                    style: TextStyle(fontSize: 9.sp))),
+                          Padding(
+                            padding: EdgeInsets.only(left: 5.w),
+                            child: TableCell(
+                              child: Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: Text('Other',
+                                      style: TextStyle(fontSize: 9.sp))),
+                            ),
                           ),
                           TableCell(
-                            child: Center(
-                                child: TextField(
-                              controller: vmTeam.dayController3,
-                              keyboardType: TextInputType.number,
-                              style: TextStyle(fontSize: 9.sp),
-                              onChanged: (value) {
-                                vmTeam.totalDayFn();
-                              },
-                              decoration: InputDecoration(
-                                hintText: 'Day',
-                                hintStyle: TextStyle(fontSize: 9.sp),
-                                border: InputBorder.none,
-                                contentPadding:
-                                    const EdgeInsets.symmetric(horizontal: 8.0),
-                              ),
-                            )),
+                            child: Column(
+                              children: [
+                                Center(
+                                    child: TextField(
+                                  controller: vmTeam.dayController3,
+                                  keyboardType: TextInputType.number,
+                                  style: TextStyle(fontSize: 9.sp),
+                                  onChanged: (value) {
+                                    vmTeam.totalDayFn();
+                                  },
+                                  decoration: InputDecoration(
+                                    hintText: 'Day',
+                                    hintStyle: TextStyle(
+                                        fontSize: 9.sp,
+                                        color: Colors.grey.shade400),
+                                    border: InputBorder.none,
+                                    contentPadding: const EdgeInsets.symmetric(
+                                        horizontal: 8.0),
+                                  ),
+                                )),
+                              ],
+                            ),
                           ),
                           TableCell(
                             child: Center(
@@ -382,7 +444,9 @@ class LeaveApplicationPage extends StatelessWidget {
                               },
                               decoration: InputDecoration(
                                 hintText: 'Hrs',
-                                hintStyle: TextStyle(fontSize: 9.sp),
+                                hintStyle: TextStyle(
+                                    fontSize: 9.sp,
+                                    color: Colors.grey.shade400),
                                 border: InputBorder.none,
                                 contentPadding:
                                     const EdgeInsets.symmetric(horizontal: 8.0),
@@ -393,13 +457,16 @@ class LeaveApplicationPage extends StatelessWidget {
                       ),
                       TableRow(
                         children: [
-                          TableCell(
-                            child: Align(
-                                alignment: Alignment.centerLeft,
-                                child: Text('Total',
-                                    style: TextStyle(
-                                        fontSize: 9.sp,
-                                        color: Appthemes.cPrimary))),
+                          Padding(
+                            padding: EdgeInsets.only(left: 5.w),
+                            child: TableCell(
+                              child: Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: Text('Total',
+                                      style: TextStyle(
+                                          fontSize: 9.sp,
+                                          color: Appthemes.cPrimary))),
+                            ),
                           ),
                           TableCell(
                             child: Center(
@@ -411,7 +478,9 @@ class LeaveApplicationPage extends StatelessWidget {
                               enabled: false,
                               decoration: InputDecoration(
                                 hintText: 'Day',
-                                hintStyle: TextStyle(fontSize: 9.sp),
+                                hintStyle: TextStyle(
+                                    fontSize: 9.sp,
+                                    color: Colors.grey.shade400),
                                 border: InputBorder.none,
                                 contentPadding:
                                     const EdgeInsets.symmetric(horizontal: 8.0),
@@ -428,7 +497,9 @@ class LeaveApplicationPage extends StatelessWidget {
                               enabled: false,
                               decoration: InputDecoration(
                                 hintText: 'Hrs',
-                                hintStyle: TextStyle(fontSize: 9.sp),
+                                hintStyle: TextStyle(
+                                    fontSize: 9.sp,
+                                    color: Colors.grey.shade400),
                                 border: InputBorder.none,
                                 contentPadding:
                                     const EdgeInsets.symmetric(horizontal: 8.0),
@@ -474,16 +545,11 @@ class LeaveApplicationPage extends StatelessWidget {
                 CmButton(
                   text: "Apply Leave",
                   loading: vmTeam.addLeaveResponse.loading,
+                  indicatorColor: Colors.white,
                   onPressed: () {
                     cmSubmitFn(context);
                   },
                   color: Appthemes.cPrimary,
-                ),
-                Text(
-                  "* Annual Leave must be applied for at least 2 weeks before leave is to be taken",
-                  style: TextStyle(
-                      fontSize: 8.w,
-                      color: const Color.fromARGB(255, 240, 94, 84)),
                 ),
                 sized0hx50
               ],

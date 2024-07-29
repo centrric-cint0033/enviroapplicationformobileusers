@@ -52,6 +52,16 @@ Row expandedRowShowsText(String firsValue, String secondValue) => Row(
         expandedShowText(secondValue)
       ],
     );
+Row expandedRowShowsTextWidget(String firsValue, Widget secondValue) => Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        expandedShowText(firsValue),
+        sized0wx05,
+        showBlackText(':'),
+        sized0wx05,
+        secondValue
+      ],
+    );
 
 Row expandedRowShowText1(String firsValue, String secondValue) => Row(
       children: [

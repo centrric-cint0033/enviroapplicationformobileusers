@@ -5,6 +5,7 @@ import 'package:enviro_mobile_application/view/08_team/team_edit_page.dart';
 import 'package:enviro_mobile_application/view/08_team/team_widgets/cm_textfield_widget.dart';
 import 'package:enviro_mobile_application/view/08_team/time_sheet_edit_page.dart';
 import 'package:enviro_mobile_application/view_model/03_vehicles/vehicle_view_model.dart';
+import 'package:enviro_mobile_application/widgets/cm_show_toast.dart';
 import 'package:enviro_mobile_application/widgets/cmbutton.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
@@ -61,8 +62,8 @@ class EditFuelExpensePage extends StatelessWidget {
                                                 .selectedFuelExpenseTime!)
                                             : "",
                                         style: TextStyle(
-                                            fontSize: 10.sp,
-                                            color: Colors.grey.shade700),
+                                          fontSize: 10.sp,
+                                        ),
                                       ),
                                       cmTimePicker(
                                           context,
@@ -130,23 +131,33 @@ class EditFuelExpensePage extends StatelessWidget {
   }
 
   cmSaveFn(BuildContext context) {
-    vmVehicle.editeFuelExpenseApi(
-      vehicleId: data.id ?? 0,
-      context: context,
-      data: VehicleModel(
-        vehicle: vmVehicle.selectedVehicleAddMaintenanceId != 0 &&
-                vmVehicle.selectedVehicleAddMaintenanceId != null
-            ? vmVehicle.selectedVehicleAddMaintenanceId
-            : vmVehicle.selectedVehicleAddMaintenance?.id,
-        date:
-            DateFormat('yyyy-MM-dd').format(vmVehicle.selectedFuelExpenseDate!),
-        time: formatTimeOfDay(vmVehicle.selectedFuelExpenseTime!),
-        truckRego: vmVehicle.regoCntrlr.text,
-        filledBy: vmVehicle.filledByCntrlr.text,
-        currentReadingBefore: vmVehicle.currentReadingCntrlr.text,
-        readingAfterFilling: vmVehicle.readingAfterCntrlr.text,
-        volumeUsedInLiter: vmVehicle.volumeCntrlr.text,
-      ),
-    );
+    if (vmVehicle.regoCntrlr.text.isNotEmpty &&
+        vmVehicle.selectedFuelExpenseDate != null &&
+        vmVehicle.selectedFuelExpenseTime != null &&
+        vmVehicle.filledByCntrlr.text.isNotEmpty &&
+        vmVehicle.currentReadingCntrlr.text.isNotEmpty &&
+        vmVehicle.readingAfterCntrlr.text.isNotEmpty &&
+        vmVehicle.volumeCntrlr.text.isNotEmpty) {
+      vmVehicle.editeFuelExpenseApi(
+        vehicleId: data.id ?? 0,
+        context: context,
+        data: VehicleModel(
+          vehicle: vmVehicle.selectedVehicleAddMaintenanceId != 0 &&
+                  vmVehicle.selectedVehicleAddMaintenanceId != null
+              ? vmVehicle.selectedVehicleAddMaintenanceId
+              : vmVehicle.selectedVehicleAddMaintenance?.id,
+          date: DateFormat('yyyy-MM-dd')
+              .format(vmVehicle.selectedFuelExpenseDate!),
+          time: formatTimeOfDay(vmVehicle.selectedFuelExpenseTime!),
+          truckRego: vmVehicle.regoCntrlr.text,
+          filledBy: vmVehicle.filledByCntrlr.text,
+          currentReadingBefore: vmVehicle.currentReadingCntrlr.text,
+          readingAfterFilling: vmVehicle.readingAfterCntrlr.text,
+          volumeUsedInLiter: vmVehicle.volumeCntrlr.text,
+        ),
+      );
+    } else {
+      showToast(context, msg: "Please fill all the fields", color: Colors.red);
+    }
   }
 }

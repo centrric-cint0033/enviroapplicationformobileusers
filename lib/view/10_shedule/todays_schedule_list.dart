@@ -16,6 +16,8 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 
+int indexx = 0;
+
 class TodaysScheduleList extends StatelessWidget {
   const TodaysScheduleList({super.key});
 
@@ -254,6 +256,12 @@ class TodaysScheduleList extends StatelessWidget {
                                                                 ? "YES,UPDATE TIME"
                                                                 : "",
                                 submitText2: "SKIP FOR NOW");
+                          } else {
+                            vmSchedule.clearFn();
+                            context.router.push(SheduledetailRoute(
+                                id: res?.id ?? 0,
+                                i: i,
+                                driversIndex: vmSchedule.driversIndex));
                           }
                         },
                         child: Row(
@@ -350,72 +358,97 @@ class TodaysScheduleList extends StatelessWidget {
           ),
         ),
         sized0hx05,
-        Expanded(
-          child: ListView.builder(
-            itemCount: schedule.drivers?.length,
-            scrollDirection: Axis.horizontal,
-            itemBuilder: (context, index) {
-              vmSchedule.driversIndex = index;
-              return Padding(
-                padding: EdgeInsets.only(left: 4.h),
-                child: Container(
-                  height: 40.w,
-                  width: MediaQuery.of(context).size.width / 3,
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(5.h)),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Row(children: [
-                        SizedBox(
-                          height: 20.w,
-                          width: 20.w,
-                          child: DecoratedBox(
-                            decoration: BoxDecoration(
-                                color: Colors.grey.shade700,
-                                shape: BoxShape.circle),
-                            child: dpImage("${schedule.drivers?[index].dp}"),
-                          ),
-                        ),
-                        SizedBox(
-                          width: 5.h,
-                        ),
-                        Expanded(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                "${schedule.drivers?[index].name}",
-                                style: TextStyle(fontSize: 8.h),
-                              ),
-                              Text(
-                                "${schedule.drivers?[index].registration}",
-                                style: TextStyle(fontSize: 8.h),
-                              )
-                            ],
-                          ),
-                        )
-                      ]),
-                      schedule.drivers?[index].type == "Primary Driver"
-                          ? Container(
+        Observer(builder: (context) {
+          List<Driver>? drivers = schedule.drivers;
+
+          Driver? primaryDriver;
+          List<Driver> otherDrivers = [];
+
+          // Separate primary driver from other drivers
+          if (drivers != null) {
+            for (var index = 0; index < drivers.length; index++) {
+              var driver = drivers[index];
+              if (driver.type == "Primary Driver") {
+                primaryDriver = driver;
+              } else {
+                otherDrivers.add(driver);
+              }
+            }
+            if (primaryDriver != null) {
+              drivers = [primaryDriver, ...otherDrivers];
+            }
+          }
+
+          return Expanded(
+            child: ListView.builder(
+              itemCount: drivers?.length ?? 0,
+              scrollDirection: Axis.horizontal,
+              itemBuilder: (context, index) {
+                final driver = drivers?[index];
+                if (driver?.type == "Primary Driver") {
+                  vmSchedule.driversIndex = index;
+                }
+                return Padding(
+                  padding: EdgeInsets.only(left: 4.h),
+                  child: Container(
+                    height: 40.w,
+                    width: MediaQuery.of(context).size.width / 3,
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(5.h)),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Row(children: [
+                          SizedBox(
+                            height: 20.w,
+                            width: 20.w,
+                            child: DecoratedBox(
                               decoration: BoxDecoration(
-                                  color: Colors.grey.shade300,
-                                  borderRadius: BorderRadius.circular(12.h)),
-                              child: Text(
-                                "     Primary     ",
-                                style: TextStyle(fontSize: 8.h),
-                              ),
-                            )
-                          : const SizedBox.shrink()
-                    ],
+                                  color: Colors.grey.shade700,
+                                  shape: BoxShape.circle),
+                              child: dpImage("${driver?.dp}"),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 5.h,
+                          ),
+                          Expanded(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "${driver?.name}",
+                                  style: TextStyle(fontSize: 8.h),
+                                ),
+                                Text(
+                                  "${driver?.registration}",
+                                  style: TextStyle(fontSize: 8.h),
+                                )
+                              ],
+                            ),
+                          )
+                        ]),
+                        driver?.type == "Primary Driver"
+                            ? Container(
+                                decoration: BoxDecoration(
+                                    color: Colors.grey.shade300,
+                                    borderRadius: BorderRadius.circular(12.h)),
+                                child: Text(
+                                  "     Primary     ",
+                                  style: TextStyle(fontSize: 8.h),
+                                ),
+                              )
+                            : const SizedBox.shrink()
+                      ],
+                    ),
                   ),
-                ),
-              );
-            },
-          ),
-        ),
+                );
+              },
+            ),
+          );
+        }),
         sized0hx05,
       ]),
     );

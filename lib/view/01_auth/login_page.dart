@@ -2,12 +2,14 @@ import 'package:auto_route/auto_route.dart';
 import 'package:enviro_mobile_application/Routepage/routespage.dart';
 
 import 'package:enviro_mobile_application/utilis/Appthemes.dart';
+import 'package:enviro_mobile_application/utilis/constant.dart';
 import 'package:enviro_mobile_application/view_model/01_auth/auth_view_model.dart';
 import 'package:enviro_mobile_application/view_model/10_profile/profile_view_model.dart';
 import 'package:enviro_mobile_application/widgets/cmbutton.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../widgets/cmcustomformfield.dart';
 import '../../widgets/cmimage.dart';
 import '../../utilis/imagepath.dart';
@@ -44,9 +46,9 @@ class LoginPage extends StatelessWidget {
                 //       fontWeight: FontWeight.w900,
                 //       color: Appthemes.bluecolor),
                 // ),
-                const SizedBox(height: 39),
+
                 SizedBox(
-                  height: 79,
+                  height: 79.w,
                   child: Cmformfield(
                     controller: vmAuth.userNameController,
                     validator: (value) {
@@ -63,9 +65,9 @@ class LoginPage extends StatelessWidget {
                     prefixIcon: const Icon(Icons.email),
                   ),
                 ),
-                const SizedBox(height: 24),
+
                 SizedBox(
-                  height: 79,
+                  height: 79.w,
                   child: Cmformfield(
                     controller: vmAuth.passwordController,
                     validator: (value) {
@@ -81,12 +83,12 @@ class LoginPage extends StatelessWidget {
                     hinttext: "Password or phonenumber",
                   ),
                 ),
-                const SizedBox(height: 64),
+                sized0hx20,
                 Observer(builder: (_) {
                   return CmButton(
+                    width: MediaQuery.of(context).size.width - 70.w,
                     loading: vmAuth.loginResponse.loading,
-                    buttonTextStyle:
-                        const TextStyle(color: Appthemes.textColor),
+                    buttonTextStyle: const TextStyle(color: Colors.white),
                     indicatorColor: Colors.white,
                     onPressed: () {
                       ontaplogin(context);
@@ -94,7 +96,7 @@ class LoginPage extends StatelessWidget {
                     text: "Login",
                   );
                 }),
-                const SizedBox(height: 43),
+                sized0hx30,
                 const Text(
                   "If you experience any Authentication isssues kindly contact the manager or higher authorities, They will resolve your issues...",
                   style: TextStyle(

@@ -41,42 +41,45 @@ Drawer cmnDrawer(BuildContext context) {
                     );
                   }),
                   sized0wx15,
-                  Observer(builder: (_) {
-                    return Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Text(
-                          vmProfile.profilepageResponse.data?.username ?? '',
-                          style: TextStyle(
-                              fontSize: 12.sp, overflow: TextOverflow.ellipsis),
-                        ),
-                        sized0hx03,
-                        SizedBox(
-                          height: 26.w,
-                          child: ElevatedButton(
-                              onPressed: () {
-                                profileeditfunction(context);
-                              },
-                              style: ButtonStyle(
-                                side: MaterialStateProperty.all(
-                                    const BorderSide(color: Colors.blue)),
-                              ),
-                              child: Observer(builder: (_) {
-                                return Text(
-                                  vmProfile.profilepageResponse.data
-                                          ?.permissionType ??
-                                      '',
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 10.sp,
-                                      fontWeight: FontWeight.w500),
-                                );
-                              })),
-                        ),
-                      ],
-                    );
-                  }),
+                  Expanded(
+                    child: Observer(builder: (_) {
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Text(
+                            vmProfile.profilepageResponse.data?.username ?? '',
+                            style: TextStyle(
+                                fontSize: 12.sp,
+                                overflow: TextOverflow.ellipsis),
+                          ),
+                          sized0hx03,
+                          SizedBox(
+                            height: 26.w,
+                            child: ElevatedButton(
+                                onPressed: () {
+                                  profileeditfunction(context);
+                                },
+                                style: ButtonStyle(
+                                  side: MaterialStateProperty.all(
+                                      const BorderSide(color: Colors.blue)),
+                                ),
+                                child: Observer(builder: (_) {
+                                  return Text(
+                                    vmProfile.profilepageResponse.data
+                                            ?.permissionType ??
+                                        '',
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 9.sp,
+                                        fontWeight: FontWeight.w500),
+                                  );
+                                })),
+                          ),
+                        ],
+                      );
+                    }),
+                  ),
                 ],
               ),
               sized0hx50,

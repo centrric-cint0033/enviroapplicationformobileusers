@@ -234,9 +234,11 @@ mixin _$JobCardRespModel {
   @JsonKey(name: "customer_contact_mob")
   dynamic get customerContactMob => throw _privateConstructorUsedError;
   @JsonKey(name: "additional_phone_number")
-  dynamic get additionalPhoneNumber => throw _privateConstructorUsedError;
+  Map<String, String>? get additionalPhoneNumber =>
+      throw _privateConstructorUsedError;
   @JsonKey(name: "additional_email")
-  dynamic get additionalEmail => throw _privateConstructorUsedError;
+  Map<String, String>? get additionalEmail =>
+      throw _privateConstructorUsedError;
   @JsonKey(name: "add_info_button")
   dynamic get addInfoButton => throw _privateConstructorUsedError;
   @JsonKey(name: "destruction_certificate_unread")
@@ -374,8 +376,9 @@ abstract class $JobCardRespModelCopyWith<$Res> {
       @JsonKey(name: "customer_contact_email") dynamic customerContactEmail,
       @JsonKey(name: "customer_contact_phone") dynamic customerContactPhone,
       @JsonKey(name: "customer_contact_mob") dynamic customerContactMob,
-      @JsonKey(name: "additional_phone_number") dynamic additionalPhoneNumber,
-      @JsonKey(name: "additional_email") dynamic additionalEmail,
+      @JsonKey(name: "additional_phone_number")
+      Map<String, String>? additionalPhoneNumber,
+      @JsonKey(name: "additional_email") Map<String, String>? additionalEmail,
       @JsonKey(name: "add_info_button") dynamic addInfoButton,
       @JsonKey(name: "destruction_certificate_unread")
       bool? destructionCertificateUnread,
@@ -932,11 +935,11 @@ class _$JobCardRespModelCopyWithImpl<$Res, $Val extends JobCardRespModel>
       additionalPhoneNumber: freezed == additionalPhoneNumber
           ? _value.additionalPhoneNumber
           : additionalPhoneNumber // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as Map<String, String>?,
       additionalEmail: freezed == additionalEmail
           ? _value.additionalEmail
           : additionalEmail // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as Map<String, String>?,
       addInfoButton: freezed == addInfoButton
           ? _value.addInfoButton
           : addInfoButton // ignore: cast_nullable_to_non_nullable
@@ -1105,8 +1108,9 @@ abstract class _$$JobCardRespModelImplCopyWith<$Res>
       @JsonKey(name: "customer_contact_email") dynamic customerContactEmail,
       @JsonKey(name: "customer_contact_phone") dynamic customerContactPhone,
       @JsonKey(name: "customer_contact_mob") dynamic customerContactMob,
-      @JsonKey(name: "additional_phone_number") dynamic additionalPhoneNumber,
-      @JsonKey(name: "additional_email") dynamic additionalEmail,
+      @JsonKey(name: "additional_phone_number")
+      Map<String, String>? additionalPhoneNumber,
+      @JsonKey(name: "additional_email") Map<String, String>? additionalEmail,
       @JsonKey(name: "add_info_button") dynamic addInfoButton,
       @JsonKey(name: "destruction_certificate_unread")
       bool? destructionCertificateUnread,
@@ -1661,13 +1665,13 @@ class __$$JobCardRespModelImplCopyWithImpl<$Res>
           : customerContactMob // ignore: cast_nullable_to_non_nullable
               as dynamic,
       additionalPhoneNumber: freezed == additionalPhoneNumber
-          ? _value.additionalPhoneNumber
+          ? _value._additionalPhoneNumber
           : additionalPhoneNumber // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as Map<String, String>?,
       additionalEmail: freezed == additionalEmail
-          ? _value.additionalEmail
+          ? _value._additionalEmail
           : additionalEmail // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as Map<String, String>?,
       addInfoButton: freezed == addInfoButton
           ? _value.addInfoButton
           : addInfoButton // ignore: cast_nullable_to_non_nullable
@@ -1804,15 +1808,19 @@ class _$JobCardRespModelImpl implements _JobCardRespModel {
       @JsonKey(name: "customer_contact_email") this.customerContactEmail,
       @JsonKey(name: "customer_contact_phone") this.customerContactPhone,
       @JsonKey(name: "customer_contact_mob") this.customerContactMob,
-      @JsonKey(name: "additional_phone_number") this.additionalPhoneNumber,
-      @JsonKey(name: "additional_email") this.additionalEmail,
+      @JsonKey(name: "additional_phone_number")
+      final Map<String, String>? additionalPhoneNumber,
+      @JsonKey(name: "additional_email")
+      final Map<String, String>? additionalEmail,
       @JsonKey(name: "add_info_button") this.addInfoButton,
       @JsonKey(name: "destruction_certificate_unread")
       this.destructionCertificateUnread,
       @JsonKey(name: "quote") this.quote,
       @JsonKey(name: "client") this.client})
       : _files = files,
-        _serviceList = serviceList;
+        _serviceList = serviceList,
+        _additionalPhoneNumber = additionalPhoneNumber,
+        _additionalEmail = additionalEmail;
 
   factory _$JobCardRespModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$JobCardRespModelImplFromJson(json);
@@ -2145,12 +2153,29 @@ class _$JobCardRespModelImpl implements _JobCardRespModel {
   @override
   @JsonKey(name: "customer_contact_mob")
   final dynamic customerContactMob;
+  final Map<String, String>? _additionalPhoneNumber;
   @override
   @JsonKey(name: "additional_phone_number")
-  final dynamic additionalPhoneNumber;
+  Map<String, String>? get additionalPhoneNumber {
+    final value = _additionalPhoneNumber;
+    if (value == null) return null;
+    if (_additionalPhoneNumber is EqualUnmodifiableMapView)
+      return _additionalPhoneNumber;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(value);
+  }
+
+  final Map<String, String>? _additionalEmail;
   @override
   @JsonKey(name: "additional_email")
-  final dynamic additionalEmail;
+  Map<String, String>? get additionalEmail {
+    final value = _additionalEmail;
+    if (value == null) return null;
+    if (_additionalEmail is EqualUnmodifiableMapView) return _additionalEmail;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(value);
+  }
+
   @override
   @JsonKey(name: "add_info_button")
   final dynamic addInfoButton;
@@ -2320,8 +2345,8 @@ class _$JobCardRespModelImpl implements _JobCardRespModel {
             const DeepCollectionEquality().equals(other.customerContactEmail, customerContactEmail) &&
             const DeepCollectionEquality().equals(other.customerContactPhone, customerContactPhone) &&
             const DeepCollectionEquality().equals(other.customerContactMob, customerContactMob) &&
-            const DeepCollectionEquality().equals(other.additionalPhoneNumber, additionalPhoneNumber) &&
-            const DeepCollectionEquality().equals(other.additionalEmail, additionalEmail) &&
+            const DeepCollectionEquality().equals(other._additionalPhoneNumber, _additionalPhoneNumber) &&
+            const DeepCollectionEquality().equals(other._additionalEmail, _additionalEmail) &&
             const DeepCollectionEquality().equals(other.addInfoButton, addInfoButton) &&
             (identical(other.destructionCertificateUnread, destructionCertificateUnread) || other.destructionCertificateUnread == destructionCertificateUnread) &&
             (identical(other.quote, quote) || other.quote == quote) &&
@@ -2436,8 +2461,8 @@ class _$JobCardRespModelImpl implements _JobCardRespModel {
         const DeepCollectionEquality().hash(customerContactEmail),
         const DeepCollectionEquality().hash(customerContactPhone),
         const DeepCollectionEquality().hash(customerContactMob),
-        const DeepCollectionEquality().hash(additionalPhoneNumber),
-        const DeepCollectionEquality().hash(additionalEmail),
+        const DeepCollectionEquality().hash(_additionalPhoneNumber),
+        const DeepCollectionEquality().hash(_additionalEmail),
         const DeepCollectionEquality().hash(addInfoButton),
         destructionCertificateUnread,
         quote,
@@ -2587,8 +2612,9 @@ abstract class _JobCardRespModel implements JobCardRespModel {
       final dynamic customerContactPhone,
       @JsonKey(name: "customer_contact_mob") final dynamic customerContactMob,
       @JsonKey(name: "additional_phone_number")
-      final dynamic additionalPhoneNumber,
-      @JsonKey(name: "additional_email") final dynamic additionalEmail,
+      final Map<String, String>? additionalPhoneNumber,
+      @JsonKey(name: "additional_email")
+      final Map<String, String>? additionalEmail,
       @JsonKey(name: "add_info_button") final dynamic addInfoButton,
       @JsonKey(name: "destruction_certificate_unread")
       final bool? destructionCertificateUnread,
@@ -2912,10 +2938,10 @@ abstract class _JobCardRespModel implements JobCardRespModel {
   dynamic get customerContactMob;
   @override
   @JsonKey(name: "additional_phone_number")
-  dynamic get additionalPhoneNumber;
+  Map<String, String>? get additionalPhoneNumber;
   @override
   @JsonKey(name: "additional_email")
-  dynamic get additionalEmail;
+  Map<String, String>? get additionalEmail;
   @override
   @JsonKey(name: "add_info_button")
   dynamic get addInfoButton;

@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 import 'package:auto_route/auto_route.dart';
 import 'package:dartz/dartz.dart';
 import 'package:enviro_mobile_application/api_response/api_response.dart';
@@ -116,7 +117,7 @@ abstract class VehicleViewModelBase with Store {
   DateTime? selectedServiceDateAddMaintenance;
 
   @observable
-  bool? showSubmitBn;
+  bool showSubmitBn = false;
 
   @observable
   ObservableList<String>? pickedFileList = ObservableList<String>();
@@ -1231,21 +1232,22 @@ abstract class VehicleViewModelBase with Store {
 
   @action
   showSubmitButtonFn() {
-    if (descriptionCntrlr.text != "" &&
-        serviceProvidedCntrlr.text != "" &&
+    if (descriptionCntrlr.text.isNotEmpty &&
+        serviceProvidedCntrlr.text.isNotEmpty &&
         selectedInvoiceDateAddMaintenance != null &&
         selectedServiceDateAddMaintenance != null &&
-        ometerCntrlr.text != "" &&
-        invoiceNoCntrlr.text != "" &&
-        hoursCntrlr.text != "" &&
-        labourCostCntrlr.text != "" &&
-        sparePartsCntrlr.text != "" &&
-        gstCntrlr.text != "" &&
-        totalCostCntrlr.text != "") {
+        ometerCntrlr.text.isNotEmpty &&
+        invoiceNoCntrlr.text.isNotEmpty &&
+        hoursCntrlr.text.isNotEmpty &&
+        labourCostCntrlr.text.isNotEmpty &&
+        sparePartsCntrlr.text.isNotEmpty &&
+        gstCntrlr.text.isNotEmpty &&
+        totalCostCntrlr.text.isNotEmpty) {
       showSubmitBn = true;
     } else {
       showSubmitBn = false;
     }
+    log(showSubmitBn.toString());
   }
 
   @action

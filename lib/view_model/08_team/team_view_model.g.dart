@@ -768,6 +768,38 @@ mixin _$TeamViewModel on TeamViewModelBase, Store {
     });
   }
 
+  late final _$showReasonAtom =
+      Atom(name: 'TeamViewModelBase.showReason', context: context);
+
+  @override
+  bool get showReason {
+    _$showReasonAtom.reportRead();
+    return super.showReason;
+  }
+
+  @override
+  set showReason(bool value) {
+    _$showReasonAtom.reportWrite(value, super.showReason, () {
+      super.showReason = value;
+    });
+  }
+
+  late final _$showAddFileAtom =
+      Atom(name: 'TeamViewModelBase.showAddFile', context: context);
+
+  @override
+  bool get showAddFile {
+    _$showAddFileAtom.reportRead();
+    return super.showAddFile;
+  }
+
+  @override
+  set showAddFile(bool value) {
+    _$showAddFileAtom.reportWrite(value, super.showAddFile, () {
+      super.showAddFile = value;
+    });
+  }
+
   late final _$selectedCheckboxIndexAtom =
       Atom(name: 'TeamViewModelBase.selectedCheckboxIndex', context: context);
 
@@ -1465,44 +1497,44 @@ mixin _$TeamViewModel on TeamViewModelBase, Store {
   }
 
   @override
-  dynamic datePickerFn8(dynamic date) {
+  dynamic datePickerFn8(dynamic date, BuildContext context) {
     final _$actionInfo = _$TeamViewModelBaseActionController.startAction(
         name: 'TeamViewModelBase.datePickerFn8');
     try {
-      return super.datePickerFn8(date);
+      return super.datePickerFn8(date, context);
     } finally {
       _$TeamViewModelBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
-  dynamic datePickerFn9(dynamic date) {
+  dynamic datePickerFn9(dynamic date, BuildContext context) {
     final _$actionInfo = _$TeamViewModelBaseActionController.startAction(
         name: 'TeamViewModelBase.datePickerFn9');
     try {
-      return super.datePickerFn9(date);
+      return super.datePickerFn9(date, context);
     } finally {
       _$TeamViewModelBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
-  dynamic datePickerFn10(dynamic date) {
+  dynamic datePickerFn10(dynamic date, BuildContext context) {
     final _$actionInfo = _$TeamViewModelBaseActionController.startAction(
         name: 'TeamViewModelBase.datePickerFn10');
     try {
-      return super.datePickerFn10(date);
+      return super.datePickerFn10(date, context);
     } finally {
       _$TeamViewModelBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
-  dynamic datePickerFn11(dynamic date) {
+  dynamic datePickerFn11(dynamic date, BuildContext context) {
     final _$actionInfo = _$TeamViewModelBaseActionController.startAction(
         name: 'TeamViewModelBase.datePickerFn11');
     try {
-      return super.datePickerFn11(date);
+      return super.datePickerFn11(date, context);
     } finally {
       _$TeamViewModelBaseActionController.endAction(_$actionInfo);
     }
@@ -1667,6 +1699,8 @@ loadinIndexFile: ${loadinIndexFile},
 selectedMember: ${selectedMember},
 searchType: ${searchType},
 folderNames: ${folderNames},
+showReason: ${showReason},
+showAddFile: ${showAddFile},
 selectedCheckboxIndex: ${selectedCheckboxIndex},
 selectedLeaveFromdate: ${selectedLeaveFromdate},
 selectedLeaveTodate: ${selectedLeaveTodate},

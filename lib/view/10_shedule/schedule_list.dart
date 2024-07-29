@@ -8,6 +8,8 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 
+import '../../model/12_shedulecard/shedule_card_resp_model.dart';
+
 class ScheduleList extends StatelessWidget {
   const ScheduleList({
     Key? key,
@@ -28,10 +30,11 @@ class ScheduleList extends StatelessWidget {
           return GestureDetector(
             onTap: () {
               vmSchedule.clearFn();
+
               context.router.push(SheduledetailRoute(
                   id: vmSchedule.shedulecardResponse.data?[i].id ?? 0,
                   i: i,
-                  driversIndex: vmSchedule.driversIndex));
+                  driversIndex: 0));
             },
             child: Container(
               decoration: BoxDecoration(
@@ -148,10 +151,34 @@ class ScheduleList extends StatelessWidget {
                             ),
                             ListView.builder(
                               shrinkWrap: true,
-                              itemCount: vmSchedule
-                                  .shedulecardResponse.data?[i].drivers?.length,
+                              itemCount: vmSchedule.shedulecardResponse.data?[i]
+                                      .drivers?.length ??
+                                  0,
                               itemBuilder: (context, index) {
-                                vmSchedule.driversIndex = index;
+                                List<Driver>? drivers = vmSchedule
+                                    .shedulecardResponse.data?[i].drivers;
+
+                                if (drivers != null) {
+                                  Driver? primaryDriver;
+                                  List<Driver> otherDrivers = [];
+
+                                  for (var driver in drivers) {
+                                    if (driver.type == "Primary Driver") {
+                                      primaryDriver = driver;
+                                    } else {
+                                      otherDrivers.add(driver);
+                                    }
+                                  }
+
+                                  if (primaryDriver != null) {
+                                    drivers = [primaryDriver, ...otherDrivers];
+                                  }
+                                }
+
+                                final driver = drivers?[index];
+                                if (driver?.type == "Primary Driver") {
+                                  vmSchedule.driversIndex = index;
+                                }
                                 return Column(
                                   children: [
                                     const Divider(
@@ -164,12 +191,7 @@ class ScheduleList extends StatelessWidget {
                                       children: [
                                         Observer(builder: (_) {
                                           return Text(
-                                            vmSchedule
-                                                    .shedulecardResponse
-                                                    .data?[i]
-                                                    .drivers?[index]
-                                                    .name ??
-                                                '',
+                                            driver?.name ?? '',
                                             style: TextStyle(
                                                 color: Colors.white,
                                                 fontSize: 9.sp),
@@ -179,12 +201,7 @@ class ScheduleList extends StatelessWidget {
                                           color: Colors.black,
                                         ),
                                         Text(
-                                          vmSchedule
-                                                  .shedulecardResponse
-                                                  .data?[i]
-                                                  .drivers?[index]
-                                                  .registration ??
-                                              '',
+                                          driver?.registration ?? '',
                                           style: TextStyle(
                                               color: Colors.white,
                                               fontSize: 9.sp),
@@ -230,7 +247,7 @@ String jobStatus(String status) {
       return "Completed";
     case "arrived_at_waste_depot":
       return "Arrived At Waste Depot";
-    case "Departed from Waste Depot":
+    case "departed_waste_depot":
       return "Departed from Waste Depot";
     case "arrived_at_enviro_facility":
       return "Arrived At Enviro Facility";

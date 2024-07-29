@@ -40,6 +40,7 @@ class ScheduleMainPage extends StatelessWidget {
                 );
                 context.router.pushNamed(RouteNames.rcalenderpage);
               }, Colors.black, FontWeight.bold),
+              sized0hx05,
               Observer(
                 builder: (_) {
                   return WWResponseHandler(

@@ -131,8 +131,9 @@ class JobCardRespModel with _$JobCardRespModel {
     @JsonKey(name: "customer_contact_email") dynamic customerContactEmail,
     @JsonKey(name: "customer_contact_phone") dynamic customerContactPhone,
     @JsonKey(name: "customer_contact_mob") dynamic customerContactMob,
-    @JsonKey(name: "additional_phone_number") dynamic additionalPhoneNumber,
-    @JsonKey(name: "additional_email") dynamic additionalEmail,
+    @JsonKey(name: "additional_phone_number")
+    Map<String, String>? additionalPhoneNumber,
+    @JsonKey(name: "additional_email") Map<String, String>? additionalEmail,
     @JsonKey(name: "add_info_button") dynamic addInfoButton,
     @JsonKey(name: "destruction_certificate_unread")
     bool? destructionCertificateUnread,
@@ -204,3 +205,14 @@ class WeighBridge with _$WeighBridge {
   factory WeighBridge.fromJson(Map<String, dynamic> json) =>
       _$WeighBridgeFromJson(json);
 }
+
+// @freezed
+// class AdditionalEmail with _$AdditionalEmail {
+//   const factory AdditionalEmail({
+//     @JsonKey(name: "0") int? id,
+//     @JsonKey(name: "1") String? name,
+//     @JsonKey(name: "2") String? file,
+//   }) = _AdditionalEmail;
+//   factory AdditionalEmail.fromJson(Map<String, dynamic> json) =>
+//       _$AdditionalEmailFromJson(json);
+// }

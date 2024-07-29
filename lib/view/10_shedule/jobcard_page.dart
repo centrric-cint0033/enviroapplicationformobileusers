@@ -1,4 +1,5 @@
 import 'package:enviro_mobile_application/model/07_Jobcard/job_card_model.dart';
+import 'package:enviro_mobile_application/utilis/Appthemes.dart';
 import 'package:enviro_mobile_application/utilis/constant.dart';
 import 'package:enviro_mobile_application/widgets/cm_title.dart';
 import 'package:flutter/material.dart';
@@ -23,6 +24,14 @@ class JobCardPage extends StatelessWidget {
       ),
       body: Observer(
         builder: (context) {
+          List<String> additionalPhoneNo = vmSchedule
+                  .jobcardResponse.data?.additionalPhoneNumber?.values
+                  .toList() ??
+              [];
+          List<String> additionalEmail = vmSchedule
+                  .jobcardResponse.data?.additionalEmail?.values
+                  .toList() ??
+              [];
           return vmSchedule.jobcardResponse.loading
               ? const Center(child: CircularProgressIndicator())
               : SingleChildScrollView(
@@ -81,19 +90,130 @@ class JobCardPage extends StatelessWidget {
                                         ?.siteContactEmail ??
                                     ''),
                             sized0hx10,
-                            expandedRowShowsText("Price",
-                                vmSchedule.jobcardResponse.data?.price ?? ''),
+                            expandedRowShowsText(
+                                "Company Name",
+                                vmSchedule.jobcardResponse.data?.customerName ??
+                                    ''),
                             sized0hx10,
                             expandedRowShowsText(
-                                "Account Status",
+                                "Company Address",
                                 vmSchedule
-                                        .jobcardResponse.data?.accountStatus ??
+                                        .jobcardResponse.data?.companyAddress ??
                                     ''),
                             sized0hx10,
                             expandedRowShowsText(
-                                "Frequency Week",
-                                vmSchedule.jobcardResponse.data?.frequency ??
+                                "Company Contact Phone",
+                                vmSchedule.jobcardResponse.data
+                                        ?.customerContactPhone ??
                                     ''),
+                            sized0hx10,
+                            expandedRowShowsText(
+                                "Company Contact Mob",
+                                vmSchedule.jobcardResponse.data
+                                        ?.customerContactMob ??
+                                    ''),
+                            sized0hx10,
+                            expandedRowShowsText(
+                                "Company Contact Email",
+                                vmSchedule.jobcardResponse.data
+                                        ?.customerContactEmail ??
+                                    ''),
+                            sized0hx10,
+                            expandedRowShowsTextWidget(
+                                "Additional Email",
+                                additionalEmail.isNotEmpty
+                                    ? Expanded(
+                                        flex: 3,
+                                        child: ListView.builder(
+                                          shrinkWrap: true,
+                                          itemCount: additionalEmail.length,
+                                          itemBuilder: (context, index) {
+                                            return Padding(
+                                              padding:
+                                                  EdgeInsets.only(bottom: 8.w),
+                                              child: Container(
+                                                constraints: BoxConstraints(
+                                                  minHeight: 20
+                                                      .w, // Set minimum height
+                                                ),
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          12.w),
+                                                  color: Appthemes.cPrimary,
+                                                ),
+                                                child: SingleChildScrollView(
+                                                  scrollDirection:
+                                                      Axis.horizontal,
+                                                  child: Row(
+                                                    mainAxisSize:
+                                                        MainAxisSize.min,
+                                                    children: [
+                                                      Padding(
+                                                        padding: EdgeInsets
+                                                            .symmetric(
+                                                                horizontal:
+                                                                    8.w),
+                                                        child: Flexible(
+                                                          child: Text(
+                                                            additionalEmail[
+                                                                index],
+                                                            style: TextStyle(
+                                                              fontSize: 10.sp,
+                                                              color:
+                                                                  Colors.white,
+                                                            ),
+                                                            softWrap: false,
+                                                            overflow:
+                                                                TextOverflow
+                                                                    .visible,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ),
+                                            );
+                                          },
+                                        ),
+                                      )
+                                    : SizedBox()),
+                            sized0hx10,
+                            expandedRowShowsTextWidget(
+                                "Additional Contact Phone",
+                                additionalPhoneNo.isNotEmpty
+                                    ? Expanded(
+                                        flex: 3,
+                                        child: ListView.builder(
+                                          shrinkWrap: true,
+                                          itemCount: additionalPhoneNo.length,
+                                          itemBuilder: (context, index) {
+                                            return Padding(
+                                              padding:
+                                                  EdgeInsets.only(bottom: 8.w),
+                                              child: Container(
+                                                height: 20.w,
+                                                decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            12.w),
+                                                    color: Appthemes.cPrimary),
+                                                child: Center(
+                                                    child: Expanded(
+                                                  child: Text(
+                                                    additionalPhoneNo[index],
+                                                    style: TextStyle(
+                                                        fontSize: 10.sp,
+                                                        color: Colors.white),
+                                                  ),
+                                                )),
+                                              ),
+                                            );
+                                          },
+                                        ),
+                                      )
+                                    : SizedBox()),
                             sized0hx10,
                             expandedRowShowsText(
                                 "Induction Type",
@@ -101,17 +221,11 @@ class JobCardPage extends StatelessWidget {
                                         ?.typeOfInduction ??
                                     ''),
                             sized0hx10,
-                            Align(
-                              alignment: Alignment.centerLeft,
-                              child: cmTitle(
-                                  vmSchedule.jobcardResponse.data
-                                              ?.reoccurring ==
-                                          false
-                                      ? "This is NOT a reoccuring Quote"
-                                      : "This is a reoccuring Quote",
-                                  width: 200.w,
-                                  blackText: true),
-                            ),
+                            expandedRowShowsText(
+                                "Industry Type",
+                                vmSchedule.jobcardResponse.data
+                                        ?.industryTypeInfo?.industryName ??
+                                    ''),
                             sized0hx10,
                             expandedRowShowsText(
                                 "Sales Person",
@@ -123,6 +237,26 @@ class JobCardPage extends StatelessWidget {
                               "Date",
                               DateFormat('dd-MM-yyyy').format(DateTime.parse(
                                   vmSchedule.jobcardResponse.data?.date ?? '')),
+                            ),
+                            sized0hx10,
+                            expandedRowShowsText(
+                              "Is this an Outsourced Job",
+                              boolToString(vmSchedule
+                                      .jobcardResponse.data?.outsourcedJob
+                                      .toString() ??
+                                  ''),
+                            ),
+                            sized0hx10,
+                            Align(
+                              alignment: Alignment.centerLeft,
+                              child: cmTitle(
+                                  vmSchedule.jobcardResponse.data
+                                              ?.reoccurring ==
+                                          false
+                                      ? "This is NOT a reoccuring Quote"
+                                      : "This is a reoccuring Quote",
+                                  width: 200.w,
+                                  blackText: true),
                             ),
                             sized0hx10,
                           ],
@@ -184,35 +318,6 @@ class JobCardPage extends StatelessWidget {
                                     []),
                                 cmDivider(),
                               ],
-                              if (vmSchedule
-                                      .jobcardResponse.data?.purchaseComment !=
-                                  "") ...[
-                                sized0hx10,
-                                _buildInfoText("Purchaseorder | Comments"),
-                                sized0hx10,
-                                _buildSectioncontainer(vmSchedule
-                                        .jobcardResponse.data?.purchaseComment
-                                        .toString() ??
-                                    ''),
-                              ],
-                              if (vmSchedule
-                                  .jobcardResponse
-                                  .data!
-                                  .jobcardinfoFiles!
-                                  .purchaseOrder!
-                                  .isNotEmpty) ...[
-                                if (vmSchedule.jobcardResponse.data
-                                        ?.purchaseComment ==
-                                    "") ...[
-                                  sized0hx10,
-                                  _buildInfoText("Purchaseorder | Comments")
-                                ],
-                                sized0hx05,
-                                cmFileBuilder(vmSchedule.jobcardResponse.data!
-                                        .jobcardinfoFiles!.purchaseOrder ??
-                                    []),
-                                cmDivider(),
-                              ],
                               if (vmSchedule.jobcardResponse.data?.manifest !=
                                   "") ...[
                                 sized0hx10,
@@ -242,6 +347,64 @@ class JobCardPage extends StatelessWidget {
                                         .manifestMultipleFile ??
                                     []),
                                 cmDivider(),
+                              ],
+                              if (vmSchedule
+                                      .jobcardResponse.data?.chemistApproval !=
+                                  "") ...[
+                                sized0hx10,
+                                expandedRowShowsText(
+                                    "Chemist Approval",
+                                    boolToString(vmSchedule.jobcardResponse.data
+                                            ?.chemistApproval
+                                            .toString() ??
+                                        "")),
+                              ],
+                              sized0hx05,
+                              if (vmSchedule
+                                  .jobcardResponse
+                                  .data!
+                                  .jobcardinfoFiles!
+                                  .chemistApprovalMultipleFile!
+                                  .isNotEmpty) ...[
+                                cmFileBuilder(vmSchedule
+                                        .jobcardResponse
+                                        .data!
+                                        .jobcardinfoFiles!
+                                        .chemistApprovalMultipleFile ??
+                                    []),
+                                cmDivider()
+                              ],
+                              if (vmSchedule.jobcardResponse.data
+                                      ?.safetyDataSheetRequired !=
+                                  "") ...[
+                                if (vmSchedule
+                                    .jobcardResponse
+                                    .data!
+                                    .jobcardinfoFiles!
+                                    .safetyDataSheetFiles!
+                                    .isNotEmpty)
+                                  sized0hx10,
+                                expandedRowShowsText(
+                                    "Safer Data Sheet \n Required",
+                                    boolToString(vmSchedule.jobcardResponse.data
+                                            ?.safetyDataSheetRequired
+                                            .toString() ??
+                                        "")),
+                              ],
+                              if (vmSchedule
+                                  .jobcardResponse
+                                  .data!
+                                  .jobcardinfoFiles!
+                                  .safetyDataSheetFiles!
+                                  .isNotEmpty) ...[
+                                sized0hx05,
+                                cmFileBuilder(vmSchedule
+                                        .jobcardResponse
+                                        .data!
+                                        .jobcardinfoFiles!
+                                        .safetyDataSheetFiles ??
+                                    []),
+                                cmDivider()
                               ],
                               if (vmSchedule
                                       .jobcardResponse.data?.additionalImages !=
@@ -292,6 +455,115 @@ class JobCardPage extends StatelessWidget {
                                 cmDivider(),
                               ],
                               if (vmSchedule
+                                      .jobcardResponse.data?.purchaseComment !=
+                                  "") ...[
+                                sized0hx10,
+                                _buildInfoText("Purchaseorder | Comments"),
+                                sized0hx10,
+                                _buildSectioncontainer(vmSchedule
+                                        .jobcardResponse.data?.purchaseComment
+                                        .toString() ??
+                                    ''),
+                              ],
+                              if (vmSchedule
+                                  .jobcardResponse
+                                  .data!
+                                  .jobcardinfoFiles!
+                                  .purchaseOrder!
+                                  .isNotEmpty) ...[
+                                if (vmSchedule.jobcardResponse.data
+                                        ?.purchaseComment ==
+                                    "") ...[
+                                  sized0hx10,
+                                  _buildInfoText("Purchaseorder | Comments")
+                                ],
+                                sized0hx05,
+                                cmFileBuilder(vmSchedule.jobcardResponse.data!
+                                        .jobcardinfoFiles!.purchaseOrder ??
+                                    []),
+                                cmDivider(),
+                              ],
+//
+                              if (vmSchedule.jobcardResponse.data
+                                      ?.wastePackagedMethod !=
+                                  "") ...[
+                                sized0hx10,
+                                expandedRowShowsText(
+                                    "How is the Waste Packaged",
+                                    vmSchedule.jobcardResponse.data
+                                            ?.wastePackagedMethod
+                                            .toString() ??
+                                        ''),
+                              ],
+                              if (vmSchedule
+                                      .jobcardResponse.data?.volumeExpected !=
+                                  "") ...[
+                                sized0hx10,
+                                expandedRowShowsText(
+                                    "Volume Expected",
+                                    vmSchedule.jobcardResponse.data
+                                            ?.volumeExpected
+                                            .toString() ??
+                                        ''),
+                              ],
+                              if (vmSchedule.jobcardResponse.data
+                                      ?.numberOfLoadsExpected !=
+                                  "") ...[
+                                sized0hx10,
+                                expandedRowShowsText(
+                                    "Number of Loads expected",
+                                    vmSchedule.jobcardResponse.data
+                                            ?.numberOfLoadsExpected
+                                            .toString() ??
+                                        ''),
+                              ],
+
+                              if (vmSchedule.jobcardResponse.data
+                                      ?.sampleOfWasteToBeCollected !=
+                                  null) ...[
+                                sized0hx10,
+                                expandedRowShowsText(
+                                    "Sample of Waste to be collected",
+                                    boolToString(vmSchedule.jobcardResponse.data
+                                            ?.sampleOfWasteToBeCollected
+                                            .toString() ??
+                                        '')),
+                              ],
+                              if (vmSchedule.jobcardResponse.data
+                                      ?.sampleOfWasteToBeCollectedText !=
+                                  "") ...[
+                                sized0hx10,
+                                expandedRowShowsText(
+                                    "Sample of Waste to be collected | Comments",
+                                    vmSchedule.jobcardResponse.data
+                                            ?.sampleOfWasteToBeCollectedText
+                                            .toString() ??
+                                        ''),
+                              ],
+                              if (vmSchedule.jobcardResponse.data
+                                      ?.estimatedDatetimeOfDisposal !=
+                                  "") ...[
+                                sized0hx10,
+                                expandedRowShowsText(
+                                    "Estimated Date and Time of Disposal",
+                                    vmSchedule.jobcardResponse.data
+                                            ?.estimatedDatetimeOfDisposal
+                                            .toString() ??
+                                        ''),
+                              ],
+                              if (vmSchedule.jobcardResponse.data
+                                      ?.flowMeterRequired !=
+                                  null) ...[
+                                sized0hx10,
+                                expandedRowShowsText(
+                                    "Flow Meter Required",
+                                    boolToString(vmSchedule.jobcardResponse.data
+                                            ?.flowMeterRequired
+                                            .toString() ??
+                                        '')),
+                              ],
+//
+                              if (vmSchedule
                                       .jobcardResponse.data?.accessHeight !=
                                   "") ...[
                                 sized0hx10,
@@ -303,15 +575,15 @@ class JobCardPage extends StatelessWidget {
                                         ''),
                               ],
                               if (vmSchedule
-                                      .jobcardResponse.data?.keyRequired !=
-                                  null) ...[
+                                      .jobcardResponse.data?.keyRequiredNew !=
+                                  "") ...[
                                 sized0hx10,
                                 expandedRowShowsText(
                                     "Key Required",
-                                    boolToString(vmSchedule
-                                            .jobcardResponse.data?.keyRequired
+                                    vmSchedule.jobcardResponse.data
+                                            ?.keyRequiredNew
                                             .toString() ??
-                                        "")),
+                                        ""),
                               ],
                               if (vmSchedule.jobcardResponse.data
                                       ?.pitDistanceFromTruckLocation !=
@@ -402,6 +674,20 @@ class JobCardPage extends StatelessWidget {
                                         ""))
                               ],
                               if (vmSchedule.jobcardResponse.data
+                                      ?.specificPpeRequiredComment !=
+                                  "") ...[
+                                sized0hx10,
+                                _buildInfoText("Specific PPE | Comments"),
+                                sized0hx10,
+                                _buildSectioncontainer((vmSchedule
+                                            .jobcardResponse
+                                            .data
+                                            ?.specificPpeRequiredComment
+                                            .toString() ??
+                                        '')
+                                    .toString()),
+                              ],
+                              if (vmSchedule.jobcardResponse.data
                                       ?.weighBridgeRequired !=
                                   null) ...[
                                 sized0hx10,
@@ -411,6 +697,21 @@ class JobCardPage extends StatelessWidget {
                                             ?.weighBridgeRequired
                                             .toString() ??
                                         ""))
+                              ],
+                              if (vmSchedule
+                                  .jobcardResponse
+                                  .data!
+                                  .jobcardinfoFiles!
+                                  .weighBridgeRequiredMultipleFile!
+                                  .isNotEmpty) ...[
+                                sized0hx10,
+                                cmFileBuilder(vmSchedule
+                                        .jobcardResponse
+                                        .data!
+                                        .jobcardinfoFiles!
+                                        .weighBridgeRequiredMultipleFile ??
+                                    []),
+                                cmDivider()
                               ],
                               if (vmSchedule.jobcardResponse.data
                                       ?.noAndTypePalletToBeExchanged !=
@@ -424,64 +725,6 @@ class JobCardPage extends StatelessWidget {
                                         '')
                               ],
                               if (vmSchedule.jobcardResponse.data
-                                      ?.safetyDataSheetRequired !=
-                                  "") ...[
-                                if (vmSchedule
-                                    .jobcardResponse
-                                    .data!
-                                    .jobcardinfoFiles!
-                                    .safetyDataSheetFiles!
-                                    .isNotEmpty)
-                                  sized0hx10,
-                                expandedRowShowsText(
-                                    "Safer Data Sheet \n Required",
-                                    boolToString(vmSchedule.jobcardResponse.data
-                                            ?.safetyDataSheetRequired
-                                            .toString() ??
-                                        "")),
-                              ],
-                              if (vmSchedule
-                                  .jobcardResponse
-                                  .data!
-                                  .jobcardinfoFiles!
-                                  .safetyDataSheetFiles!
-                                  .isNotEmpty) ...[
-                                sized0hx05,
-                                cmFileBuilder(vmSchedule
-                                        .jobcardResponse
-                                        .data!
-                                        .jobcardinfoFiles!
-                                        .safetyDataSheetFiles ??
-                                    []),
-                                cmDivider()
-                              ],
-                              if (vmSchedule
-                                      .jobcardResponse.data?.chemistApproval !=
-                                  "") ...[
-                                sized0hx10,
-                                expandedRowShowsText(
-                                    "Chemist Approval",
-                                    boolToString(vmSchedule.jobcardResponse.data
-                                            ?.chemistApproval
-                                            .toString() ??
-                                        "")),
-                              ],
-                              sized0hx05,
-                              if (vmSchedule
-                                  .jobcardResponse
-                                  .data!
-                                  .jobcardinfoFiles!
-                                  .chemistApprovalMultipleFile!
-                                  .isNotEmpty) ...[
-                                cmFileBuilder(vmSchedule
-                                        .jobcardResponse
-                                        .data!
-                                        .jobcardinfoFiles!
-                                        .chemistApprovalMultipleFile ??
-                                    []),
-                                cmDivider()
-                              ],
-                              if (vmSchedule.jobcardResponse.data
                                       ?.additionalInformation !=
                                   "") ...[
                                 sized0hx10,
@@ -493,6 +736,57 @@ class JobCardPage extends StatelessWidget {
                                         ?.additionalInformation
                                         ?.toString() ??
                                     '')
+                              ],
+                              if (vmSchedule
+                                      .jobcardResponse.data?.photoRequired !=
+                                  null) ...[
+                                sized0hx10,
+                                expandedRowShowsText(
+                                    "Photo Required",
+                                    boolToString(vmSchedule
+                                            .jobcardResponse.data?.photoRequired
+                                            ?.toString() ??
+                                        ''))
+                              ],
+                              if (vmSchedule.jobcardResponse.data
+                                      ?.photoRequiredText !=
+                                  "") ...[
+                                sized0hx10,
+                                _buildInfoText("Photo Required | Comments"),
+                                sized0hx10,
+                                _buildSectioncontainer((vmSchedule
+                                            .jobcardResponse
+                                            .data
+                                            ?.photoRequiredText
+                                            .toString() ??
+                                        '')
+                                    .toString()),
+                              ],
+                              if (vmSchedule.jobcardResponse.data
+                                      ?.certificateOfDestructionRequired !=
+                                  null) ...[
+                                sized0hx10,
+                                expandedRowShowsText(
+                                    "Certification of Destruction Required",
+                                    boolToString(vmSchedule.jobcardResponse.data
+                                            ?.certificateOfDestructionRequired
+                                            ?.toString() ??
+                                        ''))
+                              ],
+                              if (vmSchedule.jobcardResponse.data
+                                      ?.certificateOfDestructionRequiredText !=
+                                  "") ...[
+                                sized0hx10,
+                                _buildInfoText(
+                                    "Certification of Destruction | Comments"),
+                                sized0hx10,
+                                _buildSectioncontainer((vmSchedule
+                                            .jobcardResponse
+                                            .data
+                                            ?.certificateOfDestructionRequiredText
+                                            .toString() ??
+                                        '')
+                                    .toString()),
                               ],
                               if (vmSchedule.jobcardResponse.data?.capacity !=
                                   "") ...[
@@ -513,7 +807,7 @@ class JobCardPage extends StatelessWidget {
                                         '')
                               ],
                               if (vmSchedule.jobcardResponse.data?.jobStatus !=
-                                  null) ...[
+                                  "") ...[
                                 sized0hx10,
                                 expandedRowShowsText(
                                     "Job status",
@@ -542,28 +836,6 @@ class JobCardPage extends StatelessWidget {
                                             ?.toString() ??
                                         '')
                               ],
-                              if (vmSchedule
-                                  .jobcardResponse
-                                  .data!
-                                  .jobcardinfoFiles!
-                                  .weighBridgeRequiredMultipleFile!
-                                  .isNotEmpty) ...[
-                                sized0hx10,
-                                expandedRowShowsText(
-                                    "Weighbridge Requires Multiple Files",
-                                    vmSchedule.jobcardResponse.data
-                                            ?.additionalInformation
-                                            ?.toString() ??
-                                        ''),
-                                sized0hx10,
-                                cmFileBuilder(vmSchedule
-                                        .jobcardResponse
-                                        .data!
-                                        .jobcardinfoFiles!
-                                        .weighBridgeRequiredMultipleFile ??
-                                    []),
-                                cmDivider()
-                              ]
                             ],
                           )),
                       sized0hx20

@@ -20,7 +20,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:intl/intl.dart';
 
 @RoutePage()
 class TeamProfileScreen extends StatelessWidget {
@@ -58,20 +57,20 @@ class TeamProfileScreen extends StatelessWidget {
                           if (vmProfile.profilepageResponse.data?.employeeId ==
                               employeeDetails?.employeeId)
                             Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                cmOutlineButton(
-                                    text: "TimeSheet",
-                                    onPressed: () {
-                                      vmTeam.selectedChooseWeekTimesheet =
-                                          getLastFriday(DateTime.now());
-                                      vmTeam.getTimeSheetApi(
-                                          date: DateFormat('yyyy-MM-dd').format(
-                                              vmTeam
-                                                  .selectedChooseWeekTimesheet!),
-                                          context: context);
-                                      context.router.push(TimeSheetRoute());
-                                    }),
+                                // cmOutlineButton(
+                                //     text: "TimeSheet",
+                                //     onPressed: () {
+                                //       vmTeam.selectedChooseWeekTimesheet =
+                                //           getLastFriday(DateTime.now());
+                                //       vmTeam.getTimeSheetApi(
+                                //           date: DateFormat('yyyy-MM-dd').format(
+                                //               vmTeam
+                                //                   .selectedChooseWeekTimesheet!),
+                                //           context: context);
+                                //       context.router.push(TimeSheetRoute());
+                                //     }),
                                 cmOutlineButton(
                                     text: "Leave Application",
                                     onPressed: () {
@@ -385,7 +384,8 @@ class TeamProfileScreen extends StatelessWidget {
   Widget cmOutlineButton(
       {required String text, required void Function()? onPressed}) {
     return SizedBox(
-      width: 130.w,
+      // width: 130.w,
+      width: 290.w,
       child: OutlinedButton(
         onPressed: onPressed,
         style: ButtonStyle(

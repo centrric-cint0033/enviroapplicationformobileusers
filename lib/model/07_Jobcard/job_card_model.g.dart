@@ -131,8 +131,13 @@ _$JobCardRespModelImpl _$$JobCardRespModelImplFromJson(
       customerContactEmail: json['customer_contact_email'],
       customerContactPhone: json['customer_contact_phone'],
       customerContactMob: json['customer_contact_mob'],
-      additionalPhoneNumber: json['additional_phone_number'],
-      additionalEmail: json['additional_email'],
+      additionalPhoneNumber:
+          (json['additional_phone_number'] as Map<String, dynamic>?)?.map(
+        (k, e) => MapEntry(k, e as String),
+      ),
+      additionalEmail: (json['additional_email'] as Map<String, dynamic>?)?.map(
+        (k, e) => MapEntry(k, e as String),
+      ),
       addInfoButton: json['add_info_button'],
       destructionCertificateUnread:
           json['destruction_certificate_unread'] as bool?,

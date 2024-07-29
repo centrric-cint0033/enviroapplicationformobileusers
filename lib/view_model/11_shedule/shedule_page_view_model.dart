@@ -166,6 +166,10 @@ abstract class ScheduleViewModelBase with Store {
   // Flag to indicate if selection mode is active
   @observable
   bool isSelectionModeBeforePic = false;
+  @action
+  void setDriversIndex(int index) {
+    driversIndex = index;
+  }
 // @observable
 // int? selectedIndexBeforePic;
 
@@ -1236,8 +1240,13 @@ abstract class ScheduleViewModelBase with Store {
         throw 'Could not launch $url';
       }
     } catch (e) {
-      print('Error launching URL: $e');
-      // Handle or log the error appropriately
+      if (e is PlatformException && e.code == 'ACTIVITY_NOT_FOUND') {
+        print('No application can handle this URL: $url');
+        // Handle the scenario where no app can handle the URL
+      } else {
+        print('Error launching URL: $e');
+        // Handle or log the error appropriately
+      }
     }
   }
 

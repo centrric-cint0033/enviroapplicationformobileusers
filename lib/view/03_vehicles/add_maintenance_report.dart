@@ -5,6 +5,7 @@ import 'package:enviro_mobile_application/view/03_vehicles/vehicle_widget/vehicl
 import 'package:enviro_mobile_application/view/08_team/team_edit_page.dart';
 import 'package:enviro_mobile_application/view/08_team/team_widgets/cm_textfield_widget.dart';
 import 'package:enviro_mobile_application/view_model/03_vehicles/vehicle_view_model.dart';
+import 'package:enviro_mobile_application/widgets/cm_show_toast.dart';
 import 'package:enviro_mobile_application/widgets/cmbutton.dart';
 import 'package:enviro_mobile_application/widgets/show_confirmation_alert.dart';
 import 'package:flutter/material.dart';
@@ -48,13 +49,21 @@ class AddMaintenanceReportPage extends StatelessWidget {
                         expandedRowShowWidget(
                             "Description",
                             cmTextFormField(
-                                controller: vmVehicle.descriptionCntrlr,
-                                hintText: "description")),
+                              controller: vmVehicle.descriptionCntrlr,
+                              hintText: "description",
+                              onChanged: (value) {
+                                vmVehicle.showSubmitButtonFn();
+                              },
+                            )),
                         expandedRowShowWidget(
                             "Service Provided",
                             cmTextFormField(
-                                controller: vmVehicle.serviceProvidedCntrlr,
-                                hintText: "service provided")),
+                              controller: vmVehicle.serviceProvidedCntrlr,
+                              hintText: "service provided",
+                              onChanged: (value) {
+                                vmVehicle.showSubmitButtonFn();
+                              },
+                            )),
                         expandedRowShowWidget(
                             "Invoice Date",
                             Observer(
@@ -74,10 +83,14 @@ class AddMaintenanceReportPage extends StatelessWidget {
                         expandedRowShowWidget(
                             "Ometer",
                             cmTextFormField(
-                                controller: vmVehicle.ometerCntrlr,
-                                hintText: "ometer",
-                                keyboardType:
-                                    const TextInputType.numberWithOptions())),
+                              controller: vmVehicle.ometerCntrlr,
+                              hintText: "ometer",
+                              keyboardType:
+                                  const TextInputType.numberWithOptions(),
+                              onChanged: (value) {
+                                vmVehicle.showSubmitButtonFn();
+                              },
+                            )),
                         expandedRowShowWidget(
                             "Invoice No",
                             cmTextFormField(
@@ -88,38 +101,58 @@ class AddMaintenanceReportPage extends StatelessWidget {
                         expandedRowShowWidget(
                             "Hours",
                             cmTextFormField(
-                                controller: vmVehicle.hoursCntrlr,
-                                hintText: "hour",
-                                keyboardType:
-                                    const TextInputType.numberWithOptions())),
+                              controller: vmVehicle.hoursCntrlr,
+                              hintText: "hour",
+                              keyboardType:
+                                  const TextInputType.numberWithOptions(),
+                              onChanged: (value) {
+                                vmVehicle.showSubmitButtonFn();
+                              },
+                            )),
                         expandedRowShowWidget(
                             "Labour Cost",
                             cmTextFormField(
-                                controller: vmVehicle.labourCostCntrlr,
-                                hintText: "labour cost",
-                                keyboardType:
-                                    const TextInputType.numberWithOptions())),
+                              controller: vmVehicle.labourCostCntrlr,
+                              hintText: "labour cost",
+                              keyboardType:
+                                  const TextInputType.numberWithOptions(),
+                              onChanged: (value) {
+                                vmVehicle.showSubmitButtonFn();
+                              },
+                            )),
                         expandedRowShowWidget(
                             "Spare Parts",
                             cmTextFormField(
-                                controller: vmVehicle.sparePartsCntrlr,
-                                hintText: "spare parts",
-                                keyboardType:
-                                    const TextInputType.numberWithOptions())),
+                              controller: vmVehicle.sparePartsCntrlr,
+                              hintText: "spare parts",
+                              keyboardType:
+                                  const TextInputType.numberWithOptions(),
+                              onChanged: (value) {
+                                vmVehicle.showSubmitButtonFn();
+                              },
+                            )),
                         expandedRowShowWidget(
                             "GST",
                             cmTextFormField(
-                                controller: vmVehicle.gstCntrlr,
-                                hintText: "GST",
-                                keyboardType:
-                                    const TextInputType.numberWithOptions())),
+                              controller: vmVehicle.gstCntrlr,
+                              hintText: "GST",
+                              keyboardType:
+                                  const TextInputType.numberWithOptions(),
+                              onChanged: (value) {
+                                vmVehicle.showSubmitButtonFn();
+                              },
+                            )),
                         expandedRowShowWidget(
                             "Total Cost",
                             cmTextFormField(
-                                controller: vmVehicle.totalCostCntrlr,
-                                hintText: "cost",
-                                keyboardType:
-                                    const TextInputType.numberWithOptions())),
+                              controller: vmVehicle.totalCostCntrlr,
+                              hintText: "cost",
+                              keyboardType:
+                                  const TextInputType.numberWithOptions(),
+                              onChanged: (value) {
+                                vmVehicle.showSubmitButtonFn();
+                              },
+                            )),
                         Align(
                           alignment: Alignment.centerLeft,
                           child: CmButton(
@@ -208,9 +241,7 @@ class AddMaintenanceReportPage extends StatelessWidget {
                         CmButton(
                           text: "Submit",
                           width: 120.w,
-                          color: vmVehicle.showSubmitBn == true
-                              ? Appthemes.cPrimary
-                              : Colors.grey.shade300,
+                          color: Appthemes.cPrimary,
                           indicatorColor: Colors.white,
                           loading: vmVehicle.addMaintenanceResponse.loading,
                           onPressed: () {
@@ -228,27 +259,41 @@ class AddMaintenanceReportPage extends StatelessWidget {
   }
 
   cmSubmitFn(BuildContext context) {
-    vmVehicle.addMaintenanceReportApi(
-        context: context,
-        data: VehicleModel(
-            vehicle: vmVehicle.selectedVehicleAddMaintenanceId != 0 &&
-                    vmVehicle.selectedVehicleAddMaintenanceId != null
-                ? vmVehicle.selectedVehicleAddMaintenanceId
-                : vmVehicle.selectedVehicleAddMaintenance?.id,
-            description: vmVehicle.descriptionCntrlr.text,
-            serviceProvided: vmVehicle.serviceProvidedCntrlr.text,
-            invoiceDate: DateFormat('yyyy-MM-dd')
-                .format(vmVehicle.selectedInvoiceDateAddMaintenance!),
-            serviceDate: DateFormat('yyyy-MM-dd')
-                .format(vmVehicle.selectedServiceDateAddMaintenance!),
-            ometer: vmVehicle.ometerCntrlr.text,
-            invoiceNumber: vmVehicle.invoiceNoCntrlr.text,
-            hours: vmVehicle.hoursCntrlr.text,
-            lCost: vmVehicle.labourCostCntrlr.text,
-            sPart: vmVehicle.sparePartsCntrlr.text,
-            gst: vmVehicle.gstCntrlr.text,
-            totalCost: vmVehicle.totalCostCntrlr.text,
-            tabType: "waste"),
-        pickedFiles: vmVehicle.pickedFileList?.toList() ?? []);
+    if (vmVehicle.descriptionCntrlr.text.isNotEmpty &&
+        vmVehicle.serviceProvidedCntrlr.text.isNotEmpty &&
+        vmVehicle.selectedInvoiceDateAddMaintenance != null &&
+        vmVehicle.selectedServiceDateAddMaintenance != null &&
+        vmVehicle.ometerCntrlr.text.isNotEmpty &&
+        vmVehicle.invoiceNoCntrlr.text.isNotEmpty &&
+        vmVehicle.hoursCntrlr.text.isNotEmpty &&
+        vmVehicle.labourCostCntrlr.text.isNotEmpty &&
+        vmVehicle.sparePartsCntrlr.text.isNotEmpty &&
+        vmVehicle.gstCntrlr.text.isNotEmpty &&
+        vmVehicle.totalCostCntrlr.text.isNotEmpty) {
+      vmVehicle.addMaintenanceReportApi(
+          context: context,
+          data: VehicleModel(
+              vehicle: vmVehicle.selectedVehicleAddMaintenanceId != 0 &&
+                      vmVehicle.selectedVehicleAddMaintenanceId != null
+                  ? vmVehicle.selectedVehicleAddMaintenanceId
+                  : vmVehicle.selectedVehicleAddMaintenance?.id,
+              description: vmVehicle.descriptionCntrlr.text,
+              serviceProvided: vmVehicle.serviceProvidedCntrlr.text,
+              invoiceDate: DateFormat('yyyy-MM-dd')
+                  .format(vmVehicle.selectedInvoiceDateAddMaintenance!),
+              serviceDate: DateFormat('yyyy-MM-dd')
+                  .format(vmVehicle.selectedServiceDateAddMaintenance!),
+              ometer: vmVehicle.ometerCntrlr.text,
+              invoiceNumber: vmVehicle.invoiceNoCntrlr.text,
+              hours: vmVehicle.hoursCntrlr.text,
+              lCost: vmVehicle.labourCostCntrlr.text,
+              sPart: vmVehicle.sparePartsCntrlr.text,
+              gst: vmVehicle.gstCntrlr.text,
+              totalCost: vmVehicle.totalCostCntrlr.text,
+              tabType: "waste"),
+          pickedFiles: vmVehicle.pickedFileList?.toList() ?? []);
+    } else {
+      showToast(context, msg: "Please fill all the fields", color: Colors.red);
+    }
   }
 }

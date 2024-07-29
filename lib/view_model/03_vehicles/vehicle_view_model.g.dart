@@ -374,13 +374,13 @@ mixin _$VehicleViewModel on VehicleViewModelBase, Store {
       Atom(name: 'VehicleViewModelBase.showSubmitBn', context: context);
 
   @override
-  bool? get showSubmitBn {
+  bool get showSubmitBn {
     _$showSubmitBnAtom.reportRead();
     return super.showSubmitBn;
   }
 
   @override
-  set showSubmitBn(bool? value) {
+  set showSubmitBn(bool value) {
     _$showSubmitBnAtom.reportWrite(value, super.showSubmitBn, () {
       super.showSubmitBn = value;
     });
