@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:enviro_mobile_application/Routepage/routespage.dart';
 import 'package:enviro_mobile_application/Routepage/securestorage.dart';
 import 'package:enviro_mobile_application/model/home/res_model/homerespmodel.dart';
+import 'package:enviro_mobile_application/utilis/Appthemes.dart';
 import 'package:enviro_mobile_application/utilis/constant.dart';
 import 'package:enviro_mobile_application/view/home_page.dart';
 import 'package:enviro_mobile_application/view_model/10_profile/profile_view_model.dart';
@@ -9,6 +10,7 @@ import 'package:enviro_mobile_application/view_model/home_page/home_page_viewmod
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import '../Routepage/approutes.gr.dart';
 
@@ -119,10 +121,8 @@ Drawer cmnDrawer(BuildContext context) {
                 ),
                 if (permission?.sales?.view == true)
                   ListTile(
-                    leading: const Icon(
-                      Icons.monetization_on,
-                      color: Colors.blue,
-                    ),
+                    leading: SvgPicture.asset('assets/images/star.svg',
+                        width: 18.w, height: 18.w, color: Appthemes.cPrimary),
                     title: Text(
                       'Sales',
                       style: TextStyle(
@@ -137,10 +137,8 @@ Drawer cmnDrawer(BuildContext context) {
                   ),
                 if (permission?.vehicle?.view == true)
                   ListTile(
-                    leading: const Icon(
-                      Icons.directions_car,
-                      color: Colors.blue,
-                    ),
+                    leading: SvgPicture.asset('assets/images/truck.svg',
+                        width: 18.w, height: 18.w, color: Appthemes.cPrimary),
                     title: Text(
                       'Vehicle',
                       style: TextStyle(
@@ -153,30 +151,10 @@ Drawer cmnDrawer(BuildContext context) {
                       Navigator.pop(context);
                     },
                   ),
-                if (permission?.site?.view == true)
-                  ListTile(
-                    leading: const Icon(
-                      Icons.location_on,
-                      color: Colors.blue,
-                    ),
-                    title: Text(
-                      'Site',
-                      style: TextStyle(
-                          fontSize: 10.sp,
-                          fontWeight: FontWeight.w700,
-                          color: Colors.grey.shade700),
-                    ),
-                    onTap: () {
-                      navigateToSitesPage(context: context);
-                      Navigator.pop(context);
-                    },
-                  ),
                 if (permission?.ohs?.view == true)
                   ListTile(
-                    leading: const Icon(
-                      Icons.local_hospital,
-                      color: Colors.blue,
-                    ),
+                    leading: SvgPicture.asset('assets/images/move(1).svg',
+                        width: 18.w, height: 18.w, color: Appthemes.cPrimary),
                     title: Text(
                       'OH&S',
                       style: TextStyle(
@@ -189,12 +167,27 @@ Drawer cmnDrawer(BuildContext context) {
                       Navigator.pop(context);
                     },
                   ),
+                if (permission?.site?.view == true)
+                  ListTile(
+                    leading: SvgPicture.asset('assets/images/user.svg',
+                        width: 18.w, height: 18.w, color: Appthemes.cPrimary),
+                    title: Text(
+                      'Site',
+                      style: TextStyle(
+                          fontSize: 10.sp,
+                          fontWeight: FontWeight.w700,
+                          color: Colors.grey.shade700),
+                    ),
+                    onTap: () {
+                      navigateToSitesPage(context: context);
+                      Navigator.pop(context);
+                    },
+                  ),
+
                 if (permission?.scheduling?.view == true)
                   ListTile(
-                    leading: const Icon(
-                      Icons.schedule,
-                      color: Colors.blue, // Set icon color to blue
-                    ),
+                    leading: SvgPicture.asset('assets/images/calendar.svg',
+                        width: 18.w, height: 18.w, color: Appthemes.cPrimary),
                     title: Text(
                       'Scheduling',
                       style: TextStyle(
@@ -209,10 +202,8 @@ Drawer cmnDrawer(BuildContext context) {
                   ),
                 if (permission?.intranet?.view == true)
                   ListTile(
-                    leading: const Icon(
-                      Icons.business,
-                      color: Colors.blue, // Set icon color to blue
-                    ),
+                    leading: SvgPicture.asset('assets/images/globe.svg',
+                        width: 18.w, height: 18.w, color: Appthemes.cPrimary),
                     title: Text(
                       'Intranet',
                       style: TextStyle(
@@ -225,25 +216,22 @@ Drawer cmnDrawer(BuildContext context) {
                       Navigator.pop(context);
                     },
                   ),
-                if (permission?.team?.view == true)
-                  ListTile(
-                    leading: const Icon(
-                      Icons.people,
-                      color: Colors.blue, // Set icon color to blue
-                    ),
-                    title: Text(
-                      'Team',
-                      style: TextStyle(
-                          fontSize: 10.sp,
-                          fontWeight: FontWeight.w700,
-                          color: Colors.grey.shade700),
-                    ),
-                    onTap: () {
-                      teamfuntion(context);
-                      // Add your functionality here
-                      Navigator.pop(context);
-                    },
+                // if (permission?.team?.view == true)
+                ListTile(
+                  leading: SvgPicture.asset('assets/images/users.svg',
+                      width: 18.w, height: 18.w, color: Appthemes.cPrimary),
+                  title: Text(
+                    'Team',
+                    style: TextStyle(
+                        fontSize: 10.sp,
+                        fontWeight: FontWeight.w700,
+                        color: Colors.grey.shade700),
                   ),
+                  onTap: () {
+                    teamfuntion(context);
+                    Navigator.pop(context);
+                  },
+                ),
               ],
             ),
           ),

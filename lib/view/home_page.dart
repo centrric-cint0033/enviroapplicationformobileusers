@@ -3,6 +3,7 @@ import 'package:enviro_mobile_application/Routepage/approutes.gr.dart';
 import 'package:enviro_mobile_application/Routepage/routespage.dart';
 import 'package:enviro_mobile_application/model/home/res_model/homerespmodel.dart';
 import 'package:enviro_mobile_application/utilis/Appthemes.dart';
+import 'package:enviro_mobile_application/utilis/constant.dart';
 import 'package:enviro_mobile_application/view_model/02_sales/sales_view_model.dart';
 import 'package:enviro_mobile_application/view_model/03_vehicles/vehicle_view_model.dart';
 import 'package:enviro_mobile_application/view_model/04_ohs/ohs_view_model.dart';
@@ -88,8 +89,8 @@ class HomePage extends StatelessWidget {
 
   Widget _buildBox(String svgPath, String text,
       {void Function()? onTap,
-      double width = 30.0,
-      double height = 30.0,
+      double width = 26.0,
+      double height = 26.0,
       bool? permission}) {
     return InkWell(
       onTap: (permission == true) ? onTap : () {},
@@ -113,13 +114,13 @@ class HomePage extends StatelessWidget {
           children: [
             SvgPicture.asset(
               svgPath,
-              width: width,
-              height: height,
+              width: width.w,
+              height: height.w,
               color: permission == true
                   ? Appthemes.cPrimary
                   : Colors.grey.shade400,
             ),
-            const SizedBox(height: 8.0),
+            sized0hx05,
             Text(
               text,
               style: TextStyle(

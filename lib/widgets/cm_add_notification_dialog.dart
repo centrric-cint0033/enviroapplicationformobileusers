@@ -1,5 +1,6 @@
 import 'package:enviro_mobile_application/model/04_ohs/oh&s_resp_model.dart';
 import 'package:enviro_mobile_application/model/10_team/team_res_model/team_res_model.dart';
+import 'package:enviro_mobile_application/utilis/Appthemes.dart';
 import 'package:enviro_mobile_application/utilis/constant.dart';
 import 'package:enviro_mobile_application/view_model/04_ohs/ohs_view_model.dart';
 import 'package:enviro_mobile_application/view_model/08_team/team_view_model.dart';
@@ -197,7 +198,13 @@ class _MyDialogNotificationState extends State<MyDialogNotification> {
                   }
                 : null,
             child: res.loading
-                ? const CupertinoActivityIndicator()
+                ? SizedBox(
+                    height: 12.w,
+                    width: 12.w,
+                    child: const CircularProgressIndicator(
+                      strokeWidth: 2,
+                      color: Appthemes.cPrimary,
+                    ))
                 : Text(
                     'OK',
                     style: TextStyle(

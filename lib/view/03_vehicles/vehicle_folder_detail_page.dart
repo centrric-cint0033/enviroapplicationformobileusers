@@ -87,15 +87,22 @@ class VehicleFolderDetailPage extends StatelessWidget {
                                                       parentFolderId: vmVehicle
                                                               .parentFolderId ??
                                                           1)
-                                                  : vmVehicle.fileFolderSearchApi(
-                                                      context,
-                                                      v,
-                                                      vmVehicle
-                                                              .parentFolderId ??
-                                                          1,
-                                                      searchType ?? "",
-                                                      vehicleId ?? 0,
-                                                      vehicleType ?? "");
+                                                  : vmVehicle
+                                                      .fileFolderSearchApi(
+                                                          context,
+                                                          v,
+                                                          vmVehicle
+                                                                  .parentFolderId ??
+                                                              1,
+                                                          // searchType ?? "",
+                                                          vehicleType == "truck"
+                                                              ? "truck"
+                                                              : vehicleType ==
+                                                                      "car"
+                                                                  ? "car"
+                                                                  : "fork-lift",
+                                                          vehicleId ?? 0,
+                                                          vehicleType ?? "");
                                             }),
                                             suffixTap: () {},
                                             hintText: 'Search',
