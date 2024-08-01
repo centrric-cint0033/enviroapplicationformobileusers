@@ -70,6 +70,7 @@ class MasterTruckList extends StatelessWidget {
                     vmVehicle.vehicleStatusType ==
                         VehicleActionType.preInspectionCheck)
                   CmButton(
+                      height: 35.w,
                       text: 'Add New+',
                       onPressed: () {
                         vmVehicle.vehicleType = VehicleType.truck;

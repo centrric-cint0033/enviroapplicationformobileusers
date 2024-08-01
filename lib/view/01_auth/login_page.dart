@@ -36,8 +36,8 @@ class LoginPage extends StatelessWidget {
               children: [
                 const SizedBox(height: 66),
                 CommonImage(
-                  width: 150,
-                  height: 150,
+                  width: 130.w,
+                  height: 130.w,
                   imagepath: ImageConstant.imagePath,
                 ),
                 // const Text(
@@ -48,7 +48,7 @@ class LoginPage extends StatelessWidget {
                 // ),
 
                 SizedBox(
-                  height: 79.w,
+                  height: 74.w,
                   child: Cmformfield(
                     controller: vmAuth.userNameController,
                     validator: (value) {
@@ -67,7 +67,7 @@ class LoginPage extends StatelessWidget {
                 ),
 
                 SizedBox(
-                  height: 79.w,
+                  height: 74.w,
                   child: Cmformfield(
                     controller: vmAuth.passwordController,
                     validator: (value) {
@@ -97,10 +97,10 @@ class LoginPage extends StatelessWidget {
                   );
                 }),
                 sized0hx30,
-                const Text(
+                Text(
                   "If you experience any Authentication isssues kindly contact the manager or higher authorities, They will resolve your issues...",
                   style: TextStyle(
-                      fontSize: 16,
+                      fontSize: 12.sp,
                       color: Appthemes.textColor,
                       fontStyle: FontStyle.italic),
                 ),

@@ -13,6 +13,7 @@ import 'package:enviro_mobile_application/widgets/ww_response_handler.dart';
 import 'package:enviro_mobile_application/widgets/ww_search_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
 class NewsOhsTab extends StatelessWidget {
@@ -27,6 +28,7 @@ class NewsOhsTab extends StatelessWidget {
               alignment: Alignment.topLeft,
               child: Observer(builder: (context) {
                 return CmButton(
+                    height: 35.w,
                     text: 'Add New+',
                     onPressed: () {
                       showMyDialogNotification(context,
@@ -64,6 +66,7 @@ class NewsOhsTab extends StatelessWidget {
               child: Text('Folders'),
             ),
             CmButton(
+                height: 35.w,
                 text: 'Add folders+',
                 onPressed: () {
                   showCreateEditDialog(context, createEditTap: (v) {

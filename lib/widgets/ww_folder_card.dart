@@ -1,4 +1,5 @@
 import 'package:enviro_mobile_application/model/00_common_model/folder_model/folder_model.dart';
+import 'package:enviro_mobile_application/utilis/constant.dart';
 import 'package:enviro_mobile_application/widgets/common_icon_btn_widget.dart';
 import 'package:enviro_mobile_application/widgets/ww_search_widget.dart';
 import 'package:flutter/cupertino.dart';
@@ -48,7 +49,7 @@ class WWFolderCard extends StatelessWidget {
             ],
           ),
           trailing: SizedBox(
-            width: 80.w,
+            width: 86.w,
             child: Row(
               children: [
                 CommonIconBtnWidget(
@@ -114,13 +115,19 @@ void showCreateEditDialog(BuildContext context,
     builder: (BuildContext context) {
       return AlertDialog(
         title: status == FolderEditCreate.create
-            ? const Text('New Folder')
-            : const Text('Rename'),
+            ? Text(
+                'New Folder',
+                style: TextStyle(fontSize: 14.sp),
+              )
+            : Text(
+                'Rename',
+                style: TextStyle(fontSize: 14.sp),
+              ),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            const SizedBox(height: 17),
+            sized0hx10,
             WWTextField(
               controller: controller,
               hintText: 'Untitled folder',

@@ -9,7 +9,9 @@ Widget cmTextFormField(
     String? hintText,
     String? Function(String?)? validator,
     TextStyle? hintStyle,
-    TextInputType? keyboardType}) {
+    TextInputType? keyboardType,
+    bool obscureText = false,
+    Widget? suffix}) {
   return TextFormField(
     keyboardType: keyboardType,
     readOnly: readOnly!,
@@ -23,6 +25,7 @@ Widget cmTextFormField(
                 borderSide: BorderSide(color: Colors.grey.shade600)))
         : InputDecoration(
             hintText: hintText,
+            suffix: suffix,
             hintStyle:
                 hintStyle ?? TextStyle(fontSize: 10.sp, color: Colors.grey),
             border: InputBorder.none,
@@ -31,5 +34,6 @@ Widget cmTextFormField(
       onChanged;
     },
     validator: validator,
+    obscureText: obscureText,
   );
 }

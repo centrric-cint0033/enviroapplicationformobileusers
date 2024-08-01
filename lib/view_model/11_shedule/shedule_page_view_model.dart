@@ -590,7 +590,7 @@ abstract class ScheduleViewModelBase with Store {
           errors: l,
           loading: false,
         );
-         popupErrorData(context, mainFailure: l);
+        popupErrorData(context, mainFailure: l);
       },
       (r) {
         signatureResponse = signatureResponse.copyWith(
@@ -610,7 +610,9 @@ abstract class ScheduleViewModelBase with Store {
 
   @action
   Future<void> shedulecommentviewmodelfunction(
-      {required BuildContext context, required int id, required String comment}) async {
+      {required BuildContext context,
+      required int id,
+      required String comment}) async {
     commentResponse = commentResponse.copyWith(errors: null, loading: true);
     final result = await scheduleService.shedulecommentserviceapi(
         id: id, comment: comment);
@@ -620,7 +622,7 @@ abstract class ScheduleViewModelBase with Store {
           errors: l,
           loading: false,
         );
-         popupErrorData(context, mainFailure: l);
+        popupErrorData(context, mainFailure: l);
       },
       (r) {
         commentResponse = commentResponse.copyWith(
@@ -823,9 +825,9 @@ abstract class ScheduleViewModelBase with Store {
                 error: null,
                 loading: false,
               );
-        vmSchedule.showDeleteClearButtonsBeforePic = false;
-        vmSchedule.showDeleteClearButtonsAfterPic = false;
-        vmSchedule.imageIds = [];
+        showDeleteClearButtonsBeforePic = false;
+        showDeleteClearButtonsAfterPic = false;
+        imageIds = [];
         shedulecardviewmodelfunction();
       },
     );
@@ -900,6 +902,7 @@ abstract class ScheduleViewModelBase with Store {
           error: null,
           loading: false,
         );
+        showDeleteClearButtonsVideo = false;
         showToast(context, msg: "Successfully deleted", color: Colors.green);
         shedulecardviewmodelfunction();
       },

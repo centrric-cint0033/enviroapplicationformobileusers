@@ -297,11 +297,11 @@ class PreInspectionDetailPage extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
+                      Text(
                         'Any Faults to report(of any category) & any additional information',
-                        style: TextStyle(),
+                        style: TextStyle(fontSize: 10.sp),
                       ),
-                      const SizedBox(height: 8),
+                      sized0hx05,
                       Text(
                         "${data.reportedFaults}",
                         style: TextStyle(),
@@ -621,8 +621,8 @@ class PreInspectionDetailPage extends StatelessWidget {
                 fontSize: 10.sp), // Use the color parameter for text color
           ),
           Container(
-            height: 13.h,
-            width: 13.h,
+            height: 16.w,
+            width: 16.w,
             decoration: BoxDecoration(
                 border: Border.all(),
                 color: value == true
@@ -634,7 +634,7 @@ class PreInspectionDetailPage extends StatelessWidget {
                 child: Icon(
               Icons.check,
               color: Colors.white,
-              size: 10.h,
+              size: 12.sp,
             )),
           ),
         ],

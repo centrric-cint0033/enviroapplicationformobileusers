@@ -221,6 +221,7 @@ class TeamProfileScreen extends StatelessWidget {
                                   child: Text('Folders'),
                                 ),
                                 CmButton(
+                                    height: 35.w,
                                     text: 'Add folders+',
                                     onPressed: () {
                                       showCreateEditDialog(context,

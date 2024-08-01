@@ -4,7 +4,6 @@ import 'package:enviro_mobile_application/utilis/Appthemes.dart';
 import 'package:enviro_mobile_application/utilis/constant.dart';
 import 'package:enviro_mobile_application/view_model/11_shedule/shedule_page_view_model.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 
@@ -189,14 +188,12 @@ class ScheduleList extends StatelessWidget {
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
                                       children: [
-                                        Observer(builder: (_) {
-                                          return Text(
-                                            driver?.name ?? '',
-                                            style: TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 9.sp),
-                                          );
-                                        }),
+                                        Text(
+                                          driver?.name ?? '',
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 9.sp),
+                                        ),
                                         const Divider(
                                           color: Colors.black,
                                         ),

@@ -119,16 +119,6 @@ class EditTimeSheetPage extends StatelessWidget {
                             "${vmProfile.profilepageResponse.data?.employeeId}",
                         comments: vmTeam.commentsControllerr.text,
                         week: weeksToEdit,
-                        // wholeHoursTotalWorked: WholeHoursTotalWorked(
-                        //   totalHoursWorked: vmTeam.totalHrsController.text,
-                        //   normalHours: vmTeam.normalHourController.text,
-                        //   halfTime: vmTeam.timehalfController.text,
-                        //   fullTime: vmTeam.doubleTimeController.text,
-                        //   publicHolidays: vmTeam.publicHolidayController.text,
-                        //   annual: vmTeam.annualController.text,
-                        //   sick: vmTeam.sickController.text,
-                        //   otherDays: vmTeam.otherController.text,
-                        // )
                       ),
                       context: context);
                 }

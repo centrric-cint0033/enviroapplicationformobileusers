@@ -39,6 +39,7 @@ class WWTextField extends StatelessWidget {
             keyboardType: keyboardType,
             expands: description,
             maxLines: maxLines,
+            textAlignVertical: TextAlignVertical.center,
             style: const TextStyle(color: Colors.black),
             decoration: InputDecoration(
               hintText: hintText ?? 'Search here',

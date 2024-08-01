@@ -25,6 +25,22 @@ mixin _$ProfileViewModel on ProfileViewModelBase, Store {
     });
   }
 
+  late final _$passObscureAtom =
+      Atom(name: 'ProfileViewModelBase.passObscure', context: context);
+
+  @override
+  bool get passObscure {
+    _$passObscureAtom.reportRead();
+    return super.passObscure;
+  }
+
+  @override
+  set passObscure(bool value) {
+    _$passObscureAtom.reportWrite(value, super.passObscure, () {
+      super.passObscure = value;
+    });
+  }
+
   late final _$profileeditResponseAtom =
       Atom(name: 'ProfileViewModelBase.profileeditResponse', context: context);
 
@@ -91,6 +107,7 @@ mixin _$ProfileViewModel on ProfileViewModelBase, Store {
   String toString() {
     return '''
 profilepageResponse: ${profilepageResponse},
+passObscure: ${passObscure},
 profileeditResponse: ${profileeditResponse},
 permissionStatusResponse: ${permissionStatusResponse}
     ''';

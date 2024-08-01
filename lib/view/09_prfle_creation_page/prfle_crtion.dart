@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:enviro_mobile_application/utilis/Appthemes.dart';
 import 'package:enviro_mobile_application/utilis/constant.dart';
 import 'package:enviro_mobile_application/view_model/10_profile/profile_view_model.dart';
 import 'package:enviro_mobile_application/widgets/cmbutton.dart';
@@ -7,6 +8,7 @@ import 'package:enviro_mobile_application/widgets/cmn_title_textwidget.dart';
 import 'package:enviro_mobile_application/widgets/drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 @RoutePage()
 class ProfileCreationPage extends StatelessWidget {
@@ -34,36 +36,45 @@ class ProfileCreationPage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Center(
-                  child: SizedBox(
-                    width: 100,
-                    height: 100,
-                    child: vmProfile.profilepageResponse.data?.dp != null
-                        ? Image.network(
-                            vmProfile.profilepageResponse.data!.dp!,
-                            fit: BoxFit.cover,
-                          )
-                        : Container(),
+                  child: Container(
+                    width: 100.w,
+                    height: 100.w,
+                    decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        image: DecorationImage(
+                            image: NetworkImage(
+                          vmProfile.profilepageResponse.data!.dp!,
+                        ))),
+                    // child: vmProfile.profilepageResponse.data?.dp != null
+                    //     ? Image.network(
+                    //         vmProfile.profilepageResponse.data!.dp!,
+                    //         fit: BoxFit.cover,
+                    //       )
+                    //     : Container(),
                   ),
                 ),
                 sized0hx05,
                 Center(
                   child: Text(
                     vmProfile.profilepageResponse.data?.username ?? '',
+                    style: TextStyle(fontSize: 14.sp),
                   ),
                 ),
                 sized0hx05,
                 Center(
                   child: Text(
                     vmProfile.profilepageResponse.data?.permissionType ?? '',
+                    style: TextStyle(fontSize: 14.sp),
                   ),
                 ),
                 sized0hx20,
                 Padding(
                   padding: const EdgeInsets.only(left: 12.0, right: 12.0),
                   child: SizedBox(
-                    height: 48,
+                    height: 45.w,
                     child: TextFormField(
                       readOnly: true,
+                      style: TextStyle(fontSize: 10.sp),
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return 'Please enter your name';
@@ -75,23 +86,27 @@ class ProfileCreationPage extends StatelessWidget {
                       decoration: InputDecoration(
                         filled: true,
                         fillColor: Colors.grey[200],
-                        border: const OutlineInputBorder(
+                        border: OutlineInputBorder(
                             borderSide: BorderSide.none,
                             borderRadius:
-                                BorderRadius.all(Radius.circular(24.0))),
+                                BorderRadius.all(Radius.circular(10.w))),
                         labelText: 'Name',
-                        labelStyle: const TextStyle(color: Colors.blue),
+                        labelStyle: TextStyle(
+                          color: Appthemes.cPrimary,
+                          fontSize: 11.sp,
+                        ),
                       ),
                     ),
                   ),
                 ),
-                const SizedBox(height: 22),
+                sized0hx15,
                 Padding(
                   padding: const EdgeInsets.only(left: 12.0, right: 12.0),
                   child: SizedBox(
-                    height: 48,
+                    height: 45.w,
                     child: TextFormField(
                       readOnly: true,
+                      style: TextStyle(fontSize: 11.sp),
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return 'Please enter the 10 digit"s phonenumber';
@@ -105,24 +120,28 @@ class ProfileCreationPage extends StatelessWidget {
                       decoration: InputDecoration(
                         filled: true,
                         fillColor: Colors.grey[200],
-                        border: const OutlineInputBorder(
+                        border: OutlineInputBorder(
                             borderSide: BorderSide.none,
                             borderRadius:
-                                BorderRadius.all(Radius.circular(24.0))),
+                                BorderRadius.all(Radius.circular(10.w))),
                         labelText: 'Mobile Number',
-                        labelStyle: const TextStyle(color: Colors.blue),
+                        labelStyle: TextStyle(
+                          color: Appthemes.cPrimary,
+                          fontSize: 11.sp,
+                        ),
                       ),
                       keyboardType: TextInputType.phone,
                     ),
                   ),
                 ),
-                const SizedBox(height: 22),
+                sized0hx15,
                 Padding(
                   padding: const EdgeInsets.only(left: 12.0, right: 12.0),
                   child: SizedBox(
-                    height: 48,
+                    height: 45.w,
                     child: TextFormField(
                       readOnly: true,
+                      style: TextStyle(fontSize: 11.sp),
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return 'Please enter the Email';
@@ -135,21 +154,25 @@ class ProfileCreationPage extends StatelessWidget {
                       decoration: InputDecoration(
                         filled: true,
                         fillColor: Colors.grey[200],
-                        border: const OutlineInputBorder(
+                        border: OutlineInputBorder(
                             borderSide: BorderSide.none,
                             borderRadius:
-                                BorderRadius.all(Radius.circular(24.0))),
+                                BorderRadius.all(Radius.circular(10.w))),
                         labelText: 'Email',
-                        labelStyle: const TextStyle(color: Colors.blue),
+                        labelStyle: TextStyle(
+                          color: Appthemes.cPrimary,
+                          fontSize: 11.sp,
+                        ),
                       ),
                       keyboardType: TextInputType.emailAddress,
                     ),
                   ),
                 ),
-                const SizedBox(height: 22),
+                sized0hx15,
                 Padding(
                   padding: const EdgeInsets.only(left: 12.0, right: 12.0),
                   child: TextFormField(
+                    style: TextStyle(fontSize: 11.sp),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'Please enter the Username';
@@ -162,51 +185,65 @@ class ProfileCreationPage extends StatelessWidget {
                     decoration: InputDecoration(
                       contentPadding: const EdgeInsets.symmetric(
                           vertical: 0, horizontal: 12),
-                      suffixIcon: IconButton(
-                        onPressed: () {},
-                        icon: const Icon(Icons.edit),
+                      suffixIcon: Icon(
+                        Icons.edit,
+                        size: 13.sp,
                       ),
                       filled: true,
                       fillColor: Colors.grey[200],
-                      border: const OutlineInputBorder(
+                      border: OutlineInputBorder(
                           borderSide: BorderSide.none,
                           borderRadius:
-                              BorderRadius.all(Radius.circular(24.0))),
+                              BorderRadius.all(Radius.circular(10.w))),
                       labelText: 'Username',
-                      labelStyle: const TextStyle(color: Colors.blue),
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 22),
-                Padding(
-                  padding: const EdgeInsets.only(left: 12.0, right: 12.0),
-                  child: SizedBox(
-                    height: 48,
-                    child: TextFormField(
-                      controller: _controllerpassword,
-                      decoration: InputDecoration(
-                        suffixIcon: IconButton(
-                          onPressed: () {},
-                          icon: Icon(Icons.edit),
-                        ),
-                        filled: true,
-                        fillColor: Colors.grey[200],
-                        border: const OutlineInputBorder(
-                          borderSide: BorderSide.none,
-                          borderRadius: BorderRadius.all(Radius.circular(24.0)),
-                        ),
-                        labelText: 'Password',
-                        labelStyle: const TextStyle(color: Colors.blue),
+                      labelStyle: TextStyle(
+                        color: Appthemes.cPrimary,
+                        fontSize: 11.sp,
                       ),
-                      obscureText: true,
                     ),
                   ),
                 ),
-                const SizedBox(
-                  height: 55,
-                ),
+                sized0hx15,
+                Observer(builder: (context) {
+                  return Padding(
+                    padding: const EdgeInsets.only(left: 12.0, right: 12.0),
+                    child: SizedBox(
+                      height: 45.w,
+                      child: TextFormField(
+                        controller: _controllerpassword,
+                        obscureText: !vmProfile.passObscure,
+                        style: TextStyle(fontSize: 11.sp),
+                        decoration: InputDecoration(
+                          suffix: InkWell(
+                              onTap: () {
+                                vmProfile.passObscure = !vmProfile.passObscure;
+                              },
+                              child: Icon(
+                                vmProfile.passObscure == false
+                                    ? Icons.visibility_off
+                                    : Icons.visibility,
+                                size: 13.sp,
+                              )),
+                          filled: true,
+                          fillColor: Colors.grey[200],
+                          border: OutlineInputBorder(
+                            borderSide: BorderSide.none,
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(10.w)),
+                          ),
+                          labelText: 'Password',
+                          labelStyle: TextStyle(
+                            color: Appthemes.cPrimary,
+                            fontSize: 10.sp,
+                          ),
+                        ),
+                      ),
+                    ),
+                  );
+                }),
+                sized0hx40,
                 SizedBox(
-                  width: 34,
+                  width: 26.w,
                   child: Padding(
                     padding: const EdgeInsets.only(left: 15.0, right: 15),
                     child: Observer(builder: (_) {

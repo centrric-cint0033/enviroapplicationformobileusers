@@ -25,9 +25,7 @@ class CommonTeamProfileTile extends StatelessWidget {
               child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              SizedBox(
-                width: 15.w,
-              ),
+              sized0hx15,
               Stack(
                 children: [
                   SizedBox(

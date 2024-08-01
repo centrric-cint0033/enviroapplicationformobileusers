@@ -42,7 +42,7 @@ class VideoList extends StatelessWidget {
                           icon: Icons.delete,
                           bgColor: Colors.red,
                           loading:
-                              vmSchedule.deleteImageScheduleResponse.loading,
+                              vmSchedule.deleteVideoScheduleResponse.loading,
                           onPressed: () {
                             showConfirmationAlert(
                               context: context,

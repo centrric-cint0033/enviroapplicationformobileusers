@@ -14,7 +14,6 @@ Drawer cmnDrawer(BuildContext context) {
   return Drawer(
     width: 210.w,
     child: ListView(
-      physics: const NeverScrollableScrollPhysics(),
       padding: EdgeInsets.zero,
       children: <Widget>[
         SizedBox(
@@ -29,15 +28,21 @@ Drawer cmnDrawer(BuildContext context) {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Observer(builder: (_) {
-                    return SizedBox(
+                    return Container(
                       width: 45.w,
                       height: 65.w,
-                      child: vmProfile.profilepageResponse.data?.dp != null
-                          ? Image.network(
-                              vmProfile.profilepageResponse.data!.dp!,
-                              fit: BoxFit.cover,
-                            )
-                          : Container(),
+                      decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          image: DecorationImage(
+                              image: NetworkImage(
+                            vmProfile.profilepageResponse.data!.dp!,
+                          ))),
+                      // child: vmProfile.profilepageResponse.data?.dp != null
+                      //     ? Image.network(
+                      //         vmProfile.profilepageResponse.data!.dp!,
+                      //         fit: BoxFit.cover,
+                      //       )
+                      //     : Container(),
                     );
                   }),
                   sized0wx15,
@@ -82,7 +87,7 @@ Drawer cmnDrawer(BuildContext context) {
                   ),
                 ],
               ),
-              sized0hx50,
+              sized0hx30,
               ListTile(
                 leading: const Icon(
                   Icons.home,
@@ -100,7 +105,6 @@ Drawer cmnDrawer(BuildContext context) {
                   Navigator.pop(context);
                 },
               ),
-              sized0hx05,
               ListTile(
                 leading: const Icon(
                   Icons.monetization_on,
@@ -118,7 +122,6 @@ Drawer cmnDrawer(BuildContext context) {
                   Navigator.pop(context);
                 },
               ),
-              sized0hx05,
               ListTile(
                 leading: const Icon(
                   Icons.directions_car,
@@ -136,7 +139,6 @@ Drawer cmnDrawer(BuildContext context) {
                   Navigator.pop(context);
                 },
               ),
-              sized0hx05,
               ListTile(
                 leading: const Icon(
                   Icons.location_on,
@@ -154,7 +156,6 @@ Drawer cmnDrawer(BuildContext context) {
                   Navigator.pop(context);
                 },
               ),
-              sized0hx05,
               ListTile(
                 leading: const Icon(
                   Icons.local_hospital,
@@ -172,7 +173,6 @@ Drawer cmnDrawer(BuildContext context) {
                   Navigator.pop(context);
                 },
               ),
-              sized0hx05,
               ListTile(
                 leading: const Icon(
                   Icons.schedule,
@@ -190,7 +190,6 @@ Drawer cmnDrawer(BuildContext context) {
                   Navigator.pop(context);
                 },
               ),
-              sized0hx05,
               ListTile(
                 leading: const Icon(
                   Icons.business,
@@ -208,7 +207,6 @@ Drawer cmnDrawer(BuildContext context) {
                   Navigator.pop(context);
                 },
               ),
-              sized0hx05,
               ListTile(
                 leading: const Icon(
                   Icons.people,
@@ -229,9 +227,6 @@ Drawer cmnDrawer(BuildContext context) {
               ),
             ],
           ),
-        ),
-        const SizedBox(
-          height: 10,
         ),
         ListTile(
           leading: const Padding(

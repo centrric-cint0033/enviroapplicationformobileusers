@@ -4,6 +4,7 @@ import 'package:enviro_mobile_application/view/08_team/team_widgets/cm_textfield
 import 'package:enviro_mobile_application/view_model/08_team/team_view_model.dart';
 import 'package:enviro_mobile_application/widgets/01_widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 Widget cmCredentialsForEnviro(BuildContext context) {
@@ -26,16 +27,28 @@ Widget cmCredentialsForEnviro(BuildContext context) {
               showBlueText("Password"),
               sized0wx05,
               cmRequiredText()
-            ]),
-            cmTextFormField(
-                showDecoration: true,
-                controller: vmTeam.textAddTeamPasswordController,
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return "Password is required";
-                  }
-                  return null;
-                }))
+            ]), Observer(builder: (context) {
+          return cmTextFormField(
+              showDecoration: true,
+              obscureText: !vmTeam.passObscure,
+              controller: vmTeam.textAddTeamPasswordController,
+              suffix: InkWell(
+                  onTap: () {
+                    vmTeam.passObscure = !vmTeam.passObscure;
+                  },
+                  child: Icon(
+                    vmTeam.passObscure == false
+                        ? Icons.visibility_off
+                        : Icons.visibility,
+                    size: 13.sp,
+                  )),
+              validator: (value) {
+                if (value!.isEmpty) {
+                  return "Password is required";
+                }
+                return null;
+              });
+        }))
       ]),
     ),
   );

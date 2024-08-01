@@ -167,7 +167,8 @@ class LeaveApplicationPage extends StatelessWidget {
                 sized0hx05,
                 CmButton(
                   text: "Add File",
-                  width: 80.w,
+                  height: 35.w,
+                  width: 86.w,
                   color: vmTeam.showAddFile
                       ? Appthemes.cPrimary
                       : Colors.blue.shade100,

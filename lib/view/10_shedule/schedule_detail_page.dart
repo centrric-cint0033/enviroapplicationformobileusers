@@ -16,7 +16,6 @@ import 'package:enviro_mobile_application/view/10_shedule/widgets/signature_img_
 import 'package:enviro_mobile_application/view_model/11_shedule/shedule_page_view_model.dart';
 import 'package:enviro_mobile_application/widgets/cmbutton.dart';
 import 'package:enviro_mobile_application/widgets/cmn_title_textwidget.dart';
-import 'package:enviro_mobile_application/widgets/drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -37,7 +36,7 @@ class SheduledetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        drawer: cmnDrawer(context),
+        // drawer: cmnDrawer(context),
         appBar: AppBar(
           title: cmnTitleWidget('Scheduling'),
         ),
@@ -778,24 +777,29 @@ class SheduledetailPage extends StatelessWidget {
                                       itemBuilder: (context, index) {
                                         final data =
                                             res.data?[i].teamEmployees?[index];
-                                        return Column(
-                                          children: [
-                                            SizedBox(
-                                              height: 40.w,
-                                              width: 40.w,
-                                              child: DecoratedBox(
-                                                decoration: BoxDecoration(
-                                                    color: Colors.grey.shade700,
-                                                    shape: BoxShape.circle),
-                                                child: dpImage("${data?.dp}"),
+                                        return Padding(
+                                          padding: EdgeInsets.only(right: 5.w),
+                                          child: Column(
+                                            children: [
+                                              SizedBox(
+                                                height: 40.w,
+                                                width: 40.w,
+                                                child: DecoratedBox(
+                                                  decoration: BoxDecoration(
+                                                      color:
+                                                          Colors.grey.shade700,
+                                                      shape: BoxShape.circle),
+                                                  child: dpImage("${data?.dp}"),
+                                                ),
                                               ),
-                                            ),
-                                            sized0hx05,
-                                            Text(
-                                              "${data?.name}",
-                                              style: TextStyle(fontSize: 9.sp),
-                                            )
-                                          ],
+                                              sized0hx05,
+                                              Text(
+                                                "${data?.name}",
+                                                style:
+                                                    TextStyle(fontSize: 9.sp),
+                                              )
+                                            ],
+                                          ),
                                         );
                                       },
                                     ),

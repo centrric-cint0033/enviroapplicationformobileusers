@@ -26,6 +26,9 @@ abstract class ProfileViewModelBase with Store {
   ApiResponse<ProfileRespModel> profilepageResponse =
       ApiResponse<ProfileRespModel>();
 
+  @observable
+  bool passObscure = false;
+
   @action
   Future<void> profileviewmodelfunction() async {
     profilepageResponse =

@@ -52,7 +52,7 @@ class HomePage extends StatelessWidget {
                   children: [
                     _buildBox('assets/images/star.svg', 'Sales',
                         onTap: () => onsalesfunction(context),
-                        permission:permission?.sales?.view),
+                        permission: permission?.sales?.view),
                     _buildBox('assets/images/truck.svg', 'Vehicle',
                         onTap: () => vehiclefunction(context),
                         permission: permission?.vehicle?.view),
@@ -126,6 +126,7 @@ class HomePage extends StatelessWidget {
                 fontSize: 13.sp,
                 color: permission == true ? Colors.black : Colors.grey.shade400,
               ),
+              overflow: TextOverflow.ellipsis,
             ),
           ],
         ),

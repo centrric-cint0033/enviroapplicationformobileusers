@@ -12,6 +12,7 @@ import 'package:enviro_mobile_application/widgets/ww_folder_card.dart';
 import 'package:enviro_mobile_application/widgets/ww_search_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
 @RoutePage()
@@ -23,7 +24,7 @@ class IntranetMainPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: cmnTitleWidget('Inranet'),
+        title: cmnTitleWidget('Intranet'),
       ),
       body: SingleChildScrollView(child: Observer(builder: (context) {
         final res = vmIntranet.intranetFoldersResponse;
@@ -43,6 +44,7 @@ class IntranetMainPage extends StatelessWidget {
                       child: Text('Folders'),
                     ),
                     CmButton(
+                        height: 35.w,
                         text: 'Add folders+',
                         onPressed: () {
                           showCreateEditDialog(context, createEditTap: (v) {

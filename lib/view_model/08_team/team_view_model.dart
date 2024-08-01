@@ -12,6 +12,7 @@ import 'package:enviro_mobile_application/model/10_team/team_designtion_res_mode
 import 'package:enviro_mobile_application/model/10_team/team_profile_employee_details_res_model/team_profile_employee_details_res_model.dart';
 import 'package:enviro_mobile_application/model/10_team/team_res_model/team_res_model.dart';
 import 'package:enviro_mobile_application/model/10_team/time_sheet_res_model/time_sheet_res_model.dart';
+import 'package:enviro_mobile_application/model/10_team/time_sheet_res_model/week.dart';
 import 'package:enviro_mobile_application/model/10_team/time_sheet_res_model/weekly_report.dart';
 import 'package:enviro_mobile_application/service/11_team/team_service.dart';
 import 'package:enviro_mobile_application/utilis/api_endpoints/customprint.dart';
@@ -67,6 +68,8 @@ abstract class TeamViewModelBase with Store {
   @observable
   ApiResponse<TeamDesigntionResModel> designationsResponse =
       ApiResponse<TeamDesigntionResModel>();
+  @observable
+  bool passObscure = false;
   @observable
   ApiResponse<String> deleteEmployeeResponse = ApiResponse<String>();
   @observable
@@ -1095,6 +1098,14 @@ abstract class TeamViewModelBase with Store {
 
   @action
   totalHrsFn() {
+    int hrs1 = int.tryParse(vmTeam.hrsController1.text) ?? 0;
+    int hrs2 = int.tryParse(vmTeam.hrsController2.text) ?? 0;
+    int hrs3 = int.tryParse(vmTeam.hrsController3.text) ?? 0;
+    vmTeam.totalHrsController.text = (hrs1 + hrs2 + hrs3).toString();
+  }
+
+  @action
+  totalWorkedHrsFn(Week data) {
     int hrs1 = int.tryParse(vmTeam.hrsController1.text) ?? 0;
     int hrs2 = int.tryParse(vmTeam.hrsController2.text) ?? 0;
     int hrs3 = int.tryParse(vmTeam.hrsController3.text) ?? 0;

@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:auto_route/auto_route.dart';
 import 'package:enviro_mobile_application/Routepage/approutes.gr.dart';
 import 'package:enviro_mobile_application/model/10_team/time_sheet_res_model/time_sheet_res_model.dart';
@@ -137,22 +135,21 @@ class TimeSheetPage extends StatelessWidget {
                 ListView.builder(
                   shrinkWrap: true,
                   itemCount: 7, // Always 7 items
+                  physics: NeverScrollableScrollPhysics(),
                   itemBuilder: (context, index) {
                     final week = timeSheet?.weeklyReport?.week;
                     final data = (week != null && index < week.length)
                         ? week[index]
                         : null;
-                    log(data?.totalHoursWorked.toString() ?? "");
                     String inputweekStartDate = data?.date ??
                         DateFormat('dd-MM-yyyy').format(weekDates[0]);
                     DateTime parsedDate =
                         DateFormat('dd-MM-yyyy').parse(inputweekStartDate);
                     String formattedDate =
                         DateFormat('yyyy-MM-dd').format(parsedDate);
-
                     vmTeam.weekStartDate =
                         data?.date != null ? inputweekStartDate : formattedDate;
-
+                    // vmTeam.totalWorkedHrsFn(data!);
                     return InkWell(
                       onTap: () {
                         vmTeam.totalHrsController.text =
@@ -212,8 +209,8 @@ class TimeSheetPage extends StatelessWidget {
                                 data?.day ??
                                     DateFormat('EEEE').format(weekDates[index]),
                               ),
-                              cmTableCell(data?.start ?? "0"),
-                              cmTableCell(data?.finish ?? "0"),
+                              cmTableCell(data?.start ?? "-"),
+                              cmTableCell(data?.finish ?? "-"),
                               cmTableCell("${data?.totalHoursWorked ?? "0"}"),
                               cmTableCell("${data?.normalHours ?? "0"}"),
                               cmTableCell("${data?.fullTime ?? "0"}"),

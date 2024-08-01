@@ -1,6 +1,5 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:enviro_mobile_application/model/03_vehicle/vehicle_model/vehicle_model.dart';
-import 'package:enviro_mobile_application/utilis/Appthemes.dart';
 import 'package:enviro_mobile_application/utilis/constant.dart';
 import 'package:enviro_mobile_application/view/08_team/team_widgets/date_picker.dart';
 import 'package:enviro_mobile_application/view/10_shedule/schedule_widget.dart';
@@ -40,20 +39,20 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                ElevatedButton(
-                  onPressed: () {
-                    context.router.pop();
-                  },
-                  style: ElevatedButton.styleFrom(
-                      side: const BorderSide(color: Appthemes.cPrimary),
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 30.w,
-                      )),
-                  child: const Text(
-                    'Back',
-                    style: TextStyle(color: Appthemes.cPrimary),
-                  ),
-                ),
+                // ElevatedButton(
+                //   onPressed: () {
+                //     context.router.pop();
+                //   },
+                //   style: ElevatedButton.styleFrom(
+                //       side: const BorderSide(color: Appthemes.cPrimary),
+                //       padding: EdgeInsets.symmetric(
+                //         horizontal: 30.w,
+                //       )),
+                //   child: const Text(
+                //     'Back',
+                //     style: TextStyle(color: Appthemes.cPrimary),
+                //   ),
+                // ),
                 sized0hx10,
                 expandedRowShowText(
                   "Date and Time",
@@ -73,18 +72,24 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                   "${vmSchedule.shedulecardResponse.data?[index].drivers?[driversIndex].name}",
                   fromType: false,
                 ),
-                requiredRowWidget("Hour Meter Start", "",
-                    fromType: true, controller: vmSchedule.hoursMeterCntrller),
+                requiredRowWidget(
+                  "Hour Meter Start",
+                  "",
+                  fromType: true,
+                  controller: vmSchedule.hoursMeterCntrller,
+                ),
                 cmCheckBoxRow("I am Fit for Work", vmSchedule.checkboxValue,
                     onChanged: (bool? value) {
                   if (value != null) {
                     vmSchedule.updateCheckboxValue(value);
+                    FocusScope.of(context).unfocus();
                   }
                 }),
                 cmCheckBoxRow("I have approriate valid  licence",
                     vmSchedule.checkboxValue2, onChanged: (bool? value) {
                   if (value != null) {
                     vmSchedule.updateCheckboxValue2(value);
+                    FocusScope.of(context).unfocus();
                   }
                 }),
                 cmCheckBoxRow(
@@ -92,6 +97,7 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                     onChanged: (bool? value) {
                   if (value != null) {
                     vmSchedule.updateCheckboxValue3(value);
+                    FocusScope.of(context).unfocus();
                   }
                 }),
                 sized0hx05,
@@ -382,12 +388,14 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                     onChanged: (bool? value) {
                   if (value != null) {
                     vmSchedule.updateCheckboxValueFn1(value);
+                    FocusScope.of(context).unfocus();
                   }
                 }),
                 cmCheckBoxRow3("Fittings", vmSchedule.selectFittingsCheckbox,
                     onChanged: (bool? value) {
                   if (value != null) {
                     vmSchedule.updateCheckboxValueFn2(value);
+                    FocusScope.of(context).unfocus();
                   }
                 }),
                 cmCheckBoxRow3(
@@ -395,12 +403,14 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                     onChanged: (bool? value) {
                   if (value != null) {
                     vmSchedule.updateCheckboxValueFn3(value);
+                    FocusScope.of(context).unfocus();
                   }
                 }),
                 cmCheckBoxRow3("PPE", vmSchedule.selectPPECheckbox,
                     onChanged: (bool? value) {
                   if (value != null) {
                     vmSchedule.updateCheckboxValueFn4(value);
+                    FocusScope.of(context).unfocus();
                   }
                 }),
                 Padding(
@@ -430,6 +440,7 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                     onChanged: (bool? value) {
                   if (value != null) {
                     vmSchedule.updateCheckboxValueFn5(value);
+                    FocusScope.of(context).unfocus();
                   }
                 }),
                 cmCheckBoxRow3(
@@ -437,6 +448,7 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                     onChanged: (bool? value) {
                   if (value != null) {
                     vmSchedule.updateCheckboxValueFn6(value);
+                    FocusScope.of(context).unfocus();
                   }
                 }),
                 cmCheckBoxRow3(
@@ -444,12 +456,14 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                     onChanged: (bool? value) {
                   if (value != null) {
                     vmSchedule.updateCheckboxValueFn7(value);
+                    FocusScope.of(context).unfocus();
                   }
                 }),
                 cmCheckBoxRow3("Spill Kit", vmSchedule.selectSpillKitCheckbox,
                     onChanged: (bool? value) {
                   if (value != null) {
                     vmSchedule.updateCheckboxValueFn8(value);
+                    FocusScope.of(context).unfocus();
                   }
                 }),
                 sized0hx10,
@@ -464,18 +478,18 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
+                        Text(
                           'Any Faults to report(of any category) & any additional information',
-                          style: TextStyle(),
+                          style: TextStyle(fontSize: 10.sp),
                         ),
-                        const SizedBox(height: 8),
+                        sized0hx05,
                         TextField(
                           controller: vmSchedule.faultsReportCntrller,
                           decoration: const InputDecoration(
                             hintText: 'Type Here...',
                             border: InputBorder.none,
                           ),
-                          style: const TextStyle(),
+                          style: TextStyle(fontSize: 10.sp),
                         ),
                       ],
                     ),
@@ -499,6 +513,7 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                       onChanged: (bool? value) {
                         if (value != null) {
                           vmSchedule.updateCheckboxValueFn9(value);
+                          FocusScope.of(context).unfocus();
                         }
                       },
                       checkColor: Colors.white,
@@ -566,6 +581,7 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                       onPressed: () {
                         if (vmSchedule.showSubmitButton == true) {
                           cmSubmitFn(context);
+                          FocusScope.of(context).unfocus();
                         }
                       },
                       style: ElevatedButton.styleFrom(
@@ -878,8 +894,8 @@ Widget cmCheckBoxRow2(
         InkWell(
           onTap: onTap,
           child: Container(
-            height: 13.h,
-            width: 13.h,
+            height: 16.w,
+            width: 16.w,
             decoration: BoxDecoration(
                 border: Border.all(),
                 color: value == "No issue"
@@ -891,7 +907,7 @@ Widget cmCheckBoxRow2(
                 child: Icon(
               Icons.check,
               color: Colors.white,
-              size: 10.h,
+              size: 12.sp,
             )),
           ),
         ),

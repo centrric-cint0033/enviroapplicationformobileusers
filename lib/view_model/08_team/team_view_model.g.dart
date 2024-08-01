@@ -178,6 +178,22 @@ mixin _$TeamViewModel on TeamViewModelBase, Store {
     });
   }
 
+  late final _$passObscureAtom =
+      Atom(name: 'TeamViewModelBase.passObscure', context: context);
+
+  @override
+  bool get passObscure {
+    _$passObscureAtom.reportRead();
+    return super.passObscure;
+  }
+
+  @override
+  set passObscure(bool value) {
+    _$passObscureAtom.reportWrite(value, super.passObscure, () {
+      super.passObscure = value;
+    });
+  }
+
   late final _$deleteEmployeeResponseAtom =
       Atom(name: 'TeamViewModelBase.deleteEmployeeResponse', context: context);
 
@@ -1607,6 +1623,17 @@ mixin _$TeamViewModel on TeamViewModelBase, Store {
   }
 
   @override
+  dynamic totalWorkedHrsFn(Week data) {
+    final _$actionInfo = _$TeamViewModelBaseActionController.startAction(
+        name: 'TeamViewModelBase.totalWorkedHrsFn');
+    try {
+      return super.totalWorkedHrsFn(data);
+    } finally {
+      _$TeamViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   void submitButtonValidation() {
     final _$actionInfo = _$TeamViewModelBaseActionController.startAction(
         name: 'TeamViewModelBase.submitButtonValidation');
@@ -1663,6 +1690,7 @@ addFolderResponse: ${addFolderResponse},
 deleteFolderResponse: ${deleteFolderResponse},
 editFolderResponse: ${editFolderResponse},
 designationsResponse: ${designationsResponse},
+passObscure: ${passObscure},
 deleteEmployeeResponse: ${deleteEmployeeResponse},
 createTeamResponse: ${createTeamResponse},
 editTeamResponse: ${editTeamResponse},
