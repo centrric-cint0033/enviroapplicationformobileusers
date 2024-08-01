@@ -170,7 +170,8 @@ void ohsfunction(BuildContext context) {
 }
 
 void intranetfuntion(BuildContext context) {
-  vmIntranet.intranetviewmodelfunction(1);
+  vmIntranet.folderSearchCntrlr.text = "";
+  vmIntranet.getIntranetFoldersApi(parentFolderId: 1);
   context.router.pushNamed(RouteNames.intranetpage);
 }
 

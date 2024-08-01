@@ -52,7 +52,8 @@ class TeamProfileScreen extends StatelessWidget {
                 return res.loading
                     ? Center(child: wwCustomLoader())
                     : SingleChildScrollView(
-                      keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+                        keyboardDismissBehavior:
+                            ScrollViewKeyboardDismissBehavior.onDrag,
                         child: Column(children: [
                           sized0hx10,
                           if (vmProfile.profilepageResponse.data?.employeeId ==
@@ -252,11 +253,11 @@ class TeamProfileScreen extends StatelessWidget {
                             hintText: 'Search by Folder Name',
                           ),
                           sized0hx10,
-                          folderList?.folders != null &&
-                                  folderList!.folders!.isNotEmpty
-                              ? ress.loading
-                                  ? wwCustomLoader()
-                                  : ListView.separated(
+                          ress.loading
+                              ? wwCustomLoader()
+                              : folderList?.folders != null &&
+                                      folderList!.folders!.isNotEmpty
+                                  ? ListView.separated(
                                       physics:
                                           const NeverScrollableScrollPhysics(),
                                       shrinkWrap: true,
@@ -314,11 +315,11 @@ class TeamProfileScreen extends StatelessWidget {
                                         }
                                       },
                                     )
-                              : Center(
-                                  child: SvgPicture.asset(
-                                    "assets/images/empty1.svg",
-                                  ),
-                                ),
+                                  : Center(
+                                      child: SvgPicture.asset(
+                                        "assets/images/empty1.svg",
+                                      ),
+                                    ),
                         ]),
                       );
               },

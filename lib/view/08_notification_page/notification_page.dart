@@ -6,6 +6,7 @@ import 'package:enviro_mobile_application/view_model/04_ohs/ohs_view_model.dart'
 import 'package:enviro_mobile_application/view_model/08_team/team_view_model.dart';
 import 'package:enviro_mobile_application/widgets/cm_add_notification_dialog.dart';
 import 'package:enviro_mobile_application/widgets/cmbutton.dart';
+import 'package:enviro_mobile_application/widgets/cmn_action_icon.dart';
 import 'package:enviro_mobile_application/widgets/cmn_title_textwidget.dart';
 import 'package:enviro_mobile_application/widgets/drawer.dart';
 import 'package:enviro_mobile_application/widgets/ww_response_handler.dart';
@@ -27,11 +28,10 @@ class NotificationPage extends StatelessWidget {
     // );
     return Scaffold(
       drawer: cmnDrawer(context),
-      appBar: AppBar(title: cmnTitleWidget('Notifications'), actions: [
-        IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.notifications_active_rounded))
-      ]),
+      appBar: AppBar(
+        title: cmnTitleWidget('Notifications'),
+        actions: [notificationButton(context, onPressAction: false)],
+      ),
       body: Column(
         children: [
           Padding(

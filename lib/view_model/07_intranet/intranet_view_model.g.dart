@@ -154,24 +154,6 @@ mixin _$IntranetViewModel on IntranetViewModelBase, Store {
     });
   }
 
-  late final _$intranetfolderinsideResponseAtom = Atom(
-      name: 'IntranetViewModelBase.intranetfolderinsideResponse',
-      context: context);
-
-  @override
-  ApiResponse<FolderListModel> get intranetfolderinsideResponse {
-    _$intranetfolderinsideResponseAtom.reportRead();
-    return super.intranetfolderinsideResponse;
-  }
-
-  @override
-  set intranetfolderinsideResponse(ApiResponse<FolderListModel> value) {
-    _$intranetfolderinsideResponseAtom
-        .reportWrite(value, super.intranetfolderinsideResponse, () {
-      super.intranetfolderinsideResponse = value;
-    });
-  }
-
   late final _$intranetFoldersResponseAtom = Atom(
       name: 'IntranetViewModelBase.intranetFoldersResponse', context: context);
 
@@ -288,26 +270,6 @@ mixin _$IntranetViewModel on IntranetViewModelBase, Store {
     _$expiryFileResponseAtom.reportWrite(value, super.expiryFileResponse, () {
       super.expiryFileResponse = value;
     });
-  }
-
-  late final _$intranetviewmodelfunctionAsyncAction = AsyncAction(
-      'IntranetViewModelBase.intranetviewmodelfunction',
-      context: context);
-
-  @override
-  Future<void> intranetviewmodelfunction(int id) {
-    return _$intranetviewmodelfunctionAsyncAction
-        .run(() => super.intranetviewmodelfunction(id));
-  }
-
-  late final _$intranetfolderinsidefunctionAsyncAction = AsyncAction(
-      'IntranetViewModelBase.intranetfolderinsidefunction',
-      context: context);
-
-  @override
-  Future<void> intranetfolderinsidefunction(int id) {
-    return _$intranetfolderinsidefunctionAsyncAction
-        .run(() => super.intranetfolderinsidefunction(id));
   }
 
   late final _$getIntranetFoldersApiAsyncAction = AsyncAction(
@@ -475,7 +437,6 @@ loadinIndexFile: ${loadinIndexFile},
 loadinIndexFolder: ${loadinIndexFolder},
 selectedExpiryDate: ${selectedExpiryDate},
 intranetpageResponse: ${intranetpageResponse},
-intranetfolderinsideResponse: ${intranetfolderinsideResponse},
 intranetFoldersResponse: ${intranetFoldersResponse},
 intranetFoldersResponse2: ${intranetFoldersResponse2},
 addFolderResponse: ${addFolderResponse},

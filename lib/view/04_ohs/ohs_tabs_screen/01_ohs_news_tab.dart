@@ -21,6 +21,7 @@ class NewsOhsTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
+      keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
       child: Column(
         children: [
           sized0hx05,
@@ -95,11 +96,10 @@ class NewsOhsTab extends StatelessWidget {
           Observer(builder: (context) {
             final res = vmOhs.ohsFoldersResponse;
             FolderListModel? folderList = res.data;
-            return folderList?.folders != null &&
-                    folderList!.folders!.isNotEmpty
-                ? res.loading
-                    ? wwCustomLoader()
-                    : ListView.separated(
+            return res.loading
+                ? wwCustomLoader()
+                : folderList?.folders != null && folderList!.folders!.isNotEmpty
+                    ? ListView.separated(
                         physics: const NeverScrollableScrollPhysics(),
                         shrinkWrap: true,
                         separatorBuilder: (BuildContext context, int index) =>
@@ -142,11 +142,11 @@ class NewsOhsTab extends StatelessWidget {
                           }
                         },
                       )
-                : Center(
-                    child: SvgPicture.asset(
-                      "assets/images/empty1.svg",
-                    ),
-                  );
+                    : Center(
+                        child: SvgPicture.asset(
+                          "assets/images/empty1.svg",
+                        ),
+                      );
           }),
           sized0hx30
         ],

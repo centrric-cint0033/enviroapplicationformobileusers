@@ -41,65 +41,117 @@ class LeaveApplicationPage extends StatelessWidget {
           return Padding(
             padding: screenWidth,
             child: SingleChildScrollView(
+                keyboardDismissBehavior:
+                    ScrollViewKeyboardDismissBehavior.onDrag,
                 child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "I wish to apply for the following leave:(Tick the appropriate leave)",
-                  style: TextStyle(fontSize: 9.sp, color: Colors.grey.shade600),
-                ),
-                ListView.builder(
-                  itemCount: 4,
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemBuilder: (context, index) {
-                    List<String> checkboxTexts = [
-                      'Annual Leave',
-                      'Leave Without Pay',
-                      'Personal Leave(Give Reason)',
-                      'Long Service Leave'
-                    ];
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "I wish to apply for the following leave:(Tick the appropriate leave)",
+                      style: TextStyle(
+                          fontSize: 9.sp, color: Colors.grey.shade600),
+                    ),
+                    ListView.builder(
+                      itemCount: 4,
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemBuilder: (context, index) {
+                        List<String> checkboxTexts = [
+                          'Annual Leave',
+                          'Leave Without Pay',
+                          'Personal Leave(Give Reason)',
+                          'Long Service Leave'
+                        ];
 
-                    if (index == 0) {
-                      // Change index to 0 for "Annual Leave"
-                      return Column(
-                        children: [
-                          Row(
+                        if (index == 0) {
+                          // Change index to 0 for "Annual Leave"
+                          return Column(
                             children: [
-                              Observer(
-                                builder: (_) => Checkbox(
-                                  value: vmTeam.selectedCheckboxIndex == index,
-                                  onChanged: (bool? value) {
-                                    if (value == true) {
-                                      vmTeam.selectCheckbox(index);
-                                    } else {
-                                      vmTeam.selectCheckbox(null);
-                                    }
-                                  },
-                                ),
+                              Row(
+                                children: [
+                                  Observer(
+                                    builder: (_) => Checkbox(
+                                      value:
+                                          vmTeam.selectedCheckboxIndex == index,
+                                      onChanged: (bool? value) {
+                                        if (value == true) {
+                                          vmTeam.selectCheckbox(index);
+                                        } else {
+                                          vmTeam.selectCheckbox(null);
+                                        }
+                                      },
+                                    ),
+                                  ),
+                                  Text(
+                                    checkboxTexts[index],
+                                    style: TextStyle(fontSize: 9.sp),
+                                  ),
+                                ],
                               ),
                               Text(
-                                checkboxTexts[index],
-                                style: TextStyle(fontSize: 9.sp),
+                                "* Annual Leave must be applied for at least 2 weeks before leave is to be taken",
+                                style: TextStyle(
+                                    fontSize: 8.w,
+                                    color:
+                                        const Color.fromARGB(255, 240, 94, 84)),
                               ),
                             ],
-                          ),
-                          Text(
-                            "* Annual Leave must be applied for at least 2 weeks before leave is to be taken",
-                            style: TextStyle(
-                                fontSize: 8.w,
-                                color: const Color.fromARGB(255, 240, 94, 84)),
-                          ),
-                        ],
-                      );
-                    } else if (index == 2) {
-                      return Column(
-                        children: [
-                          Observer(
+                          );
+                        } else if (index == 2) {
+                          return Column(
+                            children: [
+                              Observer(
+                                builder: (_) => Row(
+                                  children: [
+                                    Checkbox(
+                                      value:
+                                          vmTeam.selectedCheckboxIndex == index,
+                                      onChanged: (bool? value) {
+                                        if (value == true) {
+                                          vmTeam.selectCheckbox(index);
+                                        } else {
+                                          vmTeam.selectCheckbox(null);
+                                        }
+                                      },
+                                    ),
+                                    Text(
+                                      checkboxTexts[index],
+                                      style: TextStyle(fontSize: 9.sp),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Observer(builder: (context) {
+                                return vmTeam.showReason
+                                    ? Container(
+                                        height: 45.h,
+                                        decoration: BoxDecoration(
+                                            color: Colors.grey.shade200),
+                                        child: TextField(
+                                          controller: vmTeam.reasonController,
+                                          textAlign: TextAlign.left,
+                                          style: TextStyle(fontSize: 9.sp),
+                                          decoration: InputDecoration(
+                                            hintText: 'Type your Reason...',
+                                            hintStyle: TextStyle(
+                                                fontSize: 9.sp,
+                                                fontWeight: FontWeight.normal),
+                                            border: InputBorder.none,
+                                          ),
+                                        ),
+                                      )
+                                    : SizedBox();
+                              }),
+                            ],
+                          );
+                        } else {
+                          return Observer(
                             builder: (_) => Row(
                               children: [
                                 Checkbox(
                                   value: vmTeam.selectedCheckboxIndex == index,
+                                  checkColor: Appthemes.cWhite,
+                                  activeColor: Appthemes.cPrimary,
                                   onChanged: (bool? value) {
                                     if (value == true) {
                                       vmTeam.selectCheckbox(index);
@@ -114,310 +166,160 @@ class LeaveApplicationPage extends StatelessWidget {
                                 ),
                               ],
                             ),
-                          ),
-                          Observer(builder: (context) {
-                            return vmTeam.showReason
-                                ? Container(
-                                    height: 45.h,
-                                    decoration: BoxDecoration(
-                                        color: Colors.grey.shade200),
-                                    child: TextField(
-                                      controller: vmTeam.reasonController,
-                                      textAlign: TextAlign.left,
-                                      style: TextStyle(fontSize: 9.sp),
-                                      decoration: InputDecoration(
-                                        hintText: 'Type your Reason...',
-                                        hintStyle: TextStyle(
-                                            fontSize: 9.sp,
-                                            fontWeight: FontWeight.normal),
-                                        border: InputBorder.none,
-                                      ),
-                                    ),
-                                  )
-                                : SizedBox();
-                          }),
-                        ],
-                      );
-                    } else {
-                      return Observer(
-                        builder: (_) => Row(
-                          children: [
-                            Checkbox(
-                              value: vmTeam.selectedCheckboxIndex == index,
-                              checkColor: Appthemes.cWhite,
-                              activeColor: Appthemes.cPrimary,
-                              onChanged: (bool? value) {
-                                if (value == true) {
-                                  vmTeam.selectCheckbox(index);
-                                } else {
-                                  vmTeam.selectCheckbox(null);
-                                }
+                          );
+                        }
+                      },
+                    ),
+                    sized0hx05,
+                    CmButton(
+                      text: "Add File",
+                      height: 35.w,
+                      width: 86.w,
+                      color: vmTeam.showAddFile
+                          ? Appthemes.cPrimary
+                          : Colors.blue.shade100,
+                      onPressed: () {
+                        if (vmTeam.showAddFile == true)
+                          vmTeam.addFileLeavedFn();
+                      },
+                    ),
+                    if (vmTeam.addFileLeave != "") ...[
+                      sized0hx05,
+                      InkWell(
+                        onTap: () async {
+                          OpenFile.open(
+                            vmTeam.addFileLeave,
+                          );
+                        },
+                        onLongPress: () {
+                          showConfirmationAlert(
+                              context: context,
+                              onSubmit: () {
+                                vmTeam.addFileLeave = "";
                               },
-                            ),
-                            Text(
-                              checkboxTexts[index],
-                              style: TextStyle(fontSize: 9.sp),
-                            ),
-                          ],
-                        ),
-                      );
-                    }
-                  },
-                ),
-                sized0hx05,
-                CmButton(
-                  text: "Add File",
-                  height: 35.w,
-                  width: 86.w,
-                  color: vmTeam.showAddFile
-                      ? Appthemes.cPrimary
-                      : Colors.blue.shade100,
-                  onPressed: () {
-                    if (vmTeam.showAddFile == true) vmTeam.addFileLeavedFn();
-                  },
-                ),
-                if (vmTeam.addFileLeave != "") ...[
-                  sized0hx05,
-                  InkWell(
-                    onTap: () async {
-                      OpenFile.open(
-                        vmTeam.addFileLeave,
-                      );
-                    },
-                    onLongPress: () {
-                      showConfirmationAlert(
-                          context: context,
-                          onSubmit: () {
-                            vmTeam.addFileLeave = "";
-                          },
-                          content: "Are you sure you want to delete?",
-                          submitText: "Yes",
-                          submitText2: "No");
-                    },
-                    child: Container(
-                      height: 80.h,
-                      width: 80.h, // Width of each item
-                      foregroundDecoration: BoxDecoration(border: Border.all()),
-                      child: Column(
-                        children: [
-                          sized0hx05,
-                          Expanded(
-                            child: isImage
-                                ? Image.file(
-                                    File(imagePath),
-                                    fit: BoxFit.cover,
-                                  )
-                                : Icon(
-                                    Icons.file_copy,
-                                    size: 20.w,
-                                    color: Colors.red,
-                                  ),
+                              content: "Are you sure you want to delete?",
+                              submitText: "Yes",
+                              submitText2: "No");
+                        },
+                        child: Container(
+                          height: 80.h,
+                          width: 80.h, // Width of each item
+                          foregroundDecoration:
+                              BoxDecoration(border: Border.all()),
+                          child: Column(
+                            children: [
+                              sized0hx05,
+                              Expanded(
+                                child: isImage
+                                    ? Image.file(
+                                        File(imagePath),
+                                        fit: BoxFit.cover,
+                                      )
+                                    : Icon(
+                                        Icons.file_copy,
+                                        size: 20.w,
+                                        color: Colors.red,
+                                      ),
+                              ),
+                              Expanded(
+                                  child: Text(
+                                fileName,
+                                style: TextStyle(
+                                    fontSize: 9.sp,
+                                    overflow: TextOverflow.ellipsis),
+                              ))
+                            ],
                           ),
-                          Expanded(
-                              child: Text(
-                            fileName,
-                            style: TextStyle(
-                                fontSize: 9.sp,
-                                overflow: TextOverflow.ellipsis),
-                          ))
-                        ],
-                      ),
+                        ),
+                      )
+                    ],
+                    sized0hx05,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "Leave From:",
+                          style: TextStyle(
+                              fontSize: 9.sp, color: Colors.grey.shade700),
+                        ),
+                        cmDatePicker(context, vmTeam.selectedLeaveFromdate,
+                            (date) => vmTeam.datePickerFn8(date, context))
+                      ],
                     ),
-                  )
-                ],
-                sized0hx05,
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "Leave To:",
+                          style: TextStyle(
+                              fontSize: 9.sp, color: Colors.grey.shade700),
+                        ),
+                        cmDatePicker(context, vmTeam.selectedLeaveTodate,
+                            (date) => vmTeam.datePickerFn9(date, context))
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "Last Day of Work:",
+                          style: TextStyle(
+                              fontSize: 9.sp, color: Colors.grey.shade700),
+                        ),
+                        cmDatePicker(context, vmTeam.selectedLastDayofWork,
+                            (date) => vmTeam.datePickerFn10(date, context))
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "Return to Work on",
+                          style: TextStyle(
+                              fontSize: 9.sp, color: Colors.grey.shade700),
+                        ),
+                        cmDatePicker(context, vmTeam.selectedReturnToWorkDate,
+                            (date) => vmTeam.datePickerFn11(date, context))
+                      ],
+                    ),
                     Text(
-                      "Leave From:",
+                      "Number of Days and Hours:",
                       style: TextStyle(
-                          fontSize: 9.sp, color: Colors.grey.shade700),
+                          fontSize: 9.sp, fontWeight: FontWeight.bold),
                     ),
-                    cmDatePicker(context, vmTeam.selectedLeaveFromdate,
-                        (date) => vmTeam.datePickerFn8(date, context))
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "Leave To:",
-                      style: TextStyle(
-                          fontSize: 9.sp, color: Colors.grey.shade700),
-                    ),
-                    cmDatePicker(context, vmTeam.selectedLeaveTodate,
-                        (date) => vmTeam.datePickerFn9(date, context))
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "Last Day of Work:",
-                      style: TextStyle(
-                          fontSize: 9.sp, color: Colors.grey.shade700),
-                    ),
-                    cmDatePicker(context, vmTeam.selectedLastDayofWork,
-                        (date) => vmTeam.datePickerFn10(date, context))
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "Return to Work on",
-                      style: TextStyle(
-                          fontSize: 9.sp, color: Colors.grey.shade700),
-                    ),
-                    cmDatePicker(context, vmTeam.selectedReturnToWorkDate,
-                        (date) => vmTeam.datePickerFn11(date, context))
-                  ],
-                ),
-                Text(
-                  "Number of Days and Hours:",
-                  style: TextStyle(fontSize: 9.sp, fontWeight: FontWeight.bold),
-                ),
-                Observer(builder: (context) {
-                  vmTeam.totalDayFn();
-                  vmTeam.totalHrsFn();
-                  return Table(
-                    border: TableBorder.all(), // Adds a border to the table
-                    defaultVerticalAlignment: TableCellVerticalAlignment.middle,
-                    columnWidths: {
-                      0: FlexColumnWidth(160.w),
-                      1: FixedColumnWidth(80.w),
-                      2: FlexColumnWidth(80.w),
-                    },
-                    children: [
-                      TableRow(
+                    Observer(builder: (context) {
+                      vmTeam.totalDayFn();
+                      vmTeam.totalHrsFn();
+                      return Table(
+                        border: TableBorder.all(), // Adds a border to the table
+                        defaultVerticalAlignment:
+                            TableCellVerticalAlignment.middle,
+                        columnWidths: {
+                          0: FlexColumnWidth(160.w),
+                          1: FixedColumnWidth(80.w),
+                          2: FlexColumnWidth(80.w),
+                        },
                         children: [
-                          Padding(
-                            padding: EdgeInsets.only(left: 5.w),
-                            child: TableCell(
-                              child: Align(
-                                alignment: Alignment.centerLeft,
-                                child: Text(
-                                  'Normal Working Days',
-                                  style: TextStyle(fontSize: 9.sp),
+                          TableRow(
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.only(left: 5.w),
+                                child: TableCell(
+                                  child: Align(
+                                    alignment: Alignment.centerLeft,
+                                    child: Text(
+                                      'Normal Working Days',
+                                      style: TextStyle(fontSize: 9.sp),
+                                    ),
+                                  ),
                                 ),
                               ),
-                            ),
-                          ),
-                          TableCell(
-                            child: Center(
-                                child: TextField(
-                              controller: vmTeam.dayController1,
-                              style: TextStyle(fontSize: 9.sp),
-                              keyboardType: TextInputType.number,
-                              onChanged: (value) {
-                                vmTeam.totalDayFn();
-                              },
-                              decoration: InputDecoration(
-                                hintText: 'Day',
-                                hintStyle: TextStyle(
-                                    fontSize: 9.sp,
-                                    color: Colors.grey.shade400),
-                                border: InputBorder.none,
-                                contentPadding:
-                                    const EdgeInsets.symmetric(horizontal: 8.0),
-                              ),
-                            )),
-                          ),
-                          TableCell(
-                            child: Center(
-                                child: TextField(
-                              keyboardType: TextInputType.number,
-                              controller: vmTeam.hrsController1,
-                              style: TextStyle(fontSize: 9.sp),
-                              onChanged: (value) {
-                                vmTeam.totalHrsFn();
-                              },
-                              decoration: InputDecoration(
-                                hintText: 'Hrs',
-                                hintStyle: TextStyle(
-                                    fontSize: 9.sp,
-                                    color: Colors.grey.shade400),
-                                border: InputBorder.none,
-                                contentPadding:
-                                    const EdgeInsets.symmetric(horizontal: 8.0),
-                              ),
-                            )),
-                          ),
-                        ],
-                      ),
-                      TableRow(
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.only(left: 5.w),
-                            child: TableCell(
-                              child: Align(
-                                  alignment: Alignment.centerLeft,
-                                  child: Text('Public Holidays',
-                                      style: TextStyle(fontSize: 9.sp))),
-                            ),
-                          ),
-                          TableCell(
-                            child: Center(
-                                child: TextField(
-                              controller: vmTeam.dayController2,
-                              style: TextStyle(fontSize: 9.sp),
-                              keyboardType: TextInputType.number,
-                              onChanged: (value) {
-                                vmTeam.totalDayFn();
-                              },
-                              decoration: InputDecoration(
-                                hintText: 'Day',
-                                hintStyle: TextStyle(
-                                    fontSize: 9.sp,
-                                    color: Colors.grey.shade400),
-                                border: InputBorder.none,
-                                contentPadding:
-                                    const EdgeInsets.symmetric(horizontal: 8.0),
-                              ),
-                            )),
-                          ),
-                          TableCell(
-                            child: Center(
-                                child: TextField(
-                              controller: vmTeam.hrsController2,
-                              keyboardType: TextInputType.number,
-                              style: TextStyle(fontSize: 9.sp),
-                              onChanged: (value) {
-                                vmTeam.totalHrsFn();
-                              },
-                              decoration: InputDecoration(
-                                hintText: 'Hrs',
-                                hintStyle: TextStyle(
-                                    fontSize: 9.sp,
-                                    color: Colors.grey.shade400),
-                                border: InputBorder.none,
-                                contentPadding:
-                                    const EdgeInsets.symmetric(horizontal: 8.0),
-                              ),
-                            )),
-                          ),
-                        ],
-                      ),
-                      TableRow(
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.only(left: 5.w),
-                            child: TableCell(
-                              child: Align(
-                                  alignment: Alignment.centerLeft,
-                                  child: Text('Other',
-                                      style: TextStyle(fontSize: 9.sp))),
-                            ),
-                          ),
-                          TableCell(
-                            child: Column(
-                              children: [
-                                Center(
+                              TableCell(
+                                child: Center(
                                     child: TextField(
-                                  controller: vmTeam.dayController3,
-                                  keyboardType: TextInputType.number,
+                                  controller: vmTeam.dayController1,
                                   style: TextStyle(fontSize: 9.sp),
+                                  keyboardType: TextInputType.number,
                                   onChanged: (value) {
                                     vmTeam.totalDayFn();
                                   },
@@ -431,130 +333,242 @@ class LeaveApplicationPage extends StatelessWidget {
                                         horizontal: 8.0),
                                   ),
                                 )),
-                              ],
-                            ),
-                          ),
-                          TableCell(
-                            child: Center(
-                                child: TextField(
-                              controller: vmTeam.hrsController3,
-                              keyboardType: TextInputType.number,
-                              style: TextStyle(fontSize: 9.sp),
-                              onChanged: (value) {
-                                vmTeam.totalHrsFn();
-                              },
-                              decoration: InputDecoration(
-                                hintText: 'Hrs',
-                                hintStyle: TextStyle(
-                                    fontSize: 9.sp,
-                                    color: Colors.grey.shade400),
-                                border: InputBorder.none,
-                                contentPadding:
-                                    const EdgeInsets.symmetric(horizontal: 8.0),
                               ),
-                            )),
+                              TableCell(
+                                child: Center(
+                                    child: TextField(
+                                  keyboardType: TextInputType.number,
+                                  controller: vmTeam.hrsController1,
+                                  style: TextStyle(fontSize: 9.sp),
+                                  onChanged: (value) {
+                                    vmTeam.totalHrsFn();
+                                  },
+                                  decoration: InputDecoration(
+                                    hintText: 'Hrs',
+                                    hintStyle: TextStyle(
+                                        fontSize: 9.sp,
+                                        color: Colors.grey.shade400),
+                                    border: InputBorder.none,
+                                    contentPadding: const EdgeInsets.symmetric(
+                                        horizontal: 8.0),
+                                  ),
+                                )),
+                              ),
+                            ],
+                          ),
+                          TableRow(
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.only(left: 5.w),
+                                child: TableCell(
+                                  child: Align(
+                                      alignment: Alignment.centerLeft,
+                                      child: Text('Public Holidays',
+                                          style: TextStyle(fontSize: 9.sp))),
+                                ),
+                              ),
+                              TableCell(
+                                child: Center(
+                                    child: TextField(
+                                  controller: vmTeam.dayController2,
+                                  style: TextStyle(fontSize: 9.sp),
+                                  keyboardType: TextInputType.number,
+                                  onChanged: (value) {
+                                    vmTeam.totalDayFn();
+                                  },
+                                  decoration: InputDecoration(
+                                    hintText: 'Day',
+                                    hintStyle: TextStyle(
+                                        fontSize: 9.sp,
+                                        color: Colors.grey.shade400),
+                                    border: InputBorder.none,
+                                    contentPadding: const EdgeInsets.symmetric(
+                                        horizontal: 8.0),
+                                  ),
+                                )),
+                              ),
+                              TableCell(
+                                child: Center(
+                                    child: TextField(
+                                  controller: vmTeam.hrsController2,
+                                  keyboardType: TextInputType.number,
+                                  style: TextStyle(fontSize: 9.sp),
+                                  onChanged: (value) {
+                                    vmTeam.totalHrsFn();
+                                  },
+                                  decoration: InputDecoration(
+                                    hintText: 'Hrs',
+                                    hintStyle: TextStyle(
+                                        fontSize: 9.sp,
+                                        color: Colors.grey.shade400),
+                                    border: InputBorder.none,
+                                    contentPadding: const EdgeInsets.symmetric(
+                                        horizontal: 8.0),
+                                  ),
+                                )),
+                              ),
+                            ],
+                          ),
+                          TableRow(
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.only(left: 5.w),
+                                child: TableCell(
+                                  child: Align(
+                                      alignment: Alignment.centerLeft,
+                                      child: Text('Other',
+                                          style: TextStyle(fontSize: 9.sp))),
+                                ),
+                              ),
+                              TableCell(
+                                child: Column(
+                                  children: [
+                                    Center(
+                                        child: TextField(
+                                      controller: vmTeam.dayController3,
+                                      keyboardType: TextInputType.number,
+                                      style: TextStyle(fontSize: 9.sp),
+                                      onChanged: (value) {
+                                        vmTeam.totalDayFn();
+                                      },
+                                      decoration: InputDecoration(
+                                        hintText: 'Day',
+                                        hintStyle: TextStyle(
+                                            fontSize: 9.sp,
+                                            color: Colors.grey.shade400),
+                                        border: InputBorder.none,
+                                        contentPadding:
+                                            const EdgeInsets.symmetric(
+                                                horizontal: 8.0),
+                                      ),
+                                    )),
+                                  ],
+                                ),
+                              ),
+                              TableCell(
+                                child: Center(
+                                    child: TextField(
+                                  controller: vmTeam.hrsController3,
+                                  keyboardType: TextInputType.number,
+                                  style: TextStyle(fontSize: 9.sp),
+                                  onChanged: (value) {
+                                    vmTeam.totalHrsFn();
+                                  },
+                                  decoration: InputDecoration(
+                                    hintText: 'Hrs',
+                                    hintStyle: TextStyle(
+                                        fontSize: 9.sp,
+                                        color: Colors.grey.shade400),
+                                    border: InputBorder.none,
+                                    contentPadding: const EdgeInsets.symmetric(
+                                        horizontal: 8.0),
+                                  ),
+                                )),
+                              ),
+                            ],
+                          ),
+                          TableRow(
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.only(left: 5.w),
+                                child: TableCell(
+                                  child: Align(
+                                      alignment: Alignment.centerLeft,
+                                      child: Text('Total',
+                                          style: TextStyle(
+                                              fontSize: 9.sp,
+                                              color: Appthemes.cPrimary))),
+                                ),
+                              ),
+                              TableCell(
+                                child: Center(
+                                    child: TextField(
+                                  controller: vmTeam.totalDayController,
+                                  style: TextStyle(
+                                      fontSize: 9.sp,
+                                      color: Appthemes.cPrimary),
+                                  keyboardType: TextInputType.number,
+                                  enabled: false,
+                                  decoration: InputDecoration(
+                                    hintText: 'Day',
+                                    hintStyle: TextStyle(
+                                        fontSize: 9.sp,
+                                        color: Colors.grey.shade400),
+                                    border: InputBorder.none,
+                                    contentPadding: const EdgeInsets.symmetric(
+                                        horizontal: 8.0),
+                                  ),
+                                )),
+                              ),
+                              TableCell(
+                                child: Center(
+                                    child: TextField(
+                                  controller: vmTeam.totalHrsController,
+                                  style: TextStyle(
+                                      fontSize: 9.sp,
+                                      color: Appthemes.cPrimary),
+                                  keyboardType: TextInputType.number,
+                                  enabled: false,
+                                  decoration: InputDecoration(
+                                    hintText: 'Hrs',
+                                    hintStyle: TextStyle(
+                                        fontSize: 9.sp,
+                                        color: Colors.grey.shade400),
+                                    border: InputBorder.none,
+                                    contentPadding: const EdgeInsets.symmetric(
+                                        horizontal: 8.0),
+                                  ),
+                                )),
+                              ),
+                            ],
                           ),
                         ],
-                      ),
-                      TableRow(
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.only(left: 5.w),
-                            child: TableCell(
-                              child: Align(
-                                  alignment: Alignment.centerLeft,
-                                  child: Text('Total',
-                                      style: TextStyle(
-                                          fontSize: 9.sp,
-                                          color: Appthemes.cPrimary))),
-                            ),
-                          ),
-                          TableCell(
-                            child: Center(
-                                child: TextField(
-                              controller: vmTeam.totalDayController,
-                              style: TextStyle(
-                                  fontSize: 9.sp, color: Appthemes.cPrimary),
-                              keyboardType: TextInputType.number,
-                              enabled: false,
-                              decoration: InputDecoration(
-                                hintText: 'Day',
-                                hintStyle: TextStyle(
-                                    fontSize: 9.sp,
-                                    color: Colors.grey.shade400),
-                                border: InputBorder.none,
-                                contentPadding:
-                                    const EdgeInsets.symmetric(horizontal: 8.0),
-                              ),
-                            )),
-                          ),
-                          TableCell(
-                            child: Center(
-                                child: TextField(
-                              controller: vmTeam.totalHrsController,
-                              style: TextStyle(
-                                  fontSize: 9.sp, color: Appthemes.cPrimary),
-                              keyboardType: TextInputType.number,
-                              enabled: false,
-                              decoration: InputDecoration(
-                                hintText: 'Hrs',
-                                hintStyle: TextStyle(
-                                    fontSize: 9.sp,
-                                    color: Colors.grey.shade400),
-                                border: InputBorder.none,
-                                contentPadding:
-                                    const EdgeInsets.symmetric(horizontal: 8.0),
-                              ),
-                            )),
-                          ),
-                        ],
-                      ),
-                    ],
-                  );
-                }),
-                sized0hx05,
-                Text(
-                  "Comments:",
-                  style: TextStyle(fontSize: 9.sp, fontWeight: FontWeight.bold),
-                ),
-                sized0hx05,
-                Container(
-                  height: 45.h,
-                  decoration: BoxDecoration(color: Colors.grey.shade200),
-                  child: TextField(
-                    controller: vmTeam.commentsControllerr,
-                    textAlign: TextAlign.left,
-                    style: TextStyle(fontSize: 9.sp),
-                    decoration: InputDecoration(
-                      hintText: 'Type Here...',
-                      hintStyle: TextStyle(
-                          fontSize: 9.sp, fontWeight: FontWeight.normal),
-                      border: InputBorder.none,
+                      );
+                    }),
+                    sized0hx05,
+                    Text(
+                      "Comments:",
+                      style: TextStyle(
+                          fontSize: 9.sp, fontWeight: FontWeight.bold),
                     ),
-                  ),
-                ),
-                sized0hx05,
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: Text(
-                    "Date : ${DateFormat('dd-MM-yyyy').format(DateTime.now())}",
-                    style:
-                        TextStyle(fontSize: 9.sp, color: Colors.grey.shade700),
-                  ),
-                ),
-                sized0hx05,
-                CmButton(
-                  text: "Apply Leave",
-                  loading: vmTeam.addLeaveResponse.loading,
-                  indicatorColor: Colors.white,
-                  onPressed: () {
-                    cmSubmitFn(context);
-                  },
-                  color: Appthemes.cPrimary,
-                ),
-                sized0hx50
-              ],
-            )),
+                    sized0hx05,
+                    Container(
+                      height: 45.h,
+                      decoration: BoxDecoration(color: Colors.grey.shade200),
+                      child: TextField(
+                        controller: vmTeam.commentsControllerr,
+                        textAlign: TextAlign.left,
+                        style: TextStyle(fontSize: 9.sp),
+                        decoration: InputDecoration(
+                          hintText: 'Type Here...',
+                          hintStyle: TextStyle(
+                              fontSize: 9.sp, fontWeight: FontWeight.normal),
+                          border: InputBorder.none,
+                        ),
+                      ),
+                    ),
+                    sized0hx05,
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: Text(
+                        "Date : ${DateFormat('dd-MM-yyyy').format(DateTime.now())}",
+                        style: TextStyle(
+                            fontSize: 9.sp, color: Colors.grey.shade700),
+                      ),
+                    ),
+                    sized0hx05,
+                    CmButton(
+                      text: "Apply Leave",
+                      loading: vmTeam.addLeaveResponse.loading,
+                      indicatorColor: Colors.white,
+                      onPressed: () {
+                        cmSubmitFn(context);
+                      },
+                      color: Appthemes.cPrimary,
+                    ),
+                    sized0hx50
+                  ],
+                )),
           );
         }),
       ),

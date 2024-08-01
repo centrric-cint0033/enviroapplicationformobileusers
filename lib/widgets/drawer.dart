@@ -65,7 +65,7 @@ Drawer cmnDrawer(BuildContext context) {
                                 vmProfile.profilepageResponse.data?.username ??
                                     '',
                                 style: TextStyle(
-                                    fontSize: 12.sp,
+                                    fontSize: 11.sp,
                                     overflow: TextOverflow.ellipsis),
                               ),
                               sized0hx03,
@@ -95,6 +95,7 @@ Drawer cmnDrawer(BuildContext context) {
                           );
                         }),
                       ),
+                      sized0wx05
                     ],
                   ),
                 ),

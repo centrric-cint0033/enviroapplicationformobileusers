@@ -1983,7 +1983,7 @@ class VehicleFolderDetailRouteArgs {
 /// [_i47.VehicleFolderPage]
 class VehicleFolderRoute extends _i49.PageRouteInfo<VehicleFolderRouteArgs> {
   VehicleFolderRoute({
-    _i50.Key? key,
+    _i53.Key? key,
     int? vehicleId,
     String? vehicleType,
     List<_i49.PageRouteInfo>? children,
@@ -2010,7 +2010,7 @@ class VehicleFolderRouteArgs {
     this.vehicleType,
   });
 
-  final _i50.Key? key;
+  final _i53.Key? key;
 
   final int? vehicleId;
 

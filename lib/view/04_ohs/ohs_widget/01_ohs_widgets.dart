@@ -23,11 +23,19 @@ class WWcard extends StatelessWidget {
         child: Row(
           children: [
             data?.dp != null
-                ? CachedNetworkImage(
-                    height: 50.w,
-                    width: 50.w,
-                    imageUrl: data!.dp!,
-                    fit: BoxFit.cover)
+                ? Container(
+                    height: 38.w,
+                    width: 38.w,
+                    decoration: BoxDecoration(
+                        image: DecorationImage(
+                            image: CachedNetworkImageProvider(data!.dp!)),
+                        shape: BoxShape.circle),
+                    // child: CachedNetworkImage(
+                    //     height: 50.w,
+                    //     width: 50.w,
+                    //     imageUrl: data!.dp!,
+                    //     fit: BoxFit.cover),
+                  )
                 : const Placeholder(),
             sized0wx10,
             Expanded(

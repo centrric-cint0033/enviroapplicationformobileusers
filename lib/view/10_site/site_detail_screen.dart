@@ -1,4 +1,5 @@
 import 'package:enviro_mobile_application/widgets/cm_title.dart';
+import 'package:enviro_mobile_application/widgets/ww_customLoading.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:auto_route/auto_route.dart';
@@ -36,88 +37,89 @@ class SiteDetailScreen extends StatelessWidget {
           appBar: AppBar(
             elevation: 1,
             title: cmnTitleWidget("Site Profile"),
-            actions: [
-              vmSite.detailLoading
-                  ? const CupertinoActivityIndicator()
-                  : const SizedBox.shrink(),
-              SizedBox(width: 5.w),
-            ],
           ),
           body: SingleChildScrollView(
             controller: vmPreviousSale.previousSaleController,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Divider(
-                  color: Colors.grey.shade300,
-                  thickness: 4,
-                ),
-                sized0hx10,
-                Padding(
-                  padding: screenWidth,
-                  child: Row(
+            child: vmSite.detailLoading
+                ? SizedBox(
+                    height: MediaQuery.of(context).size.height,
+                    child: wwCustomLoader())
+                : Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      IconWidget(length: 60.h),
-                      const Spacer(),
-                      // CommonTextBtn(
-                      //   btnText: "Edit",
-                      //   onTap: () {},
-                      // ),
-                      // sized0wx20,
+                      Divider(
+                        color: Colors.grey.shade300,
+                        thickness: 4,
+                      ),
+                      sized0hx10,
+                      Padding(
+                        padding: screenWidth,
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            IconWidget(length: 60.h),
+                            const Spacer(),
+                            // CommonTextBtn(
+                            //   btnText: "Edit",
+                            //   onTap: () {},
+                            // ),
+                            // sized0wx20,
+                          ],
+                        ),
+                      ),
+                      for (MapEntry<String, String> data in map.entries) ...{
+                        sized0hx10,
+                        Padding(
+                          padding: screenWidth,
+                          child: KeyValueTextWidget(
+                            maxLines: 4,
+                            keyName: data.key,
+                            value: ":${data.value}",
+                          ),
+                        ),
+                      },
+                      sized0hx10,
+                      cmTitle("Company and Invoicing Details",
+                          blackText: true, fontWeight: FontWeight.bold),
+                      for (MapEntry<String, String> data
+                          in company.entries) ...{
+                        sized0hx10,
+                        Padding(
+                          padding: screenWidth,
+                          child: KeyValueTextWidget(
+                            maxLines: 4,
+                            keyName: data.key,
+                            value: data.value,
+                            keyStyle: Theme.of(context)
+                                .textTheme
+                                .titleSmall
+                                ?.copyWith(
+                                  fontSize: 12.sp,
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.normal,
+                                ),
+                          ),
+                        ),
+                      },
+                      sized0hx03,
+                      Divider(color: Colors.grey.shade300, thickness: 4),
+                      Padding(
+                        padding: screenWidth,
+                        child: FolderTitleAndSearchWidget(id: site.id),
+                      ),
+                      Padding(
+                        padding: screenWidth,
+                        child: SiteFolderListWidget(id: site.id),
+                      ),
+                      sized0hx03,
+                      Divider(color: Colors.grey.shade300, thickness: 4),
+                      sized0hx10,
+                      Padding(
+                        padding: screenWidth,
+                        child: const PreviouseSalesWidget(),
+                      ),
                     ],
                   ),
-                ),
-                for (MapEntry<String, String> data in map.entries) ...{
-                  sized0hx10,
-                  Padding(
-                    padding: screenWidth,
-                    child: KeyValueTextWidget(
-                      maxLines: 4,
-                      keyName: data.key,
-                      value: ":${data.value}",
-                    ),
-                  ),
-                },
-                sized0hx10,
-                cmTitle("Company and Invoicing Details",
-                    blackText: true, fontWeight: FontWeight.bold),
-                for (MapEntry<String, String> data in company.entries) ...{
-                  sized0hx10,
-                  Padding(
-                    padding: screenWidth,
-                    child: KeyValueTextWidget(
-                      maxLines: 4,
-                      keyName: data.key,
-                      value: data.value,
-                      keyStyle:
-                          Theme.of(context).textTheme.titleSmall?.copyWith(
-                                fontSize: 12.sp,
-                                color: Colors.black,
-                                fontWeight: FontWeight.normal,
-                              ),
-                    ),
-                  ),
-                },
-                sized0hx03,
-                Divider(color: Colors.grey.shade300, thickness: 4),
-                Padding(
-                  padding: screenWidth,
-                  child: FolderTitleAndSearchWidget(id: site.id),
-                ),
-                Padding(
-                  padding: screenWidth,
-                  child: SiteFolderListWidget(id: site.id),
-                ),
-                sized0hx03,
-                Divider(color: Colors.grey.shade300, thickness: 4),
-                sized0hx10,
-                Padding(
-                  padding: screenWidth,
-                  child: const PreviouseSalesWidget(),
-                ),
-              ],
-            ),
           ),
         );
       },
