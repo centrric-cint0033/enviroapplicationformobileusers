@@ -40,8 +40,8 @@ Drawer cmnDrawer(BuildContext context) {
                     children: [
                       Observer(builder: (_) {
                         return Container(
-                          width: 45.w,
-                          height: 65.w,
+                          width: 50.w,
+                          height: 50.w,
                           decoration: BoxDecoration(
                               shape: BoxShape.circle,
                               image: DecorationImage(
@@ -119,7 +119,9 @@ Drawer cmnDrawer(BuildContext context) {
                     Navigator.pop(context);
                   },
                 ),
-                if (permission?.sales?.view == true)
+
+                if (permission?.sales?.view == true) ...[
+                  sized0hx10,
                   ListTile(
                     leading: SvgPicture.asset('assets/images/star.svg',
                         width: 18.w, height: 18.w, color: Appthemes.cPrimary),
@@ -135,7 +137,9 @@ Drawer cmnDrawer(BuildContext context) {
                       Navigator.pop(context);
                     },
                   ),
-                if (permission?.vehicle?.view == true)
+                ],
+
+                if (permission?.vehicle?.view == true) ...[
                   ListTile(
                     leading: SvgPicture.asset('assets/images/truck.svg',
                         width: 18.w, height: 18.w, color: Appthemes.cPrimary),
@@ -151,7 +155,10 @@ Drawer cmnDrawer(BuildContext context) {
                       Navigator.pop(context);
                     },
                   ),
-                if (permission?.ohs?.view == true)
+                ],
+
+                if (permission?.ohs?.view == true) ...[
+                  sized0hx10,
                   ListTile(
                     leading: SvgPicture.asset('assets/images/move(1).svg',
                         width: 18.w, height: 18.w, color: Appthemes.cPrimary),
@@ -166,8 +173,10 @@ Drawer cmnDrawer(BuildContext context) {
                       ohsfunction(context);
                       Navigator.pop(context);
                     },
-                  ),
-                if (permission?.site?.view == true)
+                  )
+                ],
+                if (permission?.site?.view == true) ...[
+                  sized0hx10,
                   ListTile(
                     leading: SvgPicture.asset('assets/images/user.svg',
                         width: 18.w, height: 18.w, color: Appthemes.cPrimary),
@@ -182,9 +191,11 @@ Drawer cmnDrawer(BuildContext context) {
                       navigateToSitesPage(context: context);
                       Navigator.pop(context);
                     },
-                  ),
+                  )
+                ],
 
-                if (permission?.scheduling?.view == true)
+                if (permission?.scheduling?.view == true) ...[
+                  sized0hx10,
                   ListTile(
                     leading: SvgPicture.asset('assets/images/calendar.svg',
                         width: 18.w, height: 18.w, color: Appthemes.cPrimary),
@@ -200,7 +211,10 @@ Drawer cmnDrawer(BuildContext context) {
                       Navigator.pop(context);
                     },
                   ),
-                if (permission?.intranet?.view == true)
+                ],
+
+                if (permission?.intranet?.view == true) ...[
+                  sized0hx10,
                   ListTile(
                     leading: SvgPicture.asset('assets/images/globe.svg',
                         width: 18.w, height: 18.w, color: Appthemes.cPrimary),
@@ -216,7 +230,10 @@ Drawer cmnDrawer(BuildContext context) {
                       Navigator.pop(context);
                     },
                   ),
+                ],
+
                 // if (permission?.team?.view == true)
+                sized0hx10,
                 ListTile(
                   leading: SvgPicture.asset('assets/images/users.svg',
                       width: 18.w, height: 18.w, color: Appthemes.cPrimary),
@@ -235,6 +252,7 @@ Drawer cmnDrawer(BuildContext context) {
               ],
             ),
           ),
+          sized0hx10,
           ListTile(
             leading: const Padding(
               padding: EdgeInsets.all(8.0),
