@@ -122,96 +122,86 @@ class JobCardPage extends StatelessWidget {
                             expandedRowShowsTextWidget(
                                 "Additional Email",
                                 additionalEmail.isNotEmpty
-                                    ? Expanded(
-                                        flex: 3,
-                                        child: ListView.builder(
-                                          shrinkWrap: true,
-                                          itemCount: additionalEmail.length,
-                                          itemBuilder: (context, index) {
-                                            return Padding(
-                                              padding:
-                                                  EdgeInsets.only(bottom: 8.w),
-                                              child: Container(
-                                                constraints: BoxConstraints(
-                                                  minHeight: 20
-                                                      .w, // Set minimum height
-                                                ),
-                                                decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          12.w),
-                                                  color: Appthemes.cPrimary,
-                                                ),
-                                                child: SingleChildScrollView(
-                                                  scrollDirection:
-                                                      Axis.horizontal,
-                                                  child: Row(
-                                                    mainAxisSize:
-                                                        MainAxisSize.min,
-                                                    children: [
-                                                      Padding(
-                                                        padding: EdgeInsets
-                                                            .symmetric(
-                                                                horizontal:
-                                                                    8.w),
-                                                        child: Flexible(
-                                                          child: Text(
-                                                            additionalEmail[
-                                                                index],
-                                                            style: TextStyle(
-                                                              fontSize: 10.sp,
-                                                              color:
-                                                                  Colors.white,
-                                                            ),
-                                                            softWrap: false,
-                                                            overflow:
-                                                                TextOverflow
-                                                                    .visible,
+                                    ? ListView.builder(
+                                        shrinkWrap: true,
+                                        itemCount: additionalEmail.length,
+                                        itemBuilder: (context, index) {
+                                          return Padding(
+                                            padding:
+                                                EdgeInsets.only(bottom: 8.w),
+                                            child: Container(
+                                              constraints: BoxConstraints(
+                                                minHeight:
+                                                    20.w, // Set minimum height
+                                              ),
+                                              decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(12.w),
+                                                color: Appthemes.cPrimary,
+                                              ),
+                                              child: SingleChildScrollView(
+                                                scrollDirection:
+                                                    Axis.horizontal,
+                                                child: Row(
+                                                  mainAxisSize:
+                                                      MainAxisSize.min,
+                                                  children: [
+                                                    Padding(
+                                                      padding:
+                                                          EdgeInsets.symmetric(
+                                                              horizontal: 8.w),
+                                                      child: Flexible(
+                                                        child: Text(
+                                                          additionalEmail[
+                                                              index],
+                                                          style: TextStyle(
+                                                            fontSize: 10.sp,
+                                                            color: Colors.white,
                                                           ),
+                                                          softWrap: false,
+                                                          overflow: TextOverflow
+                                                              .visible,
                                                         ),
                                                       ),
-                                                    ],
-                                                  ),
+                                                    ),
+                                                  ],
                                                 ),
                                               ),
-                                            );
-                                          },
-                                        ),
+                                            ),
+                                          );
+                                        },
                                       )
                                     : SizedBox()),
                             sized0hx10,
                             expandedRowShowsTextWidget(
                                 "Additional Contact Phone",
                                 additionalPhoneNo.isNotEmpty
-                                    ? Expanded(
-                                        flex: 3,
-                                        child: ListView.builder(
-                                          shrinkWrap: true,
-                                          itemCount: additionalPhoneNo.length,
-                                          itemBuilder: (context, index) {
-                                            return Padding(
-                                              padding:
-                                                  EdgeInsets.only(bottom: 8.w),
-                                              child: Container(
-                                                height: 20.w,
-                                                decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            12.w),
-                                                    color: Appthemes.cPrimary),
-                                                child: Center(
-                                                    child: Expanded(
-                                                  child: Text(
-                                                    additionalPhoneNo[index],
-                                                    style: TextStyle(
-                                                        fontSize: 10.sp,
-                                                        color: Colors.white),
-                                                  ),
-                                                )),
-                                              ),
-                                            );
-                                          },
-                                        ),
+                                    ? ListView.builder(
+                                        shrinkWrap: true,
+                                        itemCount: additionalPhoneNo.length,
+                                        itemBuilder: (context, index) {
+                                          return Padding(
+                                            padding:
+                                                EdgeInsets.only(bottom: 8.w),
+                                            child: Container(
+                                              height: 20.w,
+                                              decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          12.w),
+                                                  color: Appthemes.cPrimary),
+                                              child: Center(
+                                                  child: Expanded(
+                                                child: Text(
+                                                  additionalPhoneNo[index],
+                                                  style: TextStyle(
+                                                      fontSize: 10.sp,
+                                                      color: Colors.white),
+                                                ),
+                                              )),
+                                            ),
+                                          );
+                                        },
                                       )
                                     : SizedBox()),
                             sized0hx10,

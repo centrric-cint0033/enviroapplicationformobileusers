@@ -85,6 +85,7 @@ class EditMaintenanceReportPage extends StatelessWidget {
                       Observer(builder: (context) {
                         return CmButton(
                           text: "Save",
+                          height: 35.w,
                           width: 120.w,
                           indicatorColor: Colors.white,
                           loading: vmVehicle.editedMaintenanceResponse.loading,

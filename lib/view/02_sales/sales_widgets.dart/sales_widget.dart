@@ -59,7 +59,7 @@ Row expandedRowShowsTextWidget(String firsValue, Widget secondValue) => Row(
         sized0wx05,
         showBlackText(':'),
         sized0wx05,
-        secondValue
+        Expanded(flex: 3, child: secondValue)
       ],
     );
 

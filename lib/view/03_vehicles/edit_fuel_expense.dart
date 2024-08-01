@@ -111,16 +111,19 @@ class EditFuelExpensePage extends StatelessWidget {
                               hintText: "volume",
                               keyboardType:
                                   const TextInputType.numberWithOptions())),
-                      CmButton(
-                        text: "Save",
-                        width: 120.w,
-                        color: Appthemes.cPrimary,
-                        indicatorColor: Colors.white,
-                        loading: vmVehicle.editeFuelExpenseResponse.loading,
-                        onPressed: () {
-                          cmSaveFn(context);
-                        },
-                      )
+                      Observer(builder: (context) {
+                        return CmButton(
+                          text: "Save",
+                          height: 35.w,
+                          width: 120.w,
+                          color: Appthemes.cPrimary,
+                          indicatorColor: Colors.white,
+                          loading: vmVehicle.editeFuelExpenseResponse.loading,
+                          onPressed: () {
+                            cmSaveFn(context);
+                          },
+                        );
+                      })
                     ])),
               ),
             ],
@@ -148,7 +151,7 @@ class EditFuelExpensePage extends StatelessWidget {
               : vmVehicle.selectedVehicleAddMaintenance?.id,
           date: DateFormat('yyyy-MM-dd')
               .format(vmVehicle.selectedFuelExpenseDate!),
-          time: formatTimeOfDay(vmVehicle.selectedFuelExpenseTime!),
+          time: formatTimeOfDay24hrFormat(vmVehicle.selectedFuelExpenseTime!),
           truckRego: vmVehicle.regoCntrlr.text,
           filledBy: vmVehicle.filledByCntrlr.text,
           currentReadingBefore: vmVehicle.currentReadingCntrlr.text,

@@ -240,6 +240,7 @@ class AddMaintenanceReportPage extends StatelessWidget {
                         ],
                         CmButton(
                           text: "Submit",
+                          height: 35.w,
                           width: 120.w,
                           color: Appthemes.cPrimary,
                           indicatorColor: Colors.white,

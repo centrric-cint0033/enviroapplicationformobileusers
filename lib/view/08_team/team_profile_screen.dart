@@ -341,6 +341,7 @@ class TeamProfileScreen extends StatelessWidget {
   Widget listData(TeamProfileEmployeeDetailsResModel? data) {
     return buildCardDataOrder(
       [
+        sized0hx05,
         expandedRowShowText('Address', data?.address ?? ""),
         sized0hx05,
         expandedRowShowText('Date of Birth', data?.dateOfBirth ?? ""),
@@ -363,6 +364,7 @@ class TeamProfileScreen extends StatelessWidget {
         sized0hx05,
         expandedRowShowText(
             'Emergency Contact No', data?.emergencyContact ?? ""),
+        sized0hx05,
       ],
     );
   }
