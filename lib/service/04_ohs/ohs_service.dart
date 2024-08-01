@@ -14,7 +14,7 @@ abstract class IohsService {
       ohsNewsServiceApi();
   Future<Either<MainFailure, List<OhsRespModel>>> ohsNewsServiceApi1();
   Future<Either<Map<MainFailure, dynamic>, List<OhsRespModel>>>
-      ohsNotificationServiceApi({int? page});
+      ohsNotificationServiceApi({int? page, bool? fromArchive});
   Future<Either<Map<MainFailure, dynamic>, OhsRespModel>>
       ohsAddNotificationServiceApi({required Map<String, String> data});
   Future<Either<Map<MainFailure, dynamic>, OhsRespModel>> ohsAddNewsServiceApi(
@@ -107,8 +107,10 @@ class OhsService implements IohsService {
 
   @override
   Future<Either<Map<MainFailure, dynamic>, List<OhsRespModel>>>
-      ohsNotificationServiceApi({int? page}) async {
-    String pagination = 'view/${page ?? 1}/?limit=8&archive=read';
+      ohsNotificationServiceApi({int? page, bool? fromArchive}) async {
+    String pagination = fromArchive == true
+        ? 'view/${page ?? 1}/?limit=8&archive=read'
+        : 'view/${page ?? 1}/?limit=8';
     var response = await getIt<HttpService>().request(
         authenticated: true,
         method: HttpMethod.get,

@@ -171,7 +171,6 @@ void ohsfunction(BuildContext context) {
 
 void intranetfuntion(BuildContext context) {
   vmIntranet.intranetviewmodelfunction(1);
-
   context.router.pushNamed(RouteNames.intranetpage);
 }
 
@@ -181,6 +180,7 @@ void shedulefunction(BuildContext context) {
 }
 
 void vehiclefunction(BuildContext context) async {
+  vmVehicle.vehicleTextCtr.text = "";
   context.router.pushNamed(RouteNames.vehiclemainpage);
   await vmVehicle.masterTruckApi();
   await vmVehicle.masterCarApi();

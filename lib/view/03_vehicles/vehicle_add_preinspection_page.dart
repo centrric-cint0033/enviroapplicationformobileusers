@@ -30,6 +30,7 @@ class VehicleAddPreInspectionPage extends StatelessWidget {
           FocusScope.of(context).unfocus();
         },
         child: SingleChildScrollView(
+          keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
           padding: screenWidth,
           child: Observer(builder: (context) {
             vmVehicle.preInspectionSubmitButtonValidation();

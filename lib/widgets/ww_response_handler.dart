@@ -24,7 +24,8 @@ class WWResponseHandler extends StatelessWidget {
     Widget handerUI() => data.loading
         ? wwCustomLoader()
         : data.errors != null
-            ? Center(child: wwErrorData(onTap: onTap, mainFailure: data.errors))
+            ? Center(
+                child: wwErrorData(onTap: onTap, mainFailure: data.errors))
             : isEmpty ?? true
                 ? const EmptyDataWidget()
                 : child;

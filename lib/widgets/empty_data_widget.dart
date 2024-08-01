@@ -8,24 +8,27 @@ class EmptyDataWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          CircleAvatar(
-            radius: 28.r,
-            backgroundColor: Theme.of(context).colorScheme.primary,
-            child: const Icon(
-              Icons.error_outline,
-              size: 33,
+    return SizedBox(
+      height: 120.w,
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            CircleAvatar(
+              radius: 28.r,
+              backgroundColor: Theme.of(context).colorScheme.primary,
+              child: const Icon(
+                Icons.error_outline,
+                size: 33,
+              ),
             ),
-          ),
-          sized0hx05,
-          Text(
-            "No Data Found",
-            style: Theme.of(context).textTheme.bodySmall,
-          ),
-        ],
+            sized0hx05,
+            Text(
+              "No Data Found",
+              style: Theme.of(context).textTheme.bodySmall,
+            ),
+          ],
+        ),
       ),
     );
   }

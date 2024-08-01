@@ -53,6 +53,8 @@ class EmployeeFilesPage extends StatelessWidget {
               return res.loading
                   ? Center(child: wwCustomLoader())
                   : SingleChildScrollView(
+                      keyboardDismissBehavior:
+                          ScrollViewKeyboardDismissBehavior.onDrag,
                       child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [

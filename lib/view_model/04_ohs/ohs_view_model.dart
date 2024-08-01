@@ -688,7 +688,8 @@ abstract class OHSViewModelBase with Store {
     if (page == null) archiveNotificationPagination();
     archiveNotificationResponse = archiveNotificationResponse.copyWith(
         errors: null, loading: page == null, paginationLoading: page != null);
-    final result = await ohsService.ohsNotificationServiceApi(page: page);
+    final result = await ohsService.ohsNotificationServiceApi(
+        page: page, fromArchive: true);
     return result.fold(
       (l) {
         archiveNotificationResponse = archiveNotificationResponse.copyWith(

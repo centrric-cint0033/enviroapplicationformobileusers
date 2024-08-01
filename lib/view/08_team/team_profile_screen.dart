@@ -52,6 +52,7 @@ class TeamProfileScreen extends StatelessWidget {
                 return res.loading
                     ? Center(child: wwCustomLoader())
                     : SingleChildScrollView(
+                      keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
                         child: Column(children: [
                           sized0hx10,
                           if (vmProfile.profilepageResponse.data?.employeeId ==

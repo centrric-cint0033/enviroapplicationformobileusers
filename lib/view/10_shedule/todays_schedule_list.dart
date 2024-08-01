@@ -276,9 +276,9 @@ class TodaysScheduleList extends StatelessWidget {
                                     ),
                                   ),
                                   expandedRowShowText2(
-                                    "Time",
-                                    res.startTime ?? '',
-                                  ),
+                                      "Time",
+                                      convertTimeTo12HourFormat(
+                                          res.startTime ?? "")),
                                   expandedRowShowText2(
                                     "Type",
                                     res.wasteTypeStr ?? '',
@@ -379,7 +379,7 @@ class TodaysScheduleList extends StatelessWidget {
                   vmSchedule.driversIndex = index;
                 }
                 return Padding(
-                  padding: EdgeInsets.only(left: 4.h),
+                  padding: EdgeInsets.only(left: 4.w),
                   child: Container(
                     height: 40.w,
                     width: MediaQuery.of(context).size.width / 3,
@@ -389,37 +389,40 @@ class TodaysScheduleList extends StatelessWidget {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Row(children: [
-                          SizedBox(
-                            height: 20.w,
-                            width: 20.w,
-                            child: DecoratedBox(
-                              decoration: BoxDecoration(
-                                  color: Colors.grey.shade700,
-                                  shape: BoxShape.circle),
-                              child: dpImage("${driver?.dp}"),
+                        Padding(
+                          padding: EdgeInsets.only(left: 4.w),
+                          child: Row(children: [
+                            SizedBox(
+                              height: 20.w,
+                              width: 20.w,
+                              child: DecoratedBox(
+                                decoration: BoxDecoration(
+                                    color: Colors.grey.shade700,
+                                    shape: BoxShape.circle),
+                                child: dpImage("${driver?.dp}"),
+                              ),
                             ),
-                          ),
-                          SizedBox(
-                            width: 5.h,
-                          ),
-                          Expanded(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "${driver?.name}",
-                                  style: TextStyle(fontSize: 8.h),
-                                ),
-                                Text(
-                                  "${driver?.registration}",
-                                  style: TextStyle(fontSize: 8.h),
-                                )
-                              ],
+                            SizedBox(
+                              width: 5.h,
                             ),
-                          )
-                        ]),
+                            Expanded(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    "${driver?.name}",
+                                    style: TextStyle(fontSize: 8.h),
+                                  ),
+                                  Text(
+                                    "${driver?.registration}",
+                                    style: TextStyle(fontSize: 8.h),
+                                  )
+                                ],
+                              ),
+                            )
+                          ]),
+                        ),
                         driver?.type == "Primary Driver"
                             ? Container(
                                 decoration: BoxDecoration(

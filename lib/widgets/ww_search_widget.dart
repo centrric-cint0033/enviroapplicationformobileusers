@@ -40,7 +40,7 @@ class WWTextField extends StatelessWidget {
             expands: description,
             maxLines: maxLines,
             textAlignVertical: TextAlignVertical.center,
-            style: const TextStyle(color: Colors.black),
+            style: TextStyle(color: Colors.black, fontSize: 10.sp),
             decoration: InputDecoration(
               hintText: hintText ?? 'Search here',
               hintStyle: TextStyle(fontSize: 10.sp),
