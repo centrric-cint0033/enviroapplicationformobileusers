@@ -63,18 +63,12 @@ class WWcommonTabBar extends StatelessWidget {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Text(value1!),
-                        Container(
-                            height: 20.w,
-                            width: 20.w,
-                            decoration: BoxDecoration(
-                                border: Border.all(color: Colors.white),
-                                shape: BoxShape.circle),
-                            child: Center(
-                              child: Text(
-                                siteValue1 ?? "",
-                                style: TextStyle(fontSize: 9.sp),
-                              ),
-                            )),
+                        Center(
+                          child: Text(
+                            siteValue1 ?? "",
+                            style: TextStyle(fontSize: 9.sp),
+                          ),
+                        ),
                       ],
                     ),
                   ),
@@ -84,18 +78,12 @@ class WWcommonTabBar extends StatelessWidget {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Text(value2!),
-                        Container(
-                            height: 20.w,
-                            width: 20.w,
-                            decoration: BoxDecoration(
-                                border: Border.all(color: Colors.white),
-                                shape: BoxShape.circle),
-                            child: Center(
-                              child: Text(
-                                siteValue2 ?? "",
-                                style: TextStyle(fontSize: 9.sp),
-                              ),
-                            )),
+                        Center(
+                          child: Text(
+                            siteValue2 ?? "",
+                            style: TextStyle(fontSize: 9.sp),
+                          ),
+                        ),
                       ],
                     ),
                   ),
@@ -105,18 +93,12 @@ class WWcommonTabBar extends StatelessWidget {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Text(value3!),
-                        Container(
-                            height: 20.w,
-                            width: 20.w,
-                            decoration: BoxDecoration(
-                                border: Border.all(color: Colors.white),
-                                shape: BoxShape.circle),
-                            child: Center(
-                              child: Text(
-                                siteValue3 ?? "",
-                                style: TextStyle(fontSize: 9.sp),
-                              ),
-                            )),
+                        Center(
+                          child: Text(
+                            siteValue3 ?? "",
+                            style: TextStyle(fontSize: 9.sp),
+                          ),
+                        ),
                       ],
                     ),
                   ),

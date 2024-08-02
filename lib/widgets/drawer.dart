@@ -46,12 +46,12 @@ Drawer cmnDrawer(BuildContext context) {
                               shape: BoxShape.circle,
                               image: DecorationImage(
                                   image: NetworkImage(
-                                vmProfile.profilepageResponse.data!.dp!,
+                                vmProfile.profilepageResponse.data?.dp ?? "",
                               ))),
                           // child: vmProfile.profilepageResponse.data?.dp != null
                           //     ? Image.network(
                           //         vmProfile.profilepageResponse.data!.dp!,
-                          //         fit: BoxFit.cover,
+                          //         fit: BoxFit.cover, 
                           //       )
                           //     : Container(),
                         );

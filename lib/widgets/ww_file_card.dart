@@ -10,6 +10,7 @@ import 'package:enviro_mobile_application/widgets/ww_folder_card.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class WWFileCard extends StatelessWidget {
   final FolderModel file;
@@ -27,6 +28,7 @@ class WWFileCard extends StatelessWidget {
   final bool fromMaintenance;
   final bool? fromIntranet;
   final bool? fromSite;
+  final bool? fromVehicleFolder;
 
   const WWFileCard({
     super.key,
@@ -45,6 +47,7 @@ class WWFileCard extends StatelessWidget {
     this.fromMaintenance = false,
     this.fromSite = false,
     this.siteId,
+    this.fromVehicleFolder = false,
   });
 
   @override
@@ -122,7 +125,8 @@ class WWFileCard extends StatelessWidget {
                         vmVehicle.selectedExpiryDate,
                         (date) => vmVehicle.expiryDatePickerFn(context, date,
                             file.id ?? 1, parentFolderId, vehicleId ?? 0,
-                            fromMaintenance: fromMaintenance))
+                            fromMaintenance: fromMaintenance,
+                            fromVehicleFolder: fromVehicleFolder))
                     : fromIntranet == true
                         ? datePicker(
                             context,
@@ -153,16 +157,25 @@ class WWFileCard extends StatelessWidget {
       builder: (BuildContext context) {
         return AlertDialog(
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
-          title: const Text("Delete"),
-          content: const Text("Are you sure"),
+          title: Text(
+            "Confirmation!",
+            style: TextStyle(fontSize: 14.sp),
+          ),
+          content: Text(
+            "Are you sure you want delete it?",
+            style: TextStyle(fontSize: 12.sp),
+          ),
           actions: [
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: const Text(
+              child: Text(
                 "Cancel",
-                style: TextStyle(color: Colors.black),
+                style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 10.sp,
+                    fontWeight: FontWeight.w600),
               ),
             ),
             TextButton(
@@ -170,8 +183,11 @@ class WWFileCard extends StatelessWidget {
                 deleteTap();
                 Navigator.of(context).pop();
               },
-              child:
-                  const Text("Delete", style: TextStyle(color: Colors.black)),
+              child: Text("Delete",
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 10.sp,
+                      fontWeight: FontWeight.w600)),
             ),
           ],
         );

@@ -16,8 +16,10 @@ class KeyValueTextWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Expanded(child: showBlueText(keyName)),
+        showBlackText(": "),
         Expanded(
             child: showBlackText(value,
                 maxLines: maxLines ?? 1, overflow: TextOverflow.ellipsis))

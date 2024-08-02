@@ -97,8 +97,8 @@ class SalesService implements IScheduleService {
         return Left(l.keys.first);
       },
       (res) async {
-        JobCardRespModel jobcardlist =
-            JobCardRespModel.fromJson(jsonDecode(res.body));
+        JobCardRespModel jobcardlist = JobCardRespModel.fromJson(
+            jsonDecode(utf8.decode(res.body.codeUnits)));
         return Right(jobcardlist);
       },
     );

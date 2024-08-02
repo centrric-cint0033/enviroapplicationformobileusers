@@ -53,12 +53,12 @@ class DeletedSIteList extends StatelessWidget {
                 : const SizedBox.shrink()
             : SiteTileWidget(
                 onTap: () {
-                  navigateToSiteDetailScreen(
-                    index: index,
-                    context: context,
-                    siteId: sites[index].id,
-                    siteType: SiteType.deleted,
-                  );
+                  // navigateToSiteDetailScreen(
+                  //   index: index,
+                  //   context: context,
+                  //   siteId: sites[index].id,
+                  //   siteType: SiteType.deleted,
+                  // );
                 },
                 name: sites[index].clientName ?? "",
                 address: sites[index].siteAddress ?? "",

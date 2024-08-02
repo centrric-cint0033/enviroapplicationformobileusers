@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:enviro_mobile_application/model/10_site/number_of_clients_res_model/number_of_clients_res_model.dart';
-import 'package:enviro_mobile_application/utilis/api_endpoints/customprint.dart';
 import 'package:enviro_mobile_application/widgets/ww_popup_error.dart';
 import 'package:intl/intl.dart';
 import 'package:mobx/mobx.dart';
@@ -128,10 +127,10 @@ abstract class SiteViewModelBase with Store {
   @action
   Future<void> getPermanentSites({int? page}) async {
     permanentSiteResponse = permanentSiteResponse.copyWith(
-      error: null,
-      paginationLoading: page != null,
-      loading: permanentSiteResponse.data == null,
-    );
+        error: null,
+        paginationLoading: page != null,
+        // loading: permanentSiteResponse.data == null,
+        loading: true);
 
     final response = await siteService.getPermanantSites(page: page);
 
@@ -344,23 +343,43 @@ abstract class SiteViewModelBase with Store {
     required String key,
     SiteType type = SiteType.permananet,
   }) async {
-    customPrint(content: key);
-    customPrint(content: type);
-    final response = await siteService.searchSitesServiceApi(key: key);
+    switch (type) {
+      case SiteType.permananet:
+        permanentSiteResponse =
+            permanentSiteResponse.copyWith(error: null, loading: true);
+        break;
+
+      case SiteType.temporary:
+        tempSiteResponse =
+            tempSiteResponse.copyWith(error: null, loading: true);
+        break;
+
+      case SiteType.deleted:
+        delSiteResponse = delSiteResponse.copyWith(error: null, loading: true);
+        break;
+
+      default:
+        break;
+    }
+    final response =
+        await siteService.searchSitesServiceApi(key: key, type: type);
     response.fold(
       (l) {},
       (res) {
         switch (type) {
           case SiteType.permananet:
-            permanentSiteResponse = permanentSiteResponse.copyWith(data: res);
+            permanentSiteResponse =
+                permanentSiteResponse.copyWith(data: res, loading: false);
             break;
 
           case SiteType.temporary:
-            tempSiteResponse = tempSiteResponse.copyWith(data: res);
+            tempSiteResponse =
+                tempSiteResponse.copyWith(data: res, loading: false);
             break;
 
           case SiteType.deleted:
-            delSiteResponse = delSiteResponse.copyWith(data: res);
+            delSiteResponse =
+                delSiteResponse.copyWith(data: res, loading: false);
             break;
 
           default:

@@ -40,7 +40,7 @@ Widget cmCredentialsForEnviro(BuildContext context) {
                     vmTeam.passObscure == false
                         ? Icons.visibility_off
                         : Icons.visibility,
-                    size: 13.sp,
+                    size: 16.sp,
                   )),
               validator: (value) {
                 if (value!.isEmpty) {

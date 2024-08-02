@@ -195,7 +195,7 @@ class EmployeeFilesPage extends StatelessWidget {
                                           "assets/images/empty1.svg",
                                         ),
                                       ),
-                            sized0hx10,
+                                   sized0hx30,
                             cmTitle('Files', fontWeight: FontWeight.bold),
                             sized0hx10,
                             addFileResponse.loading

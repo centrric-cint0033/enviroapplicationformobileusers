@@ -8,6 +8,7 @@ import 'package:enviro_mobile_application/widgets/ww_response_handler.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:intl/intl.dart';
 
 class JobListTab extends StatelessWidget {
   const JobListTab({Key? key}) : super(key: key);
@@ -73,29 +74,78 @@ class SalesJobListWidget extends StatelessWidget {
                         fromSale: true),
                   );
                 },
-                child: showListData(Column(
-                  children: [
-                    sized0hx10,
-                    expandedRowShowText('Date',
-                        vmSales.joblistResponse.data?[index].date ?? ""),
-                    sized0hx03,
-                    expandedRowShowText('Client Id',
-                        "${vmSales.joblistResponse.data?[index].client ?? ""}"),
-                    sized0hx03,
-                    expandedRowShowText('Client Name',
-                        vmSales.joblistResponse.data?[index].clientName ?? ""),
-                    sized0hx03,
-                    expandedRowShowText('Quoted By',
-                        vmSales.joblistResponse.data?[index].quotedBy ?? ""),
-                    sized0hx03,
-                    expandedRowShowText('Amount',
-                        vmSales.joblistResponse.data?[index].amount ?? ""),
-                    sized0hx03,
-                    expandedRowShowText('Status',
-                        vmSales.joblistResponse.data?[index].status ?? ""),
-                    sized0hx10,
-                  ],
-                )),
+                child: vmSales.salesJobListSearchCtr.text.isEmpty
+                    ? showListData(Column(
+                        children: [
+                          sized0hx10,
+                          if (vmSales.joblistResponse.data![index].date != null)
+                            expandedRowShowText(
+                                'Date',
+                                vmSales.joblistResponse.data?[index].date ??
+                                    ""),
+                          sized0hx03,
+                          expandedRowShowText('Client Id',
+                              "${vmSales.joblistResponse.data?[index].client ?? ""}"),
+                          sized0hx03,
+                          expandedRowShowText(
+                              'Client Name',
+                              vmSales.joblistResponse.data?[index].clientName ??
+                                  ""),
+                          sized0hx03,
+                          expandedRowShowText(
+                              'Quoted By',
+                              vmSales.joblistResponse.data?[index].quotedBy ??
+                                  ""),
+                          sized0hx03,
+                          expandedRowShowText(
+                              'Amount',
+                              vmSales.joblistResponse.data?[index].amount ??
+                                  ""),
+                          // sized0hx03,
+                          // expandedRowShowText(
+                          //     'Status',
+                          //     vmSales.joblistResponse.data?[index].status ??
+                          //         ""),
+                          sized0hx10,
+                        ],
+                      ))
+                    : showListData(Column(
+                        children: [
+                          sized0hx10,
+                          if (vmSales.joblistResponse.data![index]
+                                  .createdDateTime !=
+                              null)
+                            expandedRowShowText(
+                              'Date',
+                              DateFormat('dd-MM-yyyy').format(vmSales
+                                  .joblistResponse
+                                  .data![index]
+                                  .createdDateTime!),
+                            ),
+                          sized0hx03,
+                          expandedRowShowText('Client Id',
+                              "${vmSales.joblistResponse.data?[index].clientId ?? ""}"),
+                          sized0hx03,
+                          expandedRowShowText(
+                              'Client Name',
+                              vmSales.joblistResponse.data?[index].clientName ??
+                                  ""),
+                          sized0hx03,
+                          expandedRowShowText(
+                              'Quoted By',
+                              vmSales.joblistResponse.data?[index].createdBy ??
+                                  ""),
+                          sized0hx03,
+                          expandedRowShowText(
+                              'Amount',
+                              vmSales.joblistResponse.data?[index].amount ??
+                                  ""),
+                          // sized0hx03,
+                          // expandedRowShowText('Status',
+                          //     vmSales.joblistResponse.data?[index].status ?? ""),
+                          sized0hx10,
+                        ],
+                      )),
               );
       },
     );

@@ -84,7 +84,7 @@ class ScheduleCommentSection extends StatelessWidget {
                         return Padding(
                           padding: EdgeInsets.only(top: 8.w),
                           child: SizedBox(
-                            height: 55.h,
+                            height: 52.w,
                             child: DecoratedBox(
                               decoration: BoxDecoration(
                                   border: Border.all(color: Colors.grey)),

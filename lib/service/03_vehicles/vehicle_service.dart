@@ -68,7 +68,7 @@ abstract class IVehicleService {
   Future<Either<Map<MainFailure, dynamic>, FolderListModel>> expiryDateFiles(
       {required int fileId,
       required String expiry,
-      bool fromMaintenance = false});
+      bool fromMaintenance = false,bool fromVehicleFolder = false});
   Future<Either<Map<MainFailure, dynamic>, FolderListModel>>
       folderSearchVehicle({required Map<String, String> data});
   Future<Either<Map<MainFailure, dynamic>, FolderListModel>>
@@ -446,7 +446,7 @@ class VehicleService implements IVehicleService {
     var response = await getIt<HttpService>().multipartRequest(
         data: data,
         method: 'PUT',
-        apiUrl: '${ApiEndPoints().vehEditFolder}/$folderId/');
+        apiUrl: '${ApiEndPoints().vehEditFolder}$folderId/');
     return response.fold(
       (l) => Left(l),
       (res) async {
@@ -503,15 +503,21 @@ class VehicleService implements IVehicleService {
   Future<Either<Map<MainFailure, dynamic>, FolderListModel>> expiryDateFiles(
       {required int fileId,
       required String expiry,
-      bool fromMaintenance = false}) async {
+      bool fromMaintenance = false,
+      bool fromVehicleFolder = false}) async {
     var response = fromMaintenance == true
         ? await getIt<HttpService>().multipartRequest(
             data: {"date": expiry},
             method: 'PUT',
             apiUrl: "${ApiEndPoints().vehFileExpiry}$fileId/")
-        : await getIt<HttpService>().multipartRequest(
-            method: 'PUT',
-            apiUrl: "${ApiEndPoints().vehFileExpiry}$fileId/?date=$expiry");
+        : (fromMaintenance == false && fromVehicleFolder == true)
+            ? await getIt<HttpService>().multipartRequest(
+                data: {"date": expiry},
+                method: 'PUT',
+                apiUrl: "${ApiEndPoints().vehFileExpiry}$fileId/")
+            : await getIt<HttpService>().multipartRequest(
+                method: 'PUT',
+                apiUrl: "${ApiEndPoints().vehFileExpiry}$fileId/?date=$expiry");
     return response.fold(
       (l) => Left(l),
       (res) async {

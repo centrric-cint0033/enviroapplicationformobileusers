@@ -23,7 +23,7 @@ abstract class IohsService {
       ohsAddCommentNotificationApi(
           {required int notificationId, required String comment});
   Future<Either<Map<MainFailure, dynamic>, String>> ohsDeleteNotificationApi(
-      {required int notificationId});
+      {required int notificationId, bool? fromArchive});
   Future<Either<Map<MainFailure, dynamic>, String>> ohsDeleteNewsApi(
       {required int newsId});
   Future<Either<Map<MainFailure, dynamic>, OhsRespModel>> ohsEditNewsServiceApi(
@@ -161,7 +161,7 @@ class OhsService implements IohsService {
 
   @override
   Future<Either<Map<MainFailure, dynamic>, String>> ohsDeleteNotificationApi(
-      {required int notificationId}) async {
+      {required int notificationId, bool? fromArchive}) async {
     var response = await getIt<HttpService>().request(
         authenticated: true,
         method: HttpMethod.delete,

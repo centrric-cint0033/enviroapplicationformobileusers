@@ -34,7 +34,7 @@ class SiteTileWidget extends StatelessWidget {
           ),
           sized0hx05,
           KeyValueTextWidget(
-            value: ": $address",
+            value: address,
             keyName: "Site Address",
           )
         ],

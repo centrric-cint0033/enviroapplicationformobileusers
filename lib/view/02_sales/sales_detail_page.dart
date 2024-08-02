@@ -16,34 +16,38 @@ class SalesDetailPage extends StatelessWidget {
   final SalesModel? data;
   final bool? fromSale;
   final bool? fromSaleListTab;
+  final int? index;
   const SalesDetailPage({
     super.key,
     required this.data,
     this.fromSale = false,
     this.fromSaleListTab = false,
+    this.index,
   });
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: cmnTitleWidget('Sales'),
+        title: cmnTitleWidget('Sales Detail'),
       ),
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 15.w),
           child: Observer(builder: (context) {
+            final res = vmSales.salesQuoteDetailsResponse;
+            List<SalesModel>? datas = res.data ?? [];
             return fromSaleListTab == true
                 ? Column(
                     children: [
                       sized0hx15,
-                      vmSales.salesQuoteDetailsResponse.loading
+                      res.loading
                           ? SizedBox(
                               height:
                                   MediaQuery.of(context).size.height - 100.w,
                               child: const Center(
                                   child: CircularProgressIndicator()))
-                          : listData2(data),
+                          : listData2(datas[index ?? 0]),
                     ],
                   )
                 : Column(

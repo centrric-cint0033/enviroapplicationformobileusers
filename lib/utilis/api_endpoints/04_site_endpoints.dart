@@ -27,7 +27,13 @@ mixin class SiteEndpoint {
 
   final String deleteSiteFiles = '/api/v1/drive/file/delete/';
 
-  final String searchSite = '/api/v1/clients/searchClient/all/waste/';
+  final String searchPermanentSite = '/api/v1/clients/searchClient/all/waste/';
+
+  final String searchTemperarySite =
+      '/api/v1/clients/temporary-client/search/waste/';
+
+  final String searchDeletedSite =
+      '/api/v1/clients/deleted-client/search/waste/';
 
   final String searchSiteFolder = '/api/v1/drive/site/search/folder/';
 

@@ -38,10 +38,7 @@ class EditFuelExpensePage extends StatelessWidget {
                     padding: const EdgeInsets.all(8.0),
                     child: Column(children: [
                       expandedRowShowWidget(
-                          "Vehicle",
-                          const VehicleListDropDown(
-                            fromAddMaintenance: true,
-                          )),
+                          "Vehicle", VehicleListDropDown(vehicle: data)),
                       expandedRowShowWidget(
                           "Date",
                           Observer(

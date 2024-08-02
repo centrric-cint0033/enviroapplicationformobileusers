@@ -38,11 +38,11 @@ class SiteFolderListWidget extends StatelessWidget {
                                 id: id ?? 0, parentFolderId: data.id ?? 1);
                             vmSite.folderNames.add("${data.name}");
                             vmSite.parentFolderId = data.id ?? 1;
-                            vmSite.searchType = folderList.folders?[0].type;
+                            vmSite.searchType = data.type;
                             vmSite.fileFolderSearchCntrlr.text = "";
                             context.router.push(SiteFolderDetailRoute(
                                 folderName: data.name,
-                                searchType: data.type,
+                                searchType: vmSite.searchType,
                                 siteId: id ?? 0));
                           },
                           folderName: data.name,

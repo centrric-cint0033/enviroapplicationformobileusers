@@ -6,7 +6,6 @@ import 'package:enviro_mobile_application/utilis/Appthemes.dart';
 import 'package:enviro_mobile_application/utilis/constant.dart';
 import 'package:enviro_mobile_application/view/08_team/team_widgets/cm_button.dart';
 import 'package:enviro_mobile_application/view_model/03_vehicles/vehicle_view_model.dart';
-import 'package:enviro_mobile_application/view_model/04_ohs/ohs_view_model.dart';
 import 'package:enviro_mobile_application/view_model/08_team/team_view_model.dart';
 import 'package:enviro_mobile_application/widgets/cm_title.dart';
 import 'package:enviro_mobile_application/widgets/cmn_title_textwidget.dart';
@@ -229,7 +228,8 @@ class VehicleFolderDetailPage extends StatelessWidget {
                                                                       data.id ??
                                                                           0,
                                                                   parentFolderId:
-                                                                      vmOhs.parentFolderId ??
+                                                                      vmVehicle
+                                                                              .parentFolderId ??
                                                                           1,
                                                                   context:
                                                                       context,
@@ -294,7 +294,9 @@ class VehicleFolderDetailPage extends StatelessWidget {
                                                   if (data != null) {
                                                     return WWFileCard(
                                                         fromVehicle: true,
+                                                        fromVehicleFolder: true,
                                                         employeeID: 0,
+                                                        vehicleId: vehicleId,
                                                         parentFolderId: vmVehicle
                                                                 .parentFolderId ??
                                                             1,
@@ -392,8 +394,7 @@ class VehicleFolderDetailPage extends StatelessWidget {
                               }
                             }, Appthemes.cPrimary, "Files +"),
                           ],
-                        ),
-                        sized0hx10,
+                        ),       sized0hx30,
                         cmTitle('Files', fontWeight: FontWeight.bold),
                         sized0hx10,
                         fileList?.folders?[0].files != null &&

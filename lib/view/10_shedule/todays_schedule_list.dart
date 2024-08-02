@@ -413,10 +413,12 @@ class TodaysScheduleList extends StatelessWidget {
                                   Text(
                                     "${driver?.name}",
                                     style: TextStyle(fontSize: 8.h),
+                                    overflow: TextOverflow.ellipsis,
                                   ),
                                   Text(
                                     "${driver?.registration}",
                                     style: TextStyle(fontSize: 8.h),
+                                    overflow: TextOverflow.ellipsis,
                                   )
                                 ],
                               ),

@@ -31,6 +31,9 @@ abstract class AuthViewModelBase with Store {
     passwordController.clear();
   }
 
+  @observable
+  bool passObscure = false;
+
 //      _      ____    ___      ____      _      _       _       ____
 //     / \    |  _ \  |_ _|    / ___|    / \    | |     | |     / ___|
 //    / _ \   | |_) |  | |    | |       / _ \   | |     | |     \___ \

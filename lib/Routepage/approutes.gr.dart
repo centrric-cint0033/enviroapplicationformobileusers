@@ -277,6 +277,7 @@ abstract class $AppRouter extends _i49.RootStackRouter {
           key: args.key,
           data: args.data,
           index: args.index,
+          fromArchive: args.fromArchive,
         ),
       );
     },
@@ -352,6 +353,7 @@ abstract class $AppRouter extends _i49.RootStackRouter {
           data: args.data,
           fromSale: args.fromSale,
           fromSaleListTab: args.fromSaleListTab,
+          index: args.index,
         ),
       );
     },
@@ -1025,6 +1027,7 @@ class NotificationDetailRoute
     _i50.Key? key,
     required _i54.OhsRespModel data,
     required int index,
+    bool fromArchive = false,
     List<_i49.PageRouteInfo>? children,
   }) : super(
           NotificationDetailRoute.name,
@@ -1032,6 +1035,7 @@ class NotificationDetailRoute
             key: key,
             data: data,
             index: index,
+            fromArchive: fromArchive,
           ),
           initialChildren: children,
         );
@@ -1047,6 +1051,7 @@ class NotificationDetailRouteArgs {
     this.key,
     required this.data,
     required this.index,
+    this.fromArchive = false,
   });
 
   final _i50.Key? key;
@@ -1055,9 +1060,11 @@ class NotificationDetailRouteArgs {
 
   final int index;
 
+  final bool fromArchive;
+
   @override
   String toString() {
-    return 'NotificationDetailRouteArgs{key: $key, data: $data, index: $index}';
+    return 'NotificationDetailRouteArgs{key: $key, data: $data, index: $index, fromArchive: $fromArchive}';
   }
 }
 
@@ -1292,6 +1299,7 @@ class SalesDetailRoute extends _i49.PageRouteInfo<SalesDetailRouteArgs> {
     required _i56.SalesModel? data,
     bool? fromSale = false,
     bool? fromSaleListTab = false,
+    int? index,
     List<_i49.PageRouteInfo>? children,
   }) : super(
           SalesDetailRoute.name,
@@ -1300,6 +1308,7 @@ class SalesDetailRoute extends _i49.PageRouteInfo<SalesDetailRouteArgs> {
             data: data,
             fromSale: fromSale,
             fromSaleListTab: fromSaleListTab,
+            index: index,
           ),
           initialChildren: children,
         );
@@ -1316,6 +1325,7 @@ class SalesDetailRouteArgs {
     required this.data,
     this.fromSale = false,
     this.fromSaleListTab = false,
+    this.index,
   });
 
   final _i50.Key? key;
@@ -1326,9 +1336,11 @@ class SalesDetailRouteArgs {
 
   final bool? fromSaleListTab;
 
+  final int? index;
+
   @override
   String toString() {
-    return 'SalesDetailRouteArgs{key: $key, data: $data, fromSale: $fromSale, fromSaleListTab: $fromSaleListTab}';
+    return 'SalesDetailRouteArgs{key: $key, data: $data, fromSale: $fromSale, fromSaleListTab: $fromSaleListTab, index: $index}';
   }
 }
 

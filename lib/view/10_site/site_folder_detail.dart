@@ -211,12 +211,15 @@ class SiteFolderDetailPage extends StatelessWidget {
                                             }
                                           },
                                         )
-                                      : Center(
-                                          child: SvgPicture.asset(
-                                            "assets/images/empty1.svg",
+                                      : SizedBox(
+                                          height: 120.w,
+                                          child: Center(
+                                            child: SvgPicture.asset(
+                                              "assets/images/empty1.svg",
+                                            ),
                                           ),
                                         ),
-                              sized0hx10,
+                              sized0hx30,
                               cmTitle('Files', fontWeight: FontWeight.bold),
                               sized0hx10,
                               addFileResponse.loading
@@ -292,9 +295,12 @@ class SiteFolderDetailPage extends StatelessWidget {
                                             }
                                           },
                                         )
-                                      : Center(
-                                          child: SvgPicture.asset(
-                                            "assets/images/empty1.svg",
+                                      : SizedBox(
+                                          height: 120.w,
+                                          child: Center(
+                                            child: SvgPicture.asset(
+                                              "assets/images/empty1.svg",
+                                            ),
                                           ),
                                         ),
                             ]),

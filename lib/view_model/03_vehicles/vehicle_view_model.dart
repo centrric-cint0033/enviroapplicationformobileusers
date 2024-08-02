@@ -711,11 +711,15 @@ abstract class VehicleViewModelBase with Store {
       required int vehicleId,
       required num parentFolderId,
       int? folder,
-      bool fromMaintenance = false}) async {
+      bool fromMaintenance = false,
+      bool fromVehicleFolder = false}) async {
     expiryFileResponse = expiryFileResponse.copyWith(
         error: null, loading: expiryFileResponse.data == null);
     final result = await vehicleService.expiryDateFiles(
-        fileId: fileId, expiry: expiry, fromMaintenance: fromMaintenance);
+        fileId: fileId,
+        expiry: expiry,
+        fromMaintenance: fromMaintenance,
+        fromVehicleFolder: fromVehicleFolder);
 
     return result.fold(
       (l) {
@@ -1125,7 +1129,7 @@ abstract class VehicleViewModelBase with Store {
   @action
   expiryDatePickerFn(
       BuildContext context, date, int fileId, num parentFolderId, int vehicleId,
-      {bool fromMaintenance = false}) {
+      {bool fromMaintenance = false, bool? fromVehicleFolder = false}) {
     selectedExpiryDate = date;
     String dateString = DateFormat('yyyy-MM-dd').format(selectedExpiryDate!);
     exipryDateFileApi(
@@ -1135,7 +1139,8 @@ abstract class VehicleViewModelBase with Store {
         parentFolderId: parentFolderId,
         vehicleId: vehicleId,
         folder: vmVehicle.folder,
-        fromMaintenance: fromMaintenance);
+        fromMaintenance: fromMaintenance,
+        fromVehicleFolder: fromVehicleFolder ?? false);
   }
 
   @observable

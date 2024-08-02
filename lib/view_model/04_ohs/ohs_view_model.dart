@@ -715,6 +715,33 @@ abstract class OHSViewModelBase with Store {
     );
   }
 
+  @observable
+  ApiResponse<String> deleteArchiveNotificationResponse = ApiResponse<String>();
+  @action
+  Future<void> ohsDeleteArchiveNotificationApi(
+      {required BuildContext context,
+      required int notificationId,
+      bool? fromArchive}) async {
+    deleteArchiveNotificationResponse =
+        deleteArchiveNotificationResponse.copyWith(errors: null, loading: true);
+
+    final result = await ohsService.ohsDeleteNotificationApi(
+        notificationId: notificationId, fromArchive: fromArchive);
+    return result.fold(
+      (l) {
+        deleteArchiveNotificationResponse = deleteArchiveNotificationResponse
+            .copyWith(errors: l, loading: false);
+        popupErrorData(context, mainFailure: l);
+      },
+      (r) {
+        deleteArchiveNotificationResponse = deleteArchiveNotificationResponse
+            .copyWith(data: r, errors: null, loading: false);
+        ohsArchiveNotificationApi();
+        context.router.pop();
+      },
+    );
+  }
+
   ScrollController archiveNotificationController = ScrollController();
 
   void archiveNotificationPagination() {

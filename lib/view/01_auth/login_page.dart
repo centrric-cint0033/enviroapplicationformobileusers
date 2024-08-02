@@ -34,7 +34,8 @@ class LoginPage extends StatelessWidget {
             padding: const EdgeInsets.all(15.0),
             child: Column(
               children: [
-                const SizedBox(height: 66),
+                sized0hx50,
+                sized0hx10,
                 CommonImage(
                   width: 130.w,
                   height: 130.w,
@@ -59,36 +60,53 @@ class LoginPage extends StatelessWidget {
                     },
                     keyboard: TextInputType.text,
                     hinttext: 'Username or Email',
-                    width: 335,
-                    height: 48,
-                    cursorHeight: 25,
-                    prefixIcon: const Icon(Icons.email),
+                    textStyle: TextStyle(fontSize: 11.sp),
+                    prefixIcon: Icon(
+                      Icons.email,
+                      size: 16.sp,
+                    ),
                   ),
                 ),
 
-                SizedBox(
-                  height: 74.w,
-                  child: Cmformfield(
-                    controller: vmAuth.passwordController,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter your Password';
-                      }
-                      return null;
-                    },
-                    prefixIcon: const Icon(
-                      Icons.lock,
+                Observer(builder: (context) {
+                  return SizedBox(
+                    height: 74.w,
+                    child: Cmformfield(
+                      controller: vmAuth.passwordController,
+                      obscureText: !vmAuth.passObscure,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter your Password';
+                        }
+                        return null;
+                      },
+                      prefixIcon: Icon(
+                        Icons.lock,
+                        size: 16.sp,
+                      ),
+                      suffixIcon: InkWell(
+                          onTap: () {
+                            vmAuth.passObscure = !vmAuth.passObscure;
+                          },
+                          child: Icon(
+                            vmAuth.passObscure == false
+                                ? Icons.visibility_off
+                                : Icons.visibility,
+                            size: 16.sp,
+                          )),
+                      keyboardType: TextInputType.visiblePassword,
+                      hinttext: "Password or Phonenumber",
+                      textStyle: TextStyle(fontSize: 11.sp),
                     ),
-                    keyboardType: TextInputType.visiblePassword,
-                    hinttext: "Password or phonenumber",
-                  ),
-                ),
+                  );
+                }),
                 sized0hx20,
                 Observer(builder: (_) {
                   return CmButton(
-                    width: MediaQuery.of(context).size.width - 70.w,
+                    width: MediaQuery.of(context).size.width - 60.w,
                     loading: vmAuth.loginResponse.loading,
-                    buttonTextStyle: const TextStyle(color: Colors.white),
+                    buttonTextStyle:
+                        TextStyle(color: Colors.white, fontSize: 11.sp),
                     indicatorColor: Colors.white,
                     onPressed: () {
                       ontaplogin(context);
@@ -97,12 +115,14 @@ class LoginPage extends StatelessWidget {
                   );
                 }),
                 sized0hx30,
-                Text(
-                  "If you experience any Authentication isssues kindly contact the manager or higher authorities, They will resolve your issues...",
-                  style: TextStyle(
-                      fontSize: 12.sp,
-                      color: Appthemes.textColor,
-                      fontStyle: FontStyle.italic),
+                Center(
+                  child: Text(
+                    "If you experience any Authentication isssues kindly contact the manager or higher authorities,They will resolve your issues...",
+                    style: TextStyle(
+                        fontSize: 11.sp,
+                        color: Appthemes.textColor,
+                        fontStyle: FontStyle.italic),
+                  ),
                 ),
               ],
             ),

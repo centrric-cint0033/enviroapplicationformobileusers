@@ -45,6 +45,7 @@ class SheduleSignaturePage extends StatelessWidget {
       ),
       body: Observer(builder: (context) {
         return SingleChildScrollView(
+            keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
             child: Padding(
                 padding: screenWidth,
                 child: Column(
@@ -338,9 +339,10 @@ class SheduleSignaturePage extends StatelessWidget {
                             } else if (vmSchedule.signNameController.text ==
                                 "") {
                               showToast(context,
-                                  msg: "Signname is required",
+                                  msg: "Sign name is required",
                                   color: Colors.red);
-                            } else {
+                            } else if (vmSchedule.signaturePath != null &&
+                                vmSchedule.signaturecontroller.isNotEmpty) {
                               if (vmSchedule.commentController.text != "") {
                                 vmSchedule.shedulecommentviewmodelfunction(
                                     context: context,

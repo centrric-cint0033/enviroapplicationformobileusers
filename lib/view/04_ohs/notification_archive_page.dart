@@ -57,7 +57,8 @@ class ArchiveNotificationList extends StatelessWidget {
                   : const SizedBox.shrink()
               : InkWell(
                   onTap: () => notificationdetailpagefunction(context,
-                      vmOhs.archiveNotificationResponse.data?[index], index),
+                      vmOhs.archiveNotificationResponse.data?[index], index,
+                      fromArchive: true),
                   child: WWcard(
                       data: vmOhs.archiveNotificationResponse.data?[index]),
                 );

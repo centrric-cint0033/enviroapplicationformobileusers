@@ -1,7 +1,6 @@
 import 'package:enviro_mobile_application/widgets/cm_title.dart';
 import 'package:enviro_mobile_application/widgets/ww_customLoading.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -39,6 +38,7 @@ class SiteDetailScreen extends StatelessWidget {
             title: cmnTitleWidget("Site Profile"),
           ),
           body: SingleChildScrollView(
+            keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
             controller: vmPreviousSale.previousSaleController,
             child: vmSite.detailLoading
                 ? SizedBox(
@@ -74,7 +74,7 @@ class SiteDetailScreen extends StatelessWidget {
                           child: KeyValueTextWidget(
                             maxLines: 4,
                             keyName: data.key,
-                            value: ":${data.value}",
+                            value: data.value,
                           ),
                         ),
                       },

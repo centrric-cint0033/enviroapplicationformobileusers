@@ -255,7 +255,9 @@ class WWdropDown extends StatelessWidget {
     return DecoratedBox(
       decoration: BoxDecoration(
         color: Appthemes.cWhite,
-        border: Border.all(color: Appthemes.cLightGrey),
+        border: Border.all(
+          color: Colors.grey[500]!,
+        ),
         borderRadius: BorderRadius.circular(8.0),
       ),
       child: Padding(

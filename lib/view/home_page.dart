@@ -206,6 +206,7 @@ void teamfuntion(BuildContext context) {
 }
 
 void navigateToSitesPage({required BuildContext context}) {
+  vmSite.searchCtr.text = "";
   vmSite
     ..getNumberOfClientsApi(context: context)
     ..getPermanentSites()

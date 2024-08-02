@@ -47,11 +47,16 @@ class ScheduleList extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
-                          vmSchedule.shedulecardResponse.data?[i].client
-                                  ?.clientName ??
-                              '',
-                          style: TextStyle(fontSize: 11.w),
+                        Expanded(
+                          child: Container(
+                            child: Text(
+                              vmSchedule.shedulecardResponse.data?[i].client
+                                      ?.clientName ??
+                                  '',
+                              style: TextStyle(fontSize: 11.w),
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
                         ),
                         Padding(
                           padding: EdgeInsets.only(right: 8.w),

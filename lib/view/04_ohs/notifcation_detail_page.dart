@@ -14,8 +14,12 @@ import 'package:intl/intl.dart';
 class NotificationDetailPage extends StatelessWidget {
   final OhsRespModel data;
   final int index;
+  final bool fromArchive;
   const NotificationDetailPage(
-      {Key? key, required this.data, required this.index})
+      {Key? key,
+      required this.data,
+      required this.index,
+      this.fromArchive = false})
       : super(key: key);
 
   @override
@@ -111,14 +115,25 @@ class NotificationDetailPage extends StatelessWidget {
                                                   BorderRadius.circular(7)),
                                           child: TextButton(
                                               onPressed: () {
-                                                vmOhs.ohsDeleteNotificationApi(
-                                                    context: context,
-                                                    notificationId:
-                                                        data.id ?? 0);
+                                                fromArchive == false
+                                                    ? vmOhs
+                                                        .ohsDeleteNotificationApi(
+                                                            context: context,
+                                                            notificationId:
+                                                                data.id ?? 0)
+                                                    : vmOhs
+                                                        .ohsDeleteArchiveNotificationApi(
+                                                            context: context,
+                                                            notificationId:
+                                                                data.id ?? 0);
                                               },
-                                              child: vmOhs
-                                                      .deleteNotificationResponse
-                                                      .loading
+                                              child: (fromArchive == false
+                                                      ? vmOhs
+                                                          .deleteNotificationResponse
+                                                          .loading
+                                                      : vmOhs
+                                                          .deleteArchiveNotificationResponse
+                                                          .loading)
                                                   ? SizedBox(
                                                       height: 12.w,
                                                       width: 12.w,
@@ -133,41 +148,79 @@ class NotificationDetailPage extends StatelessWidget {
                                                               .grey.shade800,
                                                           fontSize: 10.sp),
                                                     ))),
-                                      if (vmOhs.notificationpageResponse
-                                              .data?[index].userReadStatus ==
-                                          false)
-                                        Container(
-                                            height: 30.h,
-                                            width: 80.h,
-                                            decoration: BoxDecoration(
-                                                border: Border.all(),
-                                                borderRadius:
-                                                    BorderRadius.circular(7)),
-                                            child: TextButton(
-                                                onPressed: () {
-                                                  vmOhs
-                                                      .ohsStatusNotificationApi(
-                                                          context: context,
-                                                          notificationId:
-                                                              data.id ?? 0);
-                                                },
-                                                child: vmOhs
-                                                        .statusNotificationResponse
-                                                        .loading
-                                                    ? SizedBox(
-                                                        height: 12.w,
-                                                        width: 12.w,
-                                                        child:
-                                                            const CircularProgressIndicator(
-                                                          strokeWidth: 2,
-                                                        ))
-                                                    : Text(
-                                                        "Read",
-                                                        style: TextStyle(
-                                                            color: Colors
-                                                                .grey.shade800,
-                                                            fontSize: 10.sp),
-                                                      )))
+                                      if (fromArchive == false) ...[
+                                        if (vmOhs.notificationpageResponse
+                                                .data?[index].userReadStatus ==
+                                            false)
+                                          Container(
+                                              height: 30.h,
+                                              width: 80.h,
+                                              decoration: BoxDecoration(
+                                                  border: Border.all(),
+                                                  borderRadius:
+                                                      BorderRadius.circular(7)),
+                                              child: TextButton(
+                                                  onPressed: () {
+                                                    vmOhs
+                                                        .ohsStatusNotificationApi(
+                                                            context: context,
+                                                            notificationId:
+                                                                data.id ?? 0);
+                                                  },
+                                                  child: vmOhs
+                                                          .statusNotificationResponse
+                                                          .loading
+                                                      ? SizedBox(
+                                                          height: 12.w,
+                                                          width: 12.w,
+                                                          child:
+                                                              const CircularProgressIndicator(
+                                                            strokeWidth: 2,
+                                                          ))
+                                                      : Text(
+                                                          "Read",
+                                                          style: TextStyle(
+                                                              color: Colors.grey
+                                                                  .shade800,
+                                                              fontSize: 10.sp),
+                                                        )))
+                                      ] else ...[
+                                        if (vmOhs.archiveNotificationResponse
+                                                .data?[index].userReadStatus ==
+                                            false)
+                                          Container(
+                                              height: 30.h,
+                                              width: 80.h,
+                                              decoration: BoxDecoration(
+                                                  border: Border.all(),
+                                                  borderRadius:
+                                                      BorderRadius.circular(7)),
+                                              child: TextButton(
+                                                  onPressed: () {
+                                                    vmOhs
+                                                        .ohsStatusNotificationApi(
+                                                            context: context,
+                                                            notificationId:
+                                                                data.id ?? 0);
+                                                  },
+                                                  child: vmOhs
+                                                          .statusNotificationResponse
+                                                          .loading
+                                                      ? SizedBox(
+                                                          height: 12.w,
+                                                          width: 12.w,
+                                                          child:
+                                                              const CircularProgressIndicator(
+                                                            strokeWidth: 2,
+                                                          ))
+                                                      : Text(
+                                                          "Read",
+                                                          style: TextStyle(
+                                                              color: Colors.grey
+                                                                  .shade800,
+                                                              fontSize: 10.sp),
+                                                        )))
+                                      ]
                                     ],
                                   ),
                                   sized0hx20,
@@ -180,7 +233,10 @@ class NotificationDetailPage extends StatelessWidget {
                         Padding(
                           padding: screenWidth,
                           child: NotificationCommentList(
-                              data: data, indexx: index),
+                            data: data,
+                            indexx: index,
+                            fromArchive: fromArchive,
+                          ),
                         )
                       ],
                     ),

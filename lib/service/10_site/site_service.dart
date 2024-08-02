@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:enviro_mobile_application/model/10_site/number_of_clients_res_model/number_of_clients_res_model.dart';
-import 'package:enviro_mobile_application/utilis/api_endpoints/customprint.dart';
 import 'package:dartz/dartz.dart';
+import 'package:enviro_mobile_application/view_model/10_site/site_view_model.dart';
 import 'package:injectable/injectable.dart';
 import 'package:enviro_mobile_application/utilis/main_failure.dart';
 import 'package:enviro_mobile_application/service/10_site/i_site_service.dart';
@@ -104,12 +104,28 @@ class SiteService implements ISiteService {
 
   @override
   Future<Either<Map<MainFailure, dynamic>, List<SiteResModel>>>
-      searchSitesServiceApi({
-    required String key,
-  }) async {
-    customPrint(content: key);
+      searchSitesServiceApi(
+          {required String key, required SiteType type}) async {
+    String? apiUrl;
+    switch (type) {
+      case SiteType.permananet:
+        apiUrl = ApiEndPoints().searchPermanentSite;
+        break;
+
+      case SiteType.temporary:
+        apiUrl = ApiEndPoints().searchTemperarySite;
+        break;
+
+      case SiteType.deleted:
+        apiUrl = ApiEndPoints().searchDeletedSite;
+        break;
+
+      default:
+        break;
+    }
+
     var response = await getIt<HttpService>().multipartRequest(
-      apiUrl: ApiEndPoints().searchSite,
+      apiUrl: apiUrl,
       data: {"key": key},
       method: "POST",
     );

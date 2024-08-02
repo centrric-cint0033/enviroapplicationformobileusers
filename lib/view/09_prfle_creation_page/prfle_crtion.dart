@@ -186,7 +186,7 @@ class ProfileCreationPage extends StatelessWidget {
                           vertical: 0, horizontal: 12),
                       suffixIcon: Icon(
                         Icons.edit,
-                        size: 13.sp,
+                        size: 16.sp,
                       ),
                       filled: true,
                       fillColor: Colors.grey[200],
@@ -221,7 +221,7 @@ class ProfileCreationPage extends StatelessWidget {
                                 vmProfile.passObscure == false
                                     ? Icons.visibility_off
                                     : Icons.visibility,
-                                size: 13.sp,
+                                size: 16.sp,
                               )),
                           filled: true,
                           fillColor: Colors.grey[200],

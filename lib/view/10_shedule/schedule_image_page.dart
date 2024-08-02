@@ -77,9 +77,11 @@ class ScheduleImageScreen extends StatelessWidget {
                                   itemBuilder: (context, index) {
                                     return Padding(
                                       padding: EdgeInsets.all(8.0.h),
-                                      child: SizedBox(
+                                      child: Container(
                                         height: 160.h,
                                         width: 260.w,
+                                        decoration:
+                                            BoxDecoration(border: Border.all()),
                                         child: ClipRect(
                                           child: Image.file(
                                               File(vmSchedule
@@ -103,9 +105,11 @@ class ScheduleImageScreen extends StatelessWidget {
                                   itemBuilder: (context, index) {
                                     return Padding(
                                       padding: EdgeInsets.all(8.0.h),
-                                      child: SizedBox(
+                                      child: Container(
                                         height: 160.h,
                                         width: 260.w,
+                                        decoration:
+                                            BoxDecoration(border: Border.all()),
                                         child: ClipRect(
                                           child: Image.file(
                                               File(vmSchedule
@@ -131,6 +135,7 @@ class ScheduleImageScreen extends StatelessWidget {
                           color: Colors.black,
                           width: 140.w,
                           loading: vmSchedule.addImageScheduleResponse.loading,
+                          indicatorColor: Colors.white,
                           fontSize: 10.sp,
                           onPressed: () async {
                             await vmSchedule.addImageScheduleApi(

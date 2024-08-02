@@ -104,7 +104,7 @@ class SheduledetailPage extends StatelessWidget {
                                 title: Text(
                                   'Schedule Details',
                                   style: TextStyle(
-                                    fontSize: 12.w,
+                                    fontSize: 11.sp,
                                     fontWeight: FontWeight.bold,
                                     color: Appthemes.cPrimary,
                                   ),
@@ -174,7 +174,7 @@ class SheduledetailPage extends StatelessWidget {
                                           child: Text(
                                             'Current Job Status',
                                             style: TextStyle(
-                                              fontSize: 12.h,
+                                              fontSize: 11.sp,
                                               fontWeight: FontWeight.bold,
                                               color: Appthemes.cPrimary,
                                             ),
@@ -535,9 +535,9 @@ class SheduledetailPage extends StatelessWidget {
                                 ),
                                 sized0hx05
                               ],
-                              if (res.data![i].image == null &&
-                                  res.data![i].completed == null &&
-                                  res.data![i].finishJob != null) ...[
+                              // if (res.data![i].image == null &&
+                              //     res.data![i].completed == null &&
+                              //     res.data![i].finishJob != null) ...[
                                 CmButton(
                                   text: "Take Signature",
                                   onPressed: () {
@@ -550,8 +550,8 @@ class SheduledetailPage extends StatelessWidget {
                                   borderRadius: 3.w,
                                   buttonTextStyle: TextStyle(
                                       color: Colors.white, fontSize: 9.sp),
-                                )
-                              ],
+                                ),
+                              // ],
                               if (res.data![i].completed != null &&
                                   res.data![i].arriveAtWasteDepot == null) ...[
                                 CmButton(

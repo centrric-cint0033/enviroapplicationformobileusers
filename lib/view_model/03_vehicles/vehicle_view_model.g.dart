@@ -1817,7 +1817,8 @@ mixin _$VehicleViewModel on VehicleViewModelBase, Store {
       required int vehicleId,
       required num parentFolderId,
       int? folder,
-      bool fromMaintenance = false}) {
+      bool fromMaintenance = false,
+      bool fromVehicleFolder = false}) {
     return _$exipryDateFileApiAsyncAction.run(() => super.exipryDateFileApi(
         context: context,
         fileId: fileId,
@@ -1825,7 +1826,8 @@ mixin _$VehicleViewModel on VehicleViewModelBase, Store {
         vehicleId: vehicleId,
         parentFolderId: parentFolderId,
         folder: folder,
-        fromMaintenance: fromMaintenance));
+        fromMaintenance: fromMaintenance,
+        fromVehicleFolder: fromVehicleFolder));
   }
 
   late final _$folderSearchVehicleApiAsyncAction = AsyncAction(
@@ -1993,13 +1995,14 @@ mixin _$VehicleViewModel on VehicleViewModelBase, Store {
   @override
   dynamic expiryDatePickerFn(BuildContext context, dynamic date, int fileId,
       num parentFolderId, int vehicleId,
-      {bool fromMaintenance = false}) {
+      {bool fromMaintenance = false, bool? fromVehicleFolder = false}) {
     final _$actionInfo = _$VehicleViewModelBaseActionController.startAction(
         name: 'VehicleViewModelBase.expiryDatePickerFn');
     try {
       return super.expiryDatePickerFn(
           context, date, fileId, parentFolderId, vehicleId,
-          fromMaintenance: fromMaintenance);
+          fromMaintenance: fromMaintenance,
+          fromVehicleFolder: fromVehicleFolder);
     } finally {
       _$VehicleViewModelBaseActionController.endAction(_$actionInfo);
     }

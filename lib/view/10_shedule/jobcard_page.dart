@@ -1,5 +1,4 @@
 import 'package:enviro_mobile_application/model/07_Jobcard/job_card_model.dart';
-import 'package:enviro_mobile_application/utilis/Appthemes.dart';
 import 'package:enviro_mobile_application/utilis/constant.dart';
 import 'package:enviro_mobile_application/widgets/cm_title.dart';
 import 'package:flutter/material.dart';
@@ -142,7 +141,9 @@ class JobCardPage extends StatelessWidget {
                                               child: Padding(
                                                 padding: EdgeInsets.symmetric(
                                                     horizontal: 8.w),
-                                                child: Center(
+                                                child: Align(
+                                                  alignment:
+                                                      Alignment.centerLeft,
                                                   child: Text(
                                                     additionalEmail[index],
                                                     style: TextStyle(
@@ -182,7 +183,9 @@ class JobCardPage extends StatelessWidget {
                                               child: Padding(
                                                 padding: EdgeInsets.symmetric(
                                                     horizontal: 8.w),
-                                                child: Center(
+                                                child: Align(
+                                                  alignment:
+                                                      Alignment.centerLeft,
                                                   child: Text(
                                                     additionalPhoneNo[index],
                                                     style: TextStyle(
@@ -231,17 +234,13 @@ class JobCardPage extends StatelessWidget {
                                   ''),
                             ),
                             sized0hx10,
-                            Align(
-                              alignment: Alignment.centerLeft,
-                              child: cmTitle(
-                                  vmSchedule.jobcardResponse.data
-                                              ?.reoccurring ==
-                                          false
-                                      ? "This is NOT a reoccuring Quote"
-                                      : "This is a reoccuring Quote",
-                                  width: 200.w,
-                                  blackText: true),
-                            ),
+                            if (vmSchedule.jobcardResponse.data?.reoccurring ==
+                                false)
+                              Align(
+                                alignment: Alignment.centerLeft,
+                                child: cmTitle("This is NOT a reoccuring Quote",
+                                    width: 200.w, blackText: true),
+                              ),
                             sized0hx10,
                           ],
                         ),
@@ -791,7 +790,9 @@ class JobCardPage extends StatelessWidget {
                                         '')
                               ],
                               if (vmSchedule.jobcardResponse.data?.jobStatus !=
-                                  "") ...[
+                                      " " &&
+                                  vmSchedule.jobcardResponse.data?.jobStatus !=
+                                      null) ...[
                                 sized0hx10,
                                 expandedRowShowsText(
                                     "Job status",

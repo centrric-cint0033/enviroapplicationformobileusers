@@ -29,6 +29,7 @@ class MembersDownWidget extends StatelessWidget {
                   padding: EdgeInsets.only(left: 5.w),
                   child: Text(
                     employee.name ?? "",
+                    style: TextStyle(fontSize: 10.sp),
                   ),
                 ),
               );

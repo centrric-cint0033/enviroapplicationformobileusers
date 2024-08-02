@@ -87,6 +87,7 @@ class SalesListWidget extends StatelessWidget {
               vmSales.getSalesQuoteDetails(id: sale?.id?.toString() ?? "");
               context.router.push(SalesDetailRoute(
                   data: vmSales.salesQuoteDetailsResponse.data?[index],
+                  index: index,
                   fromSaleListTab: true));
             } else {
               showToast(context, msg: "There is no quotes");

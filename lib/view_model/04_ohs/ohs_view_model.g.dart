@@ -467,6 +467,24 @@ mixin _$OHSViewModel on OHSViewModelBase, Store {
     });
   }
 
+  late final _$deleteArchiveNotificationResponseAtom = Atom(
+      name: 'OHSViewModelBase.deleteArchiveNotificationResponse',
+      context: context);
+
+  @override
+  ApiResponse<String> get deleteArchiveNotificationResponse {
+    _$deleteArchiveNotificationResponseAtom.reportRead();
+    return super.deleteArchiveNotificationResponse;
+  }
+
+  @override
+  set deleteArchiveNotificationResponse(ApiResponse<String> value) {
+    _$deleteArchiveNotificationResponseAtom
+        .reportWrite(value, super.deleteArchiveNotificationResponse, () {
+      super.deleteArchiveNotificationResponse = value;
+    });
+  }
+
   late final _$ohsNewsApiAsyncAction =
       AsyncAction('OHSViewModelBase.ohsNewsApi', context: context);
 
@@ -715,6 +733,22 @@ mixin _$OHSViewModel on OHSViewModelBase, Store {
         .run(() => super.ohsArchiveNotificationApi(page: page));
   }
 
+  late final _$ohsDeleteArchiveNotificationApiAsyncAction = AsyncAction(
+      'OHSViewModelBase.ohsDeleteArchiveNotificationApi',
+      context: context);
+
+  @override
+  Future<void> ohsDeleteArchiveNotificationApi(
+      {required BuildContext context,
+      required int notificationId,
+      bool? fromArchive}) {
+    return _$ohsDeleteArchiveNotificationApiAsyncAction.run(() => super
+        .ohsDeleteArchiveNotificationApi(
+            context: context,
+            notificationId: notificationId,
+            fromArchive: fromArchive));
+  }
+
   late final _$OHSViewModelBaseActionController =
       ActionController(name: 'OHSViewModelBase', context: context);
 
@@ -760,7 +794,8 @@ ohsAddFileResponse: ${ohsAddFileResponse},
 ohsEditFolderResponse: ${ohsEditFolderResponse},
 ohsEditFileResponse: ${ohsEditFileResponse},
 expiryFileOhsResponse: ${expiryFileOhsResponse},
-archiveNotificationResponse: ${archiveNotificationResponse}
+archiveNotificationResponse: ${archiveNotificationResponse},
+deleteArchiveNotificationResponse: ${deleteArchiveNotificationResponse}
     ''';
   }
 }

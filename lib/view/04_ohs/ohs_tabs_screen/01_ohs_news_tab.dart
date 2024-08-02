@@ -36,7 +36,7 @@ class NewsOhsTab extends StatelessWidget {
                           fromOhsNews: true, fromOhsEditNews: false);
                     });
               })),
-          sized0hx05,
+          sized0hx10,
           Observer(builder: (_) {
             return SizedBox(
                 child: WWResponseHandler(
@@ -60,7 +60,7 @@ class NewsOhsTab extends StatelessWidget {
                               child: WWcard(data: data));
                         })));
           }),
-          sized0hx05,
+          sized0hx10,
           Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
             const Padding(
               padding: EdgeInsets.all(8.0),
@@ -126,7 +126,7 @@ class NewsOhsTab extends StatelessWidget {
                                   vmOhs.editFolderOhsApi(
                                     name: s,
                                     folderId: data.id ?? 0,
-                                    parentFolderId: vmOhs.parentFolderId ?? 1,
+                                    parentFolderId: 1,
                                     context: context,
                                   );
                                 },
@@ -134,128 +134,25 @@ class NewsOhsTab extends StatelessWidget {
                                   vmOhs.ohsDeleteFolderApi(
                                       folderId: data.id ?? 0,
                                       context: context,
-                                      parentFolderId:
-                                          vmOhs.parentFolderId ?? 1);
+                                      parentFolderId: 1);
                                 });
                           } else {
                             return Container();
                           }
                         },
                       )
-                    : Center(
-                        child: SvgPicture.asset(
-                          "assets/images/empty1.svg",
+                    : SizedBox(
+                        height: 120.w,
+                        child: Center(
+                          child: SvgPicture.asset(
+                            "assets/images/empty1.svg",
+                          ),
                         ),
                       );
           }),
           sized0hx30
         ],
       ),
-    );
-  }
-
-  Future<void> _showMyDialog(BuildContext context) async {
-    TextEditingController textFieldController1 = TextEditingController();
-    TextEditingController textFieldController2 = TextEditingController();
-    TextEditingController textFieldController3 = TextEditingController();
-    TextEditingController textFieldController4 = TextEditingController();
-
-    showDialog<void>(
-      context: context,
-      barrierDismissible: false,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),
-          content: SingleChildScrollView(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                SizedBox(
-                  height: 30,
-                  child: TextField(
-                    controller: textFieldController1,
-                    decoration: const InputDecoration(
-                      labelText: 'Title',
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(10))),
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 20),
-                Container(
-                  child: TextField(
-                    controller: textFieldController2,
-                    decoration: const InputDecoration(
-                      labelText: 'Description',
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(10))),
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 20),
-                SizedBox(
-                  height: 30,
-                  child: TextField(
-                    controller: textFieldController3,
-                    decoration: InputDecoration(
-                      labelText: 'Add Member',
-                      border: const OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(10)),
-                      ),
-                      suffixIcon: DropdownButton(
-                        onChanged: (String? value) {},
-                        items: const <DropdownMenuItem<String>>[
-                          DropdownMenuItem<String>(
-                            value: 'Option 1',
-                            child: Text('Option 1'),
-                          ),
-                          DropdownMenuItem<String>(
-                            value: 'Option 2',
-                            child: Text('Option 2'),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 17),
-                SizedBox(
-                  height: 30,
-                  child: TextField(
-                    controller: textFieldController4,
-                    decoration: const InputDecoration(
-                      labelText: 'Add File+',
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(
-                              10))), // Add border to the text field
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          actions: <Widget>[
-            TextButton(
-              child: const Text(
-                'Cancel',
-                style: TextStyle(color: Colors.black),
-              ),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-            TextButton(
-              child: const Text(
-                'OK',
-                style: TextStyle(color: Colors.black),
-              ),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-        );
-      },
     );
   }
 

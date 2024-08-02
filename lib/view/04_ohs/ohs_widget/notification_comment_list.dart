@@ -7,13 +7,19 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class NotificationCommentList extends StatelessWidget {
   const NotificationCommentList(
-      {super.key, required this.data, required this.indexx});
+      {super.key,
+      required this.data,
+      required this.indexx,
+      this.fromArchive = false});
   final OhsRespModel data;
   final int indexx;
+  final bool fromArchive;
   @override
   Widget build(BuildContext context) {
     return Observer(builder: (context) {
-      final res = vmOhs.notificationpageResponse;
+      final res = fromArchive == false
+          ? vmOhs.notificationpageResponse
+          : vmOhs.archiveNotificationResponse;
       List<OhsRespModel> datas = res.data ?? [];
       return datas[indexx].comments_list!.isNotEmpty
           ? ListView.separated(

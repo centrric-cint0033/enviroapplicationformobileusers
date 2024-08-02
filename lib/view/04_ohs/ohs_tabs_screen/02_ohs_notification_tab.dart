@@ -76,6 +76,8 @@ class NotificationTabList extends StatelessWidget {
   }
 }
 
-void notificationdetailpagefunction(BuildContext context, data, int index) {
-  context.router.push(NotificationDetailRoute(data: data, index: index));
+void notificationdetailpagefunction(BuildContext context, data, int index,
+    {bool fromArchive = false}) {
+  context.router.push(NotificationDetailRoute(
+      data: data, index: index, fromArchive: fromArchive));
 }

@@ -827,6 +827,7 @@ abstract class ScheduleViewModelBase with Store {
               );
         showDeleteClearButtonsBeforePic = false;
         showDeleteClearButtonsAfterPic = false;
+        showDeleteClearButtonsGalleryPic = false;
         imageIds = [];
         shedulecardviewmodelfunction();
       },

@@ -91,8 +91,8 @@ class VehicleFolderPage extends StatelessWidget {
                 sized0hx10,
                 res.loading
                     ? wwCustomLoader()
-                    : folderList?.folders != null &&
-                            folderList!.folders!.isNotEmpty
+                    : folderList?.folders?[0].folders != null &&
+                            folderList!.folders![0].folders!.isNotEmpty
                         ? Padding(
                             padding: screenWidth,
                             child: ListView.separated(
@@ -149,11 +149,14 @@ class VehicleFolderPage extends StatelessWidget {
                               },
                             ),
                           )
-                        : Center(
-                            child: SvgPicture.asset(
-                              "assets/images/empty1.svg",
+                        : SizedBox(
+                            height: 120.w,
+                            child: Center(
+                              child: SvgPicture.asset(
+                                "assets/images/empty1.svg",
+                              ),
                             ),
-                          ),
+                          )
               ],
             );
           })),
