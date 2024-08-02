@@ -131,40 +131,26 @@ class JobCardPage extends StatelessWidget {
                                                 EdgeInsets.only(bottom: 8.w),
                                             child: Container(
                                               constraints: BoxConstraints(
-                                                minHeight:
-                                                    20.w, // Set minimum height
+                                                minHeight: 30.w,
                                               ),
                                               decoration: BoxDecoration(
                                                 borderRadius:
-                                                    BorderRadius.circular(12.w),
-                                                color: Appthemes.cPrimary,
+                                                    BorderRadius.circular(6.w),
+                                                color: const Color.fromARGB(
+                                                    31, 124, 122, 122),
                                               ),
-                                              child: SingleChildScrollView(
-                                                scrollDirection:
-                                                    Axis.horizontal,
-                                                child: Row(
-                                                  mainAxisSize:
-                                                      MainAxisSize.min,
-                                                  children: [
-                                                    Padding(
-                                                      padding:
-                                                          EdgeInsets.symmetric(
-                                                              horizontal: 8.w),
-                                                      child: Flexible(
-                                                        child: Text(
-                                                          additionalEmail[
-                                                              index],
-                                                          style: TextStyle(
-                                                            fontSize: 10.sp,
-                                                            color: Colors.white,
-                                                          ),
-                                                          softWrap: false,
-                                                          overflow: TextOverflow
-                                                              .visible,
-                                                        ),
-                                                      ),
+                                              child: Padding(
+                                                padding: EdgeInsets.symmetric(
+                                                    horizontal: 8.w),
+                                                child: Center(
+                                                  child: Text(
+                                                    additionalEmail[index],
+                                                    style: TextStyle(
+                                                      fontSize: 10.sp,
                                                     ),
-                                                  ],
+                                                    overflow:
+                                                        TextOverflow.visible,
+                                                  ),
                                                 ),
                                               ),
                                             ),
@@ -184,21 +170,29 @@ class JobCardPage extends StatelessWidget {
                                             padding:
                                                 EdgeInsets.only(bottom: 8.w),
                                             child: Container(
-                                              height: 20.w,
+                                              constraints: BoxConstraints(
+                                                minHeight: 20.w,
+                                              ),
                                               decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          12.w),
-                                                  color: Appthemes.cPrimary),
-                                              child: Center(
-                                                  child: Expanded(
-                                                child: Text(
-                                                  additionalPhoneNo[index],
-                                                  style: TextStyle(
+                                                borderRadius:
+                                                    BorderRadius.circular(6.w),
+                                                color: const Color.fromARGB(
+                                                    31, 124, 122, 122),
+                                              ),
+                                              child: Padding(
+                                                padding: EdgeInsets.symmetric(
+                                                    horizontal: 8.w),
+                                                child: Center(
+                                                  child: Text(
+                                                    additionalPhoneNo[index],
+                                                    style: TextStyle(
                                                       fontSize: 10.sp,
-                                                      color: Colors.white),
+                                                    ),
+                                                    overflow:
+                                                        TextOverflow.visible,
+                                                  ),
                                                 ),
-                                              )),
+                                              ),
                                             ),
                                           );
                                         },
