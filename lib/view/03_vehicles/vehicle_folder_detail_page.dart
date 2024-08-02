@@ -361,18 +361,18 @@ class VehicleFolderDetailPage extends StatelessWidget {
                     },
                   ),
                 )
-              : Padding(
-                  padding: screenWidth,
-                  child: Observer(builder: (context) {
-                    final res = vmVehicle.maintenanceFoldersResponse;
-                    FolderListModel? folderList = res.data;
-                    FolderListModel? fileList = res.data;
-                    final editResponse = vmVehicle.editVehicleFileResponse;
-                    return SingleChildScrollView(
-                        child: Container(
-                      height: MediaQuery.of(context).size.height,
-                      child: Column(children: [
-                        Row(
+              : Observer(builder: (context) {
+                  final res = vmVehicle.maintenanceFoldersResponse;
+                  FolderListModel? folderList = res.data;
+                  FolderListModel? fileList = res.data;
+                  final editResponse = vmVehicle.editVehicleFileResponse;
+                  return SingleChildScrollView(
+                      child: Container(
+                    height: MediaQuery.of(context).size.height,
+                    child: Column(children: [
+                      Padding(
+                        padding: screenWidth,
+                        child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             const SizedBox(),
@@ -394,16 +394,20 @@ class VehicleFolderDetailPage extends StatelessWidget {
                               }
                             }, Appthemes.cPrimary, "Files +"),
                           ],
-                        ),       sized0hx30,
-                        cmTitle('Files', fontWeight: FontWeight.bold),
-                        sized0hx10,
-                        fileList?.folders?[0].files != null &&
-                                fileList!.folders![0].files!.isNotEmpty
-                            ? Expanded(
-                                child: res.loading
-                                    ? const Center(
-                                        child: CircularProgressIndicator())
-                                    : ListView.separated(
+                        ),
+                      ),
+                      sized0hx30,
+                      cmTitle('Files', fontWeight: FontWeight.bold),
+                      sized0hx10,
+                      fileList?.folders?[0].files != null &&
+                              fileList!.folders![0].files!.isNotEmpty
+                          ? Expanded(
+                              child: res.loading
+                                  ? const Center(
+                                      child: CircularProgressIndicator())
+                                  : Padding(
+                                      padding: screenWidth,
+                                      child: ListView.separated(
                                         physics:
                                             const NeverScrollableScrollPhysics(),
                                         shrinkWrap: true,
@@ -468,16 +472,16 @@ class VehicleFolderDetailPage extends StatelessWidget {
                                           }
                                         },
                                       ),
-                              )
-                            : Center(
-                                child: SvgPicture.asset(
-                                  "assets/images/empty1.svg",
-                                ),
+                                    ),
+                            )
+                          : Center(
+                              child: SvgPicture.asset(
+                                "assets/images/empty1.svg",
                               ),
-                      ]),
-                    ));
-                  }),
-                ),
+                            ),
+                    ]),
+                  ));
+                }),
         ),
       ),
     );
