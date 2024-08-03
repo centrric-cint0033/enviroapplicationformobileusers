@@ -1,4 +1,4 @@
-package com.example.enviro_mobile_application
+package au.com.envirowaste.app
 
 import io.flutter.embedding.android.FlutterActivity
 

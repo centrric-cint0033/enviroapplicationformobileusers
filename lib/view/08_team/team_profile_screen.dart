@@ -393,8 +393,8 @@ class TeamProfileScreen extends StatelessWidget {
   Widget cmOutlineButton(
       {required String text, required void Function()? onPressed}) {
     return SizedBox(
-      // width: 130.w,
-      width: 290.w,
+      width: 130.w,
+      // width: 290.w,
       child: OutlinedButton(
         onPressed: onPressed,
         style: ButtonStyle(

@@ -18,7 +18,7 @@
         </intent>
     </queries>
     <application
-        android:label="enviro_mobile_application"
+        android:label="Enviro"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
