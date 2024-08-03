@@ -1080,6 +1080,134 @@ mixin _$TeamViewModel on TeamViewModelBase, Store {
     });
   }
 
+  late final _$totalWorkedHrsAtom =
+      Atom(name: 'TeamViewModelBase.totalWorkedHrs', context: context);
+
+  @override
+  double? get totalWorkedHrs {
+    _$totalWorkedHrsAtom.reportRead();
+    return super.totalWorkedHrs;
+  }
+
+  @override
+  set totalWorkedHrs(double? value) {
+    _$totalWorkedHrsAtom.reportWrite(value, super.totalWorkedHrs, () {
+      super.totalWorkedHrs = value;
+    });
+  }
+
+  late final _$totalNormalHoursSumAtom =
+      Atom(name: 'TeamViewModelBase.totalNormalHoursSum', context: context);
+
+  @override
+  double? get totalNormalHoursSum {
+    _$totalNormalHoursSumAtom.reportRead();
+    return super.totalNormalHoursSum;
+  }
+
+  @override
+  set totalNormalHoursSum(double? value) {
+    _$totalNormalHoursSumAtom.reportWrite(value, super.totalNormalHoursSum, () {
+      super.totalNormalHoursSum = value;
+    });
+  }
+
+  late final _$totalHalfTimeHrsAtom =
+      Atom(name: 'TeamViewModelBase.totalHalfTimeHrs', context: context);
+
+  @override
+  double? get totalHalfTimeHrs {
+    _$totalHalfTimeHrsAtom.reportRead();
+    return super.totalHalfTimeHrs;
+  }
+
+  @override
+  set totalHalfTimeHrs(double? value) {
+    _$totalHalfTimeHrsAtom.reportWrite(value, super.totalHalfTimeHrs, () {
+      super.totalHalfTimeHrs = value;
+    });
+  }
+
+  late final _$totalDoubleTimeHrsAtom =
+      Atom(name: 'TeamViewModelBase.totalDoubleTimeHrs', context: context);
+
+  @override
+  double? get totalDoubleTimeHrs {
+    _$totalDoubleTimeHrsAtom.reportRead();
+    return super.totalDoubleTimeHrs;
+  }
+
+  @override
+  set totalDoubleTimeHrs(double? value) {
+    _$totalDoubleTimeHrsAtom.reportWrite(value, super.totalDoubleTimeHrs, () {
+      super.totalDoubleTimeHrs = value;
+    });
+  }
+
+  late final _$totalPublicHolidayAtom =
+      Atom(name: 'TeamViewModelBase.totalPublicHoliday', context: context);
+
+  @override
+  double? get totalPublicHoliday {
+    _$totalPublicHolidayAtom.reportRead();
+    return super.totalPublicHoliday;
+  }
+
+  @override
+  set totalPublicHoliday(double? value) {
+    _$totalPublicHolidayAtom.reportWrite(value, super.totalPublicHoliday, () {
+      super.totalPublicHoliday = value;
+    });
+  }
+
+  late final _$totalAnnualAtom =
+      Atom(name: 'TeamViewModelBase.totalAnnual', context: context);
+
+  @override
+  double? get totalAnnual {
+    _$totalAnnualAtom.reportRead();
+    return super.totalAnnual;
+  }
+
+  @override
+  set totalAnnual(double? value) {
+    _$totalAnnualAtom.reportWrite(value, super.totalAnnual, () {
+      super.totalAnnual = value;
+    });
+  }
+
+  late final _$totalSickAtom =
+      Atom(name: 'TeamViewModelBase.totalSick', context: context);
+
+  @override
+  double? get totalSick {
+    _$totalSickAtom.reportRead();
+    return super.totalSick;
+  }
+
+  @override
+  set totalSick(double? value) {
+    _$totalSickAtom.reportWrite(value, super.totalSick, () {
+      super.totalSick = value;
+    });
+  }
+
+  late final _$totalOtherAtom =
+      Atom(name: 'TeamViewModelBase.totalOther', context: context);
+
+  @override
+  double? get totalOther {
+    _$totalOtherAtom.reportRead();
+    return super.totalOther;
+  }
+
+  @override
+  set totalOther(double? value) {
+    _$totalOtherAtom.reportWrite(value, super.totalOther, () {
+      super.totalOther = value;
+    });
+  }
+
   late final _$getCurrentEmployeeAsyncAction =
       AsyncAction('TeamViewModelBase.getCurrentEmployee', context: context);
 
@@ -1623,17 +1751,6 @@ mixin _$TeamViewModel on TeamViewModelBase, Store {
   }
 
   @override
-  dynamic totalWorkedHrsFn(Week data) {
-    final _$actionInfo = _$TeamViewModelBaseActionController.startAction(
-        name: 'TeamViewModelBase.totalWorkedHrsFn');
-    try {
-      return super.totalWorkedHrsFn(data);
-    } finally {
-      _$TeamViewModelBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
   void submitButtonValidation() {
     final _$actionInfo = _$TeamViewModelBaseActionController.startAction(
         name: 'TeamViewModelBase.submitButtonValidation');
@@ -1650,6 +1767,182 @@ mixin _$TeamViewModel on TeamViewModelBase, Store {
         name: 'TeamViewModelBase.clearLeaveDatas');
     try {
       return super.clearLeaveDatas();
+    } finally {
+      _$TeamViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void calculateTotalWorkedHrs(TimeSheetResModel? timeSheet) {
+    final _$actionInfo = _$TeamViewModelBaseActionController.startAction(
+        name: 'TeamViewModelBase.calculateTotalWorkedHrs');
+    try {
+      return super.calculateTotalWorkedHrs(timeSheet);
+    } finally {
+      _$TeamViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void calculateNormalHoursSum(TimeSheetResModel? timeSheet) {
+    final _$actionInfo = _$TeamViewModelBaseActionController.startAction(
+        name: 'TeamViewModelBase.calculateNormalHoursSum');
+    try {
+      return super.calculateNormalHoursSum(timeSheet);
+    } finally {
+      _$TeamViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void calculateHalfTimeHoursSum(TimeSheetResModel? timeSheet) {
+    final _$actionInfo = _$TeamViewModelBaseActionController.startAction(
+        name: 'TeamViewModelBase.calculateHalfTimeHoursSum');
+    try {
+      return super.calculateHalfTimeHoursSum(timeSheet);
+    } finally {
+      _$TeamViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void calculateDoubleTimeHoursSum(TimeSheetResModel? timeSheet) {
+    final _$actionInfo = _$TeamViewModelBaseActionController.startAction(
+        name: 'TeamViewModelBase.calculateDoubleTimeHoursSum');
+    try {
+      return super.calculateDoubleTimeHoursSum(timeSheet);
+    } finally {
+      _$TeamViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void calculatePublicHolidayHoursSum(TimeSheetResModel? timeSheet) {
+    final _$actionInfo = _$TeamViewModelBaseActionController.startAction(
+        name: 'TeamViewModelBase.calculatePublicHolidayHoursSum');
+    try {
+      return super.calculatePublicHolidayHoursSum(timeSheet);
+    } finally {
+      _$TeamViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void calculateAnnualHoursSum(TimeSheetResModel? timeSheet) {
+    final _$actionInfo = _$TeamViewModelBaseActionController.startAction(
+        name: 'TeamViewModelBase.calculateAnnualHoursSum');
+    try {
+      return super.calculateAnnualHoursSum(timeSheet);
+    } finally {
+      _$TeamViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void calculateSickHoursSum(TimeSheetResModel? timeSheet) {
+    final _$actionInfo = _$TeamViewModelBaseActionController.startAction(
+        name: 'TeamViewModelBase.calculateSickHoursSum');
+    try {
+      return super.calculateSickHoursSum(timeSheet);
+    } finally {
+      _$TeamViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void calculateOtherHoursSum(TimeSheetResModel? timeSheet) {
+    final _$actionInfo = _$TeamViewModelBaseActionController.startAction(
+        name: 'TeamViewModelBase.calculateOtherHoursSum');
+    try {
+      return super.calculateOtherHoursSum(timeSheet);
+    } finally {
+      _$TeamViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic paidHrsFn1(String? totalWorkedHrs) {
+    final _$actionInfo = _$TeamViewModelBaseActionController.startAction(
+        name: 'TeamViewModelBase.paidHrsFn1');
+    try {
+      return super.paidHrsFn1(totalWorkedHrs);
+    } finally {
+      _$TeamViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic paidHrsFn2(String? totalNormalHoursSum) {
+    final _$actionInfo = _$TeamViewModelBaseActionController.startAction(
+        name: 'TeamViewModelBase.paidHrsFn2');
+    try {
+      return super.paidHrsFn2(totalNormalHoursSum);
+    } finally {
+      _$TeamViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic paidHrsFn3(String? totalHalfTimeHrs) {
+    final _$actionInfo = _$TeamViewModelBaseActionController.startAction(
+        name: 'TeamViewModelBase.paidHrsFn3');
+    try {
+      return super.paidHrsFn3(totalHalfTimeHrs);
+    } finally {
+      _$TeamViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic paidHrsFn4(String? totalDoubleTimeHrs) {
+    final _$actionInfo = _$TeamViewModelBaseActionController.startAction(
+        name: 'TeamViewModelBase.paidHrsFn4');
+    try {
+      return super.paidHrsFn4(totalDoubleTimeHrs);
+    } finally {
+      _$TeamViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic paidHrsFn5(String? totalPublicHoliday) {
+    final _$actionInfo = _$TeamViewModelBaseActionController.startAction(
+        name: 'TeamViewModelBase.paidHrsFn5');
+    try {
+      return super.paidHrsFn5(totalPublicHoliday);
+    } finally {
+      _$TeamViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic paidHrsFn6(String? totalAnnual) {
+    final _$actionInfo = _$TeamViewModelBaseActionController.startAction(
+        name: 'TeamViewModelBase.paidHrsFn6');
+    try {
+      return super.paidHrsFn6(totalAnnual);
+    } finally {
+      _$TeamViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic paidHrsFn7(String? totalSick) {
+    final _$actionInfo = _$TeamViewModelBaseActionController.startAction(
+        name: 'TeamViewModelBase.paidHrsFn7');
+    try {
+      return super.paidHrsFn7(totalSick);
+    } finally {
+      _$TeamViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic paidHrsFn8(String? totalOther) {
+    final _$actionInfo = _$TeamViewModelBaseActionController.startAction(
+        name: 'TeamViewModelBase.paidHrsFn8');
+    try {
+      return super.paidHrsFn8(totalOther);
     } finally {
       _$TeamViewModelBaseActionController.endAction(_$actionInfo);
     }
@@ -1744,7 +2037,15 @@ dayController1: ${dayController1},
 addLeaveResponse: ${addLeaveResponse},
 addFileLeave: ${addFileLeave},
 timeSheetResponse: ${timeSheetResponse},
-editTimeSheetResponse: ${editTimeSheetResponse}
+editTimeSheetResponse: ${editTimeSheetResponse},
+totalWorkedHrs: ${totalWorkedHrs},
+totalNormalHoursSum: ${totalNormalHoursSum},
+totalHalfTimeHrs: ${totalHalfTimeHrs},
+totalDoubleTimeHrs: ${totalDoubleTimeHrs},
+totalPublicHoliday: ${totalPublicHoliday},
+totalAnnual: ${totalAnnual},
+totalSick: ${totalSick},
+totalOther: ${totalOther}
     ''';
   }
 }

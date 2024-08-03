@@ -6,14 +6,13 @@ import 'package:enviro_mobile_application/api_response/api_response.dart';
 import 'package:enviro_mobile_application/model/00_common_model/folder_model/folder_model.dart';
 import 'package:enviro_mobile_application/model/10_team/create_team_req_model/create_team_req_model.dart';
 import 'package:enviro_mobile_application/model/10_team/edit_time_sheet_res_model/edit_time_sheet_res_model.dart';
+import 'package:enviro_mobile_application/model/10_team/edit_time_sheet_res_model/weekly_report.dart';
 import 'package:enviro_mobile_application/model/10_team/leave_res_model/leave_res_model/leave_res_model.dart';
 import 'package:enviro_mobile_application/model/10_team/team_designtion_res_model/designation.dart';
 import 'package:enviro_mobile_application/model/10_team/team_designtion_res_model/team_designtion_res_model.dart';
 import 'package:enviro_mobile_application/model/10_team/team_profile_employee_details_res_model/team_profile_employee_details_res_model.dart';
 import 'package:enviro_mobile_application/model/10_team/team_res_model/team_res_model.dart';
 import 'package:enviro_mobile_application/model/10_team/time_sheet_res_model/time_sheet_res_model.dart';
-import 'package:enviro_mobile_application/model/10_team/time_sheet_res_model/week.dart';
-import 'package:enviro_mobile_application/model/10_team/time_sheet_res_model/weekly_report.dart';
 import 'package:enviro_mobile_application/service/11_team/team_service.dart';
 import 'package:enviro_mobile_application/utilis/api_endpoints/customprint.dart';
 import 'package:enviro_mobile_application/utilis/image_picker_service/image_file_picker.dart';
@@ -942,6 +941,26 @@ abstract class TeamViewModelBase with Store {
   TextEditingController sickController = TextEditingController();
   TextEditingController otherController = TextEditingController();
 
+  TextEditingController minusBrkstotalHrsController = TextEditingController();
+  TextEditingController minusBrksnormalHourController = TextEditingController();
+  TextEditingController minusBrkstimehalfController = TextEditingController();
+  TextEditingController minusBrksdoubleTimeController = TextEditingController();
+  TextEditingController minusBrkspublicHolidayController =
+      TextEditingController();
+  TextEditingController minusBrksannualController = TextEditingController();
+  TextEditingController minusBrkssickController = TextEditingController();
+  TextEditingController minusBrksotherController = TextEditingController();
+
+  TextEditingController paidHrstotalHrsController = TextEditingController();
+  TextEditingController paidHrsnormalHourController = TextEditingController();
+  TextEditingController paidHrstimehalfController = TextEditingController();
+  TextEditingController paidHrsdoubleTimeController = TextEditingController();
+  TextEditingController paidHrspublicHolidayController =
+      TextEditingController();
+  TextEditingController paidHrsannualController = TextEditingController();
+  TextEditingController paidHrssickController = TextEditingController();
+  TextEditingController paidHrsotherController = TextEditingController();
+
   ScrollController timesheetScrCntrller = ScrollController();
 
   @action
@@ -1104,14 +1123,6 @@ abstract class TeamViewModelBase with Store {
     vmTeam.totalHrsController.text = (hrs1 + hrs2 + hrs3).toString();
   }
 
-  @action
-  totalWorkedHrsFn(Week data) {
-    int hrs1 = int.tryParse(vmTeam.hrsController1.text) ?? 0;
-    int hrs2 = int.tryParse(vmTeam.hrsController2.text) ?? 0;
-    int hrs3 = int.tryParse(vmTeam.hrsController3.text) ?? 0;
-    vmTeam.totalHrsController.text = (hrs1 + hrs2 + hrs3).toString();
-  }
-
   @observable
   ApiResponse<LeaveResModel> addLeaveResponse = ApiResponse<LeaveResModel>();
   @action
@@ -1235,6 +1246,162 @@ abstract class TeamViewModelBase with Store {
         context.router.pop();
       },
     );
+  }
+
+  @observable
+  double? totalWorkedHrs;
+  @observable
+  double? totalNormalHoursSum;
+  @observable
+  double? totalHalfTimeHrs;
+  @observable
+  double? totalDoubleTimeHrs;
+  @observable
+  double? totalPublicHoliday;
+  @observable
+  double? totalAnnual;
+  @observable
+  double? totalSick;
+  @observable
+  double? totalOther;
+
+  double parseTimeString(String timeString) {
+    List<String> parts = timeString.split(':');
+    if (parts.length == 2) {
+      double hours = double.tryParse(parts[0]) ?? 0;
+      double minutes = double.tryParse(parts[1]) ?? 0;
+      return hours + (minutes / 60);
+    }
+    return 0;
+  }
+
+  @action
+  void calculateTotalWorkedHrs(TimeSheetResModel? timeSheet) {
+    final week = timeSheet?.weeklyReport?.week ?? [];
+    totalWorkedHrs = week.fold(0, (sum, data) {
+      double totalWorkedHrs = parseTimeString(data.totalHoursWorked.toString());
+      return sum! + totalWorkedHrs;
+    });
+  }
+
+  @action
+  void calculateNormalHoursSum(TimeSheetResModel? timeSheet) {
+    final week = timeSheet?.weeklyReport?.week ?? [];
+    totalNormalHoursSum = week.fold(0, (sum, data) {
+      double normalHours = double.tryParse(data.normalHours.toString()) ?? 0;
+      return sum! + normalHours;
+    });
+  }
+
+  @action
+  void calculateHalfTimeHoursSum(TimeSheetResModel? timeSheet) {
+    final week = timeSheet?.weeklyReport?.week ?? [];
+    totalHalfTimeHrs = week.fold(0, (sum, data) {
+      double halfTimeHrs = double.tryParse(data.halfTime.toString()) ?? 0;
+      return sum! + halfTimeHrs;
+    });
+  }
+
+  @action
+  void calculateDoubleTimeHoursSum(TimeSheetResModel? timeSheet) {
+    final week = timeSheet?.weeklyReport?.week ?? [];
+    totalDoubleTimeHrs = week.fold(0, (sum, data) {
+      double doubleTimeHrs = double.tryParse(data.fullTime.toString()) ?? 0;
+      return sum! + doubleTimeHrs;
+    });
+  }
+
+  @action
+  void calculatePublicHolidayHoursSum(TimeSheetResModel? timeSheet) {
+    final week = timeSheet?.weeklyReport?.week ?? [];
+    totalPublicHoliday = week.fold(0, (sum, data) {
+      double totalPublicHoliday =
+          double.tryParse(data.publicHolidays.toString()) ?? 0;
+      return sum! + totalPublicHoliday;
+    });
+  }
+
+  @action
+  void calculateAnnualHoursSum(TimeSheetResModel? timeSheet) {
+    final week = timeSheet?.weeklyReport?.week ?? [];
+    totalAnnual = week.fold(0, (sum, data) {
+      double totalAnnual = double.tryParse(data.annual.toString()) ?? 0;
+      return sum! + totalAnnual;
+    });
+  }
+
+  @action
+  void calculateSickHoursSum(TimeSheetResModel? timeSheet) {
+    final week = timeSheet?.weeklyReport?.week ?? [];
+    totalSick = week.fold(0, (sum, data) {
+      double totalSick = double.tryParse(data.sick.toString()) ?? 0;
+      return sum! + totalSick;
+    });
+  }
+
+  @action
+  void calculateOtherHoursSum(TimeSheetResModel? timeSheet) {
+    final week = timeSheet?.weeklyReport?.week ?? [];
+    totalOther = week.fold(0, (sum, data) {
+      double totalOther = double.tryParse(data.otherDays.toString()) ?? 0;
+      return sum! + totalOther;
+    });
+  }
+
+  @action
+  paidHrsFn1(String? totalWorkedHrs) {
+    int value1 = int.tryParse(totalWorkedHrs ?? "") ?? 0;
+    int value2 = int.tryParse(minusBrkstotalHrsController.text) ?? 0;
+    paidHrstotalHrsController.text = (value1 - value2).toString();
+  }
+
+  @action
+  paidHrsFn2(String? totalNormalHoursSum) {
+    int value1 = int.tryParse(totalNormalHoursSum ?? "") ?? 0;
+    int value2 = int.tryParse(minusBrksnormalHourController.text) ?? 0;
+    paidHrsnormalHourController.text = (value1 - value2).toString();
+  }
+
+  @action
+  paidHrsFn3(String? totalHalfTimeHrs) {
+    int value1 = int.tryParse(totalHalfTimeHrs ?? "") ?? 0;
+    int value2 = int.tryParse(minusBrkstimehalfController.text) ?? 0;
+    paidHrstimehalfController.text = (value1 - value2).toString();
+  }
+
+  @action
+  paidHrsFn4(String? totalDoubleTimeHrs) {
+    int value1 = int.tryParse(totalDoubleTimeHrs ?? "") ?? 0;
+    int value2 = int.tryParse(minusBrksdoubleTimeController.text) ?? 0;
+    paidHrsdoubleTimeController.text = (value1 - value2).toString();
+  }
+
+  @action
+  paidHrsFn5(String? totalPublicHoliday) {
+    int value1 = int.tryParse(totalPublicHoliday ?? "") ?? 0;
+    int value2 = int.tryParse(minusBrkspublicHolidayController.text) ?? 0;
+    paidHrspublicHolidayController.text = (value1 - value2).toString();
+  }
+
+  @action
+  paidHrsFn6(String? totalAnnual) {
+    int value1 = int.tryParse(totalAnnual ?? " ") ?? 0;
+    int value2 = int.tryParse(minusBrksannualController.text) ?? 0;
+    paidHrsannualController.text = (value1 - value2).toString();
+  }
+
+  @action
+  paidHrsFn7(String? totalSick) {
+    int value1 = int.tryParse(totalSick ?? " ") ?? 0;
+    int value2 = int.tryParse(minusBrkssickController.text) ?? 0;
+    paidHrssickController.text = (value1 - value2).toString();
+  }
+
+  @action
+  paidHrsFn8(String? totalOther) {
+    int value1 = int.tryParse(totalOther ?? " ") ?? 0;
+    int value2 = int.tryParse(minusBrksotherController.text) ?? 0;
+    paidHrsotherController.text = (value1 - value2).toString();
   }
 
   clearFn() {

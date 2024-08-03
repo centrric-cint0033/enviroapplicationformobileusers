@@ -23,9 +23,11 @@ mixin _$Week {
   String? get day => throw _privateConstructorUsedError;
   String? get date => throw _privateConstructorUsedError;
   dynamic get sick => throw _privateConstructorUsedError;
-  dynamic get start => throw _privateConstructorUsedError;
+  @TimeOfDayConverter()
+  TimeOfDay? get start => throw _privateConstructorUsedError;
   dynamic get annual => throw _privateConstructorUsedError;
-  dynamic get finish => throw _privateConstructorUsedError;
+  @TimeOfDayConverter()
+  TimeOfDay? get finish => throw _privateConstructorUsedError;
   @JsonKey(name: 'full_time')
   dynamic get fullTime => throw _privateConstructorUsedError;
   @JsonKey(name: 'half_time')
@@ -53,9 +55,9 @@ abstract class $WeekCopyWith<$Res> {
       {String? day,
       String? date,
       dynamic sick,
-      dynamic start,
+      @TimeOfDayConverter() TimeOfDay? start,
       dynamic annual,
-      dynamic finish,
+      @TimeOfDayConverter() TimeOfDay? finish,
       @JsonKey(name: 'full_time') dynamic fullTime,
       @JsonKey(name: 'half_time') dynamic halfTime,
       @JsonKey(name: 'other_days') dynamic otherDays,
@@ -106,7 +108,7 @@ class _$WeekCopyWithImpl<$Res, $Val extends Week>
       start: freezed == start
           ? _value.start
           : start // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as TimeOfDay?,
       annual: freezed == annual
           ? _value.annual
           : annual // ignore: cast_nullable_to_non_nullable
@@ -114,7 +116,7 @@ class _$WeekCopyWithImpl<$Res, $Val extends Week>
       finish: freezed == finish
           ? _value.finish
           : finish // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as TimeOfDay?,
       fullTime: freezed == fullTime
           ? _value.fullTime
           : fullTime // ignore: cast_nullable_to_non_nullable
@@ -154,9 +156,9 @@ abstract class _$$WeekImplCopyWith<$Res> implements $WeekCopyWith<$Res> {
       {String? day,
       String? date,
       dynamic sick,
-      dynamic start,
+      @TimeOfDayConverter() TimeOfDay? start,
       dynamic annual,
-      dynamic finish,
+      @TimeOfDayConverter() TimeOfDay? finish,
       @JsonKey(name: 'full_time') dynamic fullTime,
       @JsonKey(name: 'half_time') dynamic halfTime,
       @JsonKey(name: 'other_days') dynamic otherDays,
@@ -204,7 +206,7 @@ class __$$WeekImplCopyWithImpl<$Res>
       start: freezed == start
           ? _value.start
           : start // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as TimeOfDay?,
       annual: freezed == annual
           ? _value.annual
           : annual // ignore: cast_nullable_to_non_nullable
@@ -212,7 +214,7 @@ class __$$WeekImplCopyWithImpl<$Res>
       finish: freezed == finish
           ? _value.finish
           : finish // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as TimeOfDay?,
       fullTime: freezed == fullTime
           ? _value.fullTime
           : fullTime // ignore: cast_nullable_to_non_nullable
@@ -248,9 +250,9 @@ class _$WeekImpl implements _Week {
       {this.day,
       this.date,
       this.sick,
-      this.start,
+      @TimeOfDayConverter() this.start,
       this.annual,
-      this.finish,
+      @TimeOfDayConverter() this.finish,
       @JsonKey(name: 'full_time') this.fullTime,
       @JsonKey(name: 'half_time') this.halfTime,
       @JsonKey(name: 'other_days') this.otherDays,
@@ -268,11 +270,13 @@ class _$WeekImpl implements _Week {
   @override
   final dynamic sick;
   @override
-  final dynamic start;
+  @TimeOfDayConverter()
+  final TimeOfDay? start;
   @override
   final dynamic annual;
   @override
-  final dynamic finish;
+  @TimeOfDayConverter()
+  final TimeOfDay? finish;
   @override
   @JsonKey(name: 'full_time')
   final dynamic fullTime;
@@ -305,9 +309,9 @@ class _$WeekImpl implements _Week {
             (identical(other.day, day) || other.day == day) &&
             (identical(other.date, date) || other.date == date) &&
             const DeepCollectionEquality().equals(other.sick, sick) &&
-            const DeepCollectionEquality().equals(other.start, start) &&
+            (identical(other.start, start) || other.start == start) &&
             const DeepCollectionEquality().equals(other.annual, annual) &&
-            const DeepCollectionEquality().equals(other.finish, finish) &&
+            (identical(other.finish, finish) || other.finish == finish) &&
             const DeepCollectionEquality().equals(other.fullTime, fullTime) &&
             const DeepCollectionEquality().equals(other.halfTime, halfTime) &&
             const DeepCollectionEquality().equals(other.otherDays, otherDays) &&
@@ -326,9 +330,9 @@ class _$WeekImpl implements _Week {
       day,
       date,
       const DeepCollectionEquality().hash(sick),
-      const DeepCollectionEquality().hash(start),
+      start,
       const DeepCollectionEquality().hash(annual),
-      const DeepCollectionEquality().hash(finish),
+      finish,
       const DeepCollectionEquality().hash(fullTime),
       const DeepCollectionEquality().hash(halfTime),
       const DeepCollectionEquality().hash(otherDays),
@@ -355,9 +359,9 @@ abstract class _Week implements Week {
       {final String? day,
       final String? date,
       final dynamic sick,
-      final dynamic start,
+      @TimeOfDayConverter() final TimeOfDay? start,
       final dynamic annual,
-      final dynamic finish,
+      @TimeOfDayConverter() final TimeOfDay? finish,
       @JsonKey(name: 'full_time') final dynamic fullTime,
       @JsonKey(name: 'half_time') final dynamic halfTime,
       @JsonKey(name: 'other_days') final dynamic otherDays,
@@ -375,11 +379,13 @@ abstract class _Week implements Week {
   @override
   dynamic get sick;
   @override
-  dynamic get start;
+  @TimeOfDayConverter()
+  TimeOfDay? get start;
   @override
   dynamic get annual;
   @override
-  dynamic get finish;
+  @TimeOfDayConverter()
+  TimeOfDay? get finish;
   @override
   @JsonKey(name: 'full_time')
   dynamic get fullTime;

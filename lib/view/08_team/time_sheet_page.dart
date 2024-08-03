@@ -5,6 +5,7 @@ import 'package:enviro_mobile_application/utilis/Appthemes.dart';
 import 'package:enviro_mobile_application/utilis/constant.dart';
 import 'package:enviro_mobile_application/view/08_team/team_widgets/date_picker.dart';
 import 'package:enviro_mobile_application/view_model/08_team/team_view_model.dart';
+import 'package:enviro_mobile_application/widgets/cmbutton.dart';
 import 'package:enviro_mobile_application/widgets/cmn_title_textwidget.dart';
 import 'package:enviro_mobile_application/widgets/ww_customLoading.dart';
 import 'package:flutter/material.dart';
@@ -80,7 +81,14 @@ class TimeSheetPage extends StatelessWidget {
       child: Observer(builder: (context) {
         final res = vmTeam.timeSheetResponse;
         TimeSheetResModel? timeSheet = res.data;
-
+        vmTeam.calculateNormalHoursSum(timeSheet);
+        vmTeam.calculateTotalWorkedHrs(timeSheet);
+        vmTeam.calculateHalfTimeHoursSum(timeSheet);
+        vmTeam.calculateDoubleTimeHoursSum(timeSheet);
+        vmTeam.calculatePublicHolidayHoursSum(timeSheet);
+        vmTeam.calculateAnnualHoursSum(timeSheet);
+        vmTeam.calculateSickHoursSum(timeSheet);
+        vmTeam.calculateOtherHoursSum(timeSheet);
         return SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: SizedBox(
@@ -149,7 +157,10 @@ class TimeSheetPage extends StatelessWidget {
                         DateFormat('yyyy-MM-dd').format(parsedDate);
                     vmTeam.weekStartDate =
                         data?.date != null ? inputweekStartDate : formattedDate;
-                    // vmTeam.totalWorkedHrsFn(data!);
+                    double totalHoursWorked =
+                        parseTimeString(data?.totalHoursWorked ?? "0");
+                    String formattedTotalHoursWorked =
+                        formatDouble(totalHoursWorked);
                     return InkWell(
                       onTap: () {
                         vmTeam.totalHrsController.text =
@@ -170,9 +181,9 @@ class TimeSheetPage extends StatelessWidget {
                         if (data != null) {
                           if (data.start != "") {
                             vmTeam.selectedStartTime =
-                                timeOfDayFromString(data.start ?? "");
+                                timeOfDayFromString(data.start.toString());
                             vmTeam.selectedEndTime =
-                                timeOfDayFromString(data.finish ?? "");
+                                timeOfDayFromString(data.finish.toString());
                           } else {
                             vmTeam.selectedStartTime = null;
                             vmTeam.selectedEndTime = null;
@@ -209,16 +220,26 @@ class TimeSheetPage extends StatelessWidget {
                                 data?.day ??
                                     DateFormat('EEEE').format(weekDates[index]),
                               ),
-                              cmTableCell(data?.start ?? "-"),
-                              cmTableCell(data?.finish ?? "-"),
-                              cmTableCell("${data?.totalHoursWorked ?? "0"}"),
+                              cmTableCell(data != null
+                                  ? formatTimeOfDay(data.start!)
+                                  : "-"),
+                              cmTableCell(data != null
+                                  ? formatTimeOfDay(data.finish!)
+                                  : "-"),
+                              cmTableCell(formattedTotalHoursWorked),
                               cmTableCell("${data?.normalHours ?? "0"}"),
-                              cmTableCell("${data?.fullTime ?? "0"}"),
-                              cmTableCell("${data?.halfTime ?? "0"}"),
-                              cmTableCell("${data?.publicHolidays ?? "0"}"),
-                              cmTableCell("${data?.annual ?? "0"}"),
-                              cmTableCell("${data?.sick ?? "0"}"),
-                              cmTableCell("${data?.otherDays ?? "0"}"),
+                              cmTableCell(
+                                  "${data?.halfTime != "" && data?.halfTime != null ? data?.halfTime : "0"}"),
+                              cmTableCell(
+                                  "${data?.fullTime != "" && data?.fullTime != null ? data?.fullTime : "0"}"),
+                              cmTableCell(
+                                  "${data?.publicHolidays != "" && data?.publicHolidays != null ? data?.publicHolidays : "0"}"),
+                              cmTableCell(
+                                  "${data?.annual != "" && data?.annual != null ? data?.annual : "0"}"),
+                              cmTableCell(
+                                  "${data?.sick != "" && data?.sick != null ? data?.sick : "0"}"),
+                              cmTableCell(
+                                  "${data?.otherDays != "" && data?.otherDays != null ? data?.otherDays : "0"}"),
                             ],
                           ),
                         ],
@@ -247,66 +268,131 @@ class TimeSheetPage extends StatelessWidget {
                       children: [
                         cmTableCell(""),
                         cmTableCell("Total Worked Hours"),
+                        cmTableCell(removeTrailingZeros(
+                          vmTeam.totalWorkedHrs ?? "0",
+                        )),
+                        cmTableCell(removeTrailingZeros(
+                            vmTeam.totalNormalHoursSum ?? "0")),
+                        cmTableCell(removeTrailingZeros(
+                            vmTeam.totalHalfTimeHrs ?? "0")),
+                        cmTableCell(removeTrailingZeros(
+                            vmTeam.totalDoubleTimeHrs ?? "0")),
+                        cmTableCell(removeTrailingZeros(
+                            vmTeam.totalPublicHoliday ?? "0")),
                         cmTableCell(
-                            "${timeSheet?.weeklyReport?.wholeHoursTotalWorked?.totalHoursWorked ?? "0"}"),
+                            removeTrailingZeros(vmTeam.totalAnnual ?? "0")),
                         cmTableCell(
-                            "${timeSheet?.weeklyReport?.wholeHoursTotalWorked?.normalHours ?? "0"}"),
+                            removeTrailingZeros(vmTeam.totalSick ?? "0")),
                         cmTableCell(
-                            "${timeSheet?.weeklyReport?.wholeHoursTotalWorked?.halfTime ?? "0"}"),
-                        cmTableCell(
-                            "${timeSheet?.weeklyReport?.wholeHoursTotalWorked?.fullTime ?? "0"}"),
-                        cmTableCell(
-                            "${timeSheet?.weeklyReport?.wholeHoursTotalWorked?.publicHolidays ?? "0"}"),
-                        cmTableCell(
-                            "${timeSheet?.weeklyReport?.wholeHoursTotalWorked?.annual ?? "0"}"),
-                        cmTableCell(
-                            "${timeSheet?.weeklyReport?.wholeHoursTotalWorked?.sick ?? "0"}"),
-                        cmTableCell(
-                            "${timeSheet?.weeklyReport?.wholeHoursTotalWorked?.otherDays ?? "0"}"),
+                            removeTrailingZeros(vmTeam.totalOther ?? "0")),
                       ],
                     ),
                     TableRow(
                       children: [
                         cmTableCell(""),
                         cmTableCell("Minus Breaks"),
-                        cmTableCell(
-                            "${timeSheet?.weeklyReport?.wholeWeekMinus?.totalHoursWorked ?? "0"}"),
-                        cmTableCell(
-                            "${timeSheet?.weeklyReport?.wholeWeekMinus?.normalHours ?? "0"}"),
-                        cmTableCell(
-                            "${timeSheet?.weeklyReport?.wholeWeekMinus?.halfTime ?? "0"}"),
-                        cmTableCell(
-                            "${timeSheet?.weeklyReport?.wholeWeekMinus?.fullTime ?? "0"}"),
-                        cmTableCell(
-                            "${timeSheet?.weeklyReport?.wholeWeekMinus?.publicHolidays ?? "0"}"),
-                        cmTableCell(
-                            "${timeSheet?.weeklyReport?.wholeWeekMinus?.annual ?? "0"}"),
-                        cmTableCell(
-                            "${timeSheet?.weeklyReport?.wholeWeekMinus?.sick ?? "0"}"),
-                        cmTableCell(
-                            "${timeSheet?.weeklyReport?.wholeWeekMinus?.otherDays ?? "0"}"),
+                        cmTableCellTextField(
+                          vmTeam.minusBrkstotalHrsController,
+                          onChanged: (e) {
+                            vmTeam.paidHrsFn1(removeTrailingZeros(
+                              vmTeam.totalWorkedHrs ?? "0",
+                            ));
+                          },
+                        ),
+                        cmTableCellTextField(
+                            vmTeam.minusBrksnormalHourController,
+                            onChanged: (e) {
+                          vmTeam.paidHrsFn2(removeTrailingZeros(
+                              vmTeam.totalNormalHoursSum ?? "0"));
+                        }),
+                        cmTableCellTextField(vmTeam.minusBrkstimehalfController,
+                            onChanged: (e) {
+                          vmTeam.paidHrsFn3(removeTrailingZeros(
+                              vmTeam.totalHalfTimeHrs ?? "0"));
+                        }),
+                        cmTableCellTextField(
+                            vmTeam.minusBrksdoubleTimeController,
+                            onChanged: (e) {
+                          vmTeam.paidHrsFn4(removeTrailingZeros(
+                              vmTeam.totalDoubleTimeHrs ?? "0"));
+                        }),
+                        cmTableCellTextField(
+                            vmTeam.minusBrkspublicHolidayController,
+                            onChanged: (e) {
+                          vmTeam.paidHrsFn5(removeTrailingZeros(
+                              vmTeam.totalPublicHoliday ?? "0"));
+                        }),
+                        cmTableCellTextField(vmTeam.minusBrksannualController,
+                            onChanged: (e) {
+                          vmTeam.paidHrsFn6(
+                              removeTrailingZeros(vmTeam.totalAnnual ?? "0"));
+                        }),
+                        cmTableCellTextField(vmTeam.minusBrkssickController,
+                            onChanged: (e) {
+                          vmTeam.paidHrsFn7(
+                              removeTrailingZeros(vmTeam.totalSick ?? "0"));
+                        }),
+                        cmTableCellTextField(vmTeam.minusBrksotherController,
+                            onChanged: (e) {
+                          vmTeam.paidHrsFn8(removeTrailingZeros(
+                            vmTeam.totalWorkedHrs ?? "0",
+                          ));
+                        }),
+                        // cmTableCell(
+                        //     "${timeSheet?.weeklyReport?.wholeWeekMinus?.totalHoursWorked ?? "0"}"),
+                        // cmTableCell(
+                        //     "${timeSheet?.weeklyReport?.wholeWeekMinus?.normalHours ?? "0"}"),
+                        // cmTableCell(
+                        //     "${timeSheet?.weeklyReport?.wholeWeekMinus?.halfTime ?? "0"}"),
+                        // cmTableCell(
+                        //     "${timeSheet?.weeklyReport?.wholeWeekMinus?.fullTime ?? "0"}"),
+                        // cmTableCell(
+                        //     "${timeSheet?.weeklyReport?.wholeWeekMinus?.publicHolidays ?? "0"}"),
+                        // cmTableCell(
+                        //     "${timeSheet?.weeklyReport?.wholeWeekMinus?.annual ?? "0"}"),
+                        // cmTableCell(
+                        //     "${timeSheet?.weeklyReport?.wholeWeekMinus?.sick ?? "0"}"),
+                        // cmTableCell(
+                        //     "${timeSheet?.weeklyReport?.wholeWeekMinus?.otherDays ?? "0"}"),
                       ],
                     ),
                     TableRow(
                       children: [
                         cmTableCell(""),
                         cmTableCell("Paid Hours"),
-                        cmTableCell(
-                            "${timeSheet?.weeklyReport?.wholePaidHours?.totalHoursWorked ?? "0"}"),
-                        cmTableCell(
-                            "${timeSheet?.weeklyReport?.wholePaidHours?.normalHours ?? "0"}"),
-                        cmTableCell(
-                            "${timeSheet?.weeklyReport?.wholePaidHours?.halfTime ?? "0"}"),
-                        cmTableCell(
-                            "${timeSheet?.weeklyReport?.wholePaidHours?.fullTime ?? "0"}"),
-                        cmTableCell(
-                            "${timeSheet?.weeklyReport?.wholePaidHours?.publicHolidays ?? "0"}"),
-                        cmTableCell(
-                            "${timeSheet?.weeklyReport?.wholePaidHours?.annual ?? "0"}"),
-                        cmTableCell(
-                            "${timeSheet?.weeklyReport?.wholePaidHours?.sick ?? "0"}"),
-                        cmTableCell(
-                            "${timeSheet?.weeklyReport?.wholePaidHours?.otherDays ?? "0"}"),
+                        cmTableCellTextField(vmTeam.paidHrstotalHrsController,
+                            hintText: "0",
+                            enabled: false,
+                            textColor: Appthemes.cPrimary),
+                        cmTableCellTextField(vmTeam.paidHrsnormalHourController,
+                            hintText: "0",
+                            enabled: false,
+                            textColor: Appthemes.cPrimary),
+                        cmTableCellTextField(vmTeam.paidHrstimehalfController,
+                            hintText: "0",
+                            enabled: false,
+                            textColor: Appthemes.cPrimary),
+                        cmTableCellTextField(vmTeam.paidHrsdoubleTimeController,
+                            hintText: "0",
+                            enabled: false,
+                            textColor: Appthemes.cPrimary),
+                        cmTableCellTextField(
+                            vmTeam.paidHrspublicHolidayController,
+                            hintText: "0",
+                            enabled: false,
+                            textColor: Appthemes.cPrimary),
+                        cmTableCellTextField(vmTeam.paidHrsannualController,
+                            hintText: "0",
+                            enabled: false,
+                            textColor: Appthemes.cPrimary),
+                        cmTableCellTextField(vmTeam.paidHrssickController,
+                            hintText: "0",
+                            enabled: false,
+                            textColor: Appthemes.cPrimary),
+                        cmTableCellTextField(vmTeam.paidHrsotherController,
+                            hintText: "0",
+                            enabled: false,
+                            textColor: Appthemes.cPrimary),
                       ],
                     ),
                   ],
@@ -333,6 +419,14 @@ class TimeSheetPage extends StatelessWidget {
                   ),
                 ),
                 sized0hx05,
+                CmButton(
+                  width: 120.w,
+                  text: "Save",
+                  onPressed: () {
+                    vmTeam.minusBrkstotalHrsController.text =
+                        vmTeam.minusBrkstotalHrsController.text;
+                  },
+                )
               ],
             ),
           ),
@@ -433,6 +527,31 @@ class TimeSheetPage extends StatelessWidget {
   }
 }
 
+TableCell cmTableCellTextField(TextEditingController controller,
+    {bool enabled = true,
+    String? hintText,
+    void Function(String)? onChanged,
+    Color? textColor}) {
+  return TableCell(
+    child: Padding(
+        padding: EdgeInsets.only(left: 32.w),
+        child: TextField(
+          controller: controller,
+          style: TextStyle(
+              fontSize: 9.sp, color: textColor ?? Appthemes.blackColor),
+          enabled: enabled,
+          onChanged: onChanged,
+          keyboardType: TextInputType.number,
+          decoration: InputDecoration(
+            hintText: hintText ?? '---',
+            hintStyle: TextStyle(fontSize: 9.sp, color: Colors.grey.shade400),
+            border: InputBorder.none,
+            contentPadding: const EdgeInsets.symmetric(horizontal: 8.0),
+          ),
+        )),
+  );
+}
+
 TimeOfDay timeOfDayFromString(String time) {
   try {
     List<String> parts = time.split(':');
@@ -456,4 +575,29 @@ String convertToRailwayTime(String timestamp) {
   DateFormat formatter =
       DateFormat.Hm(); // Hm stands for hours and minutes in 24-hour format
   return formatter.format(dateTime);
+}
+
+String removeTrailingZeros(dynamic value) {
+  return value.toStringAsFixed(value.truncateToDouble() == value ? 0 : 1);
+}
+
+String formatDouble(double value) {
+  if (value == value.toInt().toDouble()) {
+    return value.toInt().toString(); // No decimal part
+  } else {
+    return value.toStringAsFixed(2); // Two decimal places if needed
+  }
+}
+
+double parseTimeString(String timeString) {
+  // Split the string into hours and minutes
+  List<String> parts = timeString.split(':');
+  if (parts.length == 2) {
+    // Convert hours and minutes to double
+    double hours = double.tryParse(parts[0]) ?? 0;
+    double minutes = double.tryParse(parts[1]) ?? 0;
+    // Convert minutes to a fraction of an hour
+    return hours + (minutes / 60);
+  }
+  return 0;
 }

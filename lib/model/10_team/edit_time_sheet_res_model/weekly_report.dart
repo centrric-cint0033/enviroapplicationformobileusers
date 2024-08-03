@@ -1,6 +1,5 @@
+import 'package:enviro_mobile_application/model/10_team/time_sheet_res_model/week.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-
-import 'week.dart';
 import 'whole_hours_total_worked.dart';
 import 'whole_paid_hours.dart';
 import 'whole_week_minus.dart';

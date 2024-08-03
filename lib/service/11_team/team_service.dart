@@ -3,12 +3,12 @@ import 'package:dartz/dartz.dart';
 import 'package:enviro_mobile_application/model/00_common_model/folder_model/folder_model.dart';
 import 'package:enviro_mobile_application/model/10_team/create_team_req_model/create_team_req_model.dart';
 import 'package:enviro_mobile_application/model/10_team/edit_time_sheet_res_model/edit_time_sheet_res_model.dart';
+import 'package:enviro_mobile_application/model/10_team/edit_time_sheet_res_model/weekly_report.dart';
 import 'package:enviro_mobile_application/model/10_team/leave_res_model/leave_res_model/leave_res_model.dart';
 import 'package:enviro_mobile_application/model/10_team/team_designtion_res_model/team_designtion_res_model.dart';
 import 'package:enviro_mobile_application/model/10_team/team_profile_employee_details_res_model/team_profile_employee_details_res_model.dart';
 import 'package:enviro_mobile_application/model/10_team/team_res_model/team_res_model.dart';
 import 'package:enviro_mobile_application/model/10_team/time_sheet_res_model/time_sheet_res_model.dart';
-import 'package:enviro_mobile_application/model/10_team/time_sheet_res_model/weekly_report.dart';
 import 'package:enviro_mobile_application/utilis/api_endpoints/api_endpoints.dart';
 import 'package:enviro_mobile_application/utilis/httpservice.dart';
 import 'package:enviro_mobile_application/utilis/injection.dart';
@@ -427,9 +427,12 @@ class TeamService implements IteamService {
 
   @override
   Future<Either<Map<MainFailure, dynamic>, EditTimeSheetResModel>>
-      editTimeSheetApi(
-          {required String date, required WeeklyReport weeklyReport}) async {
+      editTimeSheetApi({
+    required String date,
+    required WeeklyReport weeklyReport,
+  }) async {
     String weeklyReportJson = jsonEncode(weeklyReport.toJson());
+
     var response = await getIt<HttpService>().multipartRequest(
       data: {
         "week_startdate": date,
