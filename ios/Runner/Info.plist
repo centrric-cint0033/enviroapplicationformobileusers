@@ -20,6 +20,10 @@
 		<string>$(FLUTTER_BUILD_NAME)</string>
 		<key>NSPhotoLibraryUsageDescription</key>
 		<string>Enviro requires Gallery access to add photos in profile.</string>
+		<key>NSCameraUsageDescription</key>
+        <string>Enviro requires Camera to add photos.</string>
+		<key>NSLocationWhenInUseUsageDescription</key>
+        <string>Enviro requires Location access to find the site location.</string>
 		<key>CFBundleSignature</key>
 		<string>????</string>
 		<key>CFBundleVersion</key>
