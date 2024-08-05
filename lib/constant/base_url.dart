@@ -9,3 +9,4 @@ const conPasswordErrorMessage =
 
 const usernameErrorMessage =
     'This username is not available. Make sure you are not using existing usernames, swear words and invalid characters. You can use a-z, 0-9 and underscores. Minimum length is 5 characters.';
+   

@@ -74,13 +74,13 @@ class HomePage extends StatelessWidget {
                     // _buildBox('assets/images/users.svg', 'Team',
                     //     onTap: () => {
                     //           Navigator.push(
-                    //               context,
+                    //               context,   
                     //               MaterialPageRoute(
                     //                 builder: (context) => MyApp(),
                     //               ))
                     //         },
                     //     permission: permission?.team?.view),
-                  ],
+                  ],                 
                 );
         }),
       ),
