@@ -37,7 +37,7 @@ class EditTimeSheetPage extends StatelessWidget {
             padding: screenWidth,
             child: Text(
               "${timesheetWeek?.date ?? "$date"} -${timesheetWeek?.day ?? "$day"}",
-              style: TextStyle(fontSize: 12.w, fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.bold),
             ),
           ),
           sized0hx10,
@@ -172,7 +172,7 @@ Widget cmTimerRow(
           child: Text(
             text,
             style: TextStyle(
-              fontSize: 11.w,
+              fontSize: 11.sp,
               fontWeight: FontWeight.w800,
             ),
           ),
@@ -202,7 +202,7 @@ Widget cmRowTextfield(
           child: Text(
             text,
             style: TextStyle(
-              fontSize: 11.w,
+              fontSize: 11.sp,
               fontWeight: FontWeight.w800,
             ),
           ),

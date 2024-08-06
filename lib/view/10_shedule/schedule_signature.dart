@@ -430,7 +430,7 @@ class SheduleSignaturePage extends StatelessWidget {
                 if (required == true)
                   Text(
                     "*",
-                    style: TextStyle(color: Colors.red, fontSize: 11.w),
+                    style: TextStyle(color: Colors.red, fontSize: 11.sp),
                   )
               ],
             ),
@@ -440,7 +440,7 @@ class SheduleSignaturePage extends StatelessWidget {
                   hintText: subtitle,
                   border: InputBorder.none,
                   hintStyle:
-                      TextStyle(color: Colors.grey.shade500, fontSize: 8.w)),
+                      TextStyle(color: Colors.grey.shade500, fontSize: 8.sp)),
               style: TextStyle(fontSize: 9.sp),
             ),
           ],

@@ -124,11 +124,11 @@ class TeamProfileScreen extends StatelessWidget {
                                               employeeDetails?.userType ?? "",
                                               style: TextStyle(
                                                   color: Appthemes.cPrimary,
-                                                  fontSize: 11.w),
+                                                  fontSize: 11.sp),
                                             ),
                                             Text(
                                               employeeDetails?.name ?? "",
-                                              style: TextStyle(fontSize: 11.w),
+                                              style: TextStyle(fontSize: 11.sp),
                                             ),
                                             if (vmProfile.profilepageResponse
                                                     .data?.permissionType

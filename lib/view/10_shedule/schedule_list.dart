@@ -53,7 +53,7 @@ class ScheduleList extends StatelessWidget {
                               vmSchedule.shedulecardResponse.data?[i].client
                                       ?.clientName ??
                                   '',
-                              style: TextStyle(fontSize: 11.w),
+                              style: TextStyle(fontSize: 11.sp),
                               overflow: TextOverflow.ellipsis,
                             ),
                           ),
@@ -103,7 +103,7 @@ class ScheduleList extends StatelessWidget {
                               child: Text(
                                   jobStatus(
                                       "${vmSchedule.shedulecardResponse.data?[i].status}"),
-                                  style: TextStyle(fontSize: 8.w)),
+                                  style: TextStyle(fontSize: 8.sp)),
                             ),
                           ),
                         )

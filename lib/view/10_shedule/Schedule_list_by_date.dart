@@ -44,7 +44,7 @@ class ScheduleListByDate extends StatelessWidget {
                       children: [
                         Text(
                           "${vmSchedule.shedulecardByDateResponse.data?[i].client ?? ''}",
-                          style: TextStyle(fontSize: 11.w),
+                          style: TextStyle(fontSize: 11.sp),
                         ),
                         Padding(
                           padding: EdgeInsets.only(right: 8.w),
@@ -88,7 +88,7 @@ class ScheduleListByDate extends StatelessWidget {
                               child: Text(
                                   jobStatus(
                                       "${vmSchedule.shedulecardByDateResponse.data?[i].status}"),
-                                  style: TextStyle(fontSize: 8.w)),
+                                  style: TextStyle(fontSize: 8.sp)),
                             ),
                           ),
                         )

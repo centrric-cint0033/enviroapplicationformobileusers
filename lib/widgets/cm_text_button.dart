@@ -31,7 +31,7 @@ Widget cmTextButton(
                 )
               : Text(
                   buttonText ?? "",
-                  style: TextStyle(fontSize: 8.w, color: Appthemes.cWhite),
+                  style: TextStyle(fontSize: 8.sp, color: Appthemes.cWhite),
                 )
         ],
       ));

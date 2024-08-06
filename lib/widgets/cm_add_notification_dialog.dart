@@ -141,7 +141,7 @@ class _MyDialogNotificationState extends State<MyDialogNotification> {
         TextButton(
           child: Text(
             'Cancel',
-            style: TextStyle(color: Colors.black, fontSize: 11.w),
+            style: TextStyle(color: Colors.black, fontSize: 11.sp),
           ),
           onPressed: () {
             Navigator.of(context).pop();
@@ -210,7 +210,7 @@ class _MyDialogNotificationState extends State<MyDialogNotification> {
                     style: TextStyle(
                       color:
                           isButtonEnabled ? Colors.black : Colors.grey.shade400,
-                      fontSize: 11.w,
+                      fontSize: 11.sp,
                     ),
                   ),
           );

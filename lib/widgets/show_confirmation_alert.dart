@@ -19,7 +19,7 @@ void showConfirmationAlert({
           "Confirmation",
           style: TextStyle(
               color: Colors.grey.shade700,
-              fontSize: 12.w,
+              fontSize: 12.sp,
               fontWeight: FontWeight.bold),
         ),
         content: Column(

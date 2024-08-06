@@ -91,7 +91,7 @@ class LeaveApplicationPage extends StatelessWidget {
                               Text(
                                 "* Annual Leave must be applied for at least 2 weeks before leave is to be taken",
                                 style: TextStyle(
-                                    fontSize: 8.w,
+                                    fontSize: 8.sp,
                                     color:
                                         const Color.fromARGB(255, 240, 94, 84)),
                               ),

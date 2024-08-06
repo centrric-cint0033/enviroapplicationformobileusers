@@ -64,7 +64,7 @@ Widget listTile(
                   leading: dpImage(data?.dpThumbnail ?? data?.dp ?? ""),
                   title: Text(
                     data?.name ?? "",
-                    style: TextStyle(fontSize: 11.w),
+                    style: TextStyle(fontSize: 11.sp),
                   ),
                   trailing: customContainerWidget(Colors.blue, "View")),
             ),

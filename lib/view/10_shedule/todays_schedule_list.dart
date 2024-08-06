@@ -97,7 +97,7 @@ class TodaysScheduleList extends StatelessWidget {
                               child: Text(
                                 "Next Job",
                                 style: TextStyle(
-                                    color: Colors.white, fontSize: 8.w),
+                                    color: Colors.white, fontSize: 8.sp),
                               )),
                         ),
                         sized0wx05,
