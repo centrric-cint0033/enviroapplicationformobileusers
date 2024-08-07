@@ -8,7 +8,7 @@ import 'package:enviro_mobile_application/view_model/03_vehicles/vehicle_view_mo
 
 import 'package:enviro_mobile_application/widgets/cmn_action_icon.dart';
 import 'package:enviro_mobile_application/widgets/cmn_title_textwidget.dart';
-import 'package:enviro_mobile_application/widgets/common_tababr.dart';
+import 'package:enviro_mobile_application/widgets/common_tabbar.dart';
 import 'package:enviro_mobile_application/widgets/drawer.dart';
 
 import 'package:flutter/material.dart';

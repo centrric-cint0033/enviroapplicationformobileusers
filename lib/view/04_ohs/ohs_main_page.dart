@@ -4,7 +4,7 @@ import 'package:enviro_mobile_application/view/04_ohs/ohs_tabs_screen/02_ohs_not
 import 'package:enviro_mobile_application/view/04_ohs/ohs_tabs_screen/01_ohs_news_tab.dart';
 import 'package:enviro_mobile_application/widgets/cmn_action_icon.dart';
 import 'package:enviro_mobile_application/widgets/cmn_title_textwidget.dart';
-import 'package:enviro_mobile_application/widgets/common_tababr.dart';
+import 'package:enviro_mobile_application/widgets/common_tabbar.dart';
 import 'package:enviro_mobile_application/widgets/drawer.dart';
 import 'package:flutter/material.dart';
 

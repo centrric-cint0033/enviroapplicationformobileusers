@@ -7,7 +7,7 @@ import 'package:enviro_mobile_application/view/08_team/team_tab_screens/terminat
 import 'package:enviro_mobile_application/widgets/cmbutton.dart';
 import 'package:enviro_mobile_application/widgets/cmn_action_icon.dart';
 import 'package:enviro_mobile_application/widgets/cmn_title_textwidget.dart';
-import 'package:enviro_mobile_application/widgets/common_tababr.dart';
+import 'package:enviro_mobile_application/widgets/common_tabbar.dart';
 import 'package:enviro_mobile_application/widgets/drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

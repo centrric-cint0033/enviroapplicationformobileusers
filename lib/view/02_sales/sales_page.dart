@@ -4,7 +4,7 @@ import 'package:enviro_mobile_application/view/02_sales/sales_tab_screens/job_li
 import 'package:enviro_mobile_application/view_model/02_sales/sales_view_model.dart';
 import 'package:enviro_mobile_application/widgets/cmn_action_icon.dart';
 import 'package:enviro_mobile_application/widgets/cmn_title_textwidget.dart';
-import 'package:enviro_mobile_application/widgets/common_tababr.dart';
+import 'package:enviro_mobile_application/widgets/common_tabbar.dart';
 import 'package:enviro_mobile_application/view/02_sales/sales_tab_screens/quote_register_tab.dart';
 import 'package:enviro_mobile_application/view/02_sales/sales_tab_screens/sales_list_tab.dart';
 import 'package:enviro_mobile_application/widgets/drawer.dart';
