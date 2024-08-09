@@ -53,9 +53,10 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
     return Column(
       children: [
         _controller.value.isInitialized
-            ? SizedBox(
-                height: widget.height,
+            ? Container(
+                height: 160.h,
                 width: 260.w,
+                decoration: BoxDecoration(border: Border.all()),
                 child: AspectRatio(
                   aspectRatio: _controller.value.aspectRatio,
                   child: VideoPlayer(_controller),

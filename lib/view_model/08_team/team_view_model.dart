@@ -598,7 +598,8 @@ abstract class TeamViewModelBase with Store {
             createTeamResponse.copyWith(data: r, error: null, loading: false);
         getCurrentEmployee();
         textControllersClearFn();
-        showToast(context, msg: "Successfully Created Employee");
+        showToast(context,
+            msg: "Successfully Created Employee", color: Colors.green);
         context.router.pop();
       },
     );

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:enviro_mobile_application/Routepage/approutes.gr.dart';
 import 'package:enviro_mobile_application/model/12_shedulecard/shedule_card_resp_model.dart';
@@ -17,8 +19,6 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 
-int indexx = 0;
-
 class TodaysScheduleList extends StatelessWidget {
   const TodaysScheduleList({super.key});
 
@@ -33,6 +33,7 @@ class TodaysScheduleList extends StatelessWidget {
           itemCount: vmSchedule.shedulecardResponse.data?.length ?? 0,
           itemBuilder: (BuildContext context, int i) {
             final res = vmSchedule.shedulecardResponse.data?[i];
+            log(res?.client?.locationLatitude.toString() ?? "");
             return SizedBox(
               height: 210.w,
               width: vmSchedule.shedulecardResponse.data?.length == 1
@@ -108,14 +109,26 @@ class TodaysScheduleList extends StatelessWidget {
                       padding: EdgeInsets.only(left: 12.w),
                       child: InkWell(
                         onTap: () {
+                          int primaryDriverIndex = 0;
+                          if (res.drivers != null) {
+                            for (var index = 0;
+                                index < res.drivers!.length;
+                                index++) {
+                              if (res.drivers![index].type ==
+                                  "Primary Driver") {
+                                primaryDriverIndex = index;
+                                break;
+                              }
+                            }
+                          }
                           if (res.primaryVehicleDriver == true &&
                               res.arriveEnviroFacility == null) {
                             showConfirmationAlert(
                                 context: context,
-                                content: (res.drivers?[vmSchedule.driversIndex]
+                                content: (res.drivers?[primaryDriverIndex]
                                                 .preinspectioncheck ==
                                             false &&
-                                        res.drivers?[vmSchedule.driversIndex]
+                                        res.drivers?[primaryDriverIndex]
                                                 .preinspectionRequired ==
                                             true &&
                                         res.completed == null)
@@ -139,16 +152,15 @@ class TodaysScheduleList extends StatelessWidget {
                                                                 ? "Have you Arrived at Enviro Facility"
                                                                 : "",
                                 onSubmit: () {
-                                  (res.drivers?[vmSchedule.driversIndex].preinspectioncheck == false &&
-                                          res.drivers?[vmSchedule.driversIndex]
+                                  (res.drivers?[primaryDriverIndex].preinspectioncheck == false &&
+                                          res.drivers?[primaryDriverIndex]
                                                   .preinspectionRequired ==
                                               true &&
                                           res.completed == null)
                                       ? context.router.push(
                                           UpdateVehiclepreinspectionRoute(
                                               index: i,
-                                              driversIndex:
-                                                  vmSchedule.driversIndex))
+                                              driversIndex: primaryDriverIndex))
                                       : res.departEnviroFacility == null
                                           ? dateTimePickerWithouIcon(
                                               context,
@@ -164,11 +176,16 @@ class TodaysScheduleList extends StatelessWidget {
                                                   ScheduleStatusType
                                                       .departedEnviroFacility))
                                           : res.startJob == null
-                                              ? context.router.push(ScheduleImageRoute(
-                                                  fromJobStarted: true,
-                                                  id: vmSchedule.shedulecardResponse.data![i].id!))
+                                              ? context.router.push(
+                                                  ScheduleImageRoute(
+                                                      fromJobStarted: true,
+                                                      id: vmSchedule
+                                                          .shedulecardResponse
+                                                          .data![i]
+                                                          .id!))
                                               : res.finishJob == null
-                                                  ? context.router.push(ScheduleImageRoute(fromJobStarted: false, id: vmSchedule.shedulecardResponse.data![i].id!))
+                                                  ? context.router
+                                                      .push(ScheduleImageRoute(fromJobStarted: false, id: vmSchedule.shedulecardResponse.data![i].id!))
                                                   : res.completed == null
                                                       ? context.router.push(SheduleSignatureRoute(id: vmSchedule.shedulecardResponse.data![i].id!, i: i))
                                                       : res.arriveAtWasteDepot == null
@@ -228,14 +245,12 @@ class TodaysScheduleList extends StatelessWidget {
                                   context.router.push(SheduledetailRoute(
                                       id: res.id ?? 0,
                                       i: i,
-                                      driversIndex: vmSchedule.driversIndex));
+                                      driversIndex: primaryDriverIndex));
                                 },
-                                submitText: (res
-                                                .drivers?[
-                                                    vmSchedule.driversIndex]
+                                submitText: (res.drivers?[primaryDriverIndex]
                                                 .preinspectioncheck ==
                                             false &&
-                                        res.drivers?[vmSchedule.driversIndex]
+                                        res.drivers?[primaryDriverIndex]
                                                 .preinspectionRequired ==
                                             true &&
                                         res.completed == null)
@@ -248,11 +263,14 @@ class TodaysScheduleList extends StatelessWidget {
                                                 ? "YES,UPDATE TIME"
                                                 : res.completed == null
                                                     ? "YES,UPDATE TIME"
-                                                    : res.arriveAtWasteDepot == null
+                                                    : res.arriveAtWasteDepot ==
+                                                            null
                                                         ? "YES,UPDATE TIME"
-                                                        : res.departWasteDepot == null
+                                                        : res.departWasteDepot ==
+                                                                null
                                                             ? "YES,UPDATE TIME"
-                                                            : res.arriveEnviroFacility == null
+                                                            : res.arriveEnviroFacility ==
+                                                                    null
                                                                 ? "YES,UPDATE TIME"
                                                                 : "",
                                 submitText2: "SKIP FOR NOW");
@@ -261,7 +279,7 @@ class TodaysScheduleList extends StatelessWidget {
                             context.router.push(SheduledetailRoute(
                                 id: res.id ?? 0,
                                 i: i,
-                                driversIndex: vmSchedule.driversIndex));
+                                driversIndex: primaryDriverIndex));
                           }
                         },
                         child: Row(
@@ -310,10 +328,16 @@ class TodaysScheduleList extends StatelessWidget {
                             ),
                             Expanded(
                               child: MapWidget(
-                                  latitude: double.parse(
-                                      res.client?.locationLatitude ?? ""),
-                                  longitude: double.parse(
-                                      res.client?.locationLogitude ?? "")),
+                                  latitude: res.client?.locationLatitude !=
+                                          "null"
+                                      ? double.parse(
+                                          res.client?.locationLatitude ?? "")
+                                      : 0,
+                                  longitude: res.client?.locationLogitude !=
+                                          "null"
+                                      ? double.parse(
+                                          res.client?.locationLogitude ?? "")
+                                      : 0),
                             ),
                           ],
                         ),
@@ -336,116 +360,137 @@ class TodaysScheduleList extends StatelessWidget {
       height: 72.w,
       width: MediaQuery.of(context).size.width - 60.h,
       decoration: BoxDecoration(
-          color: Appthemes.cPrimary, borderRadius: BorderRadius.circular(10.h)),
-      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        Center(
-          child: Text(
-            "Drivers and Vehicles",
-            style: TextStyle(
+        color: Appthemes.cPrimary,
+        borderRadius: BorderRadius.circular(10.h),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Center(
+            child: Text(
+              "Drivers and Vehicles",
+              style: TextStyle(
                 color: Colors.white,
                 fontSize: 10.h,
-                fontWeight: FontWeight.w400),
+                fontWeight: FontWeight.w400,
+              ),
+            ),
           ),
-        ),
-        sized0hx05,
-        Observer(builder: (context) {
-          List<Driver>? drivers = schedule.drivers;
+          sized0hx05,
+          Observer(builder: (context) {
+            List<Driver>? drivers = schedule.drivers;
 
-          Driver? primaryDriver;
-          List<Driver> otherDrivers = [];
+            Driver? primaryDriver;
+            List<Driver> otherDrivers = [];
+            int? primaryDriverIndex;
 
-          // Separate primary driver from other drivers
-          if (drivers != null) {
-            for (var index = 0; index < drivers.length; index++) {
-              var driver = drivers[index];
-              if (driver.type == "Primary Driver") {
-                primaryDriver = driver;
-              } else {
-                otherDrivers.add(driver);
+            // Separate primary driver from other drivers
+            if (drivers != null) {
+              for (var index = 0; index < drivers.length; index++) {
+                var driver = drivers[index];
+                if (driver.type == "Primary Driver") {
+                  primaryDriver = driver;
+                  primaryDriverIndex = index; // Store the original index
+                } else {
+                  otherDrivers.add(driver);
+                }
+              }
+              if (primaryDriver != null) {
+                drivers = [primaryDriver, ...otherDrivers];
               }
             }
-            if (primaryDriver != null) {
-              drivers = [primaryDriver, ...otherDrivers];
-            }
-          }
 
-          return Expanded(
-            child: ListView.builder(
-              itemCount: drivers?.length ?? 0,
-              scrollDirection: Axis.horizontal,
-              itemBuilder: (context, index) {
-                final driver = drivers?[index];
-                if (driver?.type == "Primary Driver") {
-                  vmSchedule.driversIndex = index;
-                }
-                return Padding(
-                  padding: EdgeInsets.only(left: 4.w),
-                  child: Container(
-                    height: 40.w,
-                    width: MediaQuery.of(context).size.width / 3,
-                    decoration: BoxDecoration(
+            // Check if primaryDriverIndex is valid
+            if (primaryDriverIndex != null &&
+                primaryDriverIndex < (drivers?.length ?? 0)) {
+            } else {}
+
+            return Expanded(
+              child: ListView.builder(
+                itemCount: drivers?.length ?? 0,
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (context, index) {
+                  // Ensure index is within valid range
+                  if (index >= (drivers?.length ?? 0)) {
+                    return const SizedBox.shrink();
+                  }
+
+                  final driver = drivers?[index];
+                  return Padding(
+                    padding: EdgeInsets.only(left: 4.w),
+                    child: Container(
+                      height: 40.w,
+                      width: MediaQuery.of(context).size.width / 3,
+                      decoration: BoxDecoration(
                         color: Colors.white,
-                        borderRadius: BorderRadius.circular(5.h)),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.only(left: 4.w),
-                          child: Row(children: [
-                            SizedBox(
-                              height: 20.w,
-                              width: 20.w,
-                              child: DecoratedBox(
-                                decoration: BoxDecoration(
-                                    color: Colors.grey.shade700,
-                                    shape: BoxShape.circle),
-                                child: dpImage("${driver?.dp}"),
-                              ),
-                            ),
-                            SizedBox(
-                              width: 5.h,
-                            ),
-                            Expanded(
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    "${driver?.name}",
-                                    style: TextStyle(fontSize: 8.h),
-                                    overflow: TextOverflow.ellipsis,
+                        borderRadius: BorderRadius.circular(5.h),
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.only(left: 4.w),
+                            child: Row(
+                              children: [
+                                SizedBox(
+                                  height: 20.w,
+                                  width: 20.w,
+                                  child: DecoratedBox(
+                                    decoration: BoxDecoration(
+                                      color: Colors.grey.shade700,
+                                      shape: BoxShape.circle,
+                                    ),
+                                    child: dpImage("${driver?.dp}"),
                                   ),
-                                  Text(
-                                    "${driver?.registration}",
-                                    style: TextStyle(fontSize: 8.h),
-                                    overflow: TextOverflow.ellipsis,
-                                  )
-                                ],
-                              ),
-                            )
-                          ]),
-                        ),
-                        driver?.type == "Primary Driver"
-                            ? Container(
-                                decoration: BoxDecoration(
-                                    color: Colors.grey.shade300,
-                                    borderRadius: BorderRadius.circular(12.h)),
-                                child: Text(
-                                  "     Primary     ",
-                                  style: TextStyle(fontSize: 8.h),
                                 ),
-                              )
-                            : const SizedBox.shrink()
-                      ],
+                                SizedBox(
+                                  width: 5.h,
+                                ),
+                                Expanded(
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        "${driver?.name}",
+                                        style: TextStyle(fontSize: 8.h),
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                      Text(
+                                        "${driver?.registration}",
+                                        style: TextStyle(fontSize: 8.h),
+                                        overflow: TextOverflow.ellipsis,
+                                      )
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                          driver?.type == "Primary Driver"
+                              ? Container(
+                                  decoration: BoxDecoration(
+                                    color: Colors.grey.shade300,
+                                    borderRadius: BorderRadius.circular(12.h),
+                                  ),
+                                  child: Text(
+                                    "     Primary     ",
+                                    style: TextStyle(fontSize: 8.h),
+                                  ),
+                                )
+                              : const SizedBox.shrink(),
+                        ],
+                      ),
                     ),
-                  ),
-                );
-              },
-            ),
-          );
-        }),
-        sized0hx05,
-      ]),
+                  );
+                },
+              ),
+            );
+          }),
+          sized0hx05,
+        ],
+      ),
     );
   }
 }

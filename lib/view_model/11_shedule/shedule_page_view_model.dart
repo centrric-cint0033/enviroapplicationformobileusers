@@ -600,6 +600,8 @@ abstract class ScheduleViewModelBase with Store {
         );
         signaturecontroller.clear();
         context.router.pop();
+        showToast(context,
+            msg: "Job status updated successfully", color: Colors.green);
       },
     );
   }

@@ -519,7 +519,9 @@ class SheduledetailPage extends StatelessWidget {
                                 sized0hx05
                               ],
                               if (res.data![i].finishJob == null &&
-                                  res.data![i].startJob != null) ...[
+                                  res.data![i].startJob != null &&
+                                  res.data![i].departEnviroFacility !=
+                                      null) ...[
                                 CmButton(
                                   color: const Color(0xFF4CAF9E),
                                   buttonTextStyle: TextStyle(
@@ -535,9 +537,9 @@ class SheduledetailPage extends StatelessWidget {
                                 ),
                                 sized0hx05
                               ],
-                              // if (res.data![i].image == null &&
-                              //     res.data![i].completed == null &&
-                              //     res.data![i].finishJob != null) ...[
+                              if (res.data![i].image == null &&
+                                  res.data![i].completed == null &&
+                                  res.data![i].finishJob != null) ...[
                                 CmButton(
                                   text: "Take Signature",
                                   onPressed: () {
@@ -551,7 +553,7 @@ class SheduledetailPage extends StatelessWidget {
                                   buttonTextStyle: TextStyle(
                                       color: Colors.white, fontSize: 9.sp),
                                 ),
-                              // ],
+                              ],
                               if (res.data![i].completed != null &&
                                   res.data![i].arriveAtWasteDepot == null) ...[
                                 CmButton(
@@ -755,57 +757,7 @@ class SheduledetailPage extends StatelessWidget {
                                 sized0hx05,
                               ],
                               sized0hx05,
-                              if (res.data?[i].teamEmployees?.isNotEmpty ??
-                                  false) ...[
-                                Text(
-                                  'Team Members',
-                                  style: TextStyle(
-                                    fontSize: 10.h,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                sized0hx05,
-                                Padding(
-                                  padding: EdgeInsets.only(left: 8.w),
-                                  child: SizedBox(
-                                    height: 80.h,
-                                    child: ListView.builder(
-                                      shrinkWrap: true,
-                                      scrollDirection: Axis.horizontal,
-                                      itemCount:
-                                          res.data?[i].teamEmployees?.length,
-                                      itemBuilder: (context, index) {
-                                        final data =
-                                            res.data?[i].teamEmployees?[index];
-                                        return Padding(
-                                          padding: EdgeInsets.only(right: 5.w),
-                                          child: Column(
-                                            children: [
-                                              SizedBox(
-                                                height: 40.w,
-                                                width: 40.w,
-                                                child: DecoratedBox(
-                                                  decoration: BoxDecoration(
-                                                      color:
-                                                          Colors.grey.shade700,
-                                                      shape: BoxShape.circle),
-                                                  child: dpImage("${data?.dp}"),
-                                                ),
-                                              ),
-                                              sized0hx05,
-                                              Text(
-                                                "${data?.name}",
-                                                style:
-                                                    TextStyle(fontSize: 9.sp),
-                                              )
-                                            ],
-                                          ),
-                                        );
-                                      },
-                                    ),
-                                  ),
-                                ),
-                              ],
+
                               if (res.data?[i].image != null) ...[
                                 Text(
                                   'Signature',
@@ -818,6 +770,54 @@ class SheduledetailPage extends StatelessWidget {
                               ],
                               sized0hx20
                             ]
+                          ],
+                          if (res.data?[i].teamEmployees?.isNotEmpty ??
+                              false) ...[
+                            Text(
+                              'Team Members',
+                              style: TextStyle(
+                                fontSize: 10.h,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            sized0hx05,
+                            Padding(
+                              padding: EdgeInsets.only(left: 8.w),
+                              child: SizedBox(
+                                height: 80.h,
+                                child: ListView.builder(
+                                  shrinkWrap: true,
+                                  scrollDirection: Axis.horizontal,
+                                  itemCount: res.data?[i].teamEmployees?.length,
+                                  itemBuilder: (context, index) {
+                                    final data =
+                                        res.data?[i].teamEmployees?[index];
+                                    return Padding(
+                                      padding: EdgeInsets.only(right: 5.w),
+                                      child: Column(
+                                        children: [
+                                          SizedBox(
+                                            height: 40.w,
+                                            width: 40.w,
+                                            child: DecoratedBox(
+                                              decoration: BoxDecoration(
+                                                  color: Colors.grey.shade700,
+                                                  shape: BoxShape.circle),
+                                              child: dpImage("${data?.dp}"),
+                                            ),
+                                          ),
+                                          sized0hx05,
+                                          Text(
+                                            "${data?.name}",
+                                            style: TextStyle(fontSize: 9.sp),
+                                          )
+                                        ],
+                                      ),
+                                    );
+                                  },
+                                ),
+                              ),
+                            ),
                           ],
                         ]),
             );

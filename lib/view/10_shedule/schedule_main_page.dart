@@ -17,7 +17,9 @@ import 'package:url_launcher/url_launcher.dart';
 @RoutePage()
 class ScheduleMainPage extends StatelessWidget {
   const ScheduleMainPage({super.key});
-
+  Future<void> _refreshContent() async {
+    vmSchedule.shedulecardviewmodelfunction();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,54 +30,57 @@ class ScheduleMainPage extends StatelessWidget {
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 15.w),
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              sized0hx15,
-              cmRowText("Today's Schedule", "Calender", () {
-                vmSchedule.selectedDay = null;
-                vmSchedule.shedulecardviewmodelfunctionByDate(
-                  fromDate: DateFormat('yyyy-MM-dd').format(DateTime.now()),
-                );
-                context.router.pushNamed(RouteNames.rcalenderpage);
-              }, Colors.black, FontWeight.bold),
-              sized0hx05,
-              Observer(
-                builder: (_) {
-                  return WWResponseHandler(
-                      data: vmSchedule.shedulecardResponse,
-                      isEmpty:
-                          vmSchedule.shedulecardResponse.data?.isEmpty ?? true,
-                      onTap: () => vmSchedule.shedulecardviewmodelfunction(),
-                      child: const TodaysScheduleList());
-                },
-              ),
-              sized0hx10,
-              Text(
-                "Schedule List",
-                style: TextStyle(
-                  fontSize: 13.sp,
+        child: RefreshIndicator(
+            onRefresh: _refreshContent,
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                sized0hx15,
+                cmRowText("Today's Schedule", "Calender", () {
+                  vmSchedule.selectedDay = null;
+                  vmSchedule.shedulecardviewmodelfunctionByDate(
+                    fromDate: DateFormat('yyyy-MM-dd').format(DateTime.now()),
+                  );
+                  context.router.pushNamed(RouteNames.rcalenderpage);
+                }, Colors.black, FontWeight.bold),
+                sized0hx05,
+                Observer(
+                  builder: (_) {
+                    return WWResponseHandler(
+                        data: vmSchedule.shedulecardResponse,
+                        isEmpty:
+                            vmSchedule.shedulecardResponse.data?.isEmpty ?? true,
+                        onTap: () => vmSchedule.shedulecardviewmodelfunction(),
+                        child: const TodaysScheduleList());
+                  },
                 ),
-              ),
-              // cmRowText("Schedule List", "week", () {
-              //   //  sheduledetailfunction4(
-              //   //       context,
-              //   //     );
-              // }, Appthemes.cPrimary, FontWeight.normal),
-              sized0hx20,
-              Observer(
-                builder: (_) {
-                  return WWResponseHandler(
-                      data: vmSchedule.shedulecardResponse,
-                      isEmpty:
-                          vmSchedule.shedulecardResponse.data?.isEmpty ?? true,
-                      onTap: () => vmSchedule.shedulecardviewmodelfunction(),
-                      child: const ScheduleList());
-                },
-              ),
-              sized0hx20,
-            ],
+                sized0hx10,
+                Text(
+                  "Schedule List",
+                  style: TextStyle(
+                    fontSize: 13.sp,
+                  ),
+                ),
+                // cmRowText("Schedule List", "week", () {
+                //   //  sheduledetailfunction4(
+                //   //       context,
+                //   //     );
+                // }, Appthemes.cPrimary, FontWeight.normal),
+                sized0hx20,
+                Observer(
+                  builder: (_) {
+                    return WWResponseHandler(
+                        data: vmSchedule.shedulecardResponse,
+                        isEmpty:
+                            vmSchedule.shedulecardResponse.data?.isEmpty ?? true,
+                        onTap: () => vmSchedule.shedulecardviewmodelfunction(),
+                        child: const ScheduleList());
+                  },
+                ),
+                sized0hx20,
+              ],
+            ),
           ),
         ),
       ),

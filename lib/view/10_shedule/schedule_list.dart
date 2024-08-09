@@ -28,12 +28,25 @@ class ScheduleList extends StatelessWidget {
         itemBuilder: (BuildContext context, int i) {
           return GestureDetector(
             onTap: () {
+              int primaryDriverIndex = 0;
+              if (vmSchedule.shedulecardResponse.data?[i].drivers != null) {
+                for (var index = 0;
+                    index <
+                        vmSchedule.shedulecardResponse.data![i].drivers!.length;
+                    index++) {
+                  if (vmSchedule
+                          .shedulecardResponse.data?[i].drivers![index].type ==
+                      "Primary Driver") {
+                    primaryDriverIndex = index;
+                    break;
+                  }
+                }
+              }
               vmSchedule.clearFn();
-
               context.router.push(SheduledetailRoute(
                   id: vmSchedule.shedulecardResponse.data?[i].id ?? 0,
                   i: i,
-                  driversIndex: 0));
+                  driversIndex: primaryDriverIndex));
             },
             child: Container(
               decoration: BoxDecoration(
@@ -161,12 +174,15 @@ class ScheduleList extends StatelessWidget {
                               itemBuilder: (context, index) {
                                 List<Driver>? drivers = vmSchedule
                                     .shedulecardResponse.data?[i].drivers;
+                                Driver? primaryDriver;
+                                List<Driver> otherDrivers = [];
 
+                                // Separate primary driver from other drivers
                                 if (drivers != null) {
-                                  Driver? primaryDriver;
-                                  List<Driver> otherDrivers = [];
-
-                                  for (var driver in drivers) {
+                                  for (var driverIndex = 0;
+                                      driverIndex < drivers.length;
+                                      driverIndex++) {
+                                    var driver = drivers[driverIndex];
                                     if (driver.type == "Primary Driver") {
                                       primaryDriver = driver;
                                     } else {
@@ -178,11 +194,7 @@ class ScheduleList extends StatelessWidget {
                                     drivers = [primaryDriver, ...otherDrivers];
                                   }
                                 }
-
                                 final driver = drivers?[index];
-                                if (driver?.type == "Primary Driver") {
-                                  vmSchedule.driversIndex = index;
-                                }
                                 return Column(
                                   children: [
                                     const Divider(

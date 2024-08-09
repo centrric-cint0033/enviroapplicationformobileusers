@@ -125,7 +125,7 @@ class ScheduleImageScreen extends StatelessWidget {
                               ),
                         ElevatedButton(
                             onPressed: () {
-                              vmSchedule.pickedCameraImage != null
+                              vmSchedule.pickedCameraImage != ""
                                   ? openCamera(context)
                                   : openGallery(context);
                             },

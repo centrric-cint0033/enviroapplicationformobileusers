@@ -112,9 +112,9 @@ flutter_native_splash:
 
   android_12:
     image: assets/images/enviro_logo.png
-    icon_background_color: "#ffffff"
+    # icon_background_color: "#ffffff"
     # image_dark: assets/images/enviro_logo.png
-    icon_background_color_dark: "#121212"
+    # icon_background_color_dark: "#121212"
 
   web: false
 
