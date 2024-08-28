@@ -100,10 +100,12 @@ class SheduleSignaturePage extends StatelessWidget {
                                     child: ListView.builder(
                                       scrollDirection: Axis.horizontal,
                                       itemCount: vmSchedule
-                                          .pickedWeighImageList?.length,
+                                              .pickedWeighImageList?.length ??
+                                          0,
                                       itemBuilder: (context, index) {
                                         String imagePath = vmSchedule
-                                            .pickedWeighImageList![index];
+                                                .pickedWeighImageList?[index] ??
+                                            "";
                                         String fileName = p.basename(imagePath);
                                         bool isImage =
                                             imagePath.endsWith('.jpg') ||
