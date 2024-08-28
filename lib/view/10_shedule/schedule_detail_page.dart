@@ -354,9 +354,8 @@ class SheduledetailPage extends StatelessWidget {
                                                             .id!,
                                                         ScheduleStatusType
                                                             .arrivedAtDepot))),
-                                          if (res.data?[i].departWasteDepot != null &&
-                                              res.data?[i].arriveEnviroFacility ==
-                                                  null)
+                                          if (res.data?[i].departWasteDepot !=
+                                              null)
                                             cmRowTextWithDatePicker(
                                                 context,
                                                 "Departed from Waste Depot",
@@ -378,7 +377,11 @@ class SheduledetailPage extends StatelessWidget {
                                                 i,
                                                 dateTimePicker(
                                                     context,
-                                                    vmSchedule.shedulecardResponse.data?[i].departWasteDepot != null
+                                                    vmSchedule
+                                                                .shedulecardResponse
+                                                                .data?[i]
+                                                                .departWasteDepot !=
+                                                            null
                                                         ? DateTime.parse(vmSchedule
                                                             .shedulecardResponse
                                                             .data?[i]
