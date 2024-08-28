@@ -4,6 +4,7 @@ import 'package:enviro_mobile_application/utilis/Appthemes.dart';
 import 'package:enviro_mobile_application/utilis/constant.dart';
 import 'package:enviro_mobile_application/view_model/11_shedule/shedule_page_view_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 
@@ -104,22 +105,24 @@ class ScheduleList extends StatelessWidget {
                                   style: TextStyle(fontSize: 9.sp))
                           ],
                         ),
-                        Container(
-                          width: 70.w,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(15.w),
-                              border: Border.all(color: Colors.grey)),
-                          child: Padding(
-                            padding: EdgeInsets.all(4.w),
-                            child: Align(
-                              alignment: Alignment.center,
-                              child: Text(
-                                  jobStatus(
-                                      "${vmSchedule.shedulecardResponse.data?[i].status}"),
-                                  style: TextStyle(fontSize: 8.sp)),
+                        Observer(builder: (context) {
+                          return Container(
+                            width: 70.w,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(15.w),
+                                border: Border.all(color: Colors.grey)),
+                            child: Padding(
+                              padding: EdgeInsets.all(4.w),
+                              child: Align(
+                                alignment: Alignment.center,
+                                child: Text(
+                                    jobStatus(
+                                        "${vmSchedule.shedulecardResponse.data?[i].status}"),
+                                    style: TextStyle(fontSize: 8.sp)),
+                              ),
                             ),
-                          ),
-                        )
+                          );
+                        })
                         // ElevatedButton(
                         //   onPressed: () {
                         //     sheduledetailfunction(
@@ -168,6 +171,7 @@ class ScheduleList extends StatelessWidget {
                             ),
                             ListView.builder(
                               shrinkWrap: true,
+                              physics: const NeverScrollableScrollPhysics(),
                               itemCount: vmSchedule.shedulecardResponse.data?[i]
                                       .drivers?.length ??
                                   0,

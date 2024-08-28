@@ -11,6 +11,7 @@ import 'package:enviro_mobile_application/view/08_team/team_widgets/dp_image_wid
 import 'package:enviro_mobile_application/view/10_shedule/after_image_list.dart';
 import 'package:enviro_mobile_application/view/10_shedule/before_image_list.dart';
 import 'package:enviro_mobile_application/view/10_shedule/gallery_image_list.dart';
+import 'package:enviro_mobile_application/view/10_shedule/schedule_list.dart';
 import 'package:enviro_mobile_application/view/10_shedule/video_list.dart';
 import 'package:enviro_mobile_application/view/10_shedule/widgets/signature_img_widget.dart';
 import 'package:enviro_mobile_application/view_model/11_shedule/shedule_page_view_model.dart';
@@ -132,7 +133,7 @@ class SheduledetailPage extends StatelessWidget {
                                   sized0hx10,
                                   expandedRowShowText(
                                     "Status",
-                                    res.data?[i].status ?? '',
+                                    jobStatus(res.data?[i].status ?? ''),
                                   ),
                                   sized0hx10,
                                   expandedRowShowText(
@@ -156,7 +157,8 @@ class SheduledetailPage extends StatelessWidget {
                           ),
                           sized0hx10,
                           if (res.data![i].primaryVehicleDriver == true) ...[
-                            if (res.data![i].departEnviroFacility != null)
+                            if (res.data![i].departEnviroFacility != null ||
+                                res.data![i].startJob != null)
                               Container(
                                 color: const Color.fromARGB(255, 240, 235, 235),
                                 child: Padding(
@@ -352,8 +354,9 @@ class SheduledetailPage extends StatelessWidget {
                                                             .id!,
                                                         ScheduleStatusType
                                                             .arrivedAtDepot))),
-                                          if (res.data?[i].departWasteDepot !=
-                                              null)
+                                          if (res.data?[i].departWasteDepot != null &&
+                                              res.data?[i].arriveEnviroFacility ==
+                                                  null)
                                             cmRowTextWithDatePicker(
                                                 context,
                                                 "Departed from Waste Depot",
@@ -375,11 +378,7 @@ class SheduledetailPage extends StatelessWidget {
                                                 i,
                                                 dateTimePicker(
                                                     context,
-                                                    vmSchedule
-                                                                .shedulecardResponse
-                                                                .data?[i]
-                                                                .departWasteDepot !=
-                                                            null
+                                                    vmSchedule.shedulecardResponse.data?[i].departWasteDepot != null
                                                         ? DateTime.parse(vmSchedule
                                                             .shedulecardResponse
                                                             .data?[i]
@@ -473,8 +472,8 @@ class SheduledetailPage extends StatelessWidget {
                               ),
                               sized0hx05
                             ] else ...[
-                              if (res.data![i].departEnviroFacility ==
-                                  null) ...[
+                              if (res.data![i].departEnviroFacility == null &&
+                                  res.data![i].startJob == null) ...[
                                 CmButton(
                                   color: const Color(0xFF4CAF9E),
                                   buttonTextStyle: TextStyle(
@@ -519,9 +518,12 @@ class SheduledetailPage extends StatelessWidget {
                                 sized0hx05
                               ],
                               if (res.data![i].finishJob == null &&
-                                  res.data![i].startJob != null &&
-                                  res.data![i].departEnviroFacility !=
-                                      null) ...[
+                                      res.data![i].startJob != null
+                                  //  &&
+                                  // res.data![i].departEnviroFacility !=
+                                  //     null
+
+                                  ) ...[
                                 CmButton(
                                   color: const Color(0xFF4CAF9E),
                                   buttonTextStyle: TextStyle(
@@ -543,6 +545,7 @@ class SheduledetailPage extends StatelessWidget {
                                 CmButton(
                                   text: "Take Signature",
                                   onPressed: () {
+                                    vmSchedule.signaturecontroller.clear();
                                     vmSchedule.signaturePath = null;
                                     context.router.push(
                                         SheduleSignatureRoute(id: id, i: i));
@@ -555,7 +558,10 @@ class SheduledetailPage extends StatelessWidget {
                                 ),
                               ],
                               if (res.data![i].completed != null &&
-                                  res.data![i].arriveAtWasteDepot == null) ...[
+                                  res.data![i].arriveAtWasteDepot == null &&
+                                  res.data![i].departWasteDepot == null &&
+                                  res.data![i].arriveEnviroFacility ==
+                                      null) ...[
                                 CmButton(
                                   color: const Color(0xFF4CAF9E),
                                   buttonTextStyle: TextStyle(
@@ -583,9 +589,11 @@ class SheduledetailPage extends StatelessWidget {
                                 ),
                                 sized0hx05
                               ],
-                              if (res.data![i].finishJob != null &&
+                              if (res.data![i].completed != null &&
+                                  res.data![i].departWasteDepot == null &&
                                   res.data![i].arriveAtWasteDepot != null &&
-                                  res.data![i].departWasteDepot == null) ...[
+                                  res.data![i].arriveEnviroFacility ==
+                                      null) ...[
                                 CmButton(
                                   color: const Color(0xFF4CAF9E),
                                   buttonTextStyle: TextStyle(

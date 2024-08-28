@@ -179,18 +179,27 @@ Future<void> launchUrlFile(
   showConfirmationAlert(
     context: context,
     submitText: "Yes",
+    submitText2: "No",
     content: "Are you sure want to open the file?",
     onSubmit: () async {
-      try {
-        final uri = Uri.parse(url);
-        if (await canLaunchUrl(uri)) {
-          launchUrl(uri);
-        } else {
-          throw Exception('Could not launch $url');
-        }
-      } catch (e) {
-        debugPrint("$e");
+      if (await canLaunch(url)) {
+        await launch(url);
+      } else {
+        throw 'Could not launch $url';
       }
+      // final Uri uri = Uri.parse(url);
+      // try {
+      //   if (await canLaunchUrl(uri)) {
+      //     await launchUrl(
+      //       uri,
+      //       mode: LaunchMode.externalApplication,
+      //     );
+      //   } else {
+      //     throw 'Could not launch $url';
+      //   }
+      // } catch (e) {
+      //   print('Error launching URL: $e');
+      // }
     },
   );
 }

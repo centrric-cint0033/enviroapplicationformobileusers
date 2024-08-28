@@ -73,22 +73,6 @@ mixin _$ScheduleViewModel on ScheduleViewModelBase, Store {
     });
   }
 
-  late final _$driversIndexAtom =
-      Atom(name: 'ScheduleViewModelBase.driversIndex', context: context);
-
-  @override
-  int get driversIndex {
-    _$driversIndexAtom.reportRead();
-    return super.driversIndex;
-  }
-
-  @override
-  set driversIndex(int value) {
-    _$driversIndexAtom.reportWrite(value, super.driversIndex, () {
-      super.driversIndex = value;
-    });
-  }
-
   late final _$driversIndexByDateAtom =
       Atom(name: 'ScheduleViewModelBase.driversIndexByDate', context: context);
 
@@ -2111,27 +2095,8 @@ mixin _$ScheduleViewModel on ScheduleViewModelBase, Store {
     return _$launchURLAsyncAction.run(() => super.launchURL(url));
   }
 
-  late final _$launchURLsAsyncAction =
-      AsyncAction('ScheduleViewModelBase.launchURLs', context: context);
-
-  @override
-  Future launchURLs(String url) {
-    return _$launchURLsAsyncAction.run(() => super.launchURLs(url));
-  }
-
   late final _$ScheduleViewModelBaseActionController =
       ActionController(name: 'ScheduleViewModelBase', context: context);
-
-  @override
-  void setDriversIndex(int index) {
-    final _$actionInfo = _$ScheduleViewModelBaseActionController.startAction(
-        name: 'ScheduleViewModelBase.setDriversIndex');
-    try {
-      return super.setDriversIndex(index);
-    } finally {
-      _$ScheduleViewModelBaseActionController.endAction(_$actionInfo);
-    }
-  }
 
   @override
   void toggleSelectionBeforePic(int index, int imageId) {
@@ -2503,7 +2468,6 @@ signColor: ${signColor},
 textColor: ${textColor},
 containerHeight: ${containerHeight},
 showSubmitButton: ${showSubmitButton},
-driversIndex: ${driversIndex},
 driversIndexByDate: ${driversIndexByDate},
 pickedFiles: ${pickedFiles},
 focusedDay: ${focusedDay},

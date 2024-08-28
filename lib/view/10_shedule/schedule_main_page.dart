@@ -20,6 +20,7 @@ class ScheduleMainPage extends StatelessWidget {
   Future<void> _refreshContent() async {
     vmSchedule.shedulecardviewmodelfunction();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,7 +32,7 @@ class ScheduleMainPage extends StatelessWidget {
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 15.w),
         child: RefreshIndicator(
-            onRefresh: _refreshContent,
+          onRefresh: _refreshContent,
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -49,8 +50,8 @@ class ScheduleMainPage extends StatelessWidget {
                   builder: (_) {
                     return WWResponseHandler(
                         data: vmSchedule.shedulecardResponse,
-                        isEmpty:
-                            vmSchedule.shedulecardResponse.data?.isEmpty ?? true,
+                        isEmpty: vmSchedule.shedulecardResponse.data?.isEmpty ??
+                            true,
                         onTap: () => vmSchedule.shedulecardviewmodelfunction(),
                         child: const TodaysScheduleList());
                   },
@@ -72,13 +73,24 @@ class ScheduleMainPage extends StatelessWidget {
                   builder: (_) {
                     return WWResponseHandler(
                         data: vmSchedule.shedulecardResponse,
-                        isEmpty:
-                            vmSchedule.shedulecardResponse.data?.isEmpty ?? true,
+                        isEmpty: vmSchedule.shedulecardResponse.data?.isEmpty ??
+                            true,
                         onTap: () => vmSchedule.shedulecardviewmodelfunction(),
                         child: const ScheduleList());
                   },
                 ),
-                sized0hx20,
+                if (vmSchedule.shedulecardResponse.data != null)
+                  if (vmSchedule.shedulecardResponse.data!.length <= 1) ...[
+                    sized0hx50,
+                    sized0hx50,
+                    sized0hx50,
+                    sized0hx50,
+                    sized0hx50,
+                    sized0hx20
+                  ] else ...[
+                    sized0hx50,
+                    sized0hx50,
+                  ]
               ],
             ),
           ),

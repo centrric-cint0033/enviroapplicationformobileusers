@@ -16,6 +16,11 @@
             <!-- If you don't know the MIME type in advance, set "mimeType" to "*/*". -->
             <data android:mimeType="application/pdf" />     
         </intent>
+        <intent>
+             <!-- If your application checks for inAppBrowserView launch mode support -->
+             <action android:name="android.support.customtabs.action.CustomTabsService" />
+        </intent>
+
     </queries>
     <application
         android:label="Enviro"

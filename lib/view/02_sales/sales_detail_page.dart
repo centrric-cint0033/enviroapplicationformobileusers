@@ -1,4 +1,4 @@
-import 'package:enviro_mobile_application/Routepage/routespage.dart';
+import 'package:enviro_mobile_application/Routepage/approutes.gr.dart';
 import 'package:enviro_mobile_application/utilis/constant.dart';
 import 'package:enviro_mobile_application/view_model/02_sales/sales_view_model.dart';
 import 'package:enviro_mobile_application/view_model/11_shedule/shedule_page_view_model.dart';
@@ -62,7 +62,7 @@ class SalesDetailPage extends StatelessWidget {
                                     quoteId: data?.quote ?? 0)
                                 : await vmSchedule.jobcardviewmodelfunction(
                                     quoteId: data?.id ?? 0);
-                            context.router.pushNamed(RouteNames.rjobcardpage);
+                            context.router.push(JobCardRoute(fromSale: true));
                           },
                           child: Container(
                             height: 26.h,

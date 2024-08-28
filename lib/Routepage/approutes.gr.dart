@@ -250,9 +250,14 @@ abstract class $AppRouter extends _i49.RootStackRouter {
       );
     },
     JobCardRoute.name: (routeData) {
+      final args = routeData.argsAs<JobCardRouteArgs>(
+          orElse: () => const JobCardRouteArgs());
       return _i49.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i15.JobCardPage(),
+        child: _i15.JobCardPage(
+          key: args.key,
+          fromSale: args.fromSale,
+        ),
       );
     },
     LeaveApplicationRoute.name: (routeData) {
@@ -964,16 +969,40 @@ class IntranetRoute extends _i49.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i15.JobCardPage]
-class JobCardRoute extends _i49.PageRouteInfo<void> {
-  const JobCardRoute({List<_i49.PageRouteInfo>? children})
-      : super(
+class JobCardRoute extends _i49.PageRouteInfo<JobCardRouteArgs> {
+  JobCardRoute({
+    _i50.Key? key,
+    bool fromSale = false,
+    List<_i49.PageRouteInfo>? children,
+  }) : super(
           JobCardRoute.name,
+          args: JobCardRouteArgs(
+            key: key,
+            fromSale: fromSale,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'JobCardRoute';
 
-  static const _i49.PageInfo<void> page = _i49.PageInfo<void>(name);
+  static const _i49.PageInfo<JobCardRouteArgs> page =
+      _i49.PageInfo<JobCardRouteArgs>(name);
+}
+
+class JobCardRouteArgs {
+  const JobCardRouteArgs({
+    this.key,
+    this.fromSale = false,
+  });
+
+  final _i50.Key? key;
+
+  final bool fromSale;
+
+  @override
+  String toString() {
+    return 'JobCardRouteArgs{key: $key, fromSale: $fromSale}';
+  }
 }
 
 /// generated route for

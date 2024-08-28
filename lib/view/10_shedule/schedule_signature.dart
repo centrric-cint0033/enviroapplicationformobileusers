@@ -38,6 +38,7 @@ class SheduleSignaturePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    vmSchedule.updateSignatureButtonColor(state: false);
     return Scaffold(
       appBar: AppBar(
         title: cmnTitleWidget('Scheduling'),
@@ -269,8 +270,10 @@ class SheduleSignaturePage extends StatelessWidget {
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
-                                  if (vmSchedule.signaturePath == null &&
-                                      vmSchedule.signaturecontroller.isNotEmpty)
+                                  if (vmSchedule.signaturePath == null
+                                      //  &&
+                                      //     vmSchedule.signaturecontroller.isNotEmpty
+                                      )
                                     CmButton(
                                       color: vmSchedule.signColor,
                                       onPressed: () async {

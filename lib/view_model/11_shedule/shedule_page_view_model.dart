@@ -76,8 +76,6 @@ abstract class ScheduleViewModelBase with Store {
   @observable
   bool showSubmitButton = false;
   @observable
-  int driversIndex = 0;
-  @observable
   int driversIndexByDate = 0;
   @observable
   List<PlatformFile> pickedFiles = [];
@@ -166,10 +164,6 @@ abstract class ScheduleViewModelBase with Store {
   // Flag to indicate if selection mode is active
   @observable
   bool isSelectionModeBeforePic = false;
-  @action
-  void setDriversIndex(int index) {
-    driversIndex = index;
-  }
 // @observable
 // int? selectedIndexBeforePic;
 
@@ -239,7 +233,6 @@ abstract class ScheduleViewModelBase with Store {
         selectedStatesBeforePic[selectedIndexBeforePic!] = false;
         imageIds.clear();
       }
-
       // Select the new item
       selectedStatesBeforePic[index] = true;
       selectedIndexBeforePic = index;
@@ -256,12 +249,10 @@ abstract class ScheduleViewModelBase with Store {
       selectedStatesBeforePic[selectedIndexBeforePic!] = false;
       imageIds.clear();
     }
-
     // Select the new item
     selectedStatesBeforePic[index] = true;
     selectedIndexBeforePic = index;
     imageIds.add(imageId);
-
     updateSelectionModeBeforePic();
   }
 
@@ -351,11 +342,13 @@ abstract class ScheduleViewModelBase with Store {
 //
   @observable
   int? selectedIndexGalleryPic;
+
   @observable
   ObservableList<bool> selectedStatesGalleryPic = ObservableList<bool>();
 
   @observable
   bool isSelectionModeGalleryPic = false;
+
   @action
   void toggleSelectionGalleryPic(int index, int imageId) {
     if (selectedIndexGalleryPic == index) {
@@ -599,6 +592,7 @@ abstract class ScheduleViewModelBase with Store {
           loading: false,
         );
         signaturecontroller.clear();
+        signaturePath = null;
         context.router.pop();
         showToast(context,
             msg: "Job status updated successfully", color: Colors.green);
@@ -1241,39 +1235,18 @@ abstract class ScheduleViewModelBase with Store {
 
   @action
   launchURL(String url) async {
+    final Uri uri = Uri.parse(url);
     try {
-      if (await canLaunch(url)) {
-        await launch(url);
+      if (await canLaunchUrl(uri)) {
+        await launchUrl(
+          uri,
+          mode: LaunchMode.externalApplication,
+        );
       } else {
         throw 'Could not launch $url';
       }
     } catch (e) {
-      if (e is PlatformException && e.code == 'ACTIVITY_NOT_FOUND') {
-        print('No application can handle this URL: $url');
-        // Handle the scenario where no app can handle the URL
-      } else {
-        print('Error launching URL: $e');
-        // Handle or log the error appropriately
-      }
-    }
-  }
-
-  @action
-  launchURLs(String url) async {
-    try {
-      // Uri requestedUri = Uri.dataFromString(url); //.dataFromString [wrong method]
-
-      Uri requestedUri = Uri.parse(url); // .parse is the correct method
-
-      if (await canLaunchUrl(requestedUri)) {
-        await launchUrl(requestedUri);
-      } else {
-        throw Exception('Could not launch $url');
-      }
-    } on PlatformException catch (e) {
-      debugPrint("PlatformException launchInBrowser : $e");
-    } on Exception catch (e) {
-      debugPrint("Exception launchInBrowser : $e");
+      print('Error launching URL: $e');
     }
   }
 }

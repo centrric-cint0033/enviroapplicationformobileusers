@@ -13,13 +13,13 @@ import 'package:url_launcher/url_launcher.dart';
 
 @RoutePage()
 class JobCardPage extends StatelessWidget {
-  const JobCardPage({Key? key}) : super(key: key);
-
+  const JobCardPage({Key? key, this.fromSale = false}) : super(key: key);
+  final bool fromSale;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: cmnTitleWidget('Scheduling'),
+        title: cmnTitleWidget(fromSale ? 'Job Card' : 'Scheduling'),
       ),
       body: Observer(
         builder: (context) {
@@ -123,6 +123,8 @@ class JobCardPage extends StatelessWidget {
                                 additionalEmail.isNotEmpty
                                     ? ListView.builder(
                                         shrinkWrap: true,
+                                        physics:
+                                            const NeverScrollableScrollPhysics(),
                                         itemCount: additionalEmail.length,
                                         itemBuilder: (context, index) {
                                           return Padding(
@@ -165,6 +167,8 @@ class JobCardPage extends StatelessWidget {
                                 additionalPhoneNo.isNotEmpty
                                     ? ListView.builder(
                                         shrinkWrap: true,
+                                        physics:
+                                            const NeverScrollableScrollPhysics(),
                                         itemCount: additionalPhoneNo.length,
                                         itemBuilder: (context, index) {
                                           return Padding(
@@ -790,7 +794,7 @@ class JobCardPage extends StatelessWidget {
                                         '')
                               ],
                               if (vmSchedule.jobcardResponse.data?.jobStatus !=
-                                      " " &&
+                                      "" &&
                                   vmSchedule.jobcardResponse.data?.jobStatus !=
                                       null) ...[
                                 sized0hx10,
@@ -941,6 +945,20 @@ class JobCardPage extends StatelessWidget {
     } else {
       throw 'Could not launch $url';
     }
+    // final Uri uri = Uri.parse(url);
+
+    // try {
+    //   if (await canLaunchUrl(uri)) {
+    //     await launchUrl(
+    //       uri,
+    //       mode: LaunchMode.externalApplication,
+    //     );
+    //   } else {
+    //     throw 'Could not launch $url';
+    //   }
+    // } catch (e) {
+    //   print('Error launching URL: $e');
+    // }
   }
 
   String boolToString(String value) {
