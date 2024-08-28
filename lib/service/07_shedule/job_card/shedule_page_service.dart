@@ -118,7 +118,7 @@ class SalesService implements IScheduleService {
         return Left(l.keys.first);
       },
       (res) async {
-        var data = jsonDecode(res.body) as List;
+        var data = jsonDecode(utf8.decode(res.body.codeUnits)) as List;
         List<SheduleCardRespModel> shedulecardlist =
             List<SheduleCardRespModel>.from(
                 data.map((e) => SheduleCardRespModel.fromJson(e)));
