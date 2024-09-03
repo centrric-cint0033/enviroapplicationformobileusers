@@ -446,7 +446,7 @@ class SheduledetailPage extends StatelessWidget {
                                                         ScheduleStatusType
                                                             .departedWasteDepot))),
                                         ]
-                                      ]),
+                                      ]), 
                                     ),
                                   ),
                                 ),

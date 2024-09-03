@@ -23,6 +23,12 @@ class ScheduleMainPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    WidgetsBinding.instance.addPostFrameCallback(
+      (timeStamp) {
+        vmSchedule.scheduleJobsPagination();
+        vmSchedule.scheduleJobsPagination2();
+      },
+    );
     return Scaffold(
       drawer: cmnDrawer(context),
       appBar: AppBar(
@@ -34,6 +40,7 @@ class ScheduleMainPage extends StatelessWidget {
         child: RefreshIndicator(
           onRefresh: _refreshContent,
           child: SingleChildScrollView(
+            physics: NeverScrollableScrollPhysics(),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
@@ -68,7 +75,7 @@ class ScheduleMainPage extends StatelessWidget {
                 //   //       context,
                 //   //     );
                 // }, Appthemes.cPrimary, FontWeight.normal),
-                sized0hx20,
+                sized0hx10,
                 Observer(
                   builder: (_) {
                     return WWResponseHandler(

@@ -12,6 +12,7 @@ import 'package:enviro_mobile_application/view/10_shedule/widgets/gmap_widget.da
 import 'package:enviro_mobile_application/view_model/11_shedule/shedule_page_view_model.dart';
 import 'package:enviro_mobile_application/widgets/cmbutton.dart';
 import 'package:enviro_mobile_application/widgets/show_confirmation_alert.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -23,17 +24,23 @@ class TodaysScheduleList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Observer(builder: (context) {
+       final res = vmSchedule.shedulecardResponse;
+                List<SheduleCardRespModel> scheduleJobs = res.data ?? [];
       return SizedBox(
         height: 250.w,
         child: ListView.builder(
           shrinkWrap: true,
           scrollDirection: Axis.horizontal,
-          itemCount: vmSchedule.shedulecardResponse.data?.length ?? 0,
-          itemBuilder: (BuildContext context, int i) {
-            final res = vmSchedule.shedulecardResponse.data?[i];
-            return SizedBox(
+          controller: vmSchedule.scheduleJobsController,
+          itemCount: scheduleJobs.length + 1,
+          itemBuilder: (BuildContext context, int i) {    
+            return  i == scheduleJobs.length
+              ? vmSchedule.shedulecardResponse.paginationLoading
+                  ? const CupertinoActivityIndicator()
+                  : const SizedBox.shrink()
+              : SizedBox(
               height: 210.w,
-              width: vmSchedule.shedulecardResponse.data?.length == 1
+              width: scheduleJobs.length == 1
                   ? MediaQuery.of(context).size.width - 34.h
                   : MediaQuery.of(context).size.width - 55.h,
               child: Card(
@@ -45,7 +52,7 @@ class TodaysScheduleList extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    res?.primaryVehicleDriver == true
+                    scheduleJobs[i].primaryVehicleDriver == true
                         ? Container(
                             height: 18.h,
                             width: 78.h,
@@ -72,7 +79,7 @@ class TodaysScheduleList extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         Text(
-                          "${res?.salesPerson}",
+                          "${scheduleJobs[i].salesPerson}",
                         ),
                         sized0wx20,
                         SizedBox(
@@ -107,66 +114,66 @@ class TodaysScheduleList extends StatelessWidget {
                       child: InkWell(
                         onTap: () {
                           int primaryDriverIndex = 0;
-                          if (res.drivers != null) {
+                          if (scheduleJobs[i].drivers != null) {
                             for (var index = 0;
-                                index < res.drivers!.length;
+                                index < scheduleJobs[i].drivers!.length;
                                 index++) {
-                              if (res.drivers![index].type ==
+                              if (scheduleJobs[i].drivers![index].type ==
                                   "Primary Driver") {
                                 primaryDriverIndex = index;
                                 break;
                               }
                             }
                           }
-                          if (res.primaryVehicleDriver == true &&
-                              res.arriveEnviroFacility == null) {
+                          if (scheduleJobs[i].primaryVehicleDriver == true &&
+                              scheduleJobs[i].arriveEnviroFacility == null) {
                             vmSchedule.signaturecontroller.clear();
                             vmSchedule.signaturePath = null;
                             showConfirmationAlert(
                               context: context,
-                              content: (res.drivers?[primaryDriverIndex]
+                              content: (scheduleJobs[i].drivers?[primaryDriverIndex]
                                               .preinspectioncheck ==
                                           false &&
-                                      res.drivers?[primaryDriverIndex]
+                                      scheduleJobs[i].drivers?[primaryDriverIndex]
                                               .preinspectionRequired ==
                                           true &&
-                                      res.completed == null)
+                                      scheduleJobs[i].completed == null)
                                   ? "Update your Vehicle's Pre-inspection Check"
-                                  : res.departEnviroFacility == null &&
-                                          res.startJob == null
+                                  : scheduleJobs[i].departEnviroFacility == null &&
+                                          scheduleJobs[i].startJob == null
                                       ? "Have you Departed the Enviro Facility"
-                                      : res.startJob == null
+                                      : scheduleJobs[i].startJob == null
                                           ? "Have you Started the Job"
-                                          : res.finishJob == null
+                                          : scheduleJobs[i].finishJob == null
                                               ? "Have you Finished the Job"
-                                              : res.completed == null
+                                              : scheduleJobs[i].completed == null
                                                   ? "Have you Completed the Job"
-                                                  : res.arriveAtWasteDepot ==
+                                                  : scheduleJobs[i].arriveAtWasteDepot ==
                                                               null &&
-                                                          res.departWasteDepot ==
+                                                          scheduleJobs[i].departWasteDepot ==
                                                               null
                                                       ? "Have you Arrived at Waste Depot"
-                                                      : res.departWasteDepot ==
+                                                      : scheduleJobs[i].departWasteDepot ==
                                                                   null &&
-                                                              res.arriveEnviroFacility ==
+                                                              scheduleJobs[i].arriveEnviroFacility ==
                                                                   null
                                                           ? "Have you Departed Waste Depot"
-                                                          : res.arriveEnviroFacility ==
+                                                          : scheduleJobs[i].arriveEnviroFacility ==
                                                                   null
                                                               ? "Have you Arrived at Enviro Facility"
                                                               : "",
                               onSubmit: () {
-                                (res.drivers?[primaryDriverIndex].preinspectioncheck == false &&
-                                        res.drivers?[primaryDriverIndex]
+                                (scheduleJobs[i].drivers?[primaryDriverIndex].preinspectioncheck == false &&
+                                        scheduleJobs[i].drivers?[primaryDriverIndex]
                                                 .preinspectionRequired ==
                                             true &&
-                                        res.completed == null)
+                                        scheduleJobs[i].completed == null)
                                     ? context.router.push(
                                         UpdateVehiclepreinspectionRoute(
                                             index: i,
                                             driversIndex: primaryDriverIndex))
-                                    : res.departEnviroFacility == null &&
-                                            res.startJob == null
+                                    : scheduleJobs[i].departEnviroFacility == null &&
+                                            scheduleJobs[i].startJob == null
                                         ? dateTimePickerWithouIcon(
                                             context,
                                             DateTime.now(),
@@ -180,16 +187,16 @@ class TodaysScheduleList extends StatelessWidget {
                                                     .data![i].id!,
                                                 ScheduleStatusType
                                                     .departedEnviroFacility))
-                                        : res.startJob == null
+                                        : scheduleJobs[i].startJob == null
                                             ? context.router.push(
                                                 ScheduleImageRoute(
                                                     fromJobStarted: true,
                                                     id: vmSchedule.shedulecardResponse.data![i].id!))
-                                            : res.finishJob == null
+                                            : scheduleJobs[i].finishJob == null
                                                 ? context.router.push(ScheduleImageRoute(fromJobStarted: false, id: vmSchedule.shedulecardResponse.data![i].id!))
-                                                : res.completed == null
+                                                : scheduleJobs[i].completed == null
                                                     ? context.router.push(SheduleSignatureRoute(id: vmSchedule.shedulecardResponse.data![i].id!, i: i))
-                                                    : res.arriveAtWasteDepot == null && res.departWasteDepot == null
+                                                    : scheduleJobs[i].arriveAtWasteDepot == null && scheduleJobs[i].departWasteDepot == null
                                                         ? dateTimePickerWithouIcon(
                                                             context,
                                                             DateTime.now(),
@@ -208,7 +215,7 @@ class TodaysScheduleList extends StatelessWidget {
                                                                   ScheduleStatusType
                                                                       .arrivedAtDepot,
                                                                 ))
-                                                        : res.departWasteDepot == null && res.arriveEnviroFacility == null
+                                                        : scheduleJobs[i].departWasteDepot == null && scheduleJobs[i].arriveEnviroFacility == null
                                                             ? dateTimePickerWithouIcon(
                                                                 context,
                                                                 DateTime.now(),
@@ -228,7 +235,7 @@ class TodaysScheduleList extends StatelessWidget {
                                                                       ScheduleStatusType
                                                                           .departedWasteDepot,
                                                                     ))
-                                                            : res.arriveEnviroFacility == null
+                                                            : scheduleJobs[i].arriveEnviroFacility == null
                                                                 ? dateTimePickerWithouIcon(
                                                                     context,
                                                                     DateTime.now(),
@@ -250,84 +257,84 @@ class TodaysScheduleList extends StatelessWidget {
                               onSubmit2: () {
                                 vmSchedule.clearFn();
                                 context.router.push(SheduledetailRoute(
-                                    id: res.id ?? 0,
+                                    id: scheduleJobs[i].id ?? 0,
                                     i: i,
                                     driversIndex: primaryDriverIndex));
                               },
-                              submitText: (res.drivers?[primaryDriverIndex]
+                              submitText: (scheduleJobs[i].drivers?[primaryDriverIndex]
                                               .preinspectioncheck ==
                                           false &&
-                                      res.drivers?[primaryDriverIndex]
+                                      scheduleJobs[i].drivers?[primaryDriverIndex]
                                               .preinspectionRequired ==
                                           true &&
-                                      res.completed == null)
+                                      scheduleJobs[i].completed == null)
                                   ? "YES ADD NOW"
-                                  : res.departEnviroFacility == null &&
-                                          res.startJob == null
+                                  : scheduleJobs[i].departEnviroFacility == null &&
+                                          scheduleJobs[i].startJob == null
                                       ? "YES,UPDATE TIME"
-                                      : res.startJob == null
+                                      : scheduleJobs[i].startJob == null
                                           ? "YES,UPDATE TIME"
-                                          : res.finishJob == null
+                                          : scheduleJobs[i].finishJob == null
                                               ? "YES,UPDATE TIME"
-                                              : res.completed == null
+                                              : scheduleJobs[i].completed == null
                                                   ? "YES,UPDATE TIME"
-                                                  : res.arriveAtWasteDepot ==
+                                                  : scheduleJobs[i].arriveAtWasteDepot ==
                                                               null &&
-                                                          res.departWasteDepot ==
+                                                         scheduleJobs[i].departWasteDepot ==
                                                               null
                                                       ? "YES,UPDATE TIME"
-                                                      : res.departWasteDepot ==
+                                                      : scheduleJobs[i].departWasteDepot ==
                                                                   null &&
-                                                              res.arriveEnviroFacility ==
+                                                              scheduleJobs[i].arriveEnviroFacility ==
                                                                   null
                                                           ? "YES,UPDATE TIME"
-                                                          : res.arriveEnviroFacility ==
+                                                          : scheduleJobs[i].arriveEnviroFacility ==
                                                                   null
                                                               ? "YES,UPDATE TIME"
                                                               : "",
                               submitText2: "SKIP FOR NOW",
-                              showSubmit3Bn: (res.drivers?[primaryDriverIndex]
+                              showSubmit3Bn: (scheduleJobs[i].drivers?[primaryDriverIndex]
                                               .preinspectioncheck ==
                                           false &&
-                                      res.drivers?[primaryDriverIndex]
+                                      scheduleJobs[i].drivers?[primaryDriverIndex]
                                               .preinspectionRequired ==
                                           true &&
-                                      res.completed == null)
+                                      scheduleJobs[i].completed == null)
                                   ? false
-                                  : res.departEnviroFacility == null &&
-                                          res.startJob == null
+                                  : scheduleJobs[i].departEnviroFacility == null &&
+                                          scheduleJobs[i].startJob == null
                                       ? true
-                                      : res.startJob == null
+                                      : scheduleJobs[i].startJob == null
                                           ? false
-                                          : res.finishJob == null
+                                          : scheduleJobs[i].finishJob == null
                                               ? false
-                                              : res.completed == null
+                                              : scheduleJobs[i].completed == null
                                                   ? false
-                                                  : res.arriveAtWasteDepot ==
+                                                  : scheduleJobs[i].arriveAtWasteDepot ==
                                                               null &&
-                                                          res.departWasteDepot ==
+                                                          scheduleJobs[i].departWasteDepot ==
                                                               null
                                                       ? true
-                                                      : res.departWasteDepot ==
+                                                      : scheduleJobs[i].departWasteDepot ==
                                                                   null &&
-                                                              res.arriveEnviroFacility ==
+                                                              scheduleJobs[i].arriveEnviroFacility ==
                                                                   null
                                                           ? true
-                                                          : res.arriveEnviroFacility ==
+                                                          : scheduleJobs[i].arriveEnviroFacility ==
                                                                   null
                                                               ? false
                                                               : false,
                               submitText3: "SKIP TO NEXT STEP",
                               onSubmit3: () {
-                                (res.drivers?[primaryDriverIndex]
+                                (scheduleJobs[i].drivers?[primaryDriverIndex]
                                                 .preinspectioncheck ==
                                             false &&
-                                        res.drivers?[primaryDriverIndex]
+                                        scheduleJobs[i].drivers?[primaryDriverIndex]
                                                 .preinspectionRequired ==
                                             true &&
-                                        res.completed == null)
+                                        scheduleJobs[i].completed == null)
                                     ? null
-                                    : res.startJob == null
+                                    : scheduleJobs[i].startJob == null
                                         ? showConfirmationAlert(
                                             context: context,
                                             content: "Have you Started the Job",
@@ -344,7 +351,7 @@ class TodaysScheduleList extends StatelessWidget {
                                               vmSchedule.clearFn();
                                               context.router.push(
                                                   SheduledetailRoute(
-                                                      id: res.id ?? 0,
+                                                      id: scheduleJobs[i].id ?? 0,
                                                       i: i,
                                                       driversIndex:
                                                           primaryDriverIndex));
@@ -352,13 +359,13 @@ class TodaysScheduleList extends StatelessWidget {
                                             submitText: "YES,UPDATE TIME",
                                             submitText2: "SKIP FOR NOW",
                                           )
-                                        : res.startJob == null
+                                        : scheduleJobs[i].startJob == null
                                             ? null
-                                            : res.finishJob == null
+                                            : scheduleJobs[i].finishJob == null
                                                 ? null
-                                                : res.completed == null
+                                                : scheduleJobs[i].completed == null
                                                     ? null
-                                                    : res.arriveAtWasteDepot ==
+                                                    : scheduleJobs[i].arriveAtWasteDepot ==
                                                             null
                                                         ? showConfirmationAlert(
                                                             context: context,
@@ -390,7 +397,7 @@ class TodaysScheduleList extends StatelessWidget {
                                                                   .clearFn();
                                                               context.router.push(
                                                                   SheduledetailRoute(
-                                                                      id: res.id ??
+                                                                      id: scheduleJobs[i].id ??
                                                                           0,
                                                                       i: i,
                                                                       driversIndex:
@@ -436,7 +443,7 @@ class TodaysScheduleList extends StatelessWidget {
                                                                   vmSchedule
                                                                       .clearFn();
                                                                   context.router.push(SheduledetailRoute(
-                                                                      id: res.id ??
+                                                                      id: scheduleJobs[i].id ??
                                                                           0,
                                                                       i: i,
                                                                       driversIndex:
@@ -491,7 +498,7 @@ class TodaysScheduleList extends StatelessWidget {
                                                         //     submitText2:
                                                         //         "SKIP FOR NOW",
                                                         //   )
-                                                        : res.departWasteDepot ==
+                                                        : scheduleJobs[i].departWasteDepot ==
                                                                 null
                                                             ? showConfirmationAlert(
                                                                 context:
@@ -519,7 +526,7 @@ class TodaysScheduleList extends StatelessWidget {
                                                                   vmSchedule
                                                                       .clearFn();
                                                                   context.router.push(SheduledetailRoute(
-                                                                      id: res.id ??
+                                                                      id: scheduleJobs[i].id ??
                                                                           0,
                                                                       i: i,
                                                                       driversIndex:
@@ -530,12 +537,12 @@ class TodaysScheduleList extends StatelessWidget {
                                                                 submitText2:
                                                                     "SKIP FOR NOW",
                                                               )
-                                                            : res.departWasteDepot ==
+                                                            : scheduleJobs[i].departWasteDepot ==
                                                                         null &&
-                                                                    res.arriveEnviroFacility ==
+                                                                    scheduleJobs[i].arriveEnviroFacility ==
                                                                         null
                                                                 ? null
-                                                                : res.arriveEnviroFacility ==
+                                                                : scheduleJobs[i].arriveEnviroFacility ==
                                                                         null
                                                                     ? null
                                                                     : "";
@@ -544,7 +551,7 @@ class TodaysScheduleList extends StatelessWidget {
                           } else {
                             vmSchedule.clearFn();
                             context.router.push(SheduledetailRoute(
-                                id: res.id ?? 0,
+                                id: scheduleJobs[i].id ?? 0,
                                 i: i,
                                 driversIndex: primaryDriverIndex));
                           }
@@ -557,28 +564,28 @@ class TodaysScheduleList extends StatelessWidget {
                                   expandedRowShowText2(
                                     "Day",
                                     DateFormat('dd-MM-yyyy').format(
-                                      res!.startDate!,
+                                      scheduleJobs[i].startDate!,
                                     ),
                                   ),
                                   expandedRowShowText2(
                                       "Time",
                                       convertTimeTo12HourFormat(
-                                          res.startTime ?? "")),
+                                          scheduleJobs[i].startTime ?? "")),
                                   expandedRowShowText2(
                                     "Type",
-                                    res.wasteTypeStr ?? '',
+                                    scheduleJobs[i].wasteTypeStr ?? '',
                                   ),
                                   expandedRowShowText2(
                                     "Company",
-                                    res.client?.clientName ?? '',
+                                    scheduleJobs[i].client?.clientName ?? '',
                                   ),
                                   (vmSchedule.shedulecardResponse.data !=
                                               null &&
-                                          res.status != null)
+                                          scheduleJobs[i].status != null)
                                       ? expandedRowShowText2(
-                                          "Status", jobStatus(res.status ?? ""))
+                                          "Status", jobStatus(scheduleJobs[i].status ?? ""))
                                       : Container(),
-                                  if (res.jobCardKeys?.photoRequired == true)
+                                  if (scheduleJobs[i].jobCardKeys?.photoRequired == true)
                                     CmButton(
                                       height: 20.w,
                                       text: "Photo Required",
@@ -595,15 +602,15 @@ class TodaysScheduleList extends StatelessWidget {
                             ),
                             Expanded(
                               child: MapWidget(
-                                  latitude: res.client?.locationLatitude !=
+                                  latitude: scheduleJobs[i].client?.locationLatitude !=
                                           "null"
                                       ? double.parse(
-                                          res.client?.locationLatitude ?? "")
+                                          scheduleJobs[i].client?.locationLatitude ?? "")
                                       : 0,
-                                  longitude: res.client?.locationLogitude !=
+                                  longitude: scheduleJobs[i].client?.locationLogitude !=
                                           "null"
                                       ? double.parse(
-                                          res.client?.locationLogitude ?? "")
+                                          scheduleJobs[i].client?.locationLogitude ?? "")
                                       : 0),
                             ),
                           ],
@@ -611,7 +618,7 @@ class TodaysScheduleList extends StatelessWidget {
                       ),
                     ),
                     sized0hx05,
-                    cmCard(context, res),
+                    cmCard(context, scheduleJobs[i]),
                   ],
                 ),
               ),

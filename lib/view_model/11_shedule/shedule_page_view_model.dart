@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 import 'package:auto_route/auto_route.dart';
 import 'package:enviro_mobile_application/api_response/api_response.dart';
@@ -502,26 +503,74 @@ abstract class ScheduleViewModelBase with Store {
       ApiResponse<List<SheduleCardRespModel>>();
 
   @action
-  Future<void> shedulecardviewmodelfunction() async {
-    shedulecardResponse =
-        shedulecardResponse.copyWith(error: null, loading: true);
+  Future<void> shedulecardviewmodelfunction({int? page}) async {
+    shedulecardResponse = shedulecardResponse.copyWith(
+      error: null,
+      loading: page == null,
+      paginationLoading: page != null,
+    );
 
-    final result = await scheduleService.shedulecardservicefunction();
+    final result = await scheduleService.shedulecardservicefunction(
+      page: page,
+    );
     return result.fold(
       (l) {
         shedulecardResponse = shedulecardResponse.copyWith(
           error: l,
           loading: false,
+          paginationLoading: false,
         );
       },
       (r) {
+        List<SheduleCardRespModel> scheduleJobs =
+            shedulecardResponse.data?.toList() ?? [];
+        if (page != null) {
+          scheduleJobs.addAll(r);
+        } else {
+          scheduleJobs = r;
+        }
+
         shedulecardResponse = shedulecardResponse.copyWith(
-          data: r,
+          data: scheduleJobs,
           error: null,
           loading: false,
+          pageNo: page ?? 1,
+          paginationLoading: false,
+          pagination: r.length == 10,
         );
       },
     );
+  }
+
+  ScrollController scheduleJobsController = ScrollController();
+
+  void scheduleJobsPagination() {
+    scheduleJobsController.addListener(() {
+      if (scheduleJobsController.position.pixels ==
+              scheduleJobsController.position.maxScrollExtent &&
+          !scheduleJobsController.position.outOfRange &&
+          shedulecardResponse.pagination &&
+          !shedulecardResponse.paginationLoading) {
+        int pageNo = shedulecardResponse.pageNo + 1;
+        shedulecardviewmodelfunction(page: pageNo);
+      }
+    });
+  }
+
+  ScrollController scheduleJobsController2 = ScrollController();
+
+  void scheduleJobsPagination2() {
+    log("message");
+    scheduleJobsController2.addListener(() {
+      if (scheduleJobsController2.position.pixels ==
+              scheduleJobsController2.position.maxScrollExtent &&
+          !scheduleJobsController2.position.outOfRange &&
+          shedulecardResponse.pagination &&
+          !shedulecardResponse.paginationLoading) {
+        int pageNo = shedulecardResponse.pageNo + 1;
+        shedulecardviewmodelfunction(page: pageNo);
+      }
+    });
   }
 
   @observable

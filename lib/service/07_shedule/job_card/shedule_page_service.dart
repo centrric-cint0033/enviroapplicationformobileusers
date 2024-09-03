@@ -34,7 +34,7 @@ abstract class IScheduleService {
   Future<Either<MainFailure, JobCardRespModel>> jobcardservicefunction(
       {required int quoteId});
   Future<Either<MainFailure, List<SheduleCardRespModel>>>
-      shedulecardservicefunction();
+      shedulecardservicefunction({int? page});
   Future<Either<MainFailure, List<SheduleCardRespModel>>>
       shedulecardservicefunctionByDate({String? fromDate});
   Future<Either<Map<MainFailure, dynamic>, SheduleSignatureModel>>
@@ -106,11 +106,11 @@ class SalesService implements IScheduleService {
 
   @override
   Future<Either<MainFailure, List<SheduleCardRespModel>>>
-      shedulecardservicefunction() async {
+      shedulecardservicefunction({int? page}) async {
     var response = await getIt<HttpService>().request(
         authenticated: true,
         method: HttpMethod.get,
-        apiUrl: ApiEndPoints.endpointshedulecard);
+        apiUrl: "${ApiEndPoints.endpointshedulecard}?page=${page ?? 1}&limit=10");
 
     return response.fold(
       (l) {

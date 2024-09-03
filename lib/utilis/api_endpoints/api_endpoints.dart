@@ -48,7 +48,7 @@ class ApiEndPoints
   static const endpointprofilelstng = '/api/v1/accounts/profile/view/';
   static const endpointprofileedit = '/api/v1/accounts/profile/view/';
   static const endpointjobcard = '/api/v1/jobs/card/info/view/';
-  static const endpointshedulecard = '/api/v1/schedule/view/mobile/waste/';
+  static const endpointshedulecard = '/api/v1/schedule/view/mobile/waste';
   static const endpointshedulecardByDate =
       '/api/v1/schedule/view/mobile/waste/';
   static const endpointshedulesignature =

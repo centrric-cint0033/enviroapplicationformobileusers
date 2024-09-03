@@ -1892,9 +1892,9 @@ mixin _$ScheduleViewModel on ScheduleViewModelBase, Store {
       context: context);
 
   @override
-  Future<void> shedulecardviewmodelfunction() {
+  Future<void> shedulecardviewmodelfunction({int? page}) {
     return _$shedulecardviewmodelfunctionAsyncAction
-        .run(() => super.shedulecardviewmodelfunction());
+        .run(() => super.shedulecardviewmodelfunction(page: page));
   }
 
   late final _$shedulecardviewmodelfunctionByDateAsyncAction = AsyncAction(
