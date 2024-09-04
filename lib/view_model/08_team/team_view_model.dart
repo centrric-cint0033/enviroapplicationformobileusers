@@ -238,9 +238,63 @@ abstract class TeamViewModelBase with Store {
           currentEmployeeResponse.pagination &&
           !currentEmployeeResponse.paginationLoading) {
         int pageNo = currentEmployeeResponse.pageNo + 1;
+        if (currentEmployeeSearchCntrlr.text.isNotEmpty) {
+          currentEmployeeSearchApi(
+            page: pageNo,
+            currentEmployeeSearchCntrlr.text,
+          );
+          return;
+        }
         getCurrentEmployee(page: pageNo);
       }
     });
+  }
+
+  @action
+  Future<void> currentEmployeeSearchApi(String searchData, {int? page}) async {
+    try {
+      currentEmployeeResponse = currentEmployeeResponse.copyWith(
+        errors: null,
+        loading: page == null,
+        paginationLoading: page != null,
+      );
+
+      final result = await teamService
+          .employeeSearchApi(data: {"key": searchData}, page: page);
+      return result.fold(
+        (l) {
+          currentEmployeeResponse = currentEmployeeResponse.copyWith(
+            errors: l,
+            loading: false,
+            paginationLoading: false,
+          );
+        },
+        (r) {
+          List<TeamResModel> currentEmployees =
+              currentEmployeeResponse.data?.toList() ?? [];
+          if (page == null) {
+            currentEmployees = r;
+          } else {
+            currentEmployees.addAll(r);
+          }
+          currentEmployeeResponse = currentEmployeeResponse.copyWith(
+            data: currentEmployees,
+            errors: null,
+            loading: false,
+            pageNo: page ?? 1,
+            pagination: r.length == 10,
+            paginationLoading: false,
+          );
+        },
+      );
+    } catch (e) {
+      customPrint(content: e, name: 'Error currentEmployeeSearchApi');
+    } finally {
+      currentEmployeeResponse = currentEmployeeResponse.copyWith(
+        loading: false,
+        paginationLoading: false,
+      );
+    }
   }
 
   @action
@@ -289,9 +343,64 @@ abstract class TeamViewModelBase with Store {
           terminatedEmployeeResponse.pagination &&
           !terminatedEmployeeResponse.paginationLoading) {
         int pageNo = terminatedEmployeeResponse.pageNo + 1;
+        if (terminatedEmployeeSearchCntrlr.text.isNotEmpty) {
+          terminatedEmployeeSearchApi(
+            page: pageNo,
+            terminatedEmployeeSearchCntrlr.text,
+          );
+          return;
+        }
         getTerminatedEmployee(page: pageNo);
       }
     });
+  }
+
+  @action
+  Future<void> terminatedEmployeeSearchApi(String searchData,
+      {int? page}) async {
+    try {
+      terminatedEmployeeResponse = terminatedEmployeeResponse.copyWith(
+        errors: null,
+        loading: page == null,
+        paginationLoading: page != null,
+      );
+
+      final result = await teamService
+          .employeeSearchApi(data: {"key": searchData}, page: page);
+      return result.fold(
+        (l) {
+          terminatedEmployeeResponse = terminatedEmployeeResponse.copyWith(
+            errors: l,
+            loading: false,
+            paginationLoading: false,
+          );
+        },
+        (r) {
+          List<TeamResModel> terminatedEmployees =
+              terminatedEmployeeResponse.data?.toList() ?? [];
+          if (page == null) {
+            terminatedEmployees = r;
+          } else {
+            terminatedEmployees.addAll(r);
+          }
+          terminatedEmployeeResponse = terminatedEmployeeResponse.copyWith(
+            data: terminatedEmployees,
+            errors: null,
+            loading: false,
+            pageNo: page ?? 1,
+            pagination: r.length == 10,
+            paginationLoading: false,
+          );
+        },
+      );
+    } catch (e) {
+      customPrint(content: e, name: 'Error terminatedEmployeeSearchApi');
+    } finally {
+      terminatedEmployeeResponse = terminatedEmployeeResponse.copyWith(
+        loading: false,
+        paginationLoading: false,
+      );
+    }
   }
 
   @action
@@ -319,58 +428,6 @@ abstract class TeamViewModelBase with Store {
     } finally {
       teamProfileEmployeeDetailListResponse =
           teamProfileEmployeeDetailListResponse.copyWith(loading: false);
-    }
-  }
-
-  @action
-  Future<void> currentEmployeeSearchApi(String searchData) async {
-    try {
-      currentEmployeeResponse =
-          currentEmployeeResponse.copyWith(errors: null, loading: true);
-
-      final result =
-          await teamService.employeeSearchApi(data: {"key": searchData});
-      return result.fold(
-        (l) {
-          currentEmployeeResponse =
-              currentEmployeeResponse.copyWith(errors: l, loading: false);
-        },
-        (r) {
-          currentEmployeeResponse = currentEmployeeResponse.copyWith(
-              data: r, errors: null, loading: false);
-        },
-      );
-    } catch (e) {
-      customPrint(content: e, name: 'Error currentEmployeeSearchApi');
-    } finally {
-      currentEmployeeResponse =
-          currentEmployeeResponse.copyWith(loading: false);
-    }
-  }
-
-  @action
-  Future<void> terminatedEmployeeSearchApi(String searchData) async {
-    try {
-      terminatedEmployeeResponse =
-          terminatedEmployeeResponse.copyWith(errors: null, loading: true);
-
-      final result =
-          await teamService.employeeSearchApi(data: {"key": searchData});
-      return result.fold(
-        (l) {
-          terminatedEmployeeResponse =
-              terminatedEmployeeResponse.copyWith(errors: l, loading: false);
-        },
-        (r) {
-          terminatedEmployeeResponse = terminatedEmployeeResponse.copyWith(
-              data: r, errors: null, loading: false);
-        },
-      );
-    } catch (e) {
-      customPrint(content: e, name: 'Error terminatedEmployeeSearchApi');
-    } finally {
-      terminatedEmployeeResponse =
-          terminatedEmployeeResponse.copyWith(loading: false);
     }
   }
 

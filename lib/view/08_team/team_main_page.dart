@@ -16,9 +16,13 @@ import '../../view_model/08_team/team_view_model.dart';
 @RoutePage()
 class TeamPage extends StatelessWidget {
   const TeamPage({super.key});
-
   @override
   Widget build(BuildContext context) {
+        WidgetsBinding.instance.addPostFrameCallback(
+      (timeStamp) {
+        vmTeam.currentEmployeePagination();
+      },
+    );
     return DefaultTabController(
       length: 2,
       child: Scaffold(

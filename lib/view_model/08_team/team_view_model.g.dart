@@ -1217,6 +1217,16 @@ mixin _$TeamViewModel on TeamViewModelBase, Store {
         .run(() => super.getCurrentEmployee(page: page));
   }
 
+  late final _$currentEmployeeSearchApiAsyncAction = AsyncAction(
+      'TeamViewModelBase.currentEmployeeSearchApi',
+      context: context);
+
+  @override
+  Future<void> currentEmployeeSearchApi(String searchData, {int? page}) {
+    return _$currentEmployeeSearchApiAsyncAction
+        .run(() => super.currentEmployeeSearchApi(searchData, page: page));
+  }
+
   late final _$getTerminatedEmployeeAsyncAction =
       AsyncAction('TeamViewModelBase.getTerminatedEmployee', context: context);
 
@@ -1224,6 +1234,16 @@ mixin _$TeamViewModel on TeamViewModelBase, Store {
   Future<void> getTerminatedEmployee({int? page}) {
     return _$getTerminatedEmployeeAsyncAction
         .run(() => super.getTerminatedEmployee(page: page));
+  }
+
+  late final _$terminatedEmployeeSearchApiAsyncAction = AsyncAction(
+      'TeamViewModelBase.terminatedEmployeeSearchApi',
+      context: context);
+
+  @override
+  Future<void> terminatedEmployeeSearchApi(String searchData, {int? page}) {
+    return _$terminatedEmployeeSearchApiAsyncAction
+        .run(() => super.terminatedEmployeeSearchApi(searchData, page: page));
   }
 
   late final _$getTeamProfileEmployeeDetailsAsyncAction = AsyncAction(
@@ -1234,26 +1254,6 @@ mixin _$TeamViewModel on TeamViewModelBase, Store {
   Future<void> getTeamProfileEmployeeDetails({required num employeeID}) {
     return _$getTeamProfileEmployeeDetailsAsyncAction
         .run(() => super.getTeamProfileEmployeeDetails(employeeID: employeeID));
-  }
-
-  late final _$currentEmployeeSearchApiAsyncAction = AsyncAction(
-      'TeamViewModelBase.currentEmployeeSearchApi',
-      context: context);
-
-  @override
-  Future<void> currentEmployeeSearchApi(String searchData) {
-    return _$currentEmployeeSearchApiAsyncAction
-        .run(() => super.currentEmployeeSearchApi(searchData));
-  }
-
-  late final _$terminatedEmployeeSearchApiAsyncAction = AsyncAction(
-      'TeamViewModelBase.terminatedEmployeeSearchApi',
-      context: context);
-
-  @override
-  Future<void> terminatedEmployeeSearchApi(String searchData) {
-    return _$terminatedEmployeeSearchApiAsyncAction
-        .run(() => super.terminatedEmployeeSearchApi(searchData));
   }
 
   late final _$getTeamFoldersAsyncAction =

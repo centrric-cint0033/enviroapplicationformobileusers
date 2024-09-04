@@ -15,11 +15,7 @@ class CurrentEmployeeTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    WidgetsBinding.instance.addPostFrameCallback(
-      (timeStamp) {
-        vmTeam.currentEmployeePagination();
-      },
-    );
+
     return Scaffold(
         body: Column(children: [
       sized0hx10,
