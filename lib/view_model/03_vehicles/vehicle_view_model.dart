@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:developer';
 import 'package:auto_route/auto_route.dart';
 import 'package:dartz/dartz.dart';
 import 'package:enviro_mobile_application/api_response/api_response.dart';
@@ -1252,7 +1251,6 @@ abstract class VehicleViewModelBase with Store {
     } else {
       showSubmitBn = false;
     }
-    log(showSubmitBn.toString());
   }
 
   @action

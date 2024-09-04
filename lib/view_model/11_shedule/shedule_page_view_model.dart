@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:io';
 import 'package:auto_route/auto_route.dart';
 import 'package:enviro_mobile_application/api_response/api_response.dart';
@@ -560,7 +559,6 @@ abstract class ScheduleViewModelBase with Store {
   ScrollController scheduleJobsController2 = ScrollController();
 
   void scheduleJobsPagination2() {
-    log("message");
     scheduleJobsController2.addListener(() {
       if (scheduleJobsController2.position.pixels ==
               scheduleJobsController2.position.maxScrollExtent &&
