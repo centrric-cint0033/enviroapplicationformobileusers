@@ -127,10 +127,11 @@ abstract class SiteViewModelBase with Store {
   @action
   Future<void> getPermanentSites({int? page}) async {
     permanentSiteResponse = permanentSiteResponse.copyWith(
-        error: null,
-        paginationLoading: page != null,
-        // loading: permanentSiteResponse.data == null,
-        loading: true);
+      error: null,
+      paginationLoading: page != null,
+      loading: permanentSiteResponse.data == null,
+      // loading: true
+    );
 
     final response = await siteService.getPermanantSites(page: page);
 

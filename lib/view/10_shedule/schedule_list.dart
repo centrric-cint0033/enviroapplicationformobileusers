@@ -22,7 +22,7 @@ class ScheduleList extends StatelessWidget {
       final res = vmSchedule.shedulecardResponse;
       List<SheduleCardRespModel> scheduleJobs = res.data ?? [];
       return SizedBox(
-        height: ScreenUtil().screenHeight - 450.h,
+        height: ScreenUtil().screenHeight - 420.h,
         child: ListView.separated(
             padding: const EdgeInsets.symmetric(
               vertical: 2,

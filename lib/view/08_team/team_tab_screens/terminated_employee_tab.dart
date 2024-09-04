@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:enviro_mobile_application/Routepage/approutes.gr.dart';
+import 'package:enviro_mobile_application/model/10_team/team_res_model/team_res_model.dart';
 import 'package:enviro_mobile_application/utilis/constant.dart';
 import 'package:enviro_mobile_application/view/08_team/team_widgets/01_team_widgets.dart';
 import 'package:enviro_mobile_application/view_model/08_team/team_view_model.dart';
@@ -33,45 +34,47 @@ class TerminatedEmployeeTab extends StatelessWidget {
       sized0hx05,
       Observer(builder: (_) {
         final res = vmTeam.terminatedEmployeeResponse;
+              List<TeamResModel> terminatedEmployees = res.data?.toList() ?? [];
         return Expanded(
             child: WWResponseHandler(
                 data: res,
                 isEmpty:
                     vmTeam.terminatedEmployeeResponse.data?.isEmpty ?? true,
                 onTap: () => vmTeam.getTerminatedEmployee(),
-                child: TerminatedEmployeeListWidget(loading: res.loading)));
+                child: TerminatedEmployeeListWidget(loading: res.loading,terminatedEmployees: terminatedEmployees,)));
       }),
     ]));
   }
 }
 
 class TerminatedEmployeeListWidget extends StatelessWidget {
-  const TerminatedEmployeeListWidget({super.key, required this.loading});
+  const TerminatedEmployeeListWidget({super.key, required this.loading, required this.terminatedEmployees});
   final bool loading;
+    final List<TeamResModel> terminatedEmployees;
   @override
   Widget build(BuildContext context) {
     return ListView.separated(
-        itemCount: vmTeam.terminatedEmployeeResponse.data!.length + 1,
+        itemCount: terminatedEmployees.length + 1,
         separatorBuilder: (BuildContext context, int index) => sized0hx10,
         controller: vmTeam.terminatedEmployeeController,
         itemBuilder: (context, index) {
-          return index == vmTeam.terminatedEmployeeResponse.data?.length
+          return index == terminatedEmployees.length
               ? vmTeam.terminatedEmployeeResponse.paginationLoading
                   ? const CupertinoActivityIndicator()
                   : const SizedBox.shrink()
               : listTile(context,
-                  data: vmTeam.terminatedEmployeeResponse.data?[index],
+                  data: terminatedEmployees[index],
                   onTap: () {
                   vmTeam.getTeamProfileEmployeeDetails(
                       employeeID:
-                          vmTeam.terminatedEmployeeResponse.data?[index].id ??
+                          terminatedEmployees[index].id ??
                               0);
                   vmTeam.getTeamFolders(
-                      id: vmTeam.terminatedEmployeeResponse.data?[index].id ??
+                      id: terminatedEmployees[index].id ??
                           0,
                       parentFolderId: 1);
                   context.router.push(TeamProfileRoute(
-                      id: vmTeam.terminatedEmployeeResponse.data?[index].id));
+                      id: terminatedEmployees[index].id));
                 });
         });
   }

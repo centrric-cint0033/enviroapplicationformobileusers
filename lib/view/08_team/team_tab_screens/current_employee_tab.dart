@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:enviro_mobile_application/Routepage/approutes.gr.dart';
+import 'package:enviro_mobile_application/model/10_team/team_res_model/team_res_model.dart';
 import 'package:enviro_mobile_application/utilis/constant.dart';
 import 'package:enviro_mobile_application/view/08_team/team_widgets/01_team_widgets.dart';
 import 'package:enviro_mobile_application/view_model/08_team/team_view_model.dart';
@@ -33,41 +34,47 @@ class CurrentEmployeeTab extends StatelessWidget {
       sized0hx10,
       Observer(builder: (_) {
         final res = vmTeam.currentEmployeeResponse;
+        List<TeamResModel> currentEmployees = res.data?.toList() ?? [];
         return Expanded(
             child: WWResponseHandler(
                 data: res,
                 isEmpty: res.data?.isEmpty ?? true,
                 onTap: () => vmTeam.getCurrentEmployee(),
-                child: CurrentEmployeeListWidget(loading: res.loading)));
+                child: CurrentEmployeeListWidget(
+                  loading: res.loading,
+                  currentEmployees: currentEmployees,
+                )));
       }),
     ]));
   }
 }
 
 class CurrentEmployeeListWidget extends StatelessWidget {
-  const CurrentEmployeeListWidget({super.key, required this.loading});
+  const CurrentEmployeeListWidget({
+    super.key,
+    required this.loading,
+    required this.currentEmployees,
+  });
   final bool loading;
+  final List<TeamResModel> currentEmployees;
   @override
   Widget build(BuildContext context) {
     return ListView.separated(
-        itemCount: vmTeam.currentEmployeeResponse.data!.length + 1,
+        itemCount: currentEmployees.length + 1,
         controller: vmTeam.currentEmployeeController,
         separatorBuilder: (BuildContext context, int index) => sized0hx10,
         itemBuilder: (context, index) {
-          return index == vmTeam.currentEmployeeResponse.data?.length
+          return index == currentEmployees.length
               ? vmTeam.currentEmployeeResponse.paginationLoading
                   ? const CupertinoActivityIndicator()
                   : const SizedBox.shrink()
-              : listTile(context,
-                  data: vmTeam.currentEmployeeResponse.data?[index], onTap: () {
+              : listTile(context, data: currentEmployees[index], onTap: () {
                   vmTeam.getTeamProfileEmployeeDetails(
-                      employeeID:
-                          vmTeam.currentEmployeeResponse.data?[index].id ?? 0);
+                      employeeID: currentEmployees[index].id ?? 0);
                   vmTeam.getTeamFolders(
-                      id: vmTeam.currentEmployeeResponse.data?[index].id ?? 0,
-                      parentFolderId: 1);
-                  context.router.push(TeamProfileRoute(
-                      id: vmTeam.currentEmployeeResponse.data?[index].id));
+                      id: currentEmployees[index].id ?? 0, parentFolderId: 1);
+                  context.router
+                      .push(TeamProfileRoute(id: currentEmployees[index].id));
                 });
         });
   }
