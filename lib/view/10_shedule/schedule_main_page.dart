@@ -91,18 +91,18 @@ class ScheduleMainPage extends StatelessWidget {
                   ),
                 ),
               ),
-              if (vmSchedule.shedulecardResponse.data != null)
-                if (vmSchedule.shedulecardResponse.data!.length <= 1) ...[
-                  sized0hx50,
-                  sized0hx50,
-                  sized0hx50,
-                  sized0hx50,
-                  sized0hx50,
-                  sized0hx20
-                ] else ...[
-                  sized0hx50,
-                  sized0hx50,
-                ]
+              // if (vmSchedule.shedulecardResponse.data != null)
+              //   if (vmSchedule.shedulecardResponse.data!.length <= 1) ...[
+              //     sized0hx50,
+              //     sized0hx50,
+              //     sized0hx50,
+              //     sized0hx50,
+              //     sized0hx50,
+              //     sized0hx20
+              //   ] else ...[
+              //     sized0hx50,
+              //     sized0hx50,
+              //   ]
             ],
           ),
         ),

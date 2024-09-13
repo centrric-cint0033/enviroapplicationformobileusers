@@ -35,7 +35,7 @@ abstract class IteamService {
   Future<Either<Map<MainFailure, dynamic>, String>> deleteEmployeeApi(
       {required num id});
   Future<Either<Map<MainFailure, dynamic>, List<TeamResModel>>>
-      employeeSearchApi({required Map<String, String> data,int? page});
+      employeeSearchApi({required Map<String, String> data, int? page});
   Future<Either<Map<MainFailure, dynamic>, CreateTeamReqModel>> createTeamApi(
       {required Map<String, dynamic> data});
   Future<Either<Map<MainFailure, dynamic>, CreateTeamReqModel>> editTeamApi(
@@ -130,7 +130,7 @@ class TeamService implements IteamService {
     var response = await getIt<HttpService>().request(
         authenticated: true,
         method: HttpMethod.get,
-        apiUrl: '${ApiEndPoints().teamFolder}/$id/$parentFolderId');
+        apiUrl: '${ApiEndPoints().teamFolder}/$id/$parentFolderId/');
 
     return response.fold(
       (l) => Left(l),
@@ -223,9 +223,12 @@ class TeamService implements IteamService {
 
   @override
   Future<Either<Map<MainFailure, dynamic>, List<TeamResModel>>>
-      employeeSearchApi({required Map<String, String> data,int? page}) async {
+      employeeSearchApi({required Map<String, String> data, int? page}) async {
     var response = await getIt<HttpService>().multipartRequest(
-        data: data, method: 'POST', apiUrl: "${ApiEndPoints().searchEmployeeList}?page=${page ?? 1}&limit=10");
+        data: data,
+        method: 'POST',
+        apiUrl:
+            "${ApiEndPoints().searchEmployeeList}?page=${page ?? 1}&limit=10");
     return response.fold(
       (l) => Left(l),
       (res) async {

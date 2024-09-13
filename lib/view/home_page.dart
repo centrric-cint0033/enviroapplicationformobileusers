@@ -189,19 +189,56 @@ void vehiclefunction(BuildContext context) async {
 }
 
 void teamfuntion(BuildContext context) {
-  if (vmProfile.profilepageResponse.data?.permissionType?.contains('driver') ??
-      false) {
+  if (vmselection.permissionsResponse.data?.team?.view == true) {
+    vmTeam.getCurrentEmployee();
+    vmTeam.getTerminatedEmployee();
+    context.router.pushNamed(RouteNames.teamPage);
+  } else {
     vmTeam.getTeamProfileEmployeeDetails(
         employeeID: vmProfile.profilepageResponse.data?.id ?? 0);
     vmTeam.getTeamFolders(
         id: vmProfile.profilepageResponse.data?.id ?? 0, parentFolderId: 1);
     context.router
         .push(TeamProfileRoute(id: vmProfile.profilepageResponse.data?.id));
-  } else {
-    vmTeam.getCurrentEmployee();
-    vmTeam.getTerminatedEmployee();
-    context.router.pushNamed(RouteNames.teamPage);
   }
+  // if (vmProfile.profilepageResponse.data?.permissionType
+  //         ?.contains('director') ??
+  //     false) {
+  //   vmTeam.getCurrentEmployee();
+  //   vmTeam.getTerminatedEmployee();
+  //   context.router.pushNamed(RouteNames.teamPage);
+  // } else if (vmProfile.profilepageResponse.data?.permissionType
+  //         ?.contains('general-manager') ??
+  //     false) {
+  //   vmTeam.getCurrentEmployee();
+  //   vmTeam.getTerminatedEmployee();
+  //   context.router.pushNamed(RouteNames.teamPage);
+  // } else if (vmProfile.profilepageResponse.data?.permissionType
+  //         ?.contains('accounts-manager') ??
+  //     false) {
+  //   vmTeam.getCurrentEmployee();
+  //   vmTeam.getTerminatedEmployee();
+  //   context.router.pushNamed(RouteNames.teamPage);
+  // } else if (vmProfile.profilepageResponse.data?.permissionType
+  //         ?.contains('account-assistant') ??
+  //     false) {
+  //   vmTeam.getCurrentEmployee();
+  //   vmTeam.getTerminatedEmployee();
+  //   context.router.pushNamed(RouteNames.teamPage);
+  // } else if (vmProfile.profilepageResponse.data?.permissionType
+  //         ?.contains('accounts') ??
+  //     false) {
+  //   vmTeam.getCurrentEmployee();
+  //   vmTeam.getTerminatedEmployee();
+  //   context.router.pushNamed(RouteNames.teamPage);
+  // } else {
+  //   vmTeam.getTeamProfileEmployeeDetails(
+  //       employeeID: vmProfile.profilepageResponse.data?.id ?? 0);
+  //   vmTeam.getTeamFolders(
+  //       id: vmProfile.profilepageResponse.data?.id ?? 0, parentFolderId: 1);
+  //   context.router
+  //       .push(TeamProfileRoute(id: vmProfile.profilepageResponse.data?.id));
+  // }
 }
 
 void navigateToSitesPage({required BuildContext context}) {

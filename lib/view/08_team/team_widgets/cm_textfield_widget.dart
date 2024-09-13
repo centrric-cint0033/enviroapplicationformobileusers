@@ -20,6 +20,7 @@ Widget cmTextFormField(
     decoration: showDecoration == true
         ? InputDecoration(
             hintText: hintText,
+            suffix: suffix,
             hintStyle: hintStyle,
             focusedBorder: UnderlineInputBorder(
                 borderSide: BorderSide(color: Colors.grey.shade600)))

@@ -370,10 +370,14 @@ class AddTeamPage extends StatelessWidget {
                 email: vmTeam.textAddTeamEmailController.text,
                 contact_number: vmTeam.textAddTeamContactNumberController.text,
                 driving_license: vmTeam.selectedFilePathLicense ?? "",
-                expiry_date: DateFormat('yyyy-MM-dd')
-                    .format(vmTeam.selectedLicenceExpiryDate!),
-                alert_before: DateFormat('yyyy-MM-dd')
-                    .format(vmTeam.selectedLicenceAlertDate!),
+                expiry_date: vmTeam.selectedLicenceExpiryDate != null
+                    ? DateFormat('yyyy-MM-dd')
+                        .format(vmTeam.selectedLicenceExpiryDate!)
+                    : "",
+                alert_before: vmTeam.selectedLicenceAlertDate != null
+                    ? DateFormat('yyyy-MM-dd')
+                        .format(vmTeam.selectedLicenceAlertDate!)
+                    : "",
                 username: vmTeam.textAddTeamEmailController.text,
                 password: vmTeam.textAddTeamPasswordController.text,
                 employement_status: vmTeam.selectedAddEmploymentStatus,
