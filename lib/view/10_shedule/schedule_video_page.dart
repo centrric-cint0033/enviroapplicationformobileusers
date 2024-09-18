@@ -155,4 +155,20 @@ class ScheduleVideoScreen extends StatelessWidget {
       vmSchedule.pickedGalleryVideoList?.add(vmSchedule.pickedGalleryVideo!);
     }
   }
+// Future<void> openGallery(BuildContext context) async {
+//   final ImagePicker imagePicker = ImagePicker();
+//   // The user will need to pick videos one by one, so we'll loop until the user cancels
+//   bool selectingVideos = true;
+//   while (selectingVideos) {
+//     final XFile? pickedFile = await imagePicker.pickVideo(source: ImageSource.gallery);
+//     if (pickedFile != null) {
+//       vmSchedule.pickedGalleryVideo = pickedFile.path;
+//       vmSchedule.pickedGalleryVideoList?.add(vmSchedule.pickedGalleryVideo!);
+//     } else {
+//       selectingVideos = false;
+//     }
+//
+//   // Optionally, update the state if required
+//   // setState(() {});
+// }
 }

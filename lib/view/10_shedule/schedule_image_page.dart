@@ -192,11 +192,26 @@ class ScheduleImageScreen extends StatelessWidget {
   }
 
   Future<void> openGallery(BuildContext context) async {
-    final pickedFile =
-        await ImagePicker().pickImage(source: ImageSource.gallery);
-    if (pickedFile != null) {
-      vmSchedule.pickedGalleryImage = pickedFile.path;
-      vmSchedule.pickedGalleryImageList?.add(vmSchedule.pickedGalleryImage!);
-    }
+    final ImagePicker imagePicker = ImagePicker();
+    List<XFile>? imageFileList = [];
+
+    final List<XFile>? selectedImages = await imagePicker.pickMultiImage();
+
+    if (selectedImages != null && selectedImages.isNotEmpty) {
+      imageFileList.addAll(selectedImages);
+      for (XFile image in selectedImages) {
+        vmSchedule.pickedGalleryImage = image.path;
+        vmSchedule.pickedGalleryImageList?.add(vmSchedule.pickedGalleryImage!);
+      }
+    } else {}
   }
+
+  // Future<void> openGallery(BuildContext context) async {
+  //   final pickedFile =
+  //       await ImagePicker().pickImage(source: ImageSource.gallery);
+  //   if (pickedFile != null) {
+  //     vmSchedule.pickedGalleryImage = pickedFile.path;
+  //     vmSchedule.pickedGalleryImageList?.add(vmSchedule.pickedGalleryImage!);
+  //   }
+  // }
 }

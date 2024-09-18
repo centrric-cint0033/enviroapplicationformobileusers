@@ -73,12 +73,11 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
                   "${vmSchedule.shedulecardResponse.data?[index].drivers?[driversIndex].name}",
                   fromType: false,
                 ),
-                requiredRowWidget(
-                  "Hour Meter Start",
-                  "",
-                  fromType: true,
-                  controller: vmSchedule.hoursMeterCntrller,
-                ),
+                requiredRowWidget("Hour Meter Start", "",
+                    fromType: true,
+                    controller: vmSchedule.hoursMeterCntrller,
+                    keyboardType: TextInputType.text,
+                    inputFormatters: []),
                 cmCheckBoxRow("I am Fit for Work", vmSchedule.checkboxValue,
                     onChanged: (bool? value) {
                   if (value != null) {
@@ -785,7 +784,10 @@ class UpdateVehiclepreinspectionPage extends StatelessWidget {
 }
 
 Widget requiredRowWidget(String? text1, String? text2,
-    {TextEditingController? controller, required bool fromType}) {
+    {TextEditingController? controller,
+    required bool fromType,
+    TextInputType? keyboardType,
+    List<TextInputFormatter>? inputFormatters}) {
   return Row(
     children: [
       Expanded(
@@ -822,8 +824,9 @@ Widget requiredRowWidget(String? text1, String? text2,
                       },
                       decoration:
                           const InputDecoration(border: InputBorder.none),
-                      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                      keyboardType: TextInputType.number,
+                      inputFormatters: inputFormatters ??
+                          [FilteringTextInputFormatter.digitsOnly],
+                      keyboardType: keyboardType ?? TextInputType.number,
                       style: TextStyle(fontSize: 10.sp),
                     ),
                   ),
