@@ -205,7 +205,7 @@ class WeighBridge with _$WeighBridge {
   factory WeighBridge.fromJson(Map<String, dynamic> json) =>
       _$WeighBridgeFromJson(json);
 }
-
+// ignore_for_file: invalid_annotation_target
 // @freezed
 // class AdditionalEmail with _$AdditionalEmail {
 //   const factory AdditionalEmail({

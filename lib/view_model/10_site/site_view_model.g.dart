@@ -224,6 +224,90 @@ mixin _$SiteViewModel on SiteViewModelBase, Store {
     });
   }
 
+  late final _$jobCardResponseAtom =
+      Atom(name: 'SiteViewModelBase.jobCardResponse', context: context);
+
+  @override
+  ApiResponse<JobCardModels> get jobCardResponse {
+    _$jobCardResponseAtom.reportRead();
+    return super.jobCardResponse;
+  }
+
+  @override
+  set jobCardResponse(ApiResponse<JobCardModels> value) {
+    _$jobCardResponseAtom.reportWrite(value, super.jobCardResponse, () {
+      super.jobCardResponse = value;
+    });
+  }
+
+  late final _$quoteCommentResponseAtom =
+      Atom(name: 'SiteViewModelBase.quoteCommentResponse', context: context);
+
+  @override
+  ApiResponse<List<QuoteCommentResModel>> get quoteCommentResponse {
+    _$quoteCommentResponseAtom.reportRead();
+    return super.quoteCommentResponse;
+  }
+
+  @override
+  set quoteCommentResponse(ApiResponse<List<QuoteCommentResModel>> value) {
+    _$quoteCommentResponseAtom.reportWrite(value, super.quoteCommentResponse,
+        () {
+      super.quoteCommentResponse = value;
+    });
+  }
+
+  late final _$addQuoteCommentResponseAtom =
+      Atom(name: 'SiteViewModelBase.addQuoteCommentResponse', context: context);
+
+  @override
+  ApiResponse<QuoteCommentResModel> get addQuoteCommentResponse {
+    _$addQuoteCommentResponseAtom.reportRead();
+    return super.addQuoteCommentResponse;
+  }
+
+  @override
+  set addQuoteCommentResponse(ApiResponse<QuoteCommentResModel> value) {
+    _$addQuoteCommentResponseAtom
+        .reportWrite(value, super.addQuoteCommentResponse, () {
+      super.addQuoteCommentResponse = value;
+    });
+  }
+
+  late final _$deleteQuoteCommentResponseAtom = Atom(
+      name: 'SiteViewModelBase.deleteQuoteCommentResponse', context: context);
+
+  @override
+  ApiResponse<dynamic> get deleteQuoteCommentResponse {
+    _$deleteQuoteCommentResponseAtom.reportRead();
+    return super.deleteQuoteCommentResponse;
+  }
+
+  @override
+  set deleteQuoteCommentResponse(ApiResponse<dynamic> value) {
+    _$deleteQuoteCommentResponseAtom
+        .reportWrite(value, super.deleteQuoteCommentResponse, () {
+      super.deleteQuoteCommentResponse = value;
+    });
+  }
+
+  late final _$editQuoteCommentResponseAtom = Atom(
+      name: 'SiteViewModelBase.editQuoteCommentResponse', context: context);
+
+  @override
+  ApiResponse<QuoteCommentResModel> get editQuoteCommentResponse {
+    _$editQuoteCommentResponseAtom.reportRead();
+    return super.editQuoteCommentResponse;
+  }
+
+  @override
+  set editQuoteCommentResponse(ApiResponse<QuoteCommentResModel> value) {
+    _$editQuoteCommentResponseAtom
+        .reportWrite(value, super.editQuoteCommentResponse, () {
+      super.editQuoteCommentResponse = value;
+    });
+  }
+
   late final _$detailLoadingAtom =
       Atom(name: 'SiteViewModelBase.detailLoading', context: context);
 
@@ -382,6 +466,22 @@ mixin _$SiteViewModel on SiteViewModelBase, Store {
   set selectedExpiryDate(DateTime? value) {
     _$selectedExpiryDateAtom.reportWrite(value, super.selectedExpiryDate, () {
       super.selectedExpiryDate = value;
+    });
+  }
+
+  late final _$loadinIndexCommentAtom =
+      Atom(name: 'SiteViewModelBase.loadinIndexComment', context: context);
+
+  @override
+  int? get loadinIndexComment {
+    _$loadinIndexCommentAtom.reportRead();
+    return super.loadinIndexComment;
+  }
+
+  @override
+  set loadinIndexComment(int? value) {
+    _$loadinIndexCommentAtom.reportWrite(value, super.loadinIndexComment, () {
+      super.loadinIndexComment = value;
     });
   }
 
@@ -599,6 +699,58 @@ mixin _$SiteViewModel on SiteViewModelBase, Store {
         .run(() => super.getNumberOfClientsApi(context: context));
   }
 
+  late final _$jobCardApiAsyncAction =
+      AsyncAction('SiteViewModelBase.jobCardApi', context: context);
+
+  @override
+  Future<void> jobCardApi({required int id}) {
+    return _$jobCardApiAsyncAction.run(() => super.jobCardApi(id: id));
+  }
+
+  late final _$getQuoteCommentsAsyncAction =
+      AsyncAction('SiteViewModelBase.getQuoteComments', context: context);
+
+  @override
+  Future<void> getQuoteComments(int? id, {int? page}) {
+    return _$getQuoteCommentsAsyncAction
+        .run(() => super.getQuoteComments(id, page: page));
+  }
+
+  late final _$addQuoteCommentApiAsyncAction =
+      AsyncAction('SiteViewModelBase.addQuoteCommentApi', context: context);
+
+  @override
+  Future<void> addQuoteCommentApi(
+      {required BuildContext context,
+      required String comment,
+      required int quoteId}) {
+    return _$addQuoteCommentApiAsyncAction.run(() => super.addQuoteCommentApi(
+        context: context, comment: comment, quoteId: quoteId));
+  }
+
+  late final _$deleteQuoteCommentApiAsyncAction =
+      AsyncAction('SiteViewModelBase.deleteQuoteCommentApi', context: context);
+
+  @override
+  Future<void> deleteQuoteCommentApi(
+      {required BuildContext context, required int id, required int quoteId}) {
+    return _$deleteQuoteCommentApiAsyncAction.run(() => super
+        .deleteQuoteCommentApi(context: context, id: id, quoteId: quoteId));
+  }
+
+  late final _$editQuoteCommentApiAsyncAction =
+      AsyncAction('SiteViewModelBase.editQuoteCommentApi', context: context);
+
+  @override
+  Future<void> editQuoteCommentApi(
+      {required BuildContext context,
+      required int id,
+      required int quoteId,
+      required String comment}) {
+    return _$editQuoteCommentApiAsyncAction.run(() => super.editQuoteCommentApi(
+        context: context, id: id, quoteId: quoteId, comment: comment));
+  }
+
   late final _$SiteViewModelBaseActionController =
       ActionController(name: 'SiteViewModelBase', context: context);
 
@@ -631,6 +783,11 @@ addSiteFileResponse: ${addSiteFileResponse},
 editSiteFileResponse: ${editSiteFileResponse},
 expiryFileResponse: ${expiryFileResponse},
 numberOfClientsResponse: ${numberOfClientsResponse},
+jobCardResponse: ${jobCardResponse},
+quoteCommentResponse: ${quoteCommentResponse},
+addQuoteCommentResponse: ${addQuoteCommentResponse},
+deleteQuoteCommentResponse: ${deleteQuoteCommentResponse},
+editQuoteCommentResponse: ${editQuoteCommentResponse},
 detailLoading: ${detailLoading},
 selectedWasteTypeModel: ${selectedWasteTypeModel},
 searchType: ${searchType},
@@ -640,7 +797,8 @@ selectedFilePath: ${selectedFilePath},
 loadinIndexFolder: ${loadinIndexFolder},
 loadinIndexFile: ${loadinIndexFile},
 parentFolderId: ${parentFolderId},
-selectedExpiryDate: ${selectedExpiryDate}
+selectedExpiryDate: ${selectedExpiryDate},
+loadinIndexComment: ${loadinIndexComment}
     ''';
   }
 }

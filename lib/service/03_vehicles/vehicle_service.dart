@@ -68,7 +68,8 @@ abstract class IVehicleService {
   Future<Either<Map<MainFailure, dynamic>, FolderListModel>> expiryDateFiles(
       {required int fileId,
       required String expiry,
-      bool fromMaintenance = false,bool fromVehicleFolder = false});
+      bool fromMaintenance = false,
+      bool fromVehicleFolder = false});
   Future<Either<Map<MainFailure, dynamic>, FolderListModel>>
       folderSearchVehicle({required Map<String, String> data});
   Future<Either<Map<MainFailure, dynamic>, FolderListModel>>

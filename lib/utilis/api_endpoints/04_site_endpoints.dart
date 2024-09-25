@@ -40,4 +40,8 @@ mixin class SiteEndpoint {
   final String wasteTypeInSite = '/api/v1/clients/childs/available/';
 
   final String numberOfClients = '/api/v1/clients/no-of-clients/waste/';
+
+  final String jobCard = '/api/v1/jobs/client/jobcard/';
+
+  final String quoteComments = '/api/v1/sales/comment/quote/';
 }

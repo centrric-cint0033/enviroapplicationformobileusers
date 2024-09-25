@@ -110,7 +110,8 @@ class SalesService implements IScheduleService {
     var response = await getIt<HttpService>().request(
         authenticated: true,
         method: HttpMethod.get,
-        apiUrl: "${ApiEndPoints.endpointshedulecard}?page=${page ?? 1}&limit=10");
+        apiUrl:
+            "${ApiEndPoints.endpointshedulecard}?page=${page ?? 1}&limit=10");
 
     return response.fold(
       (l) {

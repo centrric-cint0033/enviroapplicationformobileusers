@@ -20,6 +20,7 @@ JobCardKeys _$JobCardKeysFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$JobCardKeys {
+  int? get id => throw _privateConstructorUsedError;
   @JsonKey(name: 'site_address')
   String? get siteAddress => throw _privateConstructorUsedError;
   String? get capacity => throw _privateConstructorUsedError;
@@ -37,7 +38,9 @@ abstract class $JobCardKeysCopyWith<$Res> {
       _$JobCardKeysCopyWithImpl<$Res, JobCardKeys>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'site_address') String? siteAddress, String? capacity});
+      {int? id,
+      @JsonKey(name: 'site_address') String? siteAddress,
+      String? capacity});
 }
 
 /// @nodoc
@@ -53,10 +56,15 @@ class _$JobCardKeysCopyWithImpl<$Res, $Val extends JobCardKeys>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = freezed,
     Object? siteAddress = freezed,
     Object? capacity = freezed,
   }) {
     return _then(_value.copyWith(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
       siteAddress: freezed == siteAddress
           ? _value.siteAddress
           : siteAddress // ignore: cast_nullable_to_non_nullable
@@ -78,7 +86,9 @@ abstract class _$$JobCardKeysImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'site_address') String? siteAddress, String? capacity});
+      {int? id,
+      @JsonKey(name: 'site_address') String? siteAddress,
+      String? capacity});
 }
 
 /// @nodoc
@@ -92,10 +102,15 @@ class __$$JobCardKeysImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = freezed,
     Object? siteAddress = freezed,
     Object? capacity = freezed,
   }) {
     return _then(_$JobCardKeysImpl(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
       siteAddress: freezed == siteAddress
           ? _value.siteAddress
           : siteAddress // ignore: cast_nullable_to_non_nullable
@@ -112,11 +127,15 @@ class __$$JobCardKeysImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$JobCardKeysImpl implements _JobCardKeys {
   _$JobCardKeysImpl(
-      {@JsonKey(name: 'site_address') this.siteAddress, this.capacity});
+      {this.id,
+      @JsonKey(name: 'site_address') this.siteAddress,
+      this.capacity});
 
   factory _$JobCardKeysImpl.fromJson(Map<String, dynamic> json) =>
       _$$JobCardKeysImplFromJson(json);
 
+  @override
+  final int? id;
   @override
   @JsonKey(name: 'site_address')
   final String? siteAddress;
@@ -125,7 +144,7 @@ class _$JobCardKeysImpl implements _JobCardKeys {
 
   @override
   String toString() {
-    return 'JobCardKeys(siteAddress: $siteAddress, capacity: $capacity)';
+    return 'JobCardKeys(id: $id, siteAddress: $siteAddress, capacity: $capacity)';
   }
 
   @override
@@ -133,6 +152,7 @@ class _$JobCardKeysImpl implements _JobCardKeys {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$JobCardKeysImpl &&
+            (identical(other.id, id) || other.id == id) &&
             (identical(other.siteAddress, siteAddress) ||
                 other.siteAddress == siteAddress) &&
             (identical(other.capacity, capacity) ||
@@ -141,7 +161,7 @@ class _$JobCardKeysImpl implements _JobCardKeys {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, siteAddress, capacity);
+  int get hashCode => Object.hash(runtimeType, id, siteAddress, capacity);
 
   @JsonKey(ignore: true)
   @override
@@ -159,12 +179,15 @@ class _$JobCardKeysImpl implements _JobCardKeys {
 
 abstract class _JobCardKeys implements JobCardKeys {
   factory _JobCardKeys(
-      {@JsonKey(name: 'site_address') final String? siteAddress,
+      {final int? id,
+      @JsonKey(name: 'site_address') final String? siteAddress,
       final String? capacity}) = _$JobCardKeysImpl;
 
   factory _JobCardKeys.fromJson(Map<String, dynamic> json) =
       _$JobCardKeysImpl.fromJson;
 
+  @override
+  int? get id;
   @override
   @JsonKey(name: 'site_address')
   String? get siteAddress;

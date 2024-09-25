@@ -8,6 +8,7 @@ part 'job_card_keys.g.dart';
 @freezed
 class JobCardKeys with _$JobCardKeys {
   factory JobCardKeys({
+    int? id,
     @JsonKey(name: 'site_address') String? siteAddress,
     String? capacity,
   }) = _JobCardKeys;

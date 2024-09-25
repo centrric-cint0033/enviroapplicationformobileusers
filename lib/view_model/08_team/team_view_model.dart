@@ -174,6 +174,8 @@ abstract class TeamViewModelBase with Store {
   TextEditingController textAddTeamEmergencyContactNumberController =
       TextEditingController();
   TextEditingController textAddTeamPasswordController = TextEditingController();
+  TextEditingController textEditTeamPasswordController =
+      TextEditingController();
   TextEditingController currentEmployeeSearchCntrlr = TextEditingController();
   TextEditingController terminatedEmployeeSearchCntrlr =
       TextEditingController();
@@ -955,6 +957,7 @@ abstract class TeamViewModelBase with Store {
     selectedLicenceAlertDate = null;
     textAddTeamPasswordController.clear();
     vmTeam.profileImage = null;
+    vmTeam.textEditTeamPasswordController.clear();
   }
 
   @observable

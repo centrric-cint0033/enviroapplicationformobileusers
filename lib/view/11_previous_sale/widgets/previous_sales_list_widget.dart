@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:enviro_mobile_application/Routepage/approutes.gr.dart';
+import 'package:enviro_mobile_application/view_model/10_site/site_view_model.dart';
 import 'package:enviro_mobile_application/widgets/empty_data_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
@@ -13,7 +14,6 @@ import '../../../model/11_previous_sale/previous_sale_res_model/previous_sale_re
 
 class PreviousSalesListWidget extends StatelessWidget {
   const PreviousSalesListWidget({super.key});
-
   @override
   Widget build(BuildContext context) {
     return Observer(
@@ -37,7 +37,10 @@ class PreviousSalesListWidget extends StatelessWidget {
                                   ? const CupertinoActivityIndicator()
                                   : const SizedBox.shrink()
                               : InkWell(
-                                  onTap: () {
+                                  onTap: () async {
+                                    vmSite.jobCardApi(
+                                        id: previousSale[index].id ?? 0);
+                                        vmSite.getQuoteComments(int.parse("${previousSale[index].quote}"));
                                     context.router.push(PreviousJobetailRoute(
                                         data: previousSale[index]));
                                   },

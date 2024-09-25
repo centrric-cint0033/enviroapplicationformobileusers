@@ -60,10 +60,10 @@ class PreviousSaleResModel with _$PreviousSaleResModel {
 
 @freezed
 class JobCardKeys with _$JobCardKeys {
-  factory JobCardKeys({
-    @JsonKey(name: 'site_address') String? siteAddress,
-    String? capacity,
-  }) = _JobCardKeys;
+  factory JobCardKeys(
+      {@JsonKey(name: 'site_address') String? siteAddress,
+      String? capacity,
+      int? id}) = _JobCardKeys;
 
   factory JobCardKeys.fromJson(Map<String, dynamic> json) =>
       _$JobCardKeysFromJson(json);

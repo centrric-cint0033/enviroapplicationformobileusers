@@ -458,12 +458,11 @@ abstract class SalesViewModelBase with Store {
       },
       (r) {
         list[index] = list[index].copyWith(
-          quoteFile: r.quoteFile,
-          receivedFile: r.receivedFile,
-          attachedFiles: r.attachedFiles,
-          templateResponse: r.templateResponse,
-          team: r.team
-        );
+            quoteFile: r.quoteFile,
+            receivedFile: r.receivedFile,
+            attachedFiles: r.attachedFiles,
+            templateResponse: r.templateResponse,
+            team: r.team);
         saleDetailResponse = saleDetailResponse.copyWith(
           loading: false,
           data: list[index],
@@ -488,12 +487,11 @@ abstract class SalesViewModelBase with Store {
       },
       (r) {
         list[index] = list[index].copyWith(
-          quoteFile: r.quoteFile,
-          receivedFile: r.receivedFile,
-          attachedFiles: r.attachedFiles,
-          templateResponse: r.templateResponse,
-               team: r.team
-        );
+            quoteFile: r.quoteFile,
+            receivedFile: r.receivedFile,
+            attachedFiles: r.attachedFiles,
+            templateResponse: r.templateResponse,
+            team: r.team);
         saleDetailResponse = saleDetailResponse.copyWith(
           loading: false,
           data: list[index],

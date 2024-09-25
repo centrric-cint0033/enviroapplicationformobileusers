@@ -34,23 +34,27 @@ class TerminatedEmployeeTab extends StatelessWidget {
       sized0hx05,
       Observer(builder: (_) {
         final res = vmTeam.terminatedEmployeeResponse;
-              List<TeamResModel> terminatedEmployees = res.data?.toList() ?? [];
+        List<TeamResModel> terminatedEmployees = res.data?.toList() ?? [];
         return Expanded(
             child: WWResponseHandler(
                 data: res,
                 isEmpty:
                     vmTeam.terminatedEmployeeResponse.data?.isEmpty ?? true,
                 onTap: () => vmTeam.getTerminatedEmployee(),
-                child: TerminatedEmployeeListWidget(loading: res.loading,terminatedEmployees: terminatedEmployees,)));
+                child: TerminatedEmployeeListWidget(
+                  loading: res.loading,
+                  terminatedEmployees: terminatedEmployees,
+                )));
       }),
     ]));
   }
 }
 
 class TerminatedEmployeeListWidget extends StatelessWidget {
-  const TerminatedEmployeeListWidget({super.key, required this.loading, required this.terminatedEmployees});
+  const TerminatedEmployeeListWidget(
+      {super.key, required this.loading, required this.terminatedEmployees});
   final bool loading;
-    final List<TeamResModel> terminatedEmployees;
+  final List<TeamResModel> terminatedEmployees;
   @override
   Widget build(BuildContext context) {
     return ListView.separated(
@@ -62,19 +66,14 @@ class TerminatedEmployeeListWidget extends StatelessWidget {
               ? vmTeam.terminatedEmployeeResponse.paginationLoading
                   ? const CupertinoActivityIndicator()
                   : const SizedBox.shrink()
-              : listTile(context,
-                  data: terminatedEmployees[index],
-                  onTap: () {
+              : listTile(context, data: terminatedEmployees[index], onTap: () {
                   vmTeam.getTeamProfileEmployeeDetails(
-                      employeeID:
-                          terminatedEmployees[index].id ??
-                              0);
+                      employeeID: terminatedEmployees[index].id ?? 0);
                   vmTeam.getTeamFolders(
-                      id: terminatedEmployees[index].id ??
-                          0,
+                      id: terminatedEmployees[index].id ?? 0,
                       parentFolderId: 1);
-                  context.router.push(TeamProfileRoute(
-                      id: terminatedEmployees[index].id));
+                  context.router.push(
+                      TeamProfileRoute(id: terminatedEmployees[index].id));
                 });
         });
   }

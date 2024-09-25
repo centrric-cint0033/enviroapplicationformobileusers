@@ -51,7 +51,7 @@ Drawer cmnDrawer(BuildContext context) {
                           // child: vmProfile.profilepageResponse.data?.dp != null
                           //     ? Image.network(
                           //         vmProfile.profilepageResponse.data!.dp!,
-                          //         fit: BoxFit.cover, 
+                          //         fit: BoxFit.cover,
                           //       )
                           //     : Container(),
                         );

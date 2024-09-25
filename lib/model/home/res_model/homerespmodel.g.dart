@@ -69,7 +69,7 @@ _$PermissionImpl _$$PermissionImplFromJson(Map<String, dynamic> json) =>
       hills: json['hills'] as bool?,
       destruction: json['destruction'] as bool?,
       profile_edit: json['profile_edit'] as bool?,
-      editPreinspection: json['editPreinspection'] as bool?,
+      edit_preinspection: json['edit_preinspection'] as bool?,
     );
 
 Map<String, dynamic> _$$PermissionImplToJson(_$PermissionImpl instance) =>
@@ -83,5 +83,5 @@ Map<String, dynamic> _$$PermissionImplToJson(_$PermissionImpl instance) =>
       'hills': instance.hills,
       'destruction': instance.destruction,
       'profile_edit': instance.profile_edit,
-      'editPreinspection': instance.editPreinspection,
+      'edit_preinspection': instance.edit_preinspection,
     };

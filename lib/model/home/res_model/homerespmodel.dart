@@ -36,7 +36,7 @@ class Permission with _$Permission {
     bool? hills,
     bool? destruction,
     bool? profile_edit,
-    bool? editPreinspection,
+    bool? edit_preinspection,
   }) = _Permission;
 
   factory Permission.fromJson(Map<String, dynamic> json) =>

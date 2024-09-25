@@ -27,7 +27,6 @@ class ScheduleList extends StatelessWidget {
             horizontal: 2,
           ),
           physics: const NeverScrollableScrollPhysics(),
-        
           separatorBuilder: (context, index) => sized0hx20,
           shrinkWrap: true,
           itemCount: scheduleJobs.length + 1,

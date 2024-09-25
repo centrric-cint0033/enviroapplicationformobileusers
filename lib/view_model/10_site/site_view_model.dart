@@ -1,5 +1,7 @@
 import 'dart:async';
+import 'package:enviro_mobile_application/model/10_site/job_card_res_model.dart/job_card_model/job_card_models.dart';
 import 'package:enviro_mobile_application/model/10_site/number_of_clients_res_model/number_of_clients_res_model.dart';
+import 'package:enviro_mobile_application/model/10_site/quote_comment_res_model/quote_comment_res_model/quote_comment_res_model.dart';
 import 'package:enviro_mobile_application/widgets/ww_popup_error.dart';
 import 'package:intl/intl.dart';
 import 'package:mobx/mobx.dart';
@@ -75,6 +77,20 @@ abstract class SiteViewModelBase with Store {
   ApiResponse<NumberOfClientsResModel> numberOfClientsResponse =
       ApiResponse<NumberOfClientsResModel>();
 
+  @observable
+  ApiResponse<JobCardModels> jobCardResponse = ApiResponse<JobCardModels>();
+
+  @observable
+  ApiResponse<List<QuoteCommentResModel>> quoteCommentResponse =
+      ApiResponse<List<QuoteCommentResModel>>();
+  @observable
+  ApiResponse<QuoteCommentResModel> addQuoteCommentResponse =
+      ApiResponse<QuoteCommentResModel>();
+  @observable
+  ApiResponse deleteQuoteCommentResponse = ApiResponse();
+  @observable
+  ApiResponse<QuoteCommentResModel> editQuoteCommentResponse =
+      ApiResponse<QuoteCommentResModel>();
   Timer? debouce;
 
   void onTextChanged(Function() function) {
@@ -102,6 +118,8 @@ abstract class SiteViewModelBase with Store {
   TextEditingController textFolderAddController = TextEditingController();
   TextEditingController textFolderEditController = TextEditingController();
   TextEditingController fileFolderSearchCntrlr = TextEditingController();
+  final TextEditingController commentController = TextEditingController();
+  final TextEditingController editCommentController = TextEditingController();
 
   @observable
   List<String> folderNames = [];
@@ -123,6 +141,9 @@ abstract class SiteViewModelBase with Store {
 
   @observable
   DateTime? selectedExpiryDate;
+
+  @observable
+  int? loadinIndexComment = 0;
 
   @action
   Future<void> getPermanentSites({int? page}) async {
@@ -740,6 +761,164 @@ abstract class SiteViewModelBase with Store {
           error: null,
           loading: false,
         );
+      },
+    );
+  }
+
+  @action
+  Future<void> jobCardApi({required int id}) async {
+    jobCardResponse = jobCardResponse.copyWith(
+      error: null,
+      loading: true,
+    );
+    final response = await siteService.jobCardApi(id: id);
+    response.fold(
+      (l) {
+        jobCardResponse = jobCardResponse.copyWith(errors: l, loading: false);
+      },
+      (res) {
+        jobCardResponse = jobCardResponse.copyWith(
+          data: res,
+          error: null,
+          loading: false,
+        );
+      },
+    );
+  }
+
+  @action
+  Future<void> getQuoteComments(int? id, {int? page}) async {
+    quoteCommentResponse = quoteCommentResponse.copyWith(
+      error: null,
+      paginationLoading: page != null,
+      loading: quoteCommentResponse.data == null,
+      // loading: true
+    );
+
+    final response = await siteService.getQuoteComments(id: id ?? 0);
+
+    response.fold(
+      (l) {
+        quoteCommentResponse = quoteCommentResponse.copyWith(
+            errors: l, loading: false, paginationLoading: false);
+      },
+      (res) {
+        List<QuoteCommentResModel> sites =
+            quoteCommentResponse.data?.toList() ?? [];
+        if (page == null) {
+          sites = res;
+        } else {
+          sites.addAll(res);
+        }
+
+        quoteCommentResponse = quoteCommentResponse.copyWith(
+          data: sites,
+          error: null,
+          loading: false,
+          pageNo: page ?? 1,
+          paginationLoading: false,
+          pagination: res.length == 10,
+        );
+      },
+    );
+  }
+
+  @action
+  Future<void> addQuoteCommentApi({
+    required BuildContext context,
+    required String comment,
+    required int quoteId,
+  }) async {
+    addQuoteCommentResponse =
+        addQuoteCommentResponse.copyWith(errors: null, loading: true);
+    quoteCommentResponse =
+        quoteCommentResponse.copyWith(errors: null, loading: true);
+    final result =
+        await siteService.addQuoteComments(comment: comment, quoteId: quoteId);
+    return result.fold(
+      (l) {
+        addQuoteCommentResponse = addQuoteCommentResponse.copyWith(
+          errors: l,
+          loading: false,
+        );
+        quoteCommentResponse = quoteCommentResponse.copyWith(
+          errors: l,
+          loading: false,
+        );
+        popupErrorData(context, mainFailure: l);
+      },
+      (r) {
+        addQuoteCommentResponse = addQuoteCommentResponse.copyWith(
+          data: r,
+          errors: null,
+          loading: false,
+        );
+        quoteCommentResponse = quoteCommentResponse.copyWith(
+          errors: null,
+          loading: false,
+        );
+        getQuoteComments(quoteId);
+        commentController.clear();
+      },
+    );
+  }
+
+  @action
+  Future<void> deleteQuoteCommentApi({
+    required BuildContext context,
+    required int id,
+    required int quoteId,
+  }) async {
+    deleteQuoteCommentResponse =
+        deleteQuoteCommentResponse.copyWith(errors: null, loading: true);
+    final result = await siteService.deleteQuoteComments(id: id);
+    return result.fold(
+      (l) {
+        deleteQuoteCommentResponse = deleteQuoteCommentResponse.copyWith(
+          errors: l,
+          loading: false,
+        );
+        popupErrorData(context, mainFailure: l);
+      },
+      (r) {
+        deleteQuoteCommentResponse = deleteQuoteCommentResponse.copyWith(
+          data: r,
+          errors: null,
+          loading: false,
+        );
+        getQuoteComments(quoteId);
+        commentController.clear();
+      },
+    );
+  }
+
+  @action
+  Future<void> editQuoteCommentApi({
+    required BuildContext context,
+    required int id,
+    required int quoteId,
+    required String comment,
+  }) async {
+    editQuoteCommentResponse =
+        editQuoteCommentResponse.copyWith(errors: null, loading: true);
+    final result = await siteService.editQuoteComments(
+        id: id, quoteId: quoteId, comment: comment);
+    return result.fold(
+      (l) {
+        editQuoteCommentResponse = editQuoteCommentResponse.copyWith(
+          errors: l,
+          loading: false,
+        );
+        popupErrorData(context, mainFailure: l);
+      },
+      (r) {
+        editQuoteCommentResponse = editQuoteCommentResponse.copyWith(
+          data: r,
+          errors: null,
+          loading: false,
+        );
+        getQuoteComments(quoteId);
+        editCommentController.clear();
       },
     );
   }

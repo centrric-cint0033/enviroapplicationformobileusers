@@ -47,25 +47,28 @@ class TeamEditPage extends StatelessWidget {
                 CommonTeamProfileTile(employeeDetatils: employeeDetatils),
                 sized0hx05,
                 listEditData(context, employeeDetatils),
-                sized0hx05,
-                Observer(builder: (context) {
-                  final res = vmTeam.editTeamResponse;
-                  return CmButton(
-                    width: double.infinity,
-                    height: 45,
-                    text: 'EDIT',
-                    loading: res.loading,
-                    onPressed: () {
-                      cmOnpressedFnCreateTeam(context, employeeDetatils);
-                    },
-                  );
-                }),
+                sized0hx30,
+                sized0hx30,
+                sized0hx30,
                 // cmElevatedButton(() {
                 //   cmOnpressedFnCreateTeam(context, employeeDetatils);
                 // }, Appthemes.cPrimary, "EDIT"),
                 // sized0hx30,
               ]))),
         ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+        floatingActionButton: Observer(builder: (context) {
+          final res = vmTeam.editTeamResponse;
+          return CmButton(
+            width: 250.w,
+            height: 40.w,
+            text: 'EDIT',
+            loading: res.loading,
+            onPressed: () {
+              cmOnpressedFnCreateTeam(context, employeeDetatils);
+            },
+          );
+        }),
       ),
     );
   }
@@ -122,6 +125,27 @@ class TeamEditPage extends StatelessWidget {
             cmTextFormField(
                 controller:
                     vmTeam.textEditTeamEmergencyContactNumberController)),
+        expandedRowShowWidget('Password', Observer(builder: (context) {
+          return cmTextFormField(
+              obscureText: !vmTeam.passObscure,
+              controller: vmTeam.textEditTeamPasswordController,
+              suffix: InkWell(
+                  onTap: () {
+                    vmTeam.passObscure = !vmTeam.passObscure;
+                  },
+                  child: Icon(
+                    vmTeam.passObscure == false
+                        ? Icons.visibility_off
+                        : Icons.visibility,
+                    size: 16.sp,
+                  )),
+              validator: (value) {
+                if (value!.isEmpty) {
+                  return "Password is required";
+                }
+                return null;
+              });
+        })),
       ],
     );
   }
@@ -144,7 +168,8 @@ class TeamEditPage extends StatelessWidget {
             emergency_contact:
                 vmTeam.textEditTeamEmergencyContactNumberController.text,
             emergency_contact_name:
-                vmTeam.textEditTeamEmergencyContactController.text),
+                vmTeam.textEditTeamEmergencyContactController.text,
+            password: vmTeam.textEditTeamPasswordController.text),
         context: context);
   }
 }

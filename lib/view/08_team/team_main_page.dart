@@ -18,7 +18,7 @@ class TeamPage extends StatelessWidget {
   const TeamPage({super.key});
   @override
   Widget build(BuildContext context) {
-        WidgetsBinding.instance.addPostFrameCallback(
+    WidgetsBinding.instance.addPostFrameCallback(
       (timeStamp) {
         vmTeam.currentEmployeePagination();
       },

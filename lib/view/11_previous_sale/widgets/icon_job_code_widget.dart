@@ -29,7 +29,7 @@ class IconJobCodeWidget extends StatelessWidget {
                     ),
               ),
               TextSpan(
-                text: data.jobCardCode ?? "",
+                text: "${data.id ?? ""}",
                 style: Theme.of(context).textTheme.titleSmall?.copyWith(
                       fontSize: 9.sp,
                       color: Colors.red,

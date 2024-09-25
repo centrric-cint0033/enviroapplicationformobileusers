@@ -559,7 +559,7 @@ mixin _$Permission {
   bool? get hills => throw _privateConstructorUsedError;
   bool? get destruction => throw _privateConstructorUsedError;
   bool? get profile_edit => throw _privateConstructorUsedError;
-  bool? get editPreinspection => throw _privateConstructorUsedError;
+  bool? get edit_preinspection => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -583,7 +583,7 @@ abstract class $PermissionCopyWith<$Res> {
       bool? hills,
       bool? destruction,
       bool? profile_edit,
-      bool? editPreinspection});
+      bool? edit_preinspection});
 }
 
 /// @nodoc
@@ -608,7 +608,7 @@ class _$PermissionCopyWithImpl<$Res, $Val extends Permission>
     Object? hills = freezed,
     Object? destruction = freezed,
     Object? profile_edit = freezed,
-    Object? editPreinspection = freezed,
+    Object? edit_preinspection = freezed,
   }) {
     return _then(_value.copyWith(
       edit: freezed == edit
@@ -647,9 +647,9 @@ class _$PermissionCopyWithImpl<$Res, $Val extends Permission>
           ? _value.profile_edit
           : profile_edit // ignore: cast_nullable_to_non_nullable
               as bool?,
-      editPreinspection: freezed == editPreinspection
-          ? _value.editPreinspection
-          : editPreinspection // ignore: cast_nullable_to_non_nullable
+      edit_preinspection: freezed == edit_preinspection
+          ? _value.edit_preinspection
+          : edit_preinspection // ignore: cast_nullable_to_non_nullable
               as bool?,
     ) as $Val);
   }
@@ -673,7 +673,7 @@ abstract class _$$PermissionImplCopyWith<$Res>
       bool? hills,
       bool? destruction,
       bool? profile_edit,
-      bool? editPreinspection});
+      bool? edit_preinspection});
 }
 
 /// @nodoc
@@ -696,7 +696,7 @@ class __$$PermissionImplCopyWithImpl<$Res>
     Object? hills = freezed,
     Object? destruction = freezed,
     Object? profile_edit = freezed,
-    Object? editPreinspection = freezed,
+    Object? edit_preinspection = freezed,
   }) {
     return _then(_$PermissionImpl(
       edit: freezed == edit
@@ -735,9 +735,9 @@ class __$$PermissionImplCopyWithImpl<$Res>
           ? _value.profile_edit
           : profile_edit // ignore: cast_nullable_to_non_nullable
               as bool?,
-      editPreinspection: freezed == editPreinspection
-          ? _value.editPreinspection
-          : editPreinspection // ignore: cast_nullable_to_non_nullable
+      edit_preinspection: freezed == edit_preinspection
+          ? _value.edit_preinspection
+          : edit_preinspection // ignore: cast_nullable_to_non_nullable
               as bool?,
     ));
   }
@@ -756,7 +756,7 @@ class _$PermissionImpl implements _Permission {
       this.hills,
       this.destruction,
       this.profile_edit,
-      this.editPreinspection});
+      this.edit_preinspection});
 
   factory _$PermissionImpl.fromJson(Map<String, dynamic> json) =>
       _$$PermissionImplFromJson(json);
@@ -780,11 +780,11 @@ class _$PermissionImpl implements _Permission {
   @override
   final bool? profile_edit;
   @override
-  final bool? editPreinspection;
+  final bool? edit_preinspection;
 
   @override
   String toString() {
-    return 'Permission(edit: $edit, add: $add, delete: $delete, view: $view, waste: $waste, pumps: $pumps, hills: $hills, destruction: $destruction, profile_edit: $profile_edit, editPreinspection: $editPreinspection)';
+    return 'Permission(edit: $edit, add: $add, delete: $delete, view: $view, waste: $waste, pumps: $pumps, hills: $hills, destruction: $destruction, profile_edit: $profile_edit, edit_preinspection: $edit_preinspection)';
   }
 
   @override
@@ -803,14 +803,14 @@ class _$PermissionImpl implements _Permission {
                 other.destruction == destruction) &&
             (identical(other.profile_edit, profile_edit) ||
                 other.profile_edit == profile_edit) &&
-            (identical(other.editPreinspection, editPreinspection) ||
-                other.editPreinspection == editPreinspection));
+            (identical(other.edit_preinspection, edit_preinspection) ||
+                other.edit_preinspection == edit_preinspection));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, edit, add, delete, view, waste,
-      pumps, hills, destruction, profile_edit, editPreinspection);
+      pumps, hills, destruction, profile_edit, edit_preinspection);
 
   @JsonKey(ignore: true)
   @override
@@ -837,7 +837,7 @@ abstract class _Permission implements Permission {
       final bool? hills,
       final bool? destruction,
       final bool? profile_edit,
-      final bool? editPreinspection}) = _$PermissionImpl;
+      final bool? edit_preinspection}) = _$PermissionImpl;
 
   factory _Permission.fromJson(Map<String, dynamic> json) =
       _$PermissionImpl.fromJson;
@@ -861,7 +861,7 @@ abstract class _Permission implements Permission {
   @override
   bool? get profile_edit;
   @override
-  bool? get editPreinspection;
+  bool? get edit_preinspection;
   @override
   @JsonKey(ignore: true)
   _$$PermissionImplCopyWith<_$PermissionImpl> get copyWith =>

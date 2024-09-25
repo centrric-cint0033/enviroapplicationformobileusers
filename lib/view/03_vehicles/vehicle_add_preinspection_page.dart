@@ -475,7 +475,7 @@ class VehicleAddPreInspectionPage extends StatelessWidget {
                           'Any Faults to report(of any category) & any additional information',
                           style: TextStyle(fontSize: 10.sp),
                         ),
-                       sized0hx05,
+                        sized0hx05,
                         TextField(
                           controller: vmVehicle.faultsReportCntrller,
                           decoration: const InputDecoration(

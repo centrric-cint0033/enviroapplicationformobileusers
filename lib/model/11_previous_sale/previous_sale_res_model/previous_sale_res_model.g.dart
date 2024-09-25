@@ -110,10 +110,12 @@ _$JobCardKeysImpl _$$JobCardKeysImplFromJson(Map<String, dynamic> json) =>
     _$JobCardKeysImpl(
       siteAddress: json['site_address'] as String?,
       capacity: json['capacity'] as String?,
+      id: (json['id'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$$JobCardKeysImplToJson(_$JobCardKeysImpl instance) =>
     <String, dynamic>{
       'site_address': instance.siteAddress,
       'capacity': instance.capacity,
+      'id': instance.id,
     };

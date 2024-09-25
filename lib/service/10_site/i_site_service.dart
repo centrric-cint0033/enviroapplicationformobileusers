@@ -1,5 +1,7 @@
 import 'package:dartz/dartz.dart';
+import 'package:enviro_mobile_application/model/10_site/job_card_res_model.dart/job_card_model/job_card_models.dart';
 import 'package:enviro_mobile_application/model/10_site/number_of_clients_res_model/number_of_clients_res_model.dart';
+import 'package:enviro_mobile_application/model/10_site/quote_comment_res_model/quote_comment_res_model/quote_comment_res_model.dart';
 import 'package:enviro_mobile_application/view_model/10_site/site_view_model.dart';
 
 import '../../utilis/main_failure.dart';
@@ -25,10 +27,7 @@ abstract class ISiteService {
   });
 
   Future<Either<Map<MainFailure, dynamic>, List<SiteResModel>>>
-      searchSitesServiceApi({
-    required String key,
-    required SiteType type
-  });
+      searchSitesServiceApi({required String key, required SiteType type});
 
   Future<Either<Map<MainFailure, dynamic>, List<WasteTypeModel>>>
       getWasteTypeInSites({
@@ -66,4 +65,25 @@ abstract class ISiteService {
 
   Future<Either<Map<MainFailure, dynamic>, NumberOfClientsResModel>>
       getNumberOfClients();
+  Future<Either<Map<MainFailure, dynamic>, JobCardModels>> jobCardApi({
+    required int id,
+  });
+  Future<Either<Map<MainFailure, dynamic>, List<QuoteCommentResModel>>>
+      getQuoteComments({
+    required int id,
+  });
+  Future<Either<Map<MainFailure, dynamic>, QuoteCommentResModel>>
+      addQuoteComments({
+    required String comment,
+    required int quoteId,
+  });
+  Future<Either<Map<MainFailure, dynamic>, dynamic>> deleteQuoteComments({
+    required int id,
+  });
+  Future<Either<Map<MainFailure, dynamic>, QuoteCommentResModel>>
+      editQuoteComments({
+    required int id,
+    required String comment,
+    required int quoteId,
+  });
 }

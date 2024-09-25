@@ -1,6 +1,8 @@
 import 'dart:convert';
+import 'package:enviro_mobile_application/model/10_site/job_card_res_model.dart/job_card_model/job_card_models.dart';
 import 'package:enviro_mobile_application/model/10_site/number_of_clients_res_model/number_of_clients_res_model.dart';
 import 'package:dartz/dartz.dart';
+import 'package:enviro_mobile_application/model/10_site/quote_comment_res_model/quote_comment_res_model/quote_comment_res_model.dart';
 import 'package:enviro_mobile_application/view_model/10_site/site_view_model.dart';
 import 'package:injectable/injectable.dart';
 import 'package:enviro_mobile_application/utilis/main_failure.dart';
@@ -336,6 +338,102 @@ class SiteService implements ISiteService {
         NumberOfClientsResModel numberOfClients =
             NumberOfClientsResModel.fromJson(jsonDecode(res.body));
         return Right(numberOfClients);
+      },
+    );
+  }
+
+  @override
+  Future<Either<Map<MainFailure, dynamic>, JobCardModels>> jobCardApi(
+      {required int id}) async {
+    var response = await getIt<HttpService>().request(
+        method: HttpMethod.get, apiUrl: "${ApiEndPoints().jobCard}$id");
+
+    return response.fold(
+      (l) => Left(l),
+      (res) async {
+        JobCardModels jobCard = JobCardModels.fromJson(jsonDecode(res.body));
+        return Right(jobCard);
+      },
+    );
+  }
+
+  @override
+  Future<Either<Map<MainFailure, dynamic>, List<QuoteCommentResModel>>>
+      getQuoteComments({required int id}) async {
+    var response = await getIt<HttpService>().request(
+      method: HttpMethod.get,
+      apiUrl: "${ApiEndPoints().quoteComments}get/?quote_id=$id",
+    );
+
+    return response.fold(
+      (l) => Left(l),
+      (res) async {
+        var data = jsonDecode(res.body) as List;
+        List<QuoteCommentResModel> quoteComments =
+            data.map((e) => QuoteCommentResModel.fromJson(e)).toList();
+        return Right(quoteComments);
+      },
+    );
+  }
+
+  @override
+  Future<Either<Map<MainFailure, dynamic>, QuoteCommentResModel>>
+      addQuoteComments({
+    required String comment,
+    required int quoteId,
+  }) async {
+    var response = await getIt<HttpService>().multipartRequest(
+      apiUrl: "${ApiEndPoints().quoteComments}add/",
+      data: {"quote": quoteId, "comment": comment},
+      method: "POST",
+    );
+    return response.fold(
+      (l) => Left(l),
+      (res) async {
+        var data = jsonDecode(res.body);
+        QuoteCommentResModel addQuoteComment =
+            QuoteCommentResModel.fromJson(data);
+        return Right(addQuoteComment);
+      },
+    );
+  }
+
+  @override
+  Future<Either<Map<MainFailure, dynamic>, dynamic>> deleteQuoteComments(
+      {required int id}) async {
+    var response = await getIt<HttpService>().multipartRequest(
+      method: "DELETE",
+      apiUrl: "${ApiEndPoints().quoteComments}$id/",
+    );
+    return response.fold(
+      (l) {
+        (l.values.first);
+        return Left(l);
+      },
+      (res) async {
+        return const Right("Success");
+      },
+    );
+  }
+
+  @override
+  Future<Either<Map<MainFailure, dynamic>, QuoteCommentResModel>>
+      editQuoteComments(
+          {required int id,
+          required String comment,
+          required int quoteId}) async {
+    var response = await getIt<HttpService>().multipartRequest(
+      apiUrl: "${ApiEndPoints().quoteComments}$id/",
+      data: {"quote": quoteId, "comment": comment},
+      method: "PUT",
+    );
+    return response.fold(
+      (l) => Left(l),
+      (res) async {
+        var data = jsonDecode(res.body);
+        QuoteCommentResModel editQuoteComment =
+            QuoteCommentResModel.fromJson(data);
+        return Right(editQuoteComment);
       },
     );
   }
