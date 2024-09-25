@@ -144,7 +144,7 @@ class TeamProfileScreen extends StatelessWidget {
                                                         .permissionsResponse
                                                         .data
                                                         ?.team
-                                                        ?.profileEdit ==
+                                                        ?.profile_edit ==
                                                     false)
                                               sized0hx03
                                             else
@@ -183,7 +183,7 @@ class TeamProfileScreen extends StatelessWidget {
                                                           .permissionsResponse
                                                           .data
                                                           ?.team
-                                                          ?.profileEdit ==
+                                                          ?.profile_edit ==
                                                       true)
                                                     SizedBox(
                                                       height: 26.h,

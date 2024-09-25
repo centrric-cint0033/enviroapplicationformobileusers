@@ -35,7 +35,7 @@ class Permission with _$Permission {
     bool? pumps,
     bool? hills,
     bool? destruction,
-    bool? profileEdit,
+    bool? profile_edit,
     bool? editPreinspection,
   }) = _Permission;
 

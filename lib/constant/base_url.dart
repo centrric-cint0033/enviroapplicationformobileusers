@@ -1,5 +1,5 @@
-// const baseUrl = "https://staging-deep.envirowasteadmin.com.au";
-const baseUrl = "https://production-deep.envirowasteadmin.com.au";
+const baseUrl = "https://staging-deep.envirowasteadmin.com.au";
+// const baseUrl = "https://production-deep.envirowasteadmin.com.au";
 // const baseUrl = "http://192.168.29.47:8000";
 
 const passwordErrorMessage =

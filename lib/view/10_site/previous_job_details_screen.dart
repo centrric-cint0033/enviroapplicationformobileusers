@@ -3,6 +3,7 @@ import 'package:enviro_mobile_application/utilis/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/intl.dart';
 
 import '../../widgets/cmn_title_textwidget.dart';
 import '../02_sales/sales_widgets.dart/sales_widget.dart';
@@ -29,7 +30,7 @@ class PreviousJobetailPage extends StatelessWidget {
               sized0hx10,
               expandedRowShowText("Client Name", data.clientName ?? ""),
               sized0hx10,
-              expandedRowShowText("Job Code", data.jobCardCode ?? ""),
+              expandedRowShowText("Job Code", "${data.id ?? ""}"),
               sized0hx10,
               expandedRowShowText(
                   "Job Type", data.jobType != "null" ? data.jobType ?? "" : ""),
@@ -42,8 +43,8 @@ class PreviousJobetailPage extends StatelessWidget {
               sized0hx10,
               expandedRowShowText("Quote No", data.quote?.toString() ?? ""),
               sized0hx10,
-              expandedRowShowText(
-                  "Created Date", data.createdDateTime?.toString() ?? ""),
+              expandedRowShowText("Created Date",
+                  formatDateTime(data.createdDateTime?.toString() ?? "")),
               sized0hx10,
               expandedRowShowText("Paid Status", data.paidStatus ?? ""),
               sized0hx10,
@@ -54,5 +55,12 @@ class PreviousJobetailPage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  String formatDateTime(String? dateTimeString) {
+    if (dateTimeString == null) return '';
+    DateTime parsedDate = DateTime.parse(dateTimeString);
+    String formattedDate = DateFormat('yyyy-MM-dd HH:mm:ss').format(parsedDate);
+    return formattedDate;
   }
 }
