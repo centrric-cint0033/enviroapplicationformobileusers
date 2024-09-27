@@ -38,9 +38,11 @@ class PreviousSalesListWidget extends StatelessWidget {
                                   : const SizedBox.shrink()
                               : InkWell(
                                   onTap: () async {
+                                    vmSite.selectedButtonIndex = 0;
                                     vmSite.jobCardApi(
                                         id: previousSale[index].id ?? 0);
-                                        vmSite.getQuoteComments(int.parse("${previousSale[index].quote}"));
+                                    vmSite.getQuoteComments(int.parse(
+                                        "${previousSale[index].quote}"));
                                     context.router.push(PreviousJobetailRoute(
                                         data: previousSale[index]));
                                   },

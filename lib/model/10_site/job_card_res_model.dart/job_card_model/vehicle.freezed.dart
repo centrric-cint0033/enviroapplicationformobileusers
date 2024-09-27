@@ -23,6 +23,7 @@ mixin _$Vehicle {
   dynamic get id => throw _privateConstructorUsedError;
   dynamic get registration => throw _privateConstructorUsedError;
   dynamic get type => throw _privateConstructorUsedError;
+  dynamic get image => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -34,7 +35,7 @@ abstract class $VehicleCopyWith<$Res> {
   factory $VehicleCopyWith(Vehicle value, $Res Function(Vehicle) then) =
       _$VehicleCopyWithImpl<$Res, Vehicle>;
   @useResult
-  $Res call({dynamic id, dynamic registration, dynamic type});
+  $Res call({dynamic id, dynamic registration, dynamic type, dynamic image});
 }
 
 /// @nodoc
@@ -53,6 +54,7 @@ class _$VehicleCopyWithImpl<$Res, $Val extends Vehicle>
     Object? id = freezed,
     Object? registration = freezed,
     Object? type = freezed,
+    Object? image = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -67,6 +69,10 @@ class _$VehicleCopyWithImpl<$Res, $Val extends Vehicle>
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as dynamic,
+      image: freezed == image
+          ? _value.image
+          : image // ignore: cast_nullable_to_non_nullable
+              as dynamic,
     ) as $Val);
   }
 }
@@ -78,7 +84,7 @@ abstract class _$$VehicleImplCopyWith<$Res> implements $VehicleCopyWith<$Res> {
       __$$VehicleImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({dynamic id, dynamic registration, dynamic type});
+  $Res call({dynamic id, dynamic registration, dynamic type, dynamic image});
 }
 
 /// @nodoc
@@ -95,6 +101,7 @@ class __$$VehicleImplCopyWithImpl<$Res>
     Object? id = freezed,
     Object? registration = freezed,
     Object? type = freezed,
+    Object? image = freezed,
   }) {
     return _then(_$VehicleImpl(
       id: freezed == id
@@ -109,6 +116,10 @@ class __$$VehicleImplCopyWithImpl<$Res>
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as dynamic,
+      image: freezed == image
+          ? _value.image
+          : image // ignore: cast_nullable_to_non_nullable
+              as dynamic,
     ));
   }
 }
@@ -116,7 +127,7 @@ class __$$VehicleImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$VehicleImpl implements _Vehicle {
-  _$VehicleImpl({this.id, this.registration, this.type});
+  _$VehicleImpl({this.id, this.registration, this.type, this.image});
 
   factory _$VehicleImpl.fromJson(Map<String, dynamic> json) =>
       _$$VehicleImplFromJson(json);
@@ -127,10 +138,12 @@ class _$VehicleImpl implements _Vehicle {
   final dynamic registration;
   @override
   final dynamic type;
+  @override
+  final dynamic image;
 
   @override
   String toString() {
-    return 'Vehicle(id: $id, registration: $registration, type: $type)';
+    return 'Vehicle(id: $id, registration: $registration, type: $type, image: $image)';
   }
 
   @override
@@ -141,7 +154,8 @@ class _$VehicleImpl implements _Vehicle {
             const DeepCollectionEquality().equals(other.id, id) &&
             const DeepCollectionEquality()
                 .equals(other.registration, registration) &&
-            const DeepCollectionEquality().equals(other.type, type));
+            const DeepCollectionEquality().equals(other.type, type) &&
+            const DeepCollectionEquality().equals(other.image, image));
   }
 
   @JsonKey(ignore: true)
@@ -150,7 +164,8 @@ class _$VehicleImpl implements _Vehicle {
       runtimeType,
       const DeepCollectionEquality().hash(id),
       const DeepCollectionEquality().hash(registration),
-      const DeepCollectionEquality().hash(type));
+      const DeepCollectionEquality().hash(type),
+      const DeepCollectionEquality().hash(image));
 
   @JsonKey(ignore: true)
   @override
@@ -170,7 +185,8 @@ abstract class _Vehicle implements Vehicle {
   factory _Vehicle(
       {final dynamic id,
       final dynamic registration,
-      final dynamic type}) = _$VehicleImpl;
+      final dynamic type,
+      final dynamic image}) = _$VehicleImpl;
 
   factory _Vehicle.fromJson(Map<String, dynamic> json) = _$VehicleImpl.fromJson;
 
@@ -180,6 +196,8 @@ abstract class _Vehicle implements Vehicle {
   dynamic get registration;
   @override
   dynamic get type;
+  @override
+  dynamic get image;
   @override
   @JsonKey(ignore: true)
   _$$VehicleImplCopyWith<_$VehicleImpl> get copyWith =>

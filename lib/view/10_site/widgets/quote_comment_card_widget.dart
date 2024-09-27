@@ -57,7 +57,7 @@ class QuoteCommentCardWidget extends StatelessWidget {
           padding: EdgeInsets.only(left: 8.w, right: 8.w),
           child: ConstrainedBox(
             constraints:
-                BoxConstraints(minHeight: 10.w), // Allows height to expand
+                BoxConstraints(minHeight: 10.w), 
             child: TextField(
               onChanged: (value) {
                 vmSite.commentController.text = value;

@@ -293,6 +293,6 @@ String jobStatus(String status) {
     case "arrived_at_enviro_facility":
       return "Arrived At Enviro Facility";
     default:
-      return "pending";
+      return "Pending";
   }
 }

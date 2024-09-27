@@ -9,6 +9,7 @@ class Vehicle with _$Vehicle {
     dynamic id,
     dynamic registration,
     dynamic type,
+    dynamic image
   }) = _Vehicle;
 
   factory Vehicle.fromJson(Map<String, dynamic> json) =>

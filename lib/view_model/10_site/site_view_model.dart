@@ -935,4 +935,12 @@ abstract class SiteViewModelBase with Store {
         context: context,
         parentFolderId: int.parse("$parentFolderId"));
   }
+
+  @observable
+  int selectedButtonIndex = 0;
+
+  @action
+  void selectButton(int index) {
+    selectedButtonIndex = index;
+  }
 }

@@ -22,6 +22,7 @@ BeforePic _$BeforePicFromJson(Map<String, dynamic> json) {
 mixin _$BeforePic {
   num? get id => throw _privateConstructorUsedError;
   String? get file => throw _privateConstructorUsedError;
+  String? get image => throw _privateConstructorUsedError;
   @JsonKey(name: 'created_date_time')
   DateTime? get createdDateTime => throw _privateConstructorUsedError;
   @JsonKey(name: 'edited_date_time')
@@ -41,6 +42,7 @@ abstract class $BeforePicCopyWith<$Res> {
   $Res call(
       {num? id,
       String? file,
+      String? image,
       @JsonKey(name: 'created_date_time') DateTime? createdDateTime,
       @JsonKey(name: 'edited_date_time') DateTime? editedDateTime});
 }
@@ -60,6 +62,7 @@ class _$BeforePicCopyWithImpl<$Res, $Val extends BeforePic>
   $Res call({
     Object? id = freezed,
     Object? file = freezed,
+    Object? image = freezed,
     Object? createdDateTime = freezed,
     Object? editedDateTime = freezed,
   }) {
@@ -71,6 +74,10 @@ class _$BeforePicCopyWithImpl<$Res, $Val extends BeforePic>
       file: freezed == file
           ? _value.file
           : file // ignore: cast_nullable_to_non_nullable
+              as String?,
+      image: freezed == image
+          ? _value.image
+          : image // ignore: cast_nullable_to_non_nullable
               as String?,
       createdDateTime: freezed == createdDateTime
           ? _value.createdDateTime
@@ -95,6 +102,7 @@ abstract class _$$BeforePicImplCopyWith<$Res>
   $Res call(
       {num? id,
       String? file,
+      String? image,
       @JsonKey(name: 'created_date_time') DateTime? createdDateTime,
       @JsonKey(name: 'edited_date_time') DateTime? editedDateTime});
 }
@@ -112,6 +120,7 @@ class __$$BeforePicImplCopyWithImpl<$Res>
   $Res call({
     Object? id = freezed,
     Object? file = freezed,
+    Object? image = freezed,
     Object? createdDateTime = freezed,
     Object? editedDateTime = freezed,
   }) {
@@ -123,6 +132,10 @@ class __$$BeforePicImplCopyWithImpl<$Res>
       file: freezed == file
           ? _value.file
           : file // ignore: cast_nullable_to_non_nullable
+              as String?,
+      image: freezed == image
+          ? _value.image
+          : image // ignore: cast_nullable_to_non_nullable
               as String?,
       createdDateTime: freezed == createdDateTime
           ? _value.createdDateTime
@@ -142,6 +155,7 @@ class _$BeforePicImpl implements _BeforePic {
   _$BeforePicImpl(
       {this.id,
       this.file,
+      this.image,
       @JsonKey(name: 'created_date_time') this.createdDateTime,
       @JsonKey(name: 'edited_date_time') this.editedDateTime});
 
@@ -153,6 +167,8 @@ class _$BeforePicImpl implements _BeforePic {
   @override
   final String? file;
   @override
+  final String? image;
+  @override
   @JsonKey(name: 'created_date_time')
   final DateTime? createdDateTime;
   @override
@@ -161,7 +177,7 @@ class _$BeforePicImpl implements _BeforePic {
 
   @override
   String toString() {
-    return 'BeforePic(id: $id, file: $file, createdDateTime: $createdDateTime, editedDateTime: $editedDateTime)';
+    return 'BeforePic(id: $id, file: $file, image: $image, createdDateTime: $createdDateTime, editedDateTime: $editedDateTime)';
   }
 
   @override
@@ -171,6 +187,7 @@ class _$BeforePicImpl implements _BeforePic {
             other is _$BeforePicImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.file, file) || other.file == file) &&
+            (identical(other.image, image) || other.image == image) &&
             (identical(other.createdDateTime, createdDateTime) ||
                 other.createdDateTime == createdDateTime) &&
             (identical(other.editedDateTime, editedDateTime) ||
@@ -179,8 +196,8 @@ class _$BeforePicImpl implements _BeforePic {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, id, file, createdDateTime, editedDateTime);
+  int get hashCode => Object.hash(
+      runtimeType, id, file, image, createdDateTime, editedDateTime);
 
   @JsonKey(ignore: true)
   @override
@@ -200,6 +217,7 @@ abstract class _BeforePic implements BeforePic {
   factory _BeforePic(
           {final num? id,
           final String? file,
+          final String? image,
           @JsonKey(name: 'created_date_time') final DateTime? createdDateTime,
           @JsonKey(name: 'edited_date_time') final DateTime? editedDateTime}) =
       _$BeforePicImpl;
@@ -211,6 +229,8 @@ abstract class _BeforePic implements BeforePic {
   num? get id;
   @override
   String? get file;
+  @override
+  String? get image;
   @override
   @JsonKey(name: 'created_date_time')
   DateTime? get createdDateTime;

@@ -485,6 +485,22 @@ mixin _$SiteViewModel on SiteViewModelBase, Store {
     });
   }
 
+  late final _$selectedButtonIndexAtom =
+      Atom(name: 'SiteViewModelBase.selectedButtonIndex', context: context);
+
+  @override
+  int get selectedButtonIndex {
+    _$selectedButtonIndexAtom.reportRead();
+    return super.selectedButtonIndex;
+  }
+
+  @override
+  set selectedButtonIndex(int value) {
+    _$selectedButtonIndexAtom.reportWrite(value, super.selectedButtonIndex, () {
+      super.selectedButtonIndex = value;
+    });
+  }
+
   late final _$getPermanentSitesAsyncAction =
       AsyncAction('SiteViewModelBase.getPermanentSites', context: context);
 
@@ -768,6 +784,17 @@ mixin _$SiteViewModel on SiteViewModelBase, Store {
   }
 
   @override
+  void selectButton(int index) {
+    final _$actionInfo = _$SiteViewModelBaseActionController.startAction(
+        name: 'SiteViewModelBase.selectButton');
+    try {
+      return super.selectButton(index);
+    } finally {
+      _$SiteViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 permanentSiteResponse: ${permanentSiteResponse},
@@ -798,7 +825,8 @@ loadinIndexFolder: ${loadinIndexFolder},
 loadinIndexFile: ${loadinIndexFile},
 parentFolderId: ${parentFolderId},
 selectedExpiryDate: ${selectedExpiryDate},
-loadinIndexComment: ${loadinIndexComment}
+loadinIndexComment: ${loadinIndexComment},
+selectedButtonIndex: ${selectedButtonIndex}
     ''';
   }
 }

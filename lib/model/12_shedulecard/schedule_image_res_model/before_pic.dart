@@ -8,6 +8,7 @@ class BeforePic with _$BeforePic {
   factory BeforePic({
     num? id,
     String? file,
+    String? image,
     @JsonKey(name: 'created_date_time') DateTime? createdDateTime,
     @JsonKey(name: 'edited_date_time') DateTime? editedDateTime,
   }) = _BeforePic;

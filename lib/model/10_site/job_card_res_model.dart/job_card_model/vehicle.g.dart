@@ -11,6 +11,7 @@ _$VehicleImpl _$$VehicleImplFromJson(Map<String, dynamic> json) =>
       id: json['id'],
       registration: json['registration'],
       type: json['type'],
+      image: json['image'],
     );
 
 Map<String, dynamic> _$$VehicleImplToJson(_$VehicleImpl instance) =>
@@ -18,4 +19,5 @@ Map<String, dynamic> _$$VehicleImplToJson(_$VehicleImpl instance) =>
       'id': instance.id,
       'registration': instance.registration,
       'type': instance.type,
+      'image': instance.image,
     };

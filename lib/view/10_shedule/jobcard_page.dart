@@ -239,11 +239,18 @@ class JobCardPage extends StatelessWidget {
                             ),
                             sized0hx10,
                             if (vmSchedule.jobcardResponse.data?.reoccurring ==
-                                false)
+                                false) ...[
                               Align(
                                 alignment: Alignment.centerLeft,
                                 child: cmTitle("This is NOT a reoccuring Quote",
                                     width: 200.w, blackText: true),
+                              ),
+                            ] else
+                              Align(
+                                alignment: Alignment.centerLeft,
+                                child: cmTitle(
+                                    "This is a reoccuring Quote,with a frequency of ${vmSchedule.jobcardResponse.data?.frequency} weeks",
+                                    blackText: true),
                               ),
                             sized0hx10,
                           ],
