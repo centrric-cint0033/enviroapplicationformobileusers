@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:enviro_mobile_application/model/10_site/job_card_res_model.dart/job_card_model/job_card_models.dart';
 import 'package:enviro_mobile_application/utilis/Appthemes.dart';
 import 'package:enviro_mobile_application/utilis/constant.dart';
@@ -172,17 +174,18 @@ class FlowChartScreen extends StatelessWidget {
       ],
     );
   }
+}
 
-  String formatDateTime(String dateTimeString) {
-    // Parse the string to a DateTime object
-    DateTime dateTime = DateTime.parse(dateTimeString);
+String formatDateTime(String dateTimeString, {bool showTime = true}) {
+  // Parse the string to a DateTime object
+  DateTime dateTime = DateTime.parse(dateTimeString);
 
-    // Define your desired format
-    DateFormat formatter = DateFormat('dd-MM-yy hh:mm a');
+  // Define your desired format
+  DateFormat formatter =
+      showTime ? DateFormat('dd-MM-yy hh:mm a') : DateFormat('dd-MM-yy');
 
-    // Format the DateTime object
-    String formatted = formatter.format(dateTime);
+  // Format the DateTime object
+  String formatted = formatter.format(dateTime);
 
-    return formatted;
-  }
+  return formatted;
 }

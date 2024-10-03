@@ -54,7 +54,7 @@ mixin _$PreviousSaleResModel {
   String? get quoteInvoiceAmount => throw _privateConstructorUsedError;
   @JsonKey(name: 'attached_quote_files')
   dynamic get attachedQuoteFiles => throw _privateConstructorUsedError;
-  dynamic get schedule => throw _privateConstructorUsedError;
+  Schedule? get schedule => throw _privateConstructorUsedError;
   @JsonKey(name: 'tab_type')
   String? get tabType => throw _privateConstructorUsedError;
   String? get frequency => throw _privateConstructorUsedError;
@@ -129,7 +129,7 @@ abstract class $PreviousSaleResModelCopyWith<$Res> {
       @JsonKey(name: 'quote_auto_create') num? quoteAutoCreate,
       @JsonKey(name: 'quote_invoice_amount') String? quoteInvoiceAmount,
       @JsonKey(name: 'attached_quote_files') dynamic attachedQuoteFiles,
-      dynamic schedule,
+      Schedule? schedule,
       @JsonKey(name: 'tab_type') String? tabType,
       String? frequency,
       @JsonKey(name: 'sales_person') String? salesPerson,
@@ -155,6 +155,7 @@ abstract class $PreviousSaleResModelCopyWith<$Res> {
       num? quote,
       @JsonKey(name: 'job_card') dynamic jobCard});
 
+  $ScheduleCopyWith<$Res>? get schedule;
   $JobCardKeysCopyWith<$Res>? get jobCardKeys;
 }
 
@@ -296,7 +297,7 @@ class _$PreviousSaleResModelCopyWithImpl<$Res,
       schedule: freezed == schedule
           ? _value.schedule
           : schedule // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as Schedule?,
       tabType: freezed == tabType
           ? _value.tabType
           : tabType // ignore: cast_nullable_to_non_nullable
@@ -394,6 +395,18 @@ class _$PreviousSaleResModelCopyWithImpl<$Res,
 
   @override
   @pragma('vm:prefer-inline')
+  $ScheduleCopyWith<$Res>? get schedule {
+    if (_value.schedule == null) {
+      return null;
+    }
+
+    return $ScheduleCopyWith<$Res>(_value.schedule!, (value) {
+      return _then(_value.copyWith(schedule: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
   $JobCardKeysCopyWith<$Res>? get jobCardKeys {
     if (_value.jobCardKeys == null) {
       return null;
@@ -433,7 +446,7 @@ abstract class _$$PreviousSaleResModelImplCopyWith<$Res>
       @JsonKey(name: 'quote_auto_create') num? quoteAutoCreate,
       @JsonKey(name: 'quote_invoice_amount') String? quoteInvoiceAmount,
       @JsonKey(name: 'attached_quote_files') dynamic attachedQuoteFiles,
-      dynamic schedule,
+      Schedule? schedule,
       @JsonKey(name: 'tab_type') String? tabType,
       String? frequency,
       @JsonKey(name: 'sales_person') String? salesPerson,
@@ -459,6 +472,8 @@ abstract class _$$PreviousSaleResModelImplCopyWith<$Res>
       num? quote,
       @JsonKey(name: 'job_card') dynamic jobCard});
 
+  @override
+  $ScheduleCopyWith<$Res>? get schedule;
   @override
   $JobCardKeysCopyWith<$Res>? get jobCardKeys;
 }
@@ -598,7 +613,7 @@ class __$$PreviousSaleResModelImplCopyWithImpl<$Res>
       schedule: freezed == schedule
           ? _value.schedule
           : schedule // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as Schedule?,
       tabType: freezed == tabType
           ? _value.tabType
           : tabType // ignore: cast_nullable_to_non_nullable
@@ -801,7 +816,7 @@ class _$PreviousSaleResModelImpl implements _PreviousSaleResModel {
   @JsonKey(name: 'attached_quote_files')
   final dynamic attachedQuoteFiles;
   @override
-  final dynamic schedule;
+  final Schedule? schedule;
   @override
   @JsonKey(name: 'tab_type')
   final String? tabType;
@@ -910,7 +925,8 @@ class _$PreviousSaleResModelImpl implements _PreviousSaleResModel {
                 other.quoteInvoiceAmount == quoteInvoiceAmount) &&
             const DeepCollectionEquality()
                 .equals(other.attachedQuoteFiles, attachedQuoteFiles) &&
-            const DeepCollectionEquality().equals(other.schedule, schedule) &&
+            (identical(other.schedule, schedule) ||
+                other.schedule == schedule) &&
             (identical(other.tabType, tabType) || other.tabType == tabType) &&
             (identical(other.frequency, frequency) ||
                 other.frequency == frequency) &&
@@ -977,7 +993,7 @@ class _$PreviousSaleResModelImpl implements _PreviousSaleResModel {
         quoteAutoCreate,
         quoteInvoiceAmount,
         const DeepCollectionEquality().hash(attachedQuoteFiles),
-        const DeepCollectionEquality().hash(schedule),
+        schedule,
         tabType,
         frequency,
         salesPerson,
@@ -1041,7 +1057,7 @@ abstract class _PreviousSaleResModel implements PreviousSaleResModel {
       @JsonKey(name: 'quote_auto_create') final num? quoteAutoCreate,
       @JsonKey(name: 'quote_invoice_amount') final String? quoteInvoiceAmount,
       @JsonKey(name: 'attached_quote_files') final dynamic attachedQuoteFiles,
-      final dynamic schedule,
+      final Schedule? schedule,
       @JsonKey(name: 'tab_type') final String? tabType,
       final String? frequency,
       @JsonKey(name: 'sales_person') final String? salesPerson,
@@ -1126,7 +1142,7 @@ abstract class _PreviousSaleResModel implements PreviousSaleResModel {
   @JsonKey(name: 'attached_quote_files')
   dynamic get attachedQuoteFiles;
   @override
-  dynamic get schedule;
+  Schedule? get schedule;
   @override
   @JsonKey(name: 'tab_type')
   String? get tabType;

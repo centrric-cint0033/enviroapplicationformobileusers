@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 EdgeInsetsGeometry screenWidth = EdgeInsets.symmetric(horizontal: 15.w);
-
+SizedBox sized0hx02 = SizedBox(height: 2.h);
 SizedBox sized0hx03 = SizedBox(height: 3.h);
 SizedBox sized0hx05 = SizedBox(height: 5.h);
 SizedBox sized0hx10 = SizedBox(height: 10.h);

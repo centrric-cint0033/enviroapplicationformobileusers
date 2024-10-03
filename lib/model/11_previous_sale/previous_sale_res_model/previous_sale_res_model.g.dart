@@ -28,7 +28,9 @@ _$PreviousSaleResModelImpl _$$PreviousSaleResModelImplFromJson(
       quoteAutoCreate: json['quote_auto_create'] as num?,
       quoteInvoiceAmount: json['quote_invoice_amount'] as String?,
       attachedQuoteFiles: json['attached_quote_files'],
-      schedule: json['schedule'],
+      schedule: json['schedule'] == null
+          ? null
+          : Schedule.fromJson(json['schedule'] as Map<String, dynamic>),
       tabType: json['tab_type'] as String?,
       frequency: json['frequency'] as String?,
       salesPerson: json['sales_person'] as String?,

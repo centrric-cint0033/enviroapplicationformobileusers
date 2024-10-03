@@ -1,5 +1,7 @@
+import 'package:enviro_mobile_application/view/10_site/widgets/prime_vehicle_driver_jobstatus_flowchart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/intl.dart';
 
 import 'icon_job_code_widget.dart';
 import '../../../utilis/constant.dart';
@@ -44,7 +46,12 @@ class PreviousSalesTileWidget extends StatelessWidget {
                   "Job Type: ${data.jobType != "null" ? data.jobType ?? "" : ""}",
                   style: style,
                 ),
-                sized0hx10,
+                sized0hx02,
+                Text(
+                  "Start Date: ${data.schedule?.startDate != null ? formatDateTime(data.schedule?.startDate ?? "", showTime: false) : ""}",
+                  style: style,
+                ),
+                sized0hx02,
                 InvoiceAmountAndCreatedByWidget(data: data)
               ],
             ),

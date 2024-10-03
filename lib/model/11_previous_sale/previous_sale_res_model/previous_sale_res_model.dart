@@ -2,6 +2,8 @@
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import '../../10_site/job_card_res_model.dart/job_card_model/schedule.dart';
+
 part 'previous_sale_res_model.freezed.dart';
 part 'previous_sale_res_model.g.dart';
 
@@ -27,7 +29,7 @@ class PreviousSaleResModel with _$PreviousSaleResModel {
     @JsonKey(name: 'quote_auto_create') num? quoteAutoCreate,
     @JsonKey(name: 'quote_invoice_amount') String? quoteInvoiceAmount,
     @JsonKey(name: 'attached_quote_files') dynamic attachedQuoteFiles,
-    dynamic schedule,
+    Schedule? schedule,
     @JsonKey(name: 'tab_type') String? tabType,
     String? frequency,
     @JsonKey(name: 'sales_person') String? salesPerson,
