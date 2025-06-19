@@ -70,15 +70,6 @@ class HomePage extends StatelessWidget {
                         permission: permission?.intranet?.view),
                     _buildBox('assets/images/users.svg', 'Team',
                         onTap: () => teamfuntion(context), permission: true),
-                    // _buildBox('assets/images/users.svg', 'Team',
-                    //     onTap: () => {
-                    //           Navigator.push(
-                    //               context,
-                    //               MaterialPageRoute(
-                    //                 builder: (context) => MyApp(),
-                    //               ))
-                    //         },
-                    //     permission: permission?.team?.view),
                   ],
                 );
         }),

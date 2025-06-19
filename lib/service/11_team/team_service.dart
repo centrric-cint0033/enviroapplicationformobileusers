@@ -18,46 +18,67 @@ import 'package:injectable/injectable.dart';
 abstract class IteamService {
   Future<Either<Map<MainFailure, dynamic>, List<TeamResModel>>>
       getCurrentEmployee({int? page});
+
   Future<Either<Map<MainFailure, dynamic>, List<TeamResModel>>>
       getTerminatedEmployee({int? page});
+
   Future<Either<Map<MainFailure, dynamic>, TeamProfileEmployeeDetailsResModel>>
       getTeamProfileEmployeeDetails({required num employeeID});
+
   Future<Either<Map<MainFailure, dynamic>, FolderListModel>> getTeamFolders(
       {required num id, required num parentFolderId});
+
   Future<Either<Map<MainFailure, dynamic>, dynamic>> addTeamFolders(
       {required Map<String, String> data});
+
   Future<Either<Map<MainFailure, dynamic>, String>> deleteTeamFolders(
       {required num id});
+
   Future<Either<Map<MainFailure, dynamic>, String>> editTeamFolders(
       {required Map<String, String> data, required int id});
+
   Future<Either<Map<MainFailure, dynamic>, TeamDesigntionResModel>>
       getTeamDesignations();
+
   Future<Either<Map<MainFailure, dynamic>, String>> deleteEmployeeApi(
       {required num id});
+
   Future<Either<Map<MainFailure, dynamic>, List<TeamResModel>>>
       employeeSearchApi({required Map<String, String> data, int? page});
+
   Future<Either<Map<MainFailure, dynamic>, CreateTeamReqModel>> createTeamApi(
       {required Map<String, dynamic> data});
+
   Future<Either<Map<MainFailure, dynamic>, CreateTeamReqModel>> editTeamApi(
       {required Map<String, dynamic> data, required String employeeId});
+
   Future<Either<Map<MainFailure, dynamic>, dynamic>> addTeamFiles(
       {required Map<String, String> data});
+
   Future<Either<Map<MainFailure, dynamic>, String>> editTeamFiles(
       {required Map<String, String> data, required int id});
+
   Future<Either<Map<MainFailure, dynamic>, String>> deleteTeamFiles(
       {required num fileId, required num id});
+
   Future<Either<Map<MainFailure, dynamic>, FolderListModel>> expiryDateFiles(
       {required num fileId, required String expiry});
+
   Future<Either<Map<MainFailure, dynamic>, FolderListModel>>
       fileFolderSearchApi({required Map<String, String> data});
+
   Future<Either<Map<MainFailure, dynamic>, List<TeamResModel>>>
       getAllEmployeesApi();
+
   Future<Either<Map<MainFailure, dynamic>, FolderListModel>> folderSearchApi(
       {required Map<String, String> data});
+
   Future<Either<Map<MainFailure, dynamic>, LeaveResModel>> addLeave(
       {required LeaveResModel data});
+
   Future<Either<Map<MainFailure, dynamic>, TimeSheetResModel>> getTimeSheetApi(
       {required String date});
+
   Future<Either<Map<MainFailure, dynamic>, EditTimeSheetResModel>>
       editTimeSheetApi(
           {required String date, required WeeklyReport weeklyReport});
@@ -281,7 +302,7 @@ class TeamService implements IteamService {
     return response.fold(
       (l) => Left(l),
       (res) async {
-        return Right("Success");
+        return const Right("Success");
       },
     );
   }
@@ -437,10 +458,7 @@ class TeamService implements IteamService {
     String weeklyReportJson = jsonEncode(weeklyReport.toJson());
 
     var response = await getIt<HttpService>().multipartRequest(
-      data: {
-        "week_startdate": date,
-        "weekly_report": weeklyReportJson, // Use the JSON string
-      },
+      data: {"week_startdate": date, "weekly_report": weeklyReportJson},
       method: 'POST',
       apiUrl: ApiEndPoints().editTimeSheet,
     );

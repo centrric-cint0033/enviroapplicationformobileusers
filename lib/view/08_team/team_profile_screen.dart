@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:enviro_mobile_application/Routepage/approutes.gr.dart';
 import 'package:enviro_mobile_application/model/00_common_model/folder_model/folder_model.dart';
@@ -50,6 +52,8 @@ class TeamProfileScreen extends StatelessWidget {
                 TeamProfileEmployeeDetailsResModel? employeeDetails = res.data;
                 final ress = vmTeam.teamFoldersResponse;
                 FolderListModel? folderList = ress.data;
+                log(vmselection.permissionsResponse.data?.team.toString() ??
+                    "");
                 return res.loading
                     ? Center(child: wwCustomLoader())
                     : SingleChildScrollView(

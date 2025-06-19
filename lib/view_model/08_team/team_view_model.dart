@@ -184,10 +184,7 @@ abstract class TeamViewModelBase with Store {
 
   Timer? debouce;
   void onTextChanged(Function() function) {
-    // Clear the previous debounce timer
     if (debouce?.isActive ?? false) debouce?.cancel();
-
-    // Set up a new debounce timer
     debouce = Timer(const Duration(milliseconds: 500), () => function());
   }
 
@@ -622,16 +619,13 @@ abstract class TeamViewModelBase with Store {
       designationsResponse =
           designationsResponse.copyWith(errors: null, loading: true);
       final result = await teamService.getTeamDesignations();
-      return result.fold(
-        (l) {
-          designationsResponse =
-              designationsResponse.copyWith(errors: l, loading: false);
-        },
-        (r) {
-          designationsResponse = designationsResponse.copyWith(
-              data: r, errors: null, loading: false);
-        },
-      );
+      return result.fold((l) {
+        designationsResponse =
+            designationsResponse.copyWith(errors: l, loading: false);
+      }, (r) {
+        designationsResponse = designationsResponse.copyWith(
+            data: r, errors: null, loading: false);
+      });
     } catch (e) {
       customPrint(content: e, name: 'Error getDesignationsApi');
     } finally {
@@ -1243,17 +1237,17 @@ abstract class TeamViewModelBase with Store {
 
   @observable
   String? addFileLeave = "";
+
   @action
   Future<void> addFileLeavedFn() async {
     var result = await FilePicker.platform.pickFiles(
-      allowMultiple: false, // Allow only one file to be picked
+      allowMultiple: false,
       type: FileType.custom,
       allowedExtensions: ['jpg', 'pdf', 'doc'],
     );
 
     if (result != null && result.files.isNotEmpty) {
-      addFileLeave =
-          result.files.single.path; // Store the path of the selected file
+      addFileLeave = result.files.single.path;
     }
   }
 
@@ -1303,7 +1297,6 @@ abstract class TeamViewModelBase with Store {
             data: r, error: null, loading: false);
         getTimeSheetApi(date: date, context: context);
         clearFn();
-        // showToast(context, msg: "Successfully applied", color: Colors.green);
         context.router.pop();
       },
     );

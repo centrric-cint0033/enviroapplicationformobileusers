@@ -18,3 +18,4 @@ class ApiResponse<T> with _$ApiResponse<T> {
     @Default(false) bool paginationLoading,
   }) = _ApiResponse<T>;
 }
+

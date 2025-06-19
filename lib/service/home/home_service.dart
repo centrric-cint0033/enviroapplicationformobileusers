@@ -11,7 +11,7 @@ import 'package:enviro_mobile_application/utilis/httpservice.dart';
 import 'package:enviro_mobile_application/utilis/injection.dart';
 import 'package:enviro_mobile_application/utilis/main_failure.dart';
 
-import 'package:injectable/injectable.dart';
+import 'package:injectable/injectable.dart'; 
 
 @LazySingleton(as: IHomeService)
 class HomeRepository implements IHomeService {

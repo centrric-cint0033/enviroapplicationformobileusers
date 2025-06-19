@@ -1,7 +1,6 @@
 import 'package:enviro_mobile_application/view/10_site/widgets/prime_vehicle_driver_jobstatus_flowchart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:intl/intl.dart';
 
 import 'icon_job_code_widget.dart';
 import '../../../utilis/constant.dart';

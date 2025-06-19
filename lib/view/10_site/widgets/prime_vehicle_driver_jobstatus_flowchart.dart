@@ -58,7 +58,7 @@ Widget flowChartBlock(String title, String dateTime, Color color) {
 }
 
 class FlowChartScreen extends StatelessWidget {
-  FlowChartScreen({required this.jobCardData});
+  FlowChartScreen({super.key, required this.jobCardData});
   JobCardModels? jobCardData;
   @override
   Widget build(BuildContext context) {

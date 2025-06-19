@@ -1,6 +1,7 @@
 // const baseUrl = "https://staging-deep.envirowasteadmin.com.au";
 const baseUrl = "https://production-deep.envirowasteadmin.com.au";
 // const baseUrl = "http://192.168.29.47:8000";
+// const baseUrl = "http://172.16.3.74:8090";
 
 const passwordErrorMessage =
     'Password Must Include 8 characters \n At least one capital letter \n At least one special characters [ !@#\$&*~ ] \n At least one number \n No spaces';
